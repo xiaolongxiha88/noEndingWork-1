@@ -507,7 +507,7 @@
 
 #define root_NBQ_shidian_dianya  NSLocalizedString(@"市电电压", nil)
 
-#define root_yonghu_xieyi  NSLocalizedString(@"用户协议", nil)
+#define root_yonghu_xieyi  NSLocalizedString(@"用户协议1", nil)
 #define root_xuanze_yonghu_xieyi  NSLocalizedString(@"选择用户协议", nil)
 
 #endif /* languageNew_h */
