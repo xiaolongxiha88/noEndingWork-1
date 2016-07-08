@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15D21" minimumToolsVersion="Xcode 7.0">
+    <entity name="DemoDevice" syncable="YES">
+        <attribute name="dayPower" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="power" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statueData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="GetDevice" representedClassName="GetDevice" syncable="YES">
+        <attribute name="ailasName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dayPower" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="demoImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="deviceSN" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nowImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="power" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statueData" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statueImage" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="topNum" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalPower" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ProductData" representedClassName="ProductData" syncable="YES">
+        <attribute name="feature" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifying" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="outline" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="technologyParams" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="DemoDevice" positionX="-36" positionY="9" width="128" height="135"/>
+        <element name="GetDevice" positionX="-36" positionY="36" width="128" height="225"/>
+        <element name="ProductData" positionX="-36" positionY="117" width="128" height="150"/>
+    </elements>
+</model>
