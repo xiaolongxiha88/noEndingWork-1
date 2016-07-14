@@ -34,9 +34,9 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.navigationItem.title = @"Datalog";
+    self.navigationItem.title = root_caiJiQi_leiBiao;
     
-    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(buttonPressed)];
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_tianjia_1 style:UIBarButtonItemStylePlain target:self action:@selector(buttonPressed)];
     rightItem.tag=10;
     self.navigationItem.rightBarButtonItem=rightItem;
     _arrayData=[NSMutableArray new];
