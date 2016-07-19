@@ -21,7 +21,7 @@
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 
-@interface deviceViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,EditStationMenuViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate,UIAlertViewDelegate>
+@interface deviceViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,EditStationMenuViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property(nonatomic,strong)EditStationMenuView  *editCellect;
@@ -57,6 +57,8 @@
 @property (nonatomic, strong) NSString *head33;
 @property (nonatomic, strong)UIView *headerView;
 @property (nonatomic, strong) UIAlertView *Alert1;
+@property (nonatomic, strong) UIImageView *guideImageView;
+
 @end
 
 @implementation deviceViewController
@@ -860,6 +862,42 @@
     Lable108.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [_headerView addSubview:Lable108];
     
+    [self performSelector:@selector(showGuideView) withObject:nil afterDelay:0.5];
+    
+}
+
+
+- (void)showGuideView {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+        //第一次启动
+        
+        //引导操作动画
+        self.guideImageView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_Width - 100*NOW_SIZE)/2, 20*NOW_SIZE, 100*NOW_SIZE, 180*NOW_SIZE)];
+        NSMutableArray *guideImages = [NSMutableArray array];
+        for (int i = 1; i <= 11; i++) {
+            NSString *imageStr = [NSString stringWithFormat:@"L%d.png", i];
+            [guideImages addObject:IMAGE(imageStr)];
+        }
+        
+        [self.guideImageView setAnimationImages:guideImages];
+        [self.guideImageView setAnimationDuration:self.guideImageView.animationImages.count * 0.09];
+        [self.guideImageView setAnimationRepeatCount:0];
+        [self.guideImageView startAnimating];
+        [self.view addSubview:self.guideImageView];
+    }
+}
+
+- (void)hideGuideView {
+    [self.guideImageView performSelector:@selector(setAnimationImages:) withObject:nil afterDelay:self.guideImageView.animationDuration];
+}
+
+#pragma mark - scrollView delegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+
+    [self hideGuideView];
+
 }
 
 #pragma mark - EditCellectViewDelegate
@@ -1350,6 +1388,9 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         return 65*HEIGHT_SIZE;
     }
     
+
+
+
 
 
 - (void)didReceiveMemoryWarning {

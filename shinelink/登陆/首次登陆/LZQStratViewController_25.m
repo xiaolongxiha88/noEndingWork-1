@@ -46,9 +46,9 @@
     NSMutableArray *imageName=[NSMutableArray array];
     
     if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
-        [imageName addObject:@"111.jpg"];
-        [imageName addObject:@"111.jpg"];
-        [imageName addObject:@"222.png"];
+        [imageName addObject:@"first1.jpg"];
+        [imageName addObject:@"first1.jpg"];
+        [imageName addObject:@"first2.png"];
         [imageName addObject:@"333.png"];
     }else if ([currentLanguage isEqualToString:@"en-CN"]) {
         [imageName addObject:@"11.png"];
