@@ -85,10 +85,6 @@ static void *context = NULL;
     if(ssid!=nil&&ssid.length>0 )
     {
         self.ipName.text = ssid;
-    }else{
-         NSString *A7 = NSLocalizedString(@"A7", nil);
-        self.ipName.text = A7;
-    
     }
     self.pswd.secureTextEntry = true;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotDeviceByScan:) name:kOnGotDeviceByScan object:nil];
@@ -111,7 +107,7 @@ static void *context = NULL;
     
     
     UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE, 300*NOW_SIZE,40*HEIGHT_SIZE )];
-    noticeLable.text=root_peizhi_shinewifi_E_shaomiao;
+    noticeLable.text=root_lianjie_luyouqi;
     noticeLable.textAlignment=NSTextAlignmentLeft;
     noticeLable.textColor=[UIColor whiteColor];
     noticeLable.numberOfLines=0;
@@ -301,9 +297,9 @@ static void *context = NULL;
     NSString *ssid = [delegate getWifiName];
     if(ssid == nil )
     {
-        NSString *A6 = NSLocalizedString(@"A6", nil);
-      
-        [self.view makeToast:A6];
+     //[self showToastViewWithTitle:@"Please connect to the router first"];
+        
+           [self showAlertViewWithTitle:nil message:root_lianjie_luyouqi cancelButtonTitle:root_Yes];
         return;
     }
 

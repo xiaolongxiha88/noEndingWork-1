@@ -458,7 +458,7 @@
 "扫描设备和设置路由器"="Scanning device and setting router ";
 "ShineWifiE名字"="Name:";
 "Choice"="Choice";
-"配置ShineWifiE"="Set ShineWifi-E";
+"配置ShineWifiE"="Set ShineWifi";
 "配置提示"="Plesa check the device blue led beside the key, it means configure ok when the blue led flashing slow(one time every second) changed from flashing fast(five times every second)";
 
 "编辑"="Edit";
@@ -474,4 +474,5 @@
 "用户协议1"="Agree the user agreement ";
 "选择用户协议"="Please tick user Agreement";
 "添加1"="Add";
-
+"连接路由器2"="Please connect to the router first";
+"刷新设备列表"="After five minutes, please drop-down refresh the list of devices,in order to get the devices information under the data logger ";

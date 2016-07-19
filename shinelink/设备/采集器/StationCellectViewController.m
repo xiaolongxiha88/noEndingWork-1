@@ -146,7 +146,10 @@
         NSString *demoName2=@"ShineLan";            //旧wifi
           NSString *demoName3=@"ShineWifiBox";          //旧wifi
         
-        BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+        
+        //_SetName=@"ShineWIFI";
+        
+           BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
            BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
            BOOL result3 = [_SetName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
         

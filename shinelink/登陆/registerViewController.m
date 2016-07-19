@@ -103,7 +103,7 @@
                 _customerCodeEnable=@"0";
             }
             
-           // _customerCodeEnable=@"1";
+           //  _customerCodeEnable=@"1";
             
             if ([_customerCodeEnable isEqualToString:@"0"]) {
                 [_textFieldMutableArray[5] removeFromSuperview];

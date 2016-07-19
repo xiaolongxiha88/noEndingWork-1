@@ -510,5 +510,8 @@
 #define root_yonghu_xieyi  NSLocalizedString(@"用户协议1", nil)
 #define root_xuanze_yonghu_xieyi  NSLocalizedString(@"选择用户协议", nil)
 #define  root_tianjia_1      NSLocalizedString(@"添加1", nil)
+#define  root_lianjie_luyouqi      NSLocalizedString(@"连接路由器2", nil)
+
+#define  root_shuaxin_liebiao     NSLocalizedString(@"刷新设备列表", nil)
 
 #endif /* languageNew_h */

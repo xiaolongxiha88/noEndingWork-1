@@ -184,10 +184,14 @@
                 }
             }else{
                 
+            [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+                
                 _SetName=jsonObj[@"datalogType"];
                 NSString *demoName1=@"ShineWIFI";           //新wifi
                 NSString *demoName2=@"ShineLan";            //旧wifi
                 NSString *demoName3=@"ShineWifiBox";          //旧wifi
+                
+               // _SetName=@"ShineWIFI";
                 
                 BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
                 BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
@@ -312,10 +316,14 @@
                 }
             }else{
                 
+                  [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+                
                 _SetName=jsonObj[@"datalogType"];
                 NSString *demoName1=@"ShineWIFI";           //新wifi
                 NSString *demoName2=@"ShineLan";            //旧wifi
                 NSString *demoName3=@"ShineWifiBox";          //旧wifi
+                
+                
                 
                 BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
                 BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;

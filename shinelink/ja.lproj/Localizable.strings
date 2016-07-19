@@ -7,7 +7,7 @@
 */
 
 
-"配置ShineWifiE"="Set ShineWifi-E";
+"配置ShineWifiE"="Set ShineWifi";
 "立即体验"="Try it now";
 "下一步"="Next";
 "完成"="Done";
@@ -480,3 +480,5 @@
 "控制密码"="Please enter the correct password of controlling";
 "用户协议1"="Agree the user agreement ";
 "选择用户协议"="Please tick user Agreement";
+"连接路由器2"="Please connect to the router first";
+"刷新设备列表"="After five minutes, please drop-down refresh the list of devices,in order to get the devices information under the data logger ";

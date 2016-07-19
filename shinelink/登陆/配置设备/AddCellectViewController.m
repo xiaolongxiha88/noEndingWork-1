@@ -174,6 +174,7 @@
                             //注册成功
                             [self succeedRegister];
                             [self showAlertViewWithTitle:nil message:root_zhuCe_chengGong  cancelButtonTitle:root_Yes];
+                             [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
                         }
                     }
                     
@@ -287,6 +288,7 @@
                          //注册成功
                          [self succeedRegister];
                          [self showAlertViewWithTitle:nil message:root_zhuCe_chengGong  cancelButtonTitle:root_Yes];
+                     [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
                      }
                  }
                  

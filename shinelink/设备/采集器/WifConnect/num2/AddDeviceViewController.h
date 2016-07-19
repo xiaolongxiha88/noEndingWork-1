@@ -14,7 +14,7 @@
 #import "SIAlertView.h"
 
 //extern int _cellCount;
-@interface AddDeviceViewController : UIViewController
+@interface AddDeviceViewController : RootViewController
 {
     Boolean isSearching ;
     SIAlertView * myAlertView;
