@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface addServerViewController : RootViewController
+@property (nonatomic, strong) NSString *typeNum;
+@property (nonatomic, strong) NSString *titleString;
+@property (nonatomic, strong) NSString *SnString;
+
 
 @end

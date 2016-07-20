@@ -131,6 +131,9 @@
                 NSString *str2=(NSString *)obj2;
                 return [str1 compare:str2];
             }];
+            
+            [_provinceArray insertObject:@"中国" atIndex:0];
+            
         }else{
         [self hideProgressView];
         }

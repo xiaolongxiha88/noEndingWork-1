@@ -20,7 +20,7 @@
 @property (nonatomic, strong) NSMutableArray *picArray;
 @property (nonatomic, strong) NSMutableDictionary *allDict;
 @property (nonatomic, strong) NSString *typeName;
-@property (nonatomic, strong) NSString *typeNum;
+
 @property (nonatomic, strong) UIImageView *image1;
 @property (nonatomic, strong) UIImageView *image2;
 @property (nonatomic, strong) UIImageView *image3;
@@ -79,6 +79,10 @@
             self.userTextField.placeholder = root_ME_biaoti_shuru;
             self.userTextField.textColor = [UIColor blackColor];
             self.userTextField.tintColor = [UIColor blackColor];
+    
+    if (_titleString) {
+             self.userTextField.text = _titleString;
+    }
             [self.userTextField setValue:COLOR(163, 163, 163, 1) forKeyPath:@"_placeholderLabel.textColor"];
             [self.userTextField setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
             self.userTextField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -88,6 +92,11 @@
             self.SNTextField.placeholder = root_ME_xuliehao_shuru;
             self.SNTextField.textColor = [UIColor blackColor];
             self.SNTextField.tintColor = [UIColor blackColor];
+    
+    if (_SnString) {
+        self.SNTextField.text = _SnString;
+    }
+    
             [self.SNTextField setValue:COLOR(163, 163, 163, 1) forKeyPath:@"_placeholderLabel.textColor"];
             [self.SNTextField setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
             self.SNTextField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -97,6 +106,18 @@
     self.registLable.text=root_ME_wenti_leixing_xuanzhe;
     self.registLable.textColor=COLOR(163, 163, 163, 1);
     self.registLable.textAlignment = NSTextAlignmentLeft;
+    
+    if (_typeNum) {
+            self.registLable.textColor=[UIColor blackColor];
+        if ([_typeNum isEqualToString:@"1"]) {
+             self.registLable.text = root_ME_nibianqi_guzhan;
+            _typeName=root_ME_nibianqi_guzhan;
+        }else if (([_typeNum isEqualToString:@"2"])){
+            self.registLable.text =root_ME_chunengji_guzhan;
+              _typeName=root_ME_chunengji_guzhan;
+        }
+       
+    }
     self.registLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     self.registLable.userInteractionEnabled=YES;
     [_scrollView addSubview:self.registLable];

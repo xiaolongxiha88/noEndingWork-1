@@ -8,6 +8,8 @@
 
 #import "PvLogTableViewController.h"
 #import "pvLogTableViewCell.h"
+#import "addServerViewController.h"
+
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -69,7 +71,8 @@
         self.timeTextArray=[NSMutableArray array];
     
 //_PvSn=@"SAMP524004";
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{_type:_PvSn,@"pageNum":@"1", @"pageSize":@"20"} paramarsSite:_address sucessBlock:^(id content) {
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{_type:_PvSn,@"pageNum":@"1", @"pageSize":@"30"} paramarsSite:_address sucessBlock:^(id content) {
         [self hideProgressView];
             NSLog(@"getInverterAlarm: %@", content);
         if (content) {
@@ -159,6 +162,29 @@
     
     return cell;
 }
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+  
+    addServerViewController *addGo=[[addServerViewController alloc]init];
+    
+    if ([_type isEqualToString:@"inverterId"]) {
+        addGo.typeNum=@"1";
+    }else if ([_type isEqualToString:@"storageId"]){
+       addGo.typeNum=@"2";
+    }
+    
+    addGo.SnString=_SNTextArray[indexPath.row];
+    addGo.titleString=self.contentTextArray[indexPath.row];
+    
+     [self.navigationController pushViewController:addGo animated:NO];
+    
+
+}
+
+
+
 
 
 /*
