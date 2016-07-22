@@ -19,7 +19,7 @@
 
 @interface AddDeviceViewController ()
 @property (nonatomic, strong) UIScrollView *scrollView;
-
+@property (nonatomic, strong) NSTimer * timer;
 @end
 
 @implementation AddDeviceViewController{
@@ -57,25 +57,7 @@ static void *context = NULL;
 //    NSString *Back = NSLocalizedString(@"Back", nil);
             self.title = root_peizhi_shinewifi_E;
   
-    
-//    UIBarButtonItem *backItem =  [[UIBarButtonItem alloc] initWithTitle:Back
-//                                  
-//                                  
-//                                                                  style:UIBarButtonItemStylePlain
-//                                                                 target:self
-//                                                                 action:@selector(goBack)];
-//    backItem.tag = 1;
-//    backItem.tintColor=[UIColor whiteColor];
-//   // [backItem setImage:[UIImage imageNamed:@"navi_back_white_nor.png"]];
-//    self.navigationItem.leftBarButtonItem = backItem;
-    // self.view.viewPrintFormatter
-    //backgroundColor=[UIColor clearColor];
-//    //set NavigationBar 背景颜色&title 颜色
-//    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]]];
- 
-    
-    
-   // self.view.backgroundColor = [UIColor whiteColor];
+
      self.view.backgroundColor=MainColor;
     
     
@@ -151,7 +133,7 @@ static void *context = NULL;
     self.pswd = [[UITextField alloc] initWithFrame:CGRectMake(105*NOW_SIZE, 60*HEIGHT_SIZE, 180*NOW_SIZE,50*HEIGHT_SIZE )];
     self.pswd.placeholder = root_peizhi_shinewifi_shuru_mima;
     //self.ssidTextField.keyboardType = UIKeyboardTypeASCIICapable;
-    self.pswd.secureTextEntry = NO;
+    //self.pswd.secureTextEntry = NO;
     self.pswd.textColor = [UIColor whiteColor];
     self.pswd.tintColor = [UIColor whiteColor];
     [self.pswd setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -295,6 +277,8 @@ static void *context = NULL;
     
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSString *ssid = [delegate getWifiName];
+    
+    
     if(ssid == nil )
     {
      //[self showToastViewWithTitle:@"Please connect to the router first"];
@@ -307,11 +291,17 @@ static void *context = NULL;
 
     
     
+    //添加定时器
+    _timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(getNET) userInfo:nil repeats:YES];
+    
+    
+    
   // int  currentCount =0;
     
    // NSString *A1= NSLocalizedString(@"A1", nil);
     //NSString *A2 = NSLocalizedString(@"A2", nil);
    // NSString *A3= NSLocalizedString(@"A3", nil);
+    
      myAlertView = [[SIAlertView alloc] initWithTitle:root_Alet_user andMessage:root_peizhi_shinewifi_peizhi_tishi];
     [myAlertView addButtonWithTitle:root_cancel
                                type:SIAlertViewButtonTypeDestructive
@@ -349,6 +339,41 @@ static void *context = NULL;
 
 
 
+-(void)getNET{
+
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"datalogSn":_SnString} paramarsSite:@"/newDatalogAPI.do?op=getDatalogInfo" sucessBlock:^(id content) {
+        
+        NSLog(@"getDatalogInfo: %@", content);
+        if (content) {
+            NSString *LostValue=content[@"lost"];
+            
+            if ([LostValue intValue]==0) {
+                
+                [myAlertView dismissAnimated:NO];
+                
+                _timer.fireDate=[NSDate distantFuture];
+                
+                [self  stopSearch];
+                
+                if ([_timelineConfig isRunning]) {
+                    [_timelineConfig stop];
+                }
+   [self showAlertViewWithTitle:nil message:@"配置成功"  cancelButtonTitle:root_Yes];
+                
+            }
+            
+        }else{
+           
+        }
+        
+    } failure:^(NSError *error) {
+      
+    }];
+
+
+
+}
+
 
 -(void)doneSearchDeviceAutoThread{
     //进行一键配置
@@ -381,6 +406,7 @@ static void *context = NULL;
     _timelineConfig.completionBlock = ^void (EasyTimeline *timeline) {
         //查找完成
          NSLog(@"停止配置");
+           _timer.fireDate=[NSDate distantFuture];
         
         if (![myAlertView isHidden]) {
             [myAlertView dismissAnimated:YES];

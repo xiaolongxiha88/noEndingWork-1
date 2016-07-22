@@ -166,7 +166,7 @@
                                 
                                 [self showAlertViewWithTitle:nil message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
                             }
-
+                              [self.navigationController popViewControllerAnimated:NO];
                         }
                         else {
                             
@@ -186,6 +186,7 @@
                 
             }else{
                 [self showAlertViewWithTitle:nil message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
+                   [self.navigationController popViewControllerAnimated:NO];
             }
         }
         
@@ -280,7 +281,7 @@
                              
                              [self showAlertViewWithTitle:nil message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
                          }
-                         
+                             [self.navigationController popViewControllerAnimated:NO];
                           }
                 else {
                     _setDeviceName=content[@"datalogType"];
@@ -300,6 +301,7 @@
              
          }else{
              [self showAlertViewWithTitle:nil message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
+                [self.navigationController popViewControllerAnimated:NO];
          }
 }
      
@@ -329,7 +331,7 @@
     
     if (result1) {
         AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
-        
+        rootView.SnString=_cellectId.text;
         [self.navigationController pushViewController:rootView animated:YES];
     }else if (result2){
         MainViewController *rootView = [[MainViewController alloc]init];

@@ -120,10 +120,17 @@
 }
 
 -(void)registerUser{
+    
+     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *reUsername=[ud objectForKey:@"userName"];
+    NSString *rePassword=[ud objectForKey:@"userPassword"];
+    
     [[UserInfo defaultUserInfo] setUserPassword:nil];
     [[UserInfo defaultUserInfo] setUserName:nil];
       [[UserInfo defaultUserInfo] setServer:nil];
     loginViewController *login =[[loginViewController alloc]init];
+    login.oldName=reUsername;
+    login.oldPassword=rePassword;
     
     [self initCoredata];
     

@@ -20,6 +20,8 @@
     SIAlertView * myAlertView;
 }
 
+@property (strong, nonatomic)  NSString *SnString;
+
 @property(nonatomic) NSInteger cellCount0;
 
 @property (strong, nonatomic)  UITextField *ipName;

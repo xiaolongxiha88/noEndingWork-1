@@ -126,7 +126,7 @@
     self.wskeyTextField = [[UITextField alloc] initWithFrame:CGRectMake(105*NOW_SIZE, 75*HEIGHT_SIZE, 180*NOW_SIZE,20*HEIGHT_SIZE )];
     self.wskeyTextField.placeholder = root_peizhi_shinewifi_shuru_mima;
     //self.ssidTextField.keyboardType = UIKeyboardTypeASCIICapable;
-    self.wskeyTextField.secureTextEntry = NO;
+   // self.wskeyTextField.secureTextEntry = NO;
     self.wskeyTextField.textColor = [UIColor whiteColor];
     self.wskeyTextField.tintColor = [UIColor whiteColor];
     [self.wskeyTextField setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];

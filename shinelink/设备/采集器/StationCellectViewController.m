@@ -127,9 +127,9 @@
             [self hideProgressView];
             id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
             if ([[jsonObj objectForKey:@"success"] integerValue] ==0) {
-                [self showAlertViewWithTitle:nil message:@"delete fail" cancelButtonTitle:root_Yes];
+                [self showAlertViewWithTitle:nil message:root_shanchu_shibai  cancelButtonTitle:root_Yes];
             }else{
-                [self showAlertViewWithTitle:nil message:@"delete sucess" cancelButtonTitle:root_Yes];
+                [self showAlertViewWithTitle:nil message:root_shanChu_chengGong cancelButtonTitle:root_Yes];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
         } failure:^(NSError *error) {
@@ -147,7 +147,7 @@
           NSString *demoName3=@"ShineWifiBox";          //旧wifi
         
         
-        //_SetName=@"ShineWIFI";
+        _SetName=@"ShineWIFI";
         
            BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
            BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
@@ -155,6 +155,7 @@
         
         if (result1) {
             AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
+            rootView.SnString=_arrayData[_indexPath.row][@"datalog_sn"];
             
             [self.navigationController pushViewController:rootView animated:YES];
         }else if (result2){

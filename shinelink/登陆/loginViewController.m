@@ -68,6 +68,7 @@
     
     //NSString *isdemo=[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"];
     
+    
     if (reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] )) {
       //  [ [NSNotificationCenter defaultCenter]postNotificationName:@"reroadDemo" object:nil];
         
@@ -122,6 +123,11 @@
     
     self.userTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(userBgImageView.frame) - 50*NOW_SIZE, 45*HEIGHT_SIZE)];
     self.userTextField.placeholder = root_Alet_user_messge;
+    if (_oldName) {
+        self.userTextField.text = _oldName;
+
+    }
+    
     self.userTextField.textColor = [UIColor whiteColor];
     self.userTextField.tintColor = [UIColor whiteColor];
     [self.userTextField setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -137,6 +143,9 @@
     
     self.pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(pwdBgImageView.frame) - 50*NOW_SIZE, 45*HEIGHT_SIZE)];
     self.pwdTextField.placeholder = root_Alet_user_pwd;
+    if (_oldPassword) {
+        self.pwdTextField.text = _oldPassword;
+    }
     self.pwdTextField.keyboardType = UIKeyboardTypeASCIICapable;
     self.pwdTextField.secureTextEntry = YES;
     self.pwdTextField.textColor = [UIColor whiteColor];
@@ -233,8 +242,21 @@ NSLog(@"体验馆");
 
 -(void)getDemoData{
     
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    
+    NSString *_languageValue;
+    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"1";
+    }
+
+    
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL_Demo paramars:@{@"admin":@"admin"} paramarsSite:@"/newLoginAPI.do?op=getServerUrlList" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL_Demo paramars:@{@"language":_languageValue} paramarsSite:@"/newLoginAPI.do?op=getServerUrlList" sucessBlock:^(id content) {
          [self hideProgressView];
         NSLog(@"getServerUrlList: %@", content);
         if (content) {
@@ -436,6 +458,9 @@ NSLog(@"体验馆");
 }
 
 -(void)netServerInit{
+    
+    
+    
     
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userName":_userTextField.text} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
         

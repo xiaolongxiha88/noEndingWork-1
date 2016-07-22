@@ -182,6 +182,7 @@
                 } else if ([[jsonObj objectForKey:@"msg"]integerValue]==507) {
                     [self showAlertViewWithTitle:nil message:root_xuliehao_jiaoyanMa_bupipei cancelButtonTitle:root_Yes];
                 }
+                  [self.navigationController popViewControllerAnimated:NO];
             }else{
                 
             [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
@@ -199,6 +200,7 @@
                 
                 if (result1) {
                     AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
+                    rootView.SnString=_param2;
                     
                     [self.navigationController pushViewController:rootView animated:YES];
                 }else if (result2){
@@ -211,6 +213,8 @@
                     
                 }else{
                     [self showAlertViewWithTitle:nil message:root_shebei_tianjia_chenggong cancelButtonTitle:root_Yes];
+                    
+                    [self.navigationController popToRootViewControllerAnimated:NO];
                        }
              }
         }
@@ -314,6 +318,8 @@
                 } else if ([[jsonObj objectForKey:@"msg"]integerValue]==507) {
                     [self showAlertViewWithTitle:nil message:root_xuliehao_jiaoyanMa_bupipei cancelButtonTitle:root_Yes];
                 }
+                  [self.navigationController popViewControllerAnimated:NO];
+                
             }else{
                 
                   [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
@@ -331,7 +337,7 @@
                 
                 if (result1) {
                     AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
-                    
+                    rootView.SnString=_param2;
                     [self.navigationController pushViewController:rootView animated:YES];
                 }else if (result2){
                     MainViewController *rootView = [[MainViewController alloc]init];
@@ -343,6 +349,7 @@
                     
                 }else{
                     [self showAlertViewWithTitle:nil message:root_shebei_tianjia_chenggong cancelButtonTitle:root_Yes];
+                      [self.navigationController popToRootViewControllerAnimated:NO];
                 }
                 
             }
