@@ -165,7 +165,15 @@
                             }else if ([content[@"msg"] isEqual:@"error_agentCodeNotExist"]){
                                 
                                 [self showAlertViewWithTitle:nil message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
+                            }else if ([content[@"msg"] isEqual:@"604"]){
+                                
+                                [self showAlertViewWithTitle:nil message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
+                            }else if ([content[@"msg"] isEqual:@"605"]){
+                                
+                                [self showAlertViewWithTitle:nil message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
                             }
+                            
+                            
                               [self.navigationController popViewControllerAnimated:NO];
                         }
                         else {
@@ -280,7 +288,15 @@
                          }else if ([content[@"msg"] isEqual:@"error_agentCodeNotExist"]){
                              
                              [self showAlertViewWithTitle:nil message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
+                         }else if ([content[@"msg"] isEqual:@"604"]){
+                             
+                             [self showAlertViewWithTitle:nil message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
+                         }else if ([content[@"msg"] isEqual:@"605"]){
+                             
+                             [self showAlertViewWithTitle:nil message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
                          }
+                         
+                         
                              [self.navigationController popViewControllerAnimated:NO];
                           }
                 else {

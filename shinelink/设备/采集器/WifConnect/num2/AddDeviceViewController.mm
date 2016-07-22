@@ -68,7 +68,7 @@ static void *context = NULL;
     {
         self.ipName.text = ssid;
     }
-    self.pswd.secureTextEntry = true;
+    //self.pswd.secureTextEntry = true;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotDeviceByScan:) name:kOnGotDeviceByScan object:nil];
 }
 
@@ -154,13 +154,23 @@ static void *context = NULL;
     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [goBut addTarget:self action:@selector(deviceSearchStart) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:goBut];
-
+    
+    UIButton *backBut =  [UIButton buttonWithType:UIButtonTypeCustom];
+    backBut.frame=CGRectMake(60*NOW_SIZE,310*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    //    [goBut.layer setMasksToBounds:YES];
+    //    [goBut.layer setCornerRadius:25.0];
+    [backBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
+    [backBut setTitle:root_finish forState:UIControlStateNormal];
+    backBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+    [backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
+    [_scrollView addSubview:backBut];
+    
 }
 
 
 
 -(void)goBack{
-  [self.navigationController popViewControllerAnimated:YES];
+  [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -386,7 +396,7 @@ static void *context = NULL;
         _timelineConfig = [[EasyTimeline alloc] init];
     }
     
-    _timelineConfig.duration		= 60;
+    _timelineConfig.duration		= 80;
     _timelineConfig.tickPeriod	= 3;
     _timelineConfig.tickBlock		= ^void (NSTimeInterval time, EasyTimeline *timeline) {
 
