@@ -155,6 +155,10 @@
         }
     }
     
+    if (!(sameArray.count==_imageNameArray.count)) {
+         getSame=@"0";
+    }
+    
     if (sameArray.count==0) {
          getSame=@"0";
     }

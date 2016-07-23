@@ -191,7 +191,8 @@
     
     
     LoginButton *loginBtn = [[LoginButton alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 310*HEIGHT_SIZE+sizeH, SCREEN_Width - 80*NOW_SIZE, 45*HEIGHT_SIZE)];
-    loginBtn.backgroundColor = [UIColor colorWithRed:149/255.0f green:226/255.0f blue:98/255.0f alpha:1];
+  loginBtn.backgroundColor = [UIColor colorWithRed:149/255.0f green:226/255.0f blue:98/255.0f alpha:1];
+    
     [_scrollView addSubview:loginBtn];
     loginBtn.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [loginBtn setTitle:root_log_in forState:UIControlStateNormal];
@@ -425,6 +426,13 @@ NSLog(@"体验馆");
                 NSLog(@"ID=%@",ID);
                 
               
+                NSString *serviceBool=_dataSource[@"service"];
+                if ([serviceBool isEqualToString:@"0"]||[serviceBool isEqualToString:@""]) {
+                      [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"serviceBool"];
+                }else if ([serviceBool isEqualToString:@"1"]){
+                  [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"serviceBool"];
+                }
+                
                 
                 //获取服务器
               //  [self netServerInit];

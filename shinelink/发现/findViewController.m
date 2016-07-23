@@ -132,6 +132,10 @@
         }
     }
     
+    if (!(getImageName.count==_imageArrayName.count)) {
+        getSame=@"0";
+    }
+    
     NSMutableArray *getPicData = [NSMutableArray arrayWithArray:[user objectForKey:@"AdPicData"]];
     if (getPicData.count==0) {
           getSame=@"0";

@@ -226,6 +226,10 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 
 
+
+
+
+
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //Optional
     NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);

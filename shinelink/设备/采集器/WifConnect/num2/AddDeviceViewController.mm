@@ -368,7 +368,7 @@ static void *context = NULL;
                 if ([_timelineConfig isRunning]) {
                     [_timelineConfig stop];
                 }
-   [self showAlertViewWithTitle:nil message:@"配置成功"  cancelButtonTitle:root_Yes];
+   [self showAlertViewWithTitle:nil message:root_peizhi_chenggong  cancelButtonTitle:root_Yes];
                 
             }
             

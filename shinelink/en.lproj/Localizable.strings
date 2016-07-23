@@ -476,3 +476,5 @@
 "添加1"="Add";
 "连接路由器2"="Please connect to the router first";
 "刷新设备列表"="After five minutes, please drop-down refresh the list of devices,in order to get the devices information under the data logger ";
+"配置成功"="Configured successfully";
+

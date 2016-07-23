@@ -44,6 +44,7 @@
 
 //注册
 
+#define  root_peizhi_chenggong        NSLocalizedString(@"配置成功", nil)
 #define  root_country        NSLocalizedString(@"国家", nil)
 #define  root_country_alet        NSLocalizedString(@"点击选择国家", nil)
 #define  root_country_kong        NSLocalizedString(@"请选择国家和城市", nil)
