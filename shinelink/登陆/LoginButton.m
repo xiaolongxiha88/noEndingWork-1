@@ -138,9 +138,9 @@
     _block = completion;
     CABasicAnimation *expandAnim = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     expandAnim.fromValue = @(1.0);
-    expandAnim.toValue = @(33.0);
+    expandAnim.toValue = @(1.0);
     expandAnim.timingFunction = _expandCurve;
-    expandAnim.duration = 0.3;
+    expandAnim.duration = 0.05;
     expandAnim.delegate = self;
     expandAnim.fillMode = kCAFillModeForwards;
     expandAnim.removedOnCompletion = false;
