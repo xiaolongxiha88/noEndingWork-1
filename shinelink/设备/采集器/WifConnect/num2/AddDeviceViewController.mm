@@ -302,7 +302,7 @@ static void *context = NULL;
     
     
     //添加定时器
-    _timer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(getNET) userInfo:nil repeats:YES];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getNET) userInfo:nil repeats:YES];
     
     
     
@@ -396,7 +396,7 @@ static void *context = NULL;
         _timelineConfig = [[EasyTimeline alloc] init];
     }
     
-    _timelineConfig.duration		= 80;
+    _timelineConfig.duration		= 180;
     _timelineConfig.tickPeriod	= 3;
     _timelineConfig.tickBlock		= ^void (NSTimeInterval time, EasyTimeline *timeline) {
 

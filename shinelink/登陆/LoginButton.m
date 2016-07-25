@@ -148,6 +148,8 @@
     [_spiner stopAnimation];
 }
 
+
+
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     
     CABasicAnimation *cab = (CABasicAnimation *)anim;
