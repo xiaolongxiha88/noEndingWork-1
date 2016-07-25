@@ -37,7 +37,6 @@
 @property (nonatomic, strong) NSDictionary *dataSource;
 @property (nonatomic, strong) NSMutableDictionary *demoArray;
 @property (nonatomic, strong) NSString *serverDemoAddress;
-
 @end
 
 @implementation loginViewController
@@ -197,6 +196,11 @@
     loginBtn.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [loginBtn setTitle:root_log_in forState:UIControlStateNormal];
     [loginBtn addTarget:self action:@selector(PresentCtrl:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+
+    
     
 }
 

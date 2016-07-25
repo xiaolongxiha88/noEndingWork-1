@@ -212,7 +212,7 @@
     }
     
     UILongPressGestureRecognizer * longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellDidLongPressed:)];
-    longPressGesture.minimumPressDuration = 1.0f;
+    longPressGesture.minimumPressDuration = 0.5f;
     [cell addGestureRecognizer:longPressGesture];
     
     [cell setData:_arrayData[indexPath.row]];

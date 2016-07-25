@@ -310,10 +310,39 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [valueFor2 addObject:daydic[key]];
     }
     NSNumber *sum = [valueFor2 valueForKeyPath:@"@avg.intValue"];
+    
+  
     float k=[sum floatValue];
      NSNumber *max = [valueFor2 valueForKeyPath:@"@max.floatValue"];
-    _value3=[NSString stringWithFormat:@"%.2f",k];
-_value2=[NSString stringWithFormat:@"%@",max];
+    
+  
+    
+    if ([_dicType isEqualToString:@"2"]) {
+        
+        if (_dayButton.selected==1) {
+            if (max==nil || max==NULL||([max isEqual:@""] )) {
+                  _value2=@"0W";
+            }else{
+            _value2=[NSString stringWithFormat:@"%@W",max];
+            }
+
+            _value3=[NSString stringWithFormat:@"%.2fW",k];
+        }else{
+            _value2=[NSString stringWithFormat:@"%@kWh",max];
+            _value3=[NSString stringWithFormat:@"%.2fkWh",k];
+        }
+       
+    }else if ([_dicType isEqualToString:@"3"]){
+        if (max==nil || max==NULL||([max isEqual:@""] )) {
+            _value2=@"0kWh";
+        }else{
+              _value2=[NSString stringWithFormat:@"%@kWh",max];
+        }
+        
+      
+        _value3=[NSString stringWithFormat:@"%.2fkWh",k];
+    }
+    
         _valueArray=[NSMutableArray arrayWithObjects:_value1,_value2,_value3,nil];
     [self updataLable];
 }
@@ -1000,7 +1029,7 @@ _value2=[NSString stringWithFormat:@"%@",max];
             
             UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
             
-            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(completeSelectDate:)];
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:root_finish style:UIBarButtonItemStyleDone target:self action:@selector(completeSelectDate:)];
               [doneButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:14*HEIGHT_SIZE],NSFontAttributeName, nil] forState:UIControlStateNormal];
             
             doneButton.tintColor = [UIColor whiteColor];

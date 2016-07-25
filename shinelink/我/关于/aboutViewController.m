@@ -228,6 +228,11 @@
         [self.navigationController pushViewController:go0 animated:NO];
     }
     
+    if(indexPath.row==1)
+    {
+        [self showToastViewWithTitle:_serviceNum];
+    }
+    
     if(indexPath.row==2)
     {
         [self checkUpdate];

@@ -400,8 +400,8 @@
 "请求苹果服务器失败"="Request to sever of Apple is failed";
 "修改密码"="Change password";
 "修改手机号"="Change cellphone number";
-"修改邮箱"="Modify the email address";
-"修改代理商编号"="Modify Agent number";
+"修改邮箱"="Change the email address";
+"修改代理商编号"="Change Agent number";
 "注销账号"="Sign out";
 "输入手机号"="Input cellphone number";
 "输入邮箱地址"="Input email address";

@@ -464,6 +464,16 @@ static void *context = NULL;
 }
 
 
+
+-(void)viewDidDisappear:(BOOL)animated{
+
+_timer.fireDate=[NSDate distantFuture];
+    
+}
+
+
+
+
 #pragma mark UDP检测
 
 
