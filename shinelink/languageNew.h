@@ -29,6 +29,9 @@
 #define  root_kongzhi_mima      NSLocalizedString(@"控制密码", nil)
 
 //登陆
+#define  root_yongHuMing_mima_cuowu        NSLocalizedString(@"用户名密码错误 ", nil)
+#define  root_yongHuMing_mima_weikong        NSLocalizedString(@"用户名密码为空", nil)
+
 #define root_Enter_your_username       NSLocalizedString(@"Enter your username", @"Enter your username")
 #define root_Enter_your_pwd       NSLocalizedString(@"Enter your pwd", @"Enter your pwd")
 #define root_forget_pwd       NSLocalizedString(@"忘记密码", nil)
@@ -514,5 +517,6 @@
 #define  root_lianjie_luyouqi      NSLocalizedString(@"连接路由器2", nil)
 
 #define  root_shuaxin_liebiao     NSLocalizedString(@"刷新设备列表", nil)
+#define  root_demo     NSLocalizedString(@"示例", nil)
 
 #endif /* languageNew_h */

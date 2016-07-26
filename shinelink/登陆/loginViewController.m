@@ -381,15 +381,15 @@ NSLog(@"体验馆");
                 //登陆失败
                 if ([content[@"msg"] integerValue] == 501) {
                     
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"User name or password is blank" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_yongHuMing_mima_weikong delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
                     [alertView show];
                 }
                 if ([content[@"msg"] integerValue] ==502) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"username password error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_yongHuMing_mima_cuowu delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
                     [alertView show];
                 }
                 if ([content[@"msg"] integerValue] ==503) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"server error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_fuWuQi_cuoWu delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
                     [alertView show];
                 }
                 
@@ -452,7 +452,7 @@ NSLog(@"体验馆");
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
         hud.mode = MBProgressHUDModeText;
         hud.animationType = MBProgressHUDAnimationZoom;
-        hud.labelText = @"Networking Timeout";
+        hud.labelText = root_Networking;
         hud.margin = 10.f;
         hud.removeFromSuperViewOnHide = YES;
         [hud hide:YES afterDelay:1.5];

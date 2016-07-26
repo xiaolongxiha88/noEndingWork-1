@@ -29,7 +29,9 @@
 @property (nonatomic, strong) UIImagePickerController *cameraImagePicker;
 @property (nonatomic, strong) UIImagePickerController *photoLibraryImagePicker;
 @property (nonatomic, strong) NSMutableArray *DemoPicName;
+@property (nonatomic, strong) NSMutableArray *DemoPicName11;
 @property (nonatomic, strong) NSMutableArray *DemoPicName2;
+@property (nonatomic, strong) NSMutableArray *DemoPicName22;
 @property (nonatomic, strong) NSMutableArray *stationID;
 @property (nonatomic, strong) NSMutableArray *stationName;
 @property (nonatomic, strong) NSMutableArray *dataArr;
@@ -234,8 +236,12 @@
 }
 
 -(void)initData{
-    _DemoPicName2=[[NSMutableArray alloc]initWithObjects:@"storageE.png", @"powerE.png", @"inverterE.png",@"chargeE.png",nil];
-    _DemoPicName=[[NSMutableArray alloc]initWithObjects:@"storageD.png", @"powerD.png", @"inverterD.png",@"chargeD.png",nil];
+    _DemoPicName2=[[NSMutableArray alloc]initWithObjects:@"storagecn.png", @"powercn.png", @"pvcn.png",@"charge-cn.png",nil];
+     _DemoPicName22=[[NSMutableArray alloc]initWithObjects:@"storageen.png", @"poweren.png", @"pven.png",@"charge-en.png",nil];
+    
+    _DemoPicName=[[NSMutableArray alloc]initWithObjects:@"storagebgcn.png", @"pvbgcn.png", @"pvbgcn.png",@"demobgcn.png",nil];
+     _DemoPicName11=[[NSMutableArray alloc]initWithObjects:@"storagebgen.png", @"pvbgen.png", @"pvbgen.png",@"demobgen.png",nil];
+    
     _typeArr=[NSMutableArray array];
     nameArray=[NSMutableArray array];
     statueArray=[NSMutableArray array];
@@ -1116,6 +1122,20 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    
+    NSString *_languageValue;
+    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"1";
+    }
+
+    
  
     //TableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if(indexPath.section==0){
@@ -1137,34 +1157,76 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         [self.navigationController pushViewController:sd animated:NO];}}
     else{
          DemoDevice *demoDevice=[_managerArray objectAtIndex:indexPath.row];
+        
+           // nameArray2=[[NSMutableArray alloc]initWithObjects:root_niBianQi, root_chuNengJi, root_chongDianZhuang, root_gongLvTiaoJieQi,  nil];
+        
        if([demoDevice.type isEqualToString:@"inverter"]){
            
             DemoDeviceViewController *sd=[[DemoDeviceViewController alloc ]init];
             sd.hidesBottomBarWhenPushed=YES;
-           sd.picName=_DemoPicName[2];
-           sd.picName2=_DemoPicName2[2];
-           sd.title=@"inverter(Demo)";
+           
+           if ([_languageValue isEqualToString:@"0"]) {
+               sd.picName=_DemoPicName[2];
+               sd.picName2=_DemoPicName2[2];
+           }else{
+               sd.picName=_DemoPicName11[2];
+               sd.picName2=_DemoPicName22[2];
+           }
+       
+           NSString *title1=[NSString stringWithFormat:@"%@(%@)",root_niBianQi,root_demo];
+           sd.title=title1;
             [self.navigationController pushViewController:sd animated:NO];}
         else if([demoDevice.type  isEqualToString:@"storage"]){
             DemoDeviceViewController *sd=[[DemoDeviceViewController alloc ]init];
             sd.hidesBottomBarWhenPushed=YES;
-            sd.picName=_DemoPicName[0];
-              sd.picName2=_DemoPicName2[0];
-               sd.title=@"storage(Demo)";
+      
+            if ([_languageValue isEqualToString:@"0"]) {
+                sd.picName=_DemoPicName[0];
+                sd.picName2=_DemoPicName2[0];
+            }else{
+                sd.picName=_DemoPicName11[0];
+                sd.picName2=_DemoPicName22[0];
+            }
+            
+            NSString *title1=[NSString stringWithFormat:@"%@(%@)",root_chuNengJi,root_demo];
+            sd.title=title1;
+            
+              // sd.title=@"storage(Demo)";
             [self.navigationController pushViewController:sd animated:NO];}
         else if([demoDevice.type  isEqualToString:@"charge"]){
             DemoDeviceViewController *sd=[[DemoDeviceViewController alloc ]init];
             sd.hidesBottomBarWhenPushed=YES;
-            sd.picName=_DemoPicName[3];
-              sd.picName2=_DemoPicName2[3];
-              sd.title=@"charge(Demo)";
+ 
+            
+            if ([_languageValue isEqualToString:@"0"]) {
+                sd.picName=_DemoPicName[3];
+                sd.picName2=_DemoPicName2[3];
+            }else{
+                sd.picName=_DemoPicName11[3];
+                sd.picName2=_DemoPicName22[3];
+            }
+            NSString *title1=[NSString stringWithFormat:@"%@(%@)",root_chongDianZhuang,root_demo];
+            sd.title=title1;
+            
+              //sd.title=@"charge(Demo)";
             [self.navigationController pushViewController:sd animated:NO];}
         else if([demoDevice.type  isEqualToString:@"powerRegulator"]){
             DemoDeviceViewController *sd=[[DemoDeviceViewController alloc ]init];
             sd.hidesBottomBarWhenPushed=YES;
-            sd.picName=_DemoPicName[1];
-              sd.picName2=_DemoPicName2[1];
-            sd.title=@"powerRegulator(Demo)";
+    
+            
+            if ([_languageValue isEqualToString:@"0"]) {
+                sd.picName=_DemoPicName[1];
+                sd.picName2=_DemoPicName2[1];
+            }else{
+                sd.picName=_DemoPicName11[1];
+                sd.picName2=_DemoPicName22[1];
+            }
+            
+            NSString *title1=[NSString stringWithFormat:@"%@(%@)",root_gongLvTiaoJieQi,root_demo];
+            sd.title=title1;
+            
+           // sd.title=@"powerRegulator(Demo)";
             [self.navigationController pushViewController:sd animated:NO];}
     
         

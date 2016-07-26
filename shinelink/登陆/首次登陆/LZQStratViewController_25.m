@@ -49,18 +49,18 @@
         [imageName addObject:@"first1.jpg"];
         [imageName addObject:@"first1.jpg"];
         [imageName addObject:@"first2.png"];
-        [imageName addObject:@"333.png"];
+        [imageName addObject:@"first3.png"];
     }else if ([currentLanguage isEqualToString:@"en-CN"]) {
-        [imageName addObject:@"11.png"];
-         [imageName addObject:@"11.png"];
-         [imageName addObject:@"22.png"];
-         [imageName addObject:@"33.png"];
+        [imageName addObject:@"second1.png"];
+         [imageName addObject:@"second1.png"];
+         [imageName addObject:@"second2.png"];
+         [imageName addObject:@"second3.png"];
       // NSArray *imageName=[NSArray arrayWithObjects:@"11.png",@"11.png",@"22.png",@"33.png", nil];
     }else{
-        [imageName addObject:@"11.png"];
-        [imageName addObject:@"11.png"];
-        [imageName addObject:@"22.png"];
-        [imageName addObject:@"33.png"];
+        [imageName addObject:@"second1.png"];
+        [imageName addObject:@"second1.png"];
+        [imageName addObject:@"second2.png"];
+        [imageName addObject:@"second3.png"];
     }
 
     
