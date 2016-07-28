@@ -27,6 +27,8 @@
 @property (nonatomic, strong) UIButton *button1;
 @property (nonatomic, strong) UIButton *button2;
 @property (nonatomic, strong) UIButton *button3;
+@property (nonatomic, strong) NSMutableArray *SNArray;
+@property (nonatomic, strong) NSMutableArray *SnOnlyArray;
 @end
 
 @implementation addServerViewController
@@ -41,7 +43,45 @@
      _labelArray=[[NSMutableArray alloc]initWithObjects:root_ME_biaoti, root_ME_wenti_leixing, root_NBQ_xunliehao,root_ME_neirong,nil];
     _picArray=[NSMutableArray array];
     [self initUI];
+    [self getNetForSn];
 }
+
+-(void)getNetForSn{
+
+    _SNArray=[NSMutableArray new];
+        _SnOnlyArray=[NSMutableArray new];
+    
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *plantId=[ud objectForKey:@"plantID"];
+    //[self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":plantId,@"pageNum":@"1", @"pageSize":@"20"} paramarsSite:@"/newQualityAPI.do?op=getQualityInformation" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        if (content) {
+            //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
+            NSArray *jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"getQualityInformation==%@", jsonObj);
+            NSArray *allArray=[NSArray arrayWithArray:jsonObj];
+            for (int i=0; i<allArray.count; i++) {
+
+                NSString *deviceType=allArray[i][@"deviceType"];
+                NSString *deviceSN=allArray[i][@"deviceSN"];
+                
+                NSString *SnAll=[NSString stringWithFormat:@"%@--%@",deviceType,deviceSN];
+                
+                [_SNArray addObject:SnAll];
+                [_SnOnlyArray addObject:deviceSN];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        
+    }];
+
+}
+
+
 -(void)initUI{
     
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
@@ -73,6 +113,25 @@
         image1.userInteractionEnabled = YES;
         image1.image = IMAGE(@"frame2@2x.png");
         [_scrollView addSubview:image1];
+        
+        if (i==2) {
+           // image1.frame=CGRectMake(80*NOW_SIZE, 15*HEIGHT_SIZE+Size1*i, 170*NOW_SIZE,30*HEIGHT_SIZE );
+            
+            UIButton *lngButton=[[UIButton alloc]initWithFrame:CGRectMake(250*NOW_SIZE, 15*HEIGHT_SIZE+Size1*2, 50*NOW_SIZE, 30*HEIGHT_SIZE)];
+     //[lngButton setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
+            lngButton.backgroundColor=COLOR(141, 223, 251, 1);
+            [lngButton setTitle:root_WO_dianji_huoqu forState:UIControlStateNormal];
+            lngButton.titleLabel.font=[UIFont systemFontOfSize:11*HEIGHT_SIZE];
+            [lngButton setTitleColor:[UIColor whiteColor] forState:0];
+           // lngButton.tag=2002;
+            [lngButton addTarget:self action:@selector(getSN) forControlEvents:UIControlEventTouchUpInside];
+            [_scrollView addSubview:lngButton];
+            
+
+        }
+
+
+        
     }
 
             self.userTextField = [[UITextField alloc] initWithFrame:CGRectMake(85*NOW_SIZE, 15*HEIGHT_SIZE, 220*NOW_SIZE,30*HEIGHT_SIZE )];
@@ -88,7 +147,7 @@
             self.userTextField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
             [_scrollView addSubview:_userTextField];
     
-            self.SNTextField = [[UITextField alloc] initWithFrame:CGRectMake(85*NOW_SIZE, 15*HEIGHT_SIZE+Size1*2, 220*NOW_SIZE,30*HEIGHT_SIZE )];
+            self.SNTextField = [[UITextField alloc] initWithFrame:CGRectMake(85*NOW_SIZE, 15*HEIGHT_SIZE+Size1*2, 165*NOW_SIZE,30*HEIGHT_SIZE )];
             self.SNTextField.placeholder = root_ME_xuliehao_shuru;
             self.SNTextField.textColor = [UIColor blackColor];
             self.SNTextField.tintColor = [UIColor blackColor];
@@ -178,15 +237,13 @@
     [_scrollView addSubview:image5];
     }
     
-//    for(int i=0;i<4;i++){
-//        UIImageView *image5=[[UIImageView alloc]initWithFrame:CGRectMake(70*NOW_SIZE+size5*i, 25*HEIGHT_SIZE+50*HEIGHT_SIZE*4+175*HEIGHT_SIZE, 50*NOW_SIZE,50*HEIGHT_SIZE )];
-//        // image5.userInteractionEnabled = YES;
-//        image5.image = IMAGE(@"add2@2x.png");
-//        [_scrollView addSubview:image5];
-//    }
+
  
     
     }
+
+
+
 
 
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
@@ -358,25 +415,6 @@
    
        picTime++;
     
-//        else if(4<=picTime && picTime<8){
-//            UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(70*NOW_SIZE+size2*(picTime-4), 25*HEIGHT_SIZE+50*HEIGHT_SIZE*4+175*HEIGHT_SIZE, 50*NOW_SIZE,50*HEIGHT_SIZE )];
-//            image2.userInteractionEnabled = YES;
-//            image2.image = _picArray[picTime];
-//            image2.tag=picTime+3000;
-//            [_scrollView addSubview:image2];
-//            
-//            UIButton *del2= [[UIButton alloc] initWithFrame:CGRectMake(70*NOW_SIZE+size2*(picTime-4), 25*HEIGHT_SIZE+50*HEIGHT_SIZE*4+175*HEIGHT_SIZE+55*HEIGHT_SIZE, 50*NOW_SIZE,10*HEIGHT_SIZE )];
-//            [del2 setTitle:root_del forState:UIControlStateNormal];
-//            del2.backgroundColor=[UIColor clearColor];
-//            [del2 setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//            // del.font = [UIFont systemFontOfSize:12*NOW_SIZE];
-//            //del.userInteractionEnabled=YES;
-//            del2.tag=2000+picTime;
-//            [del2 addTarget:self action:@selector(delPicture:) forControlEvents:UIControlEventTouchUpInside];
-//            [_scrollView addSubview:del2];
-//      }
-    
-  
     }
 
 -(void)delPicture:(UIButton*)del{
@@ -403,12 +441,27 @@
         _image3=nil;
         _button3=nil;
     }
-//    UIImageView *image3=[_scrollView viewWithTag:a.tag+1000];
-//    UIButton *button3=[_scrollView viewWithTag:a.tag];
-//    
-//    [button3 removeFromSuperview];
-//    [image3 removeFromSuperview];
+
 }
+
+
+-(void)getSN{
+    
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle: nil
+                                                                              message: nil
+                                                                       preferredStyle:UIAlertControllerStyleAlert];
+    
+    
+    for (int i=0; i<_SNArray.count; i++) {
+        [alertController addAction: [UIAlertAction actionWithTitle: _SNArray[i] style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+            self.SNTextField.text=_SnOnlyArray[i];
+            self.SNTextField.textColor=[UIColor blackColor];
+        }]];
+    }
+     [self presentViewController: alertController animated: YES completion: nil];
+}
+
 
 -(void)tapLable{
 

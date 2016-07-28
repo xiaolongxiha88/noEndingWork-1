@@ -235,7 +235,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             
             self.line2View.energyTitleLabel.text = root_Today_Energy;
             self.line2View.unitLabel.text = root_Powre;
-            _selectButton=[[UIButton alloc]initWithFrame:CGRectMake(110*NOW_SIZE, 50*HEIGHT_SIZE, 210*NOW_SIZE, 30*HEIGHT_SIZE)];
+            _selectButton=[[UIButton alloc]initWithFrame:CGRectMake(90*NOW_SIZE, 50*HEIGHT_SIZE, 230*NOW_SIZE, 30*HEIGHT_SIZE)];
             [_selectButton setTitle:_dict[@"1"] forState:0];
             [_selectButton addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
             _selectButton.backgroundColor = COLOR(39, 183, 99, 1);
@@ -243,6 +243,12 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             _selectButton.clipsToBounds = YES;
             [_line2View addSubview:_selectButton];
             _scrollView.contentSize=CGSizeMake(SCREEN_Width, CGRectGetMaxY(_line2View.frame)+20*HEIGHT_SIZE);
+            
+            UIImageView *selectView = [[UIImageView alloc] initWithFrame:CGRectMake(230*NOW_SIZE-25*HEIGHT_SIZE, 9*HEIGHT_SIZE, 15*HEIGHT_SIZE, 12*HEIGHT_SIZE)];
+            // bgImageView.backgroundColor=COLOR(123, 239, 227, 1);
+            selectView.image = IMAGE(@"triangular2.png");
+            [self.selectButton addSubview:selectView];
+            
         }
         
     } failure:^(NSError *error) {

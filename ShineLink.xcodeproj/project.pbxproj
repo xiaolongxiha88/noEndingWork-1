@@ -363,6 +363,7 @@
 		33C3FFFD1D3E33E00016351C /* L4.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF21D3E33E00016351C /* L4.png */; };
 		33C3FFFE1D3E33E00016351C /* L5.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF31D3E33E00016351C /* L5.png */; };
 		33C3FFFF1D3E33E00016351C /* L6.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF41D3E33E00016351C /* L6.png */; };
+		33C5E2261D49A89F00A0DB00 /* 三角形.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C5E2251D49A89F00A0DB00 /* 三角形.png */; };
 		33ECDCF31CDC9D3400E20AF8 /* deviceCore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33ECDCF11CDC9D3400E20AF8 /* deviceCore.xcdatamodeld */; };
 		33EFB6011C979B5F003F336F /* StationCellectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB5F81C979B5F003F336F /* StationCellectViewController.m */; };
 		33EFB6021C979B5F003F336F /* StationCellectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB5FA1C979B5F003F336F /* StationCellectTableViewCell.m */; };
@@ -1038,6 +1039,7 @@
 		33C3FFF71D3E33E00016351C /* L9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L9.png; sourceTree = "<group>"; };
 		33C3FFF81D3E33E00016351C /* L10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L10.png; sourceTree = "<group>"; };
 		33C3FFF91D3E33E00016351C /* L11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L11.png; sourceTree = "<group>"; };
+		33C5E2251D49A89F00A0DB00 /* 三角形.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "三角形.png"; sourceTree = "<group>"; };
 		33ECDCF21CDC9D3400E20AF8 /* deviceCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = deviceCore.xcdatamodel; sourceTree = "<group>"; };
 		33EFB5F71C979B5F003F336F /* StationCellectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationCellectViewController.h; sourceTree = "<group>"; };
 		33EFB5F81C979B5F003F336F /* StationCellectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationCellectViewController.m; sourceTree = "<group>"; };
@@ -2159,6 +2161,7 @@
 				3376ED611D12A2F4009526B4 /* Pend-ing.png */,
 				3376ED621D12A2F4009526B4 /* Proce-ssed.png */,
 				3376ED631D12A2F4009526B4 /* Proce-ssing.png */,
+				33C5E2251D49A89F00A0DB00 /* 三角形.png */,
 			);
 			path = "图片8";
 			sourceTree = "<group>";
@@ -2941,6 +2944,7 @@
 				338990B11CEAB73400A708F8 /* logo3.png in Resources */,
 				334FF0B81CF53C7C001E6716 /* bottombg.png in Resources */,
 				33C3FFFC1D3E33E00016351C /* L3.png in Resources */,
+				33C5E2261D49A89F00A0DB00 /* 三角形.png in Resources */,
 				33FEFD711C7DB38400324374 /* iconfont-nengyuanlei_press@2x.png in Resources */,
 				3355F25E1C741AC3006DDE5A /* client.png in Resources */,
 				33FEFD751C7DB38400324374 /* iconfont-shouji.png in Resources */,

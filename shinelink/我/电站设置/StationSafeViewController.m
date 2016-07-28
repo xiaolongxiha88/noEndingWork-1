@@ -81,6 +81,13 @@
         label.textColor=[UIColor whiteColor];
         [self.view addSubview:label];
     }
+    
+      UILabel *labelK=[[UILabel alloc]initWithFrame:CGRectMake(290*NOW_SIZE, (3*40)*HEIGHT_SIZE+10*HEIGHT_SIZE, 30*NOW_SIZE, 45*HEIGHT_SIZE)];
+    labelK.text=@"Wp";
+       labelK.textColor=[UIColor whiteColor];
+    labelK.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
+       [self.view addSubview:labelK];
+
 }
 
 

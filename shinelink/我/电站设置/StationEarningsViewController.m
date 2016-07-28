@@ -80,6 +80,23 @@
         label.textColor=[UIColor whiteColor];
         [self.view addSubview:label];
     }
+    
+       for (int i=1; i<4; i++) {
+    UILabel *labelK=[[UILabel alloc]initWithFrame:CGRectMake(280*NOW_SIZE, (i*40)*HEIGHT_SIZE+10*HEIGHT_SIZE, 30*NOW_SIZE, 45*HEIGHT_SIZE)];
+    labelK.text=@"kg";
+    labelK.textColor=[UIColor whiteColor];
+    labelK.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [self.view addSubview:labelK];
+       }
+    
+    UILabel *labelS=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 160*HEIGHT_SIZE+20*HEIGHT_SIZE, 300*NOW_SIZE, 40*HEIGHT_SIZE)];
+    labelS.text=root_huanSuan_danwei;
+    labelS.textColor=[UIColor whiteColor];
+    labelS.textAlignment=NSTextAlignmentCenter;
+    labelS.numberOfLines=0;
+    labelS.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [self.view addSubview:labelS];
+    
 }
 
 
@@ -170,7 +187,7 @@
 
     
     _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    _goBut.frame=CGRectMake(60*NOW_SIZE,240*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    _goBut.frame=CGRectMake(60*NOW_SIZE,260*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
 //    [_goBut.layer setMasksToBounds:YES];
 //    [_goBut.layer setCornerRadius:25.0];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];

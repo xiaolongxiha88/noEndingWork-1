@@ -21,4 +21,5 @@
 @property (nonatomic, strong) NSString *dicType;
 @property (nonatomic, strong) NSString *plantID;
 @property (nonatomic, strong) NSString *titleString;
+@property (nonatomic, strong) NSString *familyEnable;
 @end

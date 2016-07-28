@@ -161,7 +161,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 3;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -203,16 +203,17 @@
         cell3.tableDetail.text=_serviceNum;
         
           return cell3;
-    } else if(indexPath.row==2)
-    {
-        if (!cell4) {
-            cell4=[[aboutTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cell44];
-        }
-        [cell4.imageLog setImage:[UIImage imageNamed:@"update.png"]];
-        cell4.tableName.text = root_WO_jiancha_gengxin;
-        
-        return cell4;
     }
+//    else if(indexPath.row==2)
+//    {
+//        if (!cell4) {
+//            cell4=[[aboutTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cell44];
+//        }
+//        [cell4.imageLog setImage:[UIImage imageNamed:@"update.png"]];
+//        cell4.tableName.text = root_WO_jiancha_gengxin;
+//        
+//        return cell4;
+//    }
     else return nil;
 
 }
@@ -230,13 +231,21 @@
     
     if(indexPath.row==1)
     {
-        [self showToastViewWithTitle:_serviceNum];
-    }
+      //  [self showToastViewWithTitle:_serviceNum];
+        
+        //NSString *allString = [NSString stringWithFormat:@"tel:10086"];
+        
+       // _serviceNum=@"+86-75529515888";
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:_serviceNum message:root_dadianhua delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+        alertView.tag = 1002;
+        [alertView show];
+           }
     
-    if(indexPath.row==2)
-    {
-        [self checkUpdate];
-    }
+//    if(indexPath.row==2)
+//    {
+//        [self checkUpdate];
+//    }
+      
 }
 
 
@@ -299,6 +308,19 @@
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_appUrl]];
             }
         }
+        
+        if (alertView.tag == 1002) {
+        
+            
+            NSString *strUrl = [_serviceNum stringByReplacingOccurrencesOfString:@" " withString:@""];
+            NSString *allString = [NSString stringWithFormat:@"tel://%@",strUrl];
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:allString]];
+
+        }
+
+        
+        
     }
 
 }

@@ -168,7 +168,7 @@
     
     _scrollView2=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _scrollView2.scrollEnabled=YES;
-    _scrollView2.contentSize = CGSizeMake(SCREEN_Width,2000*NOW_SIZE);
+    
     [self.view addSubview:_scrollView2];
     
     _title1=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,10*HEIGHT_SIZE, 300*NOW_SIZE,25*HEIGHT_SIZE )];
@@ -238,9 +238,11 @@
     if (_image) {
         recommendTitle.frame=CGRectMake(10*NOW_SIZE, 390*HEIGHT_SIZE-headH, 300*NOW_SIZE, 20*HEIGHT_SIZE);
         recommend.frame=CGRectMake(10*NOW_SIZE, 410*HEIGHT_SIZE-headH, 300*NOW_SIZE, fcRect.size.height);
+        _scrollView2.contentSize = CGSizeMake(SCREEN_Width,420*HEIGHT_SIZE+fcRect.size.height);
     }else{
         recommendTitle.frame=CGRectMake(10*NOW_SIZE, 390*HEIGHT_SIZE-120*HEIGHT_SIZE-headH, 300*NOW_SIZE, 20*HEIGHT_SIZE);
         recommend.frame=CGRectMake(10*NOW_SIZE, 410*HEIGHT_SIZE-120*HEIGHT_SIZE-headH, 300*NOW_SIZE, fcRect.size.height);
+        _scrollView2.contentSize = CGSizeMake(SCREEN_Width,320*HEIGHT_SIZE+fcRect.size.height);
         
     }
     

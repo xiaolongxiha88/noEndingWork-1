@@ -19,7 +19,7 @@
 
 @interface AddDeviceViewController ()
 @property (nonatomic, strong) UIScrollView *scrollView;
-@property (nonatomic, strong) NSTimer * timer;
+@property (nonatomic, weak) NSTimer * timer;
 @end
 
 @implementation AddDeviceViewController{
@@ -49,12 +49,12 @@ static void *context = NULL;
     _deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
     
     
-  //[self.addDeviceBtn setStyleType:ACPButtonMain];
-  //[self.addDeviceBtn setLabelTextColor:[UIColor blueColor] highlightedColor:[UIColor grayColor] disableColor:nil];
-  //[self.addDeviceBtn setLabelFont:[UIFont fontWithName:@"Trebuchet MS" size:20]];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    //将触摸事件添加到当前view
+    [self.view addGestureRecognizer:tapGestureRecognizer];
     
-//    NSString *Setting = NSLocalizedString(@"Setting", nil);
-//    NSString *Back = NSLocalizedString(@"Back", nil);
             self.title = root_peizhi_shinewifi_E;
   
 
@@ -72,6 +72,10 @@ static void *context = NULL;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotDeviceByScan:) name:kOnGotDeviceByScan object:nil];
 }
 
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    [_ipName resignFirstResponder];
+    [_pswd resignFirstResponder];
+}
 
 -(void)initUI{
 
@@ -396,7 +400,7 @@ static void *context = NULL;
         _timelineConfig = [[EasyTimeline alloc] init];
     }
     
-    _timelineConfig.duration		= 180;
+    _timelineConfig.duration		= 240;
     _timelineConfig.tickPeriod	= 3;
     _timelineConfig.tickBlock		= ^void (NSTimeInterval time, EasyTimeline *timeline) {
 
@@ -468,6 +472,7 @@ static void *context = NULL;
 -(void)viewDidDisappear:(BOOL)animated{
 
 _timer.fireDate=[NSDate distantFuture];
+    _timer=nil;
     
 }
 

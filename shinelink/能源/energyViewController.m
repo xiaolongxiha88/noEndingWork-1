@@ -171,6 +171,7 @@
         _home.plantID=plantID;
         _home.titleString=root_energy_jiating_yongdian;
         _home.dicType=@"2";
+        _home.familyEnable=@"0";
         _home.dictInfo=@{@"equipId":plantID,
                         @"daySite":@"/newPlantDetailAPI.do?type=1",
                         @"monthSite":@"/newPlantDetailAPI.do?type=2",

@@ -168,13 +168,12 @@ int picTime;
                 [self goback];
                 [self showAlertViewWithTitle:nil message:root_ME_tianjia_chenggong cancelButtonTitle:root_Yes];
                [self.navigationController popViewControllerAnimated:NO];
-            }
-        }else{
+            }else{
             [self showAlertViewWithTitle:nil message:root_ME_tianjia_shibai cancelButtonTitle:root_Yes];
              [self.navigationController popViewControllerAnimated:NO];
+          }
         }
-    }
-                              failure:^(NSError *error) {
+    } failure:^(NSError *error) {
                                   [self showToastViewWithTitle:root_Networking];
                                    [self hideProgressView];
                                   [self.navigationController popViewControllerAnimated:NO];

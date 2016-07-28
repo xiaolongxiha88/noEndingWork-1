@@ -25,29 +25,64 @@
 }
 
 -(void)netGet{
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    NSString *userID=[ud objectForKey:@"userID"];
+//    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+//    NSString *userID=[ud objectForKey:@"userID"];
     
-    for(int i=0;i<_picArray.count-1;i++){
+//    for(int i=0;i<_picArray.count-1;i++){
+//    [self showProgressView];
+//    [BaseRequest requestImageWithMethodByGet:HEAD_URL paramars:@{@"userId":userID,@"imageName":_picArray[i]} paramarsSite:@"/questionAPI.do?op=getQuestionImg" sucessBlock:^(id content) {
+//        [self hideProgressView];
+//         NSLog(@"getQuestionImg=: %@", content);
+//        
+//        [_imageArray addObject:content];
+//        
+//        if (_imageArray.count==(_picArray.count-1)) {
+//              [self initUI];
+//        }
+//        
+//        
+//    } failure:^(NSError *error) {
+//        [self hideProgressView];
+//        [self showToastViewWithTitle:root_Networking];
+//        
+//    }];
+//    }
+    
+     NSString *headURL=@"http://cdn.growatt.com/onlineservice";
+        NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+        NSString *userID=[ud objectForKey:@"userName"];
+    
     [self showProgressView];
-    [BaseRequest requestImageWithMethodByGet:HEAD_URL paramars:@{@"userId":userID,@"imageName":_picArray[i]} paramarsSite:@"/questionAPI.do?op=getQuestionImg" sucessBlock:^(id content) {
-        [self hideProgressView];
-         NSLog(@"getQuestionImg=: %@", content);
+    for (int i=0; i<_picArray.count-1; i++) {
         
-        [_imageArray addObject:content];
+       
         
-        if (_imageArray.count==(_picArray.count-1)) {
-              [self initUI];
-        }
-        
-        
-    } failure:^(NSError *error) {
-        [self hideProgressView];
-        [self showToastViewWithTitle:root_Networking];
-        
-    }];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSString *imageURL=[NSString stringWithFormat:@"%@/%@/%@",headURL,userID,_picArray[i]];
+            UIImage * result;
+            NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
+            
+            if (data!= nil) {
+                result = [UIImage imageWithData:data];
+                
+                [_imageArray addObject:result];
+               
+                
+                if (_imageArray.count==(_picArray.count-1)) {
+                    
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                         [self hideProgressView];
+                         [self initUI];
+                    });
+                    
+                }
+            }else{
+                    [self hideProgressView];
+              
+            }
+        });
     }
-    
 
 
 }

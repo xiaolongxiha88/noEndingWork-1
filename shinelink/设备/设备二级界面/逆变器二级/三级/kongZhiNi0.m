@@ -119,7 +119,7 @@
     }
    
    
-    if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==2)||(indexPath.row==3)) {
+    if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==2)||(indexPath.row==3)||(indexPath.row==5)) {
         
         [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
             NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);

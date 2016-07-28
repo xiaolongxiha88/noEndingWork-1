@@ -362,9 +362,9 @@
 
 "逆变器故障"="Inverter Failure";
 "储能机故障"="Storage machine Failure";
-"软件建议"="Software suggestions";
-"软件故障"="Software fault";
-"其他设备故障"="Other devices fault";
+"监控系统问题"="Monitoring system problems";
+"功能建议"="Feature suggestions";
+"问题咨询"="Advisory";
 "其他问题"="Other problems";
 
 "问题列表"="Questions list";
@@ -487,3 +487,5 @@
 "用户名密码错误 "="User name or password error ";
 "用户名密码为空"="User name or password is empty";
 "示例"="Demo";
+"拨打电话"="Do you need to make a call?";
+"换算单位"="(Conversion standard based on 1kWh power generation)";

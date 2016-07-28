@@ -44,7 +44,7 @@
 
 #define HEAD_URL  [UserInfo defaultUserInfo].server
 //#define HEAD_URL  @"http://192.168.3.32:8080/ShineServer_2016"
-
+//#define HEAD_URL   @"http://test.growatt.com"
 
 
 //#define HEAD_URL  @"http://192.168.3.32:8081/ShineServer"
