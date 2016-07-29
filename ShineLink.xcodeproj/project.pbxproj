@@ -152,7 +152,6 @@
 		335089231C73179400D7AA03 /* bg_list_popver.png in Resources */ = {isa = PBXBuildFile; fileRef = 335089221C73179400D7AA03 /* bg_list_popver.png */; };
 		335089251C7323C200D7AA03 /* frag4.png in Resources */ = {isa = PBXBuildFile; fileRef = 335089241C7323C200D7AA03 /* frag4.png */; };
 		335089281C73267A00D7AA03 /* findTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335089271C73267A00D7AA03 /* findTableViewCell.m */; };
-		335239031CD1B74E00287EA9 /* imageBig.m in Sources */ = {isa = PBXBuildFile; fileRef = 335239021CD1B74E00287EA9 /* imageBig.m */; };
 		335239061CD2067E00287EA9 /* RootPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335239051CD2067E00287EA9 /* RootPickerView.m */; };
 		33528FF01C83E41D00D07889 /* listViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33528FEF1C83E41D00D07889 /* listViewController.m */; };
 		33528FF61C83E95F00D07889 /* listTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33528FF51C83E95F00D07889 /* listTableViewCell.m */; };
@@ -364,6 +363,7 @@
 		33C3FFFE1D3E33E00016351C /* L5.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF31D3E33E00016351C /* L5.png */; };
 		33C3FFFF1D3E33E00016351C /* L6.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF41D3E33E00016351C /* L6.png */; };
 		33C5E2261D49A89F00A0DB00 /* 三角形.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C5E2251D49A89F00A0DB00 /* 三角形.png */; };
+		33C5E2291D4AFB1C00A0DB00 /* moreBigImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C5E2281D4AFB1C00A0DB00 /* moreBigImage.m */; };
 		33ECDCF31CDC9D3400E20AF8 /* deviceCore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33ECDCF11CDC9D3400E20AF8 /* deviceCore.xcdatamodeld */; };
 		33EFB6011C979B5F003F336F /* StationCellectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB5F81C979B5F003F336F /* StationCellectViewController.m */; };
 		33EFB6021C979B5F003F336F /* StationCellectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB5FA1C979B5F003F336F /* StationCellectTableViewCell.m */; };
@@ -712,8 +712,6 @@
 		335089241C7323C200D7AA03 /* frag4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frag4.png; path = "../设备/frag4.png"; sourceTree = "<group>"; };
 		335089261C73267A00D7AA03 /* findTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findTableViewCell.h; sourceTree = "<group>"; };
 		335089271C73267A00D7AA03 /* findTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findTableViewCell.m; sourceTree = "<group>"; };
-		335239011CD1B74E00287EA9 /* imageBig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imageBig.h; sourceTree = "<group>"; };
-		335239021CD1B74E00287EA9 /* imageBig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = imageBig.m; sourceTree = "<group>"; };
 		335239041CD2067E00287EA9 /* RootPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootPickerView.h; sourceTree = "<group>"; };
 		335239051CD2067E00287EA9 /* RootPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootPickerView.m; sourceTree = "<group>"; };
 		33528FEE1C83E41D00D07889 /* listViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = listViewController.h; path = ../listViewController.h; sourceTree = "<group>"; };
@@ -1040,6 +1038,8 @@
 		33C3FFF81D3E33E00016351C /* L10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L10.png; sourceTree = "<group>"; };
 		33C3FFF91D3E33E00016351C /* L11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L11.png; sourceTree = "<group>"; };
 		33C5E2251D49A89F00A0DB00 /* 三角形.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "三角形.png"; sourceTree = "<group>"; };
+		33C5E2271D4AFB1C00A0DB00 /* moreBigImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = moreBigImage.h; sourceTree = "<group>"; };
+		33C5E2281D4AFB1C00A0DB00 /* moreBigImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = moreBigImage.m; sourceTree = "<group>"; };
 		33ECDCF21CDC9D3400E20AF8 /* deviceCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = deviceCore.xcdatamodel; sourceTree = "<group>"; };
 		33EFB5F71C979B5F003F336F /* StationCellectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationCellectViewController.h; sourceTree = "<group>"; };
 		33EFB5F81C979B5F003F336F /* StationCellectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationCellectViewController.m; sourceTree = "<group>"; };
@@ -2033,10 +2033,10 @@
 				336664E31CB7524C005573FB /* moreCell.m */,
 				3367EBA21CD0C11800D2EF67 /* productViewController.h */,
 				3367EBA31CD0C11800D2EF67 /* productViewController.m */,
-				335239011CD1B74E00287EA9 /* imageBig.h */,
-				335239021CD1B74E00287EA9 /* imageBig.m */,
 				337584421D267D12006AC140 /* product.jpg */,
 				337584441D267E2A006AC140 /* product2.jpg */,
+				33C5E2271D4AFB1C00A0DB00 /* moreBigImage.h */,
+				33C5E2281D4AFB1C00A0DB00 /* moreBigImage.m */,
 			);
 			path = "更多产品";
 			sourceTree = "<group>";
@@ -3059,7 +3059,6 @@
 				3343F3DA1C80405D009F69BC /* AFNetworkActivityIndicatorManager.m in Sources */,
 				33652A2B1CEC1190004EBAE5 /* ExtensionTwoViewController.m in Sources */,
 				3349BB381C7ED28100E6E34B /* UserInfo.m in Sources */,
-				335239031CD1B74E00287EA9 /* imageBig.m in Sources */,
 				33EFB6671C98F9B1003F336F /* UIView+Zirkfied.m in Sources */,
 				3383EF9D1C9F8A6F0075E834 /* MJRefreshFooter.m in Sources */,
 				3343F3AA1C803DC9009F69BC /* BaseRequest.m in Sources */,
@@ -3083,6 +3082,7 @@
 				334E9BF21CAD263700C8271F /* parameterPV.m in Sources */,
 				3367CB501C86806700EF460C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				3383EF9F1C9F8A6F0075E834 /* MJRefreshGifHeader.m in Sources */,
+				33C5E2291D4AFB1C00A0DB00 /* moreBigImage.m in Sources */,
 				334AED6A1CA38164007E39F3 /* KongZhiNi.m in Sources */,
 				335456CE1C8584E100275478 /* forgetViewController.m in Sources */,
 				3349A7C01C75BF3B009172C2 /* SpinerLayer.m in Sources */,
