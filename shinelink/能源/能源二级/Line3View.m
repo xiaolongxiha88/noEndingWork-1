@@ -45,18 +45,75 @@
         //[self addSubview:self.noDataLabel];
         dict=[NSMutableDictionary new];
         
-        
-        [dict setObject:@"0.0" forKey:@"8:30"];
-        [dict setObject:@"0.0" forKey:@"9:30"];
-     [dict setObject:@"0.0" forKey:@"10:30"];
-      [dict setObject:@"0.0" forKey:@"11:30"];
-      [dict setObject:@"0.0" forKey:@"12:30"];
-       [dict setObject:@"0.0" forKey:@"13:30"];
-       [dict setObject:@"0.0" forKey:@"14:30"];
-      [dict setObject:@"0.0" forKey:@"15:30"];
-      [dict setObject:@"0.0" forKey:@"16:30"];
-       [dict setObject:@"0.0" forKey:@"17:30"];
-        
+        if ([_dataType isEqualToString:@"1"]) {
+            [dict setObject:@"0.0" forKey:@"8:30"];
+            [dict setObject:@"0.0" forKey:@"9:30"];
+            [dict setObject:@"0.0" forKey:@"10:30"];
+            [dict setObject:@"0.0" forKey:@"11:30"];
+            [dict setObject:@"0.0" forKey:@"12:30"];
+            [dict setObject:@"0.0" forKey:@"13:30"];
+            [dict setObject:@"0.0" forKey:@"14:30"];
+            [dict setObject:@"0.0" forKey:@"15:30"];
+            [dict setObject:@"0.0" forKey:@"16:30"];
+            [dict setObject:@"0.0" forKey:@"17:30"];
+        }
+        if ([_dataType isEqualToString:@"2"]) {
+            [dict setObject:@"0.0" forKey:@"1"];
+            [dict setObject:@"0.0" forKey:@"2"];
+            [dict setObject:@"0.0" forKey:@"3"];
+            [dict setObject:@"0.0" forKey:@"4"];
+            [dict setObject:@"0.0" forKey:@"5"];
+            [dict setObject:@"0.0" forKey:@"6"];
+            [dict setObject:@"0.0" forKey:@"7"];
+            [dict setObject:@"0.0" forKey:@"8"];
+            [dict setObject:@"0.0" forKey:@"9"];
+            [dict setObject:@"0.0" forKey:@"10"];
+            [dict setObject:@"0.0" forKey:@"11"];
+            [dict setObject:@"0.0" forKey:@"12"];
+             [dict setObject:@"0.0" forKey:@"13"];
+                 [dict setObject:@"0.0" forKey:@"14"];
+                 [dict setObject:@"0.0" forKey:@"15"];
+            [dict setObject:@"0.0" forKey:@"16"];
+            [dict setObject:@"0.0" forKey:@"17"];
+            [dict setObject:@"0.0" forKey:@"18"];
+            [dict setObject:@"0.0" forKey:@"19"];
+            [dict setObject:@"0.0" forKey:@"20"];
+            [dict setObject:@"0.0" forKey:@"21"];
+            [dict setObject:@"0.0" forKey:@"22"];
+            [dict setObject:@"0.0" forKey:@"23"];
+            [dict setObject:@"0.0" forKey:@"24"];
+            [dict setObject:@"0.0" forKey:@"25"];
+            [dict setObject:@"0.0" forKey:@"26"];
+            [dict setObject:@"0.0" forKey:@"27"];
+            [dict setObject:@"0.0" forKey:@"28"];
+            [dict setObject:@"0.0" forKey:@"29"];
+            [dict setObject:@"0.0" forKey:@"30"];
+            
+            
+        }
+        if ([_dataType isEqualToString:@"3"]) {
+            [dict setObject:@"0.0" forKey:@"1"];
+            [dict setObject:@"0.0" forKey:@"2"];
+            [dict setObject:@"0.0" forKey:@"3"];
+            [dict setObject:@"0.0" forKey:@"4"];
+            [dict setObject:@"0.0" forKey:@"5"];
+            [dict setObject:@"0.0" forKey:@"6"];
+            [dict setObject:@"0.0" forKey:@"7"];
+            [dict setObject:@"0.0" forKey:@"8"];
+            [dict setObject:@"0.0" forKey:@"9"];
+            [dict setObject:@"0.0" forKey:@"10"];
+            [dict setObject:@"0.0" forKey:@"11"];
+            [dict setObject:@"0.0" forKey:@"12"];
+        }
+        if ([_dataType isEqualToString:@"4"]) {
+            [dict setObject:@"0.0" forKey:@"2010"];
+            [dict setObject:@"0.0" forKey:@"2011"];
+            [dict setObject:@"0.0" forKey:@"2012"];
+            [dict setObject:@"0.0" forKey:@"2013"];
+            [dict setObject:@"0.0" forKey:@"2014"];
+            [dict setObject:@"0.0" forKey:@"2015"];
+            [dict setObject:@"0.0" forKey:@"2016"];
+        }
     } else {
         if (_noDataLabel) {
             [_noDataLabel removeFromSuperview];

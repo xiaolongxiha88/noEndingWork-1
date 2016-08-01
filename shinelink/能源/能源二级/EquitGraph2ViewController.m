@@ -293,8 +293,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             
             if ([_familyEnable isEqualToString:@"0"]) {
                 _dayDict=[NSMutableDictionary new];
-                self.line2View.dataType=@"1";
+                
             }
+            self.line2View.dataType=@"1";
             
             [self.line2View refreshLineChartViewWithDataDict:_dayDict];
 
@@ -449,9 +450,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             
             if ([_familyEnable isEqualToString:@"0"]) {
                 _dayDict=[NSMutableDictionary new];
-                 self.line2View.dataType=@"1";
+              
             }
-            
+             self.line2View.dataType=@"1";
             [self.line2View refreshLineChartViewWithDataDict:_dayDict];
             [self updataUI:_dayDict];
         }
@@ -510,9 +511,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             
             if ([_familyEnable isEqualToString:@"0"]) {
                 _dayDict=[NSMutableDictionary new];
-                self.line2View.dataType=@"2";
             }
             
+            self.line2View.dataType=@"2";
+
             [self.line2View refreshBarChartViewWithDataDict:self.dayDict chartType:2];
             [self updataUI:_dayDict];
         }
@@ -570,8 +572,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             
             if ([_familyEnable isEqualToString:@"0"]) {
                 _dayDict=[NSMutableDictionary new];
-                self.line2View.dataType=@"3";
+             
             }
+               self.line2View.dataType=@"3";
             
             [self.line2View refreshBarChartViewWithDataDict:_dayDict chartType:3];
             [self updataUI:_dayDict];
@@ -628,8 +631,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             
             if ([_familyEnable isEqualToString:@"0"]) {
                 _dayDict=[NSMutableDictionary new];
-                self.line2View.dataType=@"4";
+             
             }
+               self.line2View.dataType=@"4";
             
             [self.line2View refreshBarChartViewWithDataDict:_dayDict chartType:4];
             [self updataUI:_dayDict];
