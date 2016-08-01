@@ -306,7 +306,10 @@ static void *context = NULL;
     
     
     //添加定时器
-    _timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getNET) userInfo:nil repeats:YES];
+    if (!_timer) {
+        _timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getNET) userInfo:nil repeats:YES];
+    }
+    
     
     
     
@@ -339,6 +342,10 @@ static void *context = NULL;
         
     };
     myAlertView.didDismissHandler = ^(SIAlertView *alertView) {
+        
+        _timer.fireDate=[NSDate distantFuture];
+        _timer=nil;
+        
         NSLog(@"%@, didDismissHandler", alertView);
     };
     myAlertView.showIndicator = YES;
@@ -366,6 +373,7 @@ static void *context = NULL;
                 [myAlertView dismissAnimated:NO];
                 
                 _timer.fireDate=[NSDate distantFuture];
+                  _timer=nil;
                 
                 [self  stopSearch];
                 
@@ -421,6 +429,7 @@ static void *context = NULL;
         //查找完成
          NSLog(@"停止配置");
            _timer.fireDate=[NSDate distantFuture];
+          _timer=nil;
         
         if (![myAlertView isHidden]) {
             [myAlertView dismissAnimated:YES];

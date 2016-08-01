@@ -447,6 +447,7 @@
 
 -(void)getSN{
     
+    if (_SNArray.count>0) {
     UIAlertController * alertController = [UIAlertController alertControllerWithTitle: nil
                                                                               message: nil
                                                                        preferredStyle:UIAlertControllerStyleAlert];
@@ -460,6 +461,8 @@
         }]];
     }
      [self presentViewController: alertController animated: YES completion: nil];
+    }
+    
 }
 
 

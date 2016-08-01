@@ -44,16 +44,18 @@
         self.unitLabel.hidden = NO;
         //[self addSubview:self.noDataLabel];
         dict=[NSMutableDictionary new];
-        [dict setObject:@"0.0" forKey:@"08:30"];
-        [dict setObject:@"0.0" forKey:@"09:30"];
-        [dict setObject:@"0.0" forKey:@"10:30"];
-        [dict setObject:@"0.0" forKey:@"11:30"];
-        [dict setObject:@"0.0" forKey:@"12:30"];
-        [dict setObject:@"0.0" forKey:@"13:30"];
-        [dict setObject:@"0.0" forKey:@"14:30"];
-        [dict setObject:@"0.0" forKey:@"15:30"];
-        [dict setObject:@"0.0" forKey:@"16:30"];
-        [dict setObject:@"0.0" forKey:@"17:30"];
+        
+        
+        [dict setObject:@"0.0" forKey:@"8:30"];
+        [dict setObject:@"0.0" forKey:@"9:30"];
+     [dict setObject:@"0.0" forKey:@"10:30"];
+      [dict setObject:@"0.0" forKey:@"11:30"];
+      [dict setObject:@"0.0" forKey:@"12:30"];
+       [dict setObject:@"0.0" forKey:@"13:30"];
+       [dict setObject:@"0.0" forKey:@"14:30"];
+      [dict setObject:@"0.0" forKey:@"15:30"];
+      [dict setObject:@"0.0" forKey:@"16:30"];
+       [dict setObject:@"0.0" forKey:@"17:30"];
         
     } else {
         if (_noDataLabel) {

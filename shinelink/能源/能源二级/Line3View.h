@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UILabel *energyTitleLabel;
 @property (nonatomic, strong) NSString *frameType;
 @property (nonatomic, strong) NSString *deviceType;
+@property (nonatomic, strong) NSString *dataType;
 
 - (void)refreshLineChartViewWithDataDict:(NSMutableDictionary *)dataDict;
 
