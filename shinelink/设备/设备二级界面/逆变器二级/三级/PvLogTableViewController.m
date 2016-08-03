@@ -23,6 +23,8 @@
 @property(nonatomic,strong)NSMutableArray *LogTextArray;
 @property(nonatomic,strong)NSMutableArray *contentTextArray;
 @property(nonatomic,strong)NSMutableArray *timeTextArray;
+@property (nonatomic, strong)  UIImageView *AlertView ;
+@property (nonatomic, strong)  NSString *languageValue ;
 
 @end
 
@@ -30,6 +32,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    
+    
+    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage isEqualToString:@"en-CN"]){
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"2";
+    }
+    
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
    
@@ -78,7 +93,31 @@
         if (content) {
           
              NSMutableArray *allArray=[NSMutableArray arrayWithArray:content];
+            
+            
+            if(allArray.count==0){
+                
+                if (!_AlertView) {
+                    if ([_languageValue isEqualToString:@"0"]) {
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_WIDTH, 40*HEIGHT_SIZE,0.6* SCREEN_WIDTH, 0.75* SCREEN_WIDTH)];
+                        _AlertView.image=[UIImage imageNamed:@"AlertRiZhi.png"];
+                        [self.view addSubview:_AlertView];
+                    }else{
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_WIDTH, 40*HEIGHT_SIZE,0.6* SCREEN_WIDTH, 0.75* SCREEN_WIDTH)];
+                        _AlertView.image=[UIImage imageNamed:@"AlertRiZhien.png"];
+                        [self.view addSubview:_AlertView];
+                    }
+                }
+                
+            }
+            
+            
             for(int i=0;i<allArray.count;i++){
+                
+                if (_AlertView) {
+                    [_AlertView removeFromSuperview];
+                    _AlertView=nil;
+                }
                 
                 NSString *SN=[NSString stringWithFormat:@"%@",content[i][@"deviceSerialNum"]];
                 NSString *TY=[NSString stringWithFormat:@"%@",content[i][@"deviceType"]];

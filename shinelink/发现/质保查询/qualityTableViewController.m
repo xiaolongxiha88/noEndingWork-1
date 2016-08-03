@@ -21,6 +21,9 @@
 @property (nonatomic, strong) NSString *picName;
 @property (nonatomic, strong) NSString *picEnble;
 @property (nonatomic, strong) NSMutableArray *picArray;
+@property (nonatomic, strong)  NSString *languageValue ;
+@property (nonatomic, strong)  UIImageView *AlertView ;
+
 @end
 
 @implementation qualityTableViewController
@@ -30,6 +33,19 @@
     [super viewDidLoad];
     self.tableView.separatorStyle=NO;
     //　self.view.tableView.separatorStyle = NO;
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage isEqualToString:@"en-CN"]){
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"2";
+    }
+
+    
+    
     [self initData];
 }
 
@@ -54,7 +70,31 @@
             NSArray *jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
                NSLog(@"getQualityInformation==%@", jsonObj);
             NSArray *allArray=[NSArray arrayWithArray:jsonObj];
+            
+            if(allArray.count==0){
+                
+                if (!_AlertView) {
+                    if ([_languageValue isEqualToString:@"0"]) {
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2*SCREEN_Width, 40*HEIGHT_SIZE,0.6* SCREEN_Width, 0.75* SCREEN_Width)];
+                        _AlertView.image=[UIImage imageNamed:@"ZhiBaoA.png"];
+                        [self.view addSubview:_AlertView];
+                    }else{
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_Width, 40*HEIGHT_SIZE,0.6* SCREEN_Width, 0.75* SCREEN_Width)];
+                        _AlertView.image=[UIImage imageNamed:@"ZhiBaoAen.png"];
+                        [self.view addSubview:_AlertView];
+                    }
+                }
+                
+            }
+
+            
             for (int i=0; i<allArray.count; i++) {
+                
+                if (_AlertView) {
+                    [_AlertView removeFromSuperview];
+                    _AlertView=nil;
+                }
+                
                 [_typeArray addObject:allArray[i][@"deviceType"]];
                 [_maturityTimeArray addObject:allArray[i][@"maturityTime"]];
                 [_outTimeArray addObject:allArray[i][@"outTime"]];

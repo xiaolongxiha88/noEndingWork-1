@@ -15,7 +15,8 @@
 @property(nonatomic,strong)NSMutableArray *contentArray;
 @property(nonatomic,strong)NSMutableDictionary *messageDic;
 @property (nonatomic, strong) UIAlertView *Alert1;
-
+@property (nonatomic, strong)  UIImageView *AlertView ;
+@property (nonatomic, strong)  NSString *languageValue ;
 @end
 
 @implementation MessageCeterTableViewController
@@ -94,10 +95,46 @@
             [userDefaultes setObject:nil forKey:@"MessageDic"];
     }
     
+    [self getPic];
    
 }
 
+-(void)getPic{
 
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage isEqualToString:@"en-CN"]){
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"2";
+    }
+
+    
+    if(_titleArray.count==0){
+        
+        if (!_AlertView) {
+            if ([_languageValue isEqualToString:@"0"]) {
+                _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_Width, 40*HEIGHT_SIZE,0.6* SCREEN_Width, 0.75* SCREEN_Width)];
+                _AlertView.image=[UIImage imageNamed:@"XiaoXiA.png"];
+                [self.view addSubview:_AlertView];
+            }else{
+                _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_Width, 40*HEIGHT_SIZE,0.6* SCREEN_Width, 0.75* SCREEN_Width)];
+                _AlertView.image=[UIImage imageNamed:@"XiaoXiAen.png"];
+                [self.view addSubview:_AlertView];
+            }
+        }
+        
+    }else{
+        if (_AlertView) {
+            [_AlertView removeFromSuperview];
+            _AlertView=nil;
+        }
+    }
+
+
+}
 
 
 - (void)didReceiveMemoryWarning {

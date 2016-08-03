@@ -215,6 +215,13 @@
 		335C9D291D011FA4008C977A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335C9D281D011FA4008C977A /* AdSupport.framework */; };
 		335D2F6B1CC09C3A0019718E /* GetServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335D2F6A1CC09C3A0019718E /* GetServerViewController.m */; };
 		335D9C4F1CE32583007535BF /* frame_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 335D9C4E1CE32583007535BF /* frame_add.png */; };
+		335DA1571D517FED00E6C989 /* alertView1en.png in Resources */ = {isa = PBXBuildFile; fileRef = 335DA1561D517FED00E6C989 /* alertView1en.png */; };
+		335DA15A1D51920B00E6C989 /* AlertRiZhien.png in Resources */ = {isa = PBXBuildFile; fileRef = 335DA1581D51920B00E6C989 /* AlertRiZhien.png */; };
+		335DA15B1D51920B00E6C989 /* AlertRiZhi.png in Resources */ = {isa = PBXBuildFile; fileRef = 335DA1591D51920B00E6C989 /* AlertRiZhi.png */; };
+		335DA15E1D5194E800E6C989 /* ZhiBaoAen.png in Resources */ = {isa = PBXBuildFile; fileRef = 335DA15C1D5194E800E6C989 /* ZhiBaoAen.png */; };
+		335DA15F1D5194E800E6C989 /* ZhiBaoA.png in Resources */ = {isa = PBXBuildFile; fileRef = 335DA15D1D5194E800E6C989 /* ZhiBaoA.png */; };
+		335DA1621D51980100E6C989 /* XiaoXiAen.png in Resources */ = {isa = PBXBuildFile; fileRef = 335DA1601D51980100E6C989 /* XiaoXiAen.png */; };
+		335DA1631D51980100E6C989 /* XiaoXiA.png in Resources */ = {isa = PBXBuildFile; fileRef = 335DA1611D51980100E6C989 /* XiaoXiA.png */; };
 		335DDB231CFFC08700ACA123 /* testDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DDB221CFFC08700ACA123 /* testDemoViewController.m */; };
 		3363DD1E1C7C48F100D740FB /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363DD1D1C7C48F100D740FB /* registerViewController.m */; };
 		3363DD221C7C598B00D740FB /* countryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363DD211C7C598B00D740FB /* countryViewController.m */; };
@@ -339,6 +346,7 @@
 		3383F13A1C9FFD3E0075E834 /* 家庭用电设备.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383F1391C9FFD3E0075E834 /* 家庭用电设备.png */; };
 		3383F13C1C9FFD540075E834 /* 光伏电量.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383F13B1C9FFD540075E834 /* 光伏电量.png */; };
 		3383F13E1C9FFDA10075E834 /* 光伏收益.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383F13D1C9FFDA10075E834 /* 光伏收益.png */; };
+		338815141D4F48F600707B34 /* alertView1.png in Resources */ = {isa = PBXBuildFile; fileRef = 338815131D4F48F600707B34 /* alertView1.png */; };
 		338990AD1CEAB58100A708F8 /* bianhao.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AC1CEAB58100A708F8 /* bianhao.png */; };
 		338990AF1CEAB61400A708F8 /* mebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AE1CEAB61300A708F8 /* mebg.png */; };
 		338990B11CEAB73400A708F8 /* logo3.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990B01CEAB73400A708F8 /* logo3.png */; };
@@ -810,6 +818,13 @@
 		335D2F691CC09C3A0019718E /* GetServerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetServerViewController.h; sourceTree = "<group>"; };
 		335D2F6A1CC09C3A0019718E /* GetServerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetServerViewController.m; sourceTree = "<group>"; };
 		335D9C4E1CE32583007535BF /* frame_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame_add.png; sourceTree = "<group>"; };
+		335DA1561D517FED00E6C989 /* alertView1en.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alertView1en.png; sourceTree = "<group>"; };
+		335DA1581D51920B00E6C989 /* AlertRiZhien.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlertRiZhien.png; sourceTree = "<group>"; };
+		335DA1591D51920B00E6C989 /* AlertRiZhi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlertRiZhi.png; sourceTree = "<group>"; };
+		335DA15C1D5194E800E6C989 /* ZhiBaoAen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZhiBaoAen.png; sourceTree = "<group>"; };
+		335DA15D1D5194E800E6C989 /* ZhiBaoA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ZhiBaoA.png; sourceTree = "<group>"; };
+		335DA1601D51980100E6C989 /* XiaoXiAen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XiaoXiAen.png; sourceTree = "<group>"; };
+		335DA1611D51980100E6C989 /* XiaoXiA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = XiaoXiA.png; sourceTree = "<group>"; };
 		335DDB211CFFC08700ACA123 /* testDemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testDemoViewController.h; sourceTree = "<group>"; };
 		335DDB221CFFC08700ACA123 /* testDemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testDemoViewController.m; sourceTree = "<group>"; };
 		3363DD1C1C7C48F100D740FB /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = registerViewController.h; path = ../registerViewController.h; sourceTree = "<group>"; };
@@ -1004,6 +1019,7 @@
 		3383F1391C9FFD3E0075E834 /* 家庭用电设备.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "家庭用电设备.png"; sourceTree = "<group>"; };
 		3383F13B1C9FFD540075E834 /* 光伏电量.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "光伏电量.png"; sourceTree = "<group>"; };
 		3383F13D1C9FFDA10075E834 /* 光伏收益.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "光伏收益.png"; sourceTree = "<group>"; };
+		338815131D4F48F600707B34 /* alertView1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alertView1.png; sourceTree = "<group>"; };
 		338990AC1CEAB58100A708F8 /* bianhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bianhao.png; path = ../bianhao.png; sourceTree = "<group>"; };
 		338990AE1CEAB61300A708F8 /* mebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mebg.png; path = ../mebg.png; sourceTree = "<group>"; };
 		338990B01CEAB73400A708F8 /* logo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo3.png; path = ../logo3.png; sourceTree = "<group>"; };
@@ -1345,6 +1361,8 @@
 		334B8F171C9124EC00798A69 /* 曲线图第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				335DA1581D51920B00E6C989 /* AlertRiZhien.png */,
+				335DA1591D51920B00E6C989 /* AlertRiZhi.png */,
 				334B8F591C914B4E00798A69 /* UICountingLabel */,
 				334B8F181C91250300798A69 /* SHLineGraphView */,
 			);
@@ -1938,6 +1956,8 @@
 		3358812B1CB66D5C0068EFAD /* 质保查询 */ = {
 			isa = PBXGroup;
 			children = (
+				335DA15C1D5194E800E6C989 /* ZhiBaoAen.png */,
+				335DA15D1D5194E800E6C989 /* ZhiBaoA.png */,
 				3358812C1CB66E250068EFAD /* qualityTableViewController.h */,
 				3358812D1CB66E250068EFAD /* qualityTableViewController.m */,
 				3358812F1CB66E460068EFAD /* qualityCell.h */,
@@ -1949,6 +1969,8 @@
 		335BF1EA1D1006F8008EEE99 /* 消息中心 */ = {
 			isa = PBXGroup;
 			children = (
+				335DA1601D51980100E6C989 /* XiaoXiAen.png */,
+				335DA1611D51980100E6C989 /* XiaoXiA.png */,
 				335BF1F11D100EC7008EEE99 /* kuang3.jpg */,
 				335BF1EB1D100761008EEE99 /* MessageCeterTableViewController.h */,
 				335BF1EC1D100761008EEE99 /* MessageCeterTableViewController.m */,
@@ -2162,6 +2184,8 @@
 				3376ED621D12A2F4009526B4 /* Proce-ssed.png */,
 				3376ED631D12A2F4009526B4 /* Proce-ssing.png */,
 				33C5E2251D49A89F00A0DB00 /* 三角形.png */,
+				338815131D4F48F600707B34 /* alertView1.png */,
+				335DA1561D517FED00E6C989 /* alertView1en.png */,
 			);
 			path = "图片8";
 			sourceTree = "<group>";
@@ -2862,6 +2886,8 @@
 				33EFB67C1C99320B003F336F /* logo.png in Resources */,
 				335BF1F21D100EC7008EEE99 /* kuang3.jpg in Resources */,
 				334FF0B91CF53C7C001E6716 /* btn_check_off.png in Resources */,
+				335DA15A1D51920B00E6C989 /* AlertRiZhien.png in Resources */,
+				335DA1621D51980100E6C989 /* XiaoXiAen.png in Resources */,
 				3383F13A1C9FFD3E0075E834 /* 家庭用电设备.png in Resources */,
 				33C3FFFB1D3E33E00016351C /* L2.png in Resources */,
 				3381ECFB1CBCA63A00DCF0D2 /* 光伏零功率输出使能切图.png in Resources */,
@@ -2919,7 +2945,9 @@
 				33768AB41D475E5400873E82 /* charge-cn.png in Resources */,
 				33FEFD761C7DB38400324374 /* iconfont-shouji@2x.png in Resources */,
 				3349A7AE1C75B76F009172C2 /* icon_logo.png in Resources */,
+				335DA1631D51980100E6C989 /* XiaoXiA.png in Resources */,
 				3349A7B81C75BCDB009172C2 /* 账号3.png in Resources */,
+				335DA15F1D5194E800E6C989 /* ZhiBaoA.png in Resources */,
 				3383F13E1C9FFDA10075E834 /* 光伏收益.png in Resources */,
 				33FEFD5D1C7DB38400324374 /* icon---Name@2x.png in Resources */,
 				337C10E91CE02A160053361F /* head.png in Resources */,
@@ -2942,6 +2970,7 @@
 				3381ECF51CBCA61200DCF0D2 /* 智能联动设置切图.png in Resources */,
 				33209FD11D2A553E00186893 /* main1.jpg in Resources */,
 				338990B11CEAB73400A708F8 /* logo3.png in Resources */,
+				335DA1571D517FED00E6C989 /* alertView1en.png in Resources */,
 				334FF0B81CF53C7C001E6716 /* bottombg.png in Resources */,
 				33C3FFFC1D3E33E00016351C /* L3.png in Resources */,
 				33C5E2261D49A89F00A0DB00 /* 三角形.png in Resources */,
@@ -2956,6 +2985,7 @@
 				33793D141CE583AD000D0F9E /* storage4.png in Resources */,
 				334FF0AD1CF53C7C001E6716 /* SIAlertView.bundle in Resources */,
 				33C300021D3E33E00016351C /* L9.png in Resources */,
+				335DA15B1D51920B00E6C989 /* AlertRiZhi.png in Resources */,
 				334FF0B71CF53C7C001E6716 /* about.png in Resources */,
 				337584431D267D12006AC140 /* product.jpg in Resources */,
 				33C3FFFD1D3E33E00016351C /* L4.png in Resources */,
@@ -2974,6 +3004,7 @@
 				335456C91C853C2F00275478 /* scanscanBg.png in Resources */,
 				338FD9861D1D20F9009A128F /* first3.png in Resources */,
 				3383F12E1C9FF4190075E834 /* Plug.png in Resources */,
+				335DA15E1D5194E800E6C989 /* ZhiBaoAen.png in Resources */,
 				3355AD991CF6A49400AE6891 /* 333.jpg in Resources */,
 				336A10901CBDDBA500E30E83 /* 2triangular.png in Resources */,
 				33FEFD741C7DB38400324374 /* iconfont-nengyuanlei@3x.png in Resources */,
@@ -3006,6 +3037,7 @@
 				334AED661CA3774C007E39F3 /* 密码3.png in Resources */,
 				33FEFD6E1C7DB38400324374 /* iconfont-gongsijianjie@3x.png in Resources */,
 				33C300031D3E33E00016351C /* L10.png in Resources */,
+				338815141D4F48F600707B34 /* alertView1.png in Resources */,
 				3376ED5F1D12A2EA009526B4 /* 待处理.png in Resources */,
 				334770FE1C9A3E35003A6F13 /* equipment@2x.png in Resources */,
 				337F9C931C71A6710016FE43 /* Assets.xcassets in Resources */,

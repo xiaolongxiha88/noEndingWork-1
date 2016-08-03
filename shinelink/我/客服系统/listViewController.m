@@ -30,6 +30,7 @@
 @property(nonatomic,strong)NSString *delQuestionID;
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong)  NSString *languageValue ;
+@property (nonatomic, strong)  UIImageView *AlertView ;
 @end
 
 @implementation listViewController
@@ -47,8 +48,6 @@
     
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages objectAtIndex:0];
-   
-    
     if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
         _languageValue=@"0";
     }else if ([currentLanguage isEqualToString:@"en-CN"]){
@@ -118,7 +117,32 @@
         NSLog(@"questionList=: %@", content);
         if(content){
             _allArray=[NSMutableArray arrayWithArray:content];
+            
+            
+           //  _allArray=[NSMutableArray new];
+            
+            if(_allArray.count==0){
+                
+                if (!_AlertView) {
+                    if ([_languageValue isEqualToString:@"0"]) {
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_WIDTH, 40*HEIGHT_SIZE,0.6* SCREEN_WIDTH, 0.75* SCREEN_WIDTH)];
+                        _AlertView.image=[UIImage imageNamed:@"alertView1.png"];
+                        [self.view addSubview:_AlertView];
+                    }else{
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_WIDTH, 40*HEIGHT_SIZE,0.6* SCREEN_WIDTH, 0.75* SCREEN_WIDTH)];
+                        _AlertView.image=[UIImage imageNamed:@"alertView1en.png"];
+                        [self.view addSubview:_AlertView];
+                       }
+                   }
+                
+            }
+            
             for(int i=0;i<_allArray.count;i++){
+                
+                if (_AlertView) {
+                    [_AlertView removeFromSuperview];
+                    _AlertView=nil;
+                }
                 
                 NSString *title=[NSString stringWithFormat:@"%@",content[i][@"title"]];
                 NSString *status=[NSString stringWithFormat:@"%@",content[i][@"status"]];

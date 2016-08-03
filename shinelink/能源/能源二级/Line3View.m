@@ -135,6 +135,7 @@
     
 }
 
+
 - (UILabel *)noDataLabel {
     if (!_noDataLabel) {
         self.noDataLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100*NOW_SIZE, 30*HEIGHT_SIZE)];
