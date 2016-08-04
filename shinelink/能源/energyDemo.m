@@ -67,7 +67,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:root_energy_wenxin_tishi message:root_energy_houxun_kaifang delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:root_energy_wenxin_tishi message:root_energy_houxun_kaifang delegate:self cancelButtonTitle:nil otherButtonTitles:root_OK, nil];
     [alert show];
 
 

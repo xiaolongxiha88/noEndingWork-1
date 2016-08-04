@@ -330,10 +330,15 @@
         pageVc.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:pageVc animated:NO];
     }else if (indexPath.row==1){
-        qualityTableViewController *page2 = [[qualityTableViewController alloc] init];
-          page2.hidesBottomBarWhenPushed=YES;
-         page2.title=root_ME_zhibao;
-        [self.navigationController pushViewController:page2 animated:NO];
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:root_energy_wenxin_tishi message:root_zhibao_chaxun_tishi delegate:self cancelButtonTitle:nil otherButtonTitles:root_OK, nil];
+        [alert show];
+        
+        
+//        qualityTableViewController *page2 = [[qualityTableViewController alloc] init];
+//          page2.hidesBottomBarWhenPushed=YES;
+//         page2.title=root_ME_zhibao;
+//        [self.navigationController pushViewController:page2 animated:NO];
     }else if (indexPath.row==2){
         extensionListTableViewController *page2 = [[extensionListTableViewController alloc] init];
         page2.hidesBottomBarWhenPushed=YES;

@@ -353,6 +353,8 @@
 #define  root_energy_lingonglv_shineng       NSLocalizedString(@"光伏零功率输出使能", nil)
 #define  root_energy_wenxin_tishi       NSLocalizedString(@"温馨提示", nil)
 #define  root_energy_houxun_kaifang       NSLocalizedString(@"智能能源功能后续开放", nil)
+#define  root_zhibao_chaxun_tishi       NSLocalizedString(@"质保查询功能后续开放", nil)
+
 
 #define  root_energy_jiating_yongdian_zhanbi       NSLocalizedString(@"家庭用电占比(Demo)", nil)
 #define  root_energy_dianbinxiang       NSLocalizedString(@"电冰箱", nil)

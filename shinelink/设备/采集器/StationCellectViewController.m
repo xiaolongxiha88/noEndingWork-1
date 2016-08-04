@@ -32,6 +32,7 @@
     [super viewDidLoad];
 }
 
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     self.navigationItem.title = root_caiJiQi_leiBiao;
