@@ -11,6 +11,7 @@
 #import "StationLocationViewController.h"
 #import "StationAppearanceViewController.h"
 #import "StationEarningsViewController.h"
+#import"addStationViewController.h"
 
 @interface stationTableView ()
 @property(nonatomic,strong)NSMutableArray *dataArray;
@@ -31,7 +32,30 @@
     if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
         [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     }
+    
+    
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_tianjia_1 style:UIBarButtonItemStylePlain target:self action:@selector(buttonPressed)];
+    rightItem.tag=10;
+    self.navigationItem.rightBarButtonItem=rightItem;
+    
  
+}
+
+-(void)buttonPressed{
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+        return;
+    }else{
+        addStationViewController *addView=[[addStationViewController alloc]init];
+        [self.navigationController pushViewController:addView animated:YES];
+    }
+
+}
+
+- (void)showAlertViewWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:nil];
+    [alertView show];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

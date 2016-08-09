@@ -149,6 +149,7 @@
     _timeZone=[NSMutableArray arrayWithObjects:@"+1",@"+2",@"+3",@"+4",@"+5",@"+6",@"+7",@"+8",@"+9",@"+10",@"+11",@"+12",@"-1",@"-2",@"-3",@"-4",@"-5",@"-6",@"-7",@"-8",@"-9",@"-10",@"-11",@"-12", nil];
     _pickerView=[[RootPickerView alloc]initWithTwoArray:_country arrayTwo:_timeZone];
     [self.view addSubview:_pickerView];
+    
     _writeView=[[UIView alloc]initWithFrame:CGRectMake(160*NOW_SIZE, 10*HEIGHT_SIZE, 140*NOW_SIZE, 210*HEIGHT_SIZE)];
     [self.view addSubview:_writeView];
     _textFieldMutableArray=[NSMutableArray new];
@@ -184,14 +185,7 @@
         [_textFieldMutableArray addObject:textField];
     }
     
-//    UIButton *latButton=[[UIButton alloc]initWithFrame:CGRectMake(105*NOW_SIZE, 130*NOW_SIZE, 50*NOW_SIZE, 20*NOW_SIZE)];
-//    [latButton setBackgroundImage:IMAGE(@"圆角矩形.png") forState:UIControlStateNormal];
-//    [latButton setTitle:@"" forState:UIControlStateNormal];
-//    latButton.titleLabel.font=[UIFont systemFontOfSize:11*NOW_SIZE];
-//    [latButton setTitleColor:COLOR(82, 201, 194, 1) forState:0];
-//    latButton.tag=1;
-//    [latButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-//    [_writeView addSubview:latButton];
+
     UIButton *lngButton0=[[UIButton alloc]initWithFrame:CGRectMake(105*NOW_SIZE, 48*HEIGHT_SIZE, 50*NOW_SIZE, 20*HEIGHT_SIZE)];
     [lngButton0 setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [lngButton0 setTitle:root_WO_dianji_huoqu forState:UIControlStateNormal];

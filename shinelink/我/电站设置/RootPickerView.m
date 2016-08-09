@@ -61,7 +61,7 @@
         
         UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
         
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(completeSelect)];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:root_Yes style:UIBarButtonItemStyleDone target:self action:@selector(completeSelect)];
         doneButton.tintColor = [UIColor whiteColor];
         [doneButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:14*HEIGHT_SIZE],NSFontAttributeName, nil] forState:UIControlStateNormal];
         self.toolBar.items = @[cancelButton, spaceButton, doneButton];
@@ -113,6 +113,10 @@
     }else{
         secTextField.text=_arrayTwo[0];
     }
+    
+    _textValue1=textField.text;
+     _textValue2=secTextField.text;
+    
 }
 
 -(void)viewDisappear{

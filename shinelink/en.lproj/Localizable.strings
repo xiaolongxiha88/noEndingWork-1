@@ -485,3 +485,12 @@
 
 "拨打电话"="Do you need to make a call?";
 "换算单位"="(Conversion standard based on 1kWh power generation)";
+"点击图片放大"="Click the picture to enlarge";
+
+"添加电站成功"="Add plant successfully";
+"当前用户下电站名重复"="Station name repeat under the current user";
+"超出用户限制电站数量"="Exceed the station number which setting by the user";
+"国家名出错"="Country name error";
+"添加信息出错"="Add information error";
+
+

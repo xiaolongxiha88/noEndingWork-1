@@ -313,6 +313,8 @@
 		337F9CCB1C71AC200016FE43 /* energyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9CCA1C71AC200016FE43 /* energyViewController.m */; };
 		337F9CCE1C71AC2E0016FE43 /* meViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9CCD1C71AC2E0016FE43 /* meViewController.m */; };
 		337F9E111C71C4D90016FE43 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9E101C71C4D90016FE43 /* TableViewCell.m */; };
+		33801EB31D58274D00047232 /* addStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33801EB21D58274D00047232 /* addStationViewController.m */; };
+		33801EBD1D5882D500047232 /* Growatt-2-5k.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33801EBC1D5882D500047232 /* Growatt-2-5k.jpg */; };
 		3381ECE51CBC900900DCF0D2 /* EquitGraph2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ECE41CBC900900DCF0D2 /* EquitGraph2ViewController.m */; };
 		3381ECE81CBC906600DCF0D2 /* Line3View.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ECE71CBC906600DCF0D2 /* Line3View.m */; };
 		3381ECEE1CBCA3ED00DCF0D2 /* energyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ECED1CBCA3ED00DCF0D2 /* energyDemo.m */; };
@@ -968,6 +970,9 @@
 		337F9E0E1C71BFC10016FE43 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		337F9E0F1C71C4D90016FE43 /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		337F9E101C71C4D90016FE43 /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		33801EB11D58274D00047232 /* addStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addStationViewController.h; sourceTree = "<group>"; };
+		33801EB21D58274D00047232 /* addStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addStationViewController.m; sourceTree = "<group>"; };
+		33801EBC1D5882D500047232 /* Growatt-2-5k.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Growatt-2-5k.jpg"; sourceTree = "<group>"; };
 		3381ECE31CBC900900DCF0D2 /* EquitGraph2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquitGraph2ViewController.h; sourceTree = "<group>"; };
 		3381ECE41CBC900900DCF0D2 /* EquitGraph2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquitGraph2ViewController.m; sourceTree = "<group>"; };
 		3381ECE61CBC906600DCF0D2 /* Line3View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line3View.h; sourceTree = "<group>"; };
@@ -2057,6 +2062,7 @@
 				3367EBA31CD0C11800D2EF67 /* productViewController.m */,
 				337584421D267D12006AC140 /* product.jpg */,
 				337584441D267E2A006AC140 /* product2.jpg */,
+				33801EBC1D5882D500047232 /* Growatt-2-5k.jpg */,
 				33C5E2271D4AFB1C00A0DB00 /* moreBigImage.h */,
 				33C5E2281D4AFB1C00A0DB00 /* moreBigImage.m */,
 			);
@@ -2155,6 +2161,8 @@
 				3367EBA01CD0B2D200D2EF67 /* StationAppearanceViewController.m */,
 				335239041CD2067E00287EA9 /* RootPickerView.h */,
 				335239051CD2067E00287EA9 /* RootPickerView.m */,
+				33801EB11D58274D00047232 /* addStationViewController.h */,
+				33801EB21D58274D00047232 /* addStationViewController.m */,
 			);
 			path = "电站设置";
 			sourceTree = "<group>";
@@ -2889,6 +2897,7 @@
 				335DA15A1D51920B00E6C989 /* AlertRiZhien.png in Resources */,
 				335DA1621D51980100E6C989 /* XiaoXiAen.png in Resources */,
 				3383F13A1C9FFD3E0075E834 /* 家庭用电设备.png in Resources */,
+				33801EBD1D5882D500047232 /* Growatt-2-5k.jpg in Resources */,
 				33C3FFFB1D3E33E00016351C /* L2.png in Resources */,
 				3381ECFB1CBCA63A00DCF0D2 /* 光伏零功率输出使能切图.png in Resources */,
 				33768A9F1D475CCB00873E82 /* poweren.png in Resources */,
@@ -3096,6 +3105,7 @@
 				3343F3AA1C803DC9009F69BC /* BaseRequest.m in Sources */,
 				335881311CB66E460068EFAD /* qualityCell.m in Sources */,
 				335047201C9BA6F600BF8683 /* EGOCache.m in Sources */,
+				33801EB31D58274D00047232 /* addStationViewController.m in Sources */,
 				334FF0931CF53C7C001E6716 /* AsyncSocket.m in Sources */,
 				3363DD221C7C598B00D740FB /* countryViewController.m in Sources */,
 				335614941CB3A0AA0071BAC9 /* commonTableViewController.m in Sources */,
