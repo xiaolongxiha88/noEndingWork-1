@@ -8,6 +8,8 @@
 
 #import "commonTableViewController.h"
 #import "Common2ViewController.h"
+#import "HtmlCommon.h"
+
 
 @interface commonTableViewController ()
 @property(nonatomic,strong)NSMutableArray *idArray;
@@ -143,8 +145,11 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Common2ViewController *go=[[Common2ViewController alloc]init];
-    go.titleString=_titleArray[indexPath.row];
+//    Common2ViewController *go=[[Common2ViewController alloc]init];
+//    go.titleString=_titleArray[indexPath.row];
+//    go.idString=_idArray[indexPath.row];
+    
+    HtmlCommon *go=[[HtmlCommon alloc]init];
     go.idString=_idArray[indexPath.row];
     
  [self.navigationController pushViewController:go animated:NO];

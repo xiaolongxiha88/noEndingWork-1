@@ -531,6 +531,9 @@
 #define  root_tianjia_dianzhan_guojia     NSLocalizedString(@"国家名出错", nil)
 #define  root_tianjia_dianzhan_xinxi     NSLocalizedString(@"添加信息出错", nil)
 
+#define  root_haimei_jiejue_wenti     NSLocalizedString(@"还没有解决您的问题", nil)
+#define  root_xiang_kefu_tiwen     NSLocalizedString(@"向客服提问", nil)
+
 
 
 #endif /* languageNew_h */

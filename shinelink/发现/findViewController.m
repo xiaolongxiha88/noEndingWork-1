@@ -15,6 +15,8 @@
 #import "qualityTableViewController.h"
 #import "moreTableViewController.h"
 #import "extensionListTableViewController.h"
+#import "HtmlCommon.h"
+
 
 @interface findViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property(nonatomic,strong)NSMutableArray *imageArray;
@@ -326,14 +328,25 @@
 {
     if (indexPath.row==0) {
     
+//        LZPageViewController *pageVc = [[LZPageViewController alloc] initWithTitles:@[root_ME_wenti,root_ME_changjian_wenti,] controllersClass:@[[listViewController class],[commonTableViewController class]]];
+        
         LZPageViewController *pageVc = [[LZPageViewController alloc] initWithTitles:@[root_ME_wenti,root_ME_changjian_wenti,] controllersClass:@[[listViewController class],[commonTableViewController class]]];
+        
         pageVc.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:pageVc animated:NO];
     }else if (indexPath.row==1){
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:root_energy_wenxin_tishi message:root_zhibao_chaxun_tishi delegate:self cancelButtonTitle:nil otherButtonTitles:root_OK, nil];
-        [alert show];
         
+//        HtmlCommon *go=[[HtmlCommon alloc]init];
+//        go.hidesBottomBarWhenPushed=YES;
+//        
+//        [self.navigationController pushViewController:go animated:NO];
+        
+        
+        
+      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:root_energy_wenxin_tishi message:root_zhibao_chaxun_tishi delegate:self cancelButtonTitle:nil otherButtonTitles:root_OK, nil];
+     [alert show];
+      
         
 //        qualityTableViewController *page2 = [[qualityTableViewController alloc] init];
 //          page2.hidesBottomBarWhenPushed=YES;
