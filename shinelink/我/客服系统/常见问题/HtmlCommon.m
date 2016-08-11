@@ -9,8 +9,13 @@
 #import "HtmlCommon.h"
 #import "LWLoadingView.h"
 #import "addServerViewController.h"
+#import "UIImageView+AFNetworking.h"
 
-@interface HtmlCommon ()<UIWebViewDelegate>
+@interface HtmlCommon ()<UIWebViewDelegate,UIScrollViewDelegate>
+{
+    UIView *bgView;
+    UIImageView *imgView;
+}
 @property (nonatomic,strong) UIWebView* webView;
 @property (nonatomic,strong) NSString* HtmlContent;
 
@@ -79,6 +84,11 @@ self.view.backgroundColor = [UIColor whiteColor];
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
     
+//    _webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+//    _webView.scalesPageToFit=YES;
+//    _webView.multipleTouchEnabled=YES;
+//    _webView.userInteractionEnabled=YES;
+    
    // NSString* html=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"view" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
     
     [self.webView loadHTMLString:_HtmlContent baseURL:nil];
@@ -133,6 +143,9 @@ self.view.backgroundColor = [UIColor whiteColor];
 }
 
 
+
+
+
 -(void)addAnswer{
     addServerViewController *go=[[addServerViewController alloc]init];
      [self.navigationController pushViewController:go animated:NO];
@@ -143,7 +156,146 @@ self.view.backgroundColor = [UIColor whiteColor];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     [LWLoadingView hideInViwe:self.view];
+    
+    NSString *jsStr = @"function reSetImgFrame() { \
+    var imgs = document.getElementsByTagName('img'); \
+    for (var i = 0; i < imgs.length; i++) {\
+    var img = imgs[i];   \
+    img.style.maxWidth = %f;   \
+    } \
+    }";
+    jsStr = [NSString stringWithFormat:jsStr, [UIScreen mainScreen].bounds.size.width-15*NOW_SIZE];
+    
+    [webView stringByEvaluatingJavaScriptFromString:jsStr];
+    [webView stringByEvaluatingJavaScriptFromString:@"reSetImgFrame()"];
+    
+    
+    
+    //js方法遍历图片添加点击事件 返回图片个数
+    static  NSString * const jsGetImages =
+    @"function getImages(){\
+    var objs = document.getElementsByTagName(\"img\");\
+    for(var i=0;i<objs.length;i++){\
+    objs[i].onclick=function(){\
+    document.location=\"myweb:imageClick:\"+this.src;\
+    };\
+    };\
+    return objs.length;\
+    };";
+    
+    [webView stringByEvaluatingJavaScriptFromString:jsGetImages];//注入js方法
+    //注入自定义的js方法后别忘了调用 否则不会生效（不调用也一样生效了，，，不明白）
+    NSString *resurlt = [webView stringByEvaluatingJavaScriptFromString:@"getImages()"];
+    
 }
+
+
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    //将url转换为string
+    NSString *requestString = [[request URL] absoluteString];
+    //    NSLog(@"requestString is %@",requestString);
+    
+    //hasPrefix 判断创建的字符串内容是否以pic:字符开始
+    if ([requestString hasPrefix:@"myweb:imageClick:"]) {
+        NSString *imageUrl = [requestString substringFromIndex:@"myweb:imageClick:".length];
+        //        NSLog(@"image url------%@", imageUrl);
+        
+        if (bgView) {
+            //设置不隐藏，还原放大缩小，显示图片
+            bgView.hidden = NO;
+            imgView.frame = CGRectMake(2*NOW_SIZE, 2*NOW_SIZE, SCREEN_Width-2*NOW_SIZE, 250*HEIGHT_SIZE-2*NOW_SIZE);
+            [imgView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:IMAGE(@"btn_cha.png")];
+        }
+        else
+            [self showBigImage:imageUrl];//创建视图并显示图片
+        
+        return NO;
+    }
+    return YES;
+}
+
+
+#pragma mark 显示大图片
+-(void)showBigImage:(NSString *)imageUrl{
+    //创建灰色透明背景，使其背后内容不可操作
+    bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
+    [bgView setBackgroundColor:[UIColor colorWithRed:0.3
+                                               green:0.3
+                                                blue:0.3
+                                               alpha:0.7]];
+    [self.view addSubview:bgView];
+    
+    //创建边框视图
+    UIScrollView *borderView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, 250*HEIGHT_SIZE)];
+    //将图层的边框设置为圆脚
+    borderView.layer.cornerRadius = 8;
+    borderView.layer.masksToBounds = YES;
+    //给图层添加一个有色边框
+    borderView.layer.borderWidth = 2*NOW_SIZE;
+    borderView.layer.borderColor = [[UIColor colorWithRed:0.9
+                                                    green:0.9
+                                                     blue:0.9
+                                                    alpha:0.7] CGColor];
+    [borderView setCenter:bgView.center];
+    [bgView addSubview:borderView];
+    
+    //创建关闭按钮
+    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+     [closeBtn setImage:[UIImage imageNamed:@"btn_cha.png"] forState:UIControlStateNormal];
+   // closeBtn.backgroundColor = [UIColor redColor];
+    [closeBtn addTarget:self action:@selector(removeBigImage) forControlEvents:UIControlEventTouchUpInside];
+    [closeBtn setFrame:CGRectMake(borderView.frame.origin.x+borderView.frame.size.width-20*NOW_SIZE, borderView.frame.origin.y-7*HEIGHT_SIZE, 26*HEIGHT_SIZE, 26*HEIGHT_SIZE)];
+    [bgView addSubview:closeBtn];
+    
+    //创建显示图像视图
+    imgView = [[UIImageView alloc] initWithFrame:CGRectMake(2*NOW_SIZE, 2*NOW_SIZE, CGRectGetWidth(borderView.frame)-2*NOW_SIZE, CGRectGetHeight(borderView.frame)-2*NOW_SIZE)];
+    imgView.userInteractionEnabled = YES;
+   
+    [imgView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:IMAGE(@"btn_cha.png")];
+    
+    //imgView.frame=CGRectMake(10, 10, imgView.image.size.width, imgView.image.size.width);
+    
+    [borderView addSubview:imgView];
+    
+    //添加捏合手势
+    [imgView addGestureRecognizer:[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(handlePinch:)]];
+    
+    
+    borderView.contentSize=CGSizeMake(imgView.image.size.width,imgView.image.size.height+30*HEIGHT_SIZE);
+    //_scrollview.contentSize=image.size;
+    
+    
+    //设置实现缩放
+    //设置代理scrollview的代理对象
+    borderView.delegate=self;
+    //设置最大伸缩比例
+    borderView.maximumZoomScale=2.0;
+    //设置最小伸缩比例
+    borderView.minimumZoomScale=0.5;
+
+    
+}
+
+-(UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return imgView;
+}
+
+
+//关闭按钮
+-(void)removeBigImage
+{
+    bgView.hidden = YES;
+}
+
+- (void) handlePinch:(UIPinchGestureRecognizer*) recognizer
+{
+    //缩放:设置缩放比例
+    recognizer.view.transform = CGAffineTransformScale(recognizer.view.transform, recognizer.scale, recognizer.scale);
+    recognizer.scale = 1;
+}
+
 
 
 
