@@ -65,8 +65,10 @@
                 [_idArray addObject:allDic[i][@"id"]];
                 [_titleArray addObject:allDic[i][@"title"]];
             }
-            
-            [self.tableView reloadData];
+            if (_idArray.count==allDic.count) {
+                 [self.tableView reloadData];
+            }
+           
        }
    
     } failure:^(NSError *error) {

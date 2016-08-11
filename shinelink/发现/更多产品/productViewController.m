@@ -84,7 +84,10 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSString *imageURL=[NSString stringWithFormat:@"%@/%@",HEAD_URL,_paramImage];
+        NSString *imageURL=[NSString stringWithFormat:@"%@/%@",Head_Url_more,_paramImage];
+        
+       // NSString *imageURL=[NSString stringWithFormat:@"%@/1470897170108.jpg",Head_Url_more];
+        
         UIImage * resultImage;
         NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
         

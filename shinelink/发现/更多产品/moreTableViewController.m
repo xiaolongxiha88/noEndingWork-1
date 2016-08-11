@@ -148,16 +148,23 @@
     
        NSString *getSame;
     
-    for (int i=0; i<sameArray.count; i++) {
-        
-        if ( ![sameArray containsObject:_imageNameArray[i]]) {
-            getSame=@"0";
-        }
-    }
+
     
     if (!(sameArray.count==_imageNameArray.count)) {
          getSame=@"0";
+    }else{
+        
+        for (int i=0; i<sameArray.count; i++) {
+            
+            if ( ![sameArray containsObject:_imageNameArray[i]]) {
+                getSame=@"0";
+            }
+        }
+    
     }
+    
+    
+    
     
     if (sameArray.count==0) {
          getSame=@"0";
@@ -216,10 +223,16 @@
 
 
 -(void)getImage{
+    
+   
+    
     if (_imageNameArray.count==_name.count) {
         
         for (int i=0; i<_imageNameArray.count; i++) {
-            NSString *imageURL=[NSString stringWithFormat:@"%@/%@",HEAD_URL,_imageNameArray[i]];
+        NSString *imageURL=[NSString stringWithFormat:@"%@/%@",Head_Url_more,_imageNameArray[i]];
+            
+          //   NSString *imageURL=[NSString stringWithFormat:@"%@/1470897169751.jpg",Head_Url_more];
+            
             UIImage * resultImage;
             NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
             

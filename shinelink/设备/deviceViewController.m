@@ -151,8 +151,35 @@
 #pragma mark - CoreData
 -(void)initDatacore{
    
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    
+
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *_languageValue=[ud objectForKey:@"demoValue"];
+    NSString* nowLanguage;
+    
+   
+    
+    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+        nowLanguage=@"ch";
+    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
+        nowLanguage=@"en";
+    }else{
+        nowLanguage=@"en";
+    }
+
+    
+    
     NSString *coreEnable=[UserInfo defaultUserInfo].coreDataEnable;
      // BOOL firstRun = !_manager.hasStore;
+    
+    if (![_languageValue isEqualToString:nowLanguage]) {
+        coreEnable=@"1";
+         [[NSUserDefaults standardUserDefaults] setObject:nowLanguage forKey:@"demoValue"];
+    }
+    
     
     if ([coreEnable isEqualToString:@"1"]){
         [self initDemoData];

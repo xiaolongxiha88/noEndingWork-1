@@ -127,16 +127,22 @@
     
      NSMutableArray *getImageName = [NSMutableArray arrayWithArray:[user objectForKey:@"AdPicName"]];
     
-    for (int j=0; j<_imageArrayName.count; j++) {
-        
-        if ( ![getImageName containsObject:_imageArrayName[j]]) {
-            getSame=@"0";
-        }
-    }
+  
     
     if (!(getImageName.count==_imageArrayName.count)) {
         getSame=@"0";
+    }else{
+        
+        for (int j=0; j<_imageArrayName.count; j++) {
+            
+            if ( ![getImageName containsObject:_imageArrayName[j]]) {
+                getSame=@"0";
+            }
+        }
+    
     }
+    
+    
     
     NSMutableArray *getPicData = [NSMutableArray arrayWithArray:[user objectForKey:@"AdPicData"]];
     if (getPicData.count==0) {

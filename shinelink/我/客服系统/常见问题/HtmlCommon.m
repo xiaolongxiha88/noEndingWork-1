@@ -15,6 +15,7 @@
 {
     UIView *bgView;
     UIImageView *imgView;
+    UIScrollView *borderView;
 }
 @property (nonatomic,strong) UIWebView* webView;
 @property (nonatomic,strong) NSString* HtmlContent;
@@ -89,7 +90,8 @@ self.view.backgroundColor = [UIColor whiteColor];
 //    _webView.multipleTouchEnabled=YES;
 //    _webView.userInteractionEnabled=YES;
     
-   // NSString* html=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"view" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
+    
+_HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"view" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
     
     [self.webView loadHTMLString:_HtmlContent baseURL:nil];
     
@@ -164,7 +166,7 @@ self.view.backgroundColor = [UIColor whiteColor];
     img.style.maxWidth = %f;   \
     } \
     }";
-    jsStr = [NSString stringWithFormat:jsStr, [UIScreen mainScreen].bounds.size.width-15*NOW_SIZE];
+    jsStr = [NSString stringWithFormat:jsStr, [UIScreen mainScreen].bounds.size.width];
     
     [webView stringByEvaluatingJavaScriptFromString:jsStr];
     [webView stringByEvaluatingJavaScriptFromString:@"reSetImgFrame()"];
@@ -227,7 +229,7 @@ self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bgView];
     
     //创建边框视图
-    UIScrollView *borderView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, 250*HEIGHT_SIZE)];
+    borderView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, 300*HEIGHT_SIZE)];
     //将图层的边框设置为圆脚
     borderView.layer.cornerRadius = 8;
     borderView.layer.masksToBounds = YES;
@@ -239,6 +241,15 @@ self.view.backgroundColor = [UIColor whiteColor];
                                                     alpha:0.7] CGColor];
     [borderView setCenter:bgView.center];
     [bgView addSubview:borderView];
+    
+    
+    //设置实现缩放
+    //设置代理scrollview的代理对象
+    borderView.delegate=self;
+    //设置最大伸缩比例
+    borderView.maximumZoomScale=3.0;
+    //设置最小伸缩比例
+    borderView.minimumZoomScale=0.5;
     
     //创建关闭按钮
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -259,20 +270,14 @@ self.view.backgroundColor = [UIColor whiteColor];
     [borderView addSubview:imgView];
     
     //添加捏合手势
-    [imgView addGestureRecognizer:[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(handlePinch:)]];
+   // [imgView addGestureRecognizer:[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(handlePinch:)]];
     
     
-    borderView.contentSize=CGSizeMake(imgView.image.size.width,imgView.image.size.height+30*HEIGHT_SIZE);
+    borderView.contentSize=CGSizeMake(imgView.image.size.width+50*NOW_SIZE,imgView.image.size.height+50*HEIGHT_SIZE);
     //_scrollview.contentSize=image.size;
     
     
-    //设置实现缩放
-    //设置代理scrollview的代理对象
-    borderView.delegate=self;
-    //设置最大伸缩比例
-    borderView.maximumZoomScale=2.0;
-    //设置最小伸缩比例
-    borderView.minimumZoomScale=0.5;
+   
 
     
 }

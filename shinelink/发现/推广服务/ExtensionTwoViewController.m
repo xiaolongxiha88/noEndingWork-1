@@ -73,13 +73,14 @@
             
             if (_picName.length>0) {
                 
-                
+                [self showProgressView];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     
-                    NSString *imageURL=[NSString stringWithFormat:@"%@/%@",HEAD_URL,_picName];
+                    NSString *imageURL=[NSString stringWithFormat:@"%@/%@",Head_Url_more,_picName];
                     UIImage * resultImage;
                     NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
                     
+                   
                     if (data!= nil) {
                     resultImage = [UIImage imageWithData:data];
                         
@@ -93,6 +94,8 @@
  
                 
                     }else{
+                        
+                        
                         dispatch_async(dispatch_get_main_queue(), ^{
                               [self initContent];
                         });
@@ -220,6 +223,8 @@
 
 -(void)initPic{
 
+       [self hideProgressView];
+    
     _image=[[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 250*HEIGHT_SIZE-headH, 300*NOW_SIZE, 140*HEIGHT_SIZE)];
     [_image setImage:_picArray[0]];
     [_scrollView2 addSubview:_image];
@@ -229,6 +234,8 @@
 
 -(void)initContent{
 
+       [self hideProgressView];
+    
     UILabel *recommendTitle=[[UILabel alloc]init];
     UILabel *recommend=[[UILabel alloc]init];
     
