@@ -54,8 +54,12 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self setTitle:root_service];
       [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
-    arrayName=@[root_ME_kefu,root_ME_zhibao,root_ME_zengzhi,root_ME_gengduo];
-    arrayImage=@[@"客户服务.png",@"质保.png",@"增值服务.png",@"更多.png"];
+    //arrayName=@[root_ME_kefu,root_ME_zhibao,root_ME_zengzhi,root_ME_gengduo];
+    arrayName=@[root_ME_kefu,root_ME_zengzhi,root_ME_gengduo];
+    
+   // arrayImage=@[@"客户服务.png",@"质保.png",@"增值服务.png",@"更多.png"];
+     arrayImage=@[@"客户服务.png",@"增值服务.png",@"更多.png"];
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
@@ -279,7 +283,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return arrayName.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -340,30 +344,32 @@
         
         pageVc.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:pageVc animated:NO];
-    }else if (indexPath.row==1){
-        
-        
-//        HtmlCommon *go=[[HtmlCommon alloc]init];
-//        go.hidesBottomBarWhenPushed=YES;
+    }
+//    else if (indexPath.row==1){
 //        
-//        [self.navigationController pushViewController:go animated:NO];
-        
-        
-        
-      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:root_energy_wenxin_tishi message:root_zhibao_chaxun_tishi delegate:self cancelButtonTitle:nil otherButtonTitles:root_OK, nil];
-     [alert show];
-      
-        
-//        qualityTableViewController *page2 = [[qualityTableViewController alloc] init];
-//          page2.hidesBottomBarWhenPushed=YES;
-//         page2.title=root_ME_zhibao;
-//        [self.navigationController pushViewController:page2 animated:NO];
-    }else if (indexPath.row==2){
+//        
+////        HtmlCommon *go=[[HtmlCommon alloc]init];
+////        go.hidesBottomBarWhenPushed=YES;
+////        
+////        [self.navigationController pushViewController:go animated:NO];
+//        
+//        
+//        
+//      UIAlertView *alert = [[UIAlertView alloc] initWithTitle:root_energy_wenxin_tishi message:root_zhibao_chaxun_tishi delegate:self cancelButtonTitle:nil otherButtonTitles:root_OK, nil];
+//     [alert show];
+//      
+//        
+////        qualityTableViewController *page2 = [[qualityTableViewController alloc] init];
+////          page2.hidesBottomBarWhenPushed=YES;
+////         page2.title=root_ME_zhibao;
+////        [self.navigationController pushViewController:page2 animated:NO];
+//    }
+    else if (indexPath.row==1){
         extensionListTableViewController *page2 = [[extensionListTableViewController alloc] init];
         page2.hidesBottomBarWhenPushed=YES;
         page2.title=root_ME_zengzhi;
         [self.navigationController pushViewController:page2 animated:NO];
-    }else if (indexPath.row==3){
+    }else if (indexPath.row==2){
         moreTableViewController *page4 = [[moreTableViewController alloc] init];
         page4.hidesBottomBarWhenPushed=YES;
           page4.title=root_ME_gengduo;

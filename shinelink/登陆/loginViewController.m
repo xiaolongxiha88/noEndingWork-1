@@ -68,7 +68,7 @@
     //NSString *isdemo=[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"];
     
     
-    if (reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] )) {
+    if (reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] )||rePassword==nil || rePassword==NULL||([rePassword isEqual:@""] )) {
       //  [ [NSNotificationCenter defaultCenter]postNotificationName:@"reroadDemo" object:nil];
         
              [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
@@ -100,6 +100,15 @@
 - (void)addSubViews {
     float sizeH=20*HEIGHT_SIZE;
     
+    if (_userTextField) {
+        [_userTextField removeFromSuperview];
+        _userTextField=nil;
+    }
+    if (_pwdTextField) {
+        [_pwdTextField removeFromSuperview];
+        _pwdTextField=nil;
+    }
+    
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     [self.view addSubview:_scrollView];
     
@@ -120,7 +129,10 @@
     userBgImageView.image = IMAGE(@"name3.jpg");
     [_scrollView addSubview:userBgImageView];
     
-    self.userTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(userBgImageView.frame) - 50*NOW_SIZE, 45*HEIGHT_SIZE)];
+    if (!_userTextField) {
+         self.userTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(userBgImageView.frame) - 50*NOW_SIZE, 45*HEIGHT_SIZE)];
+    }
+   
     self.userTextField.placeholder = root_Alet_user_messge;
     if (_oldName) {
         self.userTextField.text = _oldName;
@@ -140,7 +152,9 @@
     pwdBgImageView.userInteractionEnabled = YES;
     [_scrollView addSubview:pwdBgImageView];
     
-    self.pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(pwdBgImageView.frame) - 50*NOW_SIZE, 45*HEIGHT_SIZE)];
+    if (!_pwdTextField) {
+      self.pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(pwdBgImageView.frame) - 50*NOW_SIZE, 45*HEIGHT_SIZE)];
+    }
     self.pwdTextField.placeholder = root_Alet_user_pwd;
     if (_oldPassword) {
         self.pwdTextField.text = _oldPassword;
@@ -155,8 +169,10 @@
     [pwdBgImageView addSubview:_pwdTextField];
     
  
-   
-    self.forgetLable= [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 260*HEIGHT_SIZE+sizeH, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+    if (!_forgetLable) {
+     self.forgetLable= [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 260*HEIGHT_SIZE+sizeH, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+    }
+
     self.forgetLable.text=root_forget_pwd;
      self.forgetLable.textColor=[UIColor whiteColor];
         self.forgetLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -166,8 +182,9 @@
     [self.forgetLable addGestureRecognizer:forget2];
     [_scrollView addSubview:self.forgetLable];
     
-    
-   _registLable= [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 260*HEIGHT_SIZE+sizeH, 115*NOW_SIZE, 40*HEIGHT_SIZE)];
+    if (!_registLable) {
+        _registLable= [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 260*HEIGHT_SIZE+sizeH, 115*NOW_SIZE, 40*HEIGHT_SIZE)];
+    }
     self.registLable.text=root_register;
     self.registLable.textColor=[UIColor whiteColor];
     self.registLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -177,7 +194,9 @@
     [self.registLable addGestureRecognizer:forget1];
     [_scrollView addSubview:self.registLable];
     
-    _demoLable= [[UILabel alloc] initWithFrame:CGRectMake(100*NOW_SIZE, 310*HEIGHT_SIZE+sizeH+90*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+    if (!_demoLable) {
+            _demoLable= [[UILabel alloc] initWithFrame:CGRectMake(100*NOW_SIZE, 310*HEIGHT_SIZE+sizeH+90*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+    }
     self.demoLable.text=root_demo_test;
     self.demoLable.textColor=COLOR(210, 210, 210, 1);
     self.demoLable.font = [UIFont systemFontOfSize:20*HEIGHT_SIZE];
@@ -420,6 +439,12 @@ NSLog(@"体验馆");
                     [[NSUserDefaults standardUserDefaults] setObject:@"isNotDemo" forKey:@"isDemo"];
                 }
 
+                
+                NSString *counrtyName=_dataSource[@"user"][@"counrty"];
+                  NSString *timeZoneNum=_dataSource[@"user"][@"timeZone"];
+                [[NSUserDefaults standardUserDefaults] setObject:counrtyName forKey:@"counrtyName"];
+                [[NSUserDefaults standardUserDefaults] setObject:timeZoneNum forKey:@"timeZoneNum"];
+                
                 
                 [[UserInfo defaultUserInfo] setTelNumber:_dataSource[@"user"][@"phoneNum"]];
                 [[UserInfo defaultUserInfo] setUserID:_dataSource[@"user"][@"id"]];

@@ -189,10 +189,12 @@
      
         if (_imageView) {
             [_imageView removeFromSuperview];
+            _imageView=nil;
         }
         
         if (_alertLable) {
             [_alertLable removeFromSuperview];
+            _alertLable=nil;
         }
         
         [self uiThree];
@@ -203,6 +205,7 @@
         
         if (_detail2) {
              [_detail2 removeFromSuperview];
+            _detail2=nil;
         }
         [self uiFour];
     }

@@ -137,6 +137,10 @@
                 
             }
             
+            if (_allArray.count>0) {
+                
+          
+            
             for(int i=0;i<_allArray.count;i++){
                 
                 if (_AlertView) {
@@ -182,8 +186,14 @@
                 [_timeArray addObject:time];
                 [_questionID addObject:question];
                 [_questionTypeArray addObject:questiontype];
-            }
-            [self.tableView reloadData];
+              }
+                if (_titleArray.count==_allArray.count) {
+                    
+                      [self.tableView reloadData];
+                }
+                
+          
+          }
            
         }
     } failure:^(NSError *error) {

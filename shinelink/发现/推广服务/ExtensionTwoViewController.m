@@ -31,7 +31,7 @@
 @implementation ExtensionTwoViewController
 {
 
-    
+    float imageHeight;
 }
 
 - (void)viewDidLoad {
@@ -225,7 +225,12 @@
 
        [self hideProgressView];
     
-    _image=[[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 250*HEIGHT_SIZE-headH, 300*NOW_SIZE, 140*HEIGHT_SIZE)];
+    UIImage *image=_picArray[0];
+    
+    float SCREEN_Width_1=SCREEN_Width-20*NOW_SIZE;
+    imageHeight=(image.size.height*SCREEN_Width_1)/image.size.width;
+    
+    _image=[[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 250*HEIGHT_SIZE-headH, SCREEN_Width_1, (image.size.height*SCREEN_Width_1)/image.size.width)];
     [_image setImage:_picArray[0]];
     [_scrollView2 addSubview:_image];
      [self initContent];
@@ -243,9 +248,9 @@
     //    return 110*HEIGHT_SIZE+fcRect.size.height;
     
     if (_image) {
-        recommendTitle.frame=CGRectMake(10*NOW_SIZE, 390*HEIGHT_SIZE-headH, 300*NOW_SIZE, 20*HEIGHT_SIZE);
-        recommend.frame=CGRectMake(10*NOW_SIZE, 410*HEIGHT_SIZE-headH, 300*NOW_SIZE, fcRect.size.height);
-        _scrollView2.contentSize = CGSizeMake(SCREEN_Width,420*HEIGHT_SIZE+fcRect.size.height);
+        recommendTitle.frame=CGRectMake(10*NOW_SIZE, 270*HEIGHT_SIZE-headH+imageHeight, 300*NOW_SIZE, 20*HEIGHT_SIZE);
+        recommend.frame=CGRectMake(10*NOW_SIZE, 290*HEIGHT_SIZE-headH+imageHeight, 300*NOW_SIZE, fcRect.size.height);
+        _scrollView2.contentSize = CGSizeMake(SCREEN_Width,320*HEIGHT_SIZE+fcRect.size.height+imageHeight);
     }else{
         recommendTitle.frame=CGRectMake(10*NOW_SIZE, 390*HEIGHT_SIZE-120*HEIGHT_SIZE-headH, 300*NOW_SIZE, 20*HEIGHT_SIZE);
         recommend.frame=CGRectMake(10*NOW_SIZE, 410*HEIGHT_SIZE-120*HEIGHT_SIZE-headH, 300*NOW_SIZE, fcRect.size.height);

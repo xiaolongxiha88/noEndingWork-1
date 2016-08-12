@@ -41,6 +41,7 @@
 #define  root_Alet_user        NSLocalizedString(@"温馨提示 ", nil)
 #define  root_Alet_user_messge        NSLocalizedString(@"请输入用户名 ", nil)
 #define  root_Alet_user_pwd        NSLocalizedString(@"请输入密码 ", nil)
+#define  root_old_pwd        NSLocalizedString(@"原密码 ", nil)
 
 #define  root_demo_Alert        NSLocalizedString(@"浏览用户禁止操作", nil)
 #define  root_huoqu_wufuqi_dizhi        NSLocalizedString(@"获取服务器地址", nil)

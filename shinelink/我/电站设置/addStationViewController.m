@@ -21,6 +21,8 @@
 @property(nonatomic,strong)UITextField *textField2;
 @property(nonatomic,strong)RootPickerView *pickerView;
 @property(nonatomic,strong)NSMutableArray *timeZone;
+@property(nonatomic,strong)NSString *counrtyName;
+@property(nonatomic,strong)NSString *timeZoneNum;
 @end
 
 @implementation addStationViewController
@@ -28,11 +30,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+   _counrtyName=(NSString*)[ud objectForKey:@"counrtyName"];
+    
+    NSString *timeZone0;
+    timeZone0=[ud objectForKey:@"timeZoneNum"];
+    _timeZoneNum=[NSString stringWithFormat:@"%@",timeZone0];
+    
+    
+    
     self.view.backgroundColor=MainColor;
     self.navigationItem.title=root_tianjia_1;
     [self getPickerData];
     [self initUI];
-    [self writeUI];
+    //[self writeUI];
   
 }
 
@@ -97,6 +108,10 @@
 
 -(void)writeUI{
     
+    if (_country.count==0) {
+         [ _country addObject:@"Null"];
+    }
+    
     _timeZone=[NSMutableArray arrayWithObjects:@"+1",@"+2",@"+3",@"+4",@"+5",@"+6",@"+7",@"+8",@"+9",@"+10",@"+11",@"+12",@"-1",@"-2",@"-3",@"-4",@"-5",@"-6",@"-7",@"-8",@"-9",@"-10",@"-11",@"-12", nil];
     _pickerView=[[RootPickerView alloc]initWithTwoArray:_country arrayTwo:_timeZone];
     [self.view addSubview:_pickerView];
@@ -145,6 +160,7 @@
     _textField1=[[UITextField alloc]initWithFrame:CGRectMake(0, (5+2*40)*HEIGHT_SIZE, 120*NOW_SIZE, 30*HEIGHT_SIZE)];
     _textField1.layer.borderWidth=0.5;
     _textField1.layer.cornerRadius=5;
+    _textField1.text=_counrtyName;
     _textField1.layer.borderColor=[UIColor whiteColor].CGColor;
     _textField1.tintColor = [UIColor whiteColor];
     [_textField1 setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -159,6 +175,7 @@
     _textField2=[[UITextField alloc]initWithFrame:CGRectMake(0, (5+3*40)*HEIGHT_SIZE, 120*NOW_SIZE, 30*HEIGHT_SIZE)];
     _textField2.layer.borderWidth=0.5;
     _textField2.layer.cornerRadius=5;
+      _textField2.text=_timeZoneNum;
     _textField2.layer.borderColor=[UIColor whiteColor].CGColor;
     _textField2.tintColor = [UIColor whiteColor];
     [_textField2 setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -184,9 +201,10 @@
 
 
 -(void)addButtonPressed{
-    
+     if (!([_pickerView.textValue1 isEqual:@""]||_pickerView.textValue1==nil||_pickerView.textValue1==NULL)) {
     _textField1.text=_pickerView.textValue1;
        _textField2.text=_pickerView.textValue2;
+     }
     
     NSArray *array=[[NSArray alloc]initWithObjects:root_plant_name, root_instal_date, root_country, root_WO_shiqu, nil];
     NSString *KK=root_WO_buneng_weikong;
