@@ -278,6 +278,8 @@
             }else{
                 [self showAlertViewWithTitle:nil message:root_CNJ_canshu_chenggong cancelButtonTitle:root_Yes];
                 
+                if([_type isEqualToString:@"0"]){
+                
                    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
                    NSString *reUsername=[ud objectForKey:@"userName"];
                 
@@ -288,6 +290,10 @@
                 
                 [login.navigationController setNavigationBarHidden:YES];
                 [self.navigationController pushViewController:login animated:YES];
+                }else{
+                    
+                [self.navigationController popViewControllerAnimated:YES];
+                }
            
             }
         }

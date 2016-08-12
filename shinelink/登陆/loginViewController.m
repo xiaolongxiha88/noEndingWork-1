@@ -172,7 +172,12 @@
     if (!_forgetLable) {
      self.forgetLable= [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 260*HEIGHT_SIZE+sizeH, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
     }
-
+    
+ NSString *LableContent1=root_forget_pwd;
+       NSDictionary *attributes1 = @{NSFontAttributeName:[UIFont systemFontOfSize:14*HEIGHT_SIZE],};
+    CGSize textSize1 = [LableContent1 boundingRectWithSize:CGSizeMake(120*NOW_SIZE,40*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes1 context:nil].size;
+     [ self.forgetLable setFrame:CGRectMake(40*NOW_SIZE, 260*HEIGHT_SIZE+sizeH, textSize1.width, 40*HEIGHT_SIZE)];
+    
     self.forgetLable.text=root_forget_pwd;
      self.forgetLable.textColor=[UIColor whiteColor];
         self.forgetLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -185,6 +190,12 @@
     if (!_registLable) {
         _registLable= [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 260*HEIGHT_SIZE+sizeH, 115*NOW_SIZE, 40*HEIGHT_SIZE)];
     }
+    
+    NSString *LableContent2=root_register;
+    NSDictionary *attributes2 = @{NSFontAttributeName:[UIFont systemFontOfSize:14*HEIGHT_SIZE],};
+    CGSize textSize2 = [LableContent2 boundingRectWithSize:CGSizeMake(120*NOW_SIZE,40*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes2 context:nil].size;
+    [ self.registLable setFrame:CGRectMake(280*NOW_SIZE-textSize2.width, 260*HEIGHT_SIZE+sizeH, textSize2.width, 40*HEIGHT_SIZE)];
+    
     self.registLable.text=root_register;
     self.registLable.textColor=[UIColor whiteColor];
     self.registLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];

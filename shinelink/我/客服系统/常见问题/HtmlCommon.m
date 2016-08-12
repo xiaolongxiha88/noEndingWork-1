@@ -110,7 +110,7 @@ _HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForRe
     PV2Lable.textColor=COLOR(113, 113, 113, 1);
     PV2Lable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     NSDictionary *attributes1 = @{NSFontAttributeName:[UIFont systemFontOfSize:16*HEIGHT_SIZE],};
-    CGSize textSize1 = [PV2LableContent boundingRectWithSize:CGSizeMake(180*NOW_SIZE,30*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes1 context:nil].size;;
+    CGSize textSize1 = [PV2LableContent boundingRectWithSize:CGSizeMake(180*NOW_SIZE,30*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes1 context:nil].size;
     [PV2Lable setFrame:CGRectMake(10*NOW_SIZE, (Height1+5)*HEIGHT_SIZE, textSize1.width, 30*HEIGHT_SIZE)];
     [self.view addSubview:PV2Lable];
     
@@ -123,7 +123,7 @@ _HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForRe
     Lable3.textColor=MainColor;
     Lable3.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     NSDictionary *attributes = @{NSFontAttributeName:[UIFont systemFontOfSize:16*HEIGHT_SIZE],};
-    CGSize textSize = [lable3Content boundingRectWithSize:CGSizeMake(180*NOW_SIZE,30*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes context:nil].size;;
+    CGSize textSize = [lable3Content boundingRectWithSize:CGSizeMake(180*NOW_SIZE,30*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes context:nil].size;
     [Lable3 setFrame:CGRectMake(310*NOW_SIZE-textSize.width, (Height1+5)*HEIGHT_SIZE, textSize.width, 30*HEIGHT_SIZE)];
     
     Lable3.userInteractionEnabled=YES;

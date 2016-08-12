@@ -959,7 +959,7 @@
 		337C10E81CE02A160053361F /* head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head.png; sourceTree = "<group>"; };
 		337C30521CCDAF3C002B99B7 /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
 		337C30531CCDAF3C002B99B7 /* protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = protocol.m; sourceTree = "<group>"; };
-		337F9C801C71A6710016FE43 /* ShineLink.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShineLink.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		337F9C801C71A6710016FE43 /* ShinePhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShinePhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		337F9C841C71A6710016FE43 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		337F9C861C71A6710016FE43 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		337F9C871C71A6710016FE43 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -2274,7 +2274,7 @@
 		337F9C811C71A6710016FE43 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				337F9C801C71A6710016FE43 /* ShineLink.app */,
+				337F9C801C71A6710016FE43 /* ShinePhone.app */,
 				337F9C9C1C71A6710016FE43 /* ShineLink.temp_caseinsensitive_rename.xctest */,
 				337F9CA71C71A6710016FE43 /* ShineLink.temp_caseinsensitive_rename.xctest */,
 			);
@@ -2753,9 +2753,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		337F9C7F1C71A6710016FE43 /* ShineLink */ = {
+		337F9C7F1C71A6710016FE43 /* ShinePhone */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 337F9CB01C71A6720016FE43 /* Build configuration list for PBXNativeTarget "ShineLink" */;
+			buildConfigurationList = 337F9CB01C71A6720016FE43 /* Build configuration list for PBXNativeTarget "ShinePhone" */;
 			buildPhases = (
 				337F9C7C1C71A6710016FE43 /* Sources */,
 				337F9C7D1C71A6710016FE43 /* Frameworks */,
@@ -2765,9 +2765,9 @@
 			);
 			dependencies = (
 			);
-			name = ShineLink;
+			name = ShinePhone;
 			productName = shinelink;
-			productReference = 337F9C801C71A6710016FE43 /* ShineLink.app */;
+			productReference = 337F9C801C71A6710016FE43 /* ShinePhone.app */;
 			productType = "com.apple.product-type.application";
 		};
 		337F9C9B1C71A6710016FE43 /* shinelinkTests */ = {
@@ -2837,7 +2837,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 337F9C7B1C71A6710016FE43 /* Build configuration list for PBXProject "ShineLink" */;
+			buildConfigurationList = 337F9C7B1C71A6710016FE43 /* Build configuration list for PBXProject "ShinePhone" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -2858,7 +2858,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				337F9C7F1C71A6710016FE43 /* ShineLink */,
+				337F9C7F1C71A6710016FE43 /* ShinePhone */,
 				337F9C9B1C71A6710016FE43 /* shinelinkTests */,
 				337F9CA61C71A6710016FE43 /* shinelinkUITests */,
 			);
@@ -3355,12 +3355,12 @@
 /* Begin PBXTargetDependency section */
 		337F9C9E1C71A6710016FE43 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 337F9C7F1C71A6710016FE43 /* ShineLink */;
+			target = 337F9C7F1C71A6710016FE43 /* ShinePhone */;
 			targetProxy = 337F9C9D1C71A6710016FE43 /* PBXContainerItemProxy */;
 		};
 		337F9CA91C71A6710016FE43 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 337F9C7F1C71A6710016FE43 /* ShineLink */;
+			target = 337F9C7F1C71A6710016FE43 /* ShinePhone */;
 			targetProxy = 337F9CA81C71A6710016FE43 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -3488,8 +3488,8 @@
 					"$(PROJECT_DIR)/shinelink/设备/采集器/WifConnect/num2/OtherThing/cloudServices/libelian/ios",
 					"$(PROJECT_DIR)/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinelink;
-				PRODUCT_NAME = ShineLink;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinephone;
+				PRODUCT_NAME = ShinePhone;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -3510,8 +3510,8 @@
 					"$(PROJECT_DIR)/shinelink/设备/采集器/WifConnect/num2/OtherThing/cloudServices/libelian/ios",
 					"$(PROJECT_DIR)/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinelink;
-				PRODUCT_NAME = ShineLink;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinephone;
+				PRODUCT_NAME = ShinePhone;
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
@@ -3567,7 +3567,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		337F9C7B1C71A6710016FE43 /* Build configuration list for PBXProject "ShineLink" */ = {
+		337F9C7B1C71A6710016FE43 /* Build configuration list for PBXProject "ShinePhone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				337F9CAE1C71A6720016FE43 /* Debug */,
@@ -3576,7 +3576,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		337F9CB01C71A6720016FE43 /* Build configuration list for PBXNativeTarget "ShineLink" */ = {
+		337F9CB01C71A6720016FE43 /* Build configuration list for PBXNativeTarget "ShinePhone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				337F9CB11C71A6720016FE43 /* Debug */,

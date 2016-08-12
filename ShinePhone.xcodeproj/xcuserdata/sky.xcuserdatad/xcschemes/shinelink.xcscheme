@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "337F9C7F1C71A6710016FE43"
                BuildableName = "ShineLink.app"
-               BlueprintName = "ShineLink"
-               ReferencedContainer = "container:ShineLink.xcodeproj">
+               BlueprintName = "ShinePhone"
+               ReferencedContainer = "container:ShinePhone.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "337F9C9B1C71A6710016FE43"
                BuildableName = "ShineLink.temp_caseinsensitive_rename.xctest"
                BlueprintName = "shinelinkTests"
-               ReferencedContainer = "container:ShineLink.xcodeproj">
+               ReferencedContainer = "container:ShinePhone.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "337F9CA61C71A6710016FE43"
                BuildableName = "ShineLink.temp_caseinsensitive_rename.xctest"
                BlueprintName = "shinelinkUITests"
-               ReferencedContainer = "container:ShineLink.xcodeproj">
+               ReferencedContainer = "container:ShinePhone.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -54,8 +54,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "337F9C7F1C71A6710016FE43"
             BuildableName = "ShineLink.app"
-            BlueprintName = "ShineLink"
-            ReferencedContainer = "container:ShineLink.xcodeproj">
+            BlueprintName = "ShinePhone"
+            ReferencedContainer = "container:ShinePhone.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -77,8 +77,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "337F9C7F1C71A6710016FE43"
             BuildableName = "ShineLink.app"
-            BlueprintName = "ShineLink"
-            ReferencedContainer = "container:ShineLink.xcodeproj">
+            BlueprintName = "ShinePhone"
+            ReferencedContainer = "container:ShinePhone.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -96,8 +96,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "337F9C7F1C71A6710016FE43"
             BuildableName = "ShineLink.app"
-            BlueprintName = "ShineLink"
-            ReferencedContainer = "container:ShineLink.xcodeproj">
+            BlueprintName = "ShinePhone"
+            ReferencedContainer = "container:ShinePhone.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
