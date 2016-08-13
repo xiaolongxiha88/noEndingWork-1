@@ -207,7 +207,11 @@
              [_detail2 removeFromSuperview];
             _detail2=nil;
         }
+        
+        if (_paramsArray.count>0) {
         [self uiFour];
+        }
+        
     }
 }
 
