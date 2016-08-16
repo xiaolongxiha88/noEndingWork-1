@@ -314,8 +314,8 @@
 "光伏电量"="Solar energy";
 "储能电量"="Stored energy";
 "月:"="Month:";
-"最省电:"="minimal:";
-"最耗电:"="maximum:";
+"最省电:"="Minimal:";
+"最耗电:"="Maximum:";
 "日:"="Day:";
 
 "能源调度优先级设置"="Energy scheduling priority";
@@ -345,7 +345,7 @@
 "常见问题"="FAQ";
 "客户服务"="Customer service";
 "质保查询"="Check warranty";
-"增值业务"="service promotion";
+"增值业务"="Service promotion";
 "更多产品"="Product promotion";
 
 "提交问题"="Submit questions";

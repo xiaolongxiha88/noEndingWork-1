@@ -91,7 +91,7 @@ self.view.backgroundColor = [UIColor whiteColor];
 //    _webView.userInteractionEnabled=YES;
     
     
-//_HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"view" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
+_HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"view" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
     
     [self.webView loadHTMLString:_HtmlContent baseURL:nil];
     
