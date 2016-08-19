@@ -60,6 +60,7 @@
 @property (nonatomic, strong)UIView *headerView;
 @property (nonatomic, strong) UIAlertView *Alert1;
 @property (nonatomic, strong) UIImageView *guideImageView;
+@property (nonatomic, strong) NSString *netEnable;
 
 @end
 
@@ -105,13 +106,18 @@
 -(void)viewDidAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netRequest) name:@"changeName" object:nil];
     
-        [self netRequest];
+    if ([_netEnable isEqualToString:@"1"]) {
+          [self netRequest];
+    }else{
+     _netEnable=@"1";
+    }
+    
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+   _netEnable=@"0";
     
   [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
