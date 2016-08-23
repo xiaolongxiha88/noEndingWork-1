@@ -73,12 +73,22 @@ static NSString *mainCell = @"mainCellmainCell";
         
         NSString *serviceBool=[[NSUserDefaults standardUserDefaults]objectForKey:@"serviceBool"];
         
-        if ([serviceBool isEqualToString:@"1"]) {
-            UIButton *addButton=[[UIButton alloc]initWithFrame:CGRectMake(240*NOW_SIZE, 0, 15*HEIGHT_SIZE, 15*HEIGHT_SIZE)];
-            [addButton setBackgroundImage:[UIImage imageNamed:@"add@2x.png"] forState:UIControlStateNormal];
-            [addButton addTarget:self action:@selector(doAdd) forControlEvents:UIControlEventTouchUpInside];
-            self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:addButton];
+        NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+        NSString *Username=[ud objectForKey:@"userName"];
+        
+        if ([serviceBool isEqualToString:@"1"]||[Username isEqualToString:Demo_Name]) {
+//            UIButton *addButton=[[UIButton alloc]initWithFrame:CGRectMake(240*NOW_SIZE, 0, 15*HEIGHT_SIZE, 15*HEIGHT_SIZE)];
+//            [addButton setBackgroundImage:[UIImage imageNamed:@"add@2x.png"] forState:UIControlStateNormal];
+//            [addButton addTarget:self action:@selector(doAdd) forControlEvents:UIControlEventTouchUpInside];
+//            self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:addButton];
+            
+            UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_tianjia_1 style:UIBarButtonItemStylePlain target:self action:@selector(doAdd)];
+            rightItem.tag=10;
+            self.navigationItem.rightBarButtonItem=rightItem;
+            
         }
+        
+        
         
       
     }
