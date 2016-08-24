@@ -151,8 +151,9 @@
 //    go.titleString=_titleArray[indexPath.row];
 //    go.idString=_idArray[indexPath.row];
     
-    HtmlCommon *go=[[HtmlCommon alloc]init];
-    go.idString=_idArray[indexPath.row];
+  HtmlCommon *go=[[HtmlCommon alloc]init];
+    
+        go.idString=_idArray[indexPath.row];
     
  [self.navigationController pushViewController:go animated:NO];
     

@@ -11,6 +11,7 @@
 #import "addServerViewController.h"
 #import "UIImageView+AFNetworking.h"
 
+
 @interface HtmlCommon ()<UIWebViewDelegate,UIScrollViewDelegate>
 {
     UIView *bgView;
@@ -91,9 +92,9 @@ self.view.backgroundColor = [UIColor whiteColor];
 //    _webView.userInteractionEnabled=YES;
     
     
-//_HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"view" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
+_HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"view" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
     
-    [self.webView loadHTMLString:_HtmlContent baseURL:nil];
+ [self.webView loadHTMLString:_HtmlContent baseURL:nil];
     
     
  if ([serviceBool isEqualToString:@"1"]) {
@@ -163,9 +164,19 @@ self.view.backgroundColor = [UIColor whiteColor];
     var imgs = document.getElementsByTagName('img'); \
     for (var i = 0; i < imgs.length; i++) {\
     var img = imgs[i];   \
-    img.style.maxWidth = %f;   \
+    img.width=%f; \
+    img.removeAttribute('height');\
+    var ps = document.getElementsByTagName('p'); \
+    for(var i=0; i<ps.length;i++){ \
+        ps[i].style.marginLeft='0px';\
     } \
+    }; \
     }";
+
+//var M_width=%f;\
+//var real_width=img.width;\
+//var real_height=img.height;\
+
     jsStr = [NSString stringWithFormat:jsStr, [UIScreen mainScreen].bounds.size.width];
     
     [webView stringByEvaluatingJavaScriptFromString:jsStr];

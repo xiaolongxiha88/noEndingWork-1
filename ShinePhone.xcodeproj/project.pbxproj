@@ -18,6 +18,7 @@
 		33209FCF1D2A54AB00186893 /* addDevice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33209FCE1D2A54AB00186893 /* addDevice.jpg */; };
 		33209FD11D2A553E00186893 /* main1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33209FD01D2A553E00186893 /* main1.jpg */; };
 		33238B491CBF816400E82B86 /* 外框@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33238B481CBF816400E82B86 /* 外框@3x.png */; };
+		33340F7B1D6D71EE00909BBF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33340F7A1D6D71EE00909BBF /* WebKit.framework */; };
 		3343F3A71C7FDD5A009F69BC /* editViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3A61C7FDD5A009F69BC /* editViewController.m */; };
 		3343F3AA1C803DC9009F69BC /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3A91C803DC9009F69BC /* BaseRequest.m */; };
 		3343F3BF1C80403C009F69BC /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3AD1C80403C009F69BC /* AFHTTPRequestOperation.m */; };
@@ -495,6 +496,7 @@
 		33209FCE1D2A54AB00186893 /* addDevice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addDevice.jpg; sourceTree = "<group>"; };
 		33209FD01D2A553E00186893 /* main1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = main1.jpg; path = AsyncSocket/main1.jpg; sourceTree = "<group>"; };
 		33238B481CBF816400E82B86 /* 外框@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "外框@3x.png"; path = "../../我/客服系统/我的问题/外框@3x.png"; sourceTree = "<group>"; };
+		33340F7A1D6D71EE00909BBF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3343F3A51C7FDD5A009F69BC /* editViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editViewController.h; path = ../editViewController.h; sourceTree = "<group>"; };
 		3343F3A61C7FDD5A009F69BC /* editViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = editViewController.m; path = ../editViewController.m; sourceTree = "<group>"; };
 		3343F3A81C803DC9009F69BC /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
@@ -1188,6 +1190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33340F7B1D6D71EE00909BBF /* WebKit.framework in Frameworks */,
 				337532F31D051C14009CE66F /* libz.tbd in Frameworks */,
 				335C9D291D011FA4008C977A /* AdSupport.framework in Frameworks */,
 				335C9D271D011F8C008C977A /* Security.framework in Frameworks */,
@@ -2263,6 +2266,7 @@
 		337F9C771C71A6710016FE43 = {
 			isa = PBXGroup;
 			children = (
+				33340F7A1D6D71EE00909BBF /* WebKit.framework */,
 				335C9D2A1D011FCA008C977A /* 框架 */,
 				337F9C821C71A6710016FE43 /* shinelink */,
 				337F9C9F1C71A6710016FE43 /* shinelinkTests */,

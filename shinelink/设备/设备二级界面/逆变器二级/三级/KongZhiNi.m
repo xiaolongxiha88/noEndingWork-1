@@ -161,6 +161,9 @@
         
   self.currentDay = [_dayFormatter stringFromDate:[NSDate date]];
     
+        _commandValue= self.currentDay;
+        _paramId=@"pf_sys_year";
+        
     _datePickerButton=[[UIButton alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 85*HEIGHT_SIZE+30*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         _datePickerButton.layer.borderWidth=1;
         _datePickerButton.layer.cornerRadius=5;
@@ -297,15 +300,29 @@
         self.toolBar.barTintColor = COLOR(17, 183, 243, 1);
         [self.view addSubview:self.toolBar];
         
-        UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+          UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:nil action:@selector(removeToolBar)];
         
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:root_finish style:UIBarButtonItemStyleDone target:self action:@selector(completeSelectDate:)];
-           [doneButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:14*HEIGHT_SIZE],NSFontAttributeName, nil] forState:UIControlStateNormal];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(completeSelectDate:)];
         
-        doneButton.tintColor = [UIColor whiteColor];
-        self.toolBar.items = @[spaceButton, doneButton];
+         UIBarButtonItem *flexibleitem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:(UIBarButtonSystemItemFlexibleSpace) target:self action:nil];
+        
+        spaceButton.tintColor=[UIColor whiteColor];
+         doneButton.tintColor=[UIColor whiteColor];
+        
+//           [doneButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:14*HEIGHT_SIZE],NSFontAttributeName, nil] forState:UIControlStateNormal];
+//        
+//        doneButton.tintColor = [UIColor whiteColor];
+        self.toolBar.items = @[spaceButton,flexibleitem,doneButton];
    }
 }
+
+
+-(void)removeToolBar{
+    [self.toolBar removeFromSuperview];
+    [self.date removeFromSuperview];
+
+}
+
 
 - (void)completeSelectDate:(UIToolbar *)toolBar {
     self.currentDay = [self.dayFormatter stringFromDate:self.date.date];
