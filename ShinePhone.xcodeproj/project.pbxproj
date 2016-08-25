@@ -19,6 +19,7 @@
 		33209FD11D2A553E00186893 /* main1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33209FD01D2A553E00186893 /* main1.jpg */; };
 		33238B491CBF816400E82B86 /* 外框@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33238B481CBF816400E82B86 /* 外框@3x.png */; };
 		33340F7B1D6D71EE00909BBF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33340F7A1D6D71EE00909BBF /* WebKit.framework */; };
+		33340F7D1D6E995C00909BBF /* loading1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33340F7C1D6E995C00909BBF /* loading1.png */; };
 		3343F3A71C7FDD5A009F69BC /* editViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3A61C7FDD5A009F69BC /* editViewController.m */; };
 		3343F3AA1C803DC9009F69BC /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3A91C803DC9009F69BC /* BaseRequest.m */; };
 		3343F3BF1C80403C009F69BC /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3AD1C80403C009F69BC /* AFHTTPRequestOperation.m */; };
@@ -497,6 +498,7 @@
 		33209FD01D2A553E00186893 /* main1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = main1.jpg; path = AsyncSocket/main1.jpg; sourceTree = "<group>"; };
 		33238B481CBF816400E82B86 /* 外框@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "外框@3x.png"; path = "../../我/客服系统/我的问题/外框@3x.png"; sourceTree = "<group>"; };
 		33340F7A1D6D71EE00909BBF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		33340F7C1D6E995C00909BBF /* loading1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading1.png; sourceTree = "<group>"; };
 		3343F3A51C7FDD5A009F69BC /* editViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editViewController.h; path = ../editViewController.h; sourceTree = "<group>"; };
 		3343F3A61C7FDD5A009F69BC /* editViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = editViewController.m; path = ../editViewController.m; sourceTree = "<group>"; };
 		3343F3A81C803DC9009F69BC /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
@@ -1250,6 +1252,7 @@
 				3319E0891D5AFB39006623A9 /* LWLoadingAnimationView.m */,
 				3319E08A1D5AFB39006623A9 /* LWLoadingView.h */,
 				3319E08B1D5AFB39006623A9 /* LWLoadingView.m */,
+				33340F7C1D6E995C00909BBF /* loading1.png */,
 			);
 			path = LWLoadingView;
 			sourceTree = "<group>";
@@ -2875,6 +2878,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				335456C31C85301200275478 /* 圆角矩形.png in Resources */,
+				33340F7D1D6E995C00909BBF /* loading1.png in Resources */,
 				33768AAC1D475D0A00873E82 /* pven.png in Resources */,
 				33FEFD5B1C7DB38400324374 /* icon---Email@3x.png in Resources */,
 				334FEF8E1CF45AEB001E6716 /* btn1.png in Resources */,

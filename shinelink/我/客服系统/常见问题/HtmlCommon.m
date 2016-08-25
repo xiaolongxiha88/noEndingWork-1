@@ -92,7 +92,7 @@ self.view.backgroundColor = [UIColor whiteColor];
 //    _webView.userInteractionEnabled=YES;
     
     
-_HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"view" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
+//_HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"view" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
     
  [self.webView loadHTMLString:_HtmlContent baseURL:nil];
     
@@ -155,10 +155,12 @@ _HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForRe
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    [LWLoadingView showInView:self.view];
+  //  [LWLoadingView showInView:self.view];
+    [self showProgressView];
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-    [LWLoadingView hideInViwe:self.view];
+    //[LWLoadingView hideInViwe:self.view];
+    [self hideProgressView];
     
     NSString *jsStr = @"function reSetImgFrame() { \
     var imgs = document.getElementsByTagName('img'); \
@@ -166,21 +168,29 @@ _HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForRe
     var img = imgs[i];   \
     img.width=%f; \
     img.removeAttribute('height');\
+    } \
     var ps = document.getElementsByTagName('p'); \
     for(var i=0; i<ps.length;i++){ \
-        ps[i].style.marginLeft='0px';\
+    ps[i].style.marginLeft='0px';\
     } \
-    }; \
     }";
 
-//var M_width=%f;\
-//var real_width=img.width;\
-//var real_height=img.height;\
+//    NSString *jsStr2 = @"function reSetMarginFrame() { \
+//    var ps = document.getElementsByTagName('p'); \
+//    for(var i=0; i<ps.length;i++){ \
+//    ps[i].style.marginLeft='0px';\
+//    alert(1);\
+//    } \
+////    }; \
+////    }";
 
-    jsStr = [NSString stringWithFormat:jsStr, [UIScreen mainScreen].bounds.size.width];
+  
     
+    jsStr = [NSString stringWithFormat:jsStr, [UIScreen mainScreen].bounds.size.width];
+
     [webView stringByEvaluatingJavaScriptFromString:jsStr];
     [webView stringByEvaluatingJavaScriptFromString:@"reSetImgFrame()"];
+    
     
     
     
@@ -198,7 +208,7 @@ _HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForRe
     
     [webView stringByEvaluatingJavaScriptFromString:jsGetImages];//注入js方法
     //注入自定义的js方法后别忘了调用 否则不会生效（不调用也一样生效了，，，不明白）
-    NSString *resurlt = [webView stringByEvaluatingJavaScriptFromString:@"getImages()"];
+    [webView stringByEvaluatingJavaScriptFromString:@"getImages()"];
     
 }
 
@@ -217,8 +227,9 @@ _HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForRe
         if (bgView) {
             //设置不隐藏，还原放大缩小，显示图片
             bgView.hidden = NO;
-            imgView.frame = CGRectMake(2*NOW_SIZE, 2*NOW_SIZE, SCREEN_Width-2*NOW_SIZE, 250*HEIGHT_SIZE-2*NOW_SIZE);
+//            imgView.frame = CGRectMake(2*NOW_SIZE, 2*NOW_SIZE, SCREEN_Width-2*NOW_SIZE, 250*HEIGHT_SIZE-2*NOW_SIZE);
             [imgView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:IMAGE(@"btn_cha.png")];
+            imgView.contentMode = UIViewContentModeScaleAspectFit;
         }
         else
             [self showBigImage:imageUrl];//创建视图并显示图片
@@ -240,12 +251,12 @@ _HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForRe
     [self.view addSubview:bgView];
     
     //创建边框视图
-    borderView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, 300*HEIGHT_SIZE)];
+    borderView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     //将图层的边框设置为圆脚
-    borderView.layer.cornerRadius = 8;
-    borderView.layer.masksToBounds = YES;
-    //给图层添加一个有色边框
-    borderView.layer.borderWidth = 2*NOW_SIZE;
+//    borderView.layer.cornerRadius = 8;
+//    borderView.layer.masksToBounds = YES;
+//    //给图层添加一个有色边框
+    borderView.layer.borderWidth = 1*NOW_SIZE;
     borderView.layer.borderColor = [[UIColor colorWithRed:0.9
                                                     green:0.9
                                                      blue:0.9
@@ -262,29 +273,34 @@ _HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForRe
     //设置最小伸缩比例
     borderView.minimumZoomScale=0.5;
     
-    //创建关闭按钮
-    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-     [closeBtn setImage:[UIImage imageNamed:@"btn_cha.png"] forState:UIControlStateNormal];
-   // closeBtn.backgroundColor = [UIColor redColor];
-    [closeBtn addTarget:self action:@selector(removeBigImage) forControlEvents:UIControlEventTouchUpInside];
-    [closeBtn setFrame:CGRectMake(borderView.frame.origin.x+borderView.frame.size.width-20*NOW_SIZE, borderView.frame.origin.y-7*HEIGHT_SIZE, 26*HEIGHT_SIZE, 26*HEIGHT_SIZE)];
-    [bgView addSubview:closeBtn];
+//    //创建关闭按钮
+//    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//     [closeBtn setImage:[UIImage imageNamed:@"btn_cha.png"] forState:UIControlStateNormal];
+//   // closeBtn.backgroundColor = [UIColor redColor];
+//    [closeBtn addTarget:self action:@selector(removeBigImage) forControlEvents:UIControlEventTouchUpInside];
+//    [closeBtn setFrame:CGRectMake(borderView.frame.origin.x+borderView.frame.size.width-30*NOW_SIZE, borderView.frame.origin.y-25*HEIGHT_SIZE, 30*HEIGHT_SIZE, 30*HEIGHT_SIZE)];
+//    [bgView addSubview:closeBtn];
     
     //创建显示图像视图
     imgView = [[UIImageView alloc] initWithFrame:CGRectMake(2*NOW_SIZE, 2*NOW_SIZE, CGRectGetWidth(borderView.frame)-2*NOW_SIZE, CGRectGetHeight(borderView.frame)-2*NOW_SIZE)];
     imgView.userInteractionEnabled = YES;
-   
-    [imgView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:IMAGE(@"btn_cha.png")];
     
-    //imgView.frame=CGRectMake(10, 10, imgView.image.size.width, imgView.image.size.width);
+    UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeBigImage)];
+    [imgView addGestureRecognizer:tap];
+   
+    [imgView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:IMAGE(@"loading1.png")];
+    
+  //  imgView.frame=CGRectMake(0, 0, imgView.image.size.width, imgView.image.size.height);
+     imgView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    borderView.frame=CGRectMake(0, 0, imgView.frame.size.width,imgView.frame.size.height);
+    borderView.contentSize=CGSizeMake(imgView.frame.size.width+100*NOW_SIZE,imgView.frame.size.height+100*HEIGHT_SIZE);
     
     [borderView addSubview:imgView];
     
-    //添加捏合手势
-   // [imgView addGestureRecognizer:[[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(handlePinch:)]];
     
     
-    borderView.contentSize=CGSizeMake(imgView.image.size.width+50*NOW_SIZE,imgView.image.size.height+50*HEIGHT_SIZE);
+    
     //_scrollview.contentSize=image.size;
     
     
