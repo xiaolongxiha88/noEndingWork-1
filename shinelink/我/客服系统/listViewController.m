@@ -118,8 +118,8 @@
         if(content){
             _allArray=[NSMutableArray arrayWithArray:content];
             
-            
-           //  _allArray=[NSMutableArray new];
+             NSLog(@"questionList=11");
+        
             
             if(_allArray.count==0){
                 
@@ -192,10 +192,11 @@
                       [self.tableView reloadData];
                 }
                 
-          
+            NSLog(@"questionList=22");
           }
            
         }
+          NSLog(@"questionList=33");
     } failure:^(NSError *error) {
         [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];

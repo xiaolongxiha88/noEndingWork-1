@@ -54,6 +54,9 @@
 -(void)requestData{
     [self showProgressView];
     NSString *page=[NSString stringWithFormat:@"%d",_page];
+    if(_stationId==nil){
+    _stationId=@"0";
+    }
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"id":_stationId, @"currentPage":page} paramarsSite:@"/newDatalogAPI.do?op=datalogList" sucessBlock:^(id content) {
         [self hideProgressView];
             NSLog(@"datalogList:%@",content);
@@ -80,13 +83,19 @@
     [self.view addSubview:_tableView];
     
     if (_arrayData.count>1) {
-        __unsafe_unretained StationCellectViewController *myself = self;
+        
+    __unsafe_unretained StationCellectViewController *myself = self;
         [_tableView addLegendFooterWithRefreshingBlock:^{
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                myself->_page++;
-                [myself requestData];
-                [myself->_tableView.footer endRefreshing];
-            });
+            
+            myself->_page++;
+            [myself requestData];
+            [myself->_tableView.footer endRefreshing];
+            
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                myself->_page++;
+//                [myself requestData];
+//                [myself->_tableView.footer endRefreshing];
+//            });
         }];
     }
 }
@@ -259,6 +268,14 @@
         _editCellect.blurRadius = 10.0f;
         [[UIApplication sharedApplication].keyWindow addSubview:_editCellect];
     }
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+//        __unsafe_unretained StationCellectViewController *myself = self;
+//     [myself->_tableView.footer endRefreshing];
+    
+    [_tableView removeFooter];
 }
 
 @end

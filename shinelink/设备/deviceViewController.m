@@ -342,6 +342,7 @@
         [ [UserInfo defaultUserInfo]setPlantID:_stationID[index]];
         [ [UserInfo defaultUserInfo]setPlantNum:[NSString stringWithFormat:@"%lu",(unsigned long)index]];
         [_plantId setObject:_stationID[index] forKey:@"plantId"];
+        _stationIdOne=_stationID[index];
         [self refreshData];
         
     }];
@@ -462,29 +463,7 @@
        // id jsonObj=[NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
          self.dataArr = [NSMutableArray arrayWithArray:content[@"deviceList"]];
         for (int i=0; i<_dataArr.count; i++) {
-//            [_typeArr addObject:content[@"deviceList"][i][@"deviceType"]];
-//            [SNArray addObject:content[@"deviceList"][i][@"deviceSn"]];
-//            if ([content[@"deviceList"][i][@"deviceAilas"]isEqualToString:@""]) {
-//                [nameArray addObject:content[@"deviceList"][i][@"deviceType"]];
-//            }else{
-//                [nameArray addObject:content[@"deviceList"][i][@"deviceAilas"]];}
-//           
-//            NSString *TO=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"energy"]];
-//            [totalPowerArray addObject:TO];
-//            
-//         NSString *ST0=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"lost"]];
-//            if ([ST0 isEqualToString:@"1"]) {
-//                      [statueArray addObject:@"6"];
-//            }else{
-//            
-//        NSString *ST=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"deviceStatus"]];
-//             [statueArray addObject:ST];
-//            }
-//            NSString *SD;
-//            if([ST isEqualToString:@"-1"])
-//            {SD=@"未连接";
-            
-//            else{SD=@"已连接";[imageStatueArray addObject:@"connected@2x.png"];}
+
             
              [imageStatueArray addObject:@"disconnect@2x.png"];
            
