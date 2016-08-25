@@ -228,7 +228,7 @@ self.view.backgroundColor = [UIColor whiteColor];
             //设置不隐藏，还原放大缩小，显示图片
             bgView.hidden = NO;
 //            imgView.frame = CGRectMake(2*NOW_SIZE, 2*NOW_SIZE, SCREEN_Width-2*NOW_SIZE, 250*HEIGHT_SIZE-2*NOW_SIZE);
-            [imgView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:IMAGE(@"btn_cha.png")];
+            [imgView setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:IMAGE(@"loading1.png")];
             imgView.contentMode = UIViewContentModeScaleAspectFit;
         }
         else
@@ -244,10 +244,11 @@ self.view.backgroundColor = [UIColor whiteColor];
 -(void)showBigImage:(NSString *)imageUrl{
     //创建灰色透明背景，使其背后内容不可操作
     bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
-    [bgView setBackgroundColor:[UIColor colorWithRed:0.3
-                                               green:0.3
-                                                blue:0.3
-                                               alpha:0.7]];
+//    [bgView setBackgroundColor:[UIColor colorWithRed:0.3
+//                                               green:0.3
+//                                                blue:0.3
+//                                               alpha:0.7]];
+    [bgView setBackgroundColor:COLOR(212, 212, 212, 1)];
     [self.view addSubview:bgView];
     
     //创建边框视图
