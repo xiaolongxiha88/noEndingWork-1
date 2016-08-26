@@ -11,6 +11,7 @@
 #import "loginViewController.h"
 #import "registerViewController.h"
 #import "SNLocationManager.h"
+#import "AnotherSearchViewController.h"
 
 @interface countryViewController ()<UINavigationControllerDelegate>
 @property(nonatomic,strong)UILabel *label;
@@ -132,7 +133,7 @@
                 return [str1 compare:str2];
             }];
             
-            [_provinceArray insertObject:@"中国" atIndex:0];
+            [_provinceArray insertObject:@"A1_中国" atIndex:0];
             
         }else{
         [self hideProgressView];
@@ -216,21 +217,42 @@
 }
 
 -(void)pickadress{
+    
     if(_provinceArray.count>0){
-    AddressPickView *addressPickView = [AddressPickView shareInstance];
-    addressPickView.provinceArray=_provinceArray;
-    [self.view addSubview:addressPickView];
-    addressPickView.block = ^(NSString *province){
-       // [self.dataDic setObject:city forKey:@"regCountry"];
-       // [self.dataDic setObject:town forKey:@"regCity"];
-        _label.text = [NSString stringWithFormat:@"%@",province] ;
-        _country=province;
-    };
+    
+        AnotherSearchViewController *another = [AnotherSearchViewController new];
+        //返回选中搜索的结果
+        [another didSelectedItem:^(NSString *item) {
+           _label.text  = item;
+            _country=item;
+        }];
+        another.title =root_xuanzhe_country;
+        another.dataSource=_provinceArray;
+        [self.navigationController pushViewController:another animated:YES];
     }else{
         [self showToastViewWithTitle:root_country_huoQu];
         return;
-    
     }
+    
+    
+    
+    
+    
+//    if(_provinceArray.count>0){
+//    AddressPickView *addressPickView = [AddressPickView shareInstance];
+//    addressPickView.provinceArray=_provinceArray;
+//    [self.view addSubview:addressPickView];
+//    addressPickView.block = ^(NSString *province){
+//       // [self.dataDic setObject:city forKey:@"regCountry"];
+//       // [self.dataDic setObject:town forKey:@"regCity"];
+//        _label.text = [NSString stringWithFormat:@"%@",province] ;
+//        _country=province;
+//    };
+//    }else{
+//        [self showToastViewWithTitle:root_country_huoQu];
+//        return;
+//    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

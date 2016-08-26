@@ -53,6 +53,9 @@
 #define  root_country_alet        NSLocalizedString(@"点击选择国家", nil)
 #define  root_country_kong        NSLocalizedString(@"请选择国家和城市", nil)
 #define  root_country_huoQu        NSLocalizedString(@"请再次进入页面获取国家列表", nil)
+#define  root_xuanzhe_country        NSLocalizedString(@"选择国家", nil)
+#define  root_sousuo        NSLocalizedString(@"搜索", nil)
+
 
 #define  root_yongHuMing        NSLocalizedString(@"用户名", nil)
 #define  root_Mima        NSLocalizedString(@"密码", nil)

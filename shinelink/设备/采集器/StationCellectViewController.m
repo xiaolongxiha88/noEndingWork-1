@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property (nonatomic, strong) NSString *SetName;
 @property(nonatomic)int page;
+@property (nonatomic, strong) UIRefreshControl *control;
 @end
 
 @implementation StationCellectViewController
@@ -59,6 +60,8 @@
     }
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"id":_stationId, @"currentPage":page} paramarsSite:@"/newDatalogAPI.do?op=datalogList" sucessBlock:^(id content) {
         [self hideProgressView];
+          [_control endRefreshing];
+        
             NSLog(@"datalogList:%@",content);
         [_arrayData addObjectsFromArray:content];
         if (_tableView) {
@@ -68,6 +71,7 @@
         }
     } failure:^(NSError *error) {
         [self hideProgressView];
+          [_control endRefreshing];
         [self showToastViewWithTitle:root_Networking];
     }];
 }
@@ -82,24 +86,38 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
+//    _control=[[UIRefreshControl alloc]init];
+//    [_control addTarget:self action:@selector(refreshStateChange:) forControlEvents:UIControlEventValueChanged];
+//    [_tableView addSubview:_control];
+//    
+//    //2.马上进入刷新状态，并不会触发UIControlEventValueChanged事件
+//    [_control beginRefreshing];
+    
     if (_arrayData.count>1) {
         
     __unsafe_unretained StationCellectViewController *myself = self;
         [_tableView addLegendFooterWithRefreshingBlock:^{
+          
             
             myself->_page++;
             [myself requestData];
+           
             [myself->_tableView.footer endRefreshing];
             
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                myself->_page++;
-//                [myself requestData];
-//                [myself->_tableView.footer endRefreshing];
-//            });
+            
         }];
     }
+    
+    
 }
 
+
+-(void)refreshStateChange:(UIRefreshControl *)control{
+    
+    _page++;
+    [self requestData];
+    
+}
 
 
 #pragma mark - EditCellectViewDelegate
@@ -275,7 +293,8 @@
 //        __unsafe_unretained StationCellectViewController *myself = self;
 //     [myself->_tableView.footer endRefreshing];
     
-    [_tableView removeFooter];
+ 
+
 }
 
 @end

@@ -260,7 +260,7 @@
 - (void)setState:(MJRefreshFooterState)state
 {
     if (_state == state) return;
-    
+
     _state = state;
     
     switch (state) {
