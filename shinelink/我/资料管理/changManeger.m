@@ -254,7 +254,7 @@
         }
         
         [dataAll setObject:_accountName forKey:@"accountName"];
-        [dataAll setObject:_param1 forKey:@"PhoneNum"];
+        [dataAll setObject:_param1 forKey:@"phoneNum"];
         [dataAll setObject:_param2 forKey:@"email"];
         [dataAll setObject:_param3 forKey:@"agentCode"];
         

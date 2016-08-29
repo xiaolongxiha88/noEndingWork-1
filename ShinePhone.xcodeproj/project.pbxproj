@@ -2080,6 +2080,7 @@
 				338CFE671CF554D8006EFD8B /* libstdc++.tbd */,
 				337532F21D051C14009CE66F /* libz.tbd */,
 				338CFE651CF554C1006EFD8B /* libstdc++.6.0.9.tbd */,
+				33340F7A1D6D71EE00909BBF /* WebKit.framework */,
 				335C9D281D011FA4008C977A /* AdSupport.framework */,
 				335C9D261D011F8C008C977A /* Security.framework */,
 				335C9D241D011F82008C977A /* UIKit.framework */,
@@ -2351,7 +2352,6 @@
 		337F9C771C71A6710016FE43 = {
 			isa = PBXGroup;
 			children = (
-				33340F7A1D6D71EE00909BBF /* WebKit.framework */,
 				335C9D2A1D011FCA008C977A /* 框架 */,
 				337F9C821C71A6710016FE43 /* shinelink */,
 				337F9C9F1C71A6710016FE43 /* shinelinkTests */,

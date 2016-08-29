@@ -10,6 +10,7 @@
 
 @interface emailViewController ()
 @property(nonatomic,strong)UITextField *cellectId;
+@property(nonatomic,strong)NSString *serverAddress;
 @end
 
 @implementation emailViewController
@@ -58,29 +59,57 @@
     }
       NSDictionary *userCheck=[NSDictionary dictionaryWithObject:_cellectId.text forKey:@"accountName"];
         [self showProgressView];
-        [BaseRequest requestWithMethod:HEAD_URL paramars:userCheck  paramarsSite:@"/newForgetAPI.do?op=sendResetEmailByAccount" sucessBlock:^(id content) {
-            NSLog(@"sendResetEmailByAccount: %@", content);
-            [self hideProgressView];
-            if (content) {
-                if ([content[@"success"] integerValue] == 0) {
-                    if ([content[@"msg"] integerValue] ==501) {
-                        [self showAlertViewWithTitle:nil message:root_youJian_shiBai cancelButtonTitle:root_Yes];
+    
+    NSMutableDictionary *getServer=[NSMutableDictionary dictionaryWithObject:_cellectId.text forKey:@"param"];
+    [getServer setObject:@"1" forKey:@"type"];
+    
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:getServer  paramarsSite:@"/newForgetAPI.do?op=getServerUrlByParam" sucessBlock:^(id content) {
+        NSLog(@"getServerUrlByParam: %@", content);
+        
+        if (content) {
+            id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+            
+            if ([jsonObj[@"success"] integerValue] == 1) {
+                
+                NSString *server1=jsonObj[@"msg"];
+                NSString *server2=@"http://";
+                _serverAddress=[NSString stringWithFormat:@"%@%@",server2,server1];
+                
+                [BaseRequest requestWithMethod:_serverAddress paramars:userCheck  paramarsSite:@"/newForgetAPI.do?op=sendResetEmailByAccount" sucessBlock:^(id content) {
+                    NSLog(@"sendResetEmailByAccount: %@", content);
+                    [self hideProgressView];
+                    if (content) {
+                        if ([content[@"success"] integerValue] == 0) {
+                            if ([content[@"msg"] integerValue] ==501) {
+                                [self showAlertViewWithTitle:nil message:root_youJian_shiBai cancelButtonTitle:root_Yes];
+                            }
+                            else if ([content[@"msg"] integerValue] ==502) {
+                                [self showAlertViewWithTitle:nil message:root_zhaoBuDao_yongHu cancelButtonTitle:root_Yes];
+                            }else if ([content[@"msg"] integerValue] ==503) {
+                                [self showAlertViewWithTitle:nil message:root_server_error cancelButtonTitle:root_Yes];
+                            }
+                        }else{
+                            NSString *email=content[@"msg"];
+                            [self showAlertViewWithTitle:nil message:email cancelButtonTitle:root_Yes];
+                            
+                        }
                     }
-                    else if ([content[@"msg"] integerValue] ==502) {
-                        [self showAlertViewWithTitle:nil message:root_zhaoBuDao_yongHu cancelButtonTitle:root_Yes];
-                    }else if ([content[@"msg"] integerValue] ==503) {
-                        [self showAlertViewWithTitle:nil message:root_server_error cancelButtonTitle:root_Yes];
-                    }
-                }else{
-                    NSString *email=content[@"msg"];
-                    [self showAlertViewWithTitle:nil message:email cancelButtonTitle:root_Yes];
-                    
-                } 
+                }failure:^(NSError *error) {
+                    [self hideProgressView];
+                    [self showToastViewWithTitle:root_Networking];
+                }];
+
+                
             }
-        }failure:^(NSError *error) {
-            [self hideProgressView];
-            [self showToastViewWithTitle:root_Networking];
-        }];
+        }
+    }failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+    }];
+    
+    
+    
+    
     
     
 }

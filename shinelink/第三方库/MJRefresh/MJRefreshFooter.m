@@ -259,6 +259,7 @@
 
 - (void)setState:(MJRefreshFooterState)state
 {
+   // [self becomeFirstResponder];
     if (_state == state) return;
 
     _state = state;

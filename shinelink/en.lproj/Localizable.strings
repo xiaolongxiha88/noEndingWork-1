@@ -90,7 +90,7 @@
 
 
 "系统错误"="System error";
-"修改成功"="Deleted successfully";
+"修改成功"="Changed successfully";
 "已配置设备"="Configured device";
 "未配置设备"="Demo device";
 "日电量:"="Energy today:";
@@ -102,7 +102,7 @@
 "正常 "="Normal";
 "故障"="Error";
 "断开"="Disconnected";
-"闲置 "="Idle";
+"闲置 "="Standby";
 "充电 "="Charging";
 "放电 "="Discharging";
 "详情 "="Details";
