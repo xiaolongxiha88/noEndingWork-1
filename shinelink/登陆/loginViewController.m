@@ -25,6 +25,9 @@
 #import "AddressPickView.h"
 #import "JPUSHService.h"
 
+#import "AVViewController.h"
+
+
 @interface loginViewController ()<UINavigationControllerDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UITextField *userTextField;
@@ -52,22 +55,28 @@
     self.view.layer.contents = (id)bgImage.CGImage;
    
    // [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:17/255.0f green:183/255.0f blue:243/255.0f alpha:0]];
-     [self.navigationController setNavigationBarHidden:YES];
+    
     
  NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
    NSString *reUsername=[ud objectForKey:@"userName"];
    NSString *rePassword=[ud objectForKey:@"userPassword"];
  //  [self addSubViews];
     
-   // NSString *reUsername=@"123";
-    //NSString *rePassword=@"234";
+
     
     NSLog(@"reUsername=%@",reUsername);
     NSLog(@"rePassword=%@",rePassword);
     
-    //NSString *isdemo=[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"];
+  
+    //////////测试区域
+    NSString *testDemo=@"OK";
+    if ([testDemo isEqualToString:@"OK"]) {
+        AVViewController *testView=[[AVViewController alloc]init];
+        [self.navigationController pushViewController:testView animated:NO];
+    }else{
     
-    
+     [self.navigationController setNavigationBarHidden:YES];
+        
     if (reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] )||rePassword==nil || rePassword==NULL||([rePassword isEqual:@""] )) {
       //  [ [NSNotificationCenter defaultCenter]postNotificationName:@"reroadDemo" object:nil];
         
@@ -91,6 +100,11 @@
           [self performSelectorOnMainThread:@selector(netRequest) withObject:nil waitUntilDone:NO];
         //添加布局
     }
+        
+    }
+    
+    
+    
 }
 
 
