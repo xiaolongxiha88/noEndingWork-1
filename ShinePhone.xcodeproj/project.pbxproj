@@ -19,6 +19,8 @@
 		33209FD11D2A553E00186893 /* main1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33209FD01D2A553E00186893 /* main1.jpg */; };
 		33238B491CBF816400E82B86 /* 外框@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33238B481CBF816400E82B86 /* 外框@3x.png */; };
 		332692681D780F410058C5B7 /* backAV.png in Resources */ = {isa = PBXBuildFile; fileRef = 332692671D780F410058C5B7 /* backAV.png */; };
+		3326926B1D794AB00058C5B7 /* AvCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3326926A1D794AB00058C5B7 /* AvCell.m */; };
+		3326926E1D79728F0058C5B7 /* AVfirstView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3326926D1D79728F0058C5B7 /* AVfirstView.m */; };
 		33340F7B1D6D71EE00909BBF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33340F7A1D6D71EE00909BBF /* WebKit.framework */; };
 		33340F7F1D6EC36800909BBF /* loading1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33340F7E1D6EC36800909BBF /* loading1.png */; };
 		3343F3A71C7FDD5A009F69BC /* editViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3A61C7FDD5A009F69BC /* editViewController.m */; };
@@ -529,6 +531,10 @@
 		33209FD01D2A553E00186893 /* main1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = main1.jpg; path = AsyncSocket/main1.jpg; sourceTree = "<group>"; };
 		33238B481CBF816400E82B86 /* 外框@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "外框@3x.png"; path = "../../我/客服系统/我的问题/外框@3x.png"; sourceTree = "<group>"; };
 		332692671D780F410058C5B7 /* backAV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backAV.png; sourceTree = "<group>"; };
+		332692691D794AB00058C5B7 /* AvCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvCell.h; sourceTree = "<group>"; };
+		3326926A1D794AB00058C5B7 /* AvCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvCell.m; sourceTree = "<group>"; };
+		3326926C1D79728F0058C5B7 /* AVfirstView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVfirstView.h; sourceTree = "<group>"; };
+		3326926D1D79728F0058C5B7 /* AVfirstView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVfirstView.m; sourceTree = "<group>"; };
 		33340F7A1D6D71EE00909BBF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		33340F7E1D6EC36800909BBF /* loading1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading1.png; sourceTree = "<group>"; };
 		3343F3A51C7FDD5A009F69BC /* editViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editViewController.h; path = ../editViewController.h; sourceTree = "<group>"; };
@@ -2164,6 +2170,10 @@
 				335D69971D77BA4D00894D90 /* HcdCachePlayer */,
 				335D69E51D77BD0500894D90 /* AVViewController.h */,
 				335D69E61D77BD0500894D90 /* AVViewController.m */,
+				3326926C1D79728F0058C5B7 /* AVfirstView.h */,
+				3326926D1D79728F0058C5B7 /* AVfirstView.m */,
+				332692691D794AB00058C5B7 /* AvCell.h */,
+				3326926A1D794AB00058C5B7 /* AvCell.m */,
 			);
 			path = "视频系统";
 			sourceTree = "<group>";
@@ -3406,6 +3416,7 @@
 				33EFB66D1C98F9B1003F336F /* ZFLabel.m in Sources */,
 				33EFB66B1C98F9B1003F336F /* ZFAxisLine.m in Sources */,
 				334FF09D1CF53C7C001E6716 /* MainViewController.m in Sources */,
+				3326926B1D794AB00058C5B7 /* AvCell.m in Sources */,
 				3383EFA11C9F8A6F0075E834 /* MJRefreshLegendFooter.m in Sources */,
 				334B8F541C914A6D00798A69 /* PNPieChartDataItem.m in Sources */,
 				334B8F4D1C914A6D00798A69 /* PNCircleChart.m in Sources */,
@@ -3564,6 +3575,7 @@
 				3367EB9E1CD0B2A700D2EF67 /* StationEarningsViewController.m in Sources */,
 				338990B51CEB1F9D00A708F8 /* DemoDeviceViewController.m in Sources */,
 				334B8F221C91250300798A69 /* SHLineGraphView.m in Sources */,
+				3326926E1D79728F0058C5B7 /* AVfirstView.m in Sources */,
 				335456D41C8588E200275478 /* SNViewController.m in Sources */,
 				335D69B41D77BA4D00894D90 /* HcdVideoRequestTask.m in Sources */,
 				334FF0AC1CF53C7C001E6716 /* Reachability.m in Sources */,

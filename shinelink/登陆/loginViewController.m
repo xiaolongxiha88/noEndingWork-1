@@ -25,7 +25,7 @@
 #import "AddressPickView.h"
 #import "JPUSHService.h"
 
-#import "AVViewController.h"
+#import "AVfirstView.h"
 
 
 @interface loginViewController ()<UINavigationControllerDelegate,UITextFieldDelegate>
@@ -71,7 +71,7 @@
     //////////测试区域
     NSString *testDemo=@"OK";
     if ([testDemo isEqualToString:@"OK"]) {
-        AVViewController *testView=[[AVViewController alloc]init];
+         AVfirstView *testView=[[AVfirstView alloc]init];
         [self.navigationController pushViewController:testView animated:NO];
     }else{
     

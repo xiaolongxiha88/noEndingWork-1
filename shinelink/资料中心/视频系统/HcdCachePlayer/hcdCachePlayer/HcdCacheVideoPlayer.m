@@ -90,7 +90,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) UISlider       *playSlider;             //滑竿
 @property (nonatomic, strong) UIButton       *stopButton;             //播放暂停按钮
 @property (nonatomic, strong) UIButton       *screenButton;           //全屏按钮
-@property (nonatomic, strong) UIButton       *goBackAV;           //返回按钮
+//@property (nonatomic, strong) UIButton       *goBackAV;           //返回按钮
 @property (nonatomic, assign) BOOL           isFullScreen;
 @property (nonatomic, assign) BOOL           canFullScreen;
 @property (nonatomic, strong) UIActivityIndicatorView *actIndicator;  //加载视频时的旋转菊花
@@ -371,6 +371,8 @@ typedef enum : NSUInteger {
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    
+    
     AVPlayerItem *playerItem = (AVPlayerItem *)object;
     
     if ([HCDVideoPlayerItemStatusKeyPath isEqualToString:keyPath]) {
@@ -397,6 +399,7 @@ typedef enum : NSUInteger {
         }
     } else if ([HCDVideoPlayerItemPlaybackLikelyToKeepUpKeyPath isEqualToString:keyPath]) {
         NSLog(@"HCDVideoPlayerItemPlaybackLikelyToKeepUpKeyPath");
+        
     } else if ([HCDVideoPlayerItemPresentationSizeKeyPath isEqualToString:keyPath]) {
         CGSize size = self.currentPlayerItem.presentationSize;
         static float staticHeight = 0;
@@ -623,24 +626,6 @@ typedef enum : NSUInteger {
     return _screenButton;
 }
 
-- (UIButton *)goBackAV {
-    if (!_goBackAV) {
-        _goBackAV = [UIButton buttonWithType:UIButtonTypeCustom];
-        _goBackAV.userInteractionEnabled=YES;
-        [_goBackAV addTarget:self action:@selector(goBackAvTwo) forControlEvents:UIControlEventTouchUpInside];
-        [_goBackAV setImage:[UIImage imageNamed:@"backAV.png"] forState:UIControlStateNormal];
-        [_goBackAV setImage:[UIImage imageNamed:@"backAV.png"] forState:UIControlStateHighlighted];
-    }
-    return _goBackAV;
-}
-
--(void)goBackAvTwo{
-  
-    NSLog(@"ok");
-     NSLog(@"ok");
-     NSLog(@"ok");
-    
-}
 
 - (UIActivityIndicatorView *)actIndicator {
     if (!_actIndicator) {
@@ -700,16 +685,19 @@ typedef enum : NSUInteger {
     }];
     
     
-    float goBackAvSzie=35*HEIGHT_SIZE;
-    self.goBackAV.frame = CGRectMake(5*HEIGHT_SIZE, 5*HEIGHT_SIZE, goBackAvSzie, goBackAvSzie);
-         // [_goBackAV addTarget:self action:@selector(goBackAvTwo) forControlEvents:UIControlEventTouchUpInside];
-    [_showView addSubview:self.goBackAV];
-    [self.goBackAV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(5*HEIGHT_SIZE);
-        make.left.mas_equalTo(5*HEIGHT_SIZE);
-        make.width.mas_equalTo(goBackAvSzie);
-        make.height.mas_equalTo(goBackAvSzie);
-    }];
+       //CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
+    
+//    float goBackAvSzie=35*HEIGHT_SIZE;
+//    _showView.userInteractionEnabled=YES;
+//    self.goBackAV.frame = CGRectMake(_showView.frame.origin.x+5*HEIGHT_SIZE,_showView.frame.origin.y+5*HEIGHT_SIZE, goBackAvSzie, goBackAvSzie);
+//         // [_goBackAV addTarget:self action:@selector(goBackAvTwo) forControlEvents:UIControlEventTouchUpInside];_playerSuperView
+//    [_playerSuperView addSubview:self.goBackAV];
+//    [self.goBackAV mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(5*HEIGHT_SIZE);
+//        make.left.mas_equalTo(5*HEIGHT_SIZE);
+//        make.width.mas_equalTo(goBackAvSzie);
+//        make.height.mas_equalTo(goBackAvSzie);
+//    }];
     
     
     self.toolView.frame = CGRectMake(0, CGRectGetHeight(_showView.frame) - 44, CGRectGetWidth(_showView.frame), 44);
@@ -787,7 +775,7 @@ typedef enum : NSUInteger {
         make.height.mas_equalTo(44);
     }];
     
-    self.touchView.frame = CGRectMake(0, 0, CGRectGetWidth(_showView.frame), CGRectGetHeight(_showView.frame) - 44);
+    self.touchView.frame = CGRectMake(0, 0*HEIGHT_SIZE, CGRectGetWidth(_showView.frame), CGRectGetHeight(_showView.frame) - 44);
     [_showView addSubview:self.touchView];
     [self.touchView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(weakSelf.playerView);
@@ -832,6 +820,8 @@ typedef enum : NSUInteger {
     //点击一次
     if (tap.numberOfTapsRequired == 1) {
         if (self.toolView.hidden) {
+            
+              //  [[UIApplication sharedApplication].keyWindow bringSubviewToFront:_goBackAV];
             [self toolViewOutHidden];
         } else {
             [self toolViewHidden];
@@ -967,7 +957,7 @@ typedef enum : NSUInteger {
 - (void)toolViewHidden {
     self.toolView.hidden = YES;
     self.statusBarBgView.hidden = YES;
-    self.goBackAV.hidden=YES;
+  
     
     if (_isFullScreen) {
         [[UIApplication sharedApplication] setStatusBarHidden:YES];
@@ -979,7 +969,7 @@ typedef enum : NSUInteger {
 
 - (void)toolViewOutHidden {
     self.toolView.hidden = NO;
-     self.goBackAV.hidden=NO;
+   
     
     if (_isFullScreen) {
         self.statusBarBgView.hidden = NO;
@@ -1252,6 +1242,8 @@ typedef enum : NSUInteger {
     
     if (orientation == UIInterfaceOrientationPortrait || orientation == UIInterfaceOrientationPortraitUpsideDown) {
         [self.showView removeFromSuperview];
+       
+        
         [self.playerSuperView addSubview:self.showView];
         
         HcdLightView *lightView = [HcdLightView sharedInstance];

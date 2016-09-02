@@ -10,4 +10,6 @@
 
 @interface AVViewController : RootViewController
 
+@property (nonatomic, strong) NSString *AvUrl;
+
 @end

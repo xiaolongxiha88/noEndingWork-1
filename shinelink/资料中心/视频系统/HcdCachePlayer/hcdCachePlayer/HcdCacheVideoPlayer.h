@@ -97,4 +97,6 @@ typedef NS_ENUM(NSInteger, HCDPlayerState) {
  */
 + (double)allVideoCacheSize;
 
+
+
 @end
