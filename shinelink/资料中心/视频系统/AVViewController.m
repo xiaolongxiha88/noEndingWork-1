@@ -229,11 +229,8 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     
- _play = [HcdCacheVideoPlayer sharedInstance];
 
-        [_play stop];
-
-    
+    [_play removeAllObserver];
     
 }
 

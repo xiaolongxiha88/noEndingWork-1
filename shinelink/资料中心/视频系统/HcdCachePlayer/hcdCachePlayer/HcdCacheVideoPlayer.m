@@ -1343,4 +1343,27 @@ typedef enum : NSUInteger {
     }
 }
 
+
+-(void)removeAllObserver{
+    
+    [self.currentPlayerItem removeObserver:self forKeyPath:HCDVideoPlayerItemStatusKeyPath];
+    [self.currentPlayerItem removeObserver:self forKeyPath:HCDVideoPlayerItemLoadedTimeRangesKeyPath];
+    [self.currentPlayerItem removeObserver:self forKeyPath:HCDVideoPlayerItemPlaybackBufferEmptyKeyPath];
+    [self.currentPlayerItem removeObserver:self forKeyPath:HCDVideoPlayerItemPlaybackLikelyToKeepUpKeyPath];
+     [self.currentPlayerItem removeObserver:self forKeyPath:HCDVideoPlayerItemPresentationSizeKeyPath];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemPlaybackStalledNotification object:nil];
+     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.player removeTimeObserver:self.playbackTimeObserver];
+    self.playbackTimeObserver = nil;
+    self.currentPlayerItem = nil;
+    
+    
+    
+}
+
 @end
