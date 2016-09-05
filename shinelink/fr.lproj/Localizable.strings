@@ -1,19 +1,10 @@
-/* 
-  Localizable.strings
-  shinelink
-
-  Created by sky on 16/5/3.
-  Copyright © 2016年 sky. All rights reserved.
-*/
-
-
 
 "立即体验"="Try it now";
 "下一步"="Next";
 "完成"="Done";
 "服务器错误"="Server error";
 "拍照"="Take photo ";
-"从相册选取"="Choose from library";
+"从相册选取"="Choose from photos";
 "取消"="Cancel";
 "警告"="Warning";
 "确定"="Yes";
@@ -54,10 +45,10 @@
 "Enter phone number"="Enter phone number";
 "Networking Timeout"="Networking Timeout";
 "Yes"="Yes";
-"请输入采集器序列号"="Input SN of datalog";
-"请输入正确采集器序列号"="Input correct SN of datalogger";
-"请输入采集器校验码"="Input verification code of datalogger";
-"请输入正确采集器校验码"="Input correct verification code of datalogger";
+"请输入采集器序列号"="Input datalogger SN";
+"请输入正确采集器序列号"="Please input correct SN";
+"请输入采集器校验码"="Input datalogger checkcode";
+"请输入正确采集器校验码"="Please input correct checkcode";
 "扫描条形码"="Scanning a barcode";
 "位置"="Location";
 
@@ -65,10 +56,10 @@
 "超出版本限制注册用户数量"="Number of user registered exceeds version limits";
 "服务器错误"="Server error ";
 "注册错误"="Registration error";
-"采集器序列号或校验码错误"="Datalog or verification code of datalog error";
+"采集器序列号或校验码错误"="Datalogger SN or checkcode incorrect";
 "代理商编码错误"="Agency ID error";
-"注册成功"="Register successfully";
-"用户名已被使用"="Username is already in use";
+"注册成功"="Registered successfully";
+"用户名已被使用"="Registered username";
 
 "找回密码"="Retrieve Password";
 "通过用户名"="Available username";
@@ -89,7 +80,7 @@
 "添加设备"="Add device";
 "系统错误"="System error";
 "删除成功"="Deleted successfully";
-"采集器列表"="List of datalogger";
+"采集器列表"="Datalogger list";
 
 "Add Plant" = "Add Plant";
 "Remove Station" = "Remove Station";
@@ -137,7 +128,7 @@
 "设置无功功率"="Set reactive power";
 
 "设置PF值"="Set power factor";
-"设置逆变器时间:"="Set time of inverter";
+"设置逆变器时间:"="Set inverter time";
 "是否确定开启逆变器"="Confirm to turn on inverter";
 "是否确定关闭逆变器"="Confirm to turn off inverter";
 "设置逆变器开关机"="Set inverter on/off";
@@ -146,15 +137,15 @@
 "事件号:"="Even No.:";
 "标识:"="Tag:";
 
-"日放电量"="Energy today";
-"总放电量"="Lifetime energy";
+"日放电量"="E-discharged today";
+"总放电量"="Total E-discharged";
 "电池百分比(%)"="Battery percentage";
-"设置储能机开关机"="Set storage on/off";
+"设置储能机开关机"="Turn on/off storage";
 "锂电池SOC下限设定"="Li-ion battery SOC lower limit setting";
 "设置储能机时间"="Set storage time";
 "强制放电使能"="Enable forced-discharging";
 "强制放电时间段"="Forced-discharging time duration";
-"设置输入SP的组串电压"="Set battery controller input string voltage";
+"设置输入SP的组串电压"="Set storage string voltage";
 "开机"="Turn on";
 "关机"="Turn off";
 
@@ -198,10 +189,10 @@
 "添加出错"="Add device error";
 "没有权限"="Unauthorized";
 "采集器序列号错误"="Datalogger SN incorrect";
-"总体采集器数量超出限制"="Datalogger quantity out of range";
-"单个电站采集器数量超出限制"="Single site datalogger quantity out of range";
+"总体采集器数量超出限制"="Datalogger quantity reaches Max allowed number";
+"单个电站采集器数量超出限制"="Datalogger reaches the max allowed number of single plant";
 "采集器序列号已经存在"="Existing datalogger SN";
-"序列号与校验码不匹配"="Unmatched SN and verification code";
+"序列号与校验码不匹配"=" SN and checkcode unmatched";
 "设备添加成功"="Add device successfully";
 
 "添加采集器"="Add datalogger";
@@ -235,7 +226,7 @@
 "Event List" = "Event List";
 "Map" = "Map";
 "Voltage"="Voltage(V)";
-"Electron flow"="Electron flow(A)";
+"Electron flow"="Current(A)";
 
 "PV POWER" = "Pv Power";
 "PV1 VOLTAGE" = "Pv1 Voltage";
@@ -255,15 +246,27 @@
 "USER-SIDE POWER" = "User-side Power";
 "GRID-SIDE POWER" = "Grid-Side Power";
 
-"MONTH BATTERY CHARGE" ="Month Battery Charge";
-"MONTHLY CHARGED"="Monthly Charged";
-"MONTHLY DISCHARGED"="Monthly Discharged";
-"YEAR BATTERY CHARGE"="Year Battery Charge";
-"YEAR CHARGED"="Year Charged";
-"YEAR DISCHARGED"="Year Discharged";
-"TOTAL BATTERY CHARGE"="Total Battery Charge";
-"TOTAL CHARGED"="Total Charged";
-"TOTAL DISCHARGED"="Total Discharged";
+//"MONTH BATTERY CHARGE" ="Month Battery Charge";
+//"MONTHLY CHARGED"="Monthly Charged";
+//"MONTHLY DISCHARGED"="Monthly Discharged";
+//"YEAR BATTERY CHARGE"="Year Battery Charge";
+//"YEAR CHARGED"="Year Charged";
+//"YEAR DISCHARGED"="Year Discharged";
+//"TOTAL BATTERY CHARGE"="Total Battery Charge";
+//"TOTAL CHARGED"="Total Charged";
+//"TOTAL DISCHARGED"="Total Discharged";
+
+"MONTH BATTERY CHARGE" ="Monthly PV energy";
+"MONTHLY CHARGED"="Monthly E-charged";
+"MONTHLY DISCHARGED"="Monthly E-discharged";
+"YEAR BATTERY CHARGE"="Year PV energy";
+"YEAR CHARGED"="Year E-charged";
+"YEAR DISCHARGED"="Year E-discharged";
+"TOTAL BATTERY CHARGE"="Total PV energy";
+"TOTAL CHARGED"="Total E-charged";
+"TOTAL DISCHARGED"="Total E-discharged";
+
+
 
 "Add"="Add";
 "Modified"= "Modified";
@@ -273,33 +276,33 @@
 "Modification fails" = "Modification fails";
 "Successfully deleted" = "Successfully deleted";
 "Delete failed" = "Delete failed";
-"Added Successfully" = "Added Successfully";
+"Added Successfully" = "Added successfully";
 
-"Enter DatalogSN" = "Enter DatalogSN";
-"Datalog Valicode" = "Datalog Valicode";
-"Insert true datalog sn" = "Insert true datalog sn";
-"Datalog verification code is incorrect" = "Datalog verification code is incorrect";
+"Enter DatalogSN" = "Input datalogger SN";
+"Datalog Valicode" = "Input datalogger checkcode";
+"Insert true datalog sn" = "Please input correct SN";
+"Datalog verification code is incorrect" = "Datalogger checkcode incorrect";
 
 "Added Successfully" = "Added Successfully";
 "Add Failed" = "Add Failed";
 "Insert datalog code"="Insert datalog code";
 
-"Plant List" = "Plant List";
-"Today Energy" = "Today Energy";
-"Total Energy" = "Total Energy";
-"Current Power" = "Current Power";
+"Plant List" = "Plant list";
+"Today Energy" = "Today energy";
+"Total Energy" = "Total energy";
+"Current Power" = "Current power";
 "Gains" = "Gains";
 "Percentage" = "Percentage";
-"Storage Status" = "Storage Status";
-"Charge Power" = "Charge Power";
-"Discharge Power" = "Discharge Power";
-"Add Plant" = "Add Plant";
-"Remove Station" = "Remove Station";
-"Upload Picture" = "Upload Picture";
-"Setting Station Map" = "Setting Station Map";
+"Storage Status" = "Storage status";
+"Charge Power" = "Charge power";
+"Discharge Power" = "Discharge power";
+"Add Plant" = "Add plant";
+"Remove Station" = "Delete plant";
+"Upload Picture" = "Plant picture";
+"Setting Station Map" = "Setting plant map";
 "Installation Information" = "Installation Information";
 "plant name" = "Plant name";
-"instal date" = "Instal date";
+"instal date" = "Installation date";
 "company" = "Company";
 "power" = "Power";
 "Next" = "Next";
@@ -310,7 +313,7 @@
 "能源分析"="Energy analysis";
 "智能能源"="Smart energy";
 "家庭用电量"="Home energy usage";
-"家庭用电设备"="Home laod equipments";
+"家庭用电设备"="Home Load";
 "光伏电量"="Solar energy";
 "储能电量"="Stored energy";
 "月:"="Month:";
@@ -327,7 +330,6 @@
 "温馨提示"="Notice";
 "智能能源功能后续开放"="Smart energy function coming soon";
 "质保查询功能后续开放"="Check warranty function coming soon";
-
 
 "家庭用电占比(Demo)"="Home consumption%(Demo)";
 "电冰箱"="Fridge";
@@ -347,7 +349,7 @@
 "客户服务"="Customer service";
 "质保查询"="Check warranty";
 "增值业务"="Service promotion";
-"更多产品"="Product promotion";
+"更多产品"="More products";
 
 "提交问题"="Submit questions";
 "标题:"="Title:";
@@ -365,7 +367,7 @@
 "逆变器故障"="Inverter Failure";
 "储能机故障"="Storage machine Failure";
 "监控系统问题"="Monitoring system problems";
-"功能建议"="Feature suggestions";
+"功能建议"="Suggestions";
 "问题咨询"="Advisory";
 "其他问题"="Other problems";
 
@@ -381,9 +383,9 @@
 "参数"="Parameters";
 "有"="Yes";
 "没有"="Non";
-"有无质保:"="Have warranty:";
+"有无质保:"="Under warranty?";
 "出厂时间:"="Starting time:";
-"到期时间:"="Expiration time:";
+"到期时间:"="Expired time:";
 "序列号码:"="serial number:";
 
 "我"="Me";
@@ -425,7 +427,7 @@
 "SO2减排"="SO2 emissions";
 "当前版本:"="current version:";
 
-"示范设备暂时不开放此功能,请安装真实产品使用此功能."="Demonstration equipment is temporarily not open this feature, install a real product to use this feature.";
+"示范设备暂时不开放此功能,请安装真实产品使用此功能."="This feature is currently not available in demo plant,please use it in real plant";
 "概述"="Outline";
 "服务介绍"="Service introduction";
 "提供商:"="Provider:";
@@ -433,7 +435,7 @@
 "价格:"="Price:";
 "联系方式:"="Contact:";
 
-"是否确定删除设备"="Are you sure you remove the device?";
+"是否确定删除设备"="Are you sure to remove?";
 "删除成功"="Delete successful";
 "系统错误，删除失败"="System error, delete failed";
 
@@ -446,7 +448,7 @@
 "PpvN"="Ppv";
 
 "体验馆"="Demo";
-"浏览用户禁止操作"="Browse user prohibited operation";
+"浏览用户禁止操作"="Not allowed for browse user";
 "获取服务器地址"="Get server address";
 "日功率走势图"="Daily power chart(W)";
 "消息中心"="Message center";
@@ -456,21 +458,21 @@
 
 "配置ShineWifi"="Set ShineWifi";
 "ShineWifi提示一"="Please enter the phone system needs to be set on a connection WiFi device";
-"ShineWifi提示二"="Please enter you need to connect the router name and password";
-"ShineWifi输入路由器"="Enter name of router";
+"ShineWifi提示二"="Please enter name and password of router which you want the datalogger to connect to";
+"ShineWifi输入路由器"="Name of router";
 "ShineWifi密码"="password:";
-"ShineWifi输入路由器密码"="Enter password of router";
+"ShineWifi输入路由器密码"="Password of router";
 "ShineWifi修改密码"="Modify Wi-Fi Module password:";
 "ShineWifi新密码"="password:";
 "请输入Wifi密码"="Enter password of wifi";
 "查询采集器信息"="Query Collector Message:";
 "序列号"="Serial number:";
 "shinewifi校验码"="Check code:";
-"扫描设备和设置路由器"="Scanning device and setting router ";
+"扫描设备和设置路由器"="Scan barcode and set Router ";
 "ShineWifiE名字"="Name:";
 "Choice"="Choice";
 "配置ShineWifiE"="Set ShineWifi";
-"配置提示"="Plesa check the device blue led beside the key, it means configure ok when the blue led flashing slow(one time every second) changed from flashing fast(five times every second)";
+"配置提示"="Plesa check the connection status via the blue LED.Flashing slowly(one time every second)means connected;flashing quickly(5 times every second)means not connected";
 
 "编辑"="Edit";
 "储能放电量"="Discharge(kWh)";
@@ -478,29 +480,34 @@
 "推荐"="Hot";
 "配置"="Set";
 "市电电压"="Set grid voltage high";
-"控制提示"="Please operate the device under the professional guidance,otherwise it cannot function well.Please enter the password of controlling";
+"控制提示"="Not allowed for unauthrorized person!Wrong setting may make system stop working.Please enter password";
 "添加问题提示"="Only Chinese and English are available in the service system";
-"控制密码"="Please enter the correct password of controlling";
+"控制密码"="Please enter the correct password for setting";
+
 "用户协议1"="Agree the user agreement ";
 "选择用户协议"="Please tick user Agreement";
+"添加1"="Add";
 "连接路由器2"="Please connect to the router first";
-"刷新设备列表"="After five minutes, please drop-down refresh the list of devices,in order to get the devices information under the data logger ";
+"刷新设备列表"="Please drop down  to refresh device list to get device information after 5 mimutes ";
 "配置成功"="Configured successfully";
+
 "用户名密码错误 "="User name or password error ";
 "用户名密码为空"="User name or password is empty";
 "示例"="Demo";
+
 "拨打电话"="Do you need to make a call?";
 "换算单位"="(Conversion standard based on 1kWh power generation)";
 "点击图片放大"="Click the picture to enlarge";
 
 "添加电站成功"="Add plant successfully";
 "当前用户下电站名重复"="Station name repeat under the current user";
-"超出用户限制电站数量"="Exceed the station number which setting by the user";
+"超出用户限制电站数量"="Exceed the max plant quantity";
 "国家名出错"="Country name error";
 "添加信息出错"="Add information error";
 
 "还没有解决您的问题"="Any more questions?";
 "向客服提问"="Ask service";
 "原密码 "="Old password";
+
 "选择国家"="Select Country";
 "搜索"="Search";

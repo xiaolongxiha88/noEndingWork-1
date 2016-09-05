@@ -49,6 +49,7 @@
     
 }
 
+
 - (UITableView *)friendTableView {
     if (!_friendTableView) {
         _friendTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 44*HEIGHT_SIZE, kScreenWidth, kScreenHeight-44*HEIGHT_SIZE) style:UITableViewStylePlain];

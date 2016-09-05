@@ -118,7 +118,7 @@ static void *context = NULL;
     self.ipName.textColor = [UIColor whiteColor];
     self.ipName.tintColor = [UIColor whiteColor];
     [self.ipName setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.ipName setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    [self.ipName setValue:[UIFont systemFontOfSize:9*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     self.ipName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [pwdBgImageView2 addSubview:_ipName];
     
@@ -141,7 +141,7 @@ static void *context = NULL;
     self.pswd.textColor = [UIColor whiteColor];
     self.pswd.tintColor = [UIColor whiteColor];
     [self.pswd setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.pswd setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    [self.pswd setValue:[UIFont systemFontOfSize:9*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     self.pswd.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [pwdBgImageView2 addSubview:_pswd];
     

@@ -49,7 +49,10 @@
 
 -(void)initData{
 
-    _AvUrl=@"http://cdn.growatt.com/app/xpg.mp4";
+  //  _AvUrl=@"http://cdn.growatt.com/app/xpg.mp4";
+        _AvUrl=@"http://cdn.growatt.com/app/7-20k.mp4";
+
+    
    _tableCellName =[NSMutableArray arrayWithObjects:@"我是第一个视频",@"我是第二个视频但是我很黄很暴力",@"我不是第一个视频但是我不黄不暴力",nil];
     _tableCellPic =[NSMutableArray arrayWithObjects:@"pic_service.png",@"pic_service.png",@"pic_service.png",nil];
 }

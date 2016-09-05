@@ -367,6 +367,8 @@
 		3381ECFE1CBCCADB00DCF0D2 /* myListSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ECFD1CBCCADB00DCF0D2 /* myListSecond.m */; };
 		3381ED011CBCD85700DCF0D2 /* myListSecondTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ED001CBCD85700DCF0D2 /* myListSecondTableViewCell.m */; };
 		3381ED091CBCE94200DCF0D2 /* AnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ED081CBCE94200DCF0D2 /* AnswerViewController.m */; };
+		3383ACE11D7D6B3400C2F4A3 /* topAvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3383ACE01D7D6B3400C2F4A3 /* topAvViewController.m */; };
+		3383ACE41D7D6DC200C2F4A3 /* MRNavigationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3383ACE31D7D6DC200C2F4A3 /* MRNavigationLabel.m */; };
 		3383EF9A1C9F8A6F0075E834 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3383EF821C9F8A6F0075E834 /* MJRefresh.bundle */; };
 		3383EF9B1C9F8A6F0075E834 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3383EF851C9F8A6F0075E834 /* MJRefreshComponent.m */; };
 		3383EF9C1C9F8A6F0075E834 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 3383EF871C9F8A6F0075E834 /* MJRefreshConst.m */; };
@@ -1098,6 +1100,10 @@
 		3381ED001CBCD85700DCF0D2 /* myListSecondTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = myListSecondTableViewCell.m; path = ../Classes/myListSecondTableViewCell.m; sourceTree = "<group>"; };
 		3381ED071CBCE94200DCF0D2 /* AnswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerViewController.h; sourceTree = "<group>"; };
 		3381ED081CBCE94200DCF0D2 /* AnswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerViewController.m; sourceTree = "<group>"; };
+		3383ACDF1D7D6B3400C2F4A3 /* topAvViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = topAvViewController.h; sourceTree = "<group>"; };
+		3383ACE01D7D6B3400C2F4A3 /* topAvViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topAvViewController.m; sourceTree = "<group>"; };
+		3383ACE21D7D6DC200C2F4A3 /* MRNavigationLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRNavigationLabel.h; sourceTree = "<group>"; };
+		3383ACE31D7D6DC200C2F4A3 /* MRNavigationLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MRNavigationLabel.m; sourceTree = "<group>"; };
 		3383EF821C9F8A6F0075E834 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
 		3383EF831C9F8A6F0075E834 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
 		3383EF841C9F8A6F0075E834 /* MJRefreshComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshComponent.h; sourceTree = "<group>"; };
@@ -2167,6 +2173,7 @@
 		335D69951D77B87500894D90 /* 视频系统 */ = {
 			isa = PBXGroup;
 			children = (
+				3383ACDE1D7D43E500C2F4A3 /* 视频首页 */,
 				335D69971D77BA4D00894D90 /* HcdCachePlayer */,
 				335D69E51D77BD0500894D90 /* AVViewController.h */,
 				335D69E61D77BD0500894D90 /* AVViewController.m */,
@@ -2688,6 +2695,17 @@
 				3356149B1CB3AFE30071BAC9 /* addServerViewController.m */,
 			);
 			path = "我的问题";
+			sourceTree = "<group>";
+		};
+		3383ACDE1D7D43E500C2F4A3 /* 视频首页 */ = {
+			isa = PBXGroup;
+			children = (
+				3383ACDF1D7D6B3400C2F4A3 /* topAvViewController.h */,
+				3383ACE01D7D6B3400C2F4A3 /* topAvViewController.m */,
+				3383ACE21D7D6DC200C2F4A3 /* MRNavigationLabel.h */,
+				3383ACE31D7D6DC200C2F4A3 /* MRNavigationLabel.m */,
+			);
+			path = "视频首页";
 			sourceTree = "<group>";
 		};
 		3383EF811C9F8A6F0075E834 /* MJRefresh */ = {
@@ -3475,6 +3493,7 @@
 				335BF1F01D1008D5008EEE99 /* messgeSecondViewController.m in Sources */,
 				335D69B31D77BA4D00894D90 /* HcdTimeSheetView.m in Sources */,
 				3343F3EC1C805BD2009F69BC /* MBProgressHUD.m in Sources */,
+				3383ACE11D7D6B3400C2F4A3 /* topAvViewController.m in Sources */,
 				3355F25A1C74178E006DDE5A /* meTableViewCell.m in Sources */,
 				334FF0A71CF53C7C001E6716 /* EasyTimelineEvent.m in Sources */,
 				334FF0B21CF53C7C001E6716 /* ProgressHUD.m in Sources */,
@@ -3565,6 +3584,7 @@
 				334FF0921CF53C7C001E6716 /* GCDAsyncUdpSocket.m in Sources */,
 				33EFB6781C98FA7F003F336F /* newLine.m in Sources */,
 				3343F3C31C80403C009F69BC /* AFSecurityPolicy.m in Sources */,
+				3383ACE41D7D6DC200C2F4A3 /* MRNavigationLabel.m in Sources */,
 				33EFB6021C979B5F003F336F /* StationCellectTableViewCell.m in Sources */,
 				3367CB4F1C86806700EF460C /* NSArray+MASAdditions.m in Sources */,
 				334FF0A31CF53C7C001E6716 /* DeviceManageViewController.m in Sources */,

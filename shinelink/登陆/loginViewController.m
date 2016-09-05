@@ -26,7 +26,7 @@
 #import "JPUSHService.h"
 
 #import "AVfirstView.h"
-
+#import "topAvViewController.h"
 
 @interface loginViewController ()<UINavigationControllerDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -71,7 +71,7 @@
     //////////测试区域
     NSString *testDemo=@"OK";
     if ([testDemo isEqualToString:@"OK"]) {
-         AVfirstView *testView=[[AVfirstView alloc]init];
+         topAvViewController *testView=[[topAvViewController alloc]init];
         [self.navigationController pushViewController:testView animated:NO];
     }else{
     
