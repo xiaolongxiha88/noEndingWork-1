@@ -33,7 +33,7 @@
     _titleScrollView.userInteractionEnabled=YES;
     [self.view addSubview:_titleScrollView];
     
-    _contentScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 30*HEIGHT_SIZE, SCREEN_Width, 330*HEIGHT_SIZE)];
+    _contentScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 40*HEIGHT_SIZE, SCREEN_Width, 330*HEIGHT_SIZE)];
     _contentScrollView.delegate=self;
     [self.view addSubview:_contentScrollView];
     

@@ -205,6 +205,8 @@
 		3356149C1CB3AFE30071BAC9 /* addServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3356149B1CB3AFE30071BAC9 /* addServerViewController.m */; };
 		335614A01CB3B8E90071BAC9 /* frame2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3356149F1CB3B8E90071BAC9 /* frame2@2x.png */; };
 		335614A41CB3E0210071BAC9 /* frame4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 335614A31CB3E0210071BAC9 /* frame4@2x.png */; };
+		335667571D7E606800C40129 /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 335667561D7E606800C40129 /* PGIndexBannerSubiew.m */; };
+		3356675B1D7E606F00C40129 /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3356675A1D7E606F00C40129 /* NewPagedFlowView.m */; };
 		3356782B1CC62A5A00EE4A73 /* controlCNJTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3356782A1CC62A5A00EE4A73 /* controlCNJTable.m */; };
 		3358812E1CB66E250068EFAD /* qualityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3358812D1CB66E250068EFAD /* qualityTableViewController.m */; };
 		335881311CB66E460068EFAD /* qualityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335881301CB66E460068EFAD /* qualityCell.m */; };
@@ -535,8 +537,8 @@
 		332692671D780F410058C5B7 /* backAV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backAV.png; sourceTree = "<group>"; };
 		332692691D794AB00058C5B7 /* AvCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvCell.h; sourceTree = "<group>"; };
 		3326926A1D794AB00058C5B7 /* AvCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvCell.m; sourceTree = "<group>"; };
-		3326926C1D79728F0058C5B7 /* AVfirstView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVfirstView.h; sourceTree = "<group>"; };
-		3326926D1D79728F0058C5B7 /* AVfirstView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVfirstView.m; sourceTree = "<group>"; };
+		3326926C1D79728F0058C5B7 /* AVfirstView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVfirstView.h; path = ../AVfirstView.h; sourceTree = "<group>"; };
+		3326926D1D79728F0058C5B7 /* AVfirstView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVfirstView.m; path = ../AVfirstView.m; sourceTree = "<group>"; };
 		33340F7A1D6D71EE00909BBF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		33340F7E1D6EC36800909BBF /* loading1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading1.png; sourceTree = "<group>"; };
 		3343F3A51C7FDD5A009F69BC /* editViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editViewController.h; path = ../editViewController.h; sourceTree = "<group>"; };
@@ -850,6 +852,10 @@
 		3356149B1CB3AFE30071BAC9 /* addServerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = addServerViewController.m; path = ../addServerViewController.m; sourceTree = "<group>"; };
 		3356149F1CB3B8E90071BAC9 /* frame2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "frame2@2x.png"; path = "../frame2@2x.png"; sourceTree = "<group>"; };
 		335614A31CB3E0210071BAC9 /* frame4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "frame4@2x.png"; path = "../frame4@2x.png"; sourceTree = "<group>"; };
+		335667551D7E606800C40129 /* PGIndexBannerSubiew.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGIndexBannerSubiew.h; sourceTree = "<group>"; };
+		335667561D7E606800C40129 /* PGIndexBannerSubiew.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PGIndexBannerSubiew.m; sourceTree = "<group>"; };
+		335667591D7E606F00C40129 /* NewPagedFlowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPagedFlowView.h; sourceTree = "<group>"; };
+		3356675A1D7E606F00C40129 /* NewPagedFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPagedFlowView.m; sourceTree = "<group>"; };
 		335678291CC62A5A00EE4A73 /* controlCNJTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = controlCNJTable.h; sourceTree = "<group>"; };
 		3356782A1CC62A5A00EE4A73 /* controlCNJTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = controlCNJTable.m; sourceTree = "<group>"; };
 		3358812C1CB66E250068EFAD /* qualityTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qualityTableViewController.h; sourceTree = "<group>"; };
@@ -2100,6 +2106,33 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		335667531D7E5FCD00C40129 /* 视频滚播 */ = {
+			isa = PBXGroup;
+			children = (
+				335667581D7E606F00C40129 /* NewPagedFlowView */,
+				335667541D7E606800C40129 /* CustomeView */,
+			);
+			path = "视频滚播";
+			sourceTree = "<group>";
+		};
+		335667541D7E606800C40129 /* CustomeView */ = {
+			isa = PBXGroup;
+			children = (
+				335667551D7E606800C40129 /* PGIndexBannerSubiew.h */,
+				335667561D7E606800C40129 /* PGIndexBannerSubiew.m */,
+			);
+			path = CustomeView;
+			sourceTree = "<group>";
+		};
+		335667581D7E606F00C40129 /* NewPagedFlowView */ = {
+			isa = PBXGroup;
+			children = (
+				335667591D7E606F00C40129 /* NewPagedFlowView.h */,
+				3356675A1D7E606F00C40129 /* NewPagedFlowView.m */,
+			);
+			path = NewPagedFlowView;
+			sourceTree = "<group>";
+		};
 		3358812B1CB66D5C0068EFAD /* 质保查询 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2177,8 +2210,6 @@
 				335D69971D77BA4D00894D90 /* HcdCachePlayer */,
 				335D69E51D77BD0500894D90 /* AVViewController.h */,
 				335D69E61D77BD0500894D90 /* AVViewController.m */,
-				3326926C1D79728F0058C5B7 /* AVfirstView.h */,
-				3326926D1D79728F0058C5B7 /* AVfirstView.m */,
 				332692691D794AB00058C5B7 /* AvCell.h */,
 				3326926A1D794AB00058C5B7 /* AvCell.m */,
 			);
@@ -2700,8 +2731,11 @@
 		3383ACDE1D7D43E500C2F4A3 /* 视频首页 */ = {
 			isa = PBXGroup;
 			children = (
+				335667531D7E5FCD00C40129 /* 视频滚播 */,
 				3383ACDF1D7D6B3400C2F4A3 /* topAvViewController.h */,
 				3383ACE01D7D6B3400C2F4A3 /* topAvViewController.m */,
+				3326926C1D79728F0058C5B7 /* AVfirstView.h */,
+				3326926D1D79728F0058C5B7 /* AVfirstView.m */,
 				3383ACE21D7D6DC200C2F4A3 /* MRNavigationLabel.h */,
 				3383ACE31D7D6DC200C2F4A3 /* MRNavigationLabel.m */,
 			);
@@ -3408,6 +3442,7 @@
 				33FEFCD31C7D8A9500324374 /* AddressPickView.m in Sources */,
 				335456B91C852EB000275478 /* RootViewController.m in Sources */,
 				33EFB66A1C98F9B1003F336F /* ZFBarChart.m in Sources */,
+				335667571D7E606800C40129 /* PGIndexBannerSubiew.m in Sources */,
 				335317441CA2423D003F106D /* GetDevice.m in Sources */,
 				3343F3C71C80403C009F69BC /* AFURLSessionManager.m in Sources */,
 				335456BC1C852ED900275478 /* TempViewController.m in Sources */,
@@ -3585,6 +3620,7 @@
 				33EFB6781C98FA7F003F336F /* newLine.m in Sources */,
 				3343F3C31C80403C009F69BC /* AFSecurityPolicy.m in Sources */,
 				3383ACE41D7D6DC200C2F4A3 /* MRNavigationLabel.m in Sources */,
+				3356675B1D7E606F00C40129 /* NewPagedFlowView.m in Sources */,
 				33EFB6021C979B5F003F336F /* StationCellectTableViewCell.m in Sources */,
 				3367CB4F1C86806700EF460C /* NSArray+MASAdditions.m in Sources */,
 				334FF0A31CF53C7C001E6716 /* DeviceManageViewController.m in Sources */,
