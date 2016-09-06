@@ -10,4 +10,6 @@
 
 @interface AVfirstView : RootViewController
 
+@property(nonatomic,strong)NSMutableArray *collectionNameArray;
+
 @end
