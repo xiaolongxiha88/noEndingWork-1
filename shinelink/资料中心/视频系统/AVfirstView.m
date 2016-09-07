@@ -84,7 +84,7 @@
     UICollectionViewFlowLayout *flowLayout=[[UICollectionViewFlowLayout alloc] init];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
-    UICollectionView * collectionView=[[UICollectionView alloc] initWithFrame:CGRectMake(0, line1Y, SCREEN_Width, SCREEN_Height-line1Y) collectionViewLayout:flowLayout];
+    UICollectionView * collectionView=[[UICollectionView alloc] initWithFrame:CGRectMake(0, line1Y, SCREEN_Width, 1*(SCREEN_Height-line1Y-90*HEIGHT_SIZE)) collectionViewLayout:flowLayout];
     collectionView.dataSource=self;
     collectionView.delegate=self;
     [collectionView setBackgroundColor:[UIColor colorWithRed:179/255.0f green:179/255.0f blue:179/255.0f alpha:1]];
@@ -184,6 +184,11 @@
     
     self.indicateLabel.text = [NSString stringWithFormat:@"点击了第%ld张图",(long)index + 1];
     
+    
+    AVViewController *goAV=[[AVViewController alloc]init];
+    [self.navigationController pushViewController:goAV animated:YES];
+    
+    
 }
 
 - (void)didScrollToPage:(NSInteger)pageNumber inFlowView:(NewPagedFlowView *)flowView {
@@ -281,19 +286,7 @@
 }
 
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 
-{
-          UICollectionReusableView *reusableview = nil;
-    
-    if (kind == UICollectionElementKindSectionHeader){
-        
-      
-        
-    }
-    
-return reusableview;
-}
 
 
 #pragma mark --UICollectionViewDelegate
@@ -326,7 +319,17 @@ return reusableview;
 
 
 
+-(void)viewDidDisappear:(BOOL)animated{
+    
+      [_pageFlowView stopTimer];
+    
+}
 
+
+-(void)viewWillAppear:(BOOL)animated{
+
+     [_pageFlowView startTimer];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

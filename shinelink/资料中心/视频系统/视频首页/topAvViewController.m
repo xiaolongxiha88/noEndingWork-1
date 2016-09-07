@@ -29,7 +29,7 @@
     [super viewDidLoad];
     
     _DataCollectionNameArray=[NSMutableArray arrayWithObjects:@"我是大大大蝴蝶花", @"我是大大大大大蝴蝶花",@"我是大大大大大大大花",@"我是大大大蝴蝶花",@"我是大大大蝴蝶花",nil];
-     float   cellWidth=SCREEN_Width/2-6*NOW_SIZE;
+    // float   cellWidth=SCREEN_Width/2-6*NOW_SIZE;
     
     
     _titleScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE, SCREEN_Width, 40*HEIGHT_SIZE)];
@@ -38,8 +38,8 @@
     [self.view addSubview:_titleScrollView];
     
     float contenY=CGRectGetMaxY(_titleScrollView.frame);
-    _contentScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0,contenY,SCREEN_Width, SCREEN_Height*2)];
-    _contentScrollView.contentSize=CGSizeMake(SCREEN_Width, (cellWidth*9/16+45*HEIGHT_SIZE)*_DataCollectionNameArray.count+270*HEIGHT_SIZE);
+    _contentScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0,contenY,SCREEN_Width, SCREEN_Height)];
+  // _contentScrollView.contentSize=CGSizeMake(SCREEN_Width, SCREEN_Height+400*NOW_SIZE);
     _contentScrollView.delegate=self;
     [self.view addSubview:_contentScrollView];
     

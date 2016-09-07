@@ -70,8 +70,9 @@
 
 - (void)startTimer {
     
+    if(!_timer){
     self.timer = [NSTimer scheduledTimerWithTimeInterval:self.autoTime target:self selector:@selector(autoNextPage) userInfo:nil repeats:YES];
-    
+    }
 }
 
 - (void)stopTimer {
