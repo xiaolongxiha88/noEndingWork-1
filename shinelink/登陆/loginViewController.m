@@ -69,7 +69,7 @@
     
   
     //////////测试区域
-    NSString *testDemo=@"OK";
+    NSString *testDemo=@"O";
     if ([testDemo isEqualToString:@"OK"]) {
          topAvViewController *testView=[[topAvViewController alloc]init];
         [self.navigationController pushViewController:testView animated:NO];

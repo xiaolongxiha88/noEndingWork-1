@@ -192,6 +192,23 @@
         if (i==0) {
                PV2Lable.text=_titleString;
         }else{
+            
+            if ([_qusetionType isEqualToString:@"1"]) {
+                _qusetionType=root_ME_nibianqi_guzhan;
+            }else if ([_qusetionType isEqualToString:@"2"]){
+                 _qusetionType=root_ME_chunengji_guzhan;
+            }else if ([_qusetionType isEqualToString:@"3"]){
+                _qusetionType=root_ME_ruanjian_jianyi;
+            }else if ([_qusetionType isEqualToString:@"4"]){
+                _qusetionType=root_ME_ruanjian_guzhan;
+            }else if ([_qusetionType isEqualToString:@"5"]){
+                _qusetionType=root_ME_qita_shebei_guzhan;
+            }else if ([_qusetionType isEqualToString:@"6"]){
+                _qusetionType=root_ME_qita_wenti;
+            }
+            
+            
+            
           PV2Lable.text=_qusetionType;
         }
         

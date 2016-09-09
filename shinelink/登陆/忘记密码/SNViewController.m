@@ -228,28 +228,46 @@
     NSMutableDictionary *userCheck=[NSMutableDictionary dictionaryWithObject:_cellectId.text forKey:@"dataLogSn"];
     [userCheck setObject:_cellectNo.text forKey:@"validateCode"];
     
-    [BaseRequest requestWithMethod:HEAD_URL paramars:userCheck  paramarsSite:@"/newForgetAPI.do?op=sendResetEmailBySn" sucessBlock:^(id content) {
-        NSLog(@"sendResetEmailByAccount: %@", content);
-        [self hideProgressView];
+    NSMutableDictionary *getServer=[NSMutableDictionary dictionaryWithObject:_cellectId.text forKey:@"param"];
+    [getServer setObject:@"2" forKey:@"type"];
+    
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:getServer  paramarsSite:@"/newForgetAPI.do?op=getServerUrlByParam" sucessBlock:^(id content) {
+        NSLog(@"getServerUrlByParam: %@", content);
+        
         if (content) {
-            if ([content[@"success"] integerValue] == 0) {
-                if ([content[@"msg"] integerValue] ==501) {
-                    [self showAlertViewWithTitle:nil message:root_jiaoYanMa_cuoWu cancelButtonTitle:root_Yes];
-                }
-                else if ([content[@"msg"] integerValue] ==502) {
-                    [self showAlertViewWithTitle:nil message:root_youJian_shiBai cancelButtonTitle:root_Yes];
-                }
-                else if ([content[@"msg"] integerValue] ==503) {
-                    [self showAlertViewWithTitle:nil message:root_zhaoBuDao_yongHu cancelButtonTitle:root_Yes];
-                }else if ([content[@"msg"] integerValue] ==504) {
-                    [self showAlertViewWithTitle:nil message:root_fuWuQi_cuoWu cancelButtonTitle:root_Yes];
-                }
-                
-            }
+            id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
             
-            else{
-                NSString *email=content[@"msg"];
-                [self showAlertViewWithTitle:nil message:email cancelButtonTitle:root_Yes];
+            if ([jsonObj[@"success"] integerValue] == 1) {
+                
+                NSString *server1=jsonObj[@"msg"];
+                NSString *server2=@"http://";
+                _serverAddress=[NSString stringWithFormat:@"%@%@",server2,server1];
+                
+                
+                [BaseRequest requestWithMethod:_serverAddress paramars:userCheck  paramarsSite:@"/newForgetAPI.do?op=sendResetEmailBySn" sucessBlock:^(id content) {
+                    NSLog(@"sendResetEmailByAccount: %@", content);
+                    [self hideProgressView];
+                    if (content) {
+                        if ([content[@"success"] integerValue] == 0) {
+                            if ([content[@"msg"] integerValue] ==501) {
+                                [self showAlertViewWithTitle:nil message:root_jiaoYanMa_cuoWu cancelButtonTitle:root_Yes];
+                            }
+                            else if ([content[@"msg"] integerValue] ==502) {
+                                [self showAlertViewWithTitle:nil message:root_youJian_shiBai cancelButtonTitle:root_Yes];
+                            }
+                            else if ([content[@"msg"] integerValue] ==503) {
+                                [self showAlertViewWithTitle:nil message:root_zhaoBuDao_yongHu cancelButtonTitle:root_Yes];
+                            }
+                        }else{
+                            NSString *email=content[@"msg"];
+                            [self showAlertViewWithTitle:nil message:email cancelButtonTitle:root_Yes];
+                            
+                        }
+                    }
+                }failure:^(NSError *error) {
+                    [self hideProgressView];
+                    [self showToastViewWithTitle:root_Networking];
+                }];
                 
             }
         }
@@ -257,8 +275,6 @@
         [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];
     }];
-
-    
     
     
 }
