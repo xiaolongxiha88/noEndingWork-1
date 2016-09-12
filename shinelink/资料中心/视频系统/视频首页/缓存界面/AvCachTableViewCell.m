@@ -60,7 +60,7 @@
         
         self.CellName = [[UILabel alloc] initWithFrame:CGRectMake(size2+imageSize*1.78+kongXi, size1, imageSize+60*NOW_SIZE,imageSize)];
         self.CellName.font=[UIFont systemFontOfSize:16*HEIGHT_SIZE];
-        self.CellName.textAlignment = NSTextAlignmentLeft;
+        self.CellName.textAlignment = NSTextAlignmentCenter;
         _CellName.numberOfLines=0;
         self.CellName.textColor = [UIColor blackColor];
         [self.contentView addSubview:_CellName];

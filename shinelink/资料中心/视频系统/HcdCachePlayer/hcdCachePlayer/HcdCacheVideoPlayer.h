@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, HCDPlayerState) {
 @property (nonatomic, readonly) CGFloat        progress;                //播放进度0~1之间
 @property (nonatomic, assign  ) BOOL           stopInBackground;        //是否在后台播放，默认YES
 
-
+@property (nonatomic, assign  ) BOOL           cachAV;
 
 -(void)removeAllObserver;
 

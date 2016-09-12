@@ -1298,6 +1298,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				335C9D1F1D011F57008C977A /* SystemConfiguration.framework in Frameworks */,
 				335D69E41D77BC2800894D90 /* MobileCoreServices.framework in Frameworks */,
 				335D69E21D77BC0B00894D90 /* AVFoundation.framework in Frameworks */,
 				33340F7B1D6D71EE00909BBF /* WebKit.framework in Frameworks */,
@@ -1307,7 +1308,6 @@
 				335C9D251D011F82008C977A /* UIKit.framework in Frameworks */,
 				335C9D231D011F74008C977A /* Foundation.framework in Frameworks */,
 				335C9D211D011F68008C977A /* CoreGraphics.framework in Frameworks */,
-				335C9D1F1D011F57008C977A /* SystemConfiguration.framework in Frameworks */,
 				335C9D1D1D011F4E008C977A /* CoreTelephony.framework in Frameworks */,
 				335C9D1B1D011F3F008C977A /* CoreFoundation.framework in Frameworks */,
 				335C9D191D011F2E008C977A /* CFNetwork.framework in Frameworks */,
@@ -2220,6 +2220,7 @@
 		335D69971D77BA4D00894D90 /* HcdCachePlayer */ = {
 			isa = PBXGroup;
 			children = (
+				3381222E1D86BC0200C7704B /* 检查网络 */,
 				335D69981D77BA4D00894D90 /* hcdCachePlayer */,
 				335D69AB1D77BA4D00894D90 /* LICENSE */,
 				335D69AC1D77BA4D00894D90 /* README.md */,
@@ -2689,6 +2690,13 @@
 				3381222C1D864D8400C7704B /* btn1-choose.png */,
 			);
 			path = "缓存界面";
+			sourceTree = "<group>";
+		};
+		3381222E1D86BC0200C7704B /* 检查网络 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "检查网络";
 			sourceTree = "<group>";
 		};
 		3381ECDF1CBC8F7100DCF0D2 /* 能源二级旧版 */ = {

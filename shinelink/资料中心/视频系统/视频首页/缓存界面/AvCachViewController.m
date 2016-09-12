@@ -25,6 +25,9 @@
 @property (nonatomic ,assign)BOOL isSelected;
 @property (nonatomic, strong) NSMutableArray *tableCellPic;
 
+@property (nonatomic, strong) NSMutableArray *cachWay;
+@property (nonatomic, strong)NSFileManager *fileManager;
+
 @end
 
 @implementation AvCachViewController
@@ -77,8 +80,49 @@
 
 -(void)initData{
 
-_dataArray = [NSMutableArray arrayWithObjects:@"我是第一个视频",@"我是第二个视频但是我很黄很暴力",@"我不是第一个视频但是我不黄不暴力",nil];
-  _tableCellPic =[NSMutableArray arrayWithObjects:@"pic_service.png",@"pic_service.png",@"pic_service.png",nil];
+    _dataArray = [NSMutableArray array];
+     _tableCellPic = [NSMutableArray array];
+    _cachWay=[NSMutableArray array];
+//    _tableCellPic =[NSMutableArray arrayWithObjects:@"pic_service.png",@"pic_service.png",@"pic_service.png",nil];
+    
+    _fileManager=[NSFileManager defaultManager];
+    //这里自己写需要保存数据的路径
+    NSString *cachPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
+    NSArray *childFiles = [_fileManager subpathsAtPath:cachPath];
+    for (NSString *fileName in childFiles) {
+        //如有需要，加入条件，过滤掉不想删除的文件
+        NSLog(@"%@", fileName);
+        if ([fileName.pathExtension isEqualToString:@"mp4"]) {
+            
+            NSArray *arr = [fileName componentsSeparatedByCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"*"]];
+            
+            NSString *AvName1=[arr lastObject];
+            
+                        NSArray *arr1 = [AvName1 componentsSeparatedByCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"."]];
+            
+            NSString *AvName=[arr1 firstObject];
+            
+           
+            
+            NSString *absolutePath=[cachPath stringByAppendingPathComponent:fileName];
+          
+            if (![AvName isEqualToString:@"temp"]) {
+                
+                [_cachWay addObject:absolutePath];
+                [_dataArray addObject:AvName];
+                [_tableCellPic addObject:@"pic_service.png"];
+                
+            }
+            
+      
+            
+           // [fileManager removeItemAtPath:absolutePath error:nil];
+        }
+    }
+    
+    
+    
+
     
 }
 
@@ -113,12 +157,36 @@ _dataArray = [NSMutableArray arrayWithObjects:@"我是第一个视频",@"我是�
 
 -(void)deltButn
 {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"删除视频" message:@"确定删除视频?" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+    alertView.tag = 1002;
+    [alertView show];
+  }
+
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+        if (alertView.tag == 1002) {
+            if (buttonIndex==1) {
+                
     NSMutableArray *deleteArrarys = [NSMutableArray array];
+    NSMutableArray *deleteArrarys2 = [NSMutableArray array];
+    NSMutableArray *deleteArrarys3 = [NSMutableArray array];
+    
     for (NSIndexPath *indexPath in self.myTableView.indexPathsForSelectedRows) {
         [deleteArrarys addObject:self.dataArray[indexPath.row]];
+        [deleteArrarys2 addObject:self.tableCellPic[indexPath.row]];
+        [deleteArrarys3 addObject:self.cachWay[indexPath.row]];
     }
     [UIView animateWithDuration:0 animations:^{
         [self.dataArray removeObjectsInArray:deleteArrarys];
+        [self.tableCellPic removeObjectsInArray:deleteArrarys2];
+        [self.cachWay removeObjectsInArray:deleteArrarys3];
+        
+        for (int i=0;i<deleteArrarys3.count; i++) {
+            [_fileManager removeItemAtPath:deleteArrarys3[i] error:nil];
+        }
+        
         [self.myTableView reloadData];
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.25 animations:^{
@@ -130,7 +198,14 @@ _dataArray = [NSMutableArray arrayWithObjects:@"我是第一个视频",@"我是�
             self.isSelected = NO;//全选之后又去掉几个选中状态
         }];
     }];
+        }
+        }
+    
 }
+
+
+
+
 #pragma mark - 全选删除
 -(void)allDelBtn
 {
@@ -165,6 +240,15 @@ _dataArray = [NSMutableArray arrayWithObjects:@"我是第一个视频",@"我是�
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.dataArray removeObjectAtIndex:indexPath.row];
+        [self.tableCellPic removeObjectAtIndex:indexPath.row];
+        
+         [_fileManager removeItemAtPath:_cachWay[indexPath.row] error:nil];
+        
+        [self.cachWay removeObjectAtIndex:indexPath.row];
+        
+        
+        
+        
         [self.myTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }

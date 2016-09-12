@@ -10,6 +10,7 @@
 #import "HcdCacheVideoPlayer.h"
 #import "UIImage+ImageEffects.h"
 #import "AvCell.h"
+#import "Reachability.h"
 
 @interface AVViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -23,6 +24,8 @@
 @property (nonatomic, strong) NSMutableArray *tableCellName;
 @property (nonatomic, strong) NSMutableArray *tableCellPic;
 
+@property (nonatomic, strong) NSString *netType;
+
 @end
 
 @implementation AVViewController
@@ -31,9 +34,7 @@
     [super viewDidLoad];
     
 
-  [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16],NSForegroundColorAttributeName:MainColor}];
- self.navigationController.navigationBar.tintColor=MainColor;
-//    self.navigationController.navigationBar.backgroundColor=MainColor;
+
     self.title = @"视频中心";
     
     //self.view.backgroundColor=MainColor;
@@ -46,11 +47,47 @@
 }
 
 
+-(NSString *)getNetconnType{
+
+    NSString *netconnType = @"";
+    
+    Reachability *reach = [Reachability reachabilityWithHostName:@"www.apple.com"];
+    
+    switch ([reach currentReachabilityStatus]) {
+        case NotReachable:// 没有网络
+        {
+            
+            netconnType = @"no network";
+        }
+            break;
+            
+        case ReachableViaWiFi:// Wifi
+        {
+            netconnType = @"Wifi";
+        }
+            break;
+            
+        case ReachableViaWWAN:// 手机自带网络
+        {
+            // 获取手机网络类型
+              netconnType = @"运营商网络";
+                 }
+            break;
+            
+        default:
+            break;
+    }
+    
+    return netconnType;
+
+}
+
+
 
 -(void)initData{
 
   // _AvUrl=@"http://cdn.growatt.com/app/xpg.mp4";
-       _AvUrl=@"http://cdn.growatt.com/app/7-20k.mp4";
+  _AvUrl=@"http://cdn.growatt.com/app/7-20k.mp4";
 
     
    _tableCellName =[NSMutableArray arrayWithObjects:@"我是第一个视频",@"我是第二个视频但是我很黄很暴力",@"我不是第一个视频但是我不黄不暴力",nil];
@@ -89,26 +126,19 @@
     _scrollView2.contentSize = CGSizeMake(SCREEN_Width,1050*HEIGHT_SIZE);
     [self.view addSubview:_scrollView2];
     
-    float imageButtonSiz=20*HEIGHT_SIZE;
-    UIImageView *imageButton = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_Width-imageButtonSiz-20*NOW_SIZE,0+5*HEIGHT_SIZE,imageButtonSiz,imageButtonSiz)];
-    imageButton.image = [UIImage imageNamed:@"downloadAV.png"];
-    UITapGestureRecognizer *tap2  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(downAV)];
-    [imageButton addGestureRecognizer:tap2];
-    [imageButton setUserInteractionEnabled:YES];
-    [_scrollView2 addSubview:imageButton];
+   float imageButtonSiz=20*HEIGHT_SIZE;
+
     
-    float downLableWidth=60*NOW_SIZE;
-        UILabel *downLable= [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_Width-downLableWidth,0+5*HEIGHT_SIZE+imageButtonSiz,downLableWidth,imageButtonSiz)];
-   downLable.text=@"缓存";
-    downLable.textColor=[UIColor blackColor];
-    downLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-   downLable.textAlignment = NSTextAlignmentCenter;
-  downLable.userInteractionEnabled=YES;
-    UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(downAV)];
-    [downLable addGestureRecognizer:demo1];
-    [_scrollView2 addSubview:downLable];
+    UILabel *CachLable= [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE,5*HEIGHT_SIZE,SCREEN_Width-10*NOW_SIZE,40*HEIGHT_SIZE)];
+    CachLable.text=@"温馨提示:播放视频，同时会存储视频，存储完请确定是否保存视频";
+    CachLable.textColor=MainColor;
+    CachLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    CachLable.numberOfLines=0;
+    CachLable.textAlignment = NSTextAlignmentLeft;
+    [_scrollView2 addSubview:CachLable];
     
-    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(0,10*HEIGHT_SIZE+imageButtonSiz*2,SCREEN_Width,4*HEIGHT_SIZE)];
+    
+    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(0,10*HEIGHT_SIZE+CGRectGetMaxY(CachLable.frame),SCREEN_Width,4*HEIGHT_SIZE)];
     line1.backgroundColor=COLOR(194, 195, 204, 0.75);
     [_scrollView2 addSubview:line1];
     
@@ -153,15 +183,44 @@
 
 
 
--(void)downAV{
-    
-   _play = [HcdCacheVideoPlayer sharedInstance];
-    [HcdCacheVideoPlayer clearAllVideoCache];
-    
-}
+//-(void)downAV{
+//    
+////   _play = [HcdCacheVideoPlayer sharedInstance];
+////    [HcdCacheVideoPlayer clearAllVideoCache];
+//    
+//    [_imageView removeFromSuperview];
+//    [_imageView2 removeFromSuperview];
+//    [_backButton removeFromSuperview];
+//    _backButton=nil;
+//    
+//    //CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
+//    
+//    
+//    _play = [HcdCacheVideoPlayer sharedInstance];
+//    UIView *videoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 0.5625)];
+//    [self.view addSubview:videoView];
+//    
+//    _play.cachAV=YES;
+//    
+//    [_play playWithUrl:[NSURL URLWithString:_AvUrl] showView:videoView andSuperView:self.view];
+//    
+//    
+//}
 
 
 -(void)playAV{
+    
+      _netType=[self getNetconnType];
+    
+    if (![_netType isEqualToString:@"Wifi"]) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"手机没有连接到wifi信号，是否继续观看?" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+        alertView.tag = 1002;
+        [alertView show];
+        
+    }else{
+    
+    
     
     [_imageView removeFromSuperview];
     [_imageView2 removeFromSuperview];
@@ -181,6 +240,32 @@
         //[play playWithUrl:[NSURL URLWithString:@"http://pan.baidu.com/s/1c1Y95fy"] showView:videoView andSuperView:self.view];
        // NSLog(@"getSize=%f", [HcdCacheVideoPlayer allVideoCacheSize]);
     
+    }
+    
+    
+    
+}
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+
+    if (buttonIndex==1) {
+    
+        [_imageView removeFromSuperview];
+        [_imageView2 removeFromSuperview];
+        [_backButton removeFromSuperview];
+        _backButton=nil;
+        
+        //CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
+        
+        
+        _play = [HcdCacheVideoPlayer sharedInstance];
+        UIView *videoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 0.5625)];
+        [self.view addSubview:videoView];
+        
+        [_play playWithUrl:[NSURL URLWithString:_AvUrl] showView:videoView andSuperView:self.view];
+        
+    }
     
     
 }
@@ -234,6 +319,7 @@
     
     
      [_play removeAllObserver];
+    
     [_play stop];
    
     _play=nil;

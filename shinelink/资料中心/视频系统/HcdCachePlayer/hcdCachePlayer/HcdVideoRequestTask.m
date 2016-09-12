@@ -21,7 +21,7 @@
 #import "HcdVideoRequestTask.h"
 #import "NSString+HCD.h"
 
-@interface HcdVideoRequestTask()<NSURLConnectionDataDelegate, AVAssetResourceLoaderDelegate>
+@interface HcdVideoRequestTask()<NSURLConnectionDataDelegate, AVAssetResourceLoaderDelegate,UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSURL           *url;
 @property (nonatomic        ) NSUInteger      offset;
@@ -155,12 +155,26 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+     if (self.taskArr.count < 2) {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"缓存成功" message:@"是否保存视频" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+    alertView.tag = 1002;
+    [alertView show];
+     }
     
+    if ([self.delegate respondsToSelector:@selector(didFinishLoadingWithTask:)]) {
+        [self.delegate didFinishLoadingWithTask:self];
+    }
+    
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+     if (buttonIndex==1) {
     if (self.taskArr.count < 2) {
         _isFinishLoad = YES;
         
-      //  NSString *md5File = [NSString stringWithFormat:@"%@.mp4", [[_url absoluteString] stringToMD5]];
-     
+        //  NSString *md5File = [NSString stringWithFormat:@"%@.mp4", [[_url absoluteString] stringToMD5]];
+        
         
         NSString *playUrl2 = [[_url absoluteString]  stringByReplacingOccurrencesOfString :@"/" withString:@"*"];
         
@@ -184,12 +198,12 @@
             NSLog(@"----%@", movePath);
         }
     }
-    
-    if ([self.delegate respondsToSelector:@selector(didFinishLoadingWithTask:)]) {
-        [self.delegate didFinishLoadingWithTask:self];
-    }
+
+     }
     
 }
+
+
 
 //网络中断：-1005
 //无网络连接：-1009

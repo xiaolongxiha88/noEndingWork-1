@@ -178,14 +178,26 @@ typedef enum : NSUInteger {
         self.resouerLoader.delegate = self;
         NSURL *playUrl              = [self.resouerLoader getSchemeVideoURL:url];
         self.videoURLAsset          = [AVURLAsset URLAssetWithURL:playUrl options:nil];
-        [_videoURLAsset.resourceLoader setDelegate:self.resouerLoader queue:dispatch_get_main_queue()];
+      [_videoURLAsset.resourceLoader setDelegate:self.resouerLoader queue:dispatch_get_main_queue()];
+        
+//        dispatch_queue_t  queue =  dispatch_queue_create ( [str UTF8String] ,  DISPATCH_QUEUE_CONCURRENT );
+//           [_videoURLAsset.resourceLoader setDelegate:self.resouerLoader queue:queue];
+        
+        
         self.currentPlayerItem      = [AVPlayerItem playerItemWithAsset:_videoURLAsset];
         
         _isLocalVideo = NO;
+        
+      
+        
     } else {
         self.videoAsset = [AVURLAsset URLAssetWithURL:url options:nil];
         self.currentPlayerItem = [AVPlayerItem playerItemWithAsset:_videoAsset];
         _isLocalVideo = YES;
+        
+        
+      
+        
     }
     
     if (!self.player) {
@@ -231,6 +243,10 @@ typedef enum : NSUInteger {
     
     [self setVideoToolView];
     
+    if (_cachAV) {
+        [self pause];
+    }
+    
 //    [self updateOrientation];
 }
 
@@ -238,7 +254,7 @@ typedef enum : NSUInteger {
 - (void)playWithUrl:(NSURL *)url showView:(UIView *)showView andSuperView:(UIView *)superView {
     
     NSURLComponents *components = [[NSURLComponents alloc] initWithURL:url resolvingAgainstBaseURL:NO];
-    components.scheme = @"streaming";
+     components.scheme = @"streaming";
     NSURL *playUrl = [components URL];
     
       NSString *playUrl2 = [[playUrl absoluteString]  stringByReplacingOccurrencesOfString :@"/" withString:@"*"];
@@ -1113,6 +1129,7 @@ typedef enum : NSUInteger {
     self.isPauseByUser = YES;
     self.state = HCDPlayerStatePause;
     [self.player pause];
+    
 }
 
 /**
