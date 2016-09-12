@@ -10,7 +10,7 @@
 #import "AVViewController.h"
 #import "MRNavigationLabel.h"
 #import "AVfirstView.h"
-
+#import "AvCachViewController.h"
 
 #define MRScreenW [UIScreen mainScreen].bounds.size.width;
 #define MRScreenH [UIScreen mainScreen].bounds.size.height;
@@ -27,6 +27,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16],NSForegroundColorAttributeName:MainColor}];
+     self.navigationController.navigationBar.tintColor=MainColor;
+    self.navigationController.navigationBar.backgroundColor=MainColor;
+    
+    
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"缓存" style:UIBarButtonItemStylePlain target:self action:@selector(cachingAV)];
+    rightItem.tag=10;
+    self.navigationItem.rightBarButtonItem=rightItem;
+    
     
     _DataCollectionNameArray=[NSMutableArray arrayWithObjects:@"我是大大大蝴蝶花", @"我是大大大大大蝴蝶花",@"我是大大大大大大大花",@"我是大大大蝴蝶花",@"我是大大大蝴蝶花",nil];
     // float   cellWidth=SCREEN_Width/2-6*NOW_SIZE;
@@ -58,6 +68,15 @@
 }
 
 
+
+-(void)cachingAV{
+
+    AvCachViewController *goView=[[AvCachViewController alloc]init];
+    [self.navigationController pushViewController:goView animated:YES];
+
+}
+
+
 /**
  *  添加子控制器
  */
@@ -74,7 +93,7 @@
     AVfirstView *vc3 = [[AVfirstView alloc] init];
     vc3.title = @"储能机";
     [self addChildViewController:vc3];
-    
+
     AVfirstView *vc4 = [[AVfirstView alloc] init];
     vc4.title = @"推荐";
     [self addChildViewController:vc4];
@@ -82,7 +101,7 @@
     AVfirstView *vc5 = [[AVfirstView alloc] init];
     vc5.title = @"市场宣传";
     [self addChildViewController:vc5];
-    
+
     AVfirstView *vc6 = [[AVfirstView alloc] init];
     vc6.title = @"我的产品";
     [self addChildViewController:vc6];

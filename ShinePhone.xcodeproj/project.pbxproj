@@ -355,6 +355,10 @@
 		337F9E111C71C4D90016FE43 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9E101C71C4D90016FE43 /* TableViewCell.m */; };
 		33801EB31D58274D00047232 /* addStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33801EB21D58274D00047232 /* addStationViewController.m */; };
 		33801EBD1D5882D500047232 /* Growatt-2-5k.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33801EBC1D5882D500047232 /* Growatt-2-5k.jpg */; };
+		338122261D864B3700C7704B /* AvCachTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 338122251D864B3700C7704B /* AvCachTableViewCell.m */; };
+		338122291D864BF500C7704B /* AvCachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338122281D864BF500C7704B /* AvCachViewController.m */; };
+		3381222B1D864D7B00C7704B /* btn1-choose-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3381222A1D864D7B00C7704B /* btn1-choose-1.png */; };
+		3381222D1D864D8400C7704B /* btn1-choose.png in Resources */ = {isa = PBXBuildFile; fileRef = 3381222C1D864D8400C7704B /* btn1-choose.png */; };
 		3381ECE51CBC900900DCF0D2 /* EquitGraph2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ECE41CBC900900DCF0D2 /* EquitGraph2ViewController.m */; };
 		3381ECE81CBC906600DCF0D2 /* Line3View.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ECE71CBC906600DCF0D2 /* Line3View.m */; };
 		3381ECEE1CBCA3ED00DCF0D2 /* energyDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ECED1CBCA3ED00DCF0D2 /* energyDemo.m */; };
@@ -1083,6 +1087,12 @@
 		33801EB11D58274D00047232 /* addStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addStationViewController.h; sourceTree = "<group>"; };
 		33801EB21D58274D00047232 /* addStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addStationViewController.m; sourceTree = "<group>"; };
 		33801EBC1D5882D500047232 /* Growatt-2-5k.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Growatt-2-5k.jpg"; sourceTree = "<group>"; };
+		338122241D864B3700C7704B /* AvCachTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvCachTableViewCell.h; sourceTree = "<group>"; };
+		338122251D864B3700C7704B /* AvCachTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvCachTableViewCell.m; sourceTree = "<group>"; };
+		338122271D864BF500C7704B /* AvCachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvCachViewController.h; sourceTree = "<group>"; };
+		338122281D864BF500C7704B /* AvCachViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvCachViewController.m; sourceTree = "<group>"; };
+		3381222A1D864D7B00C7704B /* btn1-choose-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn1-choose-1.png"; sourceTree = "<group>"; };
+		3381222C1D864D8400C7704B /* btn1-choose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn1-choose.png"; sourceTree = "<group>"; };
 		3381ECE31CBC900900DCF0D2 /* EquitGraph2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquitGraph2ViewController.h; sourceTree = "<group>"; };
 		3381ECE41CBC900900DCF0D2 /* EquitGraph2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquitGraph2ViewController.m; sourceTree = "<group>"; };
 		3381ECE61CBC906600DCF0D2 /* Line3View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line3View.h; sourceTree = "<group>"; };
@@ -2668,6 +2678,19 @@
 			path = "图片";
 			sourceTree = "<group>";
 		};
+		338122231D864A4D00C7704B /* 缓存界面 */ = {
+			isa = PBXGroup;
+			children = (
+				338122241D864B3700C7704B /* AvCachTableViewCell.h */,
+				338122251D864B3700C7704B /* AvCachTableViewCell.m */,
+				338122271D864BF500C7704B /* AvCachViewController.h */,
+				338122281D864BF500C7704B /* AvCachViewController.m */,
+				3381222A1D864D7B00C7704B /* btn1-choose-1.png */,
+				3381222C1D864D8400C7704B /* btn1-choose.png */,
+			);
+			path = "缓存界面";
+			sourceTree = "<group>";
+		};
 		3381ECDF1CBC8F7100DCF0D2 /* 能源二级旧版 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2722,6 +2745,7 @@
 		3383ACDE1D7D43E500C2F4A3 /* 视频首页 */ = {
 			isa = PBXGroup;
 			children = (
+				338122231D864A4D00C7704B /* 缓存界面 */,
 				335667531D7E5FCD00C40129 /* 视频滚播 */,
 				3383ACDF1D7D6B3400C2F4A3 /* topAvViewController.h */,
 				3383ACE01D7D6B3400C2F4A3 /* topAvViewController.m */,
@@ -3208,6 +3232,7 @@
 				33768A9F1D475CCB00873E82 /* poweren.png in Resources */,
 				33FEFCD81C7D9DCD00324374 /* 圆角矩形3.png in Resources */,
 				33EFB68A1C9973D2003F336F /* bg3.png in Resources */,
+				3381222B1D864D7B00C7704B /* btn1-choose-1.png in Resources */,
 				338FD9841D1D2065009A128F /* first2.png in Resources */,
 				335BF1E91D100572008EEE99 /* ziliao.png in Resources */,
 				33FEFD6B1C7DB38400324374 /* iconfont-faxian@2x.png in Resources */,
@@ -3345,6 +3370,7 @@
 				33768AB01D475D0A00873E82 /* storagecn.png in Resources */,
 				33FEFD571C7DB38400324374 /* icon---Email---Full@2x.png in Resources */,
 				334FEF8C1CF45423001E6716 /* second3.png in Resources */,
+				3381222D1D864D8400C7704B /* btn1-choose.png in Resources */,
 				3363DD241C7C610A00D740FB /* 语言.png in Resources */,
 				33FEFD581C7DB38400324374 /* icon---Email---Full@3x.png in Resources */,
 				33775AF31D2E404D0070742E /* 客户.png in Resources */,
@@ -3387,6 +3413,7 @@
 			files = (
 				337042521CC4E4340069D3AA /* kongZhiNi0.m in Sources */,
 				335D69B11D77BA4D00894D90 /* HcdLoaderURLConnection.m in Sources */,
+				338122291D864BF500C7704B /* AvCachViewController.m in Sources */,
 				336D401D1D6FEA7600ECFA34 /* PinyinFormatter.m in Sources */,
 				33EFB6651C98F9B1003F336F /* NSString+Zirkfied.m in Sources */,
 				3356146A1CB397220071BAC9 /* LZPageViewController.m in Sources */,
@@ -3469,6 +3496,7 @@
 				3381ED011CBCD85700DCF0D2 /* myListSecondTableViewCell.m in Sources */,
 				335D69B51D77BA4D00894D90 /* NSString+HCD.m in Sources */,
 				3343F3C61C80403C009F69BC /* AFURLResponseSerialization.m in Sources */,
+				338122261D864B3700C7704B /* AvCachTableViewCell.m in Sources */,
 				335456BF1C852EEB00275478 /* SHBQRView.m in Sources */,
 				334FF0AE1CF53C7C001E6716 /* SIAlertView.m in Sources */,
 				335431BA1CCF549000CEAFFC /* SNLocationManager.m in Sources */,
