@@ -21,6 +21,10 @@
 
 @property (strong, nonatomic) UIScrollView *contentScrollView;
 @property(nonatomic,strong)NSMutableArray *DataCollectionNameArray;
+
+@property(nonatomic,strong)NSMutableArray *dirAll;
+@property(nonatomic,strong)NSMutableArray *dirAllId;
+
 @end
 
 @implementation topAvViewController
@@ -28,10 +32,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16],NSForegroundColorAttributeName:MainColor}];
-     self.navigationController.navigationBar.tintColor=MainColor;
-    self.navigationController.navigationBar.backgroundColor=MainColor;
-    
+//    [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16],NSForegroundColorAttributeName:MainColor}];
+//     self.navigationController.navigationBar.tintColor=MainColor;
+//    self.navigationController.navigationBar.backgroundColor=MainColor;
+
+
     
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"缓存" style:UIBarButtonItemStylePlain target:self action:@selector(cachingAV)];
     rightItem.tag=10;
@@ -56,21 +61,88 @@
     // 取消系统自动设置第一个子scrollView的contentInset
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    // 添加子控制器
-    [self addChildViewControllers];
     
-    // 添加标签栏
-    [self addNavigationLabels];
     
-    // 默认滑动到第一个tab, 显示第一个控制器view
-    [self scrollViewDidEndScrollingAnimation: self.contentScrollView];
+    
+    
+        [self getNetAv];
+    
+
+    
+
+    
+ 
+    
+}
+
+
+
+-(void)getNetAv{
+
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    NSString *_languageValue ;
+    
+    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"2";
+    }
+    
+    
+    _dirAll=[NSMutableArray array];
+        _dirAllId=[NSMutableArray array];
+    
+  NSDictionary *dicGo=[NSDictionary new];
+     dicGo=@{@"language":_languageValue} ;
+    
+    
+    [self showProgressView];
+         [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:@"/newVideoAPI.do?op=getVideoDirList" sucessBlock:^(id content) {
+             
+                 [self hideProgressView];
+        NSLog(@"getVideoDirList: %@", content);
+        NSString *resultValue=[NSString stringWithFormat:@"%@",content[@"result"]];
+        
+        if ([resultValue isEqualToString:@"1"]) {
+            
+            NSArray *objAll=[NSArray arrayWithArray:content[@"obj"]];
+            if (objAll.count>0) {
+                for (int i=0; i<objAll.count; i++) {
+                    
+                    [_dirAll addObject:objAll[i][@"dirName"]];
+                      [_dirAllId addObject:objAll[i][@"id"]];
+                }
+                
+                // 添加子控制器
+                [self addChildViewControllers];
+                // 添加标签栏
+                [self addNavigationLabels];
+                // 默认滑动到第一个tab, 显示第一个控制器view
+                [self scrollViewDidEndScrollingAnimation: self.contentScrollView];
+            }
+            
+            
+        }
+    } failure:^(NSError *error) {
+         [self hideProgressView];
+          [self showToastViewWithTitle:root_Networking];
+    }];
+    
+    
+    
+    
+    
     
 }
 
 
 
 -(void)cachingAV{
-
+    
     AvCachViewController *goView=[[AvCachViewController alloc]init];
     [self.navigationController pushViewController:goView animated:YES];
 
@@ -82,33 +154,12 @@
  */
 - (void)addChildViewControllers {
     
-    AVfirstView *vc1 = [[AVfirstView alloc] init];
-    vc1.title = @"逆变器";
-    [self addChildViewController:vc1];
-    
-    AVfirstView *vc2 = [[AVfirstView alloc] init];
-    vc2.title = @"售后";
-    [self addChildViewController:vc2];
-    
-    AVfirstView *vc3 = [[AVfirstView alloc] init];
-    vc3.title = @"储能机";
-    [self addChildViewController:vc3];
-
-    AVfirstView *vc4 = [[AVfirstView alloc] init];
-    vc4.title = @"推荐";
-    [self addChildViewController:vc4];
-    
-    AVfirstView *vc5 = [[AVfirstView alloc] init];
-    vc5.title = @"市场宣传";
-    [self addChildViewController:vc5];
-
-    AVfirstView *vc6 = [[AVfirstView alloc] init];
-    vc6.title = @"我的产品";
-    [self addChildViewController:vc6];
-    
-    AVfirstView *vc7 = [[AVfirstView alloc] init];
-    vc7.title = @"更多产品";
-    [self addChildViewController:vc7];
+    for (int i=0; i<_dirAll.count; i++) {
+         AVfirstView *vc1 = [[AVfirstView alloc] init];
+        vc1.title=_dirAll[i];
+        vc1.dirID=_dirAllId[i];
+        [self addChildViewController:vc1];
+    }
     
     
     
@@ -130,7 +181,7 @@
     
     
     
-    CGFloat width = [UIScreen mainScreen].bounds.size.width/5;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width/self.childViewControllers.count;
     
     CGFloat height = self.titleScrollView.frame.size.height;
     

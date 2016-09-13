@@ -12,4 +12,7 @@
 
 @property(nonatomic,strong)NSMutableArray *collectionNameArray;
 
+@property(nonatomic,strong)NSString *dirID;
+
+
 @end

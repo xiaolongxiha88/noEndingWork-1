@@ -608,18 +608,19 @@ NSLog(@"体验馆");
         UINavigationController *Vc2=[[UINavigationController alloc]initWithRootViewController:energyVc];
         UINavigationController *Vc1=[[UINavigationController alloc]initWithRootViewController:deviceVc];
         UINavigationController *Vc4=[[UINavigationController alloc]initWithRootViewController:meVc];
+        //Vc1.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName];
         Vc1.title=root_device;
         Vc2.title=root_energy_title;
         Vc3.title=root_service;
         Vc4.title=root_ME;
         Vc1.tabBarItem.image=[UIImage imageNamed:@"equipment@2x.png"];
-        Vc1.tabBarItem.selectedImage=[UIImage imageNamed:@"equipment@2x.png"];
+        Vc1.tabBarItem.selectedImage=[[UIImage imageNamed:@"equipment2@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         Vc2.tabBarItem.image=[UIImage imageNamed:@"energy@2x.png"];
-        Vc2.tabBarItem.selectedImage=[UIImage imageNamed:@"energy@2x.png"];
+        Vc2.tabBarItem.selectedImage=[[UIImage imageNamed:@"energy2@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         Vc3.tabBarItem.image=[UIImage imageNamed:@"server@2x.png"];
-        Vc3.tabBarItem.selectedImage=[UIImage imageNamed:@"server@2x.png"];
+        Vc3.tabBarItem.selectedImage=[[UIImage imageNamed:@"serverV@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         Vc4.tabBarItem.image=[UIImage imageNamed:@"mine@2x.png"];
-        Vc4.tabBarItem.selectedImage=[UIImage imageNamed:@"mine@2x.png"];
+        Vc4.tabBarItem.selectedImage=[[UIImage imageNamed:@"mine2@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         //Vc1.tabBarController.tabBar.selectedImageTintColor = MainColor;
         

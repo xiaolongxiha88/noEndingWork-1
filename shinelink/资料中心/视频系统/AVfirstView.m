@@ -22,6 +22,10 @@
 @property(nonatomic,strong)UILabel *label;
 @property(nonatomic,strong)NSMutableArray *searchArray;
 
+@property(nonatomic,strong)NSMutableArray *AvName;
+@property(nonatomic,strong)NSMutableArray *AvOutline;
+@property(nonatomic,strong)NSMutableArray *AvUrl;
+@property(nonatomic,strong)NSMutableArray *AvPicUrl;
 
 @end
 
@@ -32,10 +36,68 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    
+    [self getAvNet];
+    
     [self initData];
  
     [self setupUI];
     
+}
+
+
+-(void)getAvNet{
+
+    _AvName=[NSMutableArray array];
+    _AvOutline=[NSMutableArray array];
+    _AvUrl=[NSMutableArray array];
+    _AvPicUrl=[NSMutableArray array];
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    NSString *_languageValue ;
+    
+    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"2";
+    }
+    
+    NSDictionary *dicGo=[NSDictionary new];
+    dicGo=@{@"language":_languageValue,@"dirId":_dirID} ;
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:@"/newVideoAPI.do?op=getVideoInfoList" sucessBlock:^(id content) {
+        
+        [self hideProgressView];
+        NSLog(@"getVideoInfoList: %@", content);
+   NSString *resultValue=[NSString stringWithFormat:@"%@",content[@"result"]];
+        
+        if ([resultValue isEqualToString:@"1"]) {
+        
+            NSArray *objAll=[NSArray arrayWithArray:content[@"obj"]];
+            if (objAll.count>0) {
+                for (int i=0; i<objAll.count; i++) {
+                    
+                    [_AvName addObject:objAll[i][@"videoTitle"]];
+                    [_AvUrl addObject:objAll[i][@"videoPicurl"]];
+                    [_AvPicUrl addObject:objAll[i][@"videoImgurl"]];
+                    [_AvOutline addObject:objAll[i][@"videoOutline"]];
+                    
+                }
+                
+            }
+        
+        }
+        
+        
+    } failure:^(NSError *error) {
+           [self hideProgressView];
+          [self showToastViewWithTitle:root_Networking];
+    }];
+
+
 }
 
 
