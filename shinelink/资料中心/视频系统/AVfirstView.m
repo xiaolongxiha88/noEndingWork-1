@@ -11,6 +11,9 @@
 #import "NewPagedFlowView.h"
 #import "PGIndexBannerSubiew.h"
 #import "AnotherSearchViewController.h"
+#import "UIImageView+WebCache.h"
+
+
 
 #define Width [UIScreen mainScreen].bounds.size.width
 
@@ -38,9 +41,9 @@
    
     [self getAvNet];
     
-    [self initData];
+    //[self initData];
  
-    [self setupUI];
+   // [self setupUI];
     
 }
 
@@ -82,8 +85,16 @@
                     
                     [_AvName addObject:objAll[i][@"videoTitle"]];
                     [_AvUrl addObject:objAll[i][@"videoPicurl"]];
-                    [_AvPicUrl addObject:objAll[i][@"videoImgurl"]];
+                    
+                    
+                    NSString *picUrl=[NSString stringWithFormat:@"%@/%@",Head_Url_more,objAll[i][@"videoImgurl"]];
+                    
+                    [_AvPicUrl addObject:picUrl];
                     [_AvOutline addObject:objAll[i][@"videoOutline"]];
+                    
+                    if (_AvPicUrl.count==objAll.count) {
+                        [self initData];
+                    }
                     
                 }
                 
@@ -100,6 +111,22 @@
 
 }
 
+
+-(void)initData{
+    cellWidth=SCREEN_Width/2-6*NOW_SIZE;
+    
+    _searchArray = [NSMutableArray arrayWithArray:_AvName];
+    
+    _collectionNameArray=[NSMutableArray arrayWithArray:_AvName];
+    
+    
+     [self setupUI];
+    
+
+    
+    
+    
+}
 
 - (void)setupUI {
     
@@ -122,8 +149,8 @@
     _pageFlowView.backgroundColor = [UIColor whiteColor];
     _pageFlowView.delegate = self;
     _pageFlowView.dataSource = self;
-    _pageFlowView.minimumPageAlpha = 0.8;
-    _pageFlowView.minimumPageScale = 0.92;
+    _pageFlowView.minimumPageAlpha = 1;
+    _pageFlowView.minimumPageScale = 0.9;
     _pageFlowView.autoTime=5;
     
     //初始化pageControl
@@ -158,35 +185,7 @@
 
 
 
--(void)initData{
-      cellWidth=SCREEN_Width/2-6*NOW_SIZE;
-    
-    _searchArray = @[@"国服第一臭豆腐 No.1 Stinky Tofu CN.",
-                   @"瓦洛兰 Valoran",
-                   @"德玛西亚 Demacia",
-                   @"诺克萨斯 Noxus",
-                   @"艾欧尼亚 Ionia",
-                   @"皮尔特沃夫 Piltover",
-                   @"弗雷尔卓德 Freijord",
-                   @"班德尔城 Bandle City",
-                   @"战争学院 The Institute of War",
-                   @"祖安 Zaun",
-                   @"卡拉曼达 Kalamanda",
-                   @"蓝焰岛 Blue Flame Island",
-                   @"哀嚎沼泽 Howling Marsh",
-                   @"艾卡西亚 Icathia",
-                   @"铁脊山脉 Ironspike Mountains",
-                   @"库莽古丛林 Kumungu",
-                   @"洛克法 Lokfar"];
 
-    _collectionNameArray=[NSMutableArray arrayWithObjects:@"我是大大大蝴蝶花", @"我是大大大大大蝴蝶花",@"我是大大大大大大大花",@"我是大大大蝴蝶花",@"我是大大大蝴蝶花",nil];
-    
-    for (int index = 0; index < 5; index++) {
-        UIImage *image = [UIImage imageNamed:@"pic_service.png"];
-        [self.imageArray addObject:image];
-    }
-
-}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
@@ -200,7 +199,7 @@
 
 #pragma mark NewPagedFlowView Datasource
 - (NSInteger)numberOfPagesInFlowView:(NewPagedFlowView *)flowView {
-    return self.imageArray.count;
+    return self.AvPicUrl.count;
 }
 
 - (UIView *)flowView:(NewPagedFlowView *)flowView cellForPageAtIndex:(NSInteger)index{
@@ -211,8 +210,15 @@
         bannerView.layer.masksToBounds = YES;
     }
     
-    //    [bannerView.mainImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:hostUrlsImg,imageDict[@"img"]]] placeholderImage:[UIImage imageNamed:@""]];
-    bannerView.mainImageView.image = self.imageArray[index];
+     NSURL* imagePath = [NSURL URLWithString:_AvPicUrl[index]];
+    
+     [bannerView.mainImageView sd_setImageWithURL:imagePath placeholderImage:[UIImage imageNamed:@"pic_service.png"]];
+    
+      [bannerView.mainImageView sd_setImageWithURL:_AvPicUrl[index]];
+    
+   // bannerView.mainImageView.image = self.imageArray[index];
+    
+    
     bannerView.allCoverButton.tag = index;
     [bannerView.allCoverButton addTarget:self action:@selector(didSelectBannerButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -244,16 +250,20 @@
     
     NSLog(@"点击了第%ld张图",(long)index + 1);
     
-    self.indicateLabel.text = [NSString stringWithFormat:@"点击了第%ld张图",(long)index + 1];
+    // self.indicateLabel.text = [NSString stringWithFormat:@"点击了第%ld张图",(long)index + 1];
     
     
     AVViewController *goAV=[[AVViewController alloc]init];
+    goAV.AvUrl=_AvUrl[index];
+    
     [self.navigationController pushViewController:goAV animated:YES];
     
     
 }
 
 - (void)didScrollToPage:(NSInteger)pageNumber inFlowView:(NewPagedFlowView *)flowView {
+    
+     self.indicateLabel.text = _AvName[pageNumber];
     
     NSLog(@"滚动到了第%ld页",(long)pageNumber);
 }
@@ -272,7 +282,7 @@
         _indicateLabel.textColor = MainColor;
         _indicateLabel.font = [UIFont systemFontOfSize:16.0];
         _indicateLabel.textAlignment = NSTextAlignmentCenter;
-        _indicateLabel.text = @"这是一个强大的视频系统";
+        _indicateLabel.text = _AvName[0];
     }
     
     return _indicateLabel;

@@ -21,8 +21,7 @@
 @property (nonatomic, strong)UIButton *backButton;
 @property (nonatomic, strong) UILabel *contentLabel;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *tableCellName;
-@property (nonatomic, strong) NSMutableArray *tableCellPic;
+
 
 @property (nonatomic, strong) NSString *netType;
 
@@ -142,7 +141,7 @@
     line1.backgroundColor=COLOR(194, 195, 204, 0.75);
     [_scrollView2 addSubview:line1];
     
-    NSString *contentLabelText=@"这就是一个视频一个很好好好好的视频一个很好好好好的视频一个很好好好好的视频一个很好好好好的视频一个很好好好好的视频";
+    NSString *contentLabelText=_contentLabelTextValue;
     _contentLabel= [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE,20*HEIGHT_SIZE+imageButtonSiz*2,SCREEN_Width-10*NOW_SIZE,10*HEIGHT_SIZE)];
     _contentLabel.text=contentLabelText;
     _contentLabel.textColor=[UIColor blackColor];

@@ -11,5 +11,9 @@
 @interface AVViewController : RootViewController
 
 @property (nonatomic, strong) NSString *AvUrl;
+@property (nonatomic, strong) NSString *AvPicUrl;
+@property (nonatomic, strong) NSString *contentLabelTextValue;
+@property (nonatomic, strong) NSMutableArray *tableCellName;
+@property (nonatomic, strong) NSMutableArray *tableCellPic;
 
 @end
