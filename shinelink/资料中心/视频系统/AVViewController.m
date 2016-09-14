@@ -11,6 +11,7 @@
 #import "UIImage+ImageEffects.h"
 #import "AvCell.h"
 #import "Reachability.h"
+#import "UIImageView+WebCache.h"
 
 @interface AVViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -34,11 +35,12 @@
     
 
 
-    self.title = @"视频中心";
+ //   self.title = @"视频中心";
     
     //self.view.backgroundColor=MainColor;
     
-    [self initData];
+   // [self initData];
+    
     [self initUI];
     
 
@@ -86,11 +88,11 @@
 -(void)initData{
 
   // _AvUrl=@"http://cdn.growatt.com/app/xpg.mp4";
-  _AvUrl=@"http://cdn.growatt.com/app/7-20k.mp4";
+  //_AvUrl=@"http://cdn.growatt.com/app/7-20k.mp4";
 
     
-   _tableCellName =[NSMutableArray arrayWithObjects:@"我是第一个视频",@"我是第二个视频但是我很黄很暴力",@"我不是第一个视频但是我不黄不暴力",nil];
-    _tableCellPic =[NSMutableArray arrayWithObjects:@"pic_service.png",@"pic_service.png",@"pic_service.png",nil];
+   //_tableCellName =[NSMutableArray arrayWithObjects:@"我是第一个视频",@"我是第二个视频但是我很黄很暴力",@"我不是第一个视频但是我不黄不暴力",nil];
+   // _tableCellPic =[NSMutableArray arrayWithObjects:@"pic_service.png",@"pic_service.png",@"pic_service.png",nil];
 }
 
 
@@ -102,10 +104,16 @@
     // CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
     
     _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,[UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.width * 0.5625)];
-    UIImage *sourceImage = [UIImage imageNamed:@"pic_service.png"];
+    
+    //UIImage *sourceImage = [UIImage imageNamed:@"pic_service.png"];
     //UIImage *lastImage = [sourceImage applyDarkEffect];//一句代码搞定毛玻璃效果
  //   _imageView.image = lastImage;
-     _imageView.image = sourceImage;
+    // _imageView.image = sourceImage;
+    
+    NSURL* imagePath = [NSURL URLWithString:_AvPicUrl];
+    
+    [_imageView sd_setImageWithURL:imagePath placeholderImage:[UIImage imageNamed:@"pic_service.png"]];
+    
     [_imageView setUserInteractionEnabled:YES];
     [self.view addSubview:_imageView];
 
@@ -122,7 +130,7 @@
     
     _scrollView2=[[UIScrollView alloc]initWithFrame:CGRectMake(0, _imageView.frame.origin.y+_imageView.frame.size.height, SCREEN_Width, SCREEN_Height)];
     _scrollView2.scrollEnabled=YES;
-    _scrollView2.contentSize = CGSizeMake(SCREEN_Width,1050*HEIGHT_SIZE);
+   // _scrollView2.contentSize = CGSizeMake(SCREEN_Width,1050*HEIGHT_SIZE);
     [self.view addSubview:_scrollView2];
     
    float imageButtonSiz=20*HEIGHT_SIZE;
@@ -156,6 +164,9 @@
     line2.backgroundColor=COLOR(194, 195, 204, 0.75);
     [_scrollView2 addSubview:line2];
     
+    if (_tableCellName.count>0) {
+        
+    
     UILabel *nameLable= [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE,52*HEIGHT_SIZE+imageButtonSiz*2+fcRect.size.height,SCREEN_Width-10*NOW_SIZE,10*HEIGHT_SIZE)];
     nameLable.text=@"相关视频";
     nameLable.textColor=[UIColor blackColor];
@@ -166,7 +177,11 @@
     UIView *line3=[[UIView alloc]initWithFrame:CGRectMake(0,75*HEIGHT_SIZE+imageButtonSiz*2+fcRect.size.height,SCREEN_Width,4*HEIGHT_SIZE)];
     line3.backgroundColor=COLOR(194, 195, 204, 0.75);
     [_scrollView2 addSubview:line3];
+        
+    }
     
+
+    _scrollView2.contentSize = CGSizeMake(SCREEN_Width,670*HEIGHT_SIZE+fcRect.size.height);
     
     float tableViewHeight=80*HEIGHT_SIZE+imageButtonSiz*2+fcRect.size.height;
     
@@ -175,6 +190,7 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_scrollView2 addSubview:_tableView];
+    
     
 }
 
@@ -228,8 +244,13 @@
     
    //CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
     
-    
-        _play = [HcdCacheVideoPlayer sharedInstance];
+        if (!_play) {
+             _play = [HcdCacheVideoPlayer sharedInstance];
+        }
+       
+         [_play removeAllObserver];
+            [_play stop];
+        
         UIView *videoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 0.5625)];
         [self.view addSubview:videoView];
     
@@ -259,6 +280,8 @@
         
         
         _play = [HcdCacheVideoPlayer sharedInstance];
+         [_play removeAllObserver];
+        
         UIView *videoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 0.5625)];
         [self.view addSubview:videoView];
         
@@ -288,7 +311,12 @@
     if (!cell) {
         cell = [[AvCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"AVcell"];
     }
-    cell.typeImageView.image=IMAGE(_tableCellPic[indexPath.row]);
+    
+    NSURL* imagePath = [NSURL URLWithString:_tableCellPic[indexPath.row]];
+    
+    [cell.typeImageView sd_setImageWithURL:imagePath placeholderImage:[UIImage imageNamed:@"pic_service.png"]];
+    
+    //cell.typeImageView.image=IMAGE(_tableCellPic[indexPath.row]);
     cell.CellName.text=_tableCellName[indexPath.row];
     
     return cell;
@@ -308,8 +336,15 @@
 //    _AvUrl=@"http://cdn.growatt.com/app/2.mp4";
 //    [self playAV];
     
-    AVViewController *testView=[[AVViewController alloc]init];
-    [self.navigationController pushViewController:testView animated:YES];
+    AVViewController *goAV=[[AVViewController alloc]init];
+    
+    goAV.AvUrl=_tableCellUrl[indexPath.row];
+    goAV.AvPicUrl=_tableCellPic[indexPath.row];
+    goAV.contentLabelTextValue=_tableCellOutline[indexPath.row];
+    goAV.title=_tableCellName[indexPath.row];
+    
+    
+    [self.navigationController pushViewController:goAV animated:YES];
     
  }
 

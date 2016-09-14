@@ -59,7 +59,7 @@
     arrayName=@[root_ME_kefu,@"资料中心",root_ME_zengzhi,root_ME_gengduo];
     
    // arrayImage=@[@"客户服务.png",@"质保.png",@"增值服务.png",@"更多.png"];
-     arrayImage=@[@"客户服务.png",@"增值服务.png",@"增值服务.png",@"更多.png"];
+     arrayImage=@[@"客户服务.png",@"informationCenter.png",@"增值服务.png",@"更多.png"];
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.

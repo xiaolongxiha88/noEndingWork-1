@@ -30,6 +30,11 @@
 @property(nonatomic,strong)NSMutableArray *AvUrl;
 @property(nonatomic,strong)NSMutableArray *AvPicUrl;
 
+@property(nonatomic,strong)NSMutableArray *AvName2;
+@property(nonatomic,strong)NSMutableArray *AvOutline2;
+@property(nonatomic,strong)NSMutableArray *AvUrl2;
+@property(nonatomic,strong)NSMutableArray *AvPicUrl2;
+
 @end
 
 @implementation AVfirstView
@@ -54,6 +59,10 @@
     _AvOutline=[NSMutableArray array];
     _AvUrl=[NSMutableArray array];
     _AvPicUrl=[NSMutableArray array];
+    _AvName2=[NSMutableArray array];
+    _AvOutline2=[NSMutableArray array];
+    _AvUrl2=[NSMutableArray array];
+    _AvPicUrl2=[NSMutableArray array];
     
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages objectAtIndex:0];
@@ -92,8 +101,19 @@
                     [_AvPicUrl addObject:picUrl];
                     [_AvOutline addObject:objAll[i][@"videoOutline"]];
                     
+                    
+                    if (i<3) {
+                        [_AvName2 addObject:objAll[i][@"videoTitle"]];
+                        [_AvUrl2 addObject:objAll[i][@"videoPicurl"]];
+                        [_AvPicUrl2 addObject:picUrl];
+                        [_AvOutline2 addObject:objAll[i][@"videoOutline"]];
+                    }
+                    
+                    
+                    
                     if (_AvPicUrl.count==objAll.count) {
                         [self initData];
+                        [self saveData];
                     }
                     
                 }
@@ -109,6 +129,33 @@
     }];
 
 
+}
+
+
+-(void)saveData{
+
+ NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    
+    NSMutableArray *AvPicUrl3 =[NSMutableArray arrayWithArray:[userDefaultes arrayForKey:@"AvPicUrl"]];
+     NSMutableArray *AvUrl3 =[NSMutableArray arrayWithArray:[userDefaultes arrayForKey:@"AvUrl"]];
+         NSMutableArray *AvName3 =[NSMutableArray arrayWithArray:[userDefaultes arrayForKey:@"AvName"]];
+         NSMutableArray *AvOutline3 =[NSMutableArray arrayWithArray:[userDefaultes arrayForKey:@"AvOutline"]];
+    
+    for (int i=0; i<_AvName.count; i++) {
+        if (![AvName3 containsObject:_AvName[i]]) {
+            [ AvPicUrl3 addObject:_AvPicUrl[i]];
+              [ AvUrl3 addObject:_AvUrl[i]];
+             [ AvName3 addObject:_AvName[i]];
+               [ AvOutline3 addObject:_AvOutline[i]];
+        }
+        
+    }
+    
+    [userDefaultes setObject:AvPicUrl3 forKey:@"AvPicUrl"];
+       [userDefaultes setObject:AvUrl3 forKey:@"AvUrl"];
+       [userDefaultes setObject:AvName3 forKey:@"AvName"];
+       [userDefaultes setObject:AvOutline3 forKey:@"AvOutline"];
+    
 }
 
 
@@ -214,7 +261,7 @@
     
      [bannerView.mainImageView sd_setImageWithURL:imagePath placeholderImage:[UIImage imageNamed:@"pic_service.png"]];
     
-      [bannerView.mainImageView sd_setImageWithURL:_AvPicUrl[index]];
+    //  [bannerView.mainImageView sd_setImageWithURL:_AvPicUrl[index]];
     
    // bannerView.mainImageView.image = self.imageArray[index];
     
@@ -255,17 +302,25 @@
     
     AVViewController *goAV=[[AVViewController alloc]init];
     goAV.AvUrl=_AvUrl[index];
+    goAV.AvPicUrl=_AvPicUrl[index];
+    goAV.contentLabelTextValue=_AvOutline[index];
+    goAV.title=_AvName[index];
+    goAV.tableCellName=[NSMutableArray arrayWithArray:_AvName2];
+    goAV.tableCellPic=[NSMutableArray arrayWithArray:_AvPicUrl2];
+    goAV.tableCellOutline=[NSMutableArray arrayWithArray:_AvOutline2];
+    goAV.tableCellUrl=[NSMutableArray arrayWithArray:_AvUrl2];
     
     [self.navigationController pushViewController:goAV animated:YES];
     
     
 }
 
+
 - (void)didScrollToPage:(NSInteger)pageNumber inFlowView:(NewPagedFlowView *)flowView {
     
      self.indicateLabel.text = _AvName[pageNumber];
     
-    NSLog(@"滚动到了第%ld页",(long)pageNumber);
+   // NSLog(@"滚动到了第%ld页",(long)pageNumber);
 }
 
 - (NSMutableArray *)imageArray {
@@ -301,7 +356,7 @@
 //定义展示的Section的个数
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return _collectionNameArray.count;
+    return _AvName.count/2;
 }
 
 
@@ -312,11 +367,26 @@
     float cellx=3*NOW_SIZE;
     
     static NSString * CellIdentifier = @"UICollectionViewCell";
+ 
     UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    for (UIView *view in cell.contentView.subviews) {
+        if (view) {
+            [view removeFromSuperview];
+        }
+    }
+    
+    
     cell.backgroundColor =  [UIColor whiteColor];
     
+    int i=indexPath.row+2*indexPath.section;
+    
      UIImageView  * AVimageView=[[UIImageView alloc] initWithFrame:CGRectMake(cellx, 0, cellWidth,cellWidth*9/16)];
-    [ AVimageView setImage:[UIImage imageNamed:@"pic_service.png"]];
+
+    NSURL* imagePath = [NSURL URLWithString:_AvPicUrl[i]];
+    
+    [AVimageView sd_setImageWithURL:imagePath placeholderImage:[UIImage imageNamed:@"pic_service.png"]];
+    
     [cell.contentView addSubview: AVimageView];
     
     float AVimageViewH=CGRectGetMaxY(AVimageView.frame);
@@ -326,9 +396,9 @@
     AVname.textColor = MainColor;
     AVname.font=[UIFont systemFontOfSize:13 *HEIGHT_SIZE];
     AVname.numberOfLines=0;
-    AVname.text=_collectionNameArray[indexPath.row];
+    AVname.text=_AvName[i];
     AVname.textAlignment=NSTextAlignmentLeft;
-    CGRect fcRect = [_collectionNameArray[indexPath.row] boundingRectWithSize:CGSizeMake(cellWidth, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 *HEIGHT_SIZE]} context:nil];
+    CGRect fcRect = [_AvName[i] boundingRectWithSize:CGSizeMake(cellWidth, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 *HEIGHT_SIZE]} context:nil];
     AVname.frame=CGRectMake(cellx, AVimageViewH+3*HEIGHT_SIZE,  cellWidth, fcRect.size.height);
       [cell.contentView addSubview:AVname];
     
@@ -369,6 +439,25 @@
     //    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     
     //    cell.backgroundColor = [UIColor greenColor];
+    
+        int i=indexPath.row+2*indexPath.section;
+    
+    AVViewController *goAV=[[AVViewController alloc]init];
+    goAV.AvUrl=_AvUrl[i];
+    goAV.AvPicUrl=_AvPicUrl[i];
+    goAV.contentLabelTextValue=_AvOutline[i];
+    goAV.title=_AvName[i];
+    goAV.tableCellName=[NSMutableArray arrayWithArray:_AvName2];
+    goAV.tableCellPic=[NSMutableArray arrayWithArray:_AvPicUrl2];
+    goAV.tableCellOutline=[NSMutableArray arrayWithArray:_AvOutline2];
+    goAV.tableCellUrl=[NSMutableArray arrayWithArray:_AvUrl2];
+    
+    [self.navigationController pushViewController:goAV animated:YES];
+    
+    
+    
+    
+    
     NSLog(@"item======%ld",(long)indexPath.item);
     NSLog(@"row=======%ld",(long)indexPath.row);
     NSLog(@"section===%ld",(long)indexPath.section);

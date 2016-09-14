@@ -192,6 +192,8 @@
             if (isSuccess) {
                 [self clearData];
                 NSLog(@"rename success");
+                
+                
             }else{
                 NSLog(@"rename fail");
             }

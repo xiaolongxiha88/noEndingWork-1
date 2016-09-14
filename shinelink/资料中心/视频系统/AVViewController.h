@@ -13,7 +13,10 @@
 @property (nonatomic, strong) NSString *AvUrl;
 @property (nonatomic, strong) NSString *AvPicUrl;
 @property (nonatomic, strong) NSString *contentLabelTextValue;
+
 @property (nonatomic, strong) NSMutableArray *tableCellName;
 @property (nonatomic, strong) NSMutableArray *tableCellPic;
+@property(nonatomic,strong)NSMutableArray *tableCellOutline;
+@property(nonatomic,strong)NSMutableArray *tableCellUrl;
 
 @end

@@ -8,6 +8,8 @@
 
 #import "AvCachViewController.h"
 #import "AvCachTableViewCell.h"
+#import "UIImageView+WebCache.h"
+#import "AVViewController.h"
 
 #define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREENHEIGHT [UIScreen mainScreen].bounds.size.height
@@ -24,6 +26,10 @@
 /** 标记是否全选 */
 @property (nonatomic ,assign)BOOL isSelected;
 @property (nonatomic, strong) NSMutableArray *tableCellPic;
+@property (nonatomic, strong) NSMutableArray *tableCellName;
+@property (nonatomic, strong) NSMutableArray *tableCellUrl;
+@property (nonatomic, strong) NSMutableArray *tableCellContent;
+
 
 @property (nonatomic, strong) NSMutableArray *cachWay;
 @property (nonatomic, strong)NSFileManager *fileManager;
@@ -83,7 +89,21 @@
     _dataArray = [NSMutableArray array];
      _tableCellPic = [NSMutableArray array];
     _cachWay=[NSMutableArray array];
+    
+     _tableCellName=[NSMutableArray array];
+     _tableCellUrl=[NSMutableArray array];
+     _tableCellContent=[NSMutableArray array];
+    
 //    _tableCellPic =[NSMutableArray arrayWithObjects:@"pic_service.png",@"pic_service.png",@"pic_service.png",nil];
+    
+    
+    NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+    NSMutableArray *AvPicUrl3 =[NSMutableArray arrayWithArray:[userDefaultes arrayForKey:@"AvPicUrl"]];
+    NSMutableArray *AvUrl3 =[NSMutableArray arrayWithArray:[userDefaultes arrayForKey:@"AvUrl"]];
+    NSMutableArray *AvName3 =[NSMutableArray arrayWithArray:[userDefaultes arrayForKey:@"AvName"]];
+    NSMutableArray *AvOutline3 =[NSMutableArray arrayWithArray:[userDefaultes arrayForKey:@"AvOutline"]];
+    
+    
     
     _fileManager=[NSFileManager defaultManager];
     //这里自己写需要保存数据的路径
@@ -108,9 +128,25 @@
           
             if (![AvName isEqualToString:@"temp"]) {
                 
-                [_cachWay addObject:absolutePath];
-                [_dataArray addObject:AvName];
-                [_tableCellPic addObject:@"pic_service.png"];
+                for (int i=0; i<AvUrl3.count; i++) {
+                    
+                    NSString *AV=[NSString stringWithFormat:@"%@",AvUrl3[i]];
+                    
+                    
+                    if( [AV containsString:AvName]){
+                        [_tableCellName addObject:AvName3[i]];
+                         [_tableCellUrl addObject:AvUrl3[i]];
+                         [_tableCellPic addObject:AvPicUrl3[i]];
+                          [_dataArray addObject:AvName3[i]];
+                             [_cachWay addObject:absolutePath];
+                        [_tableCellContent addObject:AvOutline3[i]];
+                        
+                    }
+                    
+                }
+                
+           
+        
                 
             }
             
@@ -120,7 +156,7 @@
         }
     }
     
-    
+   
     
 
     
@@ -169,19 +205,33 @@
         if (alertView.tag == 1002) {
             if (buttonIndex==1) {
                 
+                
     NSMutableArray *deleteArrarys = [NSMutableArray array];
     NSMutableArray *deleteArrarys2 = [NSMutableArray array];
     NSMutableArray *deleteArrarys3 = [NSMutableArray array];
+                    NSMutableArray *deleteArrarys4 = [NSMutableArray array];
+                
+                    NSMutableArray *deleteArrarys6 = [NSMutableArray array];
+                    NSMutableArray *deleteArrarys7 = [NSMutableArray array];
+                
     
     for (NSIndexPath *indexPath in self.myTableView.indexPathsForSelectedRows) {
         [deleteArrarys addObject:self.dataArray[indexPath.row]];
         [deleteArrarys2 addObject:self.tableCellPic[indexPath.row]];
         [deleteArrarys3 addObject:self.cachWay[indexPath.row]];
+              [deleteArrarys4 addObject:_tableCellUrl[indexPath.row]];
+       
+         [deleteArrarys6 addObject:_tableCellContent[indexPath.row]];
+         [deleteArrarys7 addObject:_tableCellName[indexPath.row]];
     }
     [UIView animateWithDuration:0 animations:^{
         [self.dataArray removeObjectsInArray:deleteArrarys];
         [self.tableCellPic removeObjectsInArray:deleteArrarys2];
         [self.cachWay removeObjectsInArray:deleteArrarys3];
+         [_tableCellUrl removeObjectsInArray:deleteArrarys4];
+     
+         [_tableCellContent removeObjectsInArray:deleteArrarys6];
+         [_tableCellName removeObjectsInArray:deleteArrarys7];
         
         for (int i=0;i<deleteArrarys3.count; i++) {
             [_fileManager removeItemAtPath:deleteArrarys3[i] error:nil];
@@ -228,19 +278,48 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     AvCachTableViewCell *cell = [AvCachTableViewCell creatWithTableView:tableView];
-    cell.typeImageView.image=IMAGE(_tableCellPic[indexPath.row]);
+   // cell.typeImageView.image=IMAGE(_tableCellPic[indexPath.row]);
+    
+    NSURL* imagePath = [NSURL URLWithString:_tableCellPic[indexPath.row]];
+    [cell.typeImageView sd_setImageWithURL:imagePath placeholderImage:[UIImage imageNamed:@"pic_service.png"]];
+    
     cell.CellName.text=_dataArray[indexPath.row];
     
 //    cell.numLabel.text = [NSString stringWithFormat:@"%ld",(long)indexPath.row];
 //    cell.textLabels.text=self.dataArray[indexPath.row];
     return cell;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+
+    
+    AVViewController *goAV=[[AVViewController alloc]init];
+    
+    goAV.AvUrl=_tableCellUrl[indexPath.row];
+    goAV.AvPicUrl=_tableCellPic[indexPath.row];
+    goAV.contentLabelTextValue=_tableCellContent[indexPath.row];
+    goAV.title=_tableCellName[indexPath.row];
+    
+    
+    [self.navigationController pushViewController:goAV animated:YES];
+    
+}
+
+
 #pragma mark - 左滑删除
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
         [self.dataArray removeObjectAtIndex:indexPath.row];
         [self.tableCellPic removeObjectAtIndex:indexPath.row];
+         [_tableCellUrl removeObjectAtIndex:indexPath.row];
+
+          [_tableCellContent removeObjectAtIndex:indexPath.row];
+          [_tableCellName removeObjectAtIndex:indexPath.row];
+        
+
         
          [_fileManager removeItemAtPath:_cachWay[indexPath.row] error:nil];
         
