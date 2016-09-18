@@ -50,32 +50,35 @@
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *regLanguage = [languages objectAtIndex:0];
     
-    if ([regLanguage isEqualToString:@"en-CN"]) {
+ 
+    
+    
+    if ([regLanguage hasPrefix:@"en"]) {
             [_dataDic setObject:@"en" forKey:@"regLanguage"];
-    }else if ([regLanguage isEqualToString:@"zh-Hans-CN"]){
+    }else if ([regLanguage hasPrefix:@"zh-Hans"]){
           [_dataDic setObject:@"zh_cn" forKey:@"regLanguage"];
-    }else if ([regLanguage isEqualToString:@"fr-CN"]){
+    }else if ([regLanguage hasPrefix:@"fr"]){
         [_dataDic setObject:@"fr" forKey:@"regLanguage"];
     }
-    else if ([regLanguage isEqualToString:@"ja-CN"]){
+    else if ([regLanguage hasPrefix:@"ja"]){
         [_dataDic setObject:@"ja" forKey:@"regLanguage"];
     }
-    else if ([regLanguage isEqualToString:@"it-CN"]){
+    else if ([regLanguage hasPrefix:@"it"]){
         [_dataDic setObject:@"it" forKey:@"regLanguage"];
     }
-    else if ([regLanguage isEqualToString:@"nl-CN"]){
+    else if ([regLanguage hasPrefix:@"nl"]){
         [_dataDic setObject:@"ho" forKey:@"regLanguage"];
     }
-    else if ([regLanguage isEqualToString:@"tr-CN"]){
+    else if ([regLanguage hasPrefix:@"tr"]){
         [_dataDic setObject:@"tk" forKey:@"regLanguage"];
     }
-    else if ([regLanguage isEqualToString:@"pl-CN"]){
+    else if ([regLanguage hasPrefix:@"pl"]){
         [_dataDic setObject:@"pl" forKey:@"regLanguage"];
     }
-    else if ([regLanguage isEqualToString:@"el-CN"]){
+    else if ([regLanguage hasPrefix:@"el"]){
         [_dataDic setObject:@"gk" forKey:@"regLanguage"];
     }
-    else if ([regLanguage isEqualToString:@"de-CN"]){
+    else if ([regLanguage hasPrefix:@"de"]){
         [_dataDic setObject:@"gm" forKey:@"regLanguage"];
     }else{
          [_dataDic setObject:@"en" forKey:@"regLanguage"];

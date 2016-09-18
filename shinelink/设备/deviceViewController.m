@@ -168,14 +168,16 @@
     
    
     
-    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
-        nowLanguage=@"ch";
-    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
-        nowLanguage=@"en";
-    }else{
-        nowLanguage=@"en";
-    }
+   
 
+    
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+        nowLanguage=@"0";
+    }else if ([currentLanguage hasPrefix:@"en"]) {
+        nowLanguage=@"1";
+    }else{
+        nowLanguage=@"2";
+    }
     
     
     NSString *coreEnable=[UserInfo defaultUserInfo].coreDataEnable;
@@ -1139,12 +1141,12 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
     NSString *currentLanguage = [languages objectAtIndex:0];
     
     NSString *_languageValue;
-    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
         _languageValue=@"0";
-    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
+    }else if ([currentLanguage hasPrefix:@"en"]) {
         _languageValue=@"1";
     }else{
-        _languageValue=@"1";
+        _languageValue=@"2";
     }
 
     

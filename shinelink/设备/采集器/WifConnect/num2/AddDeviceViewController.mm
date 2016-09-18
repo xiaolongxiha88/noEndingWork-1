@@ -98,9 +98,6 @@ static void *context = NULL;
     noticeLable.textColor=[UIColor whiteColor];
     noticeLable.numberOfLines=0;
     noticeLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    //    _connectModemLabel.layer.borderWidth=1;
-    //    _connectModemLabel.layer.cornerRadius=5;
-    //    _connectModemLabel.layer.borderColor=[UIColor whiteColor].CGColor;
     [_scrollView addSubview:noticeLable];
     
      UILabel *wifiName=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 5*HEIGHT_SIZE, 100*NOW_SIZE,50*HEIGHT_SIZE )];
@@ -263,22 +260,39 @@ static void *context = NULL;
     NSLog(@"OnSend: ssid = %s, authmode = %d, password = %s", ssid, authmode, password);
     if (context)
     {
-        elianStop(context);
-        elianDestroy(context);
+        
+        
+        //////// ////////////////// ////////////////////////////////
+        //////////////////////   ////////////////////////////注销1
+        /////elianStop(context);
+       ///// elianDestroy(context);
+        
+        
+        
         context = NULL;
     }
     
-    context = elianNew(NULL, 0, target, flag);
+    //////// ////////////////// ////////////////////////////////
+    //////////////////////   ////////////////////////////注销2
+   // context = elianNew(NULL, 0, target, flag);
+    
+    
     if (context == NULL)
     {
         NSLog(@"OnSend elianNew fail");
         return;
     }
     
-    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
-    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
-    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
-    elianStart(context);
+    
+    
+    //////// ////////////////// ////////////////////////////////
+    //////////////////////   ////////////////////////////注销3
+    
+   // elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
+   // elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
+    //elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
+   // elianStart(context);
+    
    
 }
 
@@ -313,11 +327,6 @@ static void *context = NULL;
     
     
     
-  // int  currentCount =0;
-    
-   // NSString *A1= NSLocalizedString(@"A1", nil);
-    //NSString *A2 = NSLocalizedString(@"A2", nil);
-   // NSString *A3= NSLocalizedString(@"A3", nil);
     
      myAlertView = [[SIAlertView alloc] initWithTitle:root_Alet_user andMessage:root_peizhi_shinewifi_peizhi_tishi];
     [myAlertView addButtonWithTitle:root_cancel
@@ -446,8 +455,15 @@ static void *context = NULL;
 
 -(void)stopSmartConfig{
     if (context!=nil) {
-        elianStop(context);
-        elianDestroy(context);
+        
+        
+        
+        //////// ////////////////// ////////////////////////////////
+        //////////////////////   ////////////////////////////注销4
+      /////  elianStop(context);
+     ////   elianDestroy(context);
+        
+        
     }
    
     context = NULL;
@@ -457,6 +473,7 @@ static void *context = NULL;
 -(void)stopSearch{
     
     if (_timelineConfig!=nil &&[_timelineConfig hasStarted]) {
+        
         [_timelineConfig stop];
          _timelineConfig = nil;
     }
@@ -465,8 +482,13 @@ static void *context = NULL;
         {
             NSLog(@"查找完成");
             
-            elianStop(context);
-            elianDestroy(context);
+           
+          //////// ////////////////// ////////////////////////////////
+         //////////////////////   ////////////////////////////注销5
+           // elianStop(context);
+         //  elianDestroy(context);
+            
+            
             context = NULL;
         }
         

@@ -45,12 +45,15 @@
     
     NSMutableArray *imageName=[NSMutableArray array];
     
-    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+    
+ 
+    
+    if ([currentLanguage hasPrefix:@"zh-Hans"] ){
         [imageName addObject:@"first1.jpg"];
         [imageName addObject:@"first1.jpg"];
         [imageName addObject:@"first2.png"];
         [imageName addObject:@"first3.png"];
-    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
+    }else if ([currentLanguage hasPrefix:@"en"]) {
         [imageName addObject:@"second1.png"];
          [imageName addObject:@"second1.png"];
          [imageName addObject:@"second2.png"];

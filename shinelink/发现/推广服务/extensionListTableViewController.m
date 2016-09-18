@@ -47,12 +47,12 @@
     NSString *currentLanguage = [languages objectAtIndex:0];
     
    
-    if ([currentLanguage isEqualToString:@"zh-Hans-CN"]) {
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
         _languageValue=@"0";
-    }else if ([currentLanguage isEqualToString:@"en-CN"]) {
+    }else if ([currentLanguage hasPrefix:@"en"]) {
         _languageValue=@"1";
     }else{
-    _languageValue=@"2";
+        _languageValue=@"2";
     }
     
        [self showProgressView];
