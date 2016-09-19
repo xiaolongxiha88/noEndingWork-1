@@ -308,6 +308,11 @@
 		336F1A231D88E46900CD4C2B /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F1A131D88E46900CD4C2B /* UIView+WebCacheOperation.m */; };
 		336F1A251D895C2A00CD4C2B /* informationCenter.png in Resources */ = {isa = PBXBuildFile; fileRef = 336F1A241D895C2A00CD4C2B /* informationCenter.png */; };
 		337042521CC4E4340069D3AA /* kongZhiNi0.m in Sources */ = {isa = PBXBuildFile; fileRef = 337042511CC4E4340069D3AA /* kongZhiNi0.m */; };
+		337079191D8FC78500D7DA98 /* InfoCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337079181D8FC78500D7DA98 /* InfoCenterViewController.m */; };
+		3370791D1D8FD80300D7DA98 /* question.png in Resources */ = {isa = PBXBuildFile; fileRef = 3370791B1D8FD80300D7DA98 /* question.png */; };
+		3370791E1D8FD80300D7DA98 /* video.png in Resources */ = {isa = PBXBuildFile; fileRef = 3370791C1D8FD80300D7DA98 /* video.png */; };
+		337079201D8FD80B00D7DA98 /* Installation-Manual.png in Resources */ = {isa = PBXBuildFile; fileRef = 3370791F1D8FD80B00D7DA98 /* Installation-Manual.png */; };
+		337079221D8FD81100D7DA98 /* company.png in Resources */ = {isa = PBXBuildFile; fileRef = 337079211D8FD81100D7DA98 /* company.png */; };
 		33724D9D1CFE85FB005F3965 /* pic_service.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9C1CFE85FB005F3965 /* pic_service.png */; };
 		33724D9F1CFE89BE005F3965 /* touxiang.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9E1CFE89BE005F3965 /* touxiang.png */; };
 		33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */; };
@@ -1043,6 +1048,12 @@
 		336F1A241D895C2A00CD4C2B /* informationCenter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = informationCenter.png; sourceTree = "<group>"; };
 		337042501CC4E4340069D3AA /* kongZhiNi0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kongZhiNi0.h; sourceTree = "<group>"; };
 		337042511CC4E4340069D3AA /* kongZhiNi0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = kongZhiNi0.m; sourceTree = "<group>"; };
+		337079171D8FC78500D7DA98 /* InfoCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoCenterViewController.h; sourceTree = "<group>"; };
+		337079181D8FC78500D7DA98 /* InfoCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoCenterViewController.m; sourceTree = "<group>"; };
+		3370791B1D8FD80300D7DA98 /* question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = question.png; sourceTree = "<group>"; };
+		3370791C1D8FD80300D7DA98 /* video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video.png; sourceTree = "<group>"; };
+		3370791F1D8FD80B00D7DA98 /* Installation-Manual.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Installation-Manual.png"; sourceTree = "<group>"; };
+		337079211D8FD81100D7DA98 /* company.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = company.png; sourceTree = "<group>"; };
 		33724D9C1CFE85FB005F3965 /* pic_service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pic_service.png; path = "../发现/pic_service.png"; sourceTree = "<group>"; };
 		33724D9E1CFE89BE005F3965 /* touxiang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = touxiang.png; path = "../我/touxiang.png"; sourceTree = "<group>"; };
 		33744DE21CAE597A0065DC01 /* pvLogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pvLogTableViewCell.h; sourceTree = "<group>"; };
@@ -2093,6 +2104,8 @@
 			isa = PBXGroup;
 			children = (
 				335D69951D77B87500894D90 /* 视频系统 */,
+				337079171D8FC78500D7DA98 /* InfoCenterViewController.h */,
+				337079181D8FC78500D7DA98 /* InfoCenterViewController.m */,
 			);
 			path = "资料中心";
 			sourceTree = "<group>";
@@ -2100,6 +2113,7 @@
 		335D69951D77B87500894D90 /* 视频系统 */ = {
 			isa = PBXGroup;
 			children = (
+				3370791A1D8FD7DA00D7DA98 /* 视频图片 */,
 				3383ACDE1D7D43E500C2F4A3 /* 视频首页 */,
 				335D69971D77BA4D00894D90 /* HcdCachePlayer */,
 				335D69E51D77BD0500894D90 /* AVViewController.h */,
@@ -2409,6 +2423,17 @@
 				336F1A131D88E46900CD4C2B /* UIView+WebCacheOperation.m */,
 			);
 			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		3370791A1D8FD7DA00D7DA98 /* 视频图片 */ = {
+			isa = PBXGroup;
+			children = (
+				3370791B1D8FD80300D7DA98 /* question.png */,
+				3370791C1D8FD80300D7DA98 /* video.png */,
+				3370791F1D8FD80B00D7DA98 /* Installation-Manual.png */,
+				337079211D8FD81100D7DA98 /* company.png */,
+			);
+			path = "视频图片";
 			sourceTree = "<group>";
 		};
 		3376ED5A1D12A2DD009526B4 /* 图片8 */ = {
@@ -3443,6 +3468,7 @@
 				3355F25E1C741AC3006DDE5A /* client.png in Resources */,
 				33FEFD751C7DB38400324374 /* iconfont-shouji.png in Resources */,
 				338990AD1CEAB58100A708F8 /* bianhao.png in Resources */,
+				337079201D8FD80B00D7DA98 /* Installation-Manual.png in Resources */,
 				336664EE1CB77CD3005573FB /* update@3x.png in Resources */,
 				33EFB6861C99737C003F336F /* 数据.png in Resources */,
 				335614A41CB3E0210071BAC9 /* frame4@2x.png in Resources */,
@@ -3463,6 +3489,8 @@
 				33FEFCD21C7D8A9500324374 /* Address.plist in Resources */,
 				334AED581CA37569007E39F3 /* 客户服务.png in Resources */,
 				33775AF11D2E40290070742E /* 客服.png in Resources */,
+				3370791E1D8FD80300D7DA98 /* video.png in Resources */,
+				3370791D1D8FD80300D7DA98 /* question.png in Resources */,
 				3383F1341C9FF7370075E834 /* connected@2x.png in Resources */,
 				334AED5A1CA37577007E39F3 /* 质保查询.png in Resources */,
 				335456C91C853C2F00275478 /* scanscanBg.png in Resources */,
@@ -3499,6 +3527,7 @@
 				33FEFD581C7DB38400324374 /* icon---Email---Full@3x.png in Resources */,
 				33775AF31D2E404D0070742E /* 客户.png in Resources */,
 				3381ECF71CBCA62700DCF0D2 /* 峰谷段动作使能切图.png in Resources */,
+				337079221D8FD81100D7DA98 /* company.png in Resources */,
 				336664FC1CB78CF0005573FB /* bg5.png in Resources */,
 				334AED661CA3774C007E39F3 /* 密码3.png in Resources */,
 				33FEFD6E1C7DB38400324374 /* iconfont-gongsijianjie@3x.png in Resources */,
@@ -3593,6 +3622,7 @@
 				3319E08D1D5AFB39006623A9 /* LWLoadingView.m in Sources */,
 				3367CB501C86806700EF460C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				336F1A141D88E46900CD4C2B /* MKAnnotationView+WebCache.m in Sources */,
+				337079191D8FC78500D7DA98 /* InfoCenterViewController.m in Sources */,
 				3383EF9F1C9F8A6F0075E834 /* MJRefreshGifHeader.m in Sources */,
 				33C5E2291D4AFB1C00A0DB00 /* moreBigImage.m in Sources */,
 				336F1A1B1D88E46900CD4C2B /* SDWebImageManager.m in Sources */,
@@ -3943,6 +3973,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DFM3SPMA69;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/shinelink/PrefixHeader.pch";
 				INFOPLIST_FILE = shinelink/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -3965,6 +3996,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DFM3SPMA69;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/shinelink/PrefixHeader.pch";
 				INFOPLIST_FILE = shinelink/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

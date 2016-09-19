@@ -50,6 +50,10 @@ typedef NS_ENUM(NSInteger, HCDPlayerState) {
 
 + (instancetype)sharedInstance;
 
+
+
+
+
 /**
  *  播放服务器的视频，先判断本地是否有缓存文件，缓存文件名为连接的url经过md5加密后生成的字符串
  *

@@ -8,7 +8,7 @@
 
 #import "findViewController.h"
 #import "findTableViewCell.h"
-#define Kwidth [UIScreen mainScreen].bounds.size.width
+
 #import "listViewController.h"
 #import "commonTableViewController.h"
 #import "LZPageViewController.h"
@@ -17,8 +17,10 @@
 #import "extensionListTableViewController.h"
 #import "HtmlCommon.h"
 #import "topAvViewController.h"
+#import "InfoCenterViewController.h"
 
 
+#define Kwidth [UIScreen mainScreen].bounds.size.width
 @interface findViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property(nonatomic,strong)NSMutableArray *imageArray;
 @property(nonatomic,strong)NSMutableArray *imageDataArray;
@@ -359,10 +361,10 @@
 ////         page2.title=root_ME_zhibao;
 ////        [self.navigationController pushViewController:page2 animated:NO];
         
-        
-        topAvViewController *testView=[[topAvViewController alloc]init];
-                testView.hidesBottomBarWhenPushed=YES;
+        InfoCenterViewController *testView=[[InfoCenterViewController alloc]init];
+        testView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:testView animated:YES];
+ 
         
     }
     else if (indexPath.row==2){

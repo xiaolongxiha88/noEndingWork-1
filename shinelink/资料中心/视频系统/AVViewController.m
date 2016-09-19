@@ -244,12 +244,14 @@
     
    //CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
     
-        if (!_play) {
-             _play = [HcdCacheVideoPlayer sharedInstance];
-        }
+      
        
          [_play removeAllObserver];
             [_play stop];
+        
+        if (!_play) {
+            _play = [HcdCacheVideoPlayer sharedInstance];
+        }
         
         UIView *videoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 0.5625)];
         [self.view addSubview:videoView];
@@ -278,9 +280,14 @@
         
         //CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
         
+        [_play removeAllObserver];
+        [_play stop];
         
-        _play = [HcdCacheVideoPlayer sharedInstance];
-         [_play removeAllObserver];
+        if (!_play) {
+            _play = [HcdCacheVideoPlayer sharedInstance];
+        }
+        
+     
         
         UIView *videoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 0.5625)];
         [self.view addSubview:videoView];
@@ -350,6 +357,8 @@
 
 
 -(void)viewDidDisappear:(BOOL)animated{
+    
+    
     
     
      [_play removeAllObserver];
