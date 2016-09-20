@@ -313,6 +313,13 @@
 		3370791E1D8FD80300D7DA98 /* video.png in Resources */ = {isa = PBXBuildFile; fileRef = 3370791C1D8FD80300D7DA98 /* video.png */; };
 		337079201D8FD80B00D7DA98 /* Installation-Manual.png in Resources */ = {isa = PBXBuildFile; fileRef = 3370791F1D8FD80B00D7DA98 /* Installation-Manual.png */; };
 		337079221D8FD81100D7DA98 /* company.png in Resources */ = {isa = PBXBuildFile; fileRef = 337079211D8FD81100D7DA98 /* company.png */; };
+		337079351D8FFC6E00D7DA98 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 337079341D8FFC6E00D7DA98 /* Reveal.framework */; };
+		3370793C1D910FEC00D7DA98 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 337079391D910FEC00D7DA98 /* NJKWebViewProgress.m */; };
+		3370793D1D910FEC00D7DA98 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3370793B1D910FEC00D7DA98 /* NJKWebViewProgressView.m */; };
+		3370793F1D910FF500D7DA98 /* QZBaseWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3370793E1D910FF500D7DA98 /* QZBaseWebVC.m */; };
+		337079441D911F5800D7DA98 /* questionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337079431D911F5800D7DA98 /* questionView.m */; };
+		337079471D91397800D7DA98 /* QuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 337079461D91397800D7DA98 /* QuestionTableViewCell.m */; };
+		337079491D913D9600D7DA98 /* question_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 337079481D913D9600D7DA98 /* question_icon.png */; };
 		33724D9D1CFE85FB005F3965 /* pic_service.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9C1CFE85FB005F3965 /* pic_service.png */; };
 		33724D9F1CFE89BE005F3965 /* touxiang.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9E1CFE89BE005F3965 /* touxiang.png */; };
 		33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */; };
@@ -1054,6 +1061,18 @@
 		3370791C1D8FD80300D7DA98 /* video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video.png; sourceTree = "<group>"; };
 		3370791F1D8FD80B00D7DA98 /* Installation-Manual.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Installation-Manual.png"; sourceTree = "<group>"; };
 		337079211D8FD81100D7DA98 /* company.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = company.png; sourceTree = "<group>"; };
+		337079341D8FFC6E00D7DA98 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		337079381D910FEC00D7DA98 /* NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgress.h; sourceTree = "<group>"; };
+		337079391D910FEC00D7DA98 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
+		3370793A1D910FEC00D7DA98 /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
+		3370793B1D910FEC00D7DA98 /* NJKWebViewProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgressView.m; sourceTree = "<group>"; };
+		3370793E1D910FF500D7DA98 /* QZBaseWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QZBaseWebVC.m; sourceTree = "<group>"; };
+		337079401D910FFD00D7DA98 /* QZBaseWebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QZBaseWebVC.h; sourceTree = "<group>"; };
+		337079421D911F5800D7DA98 /* questionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = questionView.h; sourceTree = "<group>"; };
+		337079431D911F5800D7DA98 /* questionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = questionView.m; sourceTree = "<group>"; };
+		337079451D91397800D7DA98 /* QuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTableViewCell.h; sourceTree = "<group>"; };
+		337079461D91397800D7DA98 /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
+		337079481D913D9600D7DA98 /* question_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = question_icon.png; sourceTree = "<group>"; };
 		33724D9C1CFE85FB005F3965 /* pic_service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pic_service.png; path = "../发现/pic_service.png"; sourceTree = "<group>"; };
 		33724D9E1CFE89BE005F3965 /* touxiang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = touxiang.png; path = "../我/touxiang.png"; sourceTree = "<group>"; };
 		33744DE21CAE597A0065DC01 /* pvLogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pvLogTableViewCell.h; sourceTree = "<group>"; };
@@ -1374,6 +1393,7 @@
 				33340F7B1D6D71EE00909BBF /* WebKit.framework in Frameworks */,
 				337532F31D051C14009CE66F /* libz.tbd in Frameworks */,
 				335C9D291D011FA4008C977A /* AdSupport.framework in Frameworks */,
+				337079351D8FFC6E00D7DA98 /* Reveal.framework in Frameworks */,
 				335C9D271D011F8C008C977A /* Security.framework in Frameworks */,
 				335C9D251D011F82008C977A /* UIKit.framework in Frameworks */,
 				335C9D231D011F74008C977A /* Foundation.framework in Frameworks */,
@@ -2078,6 +2098,7 @@
 		335C9D2A1D011FCA008C977A /* 框架 */ = {
 			isa = PBXGroup;
 			children = (
+				337079341D8FFC6E00D7DA98 /* Reveal.framework */,
 				335D69E31D77BC2800894D90 /* MobileCoreServices.framework */,
 				335D69E11D77BC0B00894D90 /* AVFoundation.framework */,
 				3353B19E1CA116FF00577595 /* CoreData.framework */,
@@ -2103,6 +2124,8 @@
 		335D69941D77B84B00894D90 /* 资料中心 */ = {
 			isa = PBXGroup;
 			children = (
+				337079411D911EB000D7DA98 /* 常见问题2 */,
+				337079361D910FC700D7DA98 /* 官网 */,
 				335D69951D77B87500894D90 /* 视频系统 */,
 				337079171D8FC78500D7DA98 /* InfoCenterViewController.h */,
 				337079181D8FC78500D7DA98 /* InfoCenterViewController.m */,
@@ -2434,6 +2457,39 @@
 				337079211D8FD81100D7DA98 /* company.png */,
 			);
 			path = "视频图片";
+			sourceTree = "<group>";
+		};
+		337079361D910FC700D7DA98 /* 官网 */ = {
+			isa = PBXGroup;
+			children = (
+				337079401D910FFD00D7DA98 /* QZBaseWebVC.h */,
+				3370793E1D910FF500D7DA98 /* QZBaseWebVC.m */,
+				337079371D910FEC00D7DA98 /* NJKWebViewProgress */,
+			);
+			path = "官网";
+			sourceTree = "<group>";
+		};
+		337079371D910FEC00D7DA98 /* NJKWebViewProgress */ = {
+			isa = PBXGroup;
+			children = (
+				337079381D910FEC00D7DA98 /* NJKWebViewProgress.h */,
+				337079391D910FEC00D7DA98 /* NJKWebViewProgress.m */,
+				3370793A1D910FEC00D7DA98 /* NJKWebViewProgressView.h */,
+				3370793B1D910FEC00D7DA98 /* NJKWebViewProgressView.m */,
+			);
+			path = NJKWebViewProgress;
+			sourceTree = "<group>";
+		};
+		337079411D911EB000D7DA98 /* 常见问题2 */ = {
+			isa = PBXGroup;
+			children = (
+				337079481D913D9600D7DA98 /* question_icon.png */,
+				337079421D911F5800D7DA98 /* questionView.h */,
+				337079431D911F5800D7DA98 /* questionView.m */,
+				337079451D91397800D7DA98 /* QuestionTableViewCell.h */,
+				337079461D91397800D7DA98 /* QuestionTableViewCell.m */,
+			);
+			path = "常见问题2";
 			sourceTree = "<group>";
 		};
 		3376ED5A1D12A2DD009526B4 /* 图片8 */ = {
@@ -3321,6 +3377,7 @@
 				33768AAF1D475D0A00873E82 /* storagebgen.png in Resources */,
 				334FF0951CF53C7C001E6716 /* Documentation.html in Resources */,
 				334771001C9A3E57003A6F13 /* mine@2x.png in Resources */,
+				337079491D913D9600D7DA98 /* question_icon.png in Resources */,
 				33FEFD651C7DB38400324374 /* icon@2x.png in Resources */,
 				33692BF11C926B4500698375 /* rili.png in Resources */,
 				33EFB63F1C97E875003F336F /* 设备切图.png in Resources */,
@@ -3706,6 +3763,7 @@
 				334ED7011C9028BB0095FFBC /* secondViewController.m in Sources */,
 				335D69AD1D77BA4D00894D90 /* HcdAudioPlayer.m in Sources */,
 				334FF0911CF53C7C001E6716 /* GCDAsyncSocket.m in Sources */,
+				3370793D1D910FEC00D7DA98 /* NJKWebViewProgressView.m in Sources */,
 				336F1A1D1D88E46900CD4C2B /* UIButton+WebCache.m in Sources */,
 				33528FF01C83E41D00D07889 /* listViewController.m in Sources */,
 				335BF1F01D1008D5008EEE99 /* messgeSecondViewController.m in Sources */,
@@ -3728,6 +3786,7 @@
 				3367CB4A1C86806600EF460C /* MASConstraint.m in Sources */,
 				3343F3E51C805BBF009F69BC /* FXBlurView.m in Sources */,
 				3367CB4B1C86806600EF460C /* MASConstraintMaker.m in Sources */,
+				337079471D91397800D7DA98 /* QuestionTableViewCell.m in Sources */,
 				334FF0941CF53C7C001E6716 /* AsyncUdpSocket.m in Sources */,
 				3355DB971CE432CD0042F627 /* Common2ViewController.m in Sources */,
 				334ED7041C902AE60095FFBC /* CircleView.m in Sources */,
@@ -3752,10 +3811,12 @@
 				334FF0991CF53C7C001E6716 /* ConnetService.m in Sources */,
 				3343F3C21C80403C009F69BC /* AFNetworkReachabilityManager.m in Sources */,
 				3353B1B31CA126EB00577595 /* DemoDevice.m in Sources */,
+				3370793F1D910FF500D7DA98 /* QZBaseWebVC.m in Sources */,
 				335047241C9BF39A00BF8683 /* homeDeviceViewController.m in Sources */,
 				334B8F551C914A6D00798A69 /* PNScatterChart.m in Sources */,
 				336664F61CB784F6005573FB /* EditGraphView.m in Sources */,
 				3355F26E1C747307006DDE5A /* aboutOneTableViewCell.m in Sources */,
+				3370793C1D910FEC00D7DA98 /* NJKWebViewProgress.m in Sources */,
 				3343F3A71C7FDD5A009F69BC /* editViewController.m in Sources */,
 				334FF09E1CF53C7C001E6716 /* ModuleInfo.m in Sources */,
 				33EFB6691C98F9B1003F336F /* ZFBar.m in Sources */,
@@ -3766,6 +3827,7 @@
 				3383EFA51C9F8A6F0075E834 /* UIView+MJExtension.m in Sources */,
 				33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */,
 				3367CB511C86806700EF460C /* View+MASAdditions.m in Sources */,
+				337079441D911F5800D7DA98 /* questionView.m in Sources */,
 				33530F1E1CC87B5000378EB2 /* ManagementController.m in Sources */,
 				3343F3C41C80403C009F69BC /* AFURLConnectionOperation.m in Sources */,
 				3355F26B1C746BF5006DDE5A /* aboutTableViewCell.m in Sources */,
@@ -3921,6 +3983,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3960,6 +4023,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -3974,6 +4038,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = DFM3SPMA69;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/shinelink/框架",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/shinelink/PrefixHeader.pch";
 				INFOPLIST_FILE = shinelink/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -3997,6 +4065,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = DFM3SPMA69;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/shinelink/框架",
+				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/shinelink/PrefixHeader.pch";
 				INFOPLIST_FILE = shinelink/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

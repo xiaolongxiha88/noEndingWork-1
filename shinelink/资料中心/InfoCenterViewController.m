@@ -8,7 +8,8 @@
 
 #import "InfoCenterViewController.h"
 #import "topAvViewController.h"
-
+#import "QZBaseWebVC.h"
+#import "questionView.h"
 
 @interface InfoCenterViewController ()
 @property (nonatomic, strong) UIScrollView *ScrollView;
@@ -56,7 +57,7 @@
             
         }else if (i==1){
             myView.backgroundColor=COLOR(217, 83, 83, 1);
-            UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goAV)];
+            UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goQuestion)];
             [myView addGestureRecognizer:tap];
         }else if (i==2){
             myView.backgroundColor=COLOR(208, 189, 86, 1);
@@ -64,7 +65,7 @@
             [myView addGestureRecognizer:tap];
         }else if (i==3){
             myView.backgroundColor=COLOR(64, 205, 87, 1);
-            UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goAV)];
+            UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goHttp)];
             [myView addGestureRecognizer:tap];
         }
         
@@ -75,6 +76,9 @@
         UIImageView *titleImage=[[UIImageView alloc]initWithFrame:CGRectMake(ImageWidth, ImageWidth, imageSize, imageSize)];
         titleImage.image=[UIImage imageNamed:imageArray[i]];
        [myView addSubview:titleImage];
+        
+      
+    
         
         UILabel *NameLable=[[UILabel alloc]initWithFrame:CGRectMake(0, ImageWidth*2+imageSize, ImageWidth*2+imageSize, 100*HEIGHT_SIZE-(ImageWidth*2+imageSize))];
         NameLable.text=NameArray[i];
@@ -99,18 +103,42 @@
         contentLable.text=contentArray[i];
          [myView2 addSubview:contentLable];
         
-        
-        
+    }
+    
+}
+
+-(void)goQuestion{
+
+    questionView *testView=[[questionView alloc]init];
+    testView.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:testView animated:YES];
+}
+
+
+-(void)goHttp{
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+  
+    
+  
+    
+    QZBaseWebVC *testView=[[QZBaseWebVC alloc]init];
+   
+    
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+        testView.url=@"http://www.growatt.com/";
+    }else if ([currentLanguage hasPrefix:@"en"]) {
+        testView.url=@"http://ginverter.com/";
+    }else{
+       testView.url=@"http://ginverter.com/";
     }
     
     
-    
-    
-    
-    
+    testView.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:testView animated:YES];
 
 }
-
 
 -(void)goAV{
 
