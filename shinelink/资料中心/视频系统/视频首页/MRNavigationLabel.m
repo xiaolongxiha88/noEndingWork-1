@@ -8,6 +8,7 @@
 
 #import "MRNavigationLabel.h"
 
+
 #define MRRed 0.4
 #define MRGreen 0.6
 #define MRBlue 0.7
@@ -46,11 +47,12 @@
     // 红色: 1.0  0   0
     
     // 颜色渐变
-    CGFloat red = MRRed + (1 - MRRed) * scale;
-    CGFloat green = MRGreen + (0 - MRGreen) * scale;
-    CGFloat blue = MRBlue + (0 - MRBlue) * scale;
+    CGFloat red = MRRed + (0.067 - MRRed) * scale;
+    CGFloat green = MRGreen + (0.718 - MRGreen) * scale;
+    CGFloat blue = MRBlue + (0.953 - MRBlue) * scale;
     
-    self.textColor = [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
+ self.textColor = [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
+  //self.textColor =MainColor;
     
     // 大小缩放比例
     CGFloat transformScale = 1 + (scale * 0.3);

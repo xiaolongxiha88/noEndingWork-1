@@ -69,7 +69,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong) AVURLAsset     *videoURLAsset;
 @property (nonatomic, strong) AVAsset        *videoAsset;
 @property (nonatomic, strong) AVPlayer       *player;
-@property (nonatomic, weak) AVPlayerItem   *currentPlayerItem;
+@property (nonatomic, strong) AVPlayerItem   *currentPlayerItem;
 //@property (nonatomic, strong) AVPlayerLayer  *currentPlayerLayer;
 @property (nonatomic, strong) NSObject       *playbackTimeObserver;
 @property (nonatomic, assign) BOOL           isPauseByUser;           //是否被用户暂停
@@ -216,13 +216,6 @@ typedef enum : NSUInteger {
     [(AVPlayerLayer *)self.playerView.layer setPlayer:self.player];
     
     
-//    if (_currentPlayerItem) {
-//        [self.currentPlayerItem removeObserver:self forKeyPath:HCDVideoPlayerItemStatusKeyPath];
-//        [self.currentPlayerItem removeObserver:self forKeyPath:HCDVideoPlayerItemLoadedTimeRangesKeyPath];
-//        [self.currentPlayerItem removeObserver:self forKeyPath:HCDVideoPlayerItemPlaybackBufferEmptyKeyPath];
-//        [self.currentPlayerItem removeObserver:self forKeyPath:HCDVideoPlayerItemPlaybackLikelyToKeepUpKeyPath];
-//        [self.currentPlayerItem removeObserver:self forKeyPath:HCDVideoPlayerItemPresentationSizeKeyPath];
-//    }
     
     [self.currentPlayerItem addObserver:self forKeyPath:HCDVideoPlayerItemStatusKeyPath options:NSKeyValueObservingOptionNew context:nil];
     [self.currentPlayerItem addObserver:self forKeyPath:HCDVideoPlayerItemLoadedTimeRangesKeyPath options:NSKeyValueObservingOptionNew context:nil];

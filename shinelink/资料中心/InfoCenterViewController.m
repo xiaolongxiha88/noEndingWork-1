@@ -10,6 +10,8 @@
 #import "topAvViewController.h"
 #import "QZBaseWebVC.h"
 #import "questionView.h"
+#import "manualTableViewController.h"
+
 
 @interface InfoCenterViewController ()
 @property (nonatomic, strong) UIScrollView *ScrollView;
@@ -61,7 +63,7 @@
             [myView addGestureRecognizer:tap];
         }else if (i==2){
             myView.backgroundColor=COLOR(208, 189, 86, 1);
-            UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goAV)];
+            UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gomanual)];
             [myView addGestureRecognizer:tap];
         }else if (i==3){
             myView.backgroundColor=COLOR(64, 205, 87, 1);
@@ -113,6 +115,14 @@
     testView.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:testView animated:YES];
 }
+
+-(void)gomanual{
+    
+    manualTableViewController *testView=[[manualTableViewController alloc]init];
+    testView.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:testView animated:YES];
+}
+
 
 
 -(void)goHttp{

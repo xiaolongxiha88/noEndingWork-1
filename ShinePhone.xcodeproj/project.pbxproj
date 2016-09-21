@@ -320,6 +320,9 @@
 		337079441D911F5800D7DA98 /* questionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337079431D911F5800D7DA98 /* questionView.m */; };
 		337079471D91397800D7DA98 /* QuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 337079461D91397800D7DA98 /* QuestionTableViewCell.m */; };
 		337079491D913D9600D7DA98 /* question_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 337079481D913D9600D7DA98 /* question_icon.png */; };
+		3370794D1D92176600D7DA98 /* manualTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3370794C1D92176600D7DA98 /* manualTableViewController.m */; };
+		337079501D9217D700D7DA98 /* manualTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3370794F1D9217D700D7DA98 /* manualTableViewCell.m */; };
+		337079521D928E0B00D7DA98 /* manual_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337079511D928E0B00D7DA98 /* manual_bg.jpg */; };
 		33724D9D1CFE85FB005F3965 /* pic_service.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9C1CFE85FB005F3965 /* pic_service.png */; };
 		33724D9F1CFE89BE005F3965 /* touxiang.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9E1CFE89BE005F3965 /* touxiang.png */; };
 		33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */; };
@@ -1073,6 +1076,11 @@
 		337079451D91397800D7DA98 /* QuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTableViewCell.h; sourceTree = "<group>"; };
 		337079461D91397800D7DA98 /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
 		337079481D913D9600D7DA98 /* question_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = question_icon.png; sourceTree = "<group>"; };
+		3370794B1D92176600D7DA98 /* manualTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = manualTableViewController.h; sourceTree = "<group>"; };
+		3370794C1D92176600D7DA98 /* manualTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = manualTableViewController.m; sourceTree = "<group>"; };
+		3370794E1D9217D700D7DA98 /* manualTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = manualTableViewCell.h; sourceTree = "<group>"; };
+		3370794F1D9217D700D7DA98 /* manualTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = manualTableViewCell.m; sourceTree = "<group>"; };
+		337079511D928E0B00D7DA98 /* manual_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = manual_bg.jpg; sourceTree = "<group>"; };
 		33724D9C1CFE85FB005F3965 /* pic_service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pic_service.png; path = "../发现/pic_service.png"; sourceTree = "<group>"; };
 		33724D9E1CFE89BE005F3965 /* touxiang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = touxiang.png; path = "../我/touxiang.png"; sourceTree = "<group>"; };
 		33744DE21CAE597A0065DC01 /* pvLogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pvLogTableViewCell.h; sourceTree = "<group>"; };
@@ -2124,6 +2132,7 @@
 		335D69941D77B84B00894D90 /* 资料中心 */ = {
 			isa = PBXGroup;
 			children = (
+				3370794A1D9216F000D7DA98 /* 安装手册 */,
 				337079411D911EB000D7DA98 /* 常见问题2 */,
 				337079361D910FC700D7DA98 /* 官网 */,
 				335D69951D77B87500894D90 /* 视频系统 */,
@@ -2490,6 +2499,18 @@
 				337079461D91397800D7DA98 /* QuestionTableViewCell.m */,
 			);
 			path = "常见问题2";
+			sourceTree = "<group>";
+		};
+		3370794A1D9216F000D7DA98 /* 安装手册 */ = {
+			isa = PBXGroup;
+			children = (
+				337079511D928E0B00D7DA98 /* manual_bg.jpg */,
+				3370794B1D92176600D7DA98 /* manualTableViewController.h */,
+				3370794C1D92176600D7DA98 /* manualTableViewController.m */,
+				3370794E1D9217D700D7DA98 /* manualTableViewCell.h */,
+				3370794F1D9217D700D7DA98 /* manualTableViewCell.m */,
+			);
+			path = "安装手册";
 			sourceTree = "<group>";
 		};
 		3376ED5A1D12A2DD009526B4 /* 图片8 */ = {
@@ -3577,6 +3598,7 @@
 				33FEFD7C1C7DB38400324374 /* shebei@3x.png in Resources */,
 				33768AA91D475D0A00873E82 /* pvbgcn.png in Resources */,
 				33768AB01D475D0A00873E82 /* storagecn.png in Resources */,
+				337079521D928E0B00D7DA98 /* manual_bg.jpg in Resources */,
 				33FEFD571C7DB38400324374 /* icon---Email---Full@2x.png in Resources */,
 				334FEF8C1CF45423001E6716 /* second3.png in Resources */,
 				3381222D1D864D8400C7704B /* btn1-choose.png in Resources */,
@@ -3778,6 +3800,7 @@
 				3343F3DC1C80405D009F69BC /* UIAlertView+AFNetworking.m in Sources */,
 				337F9CC51C71ABD80016FE43 /* deviceViewController.m in Sources */,
 				335D69B01D77BA4D00894D90 /* HcdLightView.m in Sources */,
+				337079501D9217D700D7DA98 /* manualTableViewCell.m in Sources */,
 				33775AD91D2CD7520070742E /* RKAlertView.m in Sources */,
 				334B8F571C914A6D00798A69 /* PNScatterChartDataItem.m in Sources */,
 				3381ED091CBCE94200DCF0D2 /* AnswerViewController.m in Sources */,
@@ -3791,6 +3814,7 @@
 				3355DB971CE432CD0042F627 /* Common2ViewController.m in Sources */,
 				334ED7041C902AE60095FFBC /* CircleView.m in Sources */,
 				334720E11C8E7048006388C8 /* energyTableViewCell.m in Sources */,
+				3370794D1D92176600D7DA98 /* manualTableViewController.m in Sources */,
 				335456B61C852E6200275478 /* AddCellectViewController.m in Sources */,
 				334B8F261C91281600798A69 /* Line4View.m in Sources */,
 				334B8F531C914A6D00798A69 /* PNPieChart.m in Sources */,

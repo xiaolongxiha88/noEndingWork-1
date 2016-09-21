@@ -145,7 +145,7 @@
     [_scrollView2 addSubview:CachLable];
     
     
-    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(0,10*HEIGHT_SIZE+CGRectGetMaxY(CachLable.frame),SCREEN_Width,4*HEIGHT_SIZE)];
+    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(0,10*HEIGHT_SIZE+CGRectGetMaxY(CachLable.frame),SCREEN_Width,2*HEIGHT_SIZE)];
     line1.backgroundColor=COLOR(194, 195, 204, 0.75);
     [_scrollView2 addSubview:line1];
     
@@ -160,7 +160,7 @@
      _contentLabel.frame=CGRectMake(5*NOW_SIZE,25*HEIGHT_SIZE+imageButtonSiz*2,SCREEN_Width-10*NOW_SIZE,fcRect.size.height);
        [_scrollView2 addSubview:_contentLabel];
     
-    UIView *line2=[[UIView alloc]initWithFrame:CGRectMake(0,35*HEIGHT_SIZE+imageButtonSiz*2+fcRect.size.height,SCREEN_Width,4*HEIGHT_SIZE)];
+    UIView *line2=[[UIView alloc]initWithFrame:CGRectMake(0,35*HEIGHT_SIZE+imageButtonSiz*2+fcRect.size.height,SCREEN_Width,2*HEIGHT_SIZE)];
     line2.backgroundColor=COLOR(194, 195, 204, 0.75);
     [_scrollView2 addSubview:line2];
     
@@ -174,7 +174,7 @@
     nameLable.textAlignment = NSTextAlignmentLeft;
         [_scrollView2 addSubview:nameLable];
     
-    UIView *line3=[[UIView alloc]initWithFrame:CGRectMake(0,75*HEIGHT_SIZE+imageButtonSiz*2+fcRect.size.height,SCREEN_Width,4*HEIGHT_SIZE)];
+    UIView *line3=[[UIView alloc]initWithFrame:CGRectMake(0,75*HEIGHT_SIZE+imageButtonSiz*2+fcRect.size.height,SCREEN_Width,2*HEIGHT_SIZE)];
     line3.backgroundColor=COLOR(194, 195, 204, 0.75);
     [_scrollView2 addSubview:line3];
         
@@ -246,12 +246,15 @@
     
       
        
-         [_play removeAllObserver];
-            [_play stop];
+//         [_play removeAllObserver];
+//            [_play stop];
         
-        if (!_play) {
-            _play = [HcdCacheVideoPlayer sharedInstance];
-        }
+//        if (!_play) {
+//            _play = [HcdCacheVideoPlayer sharedInstance];
+//        }
+        
+         _play = [HcdCacheVideoPlayer sharedInstance];
+        
         
         UIView *videoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 0.5625)];
         [self.view addSubview:videoView];

@@ -47,13 +47,17 @@
     // float   cellWidth=SCREEN_Width/2-6*NOW_SIZE;
     
     
-    _titleScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE, SCREEN_Width, 40*HEIGHT_SIZE)];
+    _titleScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE, SCREEN_Width, 36*HEIGHT_SIZE)];
     _titleScrollView.delegate=self;
     _titleScrollView.userInteractionEnabled=YES;
     [self.view addSubview:_titleScrollView];
     
+    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(0,32*HEIGHT_SIZE,SCREEN_Width,4*HEIGHT_SIZE)];
+    line1.backgroundColor=COLOR(194, 195, 204, 0.75);
+    [self.view addSubview:line1];
+    
     float contenY=CGRectGetMaxY(_titleScrollView.frame);
-    _contentScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0,contenY,SCREEN_Width, SCREEN_Height)];
+    _contentScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0,contenY+5*HEIGHT_SIZE,SCREEN_Width, SCREEN_Height)];
   // _contentScrollView.contentSize=CGSizeMake(SCREEN_Width, SCREEN_Height+400*NOW_SIZE);
     _contentScrollView.delegate=self;
     [self.view addSubview:_contentScrollView];
