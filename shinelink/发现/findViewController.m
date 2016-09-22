@@ -58,10 +58,10 @@
     [self setTitle:root_service];
       [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
     //arrayName=@[root_ME_kefu,root_ME_zhibao,root_ME_zengzhi,root_ME_gengduo];
-    arrayName=@[root_ME_kefu,@"资料中心",root_ME_zengzhi,root_ME_gengduo];
+    arrayName=@[root_ME_kefu,root_ziliao_zhongxin,root_ME_zengzhi,root_ME_gengduo];
     
    // arrayImage=@[@"客户服务.png",@"质保.png",@"增值服务.png",@"更多.png"];
-     arrayImage=@[@"客户服务.png",@"informationCenter.png",@"增值服务.png",@"更多.png"];
+     arrayImage=@[@"service111.png",@"informationCenter.png",@"增值服务1.png",@"更多.png"];
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.

@@ -133,11 +133,11 @@
    // _scrollView2.contentSize = CGSizeMake(SCREEN_Width,1050*HEIGHT_SIZE);
     [self.view addSubview:_scrollView2];
     
-   float imageButtonSiz=20*HEIGHT_SIZE;
+  // float imageButtonSiz=20*HEIGHT_SIZE;
 
     
-    UILabel *CachLable= [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE,5*HEIGHT_SIZE,SCREEN_Width-10*NOW_SIZE,40*HEIGHT_SIZE)];
-    CachLable.text=@"温馨提示:播放视频，同时会存储视频，存储完请确定是否保存视频";
+    UILabel *CachLable= [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE,5*HEIGHT_SIZE,SCREEN_Width-10*NOW_SIZE,55*HEIGHT_SIZE)];
+    CachLable.text=root_shiping_huancun_tishi;
     CachLable.textColor=MainColor;
     CachLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     CachLable.numberOfLines=0;
@@ -145,45 +145,51 @@
     [_scrollView2 addSubview:CachLable];
     
     
-    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(0,10*HEIGHT_SIZE+CGRectGetMaxY(CachLable.frame),SCREEN_Width,2*HEIGHT_SIZE)];
+    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(0,5*HEIGHT_SIZE+CGRectGetMaxY(CachLable.frame),SCREEN_Width,2*HEIGHT_SIZE)];
     line1.backgroundColor=COLOR(194, 195, 204, 0.75);
     [_scrollView2 addSubview:line1];
     
     NSString *contentLabelText=_contentLabelTextValue;
-    _contentLabel= [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE,20*HEIGHT_SIZE+imageButtonSiz*2,SCREEN_Width-10*NOW_SIZE,10*HEIGHT_SIZE)];
+    _contentLabel= [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE,10*HEIGHT_SIZE+CGRectGetMaxY(CachLable.frame),SCREEN_Width-10*NOW_SIZE,10*HEIGHT_SIZE)];
     _contentLabel.text=contentLabelText;
     _contentLabel.textColor=[UIColor blackColor];
     _contentLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     _contentLabel.textAlignment = NSTextAlignmentLeft;
     _contentLabel.numberOfLines=0;
      CGRect fcRect = [contentLabelText boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 *HEIGHT_SIZE]} context:nil];
-     _contentLabel.frame=CGRectMake(5*NOW_SIZE,25*HEIGHT_SIZE+imageButtonSiz*2,SCREEN_Width-10*NOW_SIZE,fcRect.size.height);
+     _contentLabel.frame=CGRectMake(5*NOW_SIZE,10*HEIGHT_SIZE+CGRectGetMaxY(CachLable.frame),SCREEN_Width-10*NOW_SIZE,fcRect.size.height);
        [_scrollView2 addSubview:_contentLabel];
     
-    UIView *line2=[[UIView alloc]initWithFrame:CGRectMake(0,35*HEIGHT_SIZE+imageButtonSiz*2+fcRect.size.height,SCREEN_Width,2*HEIGHT_SIZE)];
+    UIView *line2=[[UIView alloc]initWithFrame:CGRectMake(0,5*HEIGHT_SIZE+CGRectGetMaxY(_contentLabel.frame),SCREEN_Width,2*HEIGHT_SIZE)];
     line2.backgroundColor=COLOR(194, 195, 204, 0.75);
     [_scrollView2 addSubview:line2];
+    
+    float tableViewHeight;
     
     if (_tableCellName.count>0) {
         
     
-    UILabel *nameLable= [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE,52*HEIGHT_SIZE+imageButtonSiz*2+fcRect.size.height,SCREEN_Width-10*NOW_SIZE,10*HEIGHT_SIZE)];
-    nameLable.text=@"相关视频";
+    UILabel *nameLable= [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE,10*HEIGHT_SIZE+CGRectGetMaxY(_contentLabel.frame),SCREEN_Width-10*NOW_SIZE,20*HEIGHT_SIZE)];
+    nameLable.text=root_xiangguan_shiping;
     nameLable.textColor=[UIColor blackColor];
-    nameLable.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
+    nameLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     nameLable.textAlignment = NSTextAlignmentLeft;
         [_scrollView2 addSubview:nameLable];
     
-    UIView *line3=[[UIView alloc]initWithFrame:CGRectMake(0,75*HEIGHT_SIZE+imageButtonSiz*2+fcRect.size.height,SCREEN_Width,2*HEIGHT_SIZE)];
+    UIView *line3=[[UIView alloc]initWithFrame:CGRectMake(0,CGRectGetMaxY(nameLable.frame)+5*HEIGHT_SIZE,SCREEN_Width,2*HEIGHT_SIZE)];
     line3.backgroundColor=COLOR(194, 195, 204, 0.75);
     [_scrollView2 addSubview:line3];
         
+        tableViewHeight=CGRectGetMaxY(nameLable.frame)+10*HEIGHT_SIZE;
+    }else{
+    
+        tableViewHeight=10*HEIGHT_SIZE+CGRectGetMaxY(_contentLabel.frame);
     }
     
 
     _scrollView2.contentSize = CGSizeMake(SCREEN_Width,670*HEIGHT_SIZE+fcRect.size.height);
     
-    float tableViewHeight=80*HEIGHT_SIZE+imageButtonSiz*2+fcRect.size.height;
+   
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, tableViewHeight, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     _tableView.delegate = self;
@@ -229,7 +235,7 @@
     
     if (![_netType isEqualToString:@"Wifi"]) {
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"温馨提示" message:@"手机没有连接到wifi信号，是否继续观看?" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_Alet_user message:root_wifi_tishi delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
         alertView.tag = 1002;
         [alertView show];
         
@@ -252,6 +258,8 @@
 //        if (!_play) {
 //            _play = [HcdCacheVideoPlayer sharedInstance];
 //        }
+        
+        
         
          _play = [HcdCacheVideoPlayer sharedInstance];
         
@@ -364,14 +372,18 @@
     
     
     
-     [_play removeAllObserver];
-    
-    [_play stop];
-   
-    _play=nil;
+//     [_play removeAllObserver];
+//    
+//    [_play stop];
+//   
+//    _play=nil;
     
 }
 
+
+- (void)dealloc{
+    [_play removeAllObserver];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

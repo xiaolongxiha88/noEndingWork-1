@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=MainColor;
-    self.title=@"资料中心";
+    self.title=root_ziliao_zhongxin;
     
     [self initUI];
     
@@ -36,8 +36,8 @@
 -(void)initUI{
 
     NSArray *imageArray=[NSArray arrayWithObjects:@"video.png", @"question.png",@"Installation-Manual.png",@"company.png",nil];
-    NSArray *NameArray=[NSArray arrayWithObjects:@"视频系统", @"常见问题",@"安装手册",@"公司官网",nil];
-     NSArray *contentArray=[NSArray arrayWithObjects:@"视频系统就是好啊非常好啊", @"常见问题常见问题常见问题常见问题",@"安装手册安装手册安装手册",@"公司官网公司官网公司官网",nil];
+    NSArray *NameArray=[NSArray arrayWithObjects:root_shipin_xitong, root_changjian_wenti,root_shouce,root_gongsi_guanwang,nil];
+     NSArray *contentArray=[NSArray arrayWithObjects:root_gongsi_neirong, root_changjian_wenti_neirong,root_shouce_neirong,root_gongsi_guanwang_neirong,nil];
     
     _ScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _ScrollView.scrollEnabled=YES;
@@ -82,7 +82,7 @@
       
     
         
-        UILabel *NameLable=[[UILabel alloc]initWithFrame:CGRectMake(0, ImageWidth*2+imageSize, ImageWidth*2+imageSize, 100*HEIGHT_SIZE-(ImageWidth*2+imageSize))];
+        UILabel *NameLable=[[UILabel alloc]initWithFrame:CGRectMake(0, ImageWidth*2+imageSize-10*HEIGHT_SIZE, ImageWidth*2+imageSize, 100*HEIGHT_SIZE-(ImageWidth*2+imageSize)+10*HEIGHT_SIZE)];
         NameLable.text=NameArray[i];
          NameLable.font=[UIFont systemFontOfSize:16*HEIGHT_SIZE];
         NameLable.textAlignment=NSTextAlignmentCenter;
@@ -95,10 +95,10 @@
         [myView addSubview:myView2];
         
         UILabel *contentLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0, SCREEN_Width-2*leftWidth-ImageWidth*2-imageSize-20*NOW_SIZE, 110*HEIGHT_SIZE)];
-        contentLable.contentMode=UIViewContentModeScaleAspectFit;
-        contentLable.backgroundColor=[UIColor whiteColor];
-         contentLable.layer.cornerRadius=7*HEIGHT_SIZE;
-           contentLable.font=[UIFont systemFontOfSize:16*HEIGHT_SIZE];
+//        contentLable.contentMode=UIViewContentModeScaleAspectFit;
+//        contentLable.backgroundColor=[UIColor whiteColor];
+//         contentLable.layer.cornerRadius=7*HEIGHT_SIZE;
+           contentLable.font=[UIFont systemFontOfSize:15*HEIGHT_SIZE];
         contentLable.numberOfLines=0;
              contentLable.textAlignment=NSTextAlignmentCenter;
              contentLable.textColor=[UIColor blackColor];

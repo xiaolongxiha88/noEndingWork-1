@@ -155,8 +155,9 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    
      if (self.taskArr.count < 2) {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"缓存成功" message:@"是否保存视频" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_huancun_chenggong message:root_shifou_baocun_shiping delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
     alertView.tag = 1002;
     [alertView show];
      }

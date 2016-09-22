@@ -183,7 +183,7 @@
         _label.layer.borderWidth=1;
         _label.layer.cornerRadius=15*HEIGHT_SIZE;
         _label.layer.borderColor=MainColor.CGColor;
-    _label.text =@"搜索";
+    _label.text =root_sousuo;
     _label.textColor = MainColor;
     //textField.tintColor = [UIColor whiteColor];
     _label.textAlignment = NSTextAlignmentCenter;

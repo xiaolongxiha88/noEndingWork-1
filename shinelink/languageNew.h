@@ -539,5 +539,25 @@
 #define  root_xiang_kefu_tiwen     NSLocalizedString(@"向客服提问", nil)
 
 
+#define  root_ziliao_zhongxin     NSLocalizedString(@"资料中心", nil)
+#define  root_shipin_xitong     NSLocalizedString(@"视频系统", nil)
+#define  root_changjian_wenti     NSLocalizedString(@"常见问题", nil)
+#define  root_shouce     NSLocalizedString(@"手册", nil)
+#define  root_gongsi_guanwang     NSLocalizedString(@"公司官网", nil)
+
+#define  root_gongsi_neirong     NSLocalizedString(@"视频内容", nil)
+#define  root_changjian_wenti_neirong     NSLocalizedString(@"常见问题内容", nil)
+#define  root_shouce_neirong     NSLocalizedString(@"手册内容", nil)
+#define  root_gongsi_guanwang_neirong     NSLocalizedString(@"公司官网内容", nil)
+#define  root_huancun     NSLocalizedString(@"缓存", nil)
+#define  root_huancun_liebiao     NSLocalizedString(@"缓存列表", nil)
+#define  root_quanxuan     NSLocalizedString(@"全选", nil)
+#define  root_queding_shanchu_shiping     NSLocalizedString(@"确定删除视频", nil)
+#define  root_shiping_huancun_tishi     NSLocalizedString(@"视频缓存提示", nil)
+#define  root_xiangguan_shiping     NSLocalizedString(@"相关视频", nil)
+#define  root_wifi_tishi     NSLocalizedString(@"wifi提示", nil)
+#define  root_huancun_chenggong     NSLocalizedString(@"缓存成功", nil)
+#define  root_shifou_baocun_shiping    NSLocalizedString(@"是否保存视频", nil)
+
 
 #endif /* languageNew_h */

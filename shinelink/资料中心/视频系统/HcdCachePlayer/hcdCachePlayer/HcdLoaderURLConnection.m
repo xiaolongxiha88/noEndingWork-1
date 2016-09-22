@@ -49,6 +49,7 @@
     contentInformationRequest.byteRangeAccessSupported = YES;
     contentInformationRequest.contentType = CFBridgingRelease(contentType);
     contentInformationRequest.contentLength = self.task.videoLength;
+    
 }
 
 #pragma mark - AVURLAsset resource loader methods

@@ -40,7 +40,7 @@
      CellName.font=[UIFont systemFontOfSize:17*HEIGHT_SIZE];
     CellName.textColor=[UIColor whiteColor];
    CellName.textAlignment = NSTextAlignmentLeft;
-    CellName.text=@"常见问题";
+    CellName.text=root_changjian_wenti;
      [greenView addSubview:CellName];
     
     

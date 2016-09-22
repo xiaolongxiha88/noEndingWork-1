@@ -155,6 +155,8 @@ typedef enum : NSUInteger {
     return self;
 }
 
+
+
 - (void)playWithVideoUrl:(NSURL *)url showView:(UIView *)showView andSuperView:(UIView *)superView
 {
     
@@ -200,9 +202,13 @@ typedef enum : NSUInteger {
         
     }
     
+    
+
     if (!self.player) {
         self.player = [AVPlayer playerWithPlayerItem:self.currentPlayerItem];
+        
     } else {
+        
         [self.player replaceCurrentItemWithPlayerItem:self.currentPlayerItem];
     }
     
@@ -484,6 +490,11 @@ typedef enum : NSUInteger {
     CGFloat totalDuration = CMTimeGetSeconds(duration);
     self.loadedProgress = timeInterval / totalDuration;
     [self.videoProgressView setProgress:timeInterval / totalDuration animated:YES];
+    
+    if (timeInterval==totalDuration) {
+        NSLog(@"ok");
+    }
+    
 }
 - (void)bufferingSomeSecond
 {
@@ -1383,8 +1394,17 @@ typedef enum : NSUInteger {
     self.playbackTimeObserver = nil;
     self.currentPlayerItem = nil;
     
+    self.player=nil;
+    
     
     
 }
+
+
+- (void)dealloc{
+    [self removeAllObserver];
+}
+
+
 
 @end

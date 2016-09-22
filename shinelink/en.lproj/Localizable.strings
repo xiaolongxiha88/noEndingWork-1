@@ -511,3 +511,26 @@
 
 "选择国家"="Select Country";
 "搜索"="Search";
+
+
+"资料中心"="Information Center";
+
+"视频系统"="Video";
+"常见问题"="FAQ";
+"手册"="Manual";
+"公司官网"="Website";
+
+"视频内容"="Growatt introduction,installation video";
+"常见问题内容"="Get quick guide for frequently asked questions";
+"手册内容"="Easy access to details installation guide";
+"公司官网内容"="To know more information of Growatt";
+"缓存"="Caching";
+"缓存列表"="Cache list";
+"全选"="Select all";
+"确定删除视频"="Are you sure to delete the video?";
+"相关视频"="Related video";
+
+"视频缓存提示"="Note:when you play the video,the video will be cached,you can save the vedio when it is completed Cache.";
+"wifi提示"="Phone is not connected to a wifi signal, whether continue to watch?";
+"缓存成功"="Cache successfully";
+"是否保存视频"="Whether to save the video?";

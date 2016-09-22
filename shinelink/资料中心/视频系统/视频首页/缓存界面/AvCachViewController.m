@@ -45,7 +45,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"编辑列表";
+    self.title=root_huancun_liebiao;
     
     self.view.backgroundColor=MainColor;
     CGFloat footH=40*HEIGHT_SIZE;
@@ -60,7 +60,7 @@
     self.myTableView.showsVerticalScrollIndicator = NO;
     self.myTableView.allowsMultipleSelectionDuringEditing = YES;
     [self.view addSubview:self.myTableView];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"编辑" style:UIBarButtonItemStyleDone target:self action:@selector(editList)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:root_dianzhan_bianji style:UIBarButtonItemStyleDone target:self action:@selector(editList)];
     
     
    // CGFloat footY=SCREENHEIGHT-footH;
@@ -72,13 +72,13 @@
     
     _allDelButton=[UIButton buttonWithType:UIButtonTypeCustom];
     _allDelButton.frame=CGRectMake(0, 0,  _footerView.frame.size.width*0.5, footH);
-    [_allDelButton setTitle:@"全选" forState:UIControlStateNormal];
+    [_allDelButton setTitle:root_quanxuan forState:UIControlStateNormal];
     [_allDelButton addTarget:self action:@selector(allDelBtn) forControlEvents:UIControlEventTouchUpInside];
     [_footerView addSubview:_allDelButton];
     
     _delButton=[UIButton buttonWithType:UIButtonTypeCustom];
     _delButton.frame=CGRectMake(_footerView.frame.size.width*0.5, 0, _footerView.frame.size.width*0.5, footH);
-    [_delButton setTitle:@"删除" forState:UIControlStateNormal];
+    [_delButton setTitle:root_del forState:UIControlStateNormal];
     [_delButton setBackgroundColor:APPCOLOR];
     [_delButton addTarget:self action:@selector(deltButn) forControlEvents:UIControlEventTouchUpInside];
     [_footerView addSubview:_delButton];
@@ -166,7 +166,7 @@
 -(void)editList
 {
     self.isSelected = NO;//全选状态的切换
-    NSString *string = !self.myTableView.editing?@"完成":@"编辑";
+    NSString *string = !self.myTableView.editing?root_finish:root_dianzhan_bianji;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:string style:UIBarButtonItemStyleDone target:self action:@selector(editList)];
     if (self.dataArray.count) {
         [UIView animateWithDuration:0.25 animations:^{
@@ -193,7 +193,7 @@
 
 -(void)deltButn
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"删除视频" message:@"确定删除视频?" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_Alet_user message:root_queding_shanchu_shiping delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
     alertView.tag = 1002;
     [alertView show];
   }

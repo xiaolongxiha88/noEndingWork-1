@@ -38,12 +38,12 @@
 
 
     
-    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"缓存" style:UIBarButtonItemStylePlain target:self action:@selector(cachingAV)];
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_huancun_liebiao style:UIBarButtonItemStylePlain target:self action:@selector(cachingAV)];
     rightItem.tag=10;
     self.navigationItem.rightBarButtonItem=rightItem;
     
     
-    _DataCollectionNameArray=[NSMutableArray arrayWithObjects:@"我是大大大蝴蝶花", @"我是大大大大大蝴蝶花",@"我是大大大大大大大花",@"我是大大大蝴蝶花",@"我是大大大蝴蝶花",nil];
+
     // float   cellWidth=SCREEN_Width/2-6*NOW_SIZE;
     
     
