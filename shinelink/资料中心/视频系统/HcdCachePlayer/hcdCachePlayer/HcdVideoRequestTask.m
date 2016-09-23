@@ -174,9 +174,7 @@
     if (self.taskArr.count < 2) {
         _isFinishLoad = YES;
         
-        //  NSString *md5File = [NSString stringWithFormat:@"%@.mp4", [[_url absoluteString] stringToMD5]];
-        
-        
+      
         NSString *playUrl2 = [[_url absoluteString]  stringByReplacingOccurrencesOfString :@"/" withString:@"*"];
         
         //NSString *md5File = [NSString stringWithFormat:@"%@.mp4", [[playUrl absoluteString] stringToMD5]];

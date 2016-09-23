@@ -558,6 +558,6 @@
 #define  root_wifi_tishi     NSLocalizedString(@"wifi提示", nil)
 #define  root_huancun_chenggong     NSLocalizedString(@"缓存成功", nil)
 #define  root_shifou_baocun_shiping    NSLocalizedString(@"是否保存视频", nil)
-
+#define  root_fuwuqi_bu_pipei    NSLocalizedString(@"服务器与所属国家不匹配", nil)
 
 #endif /* languageNew_h */

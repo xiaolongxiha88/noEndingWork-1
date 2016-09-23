@@ -294,6 +294,9 @@
                          }else if ([content[@"msg"] isEqual:@"605"]){
                              
                              [self showAlertViewWithTitle:nil message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
+                         }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]){
+                             
+                             [self showAlertViewWithTitle:nil message:root_fuwuqi_bu_pipei cancelButtonTitle:root_Yes];
                          }
                          
                          

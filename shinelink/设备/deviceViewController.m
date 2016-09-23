@@ -145,13 +145,45 @@
         //创建tableView的方法
         [self _createTableView];
         //创建tableView的头视图
+        
+       
 
     }
     
-    
-  
 }
 
+
+-(void)getNewAd{
+
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    
+    NSString *adNum=[ud objectForKey:@"advertisingNumber"];
+    
+    if ([_adNumber integerValue]>[adNum integerValue]||(adNum==nil)) {
+        
+        [[NSUserDefaults standardUserDefaults] setObject:_adNumber forKey:@"advertisingNumber"];
+        
+        [self showProgressView];
+        [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"admin":@"admin"}  paramarsSite:@"/newLoginAPI.do?op=getAPPMessage" sucessBlock:^(id content) {
+            NSLog(@"getAPPMessage: %@", content);
+            [self hideProgressView];
+            if (content) {
+                
+                
+                
+                
+            }
+            
+        } failure:^(NSError *error) {
+            [self hideProgressView];
+        }];
+        
+        
+        
+    }
+    
+    
+}
 
 
 #pragma mark - CoreData
@@ -196,6 +228,9 @@
     else{
         [self request];
     }
+    
+     [self  getNewAd];
+    
 }
 
 -(void)initDemoData{

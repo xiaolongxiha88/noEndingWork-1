@@ -40,6 +40,7 @@
 @property (nonatomic, strong) NSDictionary *dataSource;
 @property (nonatomic, strong) NSMutableDictionary *demoArray;
 @property (nonatomic, strong) NSString *serverDemoAddress;
+@property (nonatomic, strong) NSString *adNumber;
 @end
 
 @implementation loginViewController
@@ -444,10 +445,17 @@ NSLog(@"体验馆");
                 
             } else {
                 
+                //[content[@"success"] integerValue]
+                 // [[NSUserDefaults standardUserDefaults] setObject:nowLanguage forKey:@"demoValue"];
+              
+                _adNumber=content[@"app_code"];
+                
                 NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+                
+              
+                
                 NSString *reUsername=[ud objectForKey:@"userName"];
                
-                
                 if (reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] )) {
                 
                       [self setAlias];
@@ -601,6 +609,8 @@ NSLog(@"体验馆");
         energyVc.type=@"1";
         
         deviceViewController *deviceVc=[[deviceViewController alloc]initWithDataDict:stationID stationName:stationName];
+        deviceVc.adNumber=_adNumber;
+        
         meViewController *meVc=[[meViewController alloc]init];
          meVc.title=root_ME;
         

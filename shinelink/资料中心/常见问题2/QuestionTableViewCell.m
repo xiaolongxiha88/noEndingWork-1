@@ -33,7 +33,7 @@
         self.CellName = [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 10*HEIGHT_SIZE, SCREEN_Width-50*NOW_SIZE, 30*HEIGHT_SIZE)];
         self.CellName.font=[UIFont systemFontOfSize:16*HEIGHT_SIZE];
         self.CellName.textAlignment = NSTextAlignmentLeft;
-       _CellName.text=@"都是一些常见问题啦";
+      
         
         self.CellName.textColor = [UIColor blackColor];
         [self.contentView addSubview:_CellName];

@@ -8,10 +8,13 @@
 
 #import "questionView.h"
 #import "QuestionTableViewCell.h"
-
+#import "HtmlCommon.h"
 
 @interface questionView ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
+@property(nonatomic,strong)NSMutableArray *idArray;
+@property(nonatomic,strong)NSMutableArray *titleArray;
+
 @end
 
 @implementation questionView
@@ -19,7 +22,55 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _idArray=[NSMutableArray array];
+    _titleArray=[NSMutableArray array];
+    
+    
+
     [self initUI];
+    
+}
+
+
+-(void)getNet{
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    NSString *_languageValue ;
+    
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage hasPrefix:@"en"]) {
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"2";
+    }
+    
+    NSDictionary *dicGo=@{@"type":@"0",@"language":_languageValue} ;
+    
+    [self showProgressView];
+    
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:@"/questionAPI.do?op=getUsQuestionListByType" sucessBlock:^(id content) {
+        NSLog(@"getUsQuestionListByType: %@", content);
+        [self hideProgressView];
+        if (content) {
+            
+            NSMutableArray *allDic=[NSMutableArray arrayWithArray:content[@"obj"]];
+            for (int i=0; i<allDic.count; i++) {
+                [_idArray addObject:allDic[i][@"id"]];
+                [_titleArray addObject:allDic[i][@"title"]];
+            }
+            if (_idArray.count==allDic.count) {
+                [self.tableView reloadData];
+            }
+            
+            
+        }
+        
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+    }];
+    
     
 }
 
@@ -49,6 +100,8 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
+    
+        [self getNet];
 
 }
 
@@ -60,7 +113,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return _titleArray.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -77,6 +130,7 @@
         cell = [[QuestionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
+     cell.CellName.text=_titleArray[indexPath.row];
     NSString *LableNum=[NSString stringWithFormat:@"%ld",(long)indexPath.row+1];
     
     cell.LableView.text=LableNum;
@@ -85,6 +139,21 @@
 }
 
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //    Common2ViewController *go=[[Common2ViewController alloc]init];
+    //    go.titleString=_titleArray[indexPath.row];
+    //    go.idString=_idArray[indexPath.row];
+    
+    HtmlCommon *go=[[HtmlCommon alloc]init];
+    
+    go.idString=_idArray[indexPath.row];
+    
+    [self.navigationController pushViewController:go animated:NO];
+    
+    
+}
 
 
 

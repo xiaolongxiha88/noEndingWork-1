@@ -110,8 +110,8 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
     
     _dateY1=[[NSMutableArray alloc]initWithObjects:root_duankou, root_CNJ_eDing_gonglv, root_moshi,nil];
     
-    _dateName=[[NSMutableArray alloc]initWithObjects:@"Volt(V)", @"Current(I)", @"Watt(W)",nil];
-    _pv=[[NSMutableArray alloc]initWithObjects:@"PV", @"Bat", @"Guid",nil];
+    _dateName=[[NSMutableArray alloc]initWithObjects:@"Volt(V)", @"Current(A)", @"Watt(W)",nil];
+    _pv=[[NSMutableArray alloc]initWithObjects:@"PV", @"Bat", @"Grid",nil];
   
 }
 

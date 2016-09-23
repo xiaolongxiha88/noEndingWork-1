@@ -12,5 +12,6 @@
 @interface deviceViewController : RootViewController
 
 - (instancetype)initWithDataDict:(NSMutableArray *)stationID stationName:(NSMutableArray *)stationName;
+@property (nonatomic, strong) NSString *adNumber;
 
 @end

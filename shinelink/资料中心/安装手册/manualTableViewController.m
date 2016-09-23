@@ -8,9 +8,11 @@
 
 #import "manualTableViewController.h"
 #import "manualTableViewCell.h"
+#import "HtmlCommon.h"
 
 @interface manualTableViewController ()
-
+@property(nonatomic,strong)NSMutableArray *idArray;
+@property(nonatomic,strong)NSMutableArray *titleArray;
 @end
 
 @implementation manualTableViewController
@@ -18,15 +20,68 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _idArray=[NSMutableArray array];
+    _titleArray=[NSMutableArray array];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self getNet];
 }
+
+
+-(void)getNet{
+
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    NSString *_languageValue ;
+    
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage hasPrefix:@"en"]) {
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"2";
+    }
+    
+    NSDictionary *dicGo=@{@"type":@"1",@"language":_languageValue} ;
+
+[self showProgressView];
+[BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:@"/questionAPI.do?op=getUsQuestionListByType" sucessBlock:^(id content) {
+    NSLog(@"getUsQuestionListByType: %@", content);
+    [self hideProgressView];
+    if (content) {
+    
+        NSMutableArray *allDic=[NSMutableArray arrayWithArray:content[@"obj"]];
+        for (int i=0; i<allDic.count; i++) {
+            [_idArray addObject:allDic[i][@"id"]];
+            [_titleArray addObject:allDic[i][@"title"]];
+        }
+        
+        if (_idArray.count==allDic.count) {
+            [self.tableView reloadData];
+        }
+        
+        
+        
+    }
+    
+} failure:^(NSError *error) {
+    [self hideProgressView];
+}];
+
+
+}
+
+
+- (void)showProgressView {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)hideProgressView {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -42,7 +97,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 4;
+    return _titleArray.count;
     
 }
 
@@ -54,15 +109,34 @@
         cell = [[manualTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
+    cell.CellName.text=_titleArray[indexPath.row];
+    
     NSString *LableNum=[NSString stringWithFormat:@"%ld",(long)indexPath.row+1];
     
   cell.LableView.text=LableNum;
     
     return cell;
    
-    
-
 }
+
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //    Common2ViewController *go=[[Common2ViewController alloc]init];
+    //    go.titleString=_titleArray[indexPath.row];
+    //    go.idString=_idArray[indexPath.row];
+    
+    HtmlCommon *go=[[HtmlCommon alloc]init];
+    
+    go.idString=_idArray[indexPath.row];
+    
+    [self.navigationController pushViewController:go animated:NO];
+    
+    
+}
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
