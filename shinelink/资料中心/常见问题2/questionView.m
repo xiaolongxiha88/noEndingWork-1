@@ -95,7 +95,7 @@
      [greenView addSubview:CellName];
     
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 50*HEIGHT_SIZE, SCREEN_Width, SCREEN_Height-50*HEIGHT_SIZE) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 50*HEIGHT_SIZE, SCREEN_Width, SCREEN_Height-90*HEIGHT_SIZE) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

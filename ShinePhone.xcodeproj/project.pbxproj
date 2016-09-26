@@ -390,6 +390,7 @@
 		3381ECFE1CBCCADB00DCF0D2 /* myListSecond.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ECFD1CBCCADB00DCF0D2 /* myListSecond.m */; };
 		3381ED011CBCD85700DCF0D2 /* myListSecondTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ED001CBCD85700DCF0D2 /* myListSecondTableViewCell.m */; };
 		3381ED091CBCE94200DCF0D2 /* AnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381ED081CBCE94200DCF0D2 /* AnswerViewController.m */; };
+		3382341B1D98ED8A002062AE /* adCancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 3382341A1D98ED8A002062AE /* adCancel.png */; };
 		3383ACE11D7D6B3400C2F4A3 /* topAvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3383ACE01D7D6B3400C2F4A3 /* topAvViewController.m */; };
 		3383ACE41D7D6DC200C2F4A3 /* MRNavigationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3383ACE31D7D6DC200C2F4A3 /* MRNavigationLabel.m */; };
 		3383EF9A1C9F8A6F0075E834 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3383EF821C9F8A6F0075E834 /* MJRefresh.bundle */; };
@@ -1177,6 +1178,7 @@
 		3381ED001CBCD85700DCF0D2 /* myListSecondTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = myListSecondTableViewCell.m; path = ../Classes/myListSecondTableViewCell.m; sourceTree = "<group>"; };
 		3381ED071CBCE94200DCF0D2 /* AnswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerViewController.h; sourceTree = "<group>"; };
 		3381ED081CBCE94200DCF0D2 /* AnswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerViewController.m; sourceTree = "<group>"; };
+		3382341A1D98ED8A002062AE /* adCancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = adCancel.png; sourceTree = "<group>"; };
 		3383ACDF1D7D6B3400C2F4A3 /* topAvViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = topAvViewController.h; sourceTree = "<group>"; };
 		3383ACE01D7D6B3400C2F4A3 /* topAvViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topAvViewController.m; sourceTree = "<group>"; };
 		3383ACE21D7D6DC200C2F4A3 /* MRNavigationLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRNavigationLabel.h; sourceTree = "<group>"; };
@@ -1992,6 +1994,7 @@
 				3334AD761D800C0000665667 /* 储能机.png */,
 				33EFB67F1C997001003F336F /* inverter.png */,
 				33EFB6811C997050003F336F /* 充电桩.png */,
+				3382341A1D98ED8A002062AE /* adCancel.png */,
 			);
 			path = "图片";
 			sourceTree = "<group>";
@@ -3445,6 +3448,7 @@
 				3383F1361C9FF7440075E834 /* disconnect@2x.png in Resources */,
 				334FF0BC1CF53C7C001E6716 /* logo_m.png in Resources */,
 				336A108F1CBDDBA500E30E83 /* triangular.png in Resources */,
+				3382341B1D98ED8A002062AE /* adCancel.png in Resources */,
 				33FFBD4F1CEC71FA003C56E1 /* name3.jpg in Resources */,
 				334B8F491C914A6D00798A69 /* LICENSE in Resources */,
 				3383F1321C9FF4210075E834 /* TemperatureController.png in Resources */,

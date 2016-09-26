@@ -18,6 +18,7 @@
 #import "DemoDevice.h"
 #import "GetDevice.h"
 #import "DemoDeviceViewController.h"
+#import "UIImageView+WebCache.h"
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 
@@ -61,6 +62,9 @@
 @property (nonatomic, strong) UIAlertView *Alert1;
 @property (nonatomic, strong) UIImageView *guideImageView;
 @property (nonatomic, strong) NSString *netEnable;
+
+@property (nonatomic, strong) UIView *AdBackView;
+@property (nonatomic, strong) UIView *AdFrontView;
 
 @end
 
@@ -159,6 +163,10 @@
     
     NSString *adNum=[ud objectForKey:@"advertisingNumber"];
     
+    //测试
+//adNum=nil;
+    
+    
     if ([_adNumber integerValue]>[adNum integerValue]||(adNum==nil)) {
         
         [[NSUserDefaults standardUserDefaults] setObject:_adNumber forKey:@"advertisingNumber"];
@@ -169,8 +177,53 @@
             [self hideProgressView];
             if (content) {
                 
+                if([content[@"result"] integerValue]==1){
+                
+                   // [self.navigationController setNavigationBarHidden:YES];
+               
+//                    NSString *demo=@"1470031970617.jpg";
+//                        NSString *picUrl=[NSString stringWithFormat:@"%@/%@",Head_Url_more,demo];
+                    
+                      NSString *picUrl=[NSString stringWithFormat:@"%@/%@",Head_Url_more,content[@"obj"][@"picurl"]];
+                    
+                    
+                     float adHeight= 260*NOW_SIZE*33/22;
+                    if (!_AdFrontView) {
+                         _AdFrontView=[[UIView alloc]initWithFrame:CGRectMake(30*NOW_SIZE, 25*HEIGHT_SIZE, 285*NOW_SIZE, adHeight)];
+                    }
+                    
+                    _AdFrontView.userInteractionEnabled=YES;
+                      [self.view addSubview:_AdFrontView];
+                    
+                    UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
+                    goBut.frame=CGRectMake(260*NOW_SIZE,0*HEIGHT_SIZE, 25*NOW_SIZE, 25*HEIGHT_SIZE);
+                    [goBut setBackgroundImage:IMAGE(@"adCancel.png") forState:UIControlStateNormal];
+                    [goBut addTarget:self action:@selector(adRemove) forControlEvents:UIControlEventTouchUpInside];
+                    [_AdFrontView addSubview:goBut];
+                    
+                    
+
+                    UIImageView *AdFrontImageView=[[UIImageView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 25*HEIGHT_SIZE, 260*NOW_SIZE, adHeight)];
+                  //  AdFrontImageView.image=[UIImage imageNamed:@"pic_service.png"];
+                                        NSURL* imagePath = [NSURL URLWithString:picUrl];
+                                        [AdFrontImageView sd_setImageWithURL:imagePath placeholderImage:[UIImage imageNamed:@"pic_service.png"]];
+                    [_AdFrontView addSubview:AdFrontImageView];
+                    
+              
+                
+                    if (!_AdBackView) {
+                           _AdBackView=[[UIView alloc]initWithFrame: [UIScreen mainScreen].bounds];
+                    }
+             
+                _AdBackView.backgroundColor = [UIColor blackColor];
+                _AdBackView.alpha = 0.3;
+                [self.view addSubview:_AdBackView];
+                
+                    [self.view bringSubviewToFront:_AdFrontView];
+                    [_AdFrontView becomeFirstResponder];
                 
                 
+                }
                 
             }
             
@@ -184,6 +237,17 @@
     
     
 }
+
+
+-(void)adRemove{
+
+    [_AdFrontView removeFromSuperview];
+      [_AdBackView removeFromSuperview];
+    _AdFrontView=nil;
+    _AdBackView=nil;
+
+}
+
 
 
 #pragma mark - CoreData
@@ -1500,7 +1564,20 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
     }
     
 
-
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    if (_AdFrontView) {
+        [_AdFrontView removeFromSuperview];
+         _AdFrontView=nil;
+    }
+    if (_AdBackView) {
+        [_AdBackView removeFromSuperview];
+        _AdBackView=nil;
+    }
+    
+  
+    
+}
 
 
 

@@ -221,7 +221,7 @@
     
      [cell.contentView setBackgroundColor: [UIColor whiteColor] ];
     
-    
+    //_statusArray[indexPath.row]=@"3";
     if ([_languageValue isEqualToString:@"0"]) {
         
         if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {

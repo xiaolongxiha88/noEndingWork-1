@@ -248,18 +248,7 @@
     [_backButton removeFromSuperview];
     _backButton=nil;
     
-   //CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
-    
-      
-       
-//         [_play removeAllObserver];
-//            [_play stop];
-        
-//        if (!_play) {
-//            _play = [HcdCacheVideoPlayer sharedInstance];
-//        }
-        
-        
+//_AvUrl=@"http://192.168.3.203:8020/HelloHBuilder/0415%E5%8F%A4%E7%91%9E%E7%93%A6%E7%89%B9%E6%88%90%E7%89%87%202.mp4";
         
          _play = [HcdCacheVideoPlayer sharedInstance];
         
