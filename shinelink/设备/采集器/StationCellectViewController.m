@@ -25,6 +25,8 @@
 @property (nonatomic, strong) NSString *SetName;
 @property(nonatomic)int page;
 @property (nonatomic, strong) UIRefreshControl *control;
+@property (nonatomic, strong)  UIImageView *AlertView ;
+@property (nonatomic, strong)  NSString *languageValue ;
 @end
 
 @implementation StationCellectViewController
@@ -53,6 +55,17 @@
 }
 
 -(void)requestData{
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage hasPrefix:@"en"]) {
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"2";
+    }
+    
     [self showProgressView];
     NSString *page=[NSString stringWithFormat:@"%d",_page];
     if(_stationId==nil){
@@ -64,6 +77,28 @@
         
             NSLog(@"datalogList:%@",content);
         [_arrayData addObjectsFromArray:content];
+        
+        if(_arrayData.count==0){
+            
+            if (!_AlertView) {
+                if ([_languageValue isEqualToString:@"0"]) {
+                    _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                    _AlertView.image=[UIImage imageNamed:@"Collectors_cn.png"];
+                    [self.view addSubview:_AlertView];
+                }else{
+                    _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                    _AlertView.image=[UIImage imageNamed:@"Collectors_en.png"];
+                    [self.view addSubview:_AlertView];
+                }
+            }
+            
+        }else{
+            if (_AlertView) {
+                [_AlertView removeFromSuperview];
+                _AlertView=nil;
+            }
+        }
+        
         if (_tableView) {
             [_tableView reloadData];
         }else{

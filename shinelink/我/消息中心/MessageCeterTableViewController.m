@@ -116,12 +116,12 @@
         
         if (!_AlertView) {
             if ([_languageValue isEqualToString:@"0"]) {
-                _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_Width, 40*HEIGHT_SIZE,0.6* SCREEN_Width, 0.75* SCREEN_Width)];
-                _AlertView.image=[UIImage imageNamed:@"XiaoXiA.png"];
+                _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                _AlertView.image=[UIImage imageNamed:@"massage_cn2.png"];
                 [self.view addSubview:_AlertView];
             }else{
-                _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_Width, 40*HEIGHT_SIZE,0.6* SCREEN_Width, 0.75* SCREEN_Width)];
-                _AlertView.image=[UIImage imageNamed:@"XiaoXiAen.png"];
+                _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                _AlertView.image=[UIImage imageNamed:@"massage_en2.png"];
                 [self.view addSubview:_AlertView];
             }
         }

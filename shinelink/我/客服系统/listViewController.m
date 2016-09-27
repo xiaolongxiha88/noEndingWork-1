@@ -125,15 +125,21 @@
                 
                 if (!_AlertView) {
                     if ([_languageValue isEqualToString:@"0"]) {
-                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_WIDTH, 40*HEIGHT_SIZE,0.6* SCREEN_WIDTH, 0.75* SCREEN_WIDTH)];
-                        _AlertView.image=[UIImage imageNamed:@"alertView1.png"];
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                        _AlertView.image=[UIImage imageNamed:@"Prompt_message_cn2.png"];
                         [self.view addSubview:_AlertView];
                     }else{
-                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.2* SCREEN_WIDTH, 40*HEIGHT_SIZE,0.6* SCREEN_WIDTH, 0.75* SCREEN_WIDTH)];
-                        _AlertView.image=[UIImage imageNamed:@"alertView1en.png"];
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                        _AlertView.image=[UIImage imageNamed:@"Prompt message_en2.png"];
                         [self.view addSubview:_AlertView];
                        }
                    }
+                
+//                if (_tableView) {
+//                    [_tableView removeFromSuperview];
+//                    _tableView=nil;
+//                }
+                   [self.tableView reloadData];
                 
             }
             

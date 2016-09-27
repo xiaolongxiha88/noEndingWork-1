@@ -248,7 +248,7 @@
     [_backButton removeFromSuperview];
     _backButton=nil;
     
-//_AvUrl=@"http://192.168.3.203:8020/HelloHBuilder/0415%E5%8F%A4%E7%91%9E%E7%93%A6%E7%89%B9%E6%88%90%E7%89%87%202.mp4";
+//_AvUrl=@"http://cdn.growatt.com/app/0415%20Guruiwate%20into%20pieces.mp4";
         
          _play = [HcdCacheVideoPlayer sharedInstance];
         
@@ -262,9 +262,7 @@
         //[play playWithUrl:[NSURL URLWithString:@"http://pan.baidu.com/s/1c1Y95fy"] showView:videoView andSuperView:self.view];
        // NSLog(@"getSize=%f", [HcdCacheVideoPlayer allVideoCacheSize]);
     
-    }
-    
-    
+      }
     
 }
 
@@ -360,18 +358,23 @@
     
     
     
-    
-//     [_play removeAllObserver];
-//    
-//    [_play stop];
-//   
-//    _play=nil;
+    if (_play) {
+        [_play removeAllObserver];
+        
+        [_play stop];
+        
+        _play=nil;
+    }
+
     
 }
 
 
 - (void)dealloc{
+        if (_play) {
     [_play removeAllObserver];
+            _play=nil;
+        }
 }
 
 - (void)didReceiveMemoryWarning {
