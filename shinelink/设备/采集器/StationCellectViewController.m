@@ -162,6 +162,41 @@
         [_editCellect removeFromSuperview];
         return;
     }
+    
+    
+    if (row==4) {
+        [_editCellect removeFromSuperview];
+        
+        _SetName=_arrayData[_indexPath.row][@"device_type"];
+        NSString *demoName1=@"ShineWIFI";           //新wifi
+        NSString *demoName2=@"ShineLan";            //旧wifi
+        NSString *demoName3=@"ShineWifiBox";          //旧wifi
+        
+        
+        //_SetName=@"ShineWIFI";
+        
+        BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+        BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+        BOOL result3 = [_SetName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+        
+        if (result1) {
+            AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
+            rootView.SnString=_arrayData[_indexPath.row][@"datalog_sn"];
+            
+            [self.navigationController pushViewController:rootView animated:YES];
+        }else if (result2){
+            MainViewController *rootView = [[MainViewController alloc]init];
+            [self.navigationController pushViewController:rootView animated:YES];
+            
+        }else if (result3){
+            MainViewController *rootView = [[MainViewController alloc]init];
+            [self.navigationController pushViewController:rootView animated:YES];
+            
+        }
+        
+    }else{
+    
+    
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
         [_editCellect removeFromSuperview];
         [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
@@ -201,57 +236,9 @@
         }];
     }
     
-    if (row==4) {
-        [_editCellect removeFromSuperview];
-        
-        _SetName=_arrayData[_indexPath.row][@"device_type"];
-        NSString *demoName1=@"ShineWIFI";           //新wifi
-        NSString *demoName2=@"ShineLan";            //旧wifi
-          NSString *demoName3=@"ShineWifiBox";          //旧wifi
-        
-        
-        //_SetName=@"ShineWIFI";
-        
-           BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
-           BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
-           BOOL result3 = [_SetName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
-        
-        if (result1) {
-            AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
-            rootView.SnString=_arrayData[_indexPath.row][@"datalog_sn"];
-            
-            [self.navigationController pushViewController:rootView animated:YES];
-        }else if (result2){
-            MainViewController *rootView = [[MainViewController alloc]init];
-            [self.navigationController pushViewController:rootView animated:YES];
-        
-        }else if (result3){
-            MainViewController *rootView = [[MainViewController alloc]init];
-            [self.navigationController pushViewController:rootView animated:YES];
-            
-        }
-        
-//        NSString *IdString1= _arrayData[_indexPath.row][@"datalog_sn"];
-//        NSString *IdString=[IdString1 substringWithRange:NSMakeRange(0, 2)];
-//        
-//        NSLog(@"datalog_sn=%@",IdString);
-//        NSString *demoId=[NSString stringWithFormat:@"4K"];
-//        if ([IdString isEqualToString:demoId]) {
-//            
-//             AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
-//            
-//            [self.navigationController pushViewController:rootView animated:YES];
-//        }else
-//        {
-//            
-//         
-//            MainViewController *rootView = [[MainViewController alloc]init];
-//            [self.navigationController pushViewController:rootView animated:YES];
-//            
-//        }
-        
-        
-    }
+  }
+   
+    
     
 }
 

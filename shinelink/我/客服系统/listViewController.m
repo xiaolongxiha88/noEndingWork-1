@@ -227,7 +227,8 @@
     
      [cell.contentView setBackgroundColor: [UIColor whiteColor] ];
     
-    //_statusArray[indexPath.row]=@"3";
+    //_statusArray[indexPath.row]=@"1";
+    
     if ([_languageValue isEqualToString:@"0"]) {
         
         if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {
@@ -236,14 +237,18 @@
             [cell.coverImageView  setImage:[UIImage imageNamed:@"处理中.png"]];
         }else if([_statusArray[indexPath.row] isEqualToString:@"2"]){
             [cell.coverImageView  setImage:[UIImage imageNamed:@"已处理.png"]];
+        }else if([_statusArray[indexPath.row] isEqualToString:@"3"]){
+            [cell.coverImageView  setImage:[UIImage imageNamed:@"待跟进.png"]];
         }
     }else{
         if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"Pend-ing.png"]];
+            [cell.coverImageView  setImage:[UIImage imageNamed:@"Pending.png"]];
         }else if ([_statusArray[indexPath.row] isEqualToString:@"1"]){
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"Proce-ssing.png"]];
+            [cell.coverImageView  setImage:[UIImage imageNamed:@"Processing.png"]];
         }else if([_statusArray[indexPath.row] isEqualToString:@"2"]){
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"Proce-ssed.png"]];
+            [cell.coverImageView  setImage:[UIImage imageNamed:@"Processed.png"]];
+        }else if([_statusArray[indexPath.row] isEqualToString:@"3"]){
+            [cell.coverImageView  setImage:[UIImage imageNamed:@"Waiting.png"]];
         }
     
     }
