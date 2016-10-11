@@ -274,6 +274,7 @@
 		33692BF31C926B4B00698375 /* shang.png in Resources */ = {isa = PBXBuildFile; fileRef = 33692BF21C926B4B00698375 /* shang.png */; };
 		33692BF51C926B5000698375 /* xia.png in Resources */ = {isa = PBXBuildFile; fileRef = 33692BF41C926B5000698375 /* xia.png */; };
 		33692BF91C92952000698375 /* engrgySencondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33692BF81C92952000698375 /* engrgySencondViewController.m */; };
+		33699BB31DACCEAE00C55CFF /* meConfigerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */; };
 		336A108F1CBDDBA500E30E83 /* triangular.png in Resources */ = {isa = PBXBuildFile; fileRef = 336A108D1CBDDBA500E30E83 /* triangular.png */; };
 		336A10901CBDDBA500E30E83 /* 2triangular.png in Resources */ = {isa = PBXBuildFile; fileRef = 336A108E1CBDDBA500E30E83 /* 2triangular.png */; };
 		336D3FFE1D6FE76100ECFA34 /* AnotherSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D3FFD1D6FE76100ECFA34 /* AnotherSearchViewController.m */; };
@@ -1003,6 +1004,8 @@
 		33692BF41C926B5000698375 /* xia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = xia.png; path = "../设备二级界面/xia.png"; sourceTree = "<group>"; };
 		33692BF71C92952000698375 /* engrgySencondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engrgySencondViewController.h; path = ../engrgySencondViewController.h; sourceTree = "<group>"; };
 		33692BF81C92952000698375 /* engrgySencondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = engrgySencondViewController.m; path = ../engrgySencondViewController.m; sourceTree = "<group>"; };
+		33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meConfigerViewController.h; sourceTree = "<group>"; };
+		33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = meConfigerViewController.m; sourceTree = "<group>"; };
 		336A108D1CBDDBA500E30E83 /* triangular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = triangular.png; path = Masonry/triangular.png; sourceTree = "<group>"; };
 		336A108E1CBDDBA500E30E83 /* 2triangular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2triangular.png; path = Masonry/2triangular.png; sourceTree = "<group>"; };
 		336D3FFC1D6FE76100ECFA34 /* AnotherSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherSearchViewController.h; sourceTree = "<group>"; };
@@ -1113,8 +1116,8 @@
 		3376ED5B1D12A2EA009526B4 /* 处理中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "处理中.png"; sourceTree = "<group>"; };
 		3376ED5C1D12A2EA009526B4 /* 待处理.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "待处理.png"; sourceTree = "<group>"; };
 		3376ED671D12A4A6009526B4 /* 已处理.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "已处理.png"; sourceTree = "<group>"; };
-		337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDeviceViewController.h; sourceTree = "<group>"; };
-		337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AddDeviceViewController.mm; sourceTree = "<group>"; };
+		337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddDeviceViewController.h; path = WifConnect/num2/AddDeviceViewController.h; sourceTree = "<group>"; };
+		337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AddDeviceViewController.mm; path = WifConnect/num2/AddDeviceViewController.mm; sourceTree = "<group>"; };
 		3377156B1D8E6D28002EEEDF /* elian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = elian.h; path = OtherThing/cloudServices/elian.h; sourceTree = "<group>"; };
 		33775AD71D2CD7520070742E /* RKAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKAlertView.h; sourceTree = "<group>"; };
 		33775AD81D2CD7520070742E /* RKAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKAlertView.m; sourceTree = "<group>"; };
@@ -2720,6 +2723,8 @@
 				337F9CCD1C71AC2E0016FE43 /* meViewController.m */,
 				3355F2581C74178E006DDE5A /* meTableViewCell.h */,
 				3355F2591C74178E006DDE5A /* meTableViewCell.m */,
+				33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */,
+				33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */,
 			);
 			path = "我";
 			sourceTree = "<group>";
@@ -2966,8 +2971,6 @@
 			children = (
 				3377156B1D8E6D28002EEEDF /* elian.h */,
 				33AF3CE31D8E67210007D6C2 /* addDevice.jpg */,
-				337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */,
-				337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */,
 				33AF3CE61D8E67210007D6C2 /* DeviceManageViewController.h */,
 				33AF3CE71D8E67210007D6C2 /* DeviceManageViewController.m */,
 				33AF3CE81D8E67210007D6C2 /* OtherThing */,
@@ -3169,6 +3172,8 @@
 				33EFB5FC1C979B5F003F336F /* EditCellectView.m */,
 				33EFB5FF1C979B5F003F336F /* ChangeCellectViewController.h */,
 				33EFB6001C979B5F003F336F /* ChangeCellectViewController.m */,
+				337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */,
+				337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */,
 			);
 			path = "采集器";
 			sourceTree = "<group>";
@@ -3794,6 +3799,7 @@
 				334B8F501C914A6D00798A69 /* PNLineChart.m in Sources */,
 				33692BE91C92527500698375 /* threeViewController.m in Sources */,
 				336D401E1D6FEA7600ECFA34 /* PinYinForObjc.m in Sources */,
+				33699BB31DACCEAE00C55CFF /* meConfigerViewController.m in Sources */,
 				337F9CCB1C71AC200016FE43 /* energyViewController.m in Sources */,
 				3356782B1CC62A5A00EE4A73 /* controlCNJTable.m in Sources */,
 				338DCD9F1D2A00DF00C8B775 /* ProductData.m in Sources */,

@@ -114,11 +114,11 @@
     [self showProgressView];
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userId":userID} paramarsSite:@"/questionAPI.do?op=questionList" sucessBlock:^(id content) {
         [self hideProgressView];
-        NSLog(@"questionList=: %@", content);
+   NSLog(@"questionList=: %@", content);
         if(content){
             _allArray=[NSMutableArray arrayWithArray:content];
             
-             NSLog(@"questionList=11");
+          //NSLog(@"questionList=11");
         
             
             if(_allArray.count==0){
@@ -198,11 +198,11 @@
                       [self.tableView reloadData];
                 }
                 
-            NSLog(@"questionList=22");
+         //   NSLog(@"questionList=22");
           }
            
         }
-          NSLog(@"questionList=33");
+        //  NSLog(@"questionList=33");
     } failure:^(NSError *error) {
         [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];

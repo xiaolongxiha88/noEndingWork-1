@@ -15,6 +15,7 @@
 #import "stationTableView.h"
 #import "MessageCeterTableViewController.h"
 #import "AddDeviceViewController.h"
+#import "meConfigerViewController.h"
 
 #define Kwidth [UIScreen mainScreen].bounds.size.width
 
@@ -250,8 +251,8 @@
     }
    
     if (indexPath.row==3) {
-        AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
-
+        meConfigerViewController *rootView = [[meConfigerViewController alloc]init];
+  rootView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:rootView animated:YES];
     }
     if (indexPath.row==4) {

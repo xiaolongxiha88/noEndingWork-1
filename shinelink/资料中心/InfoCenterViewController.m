@@ -41,7 +41,7 @@
     
     _ScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _ScrollView.scrollEnabled=YES;
-    // _scrollView2.contentSize = CGSizeMake(SCREEN_Width,1050*HEIGHT_SIZE);
+   _ScrollView.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height+60*HEIGHT_SIZE);
     [self.view addSubview:_ScrollView];
     
     
@@ -112,6 +112,7 @@
 -(void)goQuestion{
 
     questionView *testView=[[questionView alloc]init];
+      testView.title=root_changjian_wenti;
     testView.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:testView animated:YES];
 }
@@ -119,6 +120,7 @@
 -(void)gomanual{
     
     manualTableViewController *testView=[[manualTableViewController alloc]init];
+    testView.title=root_shouce;
     testView.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:testView animated:YES];
 }
@@ -134,7 +136,7 @@
   
     
     QZBaseWebVC *testView=[[QZBaseWebVC alloc]init];
-   
+    testView.title=root_gongsi_guanwang;
     
     if ([currentLanguage hasPrefix:@"zh-Hans"]) {
         testView.url=@"http://www.growatt.com/";
@@ -153,6 +155,7 @@
 -(void)goAV{
 
     topAvViewController *testView=[[topAvViewController alloc]init];
+        testView.title=root_shipin_xitong;
     testView.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:testView animated:YES];
     
