@@ -33,6 +33,38 @@
             endingLineNumber = "380"
             landmarkName = "-finishSet1"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ControlCNJ finishSet1]"
+                  moduleName = "ShinePhone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E8%AE%BE%E5%A4%87%E4%BA%8C%E7%BA%A7%E7%95%8C%E9%9D%A2/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%BA%8C%E7%BA%A7/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%B8%89%E7%BA%A7/ControlCNJ.m"
+                  timestampString = "497955028.211581"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "380"
+                  endingLineNumber = "380"
+                  offsetFromSymbolStart = "1400">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__24-[ControlCNJ finishSet1]_block_invoke"
+                  moduleName = "ShinePhone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E8%AE%BE%E5%A4%87%E4%BA%8C%E7%BA%A7%E7%95%8C%E9%9D%A2/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%BA%8C%E7%BA%A7/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%B8%89%E7%BA%A7/ControlCNJ.m"
+                  timestampString = "497955028.215291"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "380"
+                  endingLineNumber = "380"
+                  offsetFromSymbolStart = "14">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -90,12 +122,12 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E7%99%BB%E9%99%86/LoginButton.m"
-                  timestampString = "497935178.720986"
+                  timestampString = "497955028.236583"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "66"
                   endingLineNumber = "66"
-                  offsetFromSymbolStart = "33">
+                  offsetFromSymbolStart = "44">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -105,12 +137,12 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E7%99%BB%E9%99%86/LoginButton.m"
-                  timestampString = "497935178.722579"
+                  timestampString = "497955028.239177"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "67"
                   endingLineNumber = "67"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "10">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -170,12 +202,12 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E8%AE%BE%E5%A4%87%E4%BA%8C%E7%BA%A7%E7%95%8C%E9%9D%A2/%E9%80%86%E5%8F%98%E5%99%A8%E4%BA%8C%E7%BA%A7/%E4%B8%89%E7%BA%A7/KongZhiNi.m"
-                  timestampString = "497935178.736092"
+                  timestampString = "497955028.252421"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "244"
                   endingLineNumber = "244"
-                  offsetFromSymbolStart = "1548">
+                  offsetFromSymbolStart = "1812">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -185,12 +217,12 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E8%AE%BE%E5%A4%87%E4%BA%8C%E7%BA%A7%E7%95%8C%E9%9D%A2/%E9%80%86%E5%8F%98%E5%99%A8%E4%BA%8C%E7%BA%A7/%E4%B8%89%E7%BA%A7/KongZhiNi.m"
-                  timestampString = "497935178.737719"
+                  timestampString = "497955028.255593"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "244"
                   endingLineNumber = "244"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "14">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -233,22 +265,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x767b;&#x9646;/registerViewController.m"
-            timestampString = "495885303.227796"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "shinelink/&#x8d44;&#x6599;&#x4e2d;&#x5fc3;/&#x89c6;&#x9891;&#x7cfb;&#x7edf;/HcdCachePlayer/hcdCachePlayer/HcdCacheVideoPlayer.m"
             timestampString = "496234408.732787"
             startingColumnNumber = "9223372036854775807"
@@ -272,102 +288,6 @@
             startingLineNumber = "212"
             endingLineNumber = "212"
             landmarkName = "-playWithVideoUrl:showView:andSuperView:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x8d44;&#x6599;&#x4e2d;&#x5fc3;/&#x89c6;&#x9891;&#x7cfb;&#x7edf;/HcdCachePlayer/hcdCachePlayer/HcdCacheVideoPlayer.m"
-            timestampString = "496234387.881834"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "495"
-            endingLineNumber = "495"
-            landmarkName = "-calculateDownloadProgress:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x8d44;&#x6599;&#x4e2d;&#x5fc3;/&#x89c6;&#x9891;&#x7cfb;&#x7edf;/AVViewController.m"
-            timestampString = "497872412.943054"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x8bbe;&#x5907;/deviceViewController.m"
-            timestampString = "497934972.111401"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "597"
-            endingLineNumber = "597"
-            landmarkName = "-netRequest"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x8bbe;&#x5907;/deviceViewController.m"
-            timestampString = "497935141.102181"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "893"
-            endingLineNumber = "893"
-            landmarkName = "-getPvPic:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x8bbe;&#x5907;/deviceViewController.m"
-            timestampString = "497935141.102181"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "902"
-            endingLineNumber = "902"
-            landmarkName = "-getPvPic:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x8bbe;&#x5907;/deviceViewController.m"
-            timestampString = "497935128.025107"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "897"
-            endingLineNumber = "897"
-            landmarkName = "-getPvPic:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

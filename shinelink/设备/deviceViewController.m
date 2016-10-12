@@ -169,8 +169,6 @@
     
     if ([_adNumber integerValue]>[adNum integerValue]||(adNum==nil)) {
         
-        [[NSUserDefaults standardUserDefaults] setObject:_adNumber forKey:@"advertisingNumber"];
-        
         [self showProgressView];
         [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"admin":@"admin"}  paramarsSite:@"/newLoginAPI.do?op=getAPPMessage" sucessBlock:^(id content) {
             NSLog(@"getAPPMessage: %@", content);
@@ -179,7 +177,8 @@
                 
                 if([content[@"result"] integerValue]==1){
                 
-               
+                  [[NSUserDefaults standardUserDefaults] setObject:_adNumber forKey:@"advertisingNumber"];
+                    
 //                    NSString *demo=@"1470031970617.jpg";
 //                        NSString *picUrl=[NSString stringWithFormat:@"%@/%@",Head_Url_more,demo];
                     
@@ -897,16 +896,15 @@
     NSArray*pvArray3=[NSArray arrayWithObjects:@"4U",@"5U",@"6U",@"2W",@"3W",@"4W",@"83",@"84",@"85",@"86",@"87",@"88",@"AF",@"AG",@"AH",@"AI",@"AJ",@"AK",@"AL",@"BA",@"BB",@"BC",@"BD",@"BE",@"BF",@"BS",@"BT",@"E7",nil];
     
     if ([pvArray1 containsObject:pvSn2]) {
-        pvPicName=@"inverter2.png";
-        
+        pvPicName=@"PV_t1.png";
+    }else if ([pvArray2 containsObject:pvSn2]){
+      pvPicName=@"PV_t3.png";
+    }else if ([pvArray3 containsObject:pvSn2]){
+        pvPicName=@"PV_t4.png";
+    }else{
+    pvPicName=@"PV_t2.png";
     }
-    
-    
-    pvPicName=@"inverter2.png";
-    
-    
-    
-    
+      
     return pvPicName;
 }
 
