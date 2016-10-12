@@ -264,7 +264,6 @@
      [bannerView.mainImageView sd_setImageWithURL:imagePath placeholderImage:[UIImage imageNamed:@"pic_service.png"]];
     
     //  [bannerView.mainImageView sd_setImageWithURL:_AvPicUrl[index]];
-    
    // bannerView.mainImageView.image = self.imageArray[index];
     
     

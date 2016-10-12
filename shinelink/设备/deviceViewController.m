@@ -179,12 +179,31 @@
                 
                 if([content[@"result"] integerValue]==1){
                 
-                   // [self.navigationController setNavigationBarHidden:YES];
                
 //                    NSString *demo=@"1470031970617.jpg";
 //                        NSString *picUrl=[NSString stringWithFormat:@"%@/%@",Head_Url_more,demo];
                     
-                      NSString *picUrl=[NSString stringWithFormat:@"%@/%@",Head_Url_more,content[@"obj"][@"picurl"]];
+                    
+                    NSArray *languages = [NSLocale preferredLanguages];
+                    NSString *currentLanguage = [languages objectAtIndex:0];
+                    NSString*_languageTypeValue;
+                    NSString *picUrl;
+                    
+                    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+                        _languageTypeValue=@"0";
+                    }else if ([currentLanguage hasPrefix:@"en"]) {
+                        _languageTypeValue=@"1";
+                    }else{
+                        _languageTypeValue=@"2";
+                    }
+                    
+                    if ([_languageTypeValue isEqualToString:@"0"]) {
+                        picUrl=[NSString stringWithFormat:@"%@/%@",Head_Url_more,content[@"obj"][@"picurl"]];
+                    }else{
+                      picUrl=[NSString stringWithFormat:@"%@/%@",Head_Url_more,content[@"obj"][@"enpicurl"]];
+                    }
+                    
+                    
                     
                     
                      float adHeight= 260*NOW_SIZE*33/22;
@@ -569,7 +588,12 @@
              [imageStatueArray addObject:@"disconnect@2x.png"];
            
             if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"inverter"]) {
-                 [imageArray addObject:@"inverter2.png"];
+               
+                
+                
+                NSString *picTypeSN=content[@"deviceList"][i][@"deviceSn"];
+                  [imageArray addObject:[self getPvPic:picTypeSN]];
+                
                 NSString *PO=[NSString stringWithFormat:@"%@W",content[@"deviceList"][i][@"power"]];
                 [powerArray addObject:PO];
                 NSString *DY=[NSString stringWithFormat:@"%@kWh",content[@"deviceList"][i][@"eToday"]];
@@ -856,6 +880,34 @@
         [self showToastViewWithTitle:root_Networking];
     }];
 
+}
+
+
+-(NSString*)getPvPic:(NSString*)pvSN{
+    
+    NSString *pvPicName;
+    NSString*pvSn2=[pvSN substringToIndex:2];
+    
+  //  pvSn2=@"3N";
+    
+    NSArray*pvArray1=[NSArray arrayWithObjects:@"R9",@"Z3",@"Z4",@"Z5",@"6A",@"7A",@"8A",@"9A",@"0B",@"1B",@"2B",@"3B",@"4B",@"5B",@"3C",@"3F",@"4F",@"5F",@"6F",@"7F",@"8F",@"9F",@"0G",@"1G",@"2G",@"3G",@"4G",@"5G",@"6G",@"7G",@"8G",@"9G",@"0H",@"1H",@"2H",@"3H",@"4H",@"5H",@"6H",@"7H",@"8H",@"9H",@"0I",@"1I",@"2I",@"3I",@"4I",@"5I",@"6I",@"7I",@"8I",@"9I",@"0J",@"1J",@"2J",@"3J",@"0K",@"1K",@"7K",@"8K",@"9K",@"0L",@"1L",@"2L",@"3L",@"4L",@"5L",@"6L",@"7L",@"4M",@"5M",@"6M",@"7M",@"8M",@"9M",@"0N",@"1N",@"2N",@"3N",@"4N",@"5N",@"9R",@"3S",@"4S",@"7U",@"8U",@"9U",@"0V",@"1V",@"2V",@"3V",@"4V",@"5V",@"6V",@"7V",@"8V",@"9V",@"0W",@"8W",@"8X",@"9X",@"0Y",@"1Y",@"2Y",@"3Y",@"4Y",@"5Y",@"6Y",@"7Y",@"8Y",@"9Y",@"0Z",@"1Z",@"2Z",@"3Z",@"4Z",@"5Z",@"6Z",@"7Z",@"14",@"15",@"16",@"17",@"18",@"25",@"26",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"89",@"90",@"AM",@"AN",@"AO",@"AQ",@"CW",@"CX",@"CV", nil];
+    
+    NSArray*pvArray2=[NSArray arrayWithObjects:@"D5",@"D6",@"D7",@"D8",@"D9",@"E0",@"E1",@"9L",@"0M",@"1M",@"2M",@"3M",@"3O",@"4O",@"5O",@"19",@"20",@"21",@"22",@"23",@"74",@"75",@"76",@"77",@"78",@"DP",@"DO",@"DN",@"DA",@"DQ",@"DW",@"DV",@"C8",@"C9",@"D5",@"D6",@"D7",@"D8",@"D9",@"E0",@"E1",nil];
+    
+    NSArray*pvArray3=[NSArray arrayWithObjects:@"4U",@"5U",@"6U",@"2W",@"3W",@"4W",@"83",@"84",@"85",@"86",@"87",@"88",@"AF",@"AG",@"AH",@"AI",@"AJ",@"AK",@"AL",@"BA",@"BB",@"BC",@"BD",@"BE",@"BF",@"BS",@"BT",@"E7",nil];
+    
+    if ([pvArray1 containsObject:pvSn2]) {
+        pvPicName=@"inverter2.png";
+        
+    }
+    
+    
+    pvPicName=@"inverter2.png";
+    
+    
+    
+    
+    return pvPicName;
 }
 
 

@@ -155,7 +155,6 @@
 		33530F211CC8824500378EB2 /* changManeger.m in Sources */ = {isa = PBXBuildFile; fileRef = 33530F201CC8824500378EB2 /* changManeger.m */; };
 		335317431CA2423D003F106D /* GetDevice+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 335317401CA2423D003F106D /* GetDevice+CoreDataProperties.m */; };
 		335317441CA2423D003F106D /* GetDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 335317421CA2423D003F106D /* GetDevice.m */; };
-		335317461CA29E71003F106D /* storage.png in Resources */ = {isa = PBXBuildFile; fileRef = 335317451CA29E71003F106D /* storage.png */; };
 		3353B19F1CA116FF00577595 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3353B19E1CA116FF00577595 /* CoreData.framework */; };
 		3353B1B21CA126EB00577595 /* DemoDevice+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3353B1AF1CA126EB00577595 /* DemoDevice+CoreDataProperties.m */; };
 		3353B1B31CA126EB00577595 /* DemoDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 3353B1B11CA126EB00577595 /* DemoDevice.m */; };
@@ -275,6 +274,11 @@
 		33692BF51C926B5000698375 /* xia.png in Resources */ = {isa = PBXBuildFile; fileRef = 33692BF41C926B5000698375 /* xia.png */; };
 		33692BF91C92952000698375 /* engrgySencondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33692BF81C92952000698375 /* engrgySencondViewController.m */; };
 		33699BB31DACCEAE00C55CFF /* meConfigerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */; };
+		33699BB51DADE6FF00C55CFF /* PV_t1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33699BB41DADE6FF00C55CFF /* PV_t1.png */; };
+		33699BB71DADE72800C55CFF /* PV_t2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33699BB61DADE72800C55CFF /* PV_t2.png */; };
+		33699BB91DADE72E00C55CFF /* PV_t3.png in Resources */ = {isa = PBXBuildFile; fileRef = 33699BB81DADE72E00C55CFF /* PV_t3.png */; };
+		33699BBB1DADE73400C55CFF /* PV_t4.png in Resources */ = {isa = PBXBuildFile; fileRef = 33699BBA1DADE73400C55CFF /* PV_t4.png */; };
+		33699BBD1DADE73B00C55CFF /* storage.png in Resources */ = {isa = PBXBuildFile; fileRef = 33699BBC1DADE73B00C55CFF /* storage.png */; };
 		336A108F1CBDDBA500E30E83 /* triangular.png in Resources */ = {isa = PBXBuildFile; fileRef = 336A108D1CBDDBA500E30E83 /* triangular.png */; };
 		336A10901CBDDBA500E30E83 /* 2triangular.png in Resources */ = {isa = PBXBuildFile; fileRef = 336A108E1CBDDBA500E30E83 /* 2triangular.png */; };
 		336D3FFE1D6FE76100ECFA34 /* AnotherSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D3FFD1D6FE76100ECFA34 /* AnotherSearchViewController.m */; };
@@ -810,7 +814,6 @@
 		335317401CA2423D003F106D /* GetDevice+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GetDevice+CoreDataProperties.m"; sourceTree = "<group>"; };
 		335317411CA2423D003F106D /* GetDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetDevice.h; sourceTree = "<group>"; };
 		335317421CA2423D003F106D /* GetDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetDevice.m; sourceTree = "<group>"; };
-		335317451CA29E71003F106D /* storage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = storage.png; sourceTree = "<group>"; };
 		3353B19E1CA116FF00577595 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3353B1AE1CA126EB00577595 /* DemoDevice+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DemoDevice+CoreDataProperties.h"; path = "../DemoDevice+CoreDataProperties.h"; sourceTree = "<group>"; };
 		3353B1AF1CA126EB00577595 /* DemoDevice+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DemoDevice+CoreDataProperties.m"; path = "../DemoDevice+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -1006,6 +1009,11 @@
 		33692BF81C92952000698375 /* engrgySencondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = engrgySencondViewController.m; path = ../engrgySencondViewController.m; sourceTree = "<group>"; };
 		33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meConfigerViewController.h; sourceTree = "<group>"; };
 		33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = meConfigerViewController.m; sourceTree = "<group>"; };
+		33699BB41DADE6FF00C55CFF /* PV_t1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PV_t1.png; sourceTree = "<group>"; };
+		33699BB61DADE72800C55CFF /* PV_t2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PV_t2.png; sourceTree = "<group>"; };
+		33699BB81DADE72E00C55CFF /* PV_t3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PV_t3.png; sourceTree = "<group>"; };
+		33699BBA1DADE73400C55CFF /* PV_t4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PV_t4.png; sourceTree = "<group>"; };
+		33699BBC1DADE73B00C55CFF /* storage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = storage.png; sourceTree = "<group>"; };
 		336A108D1CBDDBA500E30E83 /* triangular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = triangular.png; path = Masonry/triangular.png; sourceTree = "<group>"; };
 		336A108E1CBDDBA500E30E83 /* 2triangular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2triangular.png; path = Masonry/2triangular.png; sourceTree = "<group>"; };
 		336D3FFC1D6FE76100ECFA34 /* AnotherSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherSearchViewController.h; sourceTree = "<group>"; };
@@ -1731,7 +1739,6 @@
 				335089241C7323C200D7AA03 /* frag4.png */,
 				33EFB6891C9973D2003F336F /* bg3.png */,
 				334770F91C9A3D91003A6F13 /* server@2x.png */,
-				335317451CA29E71003F106D /* storage.png */,
 				334770FB1C9A3DEE003A6F13 /* energy@2x.png */,
 				334770FF1C9A3E57003A6F13 /* mine@2x.png */,
 				334770FD1C9A3E35003A6F13 /* equipment@2x.png */,
@@ -2008,6 +2015,11 @@
 				33EFB67F1C997001003F336F /* inverter.png */,
 				33EFB6811C997050003F336F /* 充电桩.png */,
 				3382341A1D98ED8A002062AE /* adCancel.png */,
+				33699BB41DADE6FF00C55CFF /* PV_t1.png */,
+				33699BB61DADE72800C55CFF /* PV_t2.png */,
+				33699BB81DADE72E00C55CFF /* PV_t3.png */,
+				33699BBA1DADE73400C55CFF /* PV_t4.png */,
+				33699BBC1DADE73B00C55CFF /* storage.png */,
 			);
 			path = "图片";
 			sourceTree = "<group>";
@@ -3460,7 +3472,6 @@
 				334CB02A1CD847C90061AC0B /* Localizable.strings in Resources */,
 				338FD9881D1D25A8009A128F /* first1.jpg in Resources */,
 				338990AF1CEAB61400A708F8 /* mebg.png in Resources */,
-				335317461CA29E71003F106D /* storage.png in Resources */,
 				3355AD9A1CF6A49400AE6891 /* 222.jpg in Resources */,
 				334FF0C01CF53C7C001E6716 /* top.png in Resources */,
 				336664EF1CB77CD3005573FB /* user-agreement@2x.png in Resources */,
@@ -3488,6 +3499,7 @@
 				33801EBD1D5882D500047232 /* Growatt-2-5k.jpg in Resources */,
 				33C3FFFB1D3E33E00016351C /* L2.png in Resources */,
 				335D69E91D77D28800894D90 /* AVplay.png in Resources */,
+				33699BB91DADE72E00C55CFF /* PV_t3.png in Resources */,
 				3381ECFB1CBCA63A00DCF0D2 /* 光伏零功率输出使能切图.png in Resources */,
 				33768A9F1D475CCB00873E82 /* poweren.png in Resources */,
 				33FEFCD81C7D9DCD00324374 /* 圆角矩形3.png in Resources */,
@@ -3549,6 +3561,7 @@
 				33FEFD631C7DB38400324374 /* icon---Username@2x.png in Resources */,
 				33FEFD561C7DB38400324374 /* icon_press@3x.png in Resources */,
 				33768AB41D475E5400873E82 /* charge-cn.png in Resources */,
+				33699BB71DADE72800C55CFF /* PV_t2.png in Resources */,
 				33FEFD761C7DB38400324374 /* iconfont-shouji@2x.png in Resources */,
 				3349A7AE1C75B76F009172C2 /* icon_logo.png in Resources */,
 				3349A7B81C75BCDB009172C2 /* 账号3.png in Resources */,
@@ -3598,6 +3611,7 @@
 				33AF3D231D8E67210007D6C2 /* SIAlertView.bundle in Resources */,
 				33FEFD721C7DB38400324374 /* iconfont-nengyuanlei_press@3x.png in Resources */,
 				33724D9D1CFE85FB005F3965 /* pic_service.png in Resources */,
+				33699BB51DADE6FF00C55CFF /* PV_t1.png in Resources */,
 				33FEFD661C7DB38400324374 /* icon@3x.png in Resources */,
 				33FEFCD21C7D8A9500324374 /* Address.plist in Resources */,
 				334AED581CA37569007E39F3 /* 客户服务.png in Resources */,
@@ -3622,7 +3636,9 @@
 				33FEFD701C7DB38400324374 /* iconfont-klmlianxifangshi@3x.png in Resources */,
 				33C3FFFA1D3E33E00016351C /* L1.png in Resources */,
 				33FEFD611C7DB38400324374 /* icon---Password@3x.png in Resources */,
+				33699BBB1DADE73400C55CFF /* PV_t4.png in Resources */,
 				33FFBD531CEC7A8E003C56E1 /* content3.jpg in Resources */,
+				33699BBD1DADE73B00C55CFF /* storage.png in Resources */,
 				334FEF881CF453E1001E6716 /* second2.png in Resources */,
 				3349A7B21C75B7DF009172C2 /* 圆角矩形3.png in Resources */,
 				3383F1381C9FFD370075E834 /* 家庭用电量.png in Resources */,
