@@ -99,6 +99,11 @@
     
 }
 
+- (void)showAlertViewWithTitle:(NSString *)title message:(NSString *)message cancelButtonTitle:(NSString *)cancelTitle{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:cancelTitle otherButtonTitles:nil];
+    [alertView show];
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     KongZhiNi *go=[[KongZhiNi alloc]init];
@@ -118,7 +123,11 @@
         go.type=@"5";
     }
    
-   
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+        return;
+    }else{
+
     if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==2)||(indexPath.row==3)||(indexPath.row==5)) {
         
         [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
@@ -142,7 +151,8 @@
     
          [self.navigationController pushViewController:go animated:YES];
        }
-    
+        
+    }
 
 }
 

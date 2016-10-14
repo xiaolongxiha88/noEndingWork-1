@@ -317,7 +317,6 @@
 		3370791E1D8FD80300D7DA98 /* video.png in Resources */ = {isa = PBXBuildFile; fileRef = 3370791C1D8FD80300D7DA98 /* video.png */; };
 		337079201D8FD80B00D7DA98 /* Installation-Manual.png in Resources */ = {isa = PBXBuildFile; fileRef = 3370791F1D8FD80B00D7DA98 /* Installation-Manual.png */; };
 		337079221D8FD81100D7DA98 /* company.png in Resources */ = {isa = PBXBuildFile; fileRef = 337079211D8FD81100D7DA98 /* company.png */; };
-		337079351D8FFC6E00D7DA98 /* Reveal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 337079341D8FFC6E00D7DA98 /* Reveal.framework */; };
 		3370793C1D910FEC00D7DA98 /* NJKWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 337079391D910FEC00D7DA98 /* NJKWebViewProgress.m */; };
 		3370793D1D910FEC00D7DA98 /* NJKWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3370793B1D910FEC00D7DA98 /* NJKWebViewProgressView.m */; };
 		3370793F1D910FF500D7DA98 /* QZBaseWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3370793E1D910FF500D7DA98 /* QZBaseWebVC.m */; };
@@ -1082,7 +1081,6 @@
 		3370791C1D8FD80300D7DA98 /* video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video.png; sourceTree = "<group>"; };
 		3370791F1D8FD80B00D7DA98 /* Installation-Manual.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Installation-Manual.png"; sourceTree = "<group>"; };
 		337079211D8FD81100D7DA98 /* company.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = company.png; sourceTree = "<group>"; };
-		337079341D8FFC6E00D7DA98 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
 		337079381D910FEC00D7DA98 /* NJKWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgress.h; sourceTree = "<group>"; };
 		337079391D910FEC00D7DA98 /* NJKWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NJKWebViewProgress.m; sourceTree = "<group>"; };
 		3370793A1D910FEC00D7DA98 /* NJKWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NJKWebViewProgressView.h; sourceTree = "<group>"; };
@@ -1428,7 +1426,6 @@
 				33340F7B1D6D71EE00909BBF /* WebKit.framework in Frameworks */,
 				337532F31D051C14009CE66F /* libz.tbd in Frameworks */,
 				335C9D291D011FA4008C977A /* AdSupport.framework in Frameworks */,
-				337079351D8FFC6E00D7DA98 /* Reveal.framework in Frameworks */,
 				335C9D271D011F8C008C977A /* Security.framework in Frameworks */,
 				335C9D251D011F82008C977A /* UIKit.framework in Frameworks */,
 				335C9D231D011F74008C977A /* Foundation.framework in Frameworks */,
@@ -2141,7 +2138,6 @@
 		335C9D2A1D011FCA008C977A /* 框架 */ = {
 			isa = PBXGroup;
 			children = (
-				337079341D8FFC6E00D7DA98 /* Reveal.framework */,
 				335D69E31D77BC2800894D90 /* MobileCoreServices.framework */,
 				335D69E11D77BC0B00894D90 /* AVFoundation.framework */,
 				3353B19E1CA116FF00577595 /* CoreData.framework */,
@@ -4062,7 +4058,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4102,7 +4098,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
