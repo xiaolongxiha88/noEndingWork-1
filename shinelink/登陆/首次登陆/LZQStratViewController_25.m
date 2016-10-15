@@ -27,6 +27,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+       [self.navigationController setNavigationBarHidden:YES];
+    
     [self addSrollView];
   //  [self addTimer];
     
@@ -37,7 +40,7 @@
     //初始化滚动视图
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCR_W, SCR_H)];
     //设置滚动视图区域
-    _scrollView.contentSize = CGSizeMake(SCR_W * 3, SCR_H);
+    _scrollView.contentSize = CGSizeMake(SCR_W * 3, 0);
     
     
     NSArray *languages = [NSLocale preferredLanguages];
@@ -98,7 +101,7 @@
     
     
     //分页控制器（小圆点－－位置）
-    _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, SCR_H - 60*HEIGHT_SIZE, SCR_W, 40*HEIGHT_SIZE)];
+    _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, SCR_H - 55*HEIGHT_SIZE, SCR_W, 40*HEIGHT_SIZE)];
     _pageControl.backgroundColor = MainColor;
     //设置小圆点个数
     _pageControl.numberOfPages = 3;
@@ -134,7 +137,7 @@
 
 - (void)addBtn{
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(SCR_W * 2 + 60*NOW_SIZE,SCR_H - 100*HEIGHT_SIZE, 200*NOW_SIZE, 35*HEIGHT_SIZE);
+    goBut.frame=CGRectMake(SCR_W * 2 + 60*NOW_SIZE,SCR_H - 120*HEIGHT_SIZE, 200*NOW_SIZE, 35*HEIGHT_SIZE);
     //    [goBut.layer setMasksToBounds:YES];
     //    [goBut.layer setCornerRadius:25.0];
     [goBut setBackgroundImage:IMAGE(@"btn1.png") forState:UIControlStateNormal];
@@ -155,7 +158,9 @@
 
 - (void)clickBtn{
     loginViewController *lzqSVC = [[loginViewController alloc] init];
-                [self presentViewController:lzqSVC animated:YES completion:nil];
+    
+    [self.navigationController pushViewController:lzqSVC animated:YES];
+              //  [self presentViewController:lzqSVC animated:YES completion:nil];
 }
 
 #pragma mark - UIScrollViewDelegate

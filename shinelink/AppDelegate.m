@@ -54,7 +54,9 @@
              [[UserInfo defaultUserInfo]setFirstPic:@"OK"];
         LZQStratViewController_25 *lzqStartViewController = [[LZQStratViewController_25 alloc] init];
       
-        self.window.rootViewController = lzqStartViewController;
+        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:lzqStartViewController];
+        
+        self.window.rootViewController = nav;
    
     }else{
     
