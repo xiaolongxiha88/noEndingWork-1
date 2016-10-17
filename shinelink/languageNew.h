@@ -27,6 +27,8 @@
 #define  root_kongzhi_Alert      NSLocalizedString(@"控制提示", nil)
 #define  root_tianjia_wenti_Alert      NSLocalizedString(@"添加问题提示", nil)
 #define  root_kongzhi_mima      NSLocalizedString(@"控制密码", nil)
+#define  root_back      NSLocalizedString(@"返回", nil)
+#define  root_stop_config      NSLocalizedString(@"停止配置", nil)
 
 //登陆
 #define  root_yongHuMing_mima_cuowu        NSLocalizedString(@"用户名密码错误 ", nil)
@@ -485,6 +487,9 @@
 #define root_wo_qingkong_message     NSLocalizedString(@"清空", nil)
 
 #define root_wo_qingkong_lishi_shuju     NSLocalizedString(@"是否清空历史数据", nil)
+#define root_wo_qingkong_shuju     NSLocalizedString(@"清空历史数据", nil)
+#define root_wo_qingkong_tubiao_shuliang     NSLocalizedString(@"清空APP图标标记数量", nil)
+
 #define root_wenti_leirong    NSLocalizedString(@"问题内容:", nil)
 
 //配置WIFI

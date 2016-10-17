@@ -8,6 +8,7 @@
 
 #import "MessageCeterTableViewController.h"
 #import "messgeSecondViewController.h"
+#import "JPUSHService.h"
 
 @interface MessageCeterTableViewController ()<UIAlertViewDelegate>
 @property(nonatomic,strong)NSMutableArray *titleArray;
@@ -41,16 +42,27 @@
         
     }
 
+    self.tableView.frame=CGRectMake(0, 0, SCREEN_Width, SCREEN_Height-100*HEIGHT_SIZE);
+    
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_wo_qingkong_message style:UIBarButtonItemStylePlain target:self action:@selector(clearData)];
     self.navigationItem.rightBarButtonItem=rightItem;
+    
+
     
     [self initData];
     
 }
 
+
+-(void)clearBadge{
+    int badge=0;
+    [JPUSHService setBadge:badge];
+    [UIApplication sharedApplication].applicationIconBadgeNumber =badge;
+}
+
 -(void)clearData{
 
-    _Alert1 = [[UIAlertView alloc] initWithTitle:root_Alet_user message:root_wo_qingkong_lishi_shuju delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+    _Alert1 = [[UIAlertView alloc] initWithTitle:root_Alet_user message:root_wo_qingkong_lishi_shuju delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_wo_qingkong_shuju,root_wo_qingkong_tubiao_shuliang, nil];
     
     [_Alert1 show];
 }
@@ -64,8 +76,13 @@
         [userDefaultes setObject:nil forKey:@"MessageTitleArray"];
         [userDefaultes setObject:nil forKey:@"MessageTimeArray"];
         [userDefaultes setObject:nil forKey:@"MessageContentArray"];
+          [self.navigationController popViewControllerAnimated:NO];
+    }else if (buttonIndex==2){
+        [self clearBadge];
+          [self.navigationController popViewControllerAnimated:NO];
     }
-    [self.navigationController popViewControllerAnimated:NO];
+  
+    
 }
 
 

@@ -161,7 +161,7 @@ static void *context = NULL;
     //    [goBut.layer setMasksToBounds:YES];
     //    [goBut.layer setCornerRadius:25.0];
     [backBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
-    [backBut setTitle:root_finish forState:UIControlStateNormal];
+    [backBut setTitle:root_back forState:UIControlStateNormal];
     backBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:backBut];
@@ -329,7 +329,7 @@ static void *context = NULL;
     
     
      myAlertView = [[SIAlertView alloc] initWithTitle:root_Alet_user andMessage:root_peizhi_shinewifi_peizhi_tishi];
-    [myAlertView addButtonWithTitle:root_cancel
+    [myAlertView addButtonWithTitle:root_stop_config
                                type:SIAlertViewButtonTypeDestructive
                             handler:^(SIAlertView *alertView) {
                                 [alertView dismissAnimated:YES];

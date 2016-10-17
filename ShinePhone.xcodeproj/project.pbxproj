@@ -363,6 +363,8 @@
 		337960771DB0D065009AC610 /* massage_en2.png in Resources */ = {isa = PBXBuildFile; fileRef = 337960761DB0D065009AC610 /* massage_en2.png */; };
 		337C10E91CE02A160053361F /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = 337C10E81CE02A160053361F /* head.png */; };
 		337C30541CCDAF3C002B99B7 /* protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C30531CCDAF3C002B99B7 /* protocol.m */; };
+		337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */; };
+		337CB59D1DB4A837002ABB88 /* firstToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB59C1DB4A837002ABB88 /* firstToolViewController.m */; };
 		337F9C851C71A6710016FE43 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9C841C71A6710016FE43 /* main.m */; };
 		337F9C881C71A6710016FE43 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9C871C71A6710016FE43 /* AppDelegate.m */; };
 		337F9C931C71A6710016FE43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 337F9C921C71A6710016FE43 /* Assets.xcassets */; };
@@ -1006,8 +1008,8 @@
 		33692BF41C926B5000698375 /* xia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = xia.png; path = "../设备二级界面/xia.png"; sourceTree = "<group>"; };
 		33692BF71C92952000698375 /* engrgySencondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engrgySencondViewController.h; path = ../engrgySencondViewController.h; sourceTree = "<group>"; };
 		33692BF81C92952000698375 /* engrgySencondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = engrgySencondViewController.m; path = ../engrgySencondViewController.m; sourceTree = "<group>"; };
-		33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meConfigerViewController.h; sourceTree = "<group>"; };
-		33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = meConfigerViewController.m; sourceTree = "<group>"; };
+		33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = meConfigerViewController.h; path = ../meConfigerViewController.h; sourceTree = "<group>"; };
+		33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = meConfigerViewController.m; path = ../meConfigerViewController.m; sourceTree = "<group>"; };
 		33699BB41DADE6FF00C55CFF /* PV_t1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PV_t1.png; sourceTree = "<group>"; };
 		33699BB61DADE72800C55CFF /* PV_t2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PV_t2.png; sourceTree = "<group>"; };
 		33699BB81DADE72E00C55CFF /* PV_t3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PV_t3.png; sourceTree = "<group>"; };
@@ -1138,6 +1140,10 @@
 		337C10E81CE02A160053361F /* head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head.png; sourceTree = "<group>"; };
 		337C30521CCDAF3C002B99B7 /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
 		337C30531CCDAF3C002B99B7 /* protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = protocol.m; sourceTree = "<group>"; };
+		337CB5981DB4A787002ABB88 /* WiFiSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiSignalViewController.h; sourceTree = "<group>"; };
+		337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiSignalViewController.m; sourceTree = "<group>"; };
+		337CB59B1DB4A837002ABB88 /* firstToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = firstToolViewController.h; sourceTree = "<group>"; };
+		337CB59C1DB4A837002ABB88 /* firstToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = firstToolViewController.m; sourceTree = "<group>"; };
 		337F9C801C71A6710016FE43 /* ShinePhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShinePhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		337F9C841C71A6710016FE43 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		337F9C861C71A6710016FE43 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2588,6 +2594,19 @@
 			path = pic;
 			sourceTree = "<group>";
 		};
+		337CB5971DB4A746002ABB88 /* 工具箱 */ = {
+			isa = PBXGroup;
+			children = (
+				33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */,
+				33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */,
+				337CB5981DB4A787002ABB88 /* WiFiSignalViewController.h */,
+				337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */,
+				337CB59B1DB4A837002ABB88 /* firstToolViewController.h */,
+				337CB59C1DB4A837002ABB88 /* firstToolViewController.m */,
+			);
+			path = "工具箱";
+			sourceTree = "<group>";
+		};
 		337F9C771C71A6710016FE43 = {
 			isa = PBXGroup;
 			children = (
@@ -2723,6 +2742,7 @@
 		337F9CC41C71ABD80016FE43 /* 我 */ = {
 			isa = PBXGroup;
 			children = (
+				337CB5971DB4A746002ABB88 /* 工具箱 */,
 				335BF1EA1D1006F8008EEE99 /* 消息中心 */,
 				3367EB921CD0ADE300D2EF67 /* 电站设置 */,
 				3349A7AC1C75A201009172C2 /* 资料管理 */,
@@ -2731,8 +2751,6 @@
 				337F9CCD1C71AC2E0016FE43 /* meViewController.m */,
 				3355F2581C74178E006DDE5A /* meTableViewCell.h */,
 				3355F2591C74178E006DDE5A /* meTableViewCell.m */,
-				33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */,
-				33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */,
 			);
 			path = "我";
 			sourceTree = "<group>";
@@ -3786,6 +3804,7 @@
 				335D69B51D77BA4D00894D90 /* NSString+HCD.m in Sources */,
 				3343F3C61C80403C009F69BC /* AFURLResponseSerialization.m in Sources */,
 				33AF3D211D8E67210007D6C2 /* NSTimer+EasyTimeline.m in Sources */,
+				337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */,
 				3377156A1D8E6CCC002EEEDF /* AddDeviceViewController.mm in Sources */,
 				338122261D864B3700C7704B /* AvCachTableViewCell.m in Sources */,
 				335456BF1C852EEB00275478 /* SHBQRView.m in Sources */,
@@ -3929,6 +3948,7 @@
 				33FEFCD61C7D8E8300324374 /* UIViewExt.m in Sources */,
 				336D401F1D6FEA7600ECFA34 /* PinyinHelper.m in Sources */,
 				334AED701CA381D0007E39F3 /* ASValuePopUpView.m in Sources */,
+				337CB59D1DB4A837002ABB88 /* firstToolViewController.m in Sources */,
 				336F1A181D88E46900CD4C2B /* SDWebImageDecoder.m in Sources */,
 				3383EF9C1C9F8A6F0075E834 /* MJRefreshConst.m in Sources */,
 				3383EF9E1C9F8A6F0075E834 /* MJRefreshGifFooter.m in Sources */,

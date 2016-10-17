@@ -16,6 +16,7 @@
 #import "MessageCeterTableViewController.h"
 #import "AddDeviceViewController.h"
 #import "meConfigerViewController.h"
+#import "firstToolViewController.h"
 
 #define Kwidth [UIScreen mainScreen].bounds.size.width
 
@@ -70,7 +71,9 @@
 
 - (void)_createTableView {
     
-    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    //_tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height) style:UITableViewStylePlain];
+    
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

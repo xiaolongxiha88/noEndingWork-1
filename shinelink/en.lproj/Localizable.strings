@@ -11,6 +11,7 @@
 "删除"="Delete";
 "扫描结果"="Scanning result";
 
+
 "Enter your username"="Enter your username";
 "Enter your pwd"="Enter your pwd";
 "忘记密码"="Forgot password";
@@ -453,8 +454,10 @@
 "日功率走势图"="Daily power chart(W)";
 "消息中心"="Message center";
 "清空"="Clear";
-"是否清空历史数据"="Clear historical data?";
+"是否清空历史数据"="Clear data or number of APP icon tags?";
 "问题内容:"="Content:";
+"清空历史数据"="Clear historical data";
+"清空APP图标标记数量"="Clear number of APP icon tags";
 
 "配置ShineWifi"="Set ShineWifi";
 "ShineWifi提示一"="Please enter the phone system needs to be set on a connection WiFi device";
@@ -538,3 +541,6 @@
 "服务器与所属国家不匹配"="Server address doesn‘t match with the country";
 
 "ShineWiFi配置"="ShineWiFi configuration";
+
+"返回"="Back";
+"停止配置"="Stop configuration";
