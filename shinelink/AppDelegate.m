@@ -98,6 +98,7 @@
                                                           UIRemoteNotificationTypeAlert)
                                               categories:nil];
     }
+    
     //Required
     // 如需继续使用pushConfig.plist文件声明appKey等配置内容，请依旧使用[JPUSHService setupWithOption:launchOptions]方式初始化。
     [JPUSHService setupWithOption:launchOptions appKey:appKey
@@ -176,8 +177,7 @@
 
 
 //获取deviceToken
-- (void)application:(UIApplication *)application
-didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     _devicetToken=[NSString stringWithFormat:@"%@",deviceToken];
     /// Required - 注册 DeviceToken
@@ -187,17 +187,47 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 
 
 
+
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     // Required,For systems with less than or equal to iOS6
-    [JPUSHService handleRemoteNotification:userInfo];
-    
-    
     int badge =[userInfo[@"aps"][@"badge"] intValue];
     badge--;
     [JPUSHService setBadge:badge];
     [UIApplication sharedApplication].applicationIconBadgeNumber =badge;
     
+    NSDateFormatter *format=[[ NSDateFormatter alloc]init];
+    _messegeDic=[NSMutableDictionary new];
+    
+    if ([userInfo[@"type"] intValue]==0) {
+        format. dateFormat = @"yyyy-MM-dd hh:mm:ss" ;
+        NSDate *date1=[ NSDate date ];
+        NSString *date=[format stringFromDate:date1];
+        
+        
+        [_messegeDic setValue:userInfo[@"content"] forKeyPath:@"content"];
+        [_messegeDic setValue:userInfo[@"title"] forKeyPath:@"title"];
+        [_messegeDic setValue:date forKeyPath:@"time"];
+        
+        NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
+        [userDefaultes setObject:_messegeDic forKey:@"MessageDic"];
+        
+        
+        
+    }else if ([userInfo[@"type"] intValue]==1){
+        
+        
+        
+        
+    }
+
+    
+    
+    
+    
+    
+        [JPUSHService handleRemoteNotification:userInfo];
 }
 
 
@@ -229,26 +259,11 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
          NSUserDefaults *userDefaultes = [NSUserDefaults standardUserDefaults];
           [userDefaultes setObject:_messegeDic forKey:@"MessageDic"];
         
-//        MessageCeterTableViewController *center=[[MessageCeterTableViewController alloc]init];
-//        center.messageDic=_messegeDic;
-//        
-//        loginViewController *root=[[loginViewController alloc]init];
-//        
-//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:root];//先将root添加在navigation上
-//        self.window.rootViewController=nav;
-//        
-//        
-//        [nav pushViewController:center animated:NO];
+
         
     }else if ([userInfo[@"type"] intValue]==1){
     
-//        loginViewController *root=[[loginViewController alloc]init];
-//        
-//        UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:root];//先将root添加在navigation上
-//             self.window.rootViewController=nav;
-//        listViewController *list=[[listViewController alloc]init];
-//    
-//        [self.window.rootViewController presentViewController:list animated:NO completion:nil];
+
    
        
     }

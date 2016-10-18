@@ -363,6 +363,7 @@
 		337C30541CCDAF3C002B99B7 /* protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C30531CCDAF3C002B99B7 /* protocol.m */; };
 		337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */; };
 		337CB59D1DB4A837002ABB88 /* firstToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB59C1DB4A837002ABB88 /* firstToolViewController.m */; };
+		337CB5A11DB608B0002ABB88 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 337CB5A01DB608B0002ABB88 /* UserNotifications.framework */; };
 		337F9C851C71A6710016FE43 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9C841C71A6710016FE43 /* main.m */; };
 		337F9C881C71A6710016FE43 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9C871C71A6710016FE43 /* AppDelegate.m */; };
 		337F9C931C71A6710016FE43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 337F9C921C71A6710016FE43 /* Assets.xcassets */; };
@@ -1138,6 +1139,8 @@
 		337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiSignalViewController.m; sourceTree = "<group>"; };
 		337CB59B1DB4A837002ABB88 /* firstToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = firstToolViewController.h; sourceTree = "<group>"; };
 		337CB59C1DB4A837002ABB88 /* firstToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = firstToolViewController.m; sourceTree = "<group>"; };
+		337CB59E1DB6010C002ABB88 /* ShinePhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShinePhone.entitlements; sourceTree = "<group>"; };
+		337CB5A01DB608B0002ABB88 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		337F9C801C71A6710016FE43 /* ShinePhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShinePhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		337F9C841C71A6710016FE43 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		337F9C861C71A6710016FE43 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1419,6 +1422,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				337CB5A11DB608B0002ABB88 /* UserNotifications.framework in Frameworks */,
 				3377156C1D8E6E04002EEEDF /* liblibelian.a in Frameworks */,
 				335C9D1F1D011F57008C977A /* SystemConfiguration.framework in Frameworks */,
 				335D69E41D77BC2800894D90 /* MobileCoreServices.framework in Frameworks */,
@@ -2126,6 +2130,7 @@
 		335C9D2A1D011FCA008C977A /* 框架 */ = {
 			isa = PBXGroup;
 			children = (
+				337CB5A01DB608B0002ABB88 /* UserNotifications.framework */,
 				335D69E31D77BC2800894D90 /* MobileCoreServices.framework */,
 				335D69E11D77BC0B00894D90 /* AVFoundation.framework */,
 				3353B19E1CA116FF00577595 /* CoreData.framework */,
@@ -2589,14 +2594,23 @@
 			path = "工具箱";
 			sourceTree = "<group>";
 		};
+		337CB59F1DB608B0002ABB88 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		337F9C771C71A6710016FE43 = {
 			isa = PBXGroup;
 			children = (
+				337CB59E1DB6010C002ABB88 /* ShinePhone.entitlements */,
 				335C9D2A1D011FCA008C977A /* 框架 */,
 				337F9C821C71A6710016FE43 /* shinelink */,
 				337F9C9F1C71A6710016FE43 /* shinelinkTests */,
 				337F9CAA1C71A6710016FE43 /* shinelinkUITests */,
 				337F9C811C71A6710016FE43 /* Products */,
+				337CB59F1DB608B0002ABB88 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3369,7 +3383,7 @@
 								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 						};
 					};
@@ -4110,6 +4124,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = ShinePhone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenzhen Growatt New Energy Technology Co.,Ltd (DFM3SPMA69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = DFM3SPMA69;
@@ -4138,6 +4153,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = ShinePhone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenzhen Growatt New Energy Technology Co.,Ltd (DFM3SPMA69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = DFM3SPMA69;
@@ -4157,6 +4173,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinephone;
 				PRODUCT_NAME = ShinePhone;
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

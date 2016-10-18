@@ -19,17 +19,21 @@ static SNLocationManager * _manager = nil;
 @end
 @implementation SNLocationManager
 + (instancetype)shareLocationManager {
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _manager = [[self alloc] init];
-    });
+//    static dispatch_once_t onceToken;
+//    dispatch_once(&onceToken, ^{
+//        _manager = [[self alloc] init];
+//    });
+    if (_manager) {
+        _manager=nil;
+    }
+      _manager = [[self alloc] init];
     return _manager;
 }
 
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _isAlwaysUse = NO;
+        _isAlwaysUse = YES;
         _isRealTime = NO;
         _distanceFilter = 1000.f;
         _desiredAccuracy = kCLLocationAccuracyKilometer;
@@ -49,8 +53,32 @@ static SNLocationManager * _manager = nil;
     _successBlock = [success copy];
     _errorBlock = [error copy];
     
+    
+    CLAuthorizationStatus type = [CLLocationManager authorizationStatus];
+    if (![CLLocationManager locationServicesEnabled] || type == kCLAuthorizationStatusDenied){
+    
+//        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+//        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+//            [[UIApplication sharedApplication] openURL:url];
+//        }
+    
+        NSURL *url = [NSURL URLWithString:@"prefs:root=LOCATION_SERVICES"];
+       
+            [[UIApplication sharedApplication] openURL:url];;
+            
+        
+        
+    }
+        
+       
+    
+    
+    
+    
+    
     //定位服务是否可用
     BOOL isLocationEnabled = [CLLocationManager locationServicesEnabled];
+    
     if (!isLocationEnabled) {
         NSLog(@"请打开定位服务");
         UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"请打开定位服务，才能使用定位功能" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
@@ -58,6 +86,7 @@ static SNLocationManager * _manager = nil;
         return;
     }
     self.locationManager.delegate = self;
+    
 }
 
 #pragma mark - 状态改变时调用
@@ -74,11 +103,13 @@ static SNLocationManager * _manager = nil;
                 [manager requestAlwaysAuthorization];
             }
         }
-        if (_isAlwaysUse) {
-            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) {
-                manager.allowsBackgroundLocationUpdates = YES;
-            }
-        }
+//        if (_isAlwaysUse) {
+//            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9.0) {
+//                manager.allowsBackgroundLocationUpdates = YES;
+//            }
+//        }
+           [manager startUpdatingLocation];
+        
     } else {
         //精度
         manager.desiredAccuracy = _desiredAccuracy;
