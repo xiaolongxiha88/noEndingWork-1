@@ -30,6 +30,7 @@
 #define  root_back      NSLocalizedString(@"返回", nil)
 #define  root_stop_config      NSLocalizedString(@"停止配置", nil)
 
+#define  root_tuichu_zhanghu     NSLocalizedString(@"是否退出当前账户", nil)
 //登陆
 #define  root_yongHuMing_mima_cuowu        NSLocalizedString(@"用户名密码错误 ", nil)
 #define  root_yongHuMing_mima_weikong        NSLocalizedString(@"用户名密码为空", nil)

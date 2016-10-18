@@ -46,7 +46,7 @@
     self.dataArray =[NSMutableArray arrayWithObjects:root_WO_xiugai_mima,root_WO_xiugai_shoujihao,root_WO_xiugai_youxiang,root_WO_xiugai_dailishang,nil];
    // self.dataArray1 =[NSMutableArray arrayWithObjects:@"",@"18666666666",@"328657662@qq.com",nil];
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 240*HEIGHT_SIZE)];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     self.tableView.backgroundColor=MainColor;
@@ -60,18 +60,19 @@
     }
     [self.view addSubview:_tableView];
     
-    UIButton *registerUser =  [UIButton buttonWithType:UIButtonTypeCustom];
-    registerUser.frame=CGRectMake((SCREEN_Width-150*NOW_SIZE)/2,320*HEIGHT_SIZE, 150*NOW_SIZE, 40*HEIGHT_SIZE);
-    [registerUser.layer setMasksToBounds:YES];
-    [registerUser.layer setCornerRadius:20.0*HEIGHT_SIZE];
-    registerUser.backgroundColor = COLOR(98, 226, 149, 1);
-     registerUser.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    [registerUser setTitle:root_WO_zhuxiao_zhanhao forState:UIControlStateNormal];
-    //[goBut setTintColor:[UIColor colorWithRed:130/ 255.0f green:200 / 255.0f blue:250 / 255.0f alpha:1]];
-    [registerUser setTitleColor: [UIColor whiteColor]forState:UIControlStateNormal];
-    [registerUser addTarget:self action:@selector(registerUser) forControlEvents:UIControlEventTouchUpInside];
-    //  goBut.highlighted=[UIColor grayColor];
-    [self.view addSubview:registerUser];
+//    UIButton *registerUser =  [UIButton buttonWithType:UIButtonTypeCustom];
+//    registerUser.frame=CGRectMake((SCREEN_Width-150*NOW_SIZE)/2,320*HEIGHT_SIZE, 150*NOW_SIZE, 40*HEIGHT_SIZE);
+//    [registerUser.layer setMasksToBounds:YES];
+//    [registerUser.layer setCornerRadius:20.0*HEIGHT_SIZE];
+//    registerUser.backgroundColor = COLOR(98, 226, 149, 1);
+//     registerUser.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+//    [registerUser setTitle:root_WO_zhuxiao_zhanhao forState:UIControlStateNormal];
+//    //[goBut setTintColor:[UIColor colorWithRed:130/ 255.0f green:200 / 255.0f blue:250 / 255.0f alpha:1]];
+//    [registerUser setTitleColor: [UIColor whiteColor]forState:UIControlStateNormal];
+//    [registerUser addTarget:self action:@selector(registerUser) forControlEvents:UIControlEventTouchUpInside];
+//    //  goBut.highlighted=[UIColor grayColor];
+//    [self.view addSubview:registerUser];
+    
 }
 
 

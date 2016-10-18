@@ -24,7 +24,6 @@
 		33340F7F1D6EC36800909BBF /* loading1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33340F7E1D6EC36800909BBF /* loading1.png */; };
 		3334AD751D800BD900665667 /* inverter2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3334AD741D800BD800665667 /* inverter2.png */; };
 		3334AD771D800C0000665667 /* 储能机.png in Resources */ = {isa = PBXBuildFile; fileRef = 3334AD761D800C0000665667 /* 储能机.png */; };
-		3343F3A71C7FDD5A009F69BC /* editViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3A61C7FDD5A009F69BC /* editViewController.m */; };
 		3343F3AA1C803DC9009F69BC /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3A91C803DC9009F69BC /* BaseRequest.m */; };
 		3343F3BF1C80403C009F69BC /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3AD1C80403C009F69BC /* AFHTTPRequestOperation.m */; };
 		3343F3C01C80403C009F69BC /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3AF1C80403C009F69BC /* AFHTTPRequestOperationManager.m */; };
@@ -61,7 +60,6 @@
 		3349A7C01C75BF3B009172C2 /* SpinerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3349A7BE1C75BF3B009172C2 /* SpinerLayer.m */; };
 		3349A7C31C75C215009172C2 /* StTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3349A7C21C75C215009172C2 /* StTransitions.m */; };
 		3349BB381C7ED28100E6E34B /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3349BB371C7ED28100E6E34B /* UserInfo.m */; };
-		3349BB3B1C7EF66200E6E34B /* userdataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3349BB3A1C7EF66200E6E34B /* userdataViewController.m */; };
 		334AED581CA37569007E39F3 /* 客户服务.png in Resources */ = {isa = PBXBuildFile; fileRef = 334AED571CA37569007E39F3 /* 客户服务.png */; };
 		334AED5A1CA37577007E39F3 /* 质保查询.png in Resources */ = {isa = PBXBuildFile; fileRef = 334AED591CA37577007E39F3 /* 质保查询.png */; };
 		334AED5C1CA37583007E39F3 /* 增值服务.png in Resources */ = {isa = PBXBuildFile; fileRef = 334AED5B1CA37583007E39F3 /* 增值服务.png */; };
@@ -593,8 +591,6 @@
 		33340F7E1D6EC36800909BBF /* loading1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading1.png; sourceTree = "<group>"; };
 		3334AD741D800BD800665667 /* inverter2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inverter2.png; sourceTree = "<group>"; };
 		3334AD761D800C0000665667 /* 储能机.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "储能机.png"; sourceTree = "<group>"; };
-		3343F3A51C7FDD5A009F69BC /* editViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = editViewController.h; path = ../editViewController.h; sourceTree = "<group>"; };
-		3343F3A61C7FDD5A009F69BC /* editViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = editViewController.m; path = ../editViewController.m; sourceTree = "<group>"; };
 		3343F3A81C803DC9009F69BC /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
 		3343F3A91C803DC9009F69BC /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
 		3343F3AC1C80403C009F69BC /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -660,8 +656,6 @@
 		3349A7C21C75C215009172C2 /* StTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StTransitions.m; path = ../StTransitions.m; sourceTree = "<group>"; };
 		3349BB361C7ED28100E6E34B /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		3349BB371C7ED28100E6E34B /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
-		3349BB391C7EF66200E6E34B /* userdataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = userdataViewController.h; path = ../userdataViewController.h; sourceTree = "<group>"; };
-		3349BB3A1C7EF66200E6E34B /* userdataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = userdataViewController.m; path = ../userdataViewController.m; sourceTree = "<group>"; };
 		334AED571CA37569007E39F3 /* 客户服务.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "客户服务.png"; sourceTree = "<group>"; };
 		334AED591CA37577007E39F3 /* 质保查询.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "质保查询.png"; sourceTree = "<group>"; };
 		334AED5B1CA37583007E39F3 /* 增值服务.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "增值服务.png"; sourceTree = "<group>"; };
@@ -1589,7 +1583,6 @@
 		3349A7AC1C75A201009172C2 /* 资料管理 */ = {
 			isa = PBXGroup;
 			children = (
-				33530F1B1CC86EB200378EB2 /* 旧的 */,
 				33530F1C1CC87B5000378EB2 /* ManagementController.h */,
 				33530F1D1CC87B5000378EB2 /* ManagementController.m */,
 				33530F1F1CC8824500378EB2 /* changManeger.h */,
@@ -1924,17 +1917,6 @@
 			);
 			name = "客服系统";
 			path = "../我/客服系统";
-			sourceTree = "<group>";
-		};
-		33530F1B1CC86EB200378EB2 /* 旧的 */ = {
-			isa = PBXGroup;
-			children = (
-				3349BB391C7EF66200E6E34B /* userdataViewController.h */,
-				3349BB3A1C7EF66200E6E34B /* userdataViewController.m */,
-				3343F3A51C7FDD5A009F69BC /* editViewController.h */,
-				3343F3A61C7FDD5A009F69BC /* editViewController.m */,
-			);
-			path = "旧的";
 			sourceTree = "<group>";
 		};
 		3353173E1CA23211003F106D /* data */ = {
@@ -3911,7 +3893,6 @@
 				336664F61CB784F6005573FB /* EditGraphView.m in Sources */,
 				3355F26E1C747307006DDE5A /* aboutOneTableViewCell.m in Sources */,
 				3370793C1D910FEC00D7DA98 /* NJKWebViewProgress.m in Sources */,
-				3343F3A71C7FDD5A009F69BC /* editViewController.m in Sources */,
 				334FF09E1CF53C7C001E6716 /* ModuleInfo.m in Sources */,
 				33EFB6691C98F9B1003F336F /* ZFBar.m in Sources */,
 				334FF09B1CF53C7C001E6716 /* InfoSend.m in Sources */,
@@ -3925,7 +3906,6 @@
 				33530F1E1CC87B5000378EB2 /* ManagementController.m in Sources */,
 				3343F3C41C80403C009F69BC /* AFURLConnectionOperation.m in Sources */,
 				3355F26B1C746BF5006DDE5A /* aboutTableViewCell.m in Sources */,
-				3349BB3B1C7EF66200E6E34B /* userdataViewController.m in Sources */,
 				335D69B71D77BA4D00894D90 /* README.md in Sources */,
 				33AF3D1A1D8E67210007D6C2 /* ACPButton.m in Sources */,
 				3367EBA41CD0C11800D2EF67 /* productViewController.m in Sources */,

@@ -9,7 +9,7 @@
 #import "meViewController.h"
 #import "meTableViewCell.h"
 #import "aboutViewController.h"
-#import "userdataViewController.h"
+#import "JPUSHService.h"
 #import "listViewController.h"
 #import "ManagementController.h"
 #import "stationTableView.h"
@@ -17,6 +17,8 @@
 #import "AddDeviceViewController.h"
 #import "meConfigerViewController.h"
 #import "firstToolViewController.h"
+#import "loginViewController.h"
+#import "CoreDataManager.h"
 
 #define Kwidth [UIScreen mainScreen].bounds.size.width
 
@@ -25,6 +27,9 @@
 
 @property (nonatomic, strong) UIImagePickerController *cameraImagePicker;
 @property (nonatomic, strong) UIImagePickerController *photoLibraryImagePicker;
+@property (nonatomic, strong) UIAlertView *Alert1;
+@property (nonatomic, strong) CoreDataManager *manager;
+@property (nonatomic, strong) UIScrollView *scrollView2;
 
 @end
 
@@ -38,14 +43,34 @@
     NSArray *arrayImage;
     NSArray *arrayName;
     
+      NSString *scrollSize;
     
     //全局变量 用来控制偏移量
     NSInteger pageName;
 }
 
+
+-(void)viewDidAppear:(BOOL)animated{
+
+    float tableViewH=200*HEIGHT_SIZE+55*HEIGHT_SIZE*5;
+    
+    if ([scrollSize isEqualToString:@"0"]||(scrollSize==nil)) {
+            _scrollView2.contentSize = CGSizeMake(SCREEN_Width,tableViewH+130*HEIGHT_SIZE);
+    }else if ([scrollSize isEqualToString:@"1"]){
+        scrollSize=0;
+    }
+
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+   
+    scrollSize=@"1";
+    
+    
+       _manager=[CoreDataManager sharedCoreDataManager];
+    
     [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                       NSForegroundColorAttributeName :[UIColor whiteColor]
                                                                       }];
@@ -59,26 +84,61 @@
     // Do any additional setup after loading the view.
     
     
+    _scrollView2=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
+    _scrollView2.scrollEnabled=YES;
+    
+    [self.view addSubview:_scrollView2];
+    
+
+    
+    
+    
     //创建tableView的方法
     [self _createTableView];
     
     //创建tableView的头视图
     [self _createHeaderView];
     
-  
-    
 }
+
+
+-(void)registerUser{
+
+    _Alert1 = [[UIAlertView alloc] initWithTitle:root_tuichu_zhanghu message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK,nil];
+    [_Alert1 show];
+
+}
+
+
+
 
 - (void)_createTableView {
     
+    float tableViewH=200*HEIGHT_SIZE+55*HEIGHT_SIZE*5;
+    
+    _scrollView2.contentSize = CGSizeMake(SCREEN_Width,tableViewH+60*HEIGHT_SIZE);
+    
+    UIButton *registerUser =  [UIButton buttonWithType:UIButtonTypeCustom];
+    registerUser.frame=CGRectMake((SCREEN_Width-150*NOW_SIZE)/2,tableViewH+10*HEIGHT_SIZE, 150*NOW_SIZE, 40*HEIGHT_SIZE);
+    [registerUser.layer setMasksToBounds:YES];
+    [registerUser.layer setCornerRadius:20.0*HEIGHT_SIZE];
+    registerUser.backgroundColor = COLOR(98, 226, 149, 1);
+    registerUser.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+    [registerUser setTitle:root_WO_zhuxiao_zhanhao forState:UIControlStateNormal];
+    //[goBut setTintColor:[UIColor colorWithRed:130/ 255.0f green:200 / 255.0f blue:250 / 255.0f alpha:1]];
+    [registerUser setTitleColor: [UIColor whiteColor]forState:UIControlStateNormal];
+    [registerUser addTarget:self action:@selector(registerUser) forControlEvents:UIControlEventTouchUpInside];
+    //  goBut.highlighted=[UIColor grayColor];
+    [_scrollView2 addSubview:registerUser];
+    
     //_tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
-     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height) style:UITableViewStylePlain];
+     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, tableViewH) style:UITableViewStylePlain];
     
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    [self.view addSubview:_tableView];
+    [_scrollView2 addSubview:_tableView];
     _indenty = @"indenty";
     //注册单元格类型
     [_tableView registerClass:[meTableViewCell class] forCellReuseIdentifier:_indenty];
@@ -263,9 +323,72 @@
           aboutView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:aboutView animated:YES];
     }
-   
+
     
 }
+
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex==0) {
+        
+    }else if (buttonIndex==1){
+        
+        NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+        NSString *reUsername=[ud objectForKey:@"userName"];
+        NSString *rePassword=[ud objectForKey:@"userPassword"];
+        
+        [[UserInfo defaultUserInfo] setUserPassword:nil];
+        [[UserInfo defaultUserInfo] setUserName:nil];
+        [[UserInfo defaultUserInfo] setServer:nil];
+        loginViewController *login =[[loginViewController alloc]init];
+        login.oldName=reUsername;
+        login.oldPassword=rePassword;
+        
+        [self initCoredata];
+        
+        [self setAlias];
+        self.hidesBottomBarWhenPushed=YES;
+        [login.navigationController setNavigationBarHidden:YES];
+        [self.navigationController pushViewController:login animated:YES];
+        
+    }
+    
+}
+
+
+-(void)setAlias{
+    
+    NSString *Alias=@"none";
+    [JPUSHService setTags:nil alias:Alias fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
+        NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, iTags, iAlias);
+    }];
+}
+
+
+-(void)initCoredata{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"GetDevice" inManagedObjectContext:_manager.managedObjContext];
+    [request setEntity:entity];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"deviceSN" ascending:NO];
+    NSArray *sortDescriptions = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [request setSortDescriptors:sortDescriptions];
+    NSError *error = nil;
+    NSArray *fetchResult = [_manager.managedObjContext executeFetchRequest:request error:&error];
+    for (NSManagedObject *obj in fetchResult)
+    {
+        [_manager.managedObjContext deleteObject:obj];
+    }
+    BOOL isSaveSuccess = [_manager.managedObjContext save:&error];
+    if (!isSaveSuccess) {
+        NSLog(@"Error: %@,%@",error,[error userInfo]);
+    }else
+    {
+        NSLog(@"Save successFull");
+    }
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

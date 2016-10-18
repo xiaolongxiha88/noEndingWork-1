@@ -44,7 +44,7 @@
     
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _scrollView.scrollEnabled=YES;
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,700*NOW_SIZE);
+    
     [self.view addSubview:_scrollView];
     
    
@@ -134,6 +134,8 @@
     fourL.textColor=[UIColor blackColor];
     fourL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [self.scrollView addSubview:fourL];
+    
+    _scrollView.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height+20*HEIGHT_SIZE);
 }
 
 -(void)gofour{
@@ -215,6 +217,18 @@
 }
 
 -(void)addProcess{
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    NSString *_languageValue;
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage hasPrefix:@"en"]) {
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"2";
+    }
+    
     UIView *processView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 240*HEIGHT_SIZE-SizeH)];
     UIImage *bgImage = IMAGE(@"bg3.png");
     processView.layer.contents = (id)bgImage.CGImage;
@@ -226,6 +240,9 @@
     leftName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.scrollView addSubview:leftName];
     UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(2*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
+    if ([_languageValue isEqualToString:@"0"]) {
+        leftState.frame=CGRectMake(14*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE );
+    }
     leftState.text=root_ri_fangdianliang;
     leftState.textAlignment=NSTextAlignmentLeft;
     leftState.textColor=[UIColor greenColor];
@@ -240,6 +257,9 @@
     rightName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.scrollView addSubview:rightName];
     UILabel *rightState=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-116*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
+    if ([_languageValue isEqualToString:@"0"]) {
+        rightState.frame=CGRectMake(kScreenWidth-128*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE );
+    }
     rightState.text=root_zong_fangdianliang;
     rightState.textAlignment=NSTextAlignmentRight;
     rightState.textColor=[UIColor greenColor];

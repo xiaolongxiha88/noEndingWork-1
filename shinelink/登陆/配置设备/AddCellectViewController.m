@@ -98,7 +98,7 @@
     //[goBut.layer setMasksToBounds:YES];
     //[goBut.layer setCornerRadius:25.0];
      [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
-    [goBut setTitle:root_OK forState:UIControlStateNormal];
+    [goBut setTitle:root_register forState:UIControlStateNormal];
      goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [goBut addTarget:self action:@selector(addButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goBut];
@@ -248,14 +248,16 @@
 
 
 -(void)addButtonPressed{
-    if ([_cellectId.text isEqual:@""]) {
-        [self showAlertViewWithTitle:nil message:root_caiJiQi cancelButtonTitle:root_OK ];
-        return;
-    }
-    if ([_cellectNo.text isEqual:@""]) {
-        [self showAlertViewWithTitle:nil message:root_jiaoYanMa_zhengQue cancelButtonTitle:root_OK];
-        return;
-    }
+    
+//    if ([_cellectId.text isEqual:@""]) {
+//        [self showAlertViewWithTitle:nil message:root_caiJiQi cancelButtonTitle:root_OK ];
+//        return;
+//    }
+//    if ([_cellectNo.text isEqual:@""]) {
+//        [self showAlertViewWithTitle:nil message:root_jiaoYanMa_zhengQue cancelButtonTitle:root_OK];
+//        return;
+//    }
+    
      [_dataDic setObject:_cellectId.text forKey:@"regDataLoggerNo"];
      [_dataDic setObject:_cellectNo.text forKey:@"regValidateCode"];
     

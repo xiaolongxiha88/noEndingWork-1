@@ -46,7 +46,7 @@
     
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _scrollView.scrollEnabled=YES;
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,750*NOW_SIZE);
+ 
     [self.view addSubview:_scrollView];
       //[self.navigationController.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]];
 [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
@@ -106,6 +106,10 @@
     fourL.textColor=[UIColor blackColor];
     fourL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [self.scrollView addSubview:fourL];
+    
+ 
+       _scrollView.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height+20*HEIGHT_SIZE);
+    
 }
 
 -(void)goFour{
@@ -213,13 +217,13 @@
     processView.layer.contents = (id)bgImage.CGImage;
     [self.scrollView addSubview:processView];
     
-    UILabel *dayData=[[UILabel alloc]initWithFrame:CGRectMake(15*NOW_SIZE, 180*HEIGHT_SIZE-SizeH, 80*NOW_SIZE,20*HEIGHT_SIZE )];
+    UILabel *dayData=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 180*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
     dayData.text=_dayPower;
     dayData.textAlignment=NSTextAlignmentCenter;
     dayData.textColor=[UIColor greenColor];
     dayData.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.scrollView addSubview:dayData];
-    UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(15*NOW_SIZE, 200*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+    UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 200*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
     leftState.text=root_NBQ_ri_dianliang;
     leftState.textAlignment=NSTextAlignmentCenter;
     leftState.textColor=[UIColor greenColor];
@@ -242,13 +246,13 @@
     centState.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [self.scrollView addSubview:centState];
     
-    UILabel *totalData=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-95*NOW_SIZE, 180*HEIGHT_SIZE-SizeH, 80*NOW_SIZE,20*HEIGHT_SIZE )];
+    UILabel *totalData=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-95*NOW_SIZE, 180*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
     totalData.text=_totalPower;
     totalData.textAlignment=NSTextAlignmentCenter;
     totalData.textColor=[UIColor greenColor];
     totalData.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.scrollView addSubview:totalData];
-    UILabel *rightState=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-105*NOW_SIZE, 200*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+    UILabel *rightState=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-95*NOW_SIZE, 200*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
     rightState.text=root_NBQ_zong_dianliang;
     rightState.textAlignment=NSTextAlignmentCenter;
     rightState.textColor=[UIColor greenColor];
