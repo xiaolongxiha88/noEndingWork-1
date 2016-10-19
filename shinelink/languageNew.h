@@ -568,5 +568,8 @@
 
 #define  root_wifi_peizhi    NSLocalizedString(@"ShineWiFi配置", nil)
 
+#define  root_wei_kaiqi_dingwei    NSLocalizedString(@"未开启定位服务", nil)
+#define  root_tiaozhuan_jiemian_shezhi    NSLocalizedString(@"是否跳转界面进行设置", nil)
+
 
 #endif /* languageNew_h */

@@ -186,7 +186,7 @@
     }
     
 
-    UIButton *lngButton0=[[UIButton alloc]initWithFrame:CGRectMake(105*NOW_SIZE, 48*HEIGHT_SIZE, 50*NOW_SIZE, 20*HEIGHT_SIZE)];
+    UIButton *lngButton0=[[UIButton alloc]initWithFrame:CGRectMake(105*NOW_SIZE, 46*HEIGHT_SIZE, 50*NOW_SIZE, 30*HEIGHT_SIZE)];
     [lngButton0 setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [lngButton0 setTitle:root_WO_dianji_huoqu forState:UIControlStateNormal];
     lngButton0.titleLabel.font=[UIFont systemFontOfSize:11*HEIGHT_SIZE];
@@ -195,7 +195,7 @@
     [lngButton0 addTarget:self action:@selector(fetchLocation:) forControlEvents:UIControlEventTouchUpInside];
     [_writeView addSubview:lngButton0];
     
-    UIButton *lngButton=[[UIButton alloc]initWithFrame:CGRectMake(105*NOW_SIZE, 150*HEIGHT_SIZE, 50*NOW_SIZE, 20*HEIGHT_SIZE)];
+    UIButton *lngButton=[[UIButton alloc]initWithFrame:CGRectMake(105*NOW_SIZE, 148*HEIGHT_SIZE, 50*NOW_SIZE, 30*HEIGHT_SIZE)];
     [lngButton setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [lngButton setTitle:root_WO_dianji_huoqu forState:UIControlStateNormal];
     lngButton.titleLabel.font=[UIFont systemFontOfSize:11*HEIGHT_SIZE];

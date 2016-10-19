@@ -545,3 +545,5 @@
 "返回"="Back";
 "停止配置"="Stop configuration";
 "是否退出当前账户"="Sign out the account?";
+"未开启定位服务"="Not turned on location Services";
+"是否跳转界面进行设置"="Whether jump to the 'Settings' interface to set?";

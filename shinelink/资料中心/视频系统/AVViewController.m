@@ -359,6 +359,7 @@
     
     
     if (_play) {
+        [_play pause];
         [_play removeAllObserver];
         
         [_play stop];
@@ -371,6 +372,7 @@
 
 
 - (void)dealloc{
+    
         if (_play) {
     [_play removeAllObserver];
             _play=nil;

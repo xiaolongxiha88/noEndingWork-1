@@ -60,18 +60,20 @@
     }
     [self.view addSubview:_tableView];
     
-//    UIButton *registerUser =  [UIButton buttonWithType:UIButtonTypeCustom];
-//    registerUser.frame=CGRectMake((SCREEN_Width-150*NOW_SIZE)/2,320*HEIGHT_SIZE, 150*NOW_SIZE, 40*HEIGHT_SIZE);
-//    [registerUser.layer setMasksToBounds:YES];
-//    [registerUser.layer setCornerRadius:20.0*HEIGHT_SIZE];
-//    registerUser.backgroundColor = COLOR(98, 226, 149, 1);
-//     registerUser.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-//    [registerUser setTitle:root_WO_zhuxiao_zhanhao forState:UIControlStateNormal];
-//    //[goBut setTintColor:[UIColor colorWithRed:130/ 255.0f green:200 / 255.0f blue:250 / 255.0f alpha:1]];
-//    [registerUser setTitleColor: [UIColor whiteColor]forState:UIControlStateNormal];
-//    [registerUser addTarget:self action:@selector(registerUser) forControlEvents:UIControlEventTouchUpInside];
-//    //  goBut.highlighted=[UIColor grayColor];
-//    [self.view addSubview:registerUser];
+    UIButton *registerUser =  [UIButton buttonWithType:UIButtonTypeCustom];
+    registerUser.frame=CGRectMake((SCREEN_Width-150*NOW_SIZE)/2,320*HEIGHT_SIZE, 150*NOW_SIZE, 40*HEIGHT_SIZE);
+    [registerUser.layer setMasksToBounds:YES];
+    [registerUser.layer setCornerRadius:20.0*HEIGHT_SIZE];
+    registerUser.backgroundColor = COLOR(98, 226, 149, 1);
+     registerUser.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+    [registerUser setTitle:root_WO_zhuxiao_zhanhao forState:UIControlStateNormal];
+    //[goBut setTintColor:[UIColor colorWithRed:130/ 255.0f green:200 / 255.0f blue:250 / 255.0f alpha:1]];
+    [registerUser setTitleColor: [UIColor whiteColor]forState:UIControlStateNormal];
+    [registerUser addTarget:self action:@selector(registerUser) forControlEvents:UIControlEventTouchUpInside];
+    //  goBut.highlighted=[UIColor grayColor];
+    [self.view addSubview:registerUser];
+    
+    
     
 }
 
