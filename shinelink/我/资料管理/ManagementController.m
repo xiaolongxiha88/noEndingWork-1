@@ -46,7 +46,7 @@
     self.dataArray =[NSMutableArray arrayWithObjects:root_WO_xiugai_mima,root_WO_xiugai_shoujihao,root_WO_xiugai_youxiang,root_WO_xiugai_dailishang,nil];
    // self.dataArray1 =[NSMutableArray arrayWithObjects:@"",@"18666666666",@"328657662@qq.com",nil];
     
-    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
+    _tableView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 300*HEIGHT_SIZE)];
     _tableView.delegate=self;
     _tableView.dataSource=self;
     self.tableView.backgroundColor=MainColor;

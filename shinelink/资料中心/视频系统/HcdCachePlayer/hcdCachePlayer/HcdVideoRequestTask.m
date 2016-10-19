@@ -153,16 +153,22 @@
     
 }
 
+
+
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     
-     if (self.taskArr.count < 2) {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_huancun_chenggong message:root_shifou_baocun_shiping delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
-    alertView.tag = 1002;
-    [alertView show];
-     }
     
     if ([self.delegate respondsToSelector:@selector(didFinishLoadingWithTask:)]) {
+        
+        if (self.taskArr.count < 2) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_huancun_chenggong message:root_shifou_baocun_shiping delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+            alertView.tag = 1002;
+            [alertView show];
+        }
+
+        
+        
         [self.delegate didFinishLoadingWithTask:self];
     }
     
