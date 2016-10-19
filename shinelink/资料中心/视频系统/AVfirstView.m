@@ -179,22 +179,22 @@
 
 - (void)setupUI {
     
-    _label=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,0*HEIGHT_SIZE, 300*NOW_SIZE, 30*HEIGHT_SIZE)];
-        _label.layer.borderWidth=1;
-        _label.layer.cornerRadius=15*HEIGHT_SIZE;
-        _label.layer.borderColor=MainColor.CGColor;
-    _label.text =root_sousuo;
-    _label.textColor = MainColor;
-    //textField.tintColor = [UIColor whiteColor];
-    _label.textAlignment = NSTextAlignmentCenter;
-    _label.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [self.view addSubview:_label];
-    _label.userInteractionEnabled=YES;
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchAV)];
-    [_label addGestureRecognizer:tap];
+//    _label=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,0*HEIGHT_SIZE, 300*NOW_SIZE, 30*HEIGHT_SIZE)];
+//        _label.layer.borderWidth=1;
+//        _label.layer.cornerRadius=15*HEIGHT_SIZE;
+//        _label.layer.borderColor=MainColor.CGColor;
+//    _label.text =root_sousuo;
+//    _label.textColor = MainColor;
+//    //textField.tintColor = [UIColor whiteColor];
+//    _label.textAlignment = NSTextAlignmentCenter;
+//    _label.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+//    [self.view addSubview:_label];
+//    _label.userInteractionEnabled=YES;
+//    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchAV)];
+//    [_label addGestureRecognizer:tap];
     
     
-    _pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 30*HEIGHT_SIZE, Width, (Width - 84) * 9 / 16 + 24)];
+    _pageFlowView = [[NewPagedFlowView alloc] initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE, Width, (Width - 84) * 9 / 16 + 24*HEIGHT_SIZE)];
     _pageFlowView.backgroundColor = [UIColor whiteColor];
     _pageFlowView.delegate = self;
     _pageFlowView.dataSource = self;
@@ -203,7 +203,7 @@
     _pageFlowView.autoTime=5;
     
     //初始化pageControl
-    UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, _pageFlowView.frame.size.height - 24 - 8, Width, 8)];
+    UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, _pageFlowView.frame.size.height - 24*HEIGHT_SIZE - 8*HEIGHT_SIZE, Width, 8*HEIGHT_SIZE)];
     _pageFlowView.pageControl = pageControl;
     [_pageFlowView addSubview:pageControl];
       [_pageFlowView startTimer];

@@ -108,13 +108,14 @@
     return self;
 }
 -(void)viewDidAppear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netRequest) name:@"changeName" object:nil];
+  //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netRequest) name:@"changeName" object:nil];
     
     if ([_netEnable isEqualToString:@"1"]) {
           [self netRequest];
     }else{
      _netEnable=@"1";
     }
+    
     
     
 }

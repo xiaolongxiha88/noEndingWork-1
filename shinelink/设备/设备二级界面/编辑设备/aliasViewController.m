@@ -87,7 +87,7 @@
             }else{
                 
                [self showAlertViewWithTitle:nil message:root_xiuGai_chengGong cancelButtonTitle:root_Yes];
-                  [[NSNotificationCenter defaultCenter] postNotificationName:@"changeName" object:nil];
+                  //[[NSNotificationCenter defaultCenter] postNotificationName:@"changeName" object:nil];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
         }
