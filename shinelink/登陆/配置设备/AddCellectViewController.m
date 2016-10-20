@@ -182,7 +182,7 @@
                             //注册成功
                             [self succeedRegister];
                             [self showAlertViewWithTitle:nil message:root_zhuCe_chengGong  cancelButtonTitle:root_Yes];
-                             [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+                            // [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
                         }
                     }
                     
@@ -310,7 +310,7 @@
                          //注册成功
                          [self succeedRegister];
                          [self showAlertViewWithTitle:nil message:root_zhuCe_chengGong  cancelButtonTitle:root_Yes];
-                     [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+                    
                      }
                  }
                  
@@ -351,14 +351,17 @@
     BOOL result3 = [_setDeviceName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
     
     if (result1) {
+         [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
         AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
         rootView.SnString=_cellectId.text;
         [self.navigationController pushViewController:rootView animated:YES];
     }else if (result2){
+         [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
         MainViewController *rootView = [[MainViewController alloc]init];
         [self.navigationController pushViewController:rootView animated:YES];
         
     }else if (result3){
+         [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
         MainViewController *rootView = [[MainViewController alloc]init];
         [self.navigationController pushViewController:rootView animated:YES];
         

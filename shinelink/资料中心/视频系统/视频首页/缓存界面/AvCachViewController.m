@@ -294,15 +294,20 @@
     
 
     
-    AVViewController *goAV=[[AVViewController alloc]init];
     
-    goAV.AvUrl=_tableCellUrl[indexPath.row];
-    goAV.AvPicUrl=_tableCellPic[indexPath.row];
-    goAV.contentLabelTextValue=_tableCellContent[indexPath.row];
-    goAV.title=_tableCellName[indexPath.row];
+    if (!self.myTableView.editing) {
+        AVViewController *goAV=[[AVViewController alloc]init];
+        
+        goAV.AvUrl=_tableCellUrl[indexPath.row];
+        goAV.AvPicUrl=_tableCellPic[indexPath.row];
+        goAV.contentLabelTextValue=_tableCellContent[indexPath.row];
+        goAV.title=_tableCellName[indexPath.row];
+        
+        
+        [self.navigationController pushViewController:goAV animated:YES];
+    }
     
-    
-    [self.navigationController pushViewController:goAV animated:YES];
+   
     
 }
 

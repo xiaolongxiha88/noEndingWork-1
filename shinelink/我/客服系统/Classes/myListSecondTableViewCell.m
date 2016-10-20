@@ -14,11 +14,17 @@
 #define Width [UIScreen mainScreen].bounds.size.width/320.0
 #define Height [UIScreen mainScreen].bounds.size.height/568.0
 
+
+@interface myListSecondTableViewCell ()<UIWebViewDelegate>
+{
+   
+}
+
+@end
+
 @implementation myListSecondTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -65,11 +71,18 @@
         
         
         
-        _contentLabel =[[UILabel alloc]init];
-        _contentLabel.font =[UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        _contentLabel.textColor = [UIColor grayColor];
-        _contentLabel.textAlignment =NSTextAlignmentLeft;
-        _contentLabel.numberOfLines=0;
+        
+//        _contentLabel.font =[UIFont systemFontOfSize:14*HEIGHT_SIZE];
+//        _contentLabel.textColor = [UIColor grayColor];
+//        _contentLabel.textAlignment =NSTextAlignmentLeft;
+//        _contentLabel.numberOfLines=0;
+        
+        _contentLabel =[[UIWebView alloc]init];
+           _contentLabel.delegate = self;
+        _contentLabel.scrollView.bounces=NO;
+        _contentLabel.userInteractionEnabled=NO;
+        _contentLabel.opaque=NO;
+        _contentLabel.backgroundColor=[UIColor clearColor];
         [self addSubview:_contentLabel];
         
 
@@ -77,6 +90,29 @@
     return self;
 }
 
+
+- (void)showProgressView {
+    [MBProgressHUD hideHUDForView:self animated:YES];
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
+}
+
+- (void)hideProgressView {
+    [MBProgressHUD hideHUDForView:self animated:YES];
+}
+
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    //  [LWLoadingView showInView:self.view];
+    //[self showProgressView];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    //[LWLoadingView hideInViwe:self.view];
+   // [self hideProgressView];
+    
+  [_contentLabel stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '85%'"];
+    
+}
 
 
 @end

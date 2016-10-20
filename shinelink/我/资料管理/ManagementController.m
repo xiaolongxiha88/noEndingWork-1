@@ -132,8 +132,13 @@
     [[UserInfo defaultUserInfo] setUserName:nil];
       [[UserInfo defaultUserInfo] setServer:nil];
     loginViewController *login =[[loginViewController alloc]init];
+    if ([reUsername isEqualToString:@"guest"]) {
+        login.oldName=nil;
+        login.oldPassword=nil;
+    }else{
     login.oldName=reUsername;
     login.oldPassword=rePassword;
+    }
     
     [self initCoredata];
     

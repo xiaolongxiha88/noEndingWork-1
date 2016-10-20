@@ -112,7 +112,7 @@
     self.answerName=[NSMutableArray array];
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userId":userID} paramarsSite:@"/questionAPI.do?op=questionList" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfoNew" sucessBlock:^(id content) {
         [self hideProgressView];
    NSLog(@"questionList=: %@", content);
         if(content){

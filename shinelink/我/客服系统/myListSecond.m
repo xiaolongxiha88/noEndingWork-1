@@ -63,7 +63,7 @@
     self.labelArray=[NSMutableArray arrayWithObjects:root_ME_biaoti,root_NBQ_leixing, root_ME_huifu_jilu,nil];
     
         [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfo" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfoDetail" sucessBlock:^(id content) {
         [self hideProgressView];
         NSLog(@"getQuestionInfo=: %@", content);
         if(content){
@@ -91,53 +91,18 @@
                   [_imageName addObject:PIC];
             }
 //              [self initUI];
-            if (_scrollView) {
-                  [self.tableView reloadData];
-            }else{
-             [self initUI];
-            }
-        
             
-        }
-    } failure:^(NSError *error) {
-        [self hideProgressView];
-        [self showToastViewWithTitle:root_Networking];
-    }];
-}
+            if (_questionAll.count==_nameArray.count) {
+                
+                if (_scrollView) {
+                    [self.tableView reloadData];
+                }else{
+                    [self initUI];
+                }
 
--(void)netGet{
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    NSString *userID=[ud objectForKey:@"userID"];
-    
-  
-     self.questionAll =[NSMutableArray array];
-    
-    [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfo" sucessBlock:^(id content) {
-        [self hideProgressView];
-        NSLog(@"getQuestionInfo=: %@", content);
-        if(content){
-            _allDic=[NSMutableDictionary dictionaryWithDictionary:content];
-            _titleString=content[@"title"];
-            _questionAll=[NSMutableArray arrayWithArray:content[@"serviceQuestionReplyBean"]];
-            
-            for(int i=0;i<_questionAll.count;i++){
-                NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
-                NSString *nameId=[NSString stringWithFormat:@"%@",_questionAll[i][@"isAdmin"]];
-                NSString *timeA=[NSString stringWithFormat:@"%@",_questionAll[i][@"time"]];
-                NSString *contentA=[NSString stringWithFormat:@"%@",_questionAll[i][@"message"]];
-                //NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
-                NSString *questionPIC=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
-                NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
-
-                [_nameArray addObject:nameU];
-                [_nameID addObject:nameId];
-                [_timeArray addObject:timeA];
-                [_contentArray addObject:contentA];
-                  [_imageName addObject:PIC];
                 
             }
-            [self initUI];
+            
             
         }
     } failure:^(NSError *error) {
@@ -145,11 +110,54 @@
         [self showToastViewWithTitle:root_Networking];
     }];
 }
+
+//-(void)netGet{
+//    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+//    NSString *userID=[ud objectForKey:@"userID"];
+//    
+//  
+//     self.questionAll =[NSMutableArray array];
+//    
+//    //getQuestionInfo
+//    
+//    [self showProgressView];
+//    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfoDetail" sucessBlock:^(id content) {
+//        [self hideProgressView];
+//        NSLog(@"getQuestionInfo=: %@", content);
+//        if(content){
+//            _allDic=[NSMutableDictionary dictionaryWithDictionary:content];
+//            _titleString=content[@"title"];
+//            _questionAll=[NSMutableArray arrayWithArray:content[@"serviceQuestionReplyBean"]];
+//            
+//            for(int i=0;i<_questionAll.count;i++){
+//                NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
+//                NSString *nameId=[NSString stringWithFormat:@"%@",_questionAll[i][@"isAdmin"]];
+//                NSString *timeA=[NSString stringWithFormat:@"%@",_questionAll[i][@"time"]];
+//                NSString *contentA=[NSString stringWithFormat:@"%@",_questionAll[i][@"message"]];
+//                //NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
+//                NSString *questionPIC=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
+//                NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
+//
+//                [_nameArray addObject:nameU];
+//                [_nameID addObject:nameId];
+//                [_timeArray addObject:timeA];
+//                [_contentArray addObject:contentA];
+//                  [_imageName addObject:PIC];
+//                
+//            }
+//            [self initUI];
+//            
+//        }
+//    } failure:^(NSError *error) {
+//        [self hideProgressView];
+//        [self showToastViewWithTitle:root_Networking];
+//    }];
+//}
 
 -(void)initUI{
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _scrollView.scrollEnabled=YES;
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,600*NOW_SIZE);
+    _scrollView.contentSize = CGSizeMake(SCREEN_Width,0*NOW_SIZE);
     [self.view addSubview:_scrollView];
     float Size1=40*HEIGHT_SIZE;
     
@@ -299,12 +307,16 @@
     
     [cell.contentView setBackgroundColor: [UIColor whiteColor] ];
     
+    NSString *WebString;
     if ([_nameID[indexPath.row] isEqualToString:@"1"]) {
           cell.image.image = IMAGE(@"客服.png");
         cell.nameLabel.textColor = COLOR(63, 163, 220, 1);
+        WebString=self.contentArray[indexPath.row];
     }else{
     cell.image.image = IMAGE(@"客户.png");
          cell.nameLabel.textColor =[UIColor blackColor];
+        NSString *WebString1=[NSString stringWithFormat:@"<p>%@</p>",self.contentArray[indexPath.row]];
+         WebString=WebString1;
     }
       NSMutableArray *PICarray=[NSMutableArray arrayWithArray:_imageName[indexPath.row]];
     
@@ -316,11 +328,15 @@
     }
     cell.nameLabel.text= self.nameArray[indexPath.row];
     cell.timeLabel.text= self.timeArray[indexPath.row];
-    cell.contentLabel.text= self.contentArray[indexPath.row];
+    
+    cell.WebContent= self.contentArray[indexPath.row];
    
     cell.content=self.contentArray[indexPath.row];
-    CGRect fcRect = [cell.content boundingRectWithSize:CGSizeMake(300*Width, 1000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 *HEIGHT_SIZE]} context:nil];
-    cell.contentLabel.frame =CGRectMake(5*NOW_SIZE, 55*HEIGHT_SIZE, 280*Width, fcRect.size.height);
+    CGRect fcRect = [cell.content boundingRectWithSize:CGSizeMake(300*Width, 1000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 *HEIGHT_SIZE]} context:nil];
+    
+    cell.contentLabel.frame =CGRectMake(5*NOW_SIZE, 55*HEIGHT_SIZE, 280*Width, fcRect.size.height+15*HEIGHT_SIZE);
+  
+     [cell.contentLabel loadHTMLString:WebString baseURL:nil];
     
     cell.titleView.frame=CGRectMake(0, 70*HEIGHT_SIZE+fcRect.size.height,SCREEN_WIDTH, 2*HEIGHT_SIZE);
   //  cell.timeLabel.frame=CGRectMake(SCREEN_WIDTH-100*NOW_SIZE, 45*NOW_SIZE+fcRect.size.height,100*NOW_SIZE, 20*NOW_SIZE );
@@ -343,7 +359,7 @@
 {
     
     
-    CGRect fcRect = [self.contentArray[indexPath.row] boundingRectWithSize:CGSizeMake(300*Width, 1000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14*HEIGHT_SIZE]} context:nil];
+    CGRect fcRect = [self.contentArray[indexPath.row] boundingRectWithSize:CGSizeMake(300*Width, 1000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13*HEIGHT_SIZE]} context:nil];
     return 70*HEIGHT_SIZE+fcRect.size.height;
     
 }
