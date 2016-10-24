@@ -63,7 +63,7 @@
     self.labelArray=[NSMutableArray arrayWithObjects:root_ME_biaoti,root_NBQ_leixing, root_ME_huifu_jilu,nil];
     
         [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfoDetail" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfo" sucessBlock:^(id content) {
         [self hideProgressView];
         NSLog(@"getQuestionInfo=: %@", content);
         if(content){

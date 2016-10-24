@@ -396,7 +396,7 @@
         self.barChartView.chartMargin = 30*HEIGHT_SIZE;
         self.barChartView.yLabelFormatter = ^(CGFloat yValue){
             CGFloat yValueParsed = yValue;
-            NSString *labelText = [NSString stringWithFormat:@"%0.f",yValueParsed];
+            NSString *labelText = [NSString stringWithFormat:@"%.1f",yValueParsed];
             return labelText;
         };
         self.barChartView.labelMarginTop = 5.0;
