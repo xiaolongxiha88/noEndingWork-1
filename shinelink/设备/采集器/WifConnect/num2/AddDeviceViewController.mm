@@ -231,16 +231,7 @@ static void *context = NULL;
 }
 
 
-//-(IBAction)pswdShowPressed{
-//    
-//    if (self.pswd.secureTextEntry == true) {
-//        [self.pswd setSecureTextEntry:false];
-//    }else
-//    {
-//        [self.pswd setSecureTextEntry:true];
-//     
-//    }
-//}
+
 
 
 //点击屏幕空白处去掉键盘
@@ -264,8 +255,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销1
-      elianStop(context);
-      elianDestroy(context);
+//      elianStop(context);
+//      elianDestroy(context);
         
         
         
@@ -274,7 +265,7 @@ static void *context = NULL;
     
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销2
-    context = elianNew(NULL, 0, target, flag);
+//    context = elianNew(NULL, 0, target, flag);
     
     
     if (context == NULL)
@@ -288,10 +279,10 @@ static void *context = NULL;
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销3
     
-    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
-    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
-    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
-    elianStart(context);
+//    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
+//    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
+//    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
+//    elianStart(context);
     
    
 }
@@ -460,8 +451,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销4
-    elianStop(context);
-     elianDestroy(context);
+//    elianStop(context);
+//     elianDestroy(context);
         
         
     }
@@ -485,8 +476,8 @@ static void *context = NULL;
            
           //////// ////////////////// ////////////////////////////////
          //////////////////////   ////////////////////////////注销5
-            elianStop(context);
-           elianDestroy(context);
+//            elianStop(context);
+//           elianDestroy(context);
             
             
             context = NULL;

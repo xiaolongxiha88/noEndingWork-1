@@ -131,7 +131,7 @@
         sum+=snBytes[i];
     }
     NSInteger B=sum%8;
-    NSString *B1= [NSString stringWithFormat: @"%d", B];
+    NSString *B1= [NSString stringWithFormat: @"%ld", (long)B];
     int C=sum*sum;
     
     NSString *text = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x",C]];
