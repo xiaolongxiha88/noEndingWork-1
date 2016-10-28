@@ -20,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.backgroundColor=COLOR(228, 235, 245, 1);
     _idArray=[NSMutableArray array];
     _titleArray=[NSMutableArray array];
     

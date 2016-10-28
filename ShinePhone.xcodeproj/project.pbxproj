@@ -439,6 +439,8 @@
 		338FD9861D1D20F9009A128F /* first3.png in Resources */ = {isa = PBXBuildFile; fileRef = 338FD9851D1D20F9009A128F /* first3.png */; };
 		338FD9881D1D25A8009A128F /* first1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338FD9871D1D25A8009A128F /* first1.jpg */; };
 		33A4384C1D1ABE86004E9AB6 /* service3.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A4384B1D1ABE86004E9AB6 /* service3.png */; };
+		33ABC2A51DC2E619003B92AC /* extensionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ABC2A41DC2E619003B92AC /* extensionTableViewCell.m */; };
+		33ABC2A71DC2EB69003B92AC /* 增值问题33.png in Resources */ = {isa = PBXBuildFile; fileRef = 33ABC2A61DC2EB69003B92AC /* 增值问题33.png */; };
 		33AF3D171D8E67210007D6C2 /* addDevice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33AF3CE31D8E67210007D6C2 /* addDevice.jpg */; };
 		33AF3D191D8E67210007D6C2 /* DeviceManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF3CE71D8E67210007D6C2 /* DeviceManageViewController.m */; };
 		33AF3D1A1D8E67210007D6C2 /* ACPButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF3CEA1D8E67210007D6C2 /* ACPButton.m */; };
@@ -1263,6 +1265,9 @@
 		33A438511D1BB63D004E9AB6 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		33A438521D1BB651004E9AB6 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		33A438531D1BB658004E9AB6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		33ABC2A31DC2E619003B92AC /* extensionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = extensionTableViewCell.h; sourceTree = "<group>"; };
+		33ABC2A41DC2E619003B92AC /* extensionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = extensionTableViewCell.m; sourceTree = "<group>"; };
+		33ABC2A61DC2EB69003B92AC /* 增值问题33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "增值问题33.png"; sourceTree = "<group>"; };
 		33AF3CE31D8E67210007D6C2 /* addDevice.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addDevice.jpg; sourceTree = "<group>"; };
 		33AF3CE61D8E67210007D6C2 /* DeviceManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManageViewController.h; sourceTree = "<group>"; };
 		33AF3CE71D8E67210007D6C2 /* DeviceManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceManageViewController.m; sourceTree = "<group>"; };
@@ -2264,6 +2269,8 @@
 				33652A271CEC0AC8004EBAE5 /* extensionListTableViewController.m */,
 				33652A291CEC1190004EBAE5 /* ExtensionTwoViewController.h */,
 				33652A2A1CEC1190004EBAE5 /* ExtensionTwoViewController.m */,
+				33ABC2A31DC2E619003B92AC /* extensionTableViewCell.h */,
+				33ABC2A41DC2E619003B92AC /* extensionTableViewCell.m */,
 			);
 			path = "推广服务";
 			sourceTree = "<group>";
@@ -2754,6 +2761,7 @@
 		337F9D6E1C71B1020016FE43 /* 图片 */ = {
 			isa = PBXGroup;
 			children = (
+				33ABC2A61DC2EB69003B92AC /* 增值问题33.png */,
 				338E30CD1D93727A002215E4 /* 增值服务1.png */,
 				338E30CB1D93725D002215E4 /* service111.png */,
 				33724D9E1CFE89BE005F3965 /* touxiang.png */,
@@ -3657,6 +3665,7 @@
 				33FEFD6D1C7DB38400324374 /* iconfont-gongsijianjie@2x.png in Resources */,
 				3319E08F1D5AFD6D006623A9 /* view.html in Resources */,
 				33FEFD7C1C7DB38400324374 /* shebei@3x.png in Resources */,
+				33ABC2A71DC2EB69003B92AC /* 增值问题33.png in Resources */,
 				33768AA91D475D0A00873E82 /* pvbgcn.png in Resources */,
 				33768AB01D475D0A00873E82 /* storagecn.png in Resources */,
 				338234361D9A4AF0002062AE /* Warranty_cn2.png in Resources */,
@@ -3848,6 +3857,7 @@
 				336F1A1C1D88E46900CD4C2B /* SDWebImagePrefetcher.m in Sources */,
 				334B8F5F1C914B4E00798A69 /* README.md in Sources */,
 				3343F3DF1C80405D009F69BC /* UIProgressView+AFNetworking.m in Sources */,
+				33ABC2A51DC2E619003B92AC /* extensionTableViewCell.m in Sources */,
 				334ED7011C9028BB0095FFBC /* secondViewController.m in Sources */,
 				335D69AD1D77BA4D00894D90 /* HcdAudioPlayer.m in Sources */,
 				334FF0911CF53C7C001E6716 /* GCDAsyncSocket.m in Sources */,

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RootViewController.h"
 
-@interface extensionListTableViewController : UITableViewController
+@interface extensionListTableViewController : RootViewController
 
 @end

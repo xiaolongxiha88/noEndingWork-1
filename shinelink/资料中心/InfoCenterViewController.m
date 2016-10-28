@@ -35,9 +35,13 @@
 
 -(void)initUI{
 
-    NSArray *imageArray=[NSArray arrayWithObjects:@"video.png", @"question.png",@"Installation-Manual.png",@"company.png",nil];
-    NSArray *NameArray=[NSArray arrayWithObjects:root_shipin_xitong, root_changjian_wenti,root_shouce,root_gongsi_guanwang,nil];
-     NSArray *contentArray=[NSArray arrayWithObjects:root_gongsi_neirong, root_changjian_wenti_neirong,root_shouce_neirong,root_gongsi_guanwang_neirong,nil];
+//    NSArray *imageArray=[NSArray arrayWithObjects:@"video.png", @"question.png",@"Installation-Manual.png",@"company.png",nil];
+//    NSArray *NameArray=[NSArray arrayWithObjects:root_shipin_xitong, root_changjian_wenti,root_shouce,root_gongsi_guanwang,nil];
+//     NSArray *contentArray=[NSArray arrayWithObjects:root_gongsi_neirong, root_changjian_wenti_neirong,root_shouce_neirong,root_gongsi_guanwang_neirong,nil];
+    
+    NSArray *imageArray=[NSArray arrayWithObjects:@"Installation-Manual.png", @"question.png",@"video.png",@"company.png",nil];
+    NSArray *NameArray=[NSArray arrayWithObjects:root_shouce, root_changjian_wenti,root_shipin_xitong,root_gongsi_guanwang,nil];
+    NSArray *contentArray=[NSArray arrayWithObjects:root_shouce_neirong, root_changjian_wenti_neirong,root_gongsi_neirong,root_gongsi_guanwang_neirong,nil];
     
     _ScrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _ScrollView.scrollEnabled=YES;
@@ -52,7 +56,7 @@
         // myView.layer.borderWidth=1;
         myView.layer.cornerRadius=7*HEIGHT_SIZE;
         myView.userInteractionEnabled=YES;
-        if (i==0) {
+        if (i==2) {
             myView.backgroundColor=COLOR(11, 200, 222, 1);
             UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goAV)];
             [myView addGestureRecognizer:tap];
@@ -61,7 +65,7 @@
             myView.backgroundColor=COLOR(217, 83, 83, 1);
             UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goQuestion)];
             [myView addGestureRecognizer:tap];
-        }else if (i==2){
+        }else if (i==0){
             myView.backgroundColor=COLOR(208, 189, 86, 1);
             UITapGestureRecognizer *tap  = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gomanual)];
             [myView addGestureRecognizer:tap];
