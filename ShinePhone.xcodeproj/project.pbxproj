@@ -425,6 +425,8 @@
 		3383F13A1C9FFD3E0075E834 /* 家庭用电设备.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383F1391C9FFD3E0075E834 /* 家庭用电设备.png */; };
 		3383F13C1C9FFD540075E834 /* 光伏电量.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383F13B1C9FFD540075E834 /* 光伏电量.png */; };
 		3383F13E1C9FFDA10075E834 /* 光伏收益.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383F13D1C9FFDA10075E834 /* 光伏收益.png */; };
+		338418E21DC840AB00D679CA /* GifConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338418E11DC840AB00D679CA /* GifConfigViewController.m */; };
+		338418E71DC9783500D679CA /* GFWaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338418E61DC9783500D679CA /* GFWaterView.m */; };
 		338990AD1CEAB58100A708F8 /* bianhao.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AC1CEAB58100A708F8 /* bianhao.png */; };
 		338990AF1CEAB61400A708F8 /* mebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AE1CEAB61300A708F8 /* mebg.png */; };
 		338990B11CEAB73400A708F8 /* logo3.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990B01CEAB73400A708F8 /* logo3.png */; };
@@ -471,6 +473,12 @@
 		33C3FFFF1D3E33E00016351C /* L6.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF41D3E33E00016351C /* L6.png */; };
 		33C5E2261D49A89F00A0DB00 /* 三角形.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C5E2251D49A89F00A0DB00 /* 三角形.png */; };
 		33C5E2291D4AFB1C00A0DB00 /* moreBigImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C5E2281D4AFB1C00A0DB00 /* moreBigImage.m */; };
+		33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */; };
+		33E42E0B1DC9CDB60024FFBB /* peizhi_btn_click_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */; };
+		33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */; };
+		33E42E0F1DC9CE050024FFBB /* peizhi_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0E1DC9CE050024FFBB /* peizhi_btn.png */; };
+		33E42E131DC9E5690024FFBB /* WifiDisconnected.gif in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E121DC9E5690024FFBB /* WifiDisconnected.gif */; };
+		33E42E151DC9E5890024FFBB /* wifiConnected.gif in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E141DC9E5890024FFBB /* wifiConnected.gif */; };
 		33ECDCF31CDC9D3400E20AF8 /* deviceCore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33ECDCF11CDC9D3400E20AF8 /* deviceCore.xcdatamodeld */; };
 		33EFB6011C979B5F003F336F /* StationCellectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB5F81C979B5F003F336F /* StationCellectViewController.m */; };
 		33EFB6021C979B5F003F336F /* StationCellectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB5FA1C979B5F003F336F /* StationCellectTableViewCell.m */; };
@@ -1241,6 +1249,10 @@
 		3383F1391C9FFD3E0075E834 /* 家庭用电设备.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "家庭用电设备.png"; sourceTree = "<group>"; };
 		3383F13B1C9FFD540075E834 /* 光伏电量.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "光伏电量.png"; sourceTree = "<group>"; };
 		3383F13D1C9FFDA10075E834 /* 光伏收益.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "光伏收益.png"; sourceTree = "<group>"; };
+		338418E01DC840AB00D679CA /* GifConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifConfigViewController.h; path = WifConnect/GifConfigViewController.h; sourceTree = "<group>"; };
+		338418E11DC840AB00D679CA /* GifConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifConfigViewController.m; path = WifConnect/GifConfigViewController.m; sourceTree = "<group>"; };
+		338418E51DC9783500D679CA /* GFWaterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFWaterView.h; sourceTree = "<group>"; };
+		338418E61DC9783500D679CA /* GFWaterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFWaterView.m; sourceTree = "<group>"; };
 		338990AC1CEAB58100A708F8 /* bianhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bianhao.png; path = ../bianhao.png; sourceTree = "<group>"; };
 		338990AE1CEAB61300A708F8 /* mebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mebg.png; path = ../mebg.png; sourceTree = "<group>"; };
 		338990B01CEAB73400A708F8 /* logo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo3.png; path = ../logo3.png; sourceTree = "<group>"; };
@@ -1314,6 +1326,12 @@
 		33C5E2251D49A89F00A0DB00 /* 三角形.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "三角形.png"; sourceTree = "<group>"; };
 		33C5E2271D4AFB1C00A0DB00 /* moreBigImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = moreBigImage.h; sourceTree = "<group>"; };
 		33C5E2281D4AFB1C00A0DB00 /* moreBigImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = moreBigImage.m; sourceTree = "<group>"; };
+		33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click.png; path = ../../peizhi_btn_click.png; sourceTree = "<group>"; };
+		33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click_2.png; path = ../../peizhi_btn_click_2.png; sourceTree = "<group>"; };
+		33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_2.png; path = ../../peizhi_btn_2.png; sourceTree = "<group>"; };
+		33E42E0E1DC9CE050024FFBB /* peizhi_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn.png; path = ../../peizhi_btn.png; sourceTree = "<group>"; };
+		33E42E121DC9E5690024FFBB /* WifiDisconnected.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = WifiDisconnected.gif; sourceTree = "<group>"; };
+		33E42E141DC9E5890024FFBB /* wifiConnected.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = wifiConnected.gif; sourceTree = "<group>"; };
 		33ECDCF21CDC9D3400E20AF8 /* deviceCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = deviceCore.xcdatamodel; sourceTree = "<group>"; };
 		33EFB5F71C979B5F003F336F /* StationCellectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationCellectViewController.h; sourceTree = "<group>"; };
 		33EFB5F81C979B5F003F336F /* StationCellectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationCellectViewController.m; sourceTree = "<group>"; };
@@ -1815,7 +1833,6 @@
 			isa = PBXGroup;
 			children = (
 				33AF3CE21D8E67210007D6C2 /* num2 */,
-				3355AD931CF6A48B00AE6891 /* 图片WIFI */,
 				334FF0261CF53C7B001E6716 /* AppMacro.h */,
 				334FF0271CF53C7B001E6716 /* AsyncSocket */,
 				334FF0391CF53C7B001E6716 /* ConnetService.h */,
@@ -2021,6 +2038,10 @@
 		3355AD931CF6A48B00AE6891 /* 图片WIFI */ = {
 			isa = PBXGroup;
 			children = (
+				33E42E0E1DC9CE050024FFBB /* peizhi_btn.png */,
+				33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */,
+				33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */,
+				33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */,
 				3355AD941CF6A49400AE6891 /* 444.jpg */,
 				3355AD951CF6A49400AE6891 /* 333.jpg */,
 				3355AD961CF6A49400AE6891 /* 222.jpg */,
@@ -2028,7 +2049,8 @@
 				338234241D9A47AC002062AE /* Collectors_cn.png */,
 				338234251D9A47AC002062AE /* Collectors_en.png */,
 			);
-			path = "图片WIFI";
+			name = "图片WIFI";
+			path = "WifConnect/图片WIFI";
 			sourceTree = "<group>";
 		};
 		3355F2651C746983006DDE5A /* 关于 */ = {
@@ -3193,6 +3215,7 @@
 		33EFB5F61C979B54003F336F /* 采集器 */ = {
 			isa = PBXGroup;
 			children = (
+				3355AD931CF6A48B00AE6891 /* 图片WIFI */,
 				334FF0251CF53C7B001E6716 /* WifConnect */,
 				33EFB5F71C979B5F003F336F /* StationCellectViewController.h */,
 				33EFB5F81C979B5F003F336F /* StationCellectViewController.m */,
@@ -3204,6 +3227,12 @@
 				33EFB6001C979B5F003F336F /* ChangeCellectViewController.m */,
 				337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */,
 				337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */,
+				338418E01DC840AB00D679CA /* GifConfigViewController.h */,
+				338418E11DC840AB00D679CA /* GifConfigViewController.m */,
+				338418E51DC9783500D679CA /* GFWaterView.h */,
+				338418E61DC9783500D679CA /* GFWaterView.m */,
+				33E42E121DC9E5690024FFBB /* WifiDisconnected.gif */,
+				33E42E141DC9E5890024FFBB /* wifiConnected.gif */,
 			);
 			path = "采集器";
 			sourceTree = "<group>";
@@ -3462,6 +3491,7 @@
 				334FF0951CF53C7C001E6716 /* Documentation.html in Resources */,
 				334771001C9A3E57003A6F13 /* mine@2x.png in Resources */,
 				337079491D913D9600D7DA98 /* question_icon.png in Resources */,
+				33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */,
 				338234321D9A4A90002062AE /* Prompt_message_cn2.png in Resources */,
 				33FEFD651C7DB38400324374 /* icon@2x.png in Resources */,
 				33692BF11C926B4500698375 /* rili.png in Resources */,
@@ -3571,6 +3601,7 @@
 				336664ED1CB77CD3005573FB /* update@2x.png in Resources */,
 				33EFB6821C997050003F336F /* 充电桩.png in Resources */,
 				33FEFD5A1C7DB38400324374 /* icon---Email@2x.png in Resources */,
+				33E42E151DC9E5890024FFBB /* wifiConnected.gif in Resources */,
 				33EFB6881C9973AB003F336F /* 日志.png in Resources */,
 				336F1A251D895C2A00CD4C2B /* informationCenter.png in Resources */,
 				334FF0BD1CF53C7C001E6716 /* module-bg.png in Resources */,
@@ -3594,6 +3625,7 @@
 				33C300011D3E33E00016351C /* L8.png in Resources */,
 				33FEFD681C7DB38400324374 /* iconfont-address@3x.png in Resources */,
 				334AED731CA384F4007E39F3 /* open@2x.png in Resources */,
+				33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */,
 				335456C51C853AFD00275478 /* scanLine@2x.png in Resources */,
 				3343F3EB1C805BD2009F69BC /* LICENSE in Resources */,
 				335614A01CB3B8E90071BAC9 /* frame2@2x.png in Resources */,
@@ -3621,6 +3653,7 @@
 				33793D141CE583AD000D0F9E /* storage4.png in Resources */,
 				33C300021D3E33E00016351C /* L9.png in Resources */,
 				334FF0B71CF53C7C001E6716 /* about.png in Resources */,
+				33E42E0F1DC9CE050024FFBB /* peizhi_btn.png in Resources */,
 				337584431D267D12006AC140 /* product.jpg in Resources */,
 				334F3AD61D9B9FA4001D7F75 /* shinewifi.png in Resources */,
 				33C3FFFD1D3E33E00016351C /* L4.png in Resources */,
@@ -3631,6 +3664,7 @@
 				33FEFD721C7DB38400324374 /* iconfont-nengyuanlei_press@3x.png in Resources */,
 				33724D9D1CFE85FB005F3965 /* pic_service.png in Resources */,
 				33699BB51DADE6FF00C55CFF /* PV_t1.png in Resources */,
+				33E42E0B1DC9CDB60024FFBB /* peizhi_btn_click_2.png in Resources */,
 				33FEFD661C7DB38400324374 /* icon@3x.png in Resources */,
 				33FEFCD21C7D8A9500324374 /* Address.plist in Resources */,
 				334AED581CA37569007E39F3 /* 客户服务.png in Resources */,
@@ -3684,6 +3718,7 @@
 				334F3ADC1D9BA42E001D7F75 /* Processing.png in Resources */,
 				33FEFD6E1C7DB38400324374 /* iconfont-gongsijianjie@3x.png in Resources */,
 				33C300031D3E33E00016351C /* L10.png in Resources */,
+				33E42E131DC9E5690024FFBB /* WifiDisconnected.gif in Resources */,
 				337960771DB0D065009AC610 /* massage_en2.png in Resources */,
 				3376ED5F1D12A2EA009526B4 /* 待处理.png in Resources */,
 				334770FE1C9A3E35003A6F13 /* equipment@2x.png in Resources */,
@@ -3895,11 +3930,13 @@
 				334B8F261C91281600798A69 /* Line4View.m in Sources */,
 				334B8F531C914A6D00798A69 /* PNPieChart.m in Sources */,
 				336664F91CB78517005573FB /* Line2View.m in Sources */,
+				338418E71DC9783500D679CA /* GFWaterView.m in Sources */,
 				336F1A191D88E46900CD4C2B /* SDWebImageDownloader.m in Sources */,
 				33AF3D221D8E67210007D6C2 /* Reachability.m in Sources */,
 				3319E0861D5AFAA7006623A9 /* HtmlCommon.m in Sources */,
 				334E9BE41CACB78900C8271F /* ControlCNJ.m in Sources */,
 				334B8F4F1C914A6D00798A69 /* PNGenericChart.m in Sources */,
+				338418E21DC840AB00D679CA /* GifConfigViewController.m in Sources */,
 				336F1A161D88E46900CD4C2B /* SDImageCache.m in Sources */,
 				334FF0C11CF53C7C001E6716 /* UINavigationController+CustomNavigation.m in Sources */,
 				33692BF91C92952000698375 /* engrgySencondViewController.m in Sources */,

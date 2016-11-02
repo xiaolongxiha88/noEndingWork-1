@@ -77,6 +77,7 @@
 //        _contentLabel.textAlignment =NSTextAlignmentLeft;
 //        _contentLabel.numberOfLines=0;
         
+        
         _contentLabel =[[UIWebView alloc]init];
            _contentLabel.delegate = self;
         _contentLabel.scrollView.bounces=NO;

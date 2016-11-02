@@ -8,7 +8,8 @@
 
 #import "AddDeviceViewController.h"
 #import "DeviceManageViewController.h"
-
+#import "GifConfigViewController.h"
+#import "GFWaterView.h"
 
 #import "elian.h"
 #import "EasyTimeline.h"
@@ -20,11 +21,18 @@
 @interface AddDeviceViewController ()
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, weak) NSTimer * timer;
+@property (nonatomic, weak) NSTimer * timerStop;
+@property(nonatomic,strong)UIButton *setButton;
+@property(nonatomic,strong)NSString *timeLableString;
+@property(nonatomic,strong)NSString *firstLableString;
+@property(nonatomic,strong)UIView *animationView;
+@property(nonatomic,strong)UILabel *timeLable;
+
 @end
 
 @implementation AddDeviceViewController{
     EasyTimeline *_timelineConfig;
-    
+   
 }
 
 NSString* authMode = @"9";
@@ -44,6 +52,11 @@ static void *context = NULL;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_back style:UIBarButtonItemStylePlain target:self action:@selector(goBackToFirst)];
+    rightItem.tag=10;
+    self.navigationItem.rightBarButtonItem=rightItem;
+    
     
     [self initUI];
     _deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
@@ -84,31 +97,32 @@ static void *context = NULL;
     _scrollView.contentSize = CGSizeMake(SCREEN_Width,600*NOW_SIZE);
     [self.view addSubview:_scrollView];
     
-       float sizeH1=10*HEIGHT_SIZE;
+//    UIImageView *pwdBgImageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 85*HEIGHT_SIZE, 300*NOW_SIZE,110*HEIGHT_SIZE+sizeH1 )];
+//    pwdBgImageView2.image = IMAGE(@"addDevice.jpg");
+//    pwdBgImageView2.userInteractionEnabled = YES;
+//    [_scrollView addSubview:pwdBgImageView2];
     
-    UIImageView *pwdBgImageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 85*HEIGHT_SIZE, 300*NOW_SIZE,110*HEIGHT_SIZE+sizeH1 )];
-    pwdBgImageView2.image = IMAGE(@"addDevice.jpg");
-    pwdBgImageView2.userInteractionEnabled = YES;
-    [_scrollView addSubview:pwdBgImageView2];
+      CGRect fcRect = [root_lianjie_luyouqi boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20 *HEIGHT_SIZE]} context:nil];
+          float sizeH1=fcRect.size.height;
+    float lableHeigh=40*HEIGHT_SIZE;
+      float twoHeigh=5*HEIGHT_SIZE;
     
-    
-    UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE, 300*NOW_SIZE,40*HEIGHT_SIZE )];
+    UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE, 300*NOW_SIZE,sizeH1)];
     noticeLable.text=root_lianjie_luyouqi;
-    noticeLable.textAlignment=NSTextAlignmentLeft;
+    noticeLable.textAlignment=NSTextAlignmentCenter;
     noticeLable.textColor=[UIColor whiteColor];
     noticeLable.numberOfLines=0;
-    noticeLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    noticeLable.font = [UIFont systemFontOfSize:20*HEIGHT_SIZE];
     [_scrollView addSubview:noticeLable];
     
-     UILabel *wifiName=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 5*HEIGHT_SIZE, 100*NOW_SIZE,50*HEIGHT_SIZE )];
+     UILabel *wifiName=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, sizeH1+twoHeigh*4, 100*NOW_SIZE,lableHeigh )];
     wifiName.text=root_peizhi_shinewifi_E_mingzi;
     wifiName.textAlignment=NSTextAlignmentRight;
     wifiName.textColor=[UIColor whiteColor];
-    wifiName.numberOfLines=0;
     wifiName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [pwdBgImageView2 addSubview:wifiName];
+    [_scrollView addSubview:wifiName];
     
-    self.ipName = [[UITextField alloc] initWithFrame:CGRectMake(105*NOW_SIZE, 5*HEIGHT_SIZE, 180*NOW_SIZE,50*HEIGHT_SIZE )];
+    self.ipName = [[UITextField alloc] initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*4, 180*NOW_SIZE,lableHeigh)];
     self.ipName.placeholder = root_peizhi_shinewifi_name;
     //self.ssidTextField.keyboardType = UIKeyboardTypeASCIICapable;
     self.ipName.secureTextEntry = NO;
@@ -117,21 +131,20 @@ static void *context = NULL;
     [self.ipName setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.ipName setValue:[UIFont systemFontOfSize:9*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     self.ipName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [pwdBgImageView2 addSubview:_ipName];
+    [_scrollView addSubview:_ipName];
     
-    UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, 50*HEIGHT_SIZE, 180*NOW_SIZE,1*HEIGHT_SIZE )];
-    view1.backgroundColor=[UIColor whiteColor];
-    [pwdBgImageView2 addSubview:view1];
+    UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*4+lableHeigh-7*HEIGHT_SIZE, 180*NOW_SIZE,1*HEIGHT_SIZE )];
+    view1.backgroundColor=[UIColor lightTextColor];
+    [_scrollView addSubview:view1];
     
-    UILabel *Password=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 60*HEIGHT_SIZE, 100*NOW_SIZE,50*HEIGHT_SIZE )];
+    UILabel *Password=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, sizeH1+twoHeigh*5+lableHeigh, 100*NOW_SIZE,lableHeigh)];
     Password.text=root_peizhi_shinewifi_mima;
     Password.textAlignment=NSTextAlignmentRight;
     Password.textColor=[UIColor whiteColor];
-    Password.numberOfLines=0;
     Password.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [pwdBgImageView2 addSubview:Password];
+    [_scrollView addSubview:Password];
     
-    self.pswd = [[UITextField alloc] initWithFrame:CGRectMake(105*NOW_SIZE, 60*HEIGHT_SIZE, 180*NOW_SIZE,50*HEIGHT_SIZE )];
+    self.pswd = [[UITextField alloc] initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*5+lableHeigh, 180*NOW_SIZE,lableHeigh)];
     self.pswd.placeholder = root_peizhi_shinewifi_shuru_mima;
     //self.ssidTextField.keyboardType = UIKeyboardTypeASCIICapable;
     //self.pswd.secureTextEntry = NO;
@@ -140,51 +153,143 @@ static void *context = NULL;
     [self.pswd setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.pswd setValue:[UIFont systemFontOfSize:9*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     self.pswd.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [pwdBgImageView2 addSubview:_pswd];
+    [_scrollView addSubview:_pswd];
     
-    UIView *view2=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, 105*HEIGHT_SIZE, 180*NOW_SIZE,1*HEIGHT_SIZE )];
-    view2.backgroundColor=[UIColor whiteColor];
-    [pwdBgImageView2 addSubview:view2];
+    UIView *view2=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE, 180*NOW_SIZE,1*HEIGHT_SIZE )];
+    view2.backgroundColor=[UIColor lightTextColor];
+    [_scrollView addSubview:view2];
+    
+    _animationView=[[UIView alloc]initWithFrame:CGRectMake(0, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE, SCREEN_Width,200*HEIGHT_SIZE)];
+    [self.view addSubview:_animationView];
 
-    UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(60*NOW_SIZE,250*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
-    //    [goBut.layer setMasksToBounds:YES];
-    //    [goBut.layer setCornerRadius:25.0];
-    [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
-    [goBut setTitle:root_set forState:UIControlStateNormal];
-    goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    [goBut addTarget:self action:@selector(deviceSearchStart) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:goBut];
+    _setButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+   _setButton.frame=CGRectMake(60*NOW_SIZE,395*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+//       [_setButton.layer setCornerRadius:_setButton.bounds.size.width/2];
+//       [_setButton.layer setMasksToBounds:YES];
+   [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
+     [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click.png") forState:UIControlStateHighlighted];
+ [_setButton setTitle:root_set forState:UIControlStateNormal];
+  _setButton.titleLabel.font=[UIFont systemFontOfSize: 18*HEIGHT_SIZE];
+ [_setButton addTarget:self action:@selector(tapButton:) forControlEvents:UIControlEventTouchUpInside];
+   _setButton.selected=NO;
+  [_scrollView addSubview:_setButton];
     
-    UIButton *backBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    backBut.frame=CGRectMake(60*NOW_SIZE,310*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
-    //    [goBut.layer setMasksToBounds:YES];
-    //    [goBut.layer setCornerRadius:25.0];
-    [backBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
-    [backBut setTitle:root_back forState:UIControlStateNormal];
-    backBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    [backBut addTarget:self action:@selector(goBack) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:backBut];
+    __block GFWaterView *waterView = [[GFWaterView alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 40*HEIGHT_SIZE, 200*NOW_SIZE, 200*NOW_SIZE)];
+    waterView.backgroundColor = [UIColor clearColor];
+    [_animationView addSubview:waterView];
+    
+    _firstLableString=@"3";
+     _timeLableString=_firstLableString;
+    NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
+    self.timeLable = [[UILabel alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 105*HEIGHT_SIZE, 80*NOW_SIZE, 60*HEIGHT_SIZE)];
+    self.timeLable.font=[UIFont systemFontOfSize:34*HEIGHT_SIZE];
+    self.timeLable.textAlignment = NSTextAlignmentCenter;
+    self.timeLable.textColor =[UIColor whiteColor];
+     self.timeLable.text =setButtonValue;
+    [_animationView addSubview:_timeLable];
+    
+}
+
+
+- (void)tapButton:(UIButton *)button{
+    _setButton.selected = !_setButton.selected;
+    
+    if (button.isSelected) {
+        [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_2.png") forState:UIControlStateNormal];
+        [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click_2.png") forState:UIControlStateHighlighted];
+        [_setButton setTitle:root_stop_config forState:UIControlStateNormal];
+        
+        [self deviceSearchStart];
+        
+    }else{
+        [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
+        [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click.png") forState:UIControlStateHighlighted];
+        [_setButton setTitle:root_set forState:UIControlStateNormal];
+   
+        _timeLableString=_firstLableString;
+        NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
+   _timeLable.text=setButtonValue;
+        
+                 [self StopTime];
+                [self  stopSearch];
+                if ([_timelineConfig isRunning]) {
+                    [_timelineConfig stop];
+                }
+
+    }
     
 }
 
 
 
--(void)goBack{
-  [self.navigationController popToRootViewControllerAnimated:YES];
+- (void)clickAnimation:(id)sender {
+    
+    if ([_timeLableString intValue]>0) {
+        _timeLableString=[NSString stringWithFormat:@"%d", [_timeLableString intValue]-1];
+    }
+    
+    if ([_timeLableString intValue]==0) {
+         _setButton.selected = !_setButton.selected;
+        [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
+        [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click.png") forState:UIControlStateHighlighted];
+        [_setButton setTitle:root_set forState:UIControlStateNormal];
+        
+        _timeLableString=_firstLableString;
+        NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
+        _timeLable.text=setButtonValue;
+        
+        [self StopTime];
+        [self  stopSearch];
+        if ([_timelineConfig isRunning]) {
+            [_timelineConfig stop];
+               }
+
+        GifConfigViewController *get=[[GifConfigViewController alloc]init];
+        [self.navigationController pushViewController:get animated:NO];
+        
+    }
+    
+   
+    
+    NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
+    _timeLable.text=setButtonValue;
+    
+ 
+    __block GFWaterView *waterView = [[GFWaterView alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 40*HEIGHT_SIZE, 200*NOW_SIZE, 200*NOW_SIZE)];
+    
+    waterView.backgroundColor = [UIColor clearColor];
+    
+    [_animationView addSubview:waterView];
+    //    self.waterView = waterView;
+    
+    [UIView animateWithDuration:2 animations:^{
+        
+        waterView.transform = CGAffineTransformScale(waterView.transform, 2, 2);
+        
+        waterView.alpha = 0;
+        
+    } completion:^(BOOL finished) {
+        [waterView removeFromSuperview];
+
+    }];
+    
+ 
+    
 }
+
+
+
+
+
+-(void)goBackToFirst{
+ [self.navigationController popToRootViewControllerAnimated:YES];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-//- (void)onDeviceFindResultNotify:(NSNotification*)notify{
-//    [self performSelectorOnMainThread:@selector(doDeviceFindResult:) withObject:notify waitUntilDone:NO];
-//}
-
-
-
 
 
 #pragma mark 扫描到设备
@@ -201,31 +306,8 @@ static void *context = NULL;
         myAlertView.title=root_Alet_user;
         
           myAlertView.message = root_peizhi_shinewifi_peizhi_tishi;
-        //if (count<=_cellCount) {
-            
-        //    myAlertView.message = [NSString stringWithFormat:@"查找设备中. 发现设备：%d个",count ];
-        //}
-       
-//        
-//         NSString *A8= NSLocalizedString(@"A8", nil);
-//        myAlertView.title=A8;
-//            NSString *A4= NSLocalizedString(@"A4", nil);
-//        
-//       int count2=0;
-//        
-//        if (count<=self.cellCount0) {
-//            count2=0;
-//            NSLog(@"1");
-//        }
-//        if (count>self.cellCount0) {
-//             count2=count-(int)self.cellCount0;
-//             NSLog(@"2");
-//        }
-//      
-//        
-//         myAlertView.message = [NSString stringWithFormat:A4,count2 ];
-        
-        
+ 
+   
     }
     
 }
@@ -246,7 +328,7 @@ static void *context = NULL;
     const char *s_authmode = [authMode cStringUsingEncoding:NSASCIIStringEncoding];
     int authmode = atoi(s_authmode);
     const char *password = [pswd cStringUsingEncoding:NSASCIIStringEncoding];
-    unsigned char target[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+  //  unsigned char target[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
     
     NSLog(@"OnSend: ssid = %s, authmode = %d, password = %s", ssid, authmode, password);
     if (context)
@@ -290,6 +372,7 @@ static void *context = NULL;
 
 //开始查找设备
 -(void) deviceSearchStart{
+    
     _deviceArray = nil;
     _deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
     
@@ -315,48 +398,66 @@ static void *context = NULL;
         _timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getNET) userInfo:nil repeats:YES];
     }
     
+    if (!_timerStop) {
+        _timerStop = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(clickAnimation:) userInfo:nil repeats:YES];
+    }
     
     
     
+//     myAlertView = [[SIAlertView alloc] initWithTitle:root_Alet_user andMessage:root_peizhi_shinewifi_peizhi_tishi];
+//    [myAlertView addButtonWithTitle:root_stop_config
+//                               type:SIAlertViewButtonTypeDestructive
+//                            handler:^(SIAlertView *alertView) {
+//                                [alertView dismissAnimated:YES];
+//                            }];
+//    myAlertView.willShowHandler = ^(SIAlertView *alertView) {
+//        NSLog(@"%@, willShowHandler", alertView);
+//    };
+//    myAlertView.didShowHandler = ^(SIAlertView *alertView) {
+//        NSLog(@"%@, didShowHandler", alertView);
+//    };
+//    myAlertView.willDismissHandler = ^(SIAlertView *alertView) {
+//       
+//        //停止扫描
+//        [self  stopSearch];
+//        
+//        if ([_timelineConfig isRunning]) {
+//            [_timelineConfig stop];
+//        }
+//        
+//    };
+//    myAlertView.didDismissHandler = ^(SIAlertView *alertView) {
+//        
+//        _timer.fireDate=[NSDate distantFuture];
+//        _timer=nil;
+//        
+//        NSLog(@"%@, didDismissHandler", alertView);
+//    };
+//    myAlertView.showIndicator = YES;
+//    [myAlertView show];
     
-     myAlertView = [[SIAlertView alloc] initWithTitle:root_Alet_user andMessage:root_peizhi_shinewifi_peizhi_tishi];
-    [myAlertView addButtonWithTitle:root_stop_config
-                               type:SIAlertViewButtonTypeDestructive
-                            handler:^(SIAlertView *alertView) {
-                                [alertView dismissAnimated:YES];
-                            }];
-    myAlertView.willShowHandler = ^(SIAlertView *alertView) {
-        NSLog(@"%@, willShowHandler", alertView);
-    };
-    myAlertView.didShowHandler = ^(SIAlertView *alertView) {
-        NSLog(@"%@, didShowHandler", alertView);
-    };
-    myAlertView.willDismissHandler = ^(SIAlertView *alertView) {
-       
-        //停止扫描
-        [self  stopSearch];
-        
-        if ([_timelineConfig isRunning]) {
-            [_timelineConfig stop];
-        }
-        
-    };
-    myAlertView.didDismissHandler = ^(SIAlertView *alertView) {
-        
-        _timer.fireDate=[NSDate distantFuture];
-        _timer=nil;
-        
-        NSLog(@"%@, didDismissHandler", alertView);
-    };
-    myAlertView.showIndicator = YES;
-    [myAlertView show];
+    
+    
     isSearching= true;
-    
- 
-    
-    
     [self performSelectorInBackground:@selector(doneSearchDeviceAutoThread) withObject:nil];
 }
+
+
+
+
+-(void)StopTime{
+
+    _timer.fireDate=[NSDate distantFuture];
+    _timer=nil;
+
+    _timerStop.fireDate=[NSDate distantFuture];
+    _timerStop=nil;
+    
+    
+
+    
+}
+
 
 
 

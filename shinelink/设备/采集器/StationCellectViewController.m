@@ -182,7 +182,7 @@
         if (result1) {
             AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
             rootView.SnString=_arrayData[_indexPath.row][@"datalog_sn"];
-            
+            rootView.hidesBottomBarWhenPushed=YES;
             [self.navigationController pushViewController:rootView animated:YES];
         }else if (result2){
             MainViewController *rootView = [[MainViewController alloc]init];

@@ -109,6 +109,7 @@
   
     AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
     rootView.SnString=result;
+     rootView.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:rootView animated:YES];
     
 }
@@ -179,6 +180,7 @@
     if ([SnCode isEqualToString:SnCode2]) {
         AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
         rootView.SnString=SnID;
+         rootView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:rootView animated:YES];
     }else{
         [self showAlertViewWithTitle:nil message:root_jiaoYanMa_zhengQue cancelButtonTitle:root_OK];

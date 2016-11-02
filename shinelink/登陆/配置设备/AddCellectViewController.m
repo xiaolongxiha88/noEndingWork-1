@@ -354,6 +354,7 @@
          [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
         AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
         rootView.SnString=_cellectId.text;
+         rootView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:rootView animated:YES];
     }else if (result2){
          [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
