@@ -489,7 +489,7 @@
 "用户协议1"="Agree the user agreement ";
 "选择用户协议"="Please tick user Agreement";
 "添加1"="Add";
-"连接路由器2"="Please connect to the router first";
+"连接路由器2"="Connect your phone to the router to which the WIFI-E module is to be connected";
 "刷新设备列表"="Please drop down  to refresh device list to get device information after 5 mimutes ";
 "配置成功"="Configured successfully";
 
@@ -542,3 +542,12 @@
 "是否退出当前账户"="Sign out the account?";
 "未开启定位服务"="Not turned on location Services";
 "是否跳转界面进行设置"="Whether jump to the 'Settings' interface to set?";
+
+"wifi页面跳转提示"="Server may not respond instantaneously, please verify the connection status via blue LED.";
+"wifi连接成功"="Connected OK";
+"wifi连接失败"="Connected failed";
+"wifi看灯"="Please check the blue LED.";
+"wifi提示成功信息"="If the LED flash as picture A, please move to 'Device'page and refresh. ";
+"wifi提示失败信息"="If the LED flash as picture B, do as following:";
+"wifi提示失败信息1"="1. Check your router  signal strength.";
+"wifi提示失败信息2"="2. Configuration the Wi-Fi-E again.";

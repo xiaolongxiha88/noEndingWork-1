@@ -571,5 +571,13 @@
 #define  root_wei_kaiqi_dingwei    NSLocalizedString(@"未开启定位服务", nil)
 #define  root_tiaozhuan_jiemian_shezhi    NSLocalizedString(@"是否跳转界面进行设置", nil)
 
+#define  root_wifi_tiaozhuan_tishi    NSLocalizedString(@"wifi页面跳转提示", nil)
+#define  root_wifi_lianjie_ok    NSLocalizedString(@"wifi连接成功", nil)
+#define  root_wifi_lianjie_failed    NSLocalizedString(@"wifi连接失败", nil)
+#define  root_wifi_kandeng    NSLocalizedString(@"wifi看灯", nil)
+#define  root_wifi_chenggong_xinxi    NSLocalizedString(@"wifi提示成功信息", nil)
+#define  root_wifi_shibai_xinxi    NSLocalizedString(@"wifi提示失败信息", nil)
+#define  root_wifi_shibai_xinxi_1    NSLocalizedString(@"wifi提示失败信息1", nil)
+#define  root_wifi_shibai_xinxi_2    NSLocalizedString(@"wifi提示失败信息2", nil)
 
 #endif /* languageNew_h */

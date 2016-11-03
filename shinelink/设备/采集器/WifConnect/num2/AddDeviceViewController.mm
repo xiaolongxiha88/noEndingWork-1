@@ -94,7 +94,7 @@ static void *context = NULL;
 
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _scrollView.scrollEnabled=YES;
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,600*NOW_SIZE);
+ 
     [self.view addSubview:_scrollView];
     
 //    UIImageView *pwdBgImageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 85*HEIGHT_SIZE, 300*NOW_SIZE,110*HEIGHT_SIZE+sizeH1 )];
@@ -102,17 +102,17 @@ static void *context = NULL;
 //    pwdBgImageView2.userInteractionEnabled = YES;
 //    [_scrollView addSubview:pwdBgImageView2];
     
-      CGRect fcRect = [root_lianjie_luyouqi boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20 *HEIGHT_SIZE]} context:nil];
+      CGRect fcRect = [root_lianjie_luyouqi boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18 *HEIGHT_SIZE]} context:nil];
           float sizeH1=fcRect.size.height;
     float lableHeigh=40*HEIGHT_SIZE;
       float twoHeigh=5*HEIGHT_SIZE;
     
-    UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE, 300*NOW_SIZE,sizeH1)];
+    UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 10*HEIGHT_SIZE, 320*NOW_SIZE,sizeH1)];
     noticeLable.text=root_lianjie_luyouqi;
     noticeLable.textAlignment=NSTextAlignmentCenter;
     noticeLable.textColor=[UIColor whiteColor];
     noticeLable.numberOfLines=0;
-    noticeLable.font = [UIFont systemFontOfSize:20*HEIGHT_SIZE];
+    noticeLable.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
     [_scrollView addSubview:noticeLable];
     
      UILabel *wifiName=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, sizeH1+twoHeigh*4, 100*NOW_SIZE,lableHeigh )];
@@ -160,10 +160,11 @@ static void *context = NULL;
     [_scrollView addSubview:view2];
     
     _animationView=[[UIView alloc]initWithFrame:CGRectMake(0, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE, SCREEN_Width,200*HEIGHT_SIZE)];
-    [self.view addSubview:_animationView];
+    [_scrollView addSubview:_animationView];
 
+    float animationH=CGRectGetMaxY(_animationView.frame);
     _setButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-   _setButton.frame=CGRectMake(60*NOW_SIZE,395*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+   _setButton.frame=CGRectMake(60*NOW_SIZE,animationH+60*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
 //       [_setButton.layer setCornerRadius:_setButton.bounds.size.width/2];
 //       [_setButton.layer setMasksToBounds:YES];
    [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
@@ -173,6 +174,8 @@ static void *context = NULL;
  [_setButton addTarget:self action:@selector(tapButton:) forControlEvents:UIControlEventTouchUpInside];
    _setButton.selected=NO;
   [_scrollView addSubview:_setButton];
+    
+      _scrollView.contentSize = CGSizeMake(SCREEN_Width,animationH+200*HEIGHT_SIZE);
     
     __block GFWaterView *waterView = [[GFWaterView alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 40*HEIGHT_SIZE, 200*NOW_SIZE, 200*NOW_SIZE)];
     waterView.backgroundColor = [UIColor clearColor];
@@ -199,9 +202,15 @@ static void *context = NULL;
         [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click_2.png") forState:UIControlStateHighlighted];
         [_setButton setTitle:root_stop_config forState:UIControlStateNormal];
         
+        _pswd.userInteractionEnabled=NO;
+        _ipName.userInteractionEnabled=NO;
+
         [self deviceSearchStart];
         
     }else{
+        _pswd.userInteractionEnabled=YES;
+        _ipName.userInteractionEnabled=YES;
+        
         [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
         [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click.png") forState:UIControlStateHighlighted];
         [_setButton setTitle:root_set forState:UIControlStateNormal];
@@ -244,6 +253,8 @@ static void *context = NULL;
             [_timelineConfig stop];
                }
 
+          [self showAlertViewWithTitle:nil message:root_wifi_tiaozhuan_tishi cancelButtonTitle:root_Yes];
+        
         GifConfigViewController *get=[[GifConfigViewController alloc]init];
         [self.navigationController pushViewController:get animated:NO];
         
@@ -300,14 +311,9 @@ static void *context = NULL;
     if (![_deviceArray containsObject:deviceMac]) {
         [_deviceArray addObject:deviceMac];
         int count =(int)[_deviceArray count];
-        NSLog(@"Countt=%d",count);
+       // NSLog(@"Countt=%d",count);
           NSLog(@"cellCount0=%ld",(long)self.cellCount0);
         
-        myAlertView.title=root_Alet_user;
-        
-          myAlertView.message = root_peizhi_shinewifi_peizhi_tishi;
- 
-   
     }
     
 }
@@ -323,51 +329,7 @@ static void *context = NULL;
     [self.pswd resignFirstResponder];
 }
 
--(void)OnSend:(unsigned int)flag SSID:(NSString*)ssidName PSWD:(NSString*)pswd{
-    const char *ssid = [ssidName cStringUsingEncoding:NSASCIIStringEncoding];
-    const char *s_authmode = [authMode cStringUsingEncoding:NSASCIIStringEncoding];
-    int authmode = atoi(s_authmode);
-    const char *password = [pswd cStringUsingEncoding:NSASCIIStringEncoding];
-  //  unsigned char target[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
-    
-    NSLog(@"OnSend: ssid = %s, authmode = %d, password = %s", ssid, authmode, password);
-    if (context)
-    {
-        
-        
-        //////// ////////////////// ////////////////////////////////
-        //////////////////////   ////////////////////////////注销1
-//      elianStop(context);
-//      elianDestroy(context);
-        
-        
-        
-        context = NULL;
-    }
-    
-    //////// ////////////////// ////////////////////////////////
-    //////////////////////   ////////////////////////////注销2
-//    context = elianNew(NULL, 0, target, flag);
-    
-    
-    if (context == NULL)
-    {
-        NSLog(@"OnSend elianNew fail");
-        return;
-    }
-    
-    
-    
-    //////// ////////////////// ////////////////////////////////
-    //////////////////////   ////////////////////////////注销3
-    
-//    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
-//    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
-//    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
-//    elianStart(context);
-    
-   
-}
+
 
 
 //开始查找设备
@@ -381,13 +343,15 @@ static void *context = NULL;
     NSString *ssid = [delegate getWifiName];
     
     
-    if(ssid == nil )
-    {
-     //[self showToastViewWithTitle:@"Please connect to the router first"];
-        
-           [self showAlertViewWithTitle:nil message:root_lianjie_luyouqi cancelButtonTitle:root_Yes];
-        return;
-    }
+    //////// ////////////////// ////////////////////////////////
+    //////////////////////   ////////////////////////////注销0
+    
+//    if(ssid == nil )
+//    {
+//           [self showAlertViewWithTitle:nil message:root_lianjie_luyouqi cancelButtonTitle:root_Yes];
+//        return;
+//    }
+    
 
    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 
@@ -471,16 +435,26 @@ static void *context = NULL;
             
             if ([LostValue intValue]==0) {
                 
-                [myAlertView dismissAnimated:NO];
+                //[myAlertView dismissAnimated:NO];
                 
-                _timer.fireDate=[NSDate distantFuture];
-                  _timer=nil;
+                _setButton.selected = !_setButton.selected;
+                [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
+                [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click.png") forState:UIControlStateHighlighted];
+                [_setButton setTitle:root_set forState:UIControlStateNormal];
                 
+               
                 [self  stopSearch];
                 
                 if ([_timelineConfig isRunning]) {
                     [_timelineConfig stop];
                 }
+                
+                _timeLableString=_firstLableString;
+                NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
+                _timeLable.text=setButtonValue;
+                
+                [self StopTime];
+ 
    [self showAlertViewWithTitle:nil message:root_peizhi_chenggong  cancelButtonTitle:root_Yes];
                 
             }
@@ -495,6 +469,54 @@ static void *context = NULL;
 
 
 
+}
+
+
+
+-(void)OnSend:(unsigned int)flag SSID:(NSString*)ssidName PSWD:(NSString*)pswd{
+    const char *ssid = [ssidName cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *s_authmode = [authMode cStringUsingEncoding:NSASCIIStringEncoding];
+    int authmode = atoi(s_authmode);
+    const char *password = [pswd cStringUsingEncoding:NSASCIIStringEncoding];
+    unsigned char target[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+    
+    NSLog(@"OnSend: ssid = %s, authmode = %d, password = %s", ssid, authmode, password);
+    if (context)
+    {
+        
+        
+        //////// ////////////////// ////////////////////////////////
+        //////////////////////   ////////////////////////////注销1
+//        elianStop(context);
+//        elianDestroy(context);
+        
+        
+        
+        context = NULL;
+    }
+    
+    //////// ////////////////// ////////////////////////////////
+    //////////////////////   ////////////////////////////注销2
+    //context = elianNew(NULL, 0, target, flag);
+    
+    
+    if (context == NULL)
+    {
+        NSLog(@"OnSend elianNew fail");
+        return;
+    }
+    
+    
+    
+    //////// ////////////////// ////////////////////////////////
+    //////////////////////   ////////////////////////////注销3
+    
+//    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
+//    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
+//    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
+//    elianStart(context);
+    
+    
 }
 
 
