@@ -579,5 +579,6 @@
 #define  root_wifi_shibai_xinxi    NSLocalizedString(@"wifi提示失败信息", nil)
 #define  root_wifi_shibai_xinxi_1    NSLocalizedString(@"wifi提示失败信息1", nil)
 #define  root_wifi_shibai_xinxi_2    NSLocalizedString(@"wifi提示失败信息2", nil)
+#define  root_wifi_chongxin_peizhi    NSLocalizedString(@"wifi重新配置", nil)
 
 #endif /* languageNew_h */

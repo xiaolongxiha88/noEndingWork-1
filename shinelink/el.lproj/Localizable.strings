@@ -552,3 +552,4 @@
 "wifi提示失败信息"="If the LED flash as picture B, do as following:";
 "wifi提示失败信息1"="1. Check your router  signal strength.";
 "wifi提示失败信息2"="2. Configuration the Wi-Fi-E again.";
+"wifi重新配置"="Back to reconfigure";

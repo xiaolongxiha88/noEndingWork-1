@@ -71,7 +71,7 @@
      NSString *okName=[NSString stringWithFormat:@"A.%@",root_wifi_lianjie_ok];
     wifiOK.text=okName;
     wifiOK.textAlignment=NSTextAlignmentCenter;
-    wifiOK.textColor=[UIColor whiteColor];
+    wifiOK.textColor=COLOR(149, 226, 98, 1);
     wifiOK.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:wifiOK];
     
@@ -79,7 +79,7 @@
     NSString *failedName=[NSString stringWithFormat:@"B.%@",root_wifi_lianjie_failed];
     wifiFailed.text=failedName;
     wifiFailed.textAlignment=NSTextAlignmentCenter;
-    wifiFailed.textColor=[UIColor whiteColor];
+    wifiFailed.textColor=COLOR(237, 93, 93, 1);
     wifiFailed.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:wifiFailed];
     
@@ -112,8 +112,8 @@
     alertFailed1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [_scrollView addSubview:alertFailed1];
     
-        UIImageView *pwdBgImageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(30*NOW_SIZE, alertOKH+45*HEIGHT_SIZE+sizeH3, 260*NOW_SIZE,60*NOW_SIZE )];
-        pwdBgImageView2.image = IMAGE(@"addDevice.jpg");
+        UIImageView *pwdBgImageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(30*NOW_SIZE, alertOKH+45*HEIGHT_SIZE+sizeH3, 260*NOW_SIZE,260*NOW_SIZE*0.092 )];
+        pwdBgImageView2.image = IMAGE(@"singal.png");
         pwdBgImageView2.userInteractionEnabled = YES;
         [_scrollView addSubview:pwdBgImageView2];
     
@@ -130,7 +130,7 @@
     goBut.frame=CGRectMake(60*NOW_SIZE,imageH+35*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    [goBut setTitle:@"Back to set" forState:UIControlStateNormal];
+    [goBut setTitle:root_wifi_chongxin_peizhi forState:UIControlStateNormal];
     [goBut addTarget:self action:@selector(GoSet) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:goBut];
     
@@ -139,7 +139,7 @@
 }
 
 - (void)GoSet{
-
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

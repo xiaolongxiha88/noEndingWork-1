@@ -48,6 +48,10 @@ static void *context = NULL;
 
 -(void)viewWillDisappear:(BOOL)animated{
     [self stopSearch];
+    if (_timeLable) {
+         _timeLable.text=@"";
+    }
+    
 }
 
 - (void)viewDidLoad {
@@ -159,12 +163,12 @@ static void *context = NULL;
     view2.backgroundColor=[UIColor lightTextColor];
     [_scrollView addSubview:view2];
     
-    _animationView=[[UIView alloc]initWithFrame:CGRectMake(0, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE, SCREEN_Width,200*HEIGHT_SIZE)];
+    _animationView=[[UIView alloc]initWithFrame:CGRectMake(0, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE+60*HEIGHT_SIZE, SCREEN_Width,200*HEIGHT_SIZE)];
     [_scrollView addSubview:_animationView];
 
     float animationH=CGRectGetMaxY(_animationView.frame);
     _setButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-   _setButton.frame=CGRectMake(60*NOW_SIZE,animationH+60*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+   _setButton.frame=CGRectMake(60*NOW_SIZE,sizeH1+twoHeigh*5+lableHeigh*2+25*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
 //       [_setButton.layer setCornerRadius:_setButton.bounds.size.width/2];
 //       [_setButton.layer setMasksToBounds:YES];
    [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
@@ -175,20 +179,20 @@ static void *context = NULL;
    _setButton.selected=NO;
   [_scrollView addSubview:_setButton];
     
-      _scrollView.contentSize = CGSizeMake(SCREEN_Width,animationH+200*HEIGHT_SIZE);
+      _scrollView.contentSize = CGSizeMake(SCREEN_Width,animationH+160*HEIGHT_SIZE);
     
-    __block GFWaterView *waterView = [[GFWaterView alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 40*HEIGHT_SIZE, 200*NOW_SIZE, 200*NOW_SIZE)];
-    waterView.backgroundColor = [UIColor clearColor];
-    [_animationView addSubview:waterView];
+//    __block GFWaterView *waterView = [[GFWaterView alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 40*HEIGHT_SIZE, 200*NOW_SIZE, 200*NOW_SIZE)];
+//    waterView.backgroundColor = [UIColor clearColor];
+//    [_animationView addSubview:waterView];
     
-    _firstLableString=@"3";
+    _firstLableString=@"200";
      _timeLableString=_firstLableString;
-    NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
+   // NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
     self.timeLable = [[UILabel alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 105*HEIGHT_SIZE, 80*NOW_SIZE, 60*HEIGHT_SIZE)];
     self.timeLable.font=[UIFont systemFontOfSize:34*HEIGHT_SIZE];
     self.timeLable.textAlignment = NSTextAlignmentCenter;
     self.timeLable.textColor =[UIColor whiteColor];
-     self.timeLable.text =setButtonValue;
+    // self.timeLable.text =setButtonValue;
     [_animationView addSubview:_timeLable];
     
 }
@@ -216,8 +220,10 @@ static void *context = NULL;
         [_setButton setTitle:root_set forState:UIControlStateNormal];
    
         _timeLableString=_firstLableString;
-        NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
-   _timeLable.text=setButtonValue;
+        
+      //  NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
+        
+ _timeLable.text=@"";
         
                  [self StopTime];
                 [self  stopSearch];
@@ -244,8 +250,8 @@ static void *context = NULL;
         [_setButton setTitle:root_set forState:UIControlStateNormal];
         
         _timeLableString=_firstLableString;
-        NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
-        _timeLable.text=setButtonValue;
+
+      
         
         [self StopTime];
         [self  stopSearch];
@@ -253,6 +259,8 @@ static void *context = NULL;
             [_timelineConfig stop];
                }
 
+          _timeLable.text=@"";
+        
           [self showAlertViewWithTitle:nil message:root_wifi_tiaozhuan_tishi cancelButtonTitle:root_Yes];
         
         GifConfigViewController *get=[[GifConfigViewController alloc]init];
@@ -335,6 +343,19 @@ static void *context = NULL;
 //开始查找设备
 -(void) deviceSearchStart{
     
+    if ([[_pswd text] isEqual:@""]) {
+        _pswd.userInteractionEnabled=YES;
+        _ipName.userInteractionEnabled=YES;
+          _setButton.selected = !_setButton.selected;
+        [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
+        [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click.png") forState:UIControlStateHighlighted];
+        [_setButton setTitle:root_set forState:UIControlStateNormal];
+        
+       [self showAlertViewWithTitle:nil message:root_Enter_your_pwd cancelButtonTitle:root_Yes];
+        return;
+    }
+    
+    
     _deviceArray = nil;
     _deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
     
@@ -346,11 +367,17 @@ static void *context = NULL;
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销0
     
-//    if(ssid == nil )
-//    {
-//           [self showAlertViewWithTitle:nil message:root_lianjie_luyouqi cancelButtonTitle:root_Yes];
-//        return;
-//    }
+    if(ssid == nil )
+    {
+        _pswd.userInteractionEnabled=YES;
+        _ipName.userInteractionEnabled=YES;
+        _setButton.selected = !_setButton.selected;
+        [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
+        [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click.png") forState:UIControlStateHighlighted];
+        [_setButton setTitle:root_set forState:UIControlStateNormal];
+           [self showAlertViewWithTitle:nil message:root_lianjie_luyouqi cancelButtonTitle:root_Yes];
+        return;
+    }
     
 
    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
@@ -435,8 +462,9 @@ static void *context = NULL;
             
             if ([LostValue intValue]==0) {
                 
-                //[myAlertView dismissAnimated:NO];
-                
+           
+                _pswd.userInteractionEnabled=YES;
+                _ipName.userInteractionEnabled=YES;
                 _setButton.selected = !_setButton.selected;
                 [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
                 [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click.png") forState:UIControlStateHighlighted];
@@ -450,8 +478,7 @@ static void *context = NULL;
                 }
                 
                 _timeLableString=_firstLableString;
-                NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
-                _timeLable.text=setButtonValue;
+             _timeLable.text=@"";
                 
                 [self StopTime];
  
@@ -487,8 +514,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销1
-//        elianStop(context);
-//        elianDestroy(context);
+        elianStop(context);
+        elianDestroy(context);
         
         
         
@@ -497,7 +524,7 @@ static void *context = NULL;
     
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销2
-    //context = elianNew(NULL, 0, target, flag);
+  context = elianNew(NULL, 0, target, flag);
     
     
     if (context == NULL)
@@ -511,10 +538,10 @@ static void *context = NULL;
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销3
     
-//    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
-//    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
-//    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
-//    elianStart(context);
+    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
+    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
+    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
+    elianStart(context);
     
     
 }
@@ -574,8 +601,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销4
-//    elianStop(context);
-//     elianDestroy(context);
+    elianStop(context);
+     elianDestroy(context);
         
         
     }
@@ -599,8 +626,8 @@ static void *context = NULL;
            
           //////// ////////////////// ////////////////////////////////
          //////////////////////   ////////////////////////////注销5
-//            elianStop(context);
-//           elianDestroy(context);
+            elianStop(context);
+           elianDestroy(context);
             
             
             context = NULL;

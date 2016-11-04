@@ -479,6 +479,7 @@
 		33E42E0F1DC9CE050024FFBB /* peizhi_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0E1DC9CE050024FFBB /* peizhi_btn.png */; };
 		33E42E171DCB2EE80024FFBB /* connected-ok.gif in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E161DCB2EE80024FFBB /* connected-ok.gif */; };
 		33E42E1B1DCB36BD0024FFBB /* connected-failed.gif in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E1A1DCB36BD0024FFBB /* connected-failed.gif */; };
+		33E42E1F1DCC28840024FFBB /* singal.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E1E1DCC28840024FFBB /* singal.png */; };
 		33ECDCF31CDC9D3400E20AF8 /* deviceCore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33ECDCF11CDC9D3400E20AF8 /* deviceCore.xcdatamodeld */; };
 		33EFB6011C979B5F003F336F /* StationCellectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB5F81C979B5F003F336F /* StationCellectViewController.m */; };
 		33EFB6021C979B5F003F336F /* StationCellectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB5FA1C979B5F003F336F /* StationCellectTableViewCell.m */; };
@@ -1332,6 +1333,7 @@
 		33E42E0E1DC9CE050024FFBB /* peizhi_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn.png; path = ../../peizhi_btn.png; sourceTree = "<group>"; };
 		33E42E161DCB2EE80024FFBB /* connected-ok.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "connected-ok.gif"; sourceTree = "<group>"; };
 		33E42E1A1DCB36BD0024FFBB /* connected-failed.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "connected-failed.gif"; sourceTree = "<group>"; };
+		33E42E1E1DCC28840024FFBB /* singal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = singal.png; sourceTree = "<group>"; };
 		33ECDCF21CDC9D3400E20AF8 /* deviceCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = deviceCore.xcdatamodel; sourceTree = "<group>"; };
 		33EFB5F71C979B5F003F336F /* StationCellectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationCellectViewController.h; sourceTree = "<group>"; };
 		33EFB5F81C979B5F003F336F /* StationCellectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationCellectViewController.m; sourceTree = "<group>"; };
@@ -3233,6 +3235,7 @@
 				338418E61DC9783500D679CA /* GFWaterView.m */,
 				33E42E161DCB2EE80024FFBB /* connected-ok.gif */,
 				33E42E1A1DCB36BD0024FFBB /* connected-failed.gif */,
+				33E42E1E1DCC28840024FFBB /* singal.png */,
 			);
 			path = "采集器";
 			sourceTree = "<group>";
@@ -3644,6 +3647,7 @@
 				33FEFD711C7DB38400324374 /* iconfont-nengyuanlei_press@2x.png in Resources */,
 				3355F25E1C741AC3006DDE5A /* client.png in Resources */,
 				33FEFD751C7DB38400324374 /* iconfont-shouji.png in Resources */,
+				33E42E1F1DCC28840024FFBB /* singal.png in Resources */,
 				338990AD1CEAB58100A708F8 /* bianhao.png in Resources */,
 				337079201D8FD80B00D7DA98 /* Installation-Manual.png in Resources */,
 				336664EE1CB77CD3005573FB /* update@3x.png in Resources */,
