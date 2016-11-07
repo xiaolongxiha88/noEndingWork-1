@@ -21,6 +21,7 @@
 }
 
 @property (strong, nonatomic)  NSString *SnString;
+@property (strong, nonatomic)  NSString *LogType;
 
 @property(nonatomic) NSInteger cellCount0;
 

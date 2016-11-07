@@ -10,7 +10,7 @@
 #import "DeviceManageViewController.h"
 #import "GifConfigViewController.h"
 #import "GFWaterView.h"
-
+#import "loginViewController.h"
 #import "elian.h"
 #import "EasyTimeline.h"
 #import "UdpCheckUtl.h"
@@ -483,6 +483,17 @@ static void *context = NULL;
                 [self StopTime];
  
    [self showAlertViewWithTitle:nil message:root_peizhi_chenggong  cancelButtonTitle:root_Yes];
+                
+                
+                if ([_LogType isEqualToString:@"1"]) {
+                             [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+                     [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+                    loginViewController *goView=[[loginViewController alloc]init];
+                    goView.LogType=@"1";
+                    [self.navigationController pushViewController:goView animated:NO];
+                    
+                }
+                
                 
             }
             

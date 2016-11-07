@@ -77,8 +77,8 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self setTitle:root_ME];
       [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
-    arrayName=@[root_WO_zhiliao_guanli,root_WO_xitong_shezhi,root_WO_xiaoxi_zhongxin,root_wifi_peizhi,root_WO_guanyu];
-    arrayImage=@[@"ziliao.png",@"系统设置.png",@"message.png",@"shinewifi.png",@"关于.png"];
+    arrayName=@[root_WO_zhiliao_guanli,root_WO_xitong_shezhi,root_wifi_peizhi,root_WO_xiaoxi_zhongxin,root_WO_guanyu];
+    arrayImage=@[@"ziliao.png",@"系统设置.png",@"shinewifi.png",@"message.png",@"关于.png"];
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -307,13 +307,13 @@
         [self.navigationController pushViewController:aboutView animated:NO];
     }
     
-    if (indexPath.row==2) {
+    if (indexPath.row==3) {
         MessageCeterTableViewController *aboutView = [[MessageCeterTableViewController alloc]init];
         aboutView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:aboutView animated:NO];
     }
    
-    if (indexPath.row==3) {
+    if (indexPath.row==2) {
         meConfigerViewController *rootView = [[meConfigerViewController alloc]init];
   rootView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:rootView animated:YES];

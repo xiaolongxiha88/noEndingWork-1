@@ -97,9 +97,15 @@
         _userTextField=[[UITextField alloc]init];
         _userTextField.text=reUsername;
         _pwdTextField=[[UITextField alloc]init];
-        _pwdTextField.text=rePassword; 
+        _pwdTextField.text=rePassword;
+        
+        if ([_LogType isEqualToString:@"1"]) {
+                 [self performSelectorOnMainThread:@selector(netServerInit) withObject:nil waitUntilDone:NO];
+        }else{
           [self performSelectorOnMainThread:@selector(netRequest) withObject:nil waitUntilDone:NO];
         //添加布局
+           }
+        
     }
         
     }

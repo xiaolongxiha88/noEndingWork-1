@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title=root_register;
+    self.title=root_CJQ_tianjia;
 //    UIImage *bgImage = IMAGE(@"bg.png");
 //    self.view.layer.contents = (id)bgImage.CGImage;
    // self.title=@"配置设备";
@@ -94,7 +94,7 @@
  
     
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(40*NOW_SIZE,200*HEIGHT_SIZE, 240*NOW_SIZE, 40*HEIGHT_SIZE);
+    goBut.frame=CGRectMake(40*NOW_SIZE,300*HEIGHT_SIZE, 240*NOW_SIZE, 40*HEIGHT_SIZE);
     //[goBut.layer setMasksToBounds:YES];
     //[goBut.layer setCornerRadius:25.0];
      [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
@@ -104,8 +104,8 @@
     [self.view addSubview:goBut];
     
     
-    UIButton *QR=[[UIButton alloc]initWithFrame:CGRectMake(40*NOW_SIZE,300*HEIGHT_SIZE , 240*NOW_SIZE, 60*HEIGHT_SIZE)];
-    [QR setBackgroundImage:IMAGE(@"按钮2.png") forState:0];
+    UIButton *QR=[[UIButton alloc]initWithFrame:CGRectMake(40*NOW_SIZE,180*HEIGHT_SIZE , 240*NOW_SIZE, 40*HEIGHT_SIZE)];
+    [QR setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [QR setTitle:root_erWeiMa forState:UIControlStateNormal];
     QR.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [QR setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -337,10 +337,13 @@
 }
 
 -(void)succeedRegister{
-    /*NSString *user=[_dataDic objectForKey:@"regUserName"];
+    NSString *user=[_dataDic objectForKey:@"regUserName"];
     NSString *pwd=[_dataDic objectForKey:@"regPassword"];
-    [[UserInfo defaultUserInfo] setUserPassword:user];
-    [[UserInfo defaultUserInfo] setUserName:pwd];*/
+    
+        [[UserInfo defaultUserInfo] setUserName:user];
+    [[UserInfo defaultUserInfo] setUserPassword:pwd];
+    
+
     
     NSString *demoName1=@"ShineWIFI";           //新wifi
     NSString *demoName2=@"ShineLan";            //旧wifi
@@ -351,8 +354,9 @@
     BOOL result3 = [_setDeviceName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
     
     if (result1) {
-         [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+
         AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
+        rootView.LogType=@"1";
         rootView.SnString=_cellectId.text;
          rootView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:rootView animated:YES];
@@ -368,7 +372,10 @@
         
     }else{
     
+           [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+        
         loginViewController *goView=[[loginViewController alloc]init];
+        goView.LogType=@"1";
         [self.navigationController pushViewController:goView animated:NO];
     }
 
