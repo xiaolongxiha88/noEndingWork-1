@@ -9,10 +9,12 @@
 #import "manualTableViewController.h"
 #import "manualTableViewCell.h"
 #import "HtmlCommon.h"
+#import "UIImageView+WebCache.h"
 
 @interface manualTableViewController ()
 @property(nonatomic,strong)NSMutableArray *idArray;
 @property(nonatomic,strong)NSMutableArray *titleArray;
+@property(nonatomic,strong)NSMutableArray *imageArray;
 @end
 
 @implementation manualTableViewController
@@ -23,6 +25,7 @@
     self.tableView.backgroundColor=COLOR(228, 235, 245, 1);
     _idArray=[NSMutableArray array];
     _titleArray=[NSMutableArray array];
+    _imageArray=[NSMutableArray array];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -56,6 +59,8 @@
         for (int i=0; i<allDic.count; i++) {
             [_idArray addObject:allDic[i][@"id"]];
             [_titleArray addObject:allDic[i][@"title"]];
+                NSString *picUrl=[NSString stringWithFormat:@"%@/%@",Head_Url_more,allDic[i][@"imgurl"]];
+                 [_imageArray addObject:picUrl];
         }
         
         if (_idArray.count==allDic.count) {
@@ -116,6 +121,12 @@
     
   cell.LableView.text=LableNum;
     
+    
+    NSURL* imagePath = [NSURL URLWithString:_imageArray[indexPath.row]];
+    
+    [cell.contentImage sd_setImageWithURL:imagePath placeholderImage:[UIImage imageNamed:@"pic_service.png"]];
+    
+    
     return cell;
    
 }
@@ -141,7 +152,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 120*HEIGHT_SIZE;
+    return SCREEN_Width*0.448;
     
 }
 

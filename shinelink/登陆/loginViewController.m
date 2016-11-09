@@ -429,6 +429,7 @@ NSLog(@"体验馆");
     }
 }
 
+
 -(void)netRequest{
 
     [self showProgressView];
@@ -646,11 +647,12 @@ NSLog(@"体验馆");
         Vc4.tabBarItem.image=[UIImage imageNamed:@"mine@2x.png"];
         Vc4.tabBarItem.selectedImage=[[UIImage imageNamed:@"mine2@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
-        //Vc1.tabBarController.tabBar.selectedImageTintColor = MainColor;
+        //Vc1.tabBarController.tabBar.tintColor = MainColor;
         
         NSArray *controllers=[NSArray arrayWithObjects:Vc1,Vc2,Vc3,Vc4,nil];
         _tabbar=[[UITabBarController alloc]init];
         _tabbar.viewControllers=controllers;
+        
 
         [self presentViewController:_tabbar animated:YES completion:nil];
     }

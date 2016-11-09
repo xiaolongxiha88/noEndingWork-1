@@ -482,18 +482,22 @@ static void *context = NULL;
                 
                 [self StopTime];
  
-   [self showAlertViewWithTitle:nil message:root_peizhi_chenggong  cancelButtonTitle:root_Yes];
+
                 
                 
                 if ([_LogType isEqualToString:@"1"]) {
-                             [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+                             [self showAlertViewWithTitle:root_peizhi_chenggong message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
                      [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
                     loginViewController *goView=[[loginViewController alloc]init];
                     goView.LogType=@"1";
                     [self.navigationController pushViewController:goView animated:NO];
                     
+                }else{
+                
+                  [self showAlertViewWithTitle:root_peizhi_chenggong message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
                 }
                 
+              
                 
             }
             

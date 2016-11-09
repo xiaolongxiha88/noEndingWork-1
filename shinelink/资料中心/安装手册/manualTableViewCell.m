@@ -14,13 +14,13 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.backgroundColor = [UIColor clearColor];
         
-        _contentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width, 110*HEIGHT_SIZE)];
-        _contentImage.image = IMAGE(@"manual_bg.jpg");
+        _contentImage = [[UIImageView alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width, SCREEN_Width*0.448)];
+       // _contentImage.image = IMAGE(@"manual_bg.jpg");
         [self.contentView addSubview:_contentImage];
         
         
         
-        UIView *topView=[[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 50*HEIGHT_SIZE, SCREEN_Width, 40*HEIGHT_SIZE)];
+        UIView *topView=[[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 70*HEIGHT_SIZE, SCREEN_Width, 40*HEIGHT_SIZE)];
         topView.backgroundColor=COLOR(17, 183, 243, 0.8);
          [self.contentView addSubview:topView];
         
@@ -48,7 +48,7 @@
         [topView addSubview:_CellName];
         
         
-        UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(0, 110*HEIGHT_SIZE-2*HEIGHT_SIZE, SCREEN_Width, 1*HEIGHT_SIZE)];
+        UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_Width*0.448-4*HEIGHT_SIZE, SCREEN_Width, 4*HEIGHT_SIZE)];
         [view1 setBackgroundColor:COLOR(164, 171, 174, 1)];
         [self.contentView addSubview:view1];
         
