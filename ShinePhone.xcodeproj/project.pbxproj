@@ -76,7 +76,6 @@
 		334B8F211C91250300798A69 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F1A1C91250300798A69 /* PopoverView.m */; };
 		334B8F221C91250300798A69 /* SHLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F1E1C91250300798A69 /* SHLineGraphView.m */; };
 		334B8F231C91250300798A69 /* SHPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F201C91250300798A69 /* SHPlot.m */; };
-		334B8F261C91281600798A69 /* Line4View.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F251C91281600798A69 /* Line4View.m */; };
 		334B8F491C914A6D00798A69 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 334B8F281C914A6D00798A69 /* LICENSE */; };
 		334B8F4A1C914A6D00798A69 /* PNBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F2B1C914A6D00798A69 /* PNBar.m */; };
 		334B8F4B1C914A6D00798A69 /* PNBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F2D1C914A6D00798A69 /* PNBarChart.m */; };
@@ -692,8 +691,6 @@
 		334B8F1E1C91250300798A69 /* SHLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLineGraphView.m; sourceTree = "<group>"; };
 		334B8F1F1C91250300798A69 /* SHPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHPlot.h; sourceTree = "<group>"; };
 		334B8F201C91250300798A69 /* SHPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHPlot.m; sourceTree = "<group>"; };
-		334B8F241C91281600798A69 /* Line4View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Line4View.h; path = ../../../Line4View.h; sourceTree = "<group>"; };
-		334B8F251C91281600798A69 /* Line4View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Line4View.m; path = ../../../Line4View.m; sourceTree = "<group>"; };
 		334B8F281C914A6D00798A69 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		334B8F2A1C914A6D00798A69 /* PNBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBar.h; sourceTree = "<group>"; };
 		334B8F2B1C914A6D00798A69 /* PNBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNBar.m; sourceTree = "<group>"; };
@@ -2323,8 +2320,6 @@
 				3348B6621CC0E8710016AB26 /* 修改前 */,
 				336664F11CB784EC005573FB /* EquipGraphViewController.h */,
 				336664F21CB784EC005573FB /* EquipGraphViewController.m */,
-				334B8F241C91281600798A69 /* Line4View.h */,
-				334B8F251C91281600798A69 /* Line4View.m */,
 				336664F41CB784F6005573FB /* EditGraphView.h */,
 				336664F51CB784F6005573FB /* EditGraphView.m */,
 				336664F71CB78517005573FB /* Line2View.h */,
@@ -3931,7 +3926,6 @@
 				334720E11C8E7048006388C8 /* energyTableViewCell.m in Sources */,
 				3370794D1D92176600D7DA98 /* manualTableViewController.m in Sources */,
 				335456B61C852E6200275478 /* AddCellectViewController.m in Sources */,
-				334B8F261C91281600798A69 /* Line4View.m in Sources */,
 				334B8F531C914A6D00798A69 /* PNPieChart.m in Sources */,
 				336664F91CB78517005573FB /* Line2View.m in Sources */,
 				338418E71DC9783500D679CA /* GFWaterView.m in Sources */,

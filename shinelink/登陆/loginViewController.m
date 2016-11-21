@@ -432,6 +432,10 @@ NSLog(@"体验馆");
 
 -(void)netRequest{
 
+    NSString *Username=[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
+    [BaseRequest getAppError:@"test" useName:Username];
+    
+    
     [self showProgressView];
     [BaseRequest requestWithMethod:HEAD_URL paramars:@{@"userName":_userTextField.text, @"password":[self MD5:_pwdTextField.text]} paramarsSite:@"/newLoginAPI.do" sucessBlock:^(id content) {
      [self hideProgressView];
@@ -460,14 +464,15 @@ NSLog(@"体验馆");
                 
             } else {
                 
+                
                 //[content[@"success"] integerValue]
                  // [[NSUserDefaults standardUserDefaults] setObject:nowLanguage forKey:@"demoValue"];
               
                 _adNumber=content[@"app_code"];
                 
-                NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-                
               
+                
+                NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
                 
                 NSString *reUsername=[ud objectForKey:@"userName"];
                

@@ -977,6 +977,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                          [_dict[string] isEqualToString:root_PV1_ELEC_CURRENT]||
                          [_dict[string] isEqualToString:root_PV2_ELEC_CURRENT]){
                     _line2View.unitLabel.text=root_Electron_flow;
+                }else if([_dict[string] isEqualToString:root_dianchi]||
+                         [_dict[string] isEqualToString:root_dianchi]||
+                         [_dict[string] isEqualToString:root_dianchi]){
+                    _line2View.unitLabel.text=root_dianchi;
                 }else{
                     _line2View.unitLabel.text=root_Powre;
                 }

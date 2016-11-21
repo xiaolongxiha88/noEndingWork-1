@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #import "UIImageView+AFNetworking.h"
 #import "UIKit+AFNetworking.h"
+#import "sys/utsname.h"
 
 @implementation BaseRequest
 + (void)requestWithMethod:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
@@ -133,6 +134,47 @@
     }];
     
 }
+
+
++(void)getAppError:(NSString*)msg useName:(NSString*)useName{
+
+    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    
+    NSString *SystemType=@"SystemType:2";
+    NSString *version=[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString *AppVersion=[NSString stringWithFormat:@"AppVersion:%@",version];
+    NSString* phoneVersion = [[UIDevice currentDevice] systemVersion];
+    NSString *SystemVersion=[NSString stringWithFormat:@"SystemVersion:%@",phoneVersion];
+    
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    NSString *platform = [NSString stringWithCString:systemInfo.machine encoding:NSASCIIStringEncoding];
+    NSString *PhoneModel=[NSString stringWithFormat:@"PhoneModel:%@",platform];
+  //  NSString *reUsername=[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
+    NSString *UserName=[NSString stringWithFormat:@"UserName:%@",useName];
+    NSString *MSG=[NSString stringWithFormat:@"msg:%@",msg];
+    
+    NSString *errorMsg=[NSString stringWithFormat:@"%@;%@;%@;%@;%@;%@",SystemType,AppVersion,SystemVersion,PhoneModel,UserName,MSG];
+    
+    NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:@"time",dateString, @"msg",errorMsg, nil];
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:dic paramarsSite:@"/newLoginAPI.do?op=saveAppErrorMsg" sucessBlock:^(id content) {
+        NSLog(@"saveAppErrorMsg: %@", content);
+               id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        if (jsonObj) {
+          
+        }
+        
+    } failure:^(NSError *error) {
+    
+    }
+     
+     ];
+    
+}
+
 
 
 @end

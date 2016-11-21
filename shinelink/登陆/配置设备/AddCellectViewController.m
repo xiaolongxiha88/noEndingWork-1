@@ -272,8 +272,22 @@
              [BaseRequest requestWithMethod:HEAD_URL paramars:_dataDic paramarsSite:@"/newRegisterAPI.do?op=creatAccount" sucessBlock:^(id content) {
                  NSLog(@"creatAccount: %@", content);
                  [self hideProgressView];
+                 
+                 
+                 if ([[_dataDic objectForKey:@"regCountry"] isEqualToString:@"China"]) {
+                     [self showAlertViewWithTitle:nil message:root_fuwuqi_cuowu_tishi_2 cancelButtonTitle:root_Yes];
+                 }else{
+                     [self showAlertViewWithTitle:nil message:root_fuwuqi_cuowu_tishi cancelButtonTitle:root_Yes];
+                 }
+                 
+                 NSString *errorMsg=[NSString stringWithFormat:@"RegisterError%@",content[@"msg"]];
+                 [BaseRequest getAppError:errorMsg useName:[_dataDic objectForKey:@"regUserName"]];
+                  [self showAlertViewWithTitle:nil message:root_caijiqi_cuowu_tishi cancelButtonTitle:root_Yes];
+             
+                 
                  if (content) {
                      if ([content[@"success"] integerValue] == 0) {
+ 
                          //注册失败
                          if ([content[@"msg"] isEqual:@"501"]) {
                              [self showAlertViewWithTitle:nil message:root_chaoChu_shuLiang cancelButtonTitle:root_Yes];
@@ -296,9 +310,20 @@
                          }else if ([content[@"msg"] isEqual:@"605"]){
                              
                              [self showAlertViewWithTitle:nil message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
-                         }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]){
+                         }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]||[content[@"msg"] isEqual:@"608"]||[content[@"msg"] isEqual:@"609"]||[content[@"msg"] isEqual:@"602"]||[content[@"msg"] isEqual:@"502"]){
                              
-                             [self showAlertViewWithTitle:nil message:root_fuwuqi_bu_pipei cancelButtonTitle:root_Yes];
+                             if ([[_dataDic objectForKey:@"regCountry"] isEqualToString:@"China"]) {
+                                 [self showAlertViewWithTitle:nil message:root_fuwuqi_cuowu_tishi_2 cancelButtonTitle:root_Yes];
+                             }else{
+                              [self showAlertViewWithTitle:nil message:root_fuwuqi_cuowu_tishi cancelButtonTitle:root_Yes];
+                             }
+                             
+                             NSString *errorMsg=[NSString stringWithFormat:@"RegisterError%@",content[@"msg"]];
+                             [BaseRequest getAppError:errorMsg useName:[_dataDic objectForKey:@"regUserName"]];
+                             
+                         }else if ([content[@"msg"] isEqual:@"701"]){
+                             
+                             [self showAlertViewWithTitle:nil message:root_caijiqi_cuowu_tishi cancelButtonTitle:root_Yes];
                          }
                          
                          

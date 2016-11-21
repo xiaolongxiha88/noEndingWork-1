@@ -140,7 +140,7 @@
                           @"monthSite":@"/newInverterAPI.do?op=getMonthPac",
                           @"yearSite":@"/newInverterAPI.do?op=getYearPac",
                           @"allSite":@"/newInverterAPI.do?op=getTotalPac"};
-    equipGraph.dict=@{@"1":root_PV_POWER, @"2":root_PV1_VOLTAGE, @"3":root_PV1_ELEC_CURRENT, @"4":root_PV2_VOLTAGE, @"5":root_PV2_ELEC_CURRENT, @"6":root_R_PHASE_POWER, @"7":root_S_PHASE_POWER, @"8":root_T_PHASE_POWER};
+    equipGraph.dict=@{@"1":root_PV_POWER,@"9":root_shuchu_gonglv,  @"2":root_PV1_VOLTAGE, @"3":root_PV1_ELEC_CURRENT, @"4":root_PV2_VOLTAGE, @"5":root_PV2_ELEC_CURRENT, @"6":root_R_PHASE_POWER, @"7":root_S_PHASE_POWER, @"8":root_T_PHASE_POWER};
     [self.navigationController pushViewController:equipGraph animated:YES];
     
 }

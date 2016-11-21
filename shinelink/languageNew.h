@@ -318,6 +318,7 @@
 #define root_T_PHASE_POWER       NSLocalizedString(@"T-PHASE POWER", @"T-PHASE POWER")
 #define root_POWER       NSLocalizedString(@"POWER", @"POWER")
 #define root_Energy       NSLocalizedString(@"Energy", @"Energy")
+#define root_shuchu_gonglv       NSLocalizedString(@"1输出功率", nil)
 
 //详情（储能机）
 #define root_CHARGING_POWER       NSLocalizedString(@"CHARGING POWER", @"CHARGING POWER")
@@ -580,5 +581,10 @@
 #define  root_wifi_shibai_xinxi_1    NSLocalizedString(@"wifi提示失败信息1", nil)
 #define  root_wifi_shibai_xinxi_2    NSLocalizedString(@"wifi提示失败信息2", nil)
 #define  root_wifi_chongxin_peizhi    NSLocalizedString(@"wifi重新配置", nil)
+
+#define  root_fuwuqi_cuowu_tishi    NSLocalizedString(@"2服务器错误提示", nil)
+#define  root_fuwuqi_cuowu_tishi_2    NSLocalizedString(@"4服务器错误提示2", nil)
+
+#define  root_caijiqi_cuowu_tishi    NSLocalizedString(@"3采集器10位提示", nil)
 
 #endif /* languageNew_h */
