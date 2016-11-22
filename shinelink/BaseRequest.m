@@ -142,6 +142,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    NSString *dataString1=[NSString stringWithString:dateString];
     
     NSString *SystemType=@"SystemType:2";
     NSString *version=[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
@@ -159,8 +160,11 @@
     
     NSString *errorMsg=[NSString stringWithFormat:@"%@;%@;%@;%@;%@;%@",SystemType,AppVersion,SystemVersion,PhoneModel,UserName,MSG];
     
-    NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:@"time",dateString, @"msg",errorMsg, nil];
-    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:dic paramarsSite:@"/newLoginAPI.do?op=saveAppErrorMsg" sucessBlock:^(id content) {
+    
+    NSMutableDictionary *dicO=[NSMutableDictionary new];
+    [dicO setObject:dataString1 forKey:@"time"];
+    [dicO setObject:errorMsg forKey:@"msg"];
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:dicO paramarsSite:@"/newLoginAPI.do?op=saveAppErrorMsg" sucessBlock:^(id content) {
         NSLog(@"saveAppErrorMsg: %@", content);
                id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         if (jsonObj) {
