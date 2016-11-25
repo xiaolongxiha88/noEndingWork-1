@@ -273,6 +273,8 @@
                  NSLog(@"creatAccount: %@", content);
                  [self hideProgressView];
                  
+ 
+                 
                  if (content) {
                      if ([content[@"success"] integerValue] == 0) {
  
@@ -286,35 +288,36 @@
 //                         }
                          //注册失败
                          if ([content[@"msg"] isEqual:@"501"]) {
-                             [self showAlertViewWithTitle:nil message:root_chaoChu_shuLiang cancelButtonTitle:root_Yes];
+                             [self showAlertViewWithTitle:root_zhuce_shibai message:root_chaoChu_shuLiang cancelButtonTitle:root_Yes];
                          }else if ([content[@"msg"] isEqual:@"506"]){
                              
-                             [self showAlertViewWithTitle:nil message:root_caijiqi_cuowu cancelButtonTitle:root_Yes];
+                             [self showAlertViewWithTitle:root_zhuce_shibai message:root_caijiqi_cuowu cancelButtonTitle:root_Yes];
                          }else if ([content[@"msg"] isEqual:@"503"]){
                              
-                             [self showAlertViewWithTitle:nil message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
+                             [self showAlertViewWithTitle:root_zhuce_shibai message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
                              [self.navigationController popViewControllerAnimated:NO];
                          }else if ([content[@"msg"] isEqual:@"604"]){
                              
-                             [self showAlertViewWithTitle:nil message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
+                             [self showAlertViewWithTitle:root_zhuce_shibai message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
                              [self.navigationController popViewControllerAnimated:NO];
                          }else if ([content[@"msg"] isEqual:@"605"]){
                              
-                             [self showAlertViewWithTitle:nil message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
+                             [self showAlertViewWithTitle:root_zhuce_shibai message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
                          }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]||[content[@"msg"] isEqual:@"608"]||[content[@"msg"] isEqual:@"609"]||[content[@"msg"] isEqual:@"602"]||[content[@"msg"] isEqual:@"502"]||[content[@"msg"] isEqual:@"603"]){
                              
+                             NSString *failName=[NSString stringWithFormat:@"%@(%@)",root_zhuce_shibai,content[@"msg"]];
                              if ([[_dataDic objectForKey:@"regCountry"] isEqualToString:@"China"]) {
-                                 [self showAlertViewWithTitle:nil message:root_fuwuqi_cuowu_tishi_2 cancelButtonTitle:root_Yes];
+                                 
+                                 [self showAlertViewWithTitle:failName message:root_fuwuqi_cuowu_tishi_2 cancelButtonTitle:root_Yes];
                              }else{
-                              [self showAlertViewWithTitle:nil message:root_fuwuqi_cuowu_tishi cancelButtonTitle:root_Yes];
+                              [self showAlertViewWithTitle:failName message:root_fuwuqi_cuowu_tishi cancelButtonTitle:root_Yes];
                              }
                              
-                             NSString *errorMsg=[NSString stringWithFormat:@"RegisterError%@",content[@"msg"]];
-                             [BaseRequest getAppError:errorMsg useName:[_dataDic objectForKey:@"regUserName"]];
+                             [BaseRequest getAppError:failName useName:[_dataDic objectForKey:@"regUserName"]];
                              
                          }else if ([content[@"msg"] isEqual:@"701"]){
                              
-                             [self showAlertViewWithTitle:nil message:root_caijiqi_cuowu_tishi cancelButtonTitle:root_Yes];
+                             [self showAlertViewWithTitle:root_zhuce_shibai message:root_caijiqi_cuowu_tishi cancelButtonTitle:root_Yes];
                          }else{
                          
                              NSString *errorMsg=[NSString stringWithFormat:@"RegisterError%@",content[@"msg"]];

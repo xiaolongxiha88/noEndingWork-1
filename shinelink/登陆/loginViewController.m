@@ -432,8 +432,8 @@ NSLog(@"体验馆");
 
 -(void)netRequest{
 
-    NSString *Username=[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
-    [BaseRequest getAppError:@"test" useName:Username];
+//    NSString *Username=[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
+//    [BaseRequest getAppError:@"test" useName:Username];
     
     
     [self showProgressView];

@@ -364,10 +364,59 @@
     UITouch *touch = [touches anyObject];
     CGPoint touchPoint = [touch locationInView:self];
     UIView *subview = [self hitTest:touchPoint withEvent:nil];
-
+    
+    [self getLable:subview];
+    
     if ([subview isKindOfClass:[PNBar class]] && [self.delegate respondsToSelector:@selector(userClickedOnBarAtIndex:)]) {
         [self.delegate userClickedOnBarAtIndex:subview.tag];
     }
+    
+}
+
+-(void)getLable:(UIView*)subview{
+    
+    NSString *lableY1;
+    if (subview.tag<_yValues.count) {
+        lableY1=[NSString stringWithFormat:@"%@",_yValues[subview.tag]];
+    }
+   
+    float lableY11=[lableY1 floatValue];
+    NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
+   float maxY=[[NSString stringWithFormat:@"%@",maxY1] floatValue];
+    
+    NSString *lableY=[NSString stringWithFormat:@"%.1f",lableY11];
+    float lableXX=subview.frame.origin.x;
+    float lableYY=subview.frame.origin.y;
+    float lableWW=subview.frame.size.width;
+    
+    float lableGetY1=CGRectGetMaxY(subview.frame);
+     float lableGetY=(lableGetY1-lableYY)*(maxY-lableY11)/maxY+lableYY;
+    
+    long getTag=3000+subview.tag;
+    PNChartLabel *oldLable=(PNChartLabel*)[self viewWithTag:getTag];
+    UILabel* XLable=_xChartLabels[0];
+    float xLableSize=CGRectGetMaxY(XLable.frame);
+    
+    if ((lableGetY>xLableSize)||(lableGetY*1.5<lableWW)){
+        
+    }else{
+    if (oldLable) {
+        [oldLable removeFromSuperview];
+        oldLable=nil;
+    }else{
+    PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake(lableXX-10*NOW_SIZE,
+                                                                          lableGetY-10*HEIGHT_SIZE,
+                                                                          lableWW+20*NOW_SIZE,
+                                                                          10*HEIGHT_SIZE)];
+    label.font = _labelFont;
+    label.textColor = _labelTextColor;
+    [label setTextAlignment:NSTextAlignmentCenter];
+    label.text = lableY;
+    label.tag=3000+subview.tag;
+    [self addSubview:label];
+    }
+    }
+    
 }
 
 

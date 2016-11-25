@@ -372,6 +372,7 @@
     self.barChartView.delegate = self;
     
     [self addSubview:self.barChartView];
+    
 }
 
 -(int)changeLineY:(int)sender{

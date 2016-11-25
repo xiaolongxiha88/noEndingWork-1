@@ -29,6 +29,7 @@
 #define  root_kongzhi_mima      NSLocalizedString(@"控制密码", nil)
 #define  root_back      NSLocalizedString(@"返回", nil)
 #define  root_stop_config      NSLocalizedString(@"停止配置", nil)
+#define  root_zhuce_shibai      NSLocalizedString(@"5注册失败", nil)
 
 #define  root_tuichu_zhanghu     NSLocalizedString(@"是否退出当前账户", nil)
 //登陆
