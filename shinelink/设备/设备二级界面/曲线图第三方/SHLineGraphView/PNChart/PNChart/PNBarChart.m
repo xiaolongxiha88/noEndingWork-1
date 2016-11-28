@@ -14,6 +14,9 @@
 @interface PNBarChart () {
     NSMutableArray *_xChartLabels;
     NSMutableArray *_yChartLabels;
+    
+        UIView * xDirectrix;
+      UIView * yDirectriy;
 }
 
 - (UIColor *)barColorAtIndex:(NSUInteger)index;
@@ -62,6 +65,20 @@
     _showChartBorder     = NO;
     _yChartLabelWidth    = 18;
     _rotateForXAxisText  = false;
+    
+    xDirectrix = [[UIView alloc] initWithFrame:CGRectZero];
+    xDirectrix.hidden = YES;
+    xDirectrix.backgroundColor = [UIColor whiteColor];
+    xDirectrix.alpha = .5f;
+    [self addSubview:xDirectrix];
+    
+     yDirectriy = [[UIView alloc] initWithFrame:CGRectZero];
+     yDirectriy.hidden = YES;
+     yDirectriy.backgroundColor = [UIColor whiteColor];
+     yDirectriy.alpha = .5f;
+    [self addSubview: yDirectriy];
+   
+    
 }
 
 - (void)setYValues:(NSArray *)yValues
@@ -353,9 +370,68 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self touchPoint:touches withEvent:event];
+   // [self touchPoint:touches withEvent:event];
+    
+  
+    
+    
     [super touchesBegan:touches withEvent:event];
+    
+       UITouch *touch = [touches anyObject];
+        CGPoint touchPoint = [touch locationInView:self];
+      NSInteger i = (touchPoint.x - _chartMargin)/_xLabelWidth;
+    
+    if (i<_xLabels.count) {
+        float xDirX=_chartMargin+(i+1)*_xLabelWidth-_xLabelWidth/2;
+        
+        float xDirY1=[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue];
+        NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
+        float maxY=[[NSString stringWithFormat:@"%@",maxY1] floatValue];
+        float xDirY2=self.frame.size.height - _chartMargin*2- kXLabelHeight;
+        
+        float lableGetY=xDirY2*(maxY-xDirY1)/maxY;
+        
+        //self.frame.size.height - _chartMargin
+        //  UIView *subview = [self hitTest:touchPoint withEvent:nil];
+        
+        xDirectrix.frame = CGRectMake(xDirX, _chartMargin,1*NOW_SIZE, self.frame.size.height - kXLabelHeight - _chartMargin*2);
+        xDirectrix.hidden = NO;
+        [self bringSubviewToFront:xDirectrix];
+        
+        yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
+        yDirectriy.hidden = NO;
+        [self bringSubviewToFront: yDirectriy];
+    }
+   
+    
 }
+
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self];
+   // UIView *subview = [self hitTest:touchPoint withEvent:nil];
+
+    NSInteger i = (touchPoint.x - _chartMargin)/_xLabelWidth;
+    if (i<_xLabels.count) {
+        float xDirX=_chartMargin+(i+1)*_xLabelWidth-_xLabelWidth/2;
+        
+        xDirectrix.frame = CGRectMake(xDirX, _chartMargin,1, self.frame.size.height - kXLabelHeight - _chartMargin*2);
+        
+        float xDirY1=[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue];
+        NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
+        float maxY=[[NSString stringWithFormat:@"%@",maxY1] floatValue];
+        float xDirY2=self.frame.size.height - _chartMargin*2- kXLabelHeight;
+        float lableGetY=xDirY2*(maxY-xDirY1)/maxY;
+        yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
+        yDirectriy.hidden = NO;
+        [self bringSubviewToFront: yDirectriy];
+    }
+
+    
+}
+
 
 
 - (void)touchPoint:(NSSet *)touches withEvent:(UIEvent *)event
@@ -365,13 +441,18 @@
     CGPoint touchPoint = [touch locationInView:self];
     UIView *subview = [self hitTest:touchPoint withEvent:nil];
     
-    [self getLable:subview];
+    xDirectrix.frame = CGRectMake(subview.frame.origin.x, 0,1, self.frame.size.height - kXLabelHeight - _chartMargin);
+    
+   // [self getLable:subview];
     
     if ([subview isKindOfClass:[PNBar class]] && [self.delegate respondsToSelector:@selector(userClickedOnBarAtIndex:)]) {
         [self.delegate userClickedOnBarAtIndex:subview.tag];
     }
     
 }
+
+
+
 
 -(void)getLable:(UIView*)subview{
     
