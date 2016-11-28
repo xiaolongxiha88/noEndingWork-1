@@ -286,6 +286,8 @@
         }
         
         self.lineChartView.xAxisValues = tempXArr;
+        self.lineChartView.dirLableValuesX=[NSArray arrayWithArray:_xArray];
+        self.lineChartView.dirLableValuesY=[NSArray arrayWithArray:_valuesArray];
         
         self.lineChartPlot = [[SHPlot alloc] init];
         if ([_frameType isEqualToString:@"1"]) {
@@ -374,6 +376,7 @@
             }
             
             self.lineChartPlot.plottingValues = tempValuesArray;
+                 
             self.lineChartPlot.plottingPointsLabels = _valuesArray;
             
             [self.lineChartView addPlot:self.lineChartPlot];
@@ -444,6 +447,7 @@
         [self.barChartView setXLabels:_xArray];
     }
     
+       self.barChartView.xValues=[NSArray arrayWithArray:_xArray];
     [self.barChartView setYValues:_valuesArray];
     [self.barChartView strokeChart];
     

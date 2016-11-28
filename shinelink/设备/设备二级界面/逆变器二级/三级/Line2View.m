@@ -209,7 +209,9 @@
         }
         
         self.lineChartView.xAxisValues = tempXArr;
-  
+        self.lineChartView.dirLableValuesX=[NSArray arrayWithArray:_xArray];
+          self.lineChartView.dirLableValuesY=[NSArray arrayWithArray:_valuesArray];
+        
         self.lineChartPlot = [[SHPlot alloc] init];
         if ([_frameType isEqualToString:@"1"]) {
         NSDictionary *_plotThemeAttributes = @{
@@ -361,8 +363,10 @@
                 [tempArr addObject:@""];
             }
         }
+        self.barChartView.xValues=[NSArray arrayWithArray:_xArray];
         [self.barChartView setXLabels:tempArr];
     } else {
+         self.barChartView.xValues=[NSArray arrayWithArray:_xArray];
         [self.barChartView setXLabels:_xArray];
     }
     

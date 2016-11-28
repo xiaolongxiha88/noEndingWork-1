@@ -48,6 +48,12 @@
 @implementation SHLineGraphView
 {
     float _leftMarginToLeave;
+    SHPlot *SHPlotValue;
+    
+    UIView * xDirectrix;
+    UIView * yDirectriy;
+    UILabel* xyLableValue;
+    float DirectriLableH;
 }
 
 
@@ -174,6 +180,8 @@
 #pragma mark - Actual Plot Drawing Methods
 
 - (void)drawPlotWithPlot:(SHPlot *)plot {
+    [self getDirct];
+    
     //draw y-axis labels. this has to be done first, so that we can determine the left margin to leave according to the
     //y-axis lables.
     [self drawYLabels:plot];
@@ -189,6 +197,32 @@
      */
     [self drawPlot:plot];
 }
+
+-(void)getDirct{
+    xDirectrix = [[UIView alloc] initWithFrame:CGRectZero];
+    xDirectrix.hidden = YES;
+    xDirectrix.backgroundColor = [UIColor whiteColor];
+    xDirectrix.alpha = .5f;
+    [self addSubview:xDirectrix];
+    
+    yDirectriy = [[UIView alloc] initWithFrame:CGRectZero];
+    yDirectriy.hidden = YES;
+    yDirectriy.backgroundColor = [UIColor whiteColor];
+    yDirectriy.alpha = .5f;
+    [self addSubview: yDirectriy];
+    
+    DirectriLableH=20*HEIGHT_SIZE;
+    
+    xyLableValue=[[UILabel alloc]initWithFrame:CGRectMake(160*NOW_SIZE, 0*HEIGHT_SIZE, 160*NOW_SIZE, DirectriLableH)];
+    xyLableValue.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    xyLableValue.textColor = [UIColor whiteColor];
+    [xyLableValue setTextAlignment:NSTextAlignmentCenter];
+    [self addSubview:xyLableValue];
+    
+
+
+}
+
 
 - (int)getIndexForValue:(NSNumber *)value forPlot:(SHPlot *)plot {
     for(int i=0; i< _xAxisValues.count; i++) {
@@ -209,6 +243,8 @@
 }
 
 - (void)drawPlot:(SHPlot *)plot {
+    
+    SHPlotValue=plot;
     
     NSDictionary *theme = plot.plotThemeAttributes;
     
@@ -264,13 +300,14 @@
         double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
         (plot.xPoints[xIndex]).x = ceil((plot.xPoints[xIndex]).x);
         (plot.xPoints[xIndex]).y = ceil(y);
+        
     }];
     
     //move to initial point for path and background.
     CGPathMoveToPoint(graphPath, NULL, _leftMarginToLeave, plot.xPoints[0].y);
     CGPathMoveToPoint(backgroundPath, NULL, _leftMarginToLeave, plot.xPoints[0].y);
     
-    int count = _xAxisValues.count;
+    int count = (int)_xAxisValues.count;
     for(int i=0; i< count; i++){
         CGPoint point = plot.xPoints[i];
         CGPathAddLineToPoint(graphPath, NULL, point.x, point.y);
@@ -323,7 +360,7 @@
 }
 
 - (void)drawXLabels:(SHPlot *)plot {
-    int xIntervalCount = _xAxisValues.count;
+    int xIntervalCount =(int) _xAxisValues.count;
     double xIntervalInPx = PLOT_WIDTH / _xAxisValues.count;
     NSMutableArray *lableName=[NSMutableArray array];
     //initialize actual x points values where the circle will be
@@ -463,6 +500,170 @@
         NSLog(@"plotting label is not available for this point");
     }
 }
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self];
+    
+      //  int count = (int)_xAxisValues.count;
+   
+    
+    double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
+    double yIntervalValue = yRange / INTERVAL_COUNT;
+     int ShCount=(int)SHPlotValue.plottingValues.count;
+    
+    [SHPlotValue.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        
+        __block NSNumber *_key = nil;
+        __block NSNumber *_value = nil;
+        
+        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            _key = (NSNumber *)key;
+            _value = (NSNumber *)obj;
+        }];
+        
+        int xIndex = [self getIndexForValue:_key forPlot:SHPlotValue];
+        
+        //x value
+        double height = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE;
+        double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
+        (SHPlotValue.xPoints[xIndex]).x = ceil((SHPlotValue.xPoints[xIndex]).x);
+        (SHPlotValue.xPoints[xIndex]).y = ceil(y);
+        
+    }];
+    
+    int dirInt=0;
+   
+    for (int k=0; k<ShCount; k++) {
+        
+        float plotX1=(SHPlotValue.xPoints[k]).x;
+           float plotX2=(SHPlotValue.xPoints[k+1]).x;
+        float plot0=touchPoint.x;
+        if( (plotX1<plot0)&&(plotX2>plot0) ){
+           
+            if ((plot0-plotX1)>(plotX2-plot0)) {
+                 dirInt=k+1;
+            }else{
+                dirInt=k;
+            }
+        }
+        
+    }
+    
+    if (dirInt<ShCount) {
+        float xDirectrixX=(SHPlotValue.xPoints[dirInt]).x;
+        double xDirectrixY = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE-DirectriLableH;
+        xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
+        xDirectrix.hidden = NO;
+        [self bringSubviewToFront:xDirectrix];
+        
+        float yDirectrixY=(SHPlotValue.xPoints[dirInt]).y;
+        yDirectriy.frame = CGRectMake(_leftMarginToLeave,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
+        yDirectriy.hidden = NO;
+        [self bringSubviewToFront: yDirectriy];
+        
+        NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_dirLableValuesY[dirInt]] floatValue]];
+        NSString*xLableValue=[NSString stringWithFormat:@"%@",_dirLableValuesX[dirInt]];
+        NSString* xyLableText=[NSString stringWithFormat:@"x:%@  y:%@",xLableValue,xDirY0];
+        xyLableValue.text=xyLableText;
+        
+        
+    }
+   
+    
+}
+
+
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint touchPoint = [touch locationInView:self];
+
+    double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
+    double yIntervalValue = yRange / INTERVAL_COUNT;
+    int ShCount=(int)SHPlotValue.plottingValues.count;
+    
+    [SHPlotValue.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        
+        __block NSNumber *_key = nil;
+        __block NSNumber *_value = nil;
+        
+        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            _key = (NSNumber *)key;
+            _value = (NSNumber *)obj;
+        }];
+        
+        int xIndex = [self getIndexForValue:_key forPlot:SHPlotValue];
+        
+        //x value
+        double height = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE;
+        double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
+        (SHPlotValue.xPoints[xIndex]).x = ceil((SHPlotValue.xPoints[xIndex]).x);
+        (SHPlotValue.xPoints[xIndex]).y = ceil(y);
+        
+    }];
+    
+    int dirInt=0;
+    
+    for (int k=0; k<ShCount; k++) {
+        
+        float plotX1=(SHPlotValue.xPoints[k]).x;
+        float plotX2=(SHPlotValue.xPoints[k+1]).x;
+        float plot0=touchPoint.x;
+        if( (plotX1<plot0)&&(plotX2>plot0) ){
+            
+            if ((plot0-plotX1)>(plotX2-plot0)) {
+                dirInt=k+1;
+            }else{
+                dirInt=k;
+            }
+        }
+        
+    }
+    
+    if (dirInt<ShCount) {
+        float xDirectrixX=(SHPlotValue.xPoints[dirInt]).x;
+        double xDirectrixY = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE-DirectriLableH;
+        xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
+        xDirectrix.hidden = NO;
+        [self bringSubviewToFront:xDirectrix];
+        
+        float yDirectrixY=(SHPlotValue.xPoints[dirInt]).y;
+        yDirectriy.frame = CGRectMake(_leftMarginToLeave,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
+        yDirectriy.hidden = NO;
+        [self bringSubviewToFront: yDirectriy];
+        
+        NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_dirLableValuesY[dirInt]] floatValue]];
+        NSString*xLableValue=[NSString stringWithFormat:@"%@",_dirLableValuesX[dirInt]];
+        NSString* xyLableText=[NSString stringWithFormat:@"x:%@  y:%@",xLableValue,xDirY0];
+        xyLableValue.text=xyLableText;
+        
+        
+    }
+
+    
+}
+
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+[self performSelector:@selector(delayMethod) withObject:nil afterDelay:2.0f];
+    
+}
+
+-(void)delayMethod{
+   xDirectrix.hidden = YES;
+      yDirectriy.hidden = YES;
+}
+
+
+
+
 
 #pragma mark - Theme Key Extern Keys
 

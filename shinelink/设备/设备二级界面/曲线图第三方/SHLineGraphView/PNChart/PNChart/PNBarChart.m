@@ -17,6 +17,7 @@
     
         UIView * xDirectrix;
       UIView * yDirectriy;
+    UILabel* xyLableValue;
 }
 
 - (UIColor *)barColorAtIndex:(NSUInteger)index;
@@ -77,6 +78,12 @@
      yDirectriy.backgroundColor = [UIColor whiteColor];
      yDirectriy.alpha = .5f;
     [self addSubview: yDirectriy];
+    
+    xyLableValue=[[UILabel alloc]initWithFrame:CGRectMake(160*NOW_SIZE, 5*HEIGHT_SIZE, 160*NOW_SIZE, 20*HEIGHT_SIZE)];
+    xyLableValue.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    xyLableValue.textColor = [UIColor whiteColor];
+    [xyLableValue setTextAlignment:NSTextAlignmentCenter];
+    [self addSubview:xyLableValue];
    
     
 }
@@ -401,8 +408,12 @@
         yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
         yDirectriy.hidden = NO;
         [self bringSubviewToFront: yDirectriy];
+        
+        NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
+        NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
+        NSString* xyLableText=[NSString stringWithFormat:@"x:%@  y:%@",xLableValue,xDirY0];
+        xyLableValue.text=xyLableText;
     }
-   
     
 }
 
@@ -427,9 +438,28 @@
         yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
         yDirectriy.hidden = NO;
         [self bringSubviewToFront: yDirectriy];
+        
+        NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
+         NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
+        NSString* xyLableText=[NSString stringWithFormat:@"x:%@  y:%@",xLableValue,xDirY0];
+        xyLableValue.text=xyLableText;
+        
     }
-
     
+ 
+    
+}
+
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    
+    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:2.0f];
+    
+}
+
+-(void)delayMethod{
+    xDirectrix.hidden = YES;
+    yDirectriy.hidden = YES;
 }
 
 
