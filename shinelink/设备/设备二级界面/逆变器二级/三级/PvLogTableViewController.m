@@ -9,6 +9,7 @@
 #import "PvLogTableViewController.h"
 #import "pvLogTableViewCell.h"
 #import "addServerViewController.h"
+#import "HtmlCommon.h"
 
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
@@ -25,7 +26,8 @@
 @property(nonatomic,strong)NSMutableArray *timeTextArray;
 @property (nonatomic, strong)  UIImageView *AlertView ;
 @property (nonatomic, strong)  NSString *languageValue ;
-
+@property(nonatomic,strong)NSMutableArray *idArray;
+@property(nonatomic,strong)NSMutableArray *titleArray;
 @end
 
 @implementation PvLogTableViewController
@@ -132,7 +134,11 @@
                 [self.contentTextArray addObject:CO];
                  [self.timeTextArray addObject:time];
                 
-                [self.tableView reloadData];
+                if (_SNTextArray.count==allArray.count) {
+                    [self getAFQ];
+                    [self.tableView reloadData];
+                }
+               
             }
 
         }
@@ -142,6 +148,35 @@
     }];
 
 }
+
+
+-(void)getAFQ{
+
+    NSDictionary *dicGo=@{@"type":@"0",@"language":_languageValue} ;
+    
+    [self showProgressView];
+    _idArray=[NSMutableArray array];
+     _titleArray=[NSMutableArray array];
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:@"/questionAPI.do?op=getUsQuestionListByType" sucessBlock:^(id content) {
+        NSLog(@"getUsQuestionListByType: %@", content);
+        [self hideProgressView];
+        if (content) {
+            
+            NSMutableArray *allDic=[NSMutableArray arrayWithArray:content[@"obj"]];
+            for (int i=0; i<allDic.count; i++) {
+                [_idArray addObject:allDic[i][@"id"]];
+                [_titleArray addObject:allDic[i][@"title"]];
+            }
+     
+        }
+        
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+    }];
+
+
+}
+
 - (void)showProgressView {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -206,18 +241,73 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
   
-    addServerViewController *addGo=[[addServerViewController alloc]init];
+
     
     if ([_type isEqualToString:@"inverterId"]) {
-        addGo.typeNum=@"1";
-    }else if ([_type isEqualToString:@"storageId"]){
-       addGo.typeNum=@"2";
+        HtmlCommon *go=[[HtmlCommon alloc]init];
+        
+        if ([_languageValue isEqualToString:@"0"]) {
+            NSString *errorName=@"错误代码";
+            for (int i=0; i<_titleArray.count; i++) {
+                NSString *titleName=[NSString stringWithFormat:@"%@",_titleArray[i]];
+                if ([titleName containsString:errorName]) {
+                    go.idString=_idArray[i];
+                    [self.navigationController pushViewController:go animated:NO];
+                }
+            }
+            
+        }else{
+            NSString *eventId=_eventTextArray[indexPath.row];
+            NSString *errorName;
+            
+            if ([eventId isEqualToString:@"31"]) {
+                errorName=@"AC F";    //AC F Outrange
+            }else if ([eventId isEqualToString:@"25"]){
+                errorName=@"onnection"; // No AC Connection
+            }else if ([eventId isEqualToString:@"27"]){
+                errorName=@"esidual";//Residual I High
+            }else if ([eventId isEqualToString:@"26"]){
+                errorName=@"solation"; //PV Isolation Low
+            }else if ([eventId isEqualToString:@"32"]){
+                errorName=@"odule";//Module Hot
+            }else if ([eventId isEqualToString:@"28"]){
+                errorName=@"DCI";//Output High DCI
+            }else if ([eventId isEqualToString:@"30"]){
+                errorName=@"AC V";//AC V Outrange
+            }
+            
+            if (errorName==nil || errorName==NULL||([errorName isEqual:@""] )) {
+                go.idString=@"24";
+                [self.navigationController pushViewController:go animated:NO];
+            }else{
+                for (int i=0; i<_titleArray.count; i++) {
+                    NSString *titleName=[NSString stringWithFormat:@"%@",_titleArray[i]];
+                    if ([titleName containsString:errorName]) {
+                        go.idString=_idArray[i];
+                        [self.navigationController pushViewController:go animated:NO];
+                    }
+                }
+            }
+            
+        }
+        
+    }else{
+    
+            addServerViewController *addGo=[[addServerViewController alloc]init];
+            if ([_type isEqualToString:@"inverterId"]) {
+                addGo.typeNum=@"1";
+            }else if ([_type isEqualToString:@"storageId"]){
+               addGo.typeNum=@"2";
+            }
+            addGo.SnString=_SNTextArray[indexPath.row];
+            addGo.titleString=self.contentTextArray[indexPath.row];
+             [self.navigationController pushViewController:addGo animated:NO];
+    
     }
     
-    addGo.SnString=_SNTextArray[indexPath.row];
-    addGo.titleString=self.contentTextArray[indexPath.row];
     
-     [self.navigationController pushViewController:addGo animated:NO];
+
+   
     
 
 }

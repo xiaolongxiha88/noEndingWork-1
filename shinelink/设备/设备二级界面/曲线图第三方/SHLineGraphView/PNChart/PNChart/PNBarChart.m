@@ -428,7 +428,7 @@
     if (i<_xLabels.count) {
         float xDirX=_chartMargin+(i+1)*_xLabelWidth-_xLabelWidth/2;
         
-        xDirectrix.frame = CGRectMake(xDirX, _chartMargin,1, self.frame.size.height - kXLabelHeight - _chartMargin*2);
+        xDirectrix.frame = CGRectMake(xDirX, _chartMargin,1*NOW_SIZE, self.frame.size.height - kXLabelHeight - _chartMargin*2);
         
         float xDirY1=[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue];
         NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];

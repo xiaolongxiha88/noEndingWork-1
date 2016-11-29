@@ -29,6 +29,7 @@
     [super viewDidLoad];
 self.view.backgroundColor = [UIColor whiteColor];
     
+      [self showProgressView];
     [self getNet];
     
     
@@ -50,7 +51,7 @@ self.view.backgroundColor = [UIColor whiteColor];
     
     
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"id":_idString,@"language":_languageValue} paramarsSite:@"/questionAPI.do?op=getUsualQuestionInfo" sucessBlock:^(id content) {
-        [self hideProgressView];
+       // [self hideProgressView];
         NSLog(@"getUsualQuestionInfo=: %@", content);
         
         if(content){
@@ -58,6 +59,8 @@ self.view.backgroundColor = [UIColor whiteColor];
             _HtmlContent=content[@"content"];
             
             [self initUI];
+        }else{
+        [self hideProgressView];
         }
         
     } failure:^(NSError *error) {
@@ -80,7 +83,6 @@ self.view.backgroundColor = [UIColor whiteColor];
     }else{
     self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     }
-    
     
     
     self.webView.delegate = self;
@@ -156,7 +158,7 @@ self.view.backgroundColor = [UIColor whiteColor];
 
 - (void)webViewDidStartLoad:(UIWebView *)webView {
   //  [LWLoadingView showInView:self.view];
-    [self showProgressView];
+  
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     //[LWLoadingView hideInViwe:self.view];

@@ -237,7 +237,7 @@
     leftName.text=_dayDischarge;
     leftName.textAlignment=NSTextAlignmentLeft;
     leftName.textColor=[UIColor greenColor];
-    leftName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    leftName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [self.scrollView addSubview:leftName];
     UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(2*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
     if ([_languageValue isEqualToString:@"0"]) {
@@ -254,7 +254,7 @@
     rightName.text=_totalDischarge;
     rightName.textAlignment=NSTextAlignmentRight;
     rightName.textColor=[UIColor greenColor];
-    rightName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    rightName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [self.scrollView addSubview:rightName];
     UILabel *rightState=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-116*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
     if ([_languageValue isEqualToString:@"0"]) {
