@@ -40,7 +40,7 @@
     
     
     self.view.backgroundColor=MainColor;
-    self.navigationItem.title=root_tianjia_1;
+    self.navigationItem.title=root_Add_Plant;
     [self getPickerData];
     [self initUI];
     //[self writeUI];
@@ -128,7 +128,8 @@
     _toolBar.barTintColor = MainColor;
     _toolBar.tintColor = [UIColor whiteColor];
     UIBarButtonItem *doneBarItem = [[UIBarButtonItem alloc] initWithTitle:root_OK style:UIBarButtonItemStyleDone target:self action:@selector(doneBarItemDidClicked)];
-    UIBarButtonItem *spaceBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    UIBarButtonItem *spaceBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:@selector(finishPicker)];
+    
     [doneBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:14*HEIGHT_SIZE],NSFontAttributeName, nil] forState:UIControlStateNormal];
     _toolBar.items = @[spaceBarItem,doneBarItem];
     
@@ -305,6 +306,11 @@
     [self resignFirstResponder];
 }
 
+-(void)finishPicker{
+    [self.datePicker removeFromSuperview];
+    [self.toolBar removeFromSuperview];
+
+}
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField.tag != 1) {

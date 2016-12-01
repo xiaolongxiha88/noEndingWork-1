@@ -41,22 +41,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x6211;/&#x7535;&#x7ad9;&#x8bbe;&#x7f6e;/addStationViewController.m"
-            timestampString = "492678936.157545"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
-            landmarkName = "-addButtonPressed"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "shinelink/&#x6211;/&#x5ba2;&#x670d;&#x7cfb;&#x7edf;/&#x5e38;&#x89c1;&#x95ee;&#x9898;/ZLCWebView.m"
             timestampString = "493712674.884093"
             startingColumnNumber = "9223372036854775807"
@@ -112,6 +96,22 @@
             startingLineNumber = "212"
             endingLineNumber = "212"
             landmarkName = "-playWithVideoUrl:showView:andSuperView:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "shinelink/&#x6211;/&#x7535;&#x7ad9;&#x8bbe;&#x7f6e;/addStationViewController.m"
+            timestampString = "502105173.235657"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
+            landmarkName = "-finishPicker"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

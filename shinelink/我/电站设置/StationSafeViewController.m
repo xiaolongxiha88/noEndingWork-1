@@ -230,6 +230,7 @@
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
     if (self.datePicker) {
         [UIView animateWithDuration:0.3f animations:^{
             self.datePicker.frame = CGRectMake(0, SCREEN_Height, SCREEN_Width, 216*HEIGHT_SIZE);

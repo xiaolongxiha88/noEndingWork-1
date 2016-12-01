@@ -19,6 +19,7 @@
 #import "GetDevice.h"
 #import "DemoDeviceViewController.h"
 #import "UIImageView+WebCache.h"
+#import "addStationViewController.h"
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 
@@ -62,7 +63,9 @@
 @property (nonatomic, strong) UIAlertView *Alert1;
 @property (nonatomic, strong) UIImageView *guideImageView;
 @property (nonatomic, strong) NSString *netEnable;
-
+@property (nonatomic, strong) UIImageView *headImage1;
+@property (nonatomic, strong) UIImageView *headImage2;
+@property (nonatomic, strong) UIImageView *headImage3;
 @property (nonatomic, strong) UIView *AdBackView;
 @property (nonatomic, strong) UIView *AdFrontView;
 
@@ -438,7 +441,14 @@
         goLog.stationId=_stationIdOne;
         [self.navigationController pushViewController:goLog animated:NO];
     }];
-    DTKDropdownMenuView *menuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0,item1] icon:@"add@2x.png"];
+    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:root_Add_Plant iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
+        NSLog(@"rightItem%lu",(unsigned long)index);
+        addStationViewController *addView=[[addStationViewController alloc]init];
+        [self.navigationController pushViewController:addView animated:YES];
+        
+    }];
+    
+    DTKDropdownMenuView *menuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0,item1,item2] icon:@"add@2x.png"];
     
     menuView.dropWidth = 150.f;
     menuView.titleFont = [UIFont systemFontOfSize:18.f];
@@ -739,6 +749,7 @@
                 _head32=@"MWh";
                 _head31=[NSString stringWithFormat:@"%.1f",KW];
             }
+           
         }
         
         
@@ -921,6 +932,7 @@
     
     _control=[[UIRefreshControl alloc]init];
     [_control addTarget:self action:@selector(refreshStateChange:) forControlEvents:UIControlEventValueChanged];
+    
     [_tableView addSubview:_control];
     
     //2.马上进入刷新状态，并不会触发UIControlEventValueChanged事件
@@ -941,96 +953,103 @@
     //NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
    // _plantId=[ud objectForKey:@"plantID"];
     
+    [self getAnimation];
     [self netRequest];
     
+   
 }
 
-- (void)_createHeaderView {
+-(void)getAnimation{
     
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,Kwidth,200*HEIGHT_SIZE)];
+    CABasicAnimation *moveupAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
+    moveupAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(_headImage1.center.x, _headImage1.center.y+60*HEIGHT_SIZE)];
+    moveupAnimation.toValue = [NSValue valueWithCGPoint:_headImage1.center];
+    moveupAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    moveupAnimation.fillMode = kCAFillModeForwards;
+    moveupAnimation.removedOnCompletion = NO;
+    [_headImage1.layer addAnimation:moveupAnimation forKey:@"moveupAnimation"];
+
+}
+
+
+- (void)_createHeaderView {
+    float headerViewH=200*HEIGHT_SIZE;
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,Kwidth,headerViewH)];
     _tableView.tableHeaderView = _headerView;
    
     float headHeight=_headerView.bounds.size.height;
-    _headPicName=@"head.png";
+    _headPicName=@"deviceHead.jpg";
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,Kwidth,headHeight)];
     imageView.image = [UIImage imageNamed:_headPicName];
     [_headerView addSubview:imageView];
+    
+    float marchWidth=5*NOW_SIZE;
+    float marchHeigh=18*HEIGHT_SIZE;
+    float  headLableH=30*HEIGHT_SIZE;
+    float  headLableColorH=4*HEIGHT_SIZE;
+     float  headLableColorW=30*NOW_SIZE;
+    float headLableValueH=50*HEIGHT_SIZE;
+    float headImageH=40*HEIGHT_SIZE;
+    float unitWidth=(Kwidth-15*NOW_SIZE)/3;
+    float gapH=10*HEIGHT_SIZE;
+    NSArray *headNameArray=[NSArray arrayWithObjects: _head23,_head13,_head33,nil];
+     NSArray *headValueArray=[NSArray arrayWithObjects: _head21,_head11,_head31,nil];
+    NSArray *headValue1Array=[NSArray arrayWithObjects: _head22,_head12,_head32,nil];
+     NSArray *headColorArray=[NSArray arrayWithObjects: COLOR(17, 183, 243, 1),COLOR(219, 210, 74, 1),COLOR(83, 218, 118, 1),nil];
+      NSArray *headImageNameArray11=[NSArray arrayWithObjects: @"deviceHead1.png",@"deviceHead2.png",@"deviceHead33.png",nil];
+    
+    for (int i=0; i<headValueArray.count; i++) {
+        UILabel *Lable12=[[UILabel alloc]initWithFrame:CGRectMake(marchWidth+unitWidth*i, marchHeigh, unitWidth,headLableH )];
+        Lable12.text=headNameArray[i];
+        Lable12.textAlignment=NSTextAlignmentCenter;
+        Lable12.textColor=[UIColor whiteColor];
+        Lable12.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
+        [_headerView addSubview:Lable12];
+        
+        UIView *headLableView1=[[UIView alloc]initWithFrame:CGRectMake(marchWidth+(unitWidth-headLableColorW)/2+unitWidth*i, marchHeigh+headLableH+gapH, headLableColorW, headLableColorH)];
+        headLableView1.backgroundColor=headColorArray[i];
+        [_headerView addSubview:headLableView1];
+        
+        UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2, unitWidth,headLableValueH)];
+        Lable1.text=headValueArray[i];
+        Lable1.textAlignment=NSTextAlignmentCenter;
+        Lable1.textColor=[UIColor whiteColor];
+        Lable1.font = [UIFont systemFontOfSize:30*HEIGHT_SIZE];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:30*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        CGSize size = [headValueArray[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, headLableValueH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+       // [Lable1 sizeToFit];
+        [_headerView addSubview:Lable1];
+        
+        UILabel *Lable1L=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i+size.width/2+unitWidth/2, marchHeigh+headLableH+gapH*2+5*HEIGHT_SIZE, unitWidth*0.4,headLableValueH)];
+        Lable1L.text=headValue1Array[i];
+        Lable1L.textAlignment=NSTextAlignmentLeft;
+        Lable1L.textColor=[UIColor whiteColor];
+        Lable1L.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        [_headerView addSubview:Lable1L];
+        
+        
+        float headImageH0=CGRectGetMaxY(Lable1.frame);
+        float  headImageHgab=20*HEIGHT_SIZE;
+        if (i==0) {
+        _headImage1= [[UIImageView alloc] initWithFrame:CGRectMake(marchWidth+(unitWidth-headImageH)/2+unitWidth*i, headImageH0+headImageHgab, headImageH,headImageH)];
+        _headImage1.image = [UIImage imageNamed:headImageNameArray11[i]];
+        [_headerView addSubview:_headImage1];
+        }else if (i==1){
+            _headImage2= [[UIImageView alloc] initWithFrame:CGRectMake(marchWidth+(unitWidth-headImageH)/2+unitWidth*i, headImageH0+headImageHgab, headImageH,headImageH)];
+            _headImage2.image = [UIImage imageNamed:headImageNameArray11[i]];
+            [_headerView addSubview:_headImage2];
+        }else if (i==2){
+            _headImage3= [[UIImageView alloc] initWithFrame:CGRectMake(marchWidth+(unitWidth-headImageH)/2+unitWidth*i, headImageH0+headImageHgab, headImageH,headImageH)];
+            _headImage3.image = [UIImage imageNamed:headImageNameArray11[i]];
+            [_headerView addSubview:_headImage3];
+        }
 
-   
-    UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake((Kwidth-60*NOW_SIZE)/2, 40*HEIGHT_SIZE, 60*NOW_SIZE,20*HEIGHT_SIZE )];
-  
-    
-    Lable1.text=_head11;
-    //Lable1.numberOfLines=0;
-    Lable1.textAlignment=NSTextAlignmentCenter;
-    Lable1.textColor=[UIColor whiteColor];
-    Lable1.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
-    [_headerView addSubview:Lable1];
-    
-   
-    UILabel *Lable2=[[UILabel alloc]initWithFrame:CGRectMake((Kwidth-60*NOW_SIZE)/2, 58*HEIGHT_SIZE, 60*NOW_SIZE,20*HEIGHT_SIZE )];
-    Lable2.text=_head12;
-    Lable2.textAlignment=NSTextAlignmentCenter;
-    Lable2.textColor=[UIColor whiteColor];
-    Lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    [_headerView addSubview:Lable2];
-    
-    
-    UILabel *Lable12=[[UILabel alloc]initWithFrame:CGRectMake((Kwidth-80*NOW_SIZE)/2, 78*HEIGHT_SIZE, 80*NOW_SIZE,25*HEIGHT_SIZE )];
-    Lable12.text=_head13;
-    Lable12.textAlignment=NSTextAlignmentCenter;
-    Lable12.textColor=[UIColor whiteColor];
-    Lable12.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [_headerView addSubview:Lable12];
 
-    UILabel *Lable7=[[UILabel alloc]initWithFrame:CGRectMake(30*NOW_SIZE, 120*HEIGHT_SIZE, 60*NOW_SIZE,20*HEIGHT_SIZE )];
-   
-   // _head21=@"1999.99999";
-   
+    }
     
-     Lable7.text=_head21;
-    Lable7.textAlignment=NSTextAlignmentCenter;
-    Lable7.textColor=[UIColor whiteColor];
-    Lable7.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
-    [_headerView addSubview:Lable7];
-    
-    UILabel *Lable9=[[UILabel alloc]initWithFrame:CGRectMake(30*NOW_SIZE, 138*HEIGHT_SIZE, 60*NOW_SIZE,20*HEIGHT_SIZE )];
-    Lable9.text=_head22;
-    Lable9.textAlignment=NSTextAlignmentCenter;
-    Lable9.textColor=[UIColor whiteColor];
-    Lable9.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    [_headerView addSubview:Lable9];
-    
-    UILabel *Lable79=[[UILabel alloc]initWithFrame:CGRectMake(15*NOW_SIZE, 160*HEIGHT_SIZE, 90*NOW_SIZE,25*HEIGHT_SIZE )];
-    Lable79.text=_head23;
-    Lable79.textAlignment=NSTextAlignmentCenter;
-    Lable79.textColor=[UIColor whiteColor];
-    Lable79.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [_headerView addSubview:Lable79];
-    
-    //_headGet=@"3000";
-    UILabel *Lable8=[[UILabel alloc]initWithFrame:CGRectMake(230*NOW_SIZE, 120*HEIGHT_SIZE, 60*NOW_SIZE,20*HEIGHT_SIZE )];
   
-   
-      Lable8.text=_head31;
-    Lable8.textAlignment=NSTextAlignmentCenter;
-    Lable8.textColor=[UIColor whiteColor];
-    Lable8.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
-    [_headerView addSubview:Lable8];
+ 
     
-    UILabel *Lable10=[[UILabel alloc]initWithFrame:CGRectMake(230*NOW_SIZE, 138*HEIGHT_SIZE, 60*NOW_SIZE,20*HEIGHT_SIZE )];
-    Lable10.text=_head32;
-    Lable10.textAlignment=NSTextAlignmentCenter;
-    Lable10.textColor=[UIColor whiteColor];
-    Lable10.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    [_headerView addSubview:Lable10];
-    
-    UILabel *Lable108=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, 160*HEIGHT_SIZE, 80*NOW_SIZE,25*HEIGHT_SIZE )];
-    Lable108.text=_head33;
-    Lable108.textAlignment=NSTextAlignmentCenter;
-    Lable108.textColor=[UIColor whiteColor];
-    Lable108.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [_headerView addSubview:Lable108];
     
     [self performSelector:@selector(showGuideView) withObject:nil afterDelay:0.5];
     

@@ -644,13 +644,13 @@ NSLog(@"体验馆");
         Vc3.title=root_service;
         Vc4.title=root_ME;
         Vc1.tabBarItem.image=[UIImage imageNamed:@"equipment@2x.png"];
-        Vc1.tabBarItem.selectedImage=[[UIImage imageNamed:@"equipment2@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        Vc2.tabBarItem.image=[UIImage imageNamed:@"energy@2x.png"];
+        Vc1.tabBarItem.selectedImage=[[UIImage imageNamed:@"equipmentV@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        Vc2.tabBarItem.image=[UIImage imageNamed:@"energyTab@2x.png"];
         Vc2.tabBarItem.selectedImage=[[UIImage imageNamed:@"energy2@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         Vc3.tabBarItem.image=[UIImage imageNamed:@"server@2x.png"];
         Vc3.tabBarItem.selectedImage=[[UIImage imageNamed:@"serverV@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         Vc4.tabBarItem.image=[UIImage imageNamed:@"mine@2x.png"];
-        Vc4.tabBarItem.selectedImage=[[UIImage imageNamed:@"mine2@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        Vc4.tabBarItem.selectedImage=[[UIImage imageNamed:@"mine2v@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
         //Vc1.tabBarController.tabBar.tintColor = MainColor;
         
