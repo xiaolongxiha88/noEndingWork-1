@@ -23,7 +23,7 @@
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 
-@interface deviceViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,EditStationMenuViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
+@interface deviceViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,EditStationMenuViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate,UIAlertViewDelegate,UIScrollViewDelegate,CAAnimationDelegate>
 
 @property (nonatomic, strong) NSIndexPath *indexPath;
 @property(nonatomic,strong)EditStationMenuView  *editCellect;
@@ -90,6 +90,8 @@
     UIPageControl *_pageControl;
     UIScrollView *_scrollerView;
     NSString *_indenty;
+    BOOL showProgressEnable;
+    BOOL showAnimationEnable;
     
        NSMutableArray* imageStatueArray;
     //全局变量 用来控制偏移量
@@ -126,6 +128,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    _netEnable=@"0";
+    showProgressEnable=YES;
+    showAnimationEnable=NO;
     
   [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
@@ -575,9 +579,27 @@
 
 
 -(void)netRequest{
-    [self showProgressView];
+    
+    if (showProgressEnable) {
+        if (showAnimationEnable) {
+            [self getAnimation:_headImage1];
+            [self getAnimation:_headImage2];
+            [self getAnimation:_headImage3];
+        }else{
+         [self showProgressView];
+              }
+    }else{
+        [self getAnimation:_headImage1];
+        [self getAnimation:_headImage2];
+        [self getAnimation:_headImage3];
+    
+    }
+  
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:_plantId paramarsSite:@"/newPlantAPI.do?op=getAllDeviceList" sucessBlock:^(id content) {
-        [self hideProgressView];
+      [self hideProgressView];
+        showProgressEnable=YES;
+        showAnimationEnable=YES;
+        
          NSLog(@"getAllDeviceList:%@",content);
         _typeArr=[NSMutableArray array];
         nameArray=[NSMutableArray array];
@@ -589,6 +611,7 @@
         imageStatueArray=[NSMutableArray array];
         
         [_control endRefreshing];
+    
         
        // id jsonObj=[NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
          self.dataArr = [NSMutableArray arrayWithArray:content[@"deviceList"]];
@@ -950,31 +973,120 @@
 
 -(void)refreshStateChange:(UIRefreshControl *)control{
 
-    //NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-   // _plantId=[ud objectForKey:@"plantID"];
+    showProgressEnable=NO;
     
-    [self getAnimation];
+//    [self getAnimation:_headImage1];
+//    [self getAnimation:_headImage2];
+//    [self getAnimation:_headImage3];
+
     [self netRequest];
     
    
 }
 
--(void)getAnimation{
+-(void)getAnimation:(UIImageView*)headImage{
     
     CABasicAnimation *moveupAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-    moveupAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(_headImage1.center.x, _headImage1.center.y+60*HEIGHT_SIZE)];
-    moveupAnimation.toValue = [NSValue valueWithCGPoint:_headImage1.center];
+    moveupAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(headImage.center.x, headImage.center.y+55*HEIGHT_SIZE)];
+    moveupAnimation.toValue = [NSValue valueWithCGPoint:headImage.center];
     moveupAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
     moveupAnimation.fillMode = kCAFillModeForwards;
     moveupAnimation.removedOnCompletion = NO;
-    [_headImage1.layer addAnimation:moveupAnimation forKey:@"moveupAnimation"];
+    moveupAnimation.duration=1;
+    moveupAnimation.delegate=self;
+    [headImage.layer addAnimation:moveupAnimation forKey:@"moveupAnimation"];
+
+    [self getLineAnimationImage:headImage];
 
 }
 
+-(void)getLineAnimation:(UIImageView*)headImage intR:(NSString*)intRnum intAngle:(NSString*)intAngle{
+    
+   CAShapeLayer *LineShaperLayer=[CAShapeLayer layer];
+    float LineShaperLayerX=headImage.frame.origin.x-10*NOW_SIZE;
+     float LineShaperLayerY=headImage.frame.origin.y-10*NOW_SIZE;
+      float LineShaperLayerW=headImage.frame.size.width+20*NOW_SIZE;
+      float LineShaperLayerH=headImage.frame.size.height+20*NOW_SIZE;
+    LineShaperLayer.frame=CGRectMake(LineShaperLayerX, LineShaperLayerY, LineShaperLayerW, LineShaperLayerH);
+    CGPoint arcCenterPoint = CGPointMake(LineShaperLayerW/2, LineShaperLayerH/2);
+    CGFloat arcRadius = headImage.frame.size.width*0.5*[intRnum floatValue];
+    CGFloat arcStartAngle ;
+    CGFloat arcEndAngle  ;
+    if ([intAngle isEqualToString:@"1"]) {
+      arcStartAngle = 0;
+    arcEndAngle = M_PI * 2 ;
+    }else if ([intAngle isEqualToString:@"2"]){
+     arcStartAngle = -M_PI_2;
+         arcEndAngle = M_PI * 2 - M_PI_2 + M_PI / 8.0;
+    }else if ([intAngle isEqualToString:@"3"]){
+        arcStartAngle = -M_PI;
+        arcEndAngle = M_PI * 2 - M_PI_2 + M_PI / 8.0;
+
+    }
+    UIBezierPath *bezierPath = [UIBezierPath bezierPathWithArcCenter:arcCenterPoint radius:arcRadius startAngle:arcStartAngle endAngle:arcEndAngle clockwise:YES];
+    LineShaperLayer.path = bezierPath.CGPath;
+    LineShaperLayer.fillColor =nil ;
+    LineShaperLayer.strokeColor = [UIColor whiteColor].CGColor;
+    LineShaperLayer.lineWidth = 0.6*NOW_SIZE;
+    LineShaperLayer.lineCap = kCALineCapRound;
+    LineShaperLayer.strokeStart = 0;
+    LineShaperLayer.strokeEnd = 0;
+   LineShaperLayer.hidden = NO;
+    [_headerView.layer addSublayer:LineShaperLayer];
+  [self startAnimation:LineShaperLayer];
+}
+
+- (void)startAnimation:(CAShapeLayer*) HshapeLayer {
+    
+   // self.hidden = NO;
+    CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+    rotateAnimation.fromValue = @(0);
+    rotateAnimation.toValue = @(2 * M_PI);
+    rotateAnimation.duration = 0.3;
+    rotateAnimation.fillMode = kCAFillModeForwards;
+    rotateAnimation.removedOnCompletion = NO;
+    rotateAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    rotateAnimation.repeatCount = HUGE;
+    [HshapeLayer addAnimation:rotateAnimation forKey:@"rotateAnimation"];
+    [self endAnimation:HshapeLayer];
+}
+
+- (void)endAnimation:(CAShapeLayer*) HshapeLayer {
+    CABasicAnimation *strokeEndAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+    strokeEndAnimation.fromValue = @(0);
+    strokeEndAnimation.toValue = @(.95);
+    strokeEndAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    strokeEndAnimation.duration = 0.3;
+    strokeEndAnimation.repeatCount = HUGE;
+    strokeEndAnimation.fillMode = kCAFillModeForwards;
+    strokeEndAnimation.removedOnCompletion = NO;
+    // strokeEndAnimation.delegate = self;
+    [HshapeLayer addAnimation:strokeEndAnimation forKey:@"strokeEndAnimation"];
+}
+
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+
+    [self.view.layer removeAllAnimations];
+}
+
+-(void)getLineAnimationImage:(UIImageView*)imageView{
+    [self getLineAnimation:imageView intR:@"1.1" intAngle:@"1"];
+    [self getLineAnimation:imageView intR:@"1.3" intAngle:@"2"];
+    [self getLineAnimation:imageView intR:@"1.5" intAngle:@"3"];
+}
+
+-(void)creatHeadViewFirst{
+
+
+}
 
 - (void)_createHeaderView {
     float headerViewH=200*HEIGHT_SIZE;
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,Kwidth,headerViewH)];
+    if (!_headerView) {
+          _headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,Kwidth,headerViewH)];
+    }
+  
     _tableView.tableHeaderView = _headerView;
    
     float headHeight=_headerView.bounds.size.height;
@@ -1043,8 +1155,7 @@
             _headImage3.image = [UIImage imageNamed:headImageNameArray11[i]];
             [_headerView addSubview:_headImage3];
         }
-
-
+        
     }
     
   
