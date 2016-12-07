@@ -588,4 +588,8 @@
 
 #define  root_caijiqi_cuowu_tishi    NSLocalizedString(@"3采集器10位提示", nil)
 
+#define  root_shijian      NSLocalizedString(@"4时间", nil)
+#define  root_shuzhi      NSLocalizedString(@"5数据", nil)
+#define  root_riqi      NSLocalizedString(@"6日期", nil)
+
 #endif /* languageNew_h */

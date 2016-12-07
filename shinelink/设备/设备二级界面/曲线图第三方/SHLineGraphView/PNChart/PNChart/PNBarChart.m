@@ -69,19 +69,19 @@
     
     xDirectrix = [[UIView alloc] initWithFrame:CGRectZero];
     xDirectrix.hidden = YES;
-    xDirectrix.backgroundColor = [UIColor whiteColor];
+    xDirectrix.backgroundColor = COLOR(232, 114, 86, 1);
     xDirectrix.alpha = .5f;
     [self addSubview:xDirectrix];
     
      yDirectriy = [[UIView alloc] initWithFrame:CGRectZero];
      yDirectriy.hidden = YES;
-     yDirectriy.backgroundColor = [UIColor whiteColor];
+     yDirectriy.backgroundColor = COLOR(232, 114, 86, 1);
      yDirectriy.alpha = .5f;
     [self addSubview: yDirectriy];
     
     xyLableValue=[[UILabel alloc]initWithFrame:CGRectMake(160*NOW_SIZE, 5*HEIGHT_SIZE, 160*NOW_SIZE, 20*HEIGHT_SIZE)];
     xyLableValue.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    xyLableValue.textColor = [UIColor whiteColor];
+    xyLableValue.textColor = COLOR(86, 103, 232, 1);
     [xyLableValue setTextAlignment:NSTextAlignmentCenter];
     [self addSubview:xyLableValue];
    
@@ -411,7 +411,7 @@
         
         NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
         NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
-        NSString* xyLableText=[NSString stringWithFormat:@"x:%@  y:%@",xLableValue,xDirY0];
+        NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_riqi,xLableValue,root_shuzhi,xDirY0];
         xyLableValue.text=xyLableText;
     }
     
@@ -441,7 +441,7 @@
         
         NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
          NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
-        NSString* xyLableText=[NSString stringWithFormat:@"x:%@  y:%@",xLableValue,xDirY0];
+       NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_riqi,xLableValue,root_shuzhi,xDirY0];
         xyLableValue.text=xyLableText;
         
     }
@@ -460,6 +460,7 @@
 -(void)delayMethod{
     xDirectrix.hidden = YES;
     yDirectriy.hidden = YES;
+    xyLableValue.text=nil;
 }
 
 

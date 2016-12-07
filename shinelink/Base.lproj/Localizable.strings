@@ -561,3 +561,6 @@
 "3采集器10位提示"="Please enter 10-digit serial number of the collector";
 "4服务器错误提示2"="Please re-register or use the computer to log in  our server 'server-cn.growatt.com' and re-register";
 "5注册失败"="Registration failed";
+"4时间"="Time";
+"5数据"="Value";
+"6日期"="Date";

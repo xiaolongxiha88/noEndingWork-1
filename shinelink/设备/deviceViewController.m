@@ -258,7 +258,6 @@
         }];
         
         
-        
     }
     
     
@@ -391,7 +390,8 @@
     }
     [self.managerArray removeAllObjects];
     [self.managerArray addObjectsFromArray:fetchResult];
-    [self.tableView reloadData];
+    
+  [self.tableView reloadData];
 
 }
 
@@ -586,6 +586,7 @@
             [self getAnimation:_headImage2];
             [self getAnimation:_headImage3];
         }else{
+           //  [_control endRefreshing];
          [self showProgressView];
               }
     }else{
@@ -596,7 +597,11 @@
     }
   
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:_plantId paramarsSite:@"/newPlantAPI.do?op=getAllDeviceList" sucessBlock:^(id content) {
-      [self hideProgressView];
+      
+       [self hideProgressView];
+        
+           [_control endRefreshing];
+        
         showProgressEnable=YES;
         showAnimationEnable=YES;
         
@@ -610,7 +615,7 @@
         SNArray=[NSMutableArray array];
         imageStatueArray=[NSMutableArray array];
         
-        [_control endRefreshing];
+    
     
         
        // id jsonObj=[NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
@@ -989,10 +994,11 @@
     CABasicAnimation *moveupAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
     moveupAnimation.fromValue = [NSValue valueWithCGPoint:CGPointMake(headImage.center.x, headImage.center.y+55*HEIGHT_SIZE)];
     moveupAnimation.toValue = [NSValue valueWithCGPoint:headImage.center];
-    moveupAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+ moveupAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     moveupAnimation.fillMode = kCAFillModeForwards;
     moveupAnimation.removedOnCompletion = NO;
     moveupAnimation.duration=1;
+    moveupAnimation.speed=1;
     moveupAnimation.delegate=self;
     [headImage.layer addAnimation:moveupAnimation forKey:@"moveupAnimation"];
 
@@ -1042,7 +1048,7 @@
     CABasicAnimation *rotateAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotateAnimation.fromValue = @(0);
     rotateAnimation.toValue = @(2 * M_PI);
-    rotateAnimation.duration = 0.3;
+    rotateAnimation.duration = 0.4;
     rotateAnimation.fillMode = kCAFillModeForwards;
     rotateAnimation.removedOnCompletion = NO;
     rotateAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
@@ -1056,7 +1062,7 @@
     strokeEndAnimation.fromValue = @(0);
     strokeEndAnimation.toValue = @(.95);
     strokeEndAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    strokeEndAnimation.duration = 0.3;
+    strokeEndAnimation.duration = 0.4;
     strokeEndAnimation.repeatCount = HUGE;
     strokeEndAnimation.fillMode = kCAFillModeForwards;
     strokeEndAnimation.removedOnCompletion = NO;
@@ -1067,7 +1073,9 @@
 
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
 
+
     [self.view.layer removeAllAnimations];
+    
 }
 
 -(void)getLineAnimationImage:(UIImageView*)imageView{
@@ -1076,10 +1084,6 @@
     [self getLineAnimation:imageView intR:@"1.5" intAngle:@"3"];
 }
 
--(void)creatHeadViewFirst{
-
-
-}
 
 - (void)_createHeaderView {
     float headerViewH=200*HEIGHT_SIZE;
