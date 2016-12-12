@@ -56,4 +56,6 @@ typedef void (^successBlock) (id content);
 
 +(void)getAppError:(NSString*)msg useName:(NSString*)useName;
 
++(NSString*)getValidCode:(NSString*)serialNum;
+
 @end

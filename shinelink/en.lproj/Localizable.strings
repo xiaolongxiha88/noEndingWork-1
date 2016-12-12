@@ -103,7 +103,7 @@
 "正常 "="Normal";
 "故障"="Error";
 "断开"="Disconnected";
-"闲置 "="Standby";
+"闲置 "="Operating";
 "充电 "="Charging";
 "放电 "="Discharging";
 "详情 "="Details";
@@ -204,7 +204,7 @@
 
 "Add"="Add";
 "aliases"="Aliases";
-"datalog sn"="Datalog sn";
+"datalog sn"="Datalogger sn";
 "group"="Group";
 "device type"="Device type";
 
@@ -568,4 +568,7 @@
 "4时间"="Time";
 "5数据"="Value";
 "6日期"="Date";
+"RF序列号"="RFStick sn:";
+"datalogger checkcode"="Datalogger checkcode";
 
+"请输入RFStick序列号"="Input RFStick SN";

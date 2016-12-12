@@ -20,4 +20,6 @@
 
 @property (nonatomic, assign) id<EditCellectViewDelegate> delegate;
 
+@property(nonatomic,strong)NSString *dataloggerType;
+
 @end

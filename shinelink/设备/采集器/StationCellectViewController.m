@@ -16,6 +16,7 @@
 #import "DeviceManageViewController.h"
 #import "MainViewController.h"
 #import "AddDeviceViewController.h"
+#import "ShinePhone-Swift.h"
 
 @interface StationCellectViewController ()<EditCellectViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)EditCellectView *editCellect;
@@ -171,13 +172,14 @@
         NSString *demoName1=@"ShineWIFI";           //新wifi
         NSString *demoName2=@"ShineLan";            //旧wifi
         NSString *demoName3=@"ShineWifiBox";          //旧wifi
-        
+        NSString *demoName4=@"ShineLanBox";
         
         //_SetName=@"ShineWIFI";
         
         BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
         BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
         BOOL result3 = [_SetName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+          BOOL result4 = [_SetName compare:demoName4 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
         
         if (result1) {
             AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
@@ -192,6 +194,13 @@
             MainViewController *rootView = [[MainViewController alloc]init];
             [self.navigationController pushViewController:rootView animated:YES];
             
+        }else if(result4){
+            
+//            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"rfStickStoryboard" bundle:[NSBundle mainBundle]];
+//            RfStickSwift *vc = [storyboard instantiateViewControllerWithIdentifier:@"RfStickSwift"];
+        
+            RfStickSwift *rootView=[[RfStickSwift alloc]init];
+             [self.navigationController pushViewController:rootView animated:YES];
         }
         
     }else{
@@ -305,6 +314,7 @@
         _editCellect.delegate = self;
         _editCellect.tintColor = [UIColor blackColor];
         _editCellect.dynamic = NO;
+        _editCellect.dataloggerType=_arrayData[_indexPath.row][@"device_type"];
         _editCellect.blurRadius = 10.0f;
         [[UIApplication sharedApplication].keyWindow addSubview:_editCellect];
     }

@@ -59,11 +59,17 @@
         
         UIButton *deviceSet = [UIButton buttonWithType:UIButtonTypeCustom];
         deviceSet.frame = CGRectMake(0, 3* CGRectGetHeight(bgImageView.frame)/4, CGRectGetWidth(bgImageView.frame), CGRectGetHeight(bgImageView.frame)/3);
-        [deviceSet setTitle:root_CJQ_peizhi forState:UIControlStateNormal];
+        if ([_dataloggerType isEqualToString:@"ShineLanBox"]) {
+             [deviceSet setTitle:@"RfStick" forState:UIControlStateNormal];
+             deviceSet.tag = 1055;
+        }else{
+            [deviceSet setTitle:root_CJQ_peizhi forState:UIControlStateNormal];
+            deviceSet.tag = 1054;
+        }
+       
           deviceSet.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
         [deviceSet setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [deviceSet setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-        deviceSet.tag = 1054;
         [deviceSet addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
         [bgImageView addSubview:deviceSet];
         

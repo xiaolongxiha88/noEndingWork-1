@@ -547,3 +547,6 @@
 "4时间"="时间";
 "5数据"="数值";
 "6日期"="日期";
+"RF序列号"="RFStick序列号:";
+"datalogger checkcode"="采集器校验码";
+"请输入RFStick序列号"="请输入RFStick序列号";

@@ -16,6 +16,7 @@
 		3319E08F1D5AFD6D006623A9 /* view.html in Resources */ = {isa = PBXBuildFile; fileRef = 3319E08E1D5AFD6D006623A9 /* view.html */; };
 		3319E0911D5B121E006623A9 /* play_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3319E0901D5B121E006623A9 /* play_icon.png */; };
 		33209FD11D2A553E00186893 /* main1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33209FD01D2A553E00186893 /* main1.jpg */; };
+		332283A91DFAA03B00C546B4 /* swiftHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332283A81DFAA03B00C546B4 /* swiftHeader.swift */; };
 		33238B491CBF816400E82B86 /* 外框@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33238B481CBF816400E82B86 /* 外框@3x.png */; };
 		332692681D780F410058C5B7 /* backAV.png in Resources */ = {isa = PBXBuildFile; fileRef = 332692671D780F410058C5B7 /* backAV.png */; };
 		3326926B1D794AB00058C5B7 /* AvCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3326926A1D794AB00058C5B7 /* AvCell.m */; };
@@ -282,6 +283,7 @@
 		336A24681DF00AB50002D1AD /* deviceHead2.png in Resources */ = {isa = PBXBuildFile; fileRef = 336A24671DF00AB50002D1AD /* deviceHead2.png */; };
 		336A246A1DF00ABD0002D1AD /* deviceHead33.png in Resources */ = {isa = PBXBuildFile; fileRef = 336A24691DF00ABD0002D1AD /* deviceHead33.png */; };
 		336A246C1DF00AC20002D1AD /* deviceHead1.png in Resources */ = {isa = PBXBuildFile; fileRef = 336A246B1DF00AC20002D1AD /* deviceHead1.png */; };
+		336D3FD61DF80C4700BE8422 /* RfStickSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */; };
 		336D3FFE1D6FE76100ECFA34 /* AnotherSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D3FFD1D6FE76100ECFA34 /* AnotherSearchViewController.m */; };
 		336D40171D6FEA7600ECFA34 /* HCSortString.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D40021D6FEA7600ECFA34 /* HCSortString.m */; };
 		336D40181D6FEA7600ECFA34 /* UIAlertController+HCAdd.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D40041D6FEA7600ECFA34 /* UIAlertController+HCAdd.m */; };
@@ -596,6 +598,7 @@
 		3319E08E1D5AFD6D006623A9 /* view.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = view.html; sourceTree = "<group>"; };
 		3319E0901D5B121E006623A9 /* play_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_icon.png; sourceTree = "<group>"; };
 		33209FD01D2A553E00186893 /* main1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = main1.jpg; path = AsyncSocket/main1.jpg; sourceTree = "<group>"; };
+		332283A81DFAA03B00C546B4 /* swiftHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = swiftHeader.swift; sourceTree = "<group>"; };
 		33238B481CBF816400E82B86 /* 外框@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "外框@3x.png"; path = "../../我/客服系统/我的问题/外框@3x.png"; sourceTree = "<group>"; };
 		332692671D780F410058C5B7 /* backAV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backAV.png; sourceTree = "<group>"; };
 		332692691D794AB00058C5B7 /* AvCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvCell.h; sourceTree = "<group>"; };
@@ -1028,6 +1031,8 @@
 		336A24671DF00AB50002D1AD /* deviceHead2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deviceHead2.png; sourceTree = "<group>"; };
 		336A24691DF00ABD0002D1AD /* deviceHead33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deviceHead33.png; sourceTree = "<group>"; };
 		336A246B1DF00AC20002D1AD /* deviceHead1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deviceHead1.png; sourceTree = "<group>"; };
+		336D3FD41DF80C4600BE8422 /* ShinePhone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ShinePhone-Bridging-Header.h"; path = "设备/采集器/ShinePhone-Bridging-Header.h"; sourceTree = "<group>"; };
+		336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RfStickSwift.swift; sourceTree = "<group>"; };
 		336D3FFC1D6FE76100ECFA34 /* AnotherSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherSearchViewController.h; sourceTree = "<group>"; };
 		336D3FFD1D6FE76100ECFA34 /* AnotherSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnotherSearchViewController.m; sourceTree = "<group>"; };
 		336D40011D6FEA7600ECFA34 /* HCSortString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSortString.h; sourceTree = "<group>"; };
@@ -1336,9 +1341,9 @@
 		33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click_2.png; path = ../../peizhi_btn_click_2.png; sourceTree = "<group>"; };
 		33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_2.png; path = ../../peizhi_btn_2.png; sourceTree = "<group>"; };
 		33E42E0E1DC9CE050024FFBB /* peizhi_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn.png; path = ../../peizhi_btn.png; sourceTree = "<group>"; };
-		33E42E161DCB2EE80024FFBB /* connected-ok.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "connected-ok.gif"; sourceTree = "<group>"; };
-		33E42E1A1DCB36BD0024FFBB /* connected-failed.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "connected-failed.gif"; sourceTree = "<group>"; };
-		33E42E1E1DCC28840024FFBB /* singal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = singal.png; sourceTree = "<group>"; };
+		33E42E161DCB2EE80024FFBB /* connected-ok.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "connected-ok.gif"; path = "../../connected-ok.gif"; sourceTree = "<group>"; };
+		33E42E1A1DCB36BD0024FFBB /* connected-failed.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "connected-failed.gif"; path = "../../connected-failed.gif"; sourceTree = "<group>"; };
+		33E42E1E1DCC28840024FFBB /* singal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = singal.png; path = ../../singal.png; sourceTree = "<group>"; };
 		33ECDCF21CDC9D3400E20AF8 /* deviceCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = deviceCore.xcdatamodel; sourceTree = "<group>"; };
 		33EFB5F71C979B5F003F336F /* StationCellectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationCellectViewController.h; sourceTree = "<group>"; };
 		33EFB5F81C979B5F003F336F /* StationCellectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationCellectViewController.m; sourceTree = "<group>"; };
@@ -2045,6 +2050,9 @@
 		3355AD931CF6A48B00AE6891 /* 图片WIFI */ = {
 			isa = PBXGroup;
 			children = (
+				33E42E161DCB2EE80024FFBB /* connected-ok.gif */,
+				33E42E1A1DCB36BD0024FFBB /* connected-failed.gif */,
+				33E42E1E1DCC28840024FFBB /* singal.png */,
 				33E42E0E1DC9CE050024FFBB /* peizhi_btn.png */,
 				33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */,
 				33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */,
@@ -2693,6 +2701,8 @@
 		337F9C831C71A6710016FE43 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				332283A81DFAA03B00C546B4 /* swiftHeader.swift */,
+				336D3FD41DF80C4600BE8422 /* ShinePhone-Bridging-Header.h */,
 				334CB0251CD839950061AC0B /* languageNew.h */,
 				337F9E0D1C71BF9E0016FE43 /* Header.h */,
 				337F9E0E1C71BFC10016FE43 /* PrefixHeader.pch */,
@@ -3248,9 +3258,7 @@
 				338418E11DC840AB00D679CA /* GifConfigViewController.m */,
 				338418E51DC9783500D679CA /* GFWaterView.h */,
 				338418E61DC9783500D679CA /* GFWaterView.m */,
-				33E42E161DCB2EE80024FFBB /* connected-ok.gif */,
-				33E42E1A1DCB36BD0024FFBB /* connected-failed.gif */,
-				33E42E1E1DCC28840024FFBB /* singal.png */,
+				336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */,
 			);
 			path = "采集器";
 			sourceTree = "<group>";
@@ -3432,6 +3440,7 @@
 					337F9C7F1C71A6710016FE43 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = DFM3SPMA69;
+						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
@@ -3886,6 +3895,7 @@
 				3343F3ED1C805BD2009F69BC /* README.mdown in Sources */,
 				3349A7C31C75C215009172C2 /* StTransitions.m in Sources */,
 				3358812E1CB66E250068EFAD /* qualityTableViewController.m in Sources */,
+				336D3FD61DF80C4700BE8422 /* RfStickSwift.swift in Sources */,
 				3343F3C51C80403C009F69BC /* AFURLRequestSerialization.m in Sources */,
 				3367EBA11CD0B2D200D2EF67 /* StationAppearanceViewController.m in Sources */,
 				335089281C73267A00D7AA03 /* findTableViewCell.m in Sources */,
@@ -3987,6 +3997,7 @@
 				3367CB511C86806700EF460C /* View+MASAdditions.m in Sources */,
 				337079441D911F5800D7DA98 /* questionView.m in Sources */,
 				33530F1E1CC87B5000378EB2 /* ManagementController.m in Sources */,
+				332283A91DFAA03B00C546B4 /* swiftHeader.swift in Sources */,
 				3343F3C41C80403C009F69BC /* AFURLConnectionOperation.m in Sources */,
 				3355F26B1C746BF5006DDE5A /* aboutTableViewCell.m in Sources */,
 				335D69B71D77BA4D00894D90 /* README.md in Sources */,
@@ -4193,6 +4204,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ShinePhone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenzhen Growatt New Energy Technology Co.,Ltd (DFM3SPMA69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -4214,6 +4226,9 @@
 				PRODUCT_NAME = ShinePhone;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "shinelink/设备/采集器/ShinePhone-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -4222,6 +4237,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ShinePhone.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shenzhen Growatt New Energy Technology Co.,Ltd (DFM3SPMA69)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -4243,12 +4259,15 @@
 				PRODUCT_NAME = ShinePhone;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "shinelink/设备/采集器/ShinePhone-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		337F9CB41C71A6720016FE43 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = shinelinkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -4261,6 +4280,7 @@
 		337F9CB51C71A6720016FE43 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = shinelinkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -4273,6 +4293,7 @@
 		337F9CB71C71A6720016FE43 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = shinelinkUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = YD.shinelinkUITests;
@@ -4285,6 +4306,7 @@
 		337F9CB81C71A6720016FE43 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = shinelinkUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = YD.shinelinkUITests;
