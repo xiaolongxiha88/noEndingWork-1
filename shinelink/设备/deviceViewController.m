@@ -68,7 +68,8 @@
 @property (nonatomic, strong) UIImageView *headImage3;
 @property (nonatomic, strong) UIView *AdBackView;
 @property (nonatomic, strong) UIView *AdFrontView;
-
+@property (nonatomic, strong)UIImageView *dirPic;
+ @property (nonatomic, strong) NSString*languageTypeValue;
 @end
 
 @implementation deviceViewController
@@ -98,6 +99,7 @@
     NSInteger pageName;
     //coredata
    
+     NSInteger tapPicTime;
 }
 
 - (instancetype)initWithDataDict:(NSMutableArray *)stationID stationName:(NSMutableArray *)stationName{
@@ -164,11 +166,52 @@
     
 }
 
+-(void)getDirctorPic{
+     // [[UIApplication sharedApplication].keyWindow addSubview:_HUD];
+    
+    _dirPic = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width,SCREEN_Height)];
+    _dirPic.userInteractionEnabled = YES;
+     if ([_languageTypeValue isEqualToString:@"0"]) {
+    _dirPic.image = IMAGE(@"设备页引导1.jpg");
+     }else{
+     _dirPic.image = IMAGE(@"设备页引导1_en.jpg");
+     }
+   [[UIApplication sharedApplication].keyWindow addSubview:_dirPic];
+    tapPicTime=0;
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(getNextPic:)];
+    [_dirPic addGestureRecognizer:tapGestureRecognizer];
+}
+
+-(void)getNextPic:(UITapGestureRecognizer*)tap{
+    tapPicTime++;
+    if ([_languageTypeValue isEqualToString:@"0"]) {
+        if (tapPicTime==1) {
+            _dirPic.image = IMAGE(@"设备页引导2.jpg");
+        }else if (tapPicTime==2){
+            _dirPic.image = IMAGE(@"设备页引导3.jpg");
+        }else if (tapPicTime==3){
+            _dirPic.image = IMAGE(@"设备页引导4.jpg");
+        }else if (tapPicTime==4){
+            [_dirPic removeFromSuperview];
+        }
+    }else{
+        if (tapPicTime==1) {
+            _dirPic.image = IMAGE(@"设备页引导2_en.jpg");
+        }else if (tapPicTime==2){
+            _dirPic.image = IMAGE(@"设备页引导3_en.jpg");
+        }else if (tapPicTime==3){
+            _dirPic.image = IMAGE(@"设备页引导4_en.jpg");
+        }else if (tapPicTime==4){
+            [_dirPic removeFromSuperview];
+        }
+    }
+    
+}
 
 -(void)getNewAd{
+    
 
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    
     NSString *adNum=[ud objectForKey:@"advertisingNumber"];
     
     //测试
@@ -193,7 +236,7 @@
                     
                     NSArray *languages = [NSLocale preferredLanguages];
                     NSString *currentLanguage = [languages objectAtIndex:0];
-                    NSString*_languageTypeValue;
+                 
                     NSString *picUrl;
                     
                     if ([currentLanguage hasPrefix:@"zh-Hans"]) {
@@ -271,6 +314,7 @@
     _AdFrontView=nil;
     _AdBackView=nil;
 
+        [self getDirctorPic];
 }
 
 
@@ -443,6 +487,7 @@
         NSLog(@"rightItem%lu",(unsigned long)index);
         StationCellectViewController *goLog=[[StationCellectViewController alloc]init];
         goLog.stationId=_stationIdOne;
+        goLog.getDirNum=_adNumber;
         [self.navigationController pushViewController:goLog animated:NO];
     }];
     DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:root_Add_Plant iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {

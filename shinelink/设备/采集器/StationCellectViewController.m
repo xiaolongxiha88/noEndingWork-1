@@ -28,6 +28,8 @@
 @property (nonatomic, strong) UIRefreshControl *control;
 @property (nonatomic, strong)  UIImageView *AlertView ;
 @property (nonatomic, strong)  NSString *languageValue ;
+@property (nonatomic, strong)UIImageView *dirPic;
+
 @end
 
 @implementation StationCellectViewController
@@ -144,9 +146,33 @@
         }];
     }
     
+    [self getDirPic];
     
 }
 
+-(void)getDirPic{
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *adNum=[ud objectForKey:@"dirDataloggerNumber"];
+    if ([_getDirNum integerValue]>[adNum integerValue]||(adNum==nil)) {
+             [[NSUserDefaults standardUserDefaults] setObject:_getDirNum forKey:@"dirDataloggerNumber"];
+        
+        _dirPic = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width,SCREEN_Height)];
+        _dirPic.userInteractionEnabled = YES;
+          if ([_languageValue isEqualToString:@"0"]) {
+        _dirPic.image = IMAGE(@"采集器_cn.jpg");
+          }else{
+          _dirPic.image = IMAGE(@"采集器_en.jpg");
+          }
+        [[UIApplication sharedApplication].keyWindow addSubview:_dirPic];
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(getNextPic)];
+        [_dirPic addGestureRecognizer:tapGestureRecognizer];
+    }
+    
+}
+
+-(void)getNextPic{
+        [_dirPic removeFromSuperview];
+}
 
 -(void)refreshStateChange:(UIRefreshControl *)control{
     

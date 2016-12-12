@@ -109,33 +109,32 @@ class RfStickSwift: RootViewController {
     
         BaseRequest.request(withMethodResponseStringResult: HEAD_URL, paramars: netDic0, paramarsSite: "/newFtpAPI.do?op=singlepairRFStick", sucessBlock: {(successBlock)->() in
             
+          
              let data:Data=successBlock as! Data
         
      let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
             
-            let jsonDate=jsonDate0 as! Dictionary<String, Any>
+            if (jsonDate0 != nil){
+                let jsonDate=jsonDate0 as! Dictionary<String, Any>
+                
+                // let result:NSString=NSString(format:"%s",jsonDate["result"] )
+                let result1=jsonDate["result"] as! NSNumber
+                let result=result1.stringValue
+                if result.isEqual("1"){
+                    self.showToastView(withTitle: root_peizhi_chenggong)
+                }else{
+                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                }
             
-           // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-            let result1=jsonDate["result"] as! NSNumber
-            let result=result1.stringValue
-            if result.isEqual("1"){
-              self.showToastView(withTitle: root_peizhi_chenggong)
-            }else{
-            
-            self.showToastView(withTitle: jsonDate["msg"] as! String!)
             }
-                   
             
         }, failure: {(error) in
                   self.showToastView(withTitle: root_Networking)
         })
-     
         
-        
-        
-        
-        
-    }
+       }
+    
+    
     
     
     override func didReceiveMemoryWarning() {

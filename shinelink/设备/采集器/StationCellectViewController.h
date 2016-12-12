@@ -12,5 +12,6 @@
 @interface StationCellectViewController : RootViewController
 
 @property(nonatomic,strong)NSString *stationId;
+@property(nonatomic,strong)NSString *getDirNum;
 
 @end
