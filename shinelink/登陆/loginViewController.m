@@ -652,6 +652,23 @@ NSLog(@"体验馆");
         Vc4.tabBarItem.image=[UIImage imageNamed:@"mine@2x.png"];
         Vc4.tabBarItem.selectedImage=[[UIImage imageNamed:@"mine2v@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         
+        [Vc1.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                [UIColor grayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+        [Vc1.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                MainColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+        [Vc2.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                [UIColor grayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+        [Vc2.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                MainColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+        [Vc3.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                [UIColor grayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+        [Vc3.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                MainColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+        [Vc4.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                [UIColor grayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+        [Vc4.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                MainColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+        
         //Vc1.tabBarController.tabBar.tintColor = MainColor;
         
         NSArray *controllers=[NSArray arrayWithObjects:Vc1,Vc2,Vc3,Vc4,nil];

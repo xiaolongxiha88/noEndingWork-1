@@ -181,6 +181,8 @@
                     [self showAlertViewWithTitle:nil message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
                 } else if ([[jsonObj objectForKey:@"msg"]integerValue]==507) {
                     [self showAlertViewWithTitle:nil message:root_xuliehao_jiaoyanMa_bupipei cancelButtonTitle:root_Yes];
+                }else if ([[jsonObj objectForKey:@"msg"]integerValue] ==701) {
+                    [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
                 }
                   [self.navigationController popViewControllerAnimated:NO];
             }else{

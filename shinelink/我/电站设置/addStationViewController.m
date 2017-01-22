@@ -265,6 +265,8 @@
             }else if ([jsonObj[@"msg"] integerValue]==501) {
                 [self showAlertViewWithTitle:nil message:root_tianjia_dianzhan_xinxi cancelButtonTitle:root_Yes];
                 [self.navigationController popViewControllerAnimated:YES];
+            }else if ([jsonObj[@"msg"] integerValue] ==701) {
+                [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
             }
             
                 [self.navigationController popViewControllerAnimated:YES];

@@ -222,12 +222,9 @@
         
     }
 
-    
-    
-    
-    
-    
         [JPUSHService handleRemoteNotification:userInfo];
+    
+    
 }
 
 

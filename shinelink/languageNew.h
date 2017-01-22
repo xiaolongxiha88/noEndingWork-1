@@ -591,5 +591,6 @@
 #define  root_shijian      NSLocalizedString(@"4时间", nil)
 #define  root_shuzhi      NSLocalizedString(@"5数据", nil)
 #define  root_riqi      NSLocalizedString(@"6日期", nil)
+#define  root_zhanghu_meiyou_quanxian      NSLocalizedString(@"7你的账号没有操作权限", nil)
 
 #endif /* languageNew_h */

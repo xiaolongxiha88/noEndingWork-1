@@ -164,6 +164,7 @@
 
     }
     
+    
 }
 
 -(void)getDirctorPic{
@@ -1330,7 +1331,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         netType=@"/newStorageAPI.do?op=deleteStorage";
     }
     
-    [dict setObject:get.deviceSN forKey:@"inverterId"];
+ //   [dict setObject:get.deviceSN forKey:@"inverterId"];
     
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:dict paramarsSite:netType sucessBlock:^(id content) {
         //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
@@ -1342,6 +1343,8 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
                 if ([content1[@"msg"] integerValue] ==501) {
                     [self showAlertViewWithTitle:nil message:root_xiTong_CuoWu cancelButtonTitle:root_Yes];
                     //[self.tableView reloadData];
+                }else if ([content1[@"msg"] integerValue] ==701) {
+                    [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
                 }
             }else{
                 [self showAlertViewWithTitle:nil message:root_shanChu_chengGong cancelButtonTitle:root_Yes];
@@ -1415,6 +1418,8 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             if ([content1[@"success"] integerValue] == 0) {
                 if ([content1[@"msg"] integerValue] ==501) {
                     [self showAlertViewWithTitle:nil message:root_xitong_cuoWu cancelButtonTitle:root_Yes];
+                }else if ([content1[@"msg"] integerValue] ==701) {
+                    [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
                 }
             }else{
                 

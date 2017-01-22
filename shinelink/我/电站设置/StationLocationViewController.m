@@ -315,6 +315,11 @@
             [self showAlertViewWithTitle:nil message:NSLocalizedString(@"Successfully modified", @"Successfully modified") cancelButtonTitle:root_Yes];
             [self.navigationController popViewControllerAnimated:YES];
         }else{
+            if ([[jsonObj objectForKey:@"success"] integerValue] ==0) {
+                if ([[jsonObj objectForKey:@"msg"]integerValue] ==701) {
+                    [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
+                }
+            }
             [self showAlertViewWithTitle:nil message:NSLocalizedString(@"Modification fails", @"Modification fails") cancelButtonTitle:root_Yes];
         }
     } failure:^(NSError *error) {

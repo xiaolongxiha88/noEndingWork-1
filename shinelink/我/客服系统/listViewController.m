@@ -322,8 +322,16 @@
            
              [self showAlertViewWithTitle:nil message:root_shanchu_chenggong cancelButtonTitle:root_Yes];
         }else{
-        
-             [self showAlertViewWithTitle:nil message:root_shanchu_shibai cancelButtonTitle:root_Yes];
+            if ([[jsonObj objectForKey:@"success"] integerValue] ==0) {
+                if ([[jsonObj objectForKey:@"msg"]integerValue]==501) {
+                  [self showAlertViewWithTitle:nil message:root_shanchu_shibai cancelButtonTitle:root_Yes];
+                }else if ([[jsonObj objectForKey:@"msg"]integerValue] ==701) {
+                    [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
+                }
+            }
+
+            
+            
         }
         
         [self netquestion];

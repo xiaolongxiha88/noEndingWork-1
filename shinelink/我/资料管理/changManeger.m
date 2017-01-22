@@ -273,6 +273,8 @@
                     
                 }else if ([content1[@"msg"] integerValue] ==502) {
                     [self showAlertViewWithTitle:nil message:root_WO_yonghu_bucunzai cancelButtonTitle:root_Yes];
+                }else if ([content1[@"msg"] integerValue] ==701) {
+                    [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
                 }
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
