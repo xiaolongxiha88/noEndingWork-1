@@ -568,3 +568,5 @@
 "datalogger checkcode"="Datalogger checkcode";
 "请输入RFStick序列号"="Input RFStick SN";
 "7你的账号没有操作权限"="Your account does not have permission to operate";
+"8上滑查看详细数据"="Slide up to check dedail data";
+"9下滑查看曲线图"="Slide down to check the chart";

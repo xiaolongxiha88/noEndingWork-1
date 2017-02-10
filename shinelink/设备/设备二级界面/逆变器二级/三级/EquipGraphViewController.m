@@ -5,14 +5,18 @@
 //  Created by LinKai on 15/5/25.
 //  Copyright (c) 2015年 binghe168. All rights reserved.
 //
-
+#import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIKit.h>
 #import "EquipGraphViewController.h"
 #import "Line2View.h"
 #import "EditGraphView.h"
 
+#import "KongZhiNi.h"
+#import "datailD2ViewController.h"
+
 static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
-@interface EquipGraphViewController () <UIPickerViewDelegate, UIPickerViewDataSource,EditGraphViewDelegate>
+@interface EquipGraphViewController () <UIPickerViewDelegate, UIPickerViewDataSource,EditGraphViewDelegate,UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIView *timeDisplayView;
 @property (nonatomic, strong) UIButton *dayButton;
@@ -51,17 +55,22 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 @property(nonatomic,strong)NSString *type;
 @property(nonatomic,strong)UIButton *selectButton;
 @property(nonatomic,strong)UIScrollView *scrollView;
+@property(nonatomic,strong)UIPageControl *pageControl;
+@property (nonatomic, strong) NSMutableArray *timeDataArray;
+@property (nonatomic, strong) NSMutableArray *dateDataArray;
+@property (nonatomic, strong) NSString *timePickerType;
 
+@property (nonatomic, strong) UILabel *upAlert;
+@property (nonatomic, strong) UIImageView *upImage;
 @end
 
 @implementation EquipGraphViewController
 
 - (void)viewWillAppear:(BOOL)animated {
-   // self.title = _dictInfo[@"equipId"];
-    //self.navigationItem.title.
+
     _type=@"1";
-    UIImage *bgImage = IMAGE(@"bg5.png");
-    self.view.layer.contents = (id)bgImage.CGImage;
+  self.navigationController.navigationBarHidden=NO;
+    self.view.backgroundColor=MainColor;
     [self initData];
 }
 
@@ -89,10 +98,46 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
 }
 
+-(void)goDown{
+    datailD2ViewController *go=[[datailD2ViewController alloc]init];
+    go.SnID=_SnID;
+    go.dateDataArray=[NSMutableArray arrayWithArray:_dateDataArray];
+    go.timeDataArray=[NSMutableArray arrayWithArray:_timeDataArray];
+    go.timePickerType=_timePickerType;
+    CATransition* transition = [CATransition animation];
+    transition.type = kCATransitionPush;//可更改为其他方式
+    transition.subtype = kCATransitionFromTop;//可更改为其他方式
+    transition.duration = 0.6f;
+     [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+    if ([_timePickerType isEqualToString:@"1"]) {
+         [self.navigationController pushViewController:go animated:YES];
+    }
+   
+}
+
 - (void)initUI {
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
-    [self.view addSubview:_scrollView];
-
+    self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _scrollView.scrollEnabled=YES;
+        _scrollView.pagingEnabled = YES;
+      self.scrollView.clipsToBounds = NO;
+    _scrollView.showsVerticalScrollIndicator = NO;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    _scrollView.delegate = self;
+    _scrollView.contentSize = CGSizeMake(SCREEN_Width,3*SCREEN_Height);
+       [self.view addSubview:_scrollView];
+    
+//    _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0,SCREEN_Height-20*HEIGHT_SIZE,40*NOW_SIZE,SCREEN_Height)];
+//     self.pageControl.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+//    _pageControl.numberOfPages =2;
+//    _pageControl.currentPage=0;
+//      [self.view addSubview:self.pageControl];
+ 
+    UISwipeGestureRecognizer *upMove=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(goDown)];
+     upMove.direction=UISwipeGestureRecognizerDirectionUp;
+    [_scrollView addGestureRecognizer:upMove];
+    
+    
     self.dayButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
     
@@ -227,14 +272,42 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             }
              }
             
-            self.line2View = [[Line2View alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.timeDisplayView.frame), SCREEN_Width, SCREEN_Height - self.tabBarController.tabBar.frame.size.height - CGRectGetMaxY(self.timeDisplayView.frame))];
+            self.line2View = [[Line2View alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.timeDisplayView.frame), SCREEN_Width, SCREEN_Height - self.tabBarController.tabBar.frame.size.height - CGRectGetMaxY(self.timeDisplayView.frame)-50*HEIGHT_SIZE)];
             self.line2View.flag=@"1";
                self.line2View.frameType=@"2";
             [_scrollView addSubview:self.line2View];
+          //  _dateDataArray=[NSMutableArray arrayWithArray:[_dayDict allValues]];
+           // _timeDataArray=[NSMutableArray arrayWithArray:[_dayDict allKeys]];
+            
+            NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch|NSNumericSearch|NSWidthInsensitiveSearch|NSForcedOrderingSearch;
+            NSComparator sort = ^(NSString *obj1, NSString *obj2){
+                NSRange range = NSMakeRange(0, obj1.length);
+                return [obj1 compare:obj2 options:comparisonOptions range:range];
+            };
+            _timeDataArray = [NSMutableArray arrayWithArray:[_dayDict.allKeys sortedArrayUsingComparator:sort]];
+            _dateDataArray = [NSMutableArray array];
+            for (NSString *key in _timeDataArray) {
+                [_dateDataArray addObject:_dayDict[key]];
+            }
+            _timePickerType=@"1";
             [self.line2View refreshLineChartViewWithDataDict: self.dayDict];
             
             self.line2View.energyTitleLabel.text = root_Today_Energy;
             self.line2View.unitLabel.text = root_Powre;
+            
+           _upImage= [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_Width/2-10*HEIGHT_SIZE, CGRectGetMaxY(self.line2View.frame)+0*HEIGHT_SIZE, 20*HEIGHT_SIZE, 12*HEIGHT_SIZE )];
+                  _upImage.image = IMAGE(@"upGo.png");
+             [_upImage.layer addAnimation:[self opacityForever_Animation:2] forKey:nil];
+            [_scrollView addSubview:_upImage];
+            
+            _upAlert=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width/2-100*HEIGHT_SIZE, CGRectGetMaxY(self.line2View.frame)+12*HEIGHT_SIZE, 200*NOW_SIZE, 20*HEIGHT_SIZE)];
+            _upAlert.text=root_shanghua_chakan_shuju;
+            _upAlert.textAlignment=NSTextAlignmentCenter;
+            _upAlert.textColor=[UIColor whiteColor];
+            _upAlert.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+             [_upAlert.layer addAnimation:[self opacityForever_Animation:2] forKey:nil];
+            [_scrollView addSubview:_upAlert];
+            
             _selectButton=[[UIButton alloc]initWithFrame:CGRectMake(90*NOW_SIZE, 50*HEIGHT_SIZE, 230*NOW_SIZE, 30*HEIGHT_SIZE)];
             [_selectButton setTitle:_dict[@"1"] forState:0];
             [_selectButton addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
@@ -256,6 +329,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }];
     
 }
+
+
+
 
 
 #pragma mark - 获取、保存曲线图数据
@@ -288,6 +364,20 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                     NSString *value0=dayDict0[key];
                     [_dayDict setValue:value0 forKey:key0];
                 }
+                NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch|NSNumericSearch|NSWidthInsensitiveSearch|NSForcedOrderingSearch;
+                NSComparator sort = ^(NSString *obj1, NSString *obj2){
+                    NSRange range = NSMakeRange(0, obj1.length);
+                    return [obj1 compare:obj2 options:comparisonOptions range:range];
+                };
+                _timeDataArray = [NSMutableArray arrayWithArray:[_dayDict.allKeys sortedArrayUsingComparator:sort]];
+                _dateDataArray = [NSMutableArray array];
+                for (NSString *key in _timeDataArray) {
+                    [_dateDataArray addObject:_dayDict[key]];
+                }
+                _timePickerType=@"1";
+                
+                  [_scrollView addSubview:_upImage];
+                   [_scrollView addSubview:_upAlert];
                 [self.line2View refreshLineChartViewWithDataDict:_dayDict];
             }
             
@@ -311,6 +401,24 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             [self hideProgressView];
             if (content) {
                 self.monthDict = [NSMutableDictionary dictionaryWithDictionary:content];
+             //   _dateDataArray=[NSMutableArray arrayWithArray:[_monthDict allValues]];
+           //     _timeDataArray=[NSMutableArray arrayWithArray:[_monthDict allKeys]];
+                
+                NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch|NSNumericSearch|NSWidthInsensitiveSearch|NSForcedOrderingSearch;
+                NSComparator sort = ^(NSString *obj1, NSString *obj2){
+                    NSRange range = NSMakeRange(0, obj1.length);
+                    return [obj1 compare:obj2 options:comparisonOptions range:range];
+                };
+                _timeDataArray = [NSMutableArray arrayWithArray:[_monthDict.allKeys sortedArrayUsingComparator:sort]];
+                _dateDataArray = [NSMutableArray array];
+                for (NSString *key in _timeDataArray) {
+                    [_dateDataArray addObject:_monthDict[key]];
+                }
+                _timePickerType=@"2";
+                
+                [_upAlert removeFromSuperview];
+                   [_upImage removeFromSuperview];
+                
                 [self.line2View refreshBarChartViewWithDataDict:content chartType:2];
             }
             
@@ -333,6 +441,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             [self hideProgressView];
             if (content) {
                 self.yearDict = [NSMutableDictionary dictionaryWithDictionary:content];
+                [_upAlert removeFromSuperview];
+                [_upImage removeFromSuperview];
+                
                 [self.line2View refreshBarChartViewWithDataDict:content chartType:3];
             }
             
@@ -355,6 +466,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                NSLog(@"totalData: %@", content);
             if (content) {
                 self.yearDict = [NSMutableDictionary dictionaryWithDictionary:content];
+                [_upAlert removeFromSuperview];
+                [_upImage removeFromSuperview];
+                
                 [self.line2View refreshBarChartViewWithDataDict:content chartType:4];
             }
             
@@ -1020,6 +1134,23 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         }
     }
 }
+
+
+-(CABasicAnimation *)opacityForever_Animation:(float)time{
+    
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"opacity"];//必须写opacity才行。
+    animation.fromValue = [NSNumber numberWithFloat:1.0f];
+    animation.toValue = [NSNumber numberWithFloat:0.0f];//这是透明度。
+    animation.autoreverses = YES;
+    animation.duration = time;
+    animation.repeatCount = MAXFLOAT;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    animation.timingFunction=[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];///没有的话是均匀的动画。
+    return animation;
+}
+
+
 
 
 @end

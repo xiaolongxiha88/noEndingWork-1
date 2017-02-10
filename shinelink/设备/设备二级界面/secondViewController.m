@@ -10,7 +10,7 @@
 #import "CircleView.h"
 #import"DTKDropdownMenuView.h"
 #import "Line2View.h"
-#import "threeViewController.h"
+//#import "threeViewController.h"
 #import "kongZhiNi0.h"
 #import "parameterPV.h"
 #import "PvLogTableViewController.h"

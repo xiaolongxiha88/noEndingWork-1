@@ -592,5 +592,7 @@
 #define  root_shuzhi      NSLocalizedString(@"5数据", nil)
 #define  root_riqi      NSLocalizedString(@"6日期", nil)
 #define  root_zhanghu_meiyou_quanxian      NSLocalizedString(@"7你的账号没有操作权限", nil)
+#define  root_shanghua_chakan_shuju      NSLocalizedString(@"8上滑查看详细数据", nil)
+#define  root_xiahua_chakan_quxiantu      NSLocalizedString(@"9下滑查看曲线图", nil)
 
 #endif /* languageNew_h */

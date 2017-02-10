@@ -9,7 +9,7 @@
 #import "secondCNJ.h"
 #import"DTKDropdownMenuView.h"
 #import "Line2View.h"
-#import "threeViewController.h"
+//#import "threeViewController.h"
 #import"VWWWaterView.h"
 #import "ControlCNJ.h"
 #import "parameterCNJ.h"

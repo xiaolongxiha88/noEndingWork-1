@@ -1145,14 +1145,14 @@
     imageView.image = [UIImage imageNamed:_headPicName];
     [_headerView addSubview:imageView];
     
-    float marchWidth=5*NOW_SIZE;
+    float marchWidth=0*NOW_SIZE;
     float marchHeigh=18*HEIGHT_SIZE;
     float  headLableH=30*HEIGHT_SIZE;
     float  headLableColorH=4*HEIGHT_SIZE;
      float  headLableColorW=30*NOW_SIZE;
     float headLableValueH=50*HEIGHT_SIZE;
     float headImageH=40*HEIGHT_SIZE;
-    float unitWidth=(Kwidth-15*NOW_SIZE)/3;
+    float unitWidth=(Kwidth)/3;
     float gapH=10*HEIGHT_SIZE;
     NSArray *headNameArray=[NSArray arrayWithObjects: _head23,_head13,_head33,nil];
      NSArray *headValueArray=[NSArray arrayWithObjects: _head21,_head11,_head31,nil];
@@ -1176,15 +1176,16 @@
         Lable1.text=headValueArray[i];
         Lable1.textAlignment=NSTextAlignmentCenter;
         Lable1.textColor=[UIColor whiteColor];
-        Lable1.font = [UIFont systemFontOfSize:30*HEIGHT_SIZE];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:30*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [headValueArray[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, headLableValueH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-       // [Lable1 sizeToFit];
+        Lable1.font = [UIFont systemFontOfSize:26*HEIGHT_SIZE];
         [_headerView addSubview:Lable1];
+//        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:30*HEIGHT_SIZE] forKey:NSFontAttributeName];
+//        CGSize size = [headValueArray[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, headLableValueH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+       // [Lable1 sizeToFit];
         
-        UILabel *Lable1L=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i+size.width/2+unitWidth/2, marchHeigh+headLableH+gapH*2+5*HEIGHT_SIZE, unitWidth*0.4,headLableValueH)];
+        
+        UILabel *Lable1L=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableValueH-15*HEIGHT_SIZE, unitWidth,headLableValueH*0.5)];
         Lable1L.text=headValue1Array[i];
-        Lable1L.textAlignment=NSTextAlignmentLeft;
+        Lable1L.textAlignment=NSTextAlignmentCenter;
         Lable1L.textColor=[UIColor whiteColor];
         Lable1L.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_headerView addSubview:Lable1L];
@@ -1224,7 +1225,7 @@
         //第一次启动
         
         //引导操作动画
-        self.guideImageView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_Width - 100*NOW_SIZE)/2, 20*NOW_SIZE, 100*NOW_SIZE, 180*NOW_SIZE)];
+        self.guideImageView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_Width - 80*NOW_SIZE)/2, 20*NOW_SIZE, 100*NOW_SIZE, 180*NOW_SIZE)];
         NSMutableArray *guideImages = [NSMutableArray array];
         for (int i = 1; i <= 11; i++) {
             NSString *imageStr = [NSString stringWithFormat:@"L%d.png", i];
