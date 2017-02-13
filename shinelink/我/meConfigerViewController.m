@@ -21,10 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImage *bgImage = IMAGE(@"bg.png");
-    self.view.layer.contents = (id)bgImage.CGImage;
+//    UIImage *bgImage = IMAGE(@"bg.png");
+//    self.view.layer.contents = (id)bgImage.CGImage;
     self.title=root_wifi_peizhi;
-    
+    self.view.backgroundColor=MainColor;
     [self initUI];
 }
 
@@ -57,21 +57,21 @@
     _cellectId.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [userBgImageView addSubview:_cellectId];
     
-    //数据采集器效验码
-    UIImageView *pwdBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 110*HEIGHT_SIZE, SCREEN_Width - 80*NOW_SIZE, 45*HEIGHT_SIZE)];
-    pwdBgImageView.image = IMAGE(@"圆角矩形空心.png");
-    pwdBgImageView.userInteractionEnabled = YES;
-    [self.view addSubview:pwdBgImageView];
-    
-    _cellectNo = [[UITextField alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 0, CGRectGetWidth(pwdBgImageView.frame) , 45*HEIGHT_SIZE)];
-    _cellectNo.placeholder = root_jiaoYanMa;
-    _cellectNo.textColor = [UIColor grayColor];
-    _cellectNo.tintColor = [UIColor grayColor];
-    _cellectNo.textAlignment = NSTextAlignmentCenter;
-    [_cellectNo setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [_cellectNo setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
-    _cellectNo.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [pwdBgImageView addSubview:_cellectNo];
+//    //数据采集器效验码
+//    UIImageView *pwdBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 110*HEIGHT_SIZE, SCREEN_Width - 80*NOW_SIZE, 45*HEIGHT_SIZE)];
+//    pwdBgImageView.image = IMAGE(@"圆角矩形空心.png");
+//    pwdBgImageView.userInteractionEnabled = YES;
+//    [self.view addSubview:pwdBgImageView];
+//    
+//    _cellectNo = [[UITextField alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 0, CGRectGetWidth(pwdBgImageView.frame) , 45*HEIGHT_SIZE)];
+//    _cellectNo.placeholder = root_jiaoYanMa;
+//    _cellectNo.textColor = [UIColor grayColor];
+//    _cellectNo.tintColor = [UIColor grayColor];
+//    _cellectNo.textAlignment = NSTextAlignmentCenter;
+//    [_cellectNo setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
+//    [_cellectNo setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+//    _cellectNo.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+//    [pwdBgImageView addSubview:_cellectNo];
     
     
     
@@ -118,47 +118,47 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(NSString*)getValidCode:(NSString*)serialNum{
-    if (serialNum==NULL||serialNum==nil) {
-        return @"";
-    }
-    NSData *testData = [serialNum dataUsingEncoding: NSUTF8StringEncoding];
-    int sum=0;
-    
-    Byte *snBytes=(Byte*)[testData bytes];
-    
-    for(int i=0;i<[testData length];i++)
-    {
-        sum+=snBytes[i];
-    }
-    NSInteger B=sum%8;
-    NSString *B1= [NSString stringWithFormat: @"%ld", (long)B];
-    int C=sum*sum;
-    
-    NSString *text = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x",C]];
-    int length = [text length];
-    NSString *resultTemp;
-    NSString *resultTemp3;
-    NSString *resultTemp1=[text substringWithRange:NSMakeRange(0, 2)];
-    NSString *resultTemp2=[text substringWithRange:NSMakeRange(length - 2, 2)];
-    
-    resultTemp3= [resultTemp1 stringByAppendingString:resultTemp2];
-    resultTemp=[resultTemp3 stringByAppendingString:B1];
-    
-    NSString *result = @"";
-    
-    char *charArray = [resultTemp cStringUsingEncoding:NSASCIIStringEncoding];
-    for (int i=0; i<[resultTemp length]; i++) {
-        if (charArray[i]==0x30||charArray[i]==0x4F||charArray[i]==0x4F) {
-            charArray[i]++;
-        }
-        result=[result stringByAppendingFormat:@"%c",charArray[i]];
-    }
-    
-    
-    return [result uppercaseString];
-    
-}
+//-(NSString*)getValidCode:(NSString*)serialNum{
+//    if (serialNum==NULL||serialNum==nil) {
+//        return @"";
+//    }
+//    NSData *testData = [serialNum dataUsingEncoding: NSUTF8StringEncoding];
+//    int sum=0;
+//    
+//    Byte *snBytes=(Byte*)[testData bytes];
+//    
+//    for(int i=0;i<[testData length];i++)
+//    {
+//        sum+=snBytes[i];
+//    }
+//    NSInteger B=sum%8;
+//    NSString *B1= [NSString stringWithFormat: @"%ld", (long)B];
+//    int C=sum*sum;
+//    
+//    NSString *text = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x",C]];
+//    int length = [text length];
+//    NSString *resultTemp;
+//    NSString *resultTemp3;
+//    NSString *resultTemp1=[text substringWithRange:NSMakeRange(0, 2)];
+//    NSString *resultTemp2=[text substringWithRange:NSMakeRange(length - 2, 2)];
+//    
+//    resultTemp3= [resultTemp1 stringByAppendingString:resultTemp2];
+//    resultTemp=[resultTemp3 stringByAppendingString:B1];
+//    
+//    NSString *result = @"";
+//    
+//    char *charArray = [resultTemp cStringUsingEncoding:NSASCIIStringEncoding];
+//    for (int i=0; i<[resultTemp length]; i++) {
+//        if (charArray[i]==0x30||charArray[i]==0x4F||charArray[i]==0x4F) {
+//            charArray[i]++;
+//        }
+//        result=[result stringByAppendingFormat:@"%c",charArray[i]];
+//    }
+//    
+//    
+//    return [result uppercaseString];
+//    
+//}
 
 
 
@@ -167,25 +167,25 @@
         [self showAlertViewWithTitle:nil message:root_caiJiQi cancelButtonTitle:root_OK];
         return;
     }
-    if ([_cellectNo.text isEqual:@""]) {
-        [self showAlertViewWithTitle:nil message:root_jiaoYanMa_zhengQue cancelButtonTitle:root_OK];
-        return;
-    }
+//    if ([_cellectNo.text isEqual:@""]) {
+//        [self showAlertViewWithTitle:nil message:root_jiaoYanMa_zhengQue cancelButtonTitle:root_OK];
+//        return;
+//    }
     
     NSString *SnID=_cellectId.text;
-      NSString *SnCode=_cellectNo.text;
+  //    NSString *SnCode=_cellectNo.text;
     
-    NSString *SnCode2=[self getValidCode:SnID];
+ //   NSString *SnCode2=[self getValidCode:SnID];
     
-    if ([SnCode isEqualToString:SnCode2]) {
+   // if ([SnCode isEqualToString:SnCode2]) {
         AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
         rootView.SnString=SnID;
          rootView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:rootView animated:YES];
-    }else{
-        [self showAlertViewWithTitle:nil message:root_jiaoYanMa_zhengQue cancelButtonTitle:root_OK];
-        return;
-    }
+//    }else{
+//        [self showAlertViewWithTitle:nil message:root_jiaoYanMa_zhengQue cancelButtonTitle:root_OK];
+//        return;
+//    }
     
     
     

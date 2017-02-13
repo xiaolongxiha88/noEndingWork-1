@@ -70,6 +70,7 @@
 @property (nonatomic, strong) UIView *AdFrontView;
 @property (nonatomic, strong)UIImageView *dirPic;
  @property (nonatomic, strong) NSString*languageTypeValue;
+ @property (nonatomic, strong) NSString*deviceHeadType;
 @end
 
 @implementation deviceViewController
@@ -703,7 +704,8 @@
                 }
 
             }else if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"storage"]){
-             [imageArray addObject:@"storage.png"];
+                _deviceHeadType=@"1";
+                [imageArray addObject:@"storage.png"];
                 NSString *PO=[NSString stringWithFormat:@"%@W",content[@"deviceList"][i][@"pCharge"]];
                 [powerArray addObject:PO];
                 NSString *DY=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"capacity"]];
@@ -1140,25 +1142,77 @@
     _tableView.tableHeaderView = _headerView;
    
     float headHeight=_headerView.bounds.size.height;
-    _headPicName=@"deviceHead.jpg";
+    _headPicName=@"device_bg.jpg";
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,Kwidth,headHeight)];
     imageView.image = [UIImage imageNamed:_headPicName];
     [_headerView addSubview:imageView];
     
+    _deviceHeadType=@"1";
+    if([_deviceHeadType isEqualToString:@"1"]){
+        [self getPCSHead];
+    }else{
+        [self getPvHead];
+    }
+    
+}
+
+-(void)getPCSHead{
+     UIBezierPath *path = [UIBezierPath bezierPath];
+    CAShapeLayer *trackLayer = [CAShapeLayer new];
+    [path moveToPoint:CGPointMake(100, 100)];
+       [path addLineToPoint:CGPointMake(300, 100)];
+      trackLayer.path = path.CGPath;
+    trackLayer.frame = _headerView.bounds;
+    trackLayer.lineWidth=1;
+    trackLayer.fillColor = nil;
+    trackLayer.strokeColor =COLOR(229, 220, 120, 1).CGColor;
+       [_headerView.layer addSublayer:trackLayer];
+    
+    
+    UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(100,100,10*HEIGHT_SIZE,8*HEIGHT_SIZE)];
+    imageView1.image = [UIImage imageNamed:@"yuan.png"];
+    [_headerView addSubview:imageView1];
+    
+    
+    CABasicAnimation *animation1= [CABasicAnimation animationWithKeyPath:@"position"];
+    //animation1.duration = 2.5; // 持续时间
+   // animation1.repeatCount = MAXFLOAT; // 重复次数
+    animation1.fromValue = [NSValue valueWithCGPoint:CGPointMake(100, 100)]; // 起始帧
+    animation1.toValue = [NSValue valueWithCGPoint:CGPointMake(300, 100)]; // 终了帧
+    
+    CABasicAnimation *animation2 = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    // 动画选项设定
+    animation2.duration = 0.6; // 动画持续时间
+    animation2.repeatCount = MAXFLOAT; // 重复次数
+    animation2.autoreverses = YES; // 动画结束时执行逆动画
+    animation2.fromValue = [NSNumber numberWithFloat:1.0]; // 开始时的倍率
+    animation2.toValue = [NSNumber numberWithFloat:1.5]; // 结束时的倍率
+    
+    CAAnimationGroup *group = [CAAnimationGroup animation];
+    // 动画选项设定
+    group.duration =  2.5;
+    group.repeatCount = MAXFLOAT;
+    group.animations = [NSArray arrayWithObjects:animation1, animation2, nil];
+    // 添加动画
+    [imageView1.layer addAnimation:group forKey:@"move-layer"];
+    
+}
+
+-(void)getPvHead{
     float marchWidth=0*NOW_SIZE;
     float marchHeigh=18*HEIGHT_SIZE;
     float  headLableH=30*HEIGHT_SIZE;
     float  headLableColorH=4*HEIGHT_SIZE;
-     float  headLableColorW=30*NOW_SIZE;
+    float  headLableColorW=30*NOW_SIZE;
     float headLableValueH=50*HEIGHT_SIZE;
     float headImageH=40*HEIGHT_SIZE;
     float unitWidth=(Kwidth)/3;
     float gapH=10*HEIGHT_SIZE;
     NSArray *headNameArray=[NSArray arrayWithObjects: _head23,_head13,_head33,nil];
-     NSArray *headValueArray=[NSArray arrayWithObjects: _head21,_head11,_head31,nil];
+    NSArray *headValueArray=[NSArray arrayWithObjects: _head21,_head11,_head31,nil];
     NSArray *headValue1Array=[NSArray arrayWithObjects: _head22,_head12,_head32,nil];
-     NSArray *headColorArray=[NSArray arrayWithObjects: COLOR(17, 183, 243, 1),COLOR(219, 210, 74, 1),COLOR(83, 218, 118, 1),nil];
-      NSArray *headImageNameArray11=[NSArray arrayWithObjects: @"deviceHead1.png",@"deviceHead2.png",@"deviceHead33.png",nil];
+    NSArray *headColorArray=[NSArray arrayWithObjects: COLOR(17, 183, 243, 1),COLOR(219, 210, 74, 1),COLOR(83, 218, 118, 1),nil];
+    NSArray *headImageNameArray11=[NSArray arrayWithObjects: @"deviceHead1.png",@"deviceHead2.png",@"deviceHead33.png",nil];
     
     for (int i=0; i<headValueArray.count; i++) {
         UILabel *Lable12=[[UILabel alloc]initWithFrame:CGRectMake(marchWidth+unitWidth*i, marchHeigh, unitWidth,headLableH )];
@@ -1178,9 +1232,9 @@
         Lable1.textColor=[UIColor whiteColor];
         Lable1.font = [UIFont systemFontOfSize:26*HEIGHT_SIZE];
         [_headerView addSubview:Lable1];
-//        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:30*HEIGHT_SIZE] forKey:NSFontAttributeName];
-//        CGSize size = [headValueArray[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, headLableValueH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-       // [Lable1 sizeToFit];
+        //        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:30*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        //        CGSize size = [headValueArray[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, headLableValueH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        // [Lable1 sizeToFit];
         
         
         UILabel *Lable1L=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableValueH-15*HEIGHT_SIZE, unitWidth,headLableValueH*0.5)];
@@ -1194,9 +1248,9 @@
         float headImageH0=CGRectGetMaxY(Lable1.frame);
         float  headImageHgab=20*HEIGHT_SIZE;
         if (i==0) {
-        _headImage1= [[UIImageView alloc] initWithFrame:CGRectMake(marchWidth+(unitWidth-headImageH)/2+unitWidth*i, headImageH0+headImageHgab, headImageH,headImageH)];
-        _headImage1.image = [UIImage imageNamed:headImageNameArray11[i]];
-        [_headerView addSubview:_headImage1];
+            _headImage1= [[UIImageView alloc] initWithFrame:CGRectMake(marchWidth+(unitWidth-headImageH)/2+unitWidth*i, headImageH0+headImageHgab, headImageH,headImageH)];
+            _headImage1.image = [UIImage imageNamed:headImageNameArray11[i]];
+            [_headerView addSubview:_headImage1];
         }else if (i==1){
             _headImage2= [[UIImageView alloc] initWithFrame:CGRectMake(marchWidth+(unitWidth-headImageH)/2+unitWidth*i, headImageH0+headImageHgab, headImageH,headImageH)];
             _headImage2.image = [UIImage imageNamed:headImageNameArray11[i]];
@@ -1209,12 +1263,10 @@
         
     }
     
-  
- 
-    
     
     [self performSelector:@selector(showGuideView) withObject:nil afterDelay:0.5];
-    
+
+
 }
 
 

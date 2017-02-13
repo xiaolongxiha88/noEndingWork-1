@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UIAlertView *Alert1;
 @property (nonatomic, strong) UIAlertView *Alert2;
 @property (nonatomic, strong)UITextField *textField1;
+@property (nonatomic, strong)UITextField *textField2;
 @end
 
 @implementation KongZhiNi
@@ -123,28 +124,40 @@
     
     
     if([_type isEqualToString:@"3"]){
-    UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 65*HEIGHT_SIZE, 150*NOW_SIZE,20*HEIGHT_SIZE )];
-    PV2Lable.text=root_NBQ_PF;
+    UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 65*HEIGHT_SIZE, 300*NOW_SIZE,20*HEIGHT_SIZE )];
+        NSString *PV2textValue=[NSString stringWithFormat:@"%@(-0.8~-1/0.8~1)",root_NBQ_PF];
+        PV2Lable.text=PV2textValue;
     PV2Lable.textAlignment=NSTextAlignmentLeft;
     PV2Lable.textColor=[UIColor whiteColor];
     PV2Lable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [_scrollView addSubview:PV2Lable];
-    _slider2=[[ASValueTrackingSlider alloc]initWithFrame:CGRectMake(20*NOW_SIZE, 85*HEIGHT_SIZE+30*HEIGHT_SIZE, SCREEN_Width-40*NOW_SIZE, 40*HEIGHT_SIZE)];
-    _slider2.maximumValue = 0.8;
-    _slider2.minimumValue=-0.8;
-    [_scrollView addSubview:_slider2];
-    UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(15*NOW_SIZE, 85*HEIGHT_SIZE+20*HEIGHT_SIZE+55*HEIGHT_SIZE, 150*NOW_SIZE,20*HEIGHT_SIZE )];
-    PV2Lable1.text=@"-0.8";
-    PV2Lable1.textAlignment=NSTextAlignmentLeft;
-    PV2Lable1.textColor=[UIColor whiteColor];
-    PV2Lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [_scrollView addSubview:PV2Lable1];
-    UILabel *PV2Lable2=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width-22*NOW_SIZE,  85*HEIGHT_SIZE+20*HEIGHT_SIZE+55*HEIGHT_SIZE, 150*NOW_SIZE,20*HEIGHT_SIZE )];
-    PV2Lable2.text=@"0.8";
-    PV2Lable2.textAlignment=NSTextAlignmentLeft;
-    PV2Lable2.textColor=[UIColor whiteColor];
-    PV2Lable2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [_scrollView addSubview:PV2Lable2];
+        
+        _textField2 = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 85*HEIGHT_SIZE+30*HEIGHT_SIZE, 180*NOW_SIZE, 40*HEIGHT_SIZE)];
+        _textField2.layer.borderWidth=1;
+        _textField2.layer.cornerRadius=5;
+        _textField2.layer.borderColor=[UIColor whiteColor].CGColor;
+        _textField2.textColor = [UIColor whiteColor];
+        _textField2.tintColor = [UIColor whiteColor];
+        _textField2.textAlignment=NSTextAlignmentCenter;
+        _textField2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        [_scrollView addSubview:_textField2];
+        
+//    _slider2=[[ASValueTrackingSlider alloc]initWithFrame:CGRectMake(20*NOW_SIZE, 85*HEIGHT_SIZE+30*HEIGHT_SIZE, SCREEN_Width-40*NOW_SIZE, 40*HEIGHT_SIZE)];
+//    _slider2.maximumValue = 0.8;
+//    _slider2.minimumValue=-0.8;
+//    [_scrollView addSubview:_slider2];
+//    UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(15*NOW_SIZE, 85*HEIGHT_SIZE+20*HEIGHT_SIZE+55*HEIGHT_SIZE, 150*NOW_SIZE,20*HEIGHT_SIZE )];
+//    PV2Lable1.text=@"-0.8";
+//    PV2Lable1.textAlignment=NSTextAlignmentLeft;
+//    PV2Lable1.textColor=[UIColor whiteColor];
+//    PV2Lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+//    [_scrollView addSubview:PV2Lable1];
+//    UILabel *PV2Lable2=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width-22*NOW_SIZE,  85*HEIGHT_SIZE+20*HEIGHT_SIZE+55*HEIGHT_SIZE, 150*NOW_SIZE,20*HEIGHT_SIZE )];
+//    PV2Lable2.text=@"0.8";
+//    PV2Lable2.textAlignment=NSTextAlignmentLeft;
+//    PV2Lable2.textColor=[UIColor whiteColor];
+//    PV2Lable2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+//    [_scrollView addSubview:PV2Lable2];
     }
     
     if([_type isEqualToString:@"4"]){
@@ -238,6 +251,14 @@
         _commandValue=textValue;
         
         _paramId=@"pv_grid_voltage_high";
+    }
+    
+    if (_textField2) {
+        NSString *textValue= [NSString stringWithFormat:@"%.2f",[[_textField2 text] floatValue]];
+        
+        _commandValue=textValue;
+        
+        _paramId=@"pv_power_factor";
     }
     
      [self showProgressView];
