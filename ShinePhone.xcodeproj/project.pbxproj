@@ -444,6 +444,8 @@
 		338418E71DC9783500D679CA /* GFWaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338418E61DC9783500D679CA /* GFWaterView.m */; };
 		338964591E51979800A7B1AE /* device_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338964581E51979800A7B1AE /* device_bg.jpg */; };
 		3389645D1E51B74C00A7B1AE /* yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3389645C1E51B74C00A7B1AE /* yuan.png */; };
+		338964611E52E52700A7B1AE /* phoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338964601E52E52700A7B1AE /* phoneRegisterViewController.m */; };
+		338964641E53E8E200A7B1AE /* QCCountdownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 338964631E53E8E200A7B1AE /* QCCountdownButton.m */; };
 		338990AD1CEAB58100A708F8 /* bianhao.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AC1CEAB58100A708F8 /* bianhao.png */; };
 		338990AF1CEAB61400A708F8 /* mebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AE1CEAB61300A708F8 /* mebg.png */; };
 		338990B11CEAB73400A708F8 /* logo3.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990B01CEAB73400A708F8 /* logo3.png */; };
@@ -1290,6 +1292,10 @@
 		338418E61DC9783500D679CA /* GFWaterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFWaterView.m; sourceTree = "<group>"; };
 		338964581E51979800A7B1AE /* device_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = device_bg.jpg; sourceTree = "<group>"; };
 		3389645C1E51B74C00A7B1AE /* yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuan.png; sourceTree = "<group>"; };
+		3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = phoneRegisterViewController.h; sourceTree = "<group>"; };
+		338964601E52E52700A7B1AE /* phoneRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = phoneRegisterViewController.m; sourceTree = "<group>"; };
+		338964621E53E8E200A7B1AE /* QCCountdownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCCountdownButton.h; sourceTree = "<group>"; };
+		338964631E53E8E200A7B1AE /* QCCountdownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCCountdownButton.m; sourceTree = "<group>"; };
 		338990AC1CEAB58100A708F8 /* bianhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bianhao.png; path = ../bianhao.png; sourceTree = "<group>"; };
 		338990AE1CEAB61300A708F8 /* mebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mebg.png; path = ../mebg.png; sourceTree = "<group>"; };
 		338990B01CEAB73400A708F8 /* logo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo3.png; path = ../logo3.png; sourceTree = "<group>"; };
@@ -2026,6 +2032,7 @@
 		335456CA1C8582A100275478 /* 注册 */ = {
 			isa = PBXGroup;
 			children = (
+				3389645E1E52E4EF00A7B1AE /* 手机验证 */,
 				335DDB201CFFC04B00ACA123 /* 体验馆 */,
 				3363DD1C1C7C48F100D740FB /* registerViewController.h */,
 				3363DD1D1C7C48F100D740FB /* registerViewController.m */,
@@ -2983,6 +2990,17 @@
 				33ECDCF11CDC9D3400E20AF8 /* deviceCore.xcdatamodeld */,
 			);
 			path = datacore;
+			sourceTree = "<group>";
+		};
+		3389645E1E52E4EF00A7B1AE /* 手机验证 */ = {
+			isa = PBXGroup;
+			children = (
+				338964621E53E8E200A7B1AE /* QCCountdownButton.h */,
+				338964631E53E8E200A7B1AE /* QCCountdownButton.m */,
+				3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */,
+				338964601E52E52700A7B1AE /* phoneRegisterViewController.m */,
+			);
+			path = "手机验证";
 			sourceTree = "<group>";
 		};
 		338990B21CEB1F7500A708F8 /* 设备DEMO */ = {
@@ -3966,6 +3984,7 @@
 				336F1A171D88E46900CD4C2B /* SDWebImageCompat.m in Sources */,
 				337F9CC81C71ABFB0016FE43 /* findViewController.m in Sources */,
 				336F1A211D88E46900CD4C2B /* UIImageView+HighlightedWebCache.m in Sources */,
+				338964611E52E52700A7B1AE /* phoneRegisterViewController.m in Sources */,
 				337F9E111C71C4D90016FE43 /* TableViewCell.m in Sources */,
 				3353B1B21CA126EB00577595 /* DemoDevice+CoreDataProperties.m in Sources */,
 				336D40211D6FEA7600ECFA34 /* ZYPinYinSearch.m in Sources */,
@@ -4005,6 +4024,7 @@
 				334FF0941CF53C7C001E6716 /* AsyncUdpSocket.m in Sources */,
 				3355DB971CE432CD0042F627 /* Common2ViewController.m in Sources */,
 				334ED7041C902AE60095FFBC /* CircleView.m in Sources */,
+				338964641E53E8E200A7B1AE /* QCCountdownButton.m in Sources */,
 				334720E11C8E7048006388C8 /* energyTableViewCell.m in Sources */,
 				3370794D1D92176600D7DA98 /* manualTableViewController.m in Sources */,
 				335456B61C852E6200275478 /* AddCellectViewController.m in Sources */,

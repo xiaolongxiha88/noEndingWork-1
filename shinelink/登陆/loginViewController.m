@@ -24,6 +24,7 @@
 #import "energyDemo.h"
 #import "AddressPickView.h"
 #import "JPUSHService.h"
+#import "phoneRegisterViewController.h"
 
 #import "AVfirstView.h"
 #import "topAvViewController.h"
@@ -41,6 +42,7 @@
 @property (nonatomic, strong) NSMutableDictionary *demoArray;
 @property (nonatomic, strong) NSString *serverDemoAddress;
 @property (nonatomic, strong) NSString *adNumber;
+ @property (nonatomic, strong)  NSString *languageValue;
 @end
 
 @implementation loginViewController
@@ -57,18 +59,24 @@
    
     [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:17/255.0f green:183/255.0f blue:243/255.0f alpha:0]];
     
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    
+ 
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+        _languageValue=@"0";
+    }else if ([currentLanguage hasPrefix:@"en"]) {
+        _languageValue=@"1";
+    }else{
+        _languageValue=@"2";
+    }
+  
     
  NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
    NSString *reUsername=[ud objectForKey:@"userName"];
    NSString *rePassword=[ud objectForKey:@"userPassword"];
  //  [self addSubViews];
-    
-
-    
-    NSLog(@"reUsername=%@",reUsername);
-    NSLog(@"rePassword=%@",rePassword);
-    
-  
+ 
     //////////测试区域
     NSString *testDemo=@"O";
     if ([testDemo isEqualToString:@"OK"]) {
@@ -306,18 +314,7 @@ NSLog(@"体验馆");
 
 -(void)getDemoData{
     
-    NSArray *languages = [NSLocale preferredLanguages];
-    NSString *currentLanguage = [languages objectAtIndex:0];
     
-    NSString *_languageValue;
-    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
-        _languageValue=@"0";
-    }else if ([currentLanguage hasPrefix:@"en"]) {
-        _languageValue=@"1";
-    }else{
-        _languageValue=@"2";
-    }
-
     
     [self showProgressView];
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL_Demo paramars:@{@"language":_languageValue} paramarsSite:@"/newLoginAPI.do?op=getServerUrlList" sucessBlock:^(id content) {
@@ -369,14 +366,17 @@ NSLog(@"体验馆");
 
 -(void)tapLable2{
     NSLog(@"注册");
-   // self.registLable.highlighted=YES;
-   // self.registLable.highlightedTextColor=[UIColor whiteColor];
-    countryViewController *registerRoot=[[countryViewController alloc]init];
-    
-    [self.navigationController pushViewController:registerRoot animated:YES];
-    
 
+   // _languageValue=@"1";
+    if([_languageValue isEqualToString:@"0"]){
+        phoneRegisterViewController *registerRoot=[[phoneRegisterViewController alloc]init];
+        [self.navigationController pushViewController:registerRoot animated:YES];
+    }else{
+        countryViewController *registerRoot=[[countryViewController alloc]init];
+        [self.navigationController pushViewController:registerRoot animated:YES];
+    }
 }
+
 
 - (NSString *)MD5:(NSString *)str {
     const char *cStr = [str UTF8String];
