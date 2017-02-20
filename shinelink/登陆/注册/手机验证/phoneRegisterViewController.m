@@ -113,7 +113,7 @@
     line2.backgroundColor=COLOR(255, 255, 255, 0.5);
     [self.view addSubview:line2];
     
-    UIView *line3=[[UIView alloc]initWithFrame:CGRectMake((SCREEN_Width+size.width)/2+5*NOW_SIZE,200*HEIGHT_SIZE,lineW, 1*HEIGHT_SIZE)];
+    UIView *line3=[[UIView alloc]initWithFrame:CGRectMake((SCREEN_Width+size.width)/2+5*NOW_SIZE,180*HEIGHT_SIZE,lineW, 1*HEIGHT_SIZE)];
     line3.backgroundColor=COLOR(255, 255, 255, 0.5);
     [self.view addSubview:line3];
     

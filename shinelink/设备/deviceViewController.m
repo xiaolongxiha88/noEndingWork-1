@@ -1157,28 +1157,95 @@
 }
 
 -(void)getPCSHead{
-     UIBezierPath *path = [UIBezierPath bezierPath];
+   float W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
+    [self getPCSHeadUI];
+    float imageH1=H1+imageSize/2;  float imageH12=7*HEIGHT_SIZE,imageW12=12*HEIGHT_SIZE;float WW2=5*NOW_SIZE;
+    CGPoint pointStart=CGPointMake(W1+imageSize, imageH1);
+    CGPoint pointtEnd=CGPointMake(W1+W2, imageH1);
+    
+    CGPoint pointStart1=CGPointMake(W1+W2+imageSize, imageH1-imageH12);
+    CGPoint pointtEnd1=CGPointMake(W1+2*W2, imageH1-imageH12);
+    
+    CGPoint pointStart2=CGPointMake(W1+W2+imageSize, imageH1+imageH12);
+    CGPoint pointtEnd2=CGPointMake(W1+2*W2-imageW12, imageH1+imageH12);
+    CGPoint pointtEnd21=CGPointMake(W1+2*W2-imageW12, imageH1+imageH12+33*HEIGHT_SIZE);
+    CGPoint pointtEnd22=CGPointMake(W1+3*W2-imageW12-WW2, imageH1+imageH12+33*HEIGHT_SIZE);
+    
+    CGPoint pointStart3=CGPointMake(W1+2*W2+imageSize, imageH1);
+    CGPoint pointtEnd3=CGPointMake(W1+3*W2, imageH1);
+    
+    //第二排动画坐标
+    CGPoint pointtStartW1=CGPointMake(W1+W2+imageSize/2, imageH1+imageSize/2);
+    CGPoint pointtEndW1=CGPointMake(W1+W2+imageSize/2, imageH1+H2-imageSize/2);
+    
+    CGPoint pointtStartW2=CGPointMake(W1+2*W2+1.5*imageSize-WW2, imageH1);
+    CGPoint pointtEndW2=CGPointMake(W1+2*W2+1.5*imageSize-WW2, imageH1+H2-imageSize/2);
+    
+   [self getHeadAnimation:pointStart end:pointtEnd];
+   [self getHeadAnimation:pointStart1 end:pointtEnd1];
+    
+    [self getHeadAnimation:pointStart2 end:pointtEnd2];
+    [self getHeadAnimation:pointtEnd2 end:pointtEnd21];
+     [self getHeadAnimation:pointtEnd21 end:pointtEnd22];
+    
+     [self getHeadAnimation:pointStart3 end:pointtEnd3];
+    
+      [self getHeadAnimation:pointtStartW1 end:pointtEndW1];
+    [self getHeadAnimation:pointtStartW2 end:pointtEndW2];
+}
+
+
+-(void)getPCSHeadUI{
+    float W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
+    UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(W1,H1,imageSize,imageSize)];
+    imageView1.image = [UIImage imageNamed:@"icon_solor.png"];
+    [_headerView addSubview:imageView1];
+    
+    UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(W1+W2,H1,imageSize,imageSize)];
+    imageView2.image = [UIImage imageNamed:@"icon_sp.png"];
+    [_headerView addSubview:imageView2];
+    
+    UIImageView *imageView3= [[UIImageView alloc] initWithFrame:CGRectMake(W1+2*W2,H1,imageSize,imageSize)];
+    imageView3.image = [UIImage imageNamed:@"icon_inv.png"];
+    [_headerView addSubview:imageView3];
+    
+    UIImageView *imageView4 = [[UIImageView alloc] initWithFrame:CGRectMake(W1+3*W2,H1,imageSize,imageSize)];
+    imageView4.image = [UIImage imageNamed:@"icon_grid.png"];
+    [_headerView addSubview:imageView4];
+    
+    UIImageView *imageView12 = [[UIImageView alloc] initWithFrame:CGRectMake(W1+W2,H1+H2,imageSize,imageSize)];
+    imageView12.image = [UIImage imageNamed:@"icon_bat.png"];
+    [_headerView addSubview:imageView12];
+    
+    UIImageView *imageView22 = [[UIImageView alloc] initWithFrame:CGRectMake(W1+2.5*W2,H1+H2,imageSize,imageSize)];
+    imageView22.image = [UIImage imageNamed:@"icon_solor.png"];
+    [_headerView addSubview:imageView22];
+
+}
+
+-(void)getHeadAnimation:(CGPoint)startPoint  end:(CGPoint)endPoint{
+
+    UIBezierPath *path = [UIBezierPath bezierPath];
     CAShapeLayer *trackLayer = [CAShapeLayer new];
-    [path moveToPoint:CGPointMake(100, 100)];
-       [path addLineToPoint:CGPointMake(300, 100)];
-      trackLayer.path = path.CGPath;
+    [path moveToPoint:startPoint];
+    [path addLineToPoint:endPoint];
+    trackLayer.path = path.CGPath;
     trackLayer.frame = _headerView.bounds;
     trackLayer.lineWidth=1;
     trackLayer.fillColor = nil;
     trackLayer.strokeColor =COLOR(229, 220, 120, 1).CGColor;
-       [_headerView.layer addSublayer:trackLayer];
+    [_headerView.layer addSublayer:trackLayer];
     
-    
-    UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(100,100,10*HEIGHT_SIZE,8*HEIGHT_SIZE)];
+    UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(startPoint.x,startPoint.y,6*HEIGHT_SIZE,4*HEIGHT_SIZE)];
     imageView1.image = [UIImage imageNamed:@"yuan.png"];
     [_headerView addSubview:imageView1];
     
     
     CABasicAnimation *animation1= [CABasicAnimation animationWithKeyPath:@"position"];
     //animation1.duration = 2.5; // 持续时间
-   // animation1.repeatCount = MAXFLOAT; // 重复次数
-    animation1.fromValue = [NSValue valueWithCGPoint:CGPointMake(100, 100)]; // 起始帧
-    animation1.toValue = [NSValue valueWithCGPoint:CGPointMake(300, 100)]; // 终了帧
+    // animation1.repeatCount = MAXFLOAT; // 重复次数
+    animation1.fromValue = [NSValue valueWithCGPoint:startPoint]; // 起始帧
+    animation1.toValue = [NSValue valueWithCGPoint:endPoint]; // 终了帧
     
     CABasicAnimation *animation2 = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
     // 动画选项设定
@@ -1195,8 +1262,9 @@
     group.animations = [NSArray arrayWithObjects:animation1, animation2, nil];
     // 添加动画
     [imageView1.layer addAnimation:group forKey:@"move-layer"];
-    
+
 }
+
 
 -(void)getPvHead{
     float marchWidth=0*NOW_SIZE;

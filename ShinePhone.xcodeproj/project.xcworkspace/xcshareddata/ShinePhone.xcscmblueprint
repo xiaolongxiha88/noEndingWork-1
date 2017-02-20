@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "5817F745F517CE33D2F7C963DA860821AAD6F2BB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "5817F745F517CE33D2F7C963DA860821AAD6F2BB" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "5817F745F517CE33D2F7C963DA860821AAD6F2BB" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F8587A72-E91B-4907-A488-39C61F0DCB08",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "5817F745F517CE33D2F7C963DA860821AAD6F2BB" : "shinelink\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ShinePhone",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ShinePhone.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/192.168.3.115\/svn\/ShinePhone_IOS",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5817F745F517CE33D2F7C963DA860821AAD6F2BB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/yangwen15680\/ShineLink.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "5817F745F517CE33D2F7C963DA860821AAD6F2BB"
+    }
+  ]
+}
