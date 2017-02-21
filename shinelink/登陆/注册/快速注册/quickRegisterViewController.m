@@ -8,6 +8,7 @@
 
 #import "quickRegisterViewController.h"
 #import "SHBQRView.h"
+#import "quickRegister2ViewController.h"
 
 @interface quickRegisterViewController ()<SHBQRViewDelegate>
 @property(nonatomic,strong)SHBQRView *qrView;
@@ -29,8 +30,8 @@
 }
 
 -(void)nextRegister{
-
-
+    quickRegister2ViewController *registerRoot=[[quickRegister2ViewController alloc]init];
+    [self.navigationController pushViewController:registerRoot animated:YES];
 }
 
 -(void)initUI{

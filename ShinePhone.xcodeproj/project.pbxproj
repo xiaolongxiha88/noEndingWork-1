@@ -453,9 +453,10 @@
 		3389647B1E57E7E600A7B1AE /* icon_solor.png in Resources */ = {isa = PBXBuildFile; fileRef = 338964751E57E7E600A7B1AE /* icon_solor.png */; };
 		3389647C1E57E7E600A7B1AE /* icon_sp.png in Resources */ = {isa = PBXBuildFile; fileRef = 338964761E57E7E600A7B1AE /* icon_sp.png */; };
 		3389647E1E57E87500A7B1AE /* 储能2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3389647D1E57E87500A7B1AE /* 储能2.gif */; };
-		338964821E5AFF1200A7B1AE /* englishCountryJson.txt in Resources */ = {isa = PBXBuildFile; fileRef = 338964811E5AFF1200A7B1AE /* englishCountryJson.txt */; };
 		338964841E5B029100A7B1AE /* country.txt in Resources */ = {isa = PBXBuildFile; fileRef = 338964831E5B029100A7B1AE /* country.txt */; };
 		338964881E5BDE5200A7B1AE /* quickRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338964871E5BDE5200A7B1AE /* quickRegisterViewController.m */; };
+		3389648B1E5C1D2000A7B1AE /* quickRegister2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389648A1E5C1D2000A7B1AE /* quickRegister2ViewController.m */; };
+		3389648D1E5C3BBD00A7B1AE /* englishCountryJson.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3389648C1E5C3BBD00A7B1AE /* englishCountryJson.txt */; };
 		338990AD1CEAB58100A708F8 /* bianhao.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AC1CEAB58100A708F8 /* bianhao.png */; };
 		338990AF1CEAB61400A708F8 /* mebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AE1CEAB61300A708F8 /* mebg.png */; };
 		338990B11CEAB73400A708F8 /* logo3.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990B01CEAB73400A708F8 /* logo3.png */; };
@@ -1313,10 +1314,12 @@
 		338964751E57E7E600A7B1AE /* icon_solor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_solor.png; sourceTree = "<group>"; };
 		338964761E57E7E600A7B1AE /* icon_sp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_sp.png; sourceTree = "<group>"; };
 		3389647D1E57E87500A7B1AE /* 储能2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "储能2.gif"; sourceTree = "<group>"; };
-		338964811E5AFF1200A7B1AE /* englishCountryJson.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = englishCountryJson.txt; sourceTree = "<group>"; };
 		338964831E5B029100A7B1AE /* country.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = country.txt; sourceTree = "<group>"; };
 		338964861E5BDE5200A7B1AE /* quickRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quickRegisterViewController.h; sourceTree = "<group>"; };
 		338964871E5BDE5200A7B1AE /* quickRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = quickRegisterViewController.m; sourceTree = "<group>"; };
+		338964891E5C1D2000A7B1AE /* quickRegister2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quickRegister2ViewController.h; sourceTree = "<group>"; };
+		3389648A1E5C1D2000A7B1AE /* quickRegister2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = quickRegister2ViewController.m; sourceTree = "<group>"; };
+		3389648C1E5C3BBD00A7B1AE /* englishCountryJson.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = englishCountryJson.txt; sourceTree = "<group>"; };
 		338990AC1CEAB58100A708F8 /* bianhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bianhao.png; path = ../bianhao.png; sourceTree = "<group>"; };
 		338990AE1CEAB61300A708F8 /* mebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mebg.png; path = ../mebg.png; sourceTree = "<group>"; };
 		338990B01CEAB73400A708F8 /* logo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo3.png; path = ../logo3.png; sourceTree = "<group>"; };
@@ -1686,7 +1689,7 @@
 				3363DD1F1C7C491300D740FB /* 登陆动画 */,
 				3349A7B41C75B8F4009172C2 /* loginViewController.h */,
 				3349A7B51C75B8F4009172C2 /* loginViewController.m */,
-				338964811E5AFF1200A7B1AE /* englishCountryJson.txt */,
+				3389648C1E5C3BBD00A7B1AE /* englishCountryJson.txt */,
 				338964831E5B029100A7B1AE /* country.txt */,
 			);
 			path = "登陆";
@@ -3039,6 +3042,8 @@
 			children = (
 				338964861E5BDE5200A7B1AE /* quickRegisterViewController.h */,
 				338964871E5BDE5200A7B1AE /* quickRegisterViewController.m */,
+				338964891E5C1D2000A7B1AE /* quickRegister2ViewController.h */,
+				3389648A1E5C1D2000A7B1AE /* quickRegister2ViewController.m */,
 			);
 			path = "快速注册";
 			sourceTree = "<group>";
@@ -3672,6 +3677,7 @@
 				334FF0B91CF53C7C001E6716 /* btn_check_off.png in Resources */,
 				3383F13A1C9FFD3E0075E834 /* 家庭用电设备.png in Resources */,
 				33801EBD1D5882D500047232 /* Growatt-2-5k.jpg in Resources */,
+				3389648D1E5C3BBD00A7B1AE /* englishCountryJson.txt in Resources */,
 				33C3FFFB1D3E33E00016351C /* L2.png in Resources */,
 				335D69E91D77D28800894D90 /* AVplay.png in Resources */,
 				33699BB91DADE72E00C55CFF /* PV_t3.png in Resources */,
@@ -3807,7 +3813,6 @@
 				33775AF11D2E40290070742E /* 客服.png in Resources */,
 				3370791E1D8FD80300D7DA98 /* video.png in Resources */,
 				3370791D1D8FD80300D7DA98 /* question.png in Resources */,
-				338964821E5AFF1200A7B1AE /* englishCountryJson.txt in Resources */,
 				3383F1341C9FF7370075E834 /* connected@2x.png in Resources */,
 				334AED5A1CA37577007E39F3 /* 质保查询.png in Resources */,
 				335456C91C853C2F00275478 /* scanscanBg.png in Resources */,
@@ -3956,6 +3961,7 @@
 				334E9BF21CAD263700C8271F /* parameterPV.m in Sources */,
 				3319E08D1D5AFB39006623A9 /* LWLoadingView.m in Sources */,
 				3367CB501C86806700EF460C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
+				3389648B1E5C1D2000A7B1AE /* quickRegister2ViewController.m in Sources */,
 				336F1A141D88E46900CD4C2B /* MKAnnotationView+WebCache.m in Sources */,
 				337079191D8FC78500D7DA98 /* InfoCenterViewController.m in Sources */,
 				3383EF9F1C9F8A6F0075E834 /* MJRefreshGifHeader.m in Sources */,
