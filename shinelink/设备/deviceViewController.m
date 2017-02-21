@@ -1169,7 +1169,7 @@
     CGPoint pointStart2=CGPointMake(W1+W2+imageSize, imageH1+imageH12);
     CGPoint pointtEnd2=CGPointMake(W1+2*W2-imageW12, imageH1+imageH12);
     CGPoint pointtEnd21=CGPointMake(W1+2*W2-imageW12, imageH1+imageH12+33*HEIGHT_SIZE);
-    CGPoint pointtEnd22=CGPointMake(W1+3*W2-imageW12-WW2, imageH1+imageH12+33*HEIGHT_SIZE);
+    CGPoint pointtEnd22=CGPointMake(W1+3*W2-imageW12-WW2-1.5*NOW_SIZE, imageH1+imageH12+33*HEIGHT_SIZE);
     
     CGPoint pointStart3=CGPointMake(W1+2*W2+imageSize, imageH1);
     CGPoint pointtEnd3=CGPointMake(W1+3*W2, imageH1);
@@ -1187,9 +1187,11 @@
     [self getHeadAnimation:pointStart2 end:pointtEnd2];
     [self getHeadAnimation:pointtEnd2 end:pointtEnd21];
      [self getHeadAnimation:pointtEnd21 end:pointtEnd22];
+     [self getHeadAnimation:pointtEnd22 end:pointtEndW2];
     
      [self getHeadAnimation:pointStart3 end:pointtEnd3];
     
+     //第二排动画
       [self getHeadAnimation:pointtStartW1 end:pointtEndW1];
     [self getHeadAnimation:pointtStartW2 end:pointtEndW2];
 }

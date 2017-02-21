@@ -14,6 +14,7 @@
  @property (nonatomic, strong)  UITextField *textField;
 @property (nonatomic, strong)  UITextField *textField2;
 @property(nonatomic,strong)UILabel *label2;
+
 @end
 
 @implementation phoneRegisterViewController
@@ -24,6 +25,46 @@
     self.view.layer.contents = (id)bgImage.CGImage;
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]];
+    
+    NSLocale *currentLocale = [NSLocale currentLocale];
+    NSString *countryCode1 = [currentLocale objectForKey:NSLocaleCountryCode];
+    
+     NSString *countryCode3= [currentLocale objectForKey:NSLocaleCountryCode];
+    NSString *country = [currentLocale localeIdentifier];
+    NSLog(@"国家：%@", country); //en_US
+    
+  //  NSLocale *currentLocale = [NSLocale currentLocale];
+ 
+    
+    
+    NSArray *countryCodes = [NSLocale ISOCountryCodes];
+    NSMutableArray *countries = [NSMutableArray arrayWithCapacity:[countryCodes count]];
+
+    NSMutableArray *countriesArray = [[NSMutableArray alloc] init];
+    
+  //  NSLocale *locale = [NSLocale currentLocale];
+    
+    NSArray *countryArray = [NSLocale ISOCountryCodes];
+    for (NSString *countryCode in countryArray)
+    {
+        //NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+        NSString *displayNameString = [currentLocale displayNameForKey:NSLocaleCountryCode value:countryCode];
+        [countriesArray addObject:displayNameString];
+        //[pool release];
+        
+    }
+    
+    
+    NSString *getCountry;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"englishCountryJson" ofType:@"txt"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    NSArray *countryArray1=[NSArray arrayWithArray:result[@"data"]];
+    for (int i=0; i<countryArray1.count; i++) {
+        if ([countryCode1 isEqualToString:countryArray1[i][@"countryCode"]]) {
+            getCountry=countryArray1[i][@"countryName"];
+        }
+    }
     
     [self initUI];
 }

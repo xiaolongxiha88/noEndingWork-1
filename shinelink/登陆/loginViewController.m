@@ -25,7 +25,7 @@
 #import "AddressPickView.h"
 #import "JPUSHService.h"
 #import "phoneRegisterViewController.h"
-
+#import "quickRegisterViewController.h"
 #import "AVfirstView.h"
 #import "topAvViewController.h"
 
@@ -367,9 +367,9 @@ NSLog(@"体验馆");
 -(void)tapLable2{
     NSLog(@"注册");
 
-   // _languageValue=@"1";
+_languageValue=@"0";
     if([_languageValue isEqualToString:@"0"]){
-        phoneRegisterViewController *registerRoot=[[phoneRegisterViewController alloc]init];
+        quickRegisterViewController *registerRoot=[[quickRegisterViewController alloc]init];
         [self.navigationController pushViewController:registerRoot animated:YES];
     }else{
         countryViewController *registerRoot=[[countryViewController alloc]init];
