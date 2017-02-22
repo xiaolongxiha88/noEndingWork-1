@@ -11,6 +11,8 @@
 @interface quickRegister2ViewController ()
 @property (nonatomic, strong)  UITextField *textField;
 @property (nonatomic, strong)  UITextField *textField2;
+@property (nonatomic, strong)  NSString *getCountry;
+@property (nonatomic, strong)  NSString *getZone;
 @end
 
 @implementation quickRegister2ViewController
@@ -21,6 +23,39 @@
     self.view.layer.contents = (id)bgImage.CGImage;
     self.title=@"一键注册";
      [self initUI];
+    [self getInfo];
+}
+
+-(void)getInfo{
+    _getCountry=@"initC";
+    _getZone=@"initZ";
+    NSLocale *currentLocale = [NSLocale currentLocale];
+    NSString *countryCode1 = [currentLocale objectForKey:NSLocaleCountryCode];
+
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"englishCountryJson" ofType:@"txt"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+    NSArray *countryArray1=[NSArray arrayWithArray:result[@"data"]];
+    for (int i=0; i<countryArray1.count; i++) {
+        if ([countryCode1 isEqualToString:countryArray1[i][@"countryCode"]]) {
+            _getCountry=countryArray1[i][@"countryName"];
+            _getZone=countryArray1[i][@"zone"];
+        }
+    }
+    
+    if ([_getCountry isEqualToString:@"initC"]) {
+        _getCountry=@"Other";
+         _getZone=@"1";
+    }
+    
+    if ([_getZone isEqualToString:@"initZ"]) {
+        //获取时区
+        NSTimeZone *regTimeZone1 = [NSTimeZone systemTimeZone];
+        NSInteger regTimeZone = [regTimeZone1 secondsFromGMT]/3600;
+        _getCountry=@"Other";
+        _getZone=[NSString stringWithFormat:@"%ld",(long)regTimeZone];
+    }
+    
 }
 
 -(void)initUI{

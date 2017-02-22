@@ -14,7 +14,7 @@
     
     self = [super init];
     if (self) {
-        CGFloat radius = (CGRectGetHeight(frame) / 2) * 0.5;
+        CGFloat radius = (CGRectGetHeight(frame) / 2) * 0.8;
         self.frame = CGRectMake(0, 0, CGRectGetHeight(frame), CGRectGetHeight(frame));
         CGPoint center = CGPointMake(CGRectGetHeight(frame) / 2, CGRectGetMidY(self.bounds));
         CGFloat startAngle = 0 - M_PI_2;

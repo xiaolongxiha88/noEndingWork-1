@@ -8,9 +8,9 @@
 
 #import "AddressPickView.h"
 #import "UIViewExt.h"
-#define navigationViewHeight 44.0f
-#define pickViewViewHeight 300.0f
-#define buttonWidth 60.0f
+#define navigationViewHeight 44.0*HEIGHT_SIZE
+#define pickViewViewHeight 200.0*HEIGHT_SIZE
+#define buttonWidth 60.0*HEIGHT_SIZE
 
 
 @interface AddressPickView ()
@@ -87,6 +87,7 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(i*(kScreenWidth-buttonWidth), 0, buttonWidth, navigationViewHeight);
         [button setTitle:buttonTitleArray[i] forState:UIControlStateNormal];
+        button.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
         [_navigationView addSubview:button];
         
         button.tag = i;

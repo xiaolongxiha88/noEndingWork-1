@@ -153,13 +153,13 @@
     [_scrollView addSubview:logo];
     
     //用户名
-    UIImageView *userBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 145*HEIGHT_SIZE+sizeH, SCREEN_Width - 80*NOW_SIZE, 45*HEIGHT_SIZE)];
+    UIImageView *userBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 145*HEIGHT_SIZE+sizeH, SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE)];
     userBgImageView.userInteractionEnabled = YES;
-    userBgImageView.image = IMAGE(@"name3.jpg");
+    userBgImageView.image = IMAGE(@"frame_user.png");
     [_scrollView addSubview:userBgImageView];
     
     if (!_userTextField) {
-         self.userTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(userBgImageView.frame) - 50*NOW_SIZE, 45*HEIGHT_SIZE)];
+         self.userTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(userBgImageView.frame) - 50*NOW_SIZE, 35*HEIGHT_SIZE)];
     }
    
     self.userTextField.placeholder = root_Alet_user_messge;
@@ -171,18 +171,18 @@
     self.userTextField.textColor = [UIColor whiteColor];
     self.userTextField.tintColor = [UIColor whiteColor];
     [self.userTextField setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.userTextField setValue:[UIFont systemFontOfSize:13*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
-    self.userTextField.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
+    [self.userTextField setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    self.userTextField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [userBgImageView addSubview:_userTextField];
     
     //密码
-    UIImageView *pwdBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE,210*HEIGHT_SIZE+sizeH , SCREEN_Width - 80*NOW_SIZE, 45*HEIGHT_SIZE)];
-    pwdBgImageView.image = IMAGE(@"pass3.jpg");
+    UIImageView *pwdBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE,200*HEIGHT_SIZE+sizeH , SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE)];
+    pwdBgImageView.image = IMAGE(@"frame_password.png");
     pwdBgImageView.userInteractionEnabled = YES;
     [_scrollView addSubview:pwdBgImageView];
     
     if (!_pwdTextField) {
-      self.pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(pwdBgImageView.frame) - 50*NOW_SIZE, 45*HEIGHT_SIZE)];
+      self.pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(pwdBgImageView.frame) - 50*NOW_SIZE, 35*HEIGHT_SIZE)];
     }
     self.pwdTextField.placeholder = root_Alet_user_pwd;
     if (_oldPassword) {
@@ -193,21 +193,21 @@
     self.pwdTextField.textColor = [UIColor whiteColor];
     self.pwdTextField.tintColor = [UIColor whiteColor];
     [self.pwdTextField setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.pwdTextField setValue:[UIFont systemFontOfSize:13*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
-    self.pwdTextField.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
+    [self.pwdTextField setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    self.pwdTextField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [pwdBgImageView addSubview:_pwdTextField];
     
  
-    
+    float H_down=20*HEIGHT_SIZE;
     
     if (!_forgetLable) {
-     self.forgetLable= [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+     self.forgetLable= [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
     }
     
  NSString *LableContent1=root_forget_pwd;
        NSDictionary *attributes1 = @{NSFontAttributeName:[UIFont systemFontOfSize:14*HEIGHT_SIZE],};
     CGSize textSize1 = [LableContent1 boundingRectWithSize:CGSizeMake(120*NOW_SIZE,40*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes1 context:nil].size;
-     [ self.forgetLable setFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH, textSize1.width, 40*HEIGHT_SIZE)];
+     [ self.forgetLable setFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, textSize1.width, 40*HEIGHT_SIZE)];
     
     self.forgetLable.text=root_forget_pwd;
      self.forgetLable.textColor=[UIColor whiteColor];
@@ -219,13 +219,13 @@
     [_scrollView addSubview:self.forgetLable];
     
     if (!_registLable) {
-        _registLable= [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 265*HEIGHT_SIZE+sizeH, 115*NOW_SIZE, 40*HEIGHT_SIZE)];
+        _registLable= [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, 115*NOW_SIZE, 40*HEIGHT_SIZE)];
     }
     
     NSString *LableContent2=root_register;
     NSDictionary *attributes2 = @{NSFontAttributeName:[UIFont systemFontOfSize:14*HEIGHT_SIZE],};
     CGSize textSize2 = [LableContent2 boundingRectWithSize:CGSizeMake(120*NOW_SIZE,40*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes2 context:nil].size;
-    [ self.registLable setFrame:CGRectMake(280*NOW_SIZE-textSize2.width, 265*HEIGHT_SIZE+sizeH, textSize2.width, 40*HEIGHT_SIZE)];
+    [ self.registLable setFrame:CGRectMake(280*NOW_SIZE-textSize2.width, 265*HEIGHT_SIZE+sizeH-H_down, textSize2.width, 40*HEIGHT_SIZE)];
     
     self.registLable.text=root_register;
     self.registLable.textColor=[UIColor whiteColor];
@@ -239,21 +239,33 @@
     
     
     if (!_demoLable) {
-            _demoLable= [[UILabel alloc] initWithFrame:CGRectMake(100*NOW_SIZE, 310*HEIGHT_SIZE+sizeH+90*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+            _demoLable= [[UILabel alloc] initWithFrame:CGRectMake(100*NOW_SIZE, 317*HEIGHT_SIZE+sizeH+90*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
     }
     self.demoLable.text=root_demo_test;
-    self.demoLable.textColor=COLOR(210, 210, 210, 1);
-    self.demoLable.font = [UIFont systemFontOfSize:20*HEIGHT_SIZE];
+//    self.demoLable.textColor=COLOR(210, 210, 210, 1);
+      self.demoLable.textColor=[UIColor whiteColor];
+    self.demoLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     self.demoLable.textAlignment = NSTextAlignmentCenter;
     self.demoLable.userInteractionEnabled=YES;
     UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(demoTest)];
     [self.demoLable addGestureRecognizer:demo1];
+       [self.demoLable sizeToFit];
+    _demoLable.center=CGPointMake(SCREEN_Width/2, 317*HEIGHT_SIZE+sizeH+90*HEIGHT_SIZE+20*HEIGHT_SIZE);
     [_scrollView addSubview:self.demoLable];
     
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:16*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            CGSize size = [root_demo_test boundingRectWithSize:CGSizeMake(MAXFLOAT, 40*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+  
+
+    
+    UIImageView *demoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_Width/2+size.width/2, 317*HEIGHT_SIZE+sizeH+90*HEIGHT_SIZE+20*HEIGHT_SIZE-2*HEIGHT_SIZE, 16*NOW_SIZE, 5*HEIGHT_SIZE)];
+    demoImageView.image = IMAGE(@"icon_jiantou.png");
+    demoImageView.userInteractionEnabled = YES;
+    [_scrollView addSubview:demoImageView];
     
     
-    LoginButton *loginBtn = [[LoginButton alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 315*HEIGHT_SIZE+sizeH, SCREEN_Width - 80*NOW_SIZE, 45*HEIGHT_SIZE)];
-  loginBtn.backgroundColor = [UIColor colorWithRed:149/255.0f green:226/255.0f blue:98/255.0f alpha:1];
+    LoginButton *loginBtn = [[LoginButton alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 315*HEIGHT_SIZE+sizeH-H_down, SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE)];
+ loginBtn.backgroundColor = [UIColor colorWithRed:149/255.0f green:226/255.0f blue:98/255.0f alpha:1];
     
     [_scrollView addSubview:loginBtn];
     loginBtn.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
@@ -261,7 +273,49 @@
     [loginBtn addTarget:self action:@selector(PresentCtrl:) forControlEvents:UIControlEventTouchUpInside];
     
     
+    UIButton *quickRegister =  [UIButton buttonWithType:UIButtonTypeCustom];
+    quickRegister.frame=CGRectMake(40*NOW_SIZE,315*HEIGHT_SIZE+sizeH+72*HEIGHT_SIZE-H_down, SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE);
+    [quickRegister.layer setMasksToBounds:YES];
+    [quickRegister.layer setCornerRadius:20.0];
+    //UIImage *quickM=IMAGE(@"icon_yijianjianzhan.png");
+    UIImage *quickM=[self changeAlphaOfImageWith:0.9 withImage:IMAGE(@"icon_yijianjianzhan.png")];
+        UIImage *quickM2=[self changeAlphaOfImageWith:0.5 withImage:IMAGE(@"icon_yijianjianzhan.png")];
+    [quickRegister setBackgroundImage:quickM forState:UIControlStateNormal];
+       [quickRegister setBackgroundImage:quickM2 forState:UIControlStateSelected];
+     [quickRegister setBackgroundImage:quickM2 forState:UIControlStateHighlighted];
+    quickRegister.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+    [quickRegister setTitle:@"一键建站" forState:UIControlStateNormal];
+    [quickRegister addTarget:self action:@selector(goQuickRegister) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:quickRegister];
     
+}
+
+-(void)goQuickRegister{
+    quickRegisterViewController *registerRoot=[[quickRegisterViewController alloc]init];
+    [self.navigationController pushViewController:registerRoot animated:YES];
+}
+
+-(UIImage *)changeAlphaOfImageWith:(CGFloat)alpha withImage:(UIImage*)image
+{
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0f);
+    
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGRect area = CGRectMake(0, 0, image.size.width, image.size.height);
+    
+    CGContextScaleCTM(ctx, 1, -1);
+    CGContextTranslateCTM(ctx, 0, -area.size.height);
+    
+    CGContextSetBlendMode(ctx, kCGBlendModeMultiply);
+    
+    CGContextSetAlpha(ctx, alpha);
+    
+    CGContextDrawImage(ctx, area, image.CGImage);
+    
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
@@ -367,14 +421,9 @@ NSLog(@"体验馆");
 -(void)tapLable2{
     NSLog(@"注册");
 
-_languageValue=@"0";
-    if([_languageValue isEqualToString:@"0"]){
-        quickRegisterViewController *registerRoot=[[quickRegisterViewController alloc]init];
-        [self.navigationController pushViewController:registerRoot animated:YES];
-    }else{
         countryViewController *registerRoot=[[countryViewController alloc]init];
         [self.navigationController pushViewController:registerRoot animated:YES];
-    }
+
 }
 
 
