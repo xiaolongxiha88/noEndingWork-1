@@ -22,6 +22,7 @@
 #import "addStationViewController.h"
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
+#define  AnimationTime 2.5
 
 @interface deviceViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate,EditStationMenuViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate,UIAlertViewDelegate,UIScrollViewDelegate,CAAnimationDelegate>
 
@@ -1160,40 +1161,61 @@
    float W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
     [self getPCSHeadUI];
     float imageH1=H1+imageSize/2;  float imageH12=7*HEIGHT_SIZE,imageW12=12*HEIGHT_SIZE;float WW2=5*NOW_SIZE;
+    //上—1
     CGPoint pointStart=CGPointMake(W1+imageSize, imageH1);
     CGPoint pointtEnd=CGPointMake(W1+W2, imageH1);
-    
+    float time11=1;
+       //上—2-1
     CGPoint pointStart1=CGPointMake(W1+W2+imageSize, imageH1-imageH12);
     CGPoint pointtEnd1=CGPointMake(W1+2*W2, imageH1-imageH12);
-    
+     float time12=0.8;
+     //上—2-2
     CGPoint pointStart2=CGPointMake(W1+W2+imageSize, imageH1+imageH12);
     CGPoint pointtEnd2=CGPointMake(W1+2*W2-imageW12, imageH1+imageH12);
     CGPoint pointtEnd21=CGPointMake(W1+2*W2-imageW12, imageH1+imageH12+33*HEIGHT_SIZE);
     CGPoint pointtEnd22=CGPointMake(W1+3*W2-imageW12-WW2-1.5*NOW_SIZE, imageH1+imageH12+33*HEIGHT_SIZE);
-    
+      //上—3
     CGPoint pointStart3=CGPointMake(W1+2*W2+imageSize, imageH1);
     CGPoint pointtEnd3=CGPointMake(W1+3*W2, imageH1);
     
-    //第二排动画坐标
+     //下—1
     CGPoint pointtStartW1=CGPointMake(W1+W2+imageSize/2, imageH1+imageSize/2);
     CGPoint pointtEndW1=CGPointMake(W1+W2+imageSize/2, imageH1+H2-imageSize/2);
-    
+     float time21=2;
+    //下—2
     CGPoint pointtStartW2=CGPointMake(W1+2*W2+1.5*imageSize-WW2, imageH1);
     CGPoint pointtEndW2=CGPointMake(W1+2*W2+1.5*imageSize-WW2, imageH1+H2-imageSize/2);
+   
+    NSMutableArray *P10=[NSMutableArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointtEnd], time11,nil];
+ //   [P10 addObject:time11];
+    NSArray *P11=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart1],[NSValue valueWithCGPoint:pointtEnd1],time12, nil];
+    NSArray *P120=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart2],[NSValue valueWithCGPoint:pointtEnd2], time21,nil];
+    NSArray *P121=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd2],[NSValue valueWithCGPoint:pointtEnd21], nil];
+    NSArray *P122=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd21],[NSValue valueWithCGPoint:pointtEnd22], nil];
+    NSArray *P123=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd22],[NSValue valueWithCGPoint:pointtEndW2], nil];
+    NSArray *P13=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart3],[NSValue valueWithCGPoint:pointtEnd3], nil];
     
-   [self getHeadAnimation:pointStart end:pointtEnd];
-   [self getHeadAnimation:pointStart1 end:pointtEnd1];
+    NSArray *P21=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW1],[NSValue valueWithCGPoint:pointtEndW1],time21,nil];
+    NSArray *P22=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW2],[NSValue valueWithCGPoint:pointtEndW2], nil];
+
     
-    [self getHeadAnimation:pointStart2 end:pointtEnd2];
-    [self getHeadAnimation:pointtEnd2 end:pointtEnd21];
-     [self getHeadAnimation:pointtEnd21 end:pointtEnd22];
-     [self getHeadAnimation:pointtEnd22 end:pointtEndW2];
+    [self getHeadAnimation:P10];
+    [self performSelector:@selector(getHeadAnimation:) withObject:P11 afterDelay:time11];
+    [self performSelector:@selector(getHeadAnimation:) withObject:P21 afterDelay:time11];
     
-     [self getHeadAnimation:pointStart3 end:pointtEnd3];
+//   [self getHeadAnimation:pointStart end:pointtEnd];
+//   [self getHeadAnimation:pointStart1 end:pointtEnd1];
+//    
+//    [self getHeadAnimation:pointStart2 end:pointtEnd2];
+//    [self getHeadAnimation:pointtEnd2 end:pointtEnd21];
+//     [self getHeadAnimation:pointtEnd21 end:pointtEnd22];
+//     [self getHeadAnimation:pointtEnd22 end:pointtEndW2];
+//    
+//     [self getHeadAnimation:pointStart3 end:pointtEnd3];
     
      //第二排动画
-      [self getHeadAnimation:pointtStartW1 end:pointtEndW1];
-    [self getHeadAnimation:pointtStartW2 end:pointtEndW2];
+//      [self getHeadAnimation:pointtStartW1 end:pointtEndW1];
+//    [self getHeadAnimation:pointtStartW2 end:pointtEndW2];
 }
 
 
@@ -1225,8 +1247,10 @@
 
 }
 
--(void)getHeadAnimation:(CGPoint)startPoint  end:(CGPoint)endPoint{
-
+-(void)getHeadAnimation:(NSArray*)startPoint0{
+    CGPoint startPoint=[[startPoint0 objectAtIndex:0] CGPointValue];
+    CGPoint endPoint=[[startPoint0 objectAtIndex:1] CGPointValue];
+    
     UIBezierPath *path = [UIBezierPath bezierPath];
     CAShapeLayer *trackLayer = [CAShapeLayer new];
     [path moveToPoint:startPoint];
@@ -1259,7 +1283,8 @@
     
     CAAnimationGroup *group = [CAAnimationGroup animation];
     // 动画选项设定
-    group.duration =  2.5;
+    NSString *durationTime=[startPoint0 objectAtIndex:2];
+    group.duration = [durationTime floatValue];
     group.repeatCount = MAXFLOAT;
     group.animations = [NSArray arrayWithObjects:animation1, animation2, nil];
     // 添加动画

@@ -28,6 +28,8 @@
 #import "quickRegisterViewController.h"
 #import "AVfirstView.h"
 #import "topAvViewController.h"
+#import "forgetOneViewController.h"
+
 
 @interface loginViewController ()<UINavigationControllerDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -340,7 +342,7 @@
 
 -(void)forget2{
   
-    forgetViewController *registerRoot=[[forgetViewController alloc]init];
+    forgetOneViewController *registerRoot=[[forgetOneViewController alloc]init];
     
 
     

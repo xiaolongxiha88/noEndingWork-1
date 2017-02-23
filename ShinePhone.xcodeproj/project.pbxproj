@@ -460,6 +460,7 @@
 		338964911E5D679700A7B1AE /* icon_jiantou.png in Resources */ = {isa = PBXBuildFile; fileRef = 338964901E5D679700A7B1AE /* icon_jiantou.png */; };
 		338964981E5D8A6900A7B1AE /* frame_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 338964961E5D8A6900A7B1AE /* frame_password.png */; };
 		338964991E5D8A6900A7B1AE /* frame_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 338964971E5D8A6900A7B1AE /* frame_user.png */; };
+		3389649C1E5E767700A7B1AE /* forgetOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389649B1E5E767700A7B1AE /* forgetOneViewController.m */; };
 		338990AD1CEAB58100A708F8 /* bianhao.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AC1CEAB58100A708F8 /* bianhao.png */; };
 		338990AF1CEAB61400A708F8 /* mebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AE1CEAB61300A708F8 /* mebg.png */; };
 		338990B11CEAB73400A708F8 /* logo3.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990B01CEAB73400A708F8 /* logo3.png */; };
@@ -1306,8 +1307,8 @@
 		338418E61DC9783500D679CA /* GFWaterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFWaterView.m; sourceTree = "<group>"; };
 		338964581E51979800A7B1AE /* device_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = device_bg.jpg; sourceTree = "<group>"; };
 		3389645C1E51B74C00A7B1AE /* yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuan.png; sourceTree = "<group>"; };
-		3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = phoneRegisterViewController.h; sourceTree = "<group>"; };
-		338964601E52E52700A7B1AE /* phoneRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = phoneRegisterViewController.m; sourceTree = "<group>"; };
+		3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phoneRegisterViewController.h; path = "../注册/手机验证/phoneRegisterViewController.h"; sourceTree = "<group>"; };
+		338964601E52E52700A7B1AE /* phoneRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = phoneRegisterViewController.m; path = "../注册/手机验证/phoneRegisterViewController.m"; sourceTree = "<group>"; };
 		338964621E53E8E200A7B1AE /* QCCountdownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCCountdownButton.h; sourceTree = "<group>"; };
 		338964631E53E8E200A7B1AE /* QCCountdownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCCountdownButton.m; sourceTree = "<group>"; };
 		338964711E57E7E600A7B1AE /* icon_bat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_bat.png; sourceTree = "<group>"; };
@@ -1326,6 +1327,8 @@
 		338964901E5D679700A7B1AE /* icon_jiantou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_jiantou.png; sourceTree = "<group>"; };
 		338964961E5D8A6900A7B1AE /* frame_password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame_password.png; sourceTree = "<group>"; };
 		338964971E5D8A6900A7B1AE /* frame_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame_user.png; sourceTree = "<group>"; };
+		3389649A1E5E767700A7B1AE /* forgetOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forgetOneViewController.h; sourceTree = "<group>"; };
+		3389649B1E5E767700A7B1AE /* forgetOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = forgetOneViewController.m; sourceTree = "<group>"; };
 		338990AC1CEAB58100A708F8 /* bianhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bianhao.png; path = ../bianhao.png; sourceTree = "<group>"; };
 		338990AE1CEAB61300A708F8 /* mebg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mebg.png; path = ../mebg.png; sourceTree = "<group>"; };
 		338990B01CEAB73400A708F8 /* logo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo3.png; path = ../logo3.png; sourceTree = "<group>"; };
@@ -2093,6 +2096,10 @@
 				335456D01C8588D500275478 /* emailViewController.m */,
 				335456D21C8588E200275478 /* SNViewController.h */,
 				335456D31C8588E200275478 /* SNViewController.m */,
+				3389649A1E5E767700A7B1AE /* forgetOneViewController.h */,
+				3389649B1E5E767700A7B1AE /* forgetOneViewController.m */,
+				3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */,
+				338964601E52E52700A7B1AE /* phoneRegisterViewController.m */,
 			);
 			path = "忘记密码";
 			sourceTree = "<group>";
@@ -3039,8 +3046,6 @@
 			children = (
 				338964621E53E8E200A7B1AE /* QCCountdownButton.h */,
 				338964631E53E8E200A7B1AE /* QCCountdownButton.m */,
-				3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */,
-				338964601E52E52700A7B1AE /* phoneRegisterViewController.m */,
 			);
 			path = "手机验证";
 			sourceTree = "<group>";
@@ -3998,6 +4003,7 @@
 				334FF09D1CF53C7C001E6716 /* MainViewController.m in Sources */,
 				3326926B1D794AB00058C5B7 /* AvCell.m in Sources */,
 				3383EFA11C9F8A6F0075E834 /* MJRefreshLegendFooter.m in Sources */,
+				3389649C1E5E767700A7B1AE /* forgetOneViewController.m in Sources */,
 				334B8F541C914A6D00798A69 /* PNPieChartDataItem.m in Sources */,
 				334B8F4D1C914A6D00798A69 /* PNCircleChart.m in Sources */,
 				336D3FFE1D6FE76100ECFA34 /* AnotherSearchViewController.m in Sources */,
