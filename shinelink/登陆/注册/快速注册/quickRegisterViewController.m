@@ -12,6 +12,8 @@
 
 @interface quickRegisterViewController ()<SHBQRViewDelegate>
 @property(nonatomic,strong)SHBQRView *qrView;
+@property(nonatomic,strong)NSString *SnCode;
+@property(nonatomic,strong)NSString *SnCheck;
 @end
 
 @implementation quickRegisterViewController
@@ -49,8 +51,49 @@
            // [self showToastViewWithTitle:@"请扫描正确的采集器序列号"];
          [self showAlertViewWithTitle:nil message:@"请扫描正确的采集器序列号" cancelButtonTitle:root_Yes];
        
+    }else{
+        _SnCode=result;
+        _SnCheck=[self getValidCode:result];
+        quickRegister2ViewController *registerRoot=[[quickRegister2ViewController alloc]init];
+        registerRoot.SnCode=_SnCode;
+         registerRoot.SnCheck=_SnCheck;
+        [self.navigationController pushViewController:registerRoot animated:YES];
     }
    
+}
+
+
+-(NSString*)getValidCode:(NSString*)serialNum{
+    if (serialNum==NULL||serialNum==nil) {
+        return @"";
+    }
+    NSData *testData = [serialNum dataUsingEncoding: NSUTF8StringEncoding];
+    int sum=0;
+    Byte *snBytes=(Byte*)[testData bytes];
+    for(int i=0;i<[testData length];i++)
+    {
+        sum+=snBytes[i];
+    }
+    NSInteger B=sum%8;
+    NSString *B1= [NSString stringWithFormat: @"%ld", (long)B];
+    int C=sum*sum;
+    NSString *text = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x",C]];
+    int length = [text length];
+    NSString *resultTemp;
+    NSString *resultTemp3;
+    NSString *resultTemp1=[text substringWithRange:NSMakeRange(0, 2)];
+    NSString *resultTemp2=[text substringWithRange:NSMakeRange(length - 2, 2)];
+    resultTemp3= [resultTemp1 stringByAppendingString:resultTemp2];
+    resultTemp=[resultTemp3 stringByAppendingString:B1];
+    NSString *result = @"";
+    char *charArray = [resultTemp cStringUsingEncoding:NSASCIIStringEncoding];
+    for (int i=0; i<[resultTemp length]; i++) {
+        if (charArray[i]==0x30||charArray[i]==0x4F||charArray[i]==0x4F) {
+            charArray[i]++;
+        }
+        result=[result stringByAppendingFormat:@"%c",charArray[i]];
+    }
+    return [result uppercaseString];
 }
 
 

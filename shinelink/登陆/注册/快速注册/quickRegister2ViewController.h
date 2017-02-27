@@ -9,5 +9,6 @@
 #import "RootViewController.h"
 
 @interface quickRegister2ViewController : RootViewController
-
+@property(nonatomic,strong)NSString *SnCode;
+@property(nonatomic,strong)NSString *SnCheck;
 @end

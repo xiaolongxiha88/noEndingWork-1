@@ -43,8 +43,8 @@
  #define Demo_Name  @"guest"
  #define Demo_password  @"123456"
 
-//#define HEAD_URL_Demo  @"http://test.growatt.com"
-#define HEAD_URL_Demo  @"http://server.growatt.com"
+#define HEAD_URL_Demo  @"http://test.growatt.com"
+//#define HEAD_URL_Demo  @"http://server.growatt.com"
 
 
 #define HEAD_URL  [UserInfo defaultUserInfo].server

@@ -7,12 +7,20 @@
 //
 
 #import "quickRegister2ViewController.h"
+#import "AddDeviceViewController.h"
+#import "MainViewController.h"
+#import "loginViewController.h"
+#import "protocol.h"
 
 @interface quickRegister2ViewController ()
 @property (nonatomic, strong)  UITextField *textField;
 @property (nonatomic, strong)  UITextField *textField2;
 @property (nonatomic, strong)  NSString *getCountry;
 @property (nonatomic, strong)  NSString *getZone;
+@property (nonatomic, strong) NSMutableDictionary *dataDic;
+@property (nonatomic, strong) NSString *setDeviceName;
+@property(nonatomic,strong)NSString *userEnable;
+
 @end
 
 @implementation quickRegister2ViewController
@@ -22,6 +30,8 @@
     UIImage *bgImage = IMAGE(@"bg.png");
     self.view.layer.contents = (id)bgImage.CGImage;
     self.title=@"一键注册";
+    _dataDic=[NSMutableDictionary new];
+    _userEnable=@"ok";
      [self initUI];
     [self getInfo];
 }
@@ -48,20 +58,12 @@
          _getZone=@"1";
     }
     
-    if ([_getZone isEqualToString:@"initZ"]) {
-        //获取时区
-        NSTimeZone *regTimeZone1 = [NSTimeZone systemTimeZone];
-        NSInteger regTimeZone = [regTimeZone1 secondsFromGMT]/3600;
-        _getCountry=@"Other";
-        _getZone=[NSString stringWithFormat:@"%ld",(long)regTimeZone];
-    }
-    
 }
 
 -(void)initUI{
 
     float H1=20*HEIGHT_SIZE;
-    _textField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE,70*HEIGHT_SIZE-H1,220*HEIGHT_SIZE, 25*HEIGHT_SIZE)];
+    _textField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE,70*HEIGHT_SIZE-H1,220*NOW_SIZE, 25*HEIGHT_SIZE)];
     _textField.placeholder =root_Enter_phone_number;
     _textField.textColor = [UIColor whiteColor];
     _textField.tintColor = [UIColor whiteColor];
@@ -71,11 +73,11 @@
     _textField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.view addSubview:_textField];
     
-    UIView *line=[[UIView alloc]initWithFrame:CGRectMake(50*NOW_SIZE,98*HEIGHT_SIZE-H1,220*HEIGHT_SIZE, 1*HEIGHT_SIZE)];
+    UIView *line=[[UIView alloc]initWithFrame:CGRectMake(50*NOW_SIZE,98*HEIGHT_SIZE-H1,220*NOW_SIZE, 1*HEIGHT_SIZE)];
     line.backgroundColor=COLOR(255, 255, 255, 0.5);
     [self.view addSubview:line];
     
-    _textField2 = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE,128*HEIGHT_SIZE-H1,220*HEIGHT_SIZE, 25*HEIGHT_SIZE)];
+    _textField2 = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE,128*HEIGHT_SIZE-H1,220*NOW_SIZE, 25*HEIGHT_SIZE)];
     _textField2.placeholder =root_Alet_user_pwd;
     _textField2.textColor = [UIColor whiteColor];
     _textField2.tintColor = [UIColor whiteColor];
@@ -85,12 +87,12 @@
     _textField2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.view addSubview:_textField2];
     
-    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(50*NOW_SIZE,156*HEIGHT_SIZE-H1,220*HEIGHT_SIZE, 1*HEIGHT_SIZE)];
+    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(50*NOW_SIZE,156*HEIGHT_SIZE-H1,220*NOW_SIZE, 1*HEIGHT_SIZE)];
     line1.backgroundColor=COLOR(255, 255, 255, 0.5);
     [self.view addSubview:line1];
     
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(60*NOW_SIZE,200*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    goBut.frame=CGRectMake(60*NOW_SIZE,215*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     [goBut.layer setMasksToBounds:YES];
     [goBut.layer setCornerRadius:20.0];
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
@@ -98,11 +100,250 @@
     [goBut setTitle:root_register forState:UIControlStateNormal];
     [goBut addTarget:self action:@selector(PresentGo) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goBut];
+ 
+    UIButton *selectButton= [UIButton buttonWithType:UIButtonTypeCustom];
+    [selectButton setBackgroundImage:IMAGE(@"未打勾.png") forState:UIControlStateSelected];
+    [selectButton setBackgroundImage:IMAGE(@"打勾.png") forState:UIControlStateNormal];
+    [selectButton addTarget:self action:@selector(selectGo:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:selectButton];
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+    CGSize size = [root_yonghu_xieyi boundingRectWithSize:CGSizeMake(MAXFLOAT, 16*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    
+    UILabel *userOk= [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width-size.width)/2,156*HEIGHT_SIZE-H1+20*HEIGHT_SIZE, size.width, 16*HEIGHT_SIZE)];
+    userOk.text=root_yonghu_xieyi;
+    userOk.textColor=[UIColor whiteColor];
+    userOk.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    userOk.textAlignment = NSTextAlignmentCenter;
+    userOk.userInteractionEnabled=YES;
+    UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GoUsert)];
+    [userOk addGestureRecognizer:demo1];
+    [self.view addSubview:userOk];
+             [userOk sizeToFit];
+    
+      selectButton.frame=CGRectMake((SCREEN_Width-size.width)/2-22*NOW_SIZE,156*HEIGHT_SIZE-H1+21*HEIGHT_SIZE, 16*HEIGHT_SIZE, 16*HEIGHT_SIZE);
+    
+    UIView *userView= [[UIView alloc] initWithFrame:CGRectMake((SCREEN_Width-size.width)/2,156*HEIGHT_SIZE-H1+20*HEIGHT_SIZE+20*HEIGHT_SIZE, size.width, 1*HEIGHT_SIZE)];
+    userView.backgroundColor=COLOR(255, 255, 255, 0.5);
+    [self.view addSubview:userView];
+    
+}
+
+-(void)GoUsert{
+    protocol *go=[[protocol alloc]init];
+    [self.navigationController pushViewController:go animated:YES];
+}
+
+-(void)selectGo:(UIButton*)sender{
+    
+    if (sender.selected) {
+        [sender setSelected:NO];
+        _userEnable=@"ok";
+        [sender setImage:[UIImage imageNamed:@"没打勾.png"] forState:UIControlStateHighlighted];
+        [sender setImage:[UIImage imageNamed:@"打勾.png"] forState:UIControlStateNormal];
+ 
+    }else{
+        [sender setSelected:YES];
+        
+        _userEnable=@"no";
+
+        [sender setImage:[UIImage imageNamed:@"打勾.png"] forState:UIControlStateHighlighted];
+        [sender setImage:[UIImage imageNamed:@"没打勾.png"] forState:UIControlStateNormal];
+    }
+        
+}
+
+-(void)PresentGo{
+    [self getLanguage];
+
+    
+    NSArray *array=[[NSArray alloc]initWithObjects:root_Enter_your_username,root_Enter_your_pwd,nil];
+    
+        if ([[_textField text] isEqual:@""]) {
+            [self showToastViewWithTitle:array[0]];
+            return;
+        }
+    if ([[_textField2 text] isEqual:@""]) {
+        [self showToastViewWithTitle:array[1]];
+        return;
+    }
+    if (![_userEnable isEqualToString:@"ok"]) {
+        [self showToastViewWithTitle:root_xuanze_yonghu_xieyi];
+        return;
+    }
+    [_dataDic setObject:[_textField text] forKey:@"regUserName"];
+    [_dataDic setObject:[_textField2 text] forKey:@"regPassword"];
+    [_dataDic setObject:_SnCode forKey:@"regDataLoggerNo"];
+    [_dataDic setObject:_SnCheck forKey:@"regValidateCode"];
+        [_dataDic setObject:_getCountry forKey:@"regCountry"];
+    
+       NSDictionary *userCheck=[NSDictionary dictionaryWithObject:[_textField text] forKey:@"regUserName"];
+    [self showProgressView];
+    [BaseRequest requestWithMethod:HEAD_URL paramars:userCheck paramarsSite:@"/newRegisterAPI.do?op=checkUserExist" sucessBlock:^(id content) {
+        NSLog(@"checkUserExist: %@", content);
+        [self hideProgressView];
+        if (content) {
+            if ([content[@"success"] integerValue] == 0) {
+                [BaseRequest requestWithMethod:HEAD_URL paramars:_dataDic paramarsSite:@"/newRegisterAPI.do?op=mobileRegiste" sucessBlock:^(id content) {
+                    NSLog(@"creatAccount: %@", content);
+                    [self hideProgressView];
+                    
+                    if (content) {
+                        if ([content[@"success"] integerValue] == 0) {
+                            //注册失败
+                            if ([content[@"msg"] isEqual:@"501"]) {
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_chaoChu_shuLiang cancelButtonTitle:root_Yes];
+                            }else if ([content[@"msg"] isEqual:@"506"]){
+                                
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_caijiqi_cuowu cancelButtonTitle:root_Yes];
+                            }else if ([content[@"msg"] isEqual:@"503"]){
+                                
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
+                                [self.navigationController popViewControllerAnimated:NO];
+                            }else if ([content[@"msg"] isEqual:@"604"]){
+                                
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
+                                [self.navigationController popViewControllerAnimated:NO];
+                            }else if ([content[@"msg"] isEqual:@"605"]){
+                                
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
+                            }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]||[content[@"msg"] isEqual:@"608"]||[content[@"msg"] isEqual:@"609"]||[content[@"msg"] isEqual:@"602"]||[content[@"msg"] isEqual:@"502"]||[content[@"msg"] isEqual:@"603"]){
+                                
+                                NSString *failName=[NSString stringWithFormat:@"%@(%@)",root_zhuce_shibai,content[@"msg"]];
+                                if ([[_dataDic objectForKey:@"regCountry"] isEqualToString:@"China"]) {
+                                    
+                                    [self showAlertViewWithTitle:failName message:root_fuwuqi_cuowu_tishi_2 cancelButtonTitle:root_Yes];
+                                }else{
+                                    [self showAlertViewWithTitle:failName message:root_fuwuqi_cuowu_tishi cancelButtonTitle:root_Yes];
+                                }
+                                
+                                [BaseRequest getAppError:failName useName:[_dataDic objectForKey:@"regUserName"]];
+                                
+                            }else if ([content[@"msg"] isEqual:@"701"]){
+                                
+                                [self showAlertViewWithTitle:root_zhuce_shibai message:root_caijiqi_cuowu_tishi cancelButtonTitle:root_Yes];
+                            }else{
+                                
+                                NSString *errorMsg=[NSString stringWithFormat:@"RegisterError%@",content[@"msg"]];
+                                [BaseRequest getAppError:errorMsg useName:[_dataDic objectForKey:@"regUserName"]];
+                                
+                            }
+                            
+                        }
+                        else {
+                         
+                            //注册成功
+                            [self succeedRegister];
+                            [self showAlertViewWithTitle:nil message:root_zhuCe_chengGong  cancelButtonTitle:root_Yes];
+                            
+                        }
+                    }
+                    
+                } failure:^(NSError *error) {
+                    [self hideProgressView];
+                    [self showToastViewWithTitle:root_Networking];
+                }];
+                
+                
+            }else{
+                [self showAlertViewWithTitle:nil message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
+                [self.navigationController popViewControllerAnimated:NO];
+            }
+        }
+        
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+    }
+     
+     ];
+
+
+}
+
+
+-(void)succeedRegister{
+    NSString *user=[_dataDic objectForKey:@"regUserName"];
+    NSString *pwd=[_dataDic objectForKey:@"regPassword"];
+    
+    [[UserInfo defaultUserInfo] setUserName:user];
+    [[UserInfo defaultUserInfo] setUserPassword:pwd];
+    
+    
+    
+    NSString *demoName1=@"ShineWIFI";           //新wifi
+    NSString *demoName2=@"ShineLan";            //旧wifi
+    NSString *demoName3=@"ShineWifiBox";          //旧wifi
+    
+    BOOL result1 = [_setDeviceName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+    BOOL result2 = [_setDeviceName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+    BOOL result3 = [_setDeviceName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+    
+    if (result1) {
+        
+        AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
+        rootView.LogType=@"1";
+        rootView.SnString=_SnCode;
+        rootView.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:rootView animated:YES];
+    }else if (result2){
+        [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+        MainViewController *rootView = [[MainViewController alloc]init];
+        [self.navigationController pushViewController:rootView animated:YES];
+        
+    }else if (result3){
+        [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
+        MainViewController *rootView = [[MainViewController alloc]init];
+        [self.navigationController pushViewController:rootView animated:YES];
+        
+    }else{
+        
+        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+        
+        loginViewController *goView=[[loginViewController alloc]init];
+        goView.LogType=@"1";
+        [self.navigationController pushViewController:goView animated:NO];
+    }
     
 }
 
 
+-(void)getLanguage{
+    //获取本地语言
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *regLanguage = [languages objectAtIndex:0];
 
+    if ([regLanguage hasPrefix:@"en"]) {
+        [_dataDic setObject:@"en" forKey:@"regLanguage"];
+    }else if ([regLanguage hasPrefix:@"zh-Hans"]){
+        [_dataDic setObject:@"zh_cn" forKey:@"regLanguage"];
+    }else if ([regLanguage hasPrefix:@"fr"]){
+        [_dataDic setObject:@"fr" forKey:@"regLanguage"];
+    }
+    else if ([regLanguage hasPrefix:@"ja"]){
+        [_dataDic setObject:@"ja" forKey:@"regLanguage"];
+    }
+    else if ([regLanguage hasPrefix:@"it"]){
+        [_dataDic setObject:@"it" forKey:@"regLanguage"];
+    }
+    else if ([regLanguage hasPrefix:@"nl"]){
+        [_dataDic setObject:@"ho" forKey:@"regLanguage"];
+    }
+    else if ([regLanguage hasPrefix:@"tr"]){
+        [_dataDic setObject:@"tk" forKey:@"regLanguage"];
+    }
+    else if ([regLanguage hasPrefix:@"pl"]){
+        [_dataDic setObject:@"pl" forKey:@"regLanguage"];
+    }
+    else if ([regLanguage hasPrefix:@"el"]){
+        [_dataDic setObject:@"gk" forKey:@"regLanguage"];
+    }
+    else if ([regLanguage hasPrefix:@"de"]){
+        [_dataDic setObject:@"gm" forKey:@"regLanguage"];
+    }else{
+        [_dataDic setObject:@"en" forKey:@"regLanguage"];
+    }
+}
 
 
 - (void)didReceiveMemoryWarning {

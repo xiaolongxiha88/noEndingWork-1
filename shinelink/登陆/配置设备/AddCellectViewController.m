@@ -401,10 +401,6 @@
         [self.navigationController pushViewController:goView animated:NO];
     }
 
-    
-    
-    
-
 }
 
 
