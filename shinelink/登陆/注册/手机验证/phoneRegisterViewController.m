@@ -8,6 +8,7 @@
 
 #import "phoneRegisterViewController.h"
 #import "QCCountdownButton.h"
+#import "phoneRegister2ViewController.h"
 
 @interface phoneRegisterViewController ()
  @property (nonatomic, strong)  UIImageView *imageView;
@@ -16,6 +17,9 @@
 @property (nonatomic, strong)  UITextField *textField2;
 @property(nonatomic,strong)UILabel *label2;
 @property (nonatomic, strong)  NSString *getPhone;
+@property (nonatomic, strong) NSMutableDictionary *dataDic;
+@property (nonatomic, strong)  NSString *getCheckNum;
+@property (nonatomic, strong)  NSString *getPhoneNum;
 @end
 
 @implementation phoneRegisterViewController
@@ -106,10 +110,12 @@
        btn.nomalBackgroundColor = COLOR(144, 195, 32, 1);
      btn.disabledBackgroundColor = [UIColor grayColor];
     btn.totalSecond = 10;
+      [btn addTarget:self action:@selector(getCode0) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
     //进度b
     [btn processBlock:^(NSUInteger second) {
+        btn.phoneNum=[_textField text];
         btn.title = [NSString stringWithFormat:@"%lis", second] ;
     } onFinishedBlock:^{  // 倒计时完毕
         btn.title = @"获取验证码";
@@ -128,17 +134,75 @@
     
 }
 
+-(void)getCode0{
+    _getPhone=[_textField0 text];
+    if ([[_textField text] isEqual:@""]) {
+        [self showToastViewWithTitle:@"请输入手机号"];
+        return;
+    }
+    
+   
+        [self getCode];
+       
+}
 
--(void)fetchLocation{
+-(void)getCode{
+    _dataDic=[NSMutableDictionary new];
+    [_dataDic setObject:[_textField text] forKey:@"phoneNum"];
+    [_dataDic setObject:_getPhone forKey:@"areaCode"];
     
-    
-    
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:_dataDic paramarsSite:@"/newForgetAPI.do?op=smsVerification" sucessBlock:^(id content) {
+       
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+         NSLog(@"smsVerification: %@", jsonObj);
+        if (jsonObj) {
+            if ([jsonObj[@"result"] intValue]==1) {
+                if ((jsonObj[@"obj"]==nil)||(jsonObj[@"obj"]==NULL)||([jsonObj[@"obj"] isEqual:@""])) {
+                    
+                }else{
+                   
+                        _getCheckNum=jsonObj[@"obj"][@"validate"];
+                        _getPhoneNum=[_textField text];
+                    
+                }
+            }else{
+                if ([jsonObj[@"msg"] intValue]==501) {
+                  [self showAlertViewWithTitle:@"获取短信验证码失败" message:@"发送短信验证码不成功" cancelButtonTitle:root_Yes];
+                }else if ([jsonObj[@"msg"] intValue]==502) {
+                    [self showAlertViewWithTitle:@"获取短信验证码失败" message:@"手机号码为空" cancelButtonTitle:root_Yes];
+                }else if ([jsonObj[@"msg"] intValue]==503) {
+                    [self showAlertViewWithTitle:@"获取短信验证码失败" message:@"该手机号没有注册用户" cancelButtonTitle:root_Yes];
+                }else if ([jsonObj[@"msg"] intValue]==9003) {
+                    [self showAlertViewWithTitle:@"获取短信验证码失败" message:@"手机号码格式不正确" cancelButtonTitle:root_Yes];
+                }else if ([jsonObj[@"msg"] intValue]==9004) {
+                    [self showAlertViewWithTitle:@"获取短信验证码失败" message:@"请求已经失效" cancelButtonTitle:root_Yes];
+                }else {
+                    [self showAlertViewWithTitle:@"获取短信验证码失败" message:jsonObj[@"msg"] cancelButtonTitle:root_Yes];
+                }
+            
+            }
+            
+        }
+        
+    } failure:^(NSError *error) {
+        
+       }
+     ];
+
 }
 
 
 -(void)PresentGo{
 
-
+    if ([_getCheckNum isEqualToString:[_textField2 text]]) {
+        phoneRegister2ViewController *goView=[[phoneRegister2ViewController alloc]init];
+        goView.PhoneNum=_getPhoneNum;
+        goView.PhoneCheck=_getCheckNum;
+        [self.navigationController pushViewController:goView animated:YES];
+               
+    }else{
+       [self showToastViewWithTitle:@"请输入正确的手机校验码"];
+    }
 
 }
 

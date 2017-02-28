@@ -17,6 +17,7 @@
 @property (nonatomic, copy) void(^processBlock)(NSUInteger second);
 
 @property (nonatomic, copy) void(^finishedBlock)();
+@property (nonatomic, strong) NSMutableDictionary *dataDic;
 
 @end
 
@@ -40,7 +41,7 @@
 }
 
 - (void)startTime{
-    
+ //   [self getCode];
     self.second = self.totalSecond;
     
     self.userInteractionEnabled = NO;
@@ -50,6 +51,27 @@
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
     
 }
+
+-(void)getCode{
+
+    _dataDic=[NSMutableDictionary new];
+    
+      [_dataDic setObject:_phoneNum forKey:@"phoneNum"];
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:_dataDic paramarsSite:@"/newForgetAPI.do?op=smsVerification" sucessBlock:^(id content) {
+        NSLog(@"smsVerification: %@", content);
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        if (jsonObj) {
+            
+        }
+        
+    } failure:^(NSError *error) {
+        
+    }
+     
+     ];
+
+}
+
 
 - (void)timerFire{
     

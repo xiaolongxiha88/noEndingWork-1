@@ -25,6 +25,7 @@
  */
 @property (nonatomic, copy) NSString *title;
 
+@property (nonatomic, strong) NSString *phoneNum;
 /**
  *  设置文字字体
  */

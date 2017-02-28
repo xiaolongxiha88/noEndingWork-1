@@ -173,8 +173,17 @@
     }
     [_dataDic setObject:[_textField text] forKey:@"regUserName"];
     [_dataDic setObject:[_textField2 text] forKey:@"regPassword"];
+    if (_SnCode==nil) {
+           [_dataDic setObject:@"" forKey:@"regDataLoggerNo"];
+    }else{
     [_dataDic setObject:_SnCode forKey:@"regDataLoggerNo"];
-    [_dataDic setObject:_SnCheck forKey:@"regValidateCode"];
+    }
+    if (_SnCheck==nil) {
+        [_dataDic setObject:@"" forKey:@"regValidateCode"];
+    }else{
+     [_dataDic setObject:_SnCheck forKey:@"regValidateCode"];
+    }
+    
         [_dataDic setObject:_getCountry forKey:@"regCountry"];
     
        NSDictionary *userCheck=[NSDictionary dictionaryWithObject:[_textField text] forKey:@"regUserName"];
@@ -184,7 +193,8 @@
         [self hideProgressView];
         if (content) {
             if ([content[@"success"] integerValue] == 0) {
-                [BaseRequest requestWithMethod:HEAD_URL paramars:_dataDic paramarsSite:@"/newRegisterAPI.do?op=mobileRegiste" sucessBlock:^(id content) {
+                
+                [BaseRequest requestWithMethod:HEAD_URL paramars:_dataDic paramarsSite:@"/newRegisterAPI.do?op=mobileRegister" sucessBlock:^(id content) {
                     NSLog(@"creatAccount: %@", content);
                     [self hideProgressView];
                     
@@ -232,6 +242,7 @@
                         }
                         else {
                          
+                            _setDeviceName=content[@"datalogType"];
                             //注册成功
                             [self succeedRegister];
                             [self showAlertViewWithTitle:nil message:root_zhuCe_chengGong  cancelButtonTitle:root_Yes];
