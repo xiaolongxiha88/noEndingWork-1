@@ -16,7 +16,7 @@
 @property (nonatomic, strong)  UITextField *textField0;
 @property (nonatomic, strong)  UITextField *textField2;
 @property(nonatomic,strong)UILabel *label2;
-@property (nonatomic, strong)  NSString *getPhone;
+@property (nonatomic, strong)  NSMutableString *getPhone;
 @property (nonatomic, strong) NSMutableDictionary *dataDic;
 @property (nonatomic, strong)  NSString *getCheckNum;
 @property (nonatomic, strong)  NSString *getPhoneNum;
@@ -135,7 +135,20 @@
 }
 
 -(void)getCode0{
-    _getPhone=[_textField0 text];
+    NSString *A1=[_textField0 text];
+    _getPhone=[NSMutableString stringWithString:A1];
+    NSString *A=@"+";
+    if ([_getPhone containsString:A]) {
+        [_getPhone deleteCharactersInRange:[_getPhone rangeOfString:A]];
+        }
+
+    _getPhone=[self getTheCorrectNum:_getPhone];
+    
+    if (_getPhone.length>5) {
+        [self showToastViewWithTitle:@"区号超过长度"];
+        return;
+    }
+    
     if ([[_textField text] isEqual:@""]) {
         [self showToastViewWithTitle:@"请输入手机号"];
         return;
@@ -145,6 +158,22 @@
         [self getCode];
        
 }
+
+
+
+-(NSMutableString*) getTheCorrectNum:(NSString*)tempString
+{
+    while ([tempString hasPrefix:@"0"])
+        
+    {
+        tempString = [tempString substringFromIndex:1];
+        
+      //  NSLog(@"压缩之后的tempString:%@",tempString);
+    }
+    return tempString;
+}
+
+
 
 -(void)getCode{
     _dataDic=[NSMutableDictionary new];
