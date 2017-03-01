@@ -377,6 +377,8 @@
 		337C10E91CE02A160053361F /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = 337C10E81CE02A160053361F /* head.png */; };
 		337C30541CCDAF3C002B99B7 /* protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C30531CCDAF3C002B99B7 /* protocol.m */; };
 		337C8D991E6545CF0013D650 /* phoneRegister2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C8D981E6545CF0013D650 /* phoneRegister2ViewController.m */; };
+		337C8D9C1E66ACD30013D650 /* GifNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C8D9B1E66ACD30013D650 /* GifNewViewController.m */; };
+		337C8DA01E66C22C0013D650 /* LED.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C8D9F1E66C22C0013D650 /* LED.gif */; };
 		337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */; };
 		337CB59D1DB4A837002ABB88 /* firstToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB59C1DB4A837002ABB88 /* firstToolViewController.m */; };
 		337CB5A11DB608B0002ABB88 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 337CB5A01DB608B0002ABB88 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -1200,6 +1202,9 @@
 		337C30531CCDAF3C002B99B7 /* protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = protocol.m; sourceTree = "<group>"; };
 		337C8D971E6545CF0013D650 /* phoneRegister2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = phoneRegister2ViewController.h; sourceTree = "<group>"; };
 		337C8D981E6545CF0013D650 /* phoneRegister2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = phoneRegister2ViewController.m; sourceTree = "<group>"; };
+		337C8D9A1E66ACD30013D650 /* GifNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifNewViewController.h; path = WifConnect/GifNewViewController.h; sourceTree = "<group>"; };
+		337C8D9B1E66ACD30013D650 /* GifNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifNewViewController.m; path = WifConnect/GifNewViewController.m; sourceTree = "<group>"; };
+		337C8D9F1E66C22C0013D650 /* LED.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LED.gif; sourceTree = "<group>"; };
 		337CB5981DB4A787002ABB88 /* WiFiSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiSignalViewController.h; sourceTree = "<group>"; };
 		337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiSignalViewController.m; sourceTree = "<group>"; };
 		337CB59B1DB4A837002ABB88 /* firstToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = firstToolViewController.h; sourceTree = "<group>"; };
@@ -3373,8 +3378,11 @@
 				337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */,
 				338418E01DC840AB00D679CA /* GifConfigViewController.h */,
 				338418E11DC840AB00D679CA /* GifConfigViewController.m */,
+				337C8D9A1E66ACD30013D650 /* GifNewViewController.h */,
+				337C8D9B1E66ACD30013D650 /* GifNewViewController.m */,
 				338418E51DC9783500D679CA /* GFWaterView.h */,
 				338418E61DC9783500D679CA /* GFWaterView.m */,
+				337C8D9F1E66C22C0013D650 /* LED.gif */,
 				336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */,
 			);
 			path = "采集器";
@@ -3741,6 +3749,7 @@
 				330E3DF11D0D6D4B00DF75AE /* 形状17.png in Resources */,
 				33FEFD691C7DB38400324374 /* iconfont-faxian_press@2x.png in Resources */,
 				3355AD9B1CF6A49400AE6891 /* 111.jpg in Resources */,
+				337C8DA01E66C22C0013D650 /* LED.gif in Resources */,
 				33238B491CBF816400E82B86 /* 外框@3x.png in Resources */,
 				3334AD751D800BD900665667 /* inverter2.png in Resources */,
 				3355AD981CF6A49400AE6891 /* 444.jpg in Resources */,
@@ -4190,6 +4199,7 @@
 				3356675B1D7E606F00C40129 /* NewPagedFlowView.m in Sources */,
 				3370359B1E373D2D00AE7CD2 /* datailD2ViewController.m in Sources */,
 				33EFB6021C979B5F003F336F /* StationCellectTableViewCell.m in Sources */,
+				337C8D9C1E66ACD30013D650 /* GifNewViewController.m in Sources */,
 				33AF3D261D8E67210007D6C2 /* UIAlertView+Block.m in Sources */,
 				3367CB4F1C86806700EF460C /* NSArray+MASAdditions.m in Sources */,
 				3353B1B61CA1272C00577595 /* CoreDataManager.m in Sources */,

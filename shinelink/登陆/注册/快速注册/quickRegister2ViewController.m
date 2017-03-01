@@ -62,7 +62,7 @@
 
 -(void)initUI{
 
-    float H1=20*HEIGHT_SIZE;
+    float H1=20*HEIGHT_SIZE;float H2=10*HEIGHT_SIZE;
     _textField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE,70*HEIGHT_SIZE-H1,220*NOW_SIZE, 25*HEIGHT_SIZE)];
     _textField.placeholder =root_Enter_phone_number;
     _textField.textColor = [UIColor whiteColor];
@@ -73,11 +73,21 @@
     _textField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.view addSubview:_textField];
     
-    UIView *line=[[UIView alloc]initWithFrame:CGRectMake(50*NOW_SIZE,98*HEIGHT_SIZE-H1,220*NOW_SIZE, 1*HEIGHT_SIZE)];
+    UIView *line=[[UIView alloc]initWithFrame:CGRectMake(50*NOW_SIZE,95*HEIGHT_SIZE-H1,220*NOW_SIZE, 1*HEIGHT_SIZE)];
     line.backgroundColor=COLOR(255, 255, 255, 0.5);
     [self.view addSubview:line];
     
-    _textField2 = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE,128*HEIGHT_SIZE-H1,220*NOW_SIZE, 25*HEIGHT_SIZE)];
+    
+    UILabel *alertLable= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE,102*HEIGHT_SIZE-H1,300*NOW_SIZE, 15*HEIGHT_SIZE)];
+      NSString *alertText1=root_budai_guojiahao;
+    NSString *alertText=[NSString stringWithFormat:@"(%@)",alertText1];
+    alertLable.text=alertText;
+    alertLable.textColor=COLOR(255, 255, 255, 0.5);
+    alertLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    alertLable.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:alertLable];
+    
+    _textField2 = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE,128*HEIGHT_SIZE-H1+H2,220*NOW_SIZE, 25*HEIGHT_SIZE)];
     _textField2.placeholder =root_Alet_user_pwd;
     _textField2.textColor = [UIColor whiteColor];
     _textField2.tintColor = [UIColor whiteColor];
@@ -87,12 +97,12 @@
     _textField2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.view addSubview:_textField2];
     
-    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(50*NOW_SIZE,156*HEIGHT_SIZE-H1,220*NOW_SIZE, 1*HEIGHT_SIZE)];
+    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(50*NOW_SIZE,153*HEIGHT_SIZE-H1+H2,220*NOW_SIZE, 1*HEIGHT_SIZE)];
     line1.backgroundColor=COLOR(255, 255, 255, 0.5);
     [self.view addSubview:line1];
     
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(60*NOW_SIZE,215*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    goBut.frame=CGRectMake(60*NOW_SIZE,215*HEIGHT_SIZE+H2, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     [goBut.layer setMasksToBounds:YES];
     [goBut.layer setCornerRadius:20.0];
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
@@ -110,7 +120,7 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
     CGSize size = [root_yonghu_xieyi boundingRectWithSize:CGSizeMake(MAXFLOAT, 16*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     
-    UILabel *userOk= [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width-size.width)/2,156*HEIGHT_SIZE-H1+20*HEIGHT_SIZE, size.width, 16*HEIGHT_SIZE)];
+    UILabel *userOk= [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width-size.width)/2,156*HEIGHT_SIZE-H1+20*HEIGHT_SIZE+H2, size.width, 16*HEIGHT_SIZE)];
     userOk.text=root_yonghu_xieyi;
     userOk.textColor=[UIColor whiteColor];
     userOk.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -121,9 +131,9 @@
     [self.view addSubview:userOk];
              [userOk sizeToFit];
     
-      selectButton.frame=CGRectMake((SCREEN_Width-size.width)/2-22*NOW_SIZE,156*HEIGHT_SIZE-H1+21*HEIGHT_SIZE, 16*HEIGHT_SIZE, 16*HEIGHT_SIZE);
+      selectButton.frame=CGRectMake((SCREEN_Width-size.width)/2-22*NOW_SIZE,156*HEIGHT_SIZE-H1+21*HEIGHT_SIZE+H2, 16*HEIGHT_SIZE, 16*HEIGHT_SIZE);
     
-    UIView *userView= [[UIView alloc] initWithFrame:CGRectMake((SCREEN_Width-size.width)/2,156*HEIGHT_SIZE-H1+20*HEIGHT_SIZE+20*HEIGHT_SIZE, size.width, 1*HEIGHT_SIZE)];
+    UIView *userView= [[UIView alloc] initWithFrame:CGRectMake((SCREEN_Width-size.width)/2,156*HEIGHT_SIZE-H1+20*HEIGHT_SIZE+20*HEIGHT_SIZE+H2, size.width, 1*HEIGHT_SIZE)];
     userView.backgroundColor=COLOR(255, 255, 255, 0.5);
     [self.view addSubview:userView];
     

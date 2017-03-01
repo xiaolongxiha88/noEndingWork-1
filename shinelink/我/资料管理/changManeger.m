@@ -129,6 +129,17 @@
         _textField2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
         //_textField.delegate=self;
         [self.view addSubview:_textField2];
+        
+        UILabel *alertLable= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE,75*HEIGHT_SIZE+48*HEIGHT_SIZE+Size1,300*NOW_SIZE, 15*HEIGHT_SIZE)];
+        NSString *alertText1=root_budai_guojiahao;
+        NSString *alertText=[NSString stringWithFormat:@"(%@)",alertText1];
+        alertLable.text=alertText;
+        alertLable.textColor=COLOR(255, 255, 255, 0.5);
+        alertLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        alertLable.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:alertLable];
+        
+        
     }
     
     if([_type isEqualToString:@"2"]){

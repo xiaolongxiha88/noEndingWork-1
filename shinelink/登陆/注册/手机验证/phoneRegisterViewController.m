@@ -9,6 +9,7 @@
 #import "phoneRegisterViewController.h"
 #import "QCCountdownButton.h"
 #import "phoneRegister2ViewController.h"
+#import "changManeger.h"
 
 @interface phoneRegisterViewController ()
  @property (nonatomic, strong)  UIImageView *imageView;
@@ -36,7 +37,7 @@
 }
 
 -(void)getInfo{
-    _getPhone=@"86";
+    _getPhone=[NSMutableString stringWithString:@"86"];
 
     NSLocale *currentLocale = [NSLocale currentLocale];
     NSString *countryCode1 = [currentLocale objectForKey:NSLocaleCountryCode];
@@ -145,7 +146,7 @@
     _getPhone=[self getTheCorrectNum:_getPhone];
     
     if (_getPhone.length>5) {
-        [self showToastViewWithTitle:@"区号超过长度"];
+        [self showToastViewWithTitle:@"国家代码超过长度"];
         return;
     }
     
@@ -170,7 +171,8 @@
         
       //  NSLog(@"压缩之后的tempString:%@",tempString);
     }
-    return tempString;
+    NSMutableString *goString=[NSMutableString stringWithString:tempString];
+    return goString;
 }
 
 
@@ -223,12 +225,21 @@
 
 -(void)PresentGo{
 
+  
     if ([_getCheckNum isEqualToString:[_textField2 text]]) {
-        phoneRegister2ViewController *goView=[[phoneRegister2ViewController alloc]init];
-        goView.PhoneNum=_getPhoneNum;
-        goView.PhoneCheck=_getCheckNum;
-        [self.navigationController pushViewController:goView animated:YES];
-               
+     
+        if ([_goViewType isEqualToString:@"1"]) {
+            phoneRegister2ViewController *goView=[[phoneRegister2ViewController alloc]init];
+            goView.PhoneNum=_getPhoneNum;
+            goView.PhoneCheck=_getCheckNum;
+            [self.navigationController pushViewController:goView animated:YES];
+        }
+        if ([_goViewType isEqualToString:@"2"]) {
+         changManeger *go=[[changManeger alloc]init];
+               go.type=@"1";
+            [self.navigationController pushViewController:go animated:YES];
+        }
+        
     }else{
        [self showToastViewWithTitle:@"请输入正确的手机校验码"];
     }

@@ -57,6 +57,7 @@
 
 -(void)byPhone{
     phoneRegisterViewController *goView=[[phoneRegisterViewController alloc]init];
+    goView.goViewType=@"1";
     [self.navigationController pushViewController:goView animated:YES];
     
 }

@@ -594,5 +594,9 @@
 #define  root_zhanghu_meiyou_quanxian      NSLocalizedString(@"7你的账号没有操作权限", nil)
 #define  root_shanghua_chakan_shuju      NSLocalizedString(@"8上滑查看详细数据", nil)
 #define  root_xiahua_chakan_quxiantu      NSLocalizedString(@"9下滑查看曲线图", nil)
+#define  root_budai_guojiahao      NSLocalizedString(@"10填入不带国家代码的手机号", nil)
+
+
+
 
 #endif /* languageNew_h */

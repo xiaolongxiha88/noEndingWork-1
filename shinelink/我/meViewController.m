@@ -20,6 +20,9 @@
 #import "loginViewController.h"
 #import "CoreDataManager.h"
 
+//DEMO区域
+#import "GifNewViewController.h"
+
 #define Kwidth [UIScreen mainScreen].bounds.size.width
 
 
@@ -104,11 +107,19 @@
 
 -(void)registerUser{
 
-    _Alert1 = [[UIAlertView alloc] initWithTitle:root_tuichu_zhanghu message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK,nil];
-    [_Alert1 show];
+    BOOL isDemo=YES;
+    
+    if (isDemo) {
+        GifNewViewController *go=[[GifNewViewController alloc]init];
+        [self.navigationController pushViewController:go animated:YES];
+    }else{
+        _Alert1 = [[UIAlertView alloc] initWithTitle:root_tuichu_zhanghu message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK,nil];
+        [_Alert1 show];
+    }
+    
+
 
 }
-
 
 
 

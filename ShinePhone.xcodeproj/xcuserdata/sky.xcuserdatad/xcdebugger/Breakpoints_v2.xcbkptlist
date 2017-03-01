@@ -170,7 +170,7 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E7%99%BB%E9%99%86/%E6%B3%A8%E5%86%8C/%E6%89%8B%E6%9C%BA%E9%AA%8C%E8%AF%81/QCCountdownButton.m"
-                  timestampString = "509970727.152735"
+                  timestampString = "510056532.835171"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "60"
@@ -185,7 +185,7 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E7%99%BB%E9%99%86/%E6%B3%A8%E5%86%8C/%E6%89%8B%E6%9C%BA%E9%AA%8C%E8%AF%81/QCCountdownButton.m"
-                  timestampString = "509970727.154376"
+                  timestampString = "510056532.83686"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "61"
@@ -193,38 +193,6 @@
                   offsetFromSymbolStart = "51">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x767b;&#x9646;/&#x6ce8;&#x518c;/&#x624b;&#x673a;&#x9a8c;&#x8bc1;/phoneRegisterViewController.m"
-            timestampString = "509970725.975668"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "-getCode"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x767b;&#x9646;/&#x6ce8;&#x518c;/&#x624b;&#x673a;&#x9a8c;&#x8bc1;/phoneRegisterViewController.m"
-            timestampString = "509970725.975668"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "-getCode0"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

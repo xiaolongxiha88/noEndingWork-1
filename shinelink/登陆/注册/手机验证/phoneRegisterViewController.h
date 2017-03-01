@@ -9,5 +9,5 @@
 #import "RootViewController.h"
 
 @interface phoneRegisterViewController : RootViewController
-
+@property (nonatomic, strong)  NSString *goViewType;
 @end

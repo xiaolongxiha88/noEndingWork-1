@@ -11,6 +11,8 @@
 #import "changManeger.h"
 #import "JPUSHService.h"
 #import "CoreDataManager.h"
+#import "phoneRegisterViewController.h"
+
 
 
 @interface ManagementController ()<UITableViewDataSource,UITableViewDelegate>
@@ -203,18 +205,29 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-     changManeger *go=[[changManeger alloc]init];
-    if (indexPath.row==0) {
-        go.type=@"0";
-    }else if (indexPath.row==1){
-        go.type=@"1";
-    }else if (indexPath.row==2){
-        go.type=@"2";
-    }else if (indexPath.row==3){
-        go.type=@"3";
+    
+    if ((indexPath.row==0)||(indexPath.row==2)||(indexPath.row==3)) {
+        changManeger *go=[[changManeger alloc]init];
+        if (indexPath.row==0) {
+            go.type=@"0";
+        }else if (indexPath.row==2){
+            go.type=@"2";
+        }else if (indexPath.row==3){
+            go.type=@"3";
+        }
+        [self.navigationController pushViewController:go animated:YES];
     }
- 
-    [self.navigationController pushViewController:go animated:YES];
+    
+    if (indexPath.row==1){
+        
+//        changManeger *go=[[changManeger alloc]init];
+//        go.type=@"1";
+//        [self.navigationController pushViewController:go animated:YES];
+        
+        phoneRegisterViewController *registerRoot=[[phoneRegisterViewController alloc]init];
+        registerRoot.goViewType=@"2";
+        [self.navigationController pushViewController:registerRoot animated:YES];
+    }
     
 }
 
