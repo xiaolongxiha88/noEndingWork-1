@@ -57,8 +57,8 @@
     }
 
     
-    NSArray *noticeArray1=[NSArray arrayWithObjects:@"红灯闪烁:采集器和逆变器通信都正常，采集器。", @"蓝灯闪烁时,说明采集器和逆变器、路由器、服务器的通信都正常。", @"蓝灯闪烁:采集器和逆变器、路由器、服务器的通信都正常。", nil];
-       NSArray *noticeArray2=[NSArray arrayWithObjects:@"蓝灯闪烁时,说明采集器和逆变器、路由器、服务器的通信都正常。", @"蓝灯闪烁时,说明采集器和逆变器、路由器、服务器的通信都正常。", @"蓝灯闪烁时,说明采集器和逆变器、路由器、服务器的通信都正常。", nil];
+    NSArray *noticeArray1=[NSArray arrayWithObjects:@"红灯闪烁:采集器和逆变器通信正常，采集器与路由器未连接，采集器与服务器未连接。", @"绿灯闪烁：采集器和逆变器、路由器通信正常，采集器与服务器未连接。", @"蓝灯闪烁:采集器和逆变器、路由器、服务器的通信都正常。", nil];
+       NSArray *noticeArray2=[NSArray arrayWithObjects:@"请检查路由器信号强度:", @"请检查路由器是否已连接互联网。", @"采集器在正常监控中。", nil];
     
     for (int i=0; i<noticeArray1.count; i++) {
         float LableW=(320*NOW_SIZE-25*NOW_SIZE-gifwidth-10*NOW_SIZE);
@@ -67,7 +67,19 @@
         CGRect fcRect2 = [[noticeArray2 objectAtIndex:i] boundingRectWithSize:CGSizeMake(LableW, 200*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:11 *HEIGHT_SIZE]} context:nil];
         float sizeH2=fcRect2.size.height;
         
-        float HH=(gifH-sizeH1-sizeH2-15*HEIGHT_SIZE)/2+10*HEIGHT_SIZE;
+        float HH;
+        if (i==0) {
+               HH=(gifH-sizeH1-sizeH2-15*HEIGHT_SIZE-LableW*0.092)/2+10*HEIGHT_SIZE;
+            
+            UIImageView *pwdBgImageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(28*NOW_SIZE+gifwidth, HH+16*HEIGHT_SIZE+sizeH1+sizeH2, LableW,LableW*0.092 )];
+            pwdBgImageView2.image = IMAGE(@"singal.png");
+            pwdBgImageView2.userInteractionEnabled = YES;
+            [_scrollView addSubview:pwdBgImageView2];
+            
+            
+        }else{
+         HH=(gifH-sizeH1-sizeH2-15*HEIGHT_SIZE)/2+10*HEIGHT_SIZE;
+        }
         
         UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(28*NOW_SIZE+gifwidth, HH+gifH*i, LableW,sizeH1)];
         noticeLable.text=[noticeArray1 objectAtIndex:i];
@@ -80,15 +92,29 @@
         UILabel *noticeLable2=[[UILabel alloc]initWithFrame:CGRectMake(28*NOW_SIZE+gifwidth, HH+15*HEIGHT_SIZE+gifH*i+sizeH1, LableW,sizeH2)];
         noticeLable2.text=[noticeArray2 objectAtIndex:i];
         noticeLable2.textAlignment=NSTextAlignmentLeft;
-        noticeLable2.textColor=[UIColor whiteColor];
+        noticeLable2.textColor=COLOR(255, 255, 255, 0.8);;
         noticeLable2.numberOfLines=0;
         noticeLable2.font = [UIFont systemFontOfSize:11*HEIGHT_SIZE];
         [_scrollView addSubview:noticeLable2];
 
     }
     
+    UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
+    goBut.frame=CGRectMake(60*NOW_SIZE,20*HEIGHT_SIZE+gifH*3, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
+    goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+    [goBut setTitle:root_wifi_chongxin_peizhi forState:UIControlStateNormal];
+    [goBut addTarget:self action:@selector(GoSet) forControlEvents:UIControlEventTouchUpInside];
+    [_scrollView addSubview:goBut];
+    
     
 }
+
+- (void)GoSet{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 
 
 - (void)didReceiveMemoryWarning {
