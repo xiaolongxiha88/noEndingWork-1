@@ -20,6 +20,9 @@
 #import "DemoDeviceViewController.h"
 #import "UIImageView+WebCache.h"
 #import "addStationViewController.h"
+#import "PopoverView00.h"
+ #import <objc/runtime.h>
+
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 #define  AnimationTime 5
@@ -1146,7 +1149,7 @@
     imageView.image = [UIImage imageNamed:_headPicName];
     [_headerView addSubview:imageView];
     
-    _deviceHeadType=@"1";
+    _deviceHeadType=@"2";
     if([_deviceHeadType isEqualToString:@"1"]){
          animationNumber=0;
            [self getPCSHeadUI];
@@ -1356,8 +1359,17 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
         headLableView1.backgroundColor=headColorArray[i];
         [_headerView addSubview:headLableView1];
         
+        
         UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2, unitWidth,headLableValueH)];
         Lable1.text=headValueArray[i];
+        NSArray *lableName=[NSArray arrayWithObject:headValueArray[i]];
+        Lable1.userInteractionEnabled=YES;
+       objc_setAssociatedObject(Lable1, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+        //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+        tapGestureRecognizer.cancelsTouchesInView = NO;
+        //将触摸事件添加到当前view
+        [Lable1 addGestureRecognizer:tapGestureRecognizer];
         Lable1.textAlignment=NSTextAlignmentCenter;
         Lable1.textColor=[UIColor whiteColor];
         Lable1.font = [UIFont systemFontOfSize:26*HEIGHT_SIZE];
@@ -1424,6 +1436,31 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
 
 - (void)hideGuideView {
     [self.guideImageView performSelector:@selector(setAnimationImages:) withObject:nil afterDelay:self.guideImageView.animationDuration];
+}
+
+#pragma mark - 弹框提示
+-(void)showAnotherView:(id)sender
+{
+      UITapGestureRecognizer *tap = (UITapGestureRecognizer*)sender;
+     UIView *lable = (UIView*) tap.view;
+    NSArray* lableNameArray = objc_getAssociatedObject(lable, "firstObject");
+    
+    PopoverView00 *popoverView = [PopoverView00 popoverView00];
+    [popoverView showToView:lable withActions:[self QQActions:lableNameArray]];
+}
+
+
+- (NSArray<PopoverAction *> *)QQActions:(NSArray*)lableNameArray {
+    // 发起多人聊天 action
+    NSMutableArray *actionArray=[NSMutableArray new];
+    for (int i=0; i<lableNameArray.count; i++) {
+        PopoverAction *Action = [PopoverAction actionWithImage:nil title:lableNameArray[i] handler:^(PopoverAction *action) {
+#pragma mark - 该Block不会导致内存泄露, Block内代码无需刻意去设置弱引用.
+            
+        }];
+        [actionArray addObject:Action];
+    }
+    return actionArray;
 }
 
 #pragma mark - scrollView delegate
@@ -1980,7 +2017,9 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         return 65*HEIGHT_SIZE;
     }
-    
+
+
+
 
 -(void)viewDidDisappear:(BOOL)animated{
     
@@ -1993,8 +2032,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         _AdBackView=nil;
     }
     
-  
-    
+
 }
 
 

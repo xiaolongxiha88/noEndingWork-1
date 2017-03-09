@@ -468,6 +468,9 @@
 		338990AF1CEAB61400A708F8 /* mebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AE1CEAB61300A708F8 /* mebg.png */; };
 		338990B11CEAB73400A708F8 /* logo3.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990B01CEAB73400A708F8 /* logo3.png */; };
 		338990B51CEB1F9D00A708F8 /* DemoDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338990B41CEB1F9D00A708F8 /* DemoDeviceViewController.m */; };
+		338A623D1E71567A000E7CE4 /* PopoverAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A62381E71567A000E7CE4 /* PopoverAction.m */; };
+		338A623E1E71567A000E7CE4 /* PopoverView00.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A623A1E71567A000E7CE4 /* PopoverView00.m */; };
+		338A623F1E71567A000E7CE4 /* PopoverViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A623C1E71567A000E7CE4 /* PopoverViewCell.m */; };
 		338CFE661CF554C1006EFD8B /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 338CFE651CF554C1006EFD8B /* libstdc++.6.0.9.tbd */; };
 		338CFE681CF554D8006EFD8B /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 338CFE671CF554D8006EFD8B /* libstdc++.tbd */; };
 		338DCD9E1D2A00DF00C8B775 /* ProductData+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 338DCD9B1D2A00DF00C8B775 /* ProductData+CoreDataProperties.m */; };
@@ -1342,6 +1345,12 @@
 		338990B01CEAB73400A708F8 /* logo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo3.png; path = ../logo3.png; sourceTree = "<group>"; };
 		338990B31CEB1F9D00A708F8 /* DemoDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoDeviceViewController.h; sourceTree = "<group>"; };
 		338990B41CEB1F9D00A708F8 /* DemoDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoDeviceViewController.m; sourceTree = "<group>"; };
+		338A62371E71567A000E7CE4 /* PopoverAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverAction.h; sourceTree = "<group>"; };
+		338A62381E71567A000E7CE4 /* PopoverAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverAction.m; sourceTree = "<group>"; };
+		338A62391E71567A000E7CE4 /* PopoverView00.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView00.h; sourceTree = "<group>"; };
+		338A623A1E71567A000E7CE4 /* PopoverView00.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView00.m; sourceTree = "<group>"; };
+		338A623B1E71567A000E7CE4 /* PopoverViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverViewCell.h; sourceTree = "<group>"; };
+		338A623C1E71567A000E7CE4 /* PopoverViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverViewCell.m; sourceTree = "<group>"; };
 		338CFE651CF554C1006EFD8B /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		338CFE671CF554D8006EFD8B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		338DCD9A1D2A00DF00C8B775 /* ProductData+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProductData+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -2448,6 +2457,7 @@
 		3367CB2B1C86801700EF460C /* 下拉库 */ = {
 			isa = PBXGroup;
 			children = (
+				338A62351E71565E000E7CE4 /* 弹框第三方 */,
 				3367CB2F1C86806600EF460C /* Masonry */,
 				3367CB2C1C86803600EF460C /* DTKDropdownMenuView.h */,
 				3367CB2D1C86803600EF460C /* DTKDropdownMenuView.m */,
@@ -3165,6 +3175,27 @@
 				33FEFD271C7DB38400324374 /* shebei@3x.png */,
 			);
 			path = pic3;
+			sourceTree = "<group>";
+		};
+		338A62351E71565E000E7CE4 /* 弹框第三方 */ = {
+			isa = PBXGroup;
+			children = (
+				338A62361E71567A000E7CE4 /* PopoverView */,
+			);
+			path = "弹框第三方";
+			sourceTree = "<group>";
+		};
+		338A62361E71567A000E7CE4 /* PopoverView */ = {
+			isa = PBXGroup;
+			children = (
+				338A62371E71567A000E7CE4 /* PopoverAction.h */,
+				338A62381E71567A000E7CE4 /* PopoverAction.m */,
+				338A62391E71567A000E7CE4 /* PopoverView00.h */,
+				338A623A1E71567A000E7CE4 /* PopoverView00.m */,
+				338A623B1E71567A000E7CE4 /* PopoverViewCell.h */,
+				338A623C1E71567A000E7CE4 /* PopoverViewCell.m */,
+			);
+			path = PopoverView;
 			sourceTree = "<group>";
 		};
 		33AF3CE21D8E67210007D6C2 /* num2 */ = {
@@ -4082,6 +4113,7 @@
 				33ABC2A51DC2E619003B92AC /* extensionTableViewCell.m in Sources */,
 				334ED7011C9028BB0095FFBC /* secondViewController.m in Sources */,
 				335D69AD1D77BA4D00894D90 /* HcdAudioPlayer.m in Sources */,
+				338A623D1E71567A000E7CE4 /* PopoverAction.m in Sources */,
 				334FF0911CF53C7C001E6716 /* GCDAsyncSocket.m in Sources */,
 				3370793D1D910FEC00D7DA98 /* NJKWebViewProgressView.m in Sources */,
 				336F1A1D1D88E46900CD4C2B /* UIButton+WebCache.m in Sources */,
@@ -4129,6 +4161,7 @@
 				33692BF91C92952000698375 /* engrgySencondViewController.m in Sources */,
 				334FF09A1CF53C7C001E6716 /* deviceRootViewController.m in Sources */,
 				33EFB66E1C98F9B1003F336F /* ZFCirque.m in Sources */,
+				338A623F1E71567A000E7CE4 /* PopoverViewCell.m in Sources */,
 				334B8F511C914A6D00798A69 /* PNLineChartData.m in Sources */,
 				33EFB6711C98F9B1003F336F /* ZFPieChart.m in Sources */,
 				337F9CCE1C71AC2E0016FE43 /* meViewController.m in Sources */,
@@ -4190,6 +4223,7 @@
 				3381ECE51CBC900900DCF0D2 /* EquitGraph2ViewController.m in Sources */,
 				3367CB521C86806700EF460C /* ViewController+MASAdditions.m in Sources */,
 				334B8F4B1C914A6D00798A69 /* PNBarChart.m in Sources */,
+				338A623E1E71567A000E7CE4 /* PopoverView00.m in Sources */,
 				3367EB951CD0B07600D2EF67 /* stationTableView.m in Sources */,
 				33528FF61C83E95F00D07889 /* listTableViewCell.m in Sources */,
 				334FF0921CF53C7C001E6716 /* GCDAsyncUdpSocket.m in Sources */,
