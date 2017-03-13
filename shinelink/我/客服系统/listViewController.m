@@ -44,7 +44,8 @@
     [super viewDidLoad];
     
         [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
-    
+    //self.edgesForExtendedLayout = UIRectEdgeNone;
+ //   [self setAutomaticallyAdjustsScrollViewInsets:NO];
     
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages objectAtIndex:0];
@@ -57,7 +58,7 @@
     }
 
     self.navigationItem.title = root_ME_wenti_liebiao;
-    _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-100*HEIGHT_SIZE)];
+    _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     // self.tableView.separatorStyle=NO;
@@ -65,6 +66,8 @@
     //   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _tableView.scrollEnabled = YES;
     _tableView.showsVerticalScrollIndicator = YES;
+    self.tableView.contentSize = [self.tableView sizeThatFits:CGSizeMake(CGRectGetWidth(self.tableView.bounds), CGFLOAT_MAX)];
+    
     [self.view addSubview:_tableView];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

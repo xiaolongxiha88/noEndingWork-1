@@ -1359,7 +1359,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
         headLableView1.backgroundColor=headColorArray[i];
         [_headerView addSubview:headLableView1];
         
-        
+    
         UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2, unitWidth,headLableValueH)];
         Lable1.text=headValueArray[i];
         NSArray *lableName=[NSArray arrayWithObject:headValueArray[i]];

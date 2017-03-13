@@ -72,12 +72,12 @@
 -(void)PresentGo{
 
     if (([_textField text] ==nil)||([_textField text] ==NULL)||([[_textField text]  isEqual:@""])) {
-           [self showToastViewWithTitle:@"请输入密码"];
+           [self showToastViewWithTitle:root_Alet_user_pwd];
         return;
     }
     
     if (!([[_textField text]  isEqual:[_textField2 text]])) {
-        [self showToastViewWithTitle:@"请输入相同的密码"];
+        [self showToastViewWithTitle:root_xiangTong_miMa];
         return;
     }
     
@@ -92,7 +92,7 @@
         if (jsonObj) {
             if ([jsonObj[@"result"] intValue]==1) {
            
-                 [self showAlertViewWithTitle:@"修改密码成功" message:nil cancelButtonTitle:root_Yes];
+                 [self showAlertViewWithTitle:root_xiugai_mima_chenggong message:nil cancelButtonTitle:root_Yes];
             }else{
                 
                 if ((jsonObj[@"msg"]==nil)||(jsonObj[@"msg"]==NULL)||([jsonObj[@"msg"] isEqual:@""])) {
@@ -100,13 +100,13 @@
                 }else{
                     
                     if ([jsonObj[@"msg"] intValue]==502) {
-                        [self showAlertViewWithTitle:@"修改密码失败" message:@"手机号码或者密码为空" cancelButtonTitle:root_Yes];
+                        [self showAlertViewWithTitle:root_xiugai_mima_shibai message:root_mima_buneng_weikong cancelButtonTitle:root_Yes];
                     }else if ([jsonObj[@"msg"] intValue]==503) {
-                        [self showAlertViewWithTitle:@"修改密码失败" message:@"该手机号没有注册用户" cancelButtonTitle:root_Yes];
+                        [self showAlertViewWithTitle:root_xiugai_mima_shibai message:root_gaishoujihao_meiyou_zhuce_yonghu cancelButtonTitle:root_Yes];
                     }else if ([jsonObj[@"msg"] intValue]==504) {
-                        [self showAlertViewWithTitle:@"修改密码失败" message:@"修改密码失败" cancelButtonTitle:root_Yes];
+                        [self showAlertViewWithTitle:root_xiugai_mima_shibai message:root_xiugai_mima_shibai cancelButtonTitle:root_Yes];
                     }else if ([jsonObj[@"msg"] intValue]==505) {
-                        [self showAlertViewWithTitle:@"修改密码失败" message:@"手机号和验证码不对应" cancelButtonTitle:root_Yes];
+                        [self showAlertViewWithTitle:root_xiugai_mima_shibai message:root_gaishoujihao_heyanzhengma_bupipei cancelButtonTitle:root_Yes];
                     }
                     
                 }

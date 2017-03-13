@@ -52,7 +52,7 @@
     for (int i=0; i<imageArray.count; i++) {
         
         float leftWidth=5*NOW_SIZE,topWidth=7*HEIGHT_SIZE;
-        UIView *myView=[[UIView alloc]initWithFrame:CGRectMake(leftWidth, topWidth+140*i, SCREEN_Width-2*leftWidth, 110*HEIGHT_SIZE)];
+        UIView *myView=[[UIView alloc]initWithFrame:CGRectMake(leftWidth, topWidth+140*HEIGHT_SIZE*i, SCREEN_Width-2*leftWidth, 110*HEIGHT_SIZE)];
         // myView.layer.borderWidth=1;
         myView.layer.cornerRadius=7*HEIGHT_SIZE;
         myView.userInteractionEnabled=YES;

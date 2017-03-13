@@ -23,8 +23,8 @@
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]];
     
-    self.title=@"扫描采集器序列号";
-    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"跳过" style:UIBarButtonItemStylePlain target:self action:@selector(nextRegister)];
+    self.title=root_saomiao_sn;
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_tiaoguo style:UIBarButtonItemStylePlain target:self action:@selector(nextRegister)];
     rightItem.tag=10;
     self.navigationItem.rightBarButtonItem=rightItem;
     
@@ -49,7 +49,7 @@
     [_qrView stopScan];
     if (result.length!=10) {
            // [self showToastViewWithTitle:@"请扫描正确的采集器序列号"];
-         [self showAlertViewWithTitle:nil message:@"请扫描正确的采集器序列号" cancelButtonTitle:root_Yes];
+         [self showAlertViewWithTitle:nil message:root_caiJiQi_zhengque cancelButtonTitle:root_Yes];
        
     }else{
         _SnCode=result;

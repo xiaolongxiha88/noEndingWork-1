@@ -79,7 +79,7 @@
     
     
     UILabel *alertLable= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE,102*HEIGHT_SIZE-H1,300*NOW_SIZE, 15*HEIGHT_SIZE)];
-      NSString *alertText1=root_budai_guojiahao;
+      NSString *alertText1=root_budai_guojia_daima;
     NSString *alertText=[NSString stringWithFormat:@"(%@)",alertText1];
     alertLable.text=alertText;
     alertLable.textColor=COLOR(255, 255, 255, 0.5);

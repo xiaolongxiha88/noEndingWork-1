@@ -295,13 +295,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             self.line2View.energyTitleLabel.text = root_Today_Energy;
             self.line2View.unitLabel.text = root_Powre;
             
-           _upImage= [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_Width/2-10*HEIGHT_SIZE, CGRectGetMaxY(self.line2View.frame)+0*HEIGHT_SIZE, 20*HEIGHT_SIZE, 12*HEIGHT_SIZE )];
+           _upImage= [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_Width/2-8*NOW_SIZE, CGRectGetMaxY(self.line2View.frame)+0*HEIGHT_SIZE, 16*NOW_SIZE, 12*HEIGHT_SIZE )];
                   _upImage.image = IMAGE(@"upGo.png");
              [_upImage.layer addAnimation:[self opacityForever_Animation:2] forKey:nil];
             [_scrollView addSubview:_upImage];
             
-            _upAlert=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width/2-100*HEIGHT_SIZE, CGRectGetMaxY(self.line2View.frame)+12*HEIGHT_SIZE, 200*NOW_SIZE, 20*HEIGHT_SIZE)];
-            _upAlert.text=root_shanghua_chakan_shuju;
+            _upAlert=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width/2-100*NOW_SIZE, CGRectGetMaxY(self.line2View.frame)+12*HEIGHT_SIZE, 200*NOW_SIZE, 20*HEIGHT_SIZE)];
+            _upAlert.text=root_shanghua_chakan_xianxi_shuju;
             _upAlert.textAlignment=NSTextAlignmentCenter;
             _upAlert.textColor=[UIColor whiteColor];
             _upAlert.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];

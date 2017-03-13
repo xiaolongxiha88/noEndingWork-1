@@ -286,7 +286,7 @@
        [quickRegister setBackgroundImage:quickM2 forState:UIControlStateSelected];
      [quickRegister setBackgroundImage:quickM2 forState:UIControlStateHighlighted];
     quickRegister.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    [quickRegister setTitle:@"一键建站" forState:UIControlStateNormal];
+    [quickRegister setTitle:root_yijian_jianzhan forState:UIControlStateNormal];
     [quickRegister addTarget:self action:@selector(goQuickRegister) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:quickRegister];
     

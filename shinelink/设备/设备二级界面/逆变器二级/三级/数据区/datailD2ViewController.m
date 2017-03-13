@@ -51,12 +51,12 @@
     float topHeight=0*HEIGHT_SIZE;
   float topHeight0=80*HEIGHT_SIZE;
     
-    _upImage= [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_Width/2-10*HEIGHT_SIZE, 35*HEIGHT_SIZE+20*HEIGHT_SIZE, 20*HEIGHT_SIZE, 12*HEIGHT_SIZE )];
+    _upImage= [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_Width/2-8*NOW_SIZE, 35*HEIGHT_SIZE+20*HEIGHT_SIZE, 16*NOW_SIZE, 12*HEIGHT_SIZE )];
     _upImage.image = IMAGE(@"downGo.png");
     [_upImage.layer addAnimation:[self opacityForever_Animation:2] forKey:nil];
     [self.view addSubview:_upImage];
     
-    _upAlert=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width/2-100*HEIGHT_SIZE, 35*HEIGHT_SIZE, 200*NOW_SIZE, 20*HEIGHT_SIZE)];
+    _upAlert=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width/2-100*NOW_SIZE, 35*HEIGHT_SIZE, 200*NOW_SIZE, 20*HEIGHT_SIZE)];
     _upAlert.text=root_xiahua_chakan_quxiantu;
     _upAlert.textAlignment=NSTextAlignmentCenter;
     _upAlert.textColor=[UIColor whiteColor];

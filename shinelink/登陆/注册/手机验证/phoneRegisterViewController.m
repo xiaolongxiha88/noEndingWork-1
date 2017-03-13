@@ -91,7 +91,7 @@
     [self.view addSubview:line];
     
     _textField2 = [[UITextField alloc] initWithFrame:CGRectMake(80*NOW_SIZE,130*HEIGHT_SIZE,155*NOW_SIZE, 25*HEIGHT_SIZE)];
-    _textField2.placeholder =@"输入短信校验码";
+    _textField2.placeholder =root_shuru_duanxin_jiaoyanma;
     _textField2.textColor = [UIColor whiteColor];
     _textField2.tintColor = [UIColor whiteColor];
     _textField2.textAlignment = NSTextAlignmentCenter;
@@ -105,8 +105,16 @@
     [self.view addSubview:line1];
     
     QCCountdownButton *btn = [QCCountdownButton countdownButton];
-    btn.title = @"获取验证码";   
-    [btn setFrame:CGRectMake(235*NOW_SIZE,80*HEIGHT_SIZE,70*NOW_SIZE, 29*HEIGHT_SIZE)];
+    btn.title =root_fasong_yanzhengma;
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+          [btn setFrame:CGRectMake(235*NOW_SIZE,80*HEIGHT_SIZE,70*NOW_SIZE, 29*HEIGHT_SIZE)];
+    }else {
+         [btn setFrame:CGRectMake(215*NOW_SIZE,80*HEIGHT_SIZE,100*NOW_SIZE, 29*HEIGHT_SIZE)];
+    }
+    
      btn.titleLabelFont = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
        btn.nomalBackgroundColor = COLOR(144, 195, 32, 1);
      btn.disabledBackgroundColor = [UIColor grayColor];
@@ -119,7 +127,7 @@
         btn.phoneNum=[_textField text];
         btn.title = [NSString stringWithFormat:@"%lis", second] ;
     } onFinishedBlock:^{  // 倒计时完毕
-        btn.title = @"获取验证码";
+        btn.title = root_fasong_yanzhengma;
     }];
     
 
@@ -146,12 +154,12 @@
     _getPhone=[self getTheCorrectNum:_getPhone];
     
     if (_getPhone.length>5) {
-        [self showToastViewWithTitle:@"国家代码超过长度"];
+        [self showToastViewWithTitle:root_guoji_quhao_cuowu];
         return;
     }
     
     if ([[_textField text] isEqual:@""]) {
-        [self showToastViewWithTitle:@"请输入手机号"];
+        [self showToastViewWithTitle:root_Enter_phone_number];
         return;
     }
     
@@ -198,17 +206,17 @@
                 }
             }else{
                 if ([jsonObj[@"msg"] intValue]==501) {
-                  [self showAlertViewWithTitle:@"获取短信验证码失败" message:@"发送短信验证码不成功" cancelButtonTitle:root_Yes];
+                  [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:root_fasongduanxin_yanzhengma_buchenggong cancelButtonTitle:root_Yes];
                 }else if ([jsonObj[@"msg"] intValue]==502) {
-                    [self showAlertViewWithTitle:@"获取短信验证码失败" message:@"手机号码为空" cancelButtonTitle:root_Yes];
+                    [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:root_Enter_phone_number cancelButtonTitle:root_Yes];
                 }else if ([jsonObj[@"msg"] intValue]==503) {
-                    [self showAlertViewWithTitle:@"获取短信验证码失败" message:@"该手机号没有注册用户" cancelButtonTitle:root_Yes];
+                    [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:root_gaishoujihao_meiyou_zhuce_yonghu cancelButtonTitle:root_Yes];
                 }else if ([jsonObj[@"msg"] intValue]==9003) {
-                    [self showAlertViewWithTitle:@"获取短信验证码失败" message:@"手机号码格式不正确" cancelButtonTitle:root_Yes];
+                    [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:root_shouji_geshi_cuowu cancelButtonTitle:root_Yes];
                 }else if ([jsonObj[@"msg"] intValue]==9004) {
-                    [self showAlertViewWithTitle:@"获取短信验证码失败" message:@"请求已经失效" cancelButtonTitle:root_Yes];
+                    [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:root_shouji_yanzhengma_shixiao cancelButtonTitle:root_Yes];
                 }else {
-                    [self showAlertViewWithTitle:@"获取短信验证码失败" message:jsonObj[@"msg"] cancelButtonTitle:root_Yes];
+                    [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:jsonObj[@"msg"] cancelButtonTitle:root_Yes];
                 }
             
             }
@@ -241,7 +249,7 @@
         }
         
     }else{
-       [self showToastViewWithTitle:@"请输入正确的手机校验码"];
+       [self showToastViewWithTitle:root_qingshuru_zhengque_jiaoyanma];
     }
 
 }

@@ -28,7 +28,7 @@
     _scrollView.scrollEnabled=YES;
     [self.view addSubview:_scrollView];
     
-    float gifH=130*HEIGHT_SIZE;   float gifwidth=100*NOW_SIZE;
+    float gifH=130*HEIGHT_SIZE;   float gifwidth=100*HEIGHT_SIZE;
     for (int i=0; i<4; i++) {
         UIView *line=[[UIView alloc]initWithFrame:CGRectMake(15*NOW_SIZE,10*HEIGHT_SIZE+gifH*i,290*NOW_SIZE, 1*HEIGHT_SIZE)];
         line.backgroundColor=COLOR(255, 255, 255, 0.5);
@@ -57,8 +57,8 @@
     }
 
     
-    NSArray *noticeArray1=[NSArray arrayWithObjects:@"红灯闪烁:采集器和逆变器通信正常，采集器与路由器未连接，采集器与服务器未连接。", @"绿灯闪烁：采集器和逆变器、路由器通信正常，采集器与服务器未连接。", @"蓝灯闪烁:采集器和逆变器、路由器、服务器的通信都正常。", nil];
-       NSArray *noticeArray2=[NSArray arrayWithObjects:@"请检查路由器信号强度:", @"请检查路由器是否已连接互联网。", @"采集器在正常监控中。", nil];
+    NSArray *noticeArray1=[NSArray arrayWithObjects:root_new_wifi_tishi_1_hongdeng, root_new_wifi_tishi_2_lvdeng, root_new_wifi_tishi_3_landeng, nil];
+       NSArray *noticeArray2=[NSArray arrayWithObjects:root_new_wifi_tishi_1_hongdeng_yuanyin, root_new_wifi_tishi_2_lvdeng_yuanyin, root_new_wifi_tishi_3_landeng_yuanyin, nil];
     
     for (int i=0; i<noticeArray1.count; i++) {
         float LableW=(320*NOW_SIZE-25*NOW_SIZE-gifwidth-10*NOW_SIZE);
