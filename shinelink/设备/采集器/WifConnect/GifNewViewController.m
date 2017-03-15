@@ -41,7 +41,7 @@
         [self.view addSubview:line];
     }
     
-    NSArray *gifName=[NSArray arrayWithObjects:@"LED",@"LED", @"LED",  nil];
+    NSArray *gifName=[NSArray arrayWithObjects:@"ledred",@"ledgreen", @"ledblue",  nil];
   
     for (int i=0; i<gifName.count; i++) {
         NSData *data = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:[gifName objectAtIndex:i] ofType:@"gif"]];

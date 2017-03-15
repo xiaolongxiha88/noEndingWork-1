@@ -376,9 +376,11 @@
 		337960771DB0D065009AC610 /* massage_en2.png in Resources */ = {isa = PBXBuildFile; fileRef = 337960761DB0D065009AC610 /* massage_en2.png */; };
 		337C10E91CE02A160053361F /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = 337C10E81CE02A160053361F /* head.png */; };
 		337C30541CCDAF3C002B99B7 /* protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C30531CCDAF3C002B99B7 /* protocol.m */; };
+		337C44AD1E78CC9100135304 /* ledblue.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AA1E78CC9100135304 /* ledblue.gif */; };
+		337C44AE1E78CC9100135304 /* ledgreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AB1E78CC9100135304 /* ledgreen.gif */; };
+		337C44AF1E78CC9100135304 /* ledred.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AC1E78CC9100135304 /* ledred.gif */; };
 		337C8D991E6545CF0013D650 /* phoneRegister2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C8D981E6545CF0013D650 /* phoneRegister2ViewController.m */; };
 		337C8D9C1E66ACD30013D650 /* GifNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C8D9B1E66ACD30013D650 /* GifNewViewController.m */; };
-		337C8DA01E66C22C0013D650 /* LED.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C8D9F1E66C22C0013D650 /* LED.gif */; };
 		337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */; };
 		337CB59D1DB4A837002ABB88 /* firstToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB59C1DB4A837002ABB88 /* firstToolViewController.m */; };
 		337CB5A11DB608B0002ABB88 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 337CB5A01DB608B0002ABB88 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -1203,11 +1205,13 @@
 		337C10E81CE02A160053361F /* head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = head.png; path = ../head.png; sourceTree = "<group>"; };
 		337C30521CCDAF3C002B99B7 /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
 		337C30531CCDAF3C002B99B7 /* protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = protocol.m; sourceTree = "<group>"; };
+		337C44AA1E78CC9100135304 /* ledblue.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ledblue.gif; sourceTree = "<group>"; };
+		337C44AB1E78CC9100135304 /* ledgreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ledgreen.gif; sourceTree = "<group>"; };
+		337C44AC1E78CC9100135304 /* ledred.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ledred.gif; sourceTree = "<group>"; };
 		337C8D971E6545CF0013D650 /* phoneRegister2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = phoneRegister2ViewController.h; sourceTree = "<group>"; };
 		337C8D981E6545CF0013D650 /* phoneRegister2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = phoneRegister2ViewController.m; sourceTree = "<group>"; };
 		337C8D9A1E66ACD30013D650 /* GifNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifNewViewController.h; path = WifConnect/GifNewViewController.h; sourceTree = "<group>"; };
 		337C8D9B1E66ACD30013D650 /* GifNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifNewViewController.m; path = WifConnect/GifNewViewController.m; sourceTree = "<group>"; };
-		337C8D9F1E66C22C0013D650 /* LED.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LED.gif; sourceTree = "<group>"; };
 		337CB5981DB4A787002ABB88 /* WiFiSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiSignalViewController.h; sourceTree = "<group>"; };
 		337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiSignalViewController.m; sourceTree = "<group>"; };
 		337CB59B1DB4A837002ABB88 /* firstToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = firstToolViewController.h; sourceTree = "<group>"; };
@@ -3413,7 +3417,9 @@
 				337C8D9B1E66ACD30013D650 /* GifNewViewController.m */,
 				338418E51DC9783500D679CA /* GFWaterView.h */,
 				338418E61DC9783500D679CA /* GFWaterView.m */,
-				337C8D9F1E66C22C0013D650 /* LED.gif */,
+				337C44AA1E78CC9100135304 /* ledblue.gif */,
+				337C44AB1E78CC9100135304 /* ledgreen.gif */,
+				337C44AC1E78CC9100135304 /* ledred.gif */,
 				336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */,
 			);
 			path = "采集器";
@@ -3736,6 +3742,7 @@
 				334FF0B91CF53C7C001E6716 /* btn_check_off.png in Resources */,
 				3383F13A1C9FFD3E0075E834 /* 家庭用电设备.png in Resources */,
 				33801EBD1D5882D500047232 /* Growatt-2-5k.jpg in Resources */,
+				337C44AE1E78CC9100135304 /* ledgreen.gif in Resources */,
 				3389648D1E5C3BBD00A7B1AE /* englishCountryJson.txt in Resources */,
 				33C3FFFB1D3E33E00016351C /* L2.png in Resources */,
 				335D69E91D77D28800894D90 /* AVplay.png in Resources */,
@@ -3750,6 +3757,7 @@
 				335BF1E91D100572008EEE99 /* ziliao.png in Resources */,
 				33FEFD6B1C7DB38400324374 /* iconfont-faxian@2x.png in Resources */,
 				33FEFD5F1C7DB38400324374 /* icon---Password.png in Resources */,
+				337C44AD1E78CC9100135304 /* ledblue.gif in Resources */,
 				338964791E57E7E600A7B1AE /* icon_inv.png in Resources */,
 				33768AB11D475D0A00873E82 /* storageen.png in Resources */,
 				336A24681DF00AB50002D1AD /* deviceHead2.png in Resources */,
@@ -3780,7 +3788,6 @@
 				330E3DF11D0D6D4B00DF75AE /* 形状17.png in Resources */,
 				33FEFD691C7DB38400324374 /* iconfont-faxian_press@2x.png in Resources */,
 				3355AD9B1CF6A49400AE6891 /* 111.jpg in Resources */,
-				337C8DA01E66C22C0013D650 /* LED.gif in Resources */,
 				33238B491CBF816400E82B86 /* 外框@3x.png in Resources */,
 				3334AD751D800BD900665667 /* inverter2.png in Resources */,
 				3355AD981CF6A49400AE6891 /* 444.jpg in Resources */,
@@ -3823,6 +3830,7 @@
 				33627A651DFF8C450001C00B /* 设备页引导4_en.jpg in Resources */,
 				3389647B1E57E7E600A7B1AE /* icon_solor.png in Resources */,
 				33FEFD681C7DB38400324374 /* iconfont-address@3x.png in Resources */,
+				337C44AF1E78CC9100135304 /* ledred.gif in Resources */,
 				334AED731CA384F4007E39F3 /* open@2x.png in Resources */,
 				33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */,
 				335456C51C853AFD00275478 /* scanLine@2x.png in Resources */,
