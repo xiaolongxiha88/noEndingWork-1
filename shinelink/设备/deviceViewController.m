@@ -77,6 +77,10 @@
  @property (nonatomic, strong) NSString*languageTypeValue;
  @property (nonatomic, strong) NSString*deviceHeadType;
 //@property (nonatomic, strong) UIImageView *animationView;
+
+@property (nonatomic, strong) NSString *pcsNetPlantID;
+@property (nonatomic, strong) NSString *pcsNetStorageSN;
+@property (nonatomic, strong) NSMutableDictionary *pcsDataDic;
 @end
 
 @implementation deviceViewController
@@ -142,7 +146,7 @@
     showAnimationEnable=NO;
     
   [self.navigationController.navigationBar setTranslucent:YES];
-    [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
  
      //self.view=nil;
     if (!_tableView) {
@@ -650,6 +654,7 @@
     
     }
   
+    _pcsNetPlantID=[_plantId objectForKey:@"plantId"];
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:_plantId paramarsSite:@"/newPlantAPI.do?op=getAllDeviceList" sucessBlock:^(id content) {
       
        [self hideProgressView];
@@ -711,6 +716,8 @@
                 }
 
             }else if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"storage"]){
+                
+                _pcsNetStorageSN=content[@"deviceList"][i][@"deviceSn"];
                 _deviceHeadType=@"1";
                 [imageArray addObject:@"storage.png"];
                 NSString *PO=[NSString stringWithFormat:@"%@W",content[@"deviceList"][i][@"pCharge"]];
@@ -977,6 +984,48 @@
 }
 
 
+-(void)getPCSnet{
+
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":_pcsNetPlantID,@"storageSn":_pcsNetStorageSN} paramarsSite:@"/newStorageAPI.do?op=getSystemStatusData" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        if (content) {
+            //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
+            id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+            //    id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"getSystemStatusData==%@", jsonObj);
+           
+            if ([jsonObj[@"result"] integerValue]==1) {
+                
+                if (jsonObj[@"obj"]==nil || jsonObj[@"obj"]==NULL||([jsonObj[@"obj"] isEqual:@""] )) {
+                }else{
+                    _pcsDataDic=[NSMutableDictionary new];
+                    [_pcsDataDic setObject:jsonObj[@"obj"][@"capacity"] forKey:@"capacity"];
+                      [_pcsDataDic setObject:jsonObj[@"obj"][@"pCharge"] forKey:@"pCharge"];
+                     [_pcsDataDic setObject:jsonObj[@"obj"][@"pDisCharge"] forKey:@"pDisCharge"];
+                     [_pcsDataDic setObject:jsonObj[@"obj"][@"pacCharge"] forKey:@"pacCharge"];
+                     [_pcsDataDic setObject:jsonObj[@"obj"][@"pacToGrid"] forKey:@"pacToGrid"];
+                     [_pcsDataDic setObject:jsonObj[@"obj"][@"pacToUser"] forKey:@"pacToUser"];
+                     [_pcsDataDic setObject:jsonObj[@"obj"][@"ppv1"] forKey:@"ppv1"];
+                     [_pcsDataDic setObject:jsonObj[@"obj"][@"ppv2"] forKey:@"ppv2"];
+                     [_pcsDataDic setObject:jsonObj[@"obj"][@"status"] forKey:@"status"];
+                     [_pcsDataDic setObject:jsonObj[@"obj"][@"userLoad"] forKey:@"userLoad"];
+                    
+                }
+                [self getPCSHeadUI];
+                [self getPCSHead];
+            }
+            
+       
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        
+    }];
+    
+}
+
+
 -(NSString*)getPvPic:(NSString*)pvSN{
     
     NSString *pvPicName;
@@ -1149,11 +1198,11 @@
     imageView.image = [UIImage imageNamed:_headPicName];
     [_headerView addSubview:imageView];
     
-    _deviceHeadType=@"2";
+    //_deviceHeadType=@"1";
     if([_deviceHeadType isEqualToString:@"1"]){
          animationNumber=0;
-           [self getPCSHeadUI];
-         [self getPCSHead];
+        [self getPCSnet];
+        
     }else{
         [self getPvHead];
     }
@@ -1164,13 +1213,17 @@
 //    [_animationView removeFromSuperview];
 //    _animationView=nil;
     
-    float W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
+   float H0=7*HEIGHT_SIZE,W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
     float imageH1=H1+imageSize/2;  float imageH12=7*HEIGHT_SIZE,imageW12=12*HEIGHT_SIZE;float WW2=5*NOW_SIZE;
  
-      //上—1
-    CGPoint pointStart=CGPointMake(W1+imageSize, imageH1);
-    CGPoint pointtEnd=CGPointMake(W1+W2, imageH1);
+      //上—1-0
+    CGPoint pointStart=CGPointMake(W1+imageSize, imageH1-H0);
+    CGPoint pointtEnd=CGPointMake(W1+W2, imageH1-H0);
   
+    //上—1-1
+    CGPoint pointStart0=CGPointMake(W1+imageSize, imageH1+H0);
+    CGPoint pointtEnd0=CGPointMake(W1+W2, imageH1+H0);
+    
     //上—2-1
     CGPoint pointStart1=CGPointMake(W1+W2+imageSize, imageH1-imageH12);
     CGPoint pointtEnd1=CGPointMake(W1+2*W2, imageH1-imageH12);
@@ -1193,9 +1246,9 @@
     CGPoint pointtEndW2=CGPointMake(W1+2*W2+1.5*imageSize-WW2, imageH1+H2-imageSize/2);
     
     
-    NSArray *startArray=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointtStartW1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointStart2], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtStartW2], nil];
+    NSArray *startArray=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart0],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointtStartW1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointStart2], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtStartW2], nil];
     
-        NSArray *endArray=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd1], [NSValue valueWithCGPoint:pointtEndW1], [NSValue valueWithCGPoint:pointtEnd3], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEndW2], [NSValue valueWithCGPoint:pointtEndW2], nil];
+        NSArray *endArray=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd0],[NSValue valueWithCGPoint:pointtEnd1], [NSValue valueWithCGPoint:pointtEndW1], [NSValue valueWithCGPoint:pointtEnd3], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEndW2], [NSValue valueWithCGPoint:pointtEndW2], nil];
 
     if (animationNumber==0) {
         animationNumber=1;
@@ -1205,20 +1258,61 @@
         }
     }
     
-    //情况一
-    NSArray *startArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart2], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd22], nil];
+    float TIME=16;
+    //路径一
+    NSArray *startArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointtStartW2],nil];
     
-        NSArray *endArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointtEnd21],[NSValue valueWithCGPoint:pointtEnd22],[NSValue valueWithCGPoint:pointtEndW2],nil];
+        NSArray *endArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd1], [NSValue valueWithCGPoint:pointtStartW2],[NSValue valueWithCGPoint:pointtEndW2],nil];
     
-    [self getHeadAnimation:startArray0 second:endArray0 three:@"16"];
+    [self getHeadAnimation:startArray0 second:endArray0 three:TIME];
+    
+    ////////////////////////////////
+    NSArray *startArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart0],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointtStartW2],nil];
+    
+    NSArray *endArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd0],[NSValue valueWithCGPoint:pointtEnd1], [NSValue valueWithCGPoint:pointtStartW2],[NSValue valueWithCGPoint:pointtEndW2],nil];
+    
+    [self getHeadAnimation:startArray01 second:endArray01 three:TIME];
 
-    //情况二
-    NSArray *startArray00=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointtStartW1], nil];
+    float pacToUser=[[_pcsDataDic objectForKey:@"pacToUser"] floatValue];
+     float pacToGrid=[[_pcsDataDic objectForKey:@"pacToGrid"] floatValue];
+    int status=[[_pcsDataDic objectForKey:@"status"] intValue];
     
-    NSArray *endArray00=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEndW1], nil];
+   // status=2;
+    if (pacToGrid>0) {
+        //路径二
+        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart3], nil];
+        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3], nil];
+        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.27];
+    }
     
-         [self getHeadAnimation:startArray00 second:endArray00 three:@"8"];
+ if( (pacToUser>0)&&(status==1)) {
+        //路径三
+        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3],[NSValue valueWithCGPoint:pointtStartW2],  [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd2],nil];
+        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW2], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointStart2],nil];
+    
+        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*1.4];
+ }
+    
+     if (pacToUser>0) {
+     NSArray *startArray022=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3],[NSValue valueWithCGPoint:pointtStartW2],  [NSValue valueWithCGPoint:pointtEnd22], nil];
+     NSArray *endArray022=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW2], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEndW2], nil];
+     
+     [self getHeadAnimation:startArray022 second:endArray022 three:TIME*0.46];
+    
+}
 
+
+    
+    if (status==1) {
+        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW1], nil];
+        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEndW1], nil];
+        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.33];
+    }
+    if (status==2) {
+        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEndW1], nil];
+        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW1], nil];
+        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.33];
+    }
     
 }
 
@@ -1238,7 +1332,7 @@
 }
 
 
--(void)getHeadAnimation:(NSArray*)startPoint0 second:(NSArray*)endPoint0 three:(NSString*)time{
+-(void)getHeadAnimation:(NSArray*)startPoint0 second:(NSArray*)endPoint0 three:(float)time{
 
 //    [_animationView removeFromSuperview];
 //    _animationView=nil;
@@ -1284,7 +1378,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     group.delegate=self;
     // 动画选项设定
 //NSString *durationTime=time;
-    group.duration = [time floatValue];
+    group.duration = time;
     group.repeatCount = MAXFLOAT;
 
     group.animations = [NSArray arrayWithObjects:posAnim, animation2, nil];
@@ -1299,34 +1393,139 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     
 }
 
-
+//    [_pcsDataDic setObject:jsonObj[@"obj"][@"capacity"] forKey:@"capacity"];
+//    [_pcsDataDic setObject:jsonObj[@"obj"][@"pCharge"] forKey:@"pCharge"];
+//    [_pcsDataDic setObject:jsonObj[@"obj"][@"pDisCharge"] forKey:@"pDisCharge"];
+//    [_pcsDataDic setObject:jsonObj[@"obj"][@"pacCharge"] forKey:@"pacCharge"];
+//    [_pcsDataDic setObject:jsonObj[@"obj"][@"pacToGrid"] forKey:@"pacToGrid"];
+//    [_pcsDataDic setObject:jsonObj[@"obj"][@"pacToUser"] forKey:@"pacToUser"];
+//    [_pcsDataDic setObject:jsonObj[@"obj"][@"ppv1"] forKey:@"ppv1"];
+//    [_pcsDataDic setObject:jsonObj[@"obj"][@"ppv2"] forKey:@"ppv2"];
+//    [_pcsDataDic setObject:jsonObj[@"obj"][@"status"] forKey:@"status"];
+//    [_pcsDataDic setObject:jsonObj[@"obj"][@"userLoad"] forKey:@"userLoad"];
 
 
 -(void)getPCSHeadUI{
-    float W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
+    NSString *ppv1=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"ppv1"] floatValue]];
+    NSString *ppv2=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"ppv2"] floatValue]];
+    NSString *pCharge=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pCharge"] floatValue]];
+    NSString *capacity=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"capacity"] floatValue]];
+    NSString *pacCharge=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pacCharge"] floatValue]];
+      NSString *userLoad=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"userLoad"] floatValue]];
+     NSString *pacToGrid=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pacToGrid"] floatValue]];
+     NSString *pacToUser=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pacToUser"] floatValue]];
+    
+ 
+    float lableW=55*NOW_SIZE;float lableH=15*HEIGHT_SIZE;float lableH0=10*HEIGHT_SIZE;
+    float H0=8*HEIGHT_SIZE,W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
+    float imageH1=H1+imageSize/2;  float imageH12=7*HEIGHT_SIZE,imageW12=12*HEIGHT_SIZE;float WW2=5*NOW_SIZE;
+    
     UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(W1,H1,imageSize,imageSize)];
     imageView1.image = [UIImage imageNamed:@"icon_solor.png"];
     [_headerView addSubview:imageView1];
+    UILabel *solorLable=[[UILabel alloc] initWithFrame:CGRectMake(W1+(imageSize-lableW)/2,H1-lableH,lableW,lableH)];
+     solorLable.text=@"Solar";
+    solorLable.textColor=[UIColor whiteColor];
+    solorLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable.textAlignment = NSTextAlignmentCenter;
+     [_headerView addSubview:solorLable];
+    UILabel *solorLableA=[[UILabel alloc] initWithFrame:CGRectMake(W1+imageSize, imageH1-H0-lableH0,37*NOW_SIZE,lableH0)];
+    solorLableA.text=ppv1;
+    solorLableA.textColor=[UIColor whiteColor];
+    solorLableA.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
+    solorLableA.textAlignment = NSTextAlignmentCenter;
+    [_headerView addSubview:solorLableA];
+    UILabel *solorLableA1=[[UILabel alloc] initWithFrame:CGRectMake(W1+imageSize, imageH1+H0,37*NOW_SIZE,lableH0)];
+    solorLableA1.text=ppv2;
+    solorLableA1.textColor=[UIColor whiteColor];
+    solorLableA1.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
+    solorLableA1.textAlignment = NSTextAlignmentCenter;
+    [_headerView addSubview:solorLableA1];
+    UILabel *solorLableB1=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+imageSize/2-65*NOW_SIZE, imageH1+imageSize/2+20*HEIGHT_SIZE,60*NOW_SIZE,lableH0)];
+    solorLableB1.text=pCharge;
+    solorLableB1.textColor=[UIColor whiteColor];
+    solorLableB1.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
+    solorLableB1.textAlignment = NSTextAlignmentRight;
+    [_headerView addSubview:solorLableB1];
+    UILabel *solorLableB2=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+imageSize/2+44*NOW_SIZE, imageH1+imageSize/2+20*HEIGHT_SIZE,60*NOW_SIZE,lableH0)];
+    solorLableB2.text=pacCharge;
+    solorLableB2.textColor=[UIColor whiteColor];
+    solorLableB2.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
+    solorLableB2.textAlignment = NSTextAlignmentLeft;
+    [_headerView addSubview:solorLableB2];
+    UILabel *solorLableB3=[[UILabel alloc] initWithFrame:CGRectMake(W1+3*W2+(imageSize-lableW)/2,H1+imageSize+2*HEIGHT_SIZE,lableW,lableH0)];
+    if ([pacToGrid floatValue]>0) {
+          solorLableB3.text=pacToGrid;
+    }else if ([pacToUser floatValue]>0){
+         solorLableB3.text=pacToUser;
+    }
+    solorLableB3.textColor=[UIColor whiteColor];
+    solorLableB3.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
+    solorLableB3.textAlignment = NSTextAlignmentCenter;
+    [_headerView addSubview:solorLableB3];
+    UILabel *solorLableB4=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+(imageSize-lableW)/2,H1+H2+imageSize+lableH+0*HEIGHT_SIZE,lableW,lableH0)];
+        solorLableB4.text=capacity;
+    solorLableB4.textColor=[UIColor whiteColor];
+    solorLableB4.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
+    solorLableB4.textAlignment = NSTextAlignmentCenter;
+    [_headerView addSubview:solorLableB4];
+    UILabel *solorLableB5=[[UILabel alloc] initWithFrame:CGRectMake(W1+2.5*W2+(imageSize-lableW)/2,H1+H2+imageSize+lableH+0*HEIGHT_SIZE,lableW,lableH0)];
+    solorLableB5.text=userLoad;
+    solorLableB5.textColor=[UIColor whiteColor];
+    solorLableB5.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
+    solorLableB5.textAlignment = NSTextAlignmentCenter;
+    [_headerView addSubview:solorLableB5];
+    
     
     UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(W1+W2,H1,imageSize,imageSize)];
     imageView2.image = [UIImage imageNamed:@"icon_sp.png"];
     [_headerView addSubview:imageView2];
+    UILabel *solorLable1=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+(imageSize-lableW)/2,H1-lableH,lableW,lableH)];
+    solorLable1.text=@"Storage";
+    solorLable1.textColor=[UIColor whiteColor];
+    solorLable1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable1.textAlignment = NSTextAlignmentCenter;
+    [_headerView addSubview:solorLable1];
     
     UIImageView *imageView3= [[UIImageView alloc] initWithFrame:CGRectMake(W1+2*W2,H1,imageSize,imageSize)];
     imageView3.image = [UIImage imageNamed:@"icon_inv.png"];
     [_headerView addSubview:imageView3];
+    UILabel *solorLable2=[[UILabel alloc] initWithFrame:CGRectMake(W1+2*W2+(imageSize-lableW)/2,H1-lableH,lableW,lableH)];
+    solorLable2.text=@"Inverter";
+    solorLable2.textColor=[UIColor whiteColor];
+    solorLable2.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable2.textAlignment = NSTextAlignmentCenter;
+    [_headerView addSubview:solorLable2];
     
     UIImageView *imageView4 = [[UIImageView alloc] initWithFrame:CGRectMake(W1+3*W2,H1,imageSize,imageSize)];
     imageView4.image = [UIImage imageNamed:@"icon_grid.png"];
     [_headerView addSubview:imageView4];
+    UILabel *solorLable3=[[UILabel alloc] initWithFrame:CGRectMake(W1+3*W2+(imageSize-lableW)/2,H1-lableH,lableW,lableH)];
+    solorLable3.text=@"Grid";
+    solorLable3.textColor=[UIColor whiteColor];
+    solorLable3.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable3.textAlignment = NSTextAlignmentCenter;
+    [_headerView addSubview:solorLable3];
     
     UIImageView *imageView12 = [[UIImageView alloc] initWithFrame:CGRectMake(W1+W2,H1+H2,imageSize,imageSize)];
     imageView12.image = [UIImage imageNamed:@"icon_bat.png"];
     [_headerView addSubview:imageView12];
+    UILabel *solorLable4=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+(imageSize-lableW)/2,H1+H2+imageSize,lableW,lableH)];
+    solorLable4.text=@"Bat";
+    solorLable4.textColor=[UIColor whiteColor];
+    solorLable4.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable4.textAlignment = NSTextAlignmentCenter;
+    [_headerView addSubview:solorLable4];
     
     UIImageView *imageView22 = [[UIImageView alloc] initWithFrame:CGRectMake(W1+2.5*W2,H1+H2,imageSize,imageSize)];
-    imageView22.image = [UIImage imageNamed:@"icon_solor.png"];
+    imageView22.image = [UIImage imageNamed:@"icon_load.png"];
     [_headerView addSubview:imageView22];
+    UILabel *solorLable5=[[UILabel alloc] initWithFrame:CGRectMake(W1+2.5*W2+(imageSize-lableW)/2,H1+H2+imageSize,lableW,lableH)];
+    solorLable5.text=@"Load";
+    solorLable5.textColor=[UIColor whiteColor];
+    solorLable5.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable5.textAlignment = NSTextAlignmentCenter;
+    [_headerView addSubview:solorLable5];
 
 }
 

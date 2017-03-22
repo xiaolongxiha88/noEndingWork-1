@@ -108,8 +108,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     transition.type = kCATransitionPush;//可更改为其他方式
     transition.subtype = kCATransitionFromTop;//可更改为其他方式
     transition.duration = 0.6f;
-     [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+   
     if ([_timePickerType isEqualToString:@"1"]) {
+          [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
          [self.navigationController pushViewController:go animated:YES];
     }
    
@@ -468,7 +469,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 self.yearDict = [NSMutableDictionary dictionaryWithDictionary:content];
                 [_upAlert removeFromSuperview];
                 [_upImage removeFromSuperview];
-                
+                 _timePickerType=@"2";
                 [self.line2View refreshBarChartViewWithDataDict:content chartType:4];
             }
             

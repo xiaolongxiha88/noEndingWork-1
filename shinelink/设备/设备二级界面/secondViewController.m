@@ -16,6 +16,7 @@
 #import "PvLogTableViewController.h"
 #import "EquipGraphViewController.h"
 #import "newLine.h"
+#import "PopoverView00.h"
 
 #define SizeH 45*HEIGHT_SIZE
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
@@ -45,7 +46,7 @@
     self.title=_SnData;
     
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
-    _scrollView.scrollEnabled=YES;
+    _scrollView.scrollEnabled=NO;
  
     [self.view addSubview:_scrollView];
       //[self.navigationController.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]];
@@ -219,6 +220,10 @@
     
     UILabel *dayData=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 180*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
     dayData.text=_dayPower;
+    dayData.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [dayData addGestureRecognizer:tapGestureRecognizer];
     dayData.textAlignment=NSTextAlignmentCenter;
     dayData.textColor=[UIColor whiteColor];
     dayData.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
@@ -234,6 +239,10 @@
      UILabel *powerData=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-130*NOW_SIZE)/2, 120*HEIGHT_SIZE-SizeH, 130*NOW_SIZE,40*HEIGHT_SIZE )];
     NSString *powerH=[NSString stringWithFormat:@"%@W",_powerData];
     powerData.text=powerH;
+       powerData.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+    tapGestureRecognizer2.cancelsTouchesInView = NO;
+    [powerData addGestureRecognizer:tapGestureRecognizer2];
     powerData.textAlignment=NSTextAlignmentCenter;
     powerData.textColor=[UIColor whiteColor];
     powerData.font = [UIFont systemFontOfSize:24*HEIGHT_SIZE];
@@ -247,6 +256,10 @@
     
     UILabel *totalData=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-95*NOW_SIZE, 180*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
     totalData.text=_totalPower;
+      totalData.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+    tapGestureRecognizer1.cancelsTouchesInView = NO;
+    [totalData addGestureRecognizer:tapGestureRecognizer1];
     totalData.textAlignment=NSTextAlignmentCenter;
     totalData.textColor=[UIColor whiteColor];
     totalData.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
@@ -278,25 +291,33 @@
 
 }
 
-//- (void)addRightItem
-//{
-//    DTKDropdownItem *item0 = [DTKDropdownItem itemWithTitle:@"高级设置" iconName:@"DTK_jiangbei" callBack:^(NSUInteger index, id info) {
-//        NSLog(@"rightItem%lu",(unsigned long)index);}];
-//    DTKDropdownItem *item1 = [DTKDropdownItem itemWithTitle:@"基本信息" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
-//        NSLog(@"rightItem%lu",(unsigned long)index);}];
-//    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:@"日志" iconName:@"DTK_update" callBack:^(NSUInteger index, id info) {
-//        NSLog(@"rightItem%lu",(unsigned long)index);}];
-//    DTKDropdownMenuView *menuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0,item1,item2] icon:@"DTK_bi"];
-//    
-//    menuView.dropWidth = 150.f;
-//    menuView.titleFont = [UIFont systemFontOfSize:18.f];
-//    menuView.textColor = ColorWithRGB(102.f, 102.f, 102.f);
-//    menuView.textFont = [UIFont systemFontOfSize:13.f];
-//    menuView.cellSeparatorColor = ColorWithRGB(229.f, 229.f, 229.f);
-//    menuView.textFont = [UIFont systemFontOfSize:14.f];
-//    menuView.animationDuration = 0.2f;
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:menuView];
-//}
+#pragma mark - 弹框提示
+-(void)showAnotherView:(id)sender
+{
+    UITapGestureRecognizer *tap = (UITapGestureRecognizer*)sender;
+    UILabel *lable = (UILabel*) tap.view;
+    NSArray* lableNameArray = [NSArray arrayWithObject:lable.text];
+    
+    PopoverView00 *popoverView = [PopoverView00 popoverView00];
+    [popoverView showToView:lable withActions:[self QQActions:lableNameArray]];
+}
+
+
+- (NSArray<PopoverAction *> *)QQActions:(NSArray*)lableNameArray {
+    // 发起多人聊天 action
+    NSMutableArray *actionArray=[NSMutableArray new];
+    for (int i=0; i<lableNameArray.count; i++) {
+        PopoverAction *Action = [PopoverAction actionWithImage:nil title:lableNameArray[i] handler:^(PopoverAction *action) {
+#pragma mark - 该Block不会导致内存泄露, Block内代码无需刻意去设置弱引用.
+            
+        }];
+        [actionArray addObject:Action];
+    }
+    return actionArray;
+}
+
+
+
 
 - (void)updateProgress {
     CGFloat progress = self.progressView.progress;

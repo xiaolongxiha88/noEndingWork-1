@@ -25,6 +25,7 @@
 #define NavigationbarHeight  self.navigationController.navigationBar.frame.size.height
 
 #define MainColor COLOR(17, 183, 243, 1)
+//#define MainColor COLOR(7, 149, 239, 1)
 #define SCREEN_Width [UIScreen mainScreen].bounds.size.width
 #define colorGary COLOR(212, 212, 212, 1)
 #define SCREEN_Height [UIScreen mainScreen].bounds.size.height
@@ -47,10 +48,10 @@
 #define HEAD_URL_Demo  @"http://server.growatt.com"
 
 
-#define HEAD_URL  [UserInfo defaultUserInfo].server
+//#define HEAD_URL  [UserInfo defaultUserInfo].server
 
 
-//#define HEAD_URL   @"http://test.growatt.com"
+#define HEAD_URL   @"http://test.growatt.com"
 
 
 //#define HEAD_URL  @"http://192.168.3.32:8081/ShineServer"
