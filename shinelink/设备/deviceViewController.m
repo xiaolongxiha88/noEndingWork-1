@@ -1409,7 +1409,8 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     NSString *ppv1=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"ppv1"] floatValue]];
     NSString *ppv2=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"ppv2"] floatValue]];
     NSString *pCharge=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pCharge"] floatValue]];
-    NSString *capacity=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"capacity"] floatValue]];
+     NSString *pDisCharge=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pDisCharge"] floatValue]];
+    NSString *capacity=[NSString stringWithFormat:@"%.1f%%",[[_pcsDataDic objectForKey:@"capacity"] floatValue]];
     NSString *pacCharge=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pacCharge"] floatValue]];
       NSString *userLoad=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"userLoad"] floatValue]];
      NSString *pacToGrid=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pacToGrid"] floatValue]];
@@ -1418,13 +1419,14 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
  
     float lableW=55*NOW_SIZE;float lableH=15*HEIGHT_SIZE;float lableH0=10*HEIGHT_SIZE;
     float H0=8*HEIGHT_SIZE,W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
-    float imageH1=H1+imageSize/2;  float imageH12=7*HEIGHT_SIZE,imageW12=12*HEIGHT_SIZE;float WW2=5*NOW_SIZE;
+    float imageH1=H1+imageSize/2;
+    //float imageH12=7*HEIGHT_SIZE,imageW12=12*HEIGHT_SIZE;float WW2=5*NOW_SIZE;
     
     UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(W1,H1,imageSize,imageSize)];
     imageView1.image = [UIImage imageNamed:@"icon_solor.png"];
     [_headerView addSubview:imageView1];
     UILabel *solorLable=[[UILabel alloc] initWithFrame:CGRectMake(W1+(imageSize-lableW)/2,H1-lableH,lableW,lableH)];
-     solorLable.text=@"Solar";
+     solorLable.text=root_PCS_guangfu;
     solorLable.textColor=[UIColor whiteColor];
     solorLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
     solorLable.textAlignment = NSTextAlignmentCenter;
@@ -1442,7 +1444,12 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     solorLableA1.textAlignment = NSTextAlignmentCenter;
     [_headerView addSubview:solorLableA1];
     UILabel *solorLableB1=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+imageSize/2-65*NOW_SIZE, imageH1+imageSize/2+20*HEIGHT_SIZE,60*NOW_SIZE,lableH0)];
-    solorLableB1.text=pCharge;
+    if([[_pcsDataDic objectForKey:@"status"] intValue]==1){
+     solorLableB1.text=pCharge;
+    }else{
+    solorLableB1.text=pDisCharge;
+    }
+   
     solorLableB1.textColor=[UIColor whiteColor];
     solorLableB1.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
     solorLableB1.textAlignment = NSTextAlignmentRight;
@@ -1476,12 +1483,44 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     solorLableB5.textAlignment = NSTextAlignmentCenter;
     [_headerView addSubview:solorLableB5];
     
+    UILabel *solorLableB6=[[UILabel alloc] initWithFrame:CGRectMake(20*NOW_SIZE,H1+H2+imageSize+5*HEIGHT_SIZE,60*NOW_SIZE,lableH)];
+    NSString *B1=root_PCS_danwei;
+    solorLableB6.text=[NSString stringWithFormat:@"%@:W",B1];
+    solorLableB6.textColor=[UIColor whiteColor];
+    solorLableB6.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLableB6.textAlignment = NSTextAlignmentCenter;
+    solorLableB6.center=CGPointMake(35*NOW_SIZE, H1+H2+imageSize+5*HEIGHT_SIZE+lableH/2);
+    [_headerView addSubview:solorLableB6];
+    UIImageView *image00 = [[UIImageView alloc] initWithFrame:CGRectMake(25*NOW_SIZE,H1+H2+imageSize-17*HEIGHT_SIZE,16*NOW_SIZE,16*NOW_SIZE)];
+    image00.image = [UIImage imageNamed:@"zhushi11.png"];
+    NSString *name1=root_PCS_guangfu_1;  NSString *name11=[NSString stringWithFormat:@"%@:%@W",name1,ppv1];
+     NSString *name2=root_PCS_guangfu_2;  NSString *name22=[NSString stringWithFormat:@"%@:%@W",name2,ppv2];
+    NSString *name3=root_PCS_chongdian_1;  NSString *name33=[NSString stringWithFormat:@"%@:%@W",name3,pCharge];
+        NSString *name4=root_PCS_chongdian_2;  NSString *name44=[NSString stringWithFormat:@"%@:%@W",name4,pCharge];
+      NSString *name5=root_PCS_dianchi_baifenbi;  NSString *name55=[NSString stringWithFormat:@"%@:%@W",name5,capacity];
+      NSString *name6=root_PCS_dianwang_chongdian_gonglv;  NSString *name66=[NSString stringWithFormat:@"%@:%@W",name6,pacCharge];
+      NSString *name7=root_PCS_fuzai_gonglv;  NSString *name77=[NSString stringWithFormat:@"%@:%@W",name7,userLoad];
+    NSString *name8=root_PCS_to_dianwang;  NSString *name88=[NSString stringWithFormat:@"%@:%@W",name8,pacToGrid];
+    NSString *name9=root_PCS_from_dianwang;  NSString *name99=[NSString stringWithFormat:@"%@:%@W",name9,pacToUser];
+    
+    
+    NSArray *lableName=[NSArray arrayWithObjects:name11,name22,name33,name44,name55,name66,name77,name88,name99,nil];
+    image00.userInteractionEnabled=YES;
+    objc_setAssociatedObject(image00, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    //将触摸事件添加到当前view
+    [image00 addGestureRecognizer:tapGestureRecognizer];
+    image00.center=CGPointMake(35*NOW_SIZE, H1+H2+imageSize-9*HEIGHT_SIZE);
+    [_headerView addSubview:image00];
+    
     
     UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(W1+W2,H1,imageSize,imageSize)];
     imageView2.image = [UIImage imageNamed:@"icon_sp.png"];
     [_headerView addSubview:imageView2];
     UILabel *solorLable1=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+(imageSize-lableW)/2,H1-lableH,lableW,lableH)];
-    solorLable1.text=@"Storage";
+    solorLable1.text=root_PCS_chunengji;
     solorLable1.textColor=[UIColor whiteColor];
     solorLable1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
     solorLable1.textAlignment = NSTextAlignmentCenter;
@@ -1491,7 +1530,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     imageView3.image = [UIImage imageNamed:@"icon_inv.png"];
     [_headerView addSubview:imageView3];
     UILabel *solorLable2=[[UILabel alloc] initWithFrame:CGRectMake(W1+2*W2+(imageSize-lableW)/2,H1-lableH,lableW,lableH)];
-    solorLable2.text=@"Inverter";
+    solorLable2.text=root_PCS_nibianqi;
     solorLable2.textColor=[UIColor whiteColor];
     solorLable2.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
     solorLable2.textAlignment = NSTextAlignmentCenter;
@@ -1501,7 +1540,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     imageView4.image = [UIImage imageNamed:@"icon_grid.png"];
     [_headerView addSubview:imageView4];
     UILabel *solorLable3=[[UILabel alloc] initWithFrame:CGRectMake(W1+3*W2+(imageSize-lableW)/2,H1-lableH,lableW,lableH)];
-    solorLable3.text=@"Grid";
+    solorLable3.text=root_PCS_dianwang;
     solorLable3.textColor=[UIColor whiteColor];
     solorLable3.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
     solorLable3.textAlignment = NSTextAlignmentCenter;
@@ -1511,7 +1550,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     imageView12.image = [UIImage imageNamed:@"icon_bat.png"];
     [_headerView addSubview:imageView12];
     UILabel *solorLable4=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+(imageSize-lableW)/2,H1+H2+imageSize,lableW,lableH)];
-    solorLable4.text=@"Bat";
+    solorLable4.text=root_PCS_dianyuan;
     solorLable4.textColor=[UIColor whiteColor];
     solorLable4.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
     solorLable4.textAlignment = NSTextAlignmentCenter;
@@ -1521,7 +1560,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     imageView22.image = [UIImage imageNamed:@"icon_load.png"];
     [_headerView addSubview:imageView22];
     UILabel *solorLable5=[[UILabel alloc] initWithFrame:CGRectMake(W1+2.5*W2+(imageSize-lableW)/2,H1+H2+imageSize,lableW,lableH)];
-    solorLable5.text=@"Load";
+    solorLable5.text=root_PCS_fuzhai;
     solorLable5.textColor=[UIColor whiteColor];
     solorLable5.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
     solorLable5.textAlignment = NSTextAlignmentCenter;

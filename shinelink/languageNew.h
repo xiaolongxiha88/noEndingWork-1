@@ -623,4 +623,23 @@
 #define  root_qingshuru_zhengque_jiaoyanma     NSLocalizedString(@"36请输入正确的手机校验码", nil)
 #define  root_xiugai_mima_chenggong     NSLocalizedString(@"37修改密码成功", nil)
 
+#define  root_PCS_guangfu    NSLocalizedString(@"38太阳能", nil)
+#define  root_PCS_chunengji    NSLocalizedString(@"39储能机", nil)
+#define  root_PCS_nibianqi   NSLocalizedString(@"40逆变器", nil)
+#define  root_PCS_dianwang   NSLocalizedString(@"41电网", nil)
+#define  root_PCS_dianyuan   NSLocalizedString(@"42电池", nil)
+#define  root_PCS_fuzhai   NSLocalizedString(@"43负载", nil)
+#define  root_PCS_danwei  NSLocalizedString(@"44单位", nil)
+#define  root_PCS_guangfu_1  NSLocalizedString(@"45第一路光伏功率", nil)
+#define  root_PCS_guangfu_2  NSLocalizedString(@"46第二路光伏功率", nil)
+#define  root_PCS_chongdian_1  NSLocalizedString(@"47第一路光伏充电功率", nil)
+#define  root_PCS_chongdian_2  NSLocalizedString(@"48第二路光伏充电功率", nil)
+#define  root_PCS_dianchi_baifenbi  NSLocalizedString(@"49电池百分比", nil)
+#define  root_PCS_dianwang_chongdian_gonglv  NSLocalizedString(@"50电网充电功率", nil)
+#define  root_PCS_fuzai_gonglv  NSLocalizedString(@"51负载功率", nil)
+#define  root_PCS_to_dianwang  NSLocalizedString(@"52输送电网功率", nil)
+#define  root_PCS_from_dianwang  NSLocalizedString(@"53电网输入功率", nil)
+
+
+
 #endif /* languageNew_h */

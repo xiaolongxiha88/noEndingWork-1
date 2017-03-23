@@ -365,6 +365,7 @@
 		3376ED681D12A4A6009526B4 /* 已处理.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376ED671D12A4A6009526B4 /* 已处理.png */; };
 		3377156A1D8E6CCC002EEEDF /* AddDeviceViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */; };
 		3377156C1D8E6E04002EEEDF /* liblibelian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AF3CEF1D8E67210007D6C2 /* liblibelian.a */; };
+		33771D521E8369B000786FCE /* zhushi11.png in Resources */ = {isa = PBXBuildFile; fileRef = 33771D511E8369B000786FCE /* zhushi11.png */; };
 		33775AD91D2CD7520070742E /* RKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33775AD81D2CD7520070742E /* RKAlertView.m */; };
 		33775ADB1D2E03B40070742E /* 质保.png in Resources */ = {isa = PBXBuildFile; fileRef = 33775ADA1D2E03B40070742E /* 质保.png */; };
 		33775AED1D2E3BAF0070742E /* 未打勾.png in Resources */ = {isa = PBXBuildFile; fileRef = 33775AEC1D2E3BAF0070742E /* 未打勾.png */; };
@@ -1192,6 +1193,7 @@
 		337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddDeviceViewController.h; path = WifConnect/num2/AddDeviceViewController.h; sourceTree = "<group>"; };
 		337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AddDeviceViewController.mm; path = WifConnect/num2/AddDeviceViewController.mm; sourceTree = "<group>"; };
 		3377156B1D8E6D28002EEEDF /* elian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = elian.h; path = OtherThing/cloudServices/elian.h; sourceTree = "<group>"; };
+		33771D511E8369B000786FCE /* zhushi11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhushi11.png; sourceTree = "<group>"; };
 		33775AD71D2CD7520070742E /* RKAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKAlertView.h; sourceTree = "<group>"; };
 		33775AD81D2CD7520070742E /* RKAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKAlertView.m; sourceTree = "<group>"; };
 		33775ADA1D2E03B40070742E /* 质保.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "质保.png"; path = "../../../../发现/质保.png"; sourceTree = "<group>"; };
@@ -2151,6 +2153,7 @@
 				33699BB81DADE72E00C55CFF /* PV_t3.png */,
 				33699BBA1DADE73400C55CFF /* PV_t4.png */,
 				33699BBC1DADE73B00C55CFF /* storage.png */,
+				33771D511E8369B000786FCE /* zhushi11.png */,
 				336A24621DEFF7120002D1AD /* 设备头图片 */,
 			);
 			path = "图片";
@@ -3836,6 +3839,7 @@
 				335456C51C853AFD00275478 /* scanLine@2x.png in Resources */,
 				3343F3EB1C805BD2009F69BC /* LICENSE in Resources */,
 				335614A01CB3B8E90071BAC9 /* frame2@2x.png in Resources */,
+				33771D521E8369B000786FCE /* zhushi11.png in Resources */,
 				334F3AE01D9BA444001D7F75 /* Pending.png in Resources */,
 				3383F1311C9FF4210075E834 /* PowerRegulator.png in Resources */,
 				33FEFD5E1C7DB38400324374 /* icon---Name@3x.png in Resources */,
