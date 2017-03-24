@@ -100,6 +100,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 -(void)goDown{
     datailD2ViewController *go=[[datailD2ViewController alloc]init];
+    go.deviceType=_deviceType;
     go.SnID=_SnID;
     go.dateDataArray=[NSMutableArray arrayWithArray:_dateDataArray];
     go.timeDataArray=[NSMutableArray arrayWithArray:_timeDataArray];
@@ -112,6 +113,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     if ([_timePickerType isEqualToString:@"1"]) {
           [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
          [self.navigationController pushViewController:go animated:YES];
+      
     }
    
 }

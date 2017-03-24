@@ -14,4 +14,6 @@
 @property (nonatomic, strong) NSMutableArray *dateDataArray;
 @property (nonatomic, strong) NSString *SnID;
 @property (nonatomic, strong) NSMutableArray *timeLableName;
+@property (nonatomic, strong) NSString *deviceType;
+
 @end

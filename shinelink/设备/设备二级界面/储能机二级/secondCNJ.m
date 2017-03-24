@@ -165,6 +165,8 @@
 
 -(void)goThree{
     EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
+    equipGraph.deviceType=@"S";
+       equipGraph.SnID=_deviceSN;
     equipGraph.dictInfo=@{@"equipId":_deviceSN,
                           @"daySite":@"/newStorageAPI.do?op=getDayLineStorage",
                           @"monthSite":@"/newStorageAPI.do?op=getMonthLineStorage",

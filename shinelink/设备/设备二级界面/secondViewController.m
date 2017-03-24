@@ -136,6 +136,7 @@
 -(void)goPVThree{
     EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
     equipGraph.SnID=_SnData;
+    equipGraph.deviceType=@"I";
     equipGraph.dictInfo=@{@"equipId":_SnData,
                           @"daySite":@"/newInverterAPI.do?op=getInverterData",
                           @"monthSite":@"/newInverterAPI.do?op=getMonthPac",

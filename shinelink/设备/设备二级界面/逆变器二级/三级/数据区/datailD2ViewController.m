@@ -29,21 +29,56 @@
 }
 
 -(void)goDown{
-    EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
-    equipGraph.SnID=_SnID;
-    equipGraph.dictInfo=@{@"equipId":_SnID,
-                          @"daySite":@"/newInverterAPI.do?op=getInverterData",
-                          @"monthSite":@"/newInverterAPI.do?op=getMonthPac",
-                          @"yearSite":@"/newInverterAPI.do?op=getYearPac",
-                          @"allSite":@"/newInverterAPI.do?op=getTotalPac"};
-    equipGraph.dict=@{@"1":root_PV_POWER,@"9":root_shuchu_gonglv,  @"2":root_PV1_VOLTAGE, @"3":root_PV1_ELEC_CURRENT, @"4":root_PV2_VOLTAGE, @"5":root_PV2_ELEC_CURRENT, @"6":root_R_PHASE_POWER, @"7":root_S_PHASE_POWER, @"8":root_T_PHASE_POWER};
+//    if ([_deviceType isEqualToString:@"I"]) {
+//        EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
+//        equipGraph.SnID=_SnID;
+//        equipGraph.deviceType=_deviceType;
+//        equipGraph.dictInfo=@{@"equipId":_SnID,
+//                              @"daySite":@"/newInverterAPI.do?op=getInverterData",
+//                              @"monthSite":@"/newInverterAPI.do?op=getMonthPac",
+//                              @"yearSite":@"/newInverterAPI.do?op=getYearPac",
+//                              @"allSite":@"/newInverterAPI.do?op=getTotalPac"};
+//        equipGraph.dict=@{@"1":root_PV_POWER,@"9":root_shuchu_gonglv,  @"2":root_PV1_VOLTAGE, @"3":root_PV1_ELEC_CURRENT, @"4":root_PV2_VOLTAGE, @"5":root_PV2_ELEC_CURRENT, @"6":root_R_PHASE_POWER, @"7":root_S_PHASE_POWER, @"8":root_T_PHASE_POWER};
+//        CATransition* transition = [CATransition animation];
+//        transition.type = kCATransitionPush;//可更改为其他方式
+//        transition.subtype = kCATransitionFromBottom;//可更改为其他方式
+//        transition.duration = 0.6f;
+//        [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+//      //  [self.navigationController pushViewController:equipGraph animated:YES];
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+//    
+//    if ([_deviceType isEqualToString:@"S"]) {
+//        EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
+//        equipGraph.SnID=_SnID;
+//        equipGraph.deviceType=_deviceType;
+//        equipGraph.dictInfo=@{@"equipId":_SnID,
+//                              @"daySite":@"/newStorageAPI.do?op=getDayLineStorage",
+//                              @"monthSite":@"/newStorageAPI.do?op=getMonthLineStorage",
+//                              @"yearSite":@"/newStorageAPI.do?op=getYearLineStorage",
+//                              @"allSite":@"/newStorageAPI.do?op=getTotalLineStorage"};
+//        equipGraph.dict=@{@"1":root_CHARGING_POWER, @"2":root_DISCHARGING_POWER, @"3":root_INPUT_VOLTAGE, @"4":root_INPUT_CURRENT, @"5":root_USER_SIDE_POWER, @"6":root_GRID_SIDE_POWER,@"7":root_dianchi};
+//        equipGraph.dictMonth=@{@"1":root_MONTH_BATTERY_CHARGE, @"2":root_MONTHLY_CHARGED, @"3":root_MONTHLY_DISCHARGED};
+//        equipGraph.dictYear=@{@"1":root_YEAR_BATTERY_CHARGE, @"2":root_YEAR_CHARGED, @"3":root_YEAR_DISCHARGED};
+//        equipGraph.dictAll=@{@"1":root_TOTAL_BATTERY_CHARGE, @"2":root_TOTAL_CHARGED, @"3":root_TOTAL_DISCHARGED};
+//        
+//        CATransition* transition = [CATransition animation];
+//        transition.type = kCATransitionPush;//可更改为其他方式
+//        transition.subtype = kCATransitionFromBottom;//可更改为其他方式
+//        transition.duration = 0.6f;
+//        [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+//        [self.navigationController pushViewController:equipGraph animated:YES];
+//    }
+    
     CATransition* transition = [CATransition animation];
     transition.type = kCATransitionPush;//可更改为其他方式
     transition.subtype = kCATransitionFromBottom;//可更改为其他方式
     transition.duration = 0.6f;
     [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
-    [self.navigationController pushViewController:equipGraph animated:YES];
-}
+    //  [self.navigationController pushViewController:equipGraph animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+   }
 
 -(void)initUI{
     float lableWidth=SCREEN_Width/2;

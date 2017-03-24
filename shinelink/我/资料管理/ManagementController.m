@@ -220,13 +220,23 @@
     
     if (indexPath.row==1){
         
-//        changManeger *go=[[changManeger alloc]init];
-//        go.type=@"1";
-//        [self.navigationController pushViewController:go animated:YES];
+        NSArray *languages = [NSLocale preferredLanguages];
+        NSString *currentLanguage = [languages objectAtIndex:0];
         
-        phoneRegisterViewController *registerRoot=[[phoneRegisterViewController alloc]init];
-        registerRoot.goViewType=@"2";
-        [self.navigationController pushViewController:registerRoot animated:YES];
+        
+        if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+            phoneRegisterViewController *registerRoot=[[phoneRegisterViewController alloc]init];
+            registerRoot.goViewType=@"2";
+            [self.navigationController pushViewController:registerRoot animated:YES];
+        }else{
+            changManeger *go=[[changManeger alloc]init];
+            go.type=@"1";
+            [self.navigationController pushViewController:go animated:YES];
+        }
+        
+  
+
+        
     }
     
 }

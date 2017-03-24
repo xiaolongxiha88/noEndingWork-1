@@ -275,20 +275,27 @@
     [loginBtn addTarget:self action:@selector(PresentCtrl:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    UIButton *quickRegister =  [UIButton buttonWithType:UIButtonTypeCustom];
-    quickRegister.frame=CGRectMake(40*NOW_SIZE,315*HEIGHT_SIZE+sizeH+72*HEIGHT_SIZE-H_down, SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE);
-    [quickRegister.layer setMasksToBounds:YES];
-    [quickRegister.layer setCornerRadius:20.0];
-    //UIImage *quickM=IMAGE(@"icon_yijianjianzhan.png");
-    UIImage *quickM=[self changeAlphaOfImageWith:0.9 withImage:IMAGE(@"icon_yijianjianzhan.png")];
+//    NSLocale *currentLocale = [NSLocale currentLocale];
+//    NSString *countryCode1 = [currentLocale objectForKey:NSLocaleCountryCode];
+    
+    if ([_languageValue isEqualToString:@"0"]) {
+        UIButton *quickRegister =  [UIButton buttonWithType:UIButtonTypeCustom];
+        quickRegister.frame=CGRectMake(40*NOW_SIZE,315*HEIGHT_SIZE+sizeH+72*HEIGHT_SIZE-H_down, SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE);
+        [quickRegister.layer setMasksToBounds:YES];
+        [quickRegister.layer setCornerRadius:20.0];
+        //UIImage *quickM=IMAGE(@"icon_yijianjianzhan.png");
+        UIImage *quickM=[self changeAlphaOfImageWith:0.9 withImage:IMAGE(@"icon_yijianjianzhan.png")];
         UIImage *quickM2=[self changeAlphaOfImageWith:0.5 withImage:IMAGE(@"icon_yijianjianzhan.png")];
-    [quickRegister setBackgroundImage:quickM forState:UIControlStateNormal];
-       [quickRegister setBackgroundImage:quickM2 forState:UIControlStateSelected];
-     [quickRegister setBackgroundImage:quickM2 forState:UIControlStateHighlighted];
-    quickRegister.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    [quickRegister setTitle:root_yijian_jianzhan forState:UIControlStateNormal];
-    [quickRegister addTarget:self action:@selector(goQuickRegister) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:quickRegister];
+        [quickRegister setBackgroundImage:quickM forState:UIControlStateNormal];
+        [quickRegister setBackgroundImage:quickM2 forState:UIControlStateSelected];
+        [quickRegister setBackgroundImage:quickM2 forState:UIControlStateHighlighted];
+        quickRegister.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+        [quickRegister setTitle:root_yijian_jianzhan forState:UIControlStateNormal];
+        [quickRegister addTarget:self action:@selector(goQuickRegister) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:quickRegister];
+    }
+    
+ 
     
 }
 
