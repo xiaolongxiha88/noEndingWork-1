@@ -304,8 +304,15 @@
                 [login.navigationController setNavigationBarHidden:YES];
                 [self.navigationController pushViewController:login animated:YES];
                 }else{
-                    
+                    if([_type isEqualToString:@"1"]){
+                      [[UserInfo defaultUserInfo] setTelNumber:_param1];
+                    }else if ([_type isEqualToString:@"2"]){            
+                           [[UserInfo defaultUserInfo] setEmail:_param2];
+                    }else if ([_type isEqualToString:@"3"]){
+                            [[UserInfo defaultUserInfo] setAgentCode:_param3];
+                    }
                 [self.navigationController popViewControllerAnimated:YES];
+                    
                 }
            
             }

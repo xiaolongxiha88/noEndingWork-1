@@ -131,7 +131,7 @@
  
        btn.nomalBackgroundColor = COLOR(144, 195, 32, 1);
      btn.disabledBackgroundColor = [UIColor grayColor];
-    btn.totalSecond = 10;
+    btn.totalSecond = 180;
       [btn addTarget:self action:@selector(getCode0) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     

@@ -304,8 +304,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-
 {
+     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     if (indexPath.row==0) {
          ManagementController *aboutView = [[ManagementController alloc]init];
           aboutView.hidesBottomBarWhenPushed=YES;

@@ -25,14 +25,19 @@
 
 @implementation ManagementController
 
+-(void)viewWillAppear:(BOOL)animated{
+  [self initUI];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.view.backgroundColor=MainColor;
     
      _manager=[CoreDataManager sharedCoreDataManager];
-    [self initUI];
+  
  
 }
+
 
 -(void)initUI{
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
@@ -190,7 +195,7 @@
      cell.textLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
      cell.detailTextLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    
+   
     return cell;
 }
 
@@ -205,6 +210,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     if ((indexPath.row==0)||(indexPath.row==2)||(indexPath.row==3)) {
         changManeger *go=[[changManeger alloc]init];
@@ -220,23 +226,25 @@
     
     if (indexPath.row==1){
         
-        NSArray *languages = [NSLocale preferredLanguages];
-        NSString *currentLanguage = [languages objectAtIndex:0];
-        
-        
-        if ([currentLanguage hasPrefix:@"zh-Hans"]) {
-            phoneRegisterViewController *registerRoot=[[phoneRegisterViewController alloc]init];
-            registerRoot.goViewType=@"2";
-            [self.navigationController pushViewController:registerRoot animated:YES];
-        }else{
-            changManeger *go=[[changManeger alloc]init];
-            go.type=@"1";
-            [self.navigationController pushViewController:go animated:YES];
-        }
-        
-  
+        changManeger *go=[[changManeger alloc]init];
+        go.type=@"1";
+        [self.navigationController pushViewController:go animated:YES];
 
         
+//        NSArray *languages = [NSLocale preferredLanguages];
+//        NSString *currentLanguage = [languages objectAtIndex:0];
+//        
+//        if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+//            phoneRegisterViewController *registerRoot=[[phoneRegisterViewController alloc]init];
+//            registerRoot.goViewType=@"2";
+//            [self.navigationController pushViewController:registerRoot animated:YES];
+//        }else{
+//            changManeger *go=[[changManeger alloc]init];
+//            go.type=@"1";
+//            [self.navigationController pushViewController:go animated:YES];
+//        }
+        
+   
     }
     
 }
