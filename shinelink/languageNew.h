@@ -639,7 +639,7 @@
 #define  root_PCS_fuzai_gonglv  NSLocalizedString(@"51负载功率", nil)
 #define  root_PCS_to_dianwang  NSLocalizedString(@"52输送电网功率", nil)
 #define  root_PCS_from_dianwang  NSLocalizedString(@"53电网输入功率", nil)
-
+#define  root_PCS_fangdian_gonglv  NSLocalizedString(@"54放电功率", nil)
 
 
 #endif /* languageNew_h */

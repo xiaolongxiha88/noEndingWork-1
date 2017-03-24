@@ -107,7 +107,7 @@
 
 -(void)registerUser{
 
-    BOOL isDemo=YES;
+    BOOL isDemo=NO;
     
     if (isDemo) {
         GifNewViewController *go=[[GifNewViewController alloc]init];

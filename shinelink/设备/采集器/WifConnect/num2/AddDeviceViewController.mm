@@ -16,7 +16,9 @@
 #import "UdpCheckUtl.h"
 #import "Toast+UIView.h"
 #import "StationCellectViewController.h"
+#import "GifNewViewController.h"
 
+#define WifiTime 200
 
 @interface AddDeviceViewController ()
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -27,7 +29,7 @@
 @property(nonatomic,strong)NSString *firstLableString;
 @property(nonatomic,strong)UIView *animationView;
 @property(nonatomic,strong)UILabel *timeLable;
-
+@property(nonatomic,strong)NSString *isNewWIFI;
 @end
 
 @implementation AddDeviceViewController{
@@ -56,6 +58,8 @@ static void *context = NULL;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _isNewWIFI=@"noValue";
     
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_back style:UIBarButtonItemStylePlain target:self action:@selector(goBackToFirst)];
     rightItem.tag=10;
@@ -185,7 +189,7 @@ static void *context = NULL;
 //    waterView.backgroundColor = [UIColor clearColor];
 //    [_animationView addSubview:waterView];
     
-    _firstLableString=@"200";
+    _firstLableString=[NSString stringWithFormat:@"%d",WifiTime];
      _timeLableString=_firstLableString;
    // NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
     self.timeLable = [[UILabel alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 105*HEIGHT_SIZE, 80*NOW_SIZE, 60*HEIGHT_SIZE)];
@@ -263,8 +267,16 @@ static void *context = NULL;
         
           [self showAlertViewWithTitle:nil message:root_wifi_tiaozhuan_tishi cancelButtonTitle:root_Yes];
         
-        GifConfigViewController *get=[[GifConfigViewController alloc]init];
-        [self.navigationController pushViewController:get animated:NO];
+      //  _isNewWIFI=@"1";
+        if ([_isNewWIFI isEqualToString:@"1"]) {
+            GifNewViewController *get=[[GifNewViewController alloc]init];
+            [self.navigationController pushViewController:get animated:NO];
+        }else{
+            GifConfigViewController *get=[[GifConfigViewController alloc]init];
+            [self.navigationController pushViewController:get animated:NO];
+        }
+        
+       
         
     }
     
@@ -459,6 +471,8 @@ static void *context = NULL;
         NSLog(@"getDatalogInfo: %@", content);
         if (content) {
             NSString *LostValue=content[@"lost"];
+            _isNewWIFI=[NSString stringWithFormat:@"%@",content[@"isNewWIFI"]];
+            //_isNewWIFI=content[@"isNewWIFI"];
             
             if ([LostValue intValue]==0) {
                 
@@ -529,8 +543,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销1  2
-//        elianStop(context);
-//        elianDestroy(context);
+        elianStop(context);
+        elianDestroy(context);
         
         
         
@@ -539,7 +553,7 @@ static void *context = NULL;
     
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销2  1
-//  context = elianNew(NULL, 0, target, flag);
+ context = elianNew(NULL, 0, target, flag);
     
     
     if (context == NULL)
@@ -553,10 +567,10 @@ static void *context = NULL;
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销3  4
     
-//    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
-//    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
-//    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
-//    elianStart(context);
+    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
+    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
+    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
+    elianStart(context);
     
     
 }
@@ -616,8 +630,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销4  2
-//    elianStop(context);
-//     elianDestroy(context);
+    elianStop(context);
+     elianDestroy(context);
         
         
     }
@@ -641,8 +655,8 @@ static void *context = NULL;
            
           //////// ////////////////// ////////////////////////////////
          //////////////////////   ////////////////////////////注销5  2
-//            elianStop(context);
-//           elianDestroy(context);
+            elianStop(context);
+           elianDestroy(context);
             
             
             context = NULL;

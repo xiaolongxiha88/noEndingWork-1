@@ -586,7 +586,7 @@
 "18扫描采集器序列号"="Scanning datalogger serial number";
 "19手机号不能为空"="Phone number can’t be empty!";
 "20密码不能为空"="Password can’t be empty.";
-"21请输入短信验证码"="Please enter verification code";
+"21请输入短信验证码"="Enter verification code";
 "22验证码错误"="Verification code wrong";
 "23发送验证码"="Send verification code";
 "24一键建站"="Quick registration";
@@ -619,3 +619,4 @@
 "51负载功率"="Power of home load";
 "52输送电网功率"="Power to grid";
 "53电网输入功率"="Power from grid";
+"54放电功率"="Discharge Power";

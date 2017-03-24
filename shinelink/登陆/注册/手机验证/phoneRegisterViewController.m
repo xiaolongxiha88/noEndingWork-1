@@ -57,7 +57,9 @@
 
 
 -(void)initUI{
-
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    
     _textField0 = [[UITextField alloc] initWithFrame:CGRectMake(30*NOW_SIZE,82*HEIGHT_SIZE,40*NOW_SIZE, 25*HEIGHT_SIZE)];
     _textField0.placeholder =_getPhone;
     _textField0.textColor = [UIColor whiteColor];
@@ -82,7 +84,12 @@
     _textField.tintColor = [UIColor whiteColor];
       _textField.textAlignment = NSTextAlignmentCenter;
     [_textField setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [_textField setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+       [_textField setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    }else {
+      [_textField setValue:[UIFont systemFontOfSize:8*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    }
+  
     _textField.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
    [self.view addSubview:_textField];
     
@@ -96,7 +103,12 @@
     _textField2.tintColor = [UIColor whiteColor];
     _textField2.textAlignment = NSTextAlignmentCenter;
     [_textField2 setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [_textField2 setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+        [_textField2 setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    }else {
+        [_textField2 setValue:[UIFont systemFontOfSize:8*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    }
+  
     _textField2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [self.view addSubview:_textField2];
     
@@ -107,15 +119,16 @@
     QCCountdownButton *btn = [QCCountdownButton countdownButton];
     btn.title =root_fasong_yanzhengma;
     
-    NSArray *languages = [NSLocale preferredLanguages];
-    NSString *currentLanguage = [languages objectAtIndex:0];
+
     if ([currentLanguage hasPrefix:@"zh-Hans"]) {
           [btn setFrame:CGRectMake(235*NOW_SIZE,80*HEIGHT_SIZE,70*NOW_SIZE, 29*HEIGHT_SIZE)];
+            btn.titleLabelFont = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     }else {
-         [btn setFrame:CGRectMake(215*NOW_SIZE,80*HEIGHT_SIZE,100*NOW_SIZE, 29*HEIGHT_SIZE)];
+         [btn setFrame:CGRectMake(217*NOW_SIZE,80*HEIGHT_SIZE,100*NOW_SIZE, 29*HEIGHT_SIZE)];
+            btn.titleLabelFont = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
     }
     
-     btn.titleLabelFont = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+ 
        btn.nomalBackgroundColor = COLOR(144, 195, 32, 1);
      btn.disabledBackgroundColor = [UIColor grayColor];
     btn.totalSecond = 10;
@@ -144,8 +157,15 @@
 }
 
 -(void)getCode0{
+    
+   
     NSString *A1=[_textField0 text];
+    if (A1==nil || A1==NULL||([A1 isEqual:@""] ) ) {
+    }else{
     _getPhone=[NSMutableString stringWithString:A1];
+    }
+    
+    
     NSString *A=@"+";
     if ([_getPhone containsString:A]) {
         [_getPhone deleteCharactersInRange:[_getPhone rangeOfString:A]];

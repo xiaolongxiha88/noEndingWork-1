@@ -108,7 +108,7 @@
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [goBut setTitle:root_register forState:UIControlStateNormal];
-    [goBut addTarget:self action:@selector(PresentGo) forControlEvents:UIControlEventTouchUpInside];
+    [goBut addTarget:self action:@selector(registerFrist) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goBut];
  
     UIButton *selectButton= [UIButton buttonWithType:UIButtonTypeCustom];
@@ -162,6 +162,34 @@
     }
         
 }
+
+
+-(void)registerFrist{
+     [self showProgressView];
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"country":_getCountry} paramarsSite:@"/newLoginAPI.do?op=getServerUrl" sucessBlock:^(id content) {
+        
+        NSLog(@"getServerUrl: %@", content);
+        if (content) {
+            if ([content[@"success"]intValue]==1) {
+                NSString *server1=content[@"server"];
+                NSString *server2=@"http://";
+                NSString *server=[NSString stringWithFormat:@"%@%@",server2,server1];
+                [[UserInfo defaultUserInfo] setServer:server];
+                
+                [self PresentGo];
+            }
+  
+        }else{
+
+        }
+        
+    } failure:^(NSError *error) {
+
+    }];
+
+
+}
+
 
 -(void)PresentGo{
     [self getLanguage];

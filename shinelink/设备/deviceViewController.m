@@ -654,6 +654,7 @@
     
     }
   
+    _deviceHeadType=@"0";
     _pcsNetPlantID=[_plantId objectForKey:@"plantId"];
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:_plantId paramarsSite:@"/newPlantAPI.do?op=getAllDeviceList" sucessBlock:^(id content) {
       
@@ -844,6 +845,11 @@
         
         
         //创建Head
+        if (_headerView) {
+          //  [_headerView removeFromSuperview];
+            _headerView=nil;
+            
+        }
          [self _createHeaderView];
         
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -1010,6 +1016,8 @@
                      [_pcsDataDic setObject:jsonObj[@"obj"][@"ppv2"] forKey:@"ppv2"];
                      [_pcsDataDic setObject:jsonObj[@"obj"][@"status"] forKey:@"status"];
                      [_pcsDataDic setObject:jsonObj[@"obj"][@"userLoad"] forKey:@"userLoad"];
+                    [_pcsDataDic setObject:jsonObj[@"obj"][@"pCharge1"] forKey:@"pCharge1"];
+                    [_pcsDataDic setObject:jsonObj[@"obj"][@"pCharge2"] forKey:@"pCharge2"];
                     
                 }
                 [self getPCSHeadUI];
@@ -1403,7 +1411,8 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
 //    [_pcsDataDic setObject:jsonObj[@"obj"][@"ppv2"] forKey:@"ppv2"];
 //    [_pcsDataDic setObject:jsonObj[@"obj"][@"status"] forKey:@"status"];
 //    [_pcsDataDic setObject:jsonObj[@"obj"][@"userLoad"] forKey:@"userLoad"];
-
+//[_pcsDataDic setObject:jsonObj[@"obj"][@"pCharge1"] forKey:@"pCharge1"];
+//[_pcsDataDic setObject:jsonObj[@"obj"][@"pCharge2"] forKey:@"pCharge2"];
 
 -(void)getPCSHeadUI{
     NSString *ppv1=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"ppv1"] floatValue]];
@@ -1415,7 +1424,8 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
       NSString *userLoad=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"userLoad"] floatValue]];
      NSString *pacToGrid=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pacToGrid"] floatValue]];
      NSString *pacToUser=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pacToUser"] floatValue]];
-    
+    NSString *pCharge1=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pCharge1"] floatValue]];
+    NSString *pCharge2=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pCharge2"] floatValue]];
  
     float lableW=55*NOW_SIZE;float lableH=15*HEIGHT_SIZE;float lableH0=10*HEIGHT_SIZE;
     float H0=8*HEIGHT_SIZE,W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
@@ -1483,6 +1493,8 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     solorLableB5.textAlignment = NSTextAlignmentCenter;
     [_headerView addSubview:solorLableB5];
     
+   
+    
     UILabel *solorLableB6=[[UILabel alloc] initWithFrame:CGRectMake(20*NOW_SIZE,H1+H2+imageSize+5*HEIGHT_SIZE,60*NOW_SIZE,lableH)];
     NSString *B1=root_PCS_danwei;
     solorLableB6.text=[NSString stringWithFormat:@"%@:W",B1];
@@ -1495,8 +1507,9 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     image00.image = [UIImage imageNamed:@"zhushi11.png"];
     NSString *name1=root_PCS_guangfu_1;  NSString *name11=[NSString stringWithFormat:@"%@:%@W",name1,ppv1];
      NSString *name2=root_PCS_guangfu_2;  NSString *name22=[NSString stringWithFormat:@"%@:%@W",name2,ppv2];
-    NSString *name3=root_PCS_chongdian_1;  NSString *name33=[NSString stringWithFormat:@"%@:%@W",name3,pCharge];
-        NSString *name4=root_PCS_chongdian_2;  NSString *name44=[NSString stringWithFormat:@"%@:%@W",name4,pCharge];
+    NSString *name3=root_PCS_chongdian_1;  NSString *name33=[NSString stringWithFormat:@"%@:%@W",name3,pCharge1];
+        NSString *name4=root_PCS_chongdian_2;  NSString *name44=[NSString stringWithFormat:@"%@:%@W",name4,pCharge2];
+    NSString *name0=root_PCS_fangdian_gonglv;  NSString *name00=[NSString stringWithFormat:@"%@:%@W",name0,pDisCharge];
       NSString *name5=root_PCS_dianchi_baifenbi;  NSString *name55=[NSString stringWithFormat:@"%@:%@W",name5,capacity];
       NSString *name6=root_PCS_dianwang_chongdian_gonglv;  NSString *name66=[NSString stringWithFormat:@"%@:%@W",name6,pacCharge];
       NSString *name7=root_PCS_fuzai_gonglv;  NSString *name77=[NSString stringWithFormat:@"%@:%@W",name7,userLoad];
@@ -1504,7 +1517,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     NSString *name9=root_PCS_from_dianwang;  NSString *name99=[NSString stringWithFormat:@"%@:%@W",name9,pacToUser];
     
     
-    NSArray *lableName=[NSArray arrayWithObjects:name11,name22,name33,name44,name55,name66,name77,name88,name99,nil];
+    NSArray *lableName=[NSArray arrayWithObjects:name11,name22,name33,name44,name00,name55,name66,name77,name88,name99,nil];
     image00.userInteractionEnabled=YES;
     objc_setAssociatedObject(image00, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
@@ -1515,6 +1528,15 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     image00.center=CGPointMake(35*NOW_SIZE, H1+H2+imageSize-9*HEIGHT_SIZE);
     [_headerView addSubview:image00];
     
+    UIView *VV1=[[UIView alloc] initWithFrame:CGRectMake(5*NOW_SIZE,H1+H2+imageSize-28*HEIGHT_SIZE,60*NOW_SIZE,50*NOW_SIZE)];
+    VV1.userInteractionEnabled=YES;
+    objc_setAssociatedObject(VV1, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+    tapGestureRecognizer1.cancelsTouchesInView = NO;
+    //将触摸事件添加到当前view
+    [VV1 addGestureRecognizer:tapGestureRecognizer1];
+    [_headerView addSubview:VV1];
     
     UIImageView *imageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(W1+W2,H1,imageSize,imageSize)];
     imageView2.image = [UIImage imageNamed:@"icon_sp.png"];
@@ -1579,9 +1601,13 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     float headImageH=40*HEIGHT_SIZE;
     float unitWidth=(Kwidth)/3;
     float gapH=10*HEIGHT_SIZE;
-    NSArray *headNameArray=[NSArray arrayWithObjects: _head23,_head13,_head33,nil];
-    NSArray *headValueArray=[NSArray arrayWithObjects: _head21,_head11,_head31,nil];
-    NSArray *headValue1Array=[NSArray arrayWithObjects: _head22,_head12,_head32,nil];
+    NSArray *headNameArray=[NSArray arrayWithObjects: root_PpvN,root_Revenue,root_todayPV,nil];
+    NSMutableArray *headValueArray=[NSMutableArray arrayWithObjects: _head21,_head11,_head31,nil];
+    NSMutableArray *headValue1Array=[NSMutableArray arrayWithObjects: _head22,_head12,_head32,nil];
+    if (headValueArray.count==0) {
+        [headValueArray addObject:@"0"]; [headValueArray addObject:@"0"]; [headValueArray addObject:@"0"];
+        [headValue1Array addObject:@""]; [headValue1Array addObject:@""]; [headValue1Array addObject:@""];
+    }
     NSArray *headColorArray=[NSArray arrayWithObjects: COLOR(17, 183, 243, 1),COLOR(219, 210, 74, 1),COLOR(83, 218, 118, 1),nil];
     NSArray *headImageNameArray11=[NSArray arrayWithObjects: @"deviceHead1.png",@"deviceHead2.png",@"deviceHead33.png",nil];
     
