@@ -35,16 +35,31 @@
     [byEmail addTarget:self action:@selector(bymail) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:byEmail];
     
-    UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(60*NOW_SIZE,180*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
-    // [goBut.layer setMasksToBounds:YES];
-    //[goBut.layer setCornerRadius:25.0];
-    [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
-    goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    [goBut setTitle:root_tongguo_shoujihao forState:UIControlStateNormal];
-    [goBut addTarget:self action:@selector(byPhone) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:goBut];
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+        UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
+        goBut.frame=CGRectMake(60*NOW_SIZE,180*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+        // [goBut.layer setMasksToBounds:YES];
+        //[goBut.layer setCornerRadius:25.0];
+        [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
+        goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+        [goBut setTitle:root_tongguo_shoujihao forState:UIControlStateNormal];
+        [goBut addTarget:self action:@selector(byPhone) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:goBut];
+        
+        UILabel *alertLable= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE,220*HEIGHT_SIZE, 300*NOW_SIZE, 30*HEIGHT_SIZE)];
+        NSString *alertText1=root_jinggong_yijianjianzhan_yonghu;
+        NSString *alertText=[NSString stringWithFormat:@"(%@)",alertText1];
+        alertLable.text=alertText;
+        alertLable.textColor=COLOR(255, 255, 255, 0.5);
+        alertLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        alertLable.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:alertLable];
 
+    }
+    
+    
 }
 
 

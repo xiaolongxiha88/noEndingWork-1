@@ -34,6 +34,9 @@
     [byEmail addTarget:self action:@selector(bymail) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:byEmail];
     
+    
+ 
+    
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
     goBut.frame=CGRectMake(60*NOW_SIZE,180*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
    // [goBut.layer setMasksToBounds:YES];
@@ -44,6 +47,7 @@
     [goBut addTarget:self action:@selector(bySN) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goBut];
     
+   
     
 }
 

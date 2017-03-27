@@ -640,6 +640,6 @@
 #define  root_PCS_to_dianwang  NSLocalizedString(@"52输送电网功率", nil)
 #define  root_PCS_from_dianwang  NSLocalizedString(@"53电网输入功率", nil)
 #define  root_PCS_fangdian_gonglv  NSLocalizedString(@"54放电功率", nil)
-
+#define  root_jinggong_yijianjianzhan_yonghu  NSLocalizedString(@"55仅供“一键建站”注册用户使用", nil)
 
 #endif /* languageNew_h */

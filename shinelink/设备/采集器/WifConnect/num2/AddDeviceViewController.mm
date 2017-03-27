@@ -553,7 +553,7 @@ static void *context = NULL;
     
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销2  1
- //context = elianNew(NULL, 0, target, flag);
+//context = elianNew(NULL, 0, target, flag);
     
     
     if (context == NULL)
@@ -571,7 +571,7 @@ static void *context = NULL;
 //    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
 //    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
 //    elianStart(context);
-    
+//
     
 }
 
