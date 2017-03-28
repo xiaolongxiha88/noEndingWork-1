@@ -18,9 +18,17 @@
 
 @implementation commonTableViewController
 
+
+-(void)viewWillAppear:(BOOL)animated{
+  //  [self showProgressView];
+
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self netCommon];
+       [self netCommon];
+    
           self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     //  self.dataArray =[NSMutableArray arrayWithObjects:@"第一111",@"第二222",@"第三333",nil];
     
@@ -54,7 +62,7 @@
         _languageValue=@"2";
     }
 
-    
+    [self showProgressView];
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"language":_languageValue} paramarsSite:@"/questionAPI.do?op=getUsualQuestionList" sucessBlock:^(id content) {
         [self hideProgressView];
         NSLog(@"getUsualQuestionList=: %@", content);
@@ -133,7 +141,10 @@
     if (cell==nil) {
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.textLabel.text=_titleArray[indexPath.row];
+    if (_titleArray.count>0) {
+         cell.textLabel.text=_titleArray[indexPath.row];
+    }
+   
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
      cell.textLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     return cell;
@@ -152,8 +163,10 @@
 //    go.idString=_idArray[indexPath.row];
     
   HtmlCommon *go=[[HtmlCommon alloc]init];
+    if (_idArray.count>0) {
+         go.idString=_idArray[indexPath.row];
+    }
     
-        go.idString=_idArray[indexPath.row];
     
  [self.navigationController pushViewController:go animated:NO];
     

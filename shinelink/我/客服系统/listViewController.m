@@ -36,6 +36,7 @@
 @implementation listViewController
 
 -(void)viewWillAppear:(BOOL)animated{
+      [self showProgressView];
     [self netquestion];
     
 }
@@ -114,7 +115,7 @@
     self.contentSecondArray=[NSMutableArray array];
     self.answerName=[NSMutableArray array];
     
-    [self showProgressView];
+  
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfoNew" sucessBlock:^(id content) {
         [self hideProgressView];
    NSLog(@"questionList=: %@", content);
@@ -231,41 +232,45 @@
      [cell.contentView setBackgroundColor: [UIColor whiteColor] ];
     
     //_statusArray[indexPath.row]=@"1";
-    
-    if ([_languageValue isEqualToString:@"0"]) {
-        
-        if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"待处理.png"]];
-        }else if ([_statusArray[indexPath.row] isEqualToString:@"1"]){
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"处理中.png"]];
-        }else if([_statusArray[indexPath.row] isEqualToString:@"2"]){
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"已处理.png"]];
-        }else if([_statusArray[indexPath.row] isEqualToString:@"3"]){
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"待跟进.png"]];
+    if (_statusArray.count>0) {
+        if ([_languageValue isEqualToString:@"0"]) {
+            
+            if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {
+                [cell.coverImageView  setImage:[UIImage imageNamed:@"待处理.png"]];
+            }else if ([_statusArray[indexPath.row] isEqualToString:@"1"]){
+                [cell.coverImageView  setImage:[UIImage imageNamed:@"处理中.png"]];
+            }else if([_statusArray[indexPath.row] isEqualToString:@"2"]){
+                [cell.coverImageView  setImage:[UIImage imageNamed:@"已处理.png"]];
+            }else if([_statusArray[indexPath.row] isEqualToString:@"3"]){
+                [cell.coverImageView  setImage:[UIImage imageNamed:@"待跟进.png"]];
+            }
+        }else{
+            if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {
+                [cell.coverImageView  setImage:[UIImage imageNamed:@"Pending.png"]];
+            }else if ([_statusArray[indexPath.row] isEqualToString:@"1"]){
+                [cell.coverImageView  setImage:[UIImage imageNamed:@"Processing.png"]];
+            }else if([_statusArray[indexPath.row] isEqualToString:@"2"]){
+                [cell.coverImageView  setImage:[UIImage imageNamed:@"Processed.png"]];
+            }else if([_statusArray[indexPath.row] isEqualToString:@"3"]){
+                [cell.coverImageView  setImage:[UIImage imageNamed:@"Waiting.png"]];
+            }
+            
         }
-    }else{
-        if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"Pending.png"]];
-        }else if ([_statusArray[indexPath.row] isEqualToString:@"1"]){
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"Processing.png"]];
-        }else if([_statusArray[indexPath.row] isEqualToString:@"2"]){
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"Processed.png"]];
-        }else if([_statusArray[indexPath.row] isEqualToString:@"3"]){
-            [cell.coverImageView  setImage:[UIImage imageNamed:@"Waiting.png"]];
-        }
-    
     }
     
    
+    if (_titleArray.count>0) {
+        NSString *contentLabel_1=_answerName[indexPath.row];
+        NSString *contentLabel_2=_contentArray[indexPath.row];
+        NSString *contentLabel_3=[NSString stringWithFormat:@"%@%@",contentLabel_1,contentLabel_2];
+
+        cell.titleLabel.text= self.titleArray[indexPath.row];
+        cell.contentLabel.text= contentLabel_3;
+        cell.timeLabel.text=self.timeArray[indexPath.row];
+    }
+   
     
-    NSString *contentLabel_1=_answerName[indexPath.row];
-    NSString *contentLabel_2=_contentArray[indexPath.row];
-    NSString *contentLabel_3=[NSString stringWithFormat:@"%@%@",contentLabel_1,contentLabel_2];
-    
-    
-    cell.titleLabel.text= self.titleArray[indexPath.row];
-    cell.contentLabel.text= contentLabel_3;
-    cell.timeLabel.text=self.timeArray[indexPath.row];
+ 
     
     
       // cell.statusLabel.text= self.statusArray[indexPath.row];
@@ -348,12 +353,17 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    myListSecond *second=[[myListSecond alloc]init];
-    second.qusetionId=_questionID[indexPath.row];
-    second.qusetionType=_questionTypeArray[indexPath.row];
-    second.questionPicArray=[NSMutableArray arrayWithArray:_questionPicArray[indexPath.row]];
-    second.qusetionContent=_contentSecondArray[indexPath.row];
-    [self.navigationController pushViewController:second animated:NO];
+    if (_questionID.count>0) {
+        myListSecond *second=[[myListSecond alloc]init];
+        second.qusetionId=_questionID[indexPath.row];
+        second.qusetionType=_questionTypeArray[indexPath.row];
+        second.questionPicArray=[NSMutableArray arrayWithArray:_questionPicArray[indexPath.row]];
+        second.qusetionContent=_contentSecondArray[indexPath.row];
+        [self.navigationController pushViewController:second animated:NO];
+    }else{
+      [self netquestion];
+    }
+   
     
     
 }
