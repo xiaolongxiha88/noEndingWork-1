@@ -23,10 +23,12 @@
     [self.view addSubview:self.line2View];
     
     NSMutableDictionary *dict=[NSMutableDictionary new];
-    [dict setObject:@"11" forKey:root_energy_dianbinxiang];
+    
+    //NSString *newStr = [_MinString stringByReplacingOccurrencesOfString:@"kWh" withString:@""];
+    [dict setObject:@"10" forKey:root_energy_dianbinxiang];
     [dict setObject:@"21" forKey:root_energy_weibolu];
     [dict setObject:@"25" forKey:root_energy_xiyiji];
-    [dict setObject:@"15" forKey:root_energy_kongtiao];
+    [dict setObject:@"100" forKey:root_energy_kongtiao];
     [dict setObject:@"22" forKey:root_energy_reshuiqi];
     [dict setObject:@"81" forKey:root_energy_weibolu];
     

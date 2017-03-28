@@ -29,6 +29,7 @@
     [super viewDidLoad];
 self.view.backgroundColor = [UIColor whiteColor];
     
+    self.view.userInteractionEnabled=NO;
       [self showProgressView];
     [self getNet];
     
@@ -61,10 +62,12 @@ self.view.backgroundColor = [UIColor whiteColor];
             [self initUI];
         }else{
         [self hideProgressView];
+              self.view.userInteractionEnabled=YES;
         }
         
     } failure:^(NSError *error) {
         [self hideProgressView];
+         self.view.userInteractionEnabled=YES;
         
     }];
 
@@ -163,6 +166,7 @@ self.view.backgroundColor = [UIColor whiteColor];
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     //[LWLoadingView hideInViwe:self.view];
     [self hideProgressView];
+     self.view.userInteractionEnabled=YES;
     
     NSString *jsStr = @"function reSetImgFrame() { \
     var imgs = document.getElementsByTagName('img'); \
@@ -332,6 +336,12 @@ self.view.backgroundColor = [UIColor whiteColor];
 }
 
 
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [_webView removeFromSuperview];
+    _webView=nil;
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

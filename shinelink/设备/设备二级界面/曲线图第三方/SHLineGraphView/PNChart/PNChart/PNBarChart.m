@@ -394,25 +394,28 @@
         float xDirY1=[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue];
         NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
         float maxY=[[NSString stringWithFormat:@"%@",maxY1] floatValue];
-        float xDirY2=self.frame.size.height - _chartMargin*2- kXLabelHeight;
         
-        float lableGetY=xDirY2*(maxY-xDirY1)/maxY;
+        if (maxY>0) {
+            float xDirY2=self.frame.size.height - _chartMargin*2- kXLabelHeight;
+            float lableGetY=xDirY2*(maxY-xDirY1)/maxY;
+            
+            //self.frame.size.height - _chartMargin
+            //  UIView *subview = [self hitTest:touchPoint withEvent:nil];
+            
+            xDirectrix.frame = CGRectMake(xDirX, _chartMargin,1*NOW_SIZE, self.frame.size.height - kXLabelHeight - _chartMargin*2);
+            xDirectrix.hidden = NO;
+            [self bringSubviewToFront:xDirectrix];
+            
+            yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
+            yDirectriy.hidden = NO;
+            [self bringSubviewToFront: yDirectriy];
+            
+            NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
+            NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
+            NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_riqi,xLableValue,root_shuzhi,xDirY0];
+            xyLableValue.text=xyLableText;
+        }
         
-        //self.frame.size.height - _chartMargin
-        //  UIView *subview = [self hitTest:touchPoint withEvent:nil];
-        
-        xDirectrix.frame = CGRectMake(xDirX, _chartMargin,1*NOW_SIZE, self.frame.size.height - kXLabelHeight - _chartMargin*2);
-        xDirectrix.hidden = NO;
-        [self bringSubviewToFront:xDirectrix];
-        
-        yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
-        yDirectriy.hidden = NO;
-        [self bringSubviewToFront: yDirectriy];
-        
-        NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
-        NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
-        NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_riqi,xLableValue,root_shuzhi,xDirY0];
-        xyLableValue.text=xyLableText;
     }
     
 }
@@ -433,16 +436,20 @@
         float xDirY1=[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue];
         NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
         float maxY=[[NSString stringWithFormat:@"%@",maxY1] floatValue];
-        float xDirY2=self.frame.size.height - _chartMargin*2- kXLabelHeight;
-        float lableGetY=xDirY2*(maxY-xDirY1)/maxY;
-        yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
-        yDirectriy.hidden = NO;
-        [self bringSubviewToFront: yDirectriy];
         
-        NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
-         NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
-       NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_riqi,xLableValue,root_shuzhi,xDirY0];
-        xyLableValue.text=xyLableText;
+        if (maxY>0) {
+            float xDirY2=self.frame.size.height - _chartMargin*2- kXLabelHeight;
+            float lableGetY=xDirY2*(maxY-xDirY1)/maxY;
+            yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
+            yDirectriy.hidden = NO;
+            [self bringSubviewToFront: yDirectriy];
+            
+            NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
+            NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
+            NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_riqi,xLableValue,root_shuzhi,xDirY0];
+            xyLableValue.text=xyLableText;
+        }
+        
         
     }
     

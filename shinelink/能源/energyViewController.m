@@ -186,6 +186,8 @@
     if (indexPath.row==3) {
         homeDeviceViewController *home=[[homeDeviceViewController alloc]init];
         home.titleString=root_energy_jiating_shebei;
+        home.MinString=monthDateArray[indexPath.row];
+          home.MaxString=monthDateArray[indexPath.row];
            home.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:home animated:YES];
         

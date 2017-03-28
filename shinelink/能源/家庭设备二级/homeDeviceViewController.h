@@ -12,4 +12,7 @@
 
 @property (nonatomic, strong) NSString *titleString;
 
+@property (nonatomic, strong) NSString *MaxString;
+@property (nonatomic, strong) NSString *MinString;
+
 @end

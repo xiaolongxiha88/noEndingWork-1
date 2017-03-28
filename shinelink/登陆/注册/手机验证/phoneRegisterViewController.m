@@ -209,9 +209,9 @@
     _dataDic=[NSMutableDictionary new];
     [_dataDic setObject:[_textField text] forKey:@"phoneNum"];
     [_dataDic setObject:_getPhone forKey:@"areaCode"];
-    
+        [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:_dataDic paramarsSite:@"/newForgetAPI.do?op=smsVerification" sucessBlock:^(id content) {
-       
+        [self hideProgressView];
         id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
          NSLog(@"smsVerification: %@", jsonObj);
         if (jsonObj) {

@@ -13,6 +13,7 @@
 @property (nonatomic, strong)  UITextField *textField2;
 @end
 
+
 @implementation phoneRegister2ViewController
 
 - (void)viewDidLoad {
@@ -63,7 +64,7 @@
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [goBut setTitle:root_finish forState:UIControlStateNormal];
-    [goBut addTarget:self action:@selector(PresentGo) forControlEvents:UIControlEventTouchUpInside];
+    [goBut addTarget:self action:@selector(registerFrist) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goBut];
     
 }
@@ -85,8 +86,9 @@
     [dic0 setObject:_PhoneNum forKey:@"phoneNum"];
       [dic0 setObject:_PhoneCheck forKey:@"validate"];
      [dic0 setObject:[_textField text] forKey:@"password"];
+  
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:dic0 paramarsSite:@"/newForgetAPI.do?op=restartUserPassword" sucessBlock:^(id content) {
-        
+        [self hideProgressView];
         id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"smsVerification: %@", jsonObj);
         if (jsonObj) {
@@ -114,12 +116,43 @@
         }
         
     } failure:^(NSError *error) {
-        
+           [self hideProgressView];
     }
      ];
 
 
 }
+
+
+-(void)registerFrist{
+    [self showProgressView];
+
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userName":_PhoneNum} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
+        
+        NSLog(@"getUserServerUrl: %@", content);
+        if (content) {
+            if ([content[@"success"]intValue]==1) {
+                NSString *server1=content[@"msg"];
+                NSString *server2=@"http://";
+                NSString *server=[NSString stringWithFormat:@"%@%@",server2,server1];
+                [[UserInfo defaultUserInfo] setServer:server];
+                 [self PresentGo];
+            }else{
+                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+                  [self PresentGo];
+            }
+        }else{
+            [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+               [self PresentGo];
+        }
+        
+    } failure:^(NSError *error) {
+        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+   [self PresentGo];
+    }];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
