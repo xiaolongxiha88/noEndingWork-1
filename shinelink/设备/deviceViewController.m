@@ -205,6 +205,10 @@
         }else if (tapPicTime==3){
             _dirPic.image = IMAGE(@"设备页引导4.jpg");
         }else if (tapPicTime==4){
+           _dirPic.image = IMAGE(@"pvDir_cn.jpg");
+        }else if (tapPicTime==5){
+           _dirPic.image = IMAGE(@"spDir_cn.jpg");
+        }else if (tapPicTime==6){
             [_dirPic removeFromSuperview];
         }
     }else{
@@ -215,6 +219,10 @@
         }else if (tapPicTime==3){
             _dirPic.image = IMAGE(@"设备页引导4_en.jpg");
         }else if (tapPicTime==4){
+           _dirPic.image = IMAGE(@"pvDir_en.jpg");
+        }else if (tapPicTime==5){
+             _dirPic.image = IMAGE(@"spDir_en.jpg");
+        }else if (tapPicTime==6){
             [_dirPic removeFromSuperview];
         }
     }
@@ -1510,7 +1518,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     NSString *name3=root_PCS_chongdian_1;  NSString *name33=[NSString stringWithFormat:@"%@:%@W",name3,pCharge1];
         NSString *name4=root_PCS_chongdian_2;  NSString *name44=[NSString stringWithFormat:@"%@:%@W",name4,pCharge2];
     NSString *name0=root_PCS_fangdian_gonglv;  NSString *name00=[NSString stringWithFormat:@"%@:%@W",name0,pDisCharge];
-      NSString *name5=root_PCS_dianchi_baifenbi;  NSString *name55=[NSString stringWithFormat:@"%@:%@W",name5,capacity];
+      NSString *name5=root_PCS_dianchi_baifenbi;  NSString *name55=[NSString stringWithFormat:@"%@:%@",name5,capacity];
       NSString *name6=root_PCS_dianwang_chongdian_gonglv;  NSString *name66=[NSString stringWithFormat:@"%@:%@W",name6,pacCharge];
       NSString *name7=root_PCS_fuzai_gonglv;  NSString *name77=[NSString stringWithFormat:@"%@:%@W",name7,userLoad];
     NSString *name8=root_PCS_to_dianwang;  NSString *name88=[NSString stringWithFormat:@"%@:%@W",name8,pacToGrid];

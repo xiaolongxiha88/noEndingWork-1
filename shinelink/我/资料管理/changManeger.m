@@ -283,7 +283,13 @@
                     [self showAlertViewWithTitle:nil message:root_xitong_cuoWu cancelButtonTitle:root_Yes];
                     
                 }else if ([content1[@"msg"] integerValue] ==502) {
+                    if (_textField) {
+                         [self showAlertViewWithTitle:nil message:root_yuan_mima_cuowu cancelButtonTitle:root_Yes];
+                    }else{
                     [self showAlertViewWithTitle:nil message:root_WO_yonghu_bucunzai cancelButtonTitle:root_Yes];
+                    }
+                    
+                    
                 }else if ([content1[@"msg"] integerValue] ==701) {
                     [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
                 }

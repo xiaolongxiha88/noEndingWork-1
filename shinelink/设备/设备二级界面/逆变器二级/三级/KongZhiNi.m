@@ -289,6 +289,8 @@
                 [self showAlertViewWithTitle:nil message:root_CNJ_canshu_buzai_fanwei cancelButtonTitle:root_Yes];
             }else if ([content1[@"msg"] integerValue] ==509) {
                 [self showAlertViewWithTitle:nil message:root_CNJ_shijian_budui cancelButtonTitle:root_Yes];
+            }else if ([content1[@"msg"] integerValue] ==701) {
+                [self showAlertViewWithTitle:nil message:root_meiyou_quanxian cancelButtonTitle:root_Yes];
             }
                 [self.navigationController popViewControllerAnimated:YES];
             }else{

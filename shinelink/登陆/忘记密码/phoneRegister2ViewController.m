@@ -7,6 +7,7 @@
 //
 
 #import "phoneRegister2ViewController.h"
+#import "loginViewController.h"
 
 @interface phoneRegister2ViewController ()
 @property (nonatomic, strong)  UITextField *textField;
@@ -64,7 +65,7 @@
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [goBut setTitle:root_finish forState:UIControlStateNormal];
-    [goBut addTarget:self action:@selector(registerFrist) forControlEvents:UIControlEventTouchUpInside];
+    [goBut addTarget:self action:@selector(PresentGo) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goBut];
     
 }
@@ -86,7 +87,7 @@
     [dic0 setObject:_PhoneNum forKey:@"phoneNum"];
       [dic0 setObject:_PhoneCheck forKey:@"validate"];
      [dic0 setObject:[_textField text] forKey:@"password"];
-  
+  [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:dic0 paramarsSite:@"/newForgetAPI.do?op=restartUserPassword" sucessBlock:^(id content) {
         [self hideProgressView];
         id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
@@ -95,6 +96,9 @@
             if ([jsonObj[@"result"] intValue]==1) {
            
                  [self showAlertViewWithTitle:root_xiugai_mima_chenggong message:nil cancelButtonTitle:root_Yes];
+                loginViewController *root=[[loginViewController alloc]init];
+                [self presentViewController:root animated:YES completion:nil];
+                
             }else{
                 
                 if ((jsonObj[@"msg"]==nil)||(jsonObj[@"msg"]==NULL)||([jsonObj[@"msg"] isEqual:@""])) {
@@ -128,7 +132,7 @@
     [self showProgressView];
 
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userName":_PhoneNum} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
-        
+         [self hideProgressView];
         NSLog(@"getUserServerUrl: %@", content);
         if (content) {
             if ([content[@"success"]intValue]==1) {

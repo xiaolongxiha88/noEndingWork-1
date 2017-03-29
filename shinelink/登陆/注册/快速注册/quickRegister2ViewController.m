@@ -165,9 +165,12 @@
 
 
 -(void)registerFrist{
+    
+    
+    
      [self showProgressView];
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"country":_getCountry} paramarsSite:@"/newLoginAPI.do?op=getServerUrl" sucessBlock:^(id content) {
-        
+        [self hideProgressView];
         NSLog(@"getServerUrl: %@", content);
         if (content) {
             if ([content[@"success"]intValue]==1) {
@@ -209,8 +212,30 @@
         [self showToastViewWithTitle:root_xuanze_yonghu_xieyi];
         return;
     }
+    
+    
+    NSString *UserNAME=[_textField text];
+    
+    for (int i=0; i<UserNAME.length; i++) {
+       NSString *temp = [UserNAME substringWithRange:NSMakeRange(i, 1)];
+        NSString*T2=@"0123456789";
+        
+        if (![T2 containsString:temp]) {
+             [self showToastViewWithTitle:root_shoujihao_geshi_cuowu];
+            return;
+        }
+        
+    }
+    
+    if (UserNAME.length!=11) {
+        [self showToastViewWithTitle:root_shuru_shiyiwei_shoujihao];
+        return;
+    }
+    
     [_dataDic setObject:[_textField text] forKey:@"regUserName"];
     [_dataDic setObject:[_textField2 text] forKey:@"regPassword"];
+    
+    
     if (_SnCode==nil) {
            [_dataDic setObject:@"" forKey:@"regDataLoggerNo"];
     }else{

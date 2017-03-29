@@ -583,6 +583,8 @@
 #define  root_wifi_shibai_xinxi_2    NSLocalizedString(@"wifi提示失败信息2", nil)
 #define  root_wifi_chongxin_peizhi    NSLocalizedString(@"wifi重新配置", nil)
 
+#define  root_yuan_mima_cuowu  NSLocalizedString(@"原密码错误", nil)
+
 #define  root_fuwuqi_cuowu_tishi    NSLocalizedString(@"2服务器错误提示", nil)
 #define  root_fuwuqi_cuowu_tishi_2    NSLocalizedString(@"4服务器错误提示2", nil)
 
@@ -641,5 +643,7 @@
 #define  root_PCS_from_dianwang  NSLocalizedString(@"53电网输入功率", nil)
 #define  root_PCS_fangdian_gonglv  NSLocalizedString(@"54放电功率", nil)
 #define  root_jinggong_yijianjianzhan_yonghu  NSLocalizedString(@"55仅供“一键建站”注册用户使用", nil)
+#define  root_shoujihao_geshi_cuowu  NSLocalizedString(@"56手机号格式错误", nil)
+#define  root_shuru_shiyiwei_shoujihao  NSLocalizedString(@"57输入11位手机号", nil)
 
 #endif /* languageNew_h */

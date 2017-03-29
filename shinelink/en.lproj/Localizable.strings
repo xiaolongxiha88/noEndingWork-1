@@ -621,3 +621,6 @@
 "53电网输入功率"="Power from grid";
 "54放电功率"="Discharge Power";
 "55仅供“一键建站”注册用户使用"="\"Via mobile phone\":Only for \"Quick registration\" registered users to use";
+"原密码错误"="Old password is wrong";
+"56手机号格式错误"="Malformed phone number";
+"57输入11位手机号"="Please enter 11 phone numbers";
