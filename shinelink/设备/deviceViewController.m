@@ -202,11 +202,11 @@
             _dirPic.image = IMAGE(@"设备页引导2.jpg");
         }else if (tapPicTime==2){
             _dirPic.image = IMAGE(@"设备页引导3.jpg");
-        }else if (tapPicTime==3){
-            _dirPic.image = IMAGE(@"设备页引导4.jpg");
-        }else if (tapPicTime==4){
-           _dirPic.image = IMAGE(@"pvDir_cn.jpg");
         }else if (tapPicTime==5){
+            _dirPic.image = IMAGE(@"设备页引导4.jpg");
+        }else if (tapPicTime==3){
+           _dirPic.image = IMAGE(@"pvDir_cn.jpg");
+        }else if (tapPicTime==4){
            _dirPic.image = IMAGE(@"spDir_cn.jpg");
         }else if (tapPicTime==6){
             [_dirPic removeFromSuperview];
@@ -216,11 +216,11 @@
             _dirPic.image = IMAGE(@"设备页引导2_en.jpg");
         }else if (tapPicTime==2){
             _dirPic.image = IMAGE(@"设备页引导3_en.jpg");
-        }else if (tapPicTime==3){
-            _dirPic.image = IMAGE(@"设备页引导4_en.jpg");
-        }else if (tapPicTime==4){
-           _dirPic.image = IMAGE(@"pvDir_en.jpg");
         }else if (tapPicTime==5){
+            _dirPic.image = IMAGE(@"设备页引导4_en.jpg");
+        }else if (tapPicTime==3){
+           _dirPic.image = IMAGE(@"pvDir_en.jpg");
+        }else if (tapPicTime==4){
              _dirPic.image = IMAGE(@"spDir_en.jpg");
         }else if (tapPicTime==6){
             [_dirPic removeFromSuperview];
