@@ -32,8 +32,18 @@
     self.title=@"一键注册";
     _dataDic=[NSMutableDictionary new];
     _userEnable=@"ok";
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
      [self initUI];
     [self getInfo];
+}
+
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    [_textField resignFirstResponder];
+    [_textField2 resignFirstResponder];
 }
 
 -(void)getInfo{

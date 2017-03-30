@@ -24,7 +24,16 @@
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]];
     
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
     [self initUI];
+}
+
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    [_textField resignFirstResponder];
+    [_textField2 resignFirstResponder];
 }
 
 -(void)initUI{
@@ -97,7 +106,7 @@
            
                  [self showAlertViewWithTitle:root_xiugai_mima_chenggong message:nil cancelButtonTitle:root_Yes];
                 loginViewController *root=[[loginViewController alloc]init];
-                [self presentViewController:root animated:YES completion:nil];
+                [self.navigationController pushViewController:root animated:YES];
                 
             }else{
                 

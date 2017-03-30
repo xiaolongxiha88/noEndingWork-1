@@ -1274,7 +1274,7 @@
         }
     }
     
-    float TIME=16;
+    float TIME=8;
     //路径一
     NSArray *startArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointtStartW2],nil];
     

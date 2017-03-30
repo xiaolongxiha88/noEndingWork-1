@@ -32,9 +32,21 @@
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]];
     
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
     [self getInfo];
 
 }
+
+
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    [_textField resignFirstResponder];
+    [_textField0 resignFirstResponder];
+     [_textField2 resignFirstResponder];
+}
+
 
 -(void)getInfo{
     _getPhone=[NSMutableString stringWithString:@"86"];
