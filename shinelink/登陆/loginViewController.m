@@ -732,6 +732,7 @@ NSLog(@"体验馆");
         NSArray *controllers=[NSArray arrayWithObjects:Vc1,Vc2,Vc3,Vc4,nil];
         _tabbar=[[UITabBarController alloc]init];
         _tabbar.viewControllers=controllers;
+       
         
 
         [self presentViewController:_tabbar animated:YES completion:nil];

@@ -22,7 +22,9 @@
 #import "addStationViewController.h"
 #import "PopoverView00.h"
  #import <objc/runtime.h>
-
+#import "findViewController.h"
+#import "newEnergyStorage.h"
+#import "meViewController.h"
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 #define  AnimationTime 5
@@ -77,6 +79,7 @@
  @property (nonatomic, strong) NSString*languageTypeValue;
  @property (nonatomic, strong) NSString*deviceHeadType;
 //@property (nonatomic, strong) UIImageView *animationView;
+@property (nonatomic, strong) UITabBarController *tabbar;
 
 @property (nonatomic, strong) NSString *pcsNetPlantID;
 @property (nonatomic, strong) NSString *pcsNetStorageSN;
@@ -1000,8 +1003,11 @@
 
 -(void)getPCSnet{
 
+    
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":_pcsNetPlantID,@"storageSn":_pcsNetStorageSN} paramarsSite:@"/newStorageAPI.do?op=getSystemStatusData" sucessBlock:^(id content) {
         [self hideProgressView];
+         [[NSUserDefaults standardUserDefaults] setObject:_pcsNetPlantID forKey:@"pcsNetPlantID"];
+         [[NSUserDefaults standardUserDefaults] setObject:_pcsNetStorageSN forKey:@"pcsNetStorageSN"];
         
         if (content) {
             //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
@@ -1200,6 +1206,8 @@
 }
 
 
+#pragma mark - 增加Head的Banner
+
 - (void)_createHeaderView {
     float headerViewH=200*HEIGHT_SIZE;
     if (!_headerView) {
@@ -1218,8 +1226,12 @@
     if([_deviceHeadType isEqualToString:@"1"]){
          animationNumber=0;
         [self getPCSnet];
+       
+          [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"isNewEnergy"];
         
     }else{
+                [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"isNewEnergy"];
+        
         [self getPvHead];
     }
     
@@ -2292,6 +2304,13 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
 
 
 
+-(void)changeTabbar{
+ 
+  [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"isNewEnergy"];
+
+}
+
+
 
 -(void)viewDidDisappear:(BOOL)animated{
     
@@ -2303,8 +2322,6 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         [_AdBackView removeFromSuperview];
         _AdBackView=nil;
     }
-    
-
 }
 
 

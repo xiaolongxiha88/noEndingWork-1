@@ -11,6 +11,7 @@
 #import "LZPageMainCell.h"
 #import "addServerViewController.h"
 #import "RKAlertView.h"
+#import "newEnergyStorage.h"
 
 @interface LZPageViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,LZPageContentViewDelegate>
 @property (nonatomic, assign) CGFloat pageBarHeight;
@@ -65,9 +66,22 @@ static NSString *mainCell = @"mainCellmainCell";
     _pageBarHeight = pageBarHeight;
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+
+
+}
+
 -(void)viewWillAppear:(BOOL)animated{
+    
     if ([_type isEqualToString:@"1"]) {
         self.title = root_energy_title;
+        NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+        NSString *isNew=[ud objectForKey:@"isNewEnergy"];
+        if ([isNew isEqualToString:@"Y"]) {
+            newEnergyStorage *findVc=[[newEnergyStorage alloc]init];
+            [self.navigationController pushViewController:findVc animated:YES];
+        }
+        
     }else{
         self.title = root_ME_kefu;
         
@@ -77,11 +91,7 @@ static NSString *mainCell = @"mainCellmainCell";
         NSString *Username=[ud objectForKey:@"userName"];
         
         if ([serviceBool isEqualToString:@"1"]||[Username isEqualToString:Demo_Name]) {
-//            UIButton *addButton=[[UIButton alloc]initWithFrame:CGRectMake(240*NOW_SIZE, 0, 15*HEIGHT_SIZE, 15*HEIGHT_SIZE)];
-//            [addButton setBackgroundImage:[UIImage imageNamed:@"add@2x.png"] forState:UIControlStateNormal];
-//            [addButton addTarget:self action:@selector(doAdd) forControlEvents:UIControlEventTouchUpInside];
-//            self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:addButton];
-            
+
             UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_tianjia_1 style:UIBarButtonItemStylePlain target:self action:@selector(doAdd)];
             rightItem.tag=10;
             self.navigationItem.rightBarButtonItem=rightItem;

@@ -19,6 +19,7 @@
 #import "firstToolViewController.h"
 #import "loginViewController.h"
 #import "CoreDataManager.h"
+#import "newEnergyStorage.h"
 
 //DEMO区域
 #import "GifNewViewController.h"
@@ -107,10 +108,10 @@
 
 -(void)registerUser{
 
-    BOOL isDemo=NO;
+    BOOL isDemo=YES;
     
     if (isDemo) {
-        GifNewViewController *go=[[GifNewViewController alloc]init];
+        newEnergyStorage *go=[[newEnergyStorage alloc]init];
         [self.navigationController pushViewController:go animated:YES];
     }else{
         _Alert1 = [[UIAlertView alloc] initWithTitle:root_tuichu_zhanghu message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK,nil];
