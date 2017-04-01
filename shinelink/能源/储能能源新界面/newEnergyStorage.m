@@ -7,6 +7,9 @@
 //
 
 #import "newEnergyStorage.h"
+#import "JHChart.h"
+#import "JHLineChart.h"
+
 
 #define ScreenProW  HEIGHT_SIZE/2.38
 #define ScreenProH  NOW_SIZE/2.34
@@ -27,7 +30,7 @@
 @property (nonatomic, strong) NSString *currentDay;
 @property (nonatomic, strong) UIDatePicker *dayPicker;
 @property (nonatomic, strong) UIToolbar *toolBar;
-
+@property (nonatomic, strong)JHLineChart *lineChart;
 
 @property (nonatomic, strong) UIView *uiview1;
 @property (nonatomic, strong) UIView *uiview2;
@@ -50,7 +53,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [self initUI];
     
     [self getNetOne];
-   // [self getNetTwo];
+   
   //  [self getNetThree];
     
     [self initUITwo];
@@ -201,10 +204,130 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     self.datePickerButton.titleLabel.font = [UIFont boldSystemFontOfSize:28*ScreenProH];
     [self.datePickerButton addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
     [V2 addSubview:self.datePickerButton];
+    
+      [self getNetTwo:_currentDay];
 }
 
 
+-(void)initUILineChart{
+    
+    NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch|NSNumericSearch|NSWidthInsensitiveSearch|NSForcedOrderingSearch;
+    NSComparator sort = ^(NSString *obj1, NSString *obj2){
+        NSRange range = NSMakeRange(0, obj1.length);
+        return [obj1 compare:obj2 options:comparisonOptions range:range];
+    };
+     NSMutableArray *xArray = [NSMutableArray arrayWithArray:[_dataTwoDic.allKeys sortedArrayUsingComparator:sort]];
+   NSMutableArray *yArray = [NSMutableArray array];
+    for (NSString *key in xArray) {
+        [yArray addObject:_dataTwoDic[key]];
+    }
+    
+    
+    NSMutableArray*Y1=[NSMutableArray array];
+    NSMutableArray*Y2=[NSMutableArray array];
+    NSMutableArray*Y3=[NSMutableArray array];
+    NSMutableArray*Y4=[NSMutableArray array];
+   
+    if (yArray.count>0) {
+      
+        for (int i=0; i<yArray.count; i++) {
+            if ([[yArray[i] objectForKey:@"pacToUser"] floatValue]>=0) {
+                  [Y1 addObject:[yArray[i] objectForKey:@"pacToUser"]];
+            }else{
+                [Y1 addObject:@"0"];
+            }
+            if ([[yArray[i] objectForKey:@"ppv"] floatValue]>=0) {
+                [Y2 addObject:[yArray[i] objectForKey:@"ppv"]];
+            }else{
+                [Y2 addObject:@"0"];
+            }
+            if ([[yArray[i] objectForKey:@"sysOut"] floatValue]>=0) {
+                [Y3 addObject:[yArray[i] objectForKey:@"sysOut"]];
+            }else{
+                [Y3 addObject:@"0"];
+            }
+            if ([[yArray[i] objectForKey:@"userLoad"] floatValue]>=0) {
+                [Y4 addObject:[yArray[i] objectForKey:@"userLoad"]];
+            }else{
+                [Y4 addObject:@"0"];
+            }
+          
+        }
+    }
+    
+    NSMutableArray *tempXArr = [NSMutableArray array];
+    if (xArray.count > 0) {
+        NSString *flag = [[NSMutableString stringWithString:xArray[0]] substringWithRange:NSMakeRange(1, 1)];
+        if ([flag isEqualToString:@":"]) {
+            //从偶数统计
+            for (int i = 1; i <= xArray.count; i++) {
+                if (i % 2 == 0) {
+                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
+                //    NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
+                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
+                } else {
+                  //  NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
+                    [tempXArr addObject:@""];
+                }
+            }
+        } else {
+            //从奇数统计
+            for (int i = 1; i <= xArray.count; i++) {
+                if (i % 2 != 0) {
+                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
+                    //NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
+                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
+                } else {
+           //         NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
+                    [tempXArr addObject:@""];
+                }
+            }
+        }
+    }
+    
+  
+//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//    for (NSNumber *number in tempXArr) {
+//        [dict setObject:number forKey:number];
+//    }
+    NSSet *set = [NSSet setWithArray:tempXArr];
+    tempXArr=[NSMutableArray arrayWithArray:[set allObjects]];
+ 
+    
+    if (_lineChart) {
+        [_lineChart removeFromSuperview];
+        _lineChart=nil;
+    }
+    
+    _lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 620*ScreenProH, 730*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
+    _lineChart.xlableNameArray=[NSArray arrayWithArray:tempXArr];
+      _lineChart.xLineDataArr =xArray;
+   _lineChart.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 10*ScreenProW);
+    
+    _lineChart.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
+    
+    _lineChart.valueArr = @[Y1,Y2,Y3,Y4];
+    _lineChart.showYLevelLine = YES;
+    _lineChart.showYLine = NO;
+    _lineChart.showValueLeadingLine = YES;
+    _lineChart.xDescTextFontSize=20*ScreenProH;
+   _lineChart.yDescTextFontSize=20*ScreenProH;
+    _lineChart.lineWidth=2*ScreenProH;
+    _lineChart.backgroundColor = [UIColor clearColor];
+    _lineChart.hasPoint=NO;
+ //   lineChart.showValueLeadingLine=YES;
+    _lineChart.valueLineColorArr =@[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(14, 222, 228, 0.5)];
+    _lineChart.pointColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
+    _lineChart.xAndYLineColor = COLOR(255, 255, 255, 0.9);
+    _lineChart.xAndYNumberColor = COLOR(255, 255, 255, 0.8);
+    _lineChart.positionLineColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
+    _lineChart.contentFill = NO;
+    _lineChart.pathCurve = YES;
+    _lineChart.contentFillColorArr = @[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(14, 222, 228, 0.5)];
+    [_scrollView addSubview:_lineChart];
+    [_lineChart showAnimation];
 
+}
 
 
 
@@ -256,8 +379,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 if (jsonObj[@"obj"]==nil || jsonObj[@"obj"]==NULL||([jsonObj[@"obj"] isEqual:@""] )) {
                 }else{
                     _dataTwoDic=[NSDictionary dictionaryWithDictionary:jsonObj[@"obj"][@"chartData"]];
+                    
                 }
                 
+                [self initUILineChart];
             }
             
             

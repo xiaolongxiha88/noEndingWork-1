@@ -535,6 +535,8 @@
 		33EA4A031E8E4EE20044A01A /* sp_e.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA4A021E8E4EE20044A01A /* sp_e.png */; };
 		33EA4A061E8F49D90044A01A /* date_left_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA4A041E8F49D90044A01A /* date_left_icon.png */; };
 		33EA4A071E8F49D90044A01A /* date_right_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA4A051E8F49D90044A01A /* date_right_icon.png */; };
+		33EA4A0B1E8F79050044A01A /* JHLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EA4A0A1E8F79050044A01A /* JHLineChart.m */; };
+		33EA4A0E1E8F790C0044A01A /* JHChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EA4A0D1E8F790C0044A01A /* JHChart.m */; };
 		33ECDCF31CDC9D3400E20AF8 /* deviceCore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33ECDCF11CDC9D3400E20AF8 /* deviceCore.xcdatamodeld */; };
 		33EFB6011C979B5F003F336F /* StationCellectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB5F81C979B5F003F336F /* StationCellectViewController.m */; };
 		33EFB6021C979B5F003F336F /* StationCellectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB5FA1C979B5F003F336F /* StationCellectTableViewCell.m */; };
@@ -1455,6 +1457,10 @@
 		33EA4A021E8E4EE20044A01A /* sp_e.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sp_e.png; sourceTree = "<group>"; };
 		33EA4A041E8F49D90044A01A /* date_left_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_left_icon.png; sourceTree = "<group>"; };
 		33EA4A051E8F49D90044A01A /* date_right_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_right_icon.png; sourceTree = "<group>"; };
+		33EA4A091E8F79050044A01A /* JHLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHLineChart.h; sourceTree = "<group>"; };
+		33EA4A0A1E8F79050044A01A /* JHLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHLineChart.m; sourceTree = "<group>"; };
+		33EA4A0C1E8F790C0044A01A /* JHChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHChart.h; sourceTree = "<group>"; };
+		33EA4A0D1E8F790C0044A01A /* JHChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHChart.m; sourceTree = "<group>"; };
 		33ECDCF21CDC9D3400E20AF8 /* deviceCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = deviceCore.xcdatamodel; sourceTree = "<group>"; };
 		33EFB5F71C979B5F003F336F /* StationCellectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationCellectViewController.h; sourceTree = "<group>"; };
 		33EFB5F81C979B5F003F336F /* StationCellectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationCellectViewController.m; sourceTree = "<group>"; };
@@ -3433,10 +3439,22 @@
 		33EA49F21E8DE9AE0044A01A /* 储能能源新界面 */ = {
 			isa = PBXGroup;
 			children = (
+				33EA4A081E8F78F50044A01A /* 储能界面第三方 */,
 				33EA49F31E8DEA0B0044A01A /* newEnergyStorage.h */,
 				33EA49F41E8DEA0B0044A01A /* newEnergyStorage.m */,
 			);
 			path = "储能能源新界面";
+			sourceTree = "<group>";
+		};
+		33EA4A081E8F78F50044A01A /* 储能界面第三方 */ = {
+			isa = PBXGroup;
+			children = (
+				33EA4A091E8F79050044A01A /* JHLineChart.h */,
+				33EA4A0A1E8F79050044A01A /* JHLineChart.m */,
+				33EA4A0C1E8F790C0044A01A /* JHChart.h */,
+				33EA4A0D1E8F790C0044A01A /* JHChart.m */,
+			);
+			path = "储能界面第三方";
 			sourceTree = "<group>";
 		};
 		33EFB5F61C979B54003F336F /* 采集器 */ = {
@@ -4082,6 +4100,7 @@
 				335317441CA2423D003F106D /* GetDevice.m in Sources */,
 				3343F3C71C80403C009F69BC /* AFURLSessionManager.m in Sources */,
 				335456BC1C852ED900275478 /* TempViewController.m in Sources */,
+				33EA4A0B1E8F79050044A01A /* JHLineChart.m in Sources */,
 				334E9BF21CAD263700C8271F /* parameterPV.m in Sources */,
 				3319E08D1D5AFB39006623A9 /* LWLoadingView.m in Sources */,
 				3367CB501C86806700EF460C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
@@ -4174,6 +4193,7 @@
 				3343F3DF1C80405D009F69BC /* UIProgressView+AFNetworking.m in Sources */,
 				33ABC2A51DC2E619003B92AC /* extensionTableViewCell.m in Sources */,
 				334ED7011C9028BB0095FFBC /* secondViewController.m in Sources */,
+				33EA4A0E1E8F790C0044A01A /* JHChart.m in Sources */,
 				335D69AD1D77BA4D00894D90 /* HcdAudioPlayer.m in Sources */,
 				338A623D1E71567A000E7CE4 /* PopoverAction.m in Sources */,
 				334FF0911CF53C7C001E6716 /* GCDAsyncSocket.m in Sources */,
