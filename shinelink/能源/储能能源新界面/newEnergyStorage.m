@@ -20,6 +20,14 @@
 @property (nonatomic, strong) NSDictionary *dataThreeDic;
 @property (nonatomic, strong) NSDictionary *dataFourDic;
 @property (nonatomic, strong) NSDictionary *dataFiveDic;
+@property (nonatomic, strong) UIButton *lastButton;
+@property (nonatomic, strong) UIButton *nextButton;
+@property (nonatomic, strong) UIButton *datePickerButton;
+@property (nonatomic, strong) NSDateFormatter *dayFormatter;
+@property (nonatomic, strong) NSString *currentDay;
+@property (nonatomic, strong) UIDatePicker *dayPicker;
+@property (nonatomic, strong) UIToolbar *toolBar;
+
 
 @property (nonatomic, strong) UIView *uiview1;
 @property (nonatomic, strong) UIView *uiview2;
@@ -27,6 +35,9 @@
 @property (nonatomic, strong) UIView *uiview4;
 @property (nonatomic, strong) UIView *uiview5;
 @end
+
+
+static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 @implementation newEnergyStorage
 
@@ -154,7 +165,46 @@
     VL1.text=@"Energy Consum";
     VL1.textColor =[UIColor whiteColor];
     [V1 addSubview:VL1];
+    
+    UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(225*ScreenProW, 550*ScreenProH, 300*ScreenProW, ScreenProH*60)];
+    V2.layer.borderWidth=1;
+    V2.layer.cornerRadius=ScreenProH*60/2.5;
+    V2.layer.borderColor=COLOR(255, 255, 255, 0.7).CGColor;
+    V2.userInteractionEnabled = YES;
+    [_scrollView addSubview:V2];
+    
+    self.lastButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.lastButton.frame = CGRectMake(20*ScreenProW, 12.5*ScreenProH, 25*ScreenProH, 35*ScreenProH);
+    [self.lastButton setImage:IMAGE(@"date_left_icon.png") forState:UIControlStateNormal];
+    //self.lastButton.imageEdgeInsets = UIEdgeInsetsMake(7*NOW_SIZE, 7*HEIGHT_SIZE, 7*NOW_SIZE, 7*HEIGHT_SIZE);
+    self.lastButton.tag = 1004;
+    [self.lastButton addTarget:self action:@selector(lastDate:) forControlEvents:UIControlEventTouchUpInside];
+    [V2 addSubview:self.lastButton];
+    
+    self.nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.nextButton.frame = CGRectMake(CGRectGetWidth(V2.frame) - 20*ScreenProW-25*ScreenProH, 12.5*ScreenProH, 25*ScreenProH, 35*ScreenProH);
+    [self.nextButton setImage:IMAGE(@"date_right_icon.png") forState:UIControlStateNormal];
+    //self.nextButton.imageEdgeInsets = UIEdgeInsetsMake(7*NOW_SIZE, 7*HEIGHT_SIZE, 7*NOW_SIZE, 7*HEIGHT_SIZE);
+    self.nextButton.tag = 1005;
+    [self.nextButton addTarget:self action:@selector(nextDate:) forControlEvents:UIControlEventTouchUpInside];
+    [V2 addSubview:self.nextButton];
+    
+    self.dayFormatter = [[NSDateFormatter alloc] init];
+    [self.dayFormatter setDateFormat:@"yyyy-MM-dd"];
+    
+    self.datePickerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.datePickerButton.frame = CGRectMake(20*ScreenProW+25*ScreenProH, 0, CGRectGetWidth(V2.frame) -( 20*ScreenProW+25*ScreenProH)*2, 60*ScreenProH);
+    self.currentDay = [_dayFormatter stringFromDate:[NSDate date]];
+    [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
+    [self.datePickerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.datePickerButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.datePickerButton.titleLabel.font = [UIFont boldSystemFontOfSize:28*ScreenProH];
+    [self.datePickerButton addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
+    [V2 addSubview:self.datePickerButton];
 }
+
+
+
 
 
 
@@ -189,9 +239,9 @@
 }
 
 
--(void)getNetTwo{
+-(void)getNetTwo:(NSString*)time{
     
-    NSString *time=@"2017-03-28";
+   // NSString *time=@"2017-03-28";
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":_pcsNetPlantID,@"storageSn":_pcsNetStorageSN,@"date":time,@"type":@"1"} paramarsSite:@"/newStorageAPI.do?op=getEnergyProdAndConsData" sucessBlock:^(id content) {
         [self hideProgressView];
         _dataTwoDic=[NSDictionary new];
@@ -278,6 +328,104 @@
     }
     
 }
+
+- (void)pickDate {
+    self.lastButton.enabled = NO;
+    self.nextButton.enabled = NO;
+    
+    
+    //选择日
+    NSDate *currentDayDate = [self.dayFormatter dateFromString:self.currentDay];
+    
+    if (!self.dayPicker) {
+        self.dayPicker = [[UIDatePicker alloc] init];
+        self.dayPicker.backgroundColor = [UIColor whiteColor];
+        self.dayPicker.datePickerMode = UIDatePickerModeDate;
+        self.dayPicker.date = currentDayDate;
+        self.dayPicker.frame = CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+        [self.view addSubview:self.dayPicker];
+    } else {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.dayPicker.date = currentDayDate;
+            self.dayPicker.alpha = 1;
+            self.dayPicker.frame = CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+            [self.view addSubview:self.dayPicker];
+        }];
+    }
+    
+    self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE + 216*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 30*HEIGHT_SIZE)];
+    self.toolBar.barStyle = UIBarStyleDefault;
+    self.toolBar.barTintColor = MainColor;
+    [self.view addSubview:self.toolBar];
+    UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:root_finish style:UIBarButtonItemStyleDone target:self action:@selector(completeSelectDate:)];
+    [doneButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:14*HEIGHT_SIZE],NSFontAttributeName, nil] forState:UIControlStateNormal];
+    doneButton.tintColor = [UIColor whiteColor];
+    self.toolBar.items = @[spaceButton, doneButton];
+    
+}
+
+
+- (void)completeSelectDate:(UIToolbar *)toolBar {
+    self.lastButton.enabled = YES;
+    self.nextButton.enabled = YES;
+    
+    if (self.dayPicker) {
+        self.currentDay = [self.dayFormatter stringFromDate:self.dayPicker.date];
+        [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
+        [self getNetTwo:_currentDay];
+        [UIView animateWithDuration:0.3f animations:^{
+            self.dayPicker.alpha = 0;
+            self.toolBar.alpha = 0;
+            self.dayPicker.frame = CGRectMake(0, (-216 - 64 - 70-190)*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+            self.toolBar.frame = CGRectMake(0,( -216 - 64 - 70-190)*HEIGHT_SIZE - 44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+        } completion:^(BOOL finished) {
+            [self.dayPicker removeFromSuperview];
+            [self.toolBar removeFromSuperview];
+        }];
+        
+    }
+    
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (self.dayPicker) {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.dayPicker.alpha = 0;
+            self.toolBar.alpha = 0;
+            self.dayPicker.frame = CGRectMake(0, (-216 - 64 - 70-190)*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+            self.toolBar.frame = CGRectMake(0, (-216 - 64 - 70-190)*HEIGHT_SIZE - 44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+        } completion:^(BOOL finished) {
+            [self.dayPicker removeFromSuperview];
+            [self.toolBar removeFromSuperview];
+            self.lastButton.enabled = YES;
+            self.nextButton.enabled = YES;
+        }];
+    }
+}
+
+
+- (void)lastDate:(UIButton *)sender {
+    
+    NSDate *currentDayDate = [self.dayFormatter dateFromString:self.currentDay];
+    NSDate *yesterday = [currentDayDate dateByAddingTimeInterval: -secondsPerDay];
+    self.currentDay = [self.dayFormatter stringFromDate:yesterday];
+    [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
+    [self getNetTwo:_currentDay];
+}
+
+- (void)nextDate:(UIButton *)sender {
+    
+    NSDate *currentDayDate = [self.dayFormatter dateFromString:self.currentDay];
+    NSDate *tomorrow = [currentDayDate dateByAddingTimeInterval: secondsPerDay];
+    self.currentDay = [self.dayFormatter stringFromDate:tomorrow];
+    [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
+    
+    [self getNetTwo:_currentDay];
+}
+
+
+
 
 -(void)viewDidDisappear:(BOOL)animated{
 
