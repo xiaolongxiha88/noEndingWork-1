@@ -9,7 +9,7 @@
 #import "newEnergyStorage.h"
 #import "JHChart.h"
 #import "JHLineChart.h"
-
+#import "CircleView1.h"
 
 #define ScreenProW  HEIGHT_SIZE/2.38
 #define ScreenProH  NOW_SIZE/2.34
@@ -23,6 +23,8 @@
 @property (nonatomic, strong) NSDictionary *dataThreeDic;
 @property (nonatomic, strong) NSDictionary *dataFourDic;
 @property (nonatomic, strong) NSDictionary *dataFiveDic;
+@property (nonatomic, strong) NSDictionary *dataTwoNetAllDic;
+
 @property (nonatomic, strong) UIButton *lastButton;
 @property (nonatomic, strong) UIButton *nextButton;
 @property (nonatomic, strong) UIButton *datePickerButton;
@@ -57,6 +59,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
   //  [self getNetThree];
     
     [self initUITwo];
+    
+        [self getNetThree];
 }
 
 
@@ -67,7 +71,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [self.view addSubview:_scrollView];
     _scrollView.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height*2);
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.colors = @[(__bridge id)COLOR(7, 149, 239, 1).CGColor, (__bridge id)COLOR(0, 219, 216, 1).CGColor];
+    gradientLayer.colors = @[(__bridge id)COLOR(7, 149, 239, 1).CGColor, (__bridge id)COLOR(2, 201, 222, 1).CGColor];
     gradientLayer.locations = nil;
     gradientLayer.startPoint = CGPointMake(0, 0);
     gradientLayer.endPoint = CGPointMake(1, 1);
@@ -100,7 +104,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     NSString *N1=@"Unit"; NSString *N2=@"Today"; NSString *N3=@"Total";
     NSString *N=[NSString stringWithFormat:@"%@:kWh  %@/%@",N1,N2,N3];
     VL2.text=N;
-    VL2.textColor =COLOR(186, 216, 244, 0.8);
+    VL2.textColor =COLOR(186, 216, 244, 1);
     [V1 addSubview:VL2];
 
     _uiview1=[[UIView alloc]initWithFrame:CGRectMake(0, 205*ScreenProH, SCREEN_Width, ScreenProH*310)];
@@ -206,7 +210,64 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [V2 addSubview:self.datePickerButton];
     
       [self getNetTwo:_currentDay];
+    
+
 }
+
+-(void)getUITwoLable{
+
+    NSArray *colorArray=@[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(14, 222, 228, 0.5)];
+    NSArray *nameArray=@[@"光伏产出",@"系统产出",@"用户负载",@"耗电"];
+    
+    for (int i=0; i<4; i++) {
+        UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(5*ScreenProW+185*ScreenProW*i, 1160*ScreenProH, 180*ScreenProW, ScreenProH*55)];
+        V1.userInteractionEnabled = YES;
+        [_scrollView addSubview:V1];
+        
+       UIButton *button1= [UIButton buttonWithType:UIButtonTypeCustom];
+        button1.frame= CGRectMake(40*ScreenProW, 0*ScreenProH, 100*ScreenProW, ScreenProH*20);
+        button1.backgroundColor=colorArray[i];
+        [V1 addSubview:button1];
+       // [button1 addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
+
+        UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 25*ScreenProH, 180*ScreenProW, ScreenProH*30)];
+        VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
+        VL1.textAlignment = NSTextAlignmentCenter;
+        VL1.text=nameArray[i];
+        VL1.textColor =COLOR(255, 255, 255, 0.8);
+        [V1 addSubview:VL1];
+    }
+  
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 1245*ScreenProH, 375*ScreenProW, ScreenProH*40)];
+    VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
+    VL2.textAlignment = NSTextAlignmentCenter;
+    NSString *V2N1=@"光伏产出";
+    NSString *V2N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"epvToday"] floatValue]];
+    NSString *V2LableName=[NSString stringWithFormat:@"%@:%@",V2N1,V2N2];
+    VL2.text=V2LableName;
+    VL2.textColor =[UIColor whiteColor];
+    [_scrollView addSubview:VL2];
+    
+    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(375*ScreenProW, 1245*ScreenProH, 375*ScreenProW, ScreenProH*40)];
+    VL3.font=[UIFont systemFontOfSize:28*ScreenProH];
+    VL3.textAlignment = NSTextAlignmentCenter;
+    NSString *V3N1=@"总电量"; NSString *V3N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"useEnergyToday"] floatValue]];
+    NSString *V3LableName=[NSString stringWithFormat:@"%@:%@",V3N1,V3N2];
+    VL3.text=V3LableName;
+    VL3.textColor =[UIColor whiteColor];
+    [_scrollView addSubview:VL3];
+    
+    CircleView1 *circleView1= [[CircleView1 alloc]initWithFrame:CGRectMake(0*ScreenProW, 1295*ScreenProH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"1" andAllDic:_dataTwoNetAllDic];
+  //  circleView1.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
+     [_scrollView addSubview:circleView1];
+    
+    CircleView1 *circleView2= [[CircleView1 alloc]initWithFrame:CGRectMake(375*ScreenProW, 1295*ScreenProH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"2" andAllDic:_dataTwoNetAllDic];
+   //  circleView2.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
+    [_scrollView addSubview:circleView2];
+    
+}
+
+
 
 
 -(void)initUILineChart{
@@ -368,6 +429,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":_pcsNetPlantID,@"storageSn":_pcsNetStorageSN,@"date":time,@"type":@"1"} paramarsSite:@"/newStorageAPI.do?op=getEnergyProdAndConsData" sucessBlock:^(id content) {
         [self hideProgressView];
         _dataTwoDic=[NSDictionary new];
+        _dataTwoNetAllDic=[NSDictionary new];
         if (content) {
             //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
             id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
@@ -379,8 +441,12 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 if (jsonObj[@"obj"]==nil || jsonObj[@"obj"]==NULL||([jsonObj[@"obj"] isEqual:@""] )) {
                 }else{
                     _dataTwoDic=[NSDictionary dictionaryWithDictionary:jsonObj[@"obj"][@"chartData"]];
+                    _dataTwoNetAllDic=[NSDictionary dictionaryWithDictionary:jsonObj[@"obj"]];
+                    
+                 [self getUITwoLable];
                     
                 }
+                
                 
                 [self initUILineChart];
             }
@@ -395,8 +461,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 }
 
 -(void)getNetThree{
-    NSString *time=@"2017-03-28";
-    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":_pcsNetPlantID,@"storageSn":_pcsNetStorageSN,@"date":time} paramarsSite:@"/newStorageAPI.do?op=getStorageEnergyData" sucessBlock:^(id content) {
+   // NSString *time=@"2017-03-28";
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":_pcsNetPlantID,@"storageSn":_pcsNetStorageSN,@"date":_currentDay} paramarsSite:@"/newStorageAPI.do?op=getStorageEnergyData" sucessBlock:^(id content) {
         [self hideProgressView];
         _dataFourDic=[NSDictionary new];
           _dataFiveDic=[NSDictionary new];

@@ -366,6 +366,9 @@
 		33793D141CE583AD000D0F9E /* storage4.png in Resources */ = {isa = PBXBuildFile; fileRef = 33793D131CE583AD000D0F9E /* storage4.png */; };
 		33793D161CE583E4000D0F9E /* solar4.png in Resources */ = {isa = PBXBuildFile; fileRef = 33793D151CE583E4000D0F9E /* solar4.png */; };
 		337960771DB0D065009AC610 /* massage_en2.png in Resources */ = {isa = PBXBuildFile; fileRef = 337960761DB0D065009AC610 /* massage_en2.png */; };
+		3379E4E81E94BE37000A4198 /* CircleView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379E4E71E94BE37000A4198 /* CircleView1.m */; };
+		3379E4EB1E94BE40000A4198 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379E4EA1E94BE40000A4198 /* UIColor+Hex.m */; };
+		3379E4ED1E94BE54000A4198 /* CircleMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379E4EC1E94BE54000A4198 /* CircleMapView.m */; };
 		337C30541CCDAF3C002B99B7 /* protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C30531CCDAF3C002B99B7 /* protocol.m */; };
 		337C44AD1E78CC9100135304 /* ledblue.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AA1E78CC9100135304 /* ledblue.gif */; };
 		337C44AE1E78CC9100135304 /* ledgreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AB1E78CC9100135304 /* ledgreen.gif */; };
@@ -1207,6 +1210,12 @@
 		33793D131CE583AD000D0F9E /* storage4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = storage4.png; sourceTree = "<group>"; };
 		33793D151CE583E4000D0F9E /* solar4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = solar4.png; sourceTree = "<group>"; };
 		337960761DB0D065009AC610 /* massage_en2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = massage_en2.png; sourceTree = "<group>"; };
+		3379E4E51E94BE37000A4198 /* CircleMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleMapView.h; sourceTree = "<group>"; };
+		3379E4E61E94BE37000A4198 /* CircleView1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleView1.h; sourceTree = "<group>"; };
+		3379E4E71E94BE37000A4198 /* CircleView1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleView1.m; sourceTree = "<group>"; };
+		3379E4E91E94BE40000A4198 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		3379E4EA1E94BE40000A4198 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		3379E4EC1E94BE54000A4198 /* CircleMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleMapView.m; sourceTree = "<group>"; };
 		337C30521CCDAF3C002B99B7 /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
 		337C30531CCDAF3C002B99B7 /* protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = protocol.m; sourceTree = "<group>"; };
 		337C44AA1E78CC9100135304 /* ledblue.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ledblue.gif; sourceTree = "<group>"; };
@@ -2766,6 +2775,19 @@
 			path = RKAlertView;
 			sourceTree = "<group>";
 		};
+		3379E4E41E94BE25000A4198 /* 能源饼图 */ = {
+			isa = PBXGroup;
+			children = (
+				3379E4E51E94BE37000A4198 /* CircleMapView.h */,
+				3379E4EC1E94BE54000A4198 /* CircleMapView.m */,
+				3379E4E61E94BE37000A4198 /* CircleView1.h */,
+				3379E4E71E94BE37000A4198 /* CircleView1.m */,
+				3379E4E91E94BE40000A4198 /* UIColor+Hex.h */,
+				3379E4EA1E94BE40000A4198 /* UIColor+Hex.m */,
+			);
+			path = "能源饼图";
+			sourceTree = "<group>";
+		};
 		337C30511CCDAEDA002B99B7 /* pic */ = {
 			isa = PBXGroup;
 			children = (
@@ -3439,6 +3461,7 @@
 		33EA49F21E8DE9AE0044A01A /* 储能能源新界面 */ = {
 			isa = PBXGroup;
 			children = (
+				3379E4E41E94BE25000A4198 /* 能源饼图 */,
 				33EA4A081E8F78F50044A01A /* 储能界面第三方 */,
 				33EA49F31E8DEA0B0044A01A /* newEnergyStorage.h */,
 				33EA49F41E8DEA0B0044A01A /* newEnergyStorage.m */,
@@ -4130,6 +4153,7 @@
 				3326926B1D794AB00058C5B7 /* AvCell.m in Sources */,
 				3383EFA11C9F8A6F0075E834 /* MJRefreshLegendFooter.m in Sources */,
 				3389649C1E5E767700A7B1AE /* forgetOneViewController.m in Sources */,
+				3379E4EB1E94BE40000A4198 /* UIColor+Hex.m in Sources */,
 				334B8F541C914A6D00798A69 /* PNPieChartDataItem.m in Sources */,
 				334B8F4D1C914A6D00798A69 /* PNCircleChart.m in Sources */,
 				336D3FFE1D6FE76100ECFA34 /* AnotherSearchViewController.m in Sources */,
@@ -4141,6 +4165,7 @@
 				3381ED011CBCD85700DCF0D2 /* myListSecondTableViewCell.m in Sources */,
 				335D69B51D77BA4D00894D90 /* NSString+HCD.m in Sources */,
 				3343F3C61C80403C009F69BC /* AFURLResponseSerialization.m in Sources */,
+				3379E4ED1E94BE54000A4198 /* CircleMapView.m in Sources */,
 				33AF3D211D8E67210007D6C2 /* NSTimer+EasyTimeline.m in Sources */,
 				337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */,
 				3377156A1D8E6CCC002EEEDF /* AddDeviceViewController.mm in Sources */,
@@ -4238,6 +4263,7 @@
 				334E9BE41CACB78900C8271F /* ControlCNJ.m in Sources */,
 				334B8F4F1C914A6D00798A69 /* PNGenericChart.m in Sources */,
 				338418E21DC840AB00D679CA /* GifConfigViewController.m in Sources */,
+				3379E4E81E94BE37000A4198 /* CircleView1.m in Sources */,
 				336F1A161D88E46900CD4C2B /* SDImageCache.m in Sources */,
 				334FF0C11CF53C7C001E6716 /* UINavigationController+CustomNavigation.m in Sources */,
 				33692BF91C92952000698375 /* engrgySencondViewController.m in Sources */,
