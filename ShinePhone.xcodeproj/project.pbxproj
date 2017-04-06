@@ -369,6 +369,9 @@
 		3379E4E81E94BE37000A4198 /* CircleView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379E4E71E94BE37000A4198 /* CircleView1.m */; };
 		3379E4EB1E94BE40000A4198 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379E4EA1E94BE40000A4198 /* UIColor+Hex.m */; };
 		3379E4ED1E94BE54000A4198 /* CircleMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379E4EC1E94BE54000A4198 /* CircleMapView.m */; };
+		3379E4EF1E95CE90000A4198 /* gridSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 3379E4EE1E95CE90000A4198 /* gridSmall.png */; };
+		3379E4F11E95CEB4000A4198 /* spSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 3379E4F01E95CEB4000A4198 /* spSmall.png */; };
+		3379E4F31E95CF2B000A4198 /* homeLoadSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 3379E4F21E95CF2B000A4198 /* homeLoadSmall.png */; };
 		337C30541CCDAF3C002B99B7 /* protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C30531CCDAF3C002B99B7 /* protocol.m */; };
 		337C44AD1E78CC9100135304 /* ledblue.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AA1E78CC9100135304 /* ledblue.gif */; };
 		337C44AE1E78CC9100135304 /* ledgreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AB1E78CC9100135304 /* ledgreen.gif */; };
@@ -533,9 +536,6 @@
 		33EA49FA1E8E4E5E0044A01A /* energyinfo_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA49F81E8E4E5E0044A01A /* energyinfo_icon.png */; };
 		33EA49FB1E8E4E5E0044A01A /* energyuse_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA49F91E8E4E5E0044A01A /* energyuse_icon.png */; };
 		33EA49FD1E8E4E640044A01A /* sp_icon_e.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA49FC1E8E4E640044A01A /* sp_icon_e.png */; };
-		33EA4A001E8E4EB50044A01A /* grid_e.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA49FE1E8E4EB50044A01A /* grid_e.png */; };
-		33EA4A011E8E4EB50044A01A /* inverter_e.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA49FF1E8E4EB50044A01A /* inverter_e.png */; };
-		33EA4A031E8E4EE20044A01A /* sp_e.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA4A021E8E4EE20044A01A /* sp_e.png */; };
 		33EA4A061E8F49D90044A01A /* date_left_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA4A041E8F49D90044A01A /* date_left_icon.png */; };
 		33EA4A071E8F49D90044A01A /* date_right_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA4A051E8F49D90044A01A /* date_right_icon.png */; };
 		33EA4A0B1E8F79050044A01A /* JHLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EA4A0A1E8F79050044A01A /* JHLineChart.m */; };
@@ -1216,6 +1216,9 @@
 		3379E4E91E94BE40000A4198 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		3379E4EA1E94BE40000A4198 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		3379E4EC1E94BE54000A4198 /* CircleMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleMapView.m; sourceTree = "<group>"; };
+		3379E4EE1E95CE90000A4198 /* gridSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gridSmall.png; sourceTree = "<group>"; };
+		3379E4F01E95CEB4000A4198 /* spSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spSmall.png; sourceTree = "<group>"; };
+		3379E4F21E95CF2B000A4198 /* homeLoadSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeLoadSmall.png; sourceTree = "<group>"; };
 		337C30521CCDAF3C002B99B7 /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
 		337C30531CCDAF3C002B99B7 /* protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = protocol.m; sourceTree = "<group>"; };
 		337C44AA1E78CC9100135304 /* ledblue.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ledblue.gif; sourceTree = "<group>"; };
@@ -1461,9 +1464,6 @@
 		33EA49F81E8E4E5E0044A01A /* energyinfo_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = energyinfo_icon.png; path = "../储能能源新界面/energyinfo_icon.png"; sourceTree = "<group>"; };
 		33EA49F91E8E4E5E0044A01A /* energyuse_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = energyuse_icon.png; path = "../储能能源新界面/energyuse_icon.png"; sourceTree = "<group>"; };
 		33EA49FC1E8E4E640044A01A /* sp_icon_e.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sp_icon_e.png; path = "../储能能源新界面/sp_icon_e.png"; sourceTree = "<group>"; };
-		33EA49FE1E8E4EB50044A01A /* grid_e.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grid_e.png; sourceTree = "<group>"; };
-		33EA49FF1E8E4EB50044A01A /* inverter_e.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inverter_e.png; sourceTree = "<group>"; };
-		33EA4A021E8E4EE20044A01A /* sp_e.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sp_e.png; sourceTree = "<group>"; };
 		33EA4A041E8F49D90044A01A /* date_left_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_left_icon.png; sourceTree = "<group>"; };
 		33EA4A051E8F49D90044A01A /* date_right_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = date_right_icon.png; sourceTree = "<group>"; };
 		33EA4A091E8F79050044A01A /* JHLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHLineChart.h; sourceTree = "<group>"; };
@@ -3025,11 +3025,11 @@
 		3381ECEF1CBCA59900DCF0D2 /* 能源图片 */ = {
 			isa = PBXGroup;
 			children = (
+				3379E4F21E95CF2B000A4198 /* homeLoadSmall.png */,
+				3379E4F01E95CEB4000A4198 /* spSmall.png */,
+				3379E4EE1E95CE90000A4198 /* gridSmall.png */,
 				33EA4A041E8F49D90044A01A /* date_left_icon.png */,
 				33EA4A051E8F49D90044A01A /* date_right_icon.png */,
-				33EA4A021E8E4EE20044A01A /* sp_e.png */,
-				33EA49FE1E8E4EB50044A01A /* grid_e.png */,
-				33EA49FF1E8E4EB50044A01A /* inverter_e.png */,
 				33EA49FC1E8E4E640044A01A /* sp_icon_e.png */,
 				33EA49F81E8E4E5E0044A01A /* energyinfo_icon.png */,
 				33EA49F91E8E4E5E0044A01A /* energyuse_icon.png */,
@@ -3784,7 +3784,6 @@
 				33EA4A071E8F49D90044A01A /* date_right_icon.png in Resources */,
 				334AED641CA3765A007E39F3 /* 关于.png in Resources */,
 				338234261D9A47AC002062AE /* Collectors_cn.png in Resources */,
-				33EA4A031E8E4EE20044A01A /* sp_e.png in Resources */,
 				3381ECF31CBCA60C00DCF0D2 /* 智能调整优先设置.png in Resources */,
 				33FEFD551C7DB38400324374 /* icon_press@2x.png in Resources */,
 				3381ECF11CBCA5F900DCF0D2 /* 峰谷电价设置切图.png in Resources */,
@@ -3832,7 +3831,6 @@
 				33EA49E01E8B8A4D0044A01A /* spDir_cn.jpg in Resources */,
 				334FF0B91CF53C7C001E6716 /* btn_check_off.png in Resources */,
 				3383F13A1C9FFD3E0075E834 /* 家庭用电设备.png in Resources */,
-				33EA4A001E8E4EB50044A01A /* grid_e.png in Resources */,
 				33801EBD1D5882D500047232 /* Growatt-2-5k.jpg in Resources */,
 				337C44AE1E78CC9100135304 /* ledgreen.gif in Resources */,
 				3389648D1E5C3BBD00A7B1AE /* englishCountryJson.txt in Resources */,
@@ -3845,9 +3843,11 @@
 				33EA49DE1E8B8A4D0044A01A /* pvDir_cn.jpg in Resources */,
 				33EFB68A1C9973D2003F336F /* bg3.png in Resources */,
 				338E30CC1D93725D002215E4 /* service111.png in Resources */,
+				3379E4EF1E95CE90000A4198 /* gridSmall.png in Resources */,
 				3381222B1D864D7B00C7704B /* btn1-choose-1.png in Resources */,
 				338FD9841D1D2065009A128F /* first2.png in Resources */,
 				33EA49EA1E8CAC060044A01A /* 设备页引导1_en.jpg in Resources */,
+				3379E4F11E95CEB4000A4198 /* spSmall.png in Resources */,
 				335BF1E91D100572008EEE99 /* ziliao.png in Resources */,
 				33FEFD6B1C7DB38400324374 /* iconfont-faxian@2x.png in Resources */,
 				33FEFD5F1C7DB38400324374 /* icon---Password.png in Resources */,
@@ -3948,6 +3948,7 @@
 				3355F25E1C741AC3006DDE5A /* client.png in Resources */,
 				33FEFD751C7DB38400324374 /* iconfont-shouji.png in Resources */,
 				33EA49F01E8CAC060044A01A /* 设备页引导4_en.jpg in Resources */,
+				3379E4F31E95CF2B000A4198 /* homeLoadSmall.png in Resources */,
 				33E42E1F1DCC28840024FFBB /* singal.png in Resources */,
 				338990AD1CEAB58100A708F8 /* bianhao.png in Resources */,
 				336A246A1DF00ABD0002D1AD /* deviceHead33.png in Resources */,
@@ -4006,7 +4007,6 @@
 				3349A7B21C75B7DF009172C2 /* 圆角矩形3.png in Resources */,
 				3383F1381C9FFD370075E834 /* 家庭用电量.png in Resources */,
 				33E42E171DCB2EE80024FFBB /* connected-ok.gif in Resources */,
-				33EA4A011E8E4EB50044A01A /* inverter_e.png in Resources */,
 				33768AAE1D475D0A00873E82 /* storagebgcn.png in Resources */,
 				33627A541DFE9FAF0001C00B /* 采集器_cn.jpg in Resources */,
 				334FF0BB1CF53C7C001E6716 /* logo_l.png in Resources */,

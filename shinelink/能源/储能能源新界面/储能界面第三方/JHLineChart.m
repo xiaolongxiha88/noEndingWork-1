@@ -872,7 +872,7 @@
         
         
      
-    [self drawPoint];
+   // [self drawPoint];
 
         
     }
@@ -915,10 +915,10 @@
             ani.duration = 1;
             
             
-            [pLayer addAnimation:ani forKey:NSStringFromSelector(@selector(strokeEnd))];
+         //   [pLayer addAnimation:ani forKey:NSStringFromSelector(@selector(strokeEnd))];
             
-            [self.layer addSublayer:pLayer];
-            [_layerArr addObject:pLayer];
+         //   [self.layer addSublayer:pLayer];
+        //    [_layerArr addObject:pLayer];
             
             
         }
