@@ -372,6 +372,7 @@
 		3379E4EF1E95CE90000A4198 /* gridSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 3379E4EE1E95CE90000A4198 /* gridSmall.png */; };
 		3379E4F11E95CEB4000A4198 /* spSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 3379E4F01E95CEB4000A4198 /* spSmall.png */; };
 		3379E4F31E95CF2B000A4198 /* homeLoadSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 3379E4F21E95CF2B000A4198 /* homeLoadSmall.png */; };
+		3379E4F61E960C1C000A4198 /* JHColumnChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379E4F51E960C1C000A4198 /* JHColumnChart.m */; };
 		337C30541CCDAF3C002B99B7 /* protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C30531CCDAF3C002B99B7 /* protocol.m */; };
 		337C44AD1E78CC9100135304 /* ledblue.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AA1E78CC9100135304 /* ledblue.gif */; };
 		337C44AE1E78CC9100135304 /* ledgreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AB1E78CC9100135304 /* ledgreen.gif */; };
@@ -1219,6 +1220,8 @@
 		3379E4EE1E95CE90000A4198 /* gridSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gridSmall.png; sourceTree = "<group>"; };
 		3379E4F01E95CEB4000A4198 /* spSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spSmall.png; sourceTree = "<group>"; };
 		3379E4F21E95CF2B000A4198 /* homeLoadSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = homeLoadSmall.png; sourceTree = "<group>"; };
+		3379E4F41E960C1C000A4198 /* JHColumnChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHColumnChart.h; sourceTree = "<group>"; };
+		3379E4F51E960C1C000A4198 /* JHColumnChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHColumnChart.m; sourceTree = "<group>"; };
 		337C30521CCDAF3C002B99B7 /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
 		337C30531CCDAF3C002B99B7 /* protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = protocol.m; sourceTree = "<group>"; };
 		337C44AA1E78CC9100135304 /* ledblue.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ledblue.gif; sourceTree = "<group>"; };
@@ -3476,6 +3479,8 @@
 				33EA4A0A1E8F79050044A01A /* JHLineChart.m */,
 				33EA4A0C1E8F790C0044A01A /* JHChart.h */,
 				33EA4A0D1E8F790C0044A01A /* JHChart.m */,
+				3379E4F41E960C1C000A4198 /* JHColumnChart.h */,
+				3379E4F51E960C1C000A4198 /* JHColumnChart.m */,
 			);
 			path = "储能界面第三方";
 			sourceTree = "<group>";
@@ -4346,6 +4351,7 @@
 				3367CB4F1C86806700EF460C /* NSArray+MASAdditions.m in Sources */,
 				3353B1B61CA1272C00577595 /* CoreDataManager.m in Sources */,
 				335BF1ED1D100761008EEE99 /* MessageCeterTableViewController.m in Sources */,
+				3379E4F61E960C1C000A4198 /* JHColumnChart.m in Sources */,
 				334B8F581C914A6D00798A69 /* README.md in Sources */,
 				3367EB9E1CD0B2A700D2EF67 /* StationEarningsViewController.m in Sources */,
 				338990B51CEB1F9D00A708F8 /* DemoDeviceViewController.m in Sources */,

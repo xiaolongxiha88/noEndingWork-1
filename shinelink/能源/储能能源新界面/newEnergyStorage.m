@@ -10,6 +10,7 @@
 #import "JHChart.h"
 #import "JHLineChart.h"
 #import "CircleView1.h"
+#import "JHColumnChart.h"
 
 #define ScreenProW  HEIGHT_SIZE/2.38
 #define ScreenProH  NOW_SIZE/2.34
@@ -37,9 +38,7 @@
 
 @property (nonatomic, strong) UIView *uiview1;
 @property (nonatomic, strong) UIView *uiview2;
-@property (nonatomic, strong) UIView *uiview3;
-@property (nonatomic, strong) UIView *uiview4;
-@property (nonatomic, strong) UIView *uiview5;
+
 @end
 
 
@@ -69,13 +68,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     [self.view addSubview:_scrollView];
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height*2);
+    _scrollView.contentSize = CGSizeMake(SCREEN_Width,3050*ScreenProH);
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.colors = @[(__bridge id)COLOR(7, 149, 239, 1).CGColor, (__bridge id)COLOR(2, 201, 222, 1).CGColor];
     gradientLayer.locations = nil;
     gradientLayer.startPoint = CGPointMake(0, 0);
     gradientLayer.endPoint = CGPointMake(1, 1);
-    gradientLayer.frame = CGRectMake(0, 0, SCREEN_Width, SCREEN_Height*2);
+    gradientLayer.frame = CGRectMake(0, 0, SCREEN_Width, 3050*ScreenProH);
     [_scrollView.layer addSublayer:gradientLayer];
     
   
@@ -216,13 +215,22 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 -(void)getUITwoLable{
 
-    NSArray *colorArray=@[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(14, 222, 228, 0.5)];
-    NSArray *nameArray=@[@"光伏产出",@"系统产出",@"用户负载",@"耗电"];
+    if (_uiview2) {
+        [_uiview2 removeFromSuperview];
+        _uiview2=nil;
+    }
+    
+    float HH=1160*ScreenProH;
+    _uiview2=[[UIView alloc]initWithFrame:CGRectMake(0*ScreenProW, 1160*ScreenProH, 750*ScreenProW, ScreenProH*540)];
+    [_scrollView addSubview:_uiview2];
+    
+    NSArray *colorArray=@[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(55, 110, 251, 0.5)];
+    NSArray *nameArray=@[@"光伏产出",@"储能产出",@"用户负载",@"电网消耗"];
     
     for (int i=0; i<4; i++) {
-        UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(5*ScreenProW+185*ScreenProW*i, 1160*ScreenProH, 180*ScreenProW, ScreenProH*55)];
+        UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(5*ScreenProW+185*ScreenProW*i, 1160*ScreenProH-HH, 180*ScreenProW, ScreenProH*55)];
         V1.userInteractionEnabled = YES;
-        [_scrollView addSubview:V1];
+        [_uiview2 addSubview:V1];
         
        UIButton *button1= [UIButton buttonWithType:UIButtonTypeCustom];
         button1.frame= CGRectMake(40*ScreenProW, 0*ScreenProH, 100*ScreenProW, ScreenProH*20);
@@ -238,7 +246,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [V1 addSubview:VL1];
     }
   
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 1245*ScreenProH, 375*ScreenProW, ScreenProH*40)];
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 1245*ScreenProH-HH, 375*ScreenProW, ScreenProH*40)];
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL2.textAlignment = NSTextAlignmentCenter;
     NSString *V2N1=@"光伏产出";
@@ -246,30 +254,30 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     NSString *V2LableName=[NSString stringWithFormat:@"%@:%@",V2N1,V2N2];
     VL2.text=V2LableName;
     VL2.textColor =[UIColor whiteColor];
-    [_scrollView addSubview:VL2];
+    [_uiview2 addSubview:VL2];
     
-    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(375*ScreenProW, 1245*ScreenProH, 375*ScreenProW, ScreenProH*40)];
+    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(375*ScreenProW, 1245*ScreenProH-HH, 375*ScreenProW, ScreenProH*40)];
     VL3.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL3.textAlignment = NSTextAlignmentCenter;
     NSString *V3N1=@"总电量"; NSString *V3N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"useEnergyToday"] floatValue]];
     NSString *V3LableName=[NSString stringWithFormat:@"%@:%@",V3N1,V3N2];
     VL3.text=V3LableName;
     VL3.textColor =[UIColor whiteColor];
-    [_scrollView addSubview:VL3];
+    [_uiview2 addSubview:VL3];
     
-    CircleView1 *circleView1= [[CircleView1 alloc]initWithFrame:CGRectMake(0*ScreenProW, 1295*ScreenProH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"1" andAllDic:_dataTwoNetAllDic];
+    CircleView1 *circleView1= [[CircleView1 alloc]initWithFrame:CGRectMake(0*ScreenProW, 1295*ScreenProH-HH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"1" andAllDic:_dataTwoNetAllDic];
   //  circleView1.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
-     [_scrollView addSubview:circleView1];
+     [_uiview2 addSubview:circleView1];
     
-    CircleView1 *circleView2= [[CircleView1 alloc]initWithFrame:CGRectMake(375*ScreenProW, 1295*ScreenProH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"2" andAllDic:_dataTwoNetAllDic];
+    CircleView1 *circleView2= [[CircleView1 alloc]initWithFrame:CGRectMake(375*ScreenProW, 1295*ScreenProH-HH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"2" andAllDic:_dataTwoNetAllDic];
    //  circleView2.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
-    [_scrollView addSubview:circleView2];
+    [_uiview2 addSubview:circleView2];
     
     NSArray *nameArray1=@[@"Home load",@"Storage",@"Grid"];
     NSArray *IMAGEnameArray1=@[@"homeLoadSmall.png",@"spSmall.png",@"gridSmall.png"];
     for (int i=0; i<3; i++) {
-            UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(135*ScreenProW+200*ScreenProW*i, 1670*ScreenProH, 180*ScreenProW, ScreenProH*25)];
-        [_scrollView addSubview:LV1];
+            UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(135*ScreenProW+200*ScreenProW*i, 1670*ScreenProH-HH, 180*ScreenProW, ScreenProH*25)];
+        [_uiview2 addSubview:LV1];
         
         UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(0*ScreenProW, 0*ScreenProH, 25*ScreenProH, ScreenProH*25)];
         [VM1 setImage:[UIImage imageNamed:IMAGEnameArray1[i]]];
@@ -311,6 +319,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_scrollView addSubview:VL2];
     
     [self initUILineChart2];
+    [self getUiColumnChart];
 }
 
 
@@ -428,7 +437,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _lineChart.backgroundColor = [UIColor clearColor];
     _lineChart.hasPoint=NO;
  //   lineChart.showValueLeadingLine=YES;
-    _lineChart.valueLineColorArr =@[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(14, 222, 228, 0.5)];
+    _lineChart.valueLineColorArr =@[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(55, 110, 251, 0.5)];
    // _lineChart.pointColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
     _lineChart.xAndYLineColor = COLOR(255, 255, 255, 0.9);
     _lineChart.xAndYNumberColor = COLOR(255, 255, 255, 0.8);
@@ -532,7 +541,121 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_scrollView addSubview:_lineChart2];
     [_lineChart2 showAnimation];
     
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2350*ScreenProH, 730*ScreenProW, 30*ScreenProH)];
+    VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
+    VL2.textAlignment = NSTextAlignmentCenter;
+    VL2.text=@"Couurent SOC";
+    VL2.textColor =COLOR(255, 255, 255, 1);
+    [_scrollView addSubview:VL2];
+    
 }
+
+-(void)getUiColumnChart{
+    
+    NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch|NSNumericSearch|NSWidthInsensitiveSearch|NSForcedOrderingSearch;
+    NSComparator sort = ^(NSString *obj1, NSString *obj2){
+        NSRange range = NSMakeRange(0, obj1.length);
+        return [obj1 compare:obj2 options:comparisonOptions range:range];
+    };
+    NSMutableArray *xArray = [NSMutableArray arrayWithArray:[_dataFourDic.allKeys sortedArrayUsingComparator:sort]];
+    if ([xArray containsObject:@"date"]) {
+        [xArray removeObject:@"date"];
+    }
+    NSMutableArray *yArray = [NSMutableArray array];
+    for (NSString *key in xArray) {
+        [yArray addObject:_dataFourDic[key]];
+    }
+    
+    
+    NSMutableArray*valueArr00=[NSMutableArray array];
+  //  NSMutableArray*Y2=[NSMutableArray array];
+ 
+    
+    if (yArray.count>0) {
+        
+        for (int i=0; i<yArray.count; i++) {
+            NSString *Y1,*Y2;
+            if ([[yArray[i] objectForKey:@"charge"] floatValue]>=0) {
+                Y1=[yArray[i] objectForKey:@"charge"] ;
+            }else{
+                Y1=@"0";
+            }
+            if ([[yArray[i] objectForKey:@"disCharge"] floatValue]>=0) {
+                Y2=[yArray[i] objectForKey:@"disCharge"];
+            }else{
+                   Y2=@"0";
+            }
+            NSArray *Y0=[NSArray arrayWithObjects:Y1,Y2, nil];
+            [valueArr00 addObject:Y0];
+        }
+    }
+    
+    JHColumnChart *column = [[JHColumnChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 2400*ScreenProH, 730*ScreenProW, 530*ScreenProH)];
+    column.valueArr = valueArr00;
+    
+    // column.valueArr =[NSArray arrayWithObjects:A1, nil];
+    
+    /*       This point represents the distance from the lower left corner of the origin.         */
+    column.originSize = CGPointMake(30*ScreenProW, 30*ScreenProH);
+    /*    The first column of the distance from the starting point     */
+    column.drawFromOriginX = 10*ScreenProW;
+    column.typeSpace = 30*ScreenProW;
+    column.isShowYLine = NO;
+    column.columnWidth = 30*ScreenProW;
+    column.xDescTextFontSize=20*ScreenProH;
+    column.yDescTextFontSize=20*ScreenProH;
+    /*        Column backgroundColor         */
+    column.bgVewBackgoundColor = [UIColor clearColor];
+    /*        X, Y axis font color         */
+    column.drawTextColorForX_Y =COLOR(255, 255, 255, 0.8);
+    /*        X, Y axis line color         */
+    column.colorForXYLine =  COLOR(255, 255, 255, 0.5);
+    column.xAndYLineColor = COLOR(255, 255, 255, 0.9);
+    /*    Each module of the color array, such as the A class of the language performance of the color is red, the color of the math achievement is green     */
+    column.columnBGcolorsArr = @[COLOR(18, 237, 7, 1),COLOR(254, 238, 62, 1)];
+    /*        Module prompt         */
+    column.xShowInfoText = xArray;
+    column.isShowLineChart = NO;
+
+    [column showAnimation];
+    [_scrollView addSubview:column];
+
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2950*ScreenProH, 730*ScreenProW, 40*ScreenProH)];
+    VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
+    VL2.textAlignment = NSTextAlignmentCenter;
+    VL2.text=@"Storage charge&discharge";
+    VL2.textColor =COLOR(255, 255, 255, 1);
+    [_scrollView addSubview:VL2];
+    
+    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2440*ScreenProH, 100*ScreenProW, 30*ScreenProH)];
+    VL3.font=[UIFont systemFontOfSize:28*ScreenProH];
+    VL3.textAlignment = NSTextAlignmentLeft;
+    VL3.text=@"kWh";
+    VL3.textColor =COLOR(255, 255, 255,0.8 );
+    [_scrollView addSubview:VL3];
+    
+    NSArray *nameArray1=@[@"Panel power",@"Home load"];
+    NSArray *IMAGEnameArray1=@[COLOR(18, 237, 7, 1),COLOR(254, 238, 62, 1)];
+    for (int i=0; i<2; i++) {
+        UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(375*ScreenProW+100*i, 2440*ScreenProH, 100*ScreenProW, 30*ScreenProH)];
+        [_scrollView addSubview:LV1];
+        
+        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(0*ScreenProW, 6*ScreenProH, 18*ScreenProH, ScreenProH*18)];
+        VM1.backgroundColor=IMAGEnameArray1[i];
+        [LV1 addSubview:VM1];
+        
+        UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProH, 3*ScreenProH, 200*ScreenProW-30*ScreenProH, ScreenProH*25)];
+        VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
+        VL1.textAlignment = NSTextAlignmentLeft;
+        VL1.text=nameArray1[i];
+        VL1.textColor =COLOR(255, 255, 255, 0.8);
+        [LV1 addSubview:VL1];
+    }
+    
+    
+}
+
+
 
 -(void)getNetOne{
 
