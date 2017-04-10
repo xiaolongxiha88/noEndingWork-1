@@ -34,9 +34,9 @@
 -(NSMutableArray *)dataArray{
     if ([_str isEqualToString:@"1"]) {
         if (_dataArray == nil) {
-            NSString *A1=[NSString stringWithFormat:@"%.f",[[_allDic objectForKey:@"epvGridToday"] floatValue]];
-            NSString *A2=[NSString stringWithFormat:@"%.f",[[_allDic objectForKey:@"epvStorageToday"] floatValue]];
-                NSString *A3=[NSString stringWithFormat:@"%.f",[[_allDic objectForKey:@"epvUserToday"] floatValue]];
+            NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvGridToday"] floatValue]];
+            NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvStorageToday"] floatValue]];
+                NSString *A3=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvUserToday"] floatValue]];
             float D1=[A1 intValue];   float D2=[A2 intValue];   float D3=[A3 intValue];
             float B1=(D1/(D1+D2+D3))*100;
             float B2=(D2/(D1+D2+D3))*100;
@@ -52,17 +52,17 @@
         }
 
     }else{
-        NSString *A1=[NSString stringWithFormat:@"%.f",[[_allDic objectForKey:@"useGridToday"] floatValue]];
-        NSString *A2=[NSString stringWithFormat:@"%.f",[[_allDic objectForKey:@"useStorageToday"] floatValue]];
-        NSString *A3=[NSString stringWithFormat:@"%.f",[[_allDic objectForKey:@"useUserToday"] floatValue]];
+        NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useGridToday"] floatValue]];
+        NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useStorageToday"] floatValue]];
+        NSString *A3=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useUserToday"] floatValue]];
         float D1=[A1 intValue];   float D2=[A2 intValue];   float D3=[A3 intValue];
         float B1=(D1/(D1+D2+D3))*100;
         float B2=(D2/(D1+D2+D3))*100;
         float B3=(D3/(D1+D2+D3))*100;
         _dataArray = [[NSMutableArray alloc]initWithArray:@[
-                                                            @{@"number":A1,@"color":@"0eeff6",@"name":[NSString stringWithFormat:@"%.1f%%",B1]},
+                                                            @{@"number":A1,@"color":@"376efb",@"name":[NSString stringWithFormat:@"%.1f%%",B1]},
                                                             @{@"number":A2,@"color":@"20db76",@"name":[NSString stringWithFormat:@"%.1f%%",B2]},
-                                                            @{@"number":A3,@"color":@"81fafe",@"name":[NSString stringWithFormat:@"%.1f%%",B3]}]];
+                                                            @{@"number":A3,@"color":@"ffd923",@"name":[NSString stringWithFormat:@"%.1f%%",B3]}]];
     }
     
     return _dataArray;

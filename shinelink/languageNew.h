@@ -646,4 +646,22 @@
 #define  root_shoujihao_geshi_cuowu  NSLocalizedString(@"56手机号格式错误", nil)
 #define  root_shuru_shiyiwei_shoujihao  NSLocalizedString(@"57输入11位手机号", nil)
 
+#define  root_nengyuan_gailan  NSLocalizedString(@"58能源概览", nil)
+#define  root_guangfu_chanchu  NSLocalizedString(@"59光伏产出", nil)
+#define  root_guangfu_chanchu_1  NSLocalizedString(@"591光伏产出", nil)
+#define  root_nengyuan_chanchu NSLocalizedString(@"60能源产出", nil)
+#define  root_nengyuan_chanch_1 NSLocalizedString(@"601能源产出", nil)
+#define  root_dianwang_xiaohao   NSLocalizedString(@"61电网消耗", nil)
+#define  root_yongdian_xiaohao   NSLocalizedString(@"62用电消耗", nil)
+#define  root_yongdian_xiaohao_1   NSLocalizedString(@"621用电消耗", nil)
+
+#define  root_dangri  NSLocalizedString(@"63当日", nil)
+#define  root_leiji  NSLocalizedString(@"64累计", nil)
+#define  root_nengyuan_chanhao  NSLocalizedString(@"65能源产耗", nil)
+#define  root_zong_yongdian  NSLocalizedString(@"66总用电", nil)
+#define  root_chuneng_nengyuan  NSLocalizedString(@"67储能能源", nil)
+#define  root_mianban_dianliang  NSLocalizedString(@"68面板电量", nil)
+#define  root_chuneng_congfang_xinxi  NSLocalizedString(@"69储能充放电信息", nil)
+#define  root_shishi_SOC  NSLocalizedString(@"70实时SOC", nil)
+
 #endif /* languageNew_h */

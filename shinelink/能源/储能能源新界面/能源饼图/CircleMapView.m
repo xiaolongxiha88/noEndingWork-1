@@ -162,7 +162,7 @@
         numberStartX = lineEndPointX - 80*ScreenProW;
         numberStartY = lineEndPointY - itemSizeNumber.height;
         //文字
-        textStartX = lineEndPointX- 100*ScreenProW;
+        textStartX = lineEndPointX- 80*ScreenProW;
         textStartY = lineEndPointY+5*ScreenProH;
     }else{
         //指引线的终点
@@ -174,7 +174,7 @@
         numberStartY = lineEndPointY - itemSizeNumber.height;
         
         //文字
-        textStartX = lineEndPointX+0*ScreenProW;
+        textStartX = lineEndPointX+5*ScreenProW;
         textStartY = lineEndPointY+5*ScreenProH;
     }
     
