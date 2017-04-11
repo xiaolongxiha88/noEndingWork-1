@@ -438,9 +438,20 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     if (_dataFiveDic.count>0) {
          [self initUILineChart2];
+    }else{
+       // NSDictionary *A=@{@"pacToUser":@"0",@"ppv":@"0",@"sysOut":@"0",@"userLoad":@"0"};
+        _dataFiveDic=@{@"0:00":@"0",@"1:00":@"0",@"2:00":@"0",@"3:00":@"0",@"4:00":@"0"};
+       [self initUILineChart2];
     }
+    
+    
     if (_dataFourDic.count>0) {
          [self getUiColumnChart];
+    }else{
+        NSDictionary *A=@{@"charge":@"0",@"disCharge":@"0"};
+      _dataFourDic=[NSMutableDictionary dictionaryWithObjectsAndKeys:A,@"0",A,@"1",A,@"2",A,@"3",A,@"4",A,@"5",A,@"6", _currentDay,@"date",nil];
+       // _dataFourDic=@{@"9":A,@"8":A,@"7":A,@"6":A,@"5":A,@"4":A,@"3":A};
+        [self getUiColumnChart];
     }
    
     
@@ -676,20 +687,28 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 -(void)getUiColumnChart{
     NSString *dataS=[_dataFourDic objectForKey:@"date"];
+   // dataS=@"2017-04-01";
+    
     [_dataFourDic removeObjectForKey:@"date"];
     NSMutableDictionary *AllDic=[NSMutableDictionary new];
     
+  
+    NSDateFormatter *dayFormatter1=[[NSDateFormatter alloc] init];
+      [dayFormatter1 setDateFormat:@"MM-dd"];
     
-    NSArray * arr = [dataS componentsSeparatedByString:@"-"];
-     NSString *dataString=[arr lastObject];
-    
-    
-    int dataString1=[dataString intValue];
     for (id key in _dataFourDic) {
         NSString *Value=[_dataFourDic objectForKey:key];
-        int Key=dataString1-[key intValue];
-        NSString *KEY=[NSString stringWithFormat:@"%d",Key];
-        [AllDic setObject:Value forKey:KEY];
+    //    int Key=dataString1-[key intValue];
+        int Key=[key intValue];
+        NSDate *currentDayDate = [self.dayFormatter dateFromString:dataS];
+        NSDate *yesterday = [currentDayDate dateByAddingTimeInterval: -secondsPerDay*Key];
+        NSString *dataSs = [dayFormatter1 stringFromDate:yesterday];
+        
+//        NSArray * arr = [dataSs componentsSeparatedByString:@"-"];
+//        NSString *dataString=[arr lastObject];
+//        NSString *KEY=dataString;
+        
+        [AllDic setObject:Value forKey:dataSs];
     }
     
     
@@ -876,6 +895,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 }
                 if (_dataTwoDic.count>0) {
                     [self initUILineChart];
+                }else{
+                    NSDictionary *A=@{@"pacToUser":@"0",@"ppv":@"0",@"sysOut":@"0",@"userLoad":@"0"};
+                    _dataTwoDic=[NSDictionary dictionaryWithObject:A forKey:@"0:00"];
+                     [self initUILineChart];
                 }
                 
                 

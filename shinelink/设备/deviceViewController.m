@@ -84,6 +84,8 @@
 @property (nonatomic, strong) NSString *pcsNetPlantID;
 @property (nonatomic, strong) NSString *pcsNetStorageSN;
 @property (nonatomic, strong) NSMutableDictionary *pcsDataDic;
+
+@property (nonatomic) BOOL isPvType;
 @end
 
 @implementation deviceViewController
@@ -105,8 +107,7 @@
     UIPageControl *_pageControl;
     UIScrollView *_scrollerView;
     NSString *_indenty;
-    BOOL showProgressEnable;
-    BOOL showAnimationEnable;
+  
     
        NSMutableArray* imageStatueArray;
     //全局变量 用来控制偏移量
@@ -145,8 +146,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    _netEnable=@"0";
-    showProgressEnable=YES;
-    showAnimationEnable=NO;
+
+    _isPvType=NO;
     
   [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:MainColor];
@@ -546,6 +547,8 @@
         [ [UserInfo defaultUserInfo]setPlantNum:[NSString stringWithFormat:@"%lu",(unsigned long)index]];
         [_plantId setObject:_stationID[index] forKey:@"plantId"];
         _stationIdOne=_stationID[index];
+        
+        _isPvType=NO;
         [self refreshData];
         
     }];
@@ -649,22 +652,17 @@
 
 -(void)netRequest{
     
-    if (showProgressEnable) {
-        if (showAnimationEnable) {
-            [self getAnimation:_headImage1];
-            [self getAnimation:_headImage2];
-            [self getAnimation:_headImage3];
-        }else{
-           //  [_control endRefreshing];
-         [self showProgressView];
-              }
-    }else{
-        [self getAnimation:_headImage1];
-        [self getAnimation:_headImage2];
-        [self getAnimation:_headImage3];
-    
-    }
+
   
+    if (_isPvType) {
+         [self getAnimation:_headImage1];
+         [self getAnimation:_headImage2];
+         [self getAnimation:_headImage3];
+    }else{
+      [self showProgressView];
+    }
+    
+    
     _deviceHeadType=@"0";
     _pcsNetPlantID=[_plantId objectForKey:@"plantId"];
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:_plantId paramarsSite:@"/newPlantAPI.do?op=getAllDeviceList" sucessBlock:^(id content) {
@@ -673,8 +671,8 @@
         
            [_control endRefreshing];
         
-        showProgressEnable=YES;
-        showAnimationEnable=YES;
+    
+        _isPvType=YES;
         
          NSLog(@"getAllDeviceList:%@",content);
         _typeArr=[NSMutableArray array];
@@ -729,6 +727,7 @@
 
             }else if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"storage"]){
                 
+                 _isPvType=NO;
                 _pcsNetStorageSN=content[@"deviceList"][i][@"deviceSn"];
                 _deviceHeadType=@"1";
                 [imageArray addObject:@"storage.png"];
@@ -1106,9 +1105,7 @@
 
 
 -(void)refreshStateChange:(UIRefreshControl *)control{
-
-    showProgressEnable=NO;
-    
+ 
 //    [self getAnimation:_headImage1];
 //    [self getAnimation:_headImage2];
 //    [self getAnimation:_headImage3];
