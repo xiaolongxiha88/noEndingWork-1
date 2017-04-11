@@ -12,6 +12,7 @@
 #import "addServerViewController.h"
 #import "RKAlertView.h"
 #import "newEnergyStorage.h"
+#import "newEnergyStorage2000.h"
 
 @interface LZPageViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,LZPageContentViewDelegate>
 @property (nonatomic, assign) CGFloat pageBarHeight;
@@ -77,9 +78,18 @@ static NSString *mainCell = @"mainCellmainCell";
         self.title = root_energy_title;
         NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
         NSString *isNew=[ud objectForKey:@"isNewEnergy"];
+            NSString *deviceType=[ud objectForKey:@"PcsDeviceType"];
+        
+        
         if ([isNew isEqualToString:@"Y"]) {
-            newEnergyStorage *findVc=[[newEnergyStorage alloc]init];
-            [self.navigationController pushViewController:findVc animated:YES];
+            if ([deviceType isEqualToString:@"0"]) {
+                newEnergyStorage2000 *findVc=[[newEnergyStorage2000 alloc]init];
+                [self.navigationController pushViewController:findVc animated:YES];
+            }else{
+                newEnergyStorage *findVc=[[newEnergyStorage alloc]init];
+                [self.navigationController pushViewController:findVc animated:YES];
+            }
+
         }
         
     }else{

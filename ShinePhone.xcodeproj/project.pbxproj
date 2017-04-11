@@ -374,6 +374,7 @@
 		3379E4F31E95CF2B000A4198 /* homeLoadSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 3379E4F21E95CF2B000A4198 /* homeLoadSmall.png */; };
 		3379E4F61E960C1C000A4198 /* JHColumnChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379E4F51E960C1C000A4198 /* JHColumnChart.m */; };
 		337A70FB1E9B820600FE5F3C /* solar_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 337A70FA1E9B820600FE5F3C /* solar_icon.png */; };
+		337A70FE1E9C7F0200FE5F3C /* newEnergyStorage2000.m in Sources */ = {isa = PBXBuildFile; fileRef = 337A70FD1E9C7F0200FE5F3C /* newEnergyStorage2000.m */; };
 		337C30541CCDAF3C002B99B7 /* protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C30531CCDAF3C002B99B7 /* protocol.m */; };
 		337C44AD1E78CC9100135304 /* ledblue.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AA1E78CC9100135304 /* ledblue.gif */; };
 		337C44AE1E78CC9100135304 /* ledgreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AB1E78CC9100135304 /* ledgreen.gif */; };
@@ -1224,6 +1225,8 @@
 		3379E4F41E960C1C000A4198 /* JHColumnChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHColumnChart.h; sourceTree = "<group>"; };
 		3379E4F51E960C1C000A4198 /* JHColumnChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHColumnChart.m; sourceTree = "<group>"; };
 		337A70FA1E9B820600FE5F3C /* solar_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = solar_icon.png; sourceTree = "<group>"; };
+		337A70FC1E9C7F0200FE5F3C /* newEnergyStorage2000.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newEnergyStorage2000.h; sourceTree = "<group>"; };
+		337A70FD1E9C7F0200FE5F3C /* newEnergyStorage2000.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newEnergyStorage2000.m; sourceTree = "<group>"; };
 		337C30521CCDAF3C002B99B7 /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
 		337C30531CCDAF3C002B99B7 /* protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = protocol.m; sourceTree = "<group>"; };
 		337C44AA1E78CC9100135304 /* ledblue.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ledblue.gif; sourceTree = "<group>"; };
@@ -3471,6 +3474,8 @@
 				33EA4A081E8F78F50044A01A /* 储能界面第三方 */,
 				33EA49F31E8DEA0B0044A01A /* newEnergyStorage.h */,
 				33EA49F41E8DEA0B0044A01A /* newEnergyStorage.m */,
+				337A70FC1E9C7F0200FE5F3C /* newEnergyStorage2000.h */,
+				337A70FD1E9C7F0200FE5F3C /* newEnergyStorage2000.m */,
 			);
 			path = "储能能源新界面";
 			sourceTree = "<group>";
@@ -4214,6 +4219,7 @@
 				3367EB981CD0B22500D2EF67 /* StationSafeViewController.m in Sources */,
 				335DDB231CFFC08700ACA123 /* testDemoViewController.m in Sources */,
 				336F1A221D88E46900CD4C2B /* UIImageView+WebCache.m in Sources */,
+				337A70FE1E9C7F0200FE5F3C /* newEnergyStorage2000.m in Sources */,
 				336F1A171D88E46900CD4C2B /* SDWebImageCompat.m in Sources */,
 				337F9CC81C71ABFB0016FE43 /* findViewController.m in Sources */,
 				336F1A211D88E46900CD4C2B /* UIImageView+HighlightedWebCache.m in Sources */,

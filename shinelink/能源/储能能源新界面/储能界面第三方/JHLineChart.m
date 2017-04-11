@@ -686,7 +686,11 @@
                 CGPoint nextP = [dataArr[i-1] CGPointValue];
                 CGPoint control1 = P_M(p.x + (nextP.x - p.x) / 2.0, nextP.y );
                 CGPoint control2 = P_M(p.x + (nextP.x - p.x) / 2.0, p.y);
-             [secondPath addCurveToPoint:p controlPoint1:control1 controlPoint2:control2];
+                if (_contentFill) {
+                        [secondPath addCurveToPoint:p controlPoint1:control1 controlPoint2:control2];
+                }
+       
+                
              [firstPath addCurveToPoint:p controlPoint1:control1 controlPoint2:control2];
             }
         }else{

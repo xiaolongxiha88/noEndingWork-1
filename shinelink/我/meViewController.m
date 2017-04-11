@@ -108,7 +108,7 @@
 
 -(void)registerUser{
 
-    BOOL isDemo=YES;
+    BOOL isDemo=NO;
     
     if (isDemo) {
         newEnergyStorage *go=[[newEnergyStorage alloc]init];

@@ -37,7 +37,7 @@
             NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvGridToday"] floatValue]];
             NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvStorageToday"] floatValue]];
                 NSString *A3=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvUserToday"] floatValue]];
-            float D1=[A1 intValue];   float D2=[A2 intValue];   float D3=[A3 intValue];
+            float D1=[A1 floatValue];   float D2=[A2 floatValue];   float D3=[A3 floatValue];
             float B1=(D1/(D1+D2+D3))*100;
             float B2=(D2/(D1+D2+D3))*100;
             float B3=(D3/(D1+D2+D3))*100;
@@ -55,7 +55,7 @@
         NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useGridToday"] floatValue]];
         NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useStorageToday"] floatValue]];
         NSString *A3=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useUserToday"] floatValue]];
-        float D1=[A1 intValue];   float D2=[A2 intValue];   float D3=[A3 intValue];
+        float D1=[A1 floatValue];   float D2=[A2 floatValue];   float D3=[A3 floatValue];
         float B1=(D1/(D1+D2+D3))*100;
         float B2=(D2/(D1+D2+D3))*100;
         float B3=(D3/(D1+D2+D3))*100;

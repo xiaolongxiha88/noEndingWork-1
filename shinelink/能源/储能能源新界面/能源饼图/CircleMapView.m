@@ -101,8 +101,8 @@
     // 弧度的中心角度
     CGFloat h = (angle_end + angle_start) / 2.0;
     //小圆的中心点
-    CGFloat xx = self.frame.size.width / 2 + (_circleRadius + 10) * cos(h);
-    CGFloat yy = self.frame.size.height / 2 + (_circleRadius + 10) * sin(h);
+    CGFloat xx = self.frame.size.width / 2 + (_circleRadius + 5) * cos(h);
+    CGFloat yy = self.frame.size.height / 2 + (_circleRadius + 5) * sin(h);
     
     //画线
     [self addLineAndnumber:color andCGContextRef:ctx andX:xx andY:yy andInt:n angele:h];
@@ -151,8 +151,8 @@
     
     // 数字的长度
     CGSize itemSizeNumber = [[NSString stringWithFormat:@"%@",_dataArray[n][@"number"]] sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:26*ScreenProH]}];
-    lineLosePointX = smallCircleCenterPointX+10.0*cos(angele);
-    lineLosePointY = smallCircleCenterPointY + 10.0*sin(angele);
+    lineLosePointX = smallCircleCenterPointX+6.0*cos(angele);
+    lineLosePointY = smallCircleCenterPointY + 6.0*sin(angele);
     
     if (smallCircleCenterPointX > self.frame.size.width / 2) {
         //指引线的终点
@@ -170,11 +170,11 @@
         lineEndPointY = lineLosePointY; //
         
         // 数字
-        numberStartX = lineEndPointX+5*ScreenProW ;
+        numberStartX = lineEndPointX+15*ScreenProW ;
         numberStartY = lineEndPointY - itemSizeNumber.height;
         
         //文字
-        textStartX = lineEndPointX+5*ScreenProW;
+        textStartX = lineEndPointX+15*ScreenProW;
         textStartY = lineEndPointY+5*ScreenProH;
     }
     

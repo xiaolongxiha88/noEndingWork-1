@@ -1019,6 +1019,9 @@
                 
                 if (jsonObj[@"obj"]==nil || jsonObj[@"obj"]==NULL||([jsonObj[@"obj"] isEqual:@""] )) {
                 }else{
+                    NSString *deviceType=jsonObj[@"obj"][@"deviceType"];
+                        [[NSUserDefaults standardUserDefaults] setObject:deviceType forKey:@"PcsDeviceType"];
+                    
                     _pcsDataDic=[NSMutableDictionary new];
                     [_pcsDataDic setObject:jsonObj[@"obj"][@"capacity"] forKey:@"capacity"];
                       [_pcsDataDic setObject:jsonObj[@"obj"][@"pCharge"] forKey:@"pCharge"];
