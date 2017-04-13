@@ -259,7 +259,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _selectButton.titleLabel.font=[UIFont boldSystemFontOfSize:28*ScreenProH];
     [_selectButton addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
     _selectButton.backgroundColor = [UIColor clearColor];
-    [_scrollView addSubview:_selectButton];
+  //  [_scrollView addSubview:_selectButton];
 
     
     UIImageView *selectView = [[UIImageView alloc] initWithFrame:CGRectMake(150*ScreenProW-25*ScreenProH, 11*ScreenProH, 20*ScreenProH, 18*ScreenProH)];

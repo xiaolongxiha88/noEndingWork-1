@@ -71,7 +71,8 @@
 
         _BGScrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _BGScrollView.showsHorizontalScrollIndicator = NO;
-        _bgVewBackgoundColor = _bgVewBackgoundColor;
+        _BGScrollView.scrollEnabled=NO;
+        _BGScrollView.backgroundColor = _bgVewBackgoundColor;
         [self addSubview:_BGScrollView];
         
     }

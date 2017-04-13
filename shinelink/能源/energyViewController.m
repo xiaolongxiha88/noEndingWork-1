@@ -12,6 +12,8 @@
 #import "homeDeviceViewController.h"
 #import "EquitGraph2ViewController.h"
 #import "EquipGraphViewController.h"
+#import "newEnergyStorage.h"
+#import "newEnergyStorage2000.h"
 
 @interface energyViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic, strong) UITableView *tableView;
@@ -33,7 +35,26 @@
 
 -(void)viewWillAppear:(BOOL)animated{
 
-       [self netEnergy];
+    
+    
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *isNew=[ud objectForKey:@"isNewEnergy"];
+//     NSString *deviceType=[ud objectForKey:@"PcsDeviceType"];
+    
+    if ([isNew isEqualToString:@"Y"]) {
+//        if ([deviceType isEqualToString:@"0"]) {
+//            newEnergyStorage2000 *findVc=[[newEnergyStorage2000 alloc]init];
+//            [self.navigationController pushViewController:findVc animated:YES];
+//            //    [self presentViewController:findVc animated:NO completion:nil];
+//            
+//        }else{
+//            newEnergyStorage *findVc=[[newEnergyStorage alloc]init];
+//            [self.navigationController pushViewController:findVc animated:YES];
+//        }
+    }else{
+      [self netEnergy];
+    }
+    
     
 }
 
@@ -41,6 +62,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+        [self initFirst];
+    
+    
+  
+    
+}
+
+-(void)initFirst{
+
     [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
     [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                       NSForegroundColorAttributeName :[UIColor whiteColor]
@@ -48,25 +79,24 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self setTitle:root_energy];
     
-  
     
-       nameArray=[[NSMutableArray alloc]initWithObjects:root_energy_guangfu_dianliang,root_energy_chuneng_dianliang,root_energy_jiating_yongdian,root_energy_jiating_shebei, nil];
     
-
+    nameArray=[[NSMutableArray alloc]initWithObjects:root_energy_guangfu_dianliang,root_energy_chuneng_dianliang,root_energy_jiating_yongdian,root_energy_jiating_shebei, nil];
     
-        monthArray=[[NSMutableArray alloc]initWithObjects:root_energy_chuneng_yue,root_energy_chuneng_yue,root_energy_chuneng_yue,root_energy_chuneng_zuishengdian,nil];
     
-   
+    
+    monthArray=[[NSMutableArray alloc]initWithObjects:root_energy_chuneng_yue,root_energy_chuneng_yue,root_energy_chuneng_yue,root_energy_chuneng_zuishengdian,nil];
+    
+    
     monthDateArray=[[NSMutableArray alloc]initWithObjects:@"",@"",@"",@"",nil];
     dayDateArray=[[NSMutableArray alloc]initWithObjects:@"",@"",@"",@"",nil];
     
     dayArray=[[NSMutableArray alloc]initWithObjects:root_energy_chuneng_ri,root_energy_chuneng_ri,root_energy_chuneng_ri,root_energy_chuneng_zuihaodian, nil];
- imageArray=[[NSMutableArray alloc]initWithObjects:@"solar4.png",@"storage4.png",@"家庭用电量.png",@"家庭用电设备.png", nil];
+    imageArray=[[NSMutableArray alloc]initWithObjects:@"solar4.png",@"storage4.png",@"家庭用电量.png",@"家庭用电设备.png", nil];
     
-
+    
     // Do any additional setup after loading the view.
     [self _createTableView];
- 
 }
 
 -(void)netEnergy{
