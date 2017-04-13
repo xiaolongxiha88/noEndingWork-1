@@ -13,6 +13,7 @@
 #import "JHColumnChart.h"
 #import "EditGraphView.h"
 
+#define viewAA  ScreenProH*100
 #define ScreenProW  HEIGHT_SIZE/2.38
 #define ScreenProH  NOW_SIZE/2.34
 
@@ -57,6 +58,37 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 
 @implementation newEnergyStorage
+
+-(void)viewWillAppear:(BOOL)animated{
+  //  [self prefersStatusBarHidden];
+//    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *isNew=[ud objectForKey:@"isNewEnergy"];
+    if ([isNew isEqualToString:@"N"]) {
+        [self.navigationController setNavigationBarHidden:NO];
+        [self.navigationController popViewControllerAnimated:NO];
+        
+    }else{
+        UILabel *btnChapter = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];//左边打开侧滑的按钮
+        [btnChapter setText:@""];
+        UIBarButtonItem* item=[[UIBarButtonItem alloc]initWithCustomView:btnChapter];
+        self.navigationItem.leftBarButtonItem = item;
+        
+        // self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.hidesBackButton=YES;
+        self.navigationItem.backBarButtonItem.title=@"";
+        [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
+        [self.navigationController.navigationBar setTitleTextAttributes:@{
+                                                                          NSForegroundColorAttributeName :[UIColor whiteColor]
+                                                                          }];
+        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+        
+        [self setTitle:root_energy_title];
+    }
+    
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -120,14 +152,14 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 //    _UiOne=[[UIView alloc]initWithFrame:CGRectMake(0, 0*ScreenProH, SCREEN_Width, ScreenProH*1160)];
 //    [_scrollView addSubview:_UiOne];
     
-    UILabel *VL0= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 50*ScreenProH, 750*ScreenProH, ScreenProH*60)];
-    VL0.font=[UIFont systemFontOfSize:45*ScreenProH];
-    VL0.textAlignment = NSTextAlignmentCenter;
-    VL0.text=root_energy_title;
-    VL0.textColor =[UIColor whiteColor];
-    [_scrollView addSubview:VL0];
+//    UILabel *VL0= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 50*ScreenProH, 750*ScreenProH, ScreenProH*60)];
+//    VL0.font=[UIFont systemFontOfSize:45*ScreenProH];
+//    VL0.textAlignment = NSTextAlignmentCenter;
+//    VL0.text=root_energy_title;
+//    VL0.textColor =[UIColor whiteColor];
+//    [_scrollView addSubview:VL0];
     
-    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 143*ScreenProH, SCREEN_Width, ScreenProH*60)];
+    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 143*ScreenProH-viewAA, SCREEN_Width, ScreenProH*60)];
     V1.backgroundColor=COLOR(4, 55, 85, 0.1);
     [_scrollView addSubview:V1];
     
@@ -151,7 +183,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL2.textColor =COLOR(186, 216, 244, 1);
     [V1 addSubview:VL2];
 
-    _uiview1=[[UIView alloc]initWithFrame:CGRectMake(0, 205*ScreenProH, SCREEN_Width, ScreenProH*310)];
+    _uiview1=[[UIView alloc]initWithFrame:CGRectMake(0, 205*ScreenProH-viewAA, SCREEN_Width, ScreenProH*310)];
     [_scrollView addSubview:_uiview1];
     
     NSArray *lableName=[NSArray arrayWithObjects:root_guangfu_chanchu,root_nengyuan_chanchu, nil];
@@ -202,7 +234,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 
 -(void)initUITwo{
-    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 480*ScreenProH, SCREEN_Width, ScreenProH*60)];
+    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 480*ScreenProH-viewAA, SCREEN_Width, ScreenProH*60)];
     V1.backgroundColor=COLOR(4, 55, 85, 0.1);
     [_scrollView addSubview:V1];
     
@@ -217,7 +249,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL1.textColor =[UIColor whiteColor];
     [V1 addSubview:VL1];
     
-    UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(225*ScreenProW, 550*ScreenProH, 300*ScreenProW, ScreenProH*60)];
+    UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(225*ScreenProW, 550*ScreenProH-viewAA, 300*ScreenProW, ScreenProH*60)];
     V2.layer.borderWidth=1;
     V2.layer.cornerRadius=ScreenProH*60/2.5;
     V2.layer.borderColor=COLOR(255, 255, 255, 0.7).CGColor;
@@ -267,7 +299,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [self.selectButton addSubview:selectView];
     
     
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProW, 600*ScreenProH, 100*ScreenProW, 40*ScreenProH)];
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProW, 600*ScreenProH-viewAA, 100*ScreenProW, 40*ScreenProH)];
     VL2.font=[UIFont systemFontOfSize:25*ScreenProH];
     VL2.textAlignment = NSTextAlignmentLeft;
     NSString *N=@"W";
@@ -328,7 +360,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     
     float HH=1160*ScreenProH;
-    _uiview2=[[UIView alloc]initWithFrame:CGRectMake(0*ScreenProW, 1160*ScreenProH, 750*ScreenProW, ScreenProH*540)];
+    _uiview2=[[UIView alloc]initWithFrame:CGRectMake(0*ScreenProW, 1160*ScreenProH-viewAA, 750*ScreenProW, ScreenProH*540)];
     [_scrollView addSubview:_uiview2];
     
     NSArray *colorArray=@[COLOR(255, 217, 35, 1),COLOR(32, 219, 118, 1),COLOR(104, 247, 252, 1),COLOR(55, 110, 251, 1)];
@@ -380,32 +412,75 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_uiview2 addSubview:VL4];
     
     
-    CircleView1 *circleView1= [[CircleView1 alloc]initWithFrame:CGRectMake(0*ScreenProW, 1295*ScreenProH-HH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"1" andAllDic:_dataTwoNetAllDic];
+    CircleView1 *circleView1= [[CircleView1 alloc]initWithFrame:CGRectMake(0*ScreenProW, 1292*ScreenProH-HH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"1" andAllDic:_dataTwoNetAllDic];
   //  circleView1.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
      [_uiview2 addSubview:circleView1];
     
-    CircleView1 *circleView2= [[CircleView1 alloc]initWithFrame:CGRectMake(375*ScreenProW, 1295*ScreenProH-HH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"2" andAllDic:_dataTwoNetAllDic];
+    CircleView1 *circleView2= [[CircleView1 alloc]initWithFrame:CGRectMake(375*ScreenProW, 1292*ScreenProH-HH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"2" andAllDic:_dataTwoNetAllDic];
    //  circleView2.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
     [_uiview2 addSubview:circleView2];
     
-    NSArray *nameArray1=@[root_guangfu_chanchu_1,root_nengyuan_chanch_1,root_yongdian_xiaohao,root_yongdian_xiaohao_1];
-    NSArray *IMAGEnameArray1=@[@"solar_icon.png",@"spSmall.png",@"homeLoadSmall.png",@"gridSmall.png"];
-    for (int i=0; i<4; i++) {
-            UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(15*ScreenProW+180*ScreenProW*i, 1670*ScreenProH-HH, 180*ScreenProW, ScreenProH*25)];
+    
+    
+//    NSArray *nameArray1=@[root_guangfu_chanchu_1,root_nengyuan_chanch_1,root_yongdian_xiaohao,root_yongdian_xiaohao_1];
+//    NSArray *IMAGEnameArray1=@[@"solar_icon.png",@"spSmall.png",@"homeLoadSmall.png",@"gridSmall.png"];
+    
+    NSArray *nameArray00=@[root_chuNengJi,root_yongdian_xiaohao,root_PCS_dianwang];
+    NSArray *IMAGEnameArray00=@[@"spSmall.png",@"homeLoadSmall.png",@"gridSmall.png"];
+    UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(5*ScreenProW, 1670*ScreenProH-HH-20*ScreenProH, 210*ScreenProW, ScreenProH*25)];
+    VL1.font=[UIFont systemFontOfSize:23*ScreenProH];
+    VL1.textAlignment = NSTextAlignmentRight;
+    NSString *A=[NSString stringWithFormat:@"%@:",root_guangfu_chanchu];
+    VL1.text=A;
+    VL1.textColor =COLOR(255, 255, 255, 1);
+    [_uiview2 addSubview:VL1];
+    
+    for (int i=0; i<3; i++) {
+            UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(45*ScreenProW+180*ScreenProW+180*ScreenProW*i, 1670*ScreenProH-HH-20*ScreenProH, 180*ScreenProW, ScreenProH*25)];
         [_uiview2 addSubview:LV1];
         
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProH, 0*ScreenProH, 180*ScreenProW, ScreenProH*25)];
         VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
         VL1.textAlignment = NSTextAlignmentCenter;
-        VL1.text=nameArray1[i];
+        VL1.text=nameArray00[i];
         VL1.textColor =COLOR(255, 255, 255, 0.8);
         [LV1 addSubview:VL1];
         
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:22*ScreenProH] forKey:NSFontAttributeName];
-        CGSize size = [nameArray1[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, ScreenProH*25) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        CGSize size = [nameArray00[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, ScreenProH*25) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
         UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(90*ScreenProW-size.width/2-30*ScreenProH, 0*ScreenProH, 25*ScreenProH, ScreenProH*25)];
-        [VM1 setImage:[UIImage imageNamed:IMAGEnameArray1[i]]];
+        [VM1 setImage:[UIImage imageNamed:IMAGEnameArray00[i]]];
+        [LV1 addSubview:VM1];
+    }
+
+    
+    NSArray *nameArray100=@[root_chuNengJi,root_PCS_guangfu,root_PCS_dianwang];
+    NSArray *IMAGEnameArray100=@[@"spSmall.png",@"solar_icon.png",@"gridSmall.png"];
+    UILabel *VL100= [[UILabel alloc] initWithFrame:CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+12*ScreenProH, 210*ScreenProW, ScreenProH*25)];
+    VL100.font=[UIFont systemFontOfSize:23*ScreenProH];
+    VL100.textAlignment = NSTextAlignmentRight;
+    NSString *B=[NSString stringWithFormat:@"%@:",root_zong_yongdian];
+    VL100.text=B;
+    VL100.textColor =COLOR(255, 255, 255, 1);
+    [_uiview2 addSubview:VL100];
+    
+    for (int i=0; i<3; i++) {
+        UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(45*ScreenProW+180*ScreenProW+180*ScreenProW*i, 1670*ScreenProH-HH+12*ScreenProH, 180*ScreenProW, ScreenProH*25)];
+        [_uiview2 addSubview:LV1];
+        
+        UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProH, 0*ScreenProH, 180*ScreenProW, ScreenProH*25)];
+        VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
+        VL1.textAlignment = NSTextAlignmentCenter;
+        VL1.text=nameArray100[i];
+        VL1.textColor =COLOR(255, 255, 255, 0.8);
+        [LV1 addSubview:VL1];
+        
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:22*ScreenProH] forKey:NSFontAttributeName];
+        CGSize size = [nameArray100[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, ScreenProH*25) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        
+        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(90*ScreenProW-size.width/2-30*ScreenProH, 0*ScreenProH, 25*ScreenProH, ScreenProH*25)];
+        [VM1 setImage:[UIImage imageNamed:IMAGEnameArray100[i]]];
         [LV1 addSubview:VM1];
     }
 
@@ -414,7 +489,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 
 -(void)initUiThree{
-    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 1730*ScreenProH, SCREEN_Width, ScreenProH*60)];
+    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 1730*ScreenProH-viewAA, SCREEN_Width, ScreenProH*60)];
     V1.backgroundColor=COLOR(4, 55, 85, 0.1);
     [_scrollView addSubview:V1];
     
@@ -429,7 +504,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL1.textColor =[UIColor whiteColor];
     [V1 addSubview:VL1];
     
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(43*ScreenProW, 1800*ScreenProH, SCREEN_Width, ScreenProH*30)];
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(43*ScreenProW, 1800*ScreenProH-viewAA, SCREEN_Width, ScreenProH*30)];
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL2.textAlignment = NSTextAlignmentLeft;
     VL2.text=@"%";
@@ -555,7 +630,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         _lineChart=nil;
     }
     
-    _lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 620*ScreenProH, 730*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
+    _lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 620*ScreenProH-viewAA, 730*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
     _lineChart.xlableNameArray=[NSArray arrayWithArray:tempXArr];
       _lineChart.xLineDataArr =xArray;
    _lineChart.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 10*ScreenProW);
@@ -648,7 +723,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         _lineChart2=nil;
     }
     
-    _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH, 730*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
+    _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-viewAA, 730*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
     _lineChart2.xlableNameArray=[NSArray arrayWithArray:tempXArr];
     _lineChart2.xLineDataArr =xArray;
     _lineChart2.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 10*ScreenProW);
@@ -676,7 +751,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_scrollView addSubview:_lineChart2];
     [_lineChart2 showAnimation];
     
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2350*ScreenProH, 730*ScreenProW, 30*ScreenProH)];
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2350*ScreenProH-viewAA, 730*ScreenProW, 30*ScreenProH)];
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL2.textAlignment = NSTextAlignmentCenter;
     VL2.text=root_shishi_SOC;
@@ -757,7 +832,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         _uiviewThree=nil;
     }
     
-    _uiviewThree=[[UIView alloc]initWithFrame:CGRectMake(0, 2400*ScreenProH, SCREEN_Width, ScreenProH*600)];
+    _uiviewThree=[[UIView alloc]initWithFrame:CGRectMake(0, 2400*ScreenProH-viewAA, SCREEN_Width, ScreenProH*600)];
     [_scrollView addSubview:_uiviewThree];
     
     JHColumnChart *column = [[JHColumnChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 2400*ScreenProH-HH, 730*ScreenProW, 530*ScreenProH)];
@@ -946,33 +1021,19 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 }
 
 
--(void)viewWillAppear:(BOOL)animated{
-    [self prefersStatusBarHidden];
-    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
-    
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    NSString *isNew=[ud objectForKey:@"isNewEnergy"];
-    if ([isNew isEqualToString:@"N"]) {
-        [self.navigationController setNavigationBarHidden:NO];
-        [self.navigationController popViewControllerAnimated:NO];
-        
-    }else{
-        [self.navigationController setNavigationBarHidden:YES];
-    }
-    
-}
 
-- (BOOL)prefersStatusBarHidden
-{
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    NSString *isNew=[ud objectForKey:@"isNewEnergy"];
-    if ([isNew isEqualToString:@"N"]) {
-        return NO;//隐藏为YES，显示为NO
-    }else{
-        return  YES;
-    }
-    
-}
+
+//- (BOOL)prefersStatusBarHidden
+//{
+//    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+//    NSString *isNew=[ud objectForKey:@"isNewEnergy"];
+//    if ([isNew isEqualToString:@"N"]) {
+//        return NO;//隐藏为YES，显示为NO
+//    }else{
+//        return  YES;
+//    }
+//    
+//}
 
 - (void)pickDate {
     self.lastButton.enabled = NO;
@@ -1077,9 +1138,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 -(void)viewDidDisappear:(BOOL)animated{
 
-   // [ _scrollView removeFromSuperview];
-  //  self.view=nil;
-    
+   [self.navigationController setNavigationBarHidden:NO];
+    //   [self.navigationController popViewControllerAnimated:NO];
 }
 
 

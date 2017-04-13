@@ -1226,7 +1226,7 @@
     if([_deviceHeadType isEqualToString:@"1"]){
          animationNumber=0;
         [self getPCSnet];
-       
+              
           [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"isNewEnergy"];
         
     }else{
@@ -1236,6 +1236,8 @@
     }
     
 }
+
+
 
 -(void)getPCSHead{
 //    [_animationView removeFromSuperview];

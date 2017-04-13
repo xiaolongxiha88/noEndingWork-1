@@ -655,6 +655,7 @@
 #define  root_yongdian_xiaohao   NSLocalizedString(@"62用电消耗", nil)
 #define  root_yongdian_xiaohao_1   NSLocalizedString(@"621用电消耗", nil)
 
+
 #define  root_dangri  NSLocalizedString(@"63当日", nil)
 #define  root_leiji  NSLocalizedString(@"64累计", nil)
 #define  root_nengyuan_chanhao  NSLocalizedString(@"65能源产耗", nil)

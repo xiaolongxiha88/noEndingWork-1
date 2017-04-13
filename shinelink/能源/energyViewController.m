@@ -35,6 +35,14 @@
 
 -(void)viewWillAppear:(BOOL)animated{
 
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{
+                                                                      NSForegroundColorAttributeName :[UIColor whiteColor]
+                                                                      }];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+ 
+    
     
     
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
@@ -52,7 +60,9 @@
 //            [self.navigationController pushViewController:findVc animated:YES];
 //        }
     }else{
+           [self setTitle:root_energy];
       [self netEnergy];
+        
     }
     
     

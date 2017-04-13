@@ -83,11 +83,13 @@ static NSString *mainCell = @"mainCellmainCell";
         
         if ([isNew isEqualToString:@"Y"]) {
             if ([deviceType isEqualToString:@"0"]) {
+          //        self.title = @"";
                 newEnergyStorage2000 *findVc=[[newEnergyStorage2000 alloc]init];
              [self.navigationController pushViewController:findVc animated:YES];
             //    [self presentViewController:findVc animated:NO completion:nil];
               
             }else{
+               //     self.title = @"";
                 newEnergyStorage *findVc=[[newEnergyStorage alloc]init];
           [self.navigationController pushViewController:findVc animated:YES];
             }
