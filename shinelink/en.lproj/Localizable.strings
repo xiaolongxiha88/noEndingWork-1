@@ -634,7 +634,7 @@
 "64累计"="Total";
 "65能源产耗"="Energy production and consumption";
 "66总用电"="Total consumption";
-"67储能能源"="System state";
+"67储能能源"="Storage state";
 "68面板电量"="Panel power";
 "69储能充放电信息"="Charge and discharge information";
 "70实时SOC"="Battery SOC";

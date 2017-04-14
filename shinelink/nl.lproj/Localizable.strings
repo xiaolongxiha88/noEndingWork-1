@@ -624,3 +624,20 @@
 "原密码错误"="Old password is wrong";
 "56手机号格式错误"="Malformed phone number";
 "57输入11位手机号"="Please enter 11 phone numbers";
+
+"58能源概览"="Energy overview";
+"59光伏产出"="Solar production";
+"60能源产出"="Storage production";
+"61电网消耗"="Energy purchased from grid";
+"62用电消耗"="Consumption";
+"63当日"="Today";
+"64累计"="Total";
+"65能源产耗"="Energy production and consumption";
+"66总用电"="Total consumption";
+"67储能能源"="Storage state";
+"68面板电量"="Panel power";
+"69储能充放电信息"="Charge and discharge information";
+"70实时SOC"="Battery SOC";
+"591光伏产出"="Solar";
+"601能源产出"="Storage";
+"621用电消耗"="grid";

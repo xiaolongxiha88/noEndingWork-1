@@ -64,7 +64,6 @@
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages objectAtIndex:0];
     
- 
     if ([currentLanguage hasPrefix:@"zh-Hans"]) {
         _languageValue=@"0";
     }else if ([currentLanguage hasPrefix:@"en"]) {

@@ -8,7 +8,7 @@
 
 #import "addStationViewController.h"
 #import "RootPickerView.h"
-
+#import "loginViewController.h"
 
 @interface addStationViewController ()<UITextFieldDelegate>
 @property (nonatomic, strong) UIDatePicker *datePicker;
@@ -29,6 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
    _counrtyName=(NSString*)[ud objectForKey:@"counrtyName"];
@@ -250,7 +252,10 @@
         id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         if ([jsonObj[@"success"] integerValue]==1) {
             [self showAlertViewWithTitle:nil message:root_tianjia_dianzhan_chenggong cancelButtonTitle:root_Yes];
-            [self.navigationController popViewControllerAnimated:YES];
+            
+            [self registerUser];
+            
+           // [self.navigationController popViewControllerAnimated:YES];
         }else{
             
             if ([jsonObj[@"msg"] integerValue]==502) {
@@ -282,6 +287,29 @@
 }
 
 
+-(void)registerUser{
+    
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *reUsername=[ud objectForKey:@"userName"];
+    NSString *rePassword=[ud objectForKey:@"userPassword"];
+    
+    [[UserInfo defaultUserInfo] setUserPassword:nil];
+    [[UserInfo defaultUserInfo] setUserName:nil];
+    [[UserInfo defaultUserInfo] setServer:nil];
+    loginViewController *login =[[loginViewController alloc]init];
+    if ([reUsername isEqualToString:@"guest"]) {
+        login.oldName=nil;
+        login.oldPassword=nil;
+    }else{
+        login.oldName=reUsername;
+        login.oldPassword=rePassword;
+    }
+    
+    self.hidesBottomBarWhenPushed=YES;
+    [login.navigationController setNavigationBarHidden:YES];
+    [self.navigationController pushViewController:login animated:YES];
+    
+}
 
 
 - (void)chooseDate:(UIDatePicker *)sender {

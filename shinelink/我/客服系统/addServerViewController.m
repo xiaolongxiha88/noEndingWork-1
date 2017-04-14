@@ -296,12 +296,17 @@
         NSLog(@"addCustomerQuestion==%@", content);
         [self hideProgressView];
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSString *result0=[NSString stringWithFormat:@"%@",content1];
         if (content1) {
-            if ([content1 integerValue] == 1) {
+            
+            if ([result0 integerValue] == 1) {
                
                     [self showAlertViewWithTitle:nil message:root_ME_tianjia_chenggong cancelButtonTitle:root_Yes];
                 [self.navigationController popViewControllerAnimated:NO];
-                }
+            }else{
+                [self showAlertViewWithTitle:nil message:root_ME_tianjia_shibai cancelButtonTitle:root_Yes];     
+                [self.navigationController popViewControllerAnimated:NO];
+            }
             }else{
                 
                 [self showAlertViewWithTitle:nil message:root_ME_tianjia_shibai cancelButtonTitle:root_Yes];
