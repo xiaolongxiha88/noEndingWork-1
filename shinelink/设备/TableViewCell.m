@@ -24,9 +24,9 @@
 
 @implementation TableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
+//- (void)awakeFromNib {
+//    // Initialization code
+//}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
 if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -69,8 +69,9 @@ if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
 //    _stateView.layer.cornerRadius=labelWidth1/2/2.0;
 //    [self.contentView addSubview:_stateView];
     
-    self.stateValue = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+140*NOW_SIZE, 0*NOW_SIZE, 105*NOW_SIZE, 50*HEIGHT_SIZE)];
+    self.stateValue = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+140*NOW_SIZE-7*NOW_SIZE, 0*NOW_SIZE, 105*NOW_SIZE, 50*HEIGHT_SIZE)];
     self.stateValue.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    _stateValue.adjustsFontSizeToFitWidth=YES;
     self.stateValue.textAlignment = NSTextAlignmentLeft;
    self.stateValue.textColor = [UIColor labelColor];
     [self.contentView addSubview:_stateValue];
@@ -78,6 +79,7 @@ if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
     self.power = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+10*NOW_SIZE, 40*HEIGHT_SIZE, labelWidth1, labelHeight)];
     self.power.text = root_gongLv;
     self.power.font=[UIFont systemFontOfSize:fontSize];
+    _power.adjustsFontSizeToFitWidth=YES;
     self.power.textAlignment = NSTextAlignmentRight;
     self.power.textColor = [UIColor labelColor];
     [self.contentView addSubview:_power];
@@ -90,6 +92,7 @@ if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
     
     self.electric = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+60*NOW_SIZE+labelWidth1, 40*HEIGHT_SIZE, labelWidth1+70*NOW_SIZE, labelHeight)];
     self.electric.font=[UIFont systemFontOfSize:fontSize];
+    _electric.adjustsFontSizeToFitWidth=YES;
     self.electric.textAlignment = NSTextAlignmentRight;
     self.electric.textColor = [UIColor labelColor];
     [self.contentView addSubview:_electric];

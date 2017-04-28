@@ -254,6 +254,7 @@
     PV.text=root_CNJ_SP;
     PV.textAlignment=NSTextAlignmentLeft;
     PV.textColor=[UIColor whiteColor];
+         PV.adjustsFontSizeToFitWidth=YES;
     PV.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [_scrollView addSubview:PV];
     

@@ -202,18 +202,19 @@
     float H_down=20*HEIGHT_SIZE;
     
     if (!_forgetLable) {
-     self.forgetLable= [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+     self.forgetLable= [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, 140*NOW_SIZE, 40*HEIGHT_SIZE)];
     }
     
  NSString *LableContent1=root_forget_pwd;
        NSDictionary *attributes1 = @{NSFontAttributeName:[UIFont systemFontOfSize:14*HEIGHT_SIZE],};
-    CGSize textSize1 = [LableContent1 boundingRectWithSize:CGSizeMake(120*NOW_SIZE,40*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes1 context:nil].size;
+    CGSize textSize1 = [LableContent1 boundingRectWithSize:CGSizeMake(140*NOW_SIZE,40*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes1 context:nil].size;
      [ self.forgetLable setFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, textSize1.width, 40*HEIGHT_SIZE)];
     
     self.forgetLable.text=root_forget_pwd;
      self.forgetLable.textColor=[UIColor whiteColor];
         self.forgetLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     self.forgetLable.textAlignment = NSTextAlignmentLeft;
+ //   _forgetLable.adjustsFontSizeToFitWidth=YES;
      self.forgetLable.userInteractionEnabled=YES;
     UITapGestureRecognizer * forget2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(forget2)];
     [self.forgetLable addGestureRecognizer:forget2];
@@ -231,6 +232,7 @@
     self.registLable.text=root_register;
     self.registLable.textColor=[UIColor whiteColor];
     self.registLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+   // self.registLable.font =_forgetLable.font;
     self.registLable.textAlignment = NSTextAlignmentRight;
     self.registLable.userInteractionEnabled=YES;
     UITapGestureRecognizer * forget1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLable2)];
@@ -501,17 +503,19 @@ NSLog(@"体验馆");
             if ([content[@"success"] integerValue] == 0) {
                 //登陆失败
                 if ([content[@"msg"] integerValue] == 501) {
-                    
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_yongHuMing_mima_weikong delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
-                    [alertView show];
+                    [self showAlertViewWithTitle:nil message:root_yongHuMing_mima_weikong cancelButtonTitle:root_OK];
+                  //  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_yongHuMing_mima_weikong delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
+                   // [alertView show];
                 }
                 if ([content[@"msg"] integerValue] ==502) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_yongHuMing_mima_cuowu delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
-                    [alertView show];
+                        [self showAlertViewWithTitle:nil message:root_yongHuMing_mima_cuowu cancelButtonTitle:root_OK];
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_yongHuMing_mima_cuowu delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
+//                    [alertView show];
                 }
                 if ([content[@"msg"] integerValue] ==503) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_fuWuQi_cuoWu delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
-                    [alertView show];
+                       [self showAlertViewWithTitle:nil message:root_fuWuQi_cuoWu cancelButtonTitle:root_OK];
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_fuWuQi_cuoWu delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
+//                    [alertView show];
                 }
                 
                 if (!_scrollView) {

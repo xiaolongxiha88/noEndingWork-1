@@ -197,6 +197,7 @@
         UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(50*NOW_SIZE,10*HEIGHT_SIZE+i*60*HEIGHT_SIZE+moveHeight, 100*NOW_SIZE, 30*HEIGHT_SIZE)];
         label.text=labelArray[i];
         label.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        label.adjustsFontSizeToFitWidth=YES;
         label.textColor=[UIColor whiteColor];
         label.tag=10+i;
         [_backScroll addSubview:label];
@@ -243,6 +244,7 @@
     userOk.text=root_yonghu_xieyi;
    userOk.textColor=[UIColor whiteColor];
     userOk.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    userOk.adjustsFontSizeToFitWidth=YES;
     userOk.textAlignment = NSTextAlignmentCenter;
     userOk.userInteractionEnabled=YES;
     UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GoUsert)];

@@ -102,6 +102,7 @@
     firstL.textAlignment=NSTextAlignmentCenter;
     firstL.textColor=[UIColor blackColor];
     firstL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+     firstL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:firstL];
     
     UIButton *secondB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE+74*NOW_SIZE, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*NOW_SIZE,50*HEIGHT_SIZE )];
@@ -113,6 +114,7 @@
     secondL.textAlignment=NSTextAlignmentCenter;
     secondL.textColor=[UIColor blackColor];
     secondL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    secondL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:secondL];
     
     UIButton *threeB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE+74*NOW_SIZE*2, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*NOW_SIZE,50*HEIGHT_SIZE )];
@@ -124,6 +126,7 @@
     threeL.textAlignment=NSTextAlignmentCenter;
     threeL.textColor=[UIColor blackColor];
     threeL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    threeL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:threeL];
     
     UIButton *fourB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE+74*NOW_SIZE*3, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*NOW_SIZE,50*HEIGHT_SIZE )];
@@ -135,6 +138,7 @@
     fourL.textAlignment=NSTextAlignmentCenter;
     fourL.textColor=[UIColor blackColor];
     fourL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    fourL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:fourL];
     
     _scrollView.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height+20*HEIGHT_SIZE);
@@ -255,6 +259,7 @@
     leftState.textAlignment=NSTextAlignmentLeft;
     leftState.textColor=[UIColor whiteColor];
     leftState.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+      leftState.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:leftState];
     
     
@@ -276,6 +281,7 @@
     rightState.textAlignment=NSTextAlignmentRight;
     rightState.textColor=[UIColor whiteColor];
     rightState.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    rightState.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:rightState];
     
     UILabel *dataName=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 245*HEIGHT_SIZE-SizeH, 180*NOW_SIZE,20*HEIGHT_SIZE )];
@@ -283,6 +289,7 @@
     dataName.textAlignment=NSTextAlignmentLeft;
     dataName.textColor=[UIColor blackColor];
     dataName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    dataName.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:dataName];
     
     //_status=@"1";
@@ -339,6 +346,7 @@
         Status.textColor=[UIColor whiteColor];
     }
     Status.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+     Status.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:Status];
     
     UILabel *power1=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3+35*HEIGHT_SIZE, 100*NOW_SIZE,40*HEIGHT_SIZE )];
