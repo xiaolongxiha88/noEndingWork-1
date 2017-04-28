@@ -11,6 +11,9 @@
 #import "UIImageView+AFNetworking.h"
 #import "UIKit+AFNetworking.h"
 #import "sys/utsname.h"
+#import <SystemConfiguration/CaptiveNetwork.h>
+#import <CommonCrypto/CommonDigest.h>
+
 
 @implementation BaseRequest
 + (void)requestWithMethod:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
@@ -25,6 +28,13 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",[error localizedDescription]);
         failure(error);
+        
+        NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"lostLogin"];
+        if ([lostLogin isEqualToString:@"Y"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"lostLogin"];
+        }else{
+            [self netRequest];
+        }
     }];
 }
 
@@ -42,6 +52,13 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",[error localizedDescription]);
         failure(error);
+        
+        NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"lostLogin"];
+        if ([lostLogin isEqualToString:@"Y"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"lostLogin"];
+        }else{
+            [self netRequest];
+        }
     }];
 }
 
@@ -57,6 +74,13 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",[error localizedDescription]);
         failure(error);
+        
+        NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"lostLogin"];
+        if ([lostLogin isEqualToString:@"Y"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"lostLogin"];
+        }else{
+            [self netRequest];
+        }
     }];
 }
 
@@ -74,6 +98,13 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",[error localizedDescription]);
         failure(error);
+        
+        NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"lostLogin"];
+        if ([lostLogin isEqualToString:@"Y"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"lostLogin"];
+        }else{
+            [self netRequest];
+        }
     }];
 }
 
@@ -90,6 +121,13 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",[error localizedDescription]);
         failure(error);
+        
+        NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"lostLogin"];
+        if ([lostLogin isEqualToString:@"Y"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"lostLogin"];
+        }else{
+            [self netRequest];
+        }
     }];
 }
 
@@ -107,6 +145,14 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
         failure(error);
+        
+        NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"lostLogin"];
+        if ([lostLogin isEqualToString:@"Y"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"lostLogin"];
+        }else{
+            [self netRequest];
+        }
+        
     }];
 }
 
@@ -131,9 +177,19 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
         failure(error);
+        
+        NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"lostLogin"];
+        if ([lostLogin isEqualToString:@"Y"]) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"lostLogin"];
+        }else{
+            [self netRequest];
+        }
+        
     }];
     
 }
+
+
 
 
 +(void)getAppError:(NSString*)msg useName:(NSString*)useName{
@@ -172,11 +228,72 @@
         }
         
     } failure:^(NSError *error) {
-    
+  
+
+        
     }
      
      ];
     
+}
+
+
+
++(void)netRequest{
+    
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *reUsername=[ud objectForKey:@"userName"];
+    NSString *rePassword=[ud objectForKey:@"userPassword"];
+    
+     [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"lostLogin"];
+    
+    if (!(reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] ))){
+        
+        [BaseRequest requestWithMethod:HEAD_URL paramars:@{@"userName":reUsername, @"password":[self MD5:rePassword]} paramarsSite:@"/newLoginAPI.do" sucessBlock:^(id content) {
+            
+            NSLog(@"loginIn:%@",content);
+            if (content) {
+                if ([content[@"success"] integerValue] == 0) {
+                    //登陆失败
+                    if ([content[@"msg"] integerValue] == 501) {
+                        
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"User name or password is blank" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+                        [alertView show];
+                    }
+                    if ([content[@"msg"] integerValue] ==502) {
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"username password error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+                        [alertView show];
+                    }
+                    if ([content[@"msg"] integerValue] ==503) {
+                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"server error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+                        [alertView show];
+                    }
+                }
+                
+            }
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+    }
+}
+
+
+
++ (NSString *)MD5:(NSString *)str {
+    const char *cStr = [str UTF8String];
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(cStr, (CC_LONG)strlen(cStr), digest);
+    NSMutableString *result = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++) {
+        NSString *tStr = [NSString stringWithFormat:@"%x", digest[i]];
+        if (tStr.length == 1) {
+            [result appendString:@"c"];
+        }
+        [result appendFormat:@"%@", tStr];
+    }
+    return result;
 }
 
 

@@ -411,6 +411,8 @@
      }
 }
 
+
+
 - (NSString *)MD5:(NSString *)str {
     const char *cStr = [str UTF8String];
     unsigned char digest[CC_MD5_DIGEST_LENGTH];

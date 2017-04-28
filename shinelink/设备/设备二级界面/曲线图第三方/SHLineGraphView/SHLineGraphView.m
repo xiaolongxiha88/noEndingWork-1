@@ -195,7 +195,7 @@
     /*
      actual plot drawing
      */
-    [self drawPlot:plot];
+ [self drawPlot:plot];
 }
 
 -(void)getDirct{
@@ -276,7 +276,7 @@
     [graphLayer setStrokeColor:((UIColor *)theme[kPlotStrokeColorKey]).CGColor];
     [graphLayer setLineWidth:((NSNumber *)theme[kPlotStrokeWidthKey]).intValue];
     
-    CGMutablePathRef graphPath = CGPathCreateMutable();
+
     
     double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
     double yIntervalValue = yRange / INTERVAL_COUNT;
@@ -303,21 +303,40 @@
         
     }];
     
+    
+      //  CGMutablePathRef graphPath = CGPathCreateMutable();
+     UIBezierPath *graphPath = [UIBezierPath bezierPath];
+    
     //move to initial point for path and background.
-    CGPathMoveToPoint(graphPath, NULL, _leftMarginToLeave, plot.xPoints[0].y);
+    
+     [graphPath moveToPoint:CGPointMake(_leftMarginToLeave,  plot.xPoints[0].y)];
+    
+  //  CGPathMoveToPoint(graphPath, NULL, _leftMarginToLeave, plot.xPoints[0].y);
     CGPathMoveToPoint(backgroundPath, NULL, _leftMarginToLeave, plot.xPoints[0].y);
     
     int count = (int)_xAxisValues.count;
     for(int i=0; i< count; i++){
-        CGPoint point = plot.xPoints[i];
-        CGPathAddLineToPoint(graphPath, NULL, point.x, point.y);
+         CGPoint point = plot.xPoints[i];
+        CGPoint prePoint ;
+        if (i>0) {
+        prePoint = plot.xPoints[(i-1)];
+        }else{
+         prePoint = plot.xPoints[i];
+        }
+       
+           [graphPath addCurveToPoint:point controlPoint1:CGPointMake((point.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((point.x+prePoint.x)/2, point.y)];
+        
+       
+      //  CGPathAddLineToPoint(graphPath, NULL, point.x, point.y);
         CGPathAddLineToPoint(backgroundPath, NULL, point.x, point.y);
         CGFloat dotsSize = [_themeAttributes[kDotSizeKey] floatValue];
         CGPathAddEllipseInRect(circlePath, NULL, CGRectMake(point.x - dotsSize/2.0f, point.y - dotsSize/2.0f, dotsSize, dotsSize));
     }
     
     //move to initial point for path and background.
-    CGPathAddLineToPoint(graphPath, NULL, _leftMarginToLeave + PLOT_WIDTH, plot.xPoints[count -1].y);
+   // CGPathAddLineToPoint(graphPath, NULL, _leftMarginToLeave + PLOT_WIDTH, plot.xPoints[count -1].y);
+         [graphPath addLineToPoint:CGPointMake(_leftMarginToLeave + PLOT_WIDTH, plot.xPoints[count -1].y)];
+    
     CGPathAddLineToPoint(backgroundPath, NULL, _leftMarginToLeave + PLOT_WIDTH, plot.xPoints[count - 1].y);
     
     //additional points for background.
@@ -326,7 +345,8 @@
     CGPathCloseSubpath(backgroundPath);
     
     backgroundLayer.path = backgroundPath;
-    graphLayer.path = graphPath;
+  //  graphLayer.path = graphPath;
+     graphLayer.path = graphPath.CGPath;
     circleLayer.path = circlePath;
     
     //animation

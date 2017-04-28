@@ -58,4 +58,7 @@ typedef void (^successBlock) (id content);
 
 +(NSString*)getValidCode:(NSString*)serialNum;
 
+
+
+
 @end

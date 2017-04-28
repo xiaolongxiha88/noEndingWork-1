@@ -644,6 +644,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		330A80141EB1D4B800C187FB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		330E3DEC1D0D6CF300DF75AE /* enabler.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enabler.png; sourceTree = "<group>"; };
 		330E3DEE1D0D6D2100DF75AE /* priority.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = priority.png; sourceTree = "<group>"; };
 		330E3DF01D0D6D4B00DF75AE /* 形状17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状17.png"; sourceTree = "<group>"; };
@@ -3735,6 +3736,7 @@
 				el,
 				tr,
 				nl,
+				de,
 			);
 			mainGroup = 337F9C771C71A6710016FE43;
 			productRefGroup = 337F9C811C71A6710016FE43 /* Products */;
@@ -4421,6 +4423,7 @@
 				33A438511D1BB63D004E9AB6 /* el */,
 				33A438521D1BB651004E9AB6 /* tr */,
 				33A438531D1BB658004E9AB6 /* nl */,
+				330A80141EB1D4B800C187FB /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

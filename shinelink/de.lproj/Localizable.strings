@@ -1,0 +1,643 @@
+
+"立即体验"="Jetzt testen";
+"下一步"="Weiter";
+"完成"="Fertig";
+"服务器错误"="Server Fehler";
+"拍照"="Foto aufnehmen";
+"从相册选取"="Wähle aus Bildern";
+"取消"="Abbrechen";
+"警告"="Warnung";
+"确定"="Ja";
+"删除"="Löschen";
+"扫描结果"="Suchergebnis";
+
+
+"Enter your username"="Benutzername eingeben";
+"Enter your pwd"="Passwort eingeben";
+"忘记密码"="Passwort vergessen";
+"注册"="Registrieren";
+"登陆"="Einloggen";
+"温馨提示 "="Hinweis";
+"请输入用户名 "="Benutzername eingeben";
+"请输入密码 "="Passwort eingeben";
+
+
+"国家"="Land";
+"点击选择国家"="Land auswählen";
+"请选择国家和城市"="Land und Stadt auswählen";
+"请再次进入页面获取国家列表"="Bitte gehen Sie noch einmal zur Länderauswahl";
+
+"用户名"="Benutzername";
+"密码"="Passwort";
+"重复密码"="Passwort wiederholen";
+"重复输入密码"="Passwort wiederholen";
+"电子邮箱"="Email";
+"联系电话"="Telefonnummer";
+
+"代理商编号"="Agentur ID";
+"输入代理商编号"="Bitte Agentur ID eingeben";
+"请输入相同的密码"="Bitte geben Sie das Passwort erneut ein.";
+"用户名必须大于3位"="Benutzername muss aus mindestens 3 Zeichen bestehen";
+"密码必须大于6位"="Passwort muss aus mindestens 6 Zeichen bestehen";
+"位置"="Standort";
+
+"点击获取城市和经纬度"="Standort ermitteln";
+"Enter email"="Email eingeben";
+"Enter phone number"="Telefonnumer eingeben";
+"Networking Timeout"="Netzwerkzeitüberschreitung";
+"Yes"="Ja";
+"请输入采集器序列号"="Datenlogger Seriennummer eingeben";
+"请输入正确采集器序列号"="Bitte korrekte Seriennummer eingeben";
+"请输入采集器校验码"="Datenlogger Prüfcode eingeben";
+"请输入正确采集器校验码"="Bitte korrekten Prüfcode einegeben";
+"扫描条形码"="Barcode scannen";
+"位置"="Standort";
+
+
+"超出版本限制注册用户数量"="Anzahl der Benutzer erreicht Limit";
+"服务器错误"="Server Fehler";
+"注册错误"="Registrierungsfehler";
+"采集器序列号或校验码错误"="Seriennummer oder Prüfcode falsch";
+"代理商编码错误"="Agentur ID falsch";
+"注册成功"="Registrierung erfolgreich";
+"用户名已被使用"="Benutzername bereits registriert";
+
+"找回密码"="Passwort wiederherstellen";
+"通过用户名"="Benutzername bereits vergeben";
+"通过序列号"="Seriennummer bereits registriert";
+"请输入正确的用户名"="Bitte richtigen Benutzernamen eingeben";
+"发送邮件失败"="E-Mail Versand fehlgeschlagen";
+"不能找到用户名"="Benutzername konnte nicht gefunden werden";
+"配置设备"="Gerät konfigurieren";
+"校验码错误"="Fehler Verifizierungscode";
+
+"设备"="Gerät konfigurieren";
+"示范电站"="Demoanlage";
+"逆变器"="Wechselrichter";
+"储能机"="Energiespeicher";
+"充电桩"="e-Auto Ladesäule";
+"功率调节器"="Tauchsieder";
+"未连接"="Nicht verbunden";
+"添加设备"="Gerät hinzufügen";
+"系统错误"="Systemfehler";
+"删除成功"="Löschen erfolgreich";
+"采集器列表"="Liste Datenlogger";
+
+"Add Plant" = "Anlage hinzufügen";
+"Remove Station" = "Anlage löschen";
+"Upload Picture" = "Bild hochladen";
+"Cancel"="Abbrechen";
+
+
+
+"系统错误"="Systemfehler";
+"修改成功"="Ändern erfolgreich";
+"已配置设备"=" Meine Geräte";
+"未配置设备"="Demogerät";
+"日电量:"="Energie heute:";
+"电池百分比:"="Ladestatus:";
+"编辑"="Bearbeiten";
+"置顶 "="Pinnen";
+
+"等待 "="Warten";
+"正常 "="Normal";
+"故障"="Fehler";
+"断开"="Nicht verbunden";
+"闲置 "="Standby";
+"充电 "="Laden";
+"放电 "="Entladen";
+"详情 "="Details";
+"功率:"="Leistung:";
+
+"请输入设备别名"="Gerätename eingeben";
+"修改别名"="Gerätename ändern";
+"修改头像"="Bild ändern";
+"删除设备"="Gerät löschen";
+
+"控制"="Einstellungen";
+"参数"="WR-Info";
+"数据"="Daten";
+"日志"="Ereignisse";
+
+
+
+"日电量"="Energie heute";
+"当前功率"="Aktuelle Leistung";
+"总电量"="Gesamtleistung";
+"日发电量"="Energie heute";
+"设置有效功率"="Wirkleistung einstellen";
+"设置无功功率"="Blindleistung einstellen";
+
+"设置PF值"="Verschiebungsfaktor einstellen";
+"设置逆变器时间:"="Wechslrichteruhrzeit einstellen";
+"是否确定开启逆变器"="Wechselrichter einschalten";
+"是否确定关闭逆变器"="Wechselrichter ausschalten";
+"设置逆变器开关机"="Wechselrichter Ein-/Ausschalten";
+"序列号:"="Seriennummer:";
+"类型:"="Typ:";
+"事件号:"="Ereignisnummer:";
+"标识:"="Kennzeichnung:";
+
+"日放电量"="Energie heute entladen";
+"总放电量"="Gesamtenergie entladen";
+"电池百分比(%)"="Ladestatus:";
+"设置储能机开关机"="Speicher Ein-/Ausschalten";
+"锂电池SOC下限设定"="Entladetiefe Limit einstellen";
+"设置储能机时间"="Uhrzeit Energiespeicher einstellen";
+"强制放电使能"="Zwangsentladung aktivieren";
+"强制放电时间段"="Uhrzeit Zwangsentladung";
+"设置输入SP的组串电压"="Strangspannung Energiespeicher einstellen";
+"开机"="Einschalten";
+"关机"="Ausschalten";
+
+
+"锂电池SOC下限设定"="Entladetiefe Limit einstellen";
+"设置储能机时间:"="Uhrzeit SP-Gerät einstellen:";
+"强制放电使能:"="Zwangsentladung aktivieren:";
+"开"="Ein";
+"关"="Aus";
+"强制放电时间段:"="Uhrzeit Zwangsentladung:";
+"至"="An";
+"开路电压(300~500V):"="Voc (300-500V):";
+"MPP电压:"="Vmpp:";
+
+
+"所属服务器错误"="Serverfehler";
+"序列号为空"="Keine Seriennummer";
+"不在线"="offline";
+"采集器不在线"="Datenlogger offline";
+"参数类型不存在"="Parameter nicht bekannt";
+"参数为空"="Parameter leer";
+"参数不在范围内"="Parameter ausserhalb des zulässigen Bereichs";
+"时间参数不正确"="Uhrzeit falsch";
+"参数设置成功"="Parametereingabe erfolgreich";
+"是否确定开启储能机"="Energiespeicher einschalten";
+"是否确定关闭储能机"="Energiespeicher ausschalten";
+
+"型号"="Model";
+"序列号"="Seriennummer";
+"端口"="Port";
+"别名"="Name";
+"额定功率"="Nennleistung (W)";
+"固件版本"="Firmware Version";
+"属性"="Attribute";
+"模式"="Modus";
+"组别"="Gruppennummer";
+"设备类型"="Geräteart";
+"数据更新时间"="Aktualisierungsintervall";
+
+"添加设备"="Gerät hinzufügen";
+"添加出错"="Gerät hinzufügen fehlgeschlagen";
+"没有权限"="Kein Zugriff";
+"采集器序列号错误"="Seriennummer Datenlogger falsch";
+"总体采集器数量超出限制"="Maximale Anzahl von Datenloggern erreicht";
+"单个电站采集器数量超出限制"="Maximale Anzahl von Datenloggern für eine Anlage erreicht";
+"采集器序列号已经存在"="Seriennummer existiert bereits";
+"序列号与校验码不匹配"=" Seriennummer und Prüfcode passen nicht zusammen";
+"设备添加成功"="Gerät erfolgreich hinzugefügt";
+
+"添加采集器"="Datenlogger hinzufügen";
+"编辑采集器"="Datenlogger bearbeiten";
+"删除采集器"="Datenlogger löschen";
+"配置采集器"="Datenlogger konfigurieren";
+
+
+"Add"="Hinzufügen";
+"aliases"="Namen";
+"datalog sn"="Seriennummer Datenlogger";
+"group"="Gruppe";
+"device type"="Geräteart";
+
+"Plant Detail" = "Anlagendetails";
+"DAY" = "TAG";
+"MONTH" = "MONAT";
+"YEAR" = "JAHR";
+"TOTAL" = "GESAMT";
+"Daily Returns" = "Tagesertrag";
+"Daily Electricity" = "Tagesproduktion";
+"Earnings" = "Monatsertrag";
+"Month energy" = "Monatsproduktion";
+"Earnings" = "Jahresertrag";
+"Year energy" = "Jahresproduktion";
+"Earnings" = "Gesamtertrag";
+"Total energy" = "Gesamtproduktion";
+"Powre" = "Leistung (W)";
+"Plant Overview" = "Anlagenübersicht";
+"Device List" = "Geräteliste";
+"Event List" = "Ereignisliste";
+"Map" = "Karte";
+"Voltage"="Spannung (V)";
+"Electron flow"="Strom (A)";
+
+"PV POWER" = "PV-Leistung";
+"PV1 VOLTAGE" = "Strang 1 Spannung";
+"PV1 ELEC-CURRENT" = "Strang 1 Strom";
+"PV2 VOLTAGE" = "Strang 2 Spannung";
+"PV2 ELEC-CURRENT" = "Strang 2 Strom";
+"R-PHASE POWER" = "L1 Leistung";
+"S-PHASE POWER" = "L2 Leistung";
+"T-PHASE POWER" = "L3 Leistung";
+"POWER" = "Leistung";
+"Energy" = "Energie (kWh)";
+
+"CHARGING POWER" = "Ladeleistung";
+"DISCHARGING POWER" = "Entladeleistung";
+"INPUT VOLTAGE" = "Eingangspannung";
+"INPUT CURRENT" = "Eingangsstrom";
+"USER-SIDE POWER" = "Leistung Haushalt";
+"GRID-SIDE POWER" = "Leistung Netz";
+
+//"MONTH BATTERY CHARGE" ="Month Battery Charge";
+//"MONTHLY CHARGED"="Monthly Charged";
+//"MONTHLY DISCHARGED"="Monthly Discharged";
+//"YEAR BATTERY CHARGE"="Year Battery Charge";
+//"YEAR CHARGED"="Year Charged";
+//"YEAR DISCHARGED"="Year Discharged";
+//"TOTAL BATTERY CHARGE"="Total Battery Charge";
+//"TOTAL CHARGED"="Total Charged";
+//"TOTAL DISCHARGED"="Total Discharged";
+
+"MONTH BATTERY CHARGE" ="Monatlich gespeicherte PV-Energie";
+"MONTHLY CHARGED"="Monatlich geladene PV-Energie";
+"MONTHLY DISCHARGED"="Monatlich entladene PV-Energie";
+"YEAR BATTERY CHARGE"="Jährlich gespeicherte PV-Energie";
+"YEAR CHARGED"="Jährlich geladene PV-Energie";
+"YEAR DISCHARGED"="Jährlich entladene PV-Energie";
+"TOTAL BATTERY CHARGE"="Gesamte gespeicherte PV-energie";
+"TOTAL CHARGED"="Gesamte geladene PV-Energie";
+"TOTAL DISCHARGED"="Gesamte entladene PV-Energie";
+
+
+
+"Add"="Hinzufügen";
+"Modified"= "Ändern";
+"Delete" = "Löschen";
+"Aliases can not be empty" = "Bitte Name angeben.";
+"Successfully modified" = "Ändern erfolgreich";
+"Modification fails" = "Ändern fehlgeschlagen";
+"Successfully deleted" = "Löschen erfolgreich";
+"Delete failed" = "Löschen fehlgeschlagen";
+"Added Successfully" = "Hinzufügen erfolgreich";
+
+"Enter DatalogSN" = "Datenlogger Seriennummer eingeben";
+"Datalog Valicode" = "Datenlogger Prüfcode eingeben";
+"Insert true datalog sn" = "Bitte richtige Seriennummer eingeben";
+"Datalog verification code is incorrect" = "Prüfcode ist falsch";
+
+"Added Successfully" = "Hinzufügen erfolgreich";
+"Add Failed" = "Hinzufügen fehlgeschlagen";
+"Insert datalog code"="Datenlogger Prüfcode eingeben";
+
+"Plant List" = "Anlagenliste";
+"Today Energy" = "Tagesproduktion";
+"Total Energy" = "Gesamtproduktion";
+"Current Power" = "Aktuelle Leistung";
+"Gains" = "Ertrag";
+"Percentage" = "Ladestatus";
+"Storage Status" = "Speicherstatus";
+"Charge Power" = "Ladeleistung";
+"Discharge Power" = "Entladeleistung";
+"Add Plant" = "Anlage hinzufügen";
+"Remove Station" = "Anlage löschen";
+"Upload Picture" = "Anlagenbild";
+"Setting Station Map" = "Einstellungen Anlagenkarte";
+"Installation Information" = "Anlageninformation";
+"plant name" = "Anlagenname";
+"instal date" = "Installationsdatum";
+"company" = "Firma";
+"power" = "Leistung";
+"Next" = "Weiter";
+
+
+"能源"="Energie";
+
+"能源分析"="Ertragsanalyse";
+"智能能源"="Smart Energy";
+"家庭用电量"="Energieverbrauch Haushalt";
+"家庭用电设备"="Haushaltsverbraucher";
+"光伏电量"="Solarenergie";
+"储能电量"="Gespeicherte Energie";
+"月:"="Monat:";
+"最省电:"="Minimum:";
+"最耗电:"="Maximum:";
+"日:"="Tag:";
+
+"能源调度优先级设置"="Priorität Energieplanung";
+"智能联动设置"="Interaktive Einstellungen";
+"峰谷电价设置"="Tarifeinstellungen";
+"峰谷段动作使能"="Niedertarif aktivieren";
+"控制优先级设置"="Steuerungsprioritäten";
+"光伏零功率输出使能"="0%-Einspeisung aktivieren";
+"温馨提示"="Hinweis";
+"智能能源功能后续开放"="Smart-Energy-Funktionen sind bald verfügbar";
+"质保查询功能后续开放"="Garantiefunktionen bald verfügbar";
+
+"家庭用电占比(Demo)"="Eigenverbrauch (Demo)";
+"电冰箱"="Kühlschrank";
+"微波炉"="Mikrowelle";
+"空调"="Klimaanlage";
+"电视机"="TV";
+"洗衣机"="Waschmaschine";
+"热水器"="Wasserkocher";
+"发电量"="Energieertrag";
+"放电量"="Entladeleistung";
+"最大值"="Maximalwert";
+"平均值"="Durchschnittsswert";
+
+"服务"="Service";
+"我的问题"="Meine Frage";
+"常见问题"="FAQ";
+"客户服务"="Kundendienst";
+"质保查询"="Garantieanfrage";
+"增值业务"="Weitere Growatt Dienste";
+"更多产品"="Weitere Produkte";
+
+"提交问题"="Frage stellen";
+"标题:"="Titel:";
+"问题类型:"="Typ:";
+"内容:"="Inhalt:";
+"请输入标题"="Bitte Titel angeben";
+"请选择问题类型"="Bitte Fragetyp wählen";
+"请输入序列号"="Bitte Seriennummer angeben";
+"附件:"="Anhang:";
+"请选择要上传图片"="Bild hochladen";
+"请输入内容"="Bitte Inhalt angeben";
+"添加成功"="Hinzufügen erfolgreich";
+"添加错误"="Hinzufügen fehlgeschlagen";
+
+"逆变器故障"="Fehler Wechselrichter";
+"储能机故障"="Fehler Energiespeicher";
+"监控系统问题"="Problem Anlagenüberwachung";
+"功能建议"="Vorschläge";
+"问题咨询"="Ratschläge";
+"其他问题"="Andere Probleme";
+
+"问题列表"="Frageliste";
+"未处理"="Unbearbeitet";
+"正在处理"="In Barbeitung";
+"已处理"="Bearbeitung abgeschlossen";
+"删除列表"="Liste löschen";
+"回复记录"="Antworten Aufnahme";
+"回 复"="Antworten";
+"查看图片"="Bild ansehen";
+"概述"="Übersicht";
+"参数"="Parameter";
+"有"="Ja";
+"没有"="Nein";
+"有无质保:"="Garantie vorhanden?";
+"出厂时间:"="Beginn:";
+"到期时间:"="Gültig bis:";
+"序列号码:"="Seriennummer:";
+
+"我"="Einstellungen";
+"资料管理"="Account Management";
+"电站设置"="Einstellungen PV-Anlage";
+"关于"="Über";
+"用户协议"="Nutzungsbedingungen";
+"客服电话"="Verbaucher Hotline";
+"检查更新"="Nach Updates suchen";
+"最新版本为"="Neueste Version";
+"是否更新"="Update durchführen?";
+"您使用的是最新版本"="Keine neuere Version verfügbar";
+
+"暂不"="Update später durchführen";
+"立即更新"="Jetzt aktualisieren";
+"请求苹果服务器失败"="Apple Server Fehler";
+"修改密码"="Passwort ändern";
+"修改手机号"="Telefonnummer ändern";
+"修改邮箱"="E-Mail Adresse ändern";
+"修改代理商编号"="Agent Nummer wechseln";
+"注销账号"="Abmelden";
+"输入手机号"="Telefonnumer eingeben";
+"输入邮箱地址"="E-Mail Adresse eingeben";
+"输入代理商编号"="Agent Nummer eingeben";
+"用户不存在"="Benutzername nicht vorhanden";
+"安装信息"="Anlageninformation";
+
+"地理信息"="Standortinformationen";
+"资金收益"="Einspeisevergütung";
+"电站图片"="Anlagenbild";
+"不能为空"="Das Feld darf nicht leer sein";
+"城市"="Stadt";
+"时区"="Zeitzone";
+"经度"="Längengrad";
+"纬度"="Breitengrad";
+"点击获取"="Hier klicken";
+"节约标准煤"="Kohle gespart";
+"CO2减排"="CO2 vermieden";
+"SO2减排"="SO2 vermieden";
+"当前版本:"="aktuelle Version:";
+
+"示范设备暂时不开放此功能,请安装真实产品使用此功能."="Diese Funktion ist in der Demoversion nicht verfügbar.";
+"概述"="Übersicht";
+"服务介绍"="Service introduction";
+"提供商:"="Anbieter:";
+"使用区域:"="Bereich:";
+"价格:"="Preis:";
+"联系方式:"="Kontakt:";
+
+"是否确定删除设备"="Möchten Sie das Gerät entfernen?";
+"删除成功"="Löschen erfolgreich";
+"系统错误，删除失败"="Systemfehler, Löschen fehlgeschlagen";
+
+"Ppv"="P-pv";
+"Puser"="P-verbraucher";
+"Pgrid"="P-netz";
+
+"Revenue"="Tagesertrag";
+"todayPV"="Tagesproduktion";
+"PpvN"="Leistung PV";
+
+"体验馆"="Demo";
+"浏览用户禁止操作"="Nicht zugelassen für Browser Anwender";
+"获取服务器地址"="Server-Adresse ermitteln";
+"日功率走势图"="Tagesübersicht";
+"消息中心"="Nachrichtenzentrale";
+"清空"="Löschen";
+"是否清空历史数据"="Daten löschen?";
+"问题内容:"="Inhalt:";
+"清空历史数据"="Alte Daten löschen";
+"清空APP图标标记数量"="Löschen";
+
+"配置ShineWifi"="Einstellungen ShineWifi";
+"ShineWifi提示一"="Ihr Smartphone/Tablet muss mit dem gleichen WLAN-Netz verbunden sein, um ShineWifi zu konfigurieren.";
+"ShineWifi提示二"="Bitte geben Sie die Zugangsinformationen Ihres Internetrouters ein.";
+"ShineWifi输入路由器"="Name des Routers";
+"ShineWifi密码"="Passwort:";
+"ShineWifi输入路由器密码"="Passwort des Routers";
+"ShineWifi修改密码"="Passwort des WiFi-Moduls ändern:";
+"ShineWifi新密码"="Neues Passwort:";
+"请输入Wifi密码"="Bitte Passwort eingeben";
+"查询采集器信息"="Datenlogger Info:";
+"序列号"="Seriennummer:";
+"shinewifi校验码"="Prüfcode:";
+"扫描设备和设置路由器"="Barcode scannen und Router einstellen";
+"ShineWifiE名字"="Name:";
+"Choice"="Auswahl";
+"配置ShineWifiE"="Einstellungen ShineWifi";
+"配置提示"="Konfiguration…. ShineWifi ist erfolgreich eingerichtet, wenn das Blinken der blauen LED von schnell auf langsam wechselt.";
+
+"编辑"="Bearbeiten";
+"储能放电量"="Entladen";
+"新"="Neu";
+"推荐"="Empfehlung";
+"配置"="Einstellungen";
+"市电电压"="Obergrenze für Netzspannnung festlegen";
+"控制提示"="Achtung! Zugriff nur für Fachpersonal. Falsche Einstellungen können Systemfehler verursachen. Passwort eingeben.";
+"添加问题提示"="Support über die ShinePhone App nur in Englisch oder Chinesisch.";
+"控制密码"="Bitte geben Sie das korrekte Passwort ein.";
+
+"用户协议1"="Ich stimme den Nutzungsbedingungen zu.";
+"选择用户协议"="Bitte stimmern Sie den Nutzungsbedingungen zu.";
+"添加1"="Hinzufügen";
+"连接路由器2"="Verbinden Sie zuerst Ihr Smartphone/Tablet mit dem gleichen WLAN-Netzwerk.";
+"刷新设备列表"="Bitte aktualisieren Sie die Geräte liste in 5 Minuten.";
+"配置成功"="Konfiguration erfolgreich";
+
+"用户名密码错误 "="Benutzername oder Passwort falsch";
+"用户名密码为空"="Benutzername oder Passwort leer";
+"示例"="Demo";
+
+"拨打电话"="Möchten Sie einen Anruf machen?";
+"换算单位"="Umgerechnet auf 1 kWh erzeugte Energie";
+"点击图片放大"="Auf das Bild klicken, um es zu vergrößern";
+
+"添加电站成功"="Anlage erfolgreich hinzugefügt";
+"当前用户下电站名重复"="Anlagenname unter dem aktuellen Benutzer";
+"超出用户限制电站数量"="Maximale Anlagenzahl erreicht";
+"国家名出错"="Fehler Ländername";
+"添加信息出错"="Informationen hinzufügen fehlgeschlagen";
+
+"还没有解决您的问题"="Haben Sie weitere Fragen?";
+"向客服提问"="Service kontaktieren";
+"原密码 "="Altes Passwort";
+
+"选择国家"="Land auswählen";
+"搜索"="Suche";
+
+
+"资料中心"="Informationszentrum";
+
+"视频系统"="Video";
+"常见问题"="FAQ";
+"手册"="Anleitung";
+"公司官网"="Homepage";
+
+"视频内容"="Growatt Vorstellung, Produktvideos";
+"常见问题内容"="Hilfe FAQ";
+"手册内容"="Installationsanleitungen";
+"公司官网内容"="Weitere Informationen über Growatt";
+"缓存"="Zwischenspeichern";
+"缓存列表"="Zwischenspeichern";
+"全选"="Alle auswählen";
+"确定删除视频"="Video löschen?";
+"相关视频"="Zugehöriges Video";
+
+"视频缓存提示"="Hinweis: Beim Abspielen wird das Video zwischengespeichert. Sie können es anschließend auf Ihrem Gerät speichern.";
+"wifi提示"="Ihr Handy ist nicht mit einem WLAN-Netzwerk verbunden. Vodeo trotzdem abspielen?";
+"缓存成功"="Zwischenspeichern abgeschlossen";
+"是否保存视频"="Video speichern??";
+
+"服务器与所属国家不匹配"="Server-Adresse und Land stimmen nicht überein";
+
+"ShineWiFi配置"="ShineWifi Einstellungen";
+
+"返回"="Zurück";
+"停止配置"="Beende Konfiguration";
+"是否退出当前账户"="Abmelden?";
+"未开启定位服务"="GPS deaktiviert";
+"是否跳转界面进行设置"="Zurück zu den Einstellungen?";
+
+"wifi页面跳转提示"="Server antwortet nicht, bitte überprüfen Sie den Status der blauen LED.";
+"wifi连接成功"="Verbindung OK";
+"wifi连接失败"="Verbindung fehlgeschlagen";
+"wifi看灯"="Bitte überprüfen Sie den Status der blauen LED.";
+"wifi提示成功信息"="Blinkt sie wie in Abbildung A, dann gehen Sie zur Geräteseite und aktualisieren Sie diese.";
+"wifi提示失败信息"="Blinkt die LED wie in Abbildung B, dann gehen Sie wie folgt vor:";
+"wifi提示失败信息1"="1. Überprüfen Sie die Signalstärke des Internetrouters";
+"wifi提示失败信息2"="2. Richten Sie ShineWifi erneut ein.";
+"wifi重新配置"="Konfiguration wiederholen";
+
+
+//翻译后
+"1输出功率"="Pac";
+"2服务器错误提示"="Bitte registrieren Sie sich erneut unter 'server.growatt.com'";
+"3采集器10位提示"="Geben Sie die 10-stellige Seriennumer des Datenloggers ein";
+"4服务器错误提示2"="Bitte registrieren Sie sich erneut unter 'server.growatt.com'";
+"5注册失败"="Registrierung fehlgeschlagen";
+"4时间"="Zeit";
+"5数据"="Wert";
+"6日期"="Datum";
+"RF序列号"="Seriennummer RF-Stick:";
+"datalogger checkcode"="Prüfcode";
+
+"请输入RFStick序列号"="Seriennummer des RF-Stick eingeben";
+"7你的账号没有操作权限"="Sie haben keine Berechtigung die Einstellung zu ändern.";
+"8上滑查看详细数据"="Für Details nach oben wischen";
+"9下滑查看曲线图"="Für Diagramme nach unten wischen";
+"11新wifi看灯提示1"="Rote LED blinkt: Die Verbindung zum Wechselrichter besteht, jedoch nicht mit dem Router.";
+"10填入不带国家代码的手机号"="Telefonnumer ohne Landesvorwahl eingeben";
+"12新wifi看灯提示1原因"="Bitte überprüfen Sie die Router-Signalstärke";
+"13新wifi看灯提示2绿灯"="Grüne LED blinkt: Die Verbindung zum Wechselrichter und Router besteht, jedoch nicht mit ShineServer.";
+"14新wifi看灯提示2绿灯原因"="Bitte überprüfen Sie, ob Ihr Router mit dem Internet verbunden ist.";
+"15新wifi看灯提示3蓝灯"="Blaue LED blinkt: Die Verbindung mit Wechselrichter, Router und ShineServer besteht.";
+"16新wifi看灯提示3蓝灯原因"="ShineWifi arbeitet normal";
+"17通过手机号"="Via Mobiltelefon";
+"18扫描采集器序列号"="Seriennummer einscannen";
+"19手机号不能为空"="Bitte Telefonnummer eingeben!";
+"20密码不能为空"="Bitte Passwort eingeben.";
+"21请输入短信验证码"="Bitte Zugangscode eingeben";
+"22验证码错误"="Zugangscode falsch";
+"23发送验证码"="Zugangscode falsch";
+"24一键建站"="Schnellregistrierung";
+"25跳过"="Überspringen";
+"26上滑查看详细数据"="Für Details nach oben wischen";
+"27国际区号错误"="Die Ländervorwahl für internationale Anrufe ist falsch";
+"28手机号格式错误"="Format der Telefonnummer ist falsch";
+"29短信验证码请求已经失效"="Anfrage Zugangscode fehlgeschlagen";
+"30发送短信验证码不成功"="Senden des Zugangscodes fehlgeschlagen";
+"31该手机号没有注册用户"="Dieser Telefonnumer ist kein Account zugeordnet";
+"32手机号和验证码不匹配"="Telefonnummer kann dem Zugangscode nicht zugeordnet werden.";
+"33修改密码失败"="Passwort Zurücksetzen fehlgeschlagen";
+"34输入不带国家代码的手机号"="Telefonnumer ohne Landesvorwahl eingeben";
+"35通过邮箱"="Via e-mail";
+"36请输入正确的手机校验码"="Bitte geben Sie den richtigen Zugangscode ein.";
+"37修改密码成功"="Passwort erfolgreich zurückgesetzt.";
+"38太阳能"="PV";
+"39储能机"="Speicher";
+"40逆变器"="Wechselrichter";
+"41电网"="Stromnetz";
+"42电池"="Batterie";
+"43负载"="Verbraucher ";
+"44单位"="Einheit";
+"45第一路光伏功率"="Leistung MPP-A";
+"46第二路光伏功率"="Leistung MPP-B";
+"47第一路光伏充电功率"="Ladeleistung MPP-A ";
+"48第二路光伏充电功率"="Ladeleistung MPP-B";
+"49电池百分比"="Batteriekapazität";
+"50电网充电功率"="AC-Ladeleistung";
+"51负载功率"="Leistung der Verbraucher";
+"52输送电网功率"="Einspeisung";
+"53电网输入功率"="Netzbezug";
+"54放电功率"="Entladeleistung";
+"55仅供“一键建站”注册用户使用"="Über Mobiltelefon nur für Schnellregistrierung";
+"原密码错误"="Altes Passwort ist falsch";
+"56手机号格式错误"="Format der Telefonnummer ist falsch";
+"57输入11位手机号"="Bitte 11-stellige Nummer eingeben";
+
+"58能源概览"="Energie Übersicht";
+"59光伏产出"="PV-Erzeugung";
+"60能源产出"="Aus dem Speicher entladen";
+"61电网消耗"="Aus dem Stromnetz bezogen";
+"62用电消耗"="Energieverbrauch";
+"63当日"="Heute";
+"64累计"="Gesamt";
+"65能源产耗"="Energie-Übersicht";
+"66总用电"="Gesamtverbrauch";
+"67储能能源"="Status";
+"68面板电量"="PV-Leistung";
+"69储能充放电信息"="Lade- und Entladeinformationen";
+"70实时SOC"="Batteriekapazität";
+"591光伏产出"="PV-Erzeugung";
+"601能源产出"="Lagerung";
+"621用电消耗"="Gitter";
