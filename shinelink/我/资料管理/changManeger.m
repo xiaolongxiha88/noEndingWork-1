@@ -54,6 +54,7 @@
           PV0.textAlignment=NSTextAlignmentRight;
           PV0.textColor=[UIColor whiteColor];
           PV0.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+          PV0.adjustsFontSizeToFitWidth=YES;
           [self.view addSubview:PV0];
           
           _textField0 = [[UITextField alloc] initWithFrame:CGRectMake(160*NOW_SIZE,75*HEIGHT_SIZE+10*HEIGHT_SIZE-Size1, 150*NOW_SIZE,30*HEIGHT_SIZE )];
@@ -73,6 +74,7 @@
     PV1.textAlignment=NSTextAlignmentRight;
     PV1.textColor=[UIColor whiteColor];
     PV1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+          PV1.adjustsFontSizeToFitWidth=YES;
     [self.view addSubview:PV1];
     
     _textField = [[UITextField alloc] initWithFrame:CGRectMake(160*NOW_SIZE,75*HEIGHT_SIZE+10*HEIGHT_SIZE, 150*NOW_SIZE,30*HEIGHT_SIZE )];
@@ -91,6 +93,7 @@
           PV2.textAlignment=NSTextAlignmentRight;
           PV2.textColor=[UIColor whiteColor];
           PV2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+              PV2.adjustsFontSizeToFitWidth=YES;
           [self.view addSubview:PV2];
 
           
@@ -113,6 +116,7 @@
         PV2.textAlignment=NSTextAlignmentCenter;
         PV2.textColor=[UIColor whiteColor];
         PV2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+         PV2.adjustsFontSizeToFitWidth=YES;
         [self.view addSubview:PV2];
         
 //        UIView *line4=[[UIView alloc]initWithFrame:CGRectMake(160*NOW_SIZE,75*NOW_SIZE+30*NOW_SIZE+Size1, 150*NOW_SIZE,1*NOW_SIZE )];

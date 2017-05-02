@@ -103,6 +103,7 @@
 //        contentLable.backgroundColor=[UIColor whiteColor];
 //         contentLable.layer.cornerRadius=7*HEIGHT_SIZE;
            contentLable.font=[UIFont systemFontOfSize:15*HEIGHT_SIZE];
+        contentLable.adjustsFontSizeToFitWidth=YES;
         contentLable.numberOfLines=0;
              contentLable.textAlignment=NSTextAlignmentCenter;
              contentLable.textColor=[UIColor blackColor];

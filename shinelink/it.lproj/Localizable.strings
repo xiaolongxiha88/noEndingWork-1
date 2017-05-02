@@ -445,7 +445,9 @@
 "Pgrid"="Prete";
 
 "Revenue"="Rendita";
-"todayPV"="E-Fotovoltaica di oggi";
+//"todayPV"="E-Fotovoltaica di oggi";
+"todayPV"="E-oggi PV";
+
 "PpvN"="Ppv";
 
 "体验馆"="Demo";

@@ -62,6 +62,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 @property (nonatomic, strong) UILabel *upAlert;
 @property (nonatomic, strong) UIImageView *upImage;
+@property (nonatomic, strong)UIImageView *selectViewBg;
+
 @end
 
 @implementation EquipGraphViewController
@@ -311,7 +313,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
              [_upAlert.layer addAnimation:[self opacityForever_Animation:2] forKey:nil];
             [_scrollView addSubview:_upAlert];
             
-            _selectButton=[[UIButton alloc]initWithFrame:CGRectMake(90*NOW_SIZE, 50*HEIGHT_SIZE, 230*NOW_SIZE, 30*HEIGHT_SIZE)];
+            _selectButton=[[UIButton alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 50*HEIGHT_SIZE, 230*NOW_SIZE, 30*HEIGHT_SIZE)];
             [_selectButton setTitle:_dict[@"1"] forState:0];
             [_selectButton addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
             _selectButton.backgroundColor = COLOR(39, 183, 99, 1);
@@ -320,10 +322,21 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             [_line2View addSubview:_selectButton];
             _scrollView.contentSize=CGSizeMake(SCREEN_Width, CGRectGetMaxY(_line2View.frame)+20*HEIGHT_SIZE);
             
-            UIImageView *selectView = [[UIImageView alloc] initWithFrame:CGRectMake(230*NOW_SIZE-25*HEIGHT_SIZE, 9*HEIGHT_SIZE, 15*HEIGHT_SIZE, 12*HEIGHT_SIZE)];
-            // bgImageView.backgroundColor=COLOR(123, 239, 227, 1);
-            selectView.image = IMAGE(@"triangular2.png");
-            [self.selectButton addSubview:selectView];
+            
+                _selectViewBg = [[UIImageView alloc] initWithFrame:CGRectMake(290*NOW_SIZE, 50*HEIGHT_SIZE, 30*NOW_SIZE, 30*HEIGHT_SIZE)];
+                // bgImageView.backgroundColor=COLOR(123, 239, 227, 1);
+                _selectViewBg.backgroundColor= COLOR(39, 183, 99, 1);
+                _selectViewBg.userInteractionEnabled=YES;
+                UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(buttonPressed)];
+                [_selectViewBg addGestureRecognizer:demo1];
+                [_line2View addSubview:_selectViewBg];
+                
+                UIImageView *selectView = [[UIImageView alloc] initWithFrame:CGRectMake(8*HEIGHT_SIZE, 9*HEIGHT_SIZE, 15*HEIGHT_SIZE, 12*HEIGHT_SIZE)];
+                // bgImageView.backgroundColor=COLOR(123, 239, 227, 1);
+                selectView.image = IMAGE(@"triangular2.png");
+                [_selectViewBg addSubview:selectView];
+            
+         
             
         }
         
@@ -624,11 +637,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         self.totalButton.selected = NO;
         if (_dict[@"1"]) {
             [_line2View addSubview:_selectButton];
+            [_line2View addSubview:_selectViewBg];
             [_selectButton setTitle:_dict[@"1"] forState:0];
             self.line2View.energyTitleLabel.text = root_Today_Energy;
             self.line2View.unitLabel.text = root_Powre;
         }else{
             [_selectButton removeFromSuperview];
+            [_selectViewBg removeFromSuperview];
         }
         
         [UIView animateWithDuration:0.3f animations:^{
@@ -665,8 +680,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         self.totalButton.selected = NO;
         if (_dictMonth[@"1"]) {
             [_selectButton setTitle:_dictMonth[@"1"] forState:0];
+            [_line2View addSubview:_selectViewBg];
         }else{
             [_selectButton removeFromSuperview];
+            [_selectViewBg removeFromSuperview];
         }
         [UIView animateWithDuration:0.3f animations:^{
             self.timeDisplayView.alpha = 1;
@@ -703,8 +720,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         self.totalButton.selected = NO;
         if (_dictYear[@"1"]) {
             [_selectButton setTitle:_dictYear[@"1"] forState:0];
+              [_line2View addSubview:_selectViewBg];
         }else{
             [_selectButton removeFromSuperview];
+                [_selectViewBg removeFromSuperview];
         }
         [UIView animateWithDuration:0.3f animations:^{
             self.timeDisplayView.alpha = 1;
@@ -741,8 +760,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         self.totalButton.selected = YES;
         if (_dictAll[@"1"]) {
             [_selectButton setTitle:_dictAll[@"1"] forState:0];
+                [_line2View addSubview:_selectViewBg];
         }else{
             [_selectButton removeFromSuperview];
+               [_selectViewBg removeFromSuperview];
         }
         [UIView animateWithDuration:0.3f animations:^{
             self.timeDisplayView.alpha = 0;

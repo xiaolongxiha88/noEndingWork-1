@@ -351,6 +351,7 @@ UITableViewDataSource
     cell.tintColor = self.cellAccessoryCheckmarkColor;
     cell.backgroundColor = self.cellColor;
     cell.textLabel.font = self.textFont;
+    cell.textLabel.adjustsFontSizeToFitWidth=YES;
     cell.textLabel.textColor = self.textColor;
     if (self.dropDownType == dropDownTypeTitle) {
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
@@ -601,6 +602,7 @@ UITableViewDataSource
 - (UIFont *)textFont
 {
     if (!_textFont) {
+        
         return [UIFont systemFontOfSize:17.f];
     }
     return _textFont;

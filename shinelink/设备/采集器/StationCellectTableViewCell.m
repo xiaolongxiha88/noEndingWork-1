@@ -97,6 +97,7 @@
         UILabel *currentPowerTitleLable = [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 120*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
         currentPowerTitleLable.text = root_shebei_leixing;
         currentPowerTitleLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        currentPowerTitleLable.adjustsFontSizeToFitWidth=YES;
         currentPowerTitleLable.textColor = [UIColor whiteColor];
         [self.contentView addSubview:currentPowerTitleLable];
         
@@ -114,12 +115,14 @@
         UILabel *moneyTitleLable = [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 160*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
         moneyTitleLable.text = root_data_update_interval;
         moneyTitleLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+         moneyTitleLable.adjustsFontSizeToFitWidth=YES;
         moneyTitleLable.textColor = [UIColor whiteColor];
         [self.contentView addSubview:moneyTitleLable];
         
         self.moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 160*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
         self.moneyLabel.text = root_data_update_interval;
         self.moneyLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        self.moneyLabel.adjustsFontSizeToFitWidth=YES;
         self.moneyLabel.textColor = [UIColor whiteColor];
         [self.contentView addSubview:_moneyLabel];
         

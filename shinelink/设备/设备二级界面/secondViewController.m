@@ -72,6 +72,7 @@
     firstL.textAlignment=NSTextAlignmentCenter;
     firstL.textColor=[UIColor blackColor];
     firstL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    firstL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:firstL];
     
     UIButton *secondB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE+74*NOW_SIZE, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*NOW_SIZE,50*HEIGHT_SIZE )];
@@ -83,6 +84,7 @@
     secondL.textAlignment=NSTextAlignmentCenter;
     secondL.textColor=[UIColor blackColor];
     secondL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+      secondL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:secondL];
     
     UIButton *threeB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE+74*NOW_SIZE*2, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*NOW_SIZE,50*HEIGHT_SIZE )];
@@ -94,6 +96,7 @@
     threeL.textAlignment=NSTextAlignmentCenter;
     threeL.textColor=[UIColor blackColor];
     threeL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+      threeL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:threeL];
     
     UIButton *fourB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE+74*NOW_SIZE*3, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*NOW_SIZE,50*HEIGHT_SIZE )];
@@ -106,6 +109,7 @@
     fourL.textAlignment=NSTextAlignmentCenter;
     fourL.textColor=[UIColor blackColor];
     fourL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+       fourL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:fourL];
     
  
@@ -234,6 +238,7 @@
     leftState.textAlignment=NSTextAlignmentCenter;
     leftState.textColor=[UIColor whiteColor];
     leftState.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+     leftState.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:leftState];
     
    // _powerData=@"200000";
@@ -253,6 +258,7 @@
     centState.textAlignment=NSTextAlignmentCenter;
     centState.textColor=[UIColor whiteColor];
     centState.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+     centState.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:centState];
     
     UILabel *totalData=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-95*NOW_SIZE, 180*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
@@ -270,6 +276,9 @@
     rightState.textAlignment=NSTextAlignmentCenter;
     rightState.textColor=[UIColor whiteColor];
     rightState.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+      rightState.adjustsFontSizeToFitWidth=YES;
+    rightState.adjustsFontSizeToFitWidth=YES;
+
     [self.scrollView addSubview:rightState];
     
     UILabel *dayDate=[[UILabel alloc]initWithFrame:CGRectMake(0, 255*HEIGHT_SIZE-SizeH-5*HEIGHT_SIZE, 250*NOW_SIZE,20*HEIGHT_SIZE )];
@@ -277,6 +286,7 @@
     dayDate.textAlignment=NSTextAlignmentLeft;
     dayDate.textColor=[UIColor blackColor];
     dayDate.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    dayData.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:dayDate];
     
     _progressView = [[CircleView alloc] initWithFrame:CGRectMake(0, 0, 180*NOW_SIZE, 200*HEIGHT_SIZE)];

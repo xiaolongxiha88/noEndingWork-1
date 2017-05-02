@@ -190,6 +190,7 @@
     [lngButton0 setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [lngButton0 setTitle:root_WO_dianji_huoqu forState:UIControlStateNormal];
     lngButton0.titleLabel.font=[UIFont systemFontOfSize:11*HEIGHT_SIZE];
+    lngButton0.titleLabel.adjustsFontSizeToFitWidth=YES;
     [lngButton0 setTitleColor:COLOR(82, 201, 194, 1) forState:0];
     lngButton0.tag=2001;
     [lngButton0 addTarget:self action:@selector(fetchLocation:) forControlEvents:UIControlEventTouchUpInside];
@@ -199,6 +200,7 @@
     [lngButton setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [lngButton setTitle:root_WO_dianji_huoqu forState:UIControlStateNormal];
     lngButton.titleLabel.font=[UIFont systemFontOfSize:11*HEIGHT_SIZE];
+       lngButton.titleLabel.adjustsFontSizeToFitWidth=YES;
     [lngButton setTitleColor:COLOR(82, 201, 194, 1) forState:0];
     lngButton.tag=2002;
     [lngButton addTarget:self action:@selector(fetchLocation:) forControlEvents:UIControlEventTouchUpInside];

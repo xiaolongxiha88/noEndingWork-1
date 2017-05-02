@@ -38,6 +38,7 @@
                 [addButton setTitle:dictionary[string][1] forState:UIControlStateNormal];
             }
             addButton.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
+            addButton.titleLabel.adjustsFontSizeToFitWidth=YES;
             [addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [addButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
             addButton.tag = 1051+i;

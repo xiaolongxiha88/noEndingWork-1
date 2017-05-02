@@ -73,6 +73,7 @@
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
       cell.textLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
+    cell.textLabel.adjustsFontSizeToFitWidth=YES;
     cell.textLabel.text=_dataArray[indexPath.row];
      cell.backgroundColor=MainColor;
     cell.tintColor = [UIColor whiteColor];

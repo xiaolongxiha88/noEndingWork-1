@@ -46,11 +46,12 @@
         [self.contentView addSubview:_image];
         
         
-        _picLabel= [[UILabel alloc] initWithFrame:CGRectMake(220*NOW_SIZE, 10*HEIGHT_SIZE,100*NOW_SIZE, 15*HEIGHT_SIZE)];
+        _picLabel= [[UILabel alloc] initWithFrame:CGRectMake(200*NOW_SIZE, 10*HEIGHT_SIZE,100*NOW_SIZE, 15*HEIGHT_SIZE)];
         _picLabel.text=root_ME_chakan_tupian;
         _picLabel.textColor=MainColor;
         _picLabel.textAlignment = NSTextAlignmentCenter;
         _picLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        _picLabel.adjustsFontSizeToFitWidth=YES;
       //  _picLabel.userInteractionEnabled=YES;
        // UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
        // [_picLabel addGestureRecognizer:labelTap1];

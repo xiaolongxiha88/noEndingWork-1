@@ -104,6 +104,7 @@
     PV1Lable.textAlignment=NSTextAlignmentRight;
     PV1Lable.textColor=[UIColor blackColor];
     PV1Lable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        PV1Lable.adjustsFontSizeToFitWidth=YES;
     [_scrollView addSubview:PV1Lable];
     }
     
@@ -122,6 +123,7 @@
             lngButton.backgroundColor=COLOR(141, 223, 251, 1);
             [lngButton setTitle:root_WO_dianji_huoqu forState:UIControlStateNormal];
             lngButton.titleLabel.font=[UIFont systemFontOfSize:11*HEIGHT_SIZE];
+            lngButton.titleLabel.adjustsFontSizeToFitWidth=YES;
             [lngButton setTitleColor:[UIColor whiteColor] forState:0];
            // lngButton.tag=2002;
             [lngButton addTarget:self action:@selector(getSN) forControlEvents:UIControlEventTouchUpInside];

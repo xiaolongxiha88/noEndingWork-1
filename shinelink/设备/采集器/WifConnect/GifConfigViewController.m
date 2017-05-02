@@ -40,6 +40,7 @@
     noticeLable.textColor=[UIColor whiteColor];
     noticeLable.numberOfLines=0;
     noticeLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    noticeLable.adjustsFontSizeToFitWidth=YES;
     [_scrollView addSubview:noticeLable];
     
  NSData *data = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"connected-ok" ofType:@"gif"]];

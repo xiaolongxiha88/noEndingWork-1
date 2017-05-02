@@ -195,6 +195,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     for (int i=0; i<2; i++) {
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_Width/2*i, 10*ScreenProH, 375*ScreenProH, ScreenProH*55)];
         VL1.font=[UIFont systemFontOfSize:26*ScreenProH];
+        VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=lableName[i];
         VL1.textColor =COLOR(255, 255, 255, 0.7);
@@ -217,6 +218,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     for (int i=0; i<2; i++) {
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_Width/2*i, 140*ScreenProH, 375*ScreenProH, ScreenProH*55)];
         VL1.font=[UIFont systemFontOfSize:26*ScreenProH];
+           VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=lableName2[i];
         VL1.textColor =COLOR(255, 255, 255, 0.7);
@@ -380,6 +382,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 25*ScreenProH, 180*ScreenProW, ScreenProH*30)];
         VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
+        VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=nameArray[i];
         VL1.textColor =COLOR(255, 255, 255, 0.8);
@@ -454,6 +457,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProH, 0*ScreenProH, 180*ScreenProW, ScreenProH*25)];
         VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
+        VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=nameArray00[i];
         VL1.textColor =COLOR(255, 255, 255, 0.8);
@@ -462,7 +466,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:22*ScreenProH] forKey:NSFontAttributeName];
         CGSize size = [nameArray00[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, ScreenProH*25) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
-        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(90*ScreenProW-size.width/2-30*ScreenProH, 0*ScreenProH, 25*ScreenProH, ScreenProH*25)];
+        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(90*ScreenProW-size.width/2-25*ScreenProH, 0*ScreenProH, 25*ScreenProH, ScreenProH*25)];
         [VM1 setImage:[UIImage imageNamed:IMAGEnameArray00[i]]];
         [LV123 addSubview:VM1];
     }
@@ -477,6 +481,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         VL100.frame=CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+62*ScreenProH, 210*ScreenProW, ScreenProH*25);
     }
     VL100.font=[UIFont systemFontOfSize:23*ScreenProH];
+      VL100.adjustsFontSizeToFitWidth=YES;
     VL100.textAlignment = NSTextAlignmentRight;
     NSString *B=[NSString stringWithFormat:@"%@:",root_zong_yongdian];
     VL100.text=B;
@@ -494,6 +499,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProH, 0*ScreenProH, 180*ScreenProW, ScreenProH*25)];
         VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
+           VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=nameArray100[i];
         VL1.textColor =COLOR(255, 255, 255, 0.8);
@@ -502,7 +508,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:22*ScreenProH] forKey:NSFontAttributeName];
         CGSize size = [nameArray100[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, ScreenProH*25) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
-        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(90*ScreenProW-size.width/2-30*ScreenProH, 0*ScreenProH, 25*ScreenProH, ScreenProH*25)];
+        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(90*ScreenProW-size.width/2-25*ScreenProH, 0*ScreenProH, 25*ScreenProH, ScreenProH*25)];
         [VM1 setImage:[UIImage imageNamed:IMAGEnameArray100[i]]];
         [LV1 addSubview:VM1];
     }
@@ -906,7 +912,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     NSArray *nameArray1=@[root_mianban_dianliang,root_yongdian_xiaohao];
     NSArray *IMAGEnameArray1=@[COLOR(18, 237, 7, 1),COLOR(254, 238, 62, 1)];
     for (int i=0; i<2; i++) {
-        UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(375*ScreenProW+100*i, 2440*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
+        UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(335*ScreenProW+100*i, 2440*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
         [_uiviewThree addSubview:LV1];
         
         UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(0*ScreenProW, 6*ScreenProH, 18*ScreenProH, ScreenProH*18)];
@@ -915,6 +921,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProH, 3*ScreenProH, 200*ScreenProW-30*ScreenProH, ScreenProH*25)];
         VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
+        VL1.adjustsFontSizeToFitWidth=YES;
+      //  VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentLeft;
         VL1.text=nameArray1[i];
         VL1.textColor =COLOR(255, 255, 255, 0.8);

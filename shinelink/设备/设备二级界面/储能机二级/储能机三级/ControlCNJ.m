@@ -105,6 +105,7 @@
     PVLable.textAlignment=NSTextAlignmentLeft;
     PVLable.textColor=[UIColor whiteColor];
     PVLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+         PVLable.adjustsFontSizeToFitWidth=YES;
     [_scrollView addSubview:PVLable];
     _slider=[[ASValueTrackingSlider alloc]initWithFrame:CGRectMake(20*NOW_SIZE, 85*HEIGHT_SIZE+30*HEIGHT_SIZE, SCREEN_Width-40*NOW_SIZE, 40*HEIGHT_SIZE)];
     _slider.maximumValue = 10;

@@ -168,6 +168,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     for (int i=0; i<2; i++) {
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_Width/2*i, 10*ScreenProH, 375*ScreenProH, ScreenProH*55)];
         VL1.font=[UIFont systemFontOfSize:26*ScreenProH];
+           VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=lableName[i];
         VL1.textColor =COLOR(255, 255, 255, 0.7);
@@ -353,6 +354,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 25*ScreenProH, 180*ScreenProW, ScreenProH*30)];
         VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
+           VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=nameArray[i];
         VL1.textColor =COLOR(255, 255, 255, 0.8);
@@ -821,6 +823,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProH, 3*ScreenProH, 200*ScreenProW-30*ScreenProH, ScreenProH*25)];
         VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
+        VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentLeft;
         VL1.text=nameArray1[i];
         VL1.textColor =COLOR(255, 255, 255, 0.8);

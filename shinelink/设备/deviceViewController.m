@@ -1461,6 +1461,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
      solorLable.text=root_PCS_guangfu;
     solorLable.textColor=[UIColor whiteColor];
     solorLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable.adjustsFontSizeToFitWidth=YES;
     solorLable.textAlignment = NSTextAlignmentCenter;
      [_headerView addSubview:solorLable];
     UILabel *solorLableA=[[UILabel alloc] initWithFrame:CGRectMake(W1+imageSize, imageH1-H0-lableH0,37*NOW_SIZE,lableH0)];
@@ -1567,6 +1568,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     solorLable1.text=root_PCS_chunengji;
     solorLable1.textColor=[UIColor whiteColor];
     solorLable1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable1.adjustsFontSizeToFitWidth=YES;
     solorLable1.textAlignment = NSTextAlignmentCenter;
     [_headerView addSubview:solorLable1];
     
@@ -1577,6 +1579,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     solorLable2.text=root_PCS_nibianqi;
     solorLable2.textColor=[UIColor whiteColor];
     solorLable2.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+      solorLable2.adjustsFontSizeToFitWidth=YES;
     solorLable2.textAlignment = NSTextAlignmentCenter;
     [_headerView addSubview:solorLable2];
     
@@ -1587,6 +1590,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
     solorLable3.text=root_PCS_dianwang;
     solorLable3.textColor=[UIColor whiteColor];
     solorLable3.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+       solorLable3.adjustsFontSizeToFitWidth=YES;
     solorLable3.textAlignment = NSTextAlignmentCenter;
     [_headerView addSubview:solorLable3];
     
@@ -1639,6 +1643,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
         Lable12.textAlignment=NSTextAlignmentCenter;
         Lable12.textColor=[UIColor whiteColor];
         Lable12.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
+        Lable12.adjustsFontSizeToFitWidth=YES;
         [_headerView addSubview:Lable12];
         
         UIView *headLableView1=[[UIView alloc]initWithFrame:CGRectMake(marchWidth+(unitWidth-headLableColorW)/2+unitWidth*i, marchHeigh+headLableH+gapH, headLableColorW, headLableColorH)];

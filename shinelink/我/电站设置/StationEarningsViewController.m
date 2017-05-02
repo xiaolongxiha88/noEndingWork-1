@@ -77,6 +77,7 @@
         UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(40*NOW_SIZE, (10+i*40)*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
         label.text=array[i];
         label.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        label.adjustsFontSizeToFitWidth=YES;
         label.textColor=[UIColor whiteColor];
         [self.view addSubview:label];
     }
@@ -118,6 +119,7 @@
         UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, (0+i*40)*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
         label.text=array[i];
         label.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        label.adjustsFontSizeToFitWidth=YES;
         label.textColor=[UIColor whiteColor];
         [_readView addSubview:label];
     }

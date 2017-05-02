@@ -52,6 +52,7 @@
     buttonLable.textAlignment=NSTextAlignmentCenter;
     buttonLable.textColor=[UIColor whiteColor];
     buttonLable.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
+        buttonLable.adjustsFontSizeToFitWidth=YES;
     [_scrollView addSubview:buttonLable];
     
     UIButton *firstB=[[UIButton alloc]initWithFrame:CGRectMake((SCREEN_Width/2-buttonSize)/2, 85*HEIGHT_SIZE, buttonSize,buttonSize)];
@@ -80,6 +81,7 @@
     PVLable.textAlignment=NSTextAlignmentLeft;
     PVLable.textColor=[UIColor whiteColor];
     PVLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+            PVLable.adjustsFontSizeToFitWidth=YES;
     [_scrollView addSubview:PVLable];
     _slider=[[ASValueTrackingSlider alloc]initWithFrame:CGRectMake(20*NOW_SIZE, 85*HEIGHT_SIZE+30*HEIGHT_SIZE, SCREEN_Width-40*NOW_SIZE, 40*HEIGHT_SIZE)];
    _slider.maximumValue = 100;
@@ -104,6 +106,7 @@
     PV1Lable.textAlignment=NSTextAlignmentLeft;
     PV1Lable.textColor=[UIColor whiteColor];
     PV1Lable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+                  PV1Lable.adjustsFontSizeToFitWidth=YES;
     [_scrollView addSubview:PV1Lable];
     _slider1=[[ASValueTrackingSlider alloc]initWithFrame:CGRectMake(20*NOW_SIZE, 85*HEIGHT_SIZE+30*HEIGHT_SIZE, SCREEN_Width-40*NOW_SIZE, 40*HEIGHT_SIZE)];
     _slider1.maximumValue = 100;
@@ -130,6 +133,7 @@
     PV2Lable.textAlignment=NSTextAlignmentLeft;
     PV2Lable.textColor=[UIColor whiteColor];
     PV2Lable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+             PV2Lable.adjustsFontSizeToFitWidth=YES;
     [_scrollView addSubview:PV2Lable];
         
         _textField2 = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 85*HEIGHT_SIZE+30*HEIGHT_SIZE, 180*NOW_SIZE, 40*HEIGHT_SIZE)];
@@ -166,6 +170,7 @@
     PVData.textAlignment=NSTextAlignmentCenter;
     PVData.textColor=[UIColor whiteColor];
     PVData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+            PVData.adjustsFontSizeToFitWidth=YES;
     [_scrollView addSubview:PVData];
 
     self.dayFormatter = [[NSDateFormatter alloc] init];
@@ -196,6 +201,7 @@
         PVData.textAlignment=NSTextAlignmentCenter;
         PVData.textColor=[UIColor whiteColor];
         PVData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+          PVData.adjustsFontSizeToFitWidth=YES;
         [_scrollView addSubview:PVData];
     
         _textField1 = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 85*HEIGHT_SIZE+30*HEIGHT_SIZE, 180*NOW_SIZE, 40*HEIGHT_SIZE)];

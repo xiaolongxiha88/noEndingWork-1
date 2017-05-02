@@ -11,9 +11,9 @@
 @implementation pvLogTableViewCell
 
 
-- (void)awakeFromNib {
-    // Initialization code
-}
+//- (void)awakeFromNib {
+//    // Initialization code
+//}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -39,6 +39,7 @@
         _SN.textAlignment=NSTextAlignmentLeft;
         _SN.textColor=[UIColor whiteColor];
         _SN.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        _SN.adjustsFontSizeToFitWidth=YES;
         [_scrollView addSubview:_SN];
         _SNText=[[UILabel alloc]initWithFrame:CGRectMake(Size1+wSize, 15*HEIGHT_SIZE, 85*NOW_SIZE,20*HEIGHT_SIZE )];
         _SNText.textAlignment=NSTextAlignmentLeft;
@@ -51,6 +52,7 @@
         _type.textAlignment=NSTextAlignmentLeft;
         _type.textColor=[UIColor whiteColor];
         _type.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        _type.adjustsFontSizeToFitWidth=YES;
         [_scrollView addSubview:_type];
         _typtText=[[UILabel alloc]initWithFrame:CGRectMake(160*NOW_SIZE+wSize, 15*HEIGHT_SIZE, 100*NOW_SIZE,20*HEIGHT_SIZE )];
         //_typtText.text=@"序列号";
@@ -64,6 +66,7 @@
         _event.textAlignment=NSTextAlignmentLeft;
         _event.textColor=[UIColor whiteColor];
         _event.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+         _event.adjustsFontSizeToFitWidth=YES;
         [_scrollView addSubview:_event];
         _eventText=[[UILabel alloc]initWithFrame:CGRectMake(Size1+70*NOW_SIZE, Size2, 85*NOW_SIZE,20*HEIGHT_SIZE )];
        // _eventText.text=@"序列号";
@@ -77,6 +80,7 @@
         _Log.textAlignment=NSTextAlignmentLeft;
         _Log.textColor=[UIColor whiteColor];
         _Log.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        _Log.adjustsFontSizeToFitWidth=YES;
         [_scrollView addSubview:_Log];
         _LogText=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, Size2, 100*NOW_SIZE,20*HEIGHT_SIZE )];
        // _LogText.text=@"序列号";

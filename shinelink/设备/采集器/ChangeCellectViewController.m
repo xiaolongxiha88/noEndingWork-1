@@ -29,6 +29,7 @@
         UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(20*NOW_SIZE, (50+i*40)*HEIGHT_SIZE, 100*NOW_SIZE, 40*HEIGHT_SIZE)];
         label.text=labelArray[i];
         label.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        label.adjustsFontSizeToFitWidth=YES;
         label.textColor=[UIColor whiteColor];
         [self.view addSubview:label];
     }

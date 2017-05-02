@@ -47,6 +47,7 @@
         cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
      cell.textLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+    cell.textLabel.adjustsFontSizeToFitWidth=YES;
     cell.textLabel.text=_dataArray[indexPath.section];
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
     cell.imageView.image = [UIImage imageNamed:_ImageArray[indexPath.section]];
