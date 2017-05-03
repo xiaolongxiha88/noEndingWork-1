@@ -447,6 +447,8 @@
 		3383F13E1C9FFDA10075E834 /* 光伏收益.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383F13D1C9FFDA10075E834 /* 光伏收益.png */; };
 		338418E21DC840AB00D679CA /* GifConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338418E11DC840AB00D679CA /* GifConfigViewController.m */; };
 		338418E71DC9783500D679CA /* GFWaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338418E61DC9783500D679CA /* GFWaterView.m */; };
+		33875A4F1EB96A7900F7E0E6 /* newEnergyDetailData.m in Sources */ = {isa = PBXBuildFile; fileRef = 33875A4E1EB96A7900F7E0E6 /* newEnergyDetailData.m */; };
+		33875A521EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 33875A511EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m */; };
 		338964591E51979800A7B1AE /* device_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338964581E51979800A7B1AE /* device_bg.jpg */; };
 		3389645D1E51B74C00A7B1AE /* yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3389645C1E51B74C00A7B1AE /* yuan.png */; };
 		338964611E52E52700A7B1AE /* phoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338964601E52E52700A7B1AE /* phoneRegisterViewController.m */; };
@@ -1345,6 +1347,10 @@
 		338418E11DC840AB00D679CA /* GifConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifConfigViewController.m; path = WifConnect/GifConfigViewController.m; sourceTree = "<group>"; };
 		338418E51DC9783500D679CA /* GFWaterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFWaterView.h; sourceTree = "<group>"; };
 		338418E61DC9783500D679CA /* GFWaterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFWaterView.m; sourceTree = "<group>"; };
+		33875A4D1EB96A7900F7E0E6 /* newEnergyDetailData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newEnergyDetailData.h; sourceTree = "<group>"; };
+		33875A4E1EB96A7900F7E0E6 /* newEnergyDetailData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newEnergyDetailData.m; sourceTree = "<group>"; };
+		33875A501EB9B28C00F7E0E6 /* newEnergyDetaiTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newEnergyDetaiTwo.h; sourceTree = "<group>"; };
+		33875A511EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newEnergyDetaiTwo.m; sourceTree = "<group>"; };
 		338964581E51979800A7B1AE /* device_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = device_bg.jpg; sourceTree = "<group>"; };
 		3389645C1E51B74C00A7B1AE /* yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuan.png; sourceTree = "<group>"; };
 		3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phoneRegisterViewController.h; path = "../注册/手机验证/phoneRegisterViewController.h"; sourceTree = "<group>"; };
@@ -3477,6 +3483,10 @@
 				33EA49F41E8DEA0B0044A01A /* newEnergyStorage.m */,
 				337A70FC1E9C7F0200FE5F3C /* newEnergyStorage2000.h */,
 				337A70FD1E9C7F0200FE5F3C /* newEnergyStorage2000.m */,
+				33875A4D1EB96A7900F7E0E6 /* newEnergyDetailData.h */,
+				33875A4E1EB96A7900F7E0E6 /* newEnergyDetailData.m */,
+				33875A501EB9B28C00F7E0E6 /* newEnergyDetaiTwo.h */,
+				33875A511EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m */,
 			);
 			path = "储能能源新界面";
 			sourceTree = "<group>";
@@ -4262,6 +4272,7 @@
 				3367CB491C86806600EF460C /* MASCompositeConstraint.m in Sources */,
 				3367CB4A1C86806600EF460C /* MASConstraint.m in Sources */,
 				3343F3E51C805BBF009F69BC /* FXBlurView.m in Sources */,
+				33875A521EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m in Sources */,
 				3367CB4B1C86806600EF460C /* MASConstraintMaker.m in Sources */,
 				337079471D91397800D7DA98 /* QuestionTableViewCell.m in Sources */,
 				334FF0941CF53C7C001E6716 /* AsyncUdpSocket.m in Sources */,
@@ -4317,6 +4328,7 @@
 				33AF3D1A1D8E67210007D6C2 /* ACPButton.m in Sources */,
 				3367EBA41CD0C11800D2EF67 /* productViewController.m in Sources */,
 				338964881E5BDE5200A7B1AE /* quickRegisterViewController.m in Sources */,
+				33875A4F1EB96A7900F7E0E6 /* newEnergyDetailData.m in Sources */,
 				33AF3D1E1D8E67210007D6C2 /* JDStatusBarNotification.m in Sources */,
 				335D69B21D77BA4D00894D90 /* HcdPlayerView.m in Sources */,
 				335088D91C73011300D7AA03 /* addDevice.m in Sources */,

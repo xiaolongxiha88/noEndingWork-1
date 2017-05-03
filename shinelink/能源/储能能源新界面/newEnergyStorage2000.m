@@ -13,6 +13,8 @@
 #import "CircleView1.h"
 #import "JHColumnChart.h"
 #import "EditGraphView.h"
+#import "newEnergyDetailData.h"
+#import "newEnergyDetaiTwo.h"
 
 #define ScreenProW  HEIGHT_SIZE/2.38
 #define ScreenProH  NOW_SIZE/2.34
@@ -53,6 +55,9 @@
 @property (nonatomic,assign) NSInteger refreshTag;
 
 @property (nonatomic, strong) UIView *uiviewThree;
+@property (nonatomic, strong) NSMutableArray *toDetaiDataArray;
+@property (nonatomic, strong) NSMutableArray *toDetaiDataArray2;
+@property (nonatomic, strong) NSMutableArray *toDetaiDataArray3;
 
 @end
 
@@ -157,7 +162,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL2.textColor =COLOR(186, 216, 244, 1);
     [V1 addSubview:VL2];
     
-    _uiview1=[[UIView alloc]initWithFrame:CGRectMake(0, 205*ScreenProH-viewAA, SCREEN_Width, ScreenProH*310-view1H)];
+    _uiview1=[[UIView alloc]initWithFrame:CGRectMake(0, 205*ScreenProH-viewAA, SCREEN_Width, ScreenProH*280-view1H)];
     [_scrollView addSubview:_uiview1];
     
     NSArray *lableName=[NSArray arrayWithObjects:root_guangfu_chanchu,root_nengyuan_chanchu, nil];
@@ -214,7 +219,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_scrollView addSubview:V1];
     
     UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(40*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
-    [VM1 setImage:[UIImage imageNamed:@"energyinfo_icon.png"]];
+    [VM1 setImage:[UIImage imageNamed:@"energyuse_icon.png"]];
     [V1 addSubview:VM1];
     
     UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(90*ScreenProW, 0*ScreenProH, 500*ScreenProH, ScreenProH*60)];
@@ -223,6 +228,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL1.text=root_nengyuan_chanhao;
     VL1.textColor =[UIColor whiteColor];
     [V1 addSubview:VL1];
+    
+    UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(660*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
+    [VM2 setImage:[UIImage imageNamed:@"zhushi11.png"]];
+    VM2.userInteractionEnabled=YES;
+    UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail)];
+    [VM2 addGestureRecognizer:demo1];
+    [V1 addSubview:VM2];
     
     UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(225*ScreenProW, 550*ScreenProH-view1H-viewAA, 300*ScreenProW, ScreenProH*60)];
     V2.layer.borderWidth=1;
@@ -288,6 +300,16 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
 }
 
+-(void)getDetail{
+    if (_toDetaiDataArray.count>0) {
+        newEnergyDetailData *registerRoot=[[newEnergyDetailData alloc]init];
+        registerRoot.getDetaiDataArray=[NSMutableArray arrayWithArray:_toDetaiDataArray];
+        [self.navigationController pushViewController:registerRoot animated:YES];
+    }
+    
+    
+}
+
 
 -(void)buttonPressed{
     
@@ -335,7 +357,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     
     float HH=1160*ScreenProH;
-    _uiview2=[[UIView alloc]initWithFrame:CGRectMake(0*ScreenProW, 1160*ScreenProH-view1H-viewAA, 750*ScreenProW, ScreenProH*540)];
+    _uiview2=[[UIView alloc]initWithFrame:CGRectMake(0*ScreenProW, 1160*ScreenProH-view1H-viewAA, 750*ScreenProW, ScreenProH*140)];
     [_scrollView addSubview:_uiview2];
     
     NSArray *colorArray=@[COLOR(255, 217, 35, 1),COLOR(32, 219, 118, 1),COLOR(104, 247, 252, 1),COLOR(55, 110, 251, 1)];
@@ -420,6 +442,17 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
 }
 
+-(void)getDetail2{
+
+    if (_toDetaiDataArray.count>0) {
+        newEnergyDetaiTwo *registerRoot=[[newEnergyDetaiTwo alloc]init];
+        registerRoot.getDetaiDataArray1=[NSMutableArray arrayWithArray:_toDetaiDataArray2];
+         registerRoot.getDetaiDataArray2=[NSMutableArray arrayWithArray:_toDetaiDataArray3];
+        
+        [self.navigationController pushViewController:registerRoot animated:YES];
+    }
+    
+}
 
 -(void)initUiThree{
     UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 1730*ScreenProH-view2H-viewAA, SCREEN_Width, ScreenProH*60)];
@@ -436,6 +469,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL1.text=root_chuneng_nengyuan;
     VL1.textColor =[UIColor whiteColor];
     [V1 addSubview:VL1];
+    
+    UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(660*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
+    [VM2 setImage:[UIImage imageNamed:@"zhushi11.png"]];
+    VM2.userInteractionEnabled=YES;
+    UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail2)];
+    [VM2 addGestureRecognizer:demo1];
+    [V1 addSubview:VM2];
     
     UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(43*ScreenProW, 1800*ScreenProH-view2H-viewAA, SCREEN_Width, ScreenProH*30)];
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
@@ -510,6 +550,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             
         }
     }
+      _toDetaiDataArray=[NSMutableArray arrayWithObjects:xArray, Y1,Y2,Y3,Y4,nil];
     
     NSMutableArray *tempXArr = [NSMutableArray array];
     if (xArray.count > 0) {
@@ -604,6 +645,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [yArray addObject:_dataFiveDic[key]];
     }
     
+    _toDetaiDataArray2=[NSMutableArray arrayWithObjects:xArray,yArray, nil];
     
     NSMutableArray *tempXArr = [NSMutableArray array];
     if (xArray.count > 0) {
@@ -756,6 +798,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             [valueArr00 addObject:Y0];
         }
     }
+    
+    _toDetaiDataArray3=[NSMutableArray arrayWithObjects:xArray,valueArr00, nil];
     
     float HH=2400*ScreenProH;
     if (_uiviewThree) {
@@ -941,6 +985,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 }else{
                     _dataFourDic=[NSMutableDictionary dictionaryWithDictionary:jsonObj[@"obj"][@"cdsData"]];
                     _dataFiveDic=[NSDictionary dictionaryWithDictionary:jsonObj[@"obj"][@"socData"]];
+                  
+                    
                     [self initUiThree];
                 }
                 
@@ -959,6 +1005,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 -(void)viewWillAppear:(BOOL)animated{
 //    [self prefersStatusBarHidden];
  //   [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    self.tabBarController.tabBar.hidden = NO;
     
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     NSString *isNew=[ud objectForKey:@"isNewEnergy"];
@@ -1013,18 +1060,18 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         self.dayPicker.backgroundColor = [UIColor whiteColor];
         self.dayPicker.datePickerMode = UIDatePickerModeDate;
         self.dayPicker.date = currentDayDate;
-        self.dayPicker.frame = CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+        self.dayPicker.frame = CGRectMake(0, 40*HEIGHT_SIZE + 0*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
         [self.view addSubview:self.dayPicker];
     } else {
         [UIView animateWithDuration:0.3f animations:^{
             self.dayPicker.date = currentDayDate;
             self.dayPicker.alpha = 1;
-            self.dayPicker.frame = CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+            self.dayPicker.frame = CGRectMake(0, 40*HEIGHT_SIZE + 0*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
             [self.view addSubview:self.dayPicker];
         }];
     }
     
-    self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE + 216*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 30*HEIGHT_SIZE)];
+    self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 40*HEIGHT_SIZE + 0*HEIGHT_SIZE + 216*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 30*HEIGHT_SIZE)];
     self.toolBar.barStyle = UIBarStyleDefault;
     self.toolBar.barTintColor = MainColor;
     [self.view addSubview:self.toolBar];
