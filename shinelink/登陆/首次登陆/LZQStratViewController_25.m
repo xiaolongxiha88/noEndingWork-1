@@ -52,21 +52,21 @@
  
     
     if ([currentLanguage hasPrefix:@"zh-Hans"] ){
-        [imageName addObject:@"first1.jpg"];
-        [imageName addObject:@"first1.jpg"];
-        [imageName addObject:@"first2.png"];
-        [imageName addObject:@"first3.png"];
+        [imageName addObject:@"全新的监控管理_cn.png"];
+        [imageName addObject:@"全新的监控管理_cn.png"];
+        [imageName addObject:@"全面的数据分析_cn.png"];
+        [imageName addObject:@"贴心的客户服务_cn.png"];
     }else if ([currentLanguage hasPrefix:@"en"]) {
-        [imageName addObject:@"second1.png"];
-         [imageName addObject:@"second1.png"];
-         [imageName addObject:@"second2.png"];
-         [imageName addObject:@"second3.png"];
+        [imageName addObject:@"全新的监控管理_en.png"];
+         [imageName addObject:@"全新的监控管理_en.png"];
+         [imageName addObject:@"全面的数据分析_en.png"];
+         [imageName addObject:@"贴心的客户服务_en.png"];
       // NSArray *imageName=[NSArray arrayWithObjects:@"11.png",@"11.png",@"22.png",@"33.png", nil];
     }else{
-        [imageName addObject:@"second1.png"];
-        [imageName addObject:@"second1.png"];
-        [imageName addObject:@"second2.png"];
-        [imageName addObject:@"second3.png"];
+        [imageName addObject:@"全新的监控管理_en.png"];
+        [imageName addObject:@"全新的监控管理_en.png"];
+        [imageName addObject:@"全面的数据分析_en.png"];
+        [imageName addObject:@"贴心的客户服务_en.png"];
     }
 
     

@@ -680,8 +680,11 @@
                     [secondPath moveToPoint:P_M(p.x, self.chartOrigin.y)];
                     [secondPath addLineToPoint:p];
                 }
-
-                [firstPath moveToPoint:p];
+                if ((isnan(p.x))||(isnan(p.y))) {
+                }else{
+                   [firstPath moveToPoint:p];
+                }
+             
             }else{
                 CGPoint nextP = [dataArr[i-1] CGPointValue];
                 CGPoint control1 = P_M(p.x + (nextP.x - p.x) / 2.0, nextP.y );
@@ -710,8 +713,12 @@
         }
 
         if (i==dataArr.count-1) {
-            
-            [secondPath addLineToPoint:P_M(p.x, self.chartOrigin.y)];
+            if ((isnan(p.x))||(isnan(p.y))) {
+            }else{
+                       [secondPath addLineToPoint:P_M(p.x, self.chartOrigin.y)];
+            }
+
+     
             
         }
     }

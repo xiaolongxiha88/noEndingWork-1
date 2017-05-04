@@ -131,6 +131,13 @@
     CGFloat smallCircleCenterPointX = x;
     CGFloat smallCircleCenterPointY = y;
     
+    if (isnan(smallCircleCenterPointX)) {
+        smallCircleCenterPointX=0.0;
+    }
+    if (isnan(smallCircleCenterPointY)) {
+        smallCircleCenterPointY=0.0;
+    }
+    
     //NSLog(@"X:%f   Y:%f",smallCircleCenterPointX,smallCircleCenterPointY);
     //折点
     CGFloat lineLosePointX = 0.0 ; //指引线的折点
@@ -179,6 +186,7 @@
     }
     
     //画边上的小圆
+    
     UIBezierPath *arcPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(smallCircleCenterPointX, smallCircleCenterPointY) radius:2 startAngle:0 endAngle:PI * 2 clockwise:YES];
     [color set];
     [arcPath fill];
