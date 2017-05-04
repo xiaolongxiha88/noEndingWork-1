@@ -23,7 +23,7 @@
     [super viewDidLoad];
 //    UIImage *bgImage = IMAGE(@"bg.png");
 //    self.view.layer.contents = (id)bgImage.CGImage;
-    self.title=root_wifi_peizhi;
+    self.title=root_gongju;
     self.view.backgroundColor=MainColor;
     [self initUI];
 }
@@ -41,19 +41,42 @@
 
 
 -(void)initUI{
+    
+    UIView *V0=[[UIView alloc]initWithFrame:CGRectMake(0, 10*HEIGHT_SIZE, SCREEN_Width, HEIGHT_SIZE*230)];
+    V0.backgroundColor=COLOR(4, 55, 85, 0.1);
+    [self.view addSubview:V0];
+    
+    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE, SCREEN_Width, HEIGHT_SIZE*30)];
+    V1.backgroundColor=COLOR(4, 55, 85, 0.1);
+    [V0 addSubview:V1];
+    
+    UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE, 320*NOW_SIZE, HEIGHT_SIZE*30)];
+    VL1.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    VL1.textAlignment = NSTextAlignmentCenter;
+    VL1.text=root_wifi_peizhi;
+    VL1.textColor =[UIColor whiteColor];
+    [V1 addSubview:VL1];
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+    CGSize size = [root_wifi_peizhi boundingRectWithSize:CGSizeMake(MAXFLOAT, 14*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_Width-size.width)/2-30*HEIGHT_SIZE, 5*HEIGHT_SIZE, 20*HEIGHT_SIZE, 20*HEIGHT_SIZE)];
+        [VM1 setImage:[UIImage imageNamed:@"wifi_icon.png"]];
+        [V1 addSubview:VM1];
+    
+    
     //数据采集器序列号
-    UIImageView *userBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 50*HEIGHT_SIZE, SCREEN_Width - 80*NOW_SIZE, 45*HEIGHT_SIZE)];
+    UIImageView *userBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 40*HEIGHT_SIZE, SCREEN_Width - 80*NOW_SIZE, 40*HEIGHT_SIZE)];
     userBgImageView.userInteractionEnabled = YES;
     userBgImageView.image = IMAGE(@"圆角矩形空心.png");
-    [self.view addSubview:userBgImageView];
+    [V0 addSubview:userBgImageView];
     
-    _cellectId = [[UITextField alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 0, CGRectGetWidth(userBgImageView.frame) , 45*HEIGHT_SIZE)];
+    _cellectId = [[UITextField alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 0, CGRectGetWidth(userBgImageView.frame) , 40*HEIGHT_SIZE)];
     _cellectId.placeholder = root_caiJiQi;
     _cellectId.textColor = [UIColor grayColor];
     _cellectId.tintColor = [UIColor grayColor];
     _cellectId.textAlignment = NSTextAlignmentCenter;
     [_cellectId setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [_cellectId setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    [_cellectId setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     _cellectId.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [userBgImageView addSubview:_cellectId];
     
@@ -76,22 +99,22 @@
     
     
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(40*NOW_SIZE,210*HEIGHT_SIZE, 240*NOW_SIZE, 40*HEIGHT_SIZE);
+    goBut.frame=CGRectMake(40*NOW_SIZE,160*HEIGHT_SIZE, 240*NOW_SIZE, 40*HEIGHT_SIZE);
     // [goBut.layer setMasksToBounds:YES];
     // [goBut.layer setCornerRadius:25.0];
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [goBut setTitle:root_next_go forState:UIControlStateNormal];
     [goBut addTarget:self action:@selector(addButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:goBut];
+    [V0 addSubview:goBut];
     
-    UIButton *QR=[[UIButton alloc]initWithFrame:CGRectMake(40*NOW_SIZE,300*HEIGHT_SIZE , 240*NOW_SIZE, 60*HEIGHT_SIZE)];
+    UIButton *QR=[[UIButton alloc]initWithFrame:CGRectMake(40*NOW_SIZE,100*HEIGHT_SIZE , 240*NOW_SIZE, 40*HEIGHT_SIZE)];
     [QR setBackgroundImage:IMAGE(@"按钮2.png") forState:0];
     QR.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [QR setTitle:root_erWeiMa forState:UIControlStateNormal];
     [QR setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [QR addTarget:self action:@selector(ScanQR) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:QR];
+    [V0 addSubview:QR];
 }
 
 -(void)ScanQR{

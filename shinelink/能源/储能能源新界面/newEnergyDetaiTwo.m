@@ -98,7 +98,7 @@
     [self.view addSubview:_scrollView];
     
     NSArray *time=[_getDetaiDataArray2 objectAtIndex:0];
-    NSArray *D1=[_getDetaiDataArray2 objectAtIndex:1];
+    NSArray *D1=[_getDetaiDataArray2 objectAtIndex:1];  
     
     for (int i=0; i<time.count; i++) {
        // NSArray *A=[NSArray arrayWithObject:D1[i]];

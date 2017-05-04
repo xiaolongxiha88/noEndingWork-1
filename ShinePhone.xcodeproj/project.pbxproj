@@ -449,6 +449,8 @@
 		338418E71DC9783500D679CA /* GFWaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338418E61DC9783500D679CA /* GFWaterView.m */; };
 		33875A4F1EB96A7900F7E0E6 /* newEnergyDetailData.m in Sources */ = {isa = PBXBuildFile; fileRef = 33875A4E1EB96A7900F7E0E6 /* newEnergyDetailData.m */; };
 		33875A521EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 33875A511EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m */; };
+		33875A541EBABDE700F7E0E6 /* toolx_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33875A531EBABDE700F7E0E6 /* toolx_icon.png */; };
+		33875A561EBACEEA00F7E0E6 /* wifi_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33875A551EBACEEA00F7E0E6 /* wifi_icon.png */; };
 		338964591E51979800A7B1AE /* device_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338964581E51979800A7B1AE /* device_bg.jpg */; };
 		3389645D1E51B74C00A7B1AE /* yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3389645C1E51B74C00A7B1AE /* yuan.png */; };
 		338964611E52E52700A7B1AE /* phoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338964601E52E52700A7B1AE /* phoneRegisterViewController.m */; };
@@ -1351,6 +1353,8 @@
 		33875A4E1EB96A7900F7E0E6 /* newEnergyDetailData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newEnergyDetailData.m; sourceTree = "<group>"; };
 		33875A501EB9B28C00F7E0E6 /* newEnergyDetaiTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newEnergyDetaiTwo.h; sourceTree = "<group>"; };
 		33875A511EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newEnergyDetaiTwo.m; sourceTree = "<group>"; };
+		33875A531EBABDE700F7E0E6 /* toolx_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolx_icon.png; sourceTree = "<group>"; };
+		33875A551EBACEEA00F7E0E6 /* wifi_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wifi_icon.png; sourceTree = "<group>"; };
 		338964581E51979800A7B1AE /* device_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = device_bg.jpg; sourceTree = "<group>"; };
 		3389645C1E51B74C00A7B1AE /* yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuan.png; sourceTree = "<group>"; };
 		3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phoneRegisterViewController.h; path = "../注册/手机验证/phoneRegisterViewController.h"; sourceTree = "<group>"; };
@@ -2208,6 +2212,7 @@
 				33699BBA1DADE73400C55CFF /* PV_t4.png */,
 				33699BBC1DADE73B00C55CFF /* storage.png */,
 				33771D511E8369B000786FCE /* zhushi11.png */,
+				33875A531EBABDE700F7E0E6 /* toolx_icon.png */,
 				336A24621DEFF7120002D1AD /* 设备头图片 */,
 			);
 			path = "图片";
@@ -2819,6 +2824,7 @@
 		337CB5971DB4A746002ABB88 /* 工具箱 */ = {
 			isa = PBXGroup;
 			children = (
+				33875A551EBACEEA00F7E0E6 /* wifi_icon.png */,
 				33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */,
 				33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */,
 				337CB5981DB4A787002ABB88 /* WiFiSignalViewController.h */,
@@ -3914,6 +3920,7 @@
 				3334AD751D800BD900665667 /* inverter2.png in Resources */,
 				3355AD981CF6A49400AE6891 /* 444.jpg in Resources */,
 				3367D9871CED6D5700DE7528 /* triangular2.png in Resources */,
+				33875A541EBABDE700F7E0E6 /* toolx_icon.png in Resources */,
 				33FEFD671C7DB38400324374 /* iconfont-address@2x.png in Resources */,
 				33768AB81D475E8000873E82 /* demobgcn.png in Resources */,
 				336F19F11D87943700CD4C2B /* serverV@2x.png in Resources */,
@@ -4009,6 +4016,7 @@
 				3383F1341C9FF7370075E834 /* connected@2x.png in Resources */,
 				334AED5A1CA37577007E39F3 /* 质保查询.png in Resources */,
 				335456C91C853C2F00275478 /* scanscanBg.png in Resources */,
+				33875A561EBACEEA00F7E0E6 /* wifi_icon.png in Resources */,
 				338FD9861D1D20F9009A128F /* first3.png in Resources */,
 				338964771E57E7E600A7B1AE /* icon_bat.png in Resources */,
 				3383F12E1C9FF4190075E834 /* Plug.png in Resources */,

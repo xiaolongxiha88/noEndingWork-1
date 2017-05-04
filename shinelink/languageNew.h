@@ -664,5 +664,7 @@
 #define  root_mianban_dianliang  NSLocalizedString(@"68面板电量", nil)
 #define  root_chuneng_congfang_xinxi  NSLocalizedString(@"69储能充放电信息", nil)
 #define  root_shishi_SOC  NSLocalizedString(@"70实时SOC", nil)
+#define  root_gongju  NSLocalizedString(@"71工具", nil)
+
 
 #endif /* languageNew_h */

@@ -81,8 +81,8 @@
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self setTitle:root_ME];
       [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
-    arrayName=@[root_WO_zhiliao_guanli,root_WO_xitong_shezhi,root_wifi_peizhi,root_WO_xiaoxi_zhongxin,root_WO_guanyu];
-    arrayImage=@[@"ziliao.png",@"系统设置.png",@"shinewifi.png",@"message.png",@"关于.png"];
+    arrayName=@[root_WO_zhiliao_guanli,root_WO_xitong_shezhi,root_gongju,root_WO_xiaoxi_zhongxin,root_WO_guanyu];
+    arrayImage=@[@"ziliao.png",@"系统设置.png",@"toolx_icon.png",@"message.png",@"关于.png"];
     
     [super viewDidLoad];
     // Do any additional setup after loading the view.
