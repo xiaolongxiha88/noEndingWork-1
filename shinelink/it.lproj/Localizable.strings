@@ -381,7 +381,7 @@
 "回 复"="Risposta";
 "查看图片"="Vedi l'immagine";
 "概述"="Panoramica";
-"参数"="Parametri";
+"参数"="Indormazioni";
 "有"="Si";
 "没有"="No";
 "有无质保:"="In garanzia?";
@@ -446,7 +446,7 @@
 
 "Revenue"="Rendita";
 //"todayPV"="E-Fotovoltaica di oggi";
-"todayPV"="E-oggi PV";
+"todayPV"="Energia di oggi";
 
 "PpvN"="Ppv";
 

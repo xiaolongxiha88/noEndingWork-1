@@ -381,7 +381,7 @@
 "回 复"="Antworten";
 "查看图片"="Bild ansehen";
 "概述"="Übersicht";
-"参数"="Parameter";
+"参数"="WR-Info";
 "有"="Ja";
 "没有"="Nein";
 "有无质保:"="Garantie vorhanden?";
@@ -445,7 +445,8 @@
 "Pgrid"="P-netz";
 
 "Revenue"="Tagesertrag";
-"todayPV"="Tagesproduktion";
+//"todayPV"="Tagesproduktion";
+"todayPV"="Energie heute";
 "PpvN"="Leistung PV";
 
 "体验馆"="Demo";

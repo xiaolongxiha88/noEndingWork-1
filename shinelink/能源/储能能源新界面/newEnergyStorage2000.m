@@ -816,7 +816,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     // column.valueArr =[NSArray arrayWithObjects:A1, nil];
     
     /*       This point represents the distance from the lower left corner of the origin.         */
-    column.originSize = CGPointMake(30*ScreenProW, 30*ScreenProH);
+    column.originSize = CGPointMake(65*ScreenProW, 30*ScreenProH);
     /*    The first column of the distance from the starting point     */
     column.drawFromOriginX = 10*ScreenProW;
     column.typeSpace = 30*ScreenProW;
