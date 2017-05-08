@@ -114,7 +114,7 @@
         VL2.font=[UIFont systemFontOfSize:11*HEIGHT_SIZE];
         VL2.adjustsFontSizeToFitWidth=YES;
         VL2.textAlignment = NSTextAlignmentCenter;
-        NSString *a1=[NSString stringWithFormat:@"%@",[D1 objectAtIndex:0]];
+        NSString *a1=[NSString stringWithFormat:@"%@",[D1[i] objectAtIndex:0]];
         VL2.text=[NSString stringWithFormat:@"%.2f",[a1 floatValue]];
         VL2.textColor =[UIColor grayColor];
         [_scrollView addSubview:VL2];
@@ -124,7 +124,7 @@
         VL3.adjustsFontSizeToFitWidth=YES;
         VL3.textAlignment = NSTextAlignmentCenter;
         //NSString *a1=D1[i];
-        NSString *a2=[NSString stringWithFormat:@"%@",[D1 objectAtIndex:1]];
+        NSString *a2=[NSString stringWithFormat:@"%@",[D1[i] objectAtIndex:1]];
         VL3.text=[NSString stringWithFormat:@"%.2f",[a2 floatValue]];
        // VL3.text=[NSString stringWithFormat:@"%.2f",[D1[i] floatValue]];
         VL3.textColor =[UIColor grayColor];
