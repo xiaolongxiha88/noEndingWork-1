@@ -240,6 +240,29 @@ static void *context = NULL;
 }
 
 
+-(void)StopConfigerUI{
+    _pswd.userInteractionEnabled=YES;
+    _ipName.userInteractionEnabled=YES;
+    
+    [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
+    [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click.png") forState:UIControlStateHighlighted];
+    [_setButton setTitle:root_set forState:UIControlStateNormal];
+    
+    _timeLableString=_firstLableString;
+    
+    //  NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
+    
+    _timeLable.text=@"";
+    
+    [self StopTime];
+    [self  stopSearch];
+    if ([_timelineConfig isRunning]) {
+        [_timelineConfig stop];
+    }
+
+
+}
+
 
 - (void)clickAnimation:(id)sender {
     
@@ -280,6 +303,26 @@ static void *context = NULL;
         
     }
     
+    
+    
+    UIApplicationState state = [[UIApplication sharedApplication] applicationState];
+    if (state == UIApplicationStateInactive) {
+        //iOS6锁屏事件
+        NSLog(@"Sent to background by locking screen");
+        [self StopConfigerUI];
+    } else if (state == UIApplicationStateBackground) {
+        CGFloat screenBrightness = [[UIScreen mainScreen] brightness];
+        NSLog(@"Screen brightness: %f", screenBrightness);
+        if (screenBrightness > 0.0) {
+            //iOS6&iOS7 Home事件
+            NSLog(@"Sent to background by home button/switching to other app");
+        } else {
+            //iOS7锁屏事件
+                [self StopConfigerUI];
+            NSLog(@"Sent to background by locking screen");
+        }
+    }
+
    
     
     NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
@@ -394,7 +437,7 @@ static void *context = NULL;
 
    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
 
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(StopConfigerUI) name:@"StopConfigerUI" object:nil];
     
     //添加定时器
     if (!_timer) {
@@ -543,8 +586,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销1  2
-        elianStop(context);
-        elianDestroy(context);
+//        elianStop(context);
+//        elianDestroy(context);
         
         
         
@@ -553,7 +596,7 @@ static void *context = NULL;
     
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销2  1
- context = elianNew(NULL, 0, target, flag);
+     //  context = elianNew(NULL, 0, target, flag);
     
     
     if (context == NULL)
@@ -567,10 +610,10 @@ static void *context = NULL;
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销3  4
     
-    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
-    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
-    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
-    elianStart(context);
+//    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
+//    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
+//    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
+//    elianStart(context);
 //
     
 }
@@ -630,8 +673,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销4  2
-    elianStop(context);
-     elianDestroy(context);
+//    elianStop(context);
+//     elianDestroy(context);
         
         
     }
@@ -655,8 +698,8 @@ static void *context = NULL;
            
           //////// ////////////////// ////////////////////////////////
          //////////////////////   ////////////////////////////注销5  2
-            elianStop(context);
-           elianDestroy(context);
+//            elianStop(context);
+//           elianDestroy(context);
             
             
             context = NULL;
@@ -676,6 +719,9 @@ _timer.fireDate=[NSDate distantFuture];
     _timer=nil;
     
 }
+
+
+
 
 
 

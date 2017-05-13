@@ -54,6 +54,7 @@ class RfStickSwift: RootViewController {
         
         RfSnText1=UITextField()
         self.RfSnText1.frame=CGRect(x: 150*NOW_SIZE, y: 20*HEIGHT_SIZE+heigh0*CGFloat(1), width: 160*NOW_SIZE, height: 30*HEIGHT_SIZE)
+        
         RfSnText1.textAlignment=NSTextAlignment.left
         RfSnText1.textColor=UIColor.white
         RfSnText1.font=UIFont.systemFont(ofSize: 14*HEIGHT_SIZE)

@@ -439,14 +439,37 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL4.textColor =COLOR(255, 255, 255, 0.8);
     [_uiview2 addSubview:VL4];
     
+    NSString *A1=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"epvGridToday"] floatValue]];
+    NSString *A2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"epvStorageToday"] floatValue]];
+    NSString *A3=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"epvUserToday"] floatValue]];
     
-    CircleView1 *circleView1= [[CircleView1 alloc]initWithFrame:CGRectMake(0*ScreenProW, 1292*ScreenProH-HH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"1" andAllDic:_dataTwoNetAllDic];
-  //  circleView1.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
-     [_uiview2 addSubview:circleView1];
+    NSString *A4=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"useGridToday"] floatValue]];
+    NSString *A5=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"useStorageToday"] floatValue]];
+    NSString *A6=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"useUserToday"] floatValue]];
     
-    CircleView1 *circleView2= [[CircleView1 alloc]initWithFrame:CGRectMake(375*ScreenProW, 1292*ScreenProH-HH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"2" andAllDic:_dataTwoNetAllDic];
-   //  circleView2.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
-    [_uiview2 addSubview:circleView2];
+    if(([A1 isEqualToString:@"0.0"])&&([A2 isEqualToString:@"0.0"])&&([A3 isEqualToString:@"0.0"])){
+        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(37*ScreenProW, 1292*ScreenProH-HH+37*ScreenProH, 300*ScreenProW, 300*ScreenProH)];
+        [VM1 setImage:[UIImage imageNamed:@"yuan2.png"]];
+        [_uiview2 addSubview:VM1];
+        
+    }else{
+        CircleView1 *circleView1= [[CircleView1 alloc]initWithFrame:CGRectMake(0*ScreenProW, 1292*ScreenProH-HH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"1" andAllDic:_dataTwoNetAllDic];
+        //  circleView1.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
+        [_uiview2 addSubview:circleView1];
+    }
+    
+    
+    if(([A4 isEqualToString:@"0.0"])&&([A5 isEqualToString:@"0.0"])&&([A6 isEqualToString:@"0.0"])){
+        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(375*ScreenProW+37*ScreenProW, 1292*ScreenProH-HH+37*ScreenProH, 300*ScreenProW, 300*ScreenProH)];
+        [VM1 setImage:[UIImage imageNamed:@"yuan2.png"]];
+        [_uiview2 addSubview:VM1];
+    }else{
+        CircleView1 *circleView2= [[CircleView1 alloc]initWithFrame:CGRectMake(375*ScreenProW, 1292*ScreenProH-HH, 375*ScreenProW, 375*ScreenProH) andUrlStr:@"2" andAllDic:_dataTwoNetAllDic];
+        //  circleView2.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
+        [_uiview2 addSubview:circleView2];
+    }
+    
+   
     
     
     NSArray *languages = [NSLocale preferredLanguages];

@@ -10,6 +10,7 @@
 		330E3DED1D0D6CF300DF75AE /* enabler.png in Resources */ = {isa = PBXBuildFile; fileRef = 330E3DEC1D0D6CF300DF75AE /* enabler.png */; };
 		330E3DEF1D0D6D2100DF75AE /* priority.png in Resources */ = {isa = PBXBuildFile; fileRef = 330E3DEE1D0D6D2100DF75AE /* priority.png */; };
 		330E3DF11D0D6D4B00DF75AE /* 形状17.png in Resources */ = {isa = PBXBuildFile; fileRef = 330E3DF01D0D6D4B00DF75AE /* 形状17.png */; };
+		33184D571EC6A69500340CE9 /* yuan2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33184D561EC6A69500340CE9 /* yuan2.png */; };
 		3319E0861D5AFAA7006623A9 /* HtmlCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 3319E0851D5AFAA7006623A9 /* HtmlCommon.m */; };
 		3319E08C1D5AFB39006623A9 /* LWLoadingAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3319E0891D5AFB39006623A9 /* LWLoadingAnimationView.m */; };
 		3319E08D1D5AFB39006623A9 /* LWLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3319E08B1D5AFB39006623A9 /* LWLoadingView.m */; };
@@ -652,6 +653,7 @@
 		330E3DEC1D0D6CF300DF75AE /* enabler.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enabler.png; sourceTree = "<group>"; };
 		330E3DEE1D0D6D2100DF75AE /* priority.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = priority.png; sourceTree = "<group>"; };
 		330E3DF01D0D6D4B00DF75AE /* 形状17.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "形状17.png"; sourceTree = "<group>"; };
+		33184D561EC6A69500340CE9 /* yuan2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuan2.png; sourceTree = "<group>"; };
 		3319E0841D5AFAA7006623A9 /* HtmlCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HtmlCommon.h; sourceTree = "<group>"; };
 		3319E0851D5AFAA7006623A9 /* HtmlCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HtmlCommon.m; sourceTree = "<group>"; };
 		3319E0881D5AFB39006623A9 /* LWLoadingAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LWLoadingAnimationView.h; sourceTree = "<group>"; };
@@ -3046,6 +3048,7 @@
 		3381ECEF1CBCA59900DCF0D2 /* 能源图片 */ = {
 			isa = PBXGroup;
 			children = (
+				33184D561EC6A69500340CE9 /* yuan2.png */,
 				337A70FA1E9B820600FE5F3C /* solar_icon.png */,
 				3379E4F21E95CF2B000A4198 /* homeLoadSmall.png */,
 				3379E4F01E95CEB4000A4198 /* spSmall.png */,
@@ -4046,6 +4049,7 @@
 				33627A541DFE9FAF0001C00B /* 采集器_cn.jpg in Resources */,
 				334FF0BB1CF53C7C001E6716 /* logo_l.png in Resources */,
 				33FEFD6D1C7DB38400324374 /* iconfont-gongsijianjie@2x.png in Resources */,
+				33184D571EC6A69500340CE9 /* yuan2.png in Resources */,
 				3319E08F1D5AFD6D006623A9 /* view.html in Resources */,
 				33FEFD7C1C7DB38400324374 /* shebei@3x.png in Resources */,
 				33ABC2A71DC2EB69003B92AC /* 增值问题33.png in Resources */,
