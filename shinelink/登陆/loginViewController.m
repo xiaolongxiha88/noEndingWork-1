@@ -29,6 +29,7 @@
 #import "AVfirstView.h"
 #import "topAvViewController.h"
 #import "forgetOneViewController.h"
+#import "ShinePhone-Swift.h"
 
 
 @interface loginViewController ()<UINavigationControllerDelegate,UITextFieldDelegate>
@@ -79,10 +80,12 @@
  //  [self addSubViews];
  
     //////////测试区域
-    NSString *testDemo=@"O";
+    NSString *testDemo=@"OK";
     if ([testDemo isEqualToString:@"OK"]) {
-         topAvViewController *testView=[[topAvViewController alloc]init];
+         ossFistVC *testView=[[ossFistVC alloc]init];
         [self.navigationController pushViewController:testView animated:NO];
+        
+        
     }else{
     
      [self.navigationController setNavigationBarHidden:YES];

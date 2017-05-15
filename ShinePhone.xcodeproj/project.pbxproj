@@ -293,6 +293,13 @@
 		336D401F1D6FEA7600ECFA34 /* PinyinHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D40131D6FEA7600ECFA34 /* PinyinHelper.m */; };
 		336D40201D6FEA7600ECFA34 /* unicode_to_hanyu_pinyin.txt in Resources */ = {isa = PBXBuildFile; fileRef = 336D40141D6FEA7600ECFA34 /* unicode_to_hanyu_pinyin.txt */; };
 		336D40211D6FEA7600ECFA34 /* ZYPinYinSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D40161D6FEA7600ECFA34 /* ZYPinYinSearch.m */; };
+		336E03F51EC9411B0034BC86 /* ossFistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336E03F41EC9411B0034BC86 /* ossFistVC.swift */; };
+		336E03F81EC944A60034BC86 /* title_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 336E03F71EC944A60034BC86 /* title_bg.png */; };
+		336E03FA1EC944B10034BC86 /* gongdan_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 336E03F91EC944B10034BC86 /* gongdan_bg.png */; };
+		336E03FC1EC944B80034BC86 /* device_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 336E03FB1EC944B80034BC86 /* device_bg.png */; };
+		336E03FE1EC957EF0034BC86 /* ossServerFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336E03FD1EC957EF0034BC86 /* ossServerFirst.swift */; };
+		336E04001EC9586C0034BC86 /* ossDeviceFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336E03FF1EC9586C0034BC86 /* ossDeviceFirst.swift */; };
+		336E04021EC9ADAC0034BC86 /* icon_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 336E04011EC9ADAC0034BC86 /* icon_search.png */; };
 		336F19F11D87943700CD4C2B /* serverV@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 336F19F01D87943700CD4C2B /* serverV@2x.png */; };
 		336F1A141D88E46900CD4C2B /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F19F41D88E46900CD4C2B /* MKAnnotationView+WebCache.m */; };
 		336F1A151D88E46900CD4C2B /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F19F61D88E46900CD4C2B /* NSData+ImageContentType.m */; };
@@ -1116,6 +1123,13 @@
 		336D40141D6FEA7600ECFA34 /* unicode_to_hanyu_pinyin.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = unicode_to_hanyu_pinyin.txt; sourceTree = "<group>"; };
 		336D40151D6FEA7600ECFA34 /* ZYPinYinSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYPinYinSearch.h; sourceTree = "<group>"; };
 		336D40161D6FEA7600ECFA34 /* ZYPinYinSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYPinYinSearch.m; sourceTree = "<group>"; };
+		336E03F41EC9411B0034BC86 /* ossFistVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ossFistVC.swift; sourceTree = "<group>"; };
+		336E03F71EC944A60034BC86 /* title_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_bg.png; sourceTree = "<group>"; };
+		336E03F91EC944B10034BC86 /* gongdan_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gongdan_bg.png; sourceTree = "<group>"; };
+		336E03FB1EC944B80034BC86 /* device_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = device_bg.png; sourceTree = "<group>"; };
+		336E03FD1EC957EF0034BC86 /* ossServerFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ossServerFirst.swift; sourceTree = "<group>"; };
+		336E03FF1EC9586C0034BC86 /* ossDeviceFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ossDeviceFirst.swift; sourceTree = "<group>"; };
+		336E04011EC9ADAC0034BC86 /* icon_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_search.png; sourceTree = "<group>"; };
 		336F19F01D87943700CD4C2B /* serverV@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "serverV@2x.png"; sourceTree = "<group>"; };
 		336F19F31D88E46900CD4C2B /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		336F19F41D88E46900CD4C2B /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
@@ -2670,6 +2684,28 @@
 			path = PinYinSearchLib;
 			sourceTree = "<group>";
 		};
+		336E03F11EC93CCC0034BC86 /* OSS系统 */ = {
+			isa = PBXGroup;
+			children = (
+				336E03F61EC944940034BC86 /* oss图片 */,
+				336E03F41EC9411B0034BC86 /* ossFistVC.swift */,
+				336E03FF1EC9586C0034BC86 /* ossDeviceFirst.swift */,
+				336E03FD1EC957EF0034BC86 /* ossServerFirst.swift */,
+			);
+			path = "OSS系统";
+			sourceTree = "<group>";
+		};
+		336E03F61EC944940034BC86 /* oss图片 */ = {
+			isa = PBXGroup;
+			children = (
+				336E03F71EC944A60034BC86 /* title_bg.png */,
+				336E03F91EC944B10034BC86 /* gongdan_bg.png */,
+				336E03FB1EC944B80034BC86 /* device_bg.png */,
+				336E04011EC9ADAC0034BC86 /* icon_search.png */,
+			);
+			path = "oss图片";
+			sourceTree = "<group>";
+		};
 		336F19F21D88E45600CD4C2B /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -2870,6 +2906,7 @@
 		337F9C821C71A6710016FE43 /* shinelink */ = {
 			isa = PBXGroup;
 			children = (
+				336E03F11EC93CCC0034BC86 /* OSS系统 */,
 				335D69941D77B84B00894D90 /* 资料中心 */,
 				3383F1291C9FD1760075E834 /* datacore */,
 				334B8F611C915A1400798A69 /* ui */,
@@ -3519,6 +3556,7 @@
 				3355AD931CF6A48B00AE6891 /* 图片WIFI */,
 				334FF0251CF53C7B001E6716 /* WifConnect */,
 				33EFB5F71C979B5F003F336F /* StationCellectViewController.h */,
+				336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */,
 				33EFB5F81C979B5F003F336F /* StationCellectViewController.m */,
 				33EFB5F91C979B5F003F336F /* StationCellectTableViewCell.h */,
 				33EFB5FA1C979B5F003F336F /* StationCellectTableViewCell.m */,
@@ -3537,7 +3575,6 @@
 				337C44AA1E78CC9100135304 /* ledblue.gif */,
 				337C44AB1E78CC9100135304 /* ledgreen.gif */,
 				337C44AC1E78CC9100135304 /* ledred.gif */,
-				336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */,
 			);
 			path = "采集器";
 			sourceTree = "<group>";
@@ -3812,6 +3849,7 @@
 				337532EF1D051579009CE66F /* PushConfig.plist in Resources */,
 				33FEFD531C7DB38400324374 /* icon_arrow.png in Resources */,
 				3334AD771D800C0000665667 /* 储能机.png in Resources */,
+				336E03FC1EC944B80034BC86 /* device_bg.png in Resources */,
 				33FEFD731C7DB38400324374 /* iconfont-nengyuanlei@2x.png in Resources */,
 				330E3DEF1D0D6D2100DF75AE /* priority.png in Resources */,
 				337584451D267E2A006AC140 /* product2.jpg in Resources */,
@@ -3905,6 +3943,7 @@
 				33EA49EB1E8CAC060044A01A /* 设备页引导1.jpg in Resources */,
 				334AED621CA37649007E39F3 /* 系统设置.png in Resources */,
 				332692681D780F410058C5B7 /* backAV.png in Resources */,
+				336E03FA1EC944B10034BC86 /* gongdan_bg.png in Resources */,
 				33FFBD511CEC7202003C56E1 /* pass3.jpg in Resources */,
 				33768AAB1D475D0A00873E82 /* pvcn.png in Resources */,
 				33EA49EC1E8CAC060044A01A /* 设备页引导2_en.jpg in Resources */,
@@ -4019,6 +4058,8 @@
 				33775AF11D2E40290070742E /* 客服.png in Resources */,
 				3370791E1D8FD80300D7DA98 /* video.png in Resources */,
 				3370791D1D8FD80300D7DA98 /* question.png in Resources */,
+				336E03F81EC944A60034BC86 /* title_bg.png in Resources */,
+				336E04021EC9ADAC0034BC86 /* icon_search.png in Resources */,
 				3383F1341C9FF7370075E834 /* connected@2x.png in Resources */,
 				334AED5A1CA37577007E39F3 /* 质保查询.png in Resources */,
 				335456C91C853C2F00275478 /* scanscanBg.png in Resources */,
@@ -4212,6 +4253,7 @@
 				336F1A231D88E46900CD4C2B /* UIView+WebCacheOperation.m in Sources */,
 				335431BA1CCF549000CEAFFC /* SNLocationManager.m in Sources */,
 				336F1A1A1D88E46900CD4C2B /* SDWebImageDownloaderOperation.m in Sources */,
+				336E03F51EC9411B0034BC86 /* ossFistVC.swift in Sources */,
 				3319E08C1D5AFB39006623A9 /* LWLoadingAnimationView.m in Sources */,
 				336D40191D6FEA7600ECFA34 /* ChineseInclude.m in Sources */,
 				3343F3BF1C80403C009F69BC /* AFHTTPRequestOperation.m in Sources */,
@@ -4350,6 +4392,7 @@
 				3383EFA01C9F8A6F0075E834 /* MJRefreshHeader.m in Sources */,
 				33652A281CEC0AC8004EBAE5 /* extensionListTableViewController.m in Sources */,
 				335317431CA2423D003F106D /* GetDevice+CoreDataProperties.m in Sources */,
+				336E03FE1EC957EF0034BC86 /* ossServerFirst.swift in Sources */,
 				33ECDCF31CDC9D3400E20AF8 /* deviceCore.xcdatamodeld in Sources */,
 				3367CB4D1C86806600EF460C /* MASViewAttribute.m in Sources */,
 				33AF3D241D8E67210007D6C2 /* SIAlertView.m in Sources */,
@@ -4396,6 +4439,7 @@
 				335456D41C8588E200275478 /* SNViewController.m in Sources */,
 				335D69B41D77BA4D00894D90 /* HcdVideoRequestTask.m in Sources */,
 				335456D11C8588D500275478 /* emailViewController.m in Sources */,
+				336E04001EC9586C0034BC86 /* ossDeviceFirst.swift in Sources */,
 				33530F211CC8824500378EB2 /* changManeger.m in Sources */,
 				3350891B1C73112000D7AA03 /* EditStationMenuView.m in Sources */,
 				3381ECFE1CBCCADB00DCF0D2 /* myListSecond.m in Sources */,
