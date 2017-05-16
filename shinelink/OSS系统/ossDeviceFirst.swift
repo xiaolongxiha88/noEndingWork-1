@@ -16,19 +16,9 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
      var view2:UIView!
     
     var view3:UIView!
-      var button2:UIButton!
-     var button3:UIButton!
-     var button4:UIButton!
-     var button5:UIButton!
-     var button6:UIButton!
-     var button7:UIButton!
+     var view4:UIView!
     
-    var button11:UIButton!
-      var button12:UIButton!
-    var button21:UIButton!
-      var button22:UIButton!
-     var button31:UIButton!
-     var button32:UIButton!
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,18 +80,21 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
         view3.backgroundColor=UIColor.clear
         self.view.addSubview(view3)
         
-    
+        let buttonNameArray1=["用户名","电站名","手机号","邮箱"]
+         let buttonNameArray2=["采集器","逆变器","储能机"]
+        
         for i in 0...3{
             let button2=UIButton()
            
-            button2.frame=CGRect(x: 16*NOW_SIZE+76*NOW_SIZE*CGFloat(i), y: 30*HEIGHT_SIZE, width: 60*NOW_SIZE, height:25*HEIGHT_SIZE)
+            button2.frame=CGRect(x: 16*NOW_SIZE+76*NOW_SIZE*CGFloat(i), y: 90*HEIGHT_SIZE, width: 60*NOW_SIZE, height:25*HEIGHT_SIZE)
             // button2.setBackgroundImage(UIImage(named: "icon_search.png"), for: .normal)
-            button2.setTitle("电站名", for: .normal)
+            button2.setTitle(buttonNameArray1[i], for: .normal)
             button2.setTitleColor(MainColor, for: .normal)
             button2.setTitleColor(UIColor.white, for: .highlighted)
             button2.tag=i+2000
             button2.layer.borderWidth=0.8*HEIGHT_SIZE;
             button2.layer.cornerRadius=12*HEIGHT_SIZE;
+             button2.titleLabel?.adjustsFontSizeToFitWidth=true
             button2.layer.borderColor=MainColor.cgColor;
             button2.isSelected=false
             button2.backgroundColor=UIColor.clear
@@ -110,22 +103,161 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
         
         }
   
+        for i in 0...2{
+            let button2=UIButton()
+            button2.frame=CGRect(x: 35*NOW_SIZE+95*NOW_SIZE*CGFloat(i), y: 150*HEIGHT_SIZE, width: 60*NOW_SIZE, height:25*HEIGHT_SIZE)
+            // button2.setBackgroundImage(UIImage(named: "icon_search.png"), for: .normal)
+            button2.setTitle(buttonNameArray2[i], for: .normal)
+            button2.setTitleColor(MainColor, for: .normal)
+            button2.setTitleColor(UIColor.white, for: .highlighted)
+            button2.tag=i+2004
+            button2.layer.borderWidth=0.8*HEIGHT_SIZE;
+            button2.layer.cornerRadius=12*HEIGHT_SIZE;
+             button2.titleLabel?.adjustsFontSizeToFitWidth=true
+            button2.layer.borderColor=MainColor.cgColor;
+            button2.isSelected=false
+            button2.backgroundColor=UIColor.clear
+            button2.addTarget(self, action:#selector(butttonChange(uibutton:)), for: .touchUpInside)
+            view3.addSubview(button2)
+            
+        }
         
     }
     
     
     func butttonChange(uibutton: UIButton)  {
+        
+         self.changeStateT(Tag: uibutton.tag)
+        
+ 
         if uibutton.isSelected {
             uibutton.backgroundColor=UIColor.white
             uibutton.setTitleColor(MainColor, for: .normal)
-             button2.isSelected=false
+             uibutton.isSelected=false
         }else{
         uibutton.backgroundColor=MainColor
         uibutton.setTitleColor(UIColor.white, for: .normal)
-            button2.isSelected=true
+            uibutton.isSelected=true
+            if uibutton.tag==2004||uibutton.tag==2005||uibutton.tag==2006{
+                getSmallButton(Tag: uibutton.tag)
+            }
+            if uibutton.tag==2000||uibutton.tag==2001||uibutton.tag==2002||uibutton.tag==2003{
+                if (view4 != nil){
+                    view4.removeFromSuperview()
+                    view4=nil
+                }
+            }
         }
         
     }
+    
+    
+    func butttonChange2(uibutton: UIButton)  {
+        
+        self.changeStateT(Tag: uibutton.tag)
+        
+        
+        if uibutton.isSelected {
+            uibutton.backgroundColor=UIColor.white
+            uibutton.setTitleColor(MainColor, for: .normal)
+            uibutton.isSelected=false
+        }else{
+            uibutton.backgroundColor=MainColor
+            uibutton.setTitleColor(UIColor.white, for: .normal)
+            uibutton.isSelected=true
+
+        }
+        
+    }
+    
+    func getSmallButton(Tag:Int)  {
+        if (view4 != nil){
+            view4.removeFromSuperview()
+            view4=nil
+        }
+       
+        
+        view4=UIView()
+        view4.frame=CGRect(x:0*NOW_SIZE, y: 220*HEIGHT_SIZE, width: SCREEN_Width, height:20*HEIGHT_SIZE)
+        view4.backgroundColor=UIColor.clear
+        self.view.addSubview(view4)
+        
+           let i=Tag-2004
+        
+            let button2=UIButton()
+            button2.frame=CGRect(x: 5*NOW_SIZE+95*NOW_SIZE*CGFloat(i), y: 0*HEIGHT_SIZE, width: 50*NOW_SIZE, height:20*HEIGHT_SIZE)
+            button2.setTitle("序列号", for: .normal)
+            button2.setTitleColor(MainColor, for: .normal)
+            button2.setTitleColor(UIColor.white, for: .highlighted)
+            button2.tag=2008
+            button2.layer.borderWidth=0.8*HEIGHT_SIZE;
+            button2.layer.cornerRadius=10*HEIGHT_SIZE;
+            button2.titleLabel?.adjustsFontSizeToFitWidth=true
+            button2.layer.borderColor=MainColor.cgColor;
+            button2.isSelected=false
+            button2.backgroundColor=UIColor.clear
+            button2.addTarget(self, action:#selector(butttonChange2(uibutton:)), for: .touchUpInside)
+            view4.addSubview(button2)
+        
+        let button4=UIButton()
+        button4.frame=CGRect(x: 75*NOW_SIZE+95*NOW_SIZE*CGFloat(i), y: 0*HEIGHT_SIZE, width: 50*NOW_SIZE, height:20*HEIGHT_SIZE)
+        button4.setTitle("别名", for: .normal)
+        button4.setTitleColor(MainColor, for: .normal)
+        button4.setTitleColor(UIColor.white, for: .highlighted)
+        button4.tag=2009
+        button4.layer.borderWidth=0.8*HEIGHT_SIZE;
+        button4.layer.cornerRadius=10*HEIGHT_SIZE;
+        button4.titleLabel?.adjustsFontSizeToFitWidth=true
+        button4.layer.borderColor=MainColor.cgColor;
+        button4.isSelected=false
+        button4.backgroundColor=UIColor.clear
+        button4.addTarget(self, action:#selector(butttonChange2(uibutton:)), for: .touchUpInside)
+        view4.addSubview(button4)
+       
+    
+    }
+    
+    
+    func changeStateT(Tag:Int)  {
+        let A=Tag-2000
+        if A<=6 {
+            for i in 0...6{
+                if i==A {
+                    
+                }else{
+                    self.changeState(Tag: i)
+                }
+            }
+        }
+  
+        if A==8 {
+            self.changeState(Tag: 9)
+        }else if A==9 {
+            self.changeState(Tag: 8)
+        }
+        
+    }
+    
+    func changeState( Tag:Int)  {
+        
+        let A=2000+Tag
+     
+        if A<=2006 {
+             let B1 = view3.viewWithTag(A) as! UIButton
+            B1.isSelected=false
+            B1.backgroundColor=UIColor.white
+            B1.setTitleColor(MainColor, for: .normal)
+        }else{
+            let B1 = view4.viewWithTag(A) as! UIButton
+            B1.isSelected=false
+            B1.backgroundColor=UIColor.white
+            B1.setTitleColor(MainColor, for: .normal)
+        }
+       
+
+   
+    }
+    
     
     func searchDevice(){
     
