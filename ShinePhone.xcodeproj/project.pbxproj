@@ -300,6 +300,7 @@
 		336E03FE1EC957EF0034BC86 /* ossServerFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336E03FD1EC957EF0034BC86 /* ossServerFirst.swift */; };
 		336E04001EC9586C0034BC86 /* ossDeviceFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336E03FF1EC9586C0034BC86 /* ossDeviceFirst.swift */; };
 		336E04021EC9ADAC0034BC86 /* icon_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 336E04011EC9ADAC0034BC86 /* icon_search.png */; };
+		336E04081ECAFFA60034BC86 /* deviceFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336E04071ECAFFA60034BC86 /* deviceFirstCell.swift */; };
 		336F19F11D87943700CD4C2B /* serverV@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 336F19F01D87943700CD4C2B /* serverV@2x.png */; };
 		336F1A141D88E46900CD4C2B /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F19F41D88E46900CD4C2B /* MKAnnotationView+WebCache.m */; };
 		336F1A151D88E46900CD4C2B /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F19F61D88E46900CD4C2B /* NSData+ImageContentType.m */; };
@@ -1127,9 +1128,10 @@
 		336E03F71EC944A60034BC86 /* title_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = title_bg.png; sourceTree = "<group>"; };
 		336E03F91EC944B10034BC86 /* gongdan_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gongdan_bg.png; sourceTree = "<group>"; };
 		336E03FB1EC944B80034BC86 /* device_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = device_bg.png; sourceTree = "<group>"; };
-		336E03FD1EC957EF0034BC86 /* ossServerFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ossServerFirst.swift; sourceTree = "<group>"; };
-		336E03FF1EC9586C0034BC86 /* ossDeviceFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ossDeviceFirst.swift; sourceTree = "<group>"; };
+		336E03FD1EC957EF0034BC86 /* ossServerFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ossServerFirst.swift; path = ../ossServerFirst.swift; sourceTree = "<group>"; };
+		336E03FF1EC9586C0034BC86 /* ossDeviceFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ossDeviceFirst.swift; path = ../ossDeviceFirst.swift; sourceTree = "<group>"; };
 		336E04011EC9ADAC0034BC86 /* icon_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_search.png; sourceTree = "<group>"; };
+		336E04071ECAFFA60034BC86 /* deviceFirstCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = deviceFirstCell.swift; sourceTree = "<group>"; };
 		336F19F01D87943700CD4C2B /* serverV@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "serverV@2x.png"; sourceTree = "<group>"; };
 		336F19F31D88E46900CD4C2B /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		336F19F41D88E46900CD4C2B /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
@@ -2687,10 +2689,10 @@
 		336E03F11EC93CCC0034BC86 /* OSS系统 */ = {
 			isa = PBXGroup;
 			children = (
-				336E03F61EC944940034BC86 /* oss图片 */,
 				336E03F41EC9411B0034BC86 /* ossFistVC.swift */,
-				336E03FF1EC9586C0034BC86 /* ossDeviceFirst.swift */,
-				336E03FD1EC957EF0034BC86 /* ossServerFirst.swift */,
+				336E04041ECAFE8C0034BC86 /* 工单系统 */,
+				336E04031ECAFE710034BC86 /* 设备管理 */,
+				336E03F61EC944940034BC86 /* oss图片 */,
 			);
 			path = "OSS系统";
 			sourceTree = "<group>";
@@ -2704,6 +2706,23 @@
 				336E04011EC9ADAC0034BC86 /* icon_search.png */,
 			);
 			path = "oss图片";
+			sourceTree = "<group>";
+		};
+		336E04031ECAFE710034BC86 /* 设备管理 */ = {
+			isa = PBXGroup;
+			children = (
+				336E03FF1EC9586C0034BC86 /* ossDeviceFirst.swift */,
+				336E04071ECAFFA60034BC86 /* deviceFirstCell.swift */,
+			);
+			path = "设备管理";
+			sourceTree = "<group>";
+		};
+		336E04041ECAFE8C0034BC86 /* 工单系统 */ = {
+			isa = PBXGroup;
+			children = (
+				336E03FD1EC957EF0034BC86 /* ossServerFirst.swift */,
+			);
+			path = "工单系统";
 			sourceTree = "<group>";
 		};
 		336F19F21D88E45600CD4C2B /* SDWebImage */ = {
@@ -4310,6 +4329,7 @@
 				335D69B31D77BA4D00894D90 /* HcdTimeSheetView.m in Sources */,
 				3343F3EC1C805BD2009F69BC /* MBProgressHUD.m in Sources */,
 				3383ACE11D7D6B3400C2F4A3 /* topAvViewController.m in Sources */,
+				336E04081ECAFFA60034BC86 /* deviceFirstCell.swift in Sources */,
 				3355F25A1C74178E006DDE5A /* meTableViewCell.m in Sources */,
 				33EFB63A1C97E0C8003F336F /* secondCNJ.m in Sources */,
 				33EFB6011C979B5F003F336F /* StationCellectViewController.m in Sources */,

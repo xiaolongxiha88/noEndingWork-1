@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ossDeviceFirst: RootViewController,UISearchBarDelegate{
+class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate{
 
     var searchBar:UISearchBar!
       var view1:UIView!
@@ -17,12 +17,16 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
     
     var view3:UIView!
      var view4:UIView!
+    var goNetString:NSString!
+    var tableView:UITableView!
+     var tableViewArray1:NSArray!
+    var tableViewArray2:NSMutableArray!
     
-   
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    self.title="设备搜索"
+        
       self.initUI()
         self.initUiTwo()
     }
@@ -80,6 +84,14 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
         view3.backgroundColor=UIColor.clear
         self.view.addSubview(view3)
         
+       let RfSnLable=UILabel()
+         RfSnLable.frame=CGRect(x: 0*NOW_SIZE, y: 35*HEIGHT_SIZE, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
+        RfSnLable.text="选择搜索类型"
+        RfSnLable.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
+        RfSnLable.textAlignment=NSTextAlignment.center
+        RfSnLable.font=UIFont.systemFont(ofSize: 15*HEIGHT_SIZE)
+        view3.addSubview(RfSnLable)
+        
         let buttonNameArray1=["用户名","电站名","手机号","邮箱"]
          let buttonNameArray2=["采集器","逆变器","储能机"]
         
@@ -94,6 +106,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
             button2.tag=i+2000
             button2.layer.borderWidth=0.8*HEIGHT_SIZE;
             button2.layer.cornerRadius=12*HEIGHT_SIZE;
+             button2.titleLabel?.font=UIFont.systemFont(ofSize: 13*HEIGHT_SIZE)
              button2.titleLabel?.adjustsFontSizeToFitWidth=true
             button2.layer.borderColor=MainColor.cgColor;
             button2.isSelected=false
@@ -113,6 +126,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
             button2.tag=i+2004
             button2.layer.borderWidth=0.8*HEIGHT_SIZE;
             button2.layer.cornerRadius=12*HEIGHT_SIZE;
+               button2.titleLabel?.font=UIFont.systemFont(ofSize: 13*HEIGHT_SIZE)
              button2.titleLabel?.adjustsFontSizeToFitWidth=true
             button2.layer.borderColor=MainColor.cgColor;
             button2.isSelected=false
@@ -124,6 +138,40 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
         
     }
     
+    func initTableView(){
+        tableViewArray1=["just test","just test","just test","just test","just test"];
+        tableViewArray2=["I come back","I come back","I come back","I come back","I come back"];
+        
+       tableView=UITableView()
+        let H1=35*HEIGHT_SIZE
+        tableView.frame=CGRect(x: 0, y: H1, width: SCREEN_Width, height: SCREEN_Height-H1)
+        tableView.delegate=self
+        tableView.dataSource=self
+        self.view.addSubview(tableView)
+        
+    
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableViewArray1.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let indentifier = "cell"
+     //   var cell = tableView.dequeueReusableCell(withIdentifier: indentifier, for: indexPath as IndexPath)
+        
+        let  cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: indentifier);
+      
+        cell.textLabel?.text = tableViewArray1[indexPath.row] as? String
+        return cell
+        
+    }
+    
+  
     
     func butttonChange(uibutton: UIButton)  {
         
@@ -134,6 +182,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
             uibutton.backgroundColor=UIColor.white
             uibutton.setTitleColor(MainColor, for: .normal)
              uibutton.isSelected=false
+            self.title="设备搜索"
         }else{
         uibutton.backgroundColor=MainColor
         uibutton.setTitleColor(UIColor.white, for: .normal)
@@ -147,6 +196,11 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
                     view4=nil
                 }
             }
+            let titleName1=uibutton.titleLabel?.text
+            let titleName2="当前设备类型:"
+            let titleName=NSString(format: "%@%@", titleName2,titleName1!)
+            self.title=titleName as String
+            
         }
         
     }
@@ -189,9 +243,10 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
             button2.setTitle("序列号", for: .normal)
             button2.setTitleColor(MainColor, for: .normal)
             button2.setTitleColor(UIColor.white, for: .highlighted)
-            button2.tag=2008
+            button2.tag=2007
             button2.layer.borderWidth=0.8*HEIGHT_SIZE;
             button2.layer.cornerRadius=10*HEIGHT_SIZE;
+         button2.titleLabel?.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
             button2.titleLabel?.adjustsFontSizeToFitWidth=true
             button2.layer.borderColor=MainColor.cgColor;
             button2.isSelected=false
@@ -204,9 +259,10 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
         button4.setTitle("别名", for: .normal)
         button4.setTitleColor(MainColor, for: .normal)
         button4.setTitleColor(UIColor.white, for: .highlighted)
-        button4.tag=2009
+        button4.tag=2008
         button4.layer.borderWidth=0.8*HEIGHT_SIZE;
         button4.layer.cornerRadius=10*HEIGHT_SIZE;
+         button4.titleLabel?.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
         button4.titleLabel?.adjustsFontSizeToFitWidth=true
         button4.layer.borderColor=MainColor.cgColor;
         button4.isSelected=false
@@ -230,10 +286,10 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
             }
         }
   
-        if A==8 {
-            self.changeState(Tag: 9)
-        }else if A==9 {
+        if A==7 {
             self.changeState(Tag: 8)
+        }else if A==8 {
+            self.changeState(Tag: 7)
         }
         
     }
@@ -253,20 +309,55 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate{
             B1.backgroundColor=UIColor.white
             B1.setTitleColor(MainColor, for: .normal)
         }
-       
 
-   
     }
     
     
     func searchDevice(){
     
+       var choiceBool=false
+        
+        for i in 0...6{
+            let A=2000+i
+            let B1 = view3.viewWithTag(A) as! UIButton
+            if B1.isSelected {
+                goNetString=String(format: "%d", A) as NSString!
+                if A==2004||A==2005||A==2006{
+                     let C1 = view4.viewWithTag(2007) as! UIButton
+                     let C2 = view4.viewWithTag(2008) as! UIButton
+                    if C1.isSelected==false&&C2.isSelected==false {
+                         self.showToastView(withTitle: "请选择序列号或别名")
+                        return
+                    }
+                }
+                choiceBool=true
+            }
+        }
     
+        if choiceBool==false {
+               self.showToastView(withTitle: "请选择搜索类型")
+            return
+        }
+    
+        if (view3 != nil){
+            view3.removeFromSuperview()
+            view3=nil
+        }
+        
+        self.initTableView()
+        
+        
     }
    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     
-    
+        if (tableView != nil){
+            tableView.removeFromSuperview()
+            tableView=nil
+            
+            self.initUiTwo()
+        }
+        
     }
     
    
