@@ -147,6 +147,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         tableView.frame=CGRect(x: 0, y: H1, width: SCREEN_Width, height: SCREEN_Height-H1)
         tableView.delegate=self
         tableView.dataSource=self
+         tableView.register(deviceFirstCell.classForCoder(), forCellReuseIdentifier: "cell")
         self.view.addSubview(tableView)
         
     
@@ -160,13 +161,19 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         return tableViewArray1.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 60*HEIGHT_SIZE
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let indentifier = "cell"
+   //     let indentifier = "cell"
      //   var cell = tableView.dequeueReusableCell(withIdentifier: indentifier, for: indexPath as IndexPath)
         
-        let  cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: indentifier);
-      
-        cell.textLabel?.text = tableViewArray1[indexPath.row] as? String
+      //  let  cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "cell");
+        
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
+     //   cell.textLabel?.text = tableViewArray1[indexPath.row] as? String
         return cell
         
     }
@@ -183,6 +190,11 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             uibutton.setTitleColor(MainColor, for: .normal)
              uibutton.isSelected=false
             self.title="设备搜索"
+            if (view4 != nil){
+                view4.removeFromSuperview()
+                view4=nil
+            }
+            
         }else{
         uibutton.backgroundColor=MainColor
         uibutton.setTitleColor(UIColor.white, for: .normal)
@@ -354,7 +366,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         if (tableView != nil){
             tableView.removeFromSuperview()
             tableView=nil
-            
+            self.title="设备搜索"
             self.initUiTwo()
         }
         
