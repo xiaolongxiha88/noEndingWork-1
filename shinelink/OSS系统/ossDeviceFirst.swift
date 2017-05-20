@@ -19,9 +19,12 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
      var view4:UIView!
     var goNetString:NSString!
     var tableView:UITableView!
-     var tableViewArray1:NSArray!
-    var tableViewArray2:NSMutableArray!
-    
+   
+ 
+    var cellNameArray:NSArray!
+    var cellValue1Array:NSArray!
+     var cellValue2Array:NSArray!
+     var cellValue3Array:NSArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,14 +142,21 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     }
     
     func initTableView(){
-        tableViewArray1=["just test","just test","just test","just test","just test"];
-        tableViewArray2=["I come back","I come back","I come back","I come back","I come back"];
+      
+       
+        
+      
+        
+        cellNameArray=["电站名称:","所属用户名:"];
+        cellValue1Array=["my station","my station","my station","my station","my station"];
+          cellValue2Array=["yangwen","yangwen","yangwen","yangwen","yangwen"];
         
        tableView=UITableView()
         let H1=35*HEIGHT_SIZE
         tableView.frame=CGRect(x: 0, y: H1, width: SCREEN_Width, height: SCREEN_Height-H1)
         tableView.delegate=self
         tableView.dataSource=self
+           tableView.separatorStyle = UITableViewCellSeparatorStyle.none
          tableView.register(deviceFirstCell.classForCoder(), forCellReuseIdentifier: "cell")
         self.view.addSubview(tableView)
         
@@ -158,27 +168,37 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableViewArray1.count
+        return cellValue1Array.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 60*HEIGHT_SIZE
+        return 46*HEIGHT_SIZE
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-   //     let indentifier = "cell"
-     //   var cell = tableView.dequeueReusableCell(withIdentifier: indentifier, for: indexPath as IndexPath)
-        
+   
       //  let  cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "cell");
         
-      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
-     //   cell.textLabel?.text = tableViewArray1[indexPath.row] as? String
+      let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!deviceFirstCell
+        let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,cellValue1Array[indexPath.row]as!NSString)
+         let lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,cellValue2Array[indexPath.row]as!NSString)
+        cell.TitleLabel1.text=lable1 as String
+         cell.TitleLabel2.text=lable2 as String
+
         return cell
         
     }
     
   
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let goView=deviceListViewController()
+        self.navigationController?.pushViewController(goView, animated: true)
+        
+    }
+    
+    
     
     func butttonChange(uibutton: UIButton)  {
         

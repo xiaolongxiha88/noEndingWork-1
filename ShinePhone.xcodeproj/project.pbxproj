@@ -230,6 +230,9 @@
 		3360EE0F1D878D3200DD75AC /* energy2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3360EE0E1D878D3200DD75AC /* energy2@2x.png */; };
 		3360EE121D878D3900DD75AC /* equipmentV@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3360EE101D878D3900DD75AC /* equipmentV@2x.png */; };
 		3360EE131D878D3900DD75AC /* mine2v@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3360EE111D878D3900DD75AC /* mine2v@2x.png */; };
+		336181EA1ECFE745008641E9 /* deviceListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336181E91ECFE745008641E9 /* deviceListViewController.swift */; };
+		336181F41ED031C4008641E9 /* uibuttonView0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336181F31ED031C4008641E9 /* uibuttonView0.swift */; };
+		336181F61ED048ED008641E9 /* deviceListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336181F51ED048ED008641E9 /* deviceListCell.swift */; };
 		33627A541DFE9FAF0001C00B /* 采集器_cn.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33627A531DFE9FAF0001C00B /* 采集器_cn.jpg */; };
 		33627A5E1DFEA3260001C00B /* 采集器_en.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33627A5D1DFEA3260001C00B /* 采集器_en.jpg */; };
 		3363DD1E1C7C48F100D740FB /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363DD1D1C7C48F100D740FB /* registerViewController.m */; };
@@ -1016,6 +1019,9 @@
 		3360EE0E1D878D3200DD75AC /* energy2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "energy2@2x.png"; sourceTree = "<group>"; };
 		3360EE101D878D3900DD75AC /* equipmentV@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "equipmentV@2x.png"; sourceTree = "<group>"; };
 		3360EE111D878D3900DD75AC /* mine2v@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mine2v@2x.png"; sourceTree = "<group>"; };
+		336181E91ECFE745008641E9 /* deviceListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = deviceListViewController.swift; sourceTree = "<group>"; };
+		336181F31ED031C4008641E9 /* uibuttonView0.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = uibuttonView0.swift; sourceTree = "<group>"; };
+		336181F51ED048ED008641E9 /* deviceListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = deviceListCell.swift; sourceTree = "<group>"; };
 		33627A531DFE9FAF0001C00B /* 采集器_cn.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "采集器_cn.jpg"; sourceTree = "<group>"; };
 		33627A5D1DFEA3260001C00B /* 采集器_en.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "采集器_en.jpg"; sourceTree = "<group>"; };
 		3363DD1C1C7C48F100D740FB /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = registerViewController.h; path = ../registerViewController.h; sourceTree = "<group>"; };
@@ -2713,6 +2719,9 @@
 			children = (
 				336E03FF1EC9586C0034BC86 /* ossDeviceFirst.swift */,
 				336E04071ECAFFA60034BC86 /* deviceFirstCell.swift */,
+				336181E91ECFE745008641E9 /* deviceListViewController.swift */,
+				336181F31ED031C4008641E9 /* uibuttonView0.swift */,
+				336181F51ED048ED008641E9 /* deviceListCell.swift */,
 			);
 			path = "设备管理";
 			sourceTree = "<group>";
@@ -4185,6 +4194,7 @@
 				3363DD1E1C7C48F100D740FB /* registerViewController.m in Sources */,
 				335614681CB397220071BAC9 /* LZPageContentView.m in Sources */,
 				336D401C1D6FEA7600ECFA34 /* NSString+PinYin4Cocoa.m in Sources */,
+				336181F61ED048ED008641E9 /* deviceListCell.swift in Sources */,
 				3343F3E11C80405D009F69BC /* UIWebView+AFNetworking.m in Sources */,
 				3343F3C01C80403C009F69BC /* AFHTTPRequestOperationManager.m in Sources */,
 				3349A7BF1C75BF3B009172C2 /* LoginButton.m in Sources */,
@@ -4234,6 +4244,7 @@
 				334AED6A1CA38164007E39F3 /* KongZhiNi.m in Sources */,
 				335456CE1C8584E100275478 /* forgetViewController.m in Sources */,
 				3349A7C01C75BF3B009172C2 /* SpinerLayer.m in Sources */,
+				336181EA1ECFE745008641E9 /* deviceListViewController.swift in Sources */,
 				3343F3C11C80403C009F69BC /* AFHTTPSessionManager.m in Sources */,
 				3367CB2E1C86803600EF460C /* DTKDropdownMenuView.m in Sources */,
 				334B8F211C91250300798A69 /* PopoverView.m in Sources */,
@@ -4422,6 +4433,7 @@
 				3383EF9B1C9F8A6F0075E834 /* MJRefreshComponent.m in Sources */,
 				33FEFCD61C7D8E8300324374 /* UIViewExt.m in Sources */,
 				336D401F1D6FEA7600ECFA34 /* PinyinHelper.m in Sources */,
+				336181F41ED031C4008641E9 /* uibuttonView0.swift in Sources */,
 				334AED701CA381D0007E39F3 /* ASValuePopUpView.m in Sources */,
 				337CB59D1DB4A837002ABB88 /* firstToolViewController.m in Sources */,
 				336F1A181D88E46900CD4C2B /* SDWebImageDecoder.m in Sources */,
