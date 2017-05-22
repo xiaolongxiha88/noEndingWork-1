@@ -405,6 +405,7 @@
 		337F9E111C71C4D90016FE43 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9E101C71C4D90016FE43 /* TableViewCell.m */; };
 		33801EB31D58274D00047232 /* addStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33801EB21D58274D00047232 /* addStationViewController.m */; };
 		33801EBD1D5882D500047232 /* Growatt-2-5k.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33801EBC1D5882D500047232 /* Growatt-2-5k.jpg */; };
+		338049211ED2E2550077658D /* deviceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338049201ED2E2550077658D /* deviceControlView.swift */; };
 		338122261D864B3700C7704B /* AvCachTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 338122251D864B3700C7704B /* AvCachTableViewCell.m */; };
 		338122291D864BF500C7704B /* AvCachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338122281D864BF500C7704B /* AvCachViewController.m */; };
 		3381222B1D864D7B00C7704B /* btn1-choose-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3381222A1D864D7B00C7704B /* btn1-choose-1.png */; };
@@ -1295,6 +1296,7 @@
 		33801EB11D58274D00047232 /* addStationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addStationViewController.h; sourceTree = "<group>"; };
 		33801EB21D58274D00047232 /* addStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addStationViewController.m; sourceTree = "<group>"; };
 		33801EBC1D5882D500047232 /* Growatt-2-5k.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Growatt-2-5k.jpg"; sourceTree = "<group>"; };
+		338049201ED2E2550077658D /* deviceControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = deviceControlView.swift; sourceTree = "<group>"; };
 		338122241D864B3700C7704B /* AvCachTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvCachTableViewCell.h; sourceTree = "<group>"; };
 		338122251D864B3700C7704B /* AvCachTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvCachTableViewCell.m; sourceTree = "<group>"; };
 		338122271D864BF500C7704B /* AvCachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvCachViewController.h; sourceTree = "<group>"; };
@@ -2722,6 +2724,7 @@
 				336181E91ECFE745008641E9 /* deviceListViewController.swift */,
 				336181F31ED031C4008641E9 /* uibuttonView0.swift */,
 				336181F51ED048ED008641E9 /* deviceListCell.swift */,
+				338049201ED2E2550077658D /* deviceControlView.swift */,
 			);
 			path = "设备管理";
 			sourceTree = "<group>";
@@ -4300,6 +4303,7 @@
 				3343F3C51C80403C009F69BC /* AFURLRequestSerialization.m in Sources */,
 				3367EBA11CD0B2D200D2EF67 /* StationAppearanceViewController.m in Sources */,
 				335089281C73267A00D7AA03 /* findTableViewCell.m in Sources */,
+				338049211ED2E2550077658D /* deviceControlView.swift in Sources */,
 				3343F3E01C80405D009F69BC /* UIRefreshControl+AFNetworking.m in Sources */,
 				33EFB6721C98F9B1003F336F /* ZFTranslucencePath.m in Sources */,
 				334B8F501C914A6D00798A69 /* PNLineChart.m in Sources */,

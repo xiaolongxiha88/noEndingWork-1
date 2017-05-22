@@ -39,17 +39,19 @@ class deviceListCell: UITableViewCell {
             if index==0{
                 lable0.textColor=UIColor.black
                 lable0.textAlignment=NSTextAlignment.center
-                lable0.font=UIFont.systemFont(ofSize: 13*HEIGHT_SIZE)
-          lable0.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width:SCREEN_Width, height: 30*HEIGHT_SIZE)
+                lable0.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
+          lable0.frame=CGRect(x: 0*NOW_SIZE, y: 2*HEIGHT_SIZE, width:SCREEN_Width, height: 20*HEIGHT_SIZE)
             }else{
                 lable0.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
                 lable0.textAlignment=NSTextAlignment.left
+                lable0.adjustsFontSizeToFitWidth=true
                 lable0.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
                 if index==1||index==2{
-                 lable0.frame=CGRect(x: 10*NOW_SIZE+160*NOW_SIZE*CGFloat(Float(index)), y: 30*HEIGHT_SIZE, width: 160*NOW_SIZE, height: 30*HEIGHT_SIZE)
+                      let K=index-1
+                 lable0.frame=CGRect(x: 10*NOW_SIZE+160*NOW_SIZE*CGFloat(Float(K)), y: 20*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 30*HEIGHT_SIZE)
                 }else{
-                    let K=index-2
-                 lable0.frame=CGRect(x: 10*NOW_SIZE+160*NOW_SIZE*CGFloat(Float(K)), y: 60*HEIGHT_SIZE, width: 160*NOW_SIZE, height: 30*HEIGHT_SIZE)
+                    let K=index-3
+                 lable0.frame=CGRect(x: 10*NOW_SIZE+160*NOW_SIZE*CGFloat(Float(K)), y: 50*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 30*HEIGHT_SIZE)
                 }
                 
              

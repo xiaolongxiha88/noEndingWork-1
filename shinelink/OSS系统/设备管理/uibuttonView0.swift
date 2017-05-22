@@ -8,7 +8,7 @@
 
 import UIKit
 
-class uibuttonView0: UIView {
+class uibuttonView0: UIView{
 
     var buttonArray:NSArray!
     var view1:UIView!
@@ -60,12 +60,14 @@ class uibuttonView0: UIView {
             
             
         }else{
+            let dic :[String : NSObject]  = ["tag":uibutton.tag as NSObject]
+            let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView")
+         NotificationCenter.default.post(name:NotifyChatMsgRecv, object: nil, userInfo: dic)
+         
+            
             uibutton.backgroundColor=MainColor
             uibutton.setTitleColor(backgroundGrayColor, for: .normal)
             uibutton.isSelected=true
-            
-            
-            
             
         }
         

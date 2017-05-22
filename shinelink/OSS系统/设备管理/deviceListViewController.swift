@@ -8,16 +8,29 @@
 
 import UIKit
 
+protocol deviceListViewControllerDelegate: NSObjectProtocol {
+    
+    /*委托方法*/
+    
+    func tableViewReload()
+    
+}
+
 class deviceListViewController: RootViewController,UITableViewDataSource,UITableViewDelegate {
    var view1:UIView!
        var tableView:UITableView!
     var cellNameArray:NSArray!
     var cellValue0Array:NSArray!
-    var cellValue1Array:NSArray!
-    var cellValue2Array:NSArray!
-    var cellValue3Array:NSArray!
-       var cellValue4Array:NSArray!
-       var cellValue5Array:NSArray!
+    var cellValue1Array:NSMutableArray!
+    var cellValue2Array:NSMutableArray!
+    var cellValue3Array:NSMutableArray!
+       var cellValue4Array:NSMutableArray!
+    
+ 
+    var AllValue1Array:NSArray!
+    var AllValue2Array:NSArray!
+    var AllValue3Array:NSArray!
+    var AllValue4Array:NSArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,14 +40,21 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
 
     func initUI(){
         //采集器1  逆变器2 储能机3
-        
-        cellNameArray=["序列号","状态","所属采集器序列号","采集器类型","设备类型"];
+       
+        cellNameArray=["序列号:","状态:","所属采集器序列号:","采集器类型:","设备类型:"];
         cellValue0Array=["采集器","逆变器","储能机"];
-        cellValue1Array=["我是序列号","SSSSSS","HHHHHH","HHHHHH","HHHHHH"];
-          cellValue2Array=["我是别名","SSSSSS","HHHHHH","HHHHHH","HHHHHH"];
-         cellValue3Array=["我是状态","SSSSSS","HHHHHH","HHHHHH","HHHHHH"];
-         cellValue4Array=["1","1","2","2","3"];
-          cellValue5Array=["我是采集器类型","我是采集器类型","我是所属采集器序列号","我是所属采集器序列号","我是所属采集器序列号"];
+        
+        
+        AllValue1Array=["我是序列号","SSSSSS","HHHHHH","HHHHHH","HHHHHH"];
+        AllValue2Array=["我是别名","SSSSSS","HHHHHH","HHHHHH","HHHHHH"];
+        AllValue3Array=["我是状态","SSSSSS","HHHHHH","HHHHHH","HHHHHH"];
+        AllValue4Array=["1","1","2","2","3"];
+        
+        cellValue1Array=NSMutableArray.init(array: AllValue1Array)
+        cellValue2Array=NSMutableArray.init(array: AllValue2Array)
+        cellValue3Array=NSMutableArray.init(array: AllValue3Array)
+        cellValue4Array=NSMutableArray.init(array: AllValue4Array)
+        
         
        let buttonView=uibuttonView0()
         buttonView.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
@@ -43,6 +63,11 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
         buttonView.buttonArray=["采集器","逆变器","储能机"]
         buttonView.initUI()
         self.view .addSubview(buttonView)
+        
+        
+        let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView")
+        NotificationCenter.default.addObserver(self, selector:#selector(tableViewReload(info:)),
+                                               name: NotifyChatMsgRecv, object: nil)
         
         tableView=UITableView()
         let H1=35*HEIGHT_SIZE
@@ -54,7 +79,50 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
         self.view.addSubview(tableView)
     
     }
+  
     
+    func tableViewReload(info:NSNotification){
+        cellValue1Array=[]
+        cellValue2Array=[]
+        cellValue3Array=[]
+        cellValue4Array=[]
+        let  dic=info.userInfo as! NSDictionary
+        let Tag=dic.object(forKey: "tag") as! Int
+        if Tag==2000 {
+            for (i,Array)in AllValue4Array.enumerated() {
+                let Num=Array as! String
+                if Num=="1"{
+                    cellValue1Array.add(AllValue1Array[i])
+                       cellValue2Array.add(AllValue2Array[i])
+                       cellValue3Array.add(AllValue3Array[i])
+                       cellValue4Array.add(AllValue4Array[i])
+                }
+            }
+        }
+        if Tag==2001 {
+            for (i,Array)in AllValue4Array.enumerated() {
+                let Num=Array as! String
+                if Num=="2"{
+                    cellValue1Array.add(AllValue1Array[i])
+                    cellValue2Array.add(AllValue2Array[i])
+                    cellValue3Array.add(AllValue3Array[i])
+                    cellValue4Array.add(AllValue4Array[i])
+                }
+            }
+        }
+        if Tag==2002{
+            for (i,Array)in AllValue4Array.enumerated() {
+                let Num=Array as! String
+                if Num=="3"{
+                    cellValue1Array.add(AllValue1Array[i])
+                    cellValue2Array.add(AllValue2Array[i])
+                    cellValue3Array.add(AllValue3Array[i])
+                    cellValue4Array.add(AllValue4Array[i])
+                }
+            }
+        }
+        tableView.reloadData()
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -79,15 +147,16 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
         let lable3:NSString!
           var lable4:NSString!
         
-        if cellValue4Array[indexPath.row] as? Int==1{
+        let CELL=cellValue4Array[indexPath.row] as! String
+        if CELL=="1"{
            lable3=NSString(format: "%@%@", cellNameArray[3]as!NSString,cellValue2Array[indexPath.row]as!NSString)
              lable4=NSString(format: "%@%@", cellNameArray[4]as!NSString,cellValue0Array[0]as!NSString)
         }else{
           lable3=NSString(format: "%@%@", cellNameArray[2]as!NSString,cellValue2Array[indexPath.row]as!NSString)
-            if cellValue4Array[indexPath.row] as? Int==2{
+            if  CELL=="2"{
              lable4=NSString(format: "%@%@", cellNameArray[4]as!NSString,cellValue0Array[1]as!NSString)
             }
-            if cellValue4Array[indexPath.row] as? Int==3{
+            if  CELL=="3"{
                  lable4=NSString(format: "%@%@", cellNameArray[4]as!NSString,cellValue0Array[2]as!NSString)
             }
         }
@@ -100,6 +169,7 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
          cell.TitleLabel3.text=lable3 as String?
             cell.TitleLabel4.text=lable4 as String?
         
+        
         return cell
         
     }
@@ -107,8 +177,9 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let goView=deviceListViewController()
+        let goView=deviceControlView()
         self.navigationController?.pushViewController(goView, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
     }
     

@@ -152,7 +152,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
           cellValue2Array=["yangwen","yangwen","yangwen","yangwen","yangwen"];
         
        tableView=UITableView()
-        let H1=35*HEIGHT_SIZE
+        let H1=30*HEIGHT_SIZE
         tableView.frame=CGRect(x: 0, y: H1, width: SCREEN_Width, height: SCREEN_Height-H1)
         tableView.delegate=self
         tableView.dataSource=self
@@ -186,6 +186,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         cell.TitleLabel1.text=lable1 as String
          cell.TitleLabel2.text=lable2 as String
 
+  
+        cell.accessoryType=UITableViewCellAccessoryType.disclosureIndicator
         return cell
         
     }
@@ -195,7 +197,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         let goView=deviceListViewController()
         self.navigationController?.pushViewController(goView, animated: true)
-        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
@@ -351,19 +353,26 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         for i in 0...6{
             let A=2000+i
-            let B1 = view3.viewWithTag(A) as! UIButton
-            if B1.isSelected {
-                goNetString=String(format: "%d", A) as NSString!
-                if A==2004||A==2005||A==2006{
-                     let C1 = view4.viewWithTag(2007) as! UIButton
-                     let C2 = view4.viewWithTag(2008) as! UIButton
-                    if C1.isSelected==false&&C2.isSelected==false {
-                         self.showToastView(withTitle: "请选择序列号或别名")
-                        return
+            if (view3 != nil) {
+                   let B1 = view3.viewWithTag(A) as! UIButton
+                if B1.isSelected {
+                    goNetString=String(format: "%d", A) as NSString!
+                    if A==2004||A==2005||A==2006{
+                        if (view4 != nil) {
+                            let C1 = view4.viewWithTag(2007) as! UIButton
+                            let C2 = view4.viewWithTag(2008) as! UIButton
+                            if C1.isSelected==false&&C2.isSelected==false {
+                                self.showToastView(withTitle: "请选择序列号或别名")
+                                return
+                            }
+                        }
+                   
                     }
+                    choiceBool=true
                 }
-                choiceBool=true
             }
+         
+       
         }
     
         if choiceBool==false {
