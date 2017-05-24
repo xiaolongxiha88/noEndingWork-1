@@ -8,13 +8,6 @@
 
 import UIKit
 
-protocol deviceListViewControllerDelegate: NSObjectProtocol {
-    
-    /*委托方法*/
-    
-    func tableViewReload()
-    
-}
 
 class deviceListViewController: RootViewController,UITableViewDataSource,UITableViewDelegate {
    var view1:UIView!
@@ -177,8 +170,20 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let goView=deviceControlView()
-        self.navigationController?.pushViewController(goView, animated: true)
+        let CELL=cellValue4Array[indexPath.row] as! String
+        if CELL=="1"{
+            let goView=deviceControlView()
+            self.navigationController?.pushViewController(goView, animated: true)
+        }else if CELL=="2"{
+            let goView=kongZhiNi0()
+            goView.controlType="2"
+            self.navigationController?.pushViewController(goView, animated: true)
+        }else if CELL=="3"{
+            let goView=controlCNJTable()
+            goView.controlType="2"
+            self.navigationController?.pushViewController(goView, animated: true)
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
     }

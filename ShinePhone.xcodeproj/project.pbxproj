@@ -341,6 +341,12 @@
 		33724D9D1CFE85FB005F3965 /* pic_service.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9C1CFE85FB005F3965 /* pic_service.png */; };
 		33724D9F1CFE89BE005F3965 /* touxiang.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9E1CFE89BE005F3965 /* touxiang.png */; };
 		337392AC1E30BD290078A847 /* btn_cha.png in Resources */ = {isa = PBXBuildFile; fileRef = 337392AB1E30BD290078A847 /* btn_cha.png */; };
+		33742B341ED3E15C0015F2EA /* setOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 33742B331ED3E15C0015F2EA /* setOSS.png */; };
+		33742B361ED3E1660015F2EA /* peizhiOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 33742B351ED3E1660015F2EA /* peizhiOSS.png */; };
+		33742B381ED3E1780015F2EA /* deleteOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 33742B371ED3E1780015F2EA /* deleteOSS.png */; };
+		33742B3A1ED3E17F0015F2EA /* editOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 33742B391ED3E17F0015F2EA /* editOSS.png */; };
+		33742B3C1ED51BFF0015F2EA /* datalogerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33742B3B1ED51BFF0015F2EA /* datalogerControlView.swift */; };
+		33742B3E1ED558EA0015F2EA /* datalogerControlTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33742B3D1ED558EA0015F2EA /* datalogerControlTwo.swift */; };
 		33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */; };
 		337532EF1D051579009CE66F /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337532EE1D051579009CE66F /* PushConfig.plist */; };
 		337532F31D051C14009CE66F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 337532F21D051C14009CE66F /* libz.tbd */; };
@@ -1203,6 +1209,12 @@
 		33724D9C1CFE85FB005F3965 /* pic_service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pic_service.png; path = "../发现/pic_service.png"; sourceTree = "<group>"; };
 		33724D9E1CFE89BE005F3965 /* touxiang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = touxiang.png; path = "../我/touxiang.png"; sourceTree = "<group>"; };
 		337392AB1E30BD290078A847 /* btn_cha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_cha.png; sourceTree = "<group>"; };
+		33742B331ED3E15C0015F2EA /* setOSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setOSS.png; sourceTree = "<group>"; };
+		33742B351ED3E1660015F2EA /* peizhiOSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = peizhiOSS.png; sourceTree = "<group>"; };
+		33742B371ED3E1780015F2EA /* deleteOSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deleteOSS.png; sourceTree = "<group>"; };
+		33742B391ED3E17F0015F2EA /* editOSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editOSS.png; sourceTree = "<group>"; };
+		33742B3B1ED51BFF0015F2EA /* datalogerControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = datalogerControlView.swift; sourceTree = "<group>"; };
+		33742B3D1ED558EA0015F2EA /* datalogerControlTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = datalogerControlTwo.swift; sourceTree = "<group>"; };
 		33744DE21CAE597A0065DC01 /* pvLogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pvLogTableViewCell.h; sourceTree = "<group>"; };
 		33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pvLogTableViewCell.m; sourceTree = "<group>"; };
 		337532EE1D051579009CE66F /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
@@ -2708,6 +2720,10 @@
 		336E03F61EC944940034BC86 /* oss图片 */ = {
 			isa = PBXGroup;
 			children = (
+				33742B391ED3E17F0015F2EA /* editOSS.png */,
+				33742B371ED3E1780015F2EA /* deleteOSS.png */,
+				33742B351ED3E1660015F2EA /* peizhiOSS.png */,
+				33742B331ED3E15C0015F2EA /* setOSS.png */,
 				336E03F71EC944A60034BC86 /* title_bg.png */,
 				336E03F91EC944B10034BC86 /* gongdan_bg.png */,
 				336E03FB1EC944B80034BC86 /* device_bg.png */,
@@ -2725,6 +2741,8 @@
 				336181F31ED031C4008641E9 /* uibuttonView0.swift */,
 				336181F51ED048ED008641E9 /* deviceListCell.swift */,
 				338049201ED2E2550077658D /* deviceControlView.swift */,
+				33742B3B1ED51BFF0015F2EA /* datalogerControlView.swift */,
+				33742B3D1ED558EA0015F2EA /* datalogerControlTwo.swift */,
 			);
 			path = "设备管理";
 			sourceTree = "<group>";
@@ -3848,6 +3866,7 @@
 				335D69B61D77BA4D00894D90 /* LICENSE in Resources */,
 				33FEFD5B1C7DB38400324374 /* icon---Email@3x.png in Resources */,
 				334FEF8E1CF45AEB001E6716 /* btn1.png in Resources */,
+				33742B341ED3E15C0015F2EA /* setOSS.png in Resources */,
 				33768AB91D475E8000873E82 /* demobgen.png in Resources */,
 				334FF0BE1CF53C7C001E6716 /* shinesmart.png in Resources */,
 				33EA49F11E8CAC060044A01A /* 设备页引导4.jpg in Resources */,
@@ -3918,6 +3937,7 @@
 				33FEFD641C7DB38400324374 /* icon---Username@3x.png in Resources */,
 				338F0E991E4B06920002B7FE /* downGo.png in Resources */,
 				3383F1361C9FF7440075E834 /* disconnect@2x.png in Resources */,
+				33742B3A1ED3E17F0015F2EA /* editOSS.png in Resources */,
 				334FF0BC1CF53C7C001E6716 /* logo_m.png in Resources */,
 				336A108F1CBDDBA500E30E83 /* triangular.png in Resources */,
 				3382341B1D98ED8A002062AE /* adCancel.png in Resources */,
@@ -4047,6 +4067,7 @@
 				3381ECF51CBCA61200DCF0D2 /* 智能联动设置切图.png in Resources */,
 				33209FD11D2A553E00186893 /* main1.jpg in Resources */,
 				338990B11CEAB73400A708F8 /* logo3.png in Resources */,
+				33742B361ED3E1660015F2EA /* peizhiOSS.png in Resources */,
 				334FF0B81CF53C7C001E6716 /* bottombg.png in Resources */,
 				33C3FFFC1D3E33E00016351C /* L3.png in Resources */,
 				33EA49ED1E8CAC060044A01A /* 设备页引导2.jpg in Resources */,
@@ -4068,6 +4089,7 @@
 				33793D141CE583AD000D0F9E /* storage4.png in Resources */,
 				336A246C1DF00AC20002D1AD /* deviceHead1.png in Resources */,
 				33C300021D3E33E00016351C /* L9.png in Resources */,
+				33742B381ED3E1780015F2EA /* deleteOSS.png in Resources */,
 				334FF0B71CF53C7C001E6716 /* about.png in Resources */,
 				33E42E0F1DC9CE050024FFBB /* peizhi_btn.png in Resources */,
 				337584431D267D12006AC140 /* product.jpg in Resources */,
@@ -4240,6 +4262,7 @@
 				3367CB501C86806700EF460C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				3389648B1E5C1D2000A7B1AE /* quickRegister2ViewController.m in Sources */,
 				336F1A141D88E46900CD4C2B /* MKAnnotationView+WebCache.m in Sources */,
+				33742B3C1ED51BFF0015F2EA /* datalogerControlView.swift in Sources */,
 				337079191D8FC78500D7DA98 /* InfoCenterViewController.m in Sources */,
 				3383EF9F1C9F8A6F0075E834 /* MJRefreshGifHeader.m in Sources */,
 				33C5E2291D4AFB1C00A0DB00 /* moreBigImage.m in Sources */,
@@ -4307,6 +4330,7 @@
 				3343F3E01C80405D009F69BC /* UIRefreshControl+AFNetworking.m in Sources */,
 				33EFB6721C98F9B1003F336F /* ZFTranslucencePath.m in Sources */,
 				334B8F501C914A6D00798A69 /* PNLineChart.m in Sources */,
+				33742B3E1ED558EA0015F2EA /* datalogerControlTwo.swift in Sources */,
 				336D401E1D6FEA7600ECFA34 /* PinYinForObjc.m in Sources */,
 				33699BB31DACCEAE00C55CFF /* meConfigerViewController.m in Sources */,
 				337F9CCB1C71AC200016FE43 /* energyViewController.m in Sources */,

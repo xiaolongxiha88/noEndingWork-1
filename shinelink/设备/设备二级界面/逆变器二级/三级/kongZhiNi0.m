@@ -13,7 +13,7 @@
 #define AlertContent @"Growatt"
 
 @interface kongZhiNi0 ()
-@property(nonatomic,strong)NSMutableArray *dataArray;
+
 @end
 
 @implementation kongZhiNi0
@@ -28,7 +28,12 @@
     
     self.tableView.separatorColor=[UIColor whiteColor];
     
-     self.dataArray =[NSMutableArray arrayWithObjects:root_NBQ_kaiguan,root_NBQ_youxiao_gonglv,root_NBQ_wuxiao_gonglv,root_NBQ_PF,root_NBQ_shijian,root_NBQ_shidian_dianya,nil];
+      self.dataArray =[NSMutableArray arrayWithObjects:root_NBQ_kaiguan,root_NBQ_youxiao_gonglv,root_NBQ_wuxiao_gonglv,root_NBQ_PF,root_NBQ_shijian,root_NBQ_shidian_dianya,nil];
+    if ([_controlType isEqualToString:@"2"]) {
+        [_dataArray addObject:@"高级设置"];
+    }
+    
+    
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
@@ -121,6 +126,8 @@
         go.type=@"4";
     }else if (indexPath.row==5){
         go.type=@"5";
+    }else if (indexPath.row==6){
+        go.type=@"6";
     }
    
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
@@ -147,7 +154,7 @@
             NSLog(@"取消了");
         }];
         
-    }else if ((indexPath.row==4)||(indexPath.row==5)){
+    }else if ((indexPath.row==4)||(indexPath.row==5)||(indexPath.row==6)){
     
          [self.navigationController pushViewController:go animated:YES];
        }

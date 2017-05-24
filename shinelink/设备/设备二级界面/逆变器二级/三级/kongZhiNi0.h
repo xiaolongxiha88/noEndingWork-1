@@ -10,4 +10,6 @@
 
 @interface kongZhiNi0 : UITableViewController
 @property (nonatomic, strong) NSString *PvSn;
+@property (nonatomic, strong) NSString *controlType;     //OSS是2
+@property(nonatomic,strong)NSMutableArray *dataArray;
 @end

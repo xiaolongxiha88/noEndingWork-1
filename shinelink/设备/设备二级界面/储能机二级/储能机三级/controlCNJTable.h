@@ -10,5 +10,6 @@
 
 @interface controlCNJTable : UITableViewController
 @property (nonatomic, strong) NSString *CnjSn;
+@property (nonatomic, strong) NSString *controlType;     //OSS是2
 
 @end

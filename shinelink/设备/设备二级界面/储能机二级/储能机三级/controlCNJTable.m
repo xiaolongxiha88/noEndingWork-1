@@ -30,6 +30,10 @@
     }
     
     self.dataArray =[NSMutableArray arrayWithObjects:root_CNJ_kaiguan,root_CNJ_SOC,root_CNJ_shijian,root_CNJ_fangdian_kaiguan,root_CNJ_fangdian_shijian,root_CNJ_SP,nil];
+    if ([_controlType isEqualToString:@"2"]) {
+        [_dataArray addObject:@"高级设置"];
+    }
+    
     
 }
 
@@ -112,6 +116,8 @@
         go.type=@"4";
     }else if (indexPath.row==5){
         go.type=@"5";
+    }else if (indexPath.row==6){
+        go.type=@"6";
     }
     go.CnjSN=_CnjSn;
     
@@ -140,7 +146,7 @@
         }];
 
         
-    }else  if ((indexPath.row==2)||(indexPath.row==4)) {
+    }else  if ((indexPath.row==2)||(indexPath.row==4)||(indexPath.row==6)) {
     
      [self.navigationController pushViewController:go animated:YES];
     }

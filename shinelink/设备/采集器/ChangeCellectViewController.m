@@ -16,9 +16,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImage *bgImage = IMAGE(@"bg4.png");
-    self.view.layer.contents = (id)bgImage.CGImage;
+//    UIImage *bgImage = IMAGE(@"bg4.png");
+//    self.view.layer.contents = (id)bgImage.CGImage;
 
+    self.view.backgroundColor=MainColor;
     [self initUI];
 }
 
@@ -39,7 +40,7 @@
     for (int i=0; i<3; i++) {
         UITextField *textField=[[UITextField alloc]initWithFrame:CGRectMake(120*NOW_SIZE, (55+i*40)*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         textField.text=array[i];
-        textField.layer.borderWidth=0.5;
+        textField.layer.borderWidth=0.8;
         textField.layer.cornerRadius=5;
         textField.layer.borderColor=[UIColor whiteColor].CGColor;
         textField.tintColor = [UIColor whiteColor];

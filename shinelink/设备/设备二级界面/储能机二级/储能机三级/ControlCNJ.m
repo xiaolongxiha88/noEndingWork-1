@@ -316,7 +316,42 @@
 //    line4.backgroundColor=[UIColor whiteColor];
 //    [_scrollView addSubview:line4];
      }
-         
+    
+    if([_type isEqualToString:@"6"]){
+        NSArray *ossLableName=[NSArray arrayWithObjects:@"寄存器:",@"值:", nil];
+        for (int i=0; i<ossLableName.count; i++) {
+            UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE,  40*HEIGHT_SIZE+50*HEIGHT_SIZE*i, 100*NOW_SIZE,30*HEIGHT_SIZE )];
+            PVData.text=ossLableName[i];
+            PVData.textAlignment=NSTextAlignmentRight;
+            PVData.textColor=[UIColor whiteColor];
+            PVData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+            PVData.adjustsFontSizeToFitWidth=YES;
+            [_scrollView addSubview:PVData];
+        }
+        
+        _textField1 = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 40*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
+        _textField1.layer.borderWidth=1;
+        _textField1.layer.cornerRadius=5;
+        _textField1.layer.borderColor=[UIColor whiteColor].CGColor;
+        _textField1.textColor = [UIColor whiteColor];
+        _textField1.tintColor = [UIColor whiteColor];
+        _textField1.textAlignment=NSTextAlignmentCenter;
+        _textField1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        [_scrollView addSubview:_textField1];
+        
+        _textField = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 90*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
+        _textField.layer.borderWidth=1;
+        _textField.layer.cornerRadius=5;
+        _textField.layer.borderColor=[UIColor whiteColor].CGColor;
+        _textField.textColor = [UIColor whiteColor];
+        _textField.tintColor = [UIColor whiteColor];
+        _textField.textAlignment=NSTextAlignmentCenter;
+        _textField.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        [_scrollView addSubview:_textField];
+        
+    }
+    
+    
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
     goBut.frame=CGRectMake(60*NOW_SIZE,210*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
 //    [goBut.layer setMasksToBounds:YES];
