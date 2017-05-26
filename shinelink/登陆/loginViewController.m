@@ -80,7 +80,7 @@
  //  [self addSubViews];
  
     //////////测试区域
-    NSString *testDemo=@"OK";
+    NSString *testDemo=@"O";
     if ([testDemo isEqualToString:@"OK"]) {
          ossFistVC *testView=[[ossFistVC alloc]init];
         [self.navigationController pushViewController:testView animated:NO];

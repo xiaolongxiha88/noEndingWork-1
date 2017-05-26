@@ -13,6 +13,8 @@ class ossFistVC: RootViewController {
      var imageOne:UIImageView!
        var buttonOne:UIButton!
        var buttonTwo:UIButton!
+      var messageView:UIView!
+    let heigh0=96*NOW_SIZE
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,22 +28,41 @@ class ossFistVC: RootViewController {
         self.navigationItem.backBarButtonItem?.title="";
         
        self.initUI()
+        
+        let messgeEnable="isFirstNO"
+        
+        if messgeEnable=="isFirst" {
+            
+        self.initUIthree()
+        }else{
+         self.initUItwo()
+        }
+
+        
+       
     }
 
     
     func initUI(){
     
-        let heigh0=96*NOW_SIZE
+      
         
         imageOne=UIImageView()
         self.imageOne.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: heigh0)
          imageOne.image=UIImage(named: "title_bg.png")
         self.view.addSubview(imageOne)
     
+        
+        
+    }
+    
+    
+    func initUItwo(){
+     
         buttonOne=UIButton()
         buttonOne.frame=CGRect(x: 10*NOW_SIZE, y: heigh0+10*HEIGHT_SIZE, width: 300*NOW_SIZE, height:heigh0)
         buttonOne.setBackgroundImage(UIImage(named: "gongdan_bg.png"), for: .normal)
-       // buttonOne.setTitle(root_finish, for: .normal)
+        // buttonOne.setTitle(root_finish, for: .normal)
         buttonOne.addTarget(self, action:#selector(gotoServer), for: .touchUpInside)
         self.view.addSubview(buttonOne)
         
@@ -51,13 +72,27 @@ class ossFistVC: RootViewController {
         // buttonOne.setTitle(root_finish, for: .normal)
         buttonTwo.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
         self.view.addSubview(buttonTwo)
+    }
+    
+    func initUIthree(){
+//        messageView=UIView()
+//        messageView.isUserInteractionEnabled=true
+//        self.messageView.frame=CGRect(x: 0*NOW_SIZE, y: heigh0, width: SCREEN_Width, height: SCREEN_Height-heigh0)
+//        messageView.backgroundColor=MainColor
+//        self.view.addSubview(messageView)
+    
+      
+        
         
     }
     
     
     func gotoServer()  {
         
-        let vc=ossServerFirst()
+//        let vc=ossServerFirst()
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        let vc=OssMessageViewController()
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
@@ -77,6 +112,8 @@ class ossFistVC: RootViewController {
     }
     
 
+    
+    
     /*
     // MARK: - Navigation
 

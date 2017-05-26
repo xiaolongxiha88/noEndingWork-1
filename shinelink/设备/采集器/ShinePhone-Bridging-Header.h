@@ -10,3 +10,8 @@
 #import "ChangeCellectViewController.h"
 #import "kongZhiNi0.h"
 #import "controlCNJTable.h"
+#import "ZJBLStoreShopTypeAlert.h"
+
+#import "phoneRegisterViewController.h"
+
+#import "OssMessageViewController.h"

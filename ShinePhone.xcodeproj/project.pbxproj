@@ -347,6 +347,8 @@
 		33742B3A1ED3E17F0015F2EA /* editOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 33742B391ED3E17F0015F2EA /* editOSS.png */; };
 		33742B3C1ED51BFF0015F2EA /* datalogerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33742B3B1ED51BFF0015F2EA /* datalogerControlView.swift */; };
 		33742B3E1ED558EA0015F2EA /* datalogerControlTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33742B3D1ED558EA0015F2EA /* datalogerControlTwo.swift */; };
+		33742B421ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 33742B411ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.m */; };
+		33742B481ED6D6BD0015F2EA /* OssMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33742B471ED6D6BD0015F2EA /* OssMessageViewController.m */; };
 		33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */; };
 		337532EF1D051579009CE66F /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337532EE1D051579009CE66F /* PushConfig.plist */; };
 		337532F31D051C14009CE66F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 337532F21D051C14009CE66F /* libz.tbd */; };
@@ -1215,6 +1217,10 @@
 		33742B391ED3E17F0015F2EA /* editOSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = editOSS.png; sourceTree = "<group>"; };
 		33742B3B1ED51BFF0015F2EA /* datalogerControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = datalogerControlView.swift; sourceTree = "<group>"; };
 		33742B3D1ED558EA0015F2EA /* datalogerControlTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = datalogerControlTwo.swift; sourceTree = "<group>"; };
+		33742B401ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZJBLStoreShopTypeAlert.h; sourceTree = "<group>"; };
+		33742B411ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZJBLStoreShopTypeAlert.m; sourceTree = "<group>"; };
+		33742B461ED6D6BD0015F2EA /* OssMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OssMessageViewController.h; sourceTree = "<group>"; };
+		33742B471ED6D6BD0015F2EA /* OssMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OssMessageViewController.m; sourceTree = "<group>"; };
 		33744DE21CAE597A0065DC01 /* pvLogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pvLogTableViewCell.h; sourceTree = "<group>"; };
 		33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pvLogTableViewCell.m; sourceTree = "<group>"; };
 		337532EE1D051579009CE66F /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
@@ -2743,6 +2749,7 @@
 				338049201ED2E2550077658D /* deviceControlView.swift */,
 				33742B3B1ED51BFF0015F2EA /* datalogerControlView.swift */,
 				33742B3D1ED558EA0015F2EA /* datalogerControlTwo.swift */,
+				33742B3F1ED6858C0015F2EA /* OSS第三方 */,
 			);
 			path = "设备管理";
 			sourceTree = "<group>";
@@ -2849,6 +2856,17 @@
 				3370794F1D9217D700D7DA98 /* manualTableViewCell.m */,
 			);
 			path = "安装手册";
+			sourceTree = "<group>";
+		};
+		33742B3F1ED6858C0015F2EA /* OSS第三方 */ = {
+			isa = PBXGroup;
+			children = (
+				33742B401ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.h */,
+				33742B411ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.m */,
+				33742B461ED6D6BD0015F2EA /* OssMessageViewController.h */,
+				33742B471ED6D6BD0015F2EA /* OssMessageViewController.m */,
+			);
+			path = "OSS第三方";
 			sourceTree = "<group>";
 		};
 		3376ED5A1D12A2DD009526B4 /* 图片8 */ = {
@@ -4238,6 +4256,7 @@
 				335047201C9BA6F600BF8683 /* EGOCache.m in Sources */,
 				336F1A1E1D88E46900CD4C2B /* UIImage+GIF.m in Sources */,
 				33801EB31D58274D00047232 /* addStationViewController.m in Sources */,
+				33742B421ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.m in Sources */,
 				334FF0931CF53C7C001E6716 /* AsyncSocket.m in Sources */,
 				3363DD221C7C598B00D740FB /* countryViewController.m in Sources */,
 				335614941CB3A0AA0071BAC9 /* commonTableViewController.m in Sources */,
@@ -4427,6 +4446,7 @@
 				33EFB6691C98F9B1003F336F /* ZFBar.m in Sources */,
 				334FF09B1CF53C7C001E6716 /* InfoSend.m in Sources */,
 				336F1A201D88E46900CD4C2B /* UIImage+WebP.m in Sources */,
+				33742B481ED6D6BD0015F2EA /* OssMessageViewController.m in Sources */,
 				334B8F521C914A6D00798A69 /* PNLineChartDataItem.m in Sources */,
 				33AF3D251D8E67210007D6C2 /* Toast+UIView.m in Sources */,
 				3383EFA51C9F8A6F0075E834 /* UIView+MJExtension.m in Sources */,

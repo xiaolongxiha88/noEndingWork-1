@@ -726,10 +726,19 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         NSDate *currentDayDate = [self.dayFormatter dateFromString:self.currentDay];
         NSDate *tomorrow = [currentDayDate dateByAddingTimeInterval: secondsPerDay];
         
+        NSDate *nowDate= [NSDate date];
+        NSComparisonResult result = [tomorrow compare:nowDate];
+        
+        if (result == NSOrderedDescending) {
+            
+            [self showToastViewWithTitle:root_wufa_chakan_weilai_shuju];
+            return;
+        }else{
         self.currentDay = [self.dayFormatter stringFromDate:tomorrow];
         [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
         [self.dayDict removeAllObjects];
         [self requestDayDatasWithDayString:self.currentDay];
+          }
     }
     
     //月
@@ -737,6 +746,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         NSDate *currentYearDate = [self.monthFormatter dateFromString:self.currentMonth];
         NSString *currentYearStr = [self.yearFormatter stringFromDate:currentYearDate];
         NSString *currentMonthStr = [self.onlyMonthFormatter stringFromDate:currentYearDate];
+           NSDate *nowDate= [NSDate date];
+        
         
         for (int i = 0; i<self.yearsArr.count; i++) {
             if ([_yearsArr[i] integerValue] == [currentYearStr integerValue]) {
@@ -744,17 +755,37 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 for (int j = 0; j<self.monthArr.count; j++) {
                     if ([_monthArr[j] integerValue] == [currentMonthStr integerValue]) {
                         if (i < _yearsArr.count && j < _monthArr.count-1) {
-                            self.currentMonth = [NSString stringWithFormat:@"%@-%@", _yearsArr[i], _monthArr[j+1]];
-                            [self.datePickerButton setTitle:self.currentMonth forState:UIControlStateNormal];
-                            [self.monthDict removeAllObjects];
-                            [self requestMonthDatasWithMonthString:self.currentMonth];
+                            NSString *monthDate=[NSString stringWithFormat:@"%@-%@", _yearsArr[i], _monthArr[j+1]];
+                            NSDate *monthDate1 = [self.monthFormatter dateFromString:monthDate];
+                            NSComparisonResult result = [monthDate1 compare:nowDate];
+                            
+                            if (result == NSOrderedDescending) {
+                                
+                                [self showToastViewWithTitle:root_wufa_chakan_weilai_shuju];
+                                return;
+                            }else{
+                                self.currentMonth = [NSString stringWithFormat:@"%@-%@", _yearsArr[i], _monthArr[j+1]];
+                                [self.datePickerButton setTitle:self.currentMonth forState:UIControlStateNormal];
+                                [self.monthDict removeAllObjects];
+                                [self requestMonthDatasWithMonthString:self.currentMonth];
+                            }
                         }
                         
                         if (i < _yearsArr.count && j == _monthArr.count-1) {
-                            self.currentMonth = [NSString stringWithFormat:@"%@-%@", _yearsArr[i+1], _monthArr[0]];
-                            [self.datePickerButton setTitle:self.currentMonth forState:UIControlStateNormal];
-                            [self.monthDict removeAllObjects];
-                            [self requestMonthDatasWithMonthString:self.currentMonth];
+                            NSString *monthDate= [NSString stringWithFormat:@"%@-%@", _yearsArr[i+1], _monthArr[0]];
+                            NSDate *monthDate1 = [self.monthFormatter dateFromString:monthDate];
+                            NSComparisonResult result = [monthDate1 compare:nowDate];
+                            
+                            if (result == NSOrderedDescending) {
+                                
+                                [self showToastViewWithTitle:root_wufa_chakan_weilai_shuju];
+                                return;
+                            }else{
+                                self.currentMonth = [NSString stringWithFormat:@"%@-%@", _yearsArr[i+1], _monthArr[0]];
+                                [self.datePickerButton setTitle:self.currentMonth forState:UIControlStateNormal];
+                                [self.monthDict removeAllObjects];
+                                [self requestMonthDatasWithMonthString:self.currentMonth];
+                            }
                         }
                         
                         break;
@@ -771,10 +802,21 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         for (int i = 0; i<self.yearsArr.count; i++) {
             if ([_yearsArr[i] integerValue] == [self.currentYear integerValue]) {
                 if (i < _yearsArr.count) {
-                    self.currentYear = _yearsArr[i+1];
-                    [self.datePickerButton setTitle:self.currentYear forState:UIControlStateNormal];
-                    [self.yearDict removeAllObjects];
-                    [self requestYearDatasWithYearString:self.currentYear];
+                    NSDate *nowDate= [NSDate date];
+                    NSString *yearDate=_yearsArr[i+1];
+                    NSDate *monthDate1 = [self.yearFormatter dateFromString:yearDate];
+                    NSComparisonResult result = [monthDate1 compare:nowDate];
+                    
+                    if (result == NSOrderedDescending) {
+                        
+                        [self showToastViewWithTitle:root_wufa_chakan_weilai_shuju];
+                        return;
+                    }else{
+                        self.currentYear = _yearsArr[i+1];
+                        [self.datePickerButton setTitle:self.currentYear forState:UIControlStateNormal];
+                        [self.yearDict removeAllObjects];
+                        [self requestYearDatasWithYearString:self.currentYear];
+                    }
                 }
                 break;
             }

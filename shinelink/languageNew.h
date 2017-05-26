@@ -665,6 +665,6 @@
 #define  root_chuneng_congfang_xinxi  NSLocalizedString(@"69储能充放电信息", nil)
 #define  root_shishi_SOC  NSLocalizedString(@"70实时SOC", nil)
 #define  root_gongju  NSLocalizedString(@"71工具", nil)
-
+#define  root_wufa_chakan_weilai_shuju  NSLocalizedString(@"72无法查看未来数据", nil)
 
 #endif /* languageNew_h */

@@ -14,6 +14,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
       var view1:UIView!
       var button1:UIButton!
      var view2:UIView!
+    var button22:UIButton!
     
     var view3:UIView!
      var view4:UIView!
@@ -30,8 +31,14 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         super.viewDidLoad()
     self.title="设备搜索"
         
+       
+        
       self.initUI()
-        self.initUiTwo()
+        
+      
+            self.initUiTwo()
+        
+     
     }
 
     
@@ -87,8 +94,25 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         view3.backgroundColor=UIColor.clear
         self.view.addSubview(view3)
         
+        button22=UIButton()
+        button22.frame=CGRect(x: 60*NOW_SIZE, y: 10*HEIGHT_SIZE, width: 200*NOW_SIZE, height:25*HEIGHT_SIZE)
+        // button2.setBackgroundImage(UIImage(named: "icon_search.png"), for: .normal)
+        button22.setTitle("点击获取服务器地址", for: .normal)
+        button22.setTitleColor(MainColor, for: .normal)
+        button22.setTitleColor(UIColor.white, for: .highlighted)
+        button22.layer.borderWidth=0.8*HEIGHT_SIZE;
+        button22.layer.cornerRadius=12*HEIGHT_SIZE;
+        button22.titleLabel?.font=UIFont.systemFont(ofSize: 13*HEIGHT_SIZE)
+        button22.titleLabel?.adjustsFontSizeToFitWidth=true
+        button22.layer.borderColor=MainColor.cgColor;
+        button22.isSelected=false
+        button22.backgroundColor=UIColor.clear
+        button22.addTarget(self, action:#selector(getServerURL), for: .touchUpInside)
+        view3.addSubview(button22)
+        
+        
        let RfSnLable=UILabel()
-         RfSnLable.frame=CGRect(x: 0*NOW_SIZE, y: 35*HEIGHT_SIZE, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
+         RfSnLable.frame=CGRect(x: 0*NOW_SIZE, y: 40*HEIGHT_SIZE, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
         RfSnLable.text="选择搜索类型"
         RfSnLable.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
         RfSnLable.textAlignment=NSTextAlignment.center
@@ -100,7 +124,6 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         for i in 0...3{
             let button2=UIButton()
-           
             button2.frame=CGRect(x: 16*NOW_SIZE+76*NOW_SIZE*CGFloat(i), y: 90*HEIGHT_SIZE, width: 60*NOW_SIZE, height:25*HEIGHT_SIZE)
             // button2.setBackgroundImage(UIImage(named: "icon_search.png"), for: .normal)
             button2.setTitle(buttonNameArray1[i], for: .normal)
@@ -141,12 +164,21 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
     }
     
+    func getServerURL(){
+        let titleArray=["my222station","my333station","my111station","my444tation","my555tation"];
+        ZJBLStoreShopTypeAlert.show(withTitle: "选择服务器地址", titles: titleArray, selectIndex: {
+            (selectIndex)in
+        print("选择11了"+String(describing: selectIndex))
+        }, selectValue: {
+            (selectValue)in
+            print("选择了"+String(describing: selectValue))
+            self.button22.setTitle(selectValue, for: .normal)
+        }, showCloseButton: true)
+        
+    }
+    
     func initTableView(){
       
-       
-        
-      
-        
         cellNameArray=["电站名称:","所属用户名:"];
         cellValue1Array=["my station","my station","my station","my station","my station"];
           cellValue2Array=["yangwen","yangwen","yangwen","yangwen","yangwen"];

@@ -642,3 +642,6 @@
 "601能源产出"="Storage";
 "621用电消耗"="grid";
 "71工具"="Tools";
+"72无法查看未来数据"="Data can not be viewed in the future";
+
+
