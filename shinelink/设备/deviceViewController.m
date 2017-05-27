@@ -1225,7 +1225,7 @@
     //_deviceHeadType=@"1";
     if([_deviceHeadType isEqualToString:@"1"]){
          animationNumber=0;
-        [self getPCSnet];
+          [self getPCSnet];
               
           [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"isNewEnergy"];
         

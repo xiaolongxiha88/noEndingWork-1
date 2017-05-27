@@ -152,7 +152,7 @@
     btn.nomalBackgroundColor = COLOR(144, 195, 32, 1);
     btn.disabledBackgroundColor = [UIColor grayColor];
     btn.totalSecond = 180;
-    [btn addTarget:self action:@selector(registerFrist) forControlEvents:UIControlEventTouchUpInside];
+    [btn addTarget:self action:@selector(getCode0) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     
     //进度b
@@ -224,35 +224,6 @@
 }
 
 
--(void)registerFrist{
-    [self showProgressView];
-    
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userName":[_textField text]} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
-        [self hideProgressView];
-        NSLog(@"getUserServerUrl: %@", content);
-        if (content) {
-            if ([content[@"success"]intValue]==1) {
-                NSString *server1=content[@"msg"];
-                NSString *server2=@"http://";
-                NSString *server=[NSString stringWithFormat:@"%@%@",server2,server1];
-                [[UserInfo defaultUserInfo] setServer:server];
-                [self getCode0];
-            }else{
-                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-                [self getCode0];
-            }
-        }else{
-            [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-            [self getCode0];
-        }
-        
-    } failure:^(NSError *error) {
-        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-        [self getCode0];
-    }];
-    
-}
-
 
 
 -(void)getCode{
@@ -260,7 +231,7 @@
     [_dataDic setObject:[_textField text] forKey:@"phoneNum"];
     [_dataDic setObject:_getPhone forKey:@"areaCode"];
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:_dataDic paramarsSite:@"/newForgetAPI.do?op=smsVerification" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_dataDic paramarsSite:@"/api/v1/phone/send/validate" sucessBlock:^(id content) {
         [self hideProgressView];
         id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"smsVerification: %@", jsonObj);
@@ -326,6 +297,35 @@
 
 
 
+
+-(void)registerFrist{
+    [self showProgressView];
+    
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userName":[_textField text]} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
+        [self hideProgressView];
+        NSLog(@"getUserServerUrl: %@", content);
+        if (content) {
+            if ([content[@"success"]intValue]==1) {
+                NSString *server1=content[@"msg"];
+                NSString *server2=@"http://";
+                NSString *server=[NSString stringWithFormat:@"%@%@",server2,server1];
+                [[UserInfo defaultUserInfo] setServer:server];
+                [self getCode0];
+            }else{
+                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+                [self getCode0];
+            }
+        }else{
+            [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+            [self getCode0];
+        }
+        
+    } failure:^(NSError *error) {
+        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+        [self getCode0];
+    }];
+    
+}
 
 
 

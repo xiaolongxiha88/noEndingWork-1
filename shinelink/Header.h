@@ -49,7 +49,7 @@
 #define HEAD_URL  [UserInfo defaultUserInfo].server
 
 
-//demo
+//demo for server
 
 //#define HEAD_URL   @"http://test.growatt.com"
 //#define HEAD_URL_Demo  @"http://test.growatt.com"
@@ -59,6 +59,11 @@
 
 //#define HEAD_URL   @"http://192.168.3.32:8080/ShineServer_2016"
 //#define HEAD_URL_Demo  @"http://192.168.3.32:8080/ShineServer_2016"
+
+
+//demo for OSS
+#define OSS_HEAD_URL_Demo  @"http://192.168.3.32:8081/ShineOSS"
+#define OSS_HEAD_URL  [UserInfo defaultUserInfo].OSSserver
 
 
 #define mainColor [UIColor colorWithRed:130/255.0f green:200/255.0f blue:250/255.0f alpha:1]

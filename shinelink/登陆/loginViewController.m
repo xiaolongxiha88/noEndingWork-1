@@ -30,6 +30,7 @@
 #import "topAvViewController.h"
 #import "forgetOneViewController.h"
 #import "ShinePhone-Swift.h"
+#import "OssMessageViewController.h"
 
 
 @interface loginViewController ()<UINavigationControllerDelegate,UITextFieldDelegate>
@@ -484,8 +485,9 @@ NSLog(@"体验馆");
         //用户名和密码输入正确跳转页面
         [loginBtn ExitAnimationCompletion:^{
             
-           
-            [self netServerInit];
+            [self getOSSnet];
+            
+            //[self netServerInit];
          
         }];
     }
@@ -589,18 +591,85 @@ NSLog(@"体验馆");
         
     } failure:^(NSError *error) {
          [self didPresentControllerButtonTouch];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        //[self showToastViewWithTitle:root_Networking];
-        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-        hud.mode = MBProgressHUDModeText;
-        hud.animationType = MBProgressHUDAnimationZoom;
-        hud.labelText = root_Networking;
-        hud.margin = 10.f;
-        hud.removeFromSuperViewOnHide = YES;
-        [hud hide:YES afterDelay:1.5];
+            [self showToastViewWithTitle:root_Networking];
+
     }];
 
 }
+
+
+-(void)getOSSnet{
+   [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo paramars:@{@"userName":_userTextField.text, @"userPassword":[self MD5:_pwdTextField.text]} paramarsSite:@"/api/v1/login/userLogin" sucessBlock:^(id content) {
+        [self hideProgressView];
+       
+        if (content) {
+         id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+             NSLog(@"OSSloginIn:%@",jsonObj);
+         
+            if ([jsonObj isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *allDic=[NSDictionary dictionaryWithDictionary:jsonObj];
+                if ([allDic.allKeys containsObject:@"obj"]) {
+                    NSDictionary *objDic=[NSDictionary dictionaryWithDictionary:allDic[@"obj"]];
+                    if ([objDic.allKeys containsObject:@"userType"]) {
+                        NSString *userType=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"userType"]];
+                        if ([userType isEqualToString:@"0"]) {
+                            NSString *server1=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"userServerUrl"]];
+                            NSString *server2=@"http://";
+                            NSString *serverAdress=[NSString stringWithFormat:@"%@%@",server2,server1];
+                            [[UserInfo defaultUserInfo] setServer:serverAdress];
+                            [self netRequest];
+                        }else{
+                            if ([objDic.allKeys containsObject:@"ossServerUrl"]) {
+                                NSString *server1=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"ossServerUrl"]];
+                                NSString *server2=@"http://";
+                                NSString *serverAdress=[NSString stringWithFormat:@"%@%@",server2,server1];
+                                     [[UserInfo defaultUserInfo] setOSSserver:serverAdress];
+                            }
+                            NSMutableArray *serverListArray=[NSMutableArray array];
+                            if ([objDic.allKeys containsObject:@"serverList"]) {
+                                [serverListArray addObjectsFromArray:[objDic objectForKey:@"serverList"]];
+                            }
+                            
+                            NSString *PhoneNum;
+                            if ([objDic.allKeys containsObject:@"user"]) {
+                                PhoneNum=objDic[@"user"][@"phone"];
+                            }
+                            
+                            OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
+                            OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
+                            OSSView.phoneNum=PhoneNum;
+                            [self.navigationController pushViewController:OSSView animated:NO];
+                            
+                        }
+                        
+                    }
+                    
+                }
+            }
+            
+            
+       
+            
+            
+            
+            
+            
+        }
+        
+    } failure:^(NSError *error) {
+      //  [self didPresentControllerButtonTouch];
+        
+        [self showToastViewWithTitle:root_Networking];
+        
+    }];
+
+}
+
+
+
+
+
 
 -(void)setAlias{
     NSString *AliasName=_userTextField.text;
@@ -612,8 +681,6 @@ NSLog(@"体验馆");
 }
 
 -(void)netServerInit{
-    
-    
     
     
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userName":_userTextField.text} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
@@ -643,6 +710,8 @@ NSLog(@"体验馆");
     
     
 }
+
+
 
 //弹出输入用户提示框方法
 - (void)userAlertAction {

@@ -121,7 +121,12 @@ static int timerNumber=0;
             _server = [ud objectForKey:@"server"];
         }
         
-        
+        if (![ud objectForKey:@"OSSserver"]) {
+            [ud setObject:@"" forKey:@"OSSserver"];
+            _OSSserver = @"";
+        } else {
+            _OSSserver = [ud objectForKey:@"OSSserver"];
+        }
         
         [ud synchronize];
         
@@ -204,6 +209,14 @@ static int timerNumber=0;
     
     [[NSUserDefaults standardUserDefaults] setObject:_server forKey:@"server"];
 }
+
+
+- (void)setOssServer:(NSString *)server{
+    _OSSserver = server;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:_server forKey:@"OSSserver"];
+}
+
 
 #pragma mark - Tool Method
 
