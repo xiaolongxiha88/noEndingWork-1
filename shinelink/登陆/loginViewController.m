@@ -47,6 +47,8 @@
 @property (nonatomic, strong) NSString *serverDemoAddress;
 @property (nonatomic, strong) NSString *adNumber;
  @property (nonatomic, strong)  NSString *languageValue;
+@property (nonatomic, strong) NSString *OssFirst;
+
 @end
 
 @implementation loginViewController
@@ -73,61 +75,109 @@
     }else{
         _languageValue=@"2";
     }
-  
+       [self.navigationController setNavigationBarHidden:YES];
+
     
- NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-   NSString *reUsername=[ud objectForKey:@"userName"];
-   NSString *rePassword=[ud objectForKey:@"userPassword"];
- //  [self addSubViews];
- 
     //////////测试区域
-    NSString *testDemo=@"O";
-    if ([testDemo isEqualToString:@"OK"]) {
-         ossFistVC *testView=[[ossFistVC alloc]init];
-        [self.navigationController pushViewController:testView animated:NO];
+        NSString *testDemo=@"O";
+        if ([testDemo isEqualToString:@"OK"]) {
+            ossFistVC *testView=[[ossFistVC alloc]init];
+            [self.navigationController pushViewController:testView animated:NO];
+        }else{
+          [self getLoginType];
+        }
+    
+
+}
+
+
+-(void)getLoginType{
+
+   _OssFirst=@"Y";
+    
+    NSString *LoginType=@"First";
+    LoginType=[[NSUserDefaults standardUserDefaults] objectForKey:@"LoginType"];
+    
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *reUsername=[ud objectForKey:@"userName"];
+    NSString *rePassword=[ud objectForKey:@"userPassword"];
+    
+      NSString *OssName=[ud objectForKey:@"OssName"];
+          NSString *OssPassword=[ud objectForKey:@"OssPassword"];
+    
+    if ([LoginType isEqualToString:@"O"]) {
+        if (OssName==nil || OssName==NULL||([OssName isEqual:@""] )||OssPassword==nil || OssPassword==NULL||([OssPassword isEqual:@""] )) {
+            [[UserInfo defaultUserInfo] setCoreDataEnable:@"1"];
+            [self addSubViews];
+        }else{
+            _OssFirst=@"N";
+            _userTextField=[[UITextField alloc]init];
+            _userTextField.text=OssName;
+            _pwdTextField=[[UITextField alloc]init];
+            _pwdTextField.text=OssPassword;
+              [self performSelectorOnMainThread:@selector(getOSSnet) withObject:nil waitUntilDone:NO];
+        }
         
-        
+    }else if ([LoginType isEqualToString:@"S"]){
+        if (reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] )||rePassword==nil || rePassword==NULL||([rePassword isEqual:@""] )) {
+            
+            [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+            NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+            NSString *server=[ud objectForKey:@"server"];
+            
+            if (server==nil || server==NULL||[server isEqual:@""]) {
+                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+            }
+            
+            [[UserInfo defaultUserInfo] setCoreDataEnable:@"1"];
+            
+            [self addSubViews];
+            
+        }else{
+            _userTextField=[[UITextField alloc]init];
+            _userTextField.text=reUsername;
+            _pwdTextField=[[UITextField alloc]init];
+            _pwdTextField.text=rePassword;
+            
+            if ([_LogType isEqualToString:@"1"]) {
+                [self performSelectorOnMainThread:@selector(netServerInit) withObject:nil waitUntilDone:NO];
+            }else{
+                [self performSelectorOnMainThread:@selector(netRequest) withObject:nil waitUntilDone:NO];
+                //添加布局
+            }
+            
+        }
+
     }else{
     
-     [self.navigationController setNavigationBarHidden:YES];
-        
-    if (reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] )||rePassword==nil || rePassword==NULL||([rePassword isEqual:@""] )) {
-      //  [ [NSNotificationCenter defaultCenter]postNotificationName:@"reroadDemo" object:nil];
-        
-             [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
         NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
         NSString *server=[ud objectForKey:@"server"];
         
         if (server==nil || server==NULL||[server isEqual:@""]) {
-        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+            [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
         }
         
-         [[UserInfo defaultUserInfo] setCoreDataEnable:@"1"];
+        [[UserInfo defaultUserInfo] setCoreDataEnable:@"1"];
         
         [self addSubViews];
         
-    }else{
-        _userTextField=[[UITextField alloc]init];
-        _userTextField.text=reUsername;
-        _pwdTextField=[[UITextField alloc]init];
-        _pwdTextField.text=rePassword;
-        
-        if ([_LogType isEqualToString:@"1"]) {
-                 [self performSelectorOnMainThread:@selector(netServerInit) withObject:nil waitUntilDone:NO];
-        }else{
-          [self performSelectorOnMainThread:@selector(netRequest) withObject:nil waitUntilDone:NO];
-        //添加布局
-           }
-        
-    }
-        
     }
     
+
+    
+
     
     
+
+   
+    
+    
+    
+    
+
+
 }
-
-
 
 
 //添加布局
@@ -509,18 +559,15 @@ NSLog(@"体验馆");
                 //登陆失败
                 if ([content[@"msg"] integerValue] == 501) {
                     [self showAlertViewWithTitle:nil message:root_yongHuMing_mima_weikong cancelButtonTitle:root_OK];
-                  //  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_yongHuMing_mima_weikong delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
-                   // [alertView show];
+
                 }
                 if ([content[@"msg"] integerValue] ==502) {
                         [self showAlertViewWithTitle:nil message:root_yongHuMing_mima_cuowu cancelButtonTitle:root_OK];
-//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_yongHuMing_mima_cuowu delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
-//                    [alertView show];
+
                 }
                 if ([content[@"msg"] integerValue] ==503) {
                        [self showAlertViewWithTitle:nil message:root_fuWuQi_cuoWu cancelButtonTitle:root_OK];
-//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:root_fuWuQi_cuoWu delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
-//                    [alertView show];
+
                 }
                 
                 if (!_scrollView) {
@@ -548,6 +595,9 @@ NSLog(@"体验馆");
                 }
                 
                 //登陆成功
+                
+                
+                
                 [[UserInfo defaultUserInfo] setUserPassword:_pwdTextField.text];
                 [[UserInfo defaultUserInfo] setUserName:_userTextField.text];
                 self.dataSource = [NSDictionary dictionaryWithDictionary:content];
@@ -564,7 +614,7 @@ NSLog(@"体验馆");
                 [[NSUserDefaults standardUserDefaults] setObject:counrtyName forKey:@"counrtyName"];
                 [[NSUserDefaults standardUserDefaults] setObject:timeZoneNum forKey:@"timeZoneNum"];
                 
-                
+          [[NSUserDefaults standardUserDefaults] setObject:@"S" forKey:@"LoginType"];
                 [[UserInfo defaultUserInfo] setTelNumber:_dataSource[@"user"][@"phoneNum"]];
                 [[UserInfo defaultUserInfo] setUserID:_dataSource[@"user"][@"id"]];
                 [[UserInfo defaultUserInfo] setEmail:_dataSource[@"user"][@"email"]];
@@ -618,7 +668,11 @@ NSLog(@"体验馆");
                             NSString *server2=@"http://";
                             NSString *serverAdress=[NSString stringWithFormat:@"%@%@",server2,server1];
                             [[UserInfo defaultUserInfo] setServer:serverAdress];
+                        
+                            
+                            
                             [self netRequest];
+                            
                         }else{
                             if ([objDic.allKeys containsObject:@"ossServerUrl"]) {
                                 NSString *server1=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"ossServerUrl"]];
@@ -635,11 +689,24 @@ NSLog(@"体验馆");
                             if ([objDic.allKeys containsObject:@"user"]) {
                                 PhoneNum=objDic[@"user"][@"phone"];
                             }
+                            [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];
                             
-                            OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
-                            OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
-                            OSSView.phoneNum=PhoneNum;
-                            [self.navigationController pushViewController:OSSView animated:NO];
+                           
+                            
+                            if ([_OssFirst isEqualToString:@"N"]) {
+                                   ossFistVC *OSSView=[[ossFistVC alloc]init];
+                                    OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
+                                   [self.navigationController pushViewController:OSSView animated:NO];
+                            }else{
+                                OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
+                                OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
+                                OSSView.phoneNum=PhoneNum;
+                                OSSView.OssName=_userTextField.text;
+                                OSSView.OssPassword=_pwdTextField.text;
+                                [self.navigationController pushViewController:OSSView animated:NO];
+                            }
+                            
+                           
                             
                         }
                         

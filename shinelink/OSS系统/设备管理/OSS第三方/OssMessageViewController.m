@@ -10,6 +10,7 @@
 #import "QCCountdownButton.h"
 #import "phoneRegister2ViewController.h"
 #import "changManeger.h"
+#import "ShinePhone-Swift.h"
 
 @interface OssMessageViewController ()
 @property (nonatomic, strong)  UIImageView *imageView;
@@ -277,18 +278,21 @@
     
     if ([_getCheckNum isEqualToString:[_textField2 text]]) {
         
-        if ([_goViewType isEqualToString:@"1"]) {
-            phoneRegister2ViewController *goView=[[phoneRegister2ViewController alloc]init];
-            goView.PhoneNum=_getPhoneNum;
-            goView.PhoneCheck=_getCheckNum;
-            [self.navigationController pushViewController:goView animated:YES];
+        if ([_getPhoneNum isEqualToString:_phoneNum]) {
+            
+            [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];
+            [[NSUserDefaults standardUserDefaults] setObject:_OssName forKey:@"OssName"];
+            [[NSUserDefaults standardUserDefaults] setObject:_OssPassword forKey:@"OssPassword"];
+            
+            ossFistVC *goView=[[ossFistVC alloc]init];
+            goView.serverListArray=[NSMutableArray arrayWithArray:_serverListArray];
+            [self.navigationController pushViewController:goView animated:NO];
+        }else{
+            NSString *alert1=[NSString stringWithFormat:@"您注册时填写的手机号是%@",_phoneNum];
+           [self showToastViewWithTitle:alert1];
+            return;
         }
-        if ([_goViewType isEqualToString:@"2"]) {
-            changManeger *go=[[changManeger alloc]init];
-            go.type=@"1";
-            [self.navigationController pushViewController:go animated:YES];
-        }
-        
+      
     }else{
         [self showToastViewWithTitle:root_qingshuru_zhengque_jiaoyanma];
     }
@@ -298,34 +302,34 @@
 
 
 
--(void)registerFrist{
-    [self showProgressView];
-    
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userName":[_textField text]} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
-        [self hideProgressView];
-        NSLog(@"getUserServerUrl: %@", content);
-        if (content) {
-            if ([content[@"success"]intValue]==1) {
-                NSString *server1=content[@"msg"];
-                NSString *server2=@"http://";
-                NSString *server=[NSString stringWithFormat:@"%@%@",server2,server1];
-                [[UserInfo defaultUserInfo] setServer:server];
-                [self getCode0];
-            }else{
-                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-                [self getCode0];
-            }
-        }else{
-            [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-            [self getCode0];
-        }
-        
-    } failure:^(NSError *error) {
-        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-        [self getCode0];
-    }];
-    
-}
+//-(void)registerFrist{
+//    [self showProgressView];
+//    
+//    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userName":[_textField text]} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
+//        [self hideProgressView];
+//        NSLog(@"getUserServerUrl: %@", content);
+//        if (content) {
+//            if ([content[@"success"]intValue]==1) {
+//                NSString *server1=content[@"msg"];
+//                NSString *server2=@"http://";
+//                NSString *server=[NSString stringWithFormat:@"%@%@",server2,server1];
+//                [[UserInfo defaultUserInfo] setServer:server];
+//                [self getCode0];
+//            }else{
+//                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+//                [self getCode0];
+//            }
+//        }else{
+//            [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+//            [self getCode0];
+//        }
+//        
+//    } failure:^(NSError *error) {
+//        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+//        [self getCode0];
+//    }];
+//    
+//}
 
 
 

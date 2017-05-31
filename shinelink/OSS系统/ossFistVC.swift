@@ -13,7 +13,10 @@ class ossFistVC: RootViewController {
      var imageOne:UIImageView!
        var buttonOne:UIButton!
        var buttonTwo:UIButton!
+       var buttonThree:UIButton!
       var messageView:UIView!
+        var serverListArray:NSArray!
+    
     let heigh0=96*NOW_SIZE
     
     override func viewDidLoad() {
@@ -27,16 +30,14 @@ class ossFistVC: RootViewController {
         
         self.navigationItem.backBarButtonItem?.title="";
         
+   self.navigationController?.setNavigationBarHidden(false, animated: false)
+
+        
+        
        self.initUI()
         
-        let messgeEnable="isFirstNO"
-        
-        if messgeEnable=="isFirst" {
-            
-        self.initUIthree()
-        }else{
          self.initUItwo()
-        }
+      
 
         
        
@@ -72,16 +73,43 @@ class ossFistVC: RootViewController {
         // buttonOne.setTitle(root_finish, for: .normal)
         buttonTwo.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
         self.view.addSubview(buttonTwo)
+        
+        buttonThree=UIButton()
+        buttonThree.frame=CGRect(x: 60*NOW_SIZE, y: (heigh0+10*HEIGHT_SIZE)*2+heigh0+160*HEIGHT_SIZE, width: 200*NOW_SIZE, height:30*HEIGHT_SIZE)
+        buttonThree.backgroundColor=COLOR(_R: 242, _G: 242, _B: 242, _A: 1)
+        buttonThree.setTitle("退出", for: .normal)
+        buttonThree.layer.borderWidth=0.8*HEIGHT_SIZE;
+        buttonThree.layer.cornerRadius=16*HEIGHT_SIZE;
+        buttonThree.titleLabel?.adjustsFontSizeToFitWidth=true
+        buttonThree.layer.borderColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1).cgColor;
+         buttonThree.titleLabel?.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
+        buttonThree.setTitleColor(COLOR(_R: 102, _G: 102, _B: 102, _A: 1), for: .normal)
+        buttonThree.setTitleColor(COLOR(_R: 238, _G: 73, _B: 51, _A: 1), for: .highlighted)
+        buttonThree.addTarget(self, action:#selector(resisgerName), for: .touchUpInside)
+        self.view.addSubview(buttonThree)
+        
     }
     
-    func initUIthree(){
-//        messageView=UIView()
-//        messageView.isUserInteractionEnabled=true
-//        self.messageView.frame=CGRect(x: 0*NOW_SIZE, y: heigh0, width: SCREEN_Width, height: SCREEN_Height-heigh0)
-//        messageView.backgroundColor=MainColor
-//        self.view.addSubview(messageView)
     
+    
+    
+    func resisgerName(){
+    
+           let oldName=UserDefaults.standard.object(forKey: "OssName")
+            let oldPassword=UserDefaults.standard.object(forKey: "OssPassword")
+        
+    UserDefaults.standard.set("F", forKey: "LoginType")
+            UserDefaults.standard.set("", forKey: "OssName")
       
+            UserDefaults.standard.set("", forKey: "OssPassword")
+        UserDefaults.standard.set("", forKey: "server")
+        
+        let vc=loginViewController()
+        vc.oldName=oldName as! String!
+            vc.oldPassword=oldPassword as! String!
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+
         
         
     }
@@ -100,6 +128,7 @@ class ossFistVC: RootViewController {
     func gotoDevice()  {
         
         let vc=ossDeviceFirst()
+        vc.serverListArray=self.serverListArray
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

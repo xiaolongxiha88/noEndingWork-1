@@ -14,7 +14,7 @@ var TitleLabel1:UILabel!
     var TitleLabel2:UILabel!
        var TitleLabel3:UILabel!
     var TitleLabel4:UILabel!
-    
+ 
     var lableArray:NSArray!
         var view0:UIView!
 

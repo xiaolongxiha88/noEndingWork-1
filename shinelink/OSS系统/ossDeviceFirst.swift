@@ -20,22 +20,24 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
      var view4:UIView!
     var goNetString:NSString!
     var tableView:UITableView!
+    var addressString:NSString!
    
  
     var cellNameArray:NSArray!
     var cellValue1Array:NSArray!
      var cellValue2Array:NSArray!
      var cellValue3Array:NSArray!
+       var serverListArray:NSArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
     self.title="设备搜索"
         
        
         
       self.initUI()
-        
-      
             self.initUiTwo()
         
      
@@ -165,10 +167,30 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     }
     
     func getServerURL(){
-        let titleArray=["my222station","my333station","my111station","my444tation","my555tation"];
-        ZJBLStoreShopTypeAlert.show(withTitle: "选择服务器地址", titles: titleArray, selectIndex: {
+        let nameArray:NSMutableArray=[]
+        let addressArray:NSMutableArray=[]
+   
+        if self.languageType=="0" {
+            for i in 0..<self.serverListArray.count {
+                let allArray=self.serverListArray[i]as!NSDictionary
+                let titleName=NSString(format: "%@:%@", allArray["cnName"]as!NSString,allArray["url"]as!NSString)
+                nameArray.add(titleName)
+                addressArray.add(allArray["url"]as!NSString)
+            }
+        }else{
+            for i in 0..<self.serverListArray.count {
+                let allArray=self.serverListArray[i]as!NSDictionary
+                     let titleName=NSString(format: "%@:%@", allArray["enName"]as!NSString,allArray["url"]as!NSString)
+                nameArray.add(titleName)
+                addressArray.add(allArray["url"]as!NSString)
+            }
+        }
+        
+        ZJBLStoreShopTypeAlert.show(withTitle: "选择服务器地址", titles: nameArray as NSArray as! [NSString], selectIndex: {
             (selectIndex)in
         print("选择11了"+String(describing: selectIndex))
+            let IntNum=selectIndex as! Int
+          
         }, selectValue: {
             (selectValue)in
             print("选择了"+String(describing: selectValue))

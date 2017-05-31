@@ -12,4 +12,6 @@
 @property (nonatomic, strong)  NSString *goViewType;
 @property (nonatomic, strong)  NSMutableArray *serverListArray;
 @property (nonatomic, strong)  NSString *phoneNum;
+@property (nonatomic, strong)  NSString *OssName;
+@property (nonatomic, strong)  NSString *OssPassword;
 @end

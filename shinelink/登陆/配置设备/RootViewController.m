@@ -33,7 +33,16 @@
     self.navigationController.navigationBar.translucent = NO;
     
     
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
     
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+        _languageType=@"0";
+    }else if ([currentLanguage hasPrefix:@"en"]) {
+        _languageType=@"1";
+    }else{
+        _languageType=@"2";
+    }
     
 }
 

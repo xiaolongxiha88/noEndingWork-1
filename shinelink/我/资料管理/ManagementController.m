@@ -135,6 +135,7 @@
     NSString *reUsername=[ud objectForKey:@"userName"];
     NSString *rePassword=[ud objectForKey:@"userPassword"];
     
+     [[NSUserDefaults standardUserDefaults] setValue:@"F" forKey:@"LoginType"];
     [[UserInfo defaultUserInfo] setUserPassword:nil];
     [[UserInfo defaultUserInfo] setUserName:nil];
       [[UserInfo defaultUserInfo] setServer:nil];
