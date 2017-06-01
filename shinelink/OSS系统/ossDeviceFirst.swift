@@ -28,6 +28,11 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
      var cellValue2Array:NSArray!
      var cellValue3Array:NSArray!
        var serverListArray:NSArray!
+      var netDic:NSDictionary!
+     var searchNum:Int!
+     var snOrAlias:Int!
+    var plantListArray:NSArray!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,14 +102,14 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         self.view.addSubview(view3)
         
         button22=UIButton()
-        button22.frame=CGRect(x: 60*NOW_SIZE, y: 10*HEIGHT_SIZE, width: 200*NOW_SIZE, height:25*HEIGHT_SIZE)
+        button22.frame=CGRect(x: 50*NOW_SIZE, y: 10*HEIGHT_SIZE, width: 220*NOW_SIZE, height:25*HEIGHT_SIZE)
         // button2.setBackgroundImage(UIImage(named: "icon_search.png"), for: .normal)
         button22.setTitle("点击获取服务器地址", for: .normal)
         button22.setTitleColor(MainColor, for: .normal)
         button22.setTitleColor(UIColor.white, for: .highlighted)
         button22.layer.borderWidth=0.8*HEIGHT_SIZE;
         button22.layer.cornerRadius=12*HEIGHT_SIZE;
-        button22.titleLabel?.font=UIFont.systemFont(ofSize: 13*HEIGHT_SIZE)
+        button22.titleLabel?.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
         button22.titleLabel?.adjustsFontSizeToFitWidth=true
         button22.layer.borderColor=MainColor.cgColor;
         button22.isSelected=false
@@ -166,6 +171,12 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
     }
     
+    
+
+    
+    
+    
+    
     func getServerURL(){
         let nameArray:NSMutableArray=[]
         let addressArray:NSMutableArray=[]
@@ -188,9 +199,9 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         ZJBLStoreShopTypeAlert.show(withTitle: "选择服务器地址", titles: nameArray as NSArray as! [NSString], selectIndex: {
             (selectIndex)in
-        print("选择11了"+String(describing: selectIndex))
-            let IntNum=selectIndex as! Int
-          
+       
+            self.addressString=addressArray[selectIndex] as! NSString
+             print("选择11了"+String(describing: selectIndex))
         }, selectValue: {
             (selectValue)in
             print("选择了"+String(describing: selectValue))
@@ -222,7 +233,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellValue1Array.count
+        return plantListArray.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -235,8 +246,10 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
       //  let  cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "cell");
         
       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!deviceFirstCell
-        let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,cellValue1Array[indexPath.row]as!NSString)
-         let lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,cellValue2Array[indexPath.row]as!NSString)
+        let plantDic=plantListArray[indexPath.row] as! Dictionary<String, Any>
+        
+        let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,plantDic["plantName"] as!NSString)
+         let lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,plantDic["accountName"] as!NSString)
         cell.TitleLabel1.text=lable1 as String
          cell.TitleLabel2.text=lable2 as String
 
@@ -403,25 +416,46 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     func searchDevice(){
     
-       var choiceBool=false
         
+        if (searchBar.text==nil)||(searchBar.text=="") {
+            self.showToastView(withTitle: "请输入搜索类型")
+            return
+        }
+        if (addressString==nil)||(addressString=="") {
+            self.showToastView(withTitle: "请输入服务器地址")
+            return
+        }
+        
+       var choiceBool=false
         for i in 0...6{
             let A=2000+i
             if (view3 != nil) {
                    let B1 = view3.viewWithTag(A) as! UIButton
                 if B1.isSelected {
                     goNetString=String(format: "%d", A) as NSString!
-                    if A==2004||A==2005||A==2006{
+                    if A==2004||A==2005||A==2006{              //具体设备接口
                         if (view4 != nil) {
                             let C1 = view4.viewWithTag(2007) as! UIButton
                             let C2 = view4.viewWithTag(2008) as! UIButton
                             if C1.isSelected==false&&C2.isSelected==false {
                                 self.showToastView(withTitle: "请选择序列号或别名")
                                 return
+                            }else{
+                                if C1.isSelected==true {
+                                    snOrAlias=1
+                                }else {
+                                    snOrAlias=2
+                                }
+                                
                             }
                         }
-                   
+                     searchNum=i
+                      self.initNet2()
+                    }else{                     //电站列表接口
+                     searchNum=i
+                          self.initNet1()
                     }
+                    
                     choiceBool=true
                 }
             }
@@ -434,16 +468,148 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             return
         }
     
-        if (view3 != nil){
-            view3.removeFromSuperview()
-            view3=nil
-        }
-        
-        self.initTableView()
+
         
         
     }
    
+    
+    
+    func initNet1(){
+        let typeNum:Int!
+        if (searchNum==0)||(searchNum==2)||(searchNum==3) {
+            typeNum=0
+        }else{
+             typeNum=1
+        }
+        var value1=""
+        var value2=""
+        var value3=""
+        var value4=""
+        if searchNum==0 {
+            value1=searchBar.text!
+        }else if searchNum==1 {
+            value2=searchBar.text!
+        }else if searchNum==2 {
+            value3=searchBar.text!
+        }else if searchNum==3{
+           value4=searchBar.text!
+        }
+        
+        netDic=["searchType":typeNum,"userName":value1,"plantName":value2,"phoneNum":value3,"email":value4,"serverAddr":addressString]
+        
+        
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]! , paramarsSite: "/api/v1/search/all", sucessBlock: {(successBlock)->() in
+            
+            
+            let data:Data=successBlock as! Data
+            
+            let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
+            
+            if (jsonDate0 != nil){
+                let jsonDate=jsonDate0 as! Dictionary<String, Any>
+                print("/api/v1/search/all=",jsonDate)
+                
+                // let result:NSString=NSString(format:"%s",jsonDate["result"] )
+                let result1=jsonDate["result"] as! Int
+              
+                if result1==1 {
+                  let objArray=jsonDate["obj"] as! Dictionary<String, Any>
+                    let userListArray=objArray["userList"] as! Dictionary<String, Any>
+                     let plantListArray=userListArray["plantList"] as! NSArray
+                    if plantListArray.count>0{
+                    self.plantListArray=plantListArray
+                        
+                                if (self.view3 != nil){
+                                    self.view3.removeFromSuperview()
+                                    self.view3=nil
+                                }
+                        self.initTableView()
+                        
+                    }
+                    
+                    
+                }else{
+                    
+                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                }
+                
+            }
+            
+        }, failure: {(error) in
+            self.showToastView(withTitle: root_Networking)
+        })
+        
+    }
+    
+    
+    func initNet2(){
+        
+        var value1=0
+        var value2=""
+        var value3=""
+        if searchNum==4 {
+            value1=0
+        }else if searchNum==5 {
+            value1=1
+        }else if searchNum==6 {
+            value1=2
+        }
+        if snOrAlias==1 {
+            value2=searchBar.text!
+        }else if snOrAlias==2 {
+            value3=searchBar.text!
+        }
+        netDic=["deviceSn":value2,"alias":value3,"deviceType":value1,"serverAddr":addressString]
+        
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/device/info", sucessBlock: {(successBlock)->() in
+            
+            
+            let data:Data=successBlock as! Data
+            
+            let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
+            
+            if (jsonDate0 != nil){
+                let jsonDate=jsonDate0 as! Dictionary<String, Any>
+                 print("/api/v1/search/info=",jsonDate)
+                // let result:NSString=NSString(format:"%s",jsonDate["result"] )
+                let result1=jsonDate["result"] as! Int
+              
+                if result1==1 {
+                    let objArray=jsonDate["obj"] as! Dictionary<String, Any>
+                    let deviceType=objArray["deviceType"] as! Int
+                    var allDic:NSDictionary!=[:]
+                    
+                    if deviceType==0 {
+                       allDic=objArray["datalogBean"] as!  NSDictionary!
+                    }else if deviceType==1 {
+                           allDic=objArray["invBean"] as!  NSDictionary!
+                    }else if deviceType==2 {
+                        allDic=objArray["storageBean"] as!  NSDictionary!
+                    }
+                    if allDic.count>1 {
+                        let vc=deviceControlView()
+                        vc.typeNum=deviceType
+                        vc.valueDic=allDic
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    
+                
+                  
+                    
+                }else{
+                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                }
+                
+            }
+            
+        }, failure: {(error) in
+            self.showToastView(withTitle: root_Networking)
+        })
+        
+    }
+    
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     
         if (tableView != nil){

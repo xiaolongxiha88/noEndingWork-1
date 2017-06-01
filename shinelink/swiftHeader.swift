@@ -22,6 +22,7 @@ let SCREEN_Width=UIScreen.main.bounds.width
 let SCREEN_Height=UIScreen.main.bounds.height
 
 let HEAD_URL=UserInfo.default().server
+let OSS_HEAD_URL=UserInfo.default().osSserver
 
 
  let root_rf_sn=NSLocalizedString("RF序列号", comment: "default")

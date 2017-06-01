@@ -14,6 +14,8 @@ class deviceControlView: RootViewController {
      var lableValueArray:NSArray!
     var imageValueArray:NSArray!
      var imageNameArray:NSArray!
+    var typeNum:Int!
+      var valueDic:NSDictionary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +26,33 @@ class deviceControlView: RootViewController {
     }
 
     func initData(){
-    lableNameArray=["序列号","用户名","设备类型","IP及端口号","连接状态","更新间隔","更新时间","固件版本"]
-     lableValueArray=["2111222112","用户名","设备类型","123123123312","连接状态","5","2213333","12323333"]
+             var status=""
+        if (valueDic["lost"] as! Int)==0{
+            status="在线"}else{status="掉线"}
+        
+        if typeNum==0{
+         lableNameArray=["序列号","别名","设备类型","用户名","连接状态","IP及端口号","固件版本","更新时间"]
+                let paramBean=valueDic["paramBean"] as! Dictionary<String, Any>
+            var version=""
+       
+            if paramBean.count>0 {
+                version=paramBean["firmwareVersionBuild"] as! String
+            }
+            lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["deviceType"]as! NSString,valueDic["alias"]as! NSString,status,valueDic["alias"]as! NSString,version,valueDic["lastUpdateTimeText"] as! NSString]
+        }else if typeNum==1{
+        lableNameArray=["序列号","别名","所属采集器","连接状态","额定功率(W)","当前功率(W)","今日发电(kWh)","累计发电量(kWh)","逆变器型号","最后更新时间"]
+               lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["dataLogSn"]as! NSString,status,valueDic["nominalPower"]as! NSString,valueDic["power"]as! NSString,valueDic["alias"]as! NSString,valueDic["alias"]as! NSString,valueDic["alias"]as! NSString,valueDic["lastUpdateTimeText"] as! NSString]
+            
+        }else if typeNum==1{
+            var type=""
+            if (valueDic["deviceType"] as! Int)==0{
+                type="SP2000"}else if (valueDic["deviceType"] as! Int)==1{type="SP3000"}else if (valueDic["deviceType"] as! Int)==2{type="SPF5000"}
+            
+            lableNameArray=["序列号","别名","所属采集器","连接状态","充电","放电","储能机型号","最后更新时间"]
+               lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["dataLogSn"]as! NSString,status,valueDic["alias"]as! NSString,valueDic["alias"]as! NSString,type,valueDic["lastUpdateTimeText"] as! NSString]
+        }
+        
+   
     }
     
     func initUI(){
