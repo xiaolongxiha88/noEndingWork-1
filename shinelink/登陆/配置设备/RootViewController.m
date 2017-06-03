@@ -112,6 +112,20 @@
 }
 
 
+-(CGSize)getStringSize:(float)fontSize  Wsize:(float)Wsize Hsize:(float)Hsize stringName:(NSString*)stringName{
+
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:fontSize] forKey:NSFontAttributeName];
+    CGSize size = [stringName boundingRectWithSize:CGSizeMake(Wsize, Hsize) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    
+    return size;
+
+}
+
+
+
+
+
+
 //自定义UITabBarItem
 - (UITabBarItem *)createTabBarItem:(NSString *)strTitle normalImage:(NSString *)strNormalImg selectedImage:(NSString *)strSelectedImg itemTag:(NSInteger)intTag {
     

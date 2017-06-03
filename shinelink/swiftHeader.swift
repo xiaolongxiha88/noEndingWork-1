@@ -39,4 +39,8 @@ let  root_Networking = NSLocalizedString("Networking Timeout", comment: "default
 
 
 
+//获取String长度
+//let attributes1:NSDictionary = NSDictionary(object:UIFont.systemFont(ofSize: 16*HEIGHT_SIZE),
+//                                            forKey: NSFontAttributeName as NSCopying)
+//let size1=lable3String.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 30*HEIGHT_SIZE), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes1 as? [String : AnyObject], context: nil)
 

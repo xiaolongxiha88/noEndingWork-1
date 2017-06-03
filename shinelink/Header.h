@@ -71,3 +71,11 @@
 
 
 #endif /* Header_h */
+
+
+//获取String长度
+//NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:16*HEIGHT_SIZE] forKey:NSFontAttributeName];
+//CGSize size = [root_demo_test boundingRectWithSize:CGSizeMake(MAXFLOAT, 40*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+
+
+

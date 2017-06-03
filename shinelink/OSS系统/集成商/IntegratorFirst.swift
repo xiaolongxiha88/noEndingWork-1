@@ -14,6 +14,7 @@ class IntegratorFirst: RootViewController {
     var manString:NSString!
     var view0:UIView!
     var buttonThree:UIButton!
+      var view1:UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +41,6 @@ class IntegratorFirst: RootViewController {
             view3.isUserInteractionEnabled=true
             view3.tag=3000+i
             let tap=UITapGestureRecognizer(target: self, action: #selector(getDevice(tap:)))
-            
             view3.addGestureRecognizer(tap)
             self.view.addSubview(view3)
             
@@ -107,7 +107,7 @@ class IntegratorFirst: RootViewController {
         
         buttonThree=UIButton()
         buttonThree.frame=CGRect(x: 60*NOW_SIZE, y:95*HEIGHT_SIZE, width: 200*NOW_SIZE, height:30*HEIGHT_SIZE)
-        buttonThree.backgroundColor=COLOR(_R: 242, _G: 242, _B: 242, _A: 1)
+       // buttonThree.backgroundColor=COLOR(_R: 242, _G: 242, _B: 242, _A: 1)
         buttonThree.setTitle("搜索", for: .normal)
         buttonThree.layer.borderWidth=0.8*HEIGHT_SIZE;
         buttonThree.layer.cornerRadius=16*HEIGHT_SIZE;
@@ -144,6 +144,7 @@ class IntegratorFirst: RootViewController {
         view4.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
         LableView.addSubview(view4)
         
+        self.initUIThree()
     }
     
     
@@ -152,6 +153,96 @@ class IntegratorFirst: RootViewController {
     
     }
     
+    
+    func initUIThree(){
+        view1=UIView()
+        view1.frame=CGRect(x: 0*NOW_SIZE, y: 250*HEIGHT_SIZE, width: SCREEN_Width, height: 200*HEIGHT_SIZE)
+        view1.backgroundColor=UIColor.clear
+        view1.isUserInteractionEnabled=true
+        self.view.addSubview(view1)
+    
+       let view2=UIView()
+        view2.frame=CGRect(x: 80*NOW_SIZE, y: 5*HEIGHT_SIZE, width: SCREEN_Width/2, height: 30*HEIGHT_SIZE)
+        view2.backgroundColor=UIColor.clear
+        view2.isUserInteractionEnabled=true
+        view2.tag=2500
+        let tap=UITapGestureRecognizer(target: self, action: #selector(goDetailDevice(tap:)))
+        view2.addGestureRecognizer(tap)
+       view1.addSubview(view2)
+        
+        let Lable3=UILabel()
+        Lable3.frame=CGRect(x: 15*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 130*NOW_SIZE, height: 30*HEIGHT_SIZE)
+        let lable3String="设备总数"
+        Lable3.text=lable3String
+        Lable3.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
+        Lable3.textAlignment=NSTextAlignment.center
+        Lable3.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
+         Lable3.adjustsFontSizeToFitWidth=true
+        view2.addSubview(Lable3)
+        
+       let size1=self.getStringSize(Float(16*HEIGHT_SIZE), wsize: MAXFLOAT, hsize: Float(30*HEIGHT_SIZE), stringName: lable3String)
+
+        let image1=UIImageView()
+        image1.frame=CGRect(x: (160*NOW_SIZE+size1.width)/2+10*NOW_SIZE, y: 11.5*HEIGHT_SIZE, width: 5*HEIGHT_SIZE, height: 8*HEIGHT_SIZE)
+        image1.image=UIImage.init(named:"moreOSS.png")
+        view2.addSubview(image1)
+
+     //   let nameArray=["在线:","等待:","故障:","离线:"]
+       // let colorArray=[COLOR(_R: 2, _G: 232, _B:2, _A: 1),COLOR(_R: 233, _G: 223, _B:74, _A: 1),COLOR(_R: 238, _G: 73, _B:51, _A: 1),COLOR(_R: 181, _G: 186, _B:189, _A: 1)]
+        let colorArray=[COLOR(_R: 2, _G: 232, _B:2, _A: 1),COLOR(_R: 181, _G: 186, _B:189, _A: 1),COLOR(_R: 154, _G: 229, _B:128, _A: 1),COLOR(_R: 222, _G: 211, _B:91, _A: 1),COLOR(_R: 238, _G: 73, _B:51, _A: 1)]
+        let name1Array=["在线:","离线:","充电:","放电:","故障:"]
+         let valueArray=["123","123","222","444","444"]
+        let Yu=name1Array.count%2
+        let Num=name1Array.count/2
+        for i in 0...1 {
+            for K in 0..<(Num+Yu){
+                if i==1 && Yu==1 && K==(Num+Yu-1) {
+                    break
+                }
+                let view2=UIView()
+                view2.frame=CGRect(x: 0*NOW_SIZE+160*NOW_SIZE*CGFloat(i), y: 35*HEIGHT_SIZE+50*HEIGHT_SIZE*CGFloat(K), width: SCREEN_Width/2, height: 40*HEIGHT_SIZE)
+                view2.backgroundColor=UIColor.clear
+                view2.isUserInteractionEnabled=true
+                view2.tag=2500+K*2+i
+                let tap=UITapGestureRecognizer(target: self, action: #selector(goDetailDevice(tap:)))
+                view2.addGestureRecognizer(tap)
+                view1.addSubview(view2)
+                
+                let Lable3=UILabel()
+                Lable3.frame=CGRect(x: 15*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 130*NOW_SIZE, height: 30*HEIGHT_SIZE)
+                let lable3String=String(format: "%@%@", name1Array[i+2*K],valueArray[i+2*K])
+                Lable3.text=lable3String
+                Lable3.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
+                Lable3.textAlignment=NSTextAlignment.center
+                Lable3.font=UIFont.systemFont(ofSize: 14*HEIGHT_SIZE)
+                Lable3.adjustsFontSizeToFitWidth=true
+                view2.addSubview(Lable3)
+                
+                let size1=self.getStringSize(Float(16*HEIGHT_SIZE), wsize: MAXFLOAT, hsize: Float(30*HEIGHT_SIZE), stringName: lable3String)
+                
+                let image1=UIImageView()
+                image1.frame=CGRect(x: (160*NOW_SIZE+size1.width)/2+10*NOW_SIZE, y: 11.5*HEIGHT_SIZE, width: 5*HEIGHT_SIZE, height: 8*HEIGHT_SIZE)
+                image1.image=UIImage.init(named:"moreOSS.png")
+                view2.addSubview(image1)
+                
+                let image2=UIImageView()
+                image2.frame=CGRect(x: (160*NOW_SIZE-size1.width)/2, y: 30*HEIGHT_SIZE, width:size1.width+10*NOW_SIZE+5*HEIGHT_SIZE, height: 5*HEIGHT_SIZE)
+                image2.backgroundColor=colorArray[i+2*K]
+                image2.layer.borderWidth=0.2*HEIGHT_SIZE;
+                image2.layer.cornerRadius=3*HEIGHT_SIZE;
+                image2.layer.borderColor=UIColor.clear.cgColor
+                view2.addSubview(image2)
+                
+            }
+        }
+        
+    }
+    
+    
+    func goDetailDevice(tap:UITapGestureRecognizer){
+    
+        
+    }
     
     func getDevice(tap:UITapGestureRecognizer){
    let View1=tap.view!

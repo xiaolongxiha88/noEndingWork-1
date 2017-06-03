@@ -152,7 +152,7 @@
                             //注册失败
                             if ([content[@"msg"] isEqual:@"501"]) {
                                 [self showAlertViewWithTitle:nil message:root_chaoChu_shuLiang cancelButtonTitle:root_Yes];
-                            }else if ([content[@"msg"] isEqual:@"server error."]){
+                            }else if ([content[@"msg"] isEqual:@"502"]){
                                 
                                 [self showAlertViewWithTitle:nil message:root_fuWuQi_cuoWu cancelButtonTitle:root_Yes];
                             }

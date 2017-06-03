@@ -18,6 +18,8 @@
 
 - (void)hideProgressView;
 
+-(CGSize)getStringSize:(float)fontSize  Wsize:(float)Wsize Hsize:(float)Hsize stringName:(NSString*)stringName;
+
 - (NSString *)MD5:(NSString *)str;
 
 - (UIImage *)createImageWithColor:(UIColor *)color rect:(CGRect)rect;
