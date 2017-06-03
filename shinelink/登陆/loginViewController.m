@@ -79,9 +79,9 @@
 
     
     //////////测试区域
-        NSString *testDemo=@"O";
+        NSString *testDemo=@"OK";
         if ([testDemo isEqualToString:@"OK"]) {
-            ossFistVC *testView=[[ossFistVC alloc]init];
+            IntegratorFirst *testView=[[IntegratorFirst alloc]init];
             [self.navigationController pushViewController:testView animated:NO];
         }else{
           [self getLoginType];
@@ -726,7 +726,7 @@ NSLog(@"体验馆");
         
     } failure:^(NSError *error) {
       //  [self didPresentControllerButtonTouch];
-        
+          [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];
         
     }];

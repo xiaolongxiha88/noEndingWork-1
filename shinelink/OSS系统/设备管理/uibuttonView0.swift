@@ -13,6 +13,7 @@ class uibuttonView0: UIView{
     var buttonArray:NSArray!
     var view1:UIView!
      var buttonNum:Int!
+    var typeNum:Int!
     
     
     
@@ -22,10 +23,15 @@ class uibuttonView0: UIView{
         
         for (i,buttonName) in buttonArray.enumerated(){
             let button2=UIButton()
-            let W=((CGFloat)((320-buttonArray.count*70)/(buttonArray.count+1))*NOW_SIZE)
+            let W1=((320-buttonArray.count*70)/(buttonArray.count+1))
+            let W=CGFloat(W1)*NOW_SIZE
             
-            button2.frame=CGRect(x: W*NOW_SIZE+(70*NOW_SIZE+W)*CGFloat(i), y: 5*HEIGHT_SIZE, width: 70*NOW_SIZE, height:20*HEIGHT_SIZE)
-            // button2.setBackgroundImage(UIImage(named: "icon_search.png"), for: .normal)
+            
+            button2.frame=CGRect(x: W+(70*NOW_SIZE+W)*CGFloat(i), y: 5*HEIGHT_SIZE, width: 70*NOW_SIZE, height:20*HEIGHT_SIZE)
+            if typeNum==1 {
+                button2.frame=CGRect(x: 45*NOW_SIZE+160*NOW_SIZE*CGFloat(i), y: 5*HEIGHT_SIZE, width: 70*NOW_SIZE, height:20*HEIGHT_SIZE)
+            }
+            
             button2.setTitle(buttonName as? String, for: .normal)
             button2.setTitleColor(MainColor, for: .normal)
             button2.setTitleColor(backgroundGrayColor, for: .highlighted)

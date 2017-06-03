@@ -502,6 +502,9 @@
 		338A623F1E71567A000E7CE4 /* PopoverViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A623C1E71567A000E7CE4 /* PopoverViewCell.m */; };
 		338CFE661CF554C1006EFD8B /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 338CFE651CF554C1006EFD8B /* libstdc++.6.0.9.tbd */; };
 		338CFE681CF554D8006EFD8B /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 338CFE671CF554D8006EFD8B /* libstdc++.tbd */; };
+		338D51BF1EE151D9003FE4D2 /* IntegratorFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338D51BE1EE151D9003FE4D2 /* IntegratorFirst.swift */; };
+		338D51C11EE15EEE003FE4D2 /* moreOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 338D51C01EE15EEE003FE4D2 /* moreOSS.png */; };
+		338D51C31EE15EF3003FE4D2 /* upOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 338D51C21EE15EF3003FE4D2 /* upOSS.png */; };
 		338DCD9E1D2A00DF00C8B775 /* ProductData+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 338DCD9B1D2A00DF00C8B775 /* ProductData+CoreDataProperties.m */; };
 		338DCD9F1D2A00DF00C8B775 /* ProductData.m in Sources */ = {isa = PBXBuildFile; fileRef = 338DCD9D1D2A00DF00C8B775 /* ProductData.m */; };
 		338E30CC1D93725D002215E4 /* service111.png in Resources */ = {isa = PBXBuildFile; fileRef = 338E30CB1D93725D002215E4 /* service111.png */; };
@@ -1438,6 +1441,9 @@
 		338A623C1E71567A000E7CE4 /* PopoverViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverViewCell.m; sourceTree = "<group>"; };
 		338CFE651CF554C1006EFD8B /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		338CFE671CF554D8006EFD8B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		338D51BE1EE151D9003FE4D2 /* IntegratorFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegratorFirst.swift; sourceTree = "<group>"; };
+		338D51C01EE15EEE003FE4D2 /* moreOSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moreOSS.png; sourceTree = "<group>"; };
+		338D51C21EE15EF3003FE4D2 /* upOSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upOSS.png; sourceTree = "<group>"; };
 		338DCD9A1D2A00DF00C8B775 /* ProductData+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProductData+CoreDataProperties.h"; sourceTree = "<group>"; };
 		338DCD9B1D2A00DF00C8B775 /* ProductData+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProductData+CoreDataProperties.m"; sourceTree = "<group>"; };
 		338DCD9C1D2A00DF00C8B775 /* ProductData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductData.h; sourceTree = "<group>"; };
@@ -2716,6 +2722,7 @@
 			isa = PBXGroup;
 			children = (
 				336E03F41EC9411B0034BC86 /* ossFistVC.swift */,
+				338D51BD1EE15186003FE4D2 /* 集成商 */,
 				336E04041ECAFE8C0034BC86 /* 工单系统 */,
 				336E04031ECAFE710034BC86 /* 设备管理 */,
 				336E03F61EC944940034BC86 /* oss图片 */,
@@ -2726,6 +2733,8 @@
 		336E03F61EC944940034BC86 /* oss图片 */ = {
 			isa = PBXGroup;
 			children = (
+				338D51C21EE15EF3003FE4D2 /* upOSS.png */,
+				338D51C01EE15EEE003FE4D2 /* moreOSS.png */,
 				33742B391ED3E17F0015F2EA /* editOSS.png */,
 				33742B371ED3E1780015F2EA /* deleteOSS.png */,
 				33742B351ED3E1660015F2EA /* peizhiOSS.png */,
@@ -3393,6 +3402,14 @@
 			path = PopoverView;
 			sourceTree = "<group>";
 		};
+		338D51BD1EE15186003FE4D2 /* 集成商 */ = {
+			isa = PBXGroup;
+			children = (
+				338D51BE1EE151D9003FE4D2 /* IntegratorFirst.swift */,
+			);
+			path = "集成商";
+			sourceTree = "<group>";
+		};
 		33AF3CE21D8E67210007D6C2 /* num2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3921,6 +3938,7 @@
 				33FEFD731C7DB38400324374 /* iconfont-nengyuanlei@2x.png in Resources */,
 				330E3DEF1D0D6D2100DF75AE /* priority.png in Resources */,
 				337584451D267E2A006AC140 /* product2.jpg in Resources */,
+				338D51C11EE15EEE003FE4D2 /* moreOSS.png in Resources */,
 				33EA4A071E8F49D90044A01A /* date_right_icon.png in Resources */,
 				334AED641CA3765A007E39F3 /* 关于.png in Resources */,
 				338234261D9A47AC002062AE /* Collectors_cn.png in Resources */,
@@ -4117,6 +4135,7 @@
 				33FEFD771C7DB38400324374 /* iconfont-shouji@3x.png in Resources */,
 				33768AB51D475E5400873E82 /* charge-en.png in Resources */,
 				33FEFD6A1C7DB38400324374 /* iconfont-faxian_press@3x.png in Resources */,
+				338D51C31EE15EF3003FE4D2 /* upOSS.png in Resources */,
 				33AF3D231D8E67210007D6C2 /* SIAlertView.bundle in Resources */,
 				33FEFD721C7DB38400324374 /* iconfont-nengyuanlei_press@3x.png in Resources */,
 				33724D9D1CFE85FB005F3965 /* pic_service.png in Resources */,
@@ -4225,6 +4244,7 @@
 				336D401D1D6FEA7600ECFA34 /* PinyinFormatter.m in Sources */,
 				33AF3D191D8E67210007D6C2 /* DeviceManageViewController.m in Sources */,
 				33EFB6651C98F9B1003F336F /* NSString+Zirkfied.m in Sources */,
+				338D51BF1EE151D9003FE4D2 /* IntegratorFirst.swift in Sources */,
 				3356146A1CB397220071BAC9 /* LZPageViewController.m in Sources */,
 				33EFB6661C98F9B1003F336F /* UIColor+Zirkfied.m in Sources */,
 				334B8F4A1C914A6D00798A69 /* PNBar.m in Sources */,
