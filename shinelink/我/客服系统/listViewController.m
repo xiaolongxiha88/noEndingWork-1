@@ -59,7 +59,10 @@
     }
 
     self.navigationItem.title = root_ME_wenti_liebiao;
-    _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    
+    float H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
+    float H2=self.navigationController.navigationBar.frame.size.height;
+    _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-H1-H2-30*HEIGHT_SIZE)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     // self.tableView.separatorStyle=NO;
@@ -67,7 +70,7 @@
     //   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     _tableView.scrollEnabled = YES;
     _tableView.showsVerticalScrollIndicator = YES;
-    self.tableView.contentSize = [self.tableView sizeThatFits:CGSizeMake(CGRectGetWidth(self.tableView.bounds), CGFLOAT_MAX)];
+  //  self.tableView.contentSize = [self.tableView sizeThatFits:CGSizeMake(CGRectGetWidth(self.tableView.bounds), CGFLOAT_MAX)];
     
     [self.view addSubview:_tableView];
     

@@ -35,15 +35,17 @@
 //      //  titleView.backgroundColor=mainColor;
 //        [self addSubview:_titleView];
         
-        _titleLabel =[[UILabel alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 5*HEIGHT_SIZE,180*NOW_SIZE, 30*HEIGHT_SIZE) ];
-        _titleLabel.font =[UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        _titleLabel =[[UILabel alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 5*HEIGHT_SIZE,150*NOW_SIZE, 30*HEIGHT_SIZE) ];
+        _titleLabel.font =[UIFont systemFontOfSize:14*HEIGHT_SIZE];
         _titleLabel.textColor = [UIColor blackColor];
+      //  _titleLabel.adjustsFontSizeToFitWidth=YES;
         _titleLabel.textAlignment =NSTextAlignmentLeft;
         [self.contentView  addSubview:_titleLabel];
         
-        _timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(240*NOW_SIZE, 5*HEIGHT_SIZE,70*NOW_SIZE, 30*HEIGHT_SIZE) ];
+        _timeLabel=[[UILabel alloc]initWithFrame:CGRectMake(215*NOW_SIZE, 5*HEIGHT_SIZE,90*NOW_SIZE, 30*HEIGHT_SIZE) ];
         _timeLabel.font =[UIFont systemFontOfSize:10*HEIGHT_SIZE];
         _timeLabel.textColor = [UIColor grayColor];
+        _timeLabel.adjustsFontSizeToFitWidth=YES;
         _timeLabel.textAlignment =NSTextAlignmentRight;
         [self.contentView addSubview:_timeLabel];
         

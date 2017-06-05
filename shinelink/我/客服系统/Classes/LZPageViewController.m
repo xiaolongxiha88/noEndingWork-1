@@ -56,7 +56,7 @@ static NSString *mainCell = @"mainCellmainCell";
         
         self.itemsArray = titlesArray;
         self.controllersClass = controllersClass;
-        self.pageBarHeight = 40;
+        self.pageBarHeight = 30*HEIGHT_SIZE;
         [self addCollectionPage];
         [self addCollectionMain];
     }

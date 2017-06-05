@@ -79,7 +79,7 @@
 
     
     //////////测试区域
-        NSString *testDemo=@"OK";
+        NSString *testDemo=@"O";
         if ([testDemo isEqualToString:@"OK"]) {
             IntegratorFirst *testView=[[IntegratorFirst alloc]init];
             [self.navigationController pushViewController:testView animated:NO];
@@ -534,10 +534,12 @@ NSLog(@"体验馆");
     }else {
         //用户名和密码输入正确跳转页面
         [loginBtn ExitAnimationCompletion:^{
+           
             
-            [self getOSSnet];
             
-            //[self netServerInit];
+    //        [self getOSSnet];
+            
+         [self netServerInit];
          
         }];
     }
