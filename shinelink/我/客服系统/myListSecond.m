@@ -30,6 +30,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 @property (nonatomic, strong) UIScrollView *scrollView2;
 @property (nonatomic, strong) NSMutableArray *labelArray;
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)NSMutableArray *nameArray;
 @property(nonatomic,strong)NSMutableArray *nameID;
 @property(nonatomic,strong)NSMutableArray *contentArray;
@@ -37,12 +38,19 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 @property(nonatomic,strong)NSMutableArray *questionAll;
 @property(nonatomic,strong)NSMutableArray *imageName;
 @property(nonatomic,strong)NSString *titleString;
+@property(nonatomic,strong)NSString *SnString;
+@property(nonatomic,strong)NSString *QuestionTypeString;
+@property(nonatomic,strong)NSString *createrTimeString;
+@property(nonatomic,strong)NSString *statusString;
+@property(nonatomic,strong)NSString *ContentString;
+@property(nonatomic,strong)NSString *PhoneString;
+
 @property(nonatomic,strong)NSString *typeString;
 @property(nonatomic,strong)UITextView *textView;
 @property(nonatomic,strong)UIView *textViewAll;
 
 @property(nonatomic,strong)NSMutableDictionary *allDic;
-@property(nonatomic,strong)UIView *headerView;
+
 
 @property(nonatomic,strong)UIView *imageViewAll;
 @property (nonatomic, strong) UIImageView *image1;
@@ -94,8 +102,28 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         if(content){
             _allDic=[NSMutableDictionary dictionaryWithDictionary:content];
             _titleString=content[@"title"];
-            _questionAll=[NSMutableArray arrayWithArray:content[@"serviceQuestionReplyBean"]];
+            _SnString=[NSString stringWithFormat:@"%@",content[@"questionDevice"]];
+             _QuestionTypeString=[NSString stringWithFormat:@"%@",content[@"questionType"]];
+                        if ([_QuestionTypeString isEqualToString:@"1"]) {
+                            _QuestionTypeString=root_ME_nibianqi_guzhan;
+                        }else if ([_QuestionTypeString isEqualToString:@"2"]){
+                             _QuestionTypeString=root_ME_chunengji_guzhan;
+                        }else if ([_QuestionTypeString isEqualToString:@"3"]){
+                            _QuestionTypeString=root_ME_ruanjian_jianyi;
+                        }else if ([_QuestionTypeString isEqualToString:@"4"]){
+                            _QuestionTypeString=root_ME_ruanjian_guzhan;
+                        }else if ([_QuestionTypeString isEqualToString:@"5"]){
+                            _QuestionTypeString=root_ME_qita_shebei_guzhan;
+                        }else if ([_QuestionTypeString isEqualToString:@"6"]){
+                            _QuestionTypeString=root_ME_qita_wenti;
+                        }
+                 _createrTimeString=[NSString stringWithFormat:@"%@",content[@"createrTime"]];
+              _statusString=[NSString stringWithFormat:@"%@",content[@"status"]];
+      
+            _ContentString=[NSString stringWithFormat:@"%@",content[@"content"]];
+ 
             
+              _questionAll=[NSMutableArray arrayWithArray:content[@"serviceQuestionReplyBean"]];
            // NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
          //   [_questionAll sortUsingDescriptors:[NSArray arrayWithObject:sort1]];
             
@@ -119,10 +147,10 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
             
             if (_questionAll.count==_nameArray.count) {
                 
-                if (_scrollView) {
+                if (_tableView) {
                     [self.tableView reloadData];
                 }else{
-                    [self initUI];
+                    [self initHeadView];
                 }
 
                 
@@ -138,144 +166,26 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 
 
--(void)initUI{
-    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
-    _scrollView.scrollEnabled=YES;
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,0*NOW_SIZE);
-    [self.view addSubview:_scrollView];
-    float Size1=40*HEIGHT_SIZE;
-    
-    for(int i=0;i<_labelArray.count;i++)
-    {
-        UILabel *PV1Lable=[[UILabel alloc]initWithFrame:CGRectMake(15*NOW_SIZE, 16*HEIGHT_SIZE+Size1*i, 80*NOW_SIZE,28*HEIGHT_SIZE )];
-         PV1Lable.textAlignment=NSTextAlignmentLeft;
-        if (i==2) {
-            PV1Lable.frame=CGRectMake(15*NOW_SIZE, 16*HEIGHT_SIZE+Size1*i, 160*NOW_SIZE,28*HEIGHT_SIZE );
-            PV1Lable.textAlignment=NSTextAlignmentLeft;
-        }
-        
-        PV1Lable.text=_labelArray[i];
-        PV1Lable.textColor=[UIColor blackColor];
-        PV1Lable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        [_scrollView addSubview:PV1Lable];
-    }
-    
-    if (_questionPicArray.count>1) {
-        UILabel *_picLabel= [[UILabel alloc] initWithFrame:CGRectMake(220*NOW_SIZE, 96*HEIGHT_SIZE,100*NOW_SIZE, 28*HEIGHT_SIZE)];
-        _picLabel.text=root_ME_chakan_tupian;
-        _picLabel.textColor=MainColor;
-        _picLabel.textAlignment = NSTextAlignmentCenter;
-        _picLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        _picLabel.userInteractionEnabled=YES;
-        UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
-        [_picLabel addGestureRecognizer:labelTap1];
-        [_scrollView addSubview:_picLabel];
-    }
-   
-  
-    for(int i=0;i<2;i++)
-    {
-        UIView *image1=[[UIImageView alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 42*HEIGHT_SIZE+Size1*i, 310*NOW_SIZE,1*HEIGHT_SIZE )];
-        image1.backgroundColor=mainColor;
-                [_scrollView addSubview:image1];
-        
-        UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(85*NOW_SIZE, 16*HEIGHT_SIZE+Size1*i, 210*NOW_SIZE,28*HEIGHT_SIZE )];
-        if (i==0) {
-               PV2Lable.text=_titleString;
-        }else{
-            
-            if ([_qusetionType isEqualToString:@"1"]) {
-                _qusetionType=root_ME_nibianqi_guzhan;
-            }else if ([_qusetionType isEqualToString:@"2"]){
-                 _qusetionType=root_ME_chunengji_guzhan;
-            }else if ([_qusetionType isEqualToString:@"3"]){
-                _qusetionType=root_ME_ruanjian_jianyi;
-            }else if ([_qusetionType isEqualToString:@"4"]){
-                _qusetionType=root_ME_ruanjian_guzhan;
-            }else if ([_qusetionType isEqualToString:@"5"]){
-                _qusetionType=root_ME_qita_shebei_guzhan;
-            }else if ([_qusetionType isEqualToString:@"6"]){
-                _qusetionType=root_ME_qita_wenti;
-            }
-            
-            
-            
-          PV2Lable.text=_qusetionType;
-        }
-        
-        PV2Lable.textAlignment=NSTextAlignmentLeft;
-        PV2Lable.textColor=[UIColor blackColor];
-        PV2Lable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        [_scrollView addSubview:PV2Lable];
-    }
-    
-    UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 5*HEIGHT_SIZE+Size1*3, 310*NOW_SIZE,300*HEIGHT_SIZE )];
-    image2.userInteractionEnabled = YES;
-    image2.image = IMAGE(@"外框@3x.png");
-    [_scrollView addSubview:image2];
-    
-    /*_scrollView2=[[UIScrollView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 55*NOW_SIZE+Size1*3, 300*NOW_SIZE,300*NOW_SIZE )];
-    _scrollView2.scrollEnabled=YES;
-    _scrollView2.contentSize = CGSizeMake(300*NOW_SIZE,600*NOW_SIZE);
-    [self.view addSubview:_scrollView2];*/
-    
-    _tableView =[[UITableView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 6*HEIGHT_SIZE+Size1*3, 300*NOW_SIZE,290*HEIGHT_SIZE )];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-       [_scrollView addSubview:_tableView];
-    
-    
-    CGRect fcRect = [_qusetionContent boundingRectWithSize:CGSizeMake(300*Width, 1000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:14 *HEIGHT_SIZE]} context:nil];
-   // return 110*HEIGHT_SIZE+fcRect.size.height;
-    
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0,10*HEIGHT_SIZE+Size1*3,300*NOW_SIZE,35*HEIGHT_SIZE+fcRect.size.height)];
-    _tableView.tableHeaderView = _headerView;
-    
-    
-    UILabel *contentLable=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 5*HEIGHT_SIZE, 210*NOW_SIZE,20*HEIGHT_SIZE )];
-        contentLable.text=root_wenti_leirong;
-    contentLable.textAlignment=NSTextAlignmentLeft;
-    contentLable.textColor=[UIColor blackColor];
-    contentLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [_headerView addSubview:contentLable];
-    
-    UILabel *contentLable2=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 28*HEIGHT_SIZE, 290*NOW_SIZE,fcRect.size.height )];
-    contentLable2.text=_qusetionContent;
-    contentLable2.textAlignment=NSTextAlignmentLeft;
-    contentLable2.textColor=[UIColor grayColor];
-    contentLable2.numberOfLines=0;
-    contentLable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [_headerView addSubview:contentLable2];
-    
-////    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 35*HEIGHT_SIZE+fcRect.size.height, 290*NOW_SIZE,1*HEIGHT_SIZE)];
-////    line1.backgroundColor=[UIColor grayColor];
-////    [_headerView addSubview:line1];
-//    
-//    
-//    UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 315*HEIGHT_SIZE+Size1*3, 310*NOW_SIZE,30*HEIGHT_SIZE )];
-//    image3.userInteractionEnabled = YES;
-//    image3.image = IMAGE(@"frame2@2x.png");
-//    UITapGestureRecognizer * forget=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Answer)];
-//    [image3 addGestureRecognizer:forget];
-//    
-////    [_scrollView addSubview:image3];
-//    
-//    
-//    UILabel *answerLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0, 290*NOW_SIZE,30*HEIGHT_SIZE )];
-//    answerLable.text=root_ME_huifu;
-//    answerLable.textAlignment=NSTextAlignmentCenter;
-//    answerLable.textColor=MainColor;
-//    answerLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-//  //  [image3 addSubview:answerLable];
-    
 
-    
+-(void)initUI{
+
+
       float H2=self.navigationController.navigationBar.frame.size.height;
        float H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
     float allH=40*HEIGHT_SIZE;
- textViewW=[UIScreen mainScreen].bounds.size.width-allH-allH;
     
+   //  [self initHeadView];
+    
+    _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_HEIGHT-allH-H2-H1 )];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.tableHeaderView=_headView;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.view addSubview:_tableView];
+
+   
+    
+ textViewW=[UIScreen mainScreen].bounds.size.width-allH-allH;
     _textViewAll = [[UIView alloc]initWithFrame:CGRectMake(0*HEIGHT_SIZE,[UIScreen mainScreen].bounds.size.height-allH-H2-H1 , SCREEN_Width, allH)];
     _textViewAll.backgroundColor =COLOR(242, 242, 242, 1);
     _textViewAll.userInteractionEnabled = YES;
@@ -315,6 +225,119 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+}
+
+
+-(void)initHeadView{
+    
+  _headView = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,500*HEIGHT_SIZE )];
+    _headView.backgroundColor =[UIColor clearColor];
+    [self.view addSubview:_headView];
+    
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSData *pic=[ud objectForKey:@"userPic"];
+    
+    float imageSize=40*HEIGHT_SIZE;  float imageW=10*HEIGHT_SIZE;
+    UIImageView *userImage= [[UIImageView alloc] initWithFrame:CGRectMake(imageW, imageW+5*HEIGHT_SIZE, imageSize, imageSize)];
+    userImage.layer.masksToBounds=YES;
+    userImage.layer.cornerRadius=imageSize/2.0;
+    [userImage setUserInteractionEnabled:YES];
+    
+    if((pic==nil) || (pic.length==0)){
+        [userImage setImage:[UIImage imageNamed:@"touxiang.png"]];
+    }else{
+        UIImage *image = [UIImage imageWithData: pic];
+        [userImage setImage:image];
+    }
+    [_headView addSubview:userImage];
+    
+    float lableH=20*HEIGHT_SIZE;   float lableW0=SCREEN_Width-imageSize-3*imageW;
+        UILabel *nameLable=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize, imageW, lableW0,lableH )];
+            nameLable.text=_titleString;
+        nameLable.textAlignment=NSTextAlignmentLeft;
+        nameLable.textColor=COLOR(51, 51, 51, 1);
+        nameLable.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
+        [_headView addSubview:nameLable];
+    
+        float lableW=(SCREEN_Width-imageSize-3*imageW-6*NOW_SIZE)/3;
+    
+    if (_PhoneString==nil || _PhoneString==NULL||([_PhoneString isEqual:@""] )) {
+       _PhoneString=@"";
+    }
+    NSArray *lableArray=[NSArray arrayWithObjects:_QuestionTypeString, _SnString,_PhoneString,nil];
+    for (int i=0; i<3; i++) {
+        UILabel *Lable0=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize+lableW*i, imageW+lableH, lableW,lableH )];
+        Lable0.text=lableArray[i];
+        Lable0.textAlignment=NSTextAlignmentLeft;
+        Lable0.textColor=COLOR(153, 153, 153, 1);
+        Lable0.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        [_headView addSubview:Lable0];
+    }
+    
+      NSArray *lableArray1=[NSArray arrayWithObjects:_createrTimeString, _statusString,nil];
+    for (int i=0; i<2; i++) {
+        UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize+lableW*i, imageW+lableH*2, lableW,lableH )];
+        Lable1.text=lableArray1[i];
+        Lable1.textAlignment=NSTextAlignmentLeft;
+        Lable1.textColor=COLOR(153, 153, 153, 1);
+        if (i==1) {
+            if ([_statusString isEqualToString:@"0"]) {
+                 Lable1.text=@"待处理";
+                 Lable1.textColor=COLOR(227, 74, 33, 1);
+            }else if ([_statusString isEqualToString:@"1"]){
+                 Lable1.text=@"处理中";
+                Lable1.textColor=COLOR(94, 195, 53, 1);
+            }else if([_statusString isEqualToString:@"2"]){
+                 Lable1.text=@"已处理";
+                 Lable1.textColor=COLOR(157, 157, 157, 1);
+            }else if([_statusString isEqualToString:@"3"]){
+                 Lable1.text=@"待跟进";
+                 Lable1.textColor=COLOR(227, 164, 33, 1);
+            }
+        }
+        Lable1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        [_headView addSubview:Lable1];
+    }
+    
+    float LableContentW=SCREEN_Width-2*imageW;
+    NSString *LableContentText=@"我不是阿阿萨德加事件阿萨德加事萨德加事萨德加事萨德加事萨德加事萨德加事萨德加事萨德加事件阿萨德萨德加事件阿萨德萨德加事件阿萨德萨德加事件阿萨德加事件阿萨德加事件萨德加事件";
+    CGSize Lrect=[self getStringSize:12*HEIGHT_SIZE Wsize:LableContentW Hsize:MAXFLOAT stringName:LableContentText];
+    UILabel *LableContent=[[UILabel alloc]initWithFrame:CGRectMake(imageW, imageW+lableH*3+5*HEIGHT_SIZE, LableContentW,Lrect.height+20*HEIGHT_SIZE )];
+    LableContent.text=LableContentText;
+    LableContent.textAlignment=NSTextAlignmentLeft;
+    LableContent.textColor=COLOR(153, 153, 153, 1);
+    LableContent.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    LableContent.numberOfLines=0;
+    [_headView addSubview:LableContent];
+    
+    UILabel *LableS=[[UILabel alloc]initWithFrame:CGRectMake(imageW, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE, 150*NOW_SIZE,20*HEIGHT_SIZE)];
+    LableS.text=@"回复问题";
+    LableS.textAlignment=NSTextAlignmentLeft;
+    LableS.textColor=COLOR(102, 102, 102, 1);
+    LableS.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    LableS.numberOfLines=0;
+    [_headView addSubview:LableS];
+    
+    if (_questionPicArray.count>1) {
+    UILabel *LableImage=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
+    LableImage.text=@"查看图片";
+    LableImage.textAlignment=NSTextAlignmentRight;
+    LableImage.textColor=COLOR(153, 153, 153, 1);
+    LableImage.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
+    LableImage.userInteractionEnabled=YES;
+            UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
+            [LableImage addGestureRecognizer:labelTap1];
+    [_headView addSubview:LableImage];
+    }
+    
+    UIView *V1 = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+45*HEIGHT_SIZE, SCREEN_Width,2*HEIGHT_SIZE )];
+    V1.backgroundColor =COLOR(242, 242, 242, 1);
+    [_headView addSubview:V1];
+    
+    _headView.frame=CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,imageW+lableH*3+50*HEIGHT_SIZE+Lrect.height );
+    
+    [self initUI];
     
 }
 
@@ -417,13 +440,15 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     
     NSString *WebString;
     if ([_nameID[indexPath.row] isEqualToString:@"1"]) {
-          cell.image.image = IMAGE(@"客服.png");
-        cell.nameLabel.textColor = COLOR(63, 163, 220, 1);
+          cell.image.image = IMAGE(@"kefu_iconOSS.png");
+        cell.nameLabel.textColor = COLOR(102, 102, 102, 1);
         WebString=self.contentArray[indexPath.row];
     }else{
-    cell.image.image = IMAGE(@"客户.png");
-         cell.nameLabel.textColor =[UIColor blackColor];
-        NSString *WebString1=[NSString stringWithFormat:@"<p>%@</p>",self.contentArray[indexPath.row]];
+    cell.image.image = IMAGE(@"userOSS.png");
+         cell.nameLabel.textColor =COLOR(102, 102, 102, 1);
+     //   NSString *N1=@"<body width=280px style=\"word-wrap:break-word; font-family:Arial\">";
+       NSString *N1=@"";
+        NSString *WebString1=[NSString stringWithFormat:@"<p style=\"word-wrap:break-word;\">%@%@</p>",N1,self.contentArray[indexPath.row]];
          WebString=WebString1;
     }
       NSMutableArray *PICarray=[NSMutableArray arrayWithArray:_imageName[indexPath.row]];
@@ -440,13 +465,17 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     cell.WebContent= self.contentArray[indexPath.row];
    
     cell.content=self.contentArray[indexPath.row];
-    CGRect fcRect = [cell.content boundingRectWithSize:CGSizeMake(300*Width, 1000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13 *HEIGHT_SIZE]} context:nil];
     
-    cell.contentLabel.frame =CGRectMake(5*NOW_SIZE, 55*HEIGHT_SIZE, 280*Width, fcRect.size.height+15*HEIGHT_SIZE);
+    NSString *Name1=_contentArray[indexPath.row];
+    NSString *Name0=[self removeHTML:Name1];
+    float contentW=SCREEN_Width-20*NOW_SIZE-40*HEIGHT_SIZE-10*NOW_SIZE;
+    CGRect fcRect = [Name0 boundingRectWithSize:CGSizeMake(contentW, 5000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12*HEIGHT_SIZE]} context:nil];
+    
+    cell.contentLabel.frame =CGRectMake(15*NOW_SIZE+40*HEIGHT_SIZE, 52*HEIGHT_SIZE, contentW, fcRect.size.height+10*HEIGHT_SIZE);
   
      [cell.contentLabel loadHTMLString:WebString baseURL:nil];
     
-    cell.titleView.frame=CGRectMake(0, 70*HEIGHT_SIZE+fcRect.size.height,SCREEN_WIDTH, 2*HEIGHT_SIZE);
+  //  cell.titleView.frame=CGRectMake(0, 70*HEIGHT_SIZE+fcRect.size.height,SCREEN_WIDTH, 2*HEIGHT_SIZE);
   //  cell.timeLabel.frame=CGRectMake(SCREEN_WIDTH-100*NOW_SIZE, 45*NOW_SIZE+fcRect.size.height,100*NOW_SIZE, 20*NOW_SIZE );
     cell.selectionStyle=UITableViewCellSelectionStyleGray;
     
@@ -465,10 +494,44 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-    CGRect fcRect = [self.contentArray[indexPath.row] boundingRectWithSize:CGSizeMake(300*Width, 1000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13*HEIGHT_SIZE]} context:nil];
+ 
+    NSString *Name1=_contentArray[indexPath.row];
+    NSString *Name0=[self removeHTML:Name1];
+     float contentW=SCREEN_Width-20*NOW_SIZE-40*HEIGHT_SIZE-10*NOW_SIZE;
+    CGRect fcRect = [Name0 boundingRectWithSize:CGSizeMake(contentW, 5000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12*HEIGHT_SIZE]} context:nil];
     return 70*HEIGHT_SIZE+fcRect.size.height;
+    
+}
+
+- (NSString *)removeHTML:(NSString *)html {
+    
+    NSScanner *theScanner;
+    
+    NSString *text = nil;
+
+    theScanner = [NSScanner scannerWithString:html];
+
+    while ([theScanner isAtEnd] == NO) {
+        
+        // find start of tag
+        
+        [theScanner scanUpToString:@"<" intoString:NULL] ;
+        
+        // find end of tag
+        
+        [theScanner scanUpToString:@">" intoString:&text] ;
+        
+        // replace the found tag with a space
+        
+        //(you can filter multi-spaces out later if you wish)
+        
+        html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>", text] withString:@" "];
+        
+    html = [html stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        
+    }
+    
+    return html;
     
 }
 

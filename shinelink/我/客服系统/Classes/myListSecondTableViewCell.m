@@ -40,17 +40,18 @@
         _titleView= [[UIView alloc]init];
         _titleView.backgroundColor=mainColor;
         //[self addSubview:_titleView];
-        
-        _image=[[UIImageView alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 10*HEIGHT_SIZE, 40*NOW_SIZE,40*HEIGHT_SIZE )];
-        
+        float imageSize=40*HEIGHT_SIZE;float leftW=10*NOW_SIZE;
+        _image=[[UIImageView alloc]initWithFrame:CGRectMake(leftW, 10*HEIGHT_SIZE, imageSize,imageSize )];
+        _image.layer.masksToBounds=YES;
+        _image.layer.cornerRadius=imageSize/2.0;
         [self.contentView addSubview:_image];
         
         
-        _picLabel= [[UILabel alloc] initWithFrame:CGRectMake(200*NOW_SIZE, 10*HEIGHT_SIZE,100*NOW_SIZE, 15*HEIGHT_SIZE)];
+        _picLabel= [[UILabel alloc] initWithFrame:CGRectMake(220*NOW_SIZE, 10*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
         _picLabel.text=root_ME_chakan_tupian;
-        _picLabel.textColor=MainColor;
-        _picLabel.textAlignment = NSTextAlignmentCenter;
-        _picLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        _picLabel.textColor=COLOR(153, 153, 153, 1);
+        _picLabel.textAlignment = NSTextAlignmentRight;
+        _picLabel.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
         _picLabel.adjustsFontSizeToFitWidth=YES;
       //  _picLabel.userInteractionEnabled=YES;
        // UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
@@ -58,15 +59,14 @@
         [self.contentView addSubview:_picLabel];
         
         
-        _nameLabel =[[UILabel alloc]initWithFrame:CGRectMake(55*NOW_SIZE, 10*HEIGHT_SIZE,150*NOW_SIZE, 15*HEIGHT_SIZE) ];
-        _nameLabel.font =[UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        
+        _nameLabel =[[UILabel alloc]initWithFrame:CGRectMake(2*leftW+imageSize, 10*HEIGHT_SIZE,150*NOW_SIZE, 20*HEIGHT_SIZE) ];
+        _nameLabel.font =[UIFont systemFontOfSize:12*HEIGHT_SIZE];
         _nameLabel.textAlignment =NSTextAlignmentLeft;
         [self.contentView addSubview:_nameLabel];
         
-        _timeLabel =[[UILabel alloc]initWithFrame:CGRectMake(55*NOW_SIZE, 32*HEIGHT_SIZE,150*NOW_SIZE, 15*HEIGHT_SIZE) ];
+        _timeLabel =[[UILabel alloc]initWithFrame:CGRectMake(2*leftW+imageSize, 30*HEIGHT_SIZE,150*NOW_SIZE, 20*HEIGHT_SIZE) ];
         _timeLabel.font =[UIFont systemFontOfSize:10*HEIGHT_SIZE];
-        _timeLabel.textColor =COLOR(133, 131, 131, 1);
+        _timeLabel.textColor =COLOR(153, 153, 153, 1);
         _timeLabel.textAlignment =NSTextAlignmentLeft;
         [self.contentView addSubview:_timeLabel];
         
@@ -81,7 +81,7 @@
         
         _contentLabel =[[UIWebView alloc]init];
            _contentLabel.delegate = self;
-        _contentLabel.scrollView.bounces=NO;
+        _contentLabel.scrollView.bounces=YES;
         _contentLabel.userInteractionEnabled=NO;
         _contentLabel.opaque=NO;
         _contentLabel.backgroundColor=[UIColor clearColor];
@@ -111,8 +111,14 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     //[LWLoadingView hideInViwe:self.view];
    // [self hideProgressView];
+    float Lsize=11*HEIGHT_SIZE;
+    NSString *jsString = [[NSString alloc] initWithFormat:@"document.body.style.fontSize=%f",Lsize];
+    [_contentLabel stringByEvaluatingJavaScriptFromString:jsString];
     
-  [_contentLabel stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '85%'"];
+    [_contentLabel stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextFillColor= '#666666'"];
+    
+  //  "document.getElementById("p").height;"
+// [_contentLabel stringByEvaluatingJavaScriptFromString:@"document.getElementsByTagName('body')[0].style.webkitTextSizeAdjust= '90%'"];
     
 }
 
