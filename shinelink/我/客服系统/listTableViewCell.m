@@ -16,9 +16,9 @@
 
 @implementation listTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
+//- (void)awakeFromNib {
+//    // Initialization code
+//}
 
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -26,14 +26,18 @@
     self =[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
-        self.coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(7.5*NOW_SIZE, 7.5*HEIGHT_SIZE, 45*HEIGHT_SIZE, 45*HEIGHT_SIZE)];
-        
+         float imageSize=45*HEIGHT_SIZE;float leftW=7.5*NOW_SIZE;
+        self.coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(leftW, leftW, imageSize, imageSize)];
+        _coverImageView.layer.masksToBounds=YES;
+        _coverImageView.layer.cornerRadius=imageSize/2.0;
         [self.contentView addSubview:_coverImageView];
         
-//        
-//        _titleView=[[UIView alloc]initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, 40*HEIGHT_SIZE) ];
-//      //  titleView.backgroundColor=mainColor;
-//        [self addSubview:_titleView];
+        _imageLabel =[[UILabel alloc]initWithFrame:CGRectMake(2*NOW_SIZE, 15*HEIGHT_SIZE,imageSize-4*NOW_SIZE, 15*HEIGHT_SIZE) ];
+        _imageLabel.font =[UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        _imageLabel.textColor = [UIColor whiteColor];
+        _imageLabel.adjustsFontSizeToFitWidth=YES;
+        _imageLabel.textAlignment =NSTextAlignmentCenter;
+        [_coverImageView  addSubview:_imageLabel];
         
         _titleLabel =[[UILabel alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 5*HEIGHT_SIZE,150*NOW_SIZE, 30*HEIGHT_SIZE) ];
         _titleLabel.font =[UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -57,7 +61,7 @@
         
     
         
-        _contentLabel =[[UILabel alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 35*HEIGHT_SIZE,170*NOW_SIZE, 20*HEIGHT_SIZE) ];
+        _contentLabel =[[UILabel alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 35*HEIGHT_SIZE,245*NOW_SIZE, 20*HEIGHT_SIZE) ];
         _contentLabel.font =[UIFont systemFontOfSize:12*HEIGHT_SIZE];
         _contentLabel.textColor = [UIColor grayColor];
         _contentLabel.textAlignment =NSTextAlignmentLeft;

@@ -145,10 +145,10 @@ int picTime;
         [dataImageDict setObject:imageData forKey:imageName];
     }
     
-    if ([[_contentView text] isEqual:@""]) {
-        [self showToastViewWithTitle:root_ME_shuru_leirong];
-        return;
-    }
+//    if ([[_contentView text] isEqual:@""]) {
+//        [self showToastViewWithTitle:root_ME_shuru_leirong];
+//        return;
+//    }
     
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     NSString *userID=[ud objectForKey:@"userID"];

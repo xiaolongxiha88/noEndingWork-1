@@ -8,8 +8,8 @@
 
 #import "addServerViewController.h"
 
-@interface addServerViewController ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
-@property (nonatomic, strong) UIScrollView *scrollView;
+@interface addServerViewController ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate>
+@property (nonatomic, strong) UIView *scrollView;
 @property (nonatomic, strong) NSMutableArray *labelArray;
 @property (nonatomic, strong) UITextField *userTextField;
 @property (nonatomic, strong) UITextField *SNTextField;
@@ -20,6 +20,9 @@
 @property (nonatomic, strong) NSMutableArray *picArray;
 @property (nonatomic, strong) NSMutableDictionary *allDict;
 @property (nonatomic, strong) NSString *typeName;
+@property (nonatomic, strong) UILabel* QuestionLable;
+@property(nonatomic,strong)UIView *imageViewAll;
+
 
 @property (nonatomic, strong) UIImageView *image1;
 @property (nonatomic, strong) UIImageView *image2;
@@ -40,7 +43,7 @@
     [super viewDidLoad];
     self.title=root_ME_tijiao_wenti;
     picTime=0;
-     _labelArray=[[NSMutableArray alloc]initWithObjects:root_ME_biaoti, root_ME_wenti_leixing, root_NBQ_xunliehao,root_ME_neirong,nil];
+ 
     _picArray=[NSMutableArray array];
     [self initUI];
     [self getNetForSn];
@@ -83,16 +86,146 @@
 
 
 -(void)initUI{
-    
-    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
-    _scrollView.scrollEnabled=YES;
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,650*NOW_SIZE);
+    _scrollView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
+    _scrollView.backgroundColor=[UIColor clearColor];
+    _scrollView.userInteractionEnabled=YES;
     [self.view addSubview:_scrollView];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
-    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
     tapGestureRecognizer.cancelsTouchesInView = NO;
-    //将触摸事件添加到当前view
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+      _labelArray=[[NSMutableArray alloc]initWithObjects:root_ME_biaoti, root_ME_wenti_leixing, root_NBQ_xunliehao,@"电话号码:",@"邮箱:",nil];
+     NSMutableArray *alertArray=[[NSMutableArray alloc]initWithObjects:@"请输入标题", @"请选择问题类型", @"请选择或输入序列号",@"请输入电话号码",@"请输入邮箱",nil];
+    
+    float lableH=40*HEIGHT_SIZE;float Nsize=lableH+2*HEIGHT_SIZE;
+    float lablaFontSize=12*HEIGHT_SIZE;
+    for (int i=0; i<_labelArray.count; i++) {
+   NSString *nameString=_labelArray[i];
+        CGSize nameSize=[self getStringSize:lablaFontSize Wsize:MAXFLOAT Hsize:lableH stringName:nameString];
+        
+        UILabel *PV1Lable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE+Nsize*i, nameSize.width,lableH )];
+        PV1Lable.text=nameString;
+        PV1Lable.textAlignment=NSTextAlignmentLeft;
+        PV1Lable.textColor=COLOR(51, 51, 51, 1);
+        PV1Lable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_scrollView addSubview:PV1Lable];
+        
+        if (i==1) {
+            _registLable=[[UILabel alloc]initWithFrame:CGRectMake(12*NOW_SIZE+nameSize.width, 0*HEIGHT_SIZE+Nsize*i, SCREEN_Width-37*NOW_SIZE-nameSize.width,lableH )];
+            _registLable.text=alertArray[i];
+            _registLable.textAlignment=NSTextAlignmentLeft;
+           _registLable.userInteractionEnabled=YES;
+            UITapGestureRecognizer *labelTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLable)];
+            [_registLable addGestureRecognizer:labelTap];
+            _registLable.textColor=COLOR(51, 51, 51, 1);
+            _registLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [_scrollView addSubview:_registLable];
+            
+            UIImageView *image1=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_Width-15*NOW_SIZE-8*HEIGHT_SIZE, 17*HEIGHT_SIZE+Nsize*i, 8*HEIGHT_SIZE,6*HEIGHT_SIZE )];
+            image1.userInteractionEnabled=YES;
+            image1.image=IMAGE(@"upOSS.png");
+             UITapGestureRecognizer *labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLable)];
+               [image1 addGestureRecognizer:labelTap1];
+         [_scrollView addSubview:image1];
+
+        }else{
+            UITextField *textF=[[UITextField alloc]initWithFrame:CGRectMake(12*NOW_SIZE+nameSize.width, 0*HEIGHT_SIZE+Nsize*i, SCREEN_Width-22*NOW_SIZE-nameSize.width,lableH )];
+            textF.textAlignment=NSTextAlignmentLeft;
+            textF.placeholder = alertArray[i];
+            textF.tintColor =COLOR(51, 51, 51, 1);
+            textF.textColor=COLOR(51, 51, 51, 1);
+            textF.tag=6000+i;
+            [textF setValue:COLOR(153, 153, 153, 1) forKeyPath:@"_placeholderLabel.textColor"];
+            [textF setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+            textF.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [_scrollView addSubview:textF];
+            
+            if(i==2){
+                textF.frame=CGRectMake(12*NOW_SIZE+nameSize.width, 0*HEIGHT_SIZE+Nsize*i, SCREEN_Width-22*NOW_SIZE-nameSize.width-55*NOW_SIZE,lableH );
+                UILabel *L2=[[UILabel alloc]initWithFrame:CGRectMake(textF.frame.origin.x+textF.frame.size.width, 0*HEIGHT_SIZE+Nsize*i, 55*NOW_SIZE,lableH )];
+                L2.text=root_WO_dianji_huoqu;
+                L2.textAlignment=NSTextAlignmentLeft;
+                L2.userInteractionEnabled=YES;
+                L2.adjustsFontSizeToFitWidth=YES;
+                UITapGestureRecognizer *labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getSN)];
+                [L2 addGestureRecognizer:labelTap2];
+                L2.textColor=COLOR(51, 51, 51, 1);
+                L2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+                [_scrollView addSubview:L2];
+            }
+            
+        }
+        
+        UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, lableH+Nsize*i, SCREEN_Width-20*NOW_SIZE, 1*HEIGHT_SIZE)];
+        lineV.backgroundColor=COLOR(222, 222, 222, 1);
+        [_scrollView addSubview:lineV];
+        
+    }
+    
+      float imageH=50*HEIGHT_SIZE;
+    
+    self.contentView = [[UITextView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, Nsize*5+10*HEIGHT_SIZE, 300*NOW_SIZE,SCREEN_Width-imageH-Nsize*5-10*HEIGHT_SIZE )];
+    _contentView.text=root_xiangguang_wenti_miaoshu;
+    self.contentView.textColor = COLOR(153, 153, 153, 1);
+    self.contentView.tintColor = COLOR(153, 153, 153, 1);
+    _contentView.textAlignment=NSTextAlignmentLeft;
+    _contentView.delegate=self;
+    self.contentView.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    [_scrollView addSubview:_contentView];
+    
+    _imageViewAll = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_Height-imageH, SCREEN_Width,imageH )];
+    _imageViewAll.backgroundColor =COLOR(242, 242, 242, 1);
+    _imageViewAll.userInteractionEnabled = YES;
+    [_scrollView addSubview:_imageViewAll];
+    
+    UIView *VI = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, imageH,imageH )];
+    VI.backgroundColor =[UIColor clearColor];
+    VI.userInteractionEnabled = YES;
+    UITapGestureRecognizer * forget1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(controlPhoto)];
+    [VI addGestureRecognizer:forget1];
+    [_imageViewAll addSubview:VI];
+    
+    UIImageView *image4=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE, 20*HEIGHT_SIZE,20*HEIGHT_SIZE )];
+    image4.userInteractionEnabled = YES;
+    image4.image = IMAGE(@"pic_icon.png");
+    [VI addSubview:image4];
+    
+}
+
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    if ([_contentView.text isEqualToString:root_xiangguang_wenti_miaoshu]) {
+        
+        _contentView.text = @"";
+        self.contentView.textColor = COLOR(51, 51, 51, 1);
+        self.contentView.tintColor = COLOR(51, 51, 51, 1);
+        
+    }
+    
+}
+
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    
+    if (_contentView.text.length<1) {
+        _contentView.text = root_xiangguang_wenti_miaoshu;
+        self.contentView.textColor = COLOR(153, 153, 153, 1);
+        self.contentView.tintColor = COLOR(153, 153, 153, 1);
+    }
+    
+}
+
+
+-(void)initUI00{
+    
+    _scrollView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
+    _scrollView.backgroundColor=[UIColor clearColor];
+    [self.view addSubview:_scrollView];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
     float Size1=50*HEIGHT_SIZE;
@@ -462,9 +595,11 @@
     
     for (int i=0; i<_SNArray.count; i++) {
         [alertController addAction: [UIAlertAction actionWithTitle: _SNArray[i] style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-
-            self.SNTextField.text=_SnOnlyArray[i];
-            self.SNTextField.textColor=[UIColor blackColor];
+//            self.SNTextField.text=_SnOnlyArray[i];
+//            self.SNTextField.textColor=[UIColor blackColor];
+            UITextField *textF=[_scrollView viewWithTag:6002];
+            textF.text=_SnOnlyArray[i];
+  
         }]];
     }
      [self presentViewController: alertController animated: YES completion: nil];
@@ -484,37 +619,37 @@
         _typeNum=@"1";
         
           self.registLable.text=_typeName;
-        self.registLable.textColor=[UIColor blackColor];
+       
     }]];
     [alertController addAction: [UIAlertAction actionWithTitle: root_ME_chunengji_guzhan style: UIAlertActionStyleDefault handler:^(UIAlertAction *action){
       _typeName=root_ME_chunengji_guzhan;
          _typeNum=@"2";
           self.registLable.text=_typeName;
-        self.registLable.textColor=[UIColor blackColor];
+     
     }]];
     [alertController addAction: [UIAlertAction actionWithTitle: root_ME_ruanjian_jianyi style: UIAlertActionStyleDefault handler:^(UIAlertAction *action){
     _typeName=root_ME_ruanjian_jianyi;
           self.registLable.text=_typeName;
          _typeNum=@"3";
-        self.registLable.textColor=[UIColor blackColor];
+   
     }]];
     [alertController addAction: [UIAlertAction actionWithTitle: root_ME_ruanjian_guzhan style: UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         _typeName=root_ME_ruanjian_guzhan;
          _typeNum=@"4";
           self.registLable.text=_typeName;
-        self.registLable.textColor=[UIColor blackColor];
+
     }]];
     [alertController addAction: [UIAlertAction actionWithTitle: root_ME_qita_shebei_guzhan style: UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         _typeName=root_ME_qita_shebei_guzhan;
          _typeNum=@"5";
           self.registLable.text=_typeName;
-        self.registLable.textColor=[UIColor blackColor];
+   
     }]];
     [alertController addAction: [UIAlertAction actionWithTitle: root_ME_qita_wenti style: UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         _typeName=root_ME_qita_wenti;
           _typeNum=@"6";
           self.registLable.text=_typeName;
-        self.registLable.textColor=[UIColor blackColor];
+ 
     }]];
     [alertController addAction: [UIAlertAction actionWithTitle: root_cancel style: UIAlertActionStyleCancel handler:nil]];
     

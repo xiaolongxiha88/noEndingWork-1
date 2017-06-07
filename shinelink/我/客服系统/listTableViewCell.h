@@ -16,6 +16,7 @@
 @property(nonatomic,strong)UILabel *timeLabel;
 @property(nonatomic,strong)UIView *titleView;
 @property(nonatomic,strong)UIView *view1;
+@property(nonatomic,strong)UILabel *imageLabel;
 
 @property(nonatomic,strong)NSString *content;
 @property (nonatomic, strong) UIImageView *coverImageView;

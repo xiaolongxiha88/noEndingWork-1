@@ -645,3 +645,8 @@
 "72无法查看未来数据"="Data can not be viewed in the future";
 
 
+//翻译后1
+"73待处理"="Pending";
+"74处理中"="Processing";
+"75已处理"="Processed";
+"76待跟进"="Waiting";

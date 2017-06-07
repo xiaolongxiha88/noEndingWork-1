@@ -667,4 +667,16 @@
 #define  root_gongju  NSLocalizedString(@"71工具", nil)
 #define  root_wufa_chakan_weilai_shuju  NSLocalizedString(@"72无法查看未来数据", nil)
 
+#define  root_daichuli  NSLocalizedString(@"73待处理", nil)
+#define  root_chulizhong  NSLocalizedString(@"74处理中", nil)
+#define  root_yichuli  NSLocalizedString(@"75已处理", nil)
+#define  root_daigengjin  NSLocalizedString(@"76待跟进", nil)
+#define  root_xiangguang_wenti_miaoshu  NSLocalizedString(@"77请输入相关问题的详细描述", nil)
+
+
+
+
+
+
+
 #endif /* languageNew_h */

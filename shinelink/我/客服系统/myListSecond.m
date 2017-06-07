@@ -24,6 +24,10 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     NSInteger _textLine;
     float keyboradH;
        float textViewW;
+    float H2;
+    float H1;
+    float allH;
+    
 }
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -44,6 +48,8 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 @property(nonatomic,strong)NSString *statusString;
 @property(nonatomic,strong)NSString *ContentString;
 @property(nonatomic,strong)NSString *PhoneString;
+@property(nonatomic,strong)UIImage *headImageUser;
+@property (nonatomic, strong) NSMutableDictionary *allDict;
 
 @property(nonatomic,strong)NSString *typeString;
 @property(nonatomic,strong)UITextView *textView;
@@ -70,98 +76,22 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 -(void)viewDidAppear:(BOOL)animated
 {
    // [self.view removeFromSuperview];
-    [self netGetAgain];
+  //  [self netGetAgain];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
  
+     H2=self.navigationController.navigationBar.frame.size.height;
+     H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
+     allH=40*HEIGHT_SIZE;
+    _picArray=[NSMutableArray array];
+    
     //设置两个通知
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyHiden:) name: UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyWillAppear:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
-   // [self netGet];
-}
-
--(void)netGetAgain{
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    NSString *userID=[ud objectForKey:@"userID"];
-    self.questionAll =[NSMutableArray array];
-    
-    self.nameArray =[NSMutableArray array];
-    self.contentArray =[NSMutableArray array];
-    self.timeArray =[NSMutableArray array];
-    self.nameID =[NSMutableArray array];
-    self.imageName =[NSMutableArray array];
-    self.labelArray=[NSMutableArray arrayWithObjects:root_ME_biaoti,root_NBQ_leixing, root_ME_huifu_jilu,nil];
-    
-        [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfo" sucessBlock:^(id content) {
-        [self hideProgressView];
-        NSLog(@"getQuestionInfo=: %@", content);
-        if(content){
-            _allDic=[NSMutableDictionary dictionaryWithDictionary:content];
-            _titleString=content[@"title"];
-            _SnString=[NSString stringWithFormat:@"%@",content[@"questionDevice"]];
-             _QuestionTypeString=[NSString stringWithFormat:@"%@",content[@"questionType"]];
-                        if ([_QuestionTypeString isEqualToString:@"1"]) {
-                            _QuestionTypeString=root_ME_nibianqi_guzhan;
-                        }else if ([_QuestionTypeString isEqualToString:@"2"]){
-                             _QuestionTypeString=root_ME_chunengji_guzhan;
-                        }else if ([_QuestionTypeString isEqualToString:@"3"]){
-                            _QuestionTypeString=root_ME_ruanjian_jianyi;
-                        }else if ([_QuestionTypeString isEqualToString:@"4"]){
-                            _QuestionTypeString=root_ME_ruanjian_guzhan;
-                        }else if ([_QuestionTypeString isEqualToString:@"5"]){
-                            _QuestionTypeString=root_ME_qita_shebei_guzhan;
-                        }else if ([_QuestionTypeString isEqualToString:@"6"]){
-                            _QuestionTypeString=root_ME_qita_wenti;
-                        }
-                 _createrTimeString=[NSString stringWithFormat:@"%@",content[@"createrTime"]];
-              _statusString=[NSString stringWithFormat:@"%@",content[@"status"]];
-      
-            _ContentString=[NSString stringWithFormat:@"%@",content[@"content"]];
- 
-            
-              _questionAll=[NSMutableArray arrayWithArray:content[@"serviceQuestionReplyBean"]];
-           // NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
-         //   [_questionAll sortUsingDescriptors:[NSArray arrayWithObject:sort1]];
-            
-            for(int i=0;i<_questionAll.count;i++){
-                NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
-                NSString *nameId=[NSString stringWithFormat:@"%@",_questionAll[i][@"isAdmin"]];
-                NSString *timeA=[NSString stringWithFormat:@"%@",_questionAll[i][@"time"]];
-                NSString *contentA=[NSString stringWithFormat:@"%@",_questionAll[i][@"message"]];
-                //NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"imageName"]];
-//                                NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
-                                NSString *questionPIC=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
-                                NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
-                
-                [_nameArray addObject:nameU];
-                [_nameID addObject:nameId];
-                [_timeArray addObject:timeA];
-                [_contentArray addObject:contentA];
-                  [_imageName addObject:PIC];
-            }
-//              [self initUI];
-            
-            if (_questionAll.count==_nameArray.count) {
-                
-                if (_tableView) {
-                    [self.tableView reloadData];
-                }else{
-                    [self initHeadView];
-                }
-
-                
-            }
-            
-            
-        }
-    } failure:^(NSError *error) {
-        [self hideProgressView];
-        [self showToastViewWithTitle:root_Networking];
-    }];
+    [self netGetAgain];
 }
 
 
@@ -170,22 +100,23 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 -(void)initUI{
 
 
-      float H2=self.navigationController.navigationBar.frame.size.height;
-       float H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
-    float allH=40*HEIGHT_SIZE;
+  
     
    //  [self initHeadView];
-    
-    _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_HEIGHT-allH-H2-H1 )];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.tableHeaderView=_headView;
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self.view addSubview:_tableView];
+    if (!_tableView) {
+         _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_HEIGHT-allH-H2-H1 )];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.tableHeaderView=_headView;
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        [self.view addSubview:_tableView];
+    }
+   
+   
 
    
     
- textViewW=[UIScreen mainScreen].bounds.size.width-allH-allH;
+       textViewW=[UIScreen mainScreen].bounds.size.width-allH-allH;
     _textViewAll = [[UIView alloc]initWithFrame:CGRectMake(0*HEIGHT_SIZE,[UIScreen mainScreen].bounds.size.height-allH-H2-H1 , SCREEN_Width, allH)];
     _textViewAll.backgroundColor =COLOR(242, 242, 242, 1);
     _textViewAll.userInteractionEnabled = YES;
@@ -206,7 +137,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     UIView *V2 = [[UIView alloc]initWithFrame:CGRectMake(textViewW+allH, 0, allH,allH )];
     V2.backgroundColor =[UIColor clearColor];
     V2.userInteractionEnabled = YES;
-    UITapGestureRecognizer * forget2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(Answer)];
+    UITapGestureRecognizer * forget2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(finishDone)];
     [V2 addGestureRecognizer:forget2];
     [_textViewAll addSubview:V2];
     
@@ -248,6 +179,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         [userImage setImage:[UIImage imageNamed:@"touxiang.png"]];
     }else{
         UIImage *image = [UIImage imageWithData: pic];
+        _headImageUser=image;
         [userImage setImage:image];
     }
     [_headView addSubview:userImage];
@@ -270,18 +202,22 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         UILabel *Lable0=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize+lableW*i, imageW+lableH, lableW,lableH )];
         Lable0.text=lableArray[i];
         Lable0.textAlignment=NSTextAlignmentLeft;
+        Lable0.adjustsFontSizeToFitWidth=YES;
         Lable0.textColor=COLOR(153, 153, 153, 1);
         Lable0.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         [_headView addSubview:Lable0];
     }
     
-      NSArray *lableArray1=[NSArray arrayWithObjects:_createrTimeString, _statusString,nil];
+      NSArray *lableArray1=[NSArray arrayWithObjects: _statusString,_createrTimeString,nil];
     for (int i=0; i<2; i++) {
         UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize+lableW*i, imageW+lableH*2, lableW,lableH )];
+        if (i==1) {
+            Lable1.frame=CGRectMake(imageW*2+imageSize+lableW*i, imageW+lableH*2, lableW+30*NOW_SIZE,lableH );
+        }
         Lable1.text=lableArray1[i];
         Lable1.textAlignment=NSTextAlignmentLeft;
         Lable1.textColor=COLOR(153, 153, 153, 1);
-        if (i==1) {
+        if (i==0) {
             if ([_statusString isEqualToString:@"0"]) {
                  Lable1.text=@"待处理";
                  Lable1.textColor=COLOR(227, 74, 33, 1);
@@ -301,12 +237,12 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     }
     
     float LableContentW=SCREEN_Width-2*imageW;
-    NSString *LableContentText=@"我不是阿阿萨德加事件阿萨德加事萨德加事萨德加事萨德加事萨德加事萨德加事萨德加事萨德加事件阿萨德萨德加事件阿萨德萨德加事件阿萨德萨德加事件阿萨德加事件阿萨德加事件萨德加事件";
+    NSString *LableContentText=_ContentString;
     CGSize Lrect=[self getStringSize:12*HEIGHT_SIZE Wsize:LableContentW Hsize:MAXFLOAT stringName:LableContentText];
     UILabel *LableContent=[[UILabel alloc]initWithFrame:CGRectMake(imageW, imageW+lableH*3+5*HEIGHT_SIZE, LableContentW,Lrect.height+20*HEIGHT_SIZE )];
     LableContent.text=LableContentText;
     LableContent.textAlignment=NSTextAlignmentLeft;
-    LableContent.textColor=COLOR(153, 153, 153, 1);
+    LableContent.textColor=COLOR(102, 102, 102, 1);
     LableContent.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     LableContent.numberOfLines=0;
     [_headView addSubview:LableContent];
@@ -354,13 +290,158 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     }
 }
 
+
+-(void)netGetAgain{
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *userID=[ud objectForKey:@"userID"];
+    self.questionAll =[NSMutableArray array];
+    
+    self.nameArray =[NSMutableArray array];
+    self.contentArray =[NSMutableArray array];
+    self.timeArray =[NSMutableArray array];
+    self.nameID =[NSMutableArray array];
+    self.imageName =[NSMutableArray array];
+    self.labelArray=[NSMutableArray arrayWithObjects:root_ME_biaoti,root_NBQ_leixing, root_ME_huifu_jilu,nil];
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfo" sucessBlock:^(id content) {
+        [self hideProgressView];
+        NSLog(@"getQuestionInfo=: %@", content);
+        if(content){
+            _allDic=[NSMutableDictionary dictionaryWithDictionary:content];
+            _titleString=content[@"title"];
+            _SnString=[NSString stringWithFormat:@"%@",content[@"questionDevice"]];
+            _QuestionTypeString=[NSString stringWithFormat:@"%@",content[@"questionType"]];
+            if ([_QuestionTypeString isEqualToString:@"1"]) {
+                _QuestionTypeString=root_ME_nibianqi_guzhan;
+            }else if ([_QuestionTypeString isEqualToString:@"2"]){
+                _QuestionTypeString=root_ME_chunengji_guzhan;
+            }else if ([_QuestionTypeString isEqualToString:@"3"]){
+                _QuestionTypeString=root_ME_ruanjian_jianyi;
+            }else if ([_QuestionTypeString isEqualToString:@"4"]){
+                _QuestionTypeString=root_ME_ruanjian_guzhan;
+            }else if ([_QuestionTypeString isEqualToString:@"5"]){
+                _QuestionTypeString=root_ME_qita_shebei_guzhan;
+            }else if ([_QuestionTypeString isEqualToString:@"6"]){
+                _QuestionTypeString=root_ME_qita_wenti;
+            }
+            _createrTimeString=[NSString stringWithFormat:@"%@",content[@"createrTime"]];
+            _statusString=[NSString stringWithFormat:@"%@",content[@"status"]];
+            
+            _ContentString=[NSString stringWithFormat:@"%@",content[@"content"]];
+            
+            
+            _questionAll=[NSMutableArray arrayWithArray:content[@"serviceQuestionReplyBean"]];
+            // NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
+            //   [_questionAll sortUsingDescriptors:[NSArray arrayWithObject:sort1]];
+            
+            for(int i=0;i<_questionAll.count;i++){
+                NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
+                NSString *nameId=[NSString stringWithFormat:@"%@",_questionAll[i][@"isAdmin"]];
+                NSString *timeA=[NSString stringWithFormat:@"%@",_questionAll[i][@"time"]];
+                NSString *contentA=[NSString stringWithFormat:@"%@",_questionAll[i][@"message"]];
+                //NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"imageName"]];
+                //                                NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
+                NSString *questionPIC=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
+                NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
+                
+                [_nameArray addObject:nameU];
+                [_nameID addObject:nameId];
+                [_timeArray addObject:timeA];
+                [_contentArray addObject:contentA];
+                [_imageName addObject:PIC];
+            }
+            //              [self initUI];
+            
+            if (_questionAll.count==_nameArray.count) {
+                
+                if (_tableView) {
+                    [self.tableView reloadData];
+                }else{
+                    [self initHeadView];
+                }
+                
+                
+            }
+            
+            
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+    }];
+}
+
+
+-(void)finishDone{
+    NSMutableDictionary *dataImageDict = [NSMutableDictionary dictionary];
+    //    for (int i=0; i<_picArray.count; i++) {
+    //        NSData *imageData = UIImageJPEGRepresentation(_picArray[i], 0.5);
+    //        NSString *imageName=@"imageName";
+    //        [dataImageDict setObject:imageData forKey:imageName];
+    //    }
+    
+    NSMutableArray *picAll=[NSMutableArray arrayWithArray:_picArray];
+    [picAll removeObject:@"del"];
+    for (int i=0; i<picAll.count; i++) {
+        NSData *imageData = UIImageJPEGRepresentation(picAll[i], 0.5);
+        NSString *imageName=[NSString stringWithFormat:@"image%d",i+1];
+        [dataImageDict setObject:imageData forKey:imageName];
+    }
+    
+        if ([[_textView text] isEqual:@""]) {
+            [self showToastViewWithTitle:root_ME_shuru_leirong];
+            return;
+        }
+    
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *userID=[ud objectForKey:@"userID"];
+    _allDict=[NSMutableDictionary dictionary];
+    [_allDict setObject:[_textView text] forKey:@"message"];
+    [_allDict setObject:_qusetionId forKey:@"questionId"];
+    [_allDict setObject:userID forKey:@"userId"];
+    
+    [self showProgressView];
+    [BaseRequest uplodImageWithMethod:HEAD_URL paramars:_allDict paramarsSite:@"/questionAPI.do?op=replyMessage" dataImageDict:dataImageDict sucessBlock:^(id content) {
+        NSLog(@"addCustomerQuestion==%@", content);
+        [self hideProgressView];
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        if (content1) {
+            if ([content1[@"success"] integerValue] == 1) {
+                _textView.text=@"";
+                if (_imageViewAll) {
+                    [ _imageViewAll removeFromSuperview];
+                    _imageViewAll=nil;
+                }
+                
+                  [_textView resignFirstResponder];
+               NSNotification * notice = [NSNotification notificationWithName:@"ReLoadTableView" object:nil userInfo:nil];
+                [self keyHiden:notice];
+                [self showAlertViewWithTitle:nil message:root_ME_tianjia_chenggong cancelButtonTitle:root_Yes];
+                   [self netGetAgain];
+          
+            }else{
+                [self showAlertViewWithTitle:nil message:root_ME_tianjia_shibai cancelButtonTitle:root_Yes];
+     
+            }
+        }
+    } failure:^(NSError *error) {
+        [self showToastViewWithTitle:root_Networking];
+        [self hideProgressView];
+ 
+    }];
+    
+}
+
+
 - (void)updateHeight:(UITextView *)textView isInput:(BOOL)isInput {
    
     
 
-    float H2=self.navigationController.navigationBar.frame.size.height;
-    float H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
-    float allH=40*HEIGHT_SIZE;  float textViewAllH=14*HEIGHT_SIZE;
+//    float H2=self.navigationController.navigationBar.frame.size.height;
+//    float H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
+//    float allH=40*HEIGHT_SIZE;
+    float textViewAllH=14*HEIGHT_SIZE;
     
      isInput ? ++_textLine : --_textLine;
     _currentTextViewContentSize = textView.contentSize;
@@ -377,6 +458,8 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         _textViewAll.frame = CGRectMake(0*HEIGHT_SIZE,[UIScreen mainScreen].bounds.size.height-H2-H1-height11-keyboradH , SCREEN_Width,height11);
         
         _textView.frame=CGRectMake(allH,7*HEIGHT_SIZE , textViewW, height);
+        
+        _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,[UIScreen mainScreen].bounds.size.height-H2-H1-height11-keyboradH );
     }];
 }
 
@@ -390,9 +473,19 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         //        commentView.hidden = YES;
         float imageH=40*HEIGHT_SIZE;   float ViewH=imageH+10*HEIGHT_SIZE;
         float ViewY=_textViewAll.frame.origin.y-ViewH;
- 
+        if ([[_textView text] isEqualToString:@""]) {
+            _textViewAll.frame = CGRectMake(0*HEIGHT_SIZE,[UIScreen mainScreen].bounds.size.height-allH-H2-H1 , SCREEN_Width, allH);
+            _textView.frame =CGRectMake(allH,7*HEIGHT_SIZE , textViewW, 26*HEIGHT_SIZE);
+        }
+        
+        if (_imageViewAll) {
             _imageViewAll.frame=CGRectMake(0, ViewY, SCREEN_Width,ViewH );
-            
+            _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_HEIGHT-_imageViewAll.frame.origin.y );
+        }else{
+        _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,_textViewAll.frame.origin.y);
+        }
+        
+        
     }];
     
     
@@ -406,9 +499,12 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     CGRect rect= [[userInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"]CGRectValue];
     keyboradH=rect.size.height;
     
+
+     _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,[UIScreen mainScreen].bounds.size.height-H2-H1-allH-keyboradH );
     // self.tooBar.frame = rect;
     [UIView animateWithDuration:0.25 animations:^{
         _textViewAll.transform = CGAffineTransformMakeTranslation(0, -([UIScreen mainScreen].bounds.size.height-rect.origin.y));
+        
     }];
     
     
@@ -444,7 +540,13 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         cell.nameLabel.textColor = COLOR(102, 102, 102, 1);
         WebString=self.contentArray[indexPath.row];
     }else{
-    cell.image.image = IMAGE(@"userOSS.png");
+  
+        if (_headImageUser!=nil) {
+            cell.image.image =_headImageUser;
+        }else{
+          cell.image.image = IMAGE(@"touxiang.png");
+        }
+        
          cell.nameLabel.textColor =COLOR(102, 102, 102, 1);
      //   NSString *N1=@"<body width=280px style=\"word-wrap:break-word; font-family:Arial\">";
        NSString *N1=@"";

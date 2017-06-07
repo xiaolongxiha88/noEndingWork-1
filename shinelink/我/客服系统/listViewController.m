@@ -239,26 +239,20 @@
         if ([_languageValue isEqualToString:@"0"]) {
             
             if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {
-                [cell.coverImageView  setImage:[UIImage imageNamed:@"待处理.png"]];
+              cell.coverImageView.backgroundColor=COLOR(227, 74, 33, 1);
+                cell.imageLabel.text=root_daichuli;
             }else if ([_statusArray[indexPath.row] isEqualToString:@"1"]){
-                [cell.coverImageView  setImage:[UIImage imageNamed:@"处理中.png"]];
+                cell.coverImageView.backgroundColor=COLOR(94, 195, 53, 1);
+                cell.imageLabel.text=root_chulizhong;
             }else if([_statusArray[indexPath.row] isEqualToString:@"2"]){
-                [cell.coverImageView  setImage:[UIImage imageNamed:@"已处理.png"]];
+                cell.coverImageView.backgroundColor=COLOR(157, 157, 157, 1);
+                cell.imageLabel.text=root_yichuli;
             }else if([_statusArray[indexPath.row] isEqualToString:@"3"]){
-                [cell.coverImageView  setImage:[UIImage imageNamed:@"待跟进.png"]];
+                cell.coverImageView.backgroundColor=COLOR(227, 164, 33, 1);
+                cell.imageLabel.text=root_daigengjin;
             }
-        }else{
-            if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {
-                [cell.coverImageView  setImage:[UIImage imageNamed:@"Pending.png"]];
-            }else if ([_statusArray[indexPath.row] isEqualToString:@"1"]){
-                [cell.coverImageView  setImage:[UIImage imageNamed:@"Processing.png"]];
-            }else if([_statusArray[indexPath.row] isEqualToString:@"2"]){
-                [cell.coverImageView  setImage:[UIImage imageNamed:@"Processed.png"]];
-            }else if([_statusArray[indexPath.row] isEqualToString:@"3"]){
-                [cell.coverImageView  setImage:[UIImage imageNamed:@"Waiting.png"]];
-            }
-            
         }
+          
     }
     
    

@@ -751,9 +751,9 @@ NSLog(@"体验馆");
 
 -(void)netServerInit{
     
-    
+       [self showProgressView];
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userName":_userTextField.text} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
-        
+           [self hideProgressView];
         NSLog(@"getUserServerUrl: %@", content);
         if (content) {
             if ([content[@"success"]intValue]==1) {
@@ -773,7 +773,7 @@ NSLog(@"体验馆");
         
     } failure:^(NSError *error) {
         [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-
+    
               [self netRequest];
     }];
     
