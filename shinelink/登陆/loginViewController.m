@@ -48,6 +48,7 @@
 @property (nonatomic, strong) NSString *adNumber;
  @property (nonatomic, strong)  NSString *languageValue;
 @property (nonatomic, strong) NSString *OssFirst;
+@property (nonatomic, strong) NSString *userNameGet;
 
 @end
 
@@ -537,9 +538,9 @@ NSLog(@"体验馆");
            
             
             
-    //        [self getOSSnet];
+      [self getOSSnet];
             
-         [self netServerInit];
+   //      [self netServerInit];
          
         }];
     }
@@ -579,10 +580,9 @@ NSLog(@"体验馆");
                 
             } else {
                 
+                           self.dataSource = [NSDictionary dictionaryWithDictionary:content];
+                _userNameGet=_dataSource[@"user"][@"accountName"];
                 
-                //[content[@"success"] integerValue]
-                 // [[NSUserDefaults standardUserDefaults] setObject:nowLanguage forKey:@"demoValue"];
-              
                 _adNumber=content[@"app_code"];
                 
               
@@ -601,8 +601,9 @@ NSLog(@"体验馆");
                 
                 
                 [[UserInfo defaultUserInfo] setUserPassword:_pwdTextField.text];
-                [[UserInfo defaultUserInfo] setUserName:_userTextField.text];
-                self.dataSource = [NSDictionary dictionaryWithDictionary:content];
+                [[UserInfo defaultUserInfo] setUserName:_userNameGet];
+                
+     
                 
                 if ([_dataSource[@"user"][@"rightlevel"] integerValue]==2) {
                     [[NSUserDefaults standardUserDefaults] setObject:@"isDemo" forKey:@"isDemo"];
@@ -741,7 +742,7 @@ NSLog(@"体验馆");
 
 
 -(void)setAlias{
-    NSString *AliasName=_userTextField.text;
+    NSString *AliasName=_userNameGet;
     
   //  NSString *AliasName=_userTextField.text;
     [JPUSHService setTags:nil alias:AliasName fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){

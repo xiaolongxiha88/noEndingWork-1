@@ -119,11 +119,11 @@
     self.answerName=[NSMutableArray array];
     
   
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfoNew" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfoNew" sucessBlock:^(id content1) {
         [self hideProgressView];
-   NSLog(@"questionList=: %@", content);
-        if(content){
-            _allArray=[NSMutableArray arrayWithArray:content];
+   NSLog(@"questionList=: %@", content1);
+        if(content1){
+            _allArray=[NSMutableArray arrayWithArray:content1];
             
           //NSLog(@"questionList=11");
         
@@ -152,14 +152,21 @@
             
             if (_allArray.count>0) {
                 
-          
-            
-            for(int i=0;i<_allArray.count;i++){
+                NSArray *content = [content1 sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                    
+//                    NSLog(@"%@~%@",obj1,obj2); //3~4 2~1 3~1 3~2
+                    
+                    return [obj2[@"status"] compare:obj1[@"status"]]; //升序
+                    
+                }];
                 
                 if (_AlertView) {
                     [_AlertView removeFromSuperview];
                     _AlertView=nil;
                 }
+            
+            for(int i=0;i<_allArray.count;i++){
+                
                 
                 NSString *title=[NSString stringWithFormat:@"%@",content[i][@"title"]];
                 NSString *status=[NSString stringWithFormat:@"%@",content[i][@"status"]];
