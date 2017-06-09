@@ -538,9 +538,9 @@ NSLog(@"体验馆");
            
             
             
-      [self getOSSnet];
+   //   [self getOSSnet];
             
-   //      [self netServerInit];
+    [self netServerInit];
          
         }];
     }

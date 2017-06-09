@@ -29,15 +29,16 @@ var TitleLabel1:UILabel!
         
         lableArray=[TitleLabel1,TitleLabel2]
         
-        
+     
+        let lableW=140*NOW_SIZE
         for (index,array) in lableArray.enumerated(){
             
         let lable0=array as!UILabel
             lable0.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
             lable0.textAlignment=NSTextAlignment.left
-            lable0.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
-          
-               lable0.frame=CGRect(x: 10*NOW_SIZE+160*NOW_SIZE*CGFloat(Float(index)), y: 5*HEIGHT_SIZE, width: 160*NOW_SIZE, height: 30*HEIGHT_SIZE)
+            lable0.font=UIFont.systemFont(ofSize: 11*HEIGHT_SIZE)
+              lable0.adjustsFontSizeToFitWidth=true
+               lable0.frame=CGRect(x: 10*NOW_SIZE+lableW*CGFloat(Float(index)), y: 7*HEIGHT_SIZE, width: lableW, height: 30*HEIGHT_SIZE)
              self.contentView.addSubview(lable0)
             
             

@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSource,UITableViewDelegate{
 
     var searchBar:UISearchBar!
@@ -21,17 +22,20 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     var goNetString:NSString!
     var tableView:UITableView!
     var addressString:NSString!
-   
+     var getAddress:NSString!
  
     var cellNameArray:NSArray!
-    var cellValue1Array:NSArray!
-     var cellValue2Array:NSArray!
-     var cellValue3Array:NSArray!
+    var cellValue1Array:NSMutableArray!
+     var cellValue2Array:NSMutableArray!
+     var cellValue3Array:NSMutableArray!
        var serverListArray:NSArray!
       var netDic:NSDictionary!
      var searchNum:Int!
+     var typeNum:Int!
+    
      var snOrAlias:Int!
-    var plantListArray:NSArray!
+    var plantListArray:NSMutableArray!
+      var pageNum:Int!
     
     
     override func viewDidLoad() {
@@ -39,7 +43,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         
     self.title="设备搜索"
-        
+        pageNum=0
        
         
       self.initUI()
@@ -103,8 +107,14 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         button22=UIButton()
         button22.frame=CGRect(x: 50*NOW_SIZE, y: 10*HEIGHT_SIZE, width: 220*NOW_SIZE, height:25*HEIGHT_SIZE)
-        // button2.setBackgroundImage(UIImage(named: "icon_search.png"), for: .normal)
-        button22.setTitle("点击获取服务器地址", for: .normal)
+        
+        if (getAddress==nil)||(getAddress=="") {
+          button22.setTitle("点击获取服务器地址", for: .normal)
+        }else{
+          button22.setTitle(getAddress as String?, for: .normal)
+            addressString=getAddress
+        }
+      
         button22.setTitleColor(MainColor, for: .normal)
         button22.setTitleColor(UIColor.white, for: .highlighted)
         button22.layer.borderWidth=0.8*HEIGHT_SIZE;
@@ -201,6 +211,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             (selectIndex)in
        
             self.addressString=addressArray[selectIndex] as! NSString
+            self.getAddress=self.addressString
              print("选择11了"+String(describing: selectIndex))
         }, selectValue: {
             (selectValue)in
@@ -212,10 +223,6 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
    
     
     func initTableView(){
-      
-        cellNameArray=["电站名称:","所属用户名:"];
-        cellValue1Array=["my station","my station","my station","my station","my station"];
-          cellValue2Array=["yangwen","yangwen","yangwen","yangwen","yangwen"];
         
        tableView=UITableView()
         let H1=30*HEIGHT_SIZE
@@ -226,8 +233,23 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
          tableView.register(deviceFirstCell.classForCoder(), forCellReuseIdentifier: "cell")
         self.view.addSubview(tableView)
         
+        let foot=MJRefreshAutoNormalFooter(refreshingBlock: {
+           
+            self.pageNum=self.pageNum+1
+            self.initNet0()
+
+            //结束刷新
+            self.tableView!.mj_footer.endRefreshing()
+        })
+       
+        tableView.mj_footer=foot
+        foot?.setTitle("", for: .idle)
+        
     
     }
+    
+
+        
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -247,10 +269,9 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
       //  let  cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: "cell");
         
       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!deviceFirstCell
-        let plantDic=plantListArray[indexPath.row] as! Dictionary<String, Any>
         
-        let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,plantDic["plantName"] as!NSString)
-         let lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,plantDic["accountName"] as!NSString)
+        let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,self.cellValue1Array.object(at: indexPath.row) as! CVarArg)
+         let lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,self.cellValue2Array.object(at: indexPath.row) as! CVarArg)
         cell.TitleLabel1.text=lable1 as String
          cell.TitleLabel2.text=lable2 as String
 
@@ -262,10 +283,19 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
   
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (self.typeNum==0)||(self.typeNum==1)||(self.typeNum==2){
+                 let goView=PlantList()
+            if self.typeNum==0 {
+                 goView.userNameString=self.cellValue2Array.object(at: indexPath.row) as!NSString
+            }else{
+            goView.userNameString=self.cellValue1Array.object(at: indexPath.row) as!NSString
+            }
+            
+                  self.navigationController?.pushViewController(goView, animated: true)
+                 tableView.deselectRow(at: indexPath, animated: true)
         
-        let goView=deviceListViewController()
-        self.navigationController?.pushViewController(goView, animated: true)
-        tableView.deselectRow(at: indexPath, animated: true)
+        }
+
     }
     
     
@@ -475,34 +505,37 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     }
    
     
-    
     func initNet1(){
-        let typeNum:Int!
-        if (searchNum==0)||(searchNum==2)||(searchNum==3) {
-            typeNum=0
-        }else{
-             typeNum=1
-        }
-        var value1=""
-        var value2=""
-        var value3=""
-        var value4=""
+        
+        self.cellValue1Array=[]
+        self.cellValue2Array=[]
+        self.cellValue3Array=[]
+        self.plantListArray=[]
+        pageNum=0
+        
         if searchNum==0 {
-            value1=searchBar.text!
+            typeNum=0
         }else if searchNum==1 {
-            value2=searchBar.text!
+            typeNum=3
         }else if searchNum==2 {
-            value3=searchBar.text!
+            typeNum=1
         }else if searchNum==3{
-           value4=searchBar.text!
+            typeNum=2
         }
         
-        netDic=["searchType":typeNum,"userName":value1,"plantName":value2,"phoneNum":value3,"email":value4,"serverAddr":addressString]
         
+        self.initNet0()
+    }
+    
+    func initNet0(){
+    
+            let value1=searchBar.text!
+        netDic=["searchType":typeNum,"param":value1,"page":pageNum,"serverAddr":addressString]
         
+        self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]! , paramarsSite: "/api/v1/search/all", sucessBlock: {(successBlock)->() in
             
-            
+            self.hideProgressView()
             let data:Data=successBlock as! Data
             
             let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
@@ -513,19 +546,82 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                 
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
                 let result1=jsonDate["result"] as! Int
-              
+                
                 if result1==1 {
-                  let objArray=jsonDate["obj"] as! Dictionary<String, Any>
-                    let userListArray=objArray["userList"] as! Dictionary<String, Any>
-                     let plantListArray=userListArray["plantList"] as! NSArray
-                    if plantListArray.count>0{
-                    self.plantListArray=plantListArray
+                    let objArray=jsonDate["obj"] as! Dictionary<String, Any>
+                    var plantAll:NSArray=[]
+                    //获取用户列表
+                    if self.typeNum==0{
+                      self.cellNameArray=["用户名:","创建时间:"];
+                           plantAll=objArray["userList"] as! NSArray
+                        for i in 0..<plantAll.count{
+                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["accountName"] as!NSString)
+                                   var dateString=(plantAll[i] as! NSDictionary)["createDate"] as!NSString
+                            if dateString.length>11{
+                               dateString=dateString.substring(to: 11) as NSString
+                            }
+                            
+                               self.cellValue2Array.add(dateString)
+                                  self.plantListArray.add(plantAll[i])
+                            
+                        }
                         
-                                if (self.view3 != nil){
-                                    self.view3.removeFromSuperview()
-                                    self.view3=nil
-                                }
-                        self.initTableView()
+                    }
+                    
+                    //获取手机列表
+                    if self.typeNum==1{
+                           self.cellNameArray=["手机号:","用户名:"];
+                      plantAll=objArray["userList"] as! NSArray
+                        for i in 0..<plantAll.count{
+                          self.cellValue1Array.add((plantAll[i] as! NSDictionary)["phoneNum"] as!NSString)
+                              self.cellValue2Array.add((plantAll[i] as! NSDictionary)["accountName"] as!NSString)
+                            self.plantListArray.add(plantAll[i])
+                        }
+                    }
+                    
+                    //获取邮箱列表
+                    if self.typeNum==2{
+                        self.cellNameArray=["邮箱:","用户名:"];
+                        plantAll=objArray["userList"] as! NSArray
+                        for i in 0..<plantAll.count{
+                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["email"] as!NSString)
+                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["accountName"] as!NSString)
+                            self.plantListArray.add(plantAll[i])
+                        }
+                    }
+                    
+                    //获取电站列表
+                    if self.typeNum==3{
+                        self.cellNameArray=["电站名称:","所属用户名:"];
+                         plantAll=objArray["plantList"] as! NSArray
+               
+                        for i in 0..<plantAll.count{
+                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["plantName"] as!NSString)
+                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["userAccount"] as!NSString)
+                            let idString=NSString(format: "%d", (plantAll[i] as! NSDictionary)["id"] as!NSNumber)
+                            self.cellValue3Array.add(idString)
+                             self.plantListArray.add(plantAll[i])
+                        }
+                        
+                    }
+                    
+                    
+                    if ((plantAll.count==0) && !(self.plantListArray.count==0)){
+                        self.showToastView(withTitle: "没有更多数据")
+                    }
+                    
+                    if self.plantListArray.count>0{
+                        
+                        if (self.view3 != nil){
+                            self.view3.removeFromSuperview()
+                            self.view3=nil
+                        }
+                        if (self.tableView == nil){
+                            self.initTableView()
+                        }else{
+                            self.tableView.reloadData()
+                        }
+                        
                         
                     }
                     
@@ -542,6 +638,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         })
         
     }
+    
+
     
     
     func initNet2(){

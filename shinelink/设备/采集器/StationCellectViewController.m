@@ -76,7 +76,11 @@
     }
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"id":_stationId, @"currentPage":page} paramarsSite:@"/newDatalogAPI.do?op=datalogList" sucessBlock:^(id content) {
         [self hideProgressView];
-          [_control endRefreshing];
+       
+        NSArray *noDataArray=[NSArray arrayWithArray:content];
+        if (noDataArray.count==0) {
+      //       _tableView.mj_footer.hidden=YES;
+        }
         
             NSLog(@"datalogList:%@",content);
         [_arrayData addObjectsFromArray:content];
@@ -109,7 +113,7 @@
         }
     } failure:^(NSError *error) {
         [self hideProgressView];
-          [_control endRefreshing];
+        
         [self showToastViewWithTitle:root_Networking];
     }];
 }
@@ -124,26 +128,44 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_tableView];
     
-//    _control=[[UIRefreshControl alloc]init];
-//    [_control addTarget:self action:@selector(refreshStateChange:) forControlEvents:UIControlEventValueChanged];
-//    [_tableView addSubview:_control];
-//    
-//    //2.马上进入刷新状态，并不会触发UIControlEventValueChanged事件
-//    [_control beginRefreshing];
+ 
+  //  __unsafe_unretained StationCellectViewController *myself = self;
+//        [myself.tableView addLegendFooterWithRefreshingBlock:^{
+//          
+//           // addLegendFooterWithRefreshingBlock
+//            myself->_page++;
+//            [myself requestData];
+//           
+//            [myself->_tableView.mj_footer endRefreshing];
+//            
+//            
+//        }];
     
-    if (_arrayData.count>1) {
+           if (_arrayData.count>1) {
         
-    __unsafe_unretained StationCellectViewController *myself = self;
-        [_tableView addLegendFooterWithRefreshingBlock:^{
-          
-            
-            myself->_page++;
-            [myself requestData];
+              
+               
+//        self.tableView.mj_footer=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//                           _page++;
+//                        [self requestData];
+//            
+//                        [_tableView.mj_footer endRefreshing];
+//            
+//       
+//        }];
+               
+               MJRefreshAutoNormalFooter *foot=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+                   _page++;
+                   [self requestData];
+                   
+                   [_tableView.mj_footer endRefreshing];
+                   
+                   
+               }];
+               [foot setTitle:@"" forState:MJRefreshStateIdle];
+               _tableView.mj_footer=foot;
+               _tableView.mj_footer.automaticallyHidden=YES;
            
-            [myself->_tableView.footer endRefreshing];
-            
-            
-        }];
     }
     
     [self getDirPic];
