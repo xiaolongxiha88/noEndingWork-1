@@ -34,7 +34,7 @@ var TitleLabel1:UILabel!
         for (index,array) in lableArray.enumerated(){
             
         let lable0=array as!UILabel
-            lable0.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
+            lable0.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
             lable0.textAlignment=NSTextAlignment.left
             lable0.font=UIFont.systemFont(ofSize: 11*HEIGHT_SIZE)
               lable0.adjustsFontSizeToFitWidth=true

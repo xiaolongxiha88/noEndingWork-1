@@ -43,6 +43,13 @@ class uibuttonView0: UIView{
             button2.layer.borderColor=MainColor.cgColor;
             button2.isSelected=false
             button2.backgroundColor=UIColor.clear
+            if typeNum==0 {
+                if i==1 {
+                    button2.backgroundColor=MainColor
+                    button2.setTitleColor(backgroundGrayColor, for: .normal)
+                    button2.isSelected=true
+                }
+            }
             button2.addTarget(self, action:#selector(butttonChange(uibutton:)), for: .touchUpInside)
             self.addSubview(button2)
             

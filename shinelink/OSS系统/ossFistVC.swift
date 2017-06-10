@@ -81,7 +81,7 @@ class ossFistVC: RootViewController {
         buttonThree.layer.borderWidth=0.8*HEIGHT_SIZE;
         buttonThree.layer.cornerRadius=16*HEIGHT_SIZE;
         buttonThree.titleLabel?.adjustsFontSizeToFitWidth=true
-        buttonThree.layer.borderColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1).cgColor;
+        buttonThree.layer.borderColor=COLOR(_R: 242, _G: 242, _B: 242, _A: 1).cgColor;
          buttonThree.titleLabel?.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
         buttonThree.setTitleColor(COLOR(_R: 102, _G: 102, _B: 102, _A: 1), for: .normal)
         buttonThree.setTitleColor(COLOR(_R: 238, _G: 73, _B: 51, _A: 1), for: .highlighted)

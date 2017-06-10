@@ -285,10 +285,14 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (self.typeNum==0)||(self.typeNum==1)||(self.typeNum==2){
                  let goView=PlantList()
-            if self.typeNum==0 {
-                 goView.userNameString=self.cellValue2Array.object(at: indexPath.row) as!NSString
+        
+            
+            if self.typeNum==0{
+                
+                goView.userNameString=self.cellValue1Array.object(at: indexPath.row) as!NSString
             }else{
-            goView.userNameString=self.cellValue1Array.object(at: indexPath.row) as!NSString
+             
+                goView.userNameString=self.cellValue2Array.object(at: indexPath.row) as!NSString
             }
             
                   self.navigationController?.pushViewController(goView, animated: true)
@@ -548,6 +552,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                 let result1=jsonDate["result"] as! Int
                 
                 if result1==1 {
+                     UserDefaults.standard.set(self.addressString, forKey: "OssAddress")
+                    
                     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
                     var plantAll:NSArray=[]
                     //获取用户列表
@@ -598,7 +604,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                         for i in 0..<plantAll.count{
                             self.cellValue1Array.add((plantAll[i] as! NSDictionary)["plantName"] as!NSString)
                             self.cellValue2Array.add((plantAll[i] as! NSDictionary)["userAccount"] as!NSString)
-                            let idString=NSString(format: "%d", (plantAll[i] as! NSDictionary)["id"] as!NSNumber)
+                            let idString=NSString(format: "%d", (plantAll[i] as! NSDictionary)["id"] as!Int)
                             self.cellValue3Array.add(idString)
                              self.plantListArray.add(plantAll[i])
                         }
@@ -608,6 +614,21 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     
                     if ((plantAll.count==0) && !(self.plantListArray.count==0)){
                         self.showToastView(withTitle: "没有更多数据")
+                    }
+                    
+                    if self.plantListArray.count==1{
+                        if ((self.typeNum==0)||(self.typeNum==1)||(self.typeNum==2)){
+                            let goView=PlantList()
+                            if self.typeNum==0{
+                             goView.userNameString=self.cellValue1Array.object(at: 0) as!NSString
+                            }else{
+                            goView.userNameString=self.cellValue2Array.object(at: 0) as!NSString
+                            }
+                           
+                            self.navigationController?.pushViewController(goView, animated: true)
+                        }
+                      
+                     
                     }
                     
                     if self.plantListArray.count>0{
@@ -660,9 +681,9 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             value3=searchBar.text!
         }
         netDic=["deviceSn":value2,"alias":value3,"deviceType":value1,"serverAddr":addressString]
-        
+        self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/device/info", sucessBlock: {(successBlock)->() in
-            
+            self.hideProgressView()
             
             let data:Data=successBlock as! Data
             

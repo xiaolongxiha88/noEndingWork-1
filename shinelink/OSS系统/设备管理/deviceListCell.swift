@@ -37,21 +37,21 @@ class deviceListCell: UITableViewCell {
             let lable0=array as!UILabel
             
             if index==0{
-                lable0.textColor=UIColor.black
+                lable0.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
                 lable0.textAlignment=NSTextAlignment.center
-                lable0.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
+                lable0.font=UIFont.systemFont(ofSize: 10*HEIGHT_SIZE)
           lable0.frame=CGRect(x: 0*NOW_SIZE, y: 2*HEIGHT_SIZE, width:SCREEN_Width, height: 20*HEIGHT_SIZE)
             }else{
-                lable0.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
+                lable0.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
                 lable0.textAlignment=NSTextAlignment.left
                 lable0.adjustsFontSizeToFitWidth=true
-                lable0.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
+                lable0.font=UIFont.systemFont(ofSize: 10*HEIGHT_SIZE)
                 if index==1||index==2{
                       let K=index-1
-                 lable0.frame=CGRect(x: 10*NOW_SIZE+160*NOW_SIZE*CGFloat(Float(K)), y: 20*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 30*HEIGHT_SIZE)
+                 lable0.frame=CGRect(x: 10*NOW_SIZE+160*NOW_SIZE*CGFloat(Float(K)), y: 20*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 20*HEIGHT_SIZE)
                 }else{
                     let K=index-3
-                 lable0.frame=CGRect(x: 10*NOW_SIZE+160*NOW_SIZE*CGFloat(Float(K)), y: 50*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 30*HEIGHT_SIZE)
+                 lable0.frame=CGRect(x: 10*NOW_SIZE+160*NOW_SIZE*CGFloat(Float(K)), y: 40*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 20*HEIGHT_SIZE)
                 }
                 
              
@@ -62,18 +62,12 @@ class deviceListCell: UITableViewCell {
           
             self.contentView.addSubview(lable0)
             
-            
-            //            }else{
-            //                let i=index-2
-            //            lable0.frame=CGRect(x: 10*NOW_SIZE+160*NOW_SIZE*CGFloat(Float(i)), y: 30*HEIGHT_SIZE, width: 160*NOW_SIZE, height: 30*HEIGHT_SIZE)
-            //            }
-            //            lable0.text=""
-            
+  
             
         }
         
         view0=UIView()
-        view0.frame=CGRect(x: 0*NOW_SIZE, y: 90*HEIGHT_SIZE, width: SCREEN_Width, height: 6*HEIGHT_SIZE)
+        view0.frame=CGRect(x: 0*NOW_SIZE, y: 60*HEIGHT_SIZE, width: SCREEN_Width, height: 5*HEIGHT_SIZE)
         view0.backgroundColor=backgroundGrayColor
         
         self.contentView.addSubview(view0)
