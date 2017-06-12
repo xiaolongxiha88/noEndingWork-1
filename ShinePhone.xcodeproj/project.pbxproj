@@ -436,6 +436,7 @@
 		338321C71EEE3378004FFC20 /* set_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 338321C51EEE3378004FFC20 /* set_nor.png */; };
 		338321CA1EEE35B7004FFC20 /* configure_click .png in Resources */ = {isa = PBXBuildFile; fileRef = 338321C81EEE35B7004FFC20 /* configure_click .png */; };
 		338321CB1EEE35B7004FFC20 /* configure_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 338321C91EEE35B7004FFC20 /* configure_nor.png */; };
+		338321D11EEE9C49004FFC20 /* edit1.png in Resources */ = {isa = PBXBuildFile; fileRef = 338321D01EEE9C49004FFC20 /* edit1.png */; };
 		3383ACE11D7D6B3400C2F4A3 /* topAvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3383ACE01D7D6B3400C2F4A3 /* topAvViewController.m */; };
 		3383ACE41D7D6DC200C2F4A3 /* MRNavigationLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3383ACE31D7D6DC200C2F4A3 /* MRNavigationLabel.m */; };
 		3383F12E1C9FF4190075E834 /* Plug.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383F12D1C9FF4190075E834 /* Plug.png */; };
@@ -1359,6 +1360,7 @@
 		338321C51EEE3378004FFC20 /* set_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set_nor.png; sourceTree = "<group>"; };
 		338321C81EEE35B7004FFC20 /* configure_click .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "configure_click .png"; sourceTree = "<group>"; };
 		338321C91EEE35B7004FFC20 /* configure_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = configure_nor.png; sourceTree = "<group>"; };
+		338321D01EEE9C49004FFC20 /* edit1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit1.png; sourceTree = "<group>"; };
 		3383ACDF1D7D6B3400C2F4A3 /* topAvViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = topAvViewController.h; sourceTree = "<group>"; };
 		3383ACE01D7D6B3400C2F4A3 /* topAvViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = topAvViewController.m; sourceTree = "<group>"; };
 		3383ACE21D7D6DC200C2F4A3 /* MRNavigationLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MRNavigationLabel.h; sourceTree = "<group>"; };
@@ -2763,6 +2765,7 @@
 		336E03F61EC944940034BC86 /* oss图片 */ = {
 			isa = PBXGroup;
 			children = (
+				338321D01EEE9C49004FFC20 /* edit1.png */,
 				338D51C21EE15EF3003FE4D2 /* upOSS.png */,
 				338D51C01EE15EEE003FE4D2 /* moreOSS.png */,
 				336E03F71EC944A60034BC86 /* title_bg.png */,
@@ -4203,6 +4206,7 @@
 				338990B11CEAB73400A708F8 /* logo3.png in Resources */,
 				334FF0B81CF53C7C001E6716 /* bottombg.png in Resources */,
 				33C3FFFC1D3E33E00016351C /* L3.png in Resources */,
+				338321D11EEE9C49004FFC20 /* edit1.png in Resources */,
 				33EA49ED1E8CAC060044A01A /* 设备页引导2.jpg in Resources */,
 				33875A5E1EBB2F8A00F7E0E6 /* 全面的数据分析_en.png in Resources */,
 				33C5E2261D49A89F00A0DB00 /* 三角形.png in Resources */,

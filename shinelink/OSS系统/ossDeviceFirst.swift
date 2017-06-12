@@ -23,7 +23,9 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     var tableView:UITableView!
     var addressString:NSString!
      var getAddress:NSString!
- 
+   var deviceTypeString:NSString!
+    
+    
     var cellNameArray:NSArray!
     var cellValue1Array:NSMutableArray!
      var cellValue2Array:NSMutableArray!
@@ -236,7 +238,14 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         let foot=MJRefreshAutoNormalFooter(refreshingBlock: {
            
             self.pageNum=self.pageNum+1
+            
+            if (self.searchNum>3){
+            self.initNet3()
+            }else{
             self.initNet0()
+            }
+                
+            
 
             //结束刷新
             self.tableView!.mj_footer.endRefreshing()
@@ -308,6 +317,13 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             self.navigationController?.pushViewController(goView, animated: true)
         }
 
+        if self.typeNum==4{
+            let vc=deviceControlView()
+            vc.deviceTypeString=self.deviceTypeString
+            vc.deviceSnString=self.cellValue1Array.object(at: indexPath.row) as!NSString
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
     
     
@@ -646,7 +662,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                      
                     }
                     
-                    if self.plantListArray.count>0{
+                    if self.plantListArray.count>1{
                         
                         if (self.view3 != nil){
                             self.view3.removeFromSuperview()
@@ -657,8 +673,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                         }else{
                             self.tableView.reloadData()
                         }
-                        
-                        
+
                     }
                     
                     
@@ -679,6 +694,18 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     
     func initNet2(){
+        self.cellValue1Array=[]
+        self.cellValue2Array=[]
+        self.cellValue3Array=[]
+        self.plantListArray=[]
+        pageNum=0
+        typeNum=4
+            
+        self.initNet3()
+    }
+    
+    
+    func initNet3(){
         
         var value1=0
         var value2=""
@@ -695,7 +722,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         }else if snOrAlias==2 {
             value3=searchBar.text!
         }
-        netDic=["deviceSn":value2,"alias":value3,"deviceType":value1,"serverAddr":addressString]
+        
+        netDic=["deviceSn":value2,"alias":value3,"deviceType":value1,"serverAddr":addressString,"page":pageNum]
         self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/device/info", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
@@ -706,31 +734,55 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             
             if (jsonDate0 != nil){
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
-                 print("/api/v1/search/info=",jsonDate)
+                print("/api/v1/search/info=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
                 let result1=jsonDate["result"] as! Int
-              
+                
                 if result1==1 {
+                    self.deviceTypeString=NSString(format: "%d", value1)
+                      UserDefaults.standard.set(self.addressString, forKey: "OssAddress")
                     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
+                    var plantAll:NSArray = []
+                    
                     let deviceType=objArray["deviceType"] as! Int
-                    var allDic:NSDictionary!=[:]
+                   
                     
                     if deviceType==0 {
-                       allDic=objArray["datalogBean"] as!  NSDictionary!
+                      plantAll=objArray["datalogList"] as! NSArray
                     }else if deviceType==1 {
-                           allDic=objArray["invBean"] as!  NSDictionary!
+                          plantAll=objArray["invList"] as! NSArray
                     }else if deviceType==2 {
-                        allDic=objArray["storageBean"] as!  NSDictionary!
+                           plantAll=objArray["storageList"] as! NSArray
                     }
-                    if allDic.count>1 {
+                    if plantAll.count>0{
+                        for i in 0..<plantAll.count{
+                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as!NSString)
+                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["alias"] as!NSString)
+                            self.plantListArray.add(plantAll[i])
+                        }
+                    }
+                    
+                    if self.plantListArray.count==1 {
                         let vc=deviceControlView()
-                        vc.typeNum=NSString(format: "%d", deviceType)
-                        vc.valueDic=allDic
+                        vc.deviceTypeString=NSString(format: "%d", deviceType)
+                        vc.deviceSnString=value2 as NSString!
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
                     
-                
-                  
+                    if self.plantListArray.count>1{
+                           self.cellNameArray=["序列号:","别名:"];
+                        if (self.view3 != nil){
+                            self.view3.removeFromSuperview()
+                            self.view3=nil
+                        }
+                        if (self.tableView == nil){
+                            self.initTableView()
+                        }else{
+                            self.tableView.reloadData()
+                        }
+                        
+                    }
+                    
                     
                 }else{
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
@@ -741,7 +793,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         }, failure: {(error) in
             self.showToastView(withTitle: root_Networking)
         })
-        
+
     }
     
     
