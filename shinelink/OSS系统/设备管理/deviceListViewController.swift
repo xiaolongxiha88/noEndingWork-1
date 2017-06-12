@@ -270,19 +270,14 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let CELL=cellValue4Array[indexPath.row] as! String
-        if CELL=="1"{
-            let goView=deviceControlView()
-            self.navigationController?.pushViewController(goView, animated: true)
-        }else if CELL=="2"{
-            let goView=kongZhiNi0()
-            goView.controlType="2"
-            self.navigationController?.pushViewController(goView, animated: true)
-        }else if CELL=="3"{
-            let goView=controlCNJTable()
-            goView.controlType="2"
-            self.navigationController?.pushViewController(goView, animated: true)
-        }
+        let CELL=cellValue1Array[indexPath.row] as! NSString
+
+        let goView=deviceControlView()
+        
+        goView.deviceTypeString=self.deviceTypeString
+        goView.deviceSnString=CELL
+        
+        self.navigationController?.pushViewController(goView, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: true)
         

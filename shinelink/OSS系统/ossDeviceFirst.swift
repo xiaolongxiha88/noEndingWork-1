@@ -299,6 +299,14 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                  tableView.deselectRow(at: indexPath, animated: true)
         
         }
+        
+        
+        if self.typeNum==3{
+            let goView=deviceListViewController()
+            goView.plantIdString=self.cellValue3Array.object(at: 0) as!NSString
+            
+            self.navigationController?.pushViewController(goView, animated: true)
+        }
 
     }
     
@@ -627,6 +635,13 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                            
                             self.navigationController?.pushViewController(goView, animated: true)
                         }
+                        
+                        if self.typeNum==3{
+                            let goView=deviceListViewController()
+                      goView.plantIdString=self.cellValue3Array.object(at: 0) as!NSString
+                            
+                            self.navigationController?.pushViewController(goView, animated: true)
+                        }
                       
                      
                     }
@@ -709,7 +724,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     }
                     if allDic.count>1 {
                         let vc=deviceControlView()
-                        vc.typeNum=deviceType
+                        vc.typeNum=NSString(format: "%d", deviceType)
                         vc.valueDic=allDic
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
