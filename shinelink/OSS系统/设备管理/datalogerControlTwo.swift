@@ -11,10 +11,16 @@ import UIKit
 class datalogerControlTwo: RootViewController {
 
     var  lableName:NSString!
+     var  oldlableValueName:NSString!
     var  typeNum:NSString!
     var  textValue1:UITextField!
         var  textValue2:UITextField!
         var  textValue3:UITextField!
+       var netDic:NSDictionary!
+    var  snString:NSString!
+       var  paramTypeString:NSString!
+     var  value1:NSString!
+       var  value2:NSString!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +44,19 @@ class datalogerControlTwo: RootViewController {
     }
 
     func initUI(){
+//        let lable01=UILabel()
+//        lable01.textColor=UIColor.white
+//        lable01.textAlignment=NSTextAlignment.center
+//        lable01.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
+//        lable01.frame=CGRect(x: 10*NOW_SIZE, y: 40*HEIGHT_SIZE, width: 300*NOW_SIZE, height: 30*HEIGHT_SIZE)
+//        lable01.text=lableName as String?
+//        self.view.addSubview(lable01)
+        
         let lable0=UILabel()
         lable0.textColor=UIColor.white
         lable0.textAlignment=NSTextAlignment.center
         lable0.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
-        lable0.frame=CGRect(x: 10*NOW_SIZE, y: 40*HEIGHT_SIZE, width: 300*NOW_SIZE, height: 30*HEIGHT_SIZE)
+        lable0.frame=CGRect(x: 10*NOW_SIZE, y: 45*HEIGHT_SIZE, width: 300*NOW_SIZE, height: 30*HEIGHT_SIZE)
         lable0.text=lableName as String?
         self.view.addSubview(lable0)
         
@@ -103,8 +117,68 @@ class datalogerControlTwo: RootViewController {
     
     
     func finishSet(){
-    
-    
+        value1=""
+        value2=""
+        paramTypeString=""
+        if typeNum=="0" {
+            if (textValue1.text==nil) || (textValue1.text=="") {
+                self.showToastView(withTitle: "请输入服务器IP地址")
+                return
+            }
+           paramTypeString="1"
+            value1=textValue1.text as NSString!
+        }
+        if typeNum=="1" {
+            if (textValue1.text==nil) || (textValue1.text=="") {
+                self.showToastView(withTitle: "请输入服务器域名")
+                return
+            }
+            paramTypeString="2"
+            value1=textValue1.text as NSString!
+        }
+        if typeNum=="4" {
+            if (textValue2.text==nil) || (textValue2.text=="") {
+                self.showToastView(withTitle: "请输入寄存器地址")
+                return
+            }
+            if (textValue3.text==nil) || (textValue3.text=="") {
+                self.showToastView(withTitle: "请输入寄存器设置值")
+                return
+            }
+            paramTypeString="0"
+            value1=textValue2.text as NSString!
+             value2=textValue3.text as NSString!
+        }
+        netDic=["datalogSn":snString,"paramType":paramTypeString,"param_1":value1,"param_2":value2]
+        self.showProgressView()
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/deviceSet/set/datalog", sucessBlock: {(successBlock)->() in
+            self.hideProgressView()
+            
+            let data:Data=successBlock as! Data
+            
+            let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
+            
+            if (jsonDate0 != nil){
+                let jsonDate=jsonDate0 as! Dictionary<String, Any>
+                print("/api/v1/device/info",jsonDate)
+                // let result:NSString=NSString(format:"%s",jsonDate["result"] )
+                let result1=jsonDate["result"] as! Int
+                
+                if result1==1 {
+            
+                    self.showToastView(withTitle: "设置成功")
+                self.navigationController!.popViewController(animated: true)
+                    
+                }else{
+                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                }
+                
+            }
+            
+        }, failure: {(error) in
+            self.showToastView(withTitle: root_Networking)
+        })
+
     
     }
     

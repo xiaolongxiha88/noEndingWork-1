@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSString *currentTime2;
 @property (nonatomic, strong)UITextField *textField;
 @property (nonatomic, strong)UITextField *textField1;
+@property (nonatomic, strong)UITextField *textField2;
 @property (nonatomic, strong) UIButton *datePickerButton;
 @property (nonatomic, strong) UISwitch *Switch;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -134,9 +135,7 @@
     PVData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [_scrollView addSubview:PVData];
     
-//    UIView *line=[[UIView alloc]initWithFrame:CGRectMake(130*NOW_SIZE,85*NOW_SIZE+26*NOW_SIZE, 180*NOW_SIZE, 1*NOW_SIZE)];
-//    line.backgroundColor=[UIColor whiteColor];
-//    [_scrollView addSubview:line];
+
     
     self.dayFormatter = [[NSDateFormatter alloc] init];
     [self.dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -157,12 +156,7 @@
        }
     
     
-   /* UILabel *FDT=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 85*NOW_SIZE+buttonSize+5*NOW_SIZE+85*NOW_SIZE+45*NOW_SIZE, 150*NOW_SIZE,20*NOW_SIZE )];
-    FDT.text=@"FDT设置";
-    FDT.textAlignment=NSTextAlignmentLeft;
-    FDT.textColor=[UIColor blueColor];
-    FDT.font = [UIFont systemFontOfSize:18*NOW_SIZE];
-    [_scrollView addSubview:FDT];*/
+
     
        if([_type isEqualToString:@"3"]){
     UILabel *Enable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 85*HEIGHT_SIZE, 250*NOW_SIZE,20*HEIGHT_SIZE )];
@@ -197,13 +191,30 @@
            
        }
 
-    if([_type isEqualToString:@"4"]){
-    UILabel *dataDischarge=[[UILabel alloc]initWithFrame:CGRectMake(25*NOW_SIZE, 75*HEIGHT_SIZE+10*HEIGHT_SIZE, 250*NOW_SIZE,20*HEIGHT_SIZE )];
-    dataDischarge.text=root_CNJ_fangdian_shijianduan;
-    dataDischarge.textAlignment=NSTextAlignmentLeft;
-    dataDischarge.textColor=[UIColor whiteColor];
-    dataDischarge.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [_scrollView addSubview:dataDischarge];
+    if([_type isEqualToString:@"4"] ||[_type isEqualToString:@"7"]){
+        if ([_type isEqualToString:@"4"]) {
+            UILabel *dataDischarge=[[UILabel alloc]initWithFrame:CGRectMake(25*NOW_SIZE, 75*HEIGHT_SIZE+10*HEIGHT_SIZE, 250*NOW_SIZE,20*HEIGHT_SIZE )];
+            dataDischarge.text=root_CNJ_fangdian_shijianduan;
+            dataDischarge.textAlignment=NSTextAlignmentLeft;
+            dataDischarge.textColor=[UIColor whiteColor];
+            dataDischarge.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+            [_scrollView addSubview:dataDischarge];
+        }
+        if ([_type isEqualToString:@"7"]) {
+            UILabel *dataDischarge=[[UILabel alloc]initWithFrame:CGRectMake(25*NOW_SIZE, 75*HEIGHT_SIZE+10*HEIGHT_SIZE, 250*NOW_SIZE,20*HEIGHT_SIZE )];
+            dataDischarge.text=@"充电时间段:";
+            dataDischarge.textAlignment=NSTextAlignmentLeft;
+            dataDischarge.textColor=[UIColor whiteColor];
+            dataDischarge.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+            [_scrollView addSubview:dataDischarge];
+            
+            UILabel *dataDischarge1=[[UILabel alloc]initWithFrame:CGRectMake(35*NOW_SIZE, 145*HEIGHT_SIZE+10*HEIGHT_SIZE, 250*NOW_SIZE,20*HEIGHT_SIZE )];
+            dataDischarge1.text=@"(20:00~06:00)";
+            dataDischarge1.textAlignment=NSTextAlignmentCenter;
+            dataDischarge1.textColor=[UIColor whiteColor];
+            dataDischarge1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [_scrollView addSubview:dataDischarge1];
+        }
     
     self.time1Formatter = [[NSDateFormatter alloc] init];
     [self.time1Formatter setDateFormat:@"HH:mm"];
@@ -240,12 +251,7 @@
     TO.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [_scrollView addSubview:TO];
     
-//    UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(25*NOW_SIZE, 85*NOW_SIZE+10*NOW_SIZE+50*NOW_SIZE, 115*NOW_SIZE,1*NOW_SIZE )];
-//    line1.backgroundColor=[UIColor whiteColor];
-//    [_scrollView addSubview:line1];
-//    UIView *line2=[[UIView alloc]initWithFrame:CGRectMake(185*NOW_SIZE, 85*NOW_SIZE+10*NOW_SIZE+50*NOW_SIZE, 115*NOW_SIZE,1*NOW_SIZE )];
-//    line2.backgroundColor=[UIColor whiteColor];
-//    [_scrollView addSubview:line2];
+
     }
     
     float Size1=40*HEIGHT_SIZE;
@@ -318,6 +324,73 @@
      }
     
     if([_type isEqualToString:@"6"]){
+        UILabel *buttonLable=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width/2-100*NOW_SIZE)/2, 60*HEIGHT_SIZE, 100*NOW_SIZE,20*HEIGHT_SIZE )];
+        buttonLable.text=@"使能";
+        buttonLable.textAlignment=NSTextAlignmentCenter;
+        buttonLable.textColor=[UIColor whiteColor];
+        buttonLable.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
+        [_scrollView addSubview:buttonLable];
+        
+        UIButton *firstB=[[UIButton alloc]initWithFrame:CGRectMake((SCREEN_Width/2-buttonSize)/2, 85*HEIGHT_SIZE, buttonSize,buttonSize)];
+        firstB.tag=3001;
+        [firstB setImage:[UIImage imageNamed:@"open@2x.png"] forState:UIControlStateNormal];
+        [firstB addTarget:self action:@selector(getEnable:) forControlEvents:UIControlEventTouchUpInside];
+        [_scrollView addSubview:firstB];
+        
+        UILabel *buttonLable0=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width/2-100*NOW_SIZE)/2+SCREEN_Width/2, 60*HEIGHT_SIZE, 100*NOW_SIZE,20*HEIGHT_SIZE )];
+        buttonLable0.text=@"禁止";
+        buttonLable0.textAlignment=NSTextAlignmentCenter;
+        buttonLable0.textColor=[UIColor whiteColor];
+        buttonLable0.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
+        [_scrollView addSubview:buttonLable0];
+        
+        UIButton *firstB0=[[UIButton alloc]initWithFrame:CGRectMake((SCREEN_Width/2-buttonSize)/2+SCREEN_Width/2, 85*HEIGHT_SIZE, buttonSize,buttonSize)];
+        firstB0.tag=3002;
+        [firstB0 setImage:[UIImage imageNamed:@"open@2x.png"] forState:UIControlStateNormal];
+        [firstB0 addTarget:self action:@selector(getEnable:) forControlEvents:UIControlEventTouchUpInside];
+        [_scrollView addSubview:firstB0];
+    }
+    
+    if([_type isEqualToString:@"8"]){
+     
+            UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 70*HEIGHT_SIZE+10*HEIGHT_SIZE, 300*NOW_SIZE,30*HEIGHT_SIZE )];
+            PVData.text=@"充电电池SOC设置:";
+            PVData.textAlignment=NSTextAlignmentLeft;
+            PVData.textColor=[UIColor whiteColor];
+            PVData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+            PVData.adjustsFontSizeToFitWidth=YES;
+            [_scrollView addSubview:PVData];
+        
+        
+        _textField2 = [[UITextField alloc] initWithFrame:CGRectMake(90*NOW_SIZE, 110*HEIGHT_SIZE+10*HEIGHT_SIZE, 140*NOW_SIZE, 30*HEIGHT_SIZE)];
+        _textField2.layer.borderWidth=1;
+        _textField2.layer.cornerRadius=5;
+        _textField2.layer.borderColor=[UIColor whiteColor].CGColor;
+        _textField2.textColor = [UIColor whiteColor];
+        _textField2.tintColor = [UIColor whiteColor];
+        _textField2.textAlignment=NSTextAlignmentCenter;
+        _textField2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        [_scrollView addSubview:_textField2];
+        
+        UILabel *PVData2=[[UILabel alloc]initWithFrame:CGRectMake(235*NOW_SIZE, 110*HEIGHT_SIZE+10*HEIGHT_SIZE, 40*NOW_SIZE, 30*HEIGHT_SIZE)];
+        PVData2.text=@"%";
+        PVData2.textAlignment=NSTextAlignmentLeft;
+        PVData2.textColor=[UIColor whiteColor];
+        PVData2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        PVData2.adjustsFontSizeToFitWidth=YES;
+        [_scrollView addSubview:PVData2];
+        
+        UILabel *PVData1=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 150*HEIGHT_SIZE+8*HEIGHT_SIZE, 300*NOW_SIZE,30*HEIGHT_SIZE )];
+        PVData1.text=@"(10~80)";
+        PVData1.textAlignment=NSTextAlignmentCenter;
+        PVData1.textColor=[UIColor whiteColor];
+        PVData1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        PVData1.adjustsFontSizeToFitWidth=YES;
+        [_scrollView addSubview:PVData1];
+        
+    }
+    
+    if([_type isEqualToString:@"9"]){
         NSArray *ossLableName=[NSArray arrayWithObjects:@"寄存器:",@"值:", nil];
         for (int i=0; i<ossLableName.count; i++) {
             UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE,  40*HEIGHT_SIZE+50*HEIGHT_SIZE*i, 100*NOW_SIZE,30*HEIGHT_SIZE )];
@@ -380,14 +453,18 @@
     }
     
 }
-//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
-//    
-//    int V1=[[change objectForKey:@"new"]intValue]*0.55;
-//    _PV3.text=[NSString stringWithFormat:@"(%d~",V1];
-//  int V2=[[change objectForKey:@"new"]intValue]*0.9;
-//    _PV4.text=[NSString stringWithFormat:@"%dV)",V2];
-//
-//}
+
+-(void)getEnable:(UIButton*)uibutton{
+    long Tag=uibutton.tag;
+    if (Tag==3001) {
+        _param1=@"1";
+    }else if (Tag==3002){
+      _param1=@"0";
+    }
+  _typeName=@"storage_ac_charge_enable_disenable";
+    
+    [self finishSet1];
+}
 
 -(void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath{
 
@@ -410,10 +487,20 @@
         _param1=[NSString stringWithFormat:@"%d",[[_textField text] intValue]];
         
         _param2=[NSString stringWithFormat:@"%d",[[_textField1 text] intValue]];
+        if ([_type isEqualToString:@"5"]) {
+            _typeName=@"storage_fdt_open_voltage";
+        }else if ([_type isEqualToString:@"9"]) {
+            _typeName=@"storage_fdt_open_voltage";
+        }
         
-         _typeName=@"storage_fdt_open_voltage";
     }
  
+    if (_textField2) {
+        _param1=[NSString stringWithFormat:@"%d",[[_textField2 text] intValue]];
+        
+        _typeName=@"storage_ac_charge_soc_limit";
+    }
+    
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"serialNum":_CnjSN,@"type":_typeName,@"param1":_param1,@"param2":_param2,@"param3":_param3,@"param4":_param4} paramarsSite:@"/newTcpsetAPI.do?op=storageSet" sucessBlock:^(id content) {
         //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
@@ -510,33 +597,33 @@
     float buttonSize=70*HEIGHT_SIZE;
     UIButton *switchButton = (UIButton*)sender;
     if (switchButton.tag==1001) {
-        _date=[[UIDatePicker alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 85*HEIGHT_SIZE+buttonSize+5*HEIGHT_SIZE+55*HEIGHT_SIZE+85*HEIGHT_SIZE*2, SCREEN_Width, 216*HEIGHT_SIZE)];
+        _date=[[UIDatePicker alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 25*HEIGHT_SIZE+buttonSize+5*HEIGHT_SIZE+55*HEIGHT_SIZE+85*HEIGHT_SIZE*2, SCREEN_Width, 216*HEIGHT_SIZE)];
         _date.backgroundColor=[UIColor whiteColor];
         _date.datePickerMode=UIDatePickerModeDateAndTime;
         [self.view addSubview:_date];
     }else if(switchButton.tag==1002){
-        _date1=[[UIDatePicker alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 85*HEIGHT_SIZE+buttonSize+5*HEIGHT_SIZE+55*HEIGHT_SIZE+85*HEIGHT_SIZE*2, SCREEN_Width, 216*HEIGHT_SIZE)];
+        _date1=[[UIDatePicker alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 25*HEIGHT_SIZE+buttonSize+5*HEIGHT_SIZE+55*HEIGHT_SIZE+85*HEIGHT_SIZE*2, SCREEN_Width, 216*HEIGHT_SIZE)];
         _date1.backgroundColor=[UIColor whiteColor];
         _date1.datePickerMode=UIDatePickerModeTime;
         [self.view addSubview:_date1];
     }else if(switchButton.tag==1003){
-        _date2=[[UIDatePicker alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 85*HEIGHT_SIZE+buttonSize+5*HEIGHT_SIZE+55*HEIGHT_SIZE+85*HEIGHT_SIZE*2, SCREEN_Width, 216*HEIGHT_SIZE)];
+        _date2=[[UIDatePicker alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 25*HEIGHT_SIZE+buttonSize+5*HEIGHT_SIZE+55*HEIGHT_SIZE+85*HEIGHT_SIZE*2, SCREEN_Width, 216*HEIGHT_SIZE)];
         _date2.backgroundColor=[UIColor whiteColor];
         _date2.datePickerMode=UIDatePickerModeTime;
         [self.view addSubview:_date2];
     }
     
     
-   
+    float toolBarH=36*HEIGHT_SIZE;
     
     if (self.toolBar) {
         [UIView animateWithDuration:0.3f animations:^{
             self.toolBar.alpha = 1;
-            self.toolBar.frame = CGRectMake(0, 85*HEIGHT_SIZE+buttonSize+5*HEIGHT_SIZE+55*HEIGHT_SIZE+85*HEIGHT_SIZE*2-44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+            self.toolBar.frame = CGRectMake(0, 45*HEIGHT_SIZE+buttonSize+5*HEIGHT_SIZE+55*HEIGHT_SIZE+85*HEIGHT_SIZE*2-toolBarH, SCREEN_Width, toolBarH);
             [self.view addSubview:_toolBar];
         }];
     } else {
-        self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 85*HEIGHT_SIZE+buttonSize+5*HEIGHT_SIZE+55*HEIGHT_SIZE+85*HEIGHT_SIZE*2-44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE)];
+        self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 45*HEIGHT_SIZE+buttonSize+5*HEIGHT_SIZE+55*HEIGHT_SIZE+85*HEIGHT_SIZE*2-toolBarH, SCREEN_Width, toolBarH)];
         self.toolBar.barStyle = UIBarStyleDefault;
         self.toolBar.barTintColor = COLOR(17, 183, 243, 1);
         [self.view addSubview:self.toolBar];
@@ -558,7 +645,12 @@
     if (self.date1) {
         self.currentTime1 = [self.time1Formatter stringFromDate:self.date1.date];
         [self.time1 setTitle:self.currentTime1 forState:UIControlStateNormal];
-        _typeName=@"storage_cmd_forced_discharge_time1";
+        if ([_type isEqualToString:@"4"]) {
+             _typeName=@"storage_cmd_forced_discharge_time1";
+        }else if([_type isEqualToString:@"7"]){
+                _typeName=@"storage_ac_charge_hour_start";
+        }
+       
         NSRange rang = NSMakeRange(0, 2);
         NSRange rang1 = NSMakeRange(3, 2);
         _param1=[self.currentTime1 substringWithRange:rang];
@@ -594,6 +686,7 @@
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
     [_textField resignFirstResponder];
     [_textField1 resignFirstResponder];
+    [_textField2 resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

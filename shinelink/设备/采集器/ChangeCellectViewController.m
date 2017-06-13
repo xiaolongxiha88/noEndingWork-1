@@ -75,13 +75,53 @@
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [goBut setTitle:root_finish forState:UIControlStateNormal];
      goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    [goBut addTarget:self action:@selector(addButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    if ([_OssString isEqualToString:@"1"]) {
+            [goBut addTarget:self action:@selector(addButtonPressed0) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+      [goBut addTarget:self action:@selector(addButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    }
+  
     [self.view addSubview:goBut];
 }
 
 -(void)delButtonPressed{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(void)addButtonPressed0{
+    NSArray *array=[[NSArray alloc]initWithObjects:@"Insert true datalog sn",@"Datalog verification code is incorrect", nil];
+    for (int i=0; i<2; i++) {
+        if ([[_textFieldMutableArray[i] text] isEqual:@""]) {
+            [self showToastViewWithTitle:array[i]];
+            return;
+        }
+    }
+    
+    NSDictionary *dict=@{@"deviceSn":[_textFieldMutableArray[0] text],
+                         @"alias":[_textFieldMutableArray[1] text],
+                         @"other":[_textFieldMutableArray[2] text],
+                         @"deviceType":_deviceType,
+                         };
+    
+    [self showProgressView];
+    NSString *address=OSS_HEAD_URL;
+    [BaseRequest requestWithMethodResponseStringResult:address paramars:dict paramarsSite:@"/api/v1/device/update" sucessBlock:^(id content) {
+        [self hideProgressView];
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+           NSLog(@"/api/v1/device/update=: %@", jsonObj);
+        if ([[jsonObj objectForKey:@"result"] integerValue] ==1) {
+              [self showAlertViewWithTitle:nil message:NSLocalizedString(@"Successfully modified", @"Successfully modified") cancelButtonTitle:root_Yes];
+              [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            NSString *msg=[jsonObj objectForKey:@"msg"];
+                [self showAlertViewWithTitle:nil message:msg cancelButtonTitle:root_Yes];
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+    }];
+}
+
 
 -(void)addButtonPressed{
     NSArray *array=[[NSArray alloc]initWithObjects:@"Insert true datalog sn",@"Datalog verification code is incorrect", nil];

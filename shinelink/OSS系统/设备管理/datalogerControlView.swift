@@ -12,6 +12,12 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
 
       var tableView:UITableView!
       var cellNameArray:NSArray!
+      var valueDic:NSDictionary!
+        var snString:NSString!
+     var  paramTypeString:NSString!
+    var  value1:NSString!
+    var  value2:NSString!
+      var netDic:NSDictionary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,10 +71,13 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
       var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
         
         if cell == nil {
-            cell = UITableViewCell (style: UITableViewCellStyle.default, reuseIdentifier: cellId)
+            cell = UITableViewCell (style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
         }
         cell?.backgroundColor=MainColor
          cell?.textLabel?.text = cellNameArray[indexPath.row] as? String
+        if indexPath.row==0 {
+        //    cell?.detailTextLabel?.text=valueDic[""]
+        }
         cell?.textLabel?.font=UIFont.systemFont(ofSize: 14*HEIGHT_SIZE)
          cell?.textLabel?.textColor=UIColor.white
         cell?.accessoryType=UITableViewCellAccessoryType.disclosureIndicator
@@ -93,6 +102,7 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
             let goView=datalogerControlTwo()
             goView.lableName=cellNameArray[indexPath.row] as! NSString
             goView.typeNum = NSString(format: "%d", indexPath.row)
+            goView.snString=self.snString
             self.navigationController?.pushViewController(goView, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
         }else if indexPath.row==2{
@@ -112,7 +122,10 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
     // 设置2个UIAlertAction
     let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
     let okAction = UIAlertAction(title: "确认", style: .default) { (UIAlertAction) in
-        print("点击了好的")
+        self.value1="1"
+        self.value2=""
+        self.paramTypeString="3"
+        self.finishSet()
     }
     // 添加
     alertController.addAction(cancelAction)
@@ -128,13 +141,56 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
         // 设置2个UIAlertAction
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "确认", style: .default) { (UIAlertAction) in
-            print("点击了好的")
+            self.value1="1"
+            self.value2=""
+            self.paramTypeString="4"
+             self.finishSet()
         }
         // 添加
         alertController.addAction(cancelAction)
         alertController.addAction(okAction)
         // 弹出
         self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    
+    
+    func finishSet(){
+      
+
+        netDic=["datalogSn":snString,"paramType":paramTypeString,"param_1":value1,"param_2":value2]
+        self.showProgressView()
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/deviceSet/set/datalog", sucessBlock: {(successBlock)->() in
+            self.hideProgressView()
+            
+            let data:Data=successBlock as! Data
+            
+            let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
+            
+            if (jsonDate0 != nil){
+                let jsonDate=jsonDate0 as! Dictionary<String, Any>
+                print("/api/v1/device/info",jsonDate)
+                // let result:NSString=NSString(format:"%s",jsonDate["result"] )
+                let result1=jsonDate["result"] as! Int
+                
+                if result1==1 {
+                    
+                    self.showToastView(withTitle: "设置成功")
+                  //  self.navigationController!.popViewController(animated: true)
+                    
+                }else{
+                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                }
+                
+            }
+            
+        }, failure: {(error) in
+            self.showToastView(withTitle: root_Networking)
+        })
+        
         
     }
     

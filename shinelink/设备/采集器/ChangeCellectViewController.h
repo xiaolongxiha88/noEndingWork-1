@@ -12,4 +12,7 @@
 @property(nonatomic,strong)NSString *datalogSN;
 @property(nonatomic,strong)NSString *alias;
 @property(nonatomic,strong)NSString *unitId;
+
+@property(nonatomic,strong)NSString *OssString;
+@property(nonatomic,strong)NSString *deviceType;
 @end

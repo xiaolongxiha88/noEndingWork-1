@@ -29,10 +29,10 @@
         [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
     }
     
-    self.dataArray =[NSMutableArray arrayWithObjects:root_CNJ_kaiguan,root_CNJ_SOC,root_CNJ_shijian,root_CNJ_fangdian_kaiguan,root_CNJ_fangdian_shijian,root_CNJ_SP,nil];
-    if ([_controlType isEqualToString:@"2"]) {
-        [_dataArray addObject:@"高级设置"];
-    }
+    self.dataArray =[NSMutableArray arrayWithObjects:root_CNJ_kaiguan,root_CNJ_SOC,root_CNJ_shijian,root_CNJ_fangdian_kaiguan,root_CNJ_fangdian_shijian,root_CNJ_SP,@"充电使能",@"充电时间段",@"充电电池SOC设置",nil];
+//    if ([_controlType isEqualToString:@"2"]) {
+//        [_dataArray addObject:@"高级设置"];
+//    }
     
     
 }
@@ -104,21 +104,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
    ControlCNJ  *go=[[ControlCNJ alloc]init];
-    if (indexPath.row==0) {
-        go.type=@"0";
-    }else if (indexPath.row==1){
-        go.type=@"1";
-    }else if (indexPath.row==2){
-        go.type=@"2";
-    }else if (indexPath.row==3){
-        go.type=@"3";
-    }else if (indexPath.row==4){
-        go.type=@"4";
-    }else if (indexPath.row==5){
-        go.type=@"5";
-    }else if (indexPath.row==6){
-        go.type=@"6";
-    }
+
+    go.type=[NSString stringWithFormat:@"%ld",(long)indexPath.row];
     go.CnjSN=_CnjSn;
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
@@ -126,7 +113,7 @@
         return;
     }else{
     
-    if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==3)||(indexPath.row==5)) {
+    if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==3)||(indexPath.row==5)||(indexPath.row==7)||(indexPath.row==6)||(indexPath.row==9)||(indexPath.row==8)) {
         
         [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
             NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
@@ -146,11 +133,12 @@
         }];
 
         
-    }else  if ((indexPath.row==2)||(indexPath.row==4)||(indexPath.row==6)) {
+    }else  if ((indexPath.row==2)||(indexPath.row==4)) {
     
      [self.navigationController pushViewController:go animated:YES];
     }
-    
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+     //   tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
