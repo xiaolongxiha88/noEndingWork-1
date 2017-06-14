@@ -48,8 +48,12 @@
         [textField setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
         textField.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
         textField.textColor=[UIColor whiteColor];
+        textField.textAlignment=NSTextAlignmentCenter;
         textField.tag=i;
         textField.delegate=self;
+        if (i==0) {
+            textField.userInteractionEnabled=NO;
+        }
         [self.view addSubview:textField];
         [_textFieldMutableArray addObject:textField];
     }

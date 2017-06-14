@@ -19,6 +19,8 @@
 @property(nonatomic,strong)UIScrollView *backScroll;
 @property(nonatomic,strong)NSString *customerCodeEnable;
 @property(nonatomic,strong)NSString *userEnable;
+@property(nonatomic,strong) UILabel *addressLable;
+@property(nonatomic,strong)NSString *addressString;
 @end
 
 @implementation registerViewController
@@ -33,9 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title=root_register;
-    
- [self netServer];
-    
+    _addressString=@"";
     [self initUI];
     
     
@@ -119,68 +119,87 @@
                  NSString *server2=@"http://";
                 NSString *server=[NSString stringWithFormat:@"%@%@",server2,server1];
             [[UserInfo defaultUserInfo] setServer:server];
-            }
+             _addressString=server;
+                
             if ([content[@"customerCode"] intValue]==1) {
                 _customerCodeEnable=@"1";
             }else{
                 _customerCodeEnable=@"0";
             }
-            
-           //  _customerCodeEnable=@"1";
+                _addressLable.userInteractionEnabled=NO;
+                NSString *lableA=root_dangqian_fuwuqi_dizhi;
+                _addressLable.textColor=[UIColor lightTextColor];
+                _addressLable.text=[NSString stringWithFormat:@"%@%@",lableA,server1];
+            }else{
+                _addressLable.userInteractionEnabled=YES;
+                NSString *lableA=root_dianji_huoqu_fuwuqi;
+                _addressLable.textColor=[UIColor whiteColor];
+                _addressLable.text=[NSString stringWithFormat:@"%@",lableA];
+                [self showToastViewWithTitle:root_huoqu_wufuqi_buchenggong];
+            }
             
             if ([_customerCodeEnable isEqualToString:@"0"]) {
-                [_textFieldMutableArray[5] removeFromSuperview];
-                  UIImageView *image3=[_backScroll viewWithTag:5];
-                 UILabel *button3=[_backScroll viewWithTag:15];
-                UIView *view3=[_backScroll viewWithTag:25];
-                  [image3 removeFromSuperview];
-                [button3 removeFromSuperview];
-                [view3 removeFromSuperview];
+                  [self removeText5];
             }
             
         }else{
         _customerCodeEnable=@"0";
             if ([_customerCodeEnable isEqualToString:@"0"]) {
                 [_textFieldMutableArray[5] removeFromSuperview];
-                UIImageView *image3=[_backScroll viewWithTag:5];
-                UILabel *button3=[_backScroll viewWithTag:15];
-                UIView *view3=[_backScroll viewWithTag:25];
-                [image3 removeFromSuperview];
-                [button3 removeFromSuperview];
-                [view3 removeFromSuperview];
-
+               [self removeText5];
             }
+            _addressLable.userInteractionEnabled=YES;
+            NSString *lableA=root_dianji_huoqu_fuwuqi;
+            _addressLable.textColor=[UIColor whiteColor];
+            _addressLable.text=[NSString stringWithFormat:@"%@",lableA];
+            [self showToastViewWithTitle:root_huoqu_wufuqi_buchenggong];
         }
         
     } failure:^(NSError *error) {
         _customerCodeEnable=@"0";
         if ([_customerCodeEnable isEqualToString:@"0"]) {
-            [_textFieldMutableArray[5] removeFromSuperview];
-            UIImageView *image3=[_backScroll viewWithTag:5];
-            UILabel *button3=[_backScroll viewWithTag:15];
-            UIView *view3=[_backScroll viewWithTag:25];
-            [image3 removeFromSuperview];
-            [button3 removeFromSuperview];
-            [view3 removeFromSuperview];
-
+            [self removeText5];
         }
-        
+        _addressLable.userInteractionEnabled=YES;
+        NSString *lableA=root_dianji_huoqu_fuwuqi;
+        _addressLable.textColor=[UIColor whiteColor];
+        _addressLable.text=[NSString stringWithFormat:@"%@",lableA];
+        [self showToastViewWithTitle:root_huoqu_wufuqi_buchenggong];
     }];
     
    
     
 }
 
+-(void)removeText5{
+    [_textFieldMutableArray[5] removeFromSuperview];
+    UIImageView *image3=[_backScroll viewWithTag:5];
+    UILabel *button3=[_backScroll viewWithTag:15];
+    UIView *view3=[_backScroll viewWithTag:25];
+    [image3 removeFromSuperview];
+    [button3 removeFromSuperview];
+    [view3 removeFromSuperview];
+
+}
+
 -(void)initUI{
-    UIImage *bgImage = IMAGE(@"bg.png");
-    self.view.layer.contents = (id)bgImage.CGImage;
+    self.view.backgroundColor=MainColor;
+    
      _textFieldMutableArray=[NSMutableArray new];
     
      self.automaticallyAdjustsScrollViewInsets = NO;
     _backScroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height+60*NOW_SIZE)];
     _backScroll.scrollEnabled=YES;
-       _backScroll.contentSize = CGSizeMake(SCREEN_Width,850*HEIGHT_SIZE);
+       _backScroll.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height+60*NOW_SIZE);
     [self.view addSubview:_backScroll];
+    
+    _addressLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,10*HEIGHT_SIZE, 300*NOW_SIZE, 20*HEIGHT_SIZE)];
+    _addressLable.font = [UIFont systemFontOfSize:11*HEIGHT_SIZE];
+    _addressLable.textAlignment=NSTextAlignmentCenter;
+    UITapGestureRecognizer * forget2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(netServer)];
+    [_addressLable addGestureRecognizer:forget2];
+    [_backScroll addSubview:_addressLable];
+    
     
     NSArray *imageArray=[NSArray arrayWithObjects:@"icon---Name.png", @"icon---Password.png", @"icon---Password.png", @"icon---Email.png", @"iconfont-shouji.png",@"bianhao.png",nil];
     NSArray *labelArray=[NSArray arrayWithObjects:root_yongHuMing, root_Mima, root_chongFu_miMa,root_dianzZiYouJian, root_DianHua, root_daiLiShangBianHao,nil];
@@ -207,7 +226,8 @@
         line.tag=20+i;
         [_backScroll addSubview:line];
         
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(155*NOW_SIZE,10*HEIGHT_SIZE+i*60*HEIGHT_SIZE+moveHeight, 135*NOW_SIZE, 30*HEIGHT_SIZE)];
+        float textFieldH=160*NOW_SIZE;
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(155*NOW_SIZE,10*HEIGHT_SIZE+i*60*HEIGHT_SIZE+moveHeight, textFieldH, 30*HEIGHT_SIZE)];
         textField.placeholder =textFieldArray[i];
         textField.textColor = [UIColor whiteColor];
         textField.tintColor = [UIColor whiteColor];
@@ -266,7 +286,8 @@
   //  goBut.highlighted=[UIColor grayColor];
     [_backScroll addSubview:goBut];
     
-
+ [self netServer];
+    
 }
 
 
@@ -370,9 +391,15 @@
     }
     
     if (![self isValidateEmail:[_textFieldMutableArray[3] text]]) {
-        [self showToastViewWithTitle:@"请输入正确邮箱格式"];
+        [self showToastViewWithTitle:root_shuru_zhengque_youxiang_geshi];
         return;
     }
+    
+    if (_addressString==nil || _addressString==NULL||([_addressString isEqual:@""] )){
+        [self showToastViewWithTitle:root_dianji_huoqu_fuwuqi];
+        return;
+    }
+    
 //    if (![self isValidateTel:[_textFieldMutableArray[4] text]]) {
 //        [self showToastViewWithTitle:@"请输入正确电话"];
 //        return;

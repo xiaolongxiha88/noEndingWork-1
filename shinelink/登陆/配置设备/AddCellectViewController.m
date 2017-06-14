@@ -18,6 +18,8 @@
 @property(nonatomic,strong)UITextField *cellectNo;
 @property (nonatomic, strong) NSMutableDictionary *dataDic;
 @property (nonatomic, strong) NSString *setDeviceName;
+@property(nonatomic,strong)UIButton *goBut;
+
 @end
 
 @implementation AddCellectViewController
@@ -93,15 +95,15 @@
     
  
     
-    UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(40*NOW_SIZE,300*HEIGHT_SIZE, 240*NOW_SIZE, 40*HEIGHT_SIZE);
+    _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
+    _goBut.frame=CGRectMake(40*NOW_SIZE,300*HEIGHT_SIZE, 240*NOW_SIZE, 40*HEIGHT_SIZE);
     //[goBut.layer setMasksToBounds:YES];
     //[goBut.layer setCornerRadius:25.0];
-     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
-    [goBut setTitle:root_register forState:UIControlStateNormal];
-     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    [goBut addTarget:self action:@selector(addButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:goBut];
+     [_goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
+    [_goBut setTitle:root_register forState:UIControlStateNormal];
+     _goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+    [_goBut addTarget:self action:@selector(addButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_goBut];
     
     
     UIButton *QR=[[UIButton alloc]initWithFrame:CGRectMake(40*NOW_SIZE,180*HEIGHT_SIZE , 240*NOW_SIZE, 40*HEIGHT_SIZE)];
@@ -258,6 +260,7 @@
 //        return;
 //    }
     
+    _goBut.userInteractionEnabled=NO;
      [_dataDic setObject:_cellectId.text forKey:@"regDataLoggerNo"];
      [_dataDic setObject:_cellectNo.text forKey:@"regValidateCode"];
     
@@ -269,6 +272,7 @@
      [self hideProgressView];
      if (content) {
          if ([content[@"success"] integerValue] == 0) {
+               [self showProgressView];
              [BaseRequest requestWithMethod:HEAD_URL paramars:_dataDic paramarsSite:@"/newRegisterAPI.do?op=creatAccount" sucessBlock:^(id content) {
                  NSLog(@"creatAccount: %@", content);
                  [self hideProgressView];
@@ -334,23 +338,28 @@
                          [self showAlertViewWithTitle:nil message:root_zhuCe_chengGong  cancelButtonTitle:root_Yes];
                     
                      }
+                     
+                      _goBut.userInteractionEnabled=YES;
                  }
                  
              } failure:^(NSError *error) {
                  [self hideProgressView];
                  [self showToastViewWithTitle:root_Networking];
+                  _goBut.userInteractionEnabled=YES;
              }];
              
              
          }else{
              [self showAlertViewWithTitle:nil message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
                 [self.navigationController popViewControllerAnimated:NO];
+              _goBut.userInteractionEnabled=YES;
          }
 }
      
  } failure:^(NSError *error) {
      [self hideProgressView];
      [self showToastViewWithTitle:root_Networking];
+      _goBut.userInteractionEnabled=YES;
  }
   
   ];

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface registerViewController : UIViewController
+@interface registerViewController : RootViewController
 
 - (instancetype)initWithDataDict:(NSMutableDictionary *)dataDict;
 

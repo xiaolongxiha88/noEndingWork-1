@@ -667,11 +667,17 @@
 #define  root_gongju  NSLocalizedString(@"71工具", nil)
 #define  root_wufa_chakan_weilai_shuju  NSLocalizedString(@"72无法查看未来数据", nil)
 
+
+//翻译后1
 #define  root_daichuli  NSLocalizedString(@"73待处理", nil)
 #define  root_chulizhong  NSLocalizedString(@"74处理中", nil)
 #define  root_yichuli  NSLocalizedString(@"75已处理", nil)
 #define  root_daigengjin  NSLocalizedString(@"76待跟进", nil)
 #define  root_xiangguang_wenti_miaoshu  NSLocalizedString(@"77请输入相关问题的详细描述", nil)
+#define  root_dangqian_fuwuqi_dizhi  NSLocalizedString(@"78当前服务器地址:", nil)
+#define  root_dianji_huoqu_fuwuqi  NSLocalizedString(@"79点击获取服务器地址", nil)
+#define  root_huoqu_wufuqi_buchenggong  NSLocalizedString(@"80获取服务器地址不成功", nil)
+#define  root_shuru_zhengque_youxiang_geshi  NSLocalizedString(@"81请输入正确邮箱格式", nil)
 
 
 

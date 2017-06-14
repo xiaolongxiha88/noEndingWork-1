@@ -33,6 +33,38 @@
             endingLineNumber = "66"
             landmarkName = "-scaleToDefault"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[LoginButton scaleToDefault]"
+                  moduleName = "ShinePhone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E7%99%BB%E9%99%86/LoginButton.m"
+                  timestampString = "519102202.734631"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__29-[LoginButton scaleToDefault]_block_invoke"
+                  moduleName = "ShinePhone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E7%99%BB%E9%99%86/LoginButton.m"
+                  timestampString = "519102202.736235"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -185,38 +217,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x767b;&#x9646;/&#x6ce8;&#x518c;/&#x624b;&#x673a;&#x9a8c;&#x8bc1;/phoneRegisterViewController.m"
-            timestampString = "517391699.848754"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x767b;&#x9646;/&#x6ce8;&#x518c;/&#x624b;&#x673a;&#x9a8c;&#x8bc1;/phoneRegisterViewController.m"
-            timestampString = "517391983.206224"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "-initUI"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "shinelink/&#x6211;/meViewController.m"
             timestampString = "517915359.961365"
             startingColumnNumber = "9223372036854775807"
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shinelink/&#x8bbe;&#x5907;/&#x91c7;&#x96c6;&#x5668;/ChangeCellectViewController.m"
-            timestampString = "519043879.029762"
+            timestampString = "519098723.160284"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "-addButtonPressed"
             landmarkType = "7">
             <Locations>
@@ -282,12 +282,12 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E9%87%87%E9%9B%86%E5%99%A8/ChangeCellectViewController.m"
-                  timestampString = "519045151.125884"
+                  timestampString = "519102202.771664"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "140"
-                  endingLineNumber = "140"
-                  offsetFromSymbolStart = "899">
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "928">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -297,12 +297,12 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E9%87%87%E9%9B%86%E5%99%A8/ChangeCellectViewController.m"
-                  timestampString = "519045151.127575"
+                  timestampString = "519102202.773248"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "140"
-                  endingLineNumber = "140"
-                  offsetFromSymbolStart = "19">
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "24">
                </Location>
             </Locations>
          </BreakpointContent>
