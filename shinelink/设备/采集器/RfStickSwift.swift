@@ -108,8 +108,9 @@ class RfStickSwift: RootViewController {
       
         let netDic0=["serialNum":RfSnText.text,"rfStickSN":RfSnText2.text]
     
+      self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: HEAD_URL, paramars: netDic0, paramarsSite: "/newFtpAPI.do?op=singlepairRFStick", sucessBlock: {(successBlock)->() in
-            
+              self.hideProgressView()
           
              let data:Data=successBlock as! Data
         
@@ -130,6 +131,7 @@ class RfStickSwift: RootViewController {
             }
             
         }, failure: {(error) in
+            self.hideProgressView()
                   self.showToastView(withTitle: root_Networking)
         })
         

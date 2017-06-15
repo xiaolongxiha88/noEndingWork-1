@@ -57,16 +57,34 @@ class deviceControlView: RootViewController {
             }
             lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["deviceType"]as! NSString,valueDic["userName"]as! NSString,status,valueDic["clientUrl"]as! NSString,version,valueDic["tcpServerIp"] as! NSString,valueDic["lastUpdateTimeText"] as! NSString,valueDic["createDate"] as! NSString]
         }else if typeNum=="1"{
+            let nominalString=NSString(format: "%.f", valueDic["nominalPower"]as! Float)
+              let powerString=NSString(format: "%.f", valueDic["power"]as! Float)
+              let etodayString=NSString(format: "%.f", valueDic["eToday"]as! Float)
+              let eTotallString=NSString(format: "%.f", valueDic["eTotal"]as! Float)
         lableNameArray=["序列号","别名","所属采集器","连接状态","额定功率(W)","当前功率(W)","今日发电(kWh)","累计发电量(kWh)","逆变器型号","最后更新时间"]
-               lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["dataLogSn"]as! NSString,status,valueDic["nominalPower"]as! Float,valueDic["power"]as! Float,valueDic["eToday"]as! Float,valueDic["eTotal"]as! Float,valueDic["modelText"]as! NSString,valueDic["lastUpdateTimeText"] as! NSString]
+               lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["dataLogSn"]as! NSString,status,nominalString,powerString,etodayString,eTotallString,valueDic["modelText"]as! NSString,valueDic["lastUpdateTimeText"] as! NSString]
             
         }else if typeNum=="2"{
             var type=""
             if (valueDic["deviceType"] as! Int)==0{
                 type="SP2000"}else if (valueDic["deviceType"] as! Int)==1{type="SP3000"}else if (valueDic["deviceType"] as! Int)==2{type="SPF5000"}
-            
-            lableNameArray=["序列号","别名","所属采集器","连接状态","充电功率(W)","放电功率(W)","储能机版本","服务器IP地址","储能机型号","最后更新时间"]
-               lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["dataLogSn"]as! NSString,status,valueDic["pCharge"]as! Float,valueDic["pDischarge"]as! Float,valueDic["fwVersion"]as! NSString,type,valueDic["tcpServerIp"] as! NSString,type,valueDic["lastUpdateTimeText"] as! NSString]
+            let pChargeString=NSString(format: "%.f", valueDic["pCharge"]as! Float)
+            let pDischargeString=NSString(format: "%.f", valueDic["pDischarge"]as! Float)
+            let statueIne=valueDic["status"] as! Int
+            var statueString:NSString!
+            if statueIne==0 {
+                statueString=root_xianZhi as NSString!
+            }else if statueIne==1 {
+                statueString=root_chongDian as NSString!
+            }else if statueIne==2 {
+                statueString=root_fangDian as NSString!
+            }else if statueIne==3{
+                statueString=root_cuoWu as NSString!
+            }else if statueIne==4{
+                statueString=root_dengDai as NSString!
+            }
+            lableNameArray=["序列号","别名","所属采集器","连接状态","充电功率(W)","放电功率(W)","储能机状态","服务器IP地址","储能机型号","最后更新时间"]
+               lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["dataLogSn"]as! NSString,status,pChargeString,pDischargeString,statueString,valueDic["tcpServerIp"] as! NSString,type,valueDic["lastUpdateTimeText"] as! NSString]
         }
         
         self.initUI()
@@ -275,6 +293,20 @@ class deviceControlView: RootViewController {
                 self.navigationController?.pushViewController(goView, animated: true)
             }
    
+            if typeNum=="1" {
+                            let goView=kongZhiNi0()
+                            goView.controlType="2"
+                goView.pvSn=valueDic["serialNum"]as! String
+                            self.navigationController?.pushViewController(goView, animated: true)
+            }
+            
+            if typeNum=="2" {
+                let goView=controlCNJTable()
+                goView.controlType="2"
+                goView.cnjSn=valueDic["serialNum"]as! String
+                self.navigationController?.pushViewController(goView, animated: true)
+            }
+
             
         }
 
@@ -315,25 +347,27 @@ class deviceControlView: RootViewController {
         }
         
         if uibutton.tag==2003 {
-            if  dataloggerTypeString==6 {
-            
+            if  dataloggerTypeString==6 {                //新WiFi
+                   let goView=AddDeviceViewController()
+                goView.snString=valueDic["serialNum"]as! String
+                goView.hidesBottomBarWhenPushed=true
+                     self.navigationController?.pushViewController(goView, animated: true)
+                
+            }
+            if  dataloggerTypeString==2 {                  //老WiFi
+                let goView=MainViewController()
+                self.navigationController?.pushViewController(goView, animated: true)
+
+            }
+            if  dataloggerTypeString==9 {                  //shineLanBox
+                let goView=RfStickSwift()
+                self.navigationController?.pushViewController(goView, animated: true)
+                
             }
         }
         
-//        if CELL=="1"{
-//            let goView=deviceControlView()
-//            self.navigationController?.pushViewController(goView, animated: true)
-//        }else if CELL=="2"{
-//            let goView=kongZhiNi0()
-//            goView.controlType="2"
-//            self.navigationController?.pushViewController(goView, animated: true)
-//        }else if CELL=="3"{
-//            let goView=controlCNJTable()
-//            goView.controlType="2"
-//            self.navigationController?.pushViewController(goView, animated: true)
-//        }
-        
-        
+
+            
     }
     
     
@@ -359,7 +393,7 @@ class deviceControlView: RootViewController {
                 if result1==1 {
                     
                     self.showToastView(withTitle: "设置成功")
-                    //  self.navigationController!.popViewController(animated: true)
+                  self.navigationController!.popViewController(animated: true)
                     
                 }else{
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)

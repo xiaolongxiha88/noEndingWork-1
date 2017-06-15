@@ -11,4 +11,5 @@
 @interface KongZhiNi : RootViewController
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *PvSn;
+@property (nonatomic, strong) NSString *controlType;     //OSS是2
 @end

@@ -11,4 +11,6 @@
 @interface ControlCNJ : RootViewController
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *CnjSN;
+@property (nonatomic, strong) NSString *controlType;     //OSS是2
+
 @end

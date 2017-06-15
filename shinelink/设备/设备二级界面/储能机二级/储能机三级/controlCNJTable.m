@@ -108,41 +108,45 @@
     go.type=[NSString stringWithFormat:@"%ld",(long)indexPath.row];
     go.CnjSN=_CnjSn;
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
-        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
-        return;
-    }else{
-    
-    if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==3)||(indexPath.row==5)||(indexPath.row==7)||(indexPath.row==6)||(indexPath.row==9)||(indexPath.row==8)) {
-        
-        [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
-            NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
-            NSString *alert1=[alertView textFieldAtIndex:0].text;
-            
-            if ([alert1 isEqualToString:AlertContent]) {
-                [self.navigationController pushViewController:go animated:YES];
+        if ([_controlType isEqualToString:@"2"]) {
+            go.controlType=_controlType;
+           [self.navigationController pushViewController:go animated:YES];
+        }else{
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+                [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+                return;
             }else{
-                [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
-                    
-                }];
                 
+                if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==3)||(indexPath.row==5)||(indexPath.row==7)||(indexPath.row==6)||(indexPath.row==9)||(indexPath.row==8)) {
+                    
+                    [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
+                        NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
+                        NSString *alert1=[alertView textFieldAtIndex:0].text;
+                        
+                        if ([alert1 isEqualToString:AlertContent]) {
+                            [self.navigationController pushViewController:go animated:YES];
+                        }else{
+                            [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
+                                
+                            }];
+                            
+                        }
+                        
+                    } cancelBlock:^{
+                        NSLog(@"取消了");
+                    }];
+                    
+                    
+                }else  if ((indexPath.row==2)||(indexPath.row==4)) {
+                    
+                    [self.navigationController pushViewController:go animated:YES];
+                }
+                [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+                //   tableView.deselectRow(at: indexPath, animated: true)
             }
-            
-        } cancelBlock:^{
-            NSLog(@"取消了");
-        }];
-
-        
-    }else  if ((indexPath.row==2)||(indexPath.row==4)) {
+        }
     
-     [self.navigationController pushViewController:go animated:YES];
-    }
-        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-     //   tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    
-   
+  
     
 }
 

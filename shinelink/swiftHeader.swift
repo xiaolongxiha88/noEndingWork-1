@@ -37,6 +37,15 @@ let  root_shuru_rf_sn = NSLocalizedString("请输入RFStick序列号", comment: 
 let  root_peizhi_chenggong = NSLocalizedString("配置成功", comment: "default")
 let  root_Networking = NSLocalizedString("Networking Timeout", comment: "default")
 
+let  root_dengDai = NSLocalizedString("等待", comment: "default")
+let  root_zhengChang = NSLocalizedString("正常", comment: "default")
+let  root_cuoWu = NSLocalizedString("故障", comment: "default")
+let  root_duanKai = NSLocalizedString("断开", comment: "default")
+let  root_xianZhi = NSLocalizedString("闲置", comment: "default")
+let  root_chongDian = NSLocalizedString("充电", comment: "default")
+let  root_fangDian = NSLocalizedString("放电", comment: "default")
+
+
 
 
 //获取String长度

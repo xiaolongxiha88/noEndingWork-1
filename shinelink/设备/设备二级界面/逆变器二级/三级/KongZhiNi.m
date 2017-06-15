@@ -21,10 +21,14 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSString *paramId;
 @property (nonatomic, strong) NSString *commandValue;
+@property (nonatomic, strong) NSString *commandValue1;
 @property (nonatomic, strong) UIAlertView *Alert1;
 @property (nonatomic, strong) UIAlertView *Alert2;
 @property (nonatomic, strong)UITextField *textField1;
 @property (nonatomic, strong)UITextField *textField2;
+@property (nonatomic, strong)UITextField *textField3;
+@property (nonatomic, strong)UITextField *textField4;
+
 @end
 
 @implementation KongZhiNi
@@ -146,22 +150,7 @@
         _textField2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
         [_scrollView addSubview:_textField2];
         
-//    _slider2=[[ASValueTrackingSlider alloc]initWithFrame:CGRectMake(20*NOW_SIZE, 85*HEIGHT_SIZE+30*HEIGHT_SIZE, SCREEN_Width-40*NOW_SIZE, 40*HEIGHT_SIZE)];
-//    _slider2.maximumValue = 0.8;
-//    _slider2.minimumValue=-0.8;
-//    [_scrollView addSubview:_slider2];
-//    UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(15*NOW_SIZE, 85*HEIGHT_SIZE+20*HEIGHT_SIZE+55*HEIGHT_SIZE, 150*NOW_SIZE,20*HEIGHT_SIZE )];
-//    PV2Lable1.text=@"-0.8";
-//    PV2Lable1.textAlignment=NSTextAlignmentLeft;
-//    PV2Lable1.textColor=[UIColor whiteColor];
-//    PV2Lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-//    [_scrollView addSubview:PV2Lable1];
-//    UILabel *PV2Lable2=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width-22*NOW_SIZE,  85*HEIGHT_SIZE+20*HEIGHT_SIZE+55*HEIGHT_SIZE, 150*NOW_SIZE,20*HEIGHT_SIZE )];
-//    PV2Lable2.text=@"0.8";
-//    PV2Lable2.textAlignment=NSTextAlignmentLeft;
-//    PV2Lable2.textColor=[UIColor whiteColor];
-//    PV2Lable2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-//    [_scrollView addSubview:PV2Lable2];
+
     }
     
     if([_type isEqualToString:@"4"]){
@@ -194,10 +183,15 @@
     [_scrollView addSubview:_datePickerButton];
     }
     
-    if([_type isEqualToString:@"5"]){
+    if([_type isEqualToString:@"5"] || [_type isEqualToString:@"6"]){
         
         UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width-250*NOW_SIZE)/2,  65*HEIGHT_SIZE, 250*NOW_SIZE,30*HEIGHT_SIZE )];
-        PVData.text=root_NBQ_shidian_dianya;
+        if ([_type isEqualToString:@"5"]) {
+             PVData.text=root_NBQ_shidian_dianya;
+        }else{
+         PVData.text=@"设置市电电压下限";
+        }
+       
         PVData.textAlignment=NSTextAlignmentCenter;
         PVData.textColor=[UIColor whiteColor];
         PVData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
@@ -216,7 +210,7 @@
     
     }
     
-    if([_type isEqualToString:@"6"]){
+    if([_type isEqualToString:@"7"]){
         NSArray *ossLableName=[NSArray arrayWithObjects:@"寄存器:",@"值:", nil];
         for (int i=0; i<ossLableName.count; i++) {
             UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE,  40*HEIGHT_SIZE+50*HEIGHT_SIZE*i, 100*NOW_SIZE,30*HEIGHT_SIZE )];
@@ -228,25 +222,25 @@
             [_scrollView addSubview:PVData];
         }
    
-        _textField1 = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 40*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
-        _textField1.layer.borderWidth=1;
-        _textField1.layer.cornerRadius=5;
-        _textField1.layer.borderColor=[UIColor whiteColor].CGColor;
-        _textField1.textColor = [UIColor whiteColor];
-        _textField1.tintColor = [UIColor whiteColor];
-        _textField1.textAlignment=NSTextAlignmentCenter;
-        _textField1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-        [_scrollView addSubview:_textField1];
+        _textField3 = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 40*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
+        _textField3.layer.borderWidth=1;
+        _textField3.layer.cornerRadius=5;
+        _textField3.layer.borderColor=[UIColor whiteColor].CGColor;
+        _textField3.textColor = [UIColor whiteColor];
+        _textField3.tintColor = [UIColor whiteColor];
+        _textField3.textAlignment=NSTextAlignmentCenter;
+        _textField3.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        [_scrollView addSubview:_textField3];
         
-        _textField2 = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 90*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
-        _textField2.layer.borderWidth=1;
-        _textField2.layer.cornerRadius=5;
-        _textField2.layer.borderColor=[UIColor whiteColor].CGColor;
-        _textField2.textColor = [UIColor whiteColor];
-        _textField2.tintColor = [UIColor whiteColor];
-        _textField2.textAlignment=NSTextAlignmentCenter;
-        _textField2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-        [_scrollView addSubview:_textField2];
+        _textField4 = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 90*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
+        _textField4.layer.borderWidth=1;
+        _textField4.layer.cornerRadius=5;
+        _textField4.layer.borderColor=[UIColor whiteColor].CGColor;
+        _textField4.textColor = [UIColor whiteColor];
+        _textField4.tintColor = [UIColor whiteColor];
+        _textField4.textAlignment=NSTextAlignmentCenter;
+        _textField4.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        [_scrollView addSubview:_textField4];
         
     }
     
@@ -258,7 +252,12 @@
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [goBut setTitle:root_finish forState:UIControlStateNormal];
           goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    [goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
+        if ([_controlType isEqualToString:@"2"]) {
+           [goBut addTarget:self action:@selector(finishSet1) forControlEvents:UIControlEventTouchUpInside];
+        }else{
+           [goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
+        }
+ 
         [_scrollView addSubview:goBut];
     }
 }
@@ -288,8 +287,12 @@
         NSString *textValue= [NSString stringWithFormat:@"%.1f",[[_textField1 text] floatValue]];
         
         _commandValue=textValue;
-        
-        _paramId=@"pv_grid_voltage_high";
+        if ([_type isEqualToString:@"5"]) {
+          _paramId=@"pv_grid_voltage_high";
+        }else if ([_type isEqualToString:@"6"]){
+             _paramId=@"pv_grid_voltage_low";
+        }
+      
     }
     
     if (_textField2) {
@@ -344,6 +347,105 @@
     
 }
 
+
+-(void)finishSet1{
+
+   _commandValue1=@"";
+ 
+    
+    if(_slider){
+        NSString *S1=[NSString stringWithFormat:@"%.0f",_slider.value];
+        _commandValue=[NSString stringWithString:S1];
+        _paramId=@"pv_active_p_rate";
+    }else if (_slider1){
+        NSString *S2=[NSString stringWithFormat:@"%.0f",_slider1.value];
+        _commandValue=[NSString stringWithString:S2];
+        _paramId=@"pv_reactive_p_rate";
+    }else if (_slider2){
+        NSString *S3=[NSString stringWithFormat:@"%.2f",_slider2.value];
+        _commandValue=[NSString stringWithString:S3];
+        _paramId=@"pv_power_factor";
+    }
+    
+    if (_textField1) {
+        NSString *textValue= [NSString stringWithFormat:@"%.1f",[[_textField1 text] floatValue]];
+        
+        _commandValue=textValue;
+        if ([_type isEqualToString:@"5"]) {
+            _paramId=@"pv_grid_voltage_high";
+        }else if ([_type isEqualToString:@"6"]){
+            _paramId=@"pv_grid_voltage_low";
+        }
+        
+    }
+    
+    if (_textField2) {
+        NSString *textValue= [NSString stringWithFormat:@"%.2f",[[_textField2 text] floatValue]];
+        
+        _commandValue=textValue;
+        
+        _paramId=@"pv_power_factor";
+    }
+    
+    if (_textField3) {
+        NSString *textValue= [NSString stringWithFormat:@"%d",[[_textField3 text] intValue]];
+        _commandValue=textValue;
+        NSString *textValue1= [NSString stringWithFormat:@"%d",[[_textField4 text] intValue]];
+        _commandValue1=textValue1;
+        
+        _paramId=@"set_any_reg";
+    }
+    
+    if (_commandValue==nil || _commandValue==NULL||([_commandValue isEqual:@""] )){
+         [self showToastViewWithTitle:@"请填写设置参数"];
+        return;
+    }
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"inverterSn":_PvSn,@"paramId":_paramId,@"param_1":_commandValue,@"param_1":_commandValue1} paramarsSite:@"/api/v1/deviceSet/set/inverter" sucessBlock:^(id content) {
+        //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"inverterSet: %@", content1);
+        [self hideProgressView];
+        
+        if (content1) {
+            if ([content1[@"result"] integerValue] != 1) {
+                if ([content1[@"result"] integerValue] ==0) {
+                    [self showAlertViewWithTitle:nil message:root_xitong_cuoWu cancelButtonTitle:root_Yes];
+                    
+                }else if ([content1[@"result"] integerValue] ==2) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_fuwuqi_cuowu cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==3) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_buzaixian cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==4) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_xuliehao_kong cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==5) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_caijiqi_buzai cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==6) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_leixing_buzai cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==7) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_canshu_kong cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==8) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_canshu_buzai_fanwei cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==9) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_shijian_budui cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==12) {
+                    [self showAlertViewWithTitle:nil message:@"远程设置错误" cancelButtonTitle:root_Yes];
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [self showAlertViewWithTitle:nil message:root_CNJ_canshu_chenggong cancelButtonTitle:root_Yes];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+    } failure:^(NSError *error) {
+        [self showToastViewWithTitle:root_Networking];
+        [self hideProgressView];
+    }];
+    
+}
+
+
 -(void)pickDate{
    // float buttonSize=70*HEIGHT_SIZE;
   _date=[[UIDatePicker alloc]initWithFrame:CGRectMake(0*NOW_SIZE, SCREEN_Height-300*HEIGHT_SIZE, SCREEN_Width, 300*HEIGHT_SIZE)];
@@ -393,17 +495,18 @@
     [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
      _commandValue= self.currentDay;
       _paramId=@"pf_sys_year";
-    [self finishSet];
+    if ([_controlType isEqualToString:@"2"]) {
+        [self finishSet1];
+    }else{
+        [self finishSet];
+    }
     [self.toolBar removeFromSuperview];
     [self.date removeFromSuperview];
     
 }
 
 -(void)control{
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
-        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
-        return;
-    }
+
     _Alert1 = [[UIAlertView alloc] initWithTitle:root_ALET message:root_NBQ_shifou_kaiqi delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
     
     [_Alert1 show];
@@ -411,10 +514,7 @@
 }
 
 -(void)controlOff{
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
-        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
-        return;
-    }
+
    _Alert2 = [[UIAlertView alloc] initWithTitle:root_ALET message:root_NBQ_shifou_guanbi delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
     [_Alert2 show];
 }
@@ -426,11 +526,21 @@
         if (_Alert1) {
             _commandValue=@"0101";
             _paramId=@"pv_on_off";
-            [self finishSet];
+            if ([_controlType isEqualToString:@"2"]) {
+              [self finishSet1];
+            }else{
+              [self finishSet];
+            }
+          
         }else if (_Alert2){
            _commandValue=@"0000";
             _paramId=@"pv_on_off";
-            [self finishSet];
+            if ([_controlType isEqualToString:@"2"]) {
+                [self finishSet1];
+            }else{
+                [self finishSet];
+            }
+
         }
      
     }

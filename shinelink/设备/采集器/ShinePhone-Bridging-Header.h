@@ -16,3 +16,5 @@
 
 #import "OssMessageViewController.h"
 #import "MJRefresh.h"
+#import "AddDeviceViewController.h"
+#import "MainViewController.h"

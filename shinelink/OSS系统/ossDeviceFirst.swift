@@ -577,6 +577,10 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                 
                 if result1==1 {
                      UserDefaults.standard.set(self.addressString, forKey: "OssAddress")
+                     let server2="http://";
+                    let server=NSString(format: "%@%@", server2,self.addressString)
+                          UserDefaults.standard.set(server, forKey: "server")
+                  
                     
                     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
                     var plantAll:NSArray=[]
@@ -741,6 +745,10 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                 if result1==1 {
                     self.deviceTypeString=NSString(format: "%d", value1)
                       UserDefaults.standard.set(self.addressString, forKey: "OssAddress")
+                    let server2="http://";
+                    let server=NSString(format: "%@%@", server2,self.addressString)
+                    UserDefaults.standard.set(server, forKey: "server")
+                    
                     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
                     var plantAll:NSArray = []
                     

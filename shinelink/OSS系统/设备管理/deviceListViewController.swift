@@ -30,10 +30,17 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
        var plantIdString:NSString!
        var deviceTypeString:NSString!
     
+
+    override func viewWillAppear(_ animated: Bool) {
+        pageNum=0
+        
+        self.initNet1()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+deviceTypeString="1"
       self.initUI()
     }
 
@@ -55,9 +62,7 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
         NotificationCenter.default.addObserver(self, selector:#selector(tableViewReload(info:)),
                                                name: NotifyChatMsgRecv, object: nil)
         
-        pageNum=0
-          deviceTypeString="1"
-    self.initNet1()
+
       
         
     }

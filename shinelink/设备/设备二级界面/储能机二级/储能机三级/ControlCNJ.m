@@ -143,7 +143,7 @@
     
            
     _datePickerButton=[[UIButton alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2,115*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
-           _datePickerButton.layer.borderWidth=0.5;
+           _datePickerButton.layer.borderWidth=1*HEIGHT_SIZE;
            _datePickerButton.layer.cornerRadius=5;
            _datePickerButton.layer.borderColor=[UIColor whiteColor].CGColor;
     [_datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
@@ -221,7 +221,7 @@
     self.currentTime1 = [_time1Formatter stringFromDate:[NSDate date]];
     
     _time1=[[UIButton alloc]initWithFrame:CGRectMake(20*NOW_SIZE, 85*HEIGHT_SIZE+10*HEIGHT_SIZE+25*HEIGHT_SIZE, 120*NOW_SIZE,30*HEIGHT_SIZE )];
-        _time1.layer.borderWidth=1;
+        _time1.layer.borderWidth=1*HEIGHT_SIZE;
         _time1.layer.cornerRadius=5;
         _time1.layer.borderColor=[UIColor whiteColor].CGColor;
     [_time1 setTitle:self.currentTime1 forState:UIControlStateNormal];
@@ -233,7 +233,7 @@
     [_scrollView addSubview:_time1];
     
     _time2=[[UIButton alloc]initWithFrame:CGRectMake(180*NOW_SIZE, 85*HEIGHT_SIZE+10*HEIGHT_SIZE+25*HEIGHT_SIZE, 120*NOW_SIZE,30*HEIGHT_SIZE )];
-        _time2.layer.borderWidth=1;
+        _time2.layer.borderWidth=1*HEIGHT_SIZE;
         _time2.layer.cornerRadius=5;
         _time2.layer.borderColor=[UIColor whiteColor].CGColor;
     [_time2 setTitle:self.currentTime1 forState:UIControlStateNormal];
@@ -277,7 +277,7 @@
 //    [_scrollView addSubview:line3];
     
    _textField = [[UITextField alloc] initWithFrame:CGRectMake(200*NOW_SIZE,75*HEIGHT_SIZE+10*HEIGHT_SIZE+Size1, 100*NOW_SIZE,30*HEIGHT_SIZE )];
-         _textField.layer.borderWidth=1;
+         _textField.layer.borderWidth=1*HEIGHT_SIZE;
          _textField.layer.cornerRadius=5;
          _textField.layer.borderColor=[UIColor whiteColor].CGColor;
     _textField.textColor = [UIColor whiteColor];
@@ -310,7 +310,7 @@
          
     
     _textField1 = [[UITextField alloc] initWithFrame:CGRectMake(200*NOW_SIZE,75*HEIGHT_SIZE+10*HEIGHT_SIZE+Size1*2, 100*NOW_SIZE,30*HEIGHT_SIZE )];
-         _textField1.layer.borderWidth=1;
+         _textField1.layer.borderWidth=1*HEIGHT_SIZE;
          _textField1.layer.cornerRadius=5;
          _textField1.layer.borderColor=[UIColor whiteColor].CGColor;
     _textField1.textColor = [UIColor whiteColor];
@@ -363,7 +363,7 @@
         
         
         _textField2 = [[UITextField alloc] initWithFrame:CGRectMake(90*NOW_SIZE, 110*HEIGHT_SIZE+10*HEIGHT_SIZE, 140*NOW_SIZE, 30*HEIGHT_SIZE)];
-        _textField2.layer.borderWidth=1;
+        _textField2.layer.borderWidth=1*HEIGHT_SIZE;
         _textField2.layer.cornerRadius=5;
         _textField2.layer.borderColor=[UIColor whiteColor].CGColor;
         _textField2.textColor = [UIColor whiteColor];
@@ -390,39 +390,39 @@
         
     }
     
-    if([_type isEqualToString:@"9"]){
-        NSArray *ossLableName=[NSArray arrayWithObjects:@"寄存器:",@"值:", nil];
-        for (int i=0; i<ossLableName.count; i++) {
-            UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE,  40*HEIGHT_SIZE+50*HEIGHT_SIZE*i, 100*NOW_SIZE,30*HEIGHT_SIZE )];
-            PVData.text=ossLableName[i];
-            PVData.textAlignment=NSTextAlignmentRight;
-            PVData.textColor=[UIColor whiteColor];
-            PVData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-            PVData.adjustsFontSizeToFitWidth=YES;
-            [_scrollView addSubview:PVData];
-        }
-        
-        _textField1 = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 40*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
-        _textField1.layer.borderWidth=1;
-        _textField1.layer.cornerRadius=5;
-        _textField1.layer.borderColor=[UIColor whiteColor].CGColor;
-        _textField1.textColor = [UIColor whiteColor];
-        _textField1.tintColor = [UIColor whiteColor];
-        _textField1.textAlignment=NSTextAlignmentCenter;
-        _textField1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-        [_scrollView addSubview:_textField1];
-        
-        _textField = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 90*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
-        _textField.layer.borderWidth=1;
-        _textField.layer.cornerRadius=5;
-        _textField.layer.borderColor=[UIColor whiteColor].CGColor;
-        _textField.textColor = [UIColor whiteColor];
-        _textField.tintColor = [UIColor whiteColor];
-        _textField.textAlignment=NSTextAlignmentCenter;
-        _textField.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-        [_scrollView addSubview:_textField];
-        
-    }
+//    if([_type isEqualToString:@"9"]){
+//        NSArray *ossLableName=[NSArray arrayWithObjects:@"寄存器:",@"值:", nil];
+//        for (int i=0; i<ossLableName.count; i++) {
+//            UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE,  40*HEIGHT_SIZE+50*HEIGHT_SIZE*i, 100*NOW_SIZE,30*HEIGHT_SIZE )];
+//            PVData.text=ossLableName[i];
+//            PVData.textAlignment=NSTextAlignmentRight;
+//            PVData.textColor=[UIColor whiteColor];
+//            PVData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+//            PVData.adjustsFontSizeToFitWidth=YES;
+//            [_scrollView addSubview:PVData];
+//        }
+//        
+//        _textField1 = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 40*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
+//        _textField1.layer.borderWidth=1;
+//        _textField1.layer.cornerRadius=5;
+//        _textField1.layer.borderColor=[UIColor whiteColor].CGColor;
+//        _textField1.textColor = [UIColor whiteColor];
+//        _textField1.tintColor = [UIColor whiteColor];
+//        _textField1.textAlignment=NSTextAlignmentCenter;
+//        _textField1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+//        [_scrollView addSubview:_textField1];
+//        
+//        _textField = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 90*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
+//        _textField.layer.borderWidth=1;
+//        _textField.layer.cornerRadius=5;
+//        _textField.layer.borderColor=[UIColor whiteColor].CGColor;
+//        _textField.textColor = [UIColor whiteColor];
+//        _textField.tintColor = [UIColor whiteColor];
+//        _textField.textAlignment=NSTextAlignmentCenter;
+//        _textField.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+//        [_scrollView addSubview:_textField];
+//        
+//    }
     
     
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
@@ -432,7 +432,12 @@
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [goBut setTitle:root_finish forState:UIControlStateNormal];
      goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    [goBut addTarget:self action:@selector(finishSet1) forControlEvents:UIControlEventTouchUpInside];
+    if ([_controlType isEqualToString:@"2"]) {
+            [goBut addTarget:self action:@selector(finishSet2) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+        [goBut addTarget:self action:@selector(finishSet1) forControlEvents:UIControlEventTouchUpInside];
+    }
+
     [_scrollView addSubview:goBut];
 
 }
@@ -463,7 +468,13 @@
     }
   _typeName=@"storage_ac_charge_enable_disenable";
     
-    [self finishSet1];
+    if ([_controlType isEqualToString:@"2"]) {
+       [self finishSet2];
+    }else{
+          [self finishSet1];
+    }
+    
+
 }
 
 -(void)removeObserver:(NSObject *)observer forKeyPath:(NSString *)keyPath{
@@ -489,8 +500,6 @@
         _param2=[NSString stringWithFormat:@"%d",[[_textField1 text] intValue]];
         if ([_type isEqualToString:@"5"]) {
             _typeName=@"storage_fdt_open_voltage";
-        }else if ([_type isEqualToString:@"9"]) {
-            _typeName=@"storage_fdt_open_voltage";
         }
         
     }
@@ -500,7 +509,7 @@
         
         _typeName=@"storage_ac_charge_soc_limit";
     }
-    
+     [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"serialNum":_CnjSN,@"type":_typeName,@"param1":_param1,@"param2":_param2,@"param3":_param3,@"param4":_param4} paramarsSite:@"/newTcpsetAPI.do?op=storageSet" sucessBlock:^(id content) {
         //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
@@ -539,16 +548,91 @@
         }
     } failure:^(NSError *error) {
         [self showToastViewWithTitle:root_Networking];
+          [self hideProgressView];
     }];
     
     
 }
 
--(void)control{
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
-        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
-        return;
+-(void)finishSet2{
+    
+    if(_slider){
+        NSString *S1=[NSString stringWithFormat:@"%.0f",_slider.value];
+        _param1=[NSString stringWithString:S1];
+        _typeName=@"storage_lithium_battery";
     }
+    
+    if (_textField) {
+        _param1=[NSString stringWithFormat:@"%d",[[_textField text] intValue]];
+        
+        _param2=[NSString stringWithFormat:@"%d",[[_textField1 text] intValue]];
+        if ([_type isEqualToString:@"5"]) {
+            _typeName=@"storage_fdt_open_voltage";
+        }
+        
+    }
+    
+    if (_textField2) {
+        _param1=[NSString stringWithFormat:@"%d",[[_textField2 text] intValue]];
+        
+        _typeName=@"storage_ac_charge_soc_limit";
+    }
+    
+//    if (_param1==nil || _param1==NULL||([_param1 isEqual:@""] )){
+//        [self showToastViewWithTitle:@"请填写设置参数"];
+//        return;
+//    }
+       [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"storageSn":_CnjSN,@"paramId":_typeName,@"param_1":_param1,@"param_2":_param2,@"param_3":_param3,@"param_4":_param4} paramarsSite:@"/api/v1/deviceSet/set/storage" sucessBlock:^(id content) {
+        //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"inverterSet: %@", content1);
+        [self hideProgressView];
+        
+        if (content1) {
+            if ([content1[@"result"] integerValue] != 1) {
+                if ([content1[@"result"] integerValue] ==0) {
+                    [self showAlertViewWithTitle:nil message:root_xitong_cuoWu cancelButtonTitle:root_Yes];
+                    
+                }else if ([content1[@"result"] integerValue] ==2) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_fuwuqi_cuowu cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==3) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_xuliehao_kong cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==4) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_buzaixian cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==5) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_caijiqi_buzai cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==6) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_leixing_buzai cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==7) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_canshu_kong cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==8) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_canshu_buzai_fanwei cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==9) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_shijian_budui cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==12) {
+                    [self showAlertViewWithTitle:nil message:root_meiyou_quanxian cancelButtonTitle:root_Yes];
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [self showAlertViewWithTitle:nil message:root_CNJ_canshu_chenggong cancelButtonTitle:root_Yes];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+    } failure:^(NSError *error) {
+        [self showToastViewWithTitle:root_Networking];
+          [self hideProgressView];
+    }];
+    
+    
+}
+
+
+-(void)control{
+//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+//        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+//        return;
+//    }
     _Alert1 = [[UIAlertView alloc] initWithTitle:root_ALET message:root_CNJ_shifou_kaiqi_CNJ delegate:self cancelButtonTitle:root_cancel  otherButtonTitles:root_OK, nil];
     
     [_Alert1 show];
@@ -556,10 +640,10 @@
 }
 
 -(void)controlOff{
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
-        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
-        return;
-    }
+//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+//        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+//        return;
+//    }
     _Alert2 = [[UIAlertView alloc] initWithTitle:root_ALET message:root_CNJ_shifou_guanbi_CNJ delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
     [_Alert2 show];
 }
@@ -575,7 +659,12 @@
                   _typeName=@"storage_cmd_on_off";
               _param1=@"0000";
         }
-        [self finishSet1];
+        if ([_controlType isEqualToString:@"2"]) {
+            [self finishSet2];
+        }else{
+            [self finishSet1];
+        }
+        
     }
     
 }
@@ -659,21 +748,56 @@
     if (self.date2) {
         self.currentTime2 = [self.time1Formatter stringFromDate:self.date2.date];
         [self.time2 setTitle:self.currentTime2 forState:UIControlStateNormal];
+        if ([_type isEqualToString:@"4"]) {
+            _typeName=@"storage_cmd_forced_discharge_time1";
+        }else if([_type isEqualToString:@"7"]){
+            _typeName=@"storage_ac_charge_hour_start";
+        }
+        
         NSRange rang = NSMakeRange(0, 2);
         NSRange rang1 = NSMakeRange(3, 2);
         _param3=[self.currentTime2 substringWithRange:rang];
         _param4=[self.currentTime2 substringWithRange:rang1];
     }
    
+    if (self.date2) {
+        
+        if (_param1==nil || _param1==NULL||([_param1 isEqual:@""] )){
+          NSString *time1= [_time1Formatter stringFromDate:[NSDate date]];
+            NSRange rang = NSMakeRange(0, 2);
+            NSRange rang1 = NSMakeRange(3, 2);
+            _param1=[time1 substringWithRange:rang];
+            _param2=[time1 substringWithRange:rang1];
+        }
+    }
+    if (self.date1) {
+        
+        if (_param3==nil || _param3==NULL||([_param3 isEqual:@""] )){
+            NSString *time1= [_time1Formatter stringFromDate:[NSDate date]];
+            NSRange rang = NSMakeRange(0, 2);
+            NSRange rang1 = NSMakeRange(3, 2);
+            _param3=[time1 substringWithRange:rang];
+            _param4=[time1 substringWithRange:rang1];
+        }
+    }
+    
     [self.toolBar removeFromSuperview];
     [self.date removeFromSuperview];
     [self.date1 removeFromSuperview];
      [self.date2 removeFromSuperview];
     if (self.date) {
-         [self finishSet1];
+        if ([_controlType isEqualToString:@"2"]) {
+            [self finishSet2];
+        }else{
+            [self finishSet1];
+        }
     }
     if (self.date1 && self.date2) {
-         [self finishSet1];
+        if ([_controlType isEqualToString:@"2"]) {
+            [self finishSet2];
+        }else{
+            [self finishSet1];
+        }
     }
    
 }
