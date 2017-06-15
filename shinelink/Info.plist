@@ -60,6 +60,11 @@
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>ShinePhone of Growatt</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIStatusBarHidden</key>

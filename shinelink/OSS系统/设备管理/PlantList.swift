@@ -102,6 +102,13 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
                     }
                     
                     
+                    if self.plantListArray.count==1 {
+                        let goView=deviceListViewController()
+                        goView.plantIdString=self.cellValueIDArray.object(at: 0) as!NSString
+                        self.navigationController?.pushViewController(goView, animated: false)
+                        
+                    }
+                    
                     if self.plantListArray.count>0{
                         
 

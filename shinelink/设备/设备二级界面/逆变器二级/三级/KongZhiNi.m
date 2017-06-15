@@ -402,7 +402,7 @@
     }
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"inverterSn":_PvSn,@"paramId":_paramId,@"param_1":_commandValue,@"param_1":_commandValue1} paramarsSite:@"/api/v1/deviceSet/set/inverter" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"inverterSn":_PvSn,@"paramId":_paramId,@"param_1":_commandValue,@"param_2":_commandValue1} paramarsSite:@"/api/v1/deviceSet/set/inverter" sucessBlock:^(id content) {
         //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"inverterSet: %@", content1);

@@ -45,8 +45,8 @@
  #define Demo_password  @"123456"
 
 
-//#define HEAD_URL_Demo  @"http://server.growatt.com"
-//#define HEAD_URL  [UserInfo defaultUserInfo].server
+#define HEAD_URL_Demo  @"http://server.growatt.com"
+#define HEAD_URL  [UserInfo defaultUserInfo].server
 
 
 //demo for server
@@ -57,8 +57,8 @@
 //#define HEAD_URL   @"http://odm.growatt.com"
 //#define HEAD_URL_Demo  @"http://odm.growatt.com"
 
-#define HEAD_URL   @"http://192.168.3.32:8080/ShineServer_2016"
-#define HEAD_URL_Demo  @"http://192.168.3.32:8080/ShineServer_2016"
+//#define HEAD_URL   @"http://192.168.3.32:8080/ShineServer_2016"
+//#define HEAD_URL_Demo  @"http://192.168.3.32:8080/ShineServer_2016"
 
 
 //demo for OSS

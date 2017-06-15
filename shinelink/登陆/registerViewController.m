@@ -190,7 +190,7 @@
      self.automaticallyAdjustsScrollViewInsets = NO;
     _backScroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height+60*NOW_SIZE)];
     _backScroll.scrollEnabled=YES;
-       _backScroll.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height+60*NOW_SIZE);
+       _backScroll.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height+160*NOW_SIZE);
     [self.view addSubview:_backScroll];
     
     _addressLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,10*HEIGHT_SIZE, 300*NOW_SIZE, 20*HEIGHT_SIZE)];

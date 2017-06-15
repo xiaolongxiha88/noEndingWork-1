@@ -933,10 +933,10 @@
 		335456BB1C852ED900275478 /* TempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempViewController.m; sourceTree = "<group>"; };
 		335456BD1C852EEB00275478 /* SHBQRView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHBQRView.h; sourceTree = "<group>"; };
 		335456BE1C852EEB00275478 /* SHBQRView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHBQRView.m; sourceTree = "<group>"; };
-		335456C01C852FF600275478 /* 圆角矩形空心.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形空心.png"; sourceTree = "<group>"; };
-		335456C21C85301200275478 /* 圆角矩形.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形.png"; sourceTree = "<group>"; };
+		335456C01C852FF600275478 /* 圆角矩形空心.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "圆角矩形空心.png"; path = "../登陆/配置设备/圆角矩形空心.png"; sourceTree = "<group>"; };
+		335456C21C85301200275478 /* 圆角矩形.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "圆角矩形.png"; path = "../登陆/配置设备/圆角矩形.png"; sourceTree = "<group>"; };
 		335456C41C853AFD00275478 /* scanLine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scanLine@2x.png"; sourceTree = "<group>"; };
-		335456C61C853B4900275478 /* btn_cha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_cha.png; sourceTree = "<group>"; };
+		335456C61C853B4900275478 /* btn_cha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_cha.png; path = "../登陆/配置设备/btn_cha.png"; sourceTree = "<group>"; };
 		335456C81C853C2F00275478 /* scanscanBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanscanBg.png; sourceTree = "<group>"; };
 		335456CC1C8584E100275478 /* forgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forgetViewController.h; sourceTree = "<group>"; };
 		335456CD1C8584E100275478 /* forgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = forgetViewController.m; sourceTree = "<group>"; };
@@ -1447,10 +1447,10 @@
 		338964891E5C1D2000A7B1AE /* quickRegister2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quickRegister2ViewController.h; sourceTree = "<group>"; };
 		3389648A1E5C1D2000A7B1AE /* quickRegister2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = quickRegister2ViewController.m; sourceTree = "<group>"; };
 		3389648C1E5C3BBD00A7B1AE /* englishCountryJson.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = englishCountryJson.txt; path = ../../englishCountryJson.txt; sourceTree = "<group>"; };
-		3389648E1E5D678800A7B1AE /* icon_yijianjianzhan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_yijianjianzhan.png; sourceTree = "<group>"; };
-		338964901E5D679700A7B1AE /* icon_jiantou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_jiantou.png; sourceTree = "<group>"; };
-		338964961E5D8A6900A7B1AE /* frame_password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame_password.png; sourceTree = "<group>"; };
-		338964971E5D8A6900A7B1AE /* frame_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frame_user.png; sourceTree = "<group>"; };
+		3389648E1E5D678800A7B1AE /* icon_yijianjianzhan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_yijianjianzhan.png; path = "../登陆/配置设备/icon_yijianjianzhan.png"; sourceTree = "<group>"; };
+		338964901E5D679700A7B1AE /* icon_jiantou.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_jiantou.png; path = "../登陆/配置设备/icon_jiantou.png"; sourceTree = "<group>"; };
+		338964961E5D8A6900A7B1AE /* frame_password.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frame_password.png; path = "../登陆/配置设备/frame_password.png"; sourceTree = "<group>"; };
+		338964971E5D8A6900A7B1AE /* frame_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frame_user.png; path = "../登陆/配置设备/frame_user.png"; sourceTree = "<group>"; };
 		3389649A1E5E767700A7B1AE /* forgetOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = forgetOneViewController.h; sourceTree = "<group>"; };
 		3389649B1E5E767700A7B1AE /* forgetOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = forgetOneViewController.m; sourceTree = "<group>"; };
 		338990AC1CEAB58100A708F8 /* bianhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bianhao.png; path = ../bianhao.png; sourceTree = "<group>"; };
@@ -2223,13 +2223,6 @@
 				335456BD1C852EEB00275478 /* SHBQRView.h */,
 				335456BE1C852EEB00275478 /* SHBQRView.m */,
 				337F9D6E1C71B1020016FE43 /* 图片 */,
-				335456C21C85301200275478 /* 圆角矩形.png */,
-				335456C01C852FF600275478 /* 圆角矩形空心.png */,
-				335456C61C853B4900275478 /* btn_cha.png */,
-				3389648E1E5D678800A7B1AE /* icon_yijianjianzhan.png */,
-				338964901E5D679700A7B1AE /* icon_jiantou.png */,
-				338964961E5D8A6900A7B1AE /* frame_password.png */,
-				338964971E5D8A6900A7B1AE /* frame_user.png */,
 			);
 			path = "配置设备";
 			sourceTree = "<group>";
@@ -3147,6 +3140,13 @@
 		337F9D6E1C71B1020016FE43 /* 图片 */ = {
 			isa = PBXGroup;
 			children = (
+				335456C21C85301200275478 /* 圆角矩形.png */,
+				335456C01C852FF600275478 /* 圆角矩形空心.png */,
+				335456C61C853B4900275478 /* btn_cha.png */,
+				3389648E1E5D678800A7B1AE /* icon_yijianjianzhan.png */,
+				338964901E5D679700A7B1AE /* icon_jiantou.png */,
+				338964961E5D8A6900A7B1AE /* frame_password.png */,
+				338964971E5D8A6900A7B1AE /* frame_user.png */,
 				33ABC2A61DC2EB69003B92AC /* 增值问题33.png */,
 				338E30CD1D93727A002215E4 /* 增值服务1.png */,
 				338E30CB1D93725D002215E4 /* service111.png */,
@@ -3940,6 +3940,9 @@
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Maps.iOS = {
 								enabled = 0;
 							};

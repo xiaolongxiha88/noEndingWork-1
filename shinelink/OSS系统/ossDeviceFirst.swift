@@ -774,7 +774,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                         let vc=deviceControlView()
                         vc.deviceTypeString=NSString(format: "%d", deviceType)
                         vc.deviceSnString=value2 as NSString!
-                        self.navigationController?.pushViewController(vc, animated: true)
+                        self.navigationController?.pushViewController(vc, animated: false)
                     }
                     
                     if self.plantListArray.count>1{
