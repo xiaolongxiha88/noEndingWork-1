@@ -266,7 +266,7 @@
         }
         
     } failure:^(NSError *error) {
-        
+          [self hideProgressView];
     }
      ];
     

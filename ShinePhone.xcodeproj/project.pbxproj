@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3306CE5E1EF3CCE1002699BA /* intergratorDeviceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3306CE5D1EF3CCE1002699BA /* intergratorDeviceList.swift */; };
 		330E3DED1D0D6CF300DF75AE /* enabler.png in Resources */ = {isa = PBXBuildFile; fileRef = 330E3DEC1D0D6CF300DF75AE /* enabler.png */; };
 		330E3DEF1D0D6D2100DF75AE /* priority.png in Resources */ = {isa = PBXBuildFile; fileRef = 330E3DEE1D0D6D2100DF75AE /* priority.png */; };
 		330E3DF11D0D6D4B00DF75AE /* 形状17.png in Resources */ = {isa = PBXBuildFile; fileRef = 330E3DF01D0D6D4B00DF75AE /* 形状17.png */; };
@@ -683,6 +684,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3306CE5D1EF3CCE1002699BA /* intergratorDeviceList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = intergratorDeviceList.swift; sourceTree = "<group>"; };
 		330A80141EB1D4B800C187FB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		330E3DEC1D0D6CF300DF75AE /* enabler.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enabler.png; sourceTree = "<group>"; };
 		330E3DEE1D0D6D2100DF75AE /* priority.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = priority.png; sourceTree = "<group>"; };
@@ -3503,6 +3505,7 @@
 			isa = PBXGroup;
 			children = (
 				338D51BE1EE151D9003FE4D2 /* IntegratorFirst.swift */,
+				3306CE5D1EF3CCE1002699BA /* intergratorDeviceList.swift */,
 			);
 			path = "集成商";
 			sourceTree = "<group>";
@@ -4536,6 +4539,7 @@
 				3355DB971CE432CD0042F627 /* Common2ViewController.m in Sources */,
 				334ED7041C902AE60095FFBC /* CircleView.m in Sources */,
 				338964641E53E8E200A7B1AE /* QCCountdownButton.m in Sources */,
+				3306CE5E1EF3CCE1002699BA /* intergratorDeviceList.swift in Sources */,
 				334720E11C8E7048006388C8 /* energyTableViewCell.m in Sources */,
 				3370794D1D92176600D7DA98 /* manualTableViewController.m in Sources */,
 				335456B61C852E6200275478 /* AddCellectViewController.m in Sources */,

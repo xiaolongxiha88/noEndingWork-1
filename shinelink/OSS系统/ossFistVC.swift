@@ -16,6 +16,7 @@ class ossFistVC: RootViewController {
        var buttonThree:UIButton!
       var messageView:UIView!
         var serverListArray:NSArray!
+     var roleString:NSString!
     
     let heigh0=96*NOW_SIZE
     
@@ -33,6 +34,8 @@ class ossFistVC: RootViewController {
    self.navigationController?.setNavigationBarHidden(false, animated: false)
 
         
+        
+           roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString!
         
        self.initUI()
         
@@ -120,16 +123,22 @@ class ossFistVC: RootViewController {
 //        let vc=ossServerFirst()
 //        self.navigationController?.pushViewController(vc, animated: true)
         
-        let vc=OssMessageViewController()
+        let vc=ossServerFirst()
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
     func gotoDevice()  {
         
-        let vc=ossDeviceFirst()
-        vc.serverListArray=self.serverListArray
-        self.navigationController?.pushViewController(vc, animated: true)
+        if roleString=="2" || roleString=="0"{
+            let vc=ossDeviceFirst()
+            vc.serverListArray=self.serverListArray
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else if roleString=="5" || roleString=="6"{
+            let vc=IntegratorFirst()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+     
         
     }
     

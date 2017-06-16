@@ -694,7 +694,8 @@ NSLog(@"体验馆");
                             }
                             [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];
                             
-                           
+                               [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]] forKey:@"roleNum"];
+                                
                             
                             if ([_OssFirst isEqualToString:@"N"]) {
                                    ossFistVC *OSSView=[[ossFistVC alloc]init];

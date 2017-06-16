@@ -47,13 +47,18 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     self.title="设备搜索"
         pageNum=0
        
+        let tap=UITapGestureRecognizer(target: self, action: #selector(keyboardHide(tap:)))
+        tap.cancelsTouchesInView=false
+        self.view.addGestureRecognizer(tap)
         
       self.initUI()
             self.initUiTwo()
         
      
     }
-
+    func keyboardHide(tap:UITapGestureRecognizer){
+    self.searchBar.resignFirstResponder()
+    }
     
     func initUI(){
     

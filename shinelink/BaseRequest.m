@@ -14,10 +14,11 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import <CommonCrypto/CommonDigest.h>
 
-
+float Time=25.f;
 @implementation BaseRequest
 + (void)requestWithMethod:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer.timeoutInterval=Time;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"application/json",@"text/html", nil];
     //text/html是以html的形式输出，比如<input type="text"/>就会在页面上显示一个文本框，而以plain形式就会在页面上原样显示这段代码
     NSString *url = [NSString stringWithFormat:@"%@%@",method,site];
@@ -42,7 +43,7 @@
 + (void)requestWithMethodResponseStringResult:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
+    manager.requestSerializer.timeoutInterval=Time;
     NSString *url = [NSString stringWithFormat:@"%@%@",method,site];
     NSLog(@"%@", url);
     [UserInfo defaultUserInfo].R_timer.fireDate=[NSDate distantPast];
@@ -65,6 +66,7 @@
 
 + (void)requestWithMethodByGet:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
+     manager.requestSerializer.timeoutInterval=Time;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"application/json",@"text/html",@"text/javascript",  nil];
     NSString *url = [NSString stringWithFormat:@"%@%@",method,site];
     NSLog(@"%@", url);
@@ -87,6 +89,7 @@
 + (void)requestWithMethodResponseJsonByGet:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+     manager.requestSerializer.timeoutInterval=Time;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"application/json",@"text/html",@"text/javascript", nil];
     NSString *url = [NSString stringWithFormat:@"%@%@",method,site];
     NSLog(@"%@", url);
@@ -111,7 +114,7 @@
 + (void)requestImageWithMethodByGet:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFImageResponseSerializer serializer];
-    
+     manager.requestSerializer.timeoutInterval=Time;
     NSString *url = [NSString stringWithFormat:@"%@%@",method,site];
     NSLog(@"%@", url);
     [UserInfo defaultUserInfo].R_timer.fireDate=[NSDate distantPast];
@@ -133,6 +136,7 @@
 
 + (void)requestWithMethod:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site dataImage:(NSData *)data sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
+     manager.requestSerializer.timeoutInterval=Time;
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"application/json",@"text/html",@"image/png", nil];
     NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithDictionary:paramars];
     [dictionary setObject:data forKey:@"user_img"];
@@ -159,7 +163,7 @@
 + (void)uplodImageWithMethod:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site dataImageDict:(NSMutableDictionary *)dataDict sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
+     manager.requestSerializer.timeoutInterval=Time;
     NSString *url = [NSString stringWithFormat:@"%@%@",method,site];
     [UserInfo defaultUserInfo].R_timer.fireDate=[NSDate distantPast];
     

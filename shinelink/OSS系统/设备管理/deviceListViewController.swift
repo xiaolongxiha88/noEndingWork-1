@@ -185,8 +185,7 @@ deviceTypeString="1"
                         }else{
                             self.tableView.reloadData()
                         }
-                        
-                        
+
                     }
                     
                     
@@ -247,14 +246,14 @@ deviceTypeString="1"
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!deviceListCell
         
         let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,cellValue1Array[indexPath.row]as!NSString)
-        let lable21=NSString(format: "%@%@", cellNameArray[1]as!NSString,cellValue2Array[indexPath.row]as!Bool as CVarArg)
-        let lable2:NSString
-        if lable21.boolValue {
-            lable2="掉线"
+     
+        var lable22:NSString
+        if (cellValue2Array[indexPath.row]as!Bool)==true {
+            lable22="掉线"
         }else{
-          lable2="在线"
+          lable22="在线"
         }
-        
+           let lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString, lable22)
         let  lable3=NSString(format: "%@%@", cellNameArray[2]as!NSString,cellValue3Array[indexPath.row]as!NSString)
          let  lable4=NSString(format: "%@%@", cellNameArray[3]as!NSString,cellValue4Array[indexPath.row]as!NSString)
 
