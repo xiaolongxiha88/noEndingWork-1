@@ -13,6 +13,7 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
       var userNameString:NSString!
       var pageNum:Int!
        var netDic:NSDictionary!
+    var userListDic:NSDictionary!
       var cellNameArray:NSArray!
      var cellValue1Array:NSMutableArray!
       var cellValue2Array:NSMutableArray!
@@ -26,10 +27,21 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         pageNum=0;
-    
+
+        let rightItem=UIBarButtonItem.init(title: "修改用户信息", style: .plain, target: self, action:#selector(changeUserInfo) )
+        self.navigationItem.rightBarButtonItem=rightItem
+
+        
     self.initNet0()
     }
 
+    func changeUserInfo(){
+        let goView=changUserInfo()
+      goView.userListDic=self.userListDic
+        self.navigationController?.pushViewController(goView, animated: true)
+    }
+    
+    
     func initNet0(){
         cellValue1Array=[]
         cellValue2Array=[]
@@ -102,12 +114,12 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
                     }
                     
                     
-                    if self.plantListArray.count==1 {
-                        let goView=deviceListViewController()
-                        goView.plantIdString=self.cellValueIDArray.object(at: 0) as!NSString
-                        self.navigationController?.pushViewController(goView, animated: false)
-                        
-                    }
+//                    if self.plantListArray.count==1 {
+//                        let goView=deviceListViewController()
+//                        goView.plantIdString=self.cellValueIDArray.object(at: 0) as!NSString
+//                        self.navigationController?.pushViewController(goView, animated: false)
+//                        
+//                    }
                     
                     if self.plantListArray.count>0{
                         

@@ -109,7 +109,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                             self.cellValue2Array.add((plantAll[i] as! NSDictionary)["plantName"] as!NSString)
                             self.cellValue3Array.add((plantAll[i] as! NSDictionary)["agentName"] as!NSString)
                             self.cellValue4Array.add((plantAll[i] as! NSDictionary)["lost"] as! NSString)
-                            self.cellValue4Array.add((plantAll[i] as! NSDictionary)["seriaNum"] as!NSString)
+                            self.cellValue5Array.add((plantAll[i] as! NSDictionary)["seriaNum"] as!NSString)
                             self.plantListArray.add(plantAll[i])
                             
                         }
@@ -194,8 +194,8 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
         let CELL=cellValue5Array[indexPath.row] as! NSString
         
         let goView=deviceControlView()
-        
-        goView.deviceTypeString=NSString(format: "%d", deviceType)
+        goView.netType=1
+        goView.deviceTypeString=NSString(format: "%d", deviceType+1)
         goView.deviceSnString=CELL
         
         self.navigationController?.pushViewController(goView, animated: true)

@@ -662,61 +662,64 @@ NSLog(@"体验馆");
          
             if ([jsonObj isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *allDic=[NSDictionary dictionaryWithDictionary:jsonObj];
-                if ([allDic.allKeys containsObject:@"obj"]) {
-                    NSDictionary *objDic=[NSDictionary dictionaryWithDictionary:allDic[@"obj"]];
-                    if ([objDic.allKeys containsObject:@"userType"]) {
-                        NSString *userType=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"userType"]];
-                        if ([userType isEqualToString:@"0"]) {
-                            NSString *server1=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"userServerUrl"]];
-                            NSString *server2=@"http://";
-                            NSString *serverAdress=[NSString stringWithFormat:@"%@%@",server2,server1];
-                            [[UserInfo defaultUserInfo] setServer:serverAdress];
-                        
-                            
-                            
-                            [self netRequest];
-                            
-                        }else{
-                            if ([objDic.allKeys containsObject:@"ossServerUrl"]) {
-                                NSString *server1=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"ossServerUrl"]];
+                if ([allDic[@"result"] intValue]==1) {
+                    if ([allDic.allKeys containsObject:@"obj"]) {
+                        NSDictionary *objDic=[NSDictionary dictionaryWithDictionary:allDic[@"obj"]];
+                        if ([objDic.allKeys containsObject:@"userType"]) {
+                            NSString *userType=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"userType"]];
+                            if ([userType isEqualToString:@"0"]) {
+                                NSString *server1=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"userServerUrl"]];
                                 NSString *server2=@"http://";
                                 NSString *serverAdress=[NSString stringWithFormat:@"%@%@",server2,server1];
-                                     [[UserInfo defaultUserInfo] setOSSserver:serverAdress];
-                            }
-                            NSMutableArray *serverListArray=[NSMutableArray array];
-                            if ([objDic.allKeys containsObject:@"serverList"]) {
-                                [serverListArray addObjectsFromArray:[objDic objectForKey:@"serverList"]];
-                            }
-                            
-                            NSString *PhoneNum;
-                            if ([objDic.allKeys containsObject:@"user"]) {
-                                PhoneNum=objDic[@"user"][@"phone"];
-                            }
-                            [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];
-                            
-                               [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]] forKey:@"roleNum"];
+                                [[UserInfo defaultUserInfo] setServer:serverAdress];
                                 
-                            
-                            if ([_OssFirst isEqualToString:@"N"]) {
-                                   ossFistVC *OSSView=[[ossFistVC alloc]init];
-                                    OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
-                                   [self.navigationController pushViewController:OSSView animated:NO];
+                                
+                                
+                                [self netRequest];
+                                
                             }else{
-                                OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
-                                OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
-                                OSSView.phoneNum=PhoneNum;
-                                OSSView.OssName=_userTextField.text;
-                                OSSView.OssPassword=_pwdTextField.text;
-                                [self.navigationController pushViewController:OSSView animated:NO];
+                                if ([objDic.allKeys containsObject:@"ossServerUrl"]) {
+                                    NSString *server1=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"ossServerUrl"]];
+                                    NSString *server2=@"http://";
+                                    NSString *serverAdress=[NSString stringWithFormat:@"%@%@",server2,server1];
+                                    [[UserInfo defaultUserInfo] setOSSserver:serverAdress];
+                                }
+                                NSMutableArray *serverListArray=[NSMutableArray array];
+                                if ([objDic.allKeys containsObject:@"serverList"]) {
+                                    [serverListArray addObjectsFromArray:[objDic objectForKey:@"serverList"]];
+                                }
+                                
+                                NSString *PhoneNum;
+                                if ([objDic.allKeys containsObject:@"user"]) {
+                                    PhoneNum=objDic[@"user"][@"phone"];
+                                }
+                                [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];
+                                
+                                [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]] forKey:@"roleNum"];
+                                
+                                
+                                if ([_OssFirst isEqualToString:@"N"]) {
+                                    ossFistVC *OSSView=[[ossFistVC alloc]init];
+                                    OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
+                                    [self.navigationController pushViewController:OSSView animated:NO];
+                                }else{
+                                    OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
+                                    OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
+                                    OSSView.phoneNum=PhoneNum;
+                                    OSSView.OssName=_userTextField.text;
+                                    OSSView.OssPassword=_pwdTextField.text;
+                                    [self.navigationController pushViewController:OSSView animated:NO];
+                                }
+                                
+                                
+                                
                             }
-                            
-                           
                             
                         }
                         
                     }
-                    
                 }
+  
             }
             
             

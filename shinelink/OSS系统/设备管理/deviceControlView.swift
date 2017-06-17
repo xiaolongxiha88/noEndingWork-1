@@ -25,12 +25,19 @@ class deviceControlView: RootViewController {
       var valueAllDic:NSMutableDictionary!
      var viewAll:UIView!
     
+     var netType:Int?
+    
     override func viewWillAppear(_ animated: Bool) {
         if (viewAll != nil) {
            viewAll.removeFromSuperview()
             viewAll=nil
         }
-             self.initNet0()
+        if netType==1 {
+            self.initNet1()
+        }else{
+        self.initNet0()
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -71,7 +78,7 @@ class deviceControlView: RootViewController {
             let pChargeString=NSString(format: "%.f", valueDic["pCharge"]as! Float)
             let pDischargeString=NSString(format: "%.f", valueDic["pDischarge"]as! Float)
             let statueIne=valueDic["status"] as! Int
-            var statueString:NSString!
+            var statueString:NSString?
             if statueIne==0 {
                 statueString=root_xianZhi as NSString!
             }else if statueIne==1 {
@@ -83,8 +90,11 @@ class deviceControlView: RootViewController {
             }else if statueIne==4{
                 statueString=root_dengDai as NSString!
             }
+    
+            
             lableNameArray=["序列号","别名","所属采集器","连接状态","充电功率(W)","放电功率(W)","储能机状态","服务器IP地址","储能机型号","最后更新时间"]
-               lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["dataLogSn"]as! NSString,status,pChargeString,pDischargeString,statueString,valueDic["tcpServerIp"] as! NSString,type,valueDic["lastUpdateTimeText"] as! NSString]
+               lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"]as? NSString ?? "",valueDic["dataLogSn"]as? NSString ?? "",status,pChargeString,pDischargeString,statueString ?? ""  ,valueDic["tcpServerIp"] as? NSString ?? "",type,valueDic["lastUpdateTimeText"] as? NSString ?? ""]
+            
         }
         
         self.initUI()
@@ -133,6 +143,62 @@ class deviceControlView: RootViewController {
                     
                     if self.valueDic.count>0{
                     self.initData()
+                    }
+                    
+                    
+                }else{
+                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                }
+                
+            }
+            
+        }, failure: {(error) in
+            self.showToastView(withTitle: root_Networking)
+        })
+        
+    }
+    
+    
+    func initNet1(){
+        
+        valueAllDic=[:]
+
+        netDic=["deviceSn":deviceSnString,"deviceType":deviceTypeString]
+        self.showProgressView()
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/customer/device_info", sucessBlock: {(successBlock)->() in
+            self.hideProgressView()
+            
+            let data:Data=successBlock as! Data
+            
+            let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
+            
+            if (jsonDate0 != nil){
+                let jsonDate=jsonDate0 as! Dictionary<String, Any>
+                print("/api/v1/device/info",jsonDate)
+                // let result:NSString=NSString(format:"%s",jsonDate["result"] )
+                let result1=jsonDate["result"] as! Int
+                
+                if result1==1 {
+                    let objArray=jsonDate["obj"] as! Dictionary<String, Any>
+                    
+                    var plantAll:NSArray=[]
+                    
+                    if self.deviceTypeString=="0"{
+                        plantAll=objArray["datalogList"] as! NSArray
+                        self.dataloggerTypeString=(plantAll[0]as! NSDictionary)["deviceTypeIndicate"] as! Int
+                        
+                    }
+                    if self.deviceTypeString=="1"{
+                        plantAll=objArray["invList"] as! NSArray
+                    }
+                    if self.deviceTypeString=="2"{
+                        plantAll=objArray["storageList"] as! NSArray
+                    }
+                    
+                    self.valueDic=plantAll[0] as! NSDictionary
+                    
+                    if self.valueDic.count>0{
+                        self.initData()
                     }
                     
                     

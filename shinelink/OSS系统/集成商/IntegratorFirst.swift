@@ -375,12 +375,12 @@ class IntegratorFirst: RootViewController {
         let Tag=dic.object(forKey: "tag") as! Int
         if Tag==2000 {
             deviceType=0
-            
+           
         }
         if Tag==2001 {
             deviceType=1
         }
-
+ self.initNet1()
     }
     
 //MARK: - 网络层

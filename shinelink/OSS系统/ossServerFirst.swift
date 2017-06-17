@@ -75,28 +75,28 @@ class ossServerFirst: RootViewController,UISearchBarDelegate {
         buttonView.typeNum=2
         buttonView.isUserInteractionEnabled=true
         buttonView.backgroundColor=backgroundGrayColor
-        buttonView.buttonArray=["处理中","待跟进","未处理","已处理","全部"]
+        buttonView.buttonArray=["全部","处理中","待跟进","未处理","已处理"]
         buttonView.initUI()
         self.view .addSubview(buttonView)
         
         lable1=UILabel()
-        lable1.frame=CGRect(x: 10*NOW_SIZE, y: 60*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 30*HEIGHT_SIZE)
+        lable1.frame=CGRect(x: 10*NOW_SIZE, y: 60*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 20*HEIGHT_SIZE)
         lable1.text="全部工单"
         lable1.textColor=COLOR(_R: 154, _G: 154, _B: 154, _A: 1)
         lable1.textAlignment=NSTextAlignment.left
-        lable1.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
+        lable1.font=UIFont.systemFont(ofSize: 10*HEIGHT_SIZE)
         self.view.addSubview(lable1)
         
         lable2=UILabel()
-        lable2.frame=CGRect(x: 160*NOW_SIZE, y: 60*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 30*HEIGHT_SIZE)
+        lable2.frame=CGRect(x: 160*NOW_SIZE, y: 60*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 20*HEIGHT_SIZE)
         lable2.text="数量:111"
         lable2.textColor=COLOR(_R: 154, _G: 154, _B: 154, _A: 1)
         lable2.textAlignment=NSTextAlignment.right
-        lable2.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
+        lable2.font=UIFont.systemFont(ofSize: 10*HEIGHT_SIZE)
         self.view.addSubview(lable2)
         
      let view0=UIView()
-        view0.frame=CGRect(x: 10*NOW_SIZE, y: 90*HEIGHT_SIZE, width: 300*NOW_SIZE, height: 2*HEIGHT_SIZE)
+        view0.frame=CGRect(x: 10*NOW_SIZE, y: 80*HEIGHT_SIZE, width: 300*NOW_SIZE, height: 2*HEIGHT_SIZE)
         view0.backgroundColor=backgroundGrayColor
         
         self.view.addSubview(view0)

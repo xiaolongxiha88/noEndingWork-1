@@ -187,6 +187,7 @@
 		3356782B1CC62A5A00EE4A73 /* controlCNJTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3356782A1CC62A5A00EE4A73 /* controlCNJTable.m */; };
 		3358812E1CB66E250068EFAD /* qualityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3358812D1CB66E250068EFAD /* qualityTableViewController.m */; };
 		335881311CB66E460068EFAD /* qualityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335881301CB66E460068EFAD /* qualityCell.m */; };
+		335B89601EF51DAC00EE82D4 /* changUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335B895F1EF51DAC00EE82D4 /* changUserInfo.swift */; };
 		335BF1E71D100558008EEE99 /* message.png in Resources */ = {isa = PBXBuildFile; fileRef = 335BF1E61D100558008EEE99 /* message.png */; };
 		335BF1E91D100572008EEE99 /* ziliao.png in Resources */ = {isa = PBXBuildFile; fileRef = 335BF1E81D100572008EEE99 /* ziliao.png */; };
 		335BF1ED1D100761008EEE99 /* MessageCeterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335BF1EC1D100761008EEE99 /* MessageCeterTableViewController.m */; };
@@ -984,6 +985,7 @@
 		3358812D1CB66E250068EFAD /* qualityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = qualityTableViewController.m; sourceTree = "<group>"; };
 		3358812F1CB66E460068EFAD /* qualityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qualityCell.h; sourceTree = "<group>"; };
 		335881301CB66E460068EFAD /* qualityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = qualityCell.m; sourceTree = "<group>"; };
+		335B895F1EF51DAC00EE82D4 /* changUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changUserInfo.swift; sourceTree = "<group>"; };
 		335BF1E61D100558008EEE99 /* message.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message.png; sourceTree = "<group>"; };
 		335BF1E81D100572008EEE99 /* ziliao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ziliao.png; sourceTree = "<group>"; };
 		335BF1EB1D100761008EEE99 /* MessageCeterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCeterTableViewController.h; sourceTree = "<group>"; };
@@ -2789,6 +2791,7 @@
 				338049201ED2E2550077658D /* deviceControlView.swift */,
 				33742B3B1ED51BFF0015F2EA /* datalogerControlView.swift */,
 				33742B3D1ED558EA0015F2EA /* datalogerControlTwo.swift */,
+				335B895F1EF51DAC00EE82D4 /* changUserInfo.swift */,
 				33742B3F1ED6858C0015F2EA /* OSS第三方 */,
 			);
 			path = "设备管理";
@@ -4653,6 +4656,7 @@
 				335456D41C8588E200275478 /* SNViewController.m in Sources */,
 				335D69B41D77BA4D00894D90 /* HcdVideoRequestTask.m in Sources */,
 				335456D11C8588D500275478 /* emailViewController.m in Sources */,
+				335B89601EF51DAC00EE82D4 /* changUserInfo.swift in Sources */,
 				33860FE11EEA75C5004150FD /* MJRefreshHeader.m in Sources */,
 				336E04001EC9586C0034BC86 /* ossDeviceFirst.swift in Sources */,
 				33530F211CC8824500378EB2 /* changManeger.m in Sources */,
