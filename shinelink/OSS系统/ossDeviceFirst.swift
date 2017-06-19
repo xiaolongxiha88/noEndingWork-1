@@ -308,7 +308,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
              
                 goView.userNameString=self.cellValue2Array.object(at: indexPath.row) as!NSString
             }
-            
+            goView.netToDic=self.netDic
               goView.userListDic=self.plantListArray.object(at: indexPath.row) as! NSDictionary
                   self.navigationController?.pushViewController(goView, animated: true)
                  tableView.deselectRow(at: indexPath, animated: true)
@@ -659,6 +659,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                             goView.userNameString=self.cellValue2Array.object(at: 0) as!NSString
                             }
                                 goView.userListDic=self.plantListArray.object(at: 0) as! NSDictionary
+                            goView.netToDic=self.netDic
                             self.navigationController?.pushViewController(goView, animated: true)
                         }
                         

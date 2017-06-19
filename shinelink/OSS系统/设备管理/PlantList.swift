@@ -14,6 +14,7 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
       var pageNum:Int!
        var netDic:NSDictionary!
     var userListDic:NSDictionary!
+    var netToDic:NSDictionary!
       var cellNameArray:NSArray!
      var cellValue1Array:NSMutableArray!
       var cellValue2Array:NSMutableArray!
@@ -38,6 +39,7 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
     func changeUserInfo(){
         let goView=changUserInfo()
       goView.userListDic=self.userListDic
+        goView.netToDic=NSMutableDictionary.init(dictionary: self.netToDic)
         self.navigationController?.pushViewController(goView, animated: true)
     }
     

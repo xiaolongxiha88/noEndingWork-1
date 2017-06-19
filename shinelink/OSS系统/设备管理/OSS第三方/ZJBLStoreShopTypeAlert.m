@@ -114,6 +114,10 @@
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:.4];
         int N = [[NSString stringWithFormat:@"%lu",(unsigned long)titles.count] intValue];
         alertHeight = 30*HEIGHT_SIZE*N+60*HEIGHT_SIZE;
+        if (alertHeight>300*HEIGHT_SIZE) {
+            alertHeight=300*HEIGHT_SIZE;
+        }
+        
         buttonHeight = 30*HEIGHT_SIZE;
         
         self.titleLabel.text = title;

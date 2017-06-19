@@ -10,6 +10,7 @@ import UIKit
 
 class changUserInfoTwo: RootViewController {
 
+       var  lableValue:NSString!
     var  userName:NSString!
     var  lableName:NSString!
     var  oldlableValueName:NSString!
@@ -35,19 +36,24 @@ class changUserInfoTwo: RootViewController {
         
         if typeNum==3 {
             self.initUItwo()
-        }else{
+        }else if typeNum==5 {
+            self.initAlertView()
+        }else {
             self.initUI()
         }
         
-        let button2=UIButton(type: .custom)
-        button2.frame=CGRect(x:60*NOW_SIZE, y: 180*HEIGHT_SIZE, width:200*NOW_SIZE, height: 40*HEIGHT_SIZE)
-        button2.setBackgroundImage(UIImage(named:"按钮2.png" ), for:.normal)
-        button2.setTitle(root_finish, for:.normal)
-        button2.titleLabel?.textColor=UIColor.white
-        button2.tintColor=UIColor.white
-        button2.titleLabel?.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
-        button2.addTarget(self, action:#selector(finishSet), for: .touchUpInside)
-        self.view.addSubview(button2)
+       if typeNum != 5 {
+            let button2=UIButton(type: .custom)
+            button2.frame=CGRect(x:60*NOW_SIZE, y: 180*HEIGHT_SIZE, width:200*NOW_SIZE, height: 40*HEIGHT_SIZE)
+            button2.setBackgroundImage(UIImage(named:"按钮2.png" ), for:.normal)
+            button2.setTitle(root_finish, for:.normal)
+            button2.titleLabel?.textColor=UIColor.white
+            button2.tintColor=UIColor.white
+            button2.titleLabel?.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
+            button2.addTarget(self, action:#selector(finishSet), for: .touchUpInside)
+            self.view.addSubview(button2)
+        }
+ 
     }
 
     
@@ -68,8 +74,8 @@ class changUserInfoTwo: RootViewController {
         textValue1.textAlignment=NSTextAlignment.center
         textValue1.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
         textValue1.frame=CGRect(x: (SCREEN_Width-W)/2, y: 90*HEIGHT_SIZE, width: W, height: 30*HEIGHT_SIZE)
-        textValue1.layer.borderWidth=1
-        textValue1.layer.cornerRadius=6
+        textValue1.layer.borderWidth=0.8*HEIGHT_SIZE;
+        textValue1.layer.cornerRadius=12*HEIGHT_SIZE;
         textValue1.layer.borderColor=UIColor.white.cgColor
         self.view.addSubview(textValue1)
         
@@ -82,22 +88,22 @@ class changUserInfoTwo: RootViewController {
     
    
         button22=UIButton()
-        button22.frame=CGRect(x: 50*NOW_SIZE, y: 10*HEIGHT_SIZE, width: 220*NOW_SIZE, height:25*HEIGHT_SIZE)
+        button22.frame=CGRect(x: 50*NOW_SIZE, y: 90*HEIGHT_SIZE, width: 220*NOW_SIZE, height:30*HEIGHT_SIZE)
         
-        if (getAddress==nil)||(getAddress=="") {
-            button22.setTitle("点击获取服务器地址", for: .normal)
+        if (lableValue==nil)||(lableValue=="") {
+            button22.setTitle(lableName as String?, for: .normal)
         }else{
-            button22.setTitle(getAddress as String?, for: .normal)
+            button22.setTitle(lableValue as String?, for: .normal)
             zoneAddress=getAddress
         }
         
-        button22.setTitleColor(MainColor, for: .normal)
+        button22.setTitleColor(UIColor.white, for: .normal)
         button22.setTitleColor(UIColor.white, for: .highlighted)
         button22.layer.borderWidth=0.8*HEIGHT_SIZE;
         button22.layer.cornerRadius=12*HEIGHT_SIZE;
         button22.titleLabel?.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
         button22.titleLabel?.adjustsFontSizeToFitWidth=true
-        button22.layer.borderColor=MainColor.cgColor;
+        button22.layer.borderColor=UIColor.white.cgColor;
         button22.isSelected=false
         button22.backgroundColor=UIColor.clear
         button22.addTarget(self, action:#selector(getServerURL), for: .touchUpInside)
@@ -115,7 +121,7 @@ class changUserInfoTwo: RootViewController {
             (selectIndex)in
             
             self.zoneAddress=zoneArray[selectIndex] as NSString
-            self.getAddress=self.zoneAddress
+            self.value1=self.zoneAddress
             print("选择11了"+String(describing: selectIndex))
         }, selectValue: {
             (selectValue)in
@@ -128,19 +134,25 @@ class changUserInfoTwo: RootViewController {
     
     func finishSet(){
         valueArray=["","","","","","",""]
-        value1=""
+     
         
-        if !(typeNum==0) {
+  if typeNum==0 || typeNum==1 || typeNum==2 || typeNum==4 {
             if (textValue1.text==nil) || (textValue1.text=="") {
-                self.showToastView(withTitle: "请输入服务器IP地址")
+                self.showToastView(withTitle: "没有填写设置值")
                 return
             }
             value1=textValue1.text as NSString!
+    
         }
-
-        valueArray.replaceObject(at: typeNum, with: value1)
-
-        netDic=["username":snString,"userEmail":valueArray.object(at: 0),"userTimezone":valueArray.object(at: 1),"userLanguage":valueArray.object(at: 2),"userActiveName":valueArray.object(at:3),"userCompanyName":valueArray.object(at: 4),"userPhoneNum":valueArray.object(at: 5),"userEnableResetPass":valueArray.object(at: 6)]
+        
+        if (value1==nil) || (value1=="") {
+            self.showToastView(withTitle: "没有填写设置值")
+            return
+        }
+       
+    valueArray.replaceObject(at: typeNum, with: (value1 ?? "") )
+        
+        netDic=["userName":userName,"userEmail":valueArray.object(at: 1),"userTimezone":valueArray.object(at: 3),"userLanguage":valueArray.object(at: 6),"userActiveName":valueArray.object(at:0),"userCompanyName":valueArray.object(at: 4),"userPhoneNum":valueArray.object(at: 2),"userEnableResetPass":valueArray.object(at: 5)]
         self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/user/update/info", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
@@ -151,7 +163,7 @@ class changUserInfoTwo: RootViewController {
             
             if (jsonDate0 != nil){
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
-                print("/api/v1/device/info",jsonDate)
+                print("/api/v1/user/update/info",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
                 let result1=jsonDate["result"] as! Int
                 
@@ -175,14 +187,12 @@ class changUserInfoTwo: RootViewController {
     
 
     func initAlertView(){
-        let alertController = UIAlertController(title: "是否重置密码？", message: nil, preferredStyle:.alert)
+        let alertController = UIAlertController(title: "是否重置密码?", message: nil, preferredStyle:.alert)
         
         // 设置2个UIAlertAction
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         let okAction = UIAlertAction(title: "确认", style: .default) { (UIAlertAction) in
             self.value1="1"
-            self.value2=""
-            self.paramTypeString="3"
             self.finishSet()
         }
         // 添加
