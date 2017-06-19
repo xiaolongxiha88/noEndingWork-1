@@ -103,18 +103,16 @@ class changUserInfo: RootViewController,UITableViewDataSource,UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         
-        if indexPath.row==0 || indexPath.row==1 || indexPath.row==4{
-            let goView=datalogerControlTwo()
+        if indexPath.row==0 || indexPath.row==1 || indexPath.row==2 || indexPath.row==3 || indexPath.row==4{
+            let goView=changUserInfoTwo()
             goView.lableName=cellNameArray[indexPath.row] as! NSString
-            goView.typeNum = NSString(format: "%d", indexPath.row)
+            goView.typeNum = indexPath.row
  
             self.navigationController?.pushViewController(goView, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
-        }else if indexPath.row==2{
+        }else if indexPath.row==5{
 
             
-        }else if indexPath.row==3{
-          
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
