@@ -46,6 +46,61 @@ let  root_chongDian = NSLocalizedString("充电", comment: "default")
 let  root_fangDian = NSLocalizedString("放电", comment: "default")
 
 
+//未翻译
+
+let  root_shebei_soushuo = NSLocalizedString("设备搜索", comment: "default")
+let  root_shuru_soushuo_neirong = NSLocalizedString("输入搜索内容", comment: "default")
+let  root_dianji_huoqu_fuwuqi = NSLocalizedString("79点击获取服务器地址", comment: "default")     //
+let  root_xuanzhe_soushuo_leixing = NSLocalizedString("选择搜索类型", comment: "default")
+let  root_yonghuming = NSLocalizedString("用户名", comment: "default")                  //
+let  root_dianzhanming = NSLocalizedString("电站名", comment: "default")
+let  root_shoujihao = NSLocalizedString("手机号", comment: "default")
+let  root_youxiang = NSLocalizedString("邮箱", comment: "default")
+let  root_caijiqi = NSLocalizedString("采集器", comment: "default")
+let  root_niBianQi = NSLocalizedString("逆变器", comment: "default")   //
+let  root_chuNengJi = NSLocalizedString("储能机", comment: "default")    //
+let  root_xuanzhe_fuwuqi_dizhi = NSLocalizedString("选择服务器地址", comment: "default")
+let  root_dangqian_shebei_leixing = NSLocalizedString("当前设备类型", comment: "default")
+let  root_xunliehao = NSLocalizedString("序列号", comment: "default")
+let  root_bieming = NSLocalizedString("别名", comment: "default")
+let  root_shuru_soushuo_leixing = NSLocalizedString("请输入搜索类型", comment: "default")
+let  root_shuru_fuwuqi_dizhi = NSLocalizedString("请输入服务器地址", comment: "default")
+let  root_xuanze_xuliehao_hebieming = NSLocalizedString("请选择序列号或别名", comment: "default")
+let  root_chuanjian_shijian = NSLocalizedString("创建时间", comment: "default")
+let  root_suoshu_yonghuming = NSLocalizedString("所属用户名", comment: "default")
+let  root_meiyou_gengduo_shuju = NSLocalizedString("没有更多数据", comment: "default")
+let  root_xiugai_yonghu_xinxi = NSLocalizedString("修改用户信息", comment: "default")
+let  root_WO_shiqu = NSLocalizedString("时区", comment: "default")   //
+let  root_zhuantai = NSLocalizedString("状态", comment: "default")
+let  root_ip_he_duankou = NSLocalizedString("IP和端口", comment: "default")
+let  root_leixing = NSLocalizedString("类型", comment: "default")
+let  root_suoshu_caijiqi = NSLocalizedString("所属采集器", comment: "default")
+let  root_xinghao = NSLocalizedString("型号", comment: "default")    ///
+let  root_lixian = NSLocalizedString("离线", comment: "default")
+let  root_zaixian = NSLocalizedString("在线", comment: "default")
+
+
+
+//"请输入搜索类型"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //获取String长度

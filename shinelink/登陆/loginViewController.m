@@ -718,6 +718,12 @@ NSLog(@"体验馆");
                         }
                         
                     }
+                } else if ([allDic[@"result"] intValue]==0) {
+                     [self showToastViewWithTitle:root_Networking];
+                }else if ([allDic[@"result"] intValue]==4) {
+                    [self showToastViewWithTitle:root_WO_yonghu_bucunzai];
+                }else if ([allDic[@"result"] intValue]==5) {
+                    [self showToastViewWithTitle:root_yongHuMing_mima_cuowu];
                 }
   
             }
@@ -730,7 +736,7 @@ NSLog(@"体验馆");
     } failure:^(NSError *error) {
       //  [self didPresentControllerButtonTouch];
           [self hideProgressView];
-        [self showToastViewWithTitle:root_Networking];
+   
         
     }];
 
@@ -773,9 +779,8 @@ NSLog(@"体验馆");
         }
         
     } failure:^(NSError *error) {
-        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-    
-              [self netRequest];
+           [self showToastViewWithTitle:root_Networking];
+        
     }];
     
     

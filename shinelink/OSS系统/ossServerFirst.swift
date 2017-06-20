@@ -23,12 +23,19 @@ class ossServerFirst: RootViewController,UISearchBarDelegate {
         tap.cancelsTouchesInView=false
         self.view.addGestureRecognizer(tap)
         
+        self.initTest()
        self.initUI()
     }
     
     func keyboardHide(tap:UITapGestureRecognizer){
         self.searchBar.resignFirstResponder()
     }
+    
+    func initTest(){
+        let vc=serverOrder()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     func initUI(){
         
@@ -42,7 +49,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate {
         searchBar=UISearchBar();
         self.searchBar.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width-40*NOW_SIZE, height: 30*HEIGHT_SIZE)
         self.searchBar.delegate = self
-        self.searchBar.placeholder = "输入搜索内容"
+        self.searchBar.placeholder = root_shuru_soushuo_neirong
         for subview in searchBar.subviews {
             if subview .isKind(of: NSClassFromString("UIView")!) {
                 subview.backgroundColor=UIColor.clear

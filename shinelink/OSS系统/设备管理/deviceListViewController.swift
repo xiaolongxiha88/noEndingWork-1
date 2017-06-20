@@ -53,7 +53,7 @@ deviceTypeString="1"
         buttonView.typeNum=0
         buttonView.isUserInteractionEnabled=true
         buttonView.backgroundColor=backgroundGrayColor
-        buttonView.buttonArray=["采集器","逆变器","储能机"]
+        buttonView.buttonArray=[root_caijiqi,root_niBianQi,root_chuNengJi]
         buttonView.initUI()
         self.view .addSubview(buttonView)
         
@@ -235,27 +235,27 @@ deviceTypeString="1"
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if deviceTypeString=="0" {
-              cellNameArray=["序列号:","状态:","IP和端口:","类型:"];
+              cellNameArray=[root_xunliehao,root_zhuantai,root_ip_he_duankou,root_leixing];
         }else if deviceTypeString=="1"{
-          cellNameArray=["序列号:","状态:","所属采集器:","型号:"];
+          cellNameArray=[root_xunliehao,root_zhuantai,root_suoshu_caijiqi,root_xinghao];
         }else if deviceTypeString=="2"{
-            cellNameArray=["序列号:","状态:","所属采集器:","型号:"];
+            cellNameArray=[root_xunliehao,root_zhuantai,root_suoshu_caijiqi,root_xinghao];
         }
        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!deviceListCell
         
-        let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,cellValue1Array[indexPath.row]as!NSString)
+        let lable1=NSString(format: "%@:%@", cellNameArray[0]as!NSString,cellValue1Array[indexPath.row]as!NSString)
      
         var lable22:NSString
         if (cellValue2Array[indexPath.row]as!Bool)==true {
-            lable22="掉线"
+            lable22 = root_lixian as NSString
         }else{
-          lable22="在线"
+          lable22 = root_zaixian as NSString
         }
-           let lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString, lable22)
-        let  lable3=NSString(format: "%@%@", cellNameArray[2]as!NSString,cellValue3Array[indexPath.row]as!NSString)
-         let  lable4=NSString(format: "%@%@", cellNameArray[3]as!NSString,cellValue4Array[indexPath.row]as!NSString)
+           let lable2=NSString(format: "%@:%@", cellNameArray[1]as!NSString, lable22)
+        let  lable3=NSString(format: "%@:%@", cellNameArray[2]as!NSString,cellValue3Array[indexPath.row]as!NSString)
+         let  lable4=NSString(format: "%@:%@", cellNameArray[3]as!NSString,cellValue4Array[indexPath.row]as!NSString)
 
         
        

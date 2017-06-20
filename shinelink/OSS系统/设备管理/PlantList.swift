@@ -29,7 +29,7 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
         super.viewDidLoad()
         pageNum=0;
 
-        let rightItem=UIBarButtonItem.init(title: "修改用户信息", style: .plain, target: self, action:#selector(changeUserInfo) )
+        let rightItem=UIBarButtonItem.init(title: root_xiugai_yonghu_xinxi, style: .plain, target: self, action:#selector(changeUserInfo) )
         self.navigationItem.rightBarButtonItem=rightItem
 
         
@@ -57,7 +57,7 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
     
     func initTableView(){
         
-        cellNameArray=["电站名:","时区:"]
+        cellNameArray=[root_dianzhanming,root_WO_shiqu]
         
         tableView=UITableView()
         let H1=30*HEIGHT_SIZE
@@ -167,7 +167,7 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!plantListCell
         
-        let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,self.cellValue1Array.object(at: indexPath.row) as! CVarArg)
+        let lable1=NSString(format: "%@:%@", cellNameArray[0]as!NSString,self.cellValue1Array.object(at: indexPath.row) as! CVarArg)
         let lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,self.cellValue2Array.object(at: indexPath.row) as! CVarArg)
         
         cell.TitleLabel1.text=lable1 as String

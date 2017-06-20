@@ -44,7 +44,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         
-    self.title="设备搜索"
+    self.title=root_shebei_soushuo
         pageNum=0
        
         let tap=UITapGestureRecognizer(target: self, action: #selector(keyboardHide(tap:)))
@@ -72,7 +72,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         searchBar=UISearchBar();
             self.searchBar.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width-40*NOW_SIZE, height: 30*HEIGHT_SIZE)
          self.searchBar.delegate = self
-        self.searchBar.placeholder = "输入搜索内容"
+        self.searchBar.placeholder = root_shuru_soushuo_neirong
         for subview in searchBar.subviews {
             if subview .isKind(of: NSClassFromString("UIView")!) {
                 subview.backgroundColor=UIColor.clear
@@ -116,7 +116,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         button22.frame=CGRect(x: 50*NOW_SIZE, y: 10*HEIGHT_SIZE, width: 220*NOW_SIZE, height:25*HEIGHT_SIZE)
         
         if (getAddress==nil)||(getAddress=="") {
-          button22.setTitle("点击获取服务器地址", for: .normal)
+          button22.setTitle(root_dianji_huoqu_fuwuqi, for: .normal)
         }else{
           button22.setTitle(getAddress as String?, for: .normal)
             addressString=getAddress
@@ -137,14 +137,14 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
        let RfSnLable=UILabel()
          RfSnLable.frame=CGRect(x: 0*NOW_SIZE, y: 40*HEIGHT_SIZE, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
-        RfSnLable.text="选择搜索类型"
+        RfSnLable.text=root_xuanzhe_soushuo_leixing
         RfSnLable.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
         RfSnLable.textAlignment=NSTextAlignment.center
         RfSnLable.font=UIFont.systemFont(ofSize: 15*HEIGHT_SIZE)
         view3.addSubview(RfSnLable)
         
-        let buttonNameArray1=["用户名","电站名","手机号","邮箱"]
-         let buttonNameArray2=["采集器","逆变器","储能机"]
+        let buttonNameArray1=[root_yonghuming,root_dianzhanming,root_shoujihao,root_youxiang]
+         let buttonNameArray2=[root_caijiqi,root_niBianQi,root_chuNengJi]
         
         for i in 0...3{
             let button2=UIButton()
@@ -214,7 +214,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             }
         }
         
-        ZJBLStoreShopTypeAlert.show(withTitle: "选择服务器地址", titles: nameArray as NSArray as! [NSString], selectIndex: {
+        ZJBLStoreShopTypeAlert.show(withTitle: root_xuanzhe_fuwuqi_dizhi, titles: nameArray as NSArray as! [NSString], selectIndex: {
             (selectIndex)in
        
             self.addressString=addressArray[selectIndex] as! NSString
@@ -284,7 +284,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!deviceFirstCell
         
-        let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,self.cellValue1Array.object(at: indexPath.row) as! CVarArg)
+        let lable1=NSString(format: "%@:%@", cellNameArray[0]as!NSString,self.cellValue1Array.object(at: indexPath.row) as! CVarArg)
          let lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,self.cellValue2Array.object(at: indexPath.row) as! CVarArg)
         cell.TitleLabel1.text=lable1 as String
          cell.TitleLabel2.text=lable2 as String
@@ -343,7 +343,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             uibutton.backgroundColor=UIColor.white
             uibutton.setTitleColor(MainColor, for: .normal)
              uibutton.isSelected=false
-            self.title="设备搜索"
+            self.title=root_shebei_soushuo
             if (view4 != nil){
                 view4.removeFromSuperview()
                 view4=nil
@@ -363,8 +363,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                 }
             }
             let titleName1=uibutton.titleLabel?.text
-            let titleName2="当前设备类型:"
-            let titleName=NSString(format: "%@%@", titleName2,titleName1!)
+            let titleName2=root_dangqian_shebei_leixing
+            let titleName=NSString(format: "%@:%@", titleName2,titleName1!)
             self.title=titleName as String
             
         }
@@ -406,7 +406,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
             let button2=UIButton()
             button2.frame=CGRect(x: 5*NOW_SIZE+95*NOW_SIZE*CGFloat(i), y: 0*HEIGHT_SIZE, width: 50*NOW_SIZE, height:20*HEIGHT_SIZE)
-            button2.setTitle("序列号", for: .normal)
+            button2.setTitle(root_xunliehao, for: .normal)
             button2.setTitleColor(MainColor, for: .normal)
             button2.setTitleColor(UIColor.white, for: .highlighted)
             button2.tag=2007
@@ -422,7 +422,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         let button4=UIButton()
         button4.frame=CGRect(x: 75*NOW_SIZE+95*NOW_SIZE*CGFloat(i), y: 0*HEIGHT_SIZE, width: 50*NOW_SIZE, height:20*HEIGHT_SIZE)
-        button4.setTitle("别名", for: .normal)
+        button4.setTitle(root_bieming, for: .normal)
         button4.setTitleColor(MainColor, for: .normal)
         button4.setTitleColor(UIColor.white, for: .highlighted)
         button4.tag=2008
@@ -483,11 +483,11 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
         
         if (searchBar.text==nil)||(searchBar.text=="") {
-            self.showToastView(withTitle: "请输入搜索类型")
+            self.showToastView(withTitle: root_shuru_soushuo_leixing)
             return
         }
         if (addressString==nil)||(addressString=="") {
-            self.showToastView(withTitle: "请输入服务器地址")
+            self.showToastView(withTitle: root_shuru_fuwuqi_dizhi)
             return
         }
         
@@ -503,7 +503,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                             let C1 = view4.viewWithTag(2007) as! UIButton
                             let C2 = view4.viewWithTag(2008) as! UIButton
                             if C1.isSelected==false&&C2.isSelected==false {
-                                self.showToastView(withTitle: "请选择序列号或别名")
+                                self.showToastView(withTitle: root_xuanze_xuliehao_hebieming)
                                 return
                             }else{
                                 if C1.isSelected==true {
@@ -529,7 +529,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         }
     
         if choiceBool==false {
-               self.showToastView(withTitle: "请选择搜索类型")
+               self.showToastView(withTitle: root_xuanzhe_soushuo_leixing)
             return
         }
     
@@ -592,7 +592,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     var plantAll:NSArray=[]
                     //获取用户列表
                     if self.typeNum==0{
-                      self.cellNameArray=["用户名:","创建时间:"];
+                      self.cellNameArray=[root_yonghuming,root_chuanjian_shijian];
                            plantAll=objArray["userList"] as! NSArray
                         for i in 0..<plantAll.count{
                             self.cellValue1Array.add((plantAll[i] as! NSDictionary)["accountName"] as!NSString)
@@ -610,7 +610,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     
                     //获取手机列表
                     if self.typeNum==1{
-                           self.cellNameArray=["手机号:","用户名:"];
+                           self.cellNameArray=[root_shoujihao,root_yonghuming];
                       plantAll=objArray["userList"] as! NSArray
                         for i in 0..<plantAll.count{
                           self.cellValue1Array.add((plantAll[i] as! NSDictionary)["phoneNum"] as!NSString)
@@ -621,7 +621,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     
                     //获取邮箱列表
                     if self.typeNum==2{
-                        self.cellNameArray=["邮箱:","用户名:"];
+                        self.cellNameArray=[root_youxiang,root_yonghuming];
                         plantAll=objArray["userList"] as! NSArray
                         for i in 0..<plantAll.count{
                             self.cellValue1Array.add((plantAll[i] as! NSDictionary)["email"] as!NSString)
@@ -632,7 +632,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     
                     //获取电站列表
                     if self.typeNum==3{
-                        self.cellNameArray=["电站名称:","所属用户名:"];
+                        self.cellNameArray=[root_dianzhanming,root_suoshu_yonghuming];
                          plantAll=objArray["plantList"] as! NSArray
                
                         for i in 0..<plantAll.count{
@@ -647,7 +647,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     
                     
                     if ((plantAll.count==0) && !(self.plantListArray.count==0)){
-                        self.showToastView(withTitle: "没有更多数据")
+                        self.showToastView(withTitle: root_meiyou_gengduo_shuju)
                     }
                     
                     if self.plantListArray.count==1{
@@ -785,7 +785,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     }
                     
                     if self.plantListArray.count>1{
-                           self.cellNameArray=["序列号:","别名:"];
+                           self.cellNameArray=[root_xunliehao,root_bieming];
                         if (self.view3 != nil){
                             self.view3.removeFromSuperview()
                             self.view3=nil
@@ -817,7 +817,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         if (tableView != nil){
             tableView.removeFromSuperview()
             tableView=nil
-            self.title="设备搜索"
+            self.title=root_shebei_soushuo
             self.initUiTwo()
         }
         
