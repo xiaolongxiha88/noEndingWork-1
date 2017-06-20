@@ -49,6 +49,7 @@
  @property (nonatomic, strong)  NSString *languageValue;
 @property (nonatomic, strong) NSString *OssFirst;
 @property (nonatomic, strong) NSString *userNameGet;
+@property (nonatomic) int getServerAddressNum;
 
 @end
 
@@ -141,6 +142,7 @@
             _pwdTextField.text=rePassword;
             
             if ([_LogType isEqualToString:@"1"]) {
+                _getServerAddressNum=0;
                 [self performSelectorOnMainThread:@selector(netServerInit) withObject:nil waitUntilDone:NO];
             }else{
                 [self performSelectorOnMainThread:@selector(netRequest) withObject:nil waitUntilDone:NO];
@@ -538,9 +540,10 @@ NSLog(@"体验馆");
            
             
             
-  [self getOSSnet];
-            
-   // [self netServerInit];
+ // [self getOSSnet];
+  
+            _getServerAddressNum=0;
+    [self netServerInit];
          
         }];
     }
@@ -635,8 +638,7 @@ NSLog(@"体验馆");
                 }
                 
                 
-                //获取服务器
-              //  [self netServerInit];
+         
              [self didPresentControllerButtonTouch];
                 
             }
@@ -758,8 +760,17 @@ NSLog(@"体验馆");
 
 -(void)netServerInit{
     
+    _getServerAddressNum++;
+    
+    NSString *serverInitAddress;
+    if ([_languageValue isEqualToString:@"0"]) {
+        serverInitAddress=HEAD_URL_Demo_CN;
+    }else{
+        serverInitAddress=HEAD_URL_Demo;
+    }
+    
        [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userName":_userTextField.text} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:serverInitAddress paramars:@{@"userName":_userTextField.text} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
            [self hideProgressView];
         NSLog(@"getUserServerUrl: %@", content);
         if (content) {
@@ -770,16 +781,35 @@ NSLog(@"体验馆");
                 [[UserInfo defaultUserInfo] setServer:server];
                          [self netRequest];
             }else{
-                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-                [self netRequest];
+                if (_getServerAddressNum==1) {
+                    [self netServerInit];
+                }else{
+                    if ([_languageValue isEqualToString:@"0"]) {
+                              [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo_CN];
+                    }else{
+                        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+                    }
+                             [self netRequest];
+                }
+          
+       
             }
         }else{
-           [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-                 [self netRequest];
+            if ([_languageValue isEqualToString:@"0"]) {
+                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo_CN];
+            }else{
+                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+            }
+            [self netRequest];
         }
         
     } failure:^(NSError *error) {
-           [self showToastViewWithTitle:root_Networking];
+        if (_getServerAddressNum==1) {
+            [self netServerInit];
+        }else{
+            [self showToastViewWithTitle:root_Networking];
+        }
+       
         
     }];
     

@@ -46,6 +46,8 @@
 
 
 #define HEAD_URL_Demo  @"http://server.growatt.com"
+#define HEAD_URL_Demo_CN  @"http://server-cn.growatt.com"
+
 #define HEAD_URL  [UserInfo defaultUserInfo].server
 
 

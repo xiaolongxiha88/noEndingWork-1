@@ -24,7 +24,7 @@ class uibuttonView0: UIView{
         for (i,buttonName) in buttonArray.enumerated(){
             let button2=UIButton()
             var buttonW:CGFloat
-            if typeNum==2 {
+            if typeNum==2 || typeNum==3{
             buttonW=50
             }else{
              buttonW=70
@@ -43,8 +43,11 @@ class uibuttonView0: UIView{
             button2.layer.borderWidth=0.8*HEIGHT_SIZE;
             button2.layer.cornerRadius=10*HEIGHT_SIZE;
             button2.titleLabel?.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
-            if typeNum==2 {
+            if typeNum==2 || typeNum==3{
              button2.titleLabel?.font=UIFont.systemFont(ofSize: 10*HEIGHT_SIZE)
+            }
+            if typeNum==3{
+                button2.tag=i+4000
             }
             button2.titleLabel?.adjustsFontSizeToFitWidth=true
             button2.layer.borderColor=MainColor.cgColor;
@@ -65,6 +68,16 @@ class uibuttonView0: UIView{
                     button2.isSelected=true
                 }
             }
+            
+            if typeNum==3 {
+               
+                if i==0 {
+                    button2.backgroundColor=MainColor
+                    button2.setTitleColor(backgroundGrayColor, for: .normal)
+                    button2.isSelected=true
+                }
+            }
+           
             
             button2.addTarget(self, action:#selector(butttonChange(uibutton:)), for: .touchUpInside)
             self.addSubview(button2)
@@ -104,8 +117,10 @@ class uibuttonView0: UIView{
     
     
     func changeStateT(Tag:Int)  {
-        let A=Tag-2000
-      
+        var A=Tag-2000
+        if typeNum==3{
+            A=Tag-4000
+        }
             for i in 0...(buttonNum-1){
                 if i==A {
                     
@@ -121,8 +136,10 @@ class uibuttonView0: UIView{
     
     func changeState( Tag:Int)  {
         
-        let A=2000+Tag
-        
+        var A=2000+Tag
+        if typeNum==3{
+            A=Tag+4000
+        }
         
         let B1 = self.viewWithTag(A) as! UIButton
         B1.isSelected=false
