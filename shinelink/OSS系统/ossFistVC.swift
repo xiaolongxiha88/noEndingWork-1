@@ -134,9 +134,11 @@ class ossFistVC: RootViewController {
             let vc=ossDeviceFirst()
             vc.serverListArray=self.serverListArray
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if roleString=="5" || roleString=="6"{
+        }else if roleString=="5"{
             let vc=IntegratorFirst()
             self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+          self.showToastView(withTitle:"没有操作权限")
         }
      
         

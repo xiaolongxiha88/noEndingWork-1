@@ -678,8 +678,8 @@
 #define  root_dianji_huoqu_fuwuqi  NSLocalizedString(@"79点击获取服务器地址", nil)
 #define  root_huoqu_wufuqi_buchenggong  NSLocalizedString(@"80获取服务器地址不成功", nil)
 #define  root_shuru_zhengque_youxiang_geshi  NSLocalizedString(@"81请输入正确邮箱格式", nil)
-
-
+#define  root_shoujihao  NSLocalizedString(@"82手机号:", nil)
+#define  root_youxiang  NSLocalizedString(@"83邮箱:", nil)
 
 
 

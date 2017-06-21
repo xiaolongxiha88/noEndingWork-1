@@ -619,7 +619,7 @@ NSLog(@"体验馆");
                 
             } else {
                 
-                           self.dataSource = [NSDictionary dictionaryWithDictionary:content];
+               self.dataSource = [NSDictionary dictionaryWithDictionary:content];
                 _userNameGet=_dataSource[@"user"][@"accountName"];
                 
                 _adNumber=content[@"app_code"];
@@ -642,7 +642,12 @@ NSLog(@"体验馆");
                 [[UserInfo defaultUserInfo] setUserPassword:_pwdTextField.text];
                 [[UserInfo defaultUserInfo] setUserName:_userNameGet];
                 
-     
+      
+                NSDictionary *userDic=[NSDictionary dictionaryWithDictionary:_dataSource[@"user"]];
+                if ([userDic.allKeys containsObject:@"isValiPhone"]) {          
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",_dataSource[@"user"][@"isValiPhone"]] forKey:@"isValiPhone"];
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",_dataSource[@"user"][@"isValiEmail"]] forKey:@"isValiEmail"];
+                }
                 
                 if ([_dataSource[@"user"][@"rightlevel"] integerValue]==2) {
                     [[NSUserDefaults standardUserDefaults] setObject:@"isDemo" forKey:@"isDemo"];

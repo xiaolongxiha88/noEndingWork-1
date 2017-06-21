@@ -7,6 +7,7 @@
 //
 
 #import "addServerViewController.h"
+#import "ZJBLStoreShopTypeAlert.h"
 
 @interface addServerViewController ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate>
 @property (nonatomic, strong) UIView *scrollView;
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) NSString *typeName;
 @property (nonatomic, strong) UILabel* QuestionLable;
 @property(nonatomic,strong)UIView *imageViewAll;
+@property(nonatomic,strong)UIImageView *imageV5;
 
 
 @property (nonatomic, strong) UIImageView *image1;
@@ -98,8 +100,8 @@
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
-      _labelArray=[[NSMutableArray alloc]initWithObjects:root_ME_biaoti, root_ME_wenti_leixing, root_NBQ_xunliehao,@"电话号码:",@"邮箱:",nil];
-     NSMutableArray *alertArray=[[NSMutableArray alloc]initWithObjects:@"请输入标题", @"请选择问题类型", @"请选择或输入序列号",@"请输入电话号码",@"请输入邮箱",nil];
+      _labelArray=[[NSMutableArray alloc]initWithObjects:root_ME_biaoti, root_ME_wenti_leixing, root_NBQ_xunliehao,root_shoujihao,nil];
+     NSMutableArray *alertArray=[[NSMutableArray alloc]initWithObjects:@"请输入标题", @"请选择问题类型", @"请选择或输入序列号",@"请输入电话号码",nil];
     
     float lableH=40*HEIGHT_SIZE;float Nsize=lableH+2*HEIGHT_SIZE;
     float lablaFontSize=12*HEIGHT_SIZE;
@@ -109,6 +111,7 @@
         
         UILabel *PV1Lable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE+Nsize*i, nameSize.width,lableH )];
         PV1Lable.text=nameString;
+        PV1Lable.tag=4000+i;
         PV1Lable.textAlignment=NSTextAlignmentLeft;
         PV1Lable.textColor=COLOR(51, 51, 51, 1);
         PV1Lable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -125,9 +128,9 @@
             _registLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:_registLable];
             
-            UIImageView *image1=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_Width-15*NOW_SIZE-8*HEIGHT_SIZE, 17*HEIGHT_SIZE+Nsize*i, 8*HEIGHT_SIZE,6*HEIGHT_SIZE )];
+            UIImageView *image1=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_Width-15*NOW_SIZE-8*HEIGHT_SIZE, 13*HEIGHT_SIZE+Nsize*i, 6*HEIGHT_SIZE,14*HEIGHT_SIZE )];
             image1.userInteractionEnabled=YES;
-            image1.image=IMAGE(@"upOSS.png");
+            image1.image=IMAGE(@"select_icon.png");
              UITapGestureRecognizer *labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLable)];
                [image1 addGestureRecognizer:labelTap1];
          [_scrollView addSubview:image1];
@@ -158,6 +161,22 @@
                 [_scrollView addSubview:L2];
             }
             
+            if(i==3){
+                textF.frame=CGRectMake(12*NOW_SIZE+nameSize.width, 0*HEIGHT_SIZE+Nsize*i, SCREEN_Width-22*NOW_SIZE-nameSize.width-40*NOW_SIZE,lableH );
+                
+                UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(textF.frame.origin.x+textF.frame.size.width, 0*HEIGHT_SIZE+Nsize*i, 45*NOW_SIZE,lableH )];
+                lineV.backgroundColor=[UIColor clearColor];
+                [_scrollView addSubview:lineV];
+                
+                UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(27*NOW_SIZE, 13*HEIGHT_SIZE, 6*NOW_SIZE,14*HEIGHT_SIZE )];
+                image2.userInteractionEnabled=YES;
+                image2.image=IMAGE(@"select_icon.png");
+                UITapGestureRecognizer *labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapInfo)];
+                [image2 addGestureRecognizer:labelTap1];
+                [lineV addSubview:image2];
+                
+            }
+            
         }
         
         UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, lableH+Nsize*i, SCREEN_Width-20*NOW_SIZE, 1*HEIGHT_SIZE)];
@@ -166,9 +185,13 @@
         
     }
     
-      float imageH=60*HEIGHT_SIZE;
+    UIView *lineV3=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, lableH+Nsize*4-10*HEIGHT_SIZE, SCREEN_Width-20*NOW_SIZE, 1*HEIGHT_SIZE)];
+    lineV3.backgroundColor=COLOR(222, 222, 222, 1);
+    [_scrollView addSubview:lineV3];
     
-    self.contentView = [[UITextView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, Nsize*5+10*HEIGHT_SIZE, 300*NOW_SIZE,SCREEN_Height-imageH-Nsize*5-10*HEIGHT_SIZE )];
+      float imageH=50*HEIGHT_SIZE;
+    
+    self.contentView = [[UITextView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, Nsize*5, 300*NOW_SIZE,SCREEN_Height-imageH-Nsize*5-10*HEIGHT_SIZE )];
     _contentView.text=root_xiangguang_wenti_miaoshu;
     self.contentView.textColor = COLOR(153, 153, 153, 1);
     self.contentView.tintColor = COLOR(153, 153, 153, 1);
@@ -178,8 +201,8 @@
     [_scrollView addSubview:_contentView];
     
 //     float H2=self.navigationController.navigationBar.frame.size.height;
-//     float H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
-    _imageViewAll = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_Height-imageH-40*HEIGHT_SIZE, SCREEN_Width,imageH )];
+    float H1=[[UIApplication sharedApplication] statusBarFrame].size.height+self.navigationController.navigationBar.frame.size.height;
+    _imageViewAll = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_Height-imageH-H1, SCREEN_Width,imageH )];
     _imageViewAll.backgroundColor =COLOR(242, 242, 242, 1);
     _imageViewAll.userInteractionEnabled = YES;
     [_scrollView addSubview:_imageViewAll];
@@ -191,12 +214,17 @@
     [VI addGestureRecognizer:forget1];
     [_imageViewAll addSubview:VI];
     
-    UIImageView *image4=[[UIImageView alloc]initWithFrame:CGRectMake(18*NOW_SIZE, 13*HEIGHT_SIZE, 25*HEIGHT_SIZE,25*HEIGHT_SIZE )];
+    UIImageView *image4=[[UIImageView alloc]initWithFrame:CGRectMake(18*NOW_SIZE, 15*HEIGHT_SIZE, 20*HEIGHT_SIZE,20*HEIGHT_SIZE )];
     image4.userInteractionEnabled = YES;
     image4.image = IMAGE(@"pic_icon.png");
     [VI addSubview:image4];
     
+    
+    [self showAlert];
+    
 }
+
+
 
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
@@ -360,18 +388,18 @@
     float size5=70*NOW_SIZE;
     
     float imageH=40*HEIGHT_SIZE;  float imageX=20*NOW_SIZE; float ButtonImage=16*HEIGHT_SIZE;
-
+ float imageH0=9*HEIGHT_SIZE;
     
     
     if(!_image1){
         [_picArray insertObject:image atIndex:0];
-        _image1=[[UIImageView alloc]initWithFrame:CGRectMake(imageX+size5*0, 10*HEIGHT_SIZE, imageH,imageH )];
+        _image1=[[UIImageView alloc]initWithFrame:CGRectMake(imageX+size5*0, imageH0, imageH,imageH )];
         _image1.userInteractionEnabled = YES;
         _image1.image = image;
         _image1.tag=1+3000;
         [_imageViewAll addSubview:_image1];
         
-        _button1= [[UIButton alloc] initWithFrame:CGRectMake(imageX+size5*0+imageH-ButtonImage/2, 10*HEIGHT_SIZE-ButtonImage/2, ButtonImage,ButtonImage)];
+        _button1= [[UIButton alloc] initWithFrame:CGRectMake(imageX+size5*0+imageH-ButtonImage/2, imageH0-ButtonImage/2, ButtonImage,ButtonImage)];
         [_button1 setImage:IMAGE(@"cancel_icon111.png") forState:UIControlStateNormal];
         _button1.tag=2000+1;
         [_button1 addTarget:self action:@selector(delPicture:) forControlEvents:UIControlEventTouchUpInside];
@@ -379,13 +407,13 @@
         
     }else if(_image1 && !_image2){
         [_picArray insertObject:image atIndex:1];
-        _image2=[[UIImageView alloc]initWithFrame:CGRectMake(imageX+size5*1, 10*HEIGHT_SIZE, imageH,imageH )];
+        _image2=[[UIImageView alloc]initWithFrame:CGRectMake(imageX+size5*1, imageH0, imageH,imageH )];
         _image2.userInteractionEnabled = YES;
         _image2.image = image;
         _image2.tag=2+3000;
         [_imageViewAll addSubview:_image2];
         
-        _button2= [[UIButton alloc] initWithFrame:CGRectMake(imageX+size5*1+imageH-ButtonImage/2, 10*HEIGHT_SIZE-ButtonImage/2, ButtonImage,ButtonImage)];
+        _button2= [[UIButton alloc] initWithFrame:CGRectMake(imageX+size5*1+imageH-ButtonImage/2, imageH0-ButtonImage/2, ButtonImage,ButtonImage)];
         [_button2 setImage:IMAGE(@"cancel_icon111.png") forState:UIControlStateNormal];
         _button2.tag=2000+2;
         // _button2.titleLabel.font=[UIFont systemFontOfSize: 10*HEIGHT_SIZE];
@@ -394,13 +422,13 @@
         
     }else if(_image1 && _image2 && !_image3){
         [_picArray insertObject:image atIndex:2];
-        _image3=[[UIImageView alloc]initWithFrame:CGRectMake(imageX+size5*2, 10*HEIGHT_SIZE, imageH,imageH )];
+        _image3=[[UIImageView alloc]initWithFrame:CGRectMake(imageX+size5*2, imageH0, imageH,imageH )];
         _image3.userInteractionEnabled = YES;
         _image3.image = image;
         _image3.tag=3+3000;
         [_imageViewAll addSubview:_image3];
         
-        _button3= [[UIButton alloc] initWithFrame:CGRectMake(imageX+size5*2+imageH-ButtonImage/2, 10*HEIGHT_SIZE-ButtonImage/2, ButtonImage,ButtonImage)];
+        _button3= [[UIButton alloc] initWithFrame:CGRectMake(imageX+size5*2+imageH-ButtonImage/2, imageH0-ButtonImage/2, ButtonImage,ButtonImage)];
         [_button3 setImage:IMAGE(@"cancel_icon111.png") forState:UIControlStateNormal];
         _button3.tag=2000+3;
         //  _button3.titleLabel.font=[UIFont systemFontOfSize: 10*HEIGHT_SIZE];
@@ -463,6 +491,42 @@
     
 }
 
+
+-(void)tapInfo{
+    NSArray *infoArray=[NSArray arrayWithObjects:root_shoujihao,root_youxiang, nil];
+    [ZJBLStoreShopTypeAlert showWithTitle:@"选择联系方式" titles:infoArray selectIndex:^(NSInteger selectIndex) {
+    
+        
+    }selectValue:^(NSString *selectValue){
+        UILabel *lable=[_scrollView viewWithTag:4003];
+        lable.text=selectValue;
+    
+    } showCloseButton:YES ];
+    
+}
+
+
+-(void)showAlert{
+    _imageV5=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 38*HEIGHT_SIZE+(42*HEIGHT_SIZE)*3, SCREEN_Width-20*NOW_SIZE, 40*HEIGHT_SIZE)];
+    _imageV5.userInteractionEnabled = YES;
+    UITapGestureRecognizer *labelTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLable)];
+    [_imageV5 addGestureRecognizer:labelTap];
+    _imageV5.image = IMAGE(@"pop_frame.png");
+    [_scrollView addSubview:_imageV5];
+    
+    UILabel *PV1Lable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width-20*NOW_SIZE,40*HEIGHT_SIZE )];
+    PV1Lable.text=@"您的手机号还未验证,请点击验证。";
+    PV1Lable.textAlignment=NSTextAlignmentCenter;
+    PV1Lable.textColor=MainColor;
+    PV1Lable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    [_imageV5 addSubview:PV1Lable];
+}
+
+
+-(void)goToVerification{
+
+
+}
 
 -(void)tapLable{
 
