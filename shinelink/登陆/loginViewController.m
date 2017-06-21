@@ -451,9 +451,9 @@ NSLog(@"体验馆");
     }
     
     if (_getServerAddressNum==2) {
-        if ([_languageValue isEqualToString:@"0"]) {
+        if ([serverInitAddress isEqualToString:HEAD_URL_Demo_CN]) {
             serverInitAddress=HEAD_URL_Demo;
-        }else{
+        }else if ([serverInitAddress isEqualToString:HEAD_URL_Demo]){
             serverInitAddress=HEAD_URL_Demo_CN;
         }
     }
@@ -815,9 +815,9 @@ NSLog(@"体验馆");
     }
     
     if (_getServerAddressNum==2) {
-        if ([_languageValue isEqualToString:@"0"]) {
+        if ([serverInitAddress isEqualToString:HEAD_URL_Demo_CN]) {
             serverInitAddress=HEAD_URL_Demo;
-        }else{
+        }else if ([serverInitAddress isEqualToString:HEAD_URL_Demo]){
             serverInitAddress=HEAD_URL_Demo_CN;
         }
     }

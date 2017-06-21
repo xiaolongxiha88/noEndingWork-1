@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSMutableDictionary *dataDic;
 @property (nonatomic, strong) NSString *setDeviceName;
 @property(nonatomic,strong)NSString *userEnable;
+@property (nonatomic) int getServerAddressNum;
 
 @end
 
@@ -118,7 +119,7 @@
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [goBut setTitle:root_register forState:UIControlStateNormal];
-    [goBut addTarget:self action:@selector(registerFrist) forControlEvents:UIControlEventTouchUpInside];
+    [goBut addTarget:self action:@selector(registerFrist1) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goBut];
  
     UIButton *selectButton= [UIButton buttonWithType:UIButtonTypeCustom];
@@ -173,13 +174,35 @@
         
 }
 
+-(void)registerFrist1{
+_getServerAddressNum=0;
+    
+    [self registerFrist];
+}
+
 
 -(void)registerFrist{
     
+    _getServerAddressNum++;
     
+    NSString *serverInitAddress;
+    if ([self.languageType isEqualToString:@"0"]) {
+        serverInitAddress=HEAD_URL_Demo_CN;
+    }else{
+        serverInitAddress=HEAD_URL_Demo;
+    }
+    
+    if (_getServerAddressNum==2) {
+        if ([serverInitAddress isEqualToString:HEAD_URL_Demo_CN]) {
+            serverInitAddress=HEAD_URL_Demo;
+        }else if ([serverInitAddress isEqualToString:HEAD_URL_Demo]){
+            serverInitAddress=HEAD_URL_Demo_CN;
+        }
+
+    }
     
      [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"country":_getCountry} paramarsSite:@"/newLoginAPI.do?op=getServerUrl" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:serverInitAddress paramars:@{@"country":_getCountry} paramarsSite:@"/newLoginAPI.do?op=getServerUrl" sucessBlock:^(id content) {
         [self hideProgressView];
         NSLog(@"getServerUrl: %@", content);
         if (content) {
@@ -190,13 +213,29 @@
                 [[UserInfo defaultUserInfo] setServer:server];
                 
                 [self PresentGo];
+            }else{
+                if (_getServerAddressNum==1) {
+                    [self registerFrist];
+                }else{
+                    [self showToastViewWithTitle:root_Networking];
+                }
             }
   
         }else{
+            if (_getServerAddressNum==1) {
+                [self registerFrist];
+            }else{
+                [self showToastViewWithTitle:root_Networking];
+            }
 
         }
         
     } failure:^(NSError *error) {
+        if (_getServerAddressNum==1) {
+            [self registerFrist];
+        }else{
+            [self showToastViewWithTitle:root_Networking];
+        }
 
     }];
 

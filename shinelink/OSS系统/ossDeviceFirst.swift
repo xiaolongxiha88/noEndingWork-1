@@ -689,13 +689,14 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     
                     
                 }else{
-                    
+                           self.hideProgressView()
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
                 }
                 
             }
             
         }, failure: {(error) in
+                   self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         
@@ -806,6 +807,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             }
             
         }, failure: {(error) in
+                   self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
 

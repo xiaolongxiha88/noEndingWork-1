@@ -24,6 +24,8 @@
 @property(nonatomic,strong)NSString *country;
 @property(nonatomic,strong)NSString *countryGet;
 @property(nonatomic,strong)NSMutableArray *provinceArray;
+@property (nonatomic) int getServerAddressNum;
+
 
 @end
 
@@ -111,15 +113,39 @@
     [goBut addTarget:self action:@selector(PresentGo) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:goBut];
     
-        [self _getPickerData];
+        [self _getPickerData0];
+}
+
+
+- (void)_getPickerData0{
+    _getServerAddressNum=0;
+[self _getPickerData];
 }
 
 - (void)_getPickerData
 {
+    
+    _getServerAddressNum++;
+    
+    NSString *serverInitAddress;
+    if ([self.languageType isEqualToString:@"0"]) {
+        serverInitAddress=HEAD_URL_Demo_CN;
+    }else{
+        serverInitAddress=HEAD_URL_Demo;
+    }
+    
+    if (_getServerAddressNum==2) {
+        if ([serverInitAddress isEqualToString:HEAD_URL_Demo_CN]) {
+            serverInitAddress=HEAD_URL_Demo;
+        }else if ([serverInitAddress isEqualToString:HEAD_URL_Demo]){
+            serverInitAddress=HEAD_URL_Demo_CN;
+        }
+    }
+
     _provinceArray=[NSMutableArray array];
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"admin":@"admin"} paramarsSite:@"/newCountryCityAPI.do?op=getCountryCity" sucessBlock:^(id content) {
-        
+    [BaseRequest requestWithMethodResponseJsonByGet:serverInitAddress paramars:@{@"admin":@"admin"} paramarsSite:@"/newCountryCityAPI.do?op=getCountryCity" sucessBlock:^(id content) {
+           [self hideProgressView];
         NSLog(@"getCountryCity: %@", content);
         if (content) {
             NSArray *dataDic=[NSArray arrayWithArray:content];
@@ -128,24 +154,40 @@
                     NSString *DY=[NSString stringWithFormat:@"%@",content[i][@"country"]];
                     [ _provinceArray addObject:DY];
                 }
-                [self hideProgressView];
+             
+                [_provinceArray sortUsingComparator:^NSComparisonResult(__strong id obj1,__strong id obj2){
+                    NSString *str1=(NSString *)obj1;
+                    NSString *str2=(NSString *)obj2;
+                    return [str1 compare:str2];
+                }];
+                
+                [_provinceArray insertObject:@"A1_中国" atIndex:0];
+            }else{
+                if (_getServerAddressNum==1) {
+                    [self _getPickerData];
+                }else{
+                    [self showToastViewWithTitle:root_Networking];
+                }
             }
             
-            [_provinceArray sortUsingComparator:^NSComparisonResult(__strong id obj1,__strong id obj2){
-                NSString *str1=(NSString *)obj1;
-                NSString *str2=(NSString *)obj2;
-                return [str1 compare:str2];
-            }];
-            
-            [_provinceArray insertObject:@"A1_中国" atIndex:0];
+   
             
         }else{
         [self hideProgressView];
+            if (_getServerAddressNum==1) {
+                [self _getPickerData];
+            }else{
+                [self showToastViewWithTitle:root_Networking];
+            }
         }
         
     } failure:^(NSError *error) {
         [self hideProgressView];
-        
+        if (_getServerAddressNum==1) {
+            [self _getPickerData];
+        }else{
+            [self showToastViewWithTitle:root_Networking];
+        }
     }];
     
 }

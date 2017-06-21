@@ -21,6 +21,8 @@
 @property(nonatomic,strong)NSString *userEnable;
 @property(nonatomic,strong) UILabel *addressLable;
 @property(nonatomic,strong)NSString *addressString;
+@property (nonatomic) int getServerAddressNum;
+
 @end
 
 @implementation registerViewController
@@ -95,7 +97,15 @@
    
 }
 
+
 - (void)netServer
+{
+ _getServerAddressNum=0;
+    
+    [self netServer1];
+}
+
+- (void)netServer1
 {
    
     //[self showProgressView];
@@ -110,7 +120,26 @@
           [_dataDic setObject:@"China" forKey:@"regCountry"];
     }
     
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"country":[_dataDic objectForKey:@"regCountry"]} paramarsSite:@"/newLoginAPI.do?op=getServerUrl" sucessBlock:^(id content) {
+    
+    _getServerAddressNum++;
+    
+    NSString *serverInitAddress;
+    if ([self.languageType isEqualToString:@"0"]) {
+        serverInitAddress=HEAD_URL_Demo_CN;
+    }else{
+        serverInitAddress=HEAD_URL_Demo;
+    }
+    
+    if (_getServerAddressNum==2) {
+        if ([serverInitAddress isEqualToString:HEAD_URL_Demo_CN]) {
+            serverInitAddress=HEAD_URL_Demo;
+        }else if ([serverInitAddress isEqualToString:HEAD_URL_Demo]){
+            serverInitAddress=HEAD_URL_Demo_CN;
+        }
+    }
+
+    
+    [BaseRequest requestWithMethodResponseJsonByGet:serverInitAddress paramars:@{@"country":[_dataDic objectForKey:@"regCountry"]} paramarsSite:@"/newLoginAPI.do?op=getServerUrl" sucessBlock:^(id content) {
         
         NSLog(@"getServerUrl: %@", content);
         if (content) {
@@ -131,11 +160,18 @@
                 _addressLable.textColor=[UIColor lightTextColor];
                 _addressLable.text=[NSString stringWithFormat:@"%@%@",lableA,server1];
             }else{
-                _addressLable.userInteractionEnabled=YES;
-                NSString *lableA=root_dianji_huoqu_fuwuqi;
-                _addressLable.textColor=[UIColor whiteColor];
-                _addressLable.text=[NSString stringWithFormat:@"%@",lableA];
-                [self showToastViewWithTitle:root_huoqu_wufuqi_buchenggong];
+                
+                if (_getServerAddressNum==1) {
+                    [self netServer1];
+                }else{
+                    _addressLable.userInteractionEnabled=YES;
+                    NSString *lableA=root_dianji_huoqu_fuwuqi;
+                    _addressLable.textColor=[UIColor whiteColor];
+                    _addressLable.text=[NSString stringWithFormat:@"%@",lableA];
+                    [self showToastViewWithTitle:root_huoqu_wufuqi_buchenggong];
+                }
+
+          
             }
             
             if ([_customerCodeEnable isEqualToString:@"0"]) {
@@ -148,11 +184,17 @@
                 [_textFieldMutableArray[5] removeFromSuperview];
                [self removeText5];
             }
-            _addressLable.userInteractionEnabled=YES;
-            NSString *lableA=root_dianji_huoqu_fuwuqi;
-            _addressLable.textColor=[UIColor whiteColor];
-            _addressLable.text=[NSString stringWithFormat:@"%@",lableA];
-            [self showToastViewWithTitle:root_huoqu_wufuqi_buchenggong];
+            
+            if (_getServerAddressNum==1) {
+                [self netServer1];
+            }else{
+                _addressLable.userInteractionEnabled=YES;
+                NSString *lableA=root_dianji_huoqu_fuwuqi;
+                _addressLable.textColor=[UIColor whiteColor];
+                _addressLable.text=[NSString stringWithFormat:@"%@",lableA];
+                [self showToastViewWithTitle:root_huoqu_wufuqi_buchenggong];
+            }
+
         }
         
     } failure:^(NSError *error) {
@@ -160,11 +202,16 @@
         if ([_customerCodeEnable isEqualToString:@"0"]) {
             [self removeText5];
         }
-        _addressLable.userInteractionEnabled=YES;
-        NSString *lableA=root_dianji_huoqu_fuwuqi;
-        _addressLable.textColor=[UIColor whiteColor];
-        _addressLable.text=[NSString stringWithFormat:@"%@",lableA];
-        [self showToastViewWithTitle:root_huoqu_wufuqi_buchenggong];
+        if (_getServerAddressNum==1) {
+            [self netServer1];
+        }else{
+            _addressLable.userInteractionEnabled=YES;
+            NSString *lableA=root_dianji_huoqu_fuwuqi;
+            _addressLable.textColor=[UIColor whiteColor];
+            _addressLable.text=[NSString stringWithFormat:@"%@",lableA];
+            [self showToastViewWithTitle:root_huoqu_wufuqi_buchenggong];
+        }
+
     }];
     
    
