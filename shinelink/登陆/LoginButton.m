@@ -45,7 +45,7 @@
     typeof(self) __weak weak = self;
     
     self.transform = CGAffineTransformMakeScale(1, 1);
-    [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.5f initialSpringVelocity:0.0f options:UIViewAnimationOptionLayoutSubviews animations:^{
+    [UIView animateWithDuration:0.1 delay:0 usingSpringWithDamping:0.5f initialSpringVelocity:0.0f options:UIViewAnimationOptionLayoutSubviews animations:^{
         weak.transform = CGAffineTransformMakeScale(0.9, 0.9);
     } completion:^(BOOL finished) {
         
@@ -54,7 +54,7 @@
 
 - (void)scaleAnimation {
     typeof(self) __weak weak = self;
-    [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.5f initialSpringVelocity:0.0f options:UIViewAnimationOptionLayoutSubviews animations:^{
+    [UIView animateWithDuration:0.1 delay:0 usingSpringWithDamping:0.5f initialSpringVelocity:0.0f options:UIViewAnimationOptionLayoutSubviews animations:^{
         weak.transform = CGAffineTransformMakeScale(1, 1);
     } completion:^(BOOL finished) {
     }];
@@ -63,7 +63,7 @@
 
 - (void)scaleToDefault {
     typeof(self) __weak weak = self;
-    [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.5f initialSpringVelocity:0.4f options:UIViewAnimationOptionLayoutSubviews animations:^{
+    [UIView animateWithDuration:0.1 delay:0 usingSpringWithDamping:0.5f initialSpringVelocity:0.4f options:UIViewAnimationOptionLayoutSubviews animations:^{
         weak.transform = CGAffineTransformMakeScale(1, 1);
     } completion:^(BOOL finished) {
         
@@ -158,7 +158,7 @@
         if (_block) {
             _block();
         }
-        [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(DidStopAnimation) userInfo:nil repeats:nil];
+        [NSTimer scheduledTimerWithTimeInterval:0.1f target:self selector:@selector(DidStopAnimation) userInfo:nil repeats:nil];
     }
 }
 

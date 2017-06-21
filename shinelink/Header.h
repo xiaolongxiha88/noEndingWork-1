@@ -55,6 +55,7 @@
 
 //#define HEAD_URL   @"http://test.growatt.com"
 //#define HEAD_URL_Demo  @"http://test.growatt.com"
+//#define HEAD_URL_Demo_CN  @"http://test.growatt.com"
 
 //#define HEAD_URL   @"http://odm.growatt.com"
 //#define HEAD_URL_Demo  @"http://odm.growatt.com"
@@ -64,7 +65,7 @@
 
 
 //demo for OSS
-#define OSS_HEAD_URL_Demo  @"http://192.168.3.32:8081/ShineOSS"
+#define OSS_HEAD_URL_Demo  @"http://test.growatt.com"
 #define OSS_HEAD_URL  [UserInfo defaultUserInfo].OSSserver
 
 

@@ -37,6 +37,8 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UITextField *userTextField;
 @property (nonatomic, strong) UITextField *pwdTextField;
+@property (nonatomic, strong) NSString *loginUserName;
+@property (nonatomic, strong) NSString *loginUserPassword;
 //@property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UIButton *registButton;
 @property (nonatomic, strong) UILabel *registLable;
@@ -117,6 +119,8 @@
             _userTextField.text=OssName;
             _pwdTextField=[[UITextField alloc]init];
             _pwdTextField.text=OssPassword;
+            _loginUserName=OssName;
+            _loginUserPassword=OssPassword;
               [self performSelectorOnMainThread:@selector(getOSSnet) withObject:nil waitUntilDone:NO];
         }
         
@@ -140,7 +144,8 @@
             _userTextField.text=reUsername;
             _pwdTextField=[[UITextField alloc]init];
             _pwdTextField.text=rePassword;
-            
+            _loginUserName=reUsername;
+            _loginUserPassword=rePassword;
             if ([_LogType isEqualToString:@"1"]) {
                 _getServerAddressNum=0;
                 [self performSelectorOnMainThread:@selector(netServerInit) withObject:nil waitUntilDone:NO];
@@ -422,12 +427,13 @@ NSLog(@"体验馆");
     
     
     _userTextField=[[UITextField alloc]init];
-    _userTextField.text=Demo_Name;
+    _loginUserName=Demo_Name;
     _pwdTextField=[[UITextField alloc]init];
-    _pwdTextField.text=Demo_password;
+   _loginUserPassword=Demo_password;
     
      [[NSUserDefaults standardUserDefaults] setObject:@"isDemo" forKey:@"isDemo"];
     
+       _getServerAddressNum=0;
     [self getDemoData];
   
     
@@ -435,10 +441,25 @@ NSLog(@"体验馆");
 
 -(void)getDemoData{
     
+       _getServerAddressNum++;
     
+    NSString *serverInitAddress;
+    if ([_languageValue isEqualToString:@"0"]) {
+        serverInitAddress=HEAD_URL_Demo_CN;
+    }else{
+        serverInitAddress=HEAD_URL_Demo;
+    }
+    
+    if (_getServerAddressNum==2) {
+        if ([_languageValue isEqualToString:@"0"]) {
+            serverInitAddress=HEAD_URL_Demo;
+        }else{
+            serverInitAddress=HEAD_URL_Demo_CN;
+        }
+    }
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL_Demo paramars:@{@"language":_languageValue} paramarsSite:@"/newLoginAPI.do?op=getServerUrlList" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:serverInitAddress paramars:@{@"language":_languageValue} paramarsSite:@"/newLoginAPI.do?op=getServerUrlList" sucessBlock:^(id content) {
          [self hideProgressView];
         NSLog(@"getServerUrlList: %@", content);
         if (content) {
@@ -464,21 +485,35 @@ NSLog(@"体验馆");
                 };
             }else{
                    [self hideProgressView];
-                [self showToastViewWithTitle:root_country_huoQu];
-                return;
                 
+                if (_getServerAddressNum==1) {
+                    [self getDemoData];
+                }else{
+                    [self showToastViewWithTitle:root_Networking];
+                    return;
+                }
+  
             }
-
-            
-            
-            
+      
         }else{
             [self hideProgressView];
+            if (_getServerAddressNum==1) {
+                [self getDemoData];
+            }else{
+                [self showToastViewWithTitle:root_Networking];
+                return;
+            }
+            
         }
         
     } failure:^(NSError *error) {
         [self hideProgressView];
-        
+        if (_getServerAddressNum==1) {
+            [self getDemoData];
+        }else{
+            [self showToastViewWithTitle:root_Networking];
+            return;
+        }
     }];
 
 
@@ -537,13 +572,14 @@ NSLog(@"体验馆");
     }else {
         //用户名和密码输入正确跳转页面
         [loginBtn ExitAnimationCompletion:^{
-           
             
+            _loginUserName=_userTextField.text ;
+            _loginUserPassword=_pwdTextField.text;
             
- // [self getOSSnet];
+          [self getOSSnet];
   
-            _getServerAddressNum=0;
-    [self netServerInit];
+      //      _getServerAddressNum=0;
+      //    [self netServerInit];
          
         }];
     }
@@ -557,7 +593,7 @@ NSLog(@"体验馆");
     
     
     [self showProgressView];
-    [BaseRequest requestWithMethod:HEAD_URL paramars:@{@"userName":_userTextField.text, @"password":[self MD5:_pwdTextField.text]} paramarsSite:@"/newLoginAPI.do" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethod:HEAD_URL paramars:@{@"userName":_loginUserName, @"password":[self MD5:_loginUserPassword]} paramarsSite:@"/newLoginAPI.do" sucessBlock:^(id content) {
      [self hideProgressView];
       NSLog(@"loginIn:%@",content);
         if (content) {
@@ -655,7 +691,7 @@ NSLog(@"体验馆");
 
 -(void)getOSSnet{
    [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo paramars:@{@"userName":_userTextField.text, @"userPassword":[self MD5:_pwdTextField.text]} paramarsSite:@"/api/v1/login/userLogin" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo paramars:@{@"userName":_loginUserName, @"userPassword":[self MD5:_loginUserPassword]} paramarsSite:@"/api/v1/login/userLogin" sucessBlock:^(id content) {
         [self hideProgressView];
        
         if (content) {
@@ -708,8 +744,8 @@ NSLog(@"体验馆");
                                     OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
                                     OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
                                     OSSView.phoneNum=PhoneNum;
-                                    OSSView.OssName=_userTextField.text;
-                                    OSSView.OssPassword=_pwdTextField.text;
+                                    OSSView.OssName=_loginUserName;
+                                    OSSView.OssPassword=_loginUserPassword;
                                     [self.navigationController pushViewController:OSSView animated:NO];
                                 }
                                 
@@ -726,6 +762,9 @@ NSLog(@"体验馆");
                     [self showToastViewWithTitle:root_WO_yonghu_bucunzai];
                 }else if ([allDic[@"result"] intValue]==5) {
                     [self showToastViewWithTitle:root_yongHuMing_mima_cuowu];
+                }else{
+                    _getServerAddressNum=0;
+                    [self netServerInit];
                 }
   
             }
@@ -733,10 +772,16 @@ NSLog(@"体验馆");
             
             
             
+        }else{
+            _getServerAddressNum=0;
+            [self netServerInit];
+            [self hideProgressView];
         }
         
     } failure:^(NSError *error) {
-      //  [self didPresentControllerButtonTouch];
+  
+        _getServerAddressNum=0;
+        [self netServerInit];
           [self hideProgressView];
    
         
@@ -769,8 +814,17 @@ NSLog(@"体验馆");
         serverInitAddress=HEAD_URL_Demo;
     }
     
+    if (_getServerAddressNum==2) {
+        if ([_languageValue isEqualToString:@"0"]) {
+            serverInitAddress=HEAD_URL_Demo;
+        }else{
+            serverInitAddress=HEAD_URL_Demo_CN;
+        }
+    }
+    
+     NSString *userName=_loginUserName;
        [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:serverInitAddress paramars:@{@"userName":_userTextField.text} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:serverInitAddress paramars:@{@"userName":userName} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
            [self hideProgressView];
         NSLog(@"getUserServerUrl: %@", content);
         if (content) {
@@ -792,15 +846,20 @@ NSLog(@"体验馆");
                              [self netRequest];
                 }
           
-       
             }
         }else{
-            if ([_languageValue isEqualToString:@"0"]) {
-                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo_CN];
+            
+            if (_getServerAddressNum==1) {
+                [self netServerInit];
             }else{
-                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+                if ([_languageValue isEqualToString:@"0"]) {
+                    [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo_CN];
+                }else{
+                    [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
+                }
+                [self netRequest];
             }
-            [self netRequest];
+
         }
         
     } failure:^(NSError *error) {

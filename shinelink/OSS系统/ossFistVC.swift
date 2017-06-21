@@ -130,7 +130,7 @@ class ossFistVC: RootViewController {
     
     func gotoDevice()  {
         
-        if roleString=="2" || roleString=="0"{
+        if roleString=="2" || roleString=="0" || roleString=="1"{
             let vc=ossDeviceFirst()
             vc.serverListArray=self.serverListArray
             self.navigationController?.pushViewController(vc, animated: true)
