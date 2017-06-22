@@ -8,6 +8,7 @@
 
 #import "addServerViewController.h"
 #import "ZJBLStoreShopTypeAlert.h"
+#import "OssMessageViewController.h"
 
 @interface addServerViewController ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate>
 @property (nonatomic, strong) UIView *scrollView;
@@ -24,7 +25,7 @@
 @property (nonatomic, strong) UILabel* QuestionLable;
 @property(nonatomic,strong)UIView *imageViewAll;
 @property(nonatomic,strong)UIImageView *imageV5;
-
+@property (nonatomic, strong)  NSString *phoneOrEmail;
 
 @property (nonatomic, strong) UIImageView *image1;
 @property (nonatomic, strong) UIImageView *image2;
@@ -49,7 +50,10 @@
     rightItem.tag=10;
     self.navigationItem.rightBarButtonItem=rightItem;
     
+      _phoneOrEmail=@"1";
     _picArray=[NSMutableArray array];
+       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAlert) name:@"removeAlert" object:nil];
+    
     [self initUI];
     [self getNetForSn];
 }
@@ -162,13 +166,15 @@
             }
             
             if(i==3){
-                textF.frame=CGRectMake(12*NOW_SIZE+nameSize.width, 0*HEIGHT_SIZE+Nsize*i, SCREEN_Width-22*NOW_SIZE-nameSize.width-40*NOW_SIZE,lableH );
+                textF.frame=CGRectMake(12*NOW_SIZE+nameSize.width, 0*HEIGHT_SIZE+Nsize*i, SCREEN_Width-22*NOW_SIZE-nameSize.width-50*NOW_SIZE,lableH );
                 
-                UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(textF.frame.origin.x+textF.frame.size.width, 0*HEIGHT_SIZE+Nsize*i, 45*NOW_SIZE,lableH )];
+                UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(textF.frame.origin.x+textF.frame.size.width, 0*HEIGHT_SIZE+Nsize*i, 55*NOW_SIZE,lableH )];
+                UITapGestureRecognizer *labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapInfo)];
+                [lineV addGestureRecognizer:labelTap2];
                 lineV.backgroundColor=[UIColor clearColor];
                 [_scrollView addSubview:lineV];
                 
-                UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(27*NOW_SIZE, 13*HEIGHT_SIZE, 6*NOW_SIZE,14*HEIGHT_SIZE )];
+                UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(37*NOW_SIZE, 13*HEIGHT_SIZE, 6*NOW_SIZE,14*HEIGHT_SIZE )];
                 image2.userInteractionEnabled=YES;
                 image2.image=IMAGE(@"select_icon.png");
                 UITapGestureRecognizer *labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapInfo)];
@@ -491,11 +497,19 @@
     
 }
 
+-(void)removeAlert{
+    if (_imageV5) {
+        [_imageV5 removeFromSuperview];
+        _imageV5=nil;
+    }
+    
+}
+
 
 -(void)tapInfo{
     NSArray *infoArray=[NSArray arrayWithObjects:root_shoujihao,root_youxiang, nil];
     [ZJBLStoreShopTypeAlert showWithTitle:@"选择联系方式" titles:infoArray selectIndex:^(NSInteger selectIndex) {
-    
+        _phoneOrEmail=[NSString stringWithFormat:@"%ld",selectIndex+1];
         
     }selectValue:^(NSString *selectValue){
         UILabel *lable=[_scrollView viewWithTag:4003];
@@ -509,7 +523,7 @@
 -(void)showAlert{
     _imageV5=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 38*HEIGHT_SIZE+(42*HEIGHT_SIZE)*3, SCREEN_Width-20*NOW_SIZE, 40*HEIGHT_SIZE)];
     _imageV5.userInteractionEnabled = YES;
-    UITapGestureRecognizer *labelTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLable)];
+    UITapGestureRecognizer *labelTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToVerification)];
     [_imageV5 addGestureRecognizer:labelTap];
     _imageV5.image = IMAGE(@"pop_frame.png");
     [_scrollView addSubview:_imageV5];
@@ -524,8 +538,14 @@
 
 
 -(void)goToVerification{
+    UITextField *phoneText=[_scrollView viewWithTag:6003];
+    OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
+    OSSView.firstPhoneNum=phoneText.text;
+    OSSView.addQuestionType=_phoneOrEmail;
+    [self.navigationController pushViewController:OSSView animated:NO];
 
-
+    
+    
 }
 
 -(void)tapLable{

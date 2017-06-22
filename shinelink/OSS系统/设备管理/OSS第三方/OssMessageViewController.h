@@ -14,4 +14,6 @@
 @property (nonatomic, strong)  NSString *phoneNum;
 @property (nonatomic, strong)  NSString *OssName;
 @property (nonatomic, strong)  NSString *OssPassword;
+@property (nonatomic, strong)  NSString *addQuestionType;
+@property (nonatomic, strong)  NSString *firstPhoneNum;
 @end

@@ -22,6 +22,8 @@
 @property (nonatomic, strong) NSMutableDictionary *dataDic;
 @property (nonatomic, strong)  NSString *getCheckNum;
 @property (nonatomic, strong)  NSString *getPhoneNum;
+
+
 @end
 
 @implementation OssMessageViewController
@@ -31,7 +33,7 @@
     [super viewDidLoad];
     self.view.backgroundColor=MainColor;
     
-    
+  
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
@@ -75,29 +77,38 @@
     
     UILabel *currentPowerTitleLable = [[UILabel alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 20*HEIGHT_SIZE, SCREEN_Width, 40*HEIGHT_SIZE)];
     currentPowerTitleLable.text = @"首次登陆请验证手机号码";
+    if ([_addQuestionType isEqualToString:@"1"]) {
+         currentPowerTitleLable.text = @"验证用户手机号码";
+    }
+    if ([_addQuestionType isEqualToString:@"2"]) {
+        currentPowerTitleLable.text = @"验证用户邮箱";
+    }
     currentPowerTitleLable.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
     currentPowerTitleLable.textAlignment=NSTextAlignmentCenter;
     currentPowerTitleLable.adjustsFontSizeToFitWidth=YES;
     currentPowerTitleLable.textColor = [UIColor whiteColor];
     [self.view addSubview:currentPowerTitleLable];
     
-    _textField0 = [[UITextField alloc] initWithFrame:CGRectMake(30*NOW_SIZE,82*HEIGHT_SIZE,40*NOW_SIZE, 25*HEIGHT_SIZE)];
-    _textField0.placeholder =_getPhone;
-    _textField0.textColor = [UIColor whiteColor];
-    _textField0.tintColor = [UIColor whiteColor];
-    _textField0.textAlignment = NSTextAlignmentCenter;
-    [_textField0 setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [_textField0 setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
-    _textField0.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    [self.view addSubview:_textField0];
-    
-    UIView *line0=[[UIView alloc]initWithFrame:CGRectMake(30*NOW_SIZE,108*HEIGHT_SIZE,40*NOW_SIZE, 1*HEIGHT_SIZE)];
-    line0.backgroundColor=COLOR(255, 255, 255, 0.5);
-    [self.view addSubview:line0];
-    
-    UIView *line01=[[UIView alloc]initWithFrame:CGRectMake(75*NOW_SIZE,82*HEIGHT_SIZE,1*NOW_SIZE, 25*HEIGHT_SIZE)];
-    line01.backgroundColor=COLOR(255, 255, 255, 0.5);
-    [self.view addSubview:line01];
+    if (![_addQuestionType isEqualToString:@"2"]) {
+        _textField0 = [[UITextField alloc] initWithFrame:CGRectMake(30*NOW_SIZE,82*HEIGHT_SIZE,40*NOW_SIZE, 25*HEIGHT_SIZE)];
+        _textField0.placeholder =_getPhone;
+        _textField0.textColor = [UIColor whiteColor];
+        _textField0.tintColor = [UIColor whiteColor];
+        _textField0.textAlignment = NSTextAlignmentCenter;
+        [_textField0 setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
+        [_textField0 setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+        _textField0.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [self.view addSubview:_textField0];
+        
+        UIView *line0=[[UIView alloc]initWithFrame:CGRectMake(30*NOW_SIZE,108*HEIGHT_SIZE,40*NOW_SIZE, 1*HEIGHT_SIZE)];
+        line0.backgroundColor=COLOR(255, 255, 255, 0.5);
+        [self.view addSubview:line0];
+        
+        UIView *line01=[[UIView alloc]initWithFrame:CGRectMake(75*NOW_SIZE,82*HEIGHT_SIZE,1*NOW_SIZE, 25*HEIGHT_SIZE)];
+        line01.backgroundColor=COLOR(255, 255, 255, 0.5);
+        [self.view addSubview:line01];
+    }
+ 
     
     _textField = [[UITextField alloc] initWithFrame:CGRectMake(80*NOW_SIZE,82*HEIGHT_SIZE,155*NOW_SIZE, 25*HEIGHT_SIZE)];
     _textField.placeholder =root_Enter_phone_number;
@@ -109,6 +120,9 @@
         [_textField setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     }else {
         [_textField setValue:[UIFont systemFontOfSize:8*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    }
+    if ((_firstPhoneNum!=nil)||(_firstPhoneNum!=NULL)) {
+        _textField.text=_firstPhoneNum;
     }
     
     _textField.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -172,40 +186,55 @@
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [goBut setTitle:root_finish forState:UIControlStateNormal];
-    [goBut addTarget:self action:@selector(PresentGo) forControlEvents:UIControlEventTouchUpInside];
+ 
+    if ([_addQuestionType isEqualToString:@"1"] || [_addQuestionType isEqualToString:@"2"]) {
+      [goBut addTarget:self action:@selector(GoAddQuestion) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+       [goBut addTarget:self action:@selector(PresentGo) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
     [self.view addSubview:goBut];
     
 }
 
+
+
 -(void)getCode0{
     
     
-    NSString *A1=[_textField0 text];
-    if (A1==nil || A1==NULL||([A1 isEqual:@""] ) ) {
+    if (![_addQuestionType isEqualToString:@"2"]) {
+        NSString *A1=[_textField0 text];
+        if (A1==nil || A1==NULL||([A1 isEqual:@""] ) ) {
+        }else{
+            _getPhone=[NSMutableString stringWithString:A1];
+        }
+        
+        
+        NSString *A=@"+";
+        if ([_getPhone containsString:A]) {
+            [_getPhone deleteCharactersInRange:[_getPhone rangeOfString:A]];
+        }
+        
+        _getPhone=[self getTheCorrectNum:_getPhone];
+        
+        if (_getPhone.length>5) {
+            [self showToastViewWithTitle:root_guoji_quhao_cuowu];
+            return;
+        }
+        
+        if ([[_textField text] isEqual:@""]) {
+            [self showToastViewWithTitle:root_Enter_phone_number];
+            return;
+        }
+
+    }
+    
+
+    if ([_addQuestionType isEqualToString:@"1"] || [_addQuestionType isEqualToString:@"2"]) {
+        [self getCode2];
     }else{
-        _getPhone=[NSMutableString stringWithString:A1];
+     [self getCode];
     }
-    
-    
-    NSString *A=@"+";
-    if ([_getPhone containsString:A]) {
-        [_getPhone deleteCharactersInRange:[_getPhone rangeOfString:A]];
-    }
-    
-    _getPhone=[self getTheCorrectNum:_getPhone];
-    
-    if (_getPhone.length>5) {
-        [self showToastViewWithTitle:root_guoji_quhao_cuowu];
-        return;
-    }
-    
-    if ([[_textField text] isEqual:@""]) {
-        [self showToastViewWithTitle:root_Enter_phone_number];
-        return;
-    }
-    
-    
-    [self getCode];
     
 }
 
@@ -225,6 +254,107 @@
 }
 
 
+-(void)getCode2{
+    
+    NSString *typeString;
+    if ([_addQuestionType isEqualToString:@"1"]) {
+        typeString=@"1";
+    }
+    if ([_addQuestionType isEqualToString:@"2"]) {
+        typeString=@"0";
+    }
+    
+    _dataDic=[NSMutableDictionary new];
+    [_dataDic setObject:[_textField text] forKey:@"content"];
+    [_dataDic setObject:typeString forKey:@"type"];
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:_dataDic paramarsSite:@"/newLoginAPI.do?op=validate" sucessBlock:^(id content) {
+        [self hideProgressView];
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/newLoginAPI.do?op=validate: %@", jsonObj);
+        if (jsonObj) {
+            if ([jsonObj[@"result"] intValue]==1) {
+                if ((jsonObj[@"obj"]==nil)||(jsonObj[@"obj"]==NULL)||([jsonObj[@"obj"] isEqual:@""])) {
+                    
+                }else{
+                    
+                    _getCheckNum=[NSString stringWithFormat:@"%@",jsonObj[@"obj"][@"validate"]];
+                    _getPhoneNum=[_textField text];
+                    
+                }
+            }else{
+                if ([jsonObj[@"msg"] intValue]==502) {
+                    [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:@"验证条件为空" cancelButtonTitle:root_Yes];
+                }else if ([jsonObj[@"msg"] intValue]==503) {
+                    [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:@"发送短信失败" cancelButtonTitle:root_Yes];
+                }else if ([jsonObj[@"msg"] intValue]==504) {
+                    [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:@"发送邮件失败" cancelButtonTitle:root_Yes];
+                }
+                
+            }
+            
+        }
+        
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+    }
+     ];
+    
+}
+
+-(void)upInfo{
+    NSString *typeString;
+    if ([_addQuestionType isEqualToString:@"1"]) {
+        typeString=@"1";
+    }
+    if ([_addQuestionType isEqualToString:@"2"]) {
+        typeString=@"0";
+    }
+    NSString *Username=[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
+    
+    NSMutableDictionary *infoDic=[NSMutableDictionary new];
+    [infoDic setObject:Username forKey:@"userName"];
+    [infoDic setObject:typeString forKey:@"type"];
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:infoDic paramarsSite:@"/newLoginAPI.do?op=updateValidate" sucessBlock:^(id content) {
+        [self hideProgressView];
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/newLoginAPI.do?op=updateValidate: %@", jsonObj);
+        if (jsonObj) {
+            if ([jsonObj[@"result"] intValue]==1) {
+             
+                [self.navigationController popViewControllerAnimated:NO];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAlert" object:nil];
+                
+            }else{
+                if ([jsonObj[@"msg"] intValue]==502) {
+                    [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:@"修改失败" cancelButtonTitle:root_Yes];
+                }else if ([jsonObj[@"msg"] intValue]==503) {
+                    [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:@"未进行验证" cancelButtonTitle:root_Yes];
+                }
+                
+            }
+            
+        }
+        
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+    }
+     ];
+
+}
+
+-(void)GoAddQuestion{
+    if ([_getCheckNum isEqualToString:[_textField2 text]]) {
+        
+        [self upInfo];
+        
+    }else{
+        [self showToastViewWithTitle:root_qingshuru_zhengque_jiaoyanma];
+    }
+    
+}
 
 
 -(void)getCode{
@@ -242,7 +372,8 @@
                     
                 }else{
                     
-                    _getCheckNum=jsonObj[@"obj"][@"validate"];
+                   
+                    _getCheckNum=[NSString stringWithFormat:@"%@",jsonObj[@"obj"][@"validate"]];
                     _getPhoneNum=[_textField text];
                     
                 }
