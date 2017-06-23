@@ -218,12 +218,12 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E9%87%87%E9%9B%86%E5%99%A8/ChangeCellectViewController.m"
-                  timestampString = "519824936.917524"
+                  timestampString = "519906402.257358"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "144"
                   endingLineNumber = "144"
-                  offsetFromSymbolStart = "920">
+                  offsetFromSymbolStart = "899">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -233,7 +233,7 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E9%87%87%E9%9B%86%E5%99%A8/ChangeCellectViewController.m"
-                  timestampString = "519824936.919205"
+                  timestampString = "519906402.259141"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "144"
@@ -313,60 +313,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x767b;&#x9646;/LoginButton.m"
-            timestampString = "519708180.533483"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "-ErrorRevertAnimationCompletion:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "shinelink/OSS&#x7cfb;&#x7edf;/&#x8bbe;&#x5907;&#x7ba1;&#x7406;/OSS&#x7b2c;&#x4e09;&#x65b9;/OssMessageViewController.m"
-            timestampString = "519824421.107203"
+            timestampString = "519903215.964428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "351"
-            endingLineNumber = "351"
-            landmarkName = "-GoAddQuestion"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/OSS&#x7cfb;&#x7edf;/&#x8bbe;&#x5907;&#x7ba1;&#x7406;/OSS&#x7b2c;&#x4e09;&#x65b9;/OssMessageViewController.m"
-            timestampString = "519824421.107203"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
-            landmarkName = "-upInfo"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/OSS&#x7cfb;&#x7edf;/&#x8bbe;&#x5907;&#x7ba1;&#x7406;/OSS&#x7b2c;&#x4e09;&#x65b9;/OssMessageViewController.m"
-            timestampString = "519824722.8754"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "410"
-            endingLineNumber = "410"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "-PresentGo"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,12 +330,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shinelink/OSS&#x7cfb;&#x7edf;/&#x8bbe;&#x5907;&#x7ba1;&#x7406;/OSS&#x7b2c;&#x4e09;&#x65b9;/OssMessageViewController.m"
-            timestampString = "519824606.18208"
+            timestampString = "519903215.964428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
-            landmarkName = "-GoAddQuestion"
+            startingLineNumber = "385"
+            endingLineNumber = "385"
+            landmarkName = "-getCode"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -393,13 +345,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "shinelink/OSS&#x7cfb;&#x7edf;/&#x8bbe;&#x5907;&#x7ba1;&#x7406;/OSS&#x7b2c;&#x4e09;&#x65b9;/OssMessageViewController.m"
-            timestampString = "519824820.020415"
+            filePath = "shinelink/&#x6211;/&#x5ba2;&#x670d;&#x7cfb;&#x7edf;/addServerViewController.m"
+            timestampString = "519903215.964428"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
-            landmarkName = "-getCode"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
+            landmarkName = "-textFieldDidEndEditing:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "shinelink/&#x6211;/&#x5ba2;&#x670d;&#x7cfb;&#x7edf;/addServerViewController.m"
+            timestampString = "519894101.675715"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-initUI"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "shinelink/&#x6211;/&#x5ba2;&#x670d;&#x7cfb;&#x7edf;/addServerViewController.m"
+            timestampString = "519902577.718913"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "-initUI"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -10,7 +10,7 @@
 #import "ZJBLStoreShopTypeAlert.h"
 #import "OssMessageViewController.h"
 
-@interface addServerViewController ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate>
+@interface addServerViewController ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UIView *scrollView;
 @property (nonatomic, strong) NSMutableArray *labelArray;
 @property (nonatomic, strong) UITextField *userTextField;
@@ -35,6 +35,8 @@
 @property (nonatomic, strong) UIButton *button3;
 @property (nonatomic, strong) NSMutableArray *SNArray;
 @property (nonatomic, strong) NSMutableArray *SnOnlyArray;
+@property (nonatomic, strong) UITextField *phoneTextField;
+
 @end
 
 @implementation addServerViewController
@@ -166,8 +168,13 @@
             }
             
             if(i==3){
+                textF.delegate=self;
                 textF.frame=CGRectMake(12*NOW_SIZE+nameSize.width, 0*HEIGHT_SIZE+Nsize*i, SCREEN_Width-22*NOW_SIZE-nameSize.width-50*NOW_SIZE,lableH );
-                
+               NSString *TelNumber=[[NSUserDefaults standardUserDefaults] objectForKey:@"TelNumber"];
+                if (TelNumber==nil || TelNumber==NULL||([TelNumber isEqualToString:@""] )){
+                }else{
+                    textF.text=TelNumber;
+                }
                 UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(textF.frame.origin.x+textF.frame.size.width, 0*HEIGHT_SIZE+Nsize*i, 55*NOW_SIZE,lableH )];
                 UITapGestureRecognizer *labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapInfo)];
                 [lineV addGestureRecognizer:labelTap2];
@@ -225,7 +232,17 @@
     image4.image = IMAGE(@"pic_icon.png");
     [VI addSubview:image4];
     
-    
+    NSString *isValiPhone=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiPhone"];
+    NSString *isValiEmail=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiEmail"];
+    if ([isValiPhone isEqualToString:@"1"]) {
+        NSString *phoneNum=[[NSUserDefaults standardUserDefaults] objectForKey:@"phoneNum"];
+            UITextField *text=[_scrollView viewWithTag:6003];
+        text.text=phoneNum;
+    }else{
+        if ([isValiEmail isEqualToString:@"1"]) {
+        
+        }
+    }
     [self showAlert];
     
 }
@@ -256,7 +273,33 @@
     
 }
 
+-(void)textFieldDidEndEditing:(UITextField *)textField{
+    NSString* text=textField.text;
+    if (text==nil || text==NULL||([text isEqualToString:@""] )){
+        
+    }else{
+       //  NSString *email=[[NSUserDefaults standardUserDefaults] objectForKey:@"email"];
+       //  NSString *phoneNum=[[NSUserDefaults standardUserDefaults] objectForKey:@"phoneNum"];
+         NSString *isValiPhone=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiPhone"];
+       NSString *isValiEmail=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiEmail"];
+    
+        if ([_phoneOrEmail isEqualToString:@"1"]) {
+            if ([isValiPhone isEqualToString:@"1"]) {
+                [self removeAlert];
+            }else{
+                [self showAlert];
+            }
+        }else if ([_phoneOrEmail isEqualToString:@"2"]){
+            if ([isValiEmail isEqualToString:@"1"]) {
+                [self removeAlert];
+            }else{
+                [self showAlert];
+            }
+        }
+        
+    }
 
+}
 
 
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
@@ -269,6 +312,8 @@
      [textF3 resignFirstResponder];
      [textF4 resignFirstResponder];
     [_contentView resignFirstResponder];
+    
+
    
 }
 
@@ -510,6 +555,12 @@
     NSArray *infoArray=[NSArray arrayWithObjects:root_shoujihao,root_youxiang, nil];
     [ZJBLStoreShopTypeAlert showWithTitle:@"选择联系方式" titles:infoArray selectIndex:^(NSInteger selectIndex) {
         _phoneOrEmail=[NSString stringWithFormat:@"%ld",selectIndex+1];
+        UITextField *text=[_scrollView viewWithTag:6003];
+        if (selectIndex==0) {
+            text.placeholder=@"请输入电话号码";
+        }else{
+         text.placeholder=@"请输入邮箱地址";
+        }
         
     }selectValue:^(NSString *selectValue){
         UILabel *lable=[_scrollView viewWithTag:4003];
@@ -521,6 +572,11 @@
 
 
 -(void)showAlert{
+    if (_imageV5) {
+        [_imageV5 removeFromSuperview];
+        _imageV5=nil;
+    }
+    
     _imageV5=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 38*HEIGHT_SIZE+(42*HEIGHT_SIZE)*3, SCREEN_Width-20*NOW_SIZE, 40*HEIGHT_SIZE)];
     _imageV5.userInteractionEnabled = YES;
     UITapGestureRecognizer *labelTap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToVerification)];
@@ -530,6 +586,9 @@
     
     UILabel *PV1Lable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width-20*NOW_SIZE,40*HEIGHT_SIZE )];
     PV1Lable.text=@"您的手机号还未验证,请点击验证。";
+    if ([_phoneOrEmail isEqualToString:@"2"]) {
+        PV1Lable.text=@"您的邮箱还未验证,请点击验证。";
+    }
     PV1Lable.textAlignment=NSTextAlignmentCenter;
     PV1Lable.textColor=MainColor;
     PV1Lable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];

@@ -315,7 +315,9 @@
     NSMutableDictionary *infoDic=[NSMutableDictionary new];
     [infoDic setObject:Username forKey:@"userName"];
     [infoDic setObject:typeString forKey:@"type"];
+        [infoDic setObject:[_textField text] forKey:@"content"];
     
+  //    [_dataDic setObject:[_textField text] forKey:@"phoneNum"];
     [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:infoDic paramarsSite:@"/newLoginAPI.do?op=updateValidate" sucessBlock:^(id content) {
         [self hideProgressView];
@@ -323,7 +325,13 @@
         NSLog(@"/newLoginAPI.do?op=updateValidate: %@", jsonObj);
         if (jsonObj) {
             if ([jsonObj[@"result"] intValue]==1) {
+                if ([_addQuestionType isEqualToString:@"1"]) {
+                       [[NSUserDefaults standardUserDefaults] setObject:[_textField text] forKey:@"TelNumber"];
+                }else{
+                  [[NSUserDefaults standardUserDefaults] setObject:[_textField text] forKey:@"email"];
+                }
              
+              
                 [self.navigationController popViewControllerAnimated:NO];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAlert" object:nil];
                 
@@ -433,34 +441,7 @@
 
 
 
-//-(void)registerFrist{
-//    [self showProgressView];
-//    
-//    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userName":[_textField text]} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
-//        [self hideProgressView];
-//        NSLog(@"getUserServerUrl: %@", content);
-//        if (content) {
-//            if ([content[@"success"]intValue]==1) {
-//                NSString *server1=content[@"msg"];
-//                NSString *server2=@"http://";
-//                NSString *server=[NSString stringWithFormat:@"%@%@",server2,server1];
-//                [[UserInfo defaultUserInfo] setServer:server];
-//                [self getCode0];
-//            }else{
-//                [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-//                [self getCode0];
-//            }
-//        }else{
-//            [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-//            [self getCode0];
-//        }
-//        
-//    } failure:^(NSError *error) {
-//        [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
-//        [self getCode0];
-//    }];
-//    
-//}
+
 
 
 

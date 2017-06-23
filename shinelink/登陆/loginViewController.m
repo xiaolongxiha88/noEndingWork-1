@@ -576,10 +576,10 @@ NSLog(@"体验馆");
             _loginUserName=_userTextField.text ;
             _loginUserPassword=_pwdTextField.text;
             
-          [self getOSSnet];
+       //   [self getOSSnet];
   
-      //      _getServerAddressNum=0;
-      //    [self netServerInit];
+            _getServerAddressNum=0;
+          [self netServerInit];
          
         }];
     }
@@ -829,7 +829,7 @@ NSLog(@"体验馆");
     
      NSString *userName=_loginUserName;
        [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:serverInitAddress paramars:@{@"userName":userName} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL_Demo_CN paramars:@{@"userName":userName} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
            [self hideProgressView];
         NSLog(@"getUserServerUrl: %@", content);
         if (content) {
