@@ -16,4 +16,5 @@
 @property (nonatomic, strong)  NSString *OssPassword;
 @property (nonatomic, strong)  NSString *addQuestionType;
 @property (nonatomic, strong)  NSString *firstPhoneNum;
+@property (nonatomic, strong)  NSString *changeType;               //修改邮箱和电话用
 @end

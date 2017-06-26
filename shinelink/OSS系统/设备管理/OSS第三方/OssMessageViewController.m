@@ -33,7 +33,9 @@
     [super viewDidLoad];
     self.view.backgroundColor=MainColor;
     
-  
+  self.navigationController.navigationBarHidden =NO;
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
+    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
@@ -111,7 +113,12 @@
  
     
     _textField = [[UITextField alloc] initWithFrame:CGRectMake(80*NOW_SIZE,82*HEIGHT_SIZE,155*NOW_SIZE, 25*HEIGHT_SIZE)];
-    _textField.placeholder =root_Enter_phone_number;
+    if ([_addQuestionType isEqualToString:@"1"]) {
+         _textField.placeholder =root_Enter_phone_number;
+    }else  if ([_addQuestionType isEqualToString:@"2"]) {
+     _textField.placeholder =@"请输入邮箱地址";
+    }
+  
     _textField.textColor = [UIColor whiteColor];
     _textField.tintColor = [UIColor whiteColor];
     _textField.textAlignment = NSTextAlignmentCenter;
@@ -210,6 +217,14 @@
         }
         
         
+        NSCharacterSet *setToRemove =
+        [[ NSCharacterSet characterSetWithCharactersInString:@"0123456789 "]
+         invertedSet ];
+        
+        _getPhone =[NSMutableString stringWithString:[[_getPhone componentsSeparatedByCharactersInSet:setToRemove]
+                                                      componentsJoinedByString:@""]];
+
+        
         NSString *A=@"+";
         if ([_getPhone containsString:A]) {
             [_getPhone deleteCharactersInRange:[_getPhone rangeOfString:A]];
@@ -265,7 +280,8 @@
     }
     
     _dataDic=[NSMutableDictionary new];
-    [_dataDic setObject:[_textField text] forKey:@"content"];
+    NSString *contentString=[NSString stringWithFormat:@"%@%@",_getPhone,[_textField text]];
+    [_dataDic setObject:contentString forKey:@"content"];
     [_dataDic setObject:typeString forKey:@"type"];
     [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:_dataDic paramarsSite:@"/newLoginAPI.do?op=validate" sucessBlock:^(id content) {
@@ -333,7 +349,12 @@
              
               
                 [self.navigationController popViewControllerAnimated:NO];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAlert" object:nil];
+                if ([_changeType isEqualToString:@"1"]){
+                    
+                }else{
+                       [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAlert" object:nil];
+                }
+             
                 
             }else{
                 if ([jsonObj[@"msg"] intValue]==502) {

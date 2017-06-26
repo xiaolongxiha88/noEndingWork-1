@@ -235,15 +235,22 @@
     NSString *isValiPhone=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiPhone"];
     NSString *isValiEmail=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiEmail"];
     if ([isValiPhone isEqualToString:@"1"]) {
-        NSString *phoneNum=[[NSUserDefaults standardUserDefaults] objectForKey:@"phoneNum"];
+        NSString *phoneNum=[[NSUserDefaults standardUserDefaults] objectForKey:@"TelNumber"];
             UITextField *text=[_scrollView viewWithTag:6003];
         text.text=phoneNum;
     }else{
         if ([isValiEmail isEqualToString:@"1"]) {
-        
+            NSString *phoneNum=[[NSUserDefaults standardUserDefaults] objectForKey:@"email"];
+            UITextField *text=[_scrollView viewWithTag:6003];
+            text.text=phoneNum;
+            UILabel *lable=[_scrollView viewWithTag:4003];
+            lable.text=root_youxiang;
+            _phoneOrEmail=@"2";
+        }else{
+           [self showAlert];
         }
     }
-    [self showAlert];
+ 
     
 }
 
@@ -365,6 +372,14 @@
     [_allDict setObject:[textF2 text] forKey:@"questionDevice"];
     [_allDict setObject:[_contentView text] forKey:@"content"];
        [_allDict setObject:userID forKey:@"userId"];
+    if ([_phoneOrEmail isEqualToString:@"1"]) {
+        [_allDict setObject:[textF3 text] forKey:@"phoneNum"];
+        [_allDict setObject:@"" forKey:@"email"];
+    }else if ([_phoneOrEmail isEqualToString:@"2"]){
+        [_allDict setObject:@"" forKey:@"phoneNum"];
+        [_allDict setObject:[textF3 text] forKey:@"email"];
+    }
+  
     //NSError *error;
     [self showProgressView];
     [BaseRequest uplodImageWithMethod:HEAD_URL paramars:_allDict paramarsSite:@"/questionAPI.do?op=addCustomerQuestion" dataImageDict:dataImageDict sucessBlock:^(id content) {
@@ -561,6 +576,37 @@
         }else{
          text.placeholder=@"请输入邮箱地址";
         }
+        
+        NSString *isValiPhone=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiPhone"];
+        NSString *isValiEmail=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiEmail"];
+        
+        if ([_phoneOrEmail isEqualToString:@"1"]) {
+               UITextField *text=[_scrollView viewWithTag:6003];
+            if ([isValiPhone isEqualToString:@"1"]) {
+                NSString *phoneNum=[[NSUserDefaults standardUserDefaults] objectForKey:@"TelNumber"];
+                text.text=phoneNum;
+            }else{
+                text.text=nil;
+                  [self showAlert];
+            }
+            
+        }
+        
+        if ([_phoneOrEmail isEqualToString:@"2"]) {
+            UITextField *text=[_scrollView viewWithTag:6003];
+            if ([isValiEmail isEqualToString:@"1"]) {
+                NSString *email=[[NSUserDefaults standardUserDefaults] objectForKey:@"email"];
+                text.text=email;
+            }else{
+                text.text=nil;
+                  [self showAlert];
+            }
+            
+        }
+        
+        
+        
+        
         
     }selectValue:^(NSString *selectValue){
         UILabel *lable=[_scrollView viewWithTag:4003];

@@ -1,12 +1,12 @@
 //
-//  myListSecond.m
-//  shinelink
+//  OssServerTwo.m
+//  ShinePhone
 //
-//  Created by sky on 16/4/12.
-//  Copyright © 2016年 sky. All rights reserved.
+//  Created by sky on 2017/6/26.
+//  Copyright © 2017年 sky. All rights reserved.
 //
 
-#import "myListSecond.h"
+#import "OssServerTwo.h"
 #import "myListSecondTableViewCell.h"
 #import "AnswerViewController.h"
 #import "GetServerViewController.h"
@@ -16,14 +16,13 @@
 #define Width [UIScreen mainScreen].bounds.size.width/320.0
 #define Height [UIScreen mainScreen].bounds.size.height/568.0
 
-
 CGFloat const kChatInputTextViewHeight = 33.0f;
 
-@interface myListSecond ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
+@interface OssServerTwo ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
     CGSize _currentTextViewContentSize;
     NSInteger _textLine;
     float keyboradH;
-       float textViewW;
+    float textViewW;
     float H2;
     float H1;
     float allH;
@@ -57,7 +56,6 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 @property(nonatomic,strong)NSMutableDictionary *allDic;
 
-
 @property(nonatomic,strong)UIView *imageViewAll;
 @property (nonatomic, strong) UIImageView *image1;
 @property (nonatomic, strong) UIImageView *image2;
@@ -69,22 +67,17 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 @property (nonatomic, strong) UIImagePickerController *photoLibraryImagePicker;
 @property (nonatomic, strong) NSMutableArray *picArray;
 
+
 @end
 
-@implementation myListSecond
-
--(void)viewDidAppear:(BOOL)animated
-{
-   // [self.view removeFromSuperview];
-  //  [self netGetAgain];
-}
+@implementation OssServerTwo
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
-     H2=self.navigationController.navigationBar.frame.size.height;
-     H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
-     allH=40*HEIGHT_SIZE;
+    
+    H2=self.navigationController.navigationBar.frame.size.height;
+    H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
+    allH=40*HEIGHT_SIZE;
     _picArray=[NSMutableArray array];
     
     //设置两个通知
@@ -98,25 +91,25 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 
 -(void)initUI{
-
-
-  
     
-   //  [self initHeadView];
+    
+    
+    
+    //  [self initHeadView];
     if (!_tableView) {
-         _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_HEIGHT-allH-H2-H1 )];
+        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_HEIGHT-allH-H2-H1 )];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView=_headView;
         self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
         [self.view addSubview:_tableView];
     }
-   
-   
-
-   
     
-       textViewW=[UIScreen mainScreen].bounds.size.width-allH-allH;
+    
+    
+    
+    
+    textViewW=[UIScreen mainScreen].bounds.size.width-allH-allH;
     _textViewAll = [[UIView alloc]initWithFrame:CGRectMake(0*HEIGHT_SIZE,[UIScreen mainScreen].bounds.size.height-allH-H2-H1 , SCREEN_Width, allH)];
     _textViewAll.backgroundColor =COLOR(242, 242, 242, 1);
     _textViewAll.userInteractionEnabled = YES;
@@ -124,7 +117,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     
     UIView *VI = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, allH,allH )];
     VI.backgroundColor =[UIColor clearColor];
-     VI.userInteractionEnabled = YES;
+    VI.userInteractionEnabled = YES;
     UITapGestureRecognizer * forget1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(controlPhoto)];
     [VI addGestureRecognizer:forget1];
     [_textViewAll addSubview:VI];
@@ -146,7 +139,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     image5.image = IMAGE(@"send_icon.png");
     [V2 addSubview:image5];
     
-   
+    
     _textView = [[UITextView alloc]initWithFrame:CGRectMake(allH,7*HEIGHT_SIZE , textViewW, 26*HEIGHT_SIZE)];
     _textView.delegate = self;
     _textView.font=[UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -162,7 +155,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 -(void)initHeadView{
     
-  _headView = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,500*HEIGHT_SIZE )];
+    _headView = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,500*HEIGHT_SIZE )];
     _headView.backgroundColor =[UIColor clearColor];
     [self.view addSubview:_headView];
     
@@ -185,51 +178,51 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     [_headView addSubview:userImage];
     
     float lableH=20*HEIGHT_SIZE;   float lableW0=SCREEN_Width-imageSize-3*imageW;
-        UILabel *nameLable=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize, imageW, lableW0,lableH )];
-            nameLable.text=_titleString;
-        nameLable.textAlignment=NSTextAlignmentLeft;
-        nameLable.textColor=COLOR(51, 51, 51, 1);
-        nameLable.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
-        [_headView addSubview:nameLable];
+    UILabel *nameLable=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize, imageW, lableW0,lableH )];
+    nameLable.text=_titleString;
+    nameLable.textAlignment=NSTextAlignmentLeft;
+    nameLable.textColor=COLOR(51, 51, 51, 1);
+    nameLable.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
+    [_headView addSubview:nameLable];
     
-        float lableW=(SCREEN_Width-imageSize-3*imageW-6*NOW_SIZE)/2;
+    float lableW=(SCREEN_Width-imageSize-3*imageW-6*NOW_SIZE)/2;
     
     if (_PhoneString==nil || _PhoneString==NULL||([_PhoneString isEqual:@""] )) {
-       _PhoneString=@"";
+        _PhoneString=@"";
     }
     NSArray *lableArray=[NSArray arrayWithObjects:_QuestionTypeString, _SnString,nil];
     for (int i=0; i<lableArray.count; i++) {
         UILabel *Lable0=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize+lableW*i, imageW+lableH, lableW,lableH )];
         Lable0.text=lableArray[i];
         Lable0.textAlignment=NSTextAlignmentLeft;
-       // Lable0.adjustsFontSizeToFitWidth=YES;
+        // Lable0.adjustsFontSizeToFitWidth=YES;
         Lable0.textColor=COLOR(153, 153, 153, 1);
         Lable0.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         [_headView addSubview:Lable0];
     }
     
-      NSArray *lableArray1=[NSArray arrayWithObjects: _statusString,_createrTimeString,nil];
+    NSArray *lableArray1=[NSArray arrayWithObjects: _statusString,_createrTimeString,nil];
     for (int i=0; i<lableArray1.count; i++) {
         UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize+lableW*i, imageW+lableH*2, lableW,lableH )];
-//        if (i==1) {
-//            Lable1.frame=CGRectMake(imageW*2+imageSize+lableW*i, imageW+lableH*2, lableW+30*NOW_SIZE,lableH );
-//        }
+        //        if (i==1) {
+        //            Lable1.frame=CGRectMake(imageW*2+imageSize+lableW*i, imageW+lableH*2, lableW+30*NOW_SIZE,lableH );
+        //        }
         Lable1.text=lableArray1[i];
         Lable1.textAlignment=NSTextAlignmentLeft;
         Lable1.textColor=COLOR(153, 153, 153, 1);
         if (i==0) {
             if ([_statusString isEqualToString:@"0"]) {
-                 Lable1.text=@"待处理";
-                 Lable1.textColor=COLOR(227, 74, 33, 1);
+                Lable1.text=@"待处理";
+                Lable1.textColor=COLOR(227, 74, 33, 1);
             }else if ([_statusString isEqualToString:@"1"]){
-                 Lable1.text=@"处理中";
+                Lable1.text=@"处理中";
                 Lable1.textColor=COLOR(94, 195, 53, 1);
             }else if([_statusString isEqualToString:@"2"]){
-                 Lable1.text=@"已处理";
-                 Lable1.textColor=COLOR(157, 157, 157, 1);
+                Lable1.text=@"已处理";
+                Lable1.textColor=COLOR(157, 157, 157, 1);
             }else if([_statusString isEqualToString:@"3"]){
-                 Lable1.text=@"待跟进";
-                 Lable1.textColor=COLOR(227, 164, 33, 1);
+                Lable1.text=@"待跟进";
+                Lable1.textColor=COLOR(227, 164, 33, 1);
             }
         }
         Lable1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
@@ -256,15 +249,15 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     [_headView addSubview:LableS];
     
     if (_questionPicArray.count>1) {
-    UILabel *LableImage=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
-    LableImage.text=@"查看图片";
-    LableImage.textAlignment=NSTextAlignmentRight;
-    LableImage.textColor=COLOR(153, 153, 153, 1);
-    LableImage.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
-    LableImage.userInteractionEnabled=YES;
-            UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
-            [LableImage addGestureRecognizer:labelTap1];
-    [_headView addSubview:LableImage];
+        UILabel *LableImage=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
+        LableImage.text=@"查看图片";
+        LableImage.textAlignment=NSTextAlignmentRight;
+        LableImage.textColor=COLOR(153, 153, 153, 1);
+        LableImage.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
+        LableImage.userInteractionEnabled=YES;
+        UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
+        [LableImage addGestureRecognizer:labelTap1];
+        [_headView addSubview:LableImage];
     }
     
     UIView *V1 = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+45*HEIGHT_SIZE, SCREEN_Width,2*HEIGHT_SIZE )];
@@ -292,8 +285,8 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 
 -(void)netGetAgain{
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    NSString *userID=[ud objectForKey:@"userID"];
+//    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+//  //  NSString *userID=[ud objectForKey:@"userID"];
     self.questionAll =[NSMutableArray array];
     
     self.nameArray =[NSMutableArray array];
@@ -304,9 +297,9 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     self.labelArray=[NSMutableArray arrayWithObjects:root_ME_biaoti,root_NBQ_leixing, root_ME_huifu_jilu,nil];
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfo" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"questionId":_qusetionId,@"serverUrl":_serverUrl} paramarsSite:@"/api/v1/serviceQuestion/question/detail_info" sucessBlock:^(id content) {
         [self hideProgressView];
-        NSLog(@"getQuestionInfo=: %@", content);
+        NSLog(@"question/detail_info=: %@", content);
         if(content){
             _allDic=[NSMutableDictionary dictionaryWithDictionary:content];
             _titleString=content[@"title"];
@@ -389,10 +382,10 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         [dataImageDict setObject:imageData forKey:imageName];
     }
     
-        if ([[_textView text] isEqual:@""]) {
-            [self showToastViewWithTitle:root_ME_shuru_leirong];
-            return;
-        }
+    if ([[_textView text] isEqual:@""]) {
+        [self showToastViewWithTitle:root_ME_shuru_leirong];
+        return;
+    }
     
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     NSString *userID=[ud objectForKey:@"userID"];
@@ -414,44 +407,44 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
                     _imageViewAll=nil;
                 }
                 
-                  [_textView resignFirstResponder];
-               NSNotification * notice = [NSNotification notificationWithName:@"ReLoadTableView" object:nil userInfo:nil];
+                [_textView resignFirstResponder];
+                NSNotification * notice = [NSNotification notificationWithName:@"ReLoadTableView" object:nil userInfo:nil];
                 [self keyHiden:notice];
                 [self showAlertViewWithTitle:nil message:root_ME_tianjia_chenggong cancelButtonTitle:root_Yes];
-                   [self netGetAgain];
-          
+                [self netGetAgain];
+                
             }else{
                 [self showAlertViewWithTitle:nil message:root_ME_tianjia_shibai cancelButtonTitle:root_Yes];
-     
+                
             }
         }
     } failure:^(NSError *error) {
         [self showToastViewWithTitle:root_Networking];
         [self hideProgressView];
- 
+        
     }];
     
 }
 
 
 - (void)updateHeight:(UITextView *)textView isInput:(BOOL)isInput {
-   
     
-
-//    float H2=self.navigationController.navigationBar.frame.size.height;
-//    float H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
-//    float allH=40*HEIGHT_SIZE;
+    
+    
+    //    float H2=self.navigationController.navigationBar.frame.size.height;
+    //    float H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
+    //    float allH=40*HEIGHT_SIZE;
     float textViewAllH=14*HEIGHT_SIZE;
     
-     isInput ? ++_textLine : --_textLine;
+    isInput ? ++_textLine : --_textLine;
     _currentTextViewContentSize = textView.contentSize;
     CGFloat height = _currentTextViewContentSize.height;
-     CGFloat height11 = textViewAllH +_currentTextViewContentSize.height;
+    CGFloat height11 = textViewAllH +_currentTextViewContentSize.height;
     
     
     if (height >=112) {
-         height =112;
-         height11 = textViewAllH +height;
+        height =112;
+        height11 = textViewAllH +height;
     }
     [UIView animateWithDuration:0.25f animations:^{
         
@@ -482,7 +475,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
             _imageViewAll.frame=CGRectMake(0, ViewY, SCREEN_Width,ViewH );
             _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_HEIGHT-_imageViewAll.frame.origin.y );
         }else{
-        _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,_textViewAll.frame.origin.y);
+            _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,_textViewAll.frame.origin.y);
         }
         
         
@@ -499,8 +492,8 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     CGRect rect= [[userInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"]CGRectValue];
     keyboradH=rect.size.height;
     
-
-     _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,[UIScreen mainScreen].bounds.size.height-H2-H1-allH-keyboradH );
+    
+    _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,[UIScreen mainScreen].bounds.size.height-H2-H1-allH-keyboradH );
     // self.tooBar.frame = rect;
     [UIView animateWithDuration:0.25 animations:^{
         _textViewAll.transform = CGAffineTransformMakeTranslation(0, -([UIScreen mainScreen].bounds.size.height-rect.origin.y));
@@ -512,7 +505,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
-   [_textView resignFirstResponder];
+    [_textView resignFirstResponder];
 }
 
 
@@ -520,9 +513,9 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 -(void)Answer{
     AnswerViewController *AN=[[AnswerViewController alloc]init];
-    AN.qusetionId=_qusetionId;
+   
     [self.navigationController pushViewController:AN animated:NO];
-
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -536,24 +529,24 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     
     NSString *WebString;
     if ([_nameID[indexPath.row] isEqualToString:@"1"]) {
-          cell.image.image = IMAGE(@"kefu_iconOSS.png");
+        cell.image.image = IMAGE(@"kefu_iconOSS.png");
         cell.nameLabel.textColor = COLOR(102, 102, 102, 1);
         WebString=self.contentArray[indexPath.row];
     }else{
-  
+        
         if (_headImageUser!=nil) {
             cell.image.image =_headImageUser;
         }else{
-          cell.image.image = IMAGE(@"touxiang.png");
+            cell.image.image = IMAGE(@"touxiang.png");
         }
         
-         cell.nameLabel.textColor =COLOR(102, 102, 102, 1);
-     //   NSString *N1=@"<body width=280px style=\"word-wrap:break-word; font-family:Arial\">";
-       NSString *N1=@"";
+        cell.nameLabel.textColor =COLOR(102, 102, 102, 1);
+        //   NSString *N1=@"<body width=280px style=\"word-wrap:break-word; font-family:Arial\">";
+        NSString *N1=@"";
         NSString *WebString1=[NSString stringWithFormat:@"<p style=\"word-wrap:break-word;\">%@%@</p>",N1,self.contentArray[indexPath.row]];
-         WebString=WebString1;
+        WebString=WebString1;
     }
-      NSMutableArray *PICarray=[NSMutableArray arrayWithArray:_imageName[indexPath.row]];
+    NSMutableArray *PICarray=[NSMutableArray arrayWithArray:_imageName[indexPath.row]];
     
     if (PICarray.count>1) {
         cell.picLabel.hidden=NO;
@@ -565,7 +558,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     cell.timeLabel.text= self.timeArray[indexPath.row];
     
     cell.WebContent= self.contentArray[indexPath.row];
-   
+    
     cell.content=self.contentArray[indexPath.row];
     
     NSString *Name1=_contentArray[indexPath.row];
@@ -574,11 +567,11 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     CGRect fcRect = [Name0 boundingRectWithSize:CGSizeMake(contentW, 5000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12*HEIGHT_SIZE]} context:nil];
     
     cell.contentLabel.frame =CGRectMake(15*NOW_SIZE+40*HEIGHT_SIZE, 52*HEIGHT_SIZE, contentW, fcRect.size.height+10*HEIGHT_SIZE);
-  
-     [cell.contentLabel loadHTMLString:WebString baseURL:nil];
     
-  //  cell.titleView.frame=CGRectMake(0, 70*HEIGHT_SIZE+fcRect.size.height,SCREEN_WIDTH, 2*HEIGHT_SIZE);
-  //  cell.timeLabel.frame=CGRectMake(SCREEN_WIDTH-100*NOW_SIZE, 45*NOW_SIZE+fcRect.size.height,100*NOW_SIZE, 20*NOW_SIZE );
+    [cell.contentLabel loadHTMLString:WebString baseURL:nil];
+    
+    //  cell.titleView.frame=CGRectMake(0, 70*HEIGHT_SIZE+fcRect.size.height,SCREEN_WIDTH, 2*HEIGHT_SIZE);
+    //  cell.timeLabel.frame=CGRectMake(SCREEN_WIDTH-100*NOW_SIZE, 45*NOW_SIZE+fcRect.size.height,100*NOW_SIZE, 20*NOW_SIZE );
     cell.selectionStyle=UITableViewCellSelectionStyleGray;
     
     
@@ -596,10 +589,10 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
- 
+    
     NSString *Name1=_contentArray[indexPath.row];
     NSString *Name0=[self removeHTML:Name1];
-     float contentW=SCREEN_Width-20*NOW_SIZE-40*HEIGHT_SIZE-10*NOW_SIZE;
+    float contentW=SCREEN_Width-20*NOW_SIZE-40*HEIGHT_SIZE-10*NOW_SIZE;
     CGRect fcRect = [Name0 boundingRectWithSize:CGSizeMake(contentW, 5000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12*HEIGHT_SIZE]} context:nil];
     return 70*HEIGHT_SIZE+fcRect.size.height;
     
@@ -610,9 +603,9 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     NSScanner *theScanner;
     
     NSString *text = nil;
-
+    
     theScanner = [NSScanner scannerWithString:html];
-
+    
     while ([theScanner isAtEnd] == NO) {
         
         // find start of tag
@@ -629,7 +622,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         
         html = [html stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>", text] withString:@" "];
         
-    html = [html stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        html = [html stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         
     }
     
@@ -643,22 +636,22 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     get.picArray=[NSMutableArray arrayWithArray:_questionPicArray];
     
     [self.navigationController pushViewController:get animated:NO];
-
+    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableArray *PICarray=[NSMutableArray arrayWithArray:_imageName[indexPath.row]];
-  if (PICarray.count>1)
-  {
-     // NSMutableArray *test=[NSMutableArray arrayWithObject:_imageName[indexPath.row]];
-      
-      GetServerViewController *get=[[GetServerViewController alloc]init];
-      
-      get.picArray=[NSMutableArray arrayWithArray:PICarray];
-      
-      [self.navigationController pushViewController:get animated:NO];
-  }
+    if (PICarray.count>1)
+    {
+        // NSMutableArray *test=[NSMutableArray arrayWithObject:_imageName[indexPath.row]];
+        
+        GetServerViewController *get=[[GetServerViewController alloc]init];
+        
+        get.picArray=[NSMutableArray arrayWithArray:PICarray];
+        
+        [self.navigationController pushViewController:get animated:NO];
+    }
     
     
 }
@@ -714,7 +707,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         _imageViewAll.userInteractionEnabled = YES;
         [self.view addSubview:_imageViewAll];
     }
-
+    
     
     if(!_image1){
         [_picArray insertObject:image atIndex:0];
@@ -739,7 +732,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         [_imageViewAll addSubview:_image2];
         
         _button2= [[UIButton alloc] initWithFrame:CGRectMake(imageX+size5*1+imageH-ButtonImage/2, 10*HEIGHT_SIZE-ButtonImage/2, ButtonImage,ButtonImage)];
-  [_button2 setImage:IMAGE(@"cancel_icon111.png") forState:UIControlStateNormal];
+        [_button2 setImage:IMAGE(@"cancel_icon111.png") forState:UIControlStateNormal];
         _button2.tag=2000+2;
         // _button2.titleLabel.font=[UIFont systemFontOfSize: 10*HEIGHT_SIZE];
         [_button2 addTarget:self action:@selector(delPicture:) forControlEvents:UIControlEventTouchUpInside];
@@ -754,7 +747,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         [_imageViewAll addSubview:_image3];
         
         _button3= [[UIButton alloc] initWithFrame:CGRectMake(imageX+size5*2+imageH-ButtonImage/2, 10*HEIGHT_SIZE-ButtonImage/2, ButtonImage,ButtonImage)];
-  [_button3 setImage:IMAGE(@"cancel_icon111.png") forState:UIControlStateNormal];
+        [_button3 setImage:IMAGE(@"cancel_icon111.png") forState:UIControlStateNormal];
         _button3.tag=2000+3;
         //  _button3.titleLabel.font=[UIFont systemFontOfSize: 10*HEIGHT_SIZE];
         [_button3 addTarget:self action:@selector(delPicture:) forControlEvents:UIControlEventTouchUpInside];
@@ -762,7 +755,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     }
     
     
-  //  picTime++;
+    //  picTime++;
     
 }
 
@@ -796,6 +789,19 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

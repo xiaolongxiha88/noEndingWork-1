@@ -12,7 +12,7 @@
 #import "JPUSHService.h"
 #import "CoreDataManager.h"
 #import "phoneRegisterViewController.h"
-
+#import "OssMessageViewController.h"
 
 
 @interface ManagementController ()<UITableViewDataSource,UITableViewDelegate>
@@ -213,40 +213,37 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if ((indexPath.row==0)||(indexPath.row==2)||(indexPath.row==3)) {
+    if ((indexPath.row==0)||(indexPath.row==3)) {
         changManeger *go=[[changManeger alloc]init];
         if (indexPath.row==0) {
             go.type=@"0";
-        }else if (indexPath.row==2){
-            go.type=@"2";
         }else if (indexPath.row==3){
             go.type=@"3";
         }
         [self.navigationController pushViewController:go animated:YES];
     }
     
-    if (indexPath.row==1){
-        
-        changManeger *go=[[changManeger alloc]init];
-        go.type=@"1";
-        [self.navigationController pushViewController:go animated:YES];
-
-        
-//        NSArray *languages = [NSLocale preferredLanguages];
-//        NSString *currentLanguage = [languages objectAtIndex:0];
+//    if (indexPath.row==1){
 //        
-//        if ([currentLanguage hasPrefix:@"zh-Hans"]) {
-//            phoneRegisterViewController *registerRoot=[[phoneRegisterViewController alloc]init];
-//            registerRoot.goViewType=@"2";
-//            [self.navigationController pushViewController:registerRoot animated:YES];
-//        }else{
-//            changManeger *go=[[changManeger alloc]init];
-//            go.type=@"1";
-//            [self.navigationController pushViewController:go animated:YES];
-//        }
-        
-   
+//        changManeger *go=[[changManeger alloc]init];
+//        go.type=@"1";
+//        [self.navigationController pushViewController:go animated:YES];
+//
+// 
+//    }
+    
+    if ((indexPath.row==1)||(indexPath.row==2)){
+        OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
+        OSSView.firstPhoneNum=_dataArray1[indexPath.row];
+        if (indexPath.row==1){
+               OSSView.addQuestionType=@"1";
+        }else{
+              OSSView.addQuestionType=@"2";
+        }
+        OSSView.changeType=@"1";
+        [self.navigationController pushViewController:OSSView animated:NO];
     }
+
     
 }
 

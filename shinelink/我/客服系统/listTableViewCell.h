@@ -21,4 +21,6 @@
 @property(nonatomic,strong)NSString *content;
 @property (nonatomic, strong) UIImageView *coverImageView;
 
+@property(nonatomic,strong)NSString *lineType;
+
 @end

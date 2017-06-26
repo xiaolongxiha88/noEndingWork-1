@@ -576,10 +576,10 @@ NSLog(@"体验馆");
             _loginUserName=_userTextField.text ;
             _loginUserPassword=_pwdTextField.text;
             
-       //   [self getOSSnet];
+       [self getOSSnet];
   
-            _getServerAddressNum=0;
-          [self netServerInit];
+//            _getServerAddressNum=0;
+//          [self netServerInit];
          
         }];
     }
@@ -686,6 +686,7 @@ NSLog(@"体验馆");
         }
         
     } failure:^(NSError *error) {
+         [self hideProgressView];
          [self didPresentControllerButtonTouch];
             [self showToastViewWithTitle:root_Networking];
 
@@ -725,6 +726,9 @@ NSLog(@"体验馆");
                                     NSString *server1=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"ossServerUrl"]];
                                     NSString *server2=@"http://";
                                     NSString *serverAdress=[NSString stringWithFormat:@"%@%@",server2,server1];
+                                    
+                                    //serverAdress=OSS_HEAD_URL_Demo;
+                                    
                                     [[UserInfo defaultUserInfo] setOSSserver:serverAdress];
                                 }
                                 NSMutableArray *serverListArray=[NSMutableArray array];
@@ -868,6 +872,7 @@ NSLog(@"体验馆");
         }
         
     } failure:^(NSError *error) {
+         [self hideProgressView];
         if (_getServerAddressNum==1) {
             [self netServerInit];
         }else{

@@ -243,8 +243,7 @@
     
     //_statusArray[indexPath.row]=@"1";
     if (_statusArray.count>0) {
-        if ([_languageValue isEqualToString:@"0"]) {
-            
+        
             if ([_statusArray[indexPath.row] isEqualToString:@"0"]) {
               cell.coverImageView.backgroundColor=COLOR(227, 74, 33, 1);
                 cell.imageLabel.text=root_daichuli;
@@ -258,8 +257,7 @@
                 cell.coverImageView.backgroundColor=COLOR(227, 164, 33, 1);
                 cell.imageLabel.text=root_daigengjin;
             }
-        }
-          
+   
     }
     
    

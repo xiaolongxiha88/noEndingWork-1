@@ -79,6 +79,11 @@ let  root_xinghao = NSLocalizedString("型号", comment: "default")    ///
 let  root_lixian = NSLocalizedString("离线", comment: "default")
 let  root_zaixian = NSLocalizedString("在线", comment: "default")
 
+let  root_daichuli = NSLocalizedString("73待处理", comment: "default")
+let  root_chulizhong = NSLocalizedString("74处理中", comment: "default")
+let  root_yichuli = NSLocalizedString("75已处理", comment: "default")
+let  root_daigengjin = NSLocalizedString("76待跟进", comment: "default")
+
 
 
 //"请输入搜索类型"

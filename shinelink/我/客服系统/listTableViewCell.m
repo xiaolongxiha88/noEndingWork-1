@@ -71,10 +71,10 @@
         [self.contentView addSubview:_contentLabel];
         
   
+    
+            
         
-//        _view1=[[UIView alloc]init];
-//        [_view1 setBackgroundColor:COLOR(240, 242, 239, 1)];
-//        [self.contentView addSubview:_view1];
+
        
     }
     return self;

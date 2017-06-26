@@ -516,6 +516,7 @@
 		338D51BF1EE151D9003FE4D2 /* IntegratorFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338D51BE1EE151D9003FE4D2 /* IntegratorFirst.swift */; };
 		338D51C11EE15EEE003FE4D2 /* moreOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 338D51C01EE15EEE003FE4D2 /* moreOSS.png */; };
 		338D51C31EE15EF3003FE4D2 /* upOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 338D51C21EE15EF3003FE4D2 /* upOSS.png */; };
+		338D96891F0102A300652827 /* OssServerTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 338D96881F0102A300652827 /* OssServerTwo.m */; };
 		338DCD9E1D2A00DF00C8B775 /* ProductData+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 338DCD9B1D2A00DF00C8B775 /* ProductData+CoreDataProperties.m */; };
 		338DCD9F1D2A00DF00C8B775 /* ProductData.m in Sources */ = {isa = PBXBuildFile; fileRef = 338DCD9D1D2A00DF00C8B775 /* ProductData.m */; };
 		338E30CC1D93725D002215E4 /* service111.png in Resources */ = {isa = PBXBuildFile; fileRef = 338E30CB1D93725D002215E4 /* service111.png */; };
@@ -1481,6 +1482,8 @@
 		338D51BE1EE151D9003FE4D2 /* IntegratorFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegratorFirst.swift; sourceTree = "<group>"; };
 		338D51C01EE15EEE003FE4D2 /* moreOSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moreOSS.png; sourceTree = "<group>"; };
 		338D51C21EE15EF3003FE4D2 /* upOSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upOSS.png; sourceTree = "<group>"; };
+		338D96871F0102A300652827 /* OssServerTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OssServerTwo.h; sourceTree = "<group>"; };
+		338D96881F0102A300652827 /* OssServerTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OssServerTwo.m; sourceTree = "<group>"; };
 		338DCD9A1D2A00DF00C8B775 /* ProductData+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProductData+CoreDataProperties.h"; sourceTree = "<group>"; };
 		338DCD9B1D2A00DF00C8B775 /* ProductData+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProductData+CoreDataProperties.m"; sourceTree = "<group>"; };
 		338DCD9C1D2A00DF00C8B775 /* ProductData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductData.h; sourceTree = "<group>"; };
@@ -2811,6 +2814,8 @@
 			isa = PBXGroup;
 			children = (
 				336E03FD1EC957EF0034BC86 /* ossServerFirst.swift */,
+				338D96871F0102A300652827 /* OssServerTwo.h */,
+				338D96881F0102A300652827 /* OssServerTwo.m */,
 				3333D2B01EF8B41300E6182A /* serverOrder.h */,
 				3333D2B11EF8B41300E6182A /* serverOrder.m */,
 			);
@@ -4579,6 +4584,7 @@
 				334FF0C11CF53C7C001E6716 /* UINavigationController+CustomNavigation.m in Sources */,
 				33692BF91C92952000698375 /* engrgySencondViewController.m in Sources */,
 				334FF09A1CF53C7C001E6716 /* deviceRootViewController.m in Sources */,
+				338D96891F0102A300652827 /* OssServerTwo.m in Sources */,
 				33EFB66E1C98F9B1003F336F /* ZFCirque.m in Sources */,
 				338A623F1E71567A000E7CE4 /* PopoverViewCell.m in Sources */,
 				334B8F511C914A6D00798A69 /* PNLineChartData.m in Sources */,

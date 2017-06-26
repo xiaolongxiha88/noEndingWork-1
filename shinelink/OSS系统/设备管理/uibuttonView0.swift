@@ -14,6 +14,7 @@ class uibuttonView0: UIView{
     var view1:UIView!
      var buttonNum:Int!
     var typeNum:Int!
+     var backNum:Int?
     
     
     

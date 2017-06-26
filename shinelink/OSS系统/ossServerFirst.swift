@@ -30,7 +30,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     var plantListArray:NSMutableArray!
     var cellValue4Array:NSMutableArray!
     var cellValue5Array:NSMutableArray!
-    
+      var cellValue6Array:NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,7 +124,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         buttonView.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
         buttonView.typeNum=3
         buttonView.isUserInteractionEnabled=true
-        buttonView.backgroundColor=backgroundGrayColor
+        buttonView.backgroundColor=UIColor.white
         buttonView.buttonArray=buttonArray
         buttonView.initUI()
        view3.addSubview(buttonView)
@@ -144,6 +144,11 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         lable2.textAlignment=NSTextAlignment.right
         lable2.font=UIFont.systemFont(ofSize: 10*HEIGHT_SIZE)
         view3.addSubview(lable2)
+        
+        let view00=UIView()
+        view00.frame=CGRect(x: 10*NOW_SIZE, y: 30*HEIGHT_SIZE, width: 300*NOW_SIZE, height: 2*HEIGHT_SIZE)
+        view00.backgroundColor=backgroundGrayColor
+        view3.addSubview(view00)
         
         let view0=UIView()
         view0.frame=CGRect(x: 10*NOW_SIZE, y: 50*HEIGHT_SIZE, width: 300*NOW_SIZE, height: 2*HEIGHT_SIZE)
@@ -175,7 +180,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         tableView.delegate=self
         tableView.dataSource=self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        tableView.register(deviceListCell.classForCoder(), forCellReuseIdentifier: "cell")
+        tableView.register(listTableViewCell.classForCoder(), forCellReuseIdentifier: "cell")
         self.view.addSubview(tableView)
         
         let foot=MJRefreshAutoNormalFooter(refreshingBlock: {
@@ -204,41 +209,39 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 65*HEIGHT_SIZE
+        return 60*HEIGHT_SIZE
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        cellNameArray=["所属用户:","所属电站:","所属代理商:","状态:"];
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! listTableViewCell
         
-        
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!deviceListCell
-        
-        let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,cellValue1Array[indexPath.row]as!NSString)
-        
-        let lable41 = cellValue4Array[indexPath.row]as!NSString
-        var lable42:NSString
-        if lable41=="1" {
-            lable42="掉线"
-        }else{
-            lable42="在线"
+      
+        if cellValue4Array[indexPath.row] as! Int==0 {
+              cell.coverImageView.backgroundColor=COLOR(_R: 227, _G: 74, _B: 33, _A: 1)
+                cell.imageLabel.text=root_daichuli
+        }else if cellValue4Array[indexPath.row] as! Int==1 {
+            cell.coverImageView.backgroundColor=COLOR(_R: 94, _G: 195, _B: 53, _A: 1)
+            cell.imageLabel.text=root_chulizhong
+        }else if cellValue4Array[indexPath.row] as! Int==2 {
+            cell.coverImageView.backgroundColor=COLOR(_R: 157, _G: 157, _B: 157, _A: 1);
+                   cell.imageLabel.text=root_yichuli;
+        }else if cellValue4Array[indexPath.row] as! Int==3 {
+            cell.coverImageView.backgroundColor=COLOR(_R: 227, _G: 164, _B: 33, _A: 1);
+                cell.imageLabel.text=root_daigengjin;
         }
+        cell.lineType="1"
+                    cell.titleLabel.text = self.cellValue1Array.object(at: indexPath.row) as? String
+                    cell.contentLabel.text =  self.cellValue3Array.object(at: indexPath.row) as? String
+                    cell.timeLabel.text=self.cellValue2Array.object(at: indexPath.row) as? String
+ 
+        let view0=UIView()
+        view0.frame=CGRect(x: 2*NOW_SIZE, y: 58*HEIGHT_SIZE, width: SCREEN_Width-4*NOW_SIZE, height: 2*HEIGHT_SIZE)
+        view0.backgroundColor=backgroundGrayColor
+        cell.contentView.addSubview(view0)
         
-        let lable4=NSString(format: "%@%@", cellNameArray[3]as!NSString,lable42)
-        let  lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,cellValue2Array[indexPath.row]as!NSString)
-        let  lable3=NSString(format: "%@%@", cellNameArray[2]as!NSString,cellValue3Array[indexPath.row]as!NSString)
-        
-        
-        
-        cell.TitleLabel0.text=cellValue0Array[indexPath.row] as? String
-        
-        cell.TitleLabel1.text=lable1 as String
-        cell.TitleLabel2.text=lable2 as String
-        cell.TitleLabel3.text=lable3 as String?
-        cell.TitleLabel4.text=lable4 as String?
-        
+  
         
         return cell
         
@@ -247,14 +250,11 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let CELL=cellValue5Array[indexPath.row] as! NSString
-        
-        let goView=deviceControlView()
-        goView.netType=1
-     
-        goView.deviceSnString=CELL
-        
-        self.navigationController?.pushViewController(goView, animated: true)
+        let vc=OssServerTwo()
+        let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as! Int)
+      vc.qusetionId=id as String!
+        vc.serverUrl=self.cellValue6Array.object(at: indexPath.row) as! String
+        self.navigationController?.pushViewController(vc, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -265,15 +265,14 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     func initNet1(){
         
-//        self.cellValue1Array=[]
-//        self.cellValue2Array=[]
-//        self.cellValue3Array=[]
-//        self.cellValue4Array=[]
-//        self.cellValue5Array=[]
-//        self.plantListArray=[]
-//        cellValue0Array=[]
-//        cellNameArray=[]
-        
+        self.cellValue1Array=[]
+        self.cellValue2Array=[]
+        self.cellValue3Array=[]
+        self.cellValue4Array=[]
+        self.cellValue5Array=[]
+        self.cellValue6Array=[]
+       self.plantListArray=[]
+                
         self.initNet0()
     }
 
@@ -306,20 +305,39 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
                 let result1=jsonDate["result"] as! Int
                 
                 if result1==1 {
-                    let objArray=jsonDate["obj"] as! NSArray
-                    for i in 0..<objArray.count{
-
+     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
+                   let questionAll=objArray["questionList"] as! NSArray
+                    for i in 0..<questionAll.count{
+       self.cellValue1Array.add((questionAll[i] as! NSDictionary)["title"] as!NSString)
+                self.cellValue2Array.add((questionAll[i] as! NSDictionary)["lastTime"] as!NSString)
+                                    self.cellValue3Array.add((questionAll[i] as! NSDictionary)["content"] as!NSString)
+                             self.cellValue4Array.add((questionAll[i] as! NSDictionary)["status"] as! Int)
+                          self.cellValue5Array.add((questionAll[i] as! NSDictionary)["id"] as! Int)
+                         self.cellValue6Array.add((questionAll[i] as! NSDictionary)["serverUrl"] as! Int)
                         
+                          self.plantListArray.add((questionAll[i] as! NSDictionary))
                     }
                     
+                    if self.plantListArray.count>0{
+                        
+                        if (self.tableView == nil){
+                            self.initTableView()
+                        }else{
+                            self.tableView.reloadData()
+                        }
+                        
+                    }
+
                     
                 }else{
+       
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
                 }
                 
             }
             
         }, failure: {(error) in
+             self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         

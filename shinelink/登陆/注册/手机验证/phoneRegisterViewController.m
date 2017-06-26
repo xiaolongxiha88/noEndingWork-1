@@ -177,6 +177,13 @@
     _getPhone=[NSMutableString stringWithString:A1];
     }
     
+    NSCharacterSet *setToRemove =
+    [[ NSCharacterSet characterSetWithCharactersInString:@"0123456789 "]
+     invertedSet ];
+    
+    _getPhone =[NSMutableString stringWithString:[[_getPhone componentsSeparatedByCharactersInSet:setToRemove]
+                                                  componentsJoinedByString:@""]];
+    
     
     NSString *A=@"+";
     if ([_getPhone containsString:A]) {
