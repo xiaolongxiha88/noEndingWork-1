@@ -675,9 +675,9 @@
     UISwitch *switchButton = (UISwitch*)sender;
     BOOL isButtonOn = [switchButton isOn];
     if (isButtonOn) {
-        _param1=@"0";
+        _param1=@"1";
     }else {
-      _param1=@"1";
+      _param1=@"0";
     }
 }
 

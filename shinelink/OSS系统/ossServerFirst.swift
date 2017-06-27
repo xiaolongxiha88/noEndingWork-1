@@ -31,6 +31,8 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     var cellValue4Array:NSMutableArray!
     var cellValue5Array:NSMutableArray!
       var cellValue6Array:NSMutableArray!
+    var questionOrOrder:Int!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +49,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         }
         contentString=""
         pageNum=0
+        questionOrOrder=1
         
        self.initUI()
     }
@@ -95,7 +98,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         view2.addSubview(button1)
         
         let buttonView1=uibuttonView0()
-        buttonView1.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
+        buttonView1.frame=CGRect(x: 0*NOW_SIZE, y: 30*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
         buttonView1.typeNum=1
         buttonView1.isUserInteractionEnabled=true
         buttonView1.backgroundColor=backgroundGrayColor
@@ -116,7 +119,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         }
         
         view3=UIView()
-        self.view3.frame=CGRect(x: 0*NOW_SIZE, y: 30*HEIGHT_SIZE, width: SCREEN_Width, height: 52*HEIGHT_SIZE)
+        self.view3.frame=CGRect(x: 0*NOW_SIZE, y: 60*HEIGHT_SIZE, width: SCREEN_Width, height: 52*HEIGHT_SIZE)
         view3.backgroundColor=UIColor.clear
         self.view.addSubview(view3)
         
@@ -163,11 +166,14 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         let Tag=dic.object(forKey: "tag") as! Int
         if Tag==2000 {
                self.initButton(buttonArray: ["全部问题","待处理","待跟进","处理中","已处理"], name1: "全部问题", name2: "数量:111个")
+            questionOrOrder=1
         }
         if Tag==2001 {
              self.initButton(buttonArray: ["全部工单","待接收","待服务","已完成"], name1: "全部工单", name2: "数量:111个")
+               questionOrOrder=2
         }
     
+        
     }
 
     
@@ -175,8 +181,8 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     func initTableView(){
         
         tableView=UITableView()
-        let H1=82*HEIGHT_SIZE
-        tableView.frame=CGRect(x: 0, y: 0, width: SCREEN_Width, height: SCREEN_Height-H1)
+        let H1=112*HEIGHT_SIZE
+        tableView.frame=CGRect(x: 0, y: H1, width: SCREEN_Width, height: SCREEN_Height-H1)
         tableView.delegate=self
         tableView.dataSource=self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -250,7 +256,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let vc=OssServerTwo()
+        let vc=ossQuetionDetail()
         let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as! Int)
       vc.qusetionId=id as String!
         vc.serverUrl=self.cellValue6Array.object(at: indexPath.row) as! String
@@ -288,6 +294,8 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     func initNet0(){
         
+    contentString=searchBar.text! as NSString
+        
 netDic=["content":contentString,"status":statusInt,"page":pageNum]
         
         self.showProgressView()
@@ -310,10 +318,22 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
                     for i in 0..<questionAll.count{
        self.cellValue1Array.add((questionAll[i] as! NSDictionary)["title"] as!NSString)
                 self.cellValue2Array.add((questionAll[i] as! NSDictionary)["lastTime"] as!NSString)
-                                    self.cellValue3Array.add((questionAll[i] as! NSDictionary)["content"] as!NSString)
+                        let replyArray=((questionAll[i] as! NSDictionary)["serviceQuestionReplyBean"]) as! NSArray
+                        if replyArray.count>0{
+                            if (((replyArray[0] as AnyObject).isEqual(NSNull.init())) == false) {
+                                let replyDic=replyArray[0] as! Dictionary<String, Any>
+                                let contentString=NSString(format: "%@:%@", (replyDic["userName"])as! NSString, (replyDic["message"])as! NSString)
+                                self.cellValue3Array.add(contentString)
+                            }else{
+                            self.cellValue3Array.add((questionAll[i] as! NSDictionary)["content"] as!NSString)
+                            }
+                        }else{
+                          self.cellValue3Array.add((questionAll[i] as! NSDictionary)["content"] as!NSString)
+                        }
+                        
                              self.cellValue4Array.add((questionAll[i] as! NSDictionary)["status"] as! Int)
                           self.cellValue5Array.add((questionAll[i] as! NSDictionary)["id"] as! Int)
-                         self.cellValue6Array.add((questionAll[i] as! NSDictionary)["serverUrl"] as! Int)
+                         self.cellValue6Array.add((questionAll[i] as! NSDictionary)["serverUrl"] as! NSString)
                         
                           self.plantListArray.add((questionAll[i] as! NSDictionary))
                     }

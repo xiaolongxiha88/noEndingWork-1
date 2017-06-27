@@ -12,5 +12,6 @@
 
 @property(nonatomic,strong)NSMutableArray *picArray;
 @property(nonatomic,strong)NSString *picString;
+@property(nonatomic,strong)NSString *getType;
 
 @end

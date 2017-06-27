@@ -1,24 +1,19 @@
 //
-//  OssServerTwo.m
+//  ossQuetionDetail.m
 //  ShinePhone
 //
 //  Created by sky on 2017/6/26.
 //  Copyright © 2017年 sky. All rights reserved.
 //
 
-#import "OssServerTwo.h"
+#import "ossQuetionDetail.h"
 #import "myListSecondTableViewCell.h"
 #import "AnswerViewController.h"
 #import "GetServerViewController.h"
+#import "PopoverView00.h"
+ #import <objc/runtime.h>
 
-#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
-#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
-#define Width [UIScreen mainScreen].bounds.size.width/320.0
-#define Height [UIScreen mainScreen].bounds.size.height/568.0
-
-CGFloat const kChatInputTextViewHeight = 33.0f;
-
-@interface OssServerTwo ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
+@interface ossQuetionDetail ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
     CGSize _currentTextViewContentSize;
     NSInteger _textLine;
     float keyboradH;
@@ -49,6 +44,8 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 @property(nonatomic,strong)NSString *PhoneString;
 @property(nonatomic,strong)UIImage *headImageUser;
 @property (nonatomic, strong) NSMutableDictionary *allDict;
+@property(nonatomic,strong)NSString *infoNumOne;
+@property(nonatomic,strong)NSString *infoNumTwo;
 
 @property(nonatomic,strong)NSString *typeString;
 @property(nonatomic,strong)UITextView *textView;
@@ -68,9 +65,16 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 @property (nonatomic, strong) NSMutableArray *picArray;
 
 
+
 @end
 
-@implementation OssServerTwo
+@implementation ossQuetionDetail
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    // [self.view removeFromSuperview];
+    //  [self netGetAgain];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -97,7 +101,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     
     //  [self initHeadView];
     if (!_tableView) {
-        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_HEIGHT-allH-H2-H1 )];
+        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height-allH-H2-H1 )];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView=_headView;
@@ -159,22 +163,17 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     _headView.backgroundColor =[UIColor clearColor];
     [self.view addSubview:_headView];
     
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    NSData *pic=[ud objectForKey:@"userPic"];
+ 
     
     float imageSize=40*HEIGHT_SIZE;  float imageW=10*HEIGHT_SIZE;
-    UIImageView *userImage= [[UIImageView alloc] initWithFrame:CGRectMake(imageW, imageW+5*HEIGHT_SIZE, imageSize, imageSize)];
+    UIImageView *userImage= [[UIImageView alloc] initWithFrame:CGRectMake(imageW, imageW+15*HEIGHT_SIZE, imageSize, imageSize)];
     userImage.layer.masksToBounds=YES;
     userImage.layer.cornerRadius=imageSize/2.0;
     [userImage setUserInteractionEnabled:YES];
     
-    if((pic==nil) || (pic.length==0)){
-        [userImage setImage:[UIImage imageNamed:@"touxiang.png"]];
-    }else{
-        UIImage *image = [UIImage imageWithData: pic];
-        _headImageUser=image;
-        [userImage setImage:image];
-    }
+  
+        [userImage setImage:[UIImage imageNamed:@"kefu_iconOSS.png"]];
+    
     [_headView addSubview:userImage];
     
     float lableH=20*HEIGHT_SIZE;   float lableW0=SCREEN_Width-imageSize-3*imageW;
@@ -185,7 +184,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     nameLable.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
     [_headView addSubview:nameLable];
     
-    float lableW=(SCREEN_Width-imageSize-3*imageW-6*NOW_SIZE)/2;
+    float lableW=(SCREEN_Width-imageSize-3*imageW)/2;
     
     if (_PhoneString==nil || _PhoneString==NULL||([_PhoneString isEqual:@""] )) {
         _PhoneString=@"";
@@ -196,7 +195,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         Lable0.text=lableArray[i];
         Lable0.textAlignment=NSTextAlignmentLeft;
         // Lable0.adjustsFontSizeToFitWidth=YES;
-        Lable0.textColor=COLOR(153, 153, 153, 1);
+        Lable0.textColor=COLOR(102, 102, 102, 1);
         Lable0.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         [_headView addSubview:Lable0];
     }
@@ -209,7 +208,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         //        }
         Lable1.text=lableArray1[i];
         Lable1.textAlignment=NSTextAlignmentLeft;
-        Lable1.textColor=COLOR(153, 153, 153, 1);
+        Lable1.textColor=COLOR(102, 102, 102, 1);
         if (i==0) {
             if ([_statusString isEqualToString:@"0"]) {
                 Lable1.text=@"待处理";
@@ -229,10 +228,30 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         [_headView addSubview:Lable1];
     }
     
+    NSArray *lableArray2=[NSArray arrayWithObjects:_infoNumOne, _infoNumTwo,nil];
+    for (int i=0; i<lableArray.count; i++) {
+        UILabel *Lable0=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize+lableW*i, imageW+lableH*3, lableW,lableH )];
+        Lable0.text=lableArray2[i];
+        Lable0.textAlignment=NSTextAlignmentLeft;
+        // Lable0.adjustsFontSizeToFitWidth=YES;
+        Lable0.userInteractionEnabled=YES;
+          NSArray *lableName=[NSArray arrayWithObject:lableArray2[i]];
+        objc_setAssociatedObject(Lable0, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+        //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+        tapGestureRecognizer.cancelsTouchesInView = NO;
+        //将触摸事件添加到当前view
+        [Lable0 addGestureRecognizer:tapGestureRecognizer];
+        
+        Lable0.textColor=COLOR(102, 102, 102, 1);
+        Lable0.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        [_headView addSubview:Lable0];
+    }
+    
     float LableContentW=SCREEN_Width-2*imageW;
     NSString *LableContentText=_ContentString;
     CGSize Lrect=[self getStringSize:12*HEIGHT_SIZE Wsize:LableContentW Hsize:MAXFLOAT stringName:LableContentText];
-    UILabel *LableContent=[[UILabel alloc]initWithFrame:CGRectMake(imageW, imageW+lableH*3+5*HEIGHT_SIZE, LableContentW,Lrect.height+20*HEIGHT_SIZE )];
+    UILabel *LableContent=[[UILabel alloc]initWithFrame:CGRectMake(imageW, imageW+lableH*4+5*HEIGHT_SIZE, LableContentW,Lrect.height+20*HEIGHT_SIZE )];
     LableContent.text=LableContentText;
     LableContent.textAlignment=NSTextAlignmentLeft;
     LableContent.textColor=COLOR(102, 102, 102, 1);
@@ -240,7 +259,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     LableContent.numberOfLines=0;
     [_headView addSubview:LableContent];
     
-    UILabel *LableS=[[UILabel alloc]initWithFrame:CGRectMake(imageW, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE, 150*NOW_SIZE,20*HEIGHT_SIZE)];
+    UILabel *LableS=[[UILabel alloc]initWithFrame:CGRectMake(imageW, imageW+lableH*4+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE, 150*NOW_SIZE,20*HEIGHT_SIZE)];
     LableS.text=@"回复问题";
     LableS.textAlignment=NSTextAlignmentLeft;
     LableS.textColor=COLOR(102, 102, 102, 1);
@@ -249,7 +268,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     [_headView addSubview:LableS];
     
     if (_questionPicArray.count>1) {
-        UILabel *LableImage=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
+        UILabel *LableImage=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, imageW+lableH*4+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
         LableImage.text=@"查看图片";
         LableImage.textAlignment=NSTextAlignmentRight;
         LableImage.textColor=COLOR(153, 153, 153, 1);
@@ -260,15 +279,41 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         [_headView addSubview:LableImage];
     }
     
-    UIView *V1 = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+45*HEIGHT_SIZE, SCREEN_Width,2*HEIGHT_SIZE )];
+    UIView *V1 = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, imageW+lableH*4+5*HEIGHT_SIZE+Lrect.height+45*HEIGHT_SIZE, SCREEN_Width,2*HEIGHT_SIZE )];
     V1.backgroundColor =COLOR(242, 242, 242, 1);
     [_headView addSubview:V1];
     
-    _headView.frame=CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,imageW+lableH*3+50*HEIGHT_SIZE+Lrect.height );
+    _headView.frame=CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,imageW+lableH*4+50*HEIGHT_SIZE+Lrect.height );
     
     [self initUI];
     
 }
+
+
+#pragma mark - 弹框提示
+-(void)showAnotherView:(id)sender
+{
+    UITapGestureRecognizer *tap = (UITapGestureRecognizer*)sender;
+    UIView *lable = (UIView*) tap.view;
+    NSArray* lableNameArray = objc_getAssociatedObject(lable, "firstObject");
+    
+    PopoverView00 *popoverView = [PopoverView00 popoverView00];
+    [popoverView showToView:lable withActions:[self QQActions:lableNameArray]];
+}
+
+- (NSArray<PopoverAction *> *)QQActions:(NSArray*)lableNameArray {
+    // 发起多人聊天 action
+    NSMutableArray *actionArray=[NSMutableArray new];
+    for (int i=0; i<lableNameArray.count; i++) {
+        PopoverAction *Action = [PopoverAction actionWithImage:nil title:lableNameArray[i] handler:^(PopoverAction *action) {
+#pragma mark - 该Block不会导致内存泄露, Block内代码无需刻意去设置弱引用.
+            
+        }];
+        [actionArray addObject:Action];
+    }
+    return actionArray;
+}
+
 
 - (void)textViewDidChange:(UITextView *)textView {
     
@@ -286,7 +331,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 -(void)netGetAgain{
 //    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-//  //  NSString *userID=[ud objectForKey:@"userID"];
+//    NSString *userID=[ud objectForKey:@"userID"];
     self.questionAll =[NSMutableArray array];
     
     self.nameArray =[NSMutableArray array];
@@ -299,62 +344,106 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"questionId":_qusetionId,@"serverUrl":_serverUrl} paramarsSite:@"/api/v1/serviceQuestion/question/detail_info" sucessBlock:^(id content) {
         [self hideProgressView];
-        NSLog(@"question/detail_info=: %@", content);
-        if(content){
-            _allDic=[NSMutableDictionary dictionaryWithDictionary:content];
-            _titleString=content[@"title"];
-            _SnString=[NSString stringWithFormat:@"%@",content[@"questionDevice"]];
-            _QuestionTypeString=[NSString stringWithFormat:@"%@",content[@"questionType"]];
-            if ([_QuestionTypeString isEqualToString:@"1"]) {
-                _QuestionTypeString=root_ME_nibianqi_guzhan;
-            }else if ([_QuestionTypeString isEqualToString:@"2"]){
-                _QuestionTypeString=root_ME_chunengji_guzhan;
-            }else if ([_QuestionTypeString isEqualToString:@"3"]){
-                _QuestionTypeString=root_ME_ruanjian_jianyi;
-            }else if ([_QuestionTypeString isEqualToString:@"4"]){
-                _QuestionTypeString=root_ME_ruanjian_guzhan;
-            }else if ([_QuestionTypeString isEqualToString:@"5"]){
-                _QuestionTypeString=root_ME_qita_shebei_guzhan;
-            }else if ([_QuestionTypeString isEqualToString:@"6"]){
-                _QuestionTypeString=root_ME_qita_wenti;
-            }
-            _createrTimeString=[NSString stringWithFormat:@"%@",content[@"createrTime"]];
-            _statusString=[NSString stringWithFormat:@"%@",content[@"status"]];
-            
-            _ContentString=[NSString stringWithFormat:@"%@",content[@"content"]];
-            
-            
-            _questionAll=[NSMutableArray arrayWithArray:content[@"serviceQuestionReplyBean"]];
-            // NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
-            //   [_questionAll sortUsingDescriptors:[NSArray arrayWithObject:sort1]];
-            
-            for(int i=0;i<_questionAll.count;i++){
-                NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
-                NSString *nameId=[NSString stringWithFormat:@"%@",_questionAll[i][@"isAdmin"]];
-                NSString *timeA=[NSString stringWithFormat:@"%@",_questionAll[i][@"time"]];
-                NSString *contentA=[NSString stringWithFormat:@"%@",_questionAll[i][@"message"]];
-                //NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"imageName"]];
-                //                                NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
-                NSString *questionPIC=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
-                NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
-                
-                [_nameArray addObject:nameU];
-                [_nameID addObject:nameId];
-                [_timeArray addObject:timeA];
-                [_contentArray addObject:contentA];
-                [_imageName addObject:PIC];
-            }
-            //              [self initUI];
-            
-            if (_questionAll.count==_nameArray.count) {
-                
-                if (_tableView) {
-                    [self.tableView reloadData];
-                }else{
-                    [self initHeadView];
+         id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v1/serviceQuestion/question/detail_info=: %@", jsonObj);
+        if(jsonObj){
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:jsonObj];
+            if ([firstDic[@"result"] intValue]==1) {
+                 NSDictionary *objDic=[NSDictionary dictionaryWithDictionary:firstDic[@"obj"]];
+                 NSDictionary *questionDic=[NSDictionary dictionaryWithDictionary:objDic[@"question"]];
+          //      _allDic=[NSMutableDictionary dictionaryWithDictionary:content];
+                _titleString=questionDic[@"title"];
+                _SnString=[NSString stringWithFormat:@"%@",questionDic[@"questionDevice"]];
+                _QuestionTypeString=[NSString stringWithFormat:@"%@",questionDic[@"questionType"]];
+                if ([_QuestionTypeString isEqualToString:@"1"]) {
+                    _QuestionTypeString=root_ME_nibianqi_guzhan;
+                }else if ([_QuestionTypeString isEqualToString:@"2"]){
+                    _QuestionTypeString=root_ME_chunengji_guzhan;
+                }else if ([_QuestionTypeString isEqualToString:@"3"]){
+                    _QuestionTypeString=root_ME_ruanjian_jianyi;
+                }else if ([_QuestionTypeString isEqualToString:@"4"]){
+                    _QuestionTypeString=root_ME_ruanjian_guzhan;
+                }else if ([_QuestionTypeString isEqualToString:@"5"]){
+                    _QuestionTypeString=root_ME_qita_shebei_guzhan;
+                }else if ([_QuestionTypeString isEqualToString:@"6"]){
+                    _QuestionTypeString=root_ME_qita_wenti;
                 }
+                _createrTimeString=[NSString stringWithFormat:@"%@",questionDic[@"createrTime"]];
+                _statusString=[NSString stringWithFormat:@"%@",questionDic[@"status"]];
+                _ContentString=[NSString stringWithFormat:@"%@",questionDic[@"content"]];
+                
+                NSString *phone1=[NSString stringWithFormat:@"%@",questionDic[@"phoneNum"]];
+                 NSString *phone2=[NSString stringWithFormat:@"%@",questionDic[@"isValiPhoneNum"]];
+                 NSString *email1=[NSString stringWithFormat:@"%@",questionDic[@"email"]];
+                 NSString *email2=[NSString stringWithFormat:@"%@",questionDic[@"isValiEmail"]];
+                
+                if ((phone1==nil || phone1==NULL||([phone1 isEqual:@""] ))) {        //手机号为空
+                    if ([email1 isEqualToString:email2]) {
+                        _infoNumOne=email1;
+                        if ((phone2==nil || phone2==NULL||([phone2 isEqual:@""] ))) {
+                              _infoNumTwo=@"";
+                        }else{
+                          _infoNumTwo=phone2;
+                        }
+                        
+                    }else{
+                        _infoNumOne=email1;
+                        if ((phone2==nil || phone2==NULL||([phone2 isEqual:@""] ))) {
+                            _infoNumTwo=email2;
+                        }else{
+                            _infoNumTwo=phone2;
+                        }
+                    }
+                }else{                                //手机号不为空
+                    if ([phone1 isEqualToString:phone2]) {
+                        _infoNumOne=phone1;
+                        if ((email2==nil || email2==NULL||([email2 isEqual:@""] ))) {
+                            _infoNumTwo=@"";
+                        }else{
+                            _infoNumTwo=email2;
+                        }
+
+                    }else{
+                        _infoNumOne=phone1;
+                        _infoNumTwo=phone2;
+                    }
+                }
+               
                 
                 
+                _questionAll=[NSMutableArray arrayWithArray:objDic[@"replyList"]];
+                // NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
+                //   [_questionAll sortUsingDescriptors:[NSArray arrayWithObject:sort1]];
+                
+                for(int i=0;i<_questionAll.count;i++){
+                    NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
+                    NSString *nameId=[NSString stringWithFormat:@"%@",_questionAll[i][@"isAdmin"]];
+                    NSString *timeA=[NSString stringWithFormat:@"%@",_questionAll[i][@"time"]];
+                    NSString *contentA=[NSString stringWithFormat:@"%@",_questionAll[i][@"message"]];
+                    //NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"imageName"]];
+                    //                                NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
+                    NSString *questionPIC=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
+                    NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
+                    
+                    [_nameArray addObject:nameU];
+                    [_nameID addObject:nameId];
+                    [_timeArray addObject:timeA];
+                    [_contentArray addObject:contentA];
+                    [_imageName addObject:PIC];
+                }
+                //              [self initUI];
+                
+                if (_questionAll.count==_nameArray.count) {
+                    
+                    if (_tableView) {
+                        [self.tableView reloadData];
+                    }else{
+                        [self initHeadView];
+                    }
+                    
+                    
+                }
+
             }
             
             
@@ -387,20 +476,19 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         return;
     }
     
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    NSString *userID=[ud objectForKey:@"userID"];
+ 
     _allDict=[NSMutableDictionary dictionary];
     [_allDict setObject:[_textView text] forKey:@"message"];
     [_allDict setObject:_qusetionId forKey:@"questionId"];
-    [_allDict setObject:userID forKey:@"userId"];
+    [_allDict setObject:_serverUrl forKey:@"serverUrl"];
     
     [self showProgressView];
-    [BaseRequest uplodImageWithMethod:HEAD_URL paramars:_allDict paramarsSite:@"/questionAPI.do?op=replyMessage" dataImageDict:dataImageDict sucessBlock:^(id content) {
-        NSLog(@"addCustomerQuestion==%@", content);
+    [BaseRequest uplodImageWithMethod2:OSS_HEAD_URL paramars:_allDict paramarsSite:@"/api/v1/serviceQuestion/question/reply" dataImageDict:dataImageDict sucessBlock:^(id content) {
+        NSLog(@"/api/v1/serviceQuestion/question/reply==%@", content);
         [self hideProgressView];
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         if (content1) {
-            if ([content1[@"success"] integerValue] == 1) {
+            if ([content1[@"result"] integerValue] == 1) {
                 _textView.text=@"";
                 if (_imageViewAll) {
                     [ _imageViewAll removeFromSuperview];
@@ -415,7 +503,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
                 
             }else{
                 [self showAlertViewWithTitle:nil message:root_ME_tianjia_shibai cancelButtonTitle:root_Yes];
-                
+                 [self showAlertViewWithTitle:nil message:content1[@"msg"] cancelButtonTitle:root_Yes];
             }
         }
     } failure:^(NSError *error) {
@@ -473,7 +561,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         
         if (_imageViewAll) {
             _imageViewAll.frame=CGRectMake(0, ViewY, SCREEN_Width,ViewH );
-            _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_HEIGHT-_imageViewAll.frame.origin.y );
+            _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height-_imageViewAll.frame.origin.y );
         }else{
             _tableView.frame =CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,_textViewAll.frame.origin.y);
         }
@@ -511,12 +599,12 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 
 
--(void)Answer{
-    AnswerViewController *AN=[[AnswerViewController alloc]init];
-   
-    [self.navigationController pushViewController:AN animated:NO];
-    
-}
+//-(void)Answer{
+//    AnswerViewController *AN=[[AnswerViewController alloc]init];
+//    AN.qusetionId=_qusetionId;
+//    [self.navigationController pushViewController:AN animated:NO];
+//    
+//}
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -534,11 +622,8 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         WebString=self.contentArray[indexPath.row];
     }else{
         
-        if (_headImageUser!=nil) {
-            cell.image.image =_headImageUser;
-        }else{
             cell.image.image = IMAGE(@"touxiang.png");
-        }
+       
         
         cell.nameLabel.textColor =COLOR(102, 102, 102, 1);
         //   NSString *N1=@"<body width=280px style=\"word-wrap:break-word; font-family:Arial\">";
@@ -564,7 +649,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     NSString *Name1=_contentArray[indexPath.row];
     NSString *Name0=[self removeHTML:Name1];
     float contentW=SCREEN_Width-20*NOW_SIZE-40*HEIGHT_SIZE-10*NOW_SIZE;
-    CGRect fcRect = [Name0 boundingRectWithSize:CGSizeMake(contentW, 5000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12*HEIGHT_SIZE]} context:nil];
+    CGRect fcRect = [Name0 boundingRectWithSize:CGSizeMake(contentW, 5000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12*HEIGHT_SIZE]} context:nil];
     
     cell.contentLabel.frame =CGRectMake(15*NOW_SIZE+40*HEIGHT_SIZE, 52*HEIGHT_SIZE, contentW, fcRect.size.height+10*HEIGHT_SIZE);
     
@@ -593,7 +678,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     NSString *Name1=_contentArray[indexPath.row];
     NSString *Name0=[self removeHTML:Name1];
     float contentW=SCREEN_Width-20*NOW_SIZE-40*HEIGHT_SIZE-10*NOW_SIZE;
-    CGRect fcRect = [Name0 boundingRectWithSize:CGSizeMake(contentW, 5000*Height) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12*HEIGHT_SIZE]} context:nil];
+    CGRect fcRect = [Name0 boundingRectWithSize:CGSizeMake(contentW, 5000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12*HEIGHT_SIZE]} context:nil];
     return 70*HEIGHT_SIZE+fcRect.size.height;
     
 }
@@ -632,7 +717,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 -(void)GetPhoto{
     GetServerViewController *get=[[GetServerViewController alloc]init];
-    
+    get.getType=@"1";
     get.picArray=[NSMutableArray arrayWithArray:_questionPicArray];
     
     [self.navigationController pushViewController:get animated:NO];
@@ -790,26 +875,6 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 /*
 #pragma mark - Navigation

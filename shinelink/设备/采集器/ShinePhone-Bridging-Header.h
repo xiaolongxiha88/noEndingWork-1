@@ -20,6 +20,5 @@
 #import "MainViewController.h"
 
 #import "RootPickerView.h"
-#import "serverOrder.h"
 #import "listTableViewCell.h"
-#import "OssServerTwo.h"
+#import "ossQuetionDetail.h"

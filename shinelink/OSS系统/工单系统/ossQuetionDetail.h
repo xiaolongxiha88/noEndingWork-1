@@ -1,5 +1,5 @@
 //
-//  OssServerTwo.h
+//  ossQuetionDetail.h
 //  ShinePhone
 //
 //  Created by sky on 2017/6/26.
@@ -8,7 +8,7 @@
 
 #import "RootViewController.h"
 
-@interface OssServerTwo : RootViewController
+@interface ossQuetionDetail : RootViewController
 
 @property(nonatomic,strong)NSString *qusetionId;
 @property(nonatomic,strong)NSString *qusetionType;
