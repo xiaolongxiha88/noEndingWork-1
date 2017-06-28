@@ -94,7 +94,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         button1.frame=CGRect(x: 5*NOW_SIZE, y: 4*HEIGHT_SIZE, width: 22*HEIGHT_SIZE, height:20*HEIGHT_SIZE)
         button1.setBackgroundImage(UIImage(named: "icon_search.png"), for: .normal)
         // buttonOne.setTitle(root_finish, for: .normal)
-        button1.addTarget(self, action:#selector(searchDevice), for: .touchUpInside)
+        button1.addTarget(self, action:#selector(initNet1), for: .touchUpInside)
         view2.addSubview(button1)
         
         let buttonView1=uibuttonView0()
@@ -164,16 +164,57 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         let  dic=info.userInfo as Any as!NSDictionary
         let Tag=dic.object(forKey: "tag") as! Int
+        let array1=["全部问题","待处理","待跟进","处理中","已处理"]
+        let array2=["全部工单","待接收","待服务","已完成"]
         if Tag==2000 {
-               self.initButton(buttonArray: ["全部问题","待处理","待跟进","处理中","已处理"], name1: "全部问题", name2: "数量:111个")
+               self.initButton(buttonArray: array1 as NSArray, name1: array1[0] as NSString, name2: "")
             questionOrOrder=1
+              statusInt=10
         }
         if Tag==2001 {
-             self.initButton(buttonArray: ["全部工单","待接收","待服务","已完成"], name1: "全部工单", name2: "数量:111个")
+             self.initButton(buttonArray: array2 as NSArray, name1: array2[0] as NSString, name2: "")
                questionOrOrder=2
+             statusInt=0
         }
     
+        if questionOrOrder==1 {
+            if Tag==4000 {
+                statusInt=10
+                lable1.text=array1[0]
+            }else if Tag==4001 {
+                statusInt=0
+                     lable1.text=array1[1]
+            }else if Tag==4002 {
+                statusInt=3
+                  lable1.text=array1[2]
+            }else if Tag==4003 {
+                statusInt=1
+                  lable1.text=array1[3]
+            }else if Tag==4004 {
+                statusInt=2
+                   lable1.text=array1[4]
+            }
+            self.initNet1()
+        }
         
+        if questionOrOrder==2 {
+            if Tag==4000 {
+                statusInt=0
+                lable1.text=array2[0]
+            }else if Tag==4001 {
+                statusInt=2
+                   lable1.text=array2[1]
+            }else if Tag==4002 {
+                statusInt=3
+                  lable1.text=array2[2]
+            }else if Tag==4003 {
+                statusInt=4
+                  lable1.text=array2[3]
+            }
+            self.initNet1()
+        }
+        
+
     }
 
     
@@ -223,20 +264,37 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! listTableViewCell
         
-      
-        if cellValue4Array[indexPath.row] as! Int==0 {
-              cell.coverImageView.backgroundColor=COLOR(_R: 227, _G: 74, _B: 33, _A: 1)
+        if  questionOrOrder==1 {
+            if cellValue4Array[indexPath.row] as! Int==0 {
+                cell.coverImageView.backgroundColor=COLOR(_R: 227, _G: 74, _B: 33, _A: 1)
                 cell.imageLabel.text=root_daichuli
-        }else if cellValue4Array[indexPath.row] as! Int==1 {
-            cell.coverImageView.backgroundColor=COLOR(_R: 94, _G: 195, _B: 53, _A: 1)
-            cell.imageLabel.text=root_chulizhong
-        }else if cellValue4Array[indexPath.row] as! Int==2 {
-            cell.coverImageView.backgroundColor=COLOR(_R: 157, _G: 157, _B: 157, _A: 1);
-                   cell.imageLabel.text=root_yichuli;
-        }else if cellValue4Array[indexPath.row] as! Int==3 {
-            cell.coverImageView.backgroundColor=COLOR(_R: 227, _G: 164, _B: 33, _A: 1);
+            }else if cellValue4Array[indexPath.row] as! Int==1 {
+                cell.coverImageView.backgroundColor=COLOR(_R: 94, _G: 195, _B: 53, _A: 1)
+                cell.imageLabel.text=root_chulizhong
+            }else if cellValue4Array[indexPath.row] as! Int==2 {
+                cell.coverImageView.backgroundColor=COLOR(_R: 157, _G: 157, _B: 157, _A: 1);
+                cell.imageLabel.text=root_yichuli;
+            }else if cellValue4Array[indexPath.row] as! Int==3 {
+                cell.coverImageView.backgroundColor=COLOR(_R: 227, _G: 164, _B: 33, _A: 1);
                 cell.imageLabel.text=root_daigengjin;
+            }
+        
+        }else if  questionOrOrder==2 {
+            if cellValue4Array[indexPath.row] as! Int==2 {
+                cell.coverImageView.backgroundColor=COLOR(_R: 227, _G: 74, _B: 33, _A: 1)
+                cell.imageLabel.text="待接收"
+            }else if cellValue4Array[indexPath.row] as! Int==3 {
+                cell.coverImageView.backgroundColor=COLOR(_R: 94, _G: 195, _B: 53, _A: 1)
+                cell.imageLabel.text="服务中"
+            }else if cellValue4Array[indexPath.row] as! Int==4 {
+                cell.coverImageView.backgroundColor=COLOR(_R: 157, _G: 157, _B: 157, _A: 1);
+                cell.imageLabel.text="已完成"
+            }
+            
         }
+
+        
+        
         cell.lineType="1"
                     cell.titleLabel.text = self.cellValue1Array.object(at: indexPath.row) as? String
                     cell.contentLabel.text =  self.cellValue3Array.object(at: indexPath.row) as? String
@@ -256,11 +314,20 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let vc=ossQuetionDetail()
-        let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as! Int)
-      vc.qusetionId=id as String!
-        vc.serverUrl=self.cellValue6Array.object(at: indexPath.row) as! String
-        self.navigationController?.pushViewController(vc, animated: true)
+        if  questionOrOrder==1 {
+            let vc=ossQuetionDetail()
+            let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as! Int)
+            vc.qusetionId=id as String!
+            vc.serverUrl=self.cellValue6Array.object(at: indexPath.row) as! String
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else  if  questionOrOrder==2 {
+            let vc=ossQuetionDetail()
+            let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as! Int)
+            vc.qusetionId=id as String!
+            vc.serverUrl=self.cellValue6Array.object(at: indexPath.row) as! String
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
         
         tableView.deselectRow(at: indexPath, animated: true)
         
@@ -271,6 +338,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     func initNet1(){
         
+        pageNum=0
         self.cellValue1Array=[]
         self.cellValue2Array=[]
         self.cellValue3Array=[]
@@ -278,19 +346,106 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         self.cellValue5Array=[]
         self.cellValue6Array=[]
        self.plantListArray=[]
-                
-        self.initNet0()
+        
+        if  questionOrOrder==1 {
+             self.initNet0()
+        }else if questionOrOrder==2 {
+            self.initNet2()
+        }
+        
+       
     }
 
     
+
+    //MARK: - 网络层
     
     
-    func searchDevice(){
+     func initNet2(){
+    
+    contentString=searchBar.text! as NSString
+    
+    netDic=["content":contentString,"status":statusInt,"page":pageNum]
+    
+    self.showProgressView()
+    BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as Dictionary, paramarsSite: "/api/v1/workOrder/work/list", sucessBlock: {(successBlock)->() in
+    self.hideProgressView()
+    
+    let data:Data=successBlock as! Data
+    
+    let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
+    
+    if (jsonDate0 != nil){
+    let jsonDate=jsonDate0 as! Dictionary<String, Any>
+    print("/api/v1/serviceQuestion/question/list=",jsonDate)
+    // let result:NSString=NSString(format:"%s",jsonDate["result"] )
+    let result1=jsonDate["result"] as! Int
+    
+    if result1==1 {
+    let objArray=jsonDate["obj"] as! Dictionary<String, Any>
+    let questionAll=objArray["ticketList"] as! NSArray
+      
+        
+    for i in 0..<questionAll.count{
+    self.cellValue1Array.add((questionAll[i] as! NSDictionary)["title"] as!NSString)
+    self.cellValue2Array.add((questionAll[i] as! NSDictionary)["applicationTime"] as!NSString)
+        var cellValue3Array1:NSString
+        var cellValue3Array2:NSString
+        if (((((questionAll[i] as! NSDictionary)["groupName"] as AnyObject).isEqual(NSNull.init())) == false)) {
+          cellValue3Array1=((questionAll[i] as! NSDictionary)["groupName"] as!NSString)
+        }else{
+        cellValue3Array1=""
+        }
+        
+        if (((((questionAll[i] as! NSDictionary)["address"] as AnyObject).isEqual(NSNull.init())) == false)) {
+            cellValue3Array2=((questionAll[i] as! NSDictionary)["address"] as!NSString)
+        }else{
+            cellValue3Array2=""
+        }
+        
+        let contentString=NSString(format: "%@:%@", cellValue3Array1, cellValue3Array2)
+        self.cellValue3Array.add(contentString)
+    self.cellValue4Array.add((questionAll[i] as! NSDictionary)["status"] as! Int)
+    self.cellValue5Array.add((questionAll[i] as! NSDictionary)["id"] as! Int)
+
+    self.plantListArray.add((questionAll[i] as! NSDictionary))
+    }
+    
+        let lableText=NSString(format: "%d/%d", self.plantListArray.count,objArray["total"] as! Int)
+        self.lable2.text=lableText as String
+        
+    if self.plantListArray.count==0{
+    if (self.tableView != nil){
+    self.tableView.removeFromSuperview()
+    self.tableView=nil
+    }
+    }
+    
+    if self.plantListArray.count>0{
+    
+    if (self.tableView == nil){
+    self.initTableView()
+    }else{
+    self.tableView.reloadData()
+    }
     
     }
     
     
-    //MARK: - 网络层
+    }else{
+    
+    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+    }
+    
+    }
+    
+    }, failure: {(error) in
+    self.hideProgressView()
+    self.showToastView(withTitle: root_Networking)
+    })
+    
+    }
+    
     
     func initNet0(){
         
@@ -336,6 +491,17 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
                          self.cellValue6Array.add((questionAll[i] as! NSDictionary)["serverUrl"] as! NSString)
                         
                           self.plantListArray.add((questionAll[i] as! NSDictionary))
+                    }
+                    
+                 
+                    let lableText=NSString(format: "%d/%d", self.plantListArray.count,objArray["total"] as! Int)
+                    self.lable2.text=lableText as String
+                    
+                    if self.plantListArray.count==0{
+                        if (self.tableView != nil){
+                        self.tableView.removeFromSuperview()
+                            self.tableView=nil
+                        }
                     }
                     
                     if self.plantListArray.count>0{

@@ -61,8 +61,8 @@
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSString *imageURL;
-            if ([_getType isEqualToString:@"1"]) {
-                     imageURL=[NSString stringWithFormat:@"%@/%@",headURL,_picArray[i]];
+            if ([_TypeNum isEqualToString:@"1"]) {
+                     imageURL=[NSString stringWithFormat:@"%@/%@/%@",headURL,_accountName,_picArray[i]];
             }else{
                  imageURL=[NSString stringWithFormat:@"%@/%@/%@",headURL,userID,_picArray[i]];
             }

@@ -12,6 +12,7 @@
 
 @property(nonatomic,strong)NSMutableArray *picArray;
 @property(nonatomic,strong)NSString *picString;
-@property(nonatomic,strong)NSString *getType;
+@property(nonatomic,strong)NSString *TypeNum;
+@property(nonatomic,strong)NSString *accountName;
 
 @end

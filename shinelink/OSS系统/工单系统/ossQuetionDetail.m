@@ -46,6 +46,7 @@
 @property (nonatomic, strong) NSMutableDictionary *allDict;
 @property(nonatomic,strong)NSString *infoNumOne;
 @property(nonatomic,strong)NSString *infoNumTwo;
+@property(nonatomic,strong)NSString *accountNameString;
 
 @property(nonatomic,strong)NSString *typeString;
 @property(nonatomic,strong)UITextView *textView;
@@ -371,6 +372,7 @@
                 _createrTimeString=[NSString stringWithFormat:@"%@",questionDic[@"createrTime"]];
                 _statusString=[NSString stringWithFormat:@"%@",questionDic[@"status"]];
                 _ContentString=[NSString stringWithFormat:@"%@",questionDic[@"content"]];
+                _accountNameString=[NSString stringWithFormat:@"%@",questionDic[@"accountName"]];
                 
                 NSString *phone1=[NSString stringWithFormat:@"%@",questionDic[@"phoneNum"]];
                  NSString *phone2=[NSString stringWithFormat:@"%@",questionDic[@"isValiPhoneNum"]];
@@ -483,7 +485,7 @@
     [_allDict setObject:_serverUrl forKey:@"serverUrl"];
     
     [self showProgressView];
-    [BaseRequest uplodImageWithMethod2:OSS_HEAD_URL paramars:_allDict paramarsSite:@"/api/v1/serviceQuestion/question/reply" dataImageDict:dataImageDict sucessBlock:^(id content) {
+    [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:_allDict paramarsSite:@"/api/v1/serviceQuestion/question/reply" dataImageDict:dataImageDict sucessBlock:^(id content) {
         NSLog(@"/api/v1/serviceQuestion/question/reply==%@", content);
         [self hideProgressView];
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
@@ -717,9 +719,9 @@
 
 -(void)GetPhoto{
     GetServerViewController *get=[[GetServerViewController alloc]init];
-    get.getType=@"1";
     get.picArray=[NSMutableArray arrayWithArray:_questionPicArray];
-    
+     get.TypeNum=@"1";
+    get.accountName=_accountNameString;
     [self.navigationController pushViewController:get animated:NO];
     
 }
@@ -732,7 +734,8 @@
         // NSMutableArray *test=[NSMutableArray arrayWithObject:_imageName[indexPath.row]];
         
         GetServerViewController *get=[[GetServerViewController alloc]init];
-        
+        get.TypeNum=@"1";
+         get.accountName=_accountNameString;
         get.picArray=[NSMutableArray arrayWithArray:PICarray];
         
         [self.navigationController pushViewController:get animated:NO];
