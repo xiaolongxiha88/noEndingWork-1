@@ -321,10 +321,8 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             vc.serverUrl=self.cellValue6Array.object(at: indexPath.row) as! String
             self.navigationController?.pushViewController(vc, animated: true)
         }else  if  questionOrOrder==2 {
-            let vc=ossQuetionDetail()
-            let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as! Int)
-            vc.qusetionId=id as String!
-            vc.serverUrl=self.cellValue6Array.object(at: indexPath.row) as! String
+            let vc=orderFirst()
+
             self.navigationController?.pushViewController(vc, animated: true)
         }
 
@@ -434,6 +432,10 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     }else{
     
+        if (self.tableView != nil){
+            self.tableView.removeFromSuperview()
+            self.tableView=nil
+        }
     self.showToastView(withTitle: jsonDate["msg"] as! String!)
     }
     
@@ -517,6 +519,13 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
                     
                 }else{
        
+               
+                        if (self.tableView != nil){
+                            self.tableView.removeFromSuperview()
+                            self.tableView=nil
+                        }
+               
+                    
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
                 }
                 

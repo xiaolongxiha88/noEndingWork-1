@@ -304,6 +304,14 @@
 		336E04001EC9586C0034BC86 /* ossDeviceFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336E03FF1EC9586C0034BC86 /* ossDeviceFirst.swift */; };
 		336E04021EC9ADAC0034BC86 /* icon_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 336E04011EC9ADAC0034BC86 /* icon_search.png */; };
 		336E04081ECAFFA60034BC86 /* deviceFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336E04071ECAFFA60034BC86 /* deviceFirstCell.swift */; };
+		336F03FC1F0497BB00DE7CD7 /* orderFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F03FB1F0497BB00DE7CD7 /* orderFirst.m */; };
+		336F03FF1F04D59B00DE7CD7 /* orderCellOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F03FE1F04D59B00DE7CD7 /* orderCellOne.m */; };
+		336F04021F04EFAD00DE7CD7 /* yuan_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 336F04001F04EFAD00DE7CD7 /* yuan_1.png */; };
+		336F04031F04EFAD00DE7CD7 /* yuan_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 336F04011F04EFAD00DE7CD7 /* yuan_2.png */; };
+		336F04061F04EFB900DE7CD7 /* oss_more_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 336F04041F04EFB900DE7CD7 /* oss_more_down.png */; };
+		336F04071F04EFB900DE7CD7 /* oss_more_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 336F04051F04EFB900DE7CD7 /* oss_more_up.png */; };
+		336F040A1F050D8600DE7CD7 /* orderCellTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F04091F050D8600DE7CD7 /* orderCellTwo.m */; };
+		336F040D1F050F7500DE7CD7 /* orderCellThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F040C1F050F7500DE7CD7 /* orderCellThree.m */; };
 		336F19F11D87943700CD4C2B /* serverV@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 336F19F01D87943700CD4C2B /* serverV@2x.png */; };
 		336F1A141D88E46900CD4C2B /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F19F41D88E46900CD4C2B /* MKAnnotationView+WebCache.m */; };
 		336F1A151D88E46900CD4C2B /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F19F61D88E46900CD4C2B /* NSData+ImageContentType.m */; };
@@ -1168,6 +1176,18 @@
 		336E03FF1EC9586C0034BC86 /* ossDeviceFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ossDeviceFirst.swift; path = ../ossDeviceFirst.swift; sourceTree = "<group>"; };
 		336E04011EC9ADAC0034BC86 /* icon_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_search.png; sourceTree = "<group>"; };
 		336E04071ECAFFA60034BC86 /* deviceFirstCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = deviceFirstCell.swift; sourceTree = "<group>"; };
+		336F03FA1F0497BB00DE7CD7 /* orderFirst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orderFirst.h; sourceTree = "<group>"; };
+		336F03FB1F0497BB00DE7CD7 /* orderFirst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = orderFirst.m; sourceTree = "<group>"; };
+		336F03FD1F04D59B00DE7CD7 /* orderCellOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orderCellOne.h; sourceTree = "<group>"; };
+		336F03FE1F04D59B00DE7CD7 /* orderCellOne.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = orderCellOne.m; sourceTree = "<group>"; };
+		336F04001F04EFAD00DE7CD7 /* yuan_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuan_1.png; sourceTree = "<group>"; };
+		336F04011F04EFAD00DE7CD7 /* yuan_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yuan_2.png; sourceTree = "<group>"; };
+		336F04041F04EFB900DE7CD7 /* oss_more_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_more_down.png; sourceTree = "<group>"; };
+		336F04051F04EFB900DE7CD7 /* oss_more_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_more_up.png; sourceTree = "<group>"; };
+		336F04081F050D8600DE7CD7 /* orderCellTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orderCellTwo.h; sourceTree = "<group>"; };
+		336F04091F050D8600DE7CD7 /* orderCellTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = orderCellTwo.m; sourceTree = "<group>"; };
+		336F040B1F050F7500DE7CD7 /* orderCellThree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orderCellThree.h; sourceTree = "<group>"; };
+		336F040C1F050F7500DE7CD7 /* orderCellThree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = orderCellThree.m; sourceTree = "<group>"; };
 		336F19F01D87943700CD4C2B /* serverV@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "serverV@2x.png"; sourceTree = "<group>"; };
 		336F19F31D88E46900CD4C2B /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		336F19F41D88E46900CD4C2B /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
@@ -2813,8 +2833,28 @@
 				336E03FD1EC957EF0034BC86 /* ossServerFirst.swift */,
 				335EE8F51F011138005F098A /* ossQuetionDetail.h */,
 				335EE8F61F011138005F098A /* ossQuetionDetail.m */,
+				336F03F91F04941600DE7CD7 /* order */,
 			);
 			path = "工单系统";
+			sourceTree = "<group>";
+		};
+		336F03F91F04941600DE7CD7 /* order */ = {
+			isa = PBXGroup;
+			children = (
+				336F03FA1F0497BB00DE7CD7 /* orderFirst.h */,
+				336F03FB1F0497BB00DE7CD7 /* orderFirst.m */,
+				336F03FD1F04D59B00DE7CD7 /* orderCellOne.h */,
+				336F03FE1F04D59B00DE7CD7 /* orderCellOne.m */,
+				336F04081F050D8600DE7CD7 /* orderCellTwo.h */,
+				336F04091F050D8600DE7CD7 /* orderCellTwo.m */,
+				336F040B1F050F7500DE7CD7 /* orderCellThree.h */,
+				336F040C1F050F7500DE7CD7 /* orderCellThree.m */,
+				336F04001F04EFAD00DE7CD7 /* yuan_1.png */,
+				336F04011F04EFAD00DE7CD7 /* yuan_2.png */,
+				336F04041F04EFB900DE7CD7 /* oss_more_down.png */,
+				336F04051F04EFB900DE7CD7 /* oss_more_up.png */,
+			);
+			path = order;
 			sourceTree = "<group>";
 		};
 		336F19F21D88E45600CD4C2B /* SDWebImage */ = {
@@ -4053,6 +4093,7 @@
 				334AED751CA386B8007E39F3 /* bg4.png in Resources */,
 				337532EF1D051579009CE66F /* PushConfig.plist in Resources */,
 				33FEFD531C7DB38400324374 /* icon_arrow.png in Resources */,
+				336F04071F04EFB900DE7CD7 /* oss_more_up.png in Resources */,
 				3334AD771D800C0000665667 /* 储能机.png in Resources */,
 				336E03FC1EC944B80034BC86 /* device_bg.png in Resources */,
 				33FEFD731C7DB38400324374 /* iconfont-nengyuanlei@2x.png in Resources */,
@@ -4155,6 +4196,7 @@
 				33692BF51C926B5000698375 /* xia.png in Resources */,
 				33FEFD601C7DB38400324374 /* icon---Password@2x.png in Resources */,
 				33FEFD791C7DB38400324374 /* shebei_press@2x.png in Resources */,
+				336F04021F04EFAD00DE7CD7 /* yuan_1.png in Resources */,
 				334AED5C1CA37583007E39F3 /* 增值服务.png in Resources */,
 				3382342B1D9A4982002062AE /* datalog_en2.png in Resources */,
 				3382342A1D9A4982002062AE /* datalog_cn2.png in Resources */,
@@ -4178,6 +4220,7 @@
 				335D9C4F1CE32583007535BF /* frame_add.png in Resources */,
 				336664ED1CB77CD3005573FB /* update@2x.png in Resources */,
 				33EFB6821C997050003F336F /* 充电桩.png in Resources */,
+				336F04031F04EFAD00DE7CD7 /* yuan_2.png in Resources */,
 				33FEFD5A1C7DB38400324374 /* icon---Email@2x.png in Resources */,
 				3333D2B41EF8BBB700E6182A /* pic_icon.png in Resources */,
 				33EFB6881C9973AB003F336F /* 日志.png in Resources */,
@@ -4295,6 +4338,7 @@
 				33C3FFFA1D3E33E00016351C /* L1.png in Resources */,
 				33FEFD611C7DB38400324374 /* icon---Password@3x.png in Resources */,
 				33699BBB1DADE73400C55CFF /* PV_t4.png in Resources */,
+				336F04061F04EFB900DE7CD7 /* oss_more_down.png in Resources */,
 				33FFBD531CEC7A8E003C56E1 /* content3.jpg in Resources */,
 				33699BBD1DADE73B00C55CFF /* storage.png in Resources */,
 				3349A7B21C75B7DF009172C2 /* 圆角矩形3.png in Resources */,
@@ -4375,6 +4419,7 @@
 				33860FDF1EEA75C5004150FD /* MJRefreshComponent.m in Sources */,
 				337F9C881C71A6710016FE43 /* AppDelegate.m in Sources */,
 				336D401B1D6FEA7600ECFA34 /* HanyuPinyinOutputFormat.m in Sources */,
+				336F040D1F050F7500DE7CD7 /* orderCellThree.m in Sources */,
 				334E9BEF1CAD036700C8271F /* parameterCNJ.m in Sources */,
 				336664E11CB75213005573FB /* moreTableViewController.m in Sources */,
 				33EFB6051C979B5F003F336F /* ChangeCellectViewController.m in Sources */,
@@ -4411,12 +4456,14 @@
 				3381ECEE1CBCA3ED00DCF0D2 /* energyDemo.m in Sources */,
 				33FEFCD31C7D8A9500324374 /* AddressPickView.m in Sources */,
 				335EE8F71F011138005F098A /* ossQuetionDetail.m in Sources */,
+				336F03FF1F04D59B00DE7CD7 /* orderCellOne.m in Sources */,
 				33AF3D281D8E67210007D6C2 /* ProgressHUD.m in Sources */,
 				335456B91C852EB000275478 /* RootViewController.m in Sources */,
 				33EFB66A1C98F9B1003F336F /* ZFBarChart.m in Sources */,
 				336F1A151D88E46900CD4C2B /* NSData+ImageContentType.m in Sources */,
 				335667571D7E606800C40129 /* PGIndexBannerSubiew.m in Sources */,
 				335317441CA2423D003F106D /* GetDevice.m in Sources */,
+				336F03FC1F0497BB00DE7CD7 /* orderFirst.m in Sources */,
 				3343F3C71C80403C009F69BC /* AFURLSessionManager.m in Sources */,
 				335456BC1C852ED900275478 /* TempViewController.m in Sources */,
 				33EA4A0B1E8F79050044A01A /* JHLineChart.m in Sources */,
@@ -4568,6 +4615,7 @@
 				336664F91CB78517005573FB /* Line2View.m in Sources */,
 				338418E71DC9783500D679CA /* GFWaterView.m in Sources */,
 				336F1A191D88E46900CD4C2B /* SDWebImageDownloader.m in Sources */,
+				336F040A1F050D8600DE7CD7 /* orderCellTwo.m in Sources */,
 				33AF3D221D8E67210007D6C2 /* Reachability.m in Sources */,
 				3319E0861D5AFAA7006623A9 /* HtmlCommon.m in Sources */,
 				33860FDD1EEA75C5004150FD /* MJRefreshAutoFooter.m in Sources */,
