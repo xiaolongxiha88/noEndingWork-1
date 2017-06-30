@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+@class Model;
 
 @interface orderCellOne : UITableViewCell
 
 
 @property(nonatomic,strong) UIView *titleView;
+@property(nonatomic, strong) Model *model;
 
 @property(nonatomic,strong) UILabel *titleLabel;
 @property(nonatomic,strong) UIImageView *titleImage;

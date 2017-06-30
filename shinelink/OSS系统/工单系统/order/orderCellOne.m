@@ -7,7 +7,7 @@
 //
 
 #import "orderCellOne.h"
-
+#import "Model.h"
 
 @implementation orderCellOne
 
@@ -74,18 +74,10 @@
 
 - (void)showMoreText{
     
-        NSString *boolValue;
-    if (_moreTextBtn.isSelected) {
-         boolValue=@"1";
-        _moreTextBtn.selected=NO;
-    }else{
-      boolValue=@"0";
-         _moreTextBtn.selected=YES;
-    }
+   self.model.isShowMoreText = !self.model.isShowMoreText;
 
-        NSArray *dataArray=[NSArray arrayWithObjects:boolValue,_contentString, nil];
+
     if (self.showMoreBlock){
-        self.showMoreData(dataArray);
         self.showMoreBlock(self);
     }
 }
@@ -98,7 +90,7 @@
     _titleLabel.text = _titleString;
     
     _contentLabel.text =_contentString;
-    if (_moreTextBtn.isSelected){ // 展开状态
+       if (self.model.isShowMoreText){ // 展开状态
         // 计算文本高度
         NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:16]};
         

@@ -10,6 +10,7 @@
 #import "orderCellOne.h"
 #import "orderCellTwo.h"
 #import "orderCellThree.h"
+#import "Model.h"
 
 
 static NSString *cellOne = @"cellOne";
@@ -32,13 +33,24 @@ static NSString *cellThree = @"cellThree";
 
 @end
 
-@implementation orderFirst
+@implementation orderFirst{
+    NSArray<Model*> *_modelList;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     H2=self.navigationController.navigationBar.frame.size.height;
     H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
     allH=40*HEIGHT_SIZE;
+    
+    NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:@"待接收",@"title",@"ssssssss",@"content", nil];
+     NSMutableArray<Model *> *arrM = [NSMutableArray arrayWithCapacity:3];
+    for (int i=0; i<3; i++) {
+        Model *model = [[Model alloc] initWithDict:dic];
+        [arrM addObject:model];
+    }
+       _modelList = arrM.copy;
     
     [self initData];
    
@@ -74,21 +86,21 @@ static NSString *cellThree = @"cellThree";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _titleArray.count;
+    return _modelList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row==0) {
         orderCellOne *cell = [tableView dequeueReusableCellWithIdentifier:cellOne forIndexPath:indexPath];
-        cell.titleLabel.text=_titleArray[indexPath.row];
-        cell.titleString=_titleArray[indexPath.row];
-        cell.contentString=@"jaidjsaida";
-        [cell setShowMoreData:^(NSArray* dataArray){
-            NSString *dataString=dataArray.firstObject;
-            [_isShowArray setObject:dataString atIndexedSubscript:indexPath.row];
-            
-        }];
+            Model *model = _modelList[indexPath.row];
+        cell.model = model;
+
+//        [cell setShowMoreData:^(NSArray* dataArray){
+//            NSString *dataString=dataArray.firstObject;
+//            [_isShowArray setObject:dataString atIndexedSubscript:indexPath.row];
+//            
+//        }];
         
         [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
             NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
@@ -140,6 +152,8 @@ static NSString *cellThree = @"cellThree";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
      NSInteger I=indexPath.row;
     NSString *isShowOrHide=_isShowArray[indexPath.row];
+    
+    
     if ([isShowOrHide isEqualToString:@"1"]){
         if (indexPath.row==0) {
              return [orderCellOne moreHeight:_contentString];

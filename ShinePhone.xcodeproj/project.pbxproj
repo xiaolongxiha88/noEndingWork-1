@@ -312,6 +312,7 @@
 		336F04071F04EFB900DE7CD7 /* oss_more_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 336F04051F04EFB900DE7CD7 /* oss_more_up.png */; };
 		336F040A1F050D8600DE7CD7 /* orderCellTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F04091F050D8600DE7CD7 /* orderCellTwo.m */; };
 		336F040D1F050F7500DE7CD7 /* orderCellThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F040C1F050F7500DE7CD7 /* orderCellThree.m */; };
+		336F04101F05EBFA00DE7CD7 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F040F1F05EBFA00DE7CD7 /* Model.m */; };
 		336F19F11D87943700CD4C2B /* serverV@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 336F19F01D87943700CD4C2B /* serverV@2x.png */; };
 		336F1A141D88E46900CD4C2B /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F19F41D88E46900CD4C2B /* MKAnnotationView+WebCache.m */; };
 		336F1A151D88E46900CD4C2B /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 336F19F61D88E46900CD4C2B /* NSData+ImageContentType.m */; };
@@ -1188,6 +1189,8 @@
 		336F04091F050D8600DE7CD7 /* orderCellTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = orderCellTwo.m; sourceTree = "<group>"; };
 		336F040B1F050F7500DE7CD7 /* orderCellThree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = orderCellThree.h; sourceTree = "<group>"; };
 		336F040C1F050F7500DE7CD7 /* orderCellThree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = orderCellThree.m; sourceTree = "<group>"; };
+		336F040E1F05EBFA00DE7CD7 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		336F040F1F05EBFA00DE7CD7 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		336F19F01D87943700CD4C2B /* serverV@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "serverV@2x.png"; sourceTree = "<group>"; };
 		336F19F31D88E46900CD4C2B /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
 		336F19F41D88E46900CD4C2B /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
@@ -2843,6 +2846,8 @@
 			children = (
 				336F03FA1F0497BB00DE7CD7 /* orderFirst.h */,
 				336F03FB1F0497BB00DE7CD7 /* orderFirst.m */,
+				336F040E1F05EBFA00DE7CD7 /* Model.h */,
+				336F040F1F05EBFA00DE7CD7 /* Model.m */,
 				336F03FD1F04D59B00DE7CD7 /* orderCellOne.h */,
 				336F03FE1F04D59B00DE7CD7 /* orderCellOne.m */,
 				336F04081F050D8600DE7CD7 /* orderCellTwo.h */,
@@ -4688,6 +4693,7 @@
 				3343F3DD1C80405D009F69BC /* UIButton+AFNetworking.m in Sources */,
 				335D69E71D77BD0500894D90 /* AVViewController.m in Sources */,
 				3349A7B61C75B8F4009172C2 /* loginViewController.m in Sources */,
+				336F04101F05EBFA00DE7CD7 /* Model.m in Sources */,
 				33EFB66C1C98F9B1003F336F /* ZFGenericChart.m in Sources */,
 				33860FEA1EEA75C5004150FD /* MJRefreshStateHeader.m in Sources */,
 				3381ECE51CBC900900DCF0D2 /* EquitGraph2ViewController.m in Sources */,
