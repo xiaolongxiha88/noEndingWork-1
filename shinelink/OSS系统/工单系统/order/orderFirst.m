@@ -17,6 +17,7 @@ static NSString *cellOne = @"cellOne";
 static NSString *cellTwo = @"cellTwo";
 static NSString *cellThree = @"cellThree";
 
+
 @interface orderFirst ()<UITableViewDataSource,UITableViewDelegate>{
     float H2;
     float H1;
@@ -42,9 +43,9 @@ static NSString *cellThree = @"cellThree";
     [super viewDidLoad];
     H2=self.navigationController.navigationBar.frame.size.height;
     H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
-    allH=40*HEIGHT_SIZE;
+   
     
-    NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:@"待接收",@"title",@"ssssssss",@"content", nil];
+    NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:@"待接收",@"title",@"ssssaasdasdasdasdasdasdasdasdasdadsadasdsadasdasdasdasdasdasdasdasdasdssss",@"content", nil];
      NSMutableArray<Model *> *arrM = [NSMutableArray arrayWithCapacity:3];
     for (int i=0; i<3; i++) {
         Model *model = [[Model alloc] initWithDict:dic];
@@ -60,15 +61,15 @@ static NSString *cellThree = @"cellThree";
     _titleArray=[NSArray arrayWithObjects:@"待接收",@"服务中",@"已完成", nil];
     _isShowArray=[NSMutableArray arrayWithObjects:@"0",@"0",@"0", nil];
 
-     [self initUI];
+     [self initHeadView];
 }
 
 -(void)initUI{
     if (!_tableView) {
-        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height-allH-H2-H1 )];
+        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height-H2-H1 )];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-       // _tableView.tableHeaderView=_headView;
+         _tableView.tableHeaderView=_headView;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
             [self.tableView registerClass:[orderCellOne class] forCellReuseIdentifier:cellOne];
@@ -80,6 +81,55 @@ static NSString *cellThree = @"cellThree";
     
 }
 
+
+-(void)initHeadView{
+    
+    _headView = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,90*HEIGHT_SIZE )];
+    _headView.backgroundColor =[UIColor clearColor];
+    [self.view addSubview:_headView];
+    
+    float titleLabelH1=30*HEIGHT_SIZE; float firstW1=10*HEIGHT_SIZE;
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(firstW1, 0, SCREEN_Width-(2*firstW1), titleLabelH1)];
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.text=@"接收接收接收接收接收";
+    titleLabel.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    [_headView addSubview:titleLabel];
+
+    float ImageW1=16*HEIGHT_SIZE;
+    UIImageView *titleImage= [[UIImageView alloc]initWithFrame:CGRectMake(firstW1, titleLabelH1+1*HEIGHT_SIZE, ImageW1, ImageW1)];
+    titleImage.image=IMAGE(@"workorder_icon.png");
+    [_headView addSubview:titleImage];
+    
+    float titleLabelH2=20*HEIGHT_SIZE;float headW=SCREEN_Width-(2*firstW1);
+    UILabel *titleLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1+ImageW1+5*NOW_SIZE, titleLabelH1,headW, titleLabelH2)];
+    titleLabel2.textColor = COLOR(51, 51, 51, 1);
+    titleLabel2.text=@"基本信息";
+    titleLabel2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [_headView addSubview:titleLabel2];
+   
+       NSArray *headName=[NSArray arrayWithObjects:@"姓名",@"联系方式", nil];
+     NSArray *headValue=[NSArray arrayWithObjects:@"张三",@"123123211123", nil];
+    for (int i=0; i<headName.count; i++) {
+        UILabel *titleLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1+(headW/2)*i, titleLabelH1+titleLabelH2,headW/2, titleLabelH2)];
+        titleLabel3.textColor = COLOR(102, 102, 102, 1);
+        titleLabel3.textAlignment=NSTextAlignmentLeft;
+        NSString *name=[NSString stringWithFormat:@"%@:%@",headName[i],headValue[i]];
+        titleLabel3.text=name;
+        titleLabel3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_headView addSubview:titleLabel3];
+    }
+    
+    UILabel *titleLabel4 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1, titleLabelH1+titleLabelH2*2,headW, titleLabelH2)];
+    titleLabel4.textColor = COLOR(102, 102, 102, 1);
+    titleLabel4.textAlignment=NSTextAlignmentLeft;
+    NSString *name1=[NSString stringWithFormat:@"%@:%@",@"类型",@"维修服务"];
+    titleLabel4.text=name1;
+    titleLabel4.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    [_headView addSubview:titleLabel4];
+    
+    
+    [self initUI];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -95,13 +145,7 @@ static NSString *cellThree = @"cellThree";
         orderCellOne *cell = [tableView dequeueReusableCellWithIdentifier:cellOne forIndexPath:indexPath];
             Model *model = _modelList[indexPath.row];
         cell.model = model;
-
-//        [cell setShowMoreData:^(NSArray* dataArray){
-//            NSString *dataString=dataArray.firstObject;
-//            [_isShowArray setObject:dataString atIndexedSubscript:indexPath.row];
-//            
-//        }];
-        
+    
         [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
             NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
             [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -150,13 +194,13 @@ static NSString *cellThree = @"cellThree";
 
 // MARK: - 返回cell高度的代理方法
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-     NSInteger I=indexPath.row;
-    NSString *isShowOrHide=_isShowArray[indexPath.row];
+
+    CGFloat H=H1+H2;
+      Model *model = _modelList[indexPath.row];
     
-    
-    if ([isShowOrHide isEqualToString:@"1"]){
+    if (model.isShowMoreText){
         if (indexPath.row==0) {
-             return [orderCellOne moreHeight:_contentString];
+             return [orderCellOne moreHeight:H];
         }else if (indexPath.row==1){
            return [orderCellTwo moreHeight:_contentString];
         }else if (indexPath.row==2){

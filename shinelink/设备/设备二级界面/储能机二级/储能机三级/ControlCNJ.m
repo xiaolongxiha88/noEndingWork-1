@@ -717,7 +717,7 @@
         self.toolBar.barTintColor = COLOR(17, 183, 243, 1);
         [self.view addSubview:self.toolBar];
         
-        UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:root_finish style:UIBarButtonItemStyleDone target:self action:@selector(completeSelectDate:)];
         doneButton.tintColor = [UIColor whiteColor];
         self.toolBar.items = @[spaceButton, doneButton];

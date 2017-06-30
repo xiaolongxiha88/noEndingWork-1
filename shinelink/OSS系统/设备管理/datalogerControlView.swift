@@ -124,7 +124,7 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
     let okAction = UIAlertAction(title: "确认", style: .default) { (UIAlertAction) in
         self.value1="1"
         self.value2=""
-        self.paramTypeString="3"
+        self.paramTypeString="4"
         self.finishSet()
     }
     // 添加
@@ -143,7 +143,7 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
         let okAction = UIAlertAction(title: "确认", style: .default) { (UIAlertAction) in
             self.value1="1"
             self.value2=""
-            self.paramTypeString="4"
+            self.paramTypeString="3"
              self.finishSet()
         }
         // 添加

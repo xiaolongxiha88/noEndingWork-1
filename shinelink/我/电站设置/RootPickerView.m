@@ -59,7 +59,7 @@
         UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStyleDone target:self action:@selector(cancelSelect)];
         cancelButton.tintColor=[UIColor whiteColor];
         
-        UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+        UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
         
         UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:root_Yes style:UIBarButtonItemStyleDone target:self action:@selector(completeSelect)];
         doneButton.tintColor = [UIColor whiteColor];
