@@ -81,7 +81,8 @@ static NSString *cellThree = @"cellThree";
 
 -(void)initUI{
     if (!_tableView) {
-        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height-H2-H1 )];
+        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height)];
+        _tableView.contentSize=CGSizeMake(SCREEN_Width, 1000*HEIGHT_SIZE);
         _tableView.delegate = self;
         _tableView.dataSource = self;
          _tableView.tableHeaderView=_headView;

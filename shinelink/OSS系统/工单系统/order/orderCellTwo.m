@@ -98,36 +98,35 @@ static NSString *statusNum = @"3";
     NSString *dataString = [_dayFormatter stringFromDate:[NSDate date]];
     _goTimeString=dataString;
     
-    NSArray *lableNameArray=[NSArray arrayWithObjects:@"所属区域:",@"申请时间:",@"要求到达时间:", @"预约上门时间:", @"详细地址:", @"备注:", nil];
+    NSArray *lableNameArray=[NSArray arrayWithObjects:@"定位:",@"工单完成时间:",@"完成状态:",@"设备类型:", @"上传照片:",  nil];
     NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"groupName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], dataString, nil];
     
     float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;
     for (int i=0; i<lableNameArray.count; i++) {
         
-        if (i!=5) {
+     
             UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(firstW, 2*HEIGHT_SIZE+numH*i,lable1W, lableH)];
             lable1.textColor = COLOR(154, 154, 154, 1);
             if ([_statusString isEqualToString:statusNum]) {
-                if ((i==3)||(i==4)) {
+                if ((i==0)||(i==1)||(i==2)) {
                     lable1.textColor = [UIColor redColor];
                 }
             }
-            
             lable1.text=@"*";
             lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
             [_scrollView addSubview:lable1];
-        }
+       
         
         
         NSString*lable2Name=lableNameArray[i];
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
         CGSize size = [lable2Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, 0+numH*i,size.width, lableH)];
-        lable2.textColor = COLOR(154, 154, 154, 1);
+       
         if ([_statusString isEqualToString:statusNum]) {
-            if ((i==3)||(i==4)||(i==5)) {
                 lable2.textColor =COLOR(51, 51, 51, 1);
-            }
+        }else{
+         lable2.textColor = COLOR(154, 154, 154, 1);
         }
         
         lable2.text=lableNameArray[i];
@@ -141,27 +140,14 @@ static NSString *statusNum = @"3";
         }
         
         
-        float ImageW2=15*HEIGHT_SIZE;
-        if ((i==1)||(i==2)||(i==3)) {
-            
-            UIImageView *image00 = [[UIImageView alloc]initWithFrame:CGRectMake(firstW+lable1W+size.width, (lableH-ImageW2)/2+numH*i,ImageW2, ImageW2)];
-            image00.image=IMAGE(@"workoader_date1.png");
-            if ([_statusString isEqualToString:statusNum]) {
-                if (i==3) {
-                    image00.image=IMAGE(@"workoader_date2.png");
-                }
-            }
-            
-            [_scrollView addSubview:image00];
-        }
+
         
-        float lable3W=firstW+lable1W+size.width+ImageW2+5*NOW_SIZE;
+        float lable3W=firstW+lable1W+size.width+5*NOW_SIZE;
         if ((i==0)||(i==1)||(i==2)||(i==3)) {
             UILabel *lable3 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i,SCREEN_Width-(1*firstW)-lable3W, lableH)];
-            lable3.textColor = COLOR(154, 154, 154, 1);
+             lable3.textColor =COLOR(51, 51, 51, 1);
             if ([_statusString isEqualToString:statusNum]) {
-                if (i==3) {
-                    lable3.textColor =COLOR(51, 51, 51, 1);
+                if (i==1) {
                     lable3.userInteractionEnabled=YES;
                     UITapGestureRecognizer * forget3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickDate)];
                     [lable3 addGestureRecognizer:forget3];
@@ -477,6 +463,8 @@ static NSString *statusNum = @"3";
 - (void)completeSelectDate:(UIToolbar *)toolBar {
     _goTimeString = [self.dayFormatter stringFromDate:self.date.date];
     
+    UILabel *L2=[_scrollView viewWithTag:2001];
+    L2.text=_goTimeString;
     
     [self.toolBar removeFromSuperview];
     [self.date removeFromSuperview];

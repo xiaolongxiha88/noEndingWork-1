@@ -473,7 +473,9 @@ static NSString *statusNum = @"2";
 - (void)completeSelectDate:(UIToolbar *)toolBar {
     _goTimeString = [self.dayFormatter stringFromDate:self.date.date];
     
-
+    UILabel *L2=[_scrollView viewWithTag:2003];
+    L2.text=_goTimeString;
+    
     [self.toolBar removeFromSuperview];
     [self.date removeFromSuperview];
     
