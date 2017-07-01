@@ -170,11 +170,11 @@ float Time=20.f;
     [manager POST:url parameters:paramars constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSArray *keys = dataDict.allKeys;
         for (NSString *key in keys) {
-            //            NSDateFormatter *myFormatter = [[NSDateFormatter alloc] init];
-            //            [myFormatter setDateFormat:@"yyyyMMddhhmmss"];
-            //            NSString *dateStr = [myFormatter stringFromDate:[NSDate date]];
-            NSData *data = [[NSData alloc] initWithData:dataDict[key]];
-            [formData appendPartWithFileData:data name:key fileName:key mimeType:@"image/png"];
+            if (![dataDict[key] isEqualToString:@""]) {
+                NSData *data = [[NSData alloc] initWithData:dataDict[key]];
+                [formData appendPartWithFileData:data name:key fileName:key mimeType:@"image/png"];
+            }
+       
         }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         successBlock(responseObject);

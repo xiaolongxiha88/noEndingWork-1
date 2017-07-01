@@ -29,8 +29,11 @@ static NSString *cellThree = @"cellThree";
 @property(nonatomic,strong)NSArray *titleStatusArray;
 @property(nonatomic,strong)NSMutableArray *isShowArray;
 
+@property(nonatomic,strong)NSDictionary *allValueDic;
 
 @property(nonatomic,strong)NSString *contentString;
+
+@property(nonatomic,strong)NSString *statusString;
 
 @end
 
@@ -44,25 +47,37 @@ static NSString *cellThree = @"cellThree";
     H2=self.navigationController.navigationBar.frame.size.height;
     H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
    
-    
-    NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:@"待接收",@"title",@"ssssaasdasdasdasdasdasdasdasdasdadsadasdsadasdasdasdasdasdasdasdasdasdssss",@"content", nil];
-     NSMutableArray<Model *> *arrM = [NSMutableArray arrayWithCapacity:3];
-    for (int i=0; i<3; i++) {
-        Model *model = [[Model alloc] initWithDict:dic];
-        [arrM addObject:model];
-    }
-       _modelList = arrM.copy;
-    
-    [self initData];
-   
+    [self finishSet];
 }
 
 -(void)initData{
+    _statusString=[NSString stringWithFormat:@"%@",_allValueDic[@"status"]];
     _titleArray=[NSArray arrayWithObjects:@"待接收",@"服务中",@"已完成", nil];
-    _isShowArray=[NSMutableArray arrayWithObjects:@"0",@"0",@"0", nil];
+
+ 
+    NSMutableArray<Model *> *arrM = [NSMutableArray arrayWithCapacity:_titleArray.count];
+    for (int i=0; i<3; i++) {
+        Model *model = [[Model alloc] initWithDict:_titleArray[i]];
+        if ([_statusString isEqualToString:@"2"]) {
+            if (i==0) {
+                model.isShowMoreText=YES;
+            }
+        }else if ([_statusString isEqualToString:@"3"]){
+            if (i==1) {
+                model.isShowMoreText=YES;
+            }
+        }else if ([_statusString isEqualToString:@"4"]){
+            if (i==2) {
+                model.isShowMoreText=YES;
+            }
+        }
+        [arrM addObject:model];
+    }
+    _modelList = arrM.copy;
 
      [self initHeadView];
 }
+
 
 -(void)initUI{
     if (!_tableView) {
@@ -82,6 +97,42 @@ static NSString *cellThree = @"cellThree";
 }
 
 
+-(void)finishSet{
+ 
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"orderId":_orderID} paramarsSite:@"/api/v1/workOrder/work/detail_info" sucessBlock:^(id content) {
+           [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v1/workOrder/work/detail_info: %@", content1);
+      
+        if (content1) {
+               NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+     if ([firstDic[@"result"] intValue]==1) {
+
+         _allValueDic=[NSDictionary dictionaryWithDictionary:firstDic[@"obj"][@"ticketBean"]];
+         if (_allValueDic.count>3) {
+                 [self initData];
+         }
+     }else{
+      [self showToastViewWithTitle:firstDic[@"msg"]];
+         [self.navigationController popViewControllerAnimated:YES];
+     }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+           [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+    
+}
+
+
+
+
 -(void)initHeadView{
     
     _headView = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,90*HEIGHT_SIZE )];
@@ -91,7 +142,7 @@ static NSString *cellThree = @"cellThree";
     float titleLabelH1=30*HEIGHT_SIZE; float firstW1=10*HEIGHT_SIZE;
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(firstW1, 0, SCREEN_Width-(2*firstW1), titleLabelH1)];
     titleLabel.textColor = [UIColor blackColor];
-    titleLabel.text=@"接收接收接收接收接收";
+    titleLabel.text=[NSString stringWithFormat:@"%@",_allValueDic[@"title"]];
     titleLabel.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [_headView addSubview:titleLabel];
 
@@ -108,7 +159,7 @@ static NSString *cellThree = @"cellThree";
     [_headView addSubview:titleLabel2];
    
        NSArray *headName=[NSArray arrayWithObjects:@"姓名",@"联系方式", nil];
-     NSArray *headValue=[NSArray arrayWithObjects:@"张三",@"123123211123", nil];
+     NSArray *headValue=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"contact"]], nil];
     for (int i=0; i<headName.count; i++) {
         UILabel *titleLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1+(headW/2)*i, titleLabelH1+titleLabelH2,headW/2, titleLabelH2)];
         titleLabel3.textColor = COLOR(102, 102, 102, 1);
@@ -119,10 +170,13 @@ static NSString *cellThree = @"cellThree";
         [_headView addSubview:titleLabel3];
     }
     
+      NSArray *serviceType=[NSArray arrayWithObjects:@"",@"现场维修",@"安装调试", @"培训",@"巡检",nil];
     UILabel *titleLabel4 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1, titleLabelH1+titleLabelH2*2,headW, titleLabelH2)];
     titleLabel4.textColor = COLOR(102, 102, 102, 1);
     titleLabel4.textAlignment=NSTextAlignmentLeft;
-    NSString *name1=[NSString stringWithFormat:@"%@:%@",@"类型",@"维修服务"];
+    int k=[_allValueDic[@"serviceType"] intValue];
+    NSString *kName=serviceType[k];
+    NSString *name1=[NSString stringWithFormat:@"%@:%@",@"类型",kName];
     titleLabel4.text=name1;
     titleLabel4.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [_headView addSubview:titleLabel4];
@@ -145,7 +199,9 @@ static NSString *cellThree = @"cellThree";
         orderCellOne *cell = [tableView dequeueReusableCellWithIdentifier:cellOne forIndexPath:indexPath];
             Model *model = _modelList[indexPath.row];
         cell.model = model;
-    
+        cell.orderID=_orderID;
+        cell.statusString=_statusString;
+        cell.allValueDic=[NSDictionary dictionaryWithDictionary:_allValueDic];
         [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
             NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
             [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -153,15 +209,11 @@ static NSString *cellThree = @"cellThree";
            return cell;
     }else if (indexPath.row==1) {
         orderCellTwo *cell = [tableView dequeueReusableCellWithIdentifier:cellTwo forIndexPath:indexPath];
-        cell.titleLabel.text=_titleArray[indexPath.row];
-        cell.titleString=_titleArray[indexPath.row];
-        cell.contentString=@"jaidjsaidaadasdsadddddddddddddddddasd";
-        [cell setShowMoreData:^(NSArray* dataArray){
-             NSString *dataString=dataArray.firstObject;
-            [_isShowArray setObject:dataString atIndexedSubscript:indexPath.row];
-            
-        }];
-        
+        Model *model = _modelList[indexPath.row];
+        cell.model = model;
+        cell.orderID=_orderID;
+        cell.statusString=_statusString;
+        cell.allValueDic=[NSDictionary dictionaryWithDictionary:_allValueDic];
         [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
             NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
             [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -169,15 +221,11 @@ static NSString *cellThree = @"cellThree";
         return cell;
     }else if (indexPath.row==2) {
         orderCellThree *cell = [tableView dequeueReusableCellWithIdentifier:cellThree forIndexPath:indexPath];
-        cell.titleLabel.text=_titleArray[indexPath.row];
-        cell.titleString=_titleArray[indexPath.row];
-        cell.contentString=@"jaidjsaida22222222222222222222222222222222";
-        [cell setShowMoreData:^(NSArray* dataArray){
-               NSString *dataString=dataArray.firstObject;
-            [_isShowArray setObject:dataString atIndexedSubscript:indexPath.row];
-            
-        }];
-        
+        Model *model = _modelList[indexPath.row];
+        cell.model = model;
+        cell.orderID=_orderID;
+        cell.statusString=_statusString;
+        cell.allValueDic=[NSDictionary dictionaryWithDictionary:_allValueDic];
         [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
             NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
             [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -202,9 +250,11 @@ static NSString *cellThree = @"cellThree";
         if (indexPath.row==0) {
              return [orderCellOne moreHeight:H];
         }else if (indexPath.row==1){
-           return [orderCellTwo moreHeight:_contentString];
+       
+                return [orderCellTwo moreHeight:H];
         }else if (indexPath.row==2){
-               return [orderCellThree moreHeight:_contentString];
+             return [orderCellThree moreHeight:H];
+              
         }else{
             return 1*HEIGHT_SIZE;
         }

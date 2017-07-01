@@ -10,4 +10,6 @@
 
 @interface orderFirst : RootViewController
 
+@property(nonatomic,strong)NSString *orderID;
+
 @end

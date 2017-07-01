@@ -13,6 +13,8 @@
 
 
 @property(nonatomic,strong) UIView *titleView;
+@property(nonatomic,strong)UIView *View3;
+
 @property(nonatomic, strong) Model *model;
 
 @property(nonatomic,strong) UILabel *titleLabel;
@@ -20,12 +22,16 @@
 
 @property(nonatomic,strong) UILabel *contentLabel;
 @property(nonatomic,strong) UIButton *moreTextBtn;
-@property(nonatomic, assign) BOOL isShowMoreText;
+@property(nonatomic,strong)UITextField* textfield;
 
+@property(nonatomic, assign) BOOL isShowMoreText;
 @property(nonatomic,strong)NSString *titleString;
 @property(nonatomic,strong)NSString *contentString;
 @property(nonatomic)CGFloat cellFirstH;
-
+@property(nonatomic,strong)NSString *statusString;
+@property(nonatomic,strong)NSString *orderID;
+@property(nonatomic,strong)NSDictionary *allValueDic;
+@property (nonatomic, strong) NSMutableArray *picArray;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSDateFormatter *dayFormatter;

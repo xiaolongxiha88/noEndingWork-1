@@ -322,7 +322,8 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             self.navigationController?.pushViewController(vc, animated: true)
         }else  if  questionOrOrder==2 {
             let vc=orderFirst()
-
+              let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as! Int)
+             vc.orderID=id as String!
             self.navigationController?.pushViewController(vc, animated: true)
         }
 

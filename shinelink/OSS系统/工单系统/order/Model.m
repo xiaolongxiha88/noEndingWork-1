@@ -10,12 +10,12 @@
 
 @implementation Model
 
-- (instancetype)initWithDict:(NSDictionary *)dict
+- (instancetype)initWithDict:(NSString *)titleName
 {
     if (self = [super init])
     {
-        self.title = [dict objectForKey:@"title"];
-        self.content = [dict objectForKey:@"content"];
+        self.title = titleName;
+
         self.isShowMoreText = NO;
     }
     return self;

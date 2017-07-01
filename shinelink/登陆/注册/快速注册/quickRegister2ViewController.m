@@ -231,6 +231,7 @@ _getServerAddressNum=0;
         }
         
     } failure:^(NSError *error) {
+           [self hideProgressView];
         if (_getServerAddressNum==1) {
             [self registerFrist];
         }else{

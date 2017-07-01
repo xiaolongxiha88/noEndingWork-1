@@ -148,6 +148,7 @@
                  [self.navigationController popViewControllerAnimated:YES];
             }
         } failure:^(NSError *error) {
+               [self hideProgressView];
             [self showToastViewWithTitle:root_Networking];
         }];
 }

@@ -341,8 +341,9 @@
             }
         }
     } failure:^(NSError *error) {
-        [self showToastViewWithTitle:root_Networking];
           [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
     }];
     
 }
@@ -439,8 +440,9 @@
             }
         }
     } failure:^(NSError *error) {
+           [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];
-        [self hideProgressView];
+     
     }];
     
 }

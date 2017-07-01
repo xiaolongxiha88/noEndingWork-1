@@ -174,8 +174,9 @@ int picTime;
           }
         }
     } failure:^(NSError *error) {
+              [self hideProgressView];
                                   [self showToastViewWithTitle:root_Networking];
-                                   [self hideProgressView];
+        
                                   [self.navigationController popViewControllerAnimated:NO];
                               }];
     

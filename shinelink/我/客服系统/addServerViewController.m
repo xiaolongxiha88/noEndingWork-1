@@ -405,8 +405,9 @@
             }
         }
      failure:^(NSError *error) {
+               [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];
-         [self hideProgressView];
+   
     }];
     
 }

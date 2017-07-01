@@ -59,15 +59,17 @@
 //#define HEAD_URL   @"http://odm.growatt.com"
 //#define HEAD_URL_Demo  @"http://odm.growatt.com"
 //#define HEAD_URL_Demo_CN  @"http://odm.growatt.com"
+//#define OSS_HEAD_URL_Demo  @"http://odm.growatt.com"
+
 
 #define HEAD_URL   @"http://192.168.3.32:8080/ShineServer_2016"
 #define HEAD_URL_Demo  @"http://192.168.3.32:8080/ShineServer_2016"
 #define HEAD_URL_Demo_CN  @"http://192.168.3.32:8080/ShineServer_2016"
-
-//demo for OSS
-//#define OSS_HEAD_URL_Demo  @"http://odm.growatt.com"
-
 #define OSS_HEAD_URL_Demo  @"http://192.168.3.32:8081/ShineOSS"
+
+
+
+//#define OSS_HEAD_URL_Demo  @"http://192.168.3.32:8081/ShineOSS"
 #define OSS_HEAD_URL  [UserInfo defaultUserInfo].OSSserver
 
 

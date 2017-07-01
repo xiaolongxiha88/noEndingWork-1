@@ -1872,6 +1872,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             }
         }
     } failure:^(NSError *error) {
+           [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];
     }];
 
@@ -1951,6 +1952,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             }
         }
     } failure:^(NSError *error) {
+           [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];
     }];
 }

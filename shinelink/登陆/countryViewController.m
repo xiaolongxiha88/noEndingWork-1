@@ -166,6 +166,7 @@
                 if (_getServerAddressNum==1) {
                     [self _getPickerData];
                 }else{
+                       [self hideProgressView];
                     [self showToastViewWithTitle:root_Networking];
                 }
             }

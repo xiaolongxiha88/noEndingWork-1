@@ -727,7 +727,7 @@ NSLog(@"体验馆");
                                     NSString *server2=@"http://";
                                     NSString *serverAdress=[NSString stringWithFormat:@"%@%@",server2,server1];
                                     
-                                    //serverAdress=OSS_HEAD_URL_Demo;
+                                   serverAdress=OSS_HEAD_URL_Demo;
                                     
                                     [[UserInfo defaultUserInfo] setOSSserver:serverAdress];
                                 }
