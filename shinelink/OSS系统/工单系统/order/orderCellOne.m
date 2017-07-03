@@ -83,7 +83,7 @@ static NSString *statusNum = @"2";
         _scrollView.scrollEnabled=YES;
         [self.contentView addSubview:_scrollView];
         
-        _View3 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+ImageW1/2, viewW1/2, 0.3*NOW_SIZE,38*HEIGHT_SIZE)];
+        _View3 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+ImageW1/2, viewW1/2, 0.3*NOW_SIZE,38*HEIGHT_SIZE-viewW1/2)];
     if ([_statusString isEqualToString:statusNum]) {
     _View3.backgroundColor =COLOR(102, 102, 102, 1);
     }else{

@@ -99,7 +99,7 @@ static NSString *cellThree = @"cellThree";
 
 
 -(void)finishSet{
- 
+
     
     [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"orderId":_orderID} paramarsSite:@"/api/v1/workOrder/work/detail_info" sucessBlock:^(id content) {
