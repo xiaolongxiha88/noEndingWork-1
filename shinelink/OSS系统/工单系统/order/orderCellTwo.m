@@ -9,6 +9,8 @@
 #import "orderCellTwo.h"
 #import "Model.h"
 #import "MBProgressHUD.h"
+#import "ZJBLStoreShopTypeAlert.h"
+
 
 static NSString *statusNum = @"3";
 
@@ -98,8 +100,8 @@ static NSString *statusNum = @"3";
     NSString *dataString = [_dayFormatter stringFromDate:[NSDate date]];
     _goTimeString=dataString;
     
-    NSArray *lableNameArray=[NSArray arrayWithObjects:@"定位:",@"工单完成时间:",@"完成状态:",@"设备类型:", @"上传照片:",  nil];
-    NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"groupName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], dataString, nil];
+    NSArray *lableNameArray=[NSArray arrayWithObjects:@"定位:",@"工单完成时间:",@"完成状态:",@"设备类型:", @"设备序列号:", @"上传照片:",  nil];
+    NSArray *lableNameArray2=[NSArray arrayWithObjects:@"",@"",@"", @"", @"", nil];
     
     float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;
     for (int i=0; i<lableNameArray.count; i++) {
@@ -107,15 +109,37 @@ static NSString *statusNum = @"3";
      
             UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(firstW, 2*HEIGHT_SIZE+numH*i,lable1W, lableH)];
             lable1.textColor = COLOR(154, 154, 154, 1);
+        lable1.text=@"*";
+        lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
             if ([_statusString isEqualToString:statusNum]) {
                 if ((i==0)||(i==1)||(i==2)) {
                     lable1.textColor = [UIColor redColor];
+                              [_scrollView addSubview:lable1];
                 }
             }
-            lable1.text=@"*";
-            lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-            [_scrollView addSubview:lable1];
+
+        float lineW=SCREEN_Width-(2*firstW);  float image2W=6*NOW_SIZE;
+        
+        if ((i==3)||(i==1)||(i==2)) {
+            UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(firstW+lineW-image2W, 8*HEIGHT_SIZE+numH*i, image2W,14*HEIGHT_SIZE )];
+            image2.userInteractionEnabled=YES;
+            image2.image=IMAGE(@"select_icon.png");
+            UITapGestureRecognizer *labelTap1;
+            image2.tag=4000+i;
+            if (i==1) {
+                     labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickDate)];
+            }else if (i==2){
+             labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapInfo:)];
+            }else if (i==3){
+                 labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapInfo:)];
+            }
        
+            [image2 addGestureRecognizer:labelTap1];
+            [_scrollView addSubview:image2];
+        }
+        
+
+  
         
         
         NSString*lable2Name=lableNameArray[i];
@@ -143,15 +167,44 @@ static NSString *statusNum = @"3";
 
         
         float lable3W=firstW+lable1W+size.width+5*NOW_SIZE;
+        
+        if (i==0) {
+    
+            UILabel *lable4 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i,SCREEN_Width-(1*firstW)-lable3W, lableH)];
+            lable4.textColor =COLOR(51, 51, 51, 1);
+            lable4.textAlignment=NSTextAlignmentRight;
+            if ([_statusString isEqualToString:statusNum]) {
+                UITapGestureRecognizer * forget3;
+                lable4.userInteractionEnabled=YES;
+                forget3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickDate)];
+                [lable4 addGestureRecognizer:forget3];
+
+            }
+            lable4.text=@"点击获取";
+            lable4.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            [_scrollView addSubview:lable4];
+            
+        }
+        
         if ((i==0)||(i==1)||(i==2)||(i==3)) {
             UILabel *lable3 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i,SCREEN_Width-(1*firstW)-lable3W, lableH)];
              lable3.textColor =COLOR(51, 51, 51, 1);
             if ([_statusString isEqualToString:statusNum]) {
-                if (i==1) {
-                    lable3.userInteractionEnabled=YES;
-                    UITapGestureRecognizer * forget3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickDate)];
+                if ((i==1)||(i==2)||(i==3)) {
+                    UITapGestureRecognizer * forget3;
+                     lable3.userInteractionEnabled=YES;
+                    if (i==1) {
+                        forget3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickDate)];
+                    }else if (i==2){
+                        forget3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapInfo:)];
+                    }else if (i==3){
+                        forget3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapInfo:)];
+                    }
                     [lable3 addGestureRecognizer:forget3];
+                
+                
                 }
+   
             }
             
             lable3.tag=2000+i;
@@ -181,7 +234,7 @@ static NSString *statusNum = @"3";
             if ([_statusString isEqualToString:statusNum]) {
                 _textfield.textColor = COLOR(51, 51, 51, 1);
                 _textfield.tintColor = COLOR(51, 51, 51, 1);
-                _textfield.placeholder = @"请输入客户地址";
+                _textfield.placeholder = @"请输入设备序列号";
             }else{
                 _textfield.textColor =  COLOR(154, 154, 154, 1);
                 _textfield.tintColor = COLOR(154, 154, 154, 1);
@@ -190,17 +243,7 @@ static NSString *statusNum = @"3";
         }
         
         
-        // CGSize size1= [textfieldString boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-        if ([_statusString isEqualToString:statusNum]) {
-            if (i==5) {
-                _textfield2 = [[UITextView alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i,textW, lableH)];
-                _textfield2.textColor=COLOR(51, 51, 51, 1);
-                _textfield2.tintColor = COLOR(51, 51, 51, 1);
-                _textfield2.delegate=self;
-                _textfield2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-                [_scrollView addSubview:_textfield2];
-            }
-        }
+
         
         
     }
@@ -225,6 +268,44 @@ static NSString *statusNum = @"3";
     
     
 }
+
+
+
+-(void)tapInfo:(UITapGestureRecognizer*)Tap{
+    NSInteger Num=Tap.view.tag;
+    NSArray *NameArray; NSString *title; NSString *type;
+    if ((Num==4002)||(Num==2002)) {
+       NameArray=[NSArray arrayWithObjects:@"待观察",@"已完成", nil];
+      title=@"选择完成状态";
+        type=@"1";
+    }
+    if ((Num==4003)||(Num==2003)) {
+        NameArray=[NSArray arrayWithObjects:@"逆变器",@"储能机",@"采集器",  nil];
+        title=@"选择设备类型";
+        type=@"2";
+    }
+    [ZJBLStoreShopTypeAlert showWithTitle:title titles:NameArray selectIndex:^(NSInteger selectIndex) {
+        if ([type isEqualToString:@"1"]) {
+            _orderType=[NSString stringWithFormat:@"%ld",selectIndex+1];
+        }
+        if ([type isEqualToString:@"2"]) {
+            _deviceType=[NSString stringWithFormat:@"%ld",selectIndex+1];
+        }
+        
+    }selectValue:^(NSString *selectValue){
+        if ([type isEqualToString:@"1"]) {
+            UILabel *lable=[_scrollView viewWithTag:2002];
+            lable.text=selectValue;
+        }
+        if ([type isEqualToString:@"2"]) {
+            UILabel *lable=[_scrollView viewWithTag:2003];
+            lable.text=selectValue;
+        }
+        
+    } showCloseButton:YES ];
+    
+}
+
 
 
 -(void)finishSet{
@@ -352,7 +433,7 @@ static NSString *statusNum = @"3";
     
     _titleLabel.text = self.model.title;
     
-    NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"groupName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], nil];
+    NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"location"]],[NSString stringWithFormat:@"%@",_allValueDic[@"completeTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"completeState"]], nil];
     
     UILabel *L1=[_scrollView viewWithTag:2000];
     L1.text=lableNameArray2[0];
@@ -368,6 +449,7 @@ static NSString *statusNum = @"3";
     
     if ([_statusString isEqualToString:statusNum]) {
         _textfield2.text=[NSString stringWithFormat:@"%@",_allValueDic[@"remarks"]];
+          L3.text=@"";
     }
     
     if ([_statusString isEqualToString:@"4"]) {

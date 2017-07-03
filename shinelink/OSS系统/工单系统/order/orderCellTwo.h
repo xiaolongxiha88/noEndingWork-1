@@ -31,6 +31,8 @@
 @property(nonatomic,strong)NSString *orderID;
 @property(nonatomic,strong)NSDictionary *allValueDic;
 @property (nonatomic, strong) NSMutableArray *picArray;
+@property(nonatomic,strong)NSString *orderType;
+@property(nonatomic,strong)NSString *deviceType;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSDateFormatter *dayFormatter;
