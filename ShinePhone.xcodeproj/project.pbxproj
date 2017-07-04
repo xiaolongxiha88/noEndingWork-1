@@ -409,6 +409,8 @@
 		337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */; };
 		337CB59D1DB4A837002ABB88 /* firstToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB59C1DB4A837002ABB88 /* firstToolViewController.m */; };
 		337CB5A11DB608B0002ABB88 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 337CB5A01DB608B0002ABB88 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		337F96101F0B90F800840527 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F960F1F0B90F800840527 /* phone.png */; };
+		337F96121F0B928300840527 /* message_icon2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337F96111F0B928300840527 /* message_icon2.gif */; };
 		337F9C851C71A6710016FE43 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9C841C71A6710016FE43 /* main.m */; };
 		337F9C881C71A6710016FE43 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9C871C71A6710016FE43 /* AppDelegate.m */; };
 		337F9C931C71A6710016FE43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 337F9C921C71A6710016FE43 /* Assets.xcassets */; };
@@ -1335,6 +1337,8 @@
 		337CB59C1DB4A837002ABB88 /* firstToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = firstToolViewController.m; sourceTree = "<group>"; };
 		337CB59E1DB6010C002ABB88 /* ShinePhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShinePhone.entitlements; sourceTree = "<group>"; };
 		337CB5A01DB608B0002ABB88 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		337F960F1F0B90F800840527 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
+		337F96111F0B928300840527 /* message_icon2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = message_icon2.gif; sourceTree = "<group>"; };
 		337F9C801C71A6710016FE43 /* ShinePhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShinePhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		337F9C841C71A6710016FE43 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		337F9C861C71A6710016FE43 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2881,6 +2885,8 @@
 				336F04121F06203D00DE7CD7 /* workoader_date1.png */,
 				331B37D31F073A3400755335 /* workorder_button_icon_click.png */,
 				331B37D41F073A3400755335 /* workorder_button_icon_nor.png */,
+				337F960F1F0B90F800840527 /* phone.png */,
+				337F96111F0B928300840527 /* message_icon2.gif */,
 			);
 			path = "order图片";
 			sourceTree = "<group>";
@@ -4207,6 +4213,7 @@
 				33775ADB1D2E03B40070742E /* 质保.png in Resources */,
 				33FEFD7A1C7DB38400324374 /* shebei_press@3x.png in Resources */,
 				33775AEF1D2E3BC00070742E /* 打勾.png in Resources */,
+				337F96121F0B928300840527 /* message_icon2.gif in Resources */,
 				334FF0BF1CF53C7C001E6716 /* text_bg.png in Resources */,
 				334FF0901CF53C7C001E6716 /* Documentation.html in Resources */,
 				33EFB67A1C9931D2003F336F /* 按钮2.png in Resources */,
@@ -4287,6 +4294,7 @@
 				335456C51C853AFD00275478 /* scanLine@2x.png in Resources */,
 				3343F3EB1C805BD2009F69BC /* LICENSE in Resources */,
 				335614A01CB3B8E90071BAC9 /* frame2@2x.png in Resources */,
+				337F96101F0B90F800840527 /* phone.png in Resources */,
 				338321CB1EEE35B7004FFC20 /* configure_nor.png in Resources */,
 				33771D521E8369B000786FCE /* zhushi11.png in Resources */,
 				338321C11EEE3370004FFC20 /* delete_nor.png in Resources */,

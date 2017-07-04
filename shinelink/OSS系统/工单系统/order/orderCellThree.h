@@ -18,6 +18,7 @@
 
 @property(nonatomic,strong) UILabel *titleLabel;
 @property(nonatomic,strong) UIImageView *titleImage;
+@property(nonatomic,strong) UILabel *remarkLabel;
 
 @property(nonatomic,strong) UILabel *contentLabel;
 @property(nonatomic,strong) UIButton *moreTextBtn;
@@ -29,12 +30,16 @@
 @property(nonatomic,strong)NSString *statusString;
 @property(nonatomic,strong)NSString *orderID;
 @property(nonatomic,strong)NSDictionary *allValueDic;
+@property(nonatomic,strong)NSArray *picArray;
+@property(nonatomic,strong)NSArray *picArray1;
+
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSDateFormatter *dayFormatter;
 @property (nonatomic, strong) UIToolbar *toolBar;
 @property (nonatomic, strong) UIDatePicker *date;
 @property(nonatomic,strong)NSString *goTimeString;
+@property(nonatomic,strong)NSString *remarkString;
 
 @property(nonatomic,strong)UITextView* textfield2;
 

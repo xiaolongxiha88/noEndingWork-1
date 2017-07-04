@@ -67,6 +67,10 @@
                  imageURL=[NSString stringWithFormat:@"%@/%@/%@",headURL,userID,_picArray[i]];
             }
          
+            if ([_TypeNum isEqualToString:@"2"]) {
+                imageURL=[NSString stringWithFormat:@"%@/%@",headURL,_picArray[i]];
+            }
+            
             UIImage * result;
             NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
             

@@ -286,7 +286,7 @@ static NSString *statusNum = @"3";
         _imageViewAll.backgroundColor =COLOR(242, 242, 242, 1);
         _imageViewAll.userInteractionEnabled = YES;
         if ([_statusString isEqualToString:statusNum]) {
-          [self.contentView addSubview:_imageViewAll];
+          [_scrollView addSubview:_imageViewAll];
         }
       
     }
@@ -326,7 +326,7 @@ static NSString *statusNum = @"3";
         _imageViewAll2.backgroundColor =COLOR(242, 242, 242, 1);
         _imageViewAll2.userInteractionEnabled = YES;
         if ([_statusString isEqualToString:statusNum]) {
-          [self.contentView addSubview:_imageViewAll2];
+          [_scrollView addSubview:_imageViewAll2];
         }
       
     }

@@ -182,7 +182,7 @@
      static NSString *cell44=@"cell4";
     aboutTableViewCell *cell1=[tableView dequeueReusableCellWithIdentifier:cell11];
     //aboutOneTableViewCell *cell2=[tableView dequeueReusableCellWithIdentifier:cell22];
-    aboutTableViewCell *cell4=[tableView dequeueReusableCellWithIdentifier:cell44];
+   // aboutTableViewCell *cell4=[tableView dequeueReusableCellWithIdentifier:cell44];
     aboutOneTableViewCell *cell3=[tableView dequeueReusableCellWithIdentifier:cell33];
     if(indexPath.row==0)
     {
