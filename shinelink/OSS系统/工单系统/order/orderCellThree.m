@@ -72,7 +72,7 @@
         [self.dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSString *dataString = [_dayFormatter stringFromDate:[NSDate date]];
         
-        NSArray *lableNameArray=[NSArray arrayWithObjects:@"所属区域:",@"申请时间:",@"要求到达时间:", @"预约上门时间:", @"详细地址:", @"备注:", nil];
+        NSArray *lableNameArray=[NSArray arrayWithObjects:@"完成时间:",@"完成状态:",@"报告单", @"现场图片", @"备注:", nil];
         NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], dataString, nil];
         
         float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;
@@ -86,7 +86,7 @@
                 }
                 lable1.text=@"*";
                 lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-                [_scrollView addSubview:lable1];
+             //   [_scrollView addSubview:lable1];
             }
             
             
@@ -110,10 +110,10 @@
                 if (i==3) {
                     image00.image=IMAGE(@"workoader_date2.png");
                 }
-                [_scrollView addSubview:image00];
+             //   [_scrollView addSubview:image00];
             }
             
-            float lable3W=firstW+lable1W+size.width+ImageW2+5*NOW_SIZE;
+            float lable3W=firstW+lable1W+size.width+10*NOW_SIZE;
             if ((i==0)||(i==1)||(i==2)||(i==3)) {
                 UILabel *lable3 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i,SCREEN_Width-(1*firstW)-lable3W, lableH)];
                 lable3.textColor = COLOR(154, 154, 154, 1);

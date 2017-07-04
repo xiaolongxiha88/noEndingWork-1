@@ -13,6 +13,7 @@
 
 @property(nonatomic,strong) UIView *titleView;
 @property(nonatomic,strong)UIView *View3;
+@property(nonatomic,strong)UIView *View5;
 
 @property(nonatomic, strong) Model *model;
 
@@ -93,6 +94,6 @@
  @param model 模型
  @return 展开高度
  */
-+ (CGFloat)moreHeight:(CGFloat )navigationH;
 
++ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status;
 @end

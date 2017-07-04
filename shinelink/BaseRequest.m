@@ -163,17 +163,17 @@ float Time=20.f;
 + (void)uplodImageWithMethod:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site dataImageDict:(NSMutableDictionary *)dataDict sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-     manager.requestSerializer.timeoutInterval=Time;
+     manager.requestSerializer.timeoutInterval=Time*2;
     NSString *url = [NSString stringWithFormat:@"%@%@",method,site];
     [UserInfo defaultUserInfo].R_timer.fireDate=[NSDate distantPast];
     
     [manager POST:url parameters:paramars constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSArray *keys = dataDict.allKeys;
         for (NSString *key in keys) {
-            if (![dataDict[key] isEqualToString:@""]) {
+        
                 NSData *data = [[NSData alloc] initWithData:dataDict[key]];
                 [formData appendPartWithFileData:data name:key fileName:key mimeType:@"image/png"];
-            }
+            
        
         }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {

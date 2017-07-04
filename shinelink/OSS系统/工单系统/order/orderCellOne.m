@@ -178,6 +178,11 @@ static NSString *statusNum = @"2";
                 View4.backgroundColor = COLOR(222, 222, 222, 1);
                 [_scrollView addSubview:View4];
             }
+            if (i==5) {
+               _View5 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*(5+1)-1*HEIGHT_SIZE, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+                _View5.backgroundColor = COLOR(222, 222, 222, 1);
+                [_scrollView addSubview:_View5];
+            }
             
             float textfieldW=firstW+lable1W+size.width+5*NOW_SIZE;
             float textW1=SCREEN_Width-firstW-(SCREEN_Width-(2*firstW));
@@ -242,22 +247,22 @@ static NSString *statusNum = @"2";
 
 -(void)finishSet{
     
-     _picArray=[NSMutableArray arrayWithObjects:@"",@"",@"", @"", @"", @"",@"",@"",@"",@"",nil];
+     //_picArray=[NSMutableArray arrayWithObjects:@"",@"",@"", @"", @"", @"",@"",@"",@"",@"",nil];
     
     NSMutableDictionary *dataImageDict = [NSMutableDictionary dictionary];
   
-    NSMutableArray *picAll=[NSMutableArray arrayWithArray:_picArray];
-    [picAll removeObject:@"del"];
-    for (int i=0; i<picAll.count; i++) {
-         NSString *imageName=[NSString stringWithFormat:@"image%d",i+1];
-        if ([picAll[i] isEqualToString:@""]) {
-                  [dataImageDict setObject:@"" forKey:imageName];
-        }else{
-            NSData *imageData = UIImageJPEGRepresentation(picAll[i], 0.5);
-            [dataImageDict setObject:imageData forKey:imageName];
-        }
-    
-    }
+//    NSMutableArray *picAll=[NSMutableArray arrayWithArray:_picArray];
+//    [picAll removeObject:@"del"];
+//    for (int i=0; i<picAll.count; i++) {
+//         NSString *imageName=[NSString stringWithFormat:@"image%d",i+1];
+//        if ([picAll[i] isEqualToString:@""]) {
+//                  [dataImageDict setObject:@"" forKey:imageName];
+//        }else{
+//            NSData *imageData = UIImageJPEGRepresentation(picAll[i], 0.5);
+//            [dataImageDict setObject:imageData forKey:imageName];
+//        }
+//    
+//    }
     
     NSMutableDictionary *allDict=[NSMutableDictionary dictionary];
     [allDict setObject:_orderID forKey:@"orderId"];
@@ -333,9 +338,13 @@ static NSString *statusNum = @"2";
         float x=_textfield2.frame.origin.x;
         float y=_textfield2.frame.origin.y;
     
+        float W1=_View5.frame.size.width;
+        float x1=_View5.frame.origin.x;
+   
         
      _textfield2.frame=CGRectMake(x,y , W, height);
-        
+    
+         _View5.frame = CGRectMake(x1, y+height,W1,1*HEIGHT_SIZE);
       
     }];
 }
@@ -417,10 +426,13 @@ static NSString *statusNum = @"2";
 }
 
 // MARK: - 获取展开后的高度
-+ (CGFloat)moreHeight:(CGFloat) navigationH{
++ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status{
     
-  
     float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-navigationH;
+    if (![status isEqualToString:@"2"]) {
+        H=250*HEIGHT_SIZE;
+    }
+
     
     return H;
     

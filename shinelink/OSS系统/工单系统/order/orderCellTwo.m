@@ -44,7 +44,7 @@ static NSString *statusNum = @"3";
     float ImageW1=26*HEIGHT_SIZE;  float firstW1=5*HEIGHT_SIZE;
     _titleImage = [[UIImageView alloc]initWithFrame:CGRectMake(firstW1, (viewW1-ImageW1)/2, ImageW1, ImageW1)];
     
-    if ([_statusString isEqualToString:statusNum]) {
+    if ([_statusString isEqualToString:statusNum] || [_statusString isEqualToString:@"2"]) {
         _titleImage.image=IMAGE(@"yuan_1.png");
     }else{
         _titleImage.image=IMAGE(@"yuan_2.png");
@@ -122,7 +122,10 @@ static NSString *statusNum = @"3";
         
         if ((i==3)||(i==1)||(i==2)) {
             UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(firstW+lineW-image2W, 8*HEIGHT_SIZE+numH*i, image2W,14*HEIGHT_SIZE )];
-            image2.userInteractionEnabled=YES;
+            if ([_statusString isEqualToString:statusNum]) {
+                 image2.userInteractionEnabled=YES;
+            }
+       
             image2.image=IMAGE(@"select_icon.png");
             UITapGestureRecognizer *labelTap1;
             image2.tag=4000+i;
@@ -152,7 +155,7 @@ static NSString *statusNum = @"3";
         }else{
          lable2.textColor = COLOR(154, 154, 154, 1);
         }
-  
+      
         lable2.text=lableNameArray[i];
         lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         if (i==6) {
@@ -161,9 +164,10 @@ static NSString *statusNum = @"3";
         if ([_statusString isEqualToString:statusNum]) {
             [_scrollView addSubview:lable2];
         }else{
-            if (i!=5) {
+            if ((i==0)||(i==1)||(i==2)||(i==3)||(i==4)) {
                 [_scrollView addSubview:lable2];
             }
+       
         }
         
         
@@ -189,14 +193,18 @@ static NSString *statusNum = @"3";
             lable4.frame=CGRectMake(SCREEN_Width-firstW-size1.width, 0+numH*i, size1.width, lableH);
             lable4.text=lable4Name;
             lable4.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-            [_scrollView addSubview:lable4];
+            if ([_statusString isEqualToString:statusNum]) {
+               [_scrollView addSubview:lable4];
+            }
+         
             
         }
         
         if ((i==0)||(i==1)||(i==2)||(i==3)) {
             UILabel *lable3 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i,SCREEN_Width-(1*firstW)-lable3W, lableH)];
-             lable3.textColor =COLOR(51, 51, 51, 1);
+         
             if ([_statusString isEqualToString:statusNum]) {
+                    lable3.textColor =COLOR(51, 51, 51, 1);
                 if ((i==1)||(i==2)||(i==3)) {
                     UITapGestureRecognizer * forget3;
                      lable3.userInteractionEnabled=YES;
@@ -208,10 +216,10 @@ static NSString *statusNum = @"3";
                         forget3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapInfo:)];
                     }
                     [lable3 addGestureRecognizer:forget3];
-                
-                
+  
                 }
-   
+            }else{
+             lable3.textColor = COLOR(154, 154, 154, 1);
             }
             
             lable3.tag=2000+i;
@@ -258,7 +266,10 @@ static NSString *statusNum = @"3";
     VI.tag=5000;
     UITapGestureRecognizer * forget1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(controlPhoto:)];
     [VI addGestureRecognizer:forget1];
-    [_scrollView addSubview:VI];
+    if ([_statusString isEqualToString:statusNum]) {
+        [_scrollView addSubview:VI];
+    }
+
     
     UIImageView *image4=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE, 20*HEIGHT_SIZE,20*HEIGHT_SIZE )];
     image4.userInteractionEnabled = YES;
@@ -274,7 +285,10 @@ static NSString *statusNum = @"3";
         _imageViewAll = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*7+40*HEIGHT_SIZE, SCREEN_Width-(2*firstW)+10*NOW_SIZE,ViewH)];
         _imageViewAll.backgroundColor =COLOR(242, 242, 242, 1);
         _imageViewAll.userInteractionEnabled = YES;
-        [self.contentView addSubview:_imageViewAll];
+        if ([_statusString isEqualToString:statusNum]) {
+          [self.contentView addSubview:_imageViewAll];
+        }
+      
     }
     
     
@@ -297,7 +311,10 @@ static NSString *statusNum = @"3";
     V2.tag=5001;
     UITapGestureRecognizer * forget3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(controlPhoto:)];
     [V2 addGestureRecognizer:forget3];
-    [_scrollView addSubview:V2];
+    if ([_statusString isEqualToString:statusNum]) {
+       [_scrollView addSubview:V2];
+    }
+ 
     
     UIImageView *image5=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE, 20*HEIGHT_SIZE,20*HEIGHT_SIZE )];
     image5.userInteractionEnabled = YES;
@@ -308,7 +325,10 @@ static NSString *statusNum = @"3";
         _imageViewAll2 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+100*HEIGHT_SIZE, SCREEN_Width-(2*firstW)+10*NOW_SIZE,ViewH)];
         _imageViewAll2.backgroundColor =COLOR(242, 242, 242, 1);
         _imageViewAll2.userInteractionEnabled = YES;
-        [self.contentView addSubview:_imageViewAll2];
+        if ([_statusString isEqualToString:statusNum]) {
+          [self.contentView addSubview:_imageViewAll2];
+        }
+      
     }
     
     NSString *lable7Name=@"备注:";
@@ -322,6 +342,13 @@ static NSString *statusNum = @"3";
     if ([_statusString isEqualToString:statusNum]) {
         [_scrollView addSubview:lable7];
     }
+    
+    _View5 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+120*HEIGHT_SIZE+lableH, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+    _View5.backgroundColor = COLOR(222, 222, 222, 1);
+    if ([_statusString isEqualToString:statusNum]) {
+     [_scrollView addSubview:_View5];
+    }
+   
     
     if ([_statusString isEqualToString:statusNum]) {
      
@@ -338,7 +365,7 @@ static NSString *statusNum = @"3";
     _goBut.frame=CGRectMake(60*NOW_SIZE,_textfield2.frame.origin.y+100*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
     [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
-    [_goBut setTitle:@"接收" forState:UIControlStateNormal];
+    [_goBut setTitle:@"完成" forState:UIControlStateNormal];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [_goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
     
@@ -346,7 +373,8 @@ static NSString *statusNum = @"3";
         [_scrollView addSubview:_goBut];
     }
     
-    
+     _picArray=[NSMutableArray new];
+        _picArray2=[NSMutableArray new];
     
 }
 
@@ -729,29 +757,44 @@ static NSString *statusNum = @"3";
 
 -(void)finishSet{
     
-    _picArray=[NSMutableArray arrayWithObjects:@"",@"",@"", @"", @"", @"",@"",@"",@"",@"",nil];
+    NSString *locationString=((UILabel*)[_scrollView viewWithTag:2000]).text;
+    NSString *timeString=((UILabel*)[_scrollView viewWithTag:2001]).text;
+     NSString *deviceSnString=[_textfield text];
+    
+
     
     NSMutableDictionary *dataImageDict = [NSMutableDictionary dictionary];
     
     NSMutableArray *picAll=[NSMutableArray arrayWithArray:_picArray];
     [picAll removeObject:@"del"];
+    
     for (int i=0; i<picAll.count; i++) {
         NSString *imageName=[NSString stringWithFormat:@"image%d",i+1];
-        if ([picAll[i] isEqualToString:@""]) {
-            [dataImageDict setObject:@"" forKey:imageName];
-        }else{
-            NSData *imageData = UIImageJPEGRepresentation(picAll[i], 0.5);
-            [dataImageDict setObject:imageData forKey:imageName];
-        }
-        
+        NSData *imageData = UIImageJPEGRepresentation(picAll[i], 0.5);
+        [dataImageDict setObject:imageData forKey:imageName];
     }
+    
+
+    
+    NSMutableArray *picAll2=[NSMutableArray arrayWithArray:_picArray2];
+    [picAll2 removeObject:@"del"];
+    
+    for (int i=0; i<picAll2.count; i++) {
+        NSString *imageName=[NSString stringWithFormat:@"image%d",i+6];
+        NSData *imageData = UIImageJPEGRepresentation(picAll2[i], 0.5);
+        [dataImageDict setObject:imageData forKey:imageName];
+    }
+    
     
     NSMutableDictionary *allDict=[NSMutableDictionary dictionary];
     [allDict setObject:_orderID forKey:@"orderId"];
     [allDict setObject:_statusString forKey:@"status"];
-    [allDict setObject:_goTimeString forKey:@"appointment"];
-    [allDict setObject:_textfield.text forKey:@"address"];
-    [allDict setObject:_textfield2.text forKey:@"remarks"];
+    [allDict setObject:locationString forKey:@"location"];
+    [allDict setObject:timeString forKey:@"completeTime"];
+    [allDict setObject:_orderType forKey:@"completeType"];
+        [allDict setObject:_deviceType forKey:@"deviceType"];
+        [allDict setObject:deviceSnString forKey:@"deviseSerialNumber"];
+      [allDict setObject:[_textfield2 text] forKey:@"remarks"];
     
     [self showProgressView];
     [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v1/workOrder/work/perfect_info" dataImageDict:dataImageDict sucessBlock:^(id content) {
@@ -820,6 +863,10 @@ static NSString *statusNum = @"3";
         float x=_textfield2.frame.origin.x;
         float y=_textfield2.frame.origin.y;
         
+        float W1=_View5.frame.size.width;
+        float x1=_View5.frame.origin.x;
+        
+        _View5.frame = CGRectMake(x1, y+height,W1,1*HEIGHT_SIZE);
         
         _textfield2.frame=CGRectMake(x,y , W, height);
         
@@ -846,6 +893,7 @@ static NSString *statusNum = @"3";
     [super layoutSubviews];
     
     if (!_scrollView) {
+        
         [self initUI];
     }
     
@@ -861,9 +909,22 @@ static NSString *statusNum = @"3";
     L2.text=lableNameArray2[1];
     
     UILabel *L3=[_scrollView viewWithTag:2002];
-    L3.text=lableNameArray2[2];
+    if ([_allValueDic[@"completeState"] intValue]==1) {
+         L3.text=@"待观察";
+    }else if ([_allValueDic[@"completeState"] intValue]==2) {
+          L3.text=@"已完成";
+    }
+
     
     UILabel *L4=[_scrollView viewWithTag:2003];
+    if ([_allValueDic[@"deviceType"] intValue]==1) {
+         L4.text=@"逆变器";
+    }else if ([_allValueDic[@"deviceType"] intValue]==2) {
+        L4.text=@"储能机";
+    }else if ([_allValueDic[@"deviceType"] intValue]==3) {
+        L4.text=@"采集器";
+    }
+    
     
     
     if ([_statusString isEqualToString:statusNum]) {
@@ -878,8 +939,8 @@ static NSString *statusNum = @"3";
     }
     
     if (![_statusString isEqualToString:statusNum]) {
-        L4.text=[NSString stringWithFormat:@"%@",_allValueDic[@"appointment"]];
-        _textfield.text=[NSString stringWithFormat:@"%@",_allValueDic[@"address"]];
+   
+        _textfield.text=[NSString stringWithFormat:@"%@",_allValueDic[@"deviseSerialNumber"]];
     }
     
     if (self.model.isShowMoreText){ // 展开状态
@@ -908,10 +969,13 @@ static NSString *statusNum = @"3";
 }
 
 // MARK: - 获取展开后的高度
-+ (CGFloat)moreHeight:(CGFloat) navigationH{
-    
++ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status{
     
     float H=620*HEIGHT_SIZE;
+    if (![status isEqualToString:@"3"]) {
+        H=270*HEIGHT_SIZE;
+    }
+   
     
     return H;
     

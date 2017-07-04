@@ -249,10 +249,10 @@ static NSString *cellThree = @"cellThree";
     
     if (model.isShowMoreText){
         if (indexPath.row==0) {
-             return [orderCellOne moreHeight:H];
+             return [orderCellOne moreHeight:H status:_statusString];
         }else if (indexPath.row==1){
        
-                return [orderCellTwo moreHeight:H];
+                return [orderCellTwo moreHeight:H status:_statusString];
         }else if (indexPath.row==2){
              return [orderCellThree moreHeight:H];
               
