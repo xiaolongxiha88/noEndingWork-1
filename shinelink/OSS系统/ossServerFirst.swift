@@ -34,6 +34,12 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     var questionOrOrder:Int!
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+          self.initNet1()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap=UITapGestureRecognizer(target: self, action: #selector(keyboardHide(tap:)))
@@ -108,7 +114,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         self.initButton(buttonArray: ["全部问题","待处理","待跟进","处理中","已处理"], name1: "全部问题", name2: "数量:111个")
         
-        self.initNet1()
+      
     }
     
     func initButton(buttonArray:NSArray,name1:NSString,name2:NSString){

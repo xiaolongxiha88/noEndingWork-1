@@ -49,13 +49,19 @@ static NSString *cellThree = @"cellThree";
     H2=self.navigationController.navigationBar.frame.size.height;
     H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
    
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(regetNet) name:@"regetNet" object:nil];
+    
     [self finishSet];
 }
 
 -(void)initData{
     _statusString=[NSString stringWithFormat:@"%@",_allValueDic[@"status"]];
+    
+    if ([_statusString isEqualToString:@"2"]) {
     _titleArray=[NSArray arrayWithObjects:@"待接收",@"服务中",@"已完成", nil];
-
+    }else{
+    _titleArray=[NSArray arrayWithObjects:@"已接收",@"服务中",@"已完成", nil];
+    }
     if ([_statusString isEqualToString:@"4"]) {
         NSString *questionPIC=[NSString stringWithFormat:@"%@",_allValueDic[@"fieldService"]];
         _picArray = [questionPIC componentsSeparatedByString:@"_"];
@@ -70,28 +76,42 @@ static NSString *cellThree = @"cellThree";
         if ([_statusString isEqualToString:@"2"]) {
             if (i==0) {
                 model.isShowMoreText=YES;
+            }else{
+             model.isShowMoreText=NO;
             }
         }else if ([_statusString isEqualToString:@"3"]){
             if (i==1) {
                 model.isShowMoreText=YES;
+            }else{
+                model.isShowMoreText=NO;
             }
         }else if ([_statusString isEqualToString:@"4"]){
             if (i==2) {
                 model.isShowMoreText=YES;
+            }else{
+                model.isShowMoreText=NO;
             }
         }
         [arrM addObject:model];
     }
     _modelList = arrM.copy;
 
-     [self initHeadView];
+    if (_tableView) {
+        [_tableView removeFromSuperview];
+        _tableView=nil;
+           [self initHeadView];
+    }else{
+       [self initHeadView];
+    }
+    
+  
 }
 
 
 -(void)initUI{
     if (!_tableView) {
-        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height)];
-        _tableView.contentSize=CGSizeMake(SCREEN_Width, 1000*HEIGHT_SIZE);
+        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height-H1-H2)];
+        _tableView.contentSize=CGSizeMake(SCREEN_Width, 2000*HEIGHT_SIZE);
         _tableView.delegate = self;
         _tableView.dataSource = self;
          _tableView.tableHeaderView=_headView;
@@ -242,6 +262,11 @@ static NSString *cellThree = @"cellThree";
     return _modelList.count;
 }
 
+-(void)regetNet{
+    [self finishSet];
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.row==0) {
@@ -294,22 +319,30 @@ static NSString *cellThree = @"cellThree";
 // MARK: - 返回cell高度的代理方法
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    CGFloat H=H1+H2;
-    
+
       Model *model = _modelList[indexPath.row];
+    
+     float firstW=25*NOW_SIZE; CGFloat H=H1+H2;
+    NSString*remarkH=_allValueDic[@"remarks"];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+    CGSize size = [remarkH boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+       float remarkLabelH;float lableH=30*HEIGHT_SIZE;
+    if (lableH>(size.height+10*HEIGHT_SIZE)) {
+        remarkLabelH=lableH;
+    }else{
+        remarkLabelH=size.height+10*HEIGHT_SIZE;
+    }
     
     if (model.isShowMoreText){
         if (indexPath.row==0) {
-             return [orderCellOne moreHeight:H status:_statusString];
+             return [orderCellOne moreHeight:H status:_statusString remarkH:remarkLabelH];
         }else if (indexPath.row==1){
        
-                return [orderCellTwo moreHeight:H status:_statusString];
+                return [orderCellTwo moreHeight:H status:_statusString remarkH:remarkLabelH];
         }else if (indexPath.row==2){
-            float firstW=25*NOW_SIZE;
-            NSString*remarkH=_allValueDic[@"remarks"];
-            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
-            CGSize size = [remarkH boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-             return [orderCellThree moreHeight:size.height];
+           
+            
+             return [orderCellThree moreHeight:remarkLabelH];
               
         }else{
             return 1*HEIGHT_SIZE;

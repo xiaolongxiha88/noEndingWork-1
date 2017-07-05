@@ -39,12 +39,13 @@
 @property (nonatomic, strong) UIToolbar *toolBar;
 @property (nonatomic, strong) UIDatePicker *date;
 @property(nonatomic,strong)NSString *goTimeString;
+@property(nonatomic,strong)NSString *remarkString;
 
 @property(nonatomic,strong)UITextView* textfield2;
 
 @property(nonatomic, copy) void(^showMoreBlock)(UITableViewCell *currentCell);
 
-
+@property(nonatomic,strong) UIButton *goBut;
 
 /**
  默认高度
@@ -60,6 +61,8 @@
  @param model 模型
  @return 展开高度
  */
-+ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status;
+//+ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status;
++ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status remarkH:(CGFloat) remarkH;
+
 
 @end

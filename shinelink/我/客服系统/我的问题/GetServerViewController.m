@@ -103,7 +103,7 @@
 -(void)initUI{
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*NOW_SIZE, SCREEN_Width, SCREEN_Height)];
     _scrollView.scrollEnabled=YES;
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,900*NOW_SIZE);
+    _scrollView.contentSize = CGSizeMake(SCREEN_Width,1500*NOW_SIZE);
     [self.view addSubview:_scrollView];
     
     for (int i=0; i<_imageArray.count; i++) {
@@ -131,7 +131,7 @@
 
 
 -(void)moreBigImage:(UITapGestureRecognizer*)tap{
-    int K=tap.view.tag-1000;
+    int K=(int)tap.view.tag-1000;
     
     moreBigImage *go=[[moreBigImage alloc]init];
    go.paramsImageArray=[NSMutableArray arrayWithObject:_imageArray[K]];

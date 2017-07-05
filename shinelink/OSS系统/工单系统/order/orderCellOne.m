@@ -30,7 +30,7 @@ static NSString *statusNum = @"2";
 
      //   self.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        float viewW1=34*HEIGHT_SIZE;
+        float viewW1=34*HEIGHT_SIZE;    float remarkLabelH = 0.0;
         
         _titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width,viewW1)];
         _titleView.backgroundColor =COLOR(242, 242, 242, 1);
@@ -97,13 +97,13 @@ static NSString *statusNum = @"2";
         NSString *dataString = [_dayFormatter stringFromDate:[NSDate date]];
         _goTimeString=dataString;
         
-        NSArray *lableNameArray=[NSArray arrayWithObjects:@"所属区域:",@"申请时间:",@"要求到达时间:", @"预约上门时间:", @"详细地址:", @"备注:", nil];
+        NSArray *lableNameArray=[NSArray arrayWithObjects:@"所属区域:",@"申请时间:",@"要求到达时间:", @"预约上门时间:", @"详细地址:", @"备注:",@"添加备注:", nil];
         NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"groupName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], dataString, nil];
         
         float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;
         for (int i=0; i<lableNameArray.count; i++) {
             
-            if (i!=5) {
+              if ((i==0)||(i==1)||(i==2)||(i==3)||(i==4)) {
                 UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(firstW, 2*HEIGHT_SIZE+numH*i,lable1W, lableH)];
                 lable1.textColor = COLOR(154, 154, 154, 1);
                 if ([_statusString isEqualToString:statusNum]) {
@@ -132,9 +132,12 @@ static NSString *statusNum = @"2";
             lable2.text=lableNameArray[i];
             lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
             if ([_statusString isEqualToString:statusNum]) {
-                [_scrollView addSubview:lable2];
+                if (i!=6) {
+                   [_scrollView addSubview:lable2];
+                }
+             
             }else{
-                if (i!=5) {
+                  if ((i==1)||(i==2)||(i==3)||(i==0)||(i==4)) {
                     [_scrollView addSubview:lable2];
                 }
             }
@@ -178,19 +181,74 @@ static NSString *statusNum = @"2";
                 View4.backgroundColor = COLOR(222, 222, 222, 1);
                 [_scrollView addSubview:View4];
             }
-            if (i==5) {
-               _View5 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*(5+1)-1*HEIGHT_SIZE, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
-                _View5.backgroundColor = COLOR(222, 222, 222, 1);
-                [_scrollView addSubview:_View5];
-            }
+            
+            
+            
+  
             
             float textfieldW=firstW+lable1W+size.width+5*NOW_SIZE;
             float textW1=SCREEN_Width-firstW-(SCREEN_Width-(2*firstW));
             float textW=SCREEN_Width-textfieldW-textW1;
+            
+            CGSize size1= [_remarkString boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        
+            if (lableH>(size1.height+10*HEIGHT_SIZE)) {
+                remarkLabelH=lableH;
+            }else{
+                remarkLabelH=size1.height+10*HEIGHT_SIZE;
+            }
+            if (i==5) {
+                if ([_statusString isEqualToString:statusNum]) {
+                    UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*5+2*HEIGHT_SIZE,textW, remarkLabelH)];
+                    lableR.textColor = COLOR(154, 154, 154, 1);
+                    lableR.text=_remarkString;
+                    lableR.numberOfLines=0;
+                    lableR.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+                    [_scrollView addSubview:lableR];
+                    
+                    UIView* lineR = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*(5)+5*HEIGHT_SIZE-1*HEIGHT_SIZE+remarkLabelH, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+                    lineR.backgroundColor = COLOR(222, 222, 222, 1);
+                    [_scrollView addSubview:lineR];
+                }
+  
+            }
+    
+            
+            if (i==6) {
+                UILabel *lableR2= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W,5*HEIGHT_SIZE+numH*5+remarkLabelH,size.width, lableH)];
+                lableR2.textColor = COLOR(51, 51, 51, 1);
+                lableR2.text=lableNameArray[i];
+                lableR2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+                if ([_statusString isEqualToString:statusNum]) {
+                    [_scrollView addSubview:lableR2];
+                }
+                
+                if ([_statusString isEqualToString:statusNum]) {
+                    if (i==6) {
+                        _textfield2 = [[UITextView alloc] initWithFrame:CGRectMake(textfieldW,5*HEIGHT_SIZE+numH*5+remarkLabelH,textW, lableH)];
+                        _textfield2.textColor=COLOR(51, 51, 51, 1);
+                        _textfield2.tintColor = COLOR(51, 51, 51, 1);
+                        _textfield2.delegate=self;
+                        _textfield2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+                        [_scrollView addSubview:_textfield2];
+                    }
+                    
+               
+                        _View5 = [[UIView alloc]initWithFrame:CGRectMake(firstW, 5*HEIGHT_SIZE+numH*5+remarkLabelH+lableH-1*HEIGHT_SIZE, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+                        _View5.backgroundColor = COLOR(222, 222, 222, 1);
+                        [_scrollView addSubview:_View5];
+                 
+                }
+                
+        
+            }
+  
+
+            
+            
             if (i==4) {
                 _textfield = [[UITextField alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i,textW, lableH)];
-                
-                
+
                 [_textfield setValue:COLOR(154, 154, 154, 1) forKeyPath:@"_placeholderLabel.textColor"];
                 [_textfield setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
                 _textfield.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -209,31 +267,22 @@ static NSString *statusNum = @"2";
             
             
             // CGSize size1= [textfieldString boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-            if ([_statusString isEqualToString:statusNum]) {
-                if (i==5) {
-                    _textfield2 = [[UITextView alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i,textW, lableH)];
-                    _textfield2.textColor=COLOR(51, 51, 51, 1);
-                    _textfield2.tintColor = COLOR(51, 51, 51, 1);
-                    _textfield2.delegate=self;
-                    _textfield2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-                    [_scrollView addSubview:_textfield2];
-                }
-            }
+ 
             
             
         }
         
         
-        UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-        goBut.frame=CGRectMake(60*NOW_SIZE,numH*5+85*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
-        [goBut setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
-        [goBut setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
-        [goBut setTitle:@"接收" forState:UIControlStateNormal];
-        goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
-        [goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
+        _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
+        _goBut.frame=CGRectMake(60*NOW_SIZE,numH*5+95*HEIGHT_SIZE+remarkLabelH, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+        [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
+        [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
+        [_goBut setTitle:@"接收" forState:UIControlStateNormal];
+        _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
+        [_goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
         
         if ([_statusString isEqualToString:statusNum]) {
-            [_scrollView addSubview:goBut];
+            [_scrollView addSubview:_goBut];
         }
         
         
@@ -269,7 +318,9 @@ static NSString *statusNum = @"2";
     [allDict setObject:_statusString forKey:@"status"];
     [allDict setObject:_goTimeString forKey:@"appointment"];
        [allDict setObject:_textfield.text forKey:@"address"];
-       [allDict setObject:_textfield2.text forKey:@"remarks"];
+    
+    NSString*remarkAll=[NSString stringWithFormat:@"%@%@",_remarkString,_textfield2.text];
+       [allDict setObject:remarkAll forKey:@"remarks"];
     
     [self showProgressView];
    [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v1/workOrder/work/perfect_info" dataImageDict:dataImageDict sucessBlock:^(id content) {
@@ -286,6 +337,10 @@ static NSString *statusNum = @"2";
               [self showToastViewWithTitle:@"接收成功"];
          _titleLabel.text=@"已接收";
                   _titleImage.image=IMAGE(@"yuan_2.png");
+                
+                [self showMoreText];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"regetNet" object:nil];
+                
             }else{
                 [self showToastViewWithTitle:firstDic[@"msg"]];
               
@@ -367,6 +422,8 @@ static NSString *statusNum = @"2";
 {
     [super layoutSubviews];
     
+    _remarkString=_allValueDic[@"remarks"];
+    
     if (!_scrollView) {
             [self initUI];
     }
@@ -390,7 +447,7 @@ static NSString *statusNum = @"2";
 
     if ([_statusString isEqualToString:statusNum]) {
         _titleImage.image=IMAGE(@"yuan_1.png");
-        _textfield2.text=[NSString stringWithFormat:@"%@",_allValueDic[@"remarks"]];
+       // _textfield2.text=[NSString stringWithFormat:@"%@",_allValueDic[@"remarks"]];
     }else{
         _titleImage.image=IMAGE(@"yuan_2.png");
     }
@@ -403,11 +460,12 @@ static NSString *statusNum = @"2";
        if (self.model.isShowMoreText){ // 展开状态
         // 计算文本高度
            float y=_scrollView.frame.origin.y;
-     _scrollView.frame=CGRectMake(0, y, SCREEN_Width, SCREEN_Height);
+           float buttonY=_goBut.frame.origin.y;
+     _scrollView.frame=CGRectMake(0, y, SCREEN_Width, buttonY+100*HEIGHT_SIZE);
            
-             float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-70*HEIGHT_SIZE;
+ //           float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-70*HEIGHT_SIZE;
            float Vx=_View3.frame.origin.x; float Vy=_View3.frame.origin.y;
-                _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,H);
+                _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,buttonY+100*HEIGHT_SIZE);
            
         [_moreTextBtn setImage:IMAGE(@"oss_more_up.png") forState:UIControlStateNormal];
            
@@ -426,9 +484,9 @@ static NSString *statusNum = @"2";
 }
 
 // MARK: - 获取展开后的高度
-+ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status{
++ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status remarkH:(CGFloat) remarkH{
     
-    float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-navigationH;
+    float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-navigationH+remarkH+40*HEIGHT_SIZE;
     if (![status isEqualToString:@"2"]) {
         H=250*HEIGHT_SIZE;
     }

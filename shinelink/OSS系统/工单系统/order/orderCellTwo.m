@@ -279,10 +279,10 @@ static NSString *statusNum = @"3";
     
 
     
-    float imageH=40*HEIGHT_SIZE;
+    float imageH=40*HEIGHT_SIZE; float imageH2=40*HEIGHT_SIZE;
      float ViewH=imageH+10*HEIGHT_SIZE;
     if (!_imageViewAll) {
-        _imageViewAll = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*7+40*HEIGHT_SIZE, SCREEN_Width-(2*firstW)+10*NOW_SIZE,ViewH)];
+        _imageViewAll = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*7+40*HEIGHT_SIZE-imageH2, SCREEN_Width-(2*firstW)+10*NOW_SIZE,ViewH)];
         _imageViewAll.backgroundColor =COLOR(242, 242, 242, 1);
         _imageViewAll.userInteractionEnabled = YES;
         if ([_statusString isEqualToString:statusNum]) {
@@ -322,7 +322,7 @@ static NSString *statusNum = @"3";
     [V2 addSubview:image5];
     
     if (!_imageViewAll2) {
-        _imageViewAll2 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+100*HEIGHT_SIZE, SCREEN_Width-(2*firstW)+10*NOW_SIZE,ViewH)];
+        _imageViewAll2 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+100*HEIGHT_SIZE-imageH2, SCREEN_Width-(2*firstW)+10*NOW_SIZE,ViewH)];
         _imageViewAll2.backgroundColor =COLOR(242, 242, 242, 1);
         _imageViewAll2.userInteractionEnabled = YES;
         if ([_statusString isEqualToString:statusNum]) {
@@ -343,21 +343,59 @@ static NSString *statusNum = @"3";
         [_scrollView addSubview:lable7];
     }
     
-    _View5 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+120*HEIGHT_SIZE+lableH, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
-    _View5.backgroundColor = COLOR(222, 222, 222, 1);
-    if ([_statusString isEqualToString:statusNum]) {
-     [_scrollView addSubview:_View5];
+    CGSize size2= [_remarkString boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW)-size3.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    float remarkLabelH = 0.0;
+    if (lableH>(size2.height+10*HEIGHT_SIZE)) {
+        remarkLabelH=lableH;
+    }else{
+        remarkLabelH=size2.height+10*HEIGHT_SIZE;
     }
+
+    if ([_statusString isEqualToString:statusNum]) {
+        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+120*HEIGHT_SIZE+2*HEIGHT_SIZE, SCREEN_Width-(2*firstW)-lable1W-size3.width,remarkLabelH)];
+        lableR.textColor = COLOR(154, 154, 154, 1);
+        lableR.text=_remarkString;
+        lableR.numberOfLines=0;
+        lableR.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        [_scrollView addSubview:lableR];
+        
+        UIView* lineR = [[UIView alloc]initWithFrame:CGRectMake(firstW,  numH*8+120*HEIGHT_SIZE+5*HEIGHT_SIZE-1*HEIGHT_SIZE+remarkLabelH, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+        lineR.backgroundColor = COLOR(222, 222, 222, 1);
+        [_scrollView addSubview:lineR];
+    }
+    
+    
+
+
    
     
     if ([_statusString isEqualToString:statusNum]) {
      
-            _textfield2 = [[UITextView alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+120*HEIGHT_SIZE, SCREEN_Width-(2*firstW)-lable1W-size3.width,lableH)];
+        NSString *lable8Name=@"添加备注:";
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        CGSize size3 = [lable8Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        
+        UILabel *lable8= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*8+125*HEIGHT_SIZE+remarkLabelH,size3.width, lableH)];
+        lable8.textColor =COLOR(51, 51, 51, 1);
+        lable8.text=lable8Name;
+        lable8.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        if ([_statusString isEqualToString:statusNum]) {
+            [_scrollView addSubview:lable8];
+        }
+        
+            _textfield2 = [[UITextView alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+125*HEIGHT_SIZE+remarkLabelH, SCREEN_Width-(2*firstW)-lable1W-size3.width,lableH)];
             _textfield2.textColor=COLOR(51, 51, 51, 1);
             _textfield2.tintColor = COLOR(51, 51, 51, 1);
             _textfield2.delegate=self;
             _textfield2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
             [_scrollView addSubview:_textfield2];
+        
+        _View5 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+125*HEIGHT_SIZE+lableH+remarkLabelH, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+        _View5.backgroundColor = COLOR(222, 222, 222, 1);
+        if ([_statusString isEqualToString:statusNum]) {
+            [_scrollView addSubview:_View5];
+        }
+        
             }
     
     
@@ -382,14 +420,19 @@ static NSString *statusNum = @"3";
 -(void)controlPhoto:(UITapGestureRecognizer*)Tap{
     if (Tap.view.tag==5000) {
         _picGetType=@"1";
+        if (_image1 &&_image2 &&_image3&&_image4&&_image5) {
+            [self showToastViewWithTitle:@"最多上传5张图片"];
+            return;
+        }
     }
     if (Tap.view.tag==5001) {
         _picGetType=@"2";
+        if (_image6 &&_image7 &&_image8&&_image9&&_image10) {
+            [self showToastViewWithTitle:@"最多上传5张图片"];
+            return;
+        }
     }
-    if (_image1 &&_image2 &&_image3&&_image4&&_image5) {
-                   [self showToastViewWithTitle:@"最多上传5张图片"];
-        return;
-    }
+
         
      
         
@@ -794,7 +837,9 @@ static NSString *statusNum = @"3";
     [allDict setObject:_orderType forKey:@"completeType"];
         [allDict setObject:_deviceType forKey:@"deviceType"];
         [allDict setObject:deviceSnString forKey:@"deviseSerialNumber"];
-      [allDict setObject:[_textfield2 text] forKey:@"remarks"];
+    
+       NSString*remarkAll=[NSString stringWithFormat:@"%@%@",_remarkString,_textfield2.text];
+      [allDict setObject:remarkAll forKey:@"remarks"];
     
     [self showProgressView];
     [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v1/workOrder/work/perfect_info" dataImageDict:dataImageDict sucessBlock:^(id content) {
@@ -811,6 +856,10 @@ static NSString *statusNum = @"3";
                 [self showToastViewWithTitle:@"接收成功"];
                 _titleLabel.text=@"已接收";
                 _titleImage.image=IMAGE(@"yuan_2.png");
+                
+                [self showMoreText];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"regetNet" object:nil];
+                
             }else{
                 [self showToastViewWithTitle:firstDic[@"msg"]];
                 
@@ -892,8 +941,9 @@ static NSString *statusNum = @"3";
 {
     [super layoutSubviews];
     
-    if (!_scrollView) {
-        
+     _remarkString=_allValueDic[@"remarks"];
+    
+    if (!_scrollView) { 
         [self initUI];
     }
     
@@ -928,7 +978,7 @@ static NSString *statusNum = @"3";
     
     
     if ([_statusString isEqualToString:statusNum]) {
-        _textfield2.text=[NSString stringWithFormat:@"%@",_allValueDic[@"remarks"]];
+    //    _textfield2.text=[NSString stringWithFormat:@"%@",_allValueDic[@"remarks"]];
           L3.text=@"";
     }
     
@@ -946,11 +996,14 @@ static NSString *statusNum = @"3";
     if (self.model.isShowMoreText){ // 展开状态
         // 计算文本高度
         float y=_scrollView.frame.origin.y;
-        _scrollView.frame=CGRectMake(0, y, SCREEN_Width, SCREEN_Height);
+       
+           float buttonY=_goBut.frame.origin.y;
         
       //  float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-40*HEIGHT_SIZE;
         float Vx=_View3.frame.origin.x; float Vy=_View3.frame.origin.y;
-        _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,620*HEIGHT_SIZE);
+        
+         _scrollView.frame=CGRectMake(0, y, SCREEN_Width, buttonY+60*HEIGHT_SIZE);
+        _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,buttonY+170*HEIGHT_SIZE);
         
         [_moreTextBtn setImage:IMAGE(@"oss_more_up.png") forState:UIControlStateNormal];
         
@@ -969,9 +1022,9 @@ static NSString *statusNum = @"3";
 }
 
 // MARK: - 获取展开后的高度
-+ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status{
++ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status remarkH:(CGFloat) remarkH{
     
-    float H=620*HEIGHT_SIZE;
+    float H=620*HEIGHT_SIZE+remarkH-20*HEIGHT_SIZE;
     if (![status isEqualToString:@"3"]) {
         H=270*HEIGHT_SIZE;
     }

@@ -78,7 +78,7 @@
     _scrollView.scrollEnabled=YES;
     [self.contentView addSubview:_scrollView];
     
-    _View3 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+ImageW1/2, 0, 0.3*NOW_SIZE,38*HEIGHT_SIZE)];
+    _View3 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+ImageW1/2, 0, 0.3*NOW_SIZE,34*HEIGHT_SIZE)];
   
     if ([_statusString isEqualToString:@"4"]) {
         _View3.backgroundColor =COLOR(255, 204, 0, 1);

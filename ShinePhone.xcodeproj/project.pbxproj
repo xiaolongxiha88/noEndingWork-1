@@ -410,7 +410,13 @@
 		337CB59D1DB4A837002ABB88 /* firstToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB59C1DB4A837002ABB88 /* firstToolViewController.m */; };
 		337CB5A11DB608B0002ABB88 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 337CB5A01DB608B0002ABB88 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		337F96101F0B90F800840527 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F960F1F0B90F800840527 /* phone.png */; };
-		337F96121F0B928300840527 /* message_icon2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337F96111F0B928300840527 /* message_icon2.gif */; };
+		337F96141F0CCA8B00840527 /* workorderFirst.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F96131F0CCA8B00840527 /* workorderFirst.png */; };
+		337F96181F0CCB2900840527 /* follow-up.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F96171F0CCB2900840527 /* follow-up.png */; };
+		337F961A1F0CCB8B00840527 /* Untreated1111.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F96191F0CCB8B00840527 /* Untreated1111.png */; };
+		337F961C1F0CCBCA00840527 /* Follow-up2.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F961B1F0CCBCA00840527 /* Follow-up2.png */; };
+		337F961E1F0CCBD000840527 /* Untreated22.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F961D1F0CCBD000840527 /* Untreated22.png */; };
+		337F96201F0CCDBE00840527 /* firstGo.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F961F1F0CCDBE00840527 /* firstGo.png */; };
+		337F96221F0CE6BA00840527 /* message_icon2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337F96211F0CE6BA00840527 /* message_icon2.gif */; };
 		337F9C851C71A6710016FE43 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9C841C71A6710016FE43 /* main.m */; };
 		337F9C881C71A6710016FE43 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 337F9C871C71A6710016FE43 /* AppDelegate.m */; };
 		337F9C931C71A6710016FE43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 337F9C921C71A6710016FE43 /* Assets.xcassets */; };
@@ -1338,7 +1344,13 @@
 		337CB59E1DB6010C002ABB88 /* ShinePhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShinePhone.entitlements; sourceTree = "<group>"; };
 		337CB5A01DB608B0002ABB88 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		337F960F1F0B90F800840527 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
-		337F96111F0B928300840527 /* message_icon2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = message_icon2.gif; sourceTree = "<group>"; };
+		337F96131F0CCA8B00840527 /* workorderFirst.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = workorderFirst.png; sourceTree = "<group>"; };
+		337F96171F0CCB2900840527 /* follow-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow-up.png"; sourceTree = "<group>"; };
+		337F96191F0CCB8B00840527 /* Untreated1111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Untreated1111.png; sourceTree = "<group>"; };
+		337F961B1F0CCBCA00840527 /* Follow-up2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Follow-up2.png"; sourceTree = "<group>"; };
+		337F961D1F0CCBD000840527 /* Untreated22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Untreated22.png; sourceTree = "<group>"; };
+		337F961F1F0CCDBE00840527 /* firstGo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = firstGo.png; sourceTree = "<group>"; };
+		337F96211F0CE6BA00840527 /* message_icon2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = message_icon2.gif; sourceTree = "<group>"; };
 		337F9C801C71A6710016FE43 /* ShinePhone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShinePhone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		337F9C841C71A6710016FE43 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		337F9C861C71A6710016FE43 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2876,6 +2888,13 @@
 		336F04151F06207300DE7CD7 /* order图片 */ = {
 			isa = PBXGroup;
 			children = (
+				337F96211F0CE6BA00840527 /* message_icon2.gif */,
+				337F961F1F0CCDBE00840527 /* firstGo.png */,
+				337F961D1F0CCBD000840527 /* Untreated22.png */,
+				337F961B1F0CCBCA00840527 /* Follow-up2.png */,
+				337F96191F0CCB8B00840527 /* Untreated1111.png */,
+				337F96171F0CCB2900840527 /* follow-up.png */,
+				337F96131F0CCA8B00840527 /* workorderFirst.png */,
 				336F04161F0666A300DE7CD7 /* workorder_icon.png */,
 				336F04001F04EFAD00DE7CD7 /* yuan_1.png */,
 				336F04011F04EFAD00DE7CD7 /* yuan_2.png */,
@@ -2886,7 +2905,6 @@
 				331B37D31F073A3400755335 /* workorder_button_icon_click.png */,
 				331B37D41F073A3400755335 /* workorder_button_icon_nor.png */,
 				337F960F1F0B90F800840527 /* phone.png */,
-				337F96111F0B928300840527 /* message_icon2.gif */,
 			);
 			path = "order图片";
 			sourceTree = "<group>";
@@ -4110,12 +4128,14 @@
 				335089211C73178100D7AA03 /* btn_cha.png in Resources */,
 				335089251C7323C200D7AA03 /* frag4.png in Resources */,
 				338964781E57E7E600A7B1AE /* icon_grid.png in Resources */,
+				337F961E1F0CCBD000840527 /* Untreated22.png in Resources */,
 				33768AAF1D475D0A00873E82 /* storagebgen.png in Resources */,
 				33EA49FA1E8E4E5E0044A01A /* energyinfo_icon.png in Resources */,
 				3382342E1D9A4A22002062AE /* massage_cn2.png in Resources */,
 				334FF0951CF53C7C001E6716 /* Documentation.html in Resources */,
 				334771001C9A3E57003A6F13 /* mine@2x.png in Resources */,
 				337079491D913D9600D7DA98 /* question_icon.png in Resources */,
+				337F96201F0CCDBE00840527 /* firstGo.png in Resources */,
 				338321C31EEE3370004FFC20 /* edit_nor.png in Resources */,
 				33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */,
 				338E34F91EE655140027EBD5 /* userOSS.png in Resources */,
@@ -4144,6 +4164,7 @@
 				335D69F11D77FD3100894D90 /* downloadAV.png in Resources */,
 				334B8F631C915A1B00798A69 /* bg.png in Resources */,
 				33AF3D171D8E67210007D6C2 /* addDevice.jpg in Resources */,
+				337F961C1F0CCBCA00840527 /* Follow-up2.png in Resources */,
 				33768AAA1D475D0A00873E82 /* pvbgen.png in Resources */,
 				335D69EF1D77DA9200894D90 /* AvPlay2.png in Resources */,
 				334770FC1C9A3DEE003A6F13 /* energyTab@2x.png in Resources */,
@@ -4213,7 +4234,6 @@
 				33775ADB1D2E03B40070742E /* 质保.png in Resources */,
 				33FEFD7A1C7DB38400324374 /* shebei_press@3x.png in Resources */,
 				33775AEF1D2E3BC00070742E /* 打勾.png in Resources */,
-				337F96121F0B928300840527 /* message_icon2.gif in Resources */,
 				334FF0BF1CF53C7C001E6716 /* text_bg.png in Resources */,
 				334FF0901CF53C7C001E6716 /* Documentation.html in Resources */,
 				33EFB67A1C9931D2003F336F /* 按钮2.png in Resources */,
@@ -4276,6 +4296,7 @@
 				33FEFD761C7DB38400324374 /* iconfont-shouji@2x.png in Resources */,
 				3349A7AE1C75B76F009172C2 /* icon_logo.png in Resources */,
 				3349A7B81C75BCDB009172C2 /* 账号3.png in Resources */,
+				337F961A1F0CCB8B00840527 /* Untreated1111.png in Resources */,
 				3383F13E1C9FFDA10075E834 /* 光伏收益.png in Resources */,
 				33FEFD5D1C7DB38400324374 /* icon---Name@2x.png in Resources */,
 				335456C11C852FF600275478 /* 圆角矩形空心.png in Resources */,
@@ -4289,6 +4310,7 @@
 				33FEFD681C7DB38400324374 /* iconfont-address@3x.png in Resources */,
 				337C44AF1E78CC9100135304 /* ledred.gif in Resources */,
 				33875A5D1EBB2F8A00F7E0E6 /* 全面的数据分析_cn.png in Resources */,
+				337F96181F0CCB2900840527 /* follow-up.png in Resources */,
 				334AED731CA384F4007E39F3 /* open@2x.png in Resources */,
 				33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */,
 				335456C51C853AFD00275478 /* scanLine@2x.png in Resources */,
@@ -4331,7 +4353,9 @@
 				336A246C1DF00AC20002D1AD /* deviceHead1.png in Resources */,
 				33C300021D3E33E00016351C /* L9.png in Resources */,
 				334FF0B71CF53C7C001E6716 /* about.png in Resources */,
+				337F96141F0CCA8B00840527 /* workorderFirst.png in Resources */,
 				33E42E0F1DC9CE050024FFBB /* peizhi_btn.png in Resources */,
+				337F96221F0CE6BA00840527 /* message_icon2.gif in Resources */,
 				337584431D267D12006AC140 /* product.jpg in Resources */,
 				334F3AD61D9B9FA4001D7F75 /* shinewifi.png in Resources */,
 				33860FEB1EEA75C5004150FD /* MJRefresh.bundle in Resources */,

@@ -78,7 +78,7 @@
 @property(nonatomic,strong)UIView *imageViewAll;
 @property(nonatomic,strong)UIView *imageViewAll2;
 @property(nonatomic,strong) NSString*picGetType;
-
+@property(nonatomic,strong)NSString *remarkString;
 
 /**
  默认高度
@@ -95,5 +95,5 @@
  @return 展开高度
  */
 
-+ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status;
++ (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status remarkH:(CGFloat) remarkH;
 @end
