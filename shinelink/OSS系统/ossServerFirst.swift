@@ -32,6 +32,8 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     var cellValue5Array:NSMutableArray!
       var cellValue6Array:NSMutableArray!
     var questionOrOrder:Int!
+      var firstNum:Int!
+      var secondNum:Int!
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,12 +52,10 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         NotificationCenter.default.addObserver(self, selector:#selector(tableViewReload(info:)),
                                                name: NotifyChatMsgRecv, object: nil)
         
-        if statusInt == nil {
-        statusInt=10
-        }
+  
         contentString=""
         pageNum=0
-        questionOrOrder=1
+     
         
        self.initUI()
     }
@@ -106,13 +106,35 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         let buttonView1=uibuttonView0()
         buttonView1.frame=CGRect(x: 0*NOW_SIZE, y: 30*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
         buttonView1.typeNum=1
+        buttonView1.firstNum=firstNum
         buttonView1.isUserInteractionEnabled=true
         buttonView1.backgroundColor=backgroundGrayColor
         buttonView1.buttonArray=["问题","工单"]
         buttonView1.initUI()
          self.view.addSubview(buttonView1)
         
-        self.initButton(buttonArray: ["全部问题","待处理","待跟进","处理中","已处理"], name1: "全部问题", name2: "数量:111个")
+        if questionOrOrder==1 {
+            var name="全部问题"
+            if secondNum==0 {
+                name="全部问题"
+            }else  if secondNum==2 {
+                name="待跟进"
+            }else  if secondNum==1 {
+                name="待处理"
+            }
+              self.initButton(buttonArray: ["全部问题","待处理","待跟进","处理中","已处理"], name1: name as NSString, name2: "0/0")
+        }else  if questionOrOrder==2 {
+            var name="全部工单"
+            if secondNum==0 {
+                name="全部工单"
+            }else  if secondNum==2 {
+                name="服务中"
+            }else  if secondNum==1 {
+                name="待接收"
+            }
+            self.initButton(buttonArray: ["全部工单","待接收","服务中","已完成"], name1: name as NSString, name2: "0/0")
+        }
+      
         
       
     }
@@ -132,6 +154,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         let buttonView=uibuttonView0()
         buttonView.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
         buttonView.typeNum=3
+          buttonView.secondNum=secondNum
         buttonView.isUserInteractionEnabled=true
         buttonView.backgroundColor=UIColor.white
         buttonView.buttonArray=buttonArray
@@ -171,7 +194,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         let  dic=info.userInfo as Any as!NSDictionary
         let Tag=dic.object(forKey: "tag") as! Int
         let array1=["全部问题","待处理","待跟进","处理中","已处理"]
-        let array2=["全部工单","待接收","待服务","已完成"]
+        let array2=["全部工单","待接收","服务中","已完成"]
         if Tag==2000 {
                self.initButton(buttonArray: array1 as NSArray, name1: array1[0] as NSString, name2: "")
             questionOrOrder=1

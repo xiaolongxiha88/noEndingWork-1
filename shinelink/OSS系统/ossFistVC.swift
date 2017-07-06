@@ -18,6 +18,8 @@ class ossFistVC: RootViewController {
         var serverListArray:NSArray!
     var serverNumArray:NSArray!
     var orderNumArray:NSArray!
+       var integratorValueArray:NSArray!
+    
  var newInfoType:Int!
      var infoID:Int!
       var infoAddress:NSString!
@@ -49,12 +51,17 @@ class ossFistVC: RootViewController {
         orderNumArray=[0,0]
         infoString=""
         
-        self.initNet0()
+     
         
        self.initUI()
         
    
-      
+        if roleString=="2" || roleString=="0" || roleString=="1"{
+               self.initNet0()
+        }else if roleString=="5"{
+            self.initNet1()
+            
+        }
 
         
        
@@ -63,17 +70,47 @@ class ossFistVC: RootViewController {
     
     func initUI(){
     
-      
-        
         imageOne=UIImageView()
         self.imageOne.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: heigh0)
          imageOne.image=UIImage(named: "title_bg.png")
         self.view.addSubview(imageOne)
-    
- 
         
     }
     
+    
+    func initUIThree(){
+      
+        let view1=UIView()
+        view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+10*heigh0, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
+        view1.backgroundColor=UIColor.clear
+        view1.isUserInteractionEnabled=true
+        let tap0=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
+        view1.addGestureRecognizer(tap0)
+         self.view.addSubview(view1)
+        
+        let imageH=20*HEIGHT_SIZE
+        let imageV = UIImageView()
+        imageV.frame=CGRect(x: 10*NOW_SIZE, y: (40*HEIGHT_SIZE-imageH)/2, width: imageH, height: imageH)
+        imageV.image=UIImage(named: "device_iconI.png")
+        view1.addSubview(imageV)
+        
+        let  lable1=UILabel()
+        lable1.frame=CGRect(x: 10*NOW_SIZE+imageH+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 40*HEIGHT_SIZE)
+        lable1.text="设备管理"
+
+        lable1.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
+        lable1.textAlignment=NSTextAlignment.left
+        lable1.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
+        view1.addSubview(lable1)
+        
+        let imageH2=20*HEIGHT_SIZE
+        let imageV2 = UIImageView()
+        imageV2.frame=CGRect(x: (SCREEN_Width-20*NOW_SIZE)-imageH2, y: (40*HEIGHT_SIZE-imageH2)/2, width: imageH2, height: imageH2)
+        imageV2.image=UIImage(named: "firstGo.png")
+        view1.addSubview(imageV2)
+
+        
+    }
     
     func initUItwo(){
      
@@ -84,12 +121,6 @@ class ossFistVC: RootViewController {
         buttonOne.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
         self.view.addSubview(buttonOne)
         
-//        buttonTwo=UIButton()
-//        buttonTwo.frame=CGRect(x: 10*NOW_SIZE, y: (heigh0+10*HEIGHT_SIZE)*2, width: 300*NOW_SIZE, height:heigh0)
-//        buttonTwo.setBackgroundImage(UIImage(named: "device_bg.png"), for: .normal)
-//        // buttonOne.setTitle(root_finish, for: .normal)
-//        buttonTwo.addTarget(self, action:#selector(gotoServer), for: .touchUpInside)
-//        self.view.addSubview(buttonTwo)
    
         let AllH=160*HEIGHT_SIZE;
         for i in 0...1 {
@@ -101,12 +132,20 @@ class ossFistVC: RootViewController {
             let view1=UIView()
             view1.frame=CGRect(x: 0*NOW_SIZE, y: 0, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
             view1.backgroundColor=UIColor.clear
+            view1.isUserInteractionEnabled=true
+            view1.tag=2000+i
+            let tap0=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
+                view1.addGestureRecognizer(tap0)
             viewAll.addSubview(view1)
             
             let imageH=20*HEIGHT_SIZE
             let imageV = UIImageView()
             imageV.frame=CGRect(x: 10*NOW_SIZE, y: (30*HEIGHT_SIZE-imageH)/2, width: imageH, height: imageH)
             imageV.image=UIImage(named: "workorderFirst.png")
+            if i==0 {
+                 imageV.image=UIImage(named: "Customer.png")
+            }
+         
             view1.addSubview(imageV)
             
             let  lable1=UILabel()
@@ -219,6 +258,11 @@ class ossFistVC: RootViewController {
             let viewButton=UIView()
             viewButton.frame=CGRect(x: 0*NOW_SIZE, y: viewLine.frame.origin.y+1*HEIGHT_SIZE, width: SCREEN_Width/2, height: viewButtonH)
             viewButton.backgroundColor=UIColor.clear
+            viewButton.isUserInteractionEnabled=true
+            viewButton.tag=3000+i
+            let tap2=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
+            viewButton.addGestureRecognizer(tap2)
+            
             viewAll.addSubview(viewButton)
             
             let ButtonImageH=40*HEIGHT_SIZE
@@ -244,6 +288,10 @@ class ossFistVC: RootViewController {
             let viewButton1=UIView()
             viewButton1.frame=CGRect(x: SCREEN_Width/2, y: viewLine.frame.origin.y+1*HEIGHT_SIZE, width: SCREEN_Width/2, height: viewButtonH)
             viewButton1.backgroundColor=UIColor.clear
+            viewButton1.isUserInteractionEnabled=true
+            viewButton1.tag=4000+i
+            let tap3=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
+            viewButton1.addGestureRecognizer(tap3)
             viewAll.addSubview(viewButton1)
             
             
@@ -263,7 +311,7 @@ class ossFistVC: RootViewController {
          
             ButtonLable21.text=String(format: "%@:%d", "未处理",serverNumArray[1] as! Int)
             if i==1 {
-                ButtonLable21.text=String(format: "%@:%d", "待服务",orderNumArray[1] as! Int)
+                ButtonLable21.text=String(format: "%@:%d", "服务中",orderNumArray[1] as! Int)
             }
             ButtonLable21.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
             ButtonLable21.textAlignment=NSTextAlignment.center
@@ -282,6 +330,20 @@ class ossFistVC: RootViewController {
     
     func goToNew(){
     UserDefaults.standard.set(false, forKey: "newInfoEnble")
+        
+        if  newInfoType==1 {
+            let vc=ossQuetionDetail()
+            let id=NSString(format: "%d", infoID)
+            vc.qusetionId=id as String!
+            vc.serverUrl=infoAddress! as String
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else  if  newInfoType==2 {
+            let vc=orderFirst()
+            let id=NSString(format: "%d", infoID)
+            vc.orderID=id as String!
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
     
     func initNet0(){
@@ -306,17 +368,7 @@ class ossFistVC: RootViewController {
                     self.serverNumArray=[objDic["waitFollowNum"] as! Int,objDic["notProcessedNum"] as! Int]
                     self.orderNumArray=[objDic["waitReceiveNum"] as! Int,objDic["inServiceNum"] as! Int]
                 
-                    
-                    if (((objDic["replyBean"]  as AnyObject).isEqual(NSNull.init())) == false){
-                        let replyBeanDic=objDic["replyBean"] as! NSDictionary
-                        if replyBeanDic.count>0{
-                            self.newInfoType=1
-                            self.infoID=replyBeanDic["id"] as! Int
-                            self.infoAddress=replyBeanDic["serverUrl"] as! NSString
-                            self.infoString=NSString(format: "%@:%@",replyBeanDic["userName"] as! NSString,replyBeanDic["message"] as! NSString )
-                        }
-                    }
-                    
+    
                     if (((objDic["ticketSystemBean"]  as AnyObject).isEqual(NSNull.init())) == false){
                         
                         let ticketSystemBeanDic=objDic["ticketSystemBean"] as! NSDictionary
@@ -326,6 +378,16 @@ class ossFistVC: RootViewController {
                               self.infoString=NSString(format: "%@",ticketSystemBeanDic["title"] as! NSString )
                         }
                        
+                    }
+                    
+                    if (((objDic["replyBean"]  as AnyObject).isEqual(NSNull.init())) == false){
+                        let replyBeanDic=objDic["replyBean"] as! NSDictionary
+                        if replyBeanDic.count>0{
+                            self.newInfoType=1
+                            self.infoID=replyBeanDic["questionId"] as! Int
+                            self.infoAddress=replyBeanDic["serverUrl"] as! NSString
+                            self.infoString=NSString(format: "%@:%@",replyBeanDic["userName"] as! NSString,replyBeanDic["message"] as! NSString )
+                        }
                     }
                    
                     if (((UserDefaults.standard.object(forKey: "newInfoEnble")  as AnyObject).isEqual(NSNull.init())) == false){
@@ -350,6 +412,7 @@ class ossFistVC: RootViewController {
             }
             
         }, failure: {(error) in
+             self.initUItwo()
                self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
@@ -357,7 +420,49 @@ class ossFistVC: RootViewController {
     }
     
     
-    
+   
+    func initNet1(){
+        
+             integratorValueArray=[0,0,0,0];
+        self.showProgressView()
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v1/customer/customer_overview_data", sucessBlock: {(successBlock)->() in
+            self.hideProgressView()
+            
+            let data:Data=successBlock as! Data
+            
+            let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
+            
+            if (jsonDate0 != nil){
+                let jsonDate=jsonDate0 as! Dictionary<String, Any>
+                print("/api/v1/customer/customer_overview_data=",jsonDate)
+                // let result:NSString=NSString(format:"%s",jsonDate["result"] )
+                let result1=jsonDate["result"] as! Int
+                
+                if result1==1 {
+                    let objDic=jsonDate["obj"] as! NSDictionary
+                    
+                    if objDic.count>0{
+                        self.integratorValueArray=[objDic["todayEnergy"] as? Int ?? 0,objDic["totalEnergy"] as? Int ?? 0,objDic["totalInvNum"] as? Int ?? 0,objDic["totalPower"] as? Int ?? 0];
+                    
+                                 self.initUIThree()
+                    }
+                    
+       
+                    
+                }else{
+                      self.initUIThree()
+                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                }
+                
+            }
+            
+        }, failure: {(error) in
+            self.initUIThree()
+            self.hideProgressView()
+            self.showToastView(withTitle: root_Networking)
+        })
+        
+    }
     
     
     
@@ -383,12 +488,52 @@ class ossFistVC: RootViewController {
     }
     
     
-    func gotoServer()  {
+    func gotoServer(Tap:UITapGestureRecognizer ) {
         
-//        let vc=ossServerFirst()
-//        self.navigationController?.pushViewController(vc, animated: true)
+        
         
         let vc=ossServerFirst()
+        if Tap.view?.tag==2000 {
+               vc.questionOrOrder=1
+              vc.statusInt=10
+               vc.firstNum=0
+            vc.secondNum=0
+        }
+        if Tap.view?.tag==2001 {
+            vc.questionOrOrder=2
+            vc.statusInt=0
+            vc.firstNum=1
+            vc.secondNum=0
+        }
+        
+        if Tap.view?.tag==3000 {
+            vc.questionOrOrder=1
+            vc.statusInt=3
+            vc.secondNum=2
+            vc.firstNum=0
+        }
+        
+        if Tap.view?.tag==4000 {
+            vc.questionOrOrder=1
+            vc.statusInt=0
+            vc.secondNum=1
+            vc.firstNum=0
+        }
+        
+        if Tap.view?.tag==3001 {
+            vc.questionOrOrder=2
+            vc.statusInt=2
+            vc.secondNum=1
+            vc.firstNum=1
+        }
+        
+        if Tap.view?.tag==4001{
+            vc.questionOrOrder=2
+            vc.statusInt=3
+            vc.secondNum=2
+            vc.firstNum=1
+        }
+        
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

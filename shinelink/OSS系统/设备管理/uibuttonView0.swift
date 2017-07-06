@@ -16,7 +16,8 @@ class uibuttonView0: UIView{
     var typeNum:Int!
      var backNum:Int?
     
-    
+     var firstNum:Int!
+     var secondNum:Int!
     
     func initUI(){
 
@@ -63,7 +64,7 @@ class uibuttonView0: UIView{
             }
             if typeNum==1 {
                 button2.frame=CGRect(x: 45*NOW_SIZE+160*NOW_SIZE*CGFloat(i), y: 5*HEIGHT_SIZE, width: 70*NOW_SIZE, height:20*HEIGHT_SIZE)
-                if i==0 {
+                if i==firstNum {
                     button2.backgroundColor=MainColor
                     button2.setTitleColor(backgroundGrayColor, for: .normal)
                     button2.isSelected=true
@@ -72,7 +73,7 @@ class uibuttonView0: UIView{
             
             if typeNum==3 {
                
-                if i==0 {
+                if i==secondNum {
                     button2.backgroundColor=MainColor
                     button2.setTitleColor(backgroundGrayColor, for: .normal)
                     button2.isSelected=true
