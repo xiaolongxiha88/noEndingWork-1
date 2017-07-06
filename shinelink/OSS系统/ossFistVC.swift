@@ -84,7 +84,7 @@ class ossFistVC: RootViewController {
         view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+10*HEIGHT_SIZE, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
         view1.backgroundColor=UIColor.clear
         view1.isUserInteractionEnabled=true
-        let tap0=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
+        let tap0=UITapGestureRecognizer(target: self, action: #selector(gotoDevice))
         view1.addGestureRecognizer(tap0)
          self.view.addSubview(view1)
         
@@ -617,6 +617,7 @@ class ossFistVC: RootViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }else if roleString=="5"{
             let vc=IntegratorFirst()
+              vc.firstNum=0
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
           self.showToastView(withTitle:"没有操作权限")

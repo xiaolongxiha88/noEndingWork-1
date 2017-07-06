@@ -116,8 +116,9 @@
         }else{
             _OssFirst=@"N";
             _userTextField=[[UITextField alloc]init];
-            _userTextField.text=OssName;
             _pwdTextField=[[UITextField alloc]init];
+            
+            _userTextField.text=OssName;
             _pwdTextField.text=OssPassword;
             _loginUserName=OssName;
             _loginUserPassword=OssPassword;
@@ -141,8 +142,9 @@
             
         }else{
             _userTextField=[[UITextField alloc]init];
-            _userTextField.text=reUsername;
             _pwdTextField=[[UITextField alloc]init];
+            
+                        _userTextField.text=reUsername;
             _pwdTextField.text=rePassword;
             _loginUserName=reUsername;
             _loginUserPassword=rePassword;
@@ -576,7 +578,7 @@ NSLog(@"体验馆");
             _loginUserName=_userTextField.text ;
             _loginUserPassword=_pwdTextField.text;
             
-       [self getOSSnet];
+              [self getOSSnet];
   
 //            _getServerAddressNum=0;
 //          [self netServerInit];
@@ -616,6 +618,10 @@ NSLog(@"体验馆");
                         [self addSubViews];
                 }
              
+                [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];
+                [[NSUserDefaults standardUserDefaults] setObject:_loginUserName forKey:@"OssName"];
+                [[NSUserDefaults standardUserDefaults] setObject:_loginUserPassword forKey:@"OssPassword"];
+            
                 
             } else {
                 
@@ -686,8 +692,13 @@ NSLog(@"体验馆");
         }
         
     } failure:^(NSError *error) {
+          [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];
+         [[NSUserDefaults standardUserDefaults] setObject:_loginUserName forKey:@"OssName"];
+         [[NSUserDefaults standardUserDefaults] setObject:_loginUserPassword forKey:@"OssPassword"];
+        
+
          [self hideProgressView];
-         [self didPresentControllerButtonTouch];
+     //    [self didPresentControllerButtonTouch];
             [self showToastViewWithTitle:root_Networking];
 
     }];
@@ -735,6 +746,8 @@ NSLog(@"体验馆");
                                 if ([objDic.allKeys containsObject:@"serverList"]) {
                                     [serverListArray addObjectsFromArray:[objDic objectForKey:@"serverList"]];
                                 }
+                                
+                                  [[NSUserDefaults standardUserDefaults] setObject:serverListArray forKey:@"OssServerAddress"];
                                 
                                 NSString *PhoneNum;
                                 if ([objDic.allKeys containsObject:@"user"]) {
@@ -833,12 +846,16 @@ NSLog(@"体验馆");
     
      NSString *userName=_loginUserName;
        [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL_Demo_CN paramars:@{@"userName":userName} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
+     [BaseRequest requestWithMethodResponseStringResult:serverInitAddress paramars:@{@"userName":userName} paramarsSite:@"/newLoginAPI.do?op=getServerUrlByName" sucessBlock:^(id content) {
+         
+//    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL_Demo_CN paramars:@{@"userName":userName} paramarsSite:@"/newLoginAPI.do?op=getUserServerUrl" sucessBlock:^(id content) {
+         
+             id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
            [self hideProgressView];
-        NSLog(@"getUserServerUrl: %@", content);
-        if (content) {
-            if ([content[@"success"]intValue]==1) {
-                NSString *server1=content[@"msg"];
+        NSLog(@"getUserServerUrl: %@", content1);
+        if (content1) {
+            if ([content1[@"success"]intValue]==1) {
+                NSString *server1=content1[@"msg"];
                 NSString *server2=@"http://";
                 NSString *server=[NSString stringWithFormat:@"%@%@",server2,server1];
                 [[UserInfo defaultUserInfo] setServer:server];

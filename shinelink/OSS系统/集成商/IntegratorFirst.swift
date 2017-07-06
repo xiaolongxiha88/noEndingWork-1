@@ -27,6 +27,9 @@ class IntegratorFirst: RootViewController {
        var datalogSnString:NSString!
        var agentCompanyArray:NSMutableArray!
         var agentCodeArray:NSMutableArray!
+     var firstNum:Int!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +67,7 @@ class IntegratorFirst: RootViewController {
         let buttonView=uibuttonView0()
         buttonView.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
         buttonView.typeNum=1
+         buttonView.firstNum=firstNum
         buttonView.isUserInteractionEnabled=true
         buttonView.backgroundColor=backgroundGrayColor
         buttonView.buttonArray=["逆变器","储能机"]

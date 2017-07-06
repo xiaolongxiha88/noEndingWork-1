@@ -19,7 +19,7 @@
 
 CGFloat const kChatInputTextViewHeight = 33.0f;
 
-@interface myListSecond ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
+@interface myListSecond ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIAlertViewDelegate>{
     CGSize _currentTextViewContentSize;
     NSInteger _textLine;
     float keyboradH;
@@ -90,6 +90,9 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     //设置两个通知
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyHiden:) name: UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyWillAppear:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"关闭问题" style:UIBarButtonItemStylePlain target:self action:@selector(closeQuestion)];
+    self.navigationItem.rightBarButtonItem=rightItem;
     
     [self netGetAgain];
 }
@@ -256,15 +259,22 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     [_headView addSubview:LableS];
     
     if (_questionPicArray.count>1) {
-    UILabel *LableImage=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
-    LableImage.text=@"查看图片";
-    LableImage.textAlignment=NSTextAlignmentRight;
-    LableImage.textColor=COLOR(153, 153, 153, 1);
-    LableImage.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
-    LableImage.userInteractionEnabled=YES;
-            UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
-            [LableImage addGestureRecognizer:labelTap1];
-    [_headView addSubview:LableImage];
+        UIImageView *image55=[[UIImageView alloc]initWithFrame:CGRectMake(280*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,20*NOW_SIZE, 20*HEIGHT_SIZE)];
+        image55.userInteractionEnabled = YES;
+        image55.image = IMAGE(@"pic_icon.png");
+        UITapGestureRecognizer * labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
+        [image55 addGestureRecognizer:labelTap2];
+        [_headView addSubview:image55];
+        
+//    UILabel *LableImage=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
+//    LableImage.text=@"查看图片";
+//    LableImage.textAlignment=NSTextAlignmentRight;
+//    LableImage.textColor=COLOR(153, 153, 153, 1);
+//    LableImage.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
+//    LableImage.userInteractionEnabled=YES;
+//            UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
+//            [LableImage addGestureRecognizer:labelTap1];
+//    [_headView addSubview:LableImage];
     }
     
     UIView *V1 = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+45*HEIGHT_SIZE, SCREEN_Width,2*HEIGHT_SIZE )];
@@ -798,7 +808,52 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     
 }
 
+- (void)closeQuestion {
+    UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"是否关闭问题?" message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+    [alertView1 show];
+}
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex) {
+ 
+        [self closeQuestion1];
+    }
+    
+}
+
+- (void)closeQuestion1 {
+
+ 
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"questionId":_qusetionId} paramarsSite:@"/questionAPI.do?op=solveQuestion" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"questionAPI.do?op=solveQuestion: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+                
+                [self showToastViewWithTitle:@"操作成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+     
+            }else{
+                [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+
+        
+    }];
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

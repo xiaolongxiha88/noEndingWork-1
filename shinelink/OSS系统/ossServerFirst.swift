@@ -53,11 +53,20 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                                                name: NotifyChatMsgRecv, object: nil)
         
   
+        let rightItem=UIBarButtonItem.init(title: "搜索设备", style: .plain, target: self, action:#selector(goToDevice) )
+        self.navigationItem.rightBarButtonItem=rightItem
+        
         contentString=""
         pageNum=0
      
         
        self.initUI()
+    }
+    
+    func goToDevice(){
+        let vc=ossDeviceFirst()
+       
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func keyboardHide(tap:UITapGestureRecognizer){

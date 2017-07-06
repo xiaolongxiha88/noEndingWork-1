@@ -198,6 +198,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         let nameArray:NSMutableArray=[]
         let addressArray:NSMutableArray=[]
    
+          self.serverListArray=UserDefaults.standard.object(forKey: "OssServerAddress") as! NSArray
+        
         if self.languageType=="0" {
             for i in 0..<self.serverListArray.count {
                 let allArray=self.serverListArray[i]as!NSDictionary

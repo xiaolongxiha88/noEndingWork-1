@@ -13,6 +13,9 @@
 #import "PopoverView00.h"
  #import <objc/runtime.h>
 #import "orderFirst.h"
+#import "ShinePhone-Swift.h"
+
+
 @interface ossQuetionDetail ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>{
     CGSize _currentTextViewContentSize;
     NSInteger _textLine;
@@ -89,10 +92,18 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyHiden:) name: UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyWillAppear:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"搜索设备" style:UIBarButtonItemStylePlain target:self action:@selector(goToDevice)];
+    self.navigationItem.rightBarButtonItem=rightItem;
+    
     [self netGetAgain];
 }
 
-
+-(void)goToDevice{
+    
+    ossDeviceFirst *rootView = [[ossDeviceFirst alloc]init];
+    [self.navigationController pushViewController:rootView animated:YES];
+    
+}
 
 
 -(void)initUI{

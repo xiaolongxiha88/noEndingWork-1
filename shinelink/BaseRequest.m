@@ -14,7 +14,7 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import <CommonCrypto/CommonDigest.h>
 
-float Time=20.f;
+float Time=15.f;
 @implementation BaseRequest
 + (void)requestWithMethod:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
@@ -163,7 +163,7 @@ float Time=20.f;
 + (void)uplodImageWithMethod:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site dataImageDict:(NSMutableDictionary *)dataDict sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-     manager.requestSerializer.timeoutInterval=Time*2;
+     manager.requestSerializer.timeoutInterval=50.f;
     NSString *url = [NSString stringWithFormat:@"%@%@",method,site];
     [UserInfo defaultUserInfo].R_timer.fireDate=[NSDate distantPast];
     
@@ -194,41 +194,6 @@ float Time=20.f;
 }
 
 
-
-+ (void)uplodImageWithMethod2:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site dataImageDict:(NSMutableDictionary *)dataDict sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    manager.requestSerializer.timeoutInterval=Time;
-        //manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/plain",@"application/json",@"text/html",@"multipart/form-data", nil];
-   [manager.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
-    NSString *url = [NSString stringWithFormat:@"%@%@",method,site];
-    [UserInfo defaultUserInfo].R_timer.fireDate=[NSDate distantPast];
-    
-    [manager POST:url parameters:paramars constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        NSArray *keys = dataDict.allKeys;
-        for (NSString *key in keys) {
-            //            NSDateFormatter *myFormatter = [[NSDateFormatter alloc] init];
-            //            [myFormatter setDateFormat:@"yyyyMMddhhmmss"];
-            //            NSString *dateStr = [myFormatter stringFromDate:[NSDate date]];
-            NSData *data = [[NSData alloc] initWithData:dataDict[key]];
-            [formData appendPartWithFileData:data name:key fileName:key mimeType:@"image/png"];
-        }
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        successBlock(responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
-        failure(error);
-        
-        NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"lostLogin"];
-        if ([lostLogin isEqualToString:@"Y"]) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"lostLogin"];
-        }else{
-            [self netRequest];
-        }
-        
-    }];
-    
-}
 
 
 +(void)getAppError:(NSString*)msg useName:(NSString*)useName{

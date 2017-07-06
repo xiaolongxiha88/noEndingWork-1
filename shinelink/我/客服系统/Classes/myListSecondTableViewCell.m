@@ -47,16 +47,23 @@
         [self.contentView addSubview:_image];
         
         
-        _picLabel= [[UILabel alloc] initWithFrame:CGRectMake(220*NOW_SIZE, 10*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
-        _picLabel.text=root_ME_chakan_tupian;
-        _picLabel.textColor=COLOR(153, 153, 153, 1);
-        _picLabel.textAlignment = NSTextAlignmentRight;
-        _picLabel.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
-        _picLabel.adjustsFontSizeToFitWidth=YES;
-      //  _picLabel.userInteractionEnabled=YES;
-       // UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
-       // [_picLabel addGestureRecognizer:labelTap1];
+        _picLabel=[[UIImageView alloc]initWithFrame:CGRectMake(280*NOW_SIZE, 10*HEIGHT_SIZE,20*NOW_SIZE, 20*HEIGHT_SIZE)];
+
+        _picLabel.image = IMAGE(@"pic_icon.png");
+    
         [self.contentView addSubview:_picLabel];
+        
+        
+//        _picLabel= [[UILabel alloc] initWithFrame:CGRectMake(220*NOW_SIZE, 10*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
+//        _picLabel.text=root_ME_chakan_tupian;
+//        _picLabel.textColor=COLOR(153, 153, 153, 1);
+//        _picLabel.textAlignment = NSTextAlignmentRight;
+//        _picLabel.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
+//        _picLabel.adjustsFontSizeToFitWidth=YES;
+//      //  _picLabel.userInteractionEnabled=YES;
+//       // UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
+//       // [_picLabel addGestureRecognizer:labelTap1];
+//        [self.contentView addSubview:_picLabel];
         
         
         _nameLabel =[[UILabel alloc]initWithFrame:CGRectMake(2*leftW+imageSize, 10*HEIGHT_SIZE,150*NOW_SIZE, 20*HEIGHT_SIZE) ];

@@ -11,7 +11,7 @@
 #import "orderCellTwo.h"
 #import "orderCellThree.h"
 #import "Model.h"
-
+#import "ShinePhone-Swift.h"
 
 static NSString *cellOne = @"cellOne";
 static NSString *cellTwo = @"cellTwo";
@@ -51,7 +51,17 @@ static NSString *cellThree = @"cellThree";
    
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(regetNet) name:@"regetNet" object:nil];
     
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"搜索设备" style:UIBarButtonItemStylePlain target:self action:@selector(goToDevice)];
+    self.navigationItem.rightBarButtonItem=rightItem;
+    
     [self finishSet];
+}
+
+-(void)goToDevice{
+
+    ossDeviceFirst *rootView = [[ossDeviceFirst alloc]init];
+    [self.navigationController pushViewController:rootView animated:YES];
+    
 }
 
 -(void)initData{
