@@ -81,7 +81,7 @@ class ossFistVC: RootViewController {
     func initUIThree(){
       
         let view1=UIView()
-        view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+10*heigh0, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
+        view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+10*HEIGHT_SIZE, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
         view1.backgroundColor=UIColor.clear
         view1.isUserInteractionEnabled=true
         let tap0=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
@@ -97,10 +97,9 @@ class ossFistVC: RootViewController {
         let  lable1=UILabel()
         lable1.frame=CGRect(x: 10*NOW_SIZE+imageH+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 40*HEIGHT_SIZE)
         lable1.text="设备管理"
-
         lable1.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
         lable1.textAlignment=NSTextAlignment.left
-        lable1.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
+        lable1.font=UIFont.systemFont(ofSize: 18*HEIGHT_SIZE)
         view1.addSubview(lable1)
         
         let imageH2=20*HEIGHT_SIZE
@@ -109,6 +108,78 @@ class ossFistVC: RootViewController {
         imageV2.image=UIImage(named: "firstGo.png")
         view1.addSubview(imageV2)
 
+        let imageAll = UIImageView()
+        imageAll.frame=CGRect(x: 5*NOW_SIZE, y:heigh0+55*HEIGHT_SIZE, width: SCREEN_Width-10*NOW_SIZE, height: 180*HEIGHT_SIZE)
+        imageAll.image=UIImage(named: "frameIntergrator.png")
+         self.view.addSubview(imageAll)
+        
+        for i in 0...1 {
+            for K in 0...1 {
+                
+                let viewW=155*NOW_SIZE
+                 let viewH=90*HEIGHT_SIZE
+                let viewA=UIView()
+                viewA.frame=CGRect(x:0*NOW_SIZE+viewW*CGFloat(i), y:0+viewH*CGFloat(K), width:viewW, height: viewH)
+                viewA.backgroundColor=UIColor.clear
+                imageAll.addSubview(viewA)
+                
+                let imagePH=40*HEIGHT_SIZE
+                let H=(viewH-imagePH)/2
+                 let W=10*NOW_SIZE
+                let imageP = UIImageView()
+                imageP.frame=CGRect(x: W, y: H, width: imagePH, height: imagePH)
+                viewA.addSubview(imageP)
+                
+                let  lable1=UILabel()
+                lable1.frame=CGRect(x: W*2+imagePH, y: H-5*HEIGHT_SIZE, width: viewW-(W*2+imagePH), height: 40*HEIGHT_SIZE)
+               
+                lable1.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
+                lable1.textAlignment=NSTextAlignment.left
+                   lable1.adjustsFontSizeToFitWidth=true
+                lable1.font=UIFont.systemFont(ofSize: 24*HEIGHT_SIZE)
+                viewA.addSubview(lable1)
+                
+                let  lable2=UILabel()
+                lable2.frame=CGRect(x: W*2+imagePH, y: H-17*HEIGHT_SIZE+40*HEIGHT_SIZE, width: viewW-(W*2+imagePH), height: 20*HEIGHT_SIZE)
+               
+                lable2.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
+                lable2.textAlignment=NSTextAlignment.left
+                lable2.adjustsFontSizeToFitWidth=true
+                lable2.font=UIFont.systemFont(ofSize: 10*HEIGHT_SIZE)
+                viewA.addSubview(lable2)
+           
+                // self.integratorValueArray=[objDic["todayEnergy"] as? Int ?? 0,objDic["totalEnergy"] as? Int ?? 0,objDic["totalInvNum"] as? Int ?? 0,objDic["totalPower"] as? Int ?? 0];
+                if i==0 {
+                    if K==0 {
+                          imageP.image=UIImage(named: "e-today_iconI.png")
+                         lable1.text=self.integratorValueArray[0] as? String
+                         lable2.text="今日发电量(kWh)"
+                    }
+                    if K==1 {
+                        imageP.image=UIImage(named: "inv_iconI.png")
+                           lable1.text=self.integratorValueArray[2] as? String
+                         lable2.text="逆变器总数(台)"
+                    }
+                }
+                if i==1 {
+                    if K==0 {
+                        imageP.image=UIImage(named: "etotaliconI.png")
+                          lable1.text=self.integratorValueArray[1] as? String
+                          lable2.text="累计发电量(kWh)"
+                    }
+                    if K==1 {
+                        imageP.image=UIImage(named: "power_iconI.png")
+                           lable1.text=self.integratorValueArray[3] as? String
+                        lable2.text="装机功率(W)"
+                    }
+                }
+              
+                
+                
+                
+            }
+        }
+        
         
     }
     
@@ -442,7 +513,7 @@ class ossFistVC: RootViewController {
                     let objDic=jsonDate["obj"] as! NSDictionary
                     
                     if objDic.count>0{
-                        self.integratorValueArray=[objDic["todayEnergy"] as? Int ?? 0,objDic["totalEnergy"] as? Int ?? 0,objDic["totalInvNum"] as? Int ?? 0,objDic["totalPower"] as? Int ?? 0];
+                        self.integratorValueArray=[objDic["todayEnergy"] as? String ?? "",objDic["totalEnergy"] as? String ?? "",objDic["totalInvNum"] as? String ?? "",objDic["totalPower"] as? String ?? ""];
                     
                                  self.initUIThree()
                     }
