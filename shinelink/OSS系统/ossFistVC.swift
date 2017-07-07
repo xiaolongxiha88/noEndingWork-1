@@ -27,6 +27,11 @@ class ossFistVC: RootViewController {
     
      var roleString:NSString!
     
+    var view2:UIView!
+    var  image4:UIImageView!
+    
+    var  lable3:UILabel!
+    
     let heigh0=96*NOW_SIZE
     
     override func viewDidLoad() {
@@ -57,8 +62,10 @@ class ossFistVC: RootViewController {
         
    
         if roleString=="2" || roleString=="0" || roleString=="1"{
+                self.initUItwo()
                self.initNet0()
         }else if roleString=="5"{
+              self.initUIThree()
             self.initNet1()
             
         }
@@ -152,24 +159,28 @@ class ossFistVC: RootViewController {
                 if i==0 {
                     if K==0 {
                           imageP.image=UIImage(named: "e-today_iconI.png")
-                         lable1.text=self.integratorValueArray[0] as? String
+                     //    lable1.text=self.integratorValueArray[0] as? String
+                        lable1.tag=6000
                          lable2.text="今日发电量(kWh)"
                     }
                     if K==1 {
                         imageP.image=UIImage(named: "inv_iconI.png")
-                           lable1.text=self.integratorValueArray[2] as? String
+                     //      lable1.text=self.integratorValueArray[2] as? String
+                          lable1.tag=6002
                          lable2.text="逆变器总数(台)"
                     }
                 }
                 if i==1 {
                     if K==0 {
                         imageP.image=UIImage(named: "etotaliconI.png")
-                          lable1.text=self.integratorValueArray[1] as? String
+                        //  lable1.text=self.integratorValueArray[1] as? String
+                          lable1.tag=6001
                           lable2.text="累计发电量(kWh)"
                     }
                     if K==1 {
                         imageP.image=UIImage(named: "power_iconI.png")
-                           lable1.text=self.integratorValueArray[3] as? String
+                        //   lable1.text=self.integratorValueArray[3] as? String
+                          lable1.tag=6003
                         lable2.text="装机功率(W)"
                     }
                 }
@@ -182,6 +193,17 @@ class ossFistVC: RootViewController {
         
         
     }
+    
+    func initUIThree3(){
+        
+        for i in 0...3 {
+            let L1=self.view.viewWithTag(6000+i) as! UILabel
+            L1.text=self.integratorValueArray[i] as? String
+        }
+   
+    
+    }
+    
     
     func initUItwo(){
      
@@ -237,37 +259,44 @@ class ossFistVC: RootViewController {
             view1.addSubview(imageV2)
             if i==0 {
 
-                let view2=UIView()
+                 view2=UIView()
                 view2.frame=CGRect(x: 0*NOW_SIZE, y: 35*HEIGHT_SIZE, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
                 view2.backgroundColor=UIColor.clear
-                view2.isUserInteractionEnabled=true
+                view2.isUserInteractionEnabled=false
                 let tap=UITapGestureRecognizer(target: self, action: #selector(goToNew))
                 view2.addGestureRecognizer(tap)
                 
                 viewAll.addSubview(view2)
                 
-                let bundleDBPath:String? = Bundle.main.path(forResource: "message_icon2", ofType: "gif")
-                let data1=NSData.init(contentsOfFile:bundleDBPath!)
-                let gifWebH2=20*HEIGHT_SIZE
+           
                 
-                let gifWeb=UIWebView()
-                gifWeb.frame=CGRect(x: 10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: gifWebH2, height: gifWebH2*1.2)
-                gifWeb.load(data1! as Data, mimeType:"image/gif", textEncodingName: String(), baseURL:NSURL() as URL)
-                gifWeb.isUserInteractionEnabled=false
-                gifWeb.scalesPageToFit=true
-                gifWeb.isOpaque=false
-                gifWeb.backgroundColor=UIColor.clear
-                
-                if (((UserDefaults.standard.object(forKey: "newInfoEnble")  as AnyObject).isEqual(NSNull.init())) == false){
-                    let newInfoEnble=UserDefaults.standard.object(forKey: "newInfoEnble") as! Bool
-                    if newInfoEnble {
-                        view2.addSubview(gifWeb)
-                    }
-                }else{
-                 view2.addSubview(gifWeb)
+             let gifWebH2=20*HEIGHT_SIZE
+               
+                let time: TimeInterval = 1.0
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
+                    
+                    let bundleDBPath:String? = Bundle.main.path(forResource: "message_icon2", ofType: "gif")
+                    let data1=NSData.init(contentsOfFile:bundleDBPath!)
+               
+                    let gifWeb=UIWebView()
+                    gifWeb.frame=CGRect(x: 10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: gifWebH2, height: gifWebH2*1.2)
+                    gifWeb.load(data1! as Data, mimeType:"image/gif", textEncodingName: String(), baseURL:NSURLComponents().url!)
+                    gifWeb.isUserInteractionEnabled=false
+                    gifWeb.scalesPageToFit=true
+                    gifWeb.isOpaque=false
+                    gifWeb.backgroundColor=UIColor.clear
+                       self.view2.addSubview(gifWeb)
+                    
+//                    if (((UserDefaults.standard.object(forKey: "newInfoEnble")  as AnyObject).isEqual(NSNull.init())) == false){
+//                        let newInfoEnble=UserDefaults.standard.object(forKey: "newInfoEnble") as! Bool
+//                        if newInfoEnble {
+//                            self.view2.addSubview(gifWeb)
+//                        }
+//                    }else{
+//                        self.view2.addSubview(gifWeb)
+//                    }
+                 
                 }
-                
-              
                 
                 
                 let  lable2=UILabel()
@@ -279,27 +308,16 @@ class ossFistVC: RootViewController {
                 view2.addSubview(lable2)
                 
                 let image4H=5*HEIGHT_SIZE
-                let  image4=UIImageView()
+                  image4=UIImageView()
                 image4.layer.masksToBounds=true
                 image4.layer.cornerRadius=image4H/2
                 image4.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE, y: 20*HEIGHT_SIZE+(20*HEIGHT_SIZE-image4H)/2, width: image4H, height: image4H)
-                if (((UserDefaults.standard.object(forKey: "newInfoEnble")  as AnyObject).isEqual(NSNull.init())) == false){
-                    let newInfoEnble=UserDefaults.standard.object(forKey: "newInfoEnble") as! Bool
-                    if newInfoEnble {
-                        image4.backgroundColor=UIColor.red
-                    }else{
-                        image4.backgroundColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
-                    }
-                }else{
-                  image4.backgroundColor=UIColor.red
-                }
-             
-              
+ 
                 view2.addSubview(image4)
                 
-                let  lable3=UILabel()
+                  lable3=UILabel()
                 lable3.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE+image4H+5*NOW_SIZE, y: 20*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 20*HEIGHT_SIZE)
-                lable3.text=infoString! as String
+             
                 lable3.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
                 lable3.textAlignment=NSTextAlignment.left
                 lable3.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
@@ -347,10 +365,8 @@ class ossFistVC: RootViewController {
             
             let  ButtonLable2=UILabel()
             ButtonLable2.frame=CGRect(x:0, y: 15*HEIGHT_SIZE+ButtonImageH, width: SCREEN_Width/2, height: 20*HEIGHT_SIZE)
-             ButtonLable2.text=String(format: "%@:%d", "待跟进",(serverNumArray[0] as? Int)!)
-            if i==1 {
-               ButtonLable2.text=String(format: "%@:%d", "待接收",(orderNumArray[0] as? Int)!)
-            }
+            ButtonLable2.tag=3100+i
+       
             ButtonLable2.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
             ButtonLable2.textAlignment=NSTextAlignment.center
             ButtonLable2.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
@@ -380,10 +396,8 @@ class ossFistVC: RootViewController {
             let  ButtonLable21=UILabel()
             ButtonLable21.frame=CGRect(x:0, y: 15*HEIGHT_SIZE+ButtonImageH, width: SCREEN_Width/2, height: 20*HEIGHT_SIZE)
          
-            ButtonLable21.text=String(format: "%@:%d", "未处理",serverNumArray[1] as! Int)
-            if i==1 {
-                ButtonLable21.text=String(format: "%@:%d", "服务中",orderNumArray[1] as! Int)
-            }
+            ButtonLable21.tag=4100+i
+       
             ButtonLable21.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
             ButtonLable21.textAlignment=NSTextAlignment.center
             ButtonLable21.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
@@ -397,6 +411,42 @@ class ossFistVC: RootViewController {
         }
         
     }
+    
+    
+    func initUItwo2(){
+        
+           view2.isUserInteractionEnabled=true
+           lable3.text=infoString! as String
+        
+        let L1=self.view.viewWithTag(3100) as! UILabel
+        L1.text=String(format: "%@:%d", "待跟进",(serverNumArray[0] as? Int)!)
+        
+        let L2=self.view.viewWithTag(3101) as! UILabel
+        L2.text=String(format: "%@:%d", "待接收",(orderNumArray[0] as? Int)!)
+        
+        let L3=self.view.viewWithTag(4100) as! UILabel
+        L3.text=String(format: "%@:%d", "未处理",serverNumArray[1] as! Int)
+        
+        let L4=self.view.viewWithTag(4101) as! UILabel
+        L4.text=String(format: "%@:%d", "服务中",orderNumArray[1] as! Int)
+        
+
+        
+        if (((UserDefaults.standard.object(forKey: "newInfoEnble")  as AnyObject).isEqual(NSNull.init())) == false){
+            let newInfoEnble=UserDefaults.standard.object(forKey: "newInfoEnble") as! Bool
+            if newInfoEnble {
+                image4.backgroundColor=UIColor.red
+            }else{
+                image4.backgroundColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
+            }
+        }else{
+            image4.backgroundColor=UIColor.red
+        }
+        
+        
+    }
+    
+    
     
     
     func goToNew(){
@@ -420,7 +470,7 @@ class ossFistVC: RootViewController {
     func initNet0(){
         
  
-        self.showProgressView()
+     //   self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v1/serviceQuestion/question/service_overview_data", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
@@ -472,18 +522,18 @@ class ossFistVC: RootViewController {
                         UserDefaults.standard.set(true, forKey: "newInfoEnble")
                     }
                     
-                   
-                          self.initUItwo()
+                    self.initUItwo2()
+                    
                     
                 }else{
-                         self.initUItwo()
+                       self.initUItwo2()
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
                 }
                 
             }
             
         }, failure: {(error) in
-             self.initUItwo()
+              self.initUItwo2()
                self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
@@ -515,20 +565,20 @@ class ossFistVC: RootViewController {
                     if objDic.count>0{
                         self.integratorValueArray=[objDic["todayEnergy"] as? String ?? "",objDic["totalEnergy"] as? String ?? "",objDic["totalInvNum"] as? String ?? "",objDic["totalPower"] as? String ?? ""];
                     
-                                 self.initUIThree()
+                                 self.initUIThree3()
                     }
                     
        
                     
                 }else{
-                      self.initUIThree()
+                      self.initUIThree3()
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
                 }
                 
             }
             
         }, failure: {(error) in
-            self.initUIThree()
+            self.initUIThree3()
             self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })

@@ -54,6 +54,8 @@ static NSString *cellThree = @"cellThree";
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"搜索设备" style:UIBarButtonItemStylePlain target:self action:@selector(goToDevice)];
     self.navigationItem.rightBarButtonItem=rightItem;
     
+        [self initUI];
+    
     [self finishSet];
 }
 
@@ -107,10 +109,13 @@ static NSString *cellThree = @"cellThree";
     _modelList = arrM.copy;
 
     if (_tableView) {
-        [_tableView removeFromSuperview];
-        _tableView=nil;
+//        [_tableView removeFromSuperview];
+//        _tableView=nil;
+        
+        [_tableView reloadData];
            [self initHeadView];
     }else{
+          [self initUI];
        [self initHeadView];
     }
     
@@ -119,6 +124,13 @@ static NSString *cellThree = @"cellThree";
 
 
 -(void)initUI{
+    if (!_headView) {
+        _headView = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,100*HEIGHT_SIZE )];
+        _headView.backgroundColor =[UIColor clearColor];
+        [self.view addSubview:_headView];
+    }
+
+    
     if (!_tableView) {
         _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height-H1-H2)];
         _tableView.contentSize=CGSizeMake(SCREEN_Width, 2000*HEIGHT_SIZE);
@@ -127,6 +139,7 @@ static NSString *cellThree = @"cellThree";
          _tableView.tableHeaderView=_headView;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        
             [self.tableView registerClass:[orderCellOne class] forCellReuseIdentifier:cellOne];
           [self.tableView registerClass:[orderCellTwo class] forCellReuseIdentifier:cellTwo];
          [self.tableView registerClass:[orderCellThree class] forCellReuseIdentifier:cellThree];
@@ -136,6 +149,84 @@ static NSString *cellThree = @"cellThree";
     
 }
 
+
+-(void)initHeadView{
+    
+    if (!_headView) {
+        _headView = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,100*HEIGHT_SIZE )];
+        _headView.backgroundColor =[UIColor clearColor];
+        [self.view addSubview:_headView];
+    }
+    
+//    _headView = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,100*HEIGHT_SIZE )];
+//    _headView.backgroundColor =[UIColor clearColor];
+//    [self.view addSubview:_headView];
+    
+    float titleLabelH1=30*HEIGHT_SIZE; float firstW1=10*HEIGHT_SIZE;
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(firstW1, 0, SCREEN_Width-(2*firstW1), titleLabelH1)];
+    titleLabel.textColor = [UIColor blackColor];
+    titleLabel.text=[NSString stringWithFormat:@"%@",_allValueDic[@"title"]];
+    titleLabel.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    [_headView addSubview:titleLabel];
+    
+    float ImageW1=16*HEIGHT_SIZE;
+    UIImageView *titleImage= [[UIImageView alloc]initWithFrame:CGRectMake(firstW1, titleLabelH1+1*HEIGHT_SIZE, ImageW1, ImageW1)];
+    titleImage.image=IMAGE(@"workorder_icon.png");
+    [_headView addSubview:titleImage];
+    
+    float titleLabelH2=20*HEIGHT_SIZE;float headW=SCREEN_Width-(2*firstW1);
+    UILabel *titleLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1+ImageW1+5*NOW_SIZE, titleLabelH1,headW, titleLabelH2)];
+    titleLabel2.textColor = COLOR(51, 51, 51, 1);
+    titleLabel2.text=@"基本信息";
+    titleLabel2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [_headView addSubview:titleLabel2];
+    
+    NSArray *headName=[NSArray arrayWithObjects:@"姓名",@"类型", nil];
+    NSArray *serviceType=[NSArray arrayWithObjects:@"",@"现场维修",@"安装调试", @"培训",@"巡检",nil];
+    int k=[_allValueDic[@"serviceType"] intValue];
+    NSString *kName=serviceType[k];
+    NSArray *headValue=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],kName, nil];
+    for (int i=0; i<headName.count; i++) {
+        UILabel *titleLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1+(headW/2)*i, titleLabelH1+titleLabelH2,headW/2, titleLabelH2)];
+        titleLabel3.textColor = COLOR(102, 102, 102, 1);
+        titleLabel3.textAlignment=NSTextAlignmentLeft;
+        NSString *name=[NSString stringWithFormat:@"%@:%@",headName[i],headValue[i]];
+        titleLabel3.text=name;
+        titleLabel3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_headView addSubview:titleLabel3];
+    }
+    
+    
+    UILabel *titleLabel4 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1, titleLabelH1+titleLabelH2*2,headW, titleLabelH2)];
+    titleLabel4.textColor = COLOR(102, 102, 102, 1);
+    titleLabel4.textAlignment=NSTextAlignmentLeft;
+    NSString *name1=[NSString stringWithFormat:@"%@:%@",@"联系方式",[NSString stringWithFormat:@"%@",_allValueDic[@"contact"]]];
+    titleLabel4.text=name1;
+    titleLabel4.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    [_headView addSubview:titleLabel4];
+    
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+    CGSize size = [name1 boundingRectWithSize:CGSizeMake(headW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    
+    UIView *V0 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+size.width+20*NOW_SIZE,titleLabelH1+titleLabelH2*2, 30*NOW_SIZE,titleLabelH2)];
+    V0.backgroundColor =[UIColor clearColor];
+    UITapGestureRecognizer *labelTap1;
+    V0.userInteractionEnabled=YES;
+    labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getPhone)];
+    [V0 addGestureRecognizer:labelTap1];
+    [_headView addSubview:V0];
+    
+    float imageH=14*HEIGHT_SIZE;
+    UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,3*HEIGHT_SIZE, imageH,imageH)];
+    image2.userInteractionEnabled=YES;
+    image2.image=IMAGE(@"phone.png");
+    
+    [V0 addSubview:image2];
+    
+    
+    
+}
 
 -(void)finishSet{
 
@@ -173,77 +264,6 @@ static NSString *cellThree = @"cellThree";
 
 
 
--(void)initHeadView{
-    
-    _headView = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,100*HEIGHT_SIZE )];
-    _headView.backgroundColor =[UIColor clearColor];
-    [self.view addSubview:_headView];
-    
-    float titleLabelH1=30*HEIGHT_SIZE; float firstW1=10*HEIGHT_SIZE;
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(firstW1, 0, SCREEN_Width-(2*firstW1), titleLabelH1)];
-    titleLabel.textColor = [UIColor blackColor];
-    titleLabel.text=[NSString stringWithFormat:@"%@",_allValueDic[@"title"]];
-    titleLabel.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [_headView addSubview:titleLabel];
-
-    float ImageW1=16*HEIGHT_SIZE;
-    UIImageView *titleImage= [[UIImageView alloc]initWithFrame:CGRectMake(firstW1, titleLabelH1+1*HEIGHT_SIZE, ImageW1, ImageW1)];
-    titleImage.image=IMAGE(@"workorder_icon.png");
-    [_headView addSubview:titleImage];
-    
-    float titleLabelH2=20*HEIGHT_SIZE;float headW=SCREEN_Width-(2*firstW1);
-    UILabel *titleLabel2 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1+ImageW1+5*NOW_SIZE, titleLabelH1,headW, titleLabelH2)];
-    titleLabel2.textColor = COLOR(51, 51, 51, 1);
-    titleLabel2.text=@"基本信息";
-    titleLabel2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [_headView addSubview:titleLabel2];
-   
-       NSArray *headName=[NSArray arrayWithObjects:@"姓名",@"类型", nil];
-       NSArray *serviceType=[NSArray arrayWithObjects:@"",@"现场维修",@"安装调试", @"培训",@"巡检",nil];
-    int k=[_allValueDic[@"serviceType"] intValue];
-    NSString *kName=serviceType[k];
-     NSArray *headValue=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],kName, nil];
-    for (int i=0; i<headName.count; i++) {
-        UILabel *titleLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1+(headW/2)*i, titleLabelH1+titleLabelH2,headW/2, titleLabelH2)];
-        titleLabel3.textColor = COLOR(102, 102, 102, 1);
-        titleLabel3.textAlignment=NSTextAlignmentLeft;
-        NSString *name=[NSString stringWithFormat:@"%@:%@",headName[i],headValue[i]];
-        titleLabel3.text=name;
-        titleLabel3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        [_headView addSubview:titleLabel3];
-    }
-    
-   
-    UILabel *titleLabel4 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1, titleLabelH1+titleLabelH2*2,headW, titleLabelH2)];
-    titleLabel4.textColor = COLOR(102, 102, 102, 1);
-    titleLabel4.textAlignment=NSTextAlignmentLeft;
-    NSString *name1=[NSString stringWithFormat:@"%@:%@",@"联系方式",[NSString stringWithFormat:@"%@",_allValueDic[@"contact"]]];
-    titleLabel4.text=name1;
-    titleLabel4.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    [_headView addSubview:titleLabel4];
-    
-    
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-    CGSize size = [name1 boundingRectWithSize:CGSizeMake(headW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-    
-    UIView *V0 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+size.width+20*NOW_SIZE,titleLabelH1+titleLabelH2*2, 30*NOW_SIZE,titleLabelH2)];
-    V0.backgroundColor =[UIColor clearColor];
-    UITapGestureRecognizer *labelTap1;
-           V0.userInteractionEnabled=YES;
-    labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getPhone)];
-    [V0 addGestureRecognizer:labelTap1];
-    [_headView addSubview:V0];
-    
-    float imageH=14*HEIGHT_SIZE;
-    UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,3*HEIGHT_SIZE, imageH,imageH)];
-        image2.userInteractionEnabled=YES;
-    image2.image=IMAGE(@"phone.png");
-
-    [V0 addSubview:image2];
-    
-    
-    [self initUI];
-}
 
 -(void)getPhone{
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:_allValueDic[@"contact"] message:root_dadianhua delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];

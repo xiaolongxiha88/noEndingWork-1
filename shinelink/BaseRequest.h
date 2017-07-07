@@ -54,12 +54,7 @@ typedef void (^successBlock) (id content);
                  sucessBlock:(successBlock)successBlock
                      failure:(void (^)(NSError * error))failure;
 
-+ (void)uplodImageWithMethod2:(NSString *)method
-                    paramars:(NSDictionary *)paramars
-                paramarsSite:(NSString *)site
-               dataImageDict:(NSMutableDictionary *)dataDict
-                 sucessBlock:(successBlock)successBlock
-                     failure:(void (^)(NSError * error))failure;
+
 
 +(void)getAppError:(NSString*)msg useName:(NSString*)useName;
 
