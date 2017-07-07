@@ -48,7 +48,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         tap.cancelsTouchesInView=false
         self.view.addGestureRecognizer(tap)
         
-        let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView")
+        let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView3")
         NotificationCenter.default.addObserver(self, selector:#selector(tableViewReload(info:)),
                                                name: NotifyChatMsgRecv, object: nil)
         
@@ -115,6 +115,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         let buttonView1=uibuttonView0()
         buttonView1.frame=CGRect(x: 0*NOW_SIZE, y: 30*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
         buttonView1.typeNum=1
+        buttonView1.goToNetNum=3
         buttonView1.firstNum=firstNum
         buttonView1.isUserInteractionEnabled=true
         buttonView1.backgroundColor=backgroundGrayColor

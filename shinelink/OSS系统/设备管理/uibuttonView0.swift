@@ -15,6 +15,7 @@ class uibuttonView0: UIView{
      var buttonNum:Int!
     var typeNum:Int!
      var backNum:Int?
+       var goToNetNum:Int?
     
      var firstNum:Int!
      var secondNum:Int!
@@ -105,8 +106,23 @@ class uibuttonView0: UIView{
             
         }else{
             let dic :[String : NSObject]  = ["tag":uibutton.tag as NSObject]
-            let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView")
-         NotificationCenter.default.post(name:NotifyChatMsgRecv, object: nil, userInfo: dic)
+            
+            if goToNetNum==1 {
+                let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView1")
+                NotificationCenter.default.post(name:NotifyChatMsgRecv, object: nil, userInfo: dic)
+            }
+            
+            if goToNetNum==2 {
+                let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView2")
+                NotificationCenter.default.post(name:NotifyChatMsgRecv, object: nil, userInfo: dic)
+            }
+            
+            if goToNetNum==3 {
+                let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView3")
+                NotificationCenter.default.post(name:NotifyChatMsgRecv, object: nil, userInfo: dic)
+            }
+            
+     
          
             
             uibutton.backgroundColor=MainColor

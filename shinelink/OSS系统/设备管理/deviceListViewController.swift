@@ -51,6 +51,7 @@ deviceTypeString="1"
        let buttonView=uibuttonView0()
         buttonView.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
         buttonView.typeNum=0
+        buttonView.goToNetNum=1
         buttonView.isUserInteractionEnabled=true
         buttonView.backgroundColor=backgroundGrayColor
         buttonView.buttonArray=[root_caijiqi,root_niBianQi,root_chuNengJi]
@@ -58,7 +59,7 @@ deviceTypeString="1"
         self.view .addSubview(buttonView)
         
         
-        let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView")
+        let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView1")
         NotificationCenter.default.addObserver(self, selector:#selector(tableViewReload(info:)),
                                                name: NotifyChatMsgRecv, object: nil)
         

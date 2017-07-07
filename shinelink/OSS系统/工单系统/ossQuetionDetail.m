@@ -511,7 +511,7 @@
                 }
                 
                 [_textView resignFirstResponder];
-                NSNotification * notice = [NSNotification notificationWithName:@"ReLoadTableView" object:nil userInfo:nil];
+                NSNotification * notice = [NSNotification notificationWithName:@"ReLoadTTTableView" object:nil userInfo:nil];
                 [self keyHiden:notice];
                 [self showAlertViewWithTitle:nil message:root_ME_tianjia_chenggong cancelButtonTitle:root_Yes];
                 [self netGetAgain];

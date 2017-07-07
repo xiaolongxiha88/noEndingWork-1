@@ -67,6 +67,7 @@ class IntegratorFirst: RootViewController {
         let buttonView=uibuttonView0()
         buttonView.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
         buttonView.typeNum=1
+        buttonView.goToNetNum=2
          buttonView.firstNum=firstNum
         buttonView.isUserInteractionEnabled=true
         buttonView.backgroundColor=backgroundGrayColor
@@ -74,7 +75,7 @@ class IntegratorFirst: RootViewController {
         buttonView.initUI()
         self.view .addSubview(buttonView)
         
-        let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView")
+        let NotifyChatMsgRecv = NSNotification.Name(rawValue:"ReLoadTableView2")
         NotificationCenter.default.addObserver(self, selector:#selector(tableViewReload(info:)),
                                                name: NotifyChatMsgRecv, object: nil)
         
