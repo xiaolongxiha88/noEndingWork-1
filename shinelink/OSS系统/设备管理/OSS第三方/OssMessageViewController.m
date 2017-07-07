@@ -78,12 +78,13 @@
     NSString *currentLanguage = [languages objectAtIndex:0];
     
     UILabel *currentPowerTitleLable = [[UILabel alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 20*HEIGHT_SIZE, SCREEN_Width, 40*HEIGHT_SIZE)];
-    currentPowerTitleLable.text = @"首次登陆请验证手机号码";
+    currentPowerTitleLable.text = root_yanzheng_zhuce_shoujihao;
+    
     if ([_addQuestionType isEqualToString:@"1"]) {
-         currentPowerTitleLable.text = @"验证用户手机号码";
+         currentPowerTitleLable.text = root_yanzheng_yonghu_shoujihao;
     }
     if ([_addQuestionType isEqualToString:@"2"]) {
-        currentPowerTitleLable.text = @"验证用户邮箱";
+        currentPowerTitleLable.text = root_yanzheng_yonghu_youxiang;
     }
     currentPowerTitleLable.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
     currentPowerTitleLable.textAlignment=NSTextAlignmentCenter;
@@ -116,7 +117,7 @@
     if ([_addQuestionType isEqualToString:@"1"]) {
          _textField.placeholder =root_Enter_phone_number;
     }else  if ([_addQuestionType isEqualToString:@"2"]) {
-     _textField.placeholder =@"请输入邮箱地址";
+     _textField.placeholder =root_WO_shuru_youxiang;
     }
   
     _textField.textColor = [UIColor whiteColor];
@@ -448,7 +449,7 @@
             goView.serverListArray=[NSMutableArray arrayWithArray:_serverListArray];
             [self.navigationController pushViewController:goView animated:NO];
         }else{
-            NSString *alert1=[NSString stringWithFormat:@"您注册时填写的手机号是%@",_phoneNum];
+            NSString *alert1=[NSString stringWithFormat:@"%@%@",root_zhuce_tianxie_shoujihao,_phoneNum];
            [self showToastViewWithTitle:alert1];
             return;
         }

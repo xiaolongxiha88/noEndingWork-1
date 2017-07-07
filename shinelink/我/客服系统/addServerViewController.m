@@ -48,7 +48,7 @@
     [super viewDidLoad];
     self.title=root_ME_tijiao_wenti;
     picTime=0;
-    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"提交问题" style:UIBarButtonItemStylePlain target:self action:@selector(finishDone)];
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_ME_tijiao_wenti style:UIBarButtonItemStylePlain target:self action:@selector(finishDone)];
     rightItem.tag=10;
     self.navigationItem.rightBarButtonItem=rightItem;
     
@@ -107,7 +107,7 @@
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
       _labelArray=[[NSMutableArray alloc]initWithObjects:root_ME_biaoti, root_ME_wenti_leixing, root_NBQ_xunliehao,root_shoujihao,nil];
-     NSMutableArray *alertArray=[[NSMutableArray alloc]initWithObjects:@"请输入标题", @"请选择问题类型", @"请选择或输入序列号",@"请输入电话号码",nil];
+     NSMutableArray *alertArray=[[NSMutableArray alloc]initWithObjects:root_ME_biaoti_shuru, root_ME_wenti_leixing_xuanzhe, root_ME_xuliehao_shuru,root_Enter_phone_number,nil];
     
     float lableH=40*HEIGHT_SIZE;float Nsize=lableH+2*HEIGHT_SIZE;
     float lablaFontSize=12*HEIGHT_SIZE;
@@ -356,7 +356,7 @@
         return;
     }
     if( ([[textF3 text] isEqual:@""]) &&([[textF4 text] isEqual:@""])){
-        [self showToastViewWithTitle:@"至少输入一种联系方式"];
+        [self showToastViewWithTitle:root_shuru_yizhong_lianxi_fangshi];
         return;
     }
   
@@ -416,7 +416,7 @@
    // [_picArray removeObject:@"del"];
     
     if (_image1 &&_image2 &&_image3) {
-          [self showAlertViewWithTitle:nil message:@"最多上传3张图片" cancelButtonTitle:root_Yes];
+          [self showAlertViewWithTitle:nil message:root_shangchuan_sanzhang_tupian cancelButtonTitle:root_Yes];
     }else{
     
     UIAlertController * alertController = [UIAlertController alertControllerWithTitle: nil
@@ -569,13 +569,13 @@
 
 -(void)tapInfo{
     NSArray *infoArray=[NSArray arrayWithObjects:root_shoujihao,root_youxiang, nil];
-    [ZJBLStoreShopTypeAlert showWithTitle:@"选择联系方式" titles:infoArray selectIndex:^(NSInteger selectIndex) {
+    [ZJBLStoreShopTypeAlert showWithTitle:root_xuanzhe_lianxi_fangshi titles:infoArray selectIndex:^(NSInteger selectIndex) {
         _phoneOrEmail=[NSString stringWithFormat:@"%ld",selectIndex+1];
         UITextField *text=[_scrollView viewWithTag:6003];
         if (selectIndex==0) {
-            text.placeholder=@"请输入电话号码";
+            text.placeholder=root_Enter_phone_number;
         }else{
-         text.placeholder=@"请输入邮箱地址";
+         text.placeholder=root_WO_shuru_youxiang;
         }
         
         NSString *isValiPhone=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiPhone"];
@@ -632,9 +632,9 @@
     [_scrollView addSubview:_imageV5];
     
     UILabel *PV1Lable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width-20*NOW_SIZE,40*HEIGHT_SIZE )];
-    PV1Lable.text=@"您的手机号还未验证,请点击验证。";
+    PV1Lable.text=root_shouji_meiyou_yanzheng;
     if ([_phoneOrEmail isEqualToString:@"2"]) {
-        PV1Lable.text=@"您的邮箱还未验证,请点击验证。";
+        PV1Lable.text=root_youxiang_meiyou_yanzheng;
     }
     PV1Lable.textAlignment=NSTextAlignmentCenter;
     PV1Lable.textColor=MainColor;

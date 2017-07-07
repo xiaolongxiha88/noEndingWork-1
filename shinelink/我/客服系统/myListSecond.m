@@ -91,7 +91,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyHiden:) name: UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyWillAppear:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
-    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"关闭问题" style:UIBarButtonItemStylePlain target:self action:@selector(closeQuestion)];
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_guanbi_wenti style:UIBarButtonItemStylePlain target:self action:@selector(closeQuestion)];
     self.navigationItem.rightBarButtonItem=rightItem;
     
     [self netGetAgain];
@@ -222,16 +222,16 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
         Lable1.textColor=COLOR(153, 153, 153, 1);
         if (i==0) {
             if ([_statusString isEqualToString:@"0"]) {
-                 Lable1.text=@"待处理";
+                 Lable1.text=root_daichuli;
                  Lable1.textColor=COLOR(227, 74, 33, 1);
             }else if ([_statusString isEqualToString:@"1"]){
-                 Lable1.text=@"处理中";
+                 Lable1.text=root_chulizhong;
                 Lable1.textColor=COLOR(94, 195, 53, 1);
             }else if([_statusString isEqualToString:@"2"]){
-                 Lable1.text=@"已处理";
+                 Lable1.text=root_yichuli;
                  Lable1.textColor=COLOR(157, 157, 157, 1);
             }else if([_statusString isEqualToString:@"3"]){
-                 Lable1.text=@"待跟进";
+                 Lable1.text=root_daigengjin;
                  Lable1.textColor=COLOR(227, 164, 33, 1);
             }
         }
@@ -251,7 +251,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     [_headView addSubview:LableContent];
     
     UILabel *LableS=[[UILabel alloc]initWithFrame:CGRectMake(imageW, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE, 150*NOW_SIZE,20*HEIGHT_SIZE)];
-    LableS.text=@"回复问题";
+    LableS.text=root_huifu_jilu;
     LableS.textAlignment=NSTextAlignmentLeft;
     LableS.textColor=COLOR(102, 102, 102, 1);
     LableS.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];

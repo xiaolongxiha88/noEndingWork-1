@@ -13,7 +13,7 @@
 #define AlertContent @"Growatt"
 
 @interface kongZhiNi0 ()
-
+@property (nonatomic, strong) NSString *password;
 @end
 
 @implementation kongZhiNi0
@@ -28,7 +28,9 @@
     
     self.tableView.separatorColor=[UIColor whiteColor];
     
-      self.dataArray =[NSMutableArray arrayWithObjects:root_NBQ_kaiguan,root_NBQ_youxiao_gonglv,root_NBQ_wuxiao_gonglv,root_NBQ_PF,root_NBQ_shijian,root_NBQ_shidian_dianya,@"设置市电电压下限",nil];
+       [self getPassword];
+    
+      self.dataArray =[NSMutableArray arrayWithObjects:root_NBQ_kaiguan,root_NBQ_youxiao_gonglv,root_NBQ_wuxiao_gonglv,root_NBQ_PF,root_NBQ_shijian,root_NBQ_shidian_dianya,root_shezhi_shidian_dianya_xiaxian,nil];
     if ([_controlType isEqualToString:@"2"]) {
         [_dataArray addObject:@"高级设置"];
     }
@@ -131,7 +133,7 @@
                     NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
                     NSString *alert1=[alertView textFieldAtIndex:0].text;
                     
-                    if ([alert1 isEqualToString:AlertContent]) {
+                    if ([alert1 isEqualToString:_password]) {
                         [self.navigationController pushViewController:go animated:YES];
                     }else{
                         [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
@@ -156,6 +158,32 @@
 
 }
 
+-(void)getPassword{
+    
+    NSDateFormatter *dataFormatter= [[NSDateFormatter alloc] init];
+    [dataFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *time = [dataFormatter stringFromDate:[NSDate date]];
+    
+    
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"type":@"1",@"stringTime":time} paramarsSite:@"/newLoginAPI.do?op=getSetPass" sucessBlock:^(id content) {
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        
+        NSLog(@"getUserServerUrl: %@", content1);
+        if (content1 != [NSNull null]) {
+            _password=content1[@"msg"];
+            
+            
+        }
+        
+    } failure:^(NSError *error) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"没有获取密码，请重新进入页面。" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        [alertView show];
+        
+    }];
+    
+}
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -118,7 +118,7 @@
     self.contentSecondArray=[NSMutableArray array];
     self.answerName=[NSMutableArray array];
     
-  
+      [self showProgressView];
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfoNew" sucessBlock:^(id content1) {
         [self hideProgressView];
    NSLog(@"questionList=: %@", content1);
@@ -154,9 +154,10 @@
                 
                 NSArray *content = [content1 sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                     
-//                    NSLog(@"%@~%@",obj1,obj2); //3~4 2~1 3~1 3~2
+
                     
-                    return [obj2[@"status"] compare:obj1[@"status"]]; //升序
+              //      return [obj2[@"status"] compare:obj1[@"status"]]; //升序
+                     return [obj1[@"status"] compare:obj2[@"status"]];
                     
                 }];
                 
@@ -323,6 +324,7 @@
 
 -(void)delQuestion{
 
+    [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"questionId":_delQuestionID} paramarsSite:@"/questionAPI.do?op=deleteQuestion" sucessBlock:^(id content) {
         [self hideProgressView];
         NSLog(@"deleteQuestion=: %@", content);

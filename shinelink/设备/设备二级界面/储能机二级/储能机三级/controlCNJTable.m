@@ -13,6 +13,7 @@
 
 @interface controlCNJTable ()
 @property(nonatomic,strong)NSMutableArray *dataArray;
+@property (nonatomic, strong) NSString *password;
 @end
 
 @implementation controlCNJTable
@@ -29,13 +30,44 @@
         [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
     }
     
-    self.dataArray =[NSMutableArray arrayWithObjects:root_CNJ_kaiguan,root_CNJ_SOC,root_CNJ_shijian,root_CNJ_fangdian_kaiguan,root_CNJ_fangdian_shijian,root_CNJ_SP,@"充电使能",@"充电时间段",@"充电电池SOC设置",nil];
+    [self getPassword];
+    
+    self.dataArray =[NSMutableArray arrayWithObjects:root_CNJ_kaiguan,root_CNJ_SOC,root_CNJ_shijian,root_CNJ_fangdian_kaiguan,root_CNJ_fangdian_shijian,root_CNJ_SP,root_chongdian_shineng,root_chongdian_shijianduan,root_chongdian_dianchi_soc,nil];
 //    if ([_controlType isEqualToString:@"2"]) {
 //        [_dataArray addObject:@"高级设置"];
 //    }
     
     
 }
+
+
+-(void)getPassword{
+
+   NSDateFormatter *dataFormatter= [[NSDateFormatter alloc] init];
+    [dataFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *time = [dataFormatter stringFromDate:[NSDate date]];
+    
+
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"type":@"2",@"stringTime":time} paramarsSite:@"/newLoginAPI.do?op=getSetPass" sucessBlock:^(id content) {
+ 
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+     
+        NSLog(@"getUserServerUrl: %@", content1);
+        if (content1 != [NSNull null]) {
+            _password=content1[@"msg"];
+
+         
+        }
+        
+    } failure:^(NSError *error) {
+  
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"没有获取密码，请重新进入页面。" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        [alertView show];
+        
+    }];
+    
+}
+
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -123,7 +155,7 @@
                         NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
                         NSString *alert1=[alertView textFieldAtIndex:0].text;
                         
-                        if ([alert1 isEqualToString:AlertContent]) {
+                        if ([alert1 isEqualToString:_password]) {
                             [self.navigationController pushViewController:go animated:YES];
                         }else{
                             [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{

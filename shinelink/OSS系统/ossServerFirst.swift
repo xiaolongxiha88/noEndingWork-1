@@ -164,6 +164,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         let buttonView=uibuttonView0()
         buttonView.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
         buttonView.typeNum=3
+        buttonView.goToNetNum=3
           buttonView.secondNum=secondNum
         buttonView.isUserInteractionEnabled=true
         buttonView.backgroundColor=UIColor.white

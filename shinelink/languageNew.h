@@ -680,6 +680,25 @@
 #define  root_shuru_zhengque_youxiang_geshi  NSLocalizedString(@"81请输入正确邮箱格式", nil)
 #define  root_shoujihao  NSLocalizedString(@"82手机号:", nil)
 #define  root_youxiang  NSLocalizedString(@"83邮箱:", nil)
+#define  root_chongdian_shineng  NSLocalizedString(@"84充电使能", nil)
+#define  root_chongdian_shijianduan  NSLocalizedString(@"85充电时间段", nil)
+#define  root_chongdian_dianchi_soc  NSLocalizedString(@"86充电电池SOC设置", nil)
+#define  root_shezhi_shidian_dianya_xiaxian  NSLocalizedString(@"87设置市电电压下限", nil)
+#define  root_shineng  NSLocalizedString(@"88使能", nil)
+#define  root_jinzhi  NSLocalizedString(@"89禁止", nil)
+#define  root_tijiao_wenti  NSLocalizedString(@"90提交问题", nil)
+
+#define  root_shuru_yizhong_lianxi_fangshi  NSLocalizedString(@"91至少输入一种联系方式", nil)
+#define  root_shangchuan_sanzhang_tupian  NSLocalizedString(@"92最多上传3张图片", nil)
+#define  root_xuanzhe_lianxi_fangshi  NSLocalizedString(@"93选择联系方式", nil)
+#define  root_shouji_meiyou_yanzheng  NSLocalizedString(@"94您的手机号还未验证", nil)
+#define  root_youxiang_meiyou_yanzheng  NSLocalizedString(@"95您的邮箱还未验证", nil)
+#define  root_yanzheng_zhuce_shoujihao  NSLocalizedString(@"96请验证注册时填写的手机号码", nil)
+#define  root_yanzheng_yonghu_shoujihao  NSLocalizedString(@"97验证用户手机号码", nil)
+#define  root_yanzheng_yonghu_youxiang  NSLocalizedString(@"98验证用户邮箱", nil)
+#define  root_zhuce_tianxie_shoujihao  NSLocalizedString(@"99您注册时填写的手机号是", nil)
+#define  root_guanbi_wenti  NSLocalizedString(@"100关闭问题", nil)
+#define  root_huifu_jilu  NSLocalizedString(@"101回复记录", nil)
 
 
 

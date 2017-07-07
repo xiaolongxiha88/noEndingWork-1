@@ -189,7 +189,7 @@
         if ([_type isEqualToString:@"5"]) {
              PVData.text=root_NBQ_shidian_dianya;
         }else{
-         PVData.text=@"设置市电电压下限";
+         PVData.text=root_shezhi_shidian_dianya_xiaxian;
         }
        
         PVData.textAlignment=NSTextAlignmentCenter;

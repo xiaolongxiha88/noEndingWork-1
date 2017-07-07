@@ -651,13 +651,29 @@
 "75已处理"="Processed";
 "76待跟进"="Waiting";
 
+"77请输入相关问题的详细描述"="Please enter a detailed description of the problem...";
+"78当前服务器地址:"="Current server address:";
+"79点击获取服务器地址"="Click to get the server address";
+"80获取服务器地址不成功"="Obtain server address unsuccessful";
+"81请输入正确邮箱格式"="Please enter the correct email box format";
+"82手机号:"="Phone number:";
+"83邮箱:"="Email address:";
 
-
-
-
-
-
-
-
-
-
+"84充电使能"="Charge enable";
+"85充电时间段"="Charging time";
+"86充电电池SOC设置"="Rechargeable battery SOC";
+"87设置市电电压下限"="Set grid voltage low";
+"88使能"="On";
+"89禁止"="Off";
+"90提交问题"="Submit the question";
+"91至少输入一种联系方式"="Enter at least one contact method";
+"92最多上传3张图片"="Upload up to three pictures";
+"93选择联系方式"="Select contact method";
+"94您的手机号还未验证"="Your phone number has not been verified, please click verify.";
+"95您的邮箱还未验证"="Your email is not verified. Please click verify.";
+"96请验证注册时填写的手机号码"="Please verify the phone number";
+"97验证用户手机号码"="Verify the user's phone number";
+"98验证用户邮箱"="Verify the user's email address";
+"99您注册时填写的手机号是"="You fill out the registration phone number is";
+"100关闭问题"="Close question";
+"101回复记录"="Reply record";

@@ -650,3 +650,7 @@
 "74处理中"="Processing";
 "75已处理"="Processed";
 "76待跟进"="Waiting";
+
+"84充电使能"="Charge enable";
+"85充电时间段"="Charging time";
+"86充电电池SOC设置"="Rechargeable battery SOC";

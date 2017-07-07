@@ -202,7 +202,7 @@
         }
         if ([_type isEqualToString:@"7"]) {
             UILabel *dataDischarge=[[UILabel alloc]initWithFrame:CGRectMake(25*NOW_SIZE, 75*HEIGHT_SIZE+10*HEIGHT_SIZE, 250*NOW_SIZE,20*HEIGHT_SIZE )];
-            dataDischarge.text=@"充电时间段:";
+            dataDischarge.text=[NSString stringWithFormat:@"%@:",root_chongdian_shijianduan];
             dataDischarge.textAlignment=NSTextAlignmentLeft;
             dataDischarge.textColor=[UIColor whiteColor];
             dataDischarge.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
@@ -325,7 +325,7 @@
     
     if([_type isEqualToString:@"6"]){
         UILabel *buttonLable=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width/2-100*NOW_SIZE)/2, 60*HEIGHT_SIZE, 100*NOW_SIZE,20*HEIGHT_SIZE )];
-        buttonLable.text=@"使能";
+        buttonLable.text=root_shineng;
         buttonLable.textAlignment=NSTextAlignmentCenter;
         buttonLable.textColor=[UIColor whiteColor];
         buttonLable.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
@@ -338,7 +338,7 @@
         [_scrollView addSubview:firstB];
         
         UILabel *buttonLable0=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width/2-100*NOW_SIZE)/2+SCREEN_Width/2, 60*HEIGHT_SIZE, 100*NOW_SIZE,20*HEIGHT_SIZE )];
-        buttonLable0.text=@"禁止";
+        buttonLable0.text=root_jinzhi;
         buttonLable0.textAlignment=NSTextAlignmentCenter;
         buttonLable0.textColor=[UIColor whiteColor];
         buttonLable0.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
@@ -354,7 +354,7 @@
     if([_type isEqualToString:@"8"]){
      
             UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 70*HEIGHT_SIZE+10*HEIGHT_SIZE, 300*NOW_SIZE,30*HEIGHT_SIZE )];
-            PVData.text=@"充电电池SOC设置:";
+            PVData.text=[NSString stringWithFormat:@"%@:",root_chongdian_dianchi_soc];
             PVData.textAlignment=NSTextAlignmentLeft;
             PVData.textColor=[UIColor whiteColor];
             PVData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];

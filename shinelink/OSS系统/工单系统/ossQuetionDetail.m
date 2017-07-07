@@ -502,7 +502,7 @@
         NSLog(@"/api/v1/serviceQuestion/question/reply==%@", content);
         [self hideProgressView];
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        if (content1) {
+        if (content1 != [NSNull null]) {
             if ([content1[@"result"] integerValue] == 1) {
                 _textView.text=@"";
                 if (_imageViewAll) {
