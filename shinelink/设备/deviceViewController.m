@@ -931,18 +931,21 @@
                     [request setPredicate:predicate];//这里相当于sqlite中的查询条件，具体格式参考苹果文档
                     NSError *error = nil;
                     NSArray *result = [_manager.managedObjContext executeFetchRequest:request error:&error];
-                    GetDevice *getDevice2=result[0];
-                    getDevice2.name=nameArray[i];
-                    getDevice2.type=_typeArr[i];
-                    getDevice2.power=powerArray[i];
-                    getDevice2.dayPower=dayArray[i];
-                    getDevice2.statueData=statueArray[i];
-                    getDevice2.deviceSN=SNArray[i];
-                    getDevice2.totalPower=totalPowerArray[i];
-                    UIImage *image=IMAGE(imageArray[i]);
-                    NSData *imagedata=UIImageJPEGRepresentation(image, 0.5);
-                    getDevice2.demoImage=imagedata;
-                    getDevice2.statueImage=UIImageJPEGRepresentation(IMAGE(imageStatueArray[i]), 0.5);
+                    if (result.count>0) {
+                        GetDevice *getDevice2=result[0];
+                        getDevice2.name=nameArray[i];
+                        getDevice2.type=_typeArr[i];
+                        getDevice2.power=powerArray[i];
+                        getDevice2.dayPower=dayArray[i];
+                        getDevice2.statueData=statueArray[i];
+                        getDevice2.deviceSN=SNArray[i];
+                        getDevice2.totalPower=totalPowerArray[i];
+                        UIImage *image=IMAGE(imageArray[i]);
+                        NSData *imagedata=UIImageJPEGRepresentation(image, 0.5);
+                        getDevice2.demoImage=imagedata;
+                        getDevice2.statueImage=UIImageJPEGRepresentation(IMAGE(imageStatueArray[i]), 0.5);
+                    }
+               
                     
                 }
                 

@@ -678,7 +678,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 -(void)controlPhoto{
     if (_image1 &&_image2 &&_image3) {
-        [self showAlertViewWithTitle:nil message:@"最多上传3张图片" cancelButtonTitle:root_Yes];
+        [self showAlertViewWithTitle:nil message:root_shangchuan_sanzhang_tupian cancelButtonTitle:root_Yes];
     }else{
         
         UIAlertController * alertController = [UIAlertController alertControllerWithTitle: nil
@@ -809,7 +809,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 }
 
 - (void)closeQuestion {
-    UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:@"是否关闭问题?" message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+    UIAlertView *alertView1 = [[UIAlertView alloc] initWithTitle:root_shifou_guanbi_wenti message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
     [alertView1 show];
 }
 
@@ -838,7 +838,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
             
             if ([firstDic[@"result"] intValue]==1) {
                 
-                [self showToastViewWithTitle:@"操作成功"];
+                [self showToastViewWithTitle:root_caozuo_chenggong];
                 [self.navigationController popViewControllerAnimated:YES];
      
             }else{

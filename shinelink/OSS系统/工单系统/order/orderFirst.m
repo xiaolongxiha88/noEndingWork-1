@@ -109,10 +109,12 @@ static NSString *cellThree = @"cellThree";
     _modelList = arrM.copy;
 
     if (_tableView) {
-//        [_tableView removeFromSuperview];
-//        _tableView=nil;
+        [_tableView removeFromSuperview];
+        _tableView=nil;
         
-        [_tableView reloadData];
+    //    [_tableView reloadData];
+        
+          [self initUI];
            [self initHeadView];
     }else{
           [self initUI];

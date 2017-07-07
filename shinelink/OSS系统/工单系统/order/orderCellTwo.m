@@ -802,6 +802,7 @@ static NSString *statusNum = @"3";
     
     NSString *locationString=((UILabel*)[_scrollView viewWithTag:2000]).text;
     NSString *timeString=((UILabel*)[_scrollView viewWithTag:2001]).text;
+    
      NSString *deviceSnString=[_textfield text];
     
 
@@ -827,6 +828,30 @@ static NSString *statusNum = @"3";
         NSData *imageData = UIImageJPEGRepresentation(picAll2[i], 0.5);
         [dataImageDict setObject:imageData forKey:imageName];
     }
+    
+    if (_picArray.count==0) {
+        [self showToastViewWithTitle:@"请上传报告单图片"];
+        return;
+    }
+    
+    if ([locationString isEqual:@""]) {
+        [self showToastViewWithTitle:@"请点击获取位置信息"];
+        return;
+    }
+    if ([timeString isEqual:@""]) {
+        [self showToastViewWithTitle:@"请选择工单完成时间"];
+        return;
+    }
+    if ([_orderType isEqual:@""] || (!_orderType)) {
+        [self showToastViewWithTitle:@"请选择工单完成状态"];
+        return;
+    }
+    
+    if (!_goTimeString) {
+        [self showToastViewWithTitle:@"请选择预约上门时间"];
+        return;
+    }
+    
     
     
     NSMutableDictionary *allDict=[NSMutableDictionary dictionary];
@@ -942,6 +967,7 @@ static NSString *statusNum = @"3";
     [super layoutSubviews];
     
      _remarkString=_allValueDic[@"remarks"];
+    _deviceType=@"";
     
     if (!_scrollView) { 
         [self initUI];

@@ -300,18 +300,14 @@ static NSString *statusNum = @"2";
     
     NSMutableDictionary *dataImageDict = [NSMutableDictionary dictionary];
   
-//    NSMutableArray *picAll=[NSMutableArray arrayWithArray:_picArray];
-//    [picAll removeObject:@"del"];
-//    for (int i=0; i<picAll.count; i++) {
-//         NSString *imageName=[NSString stringWithFormat:@"image%d",i+1];
-//        if ([picAll[i] isEqualToString:@""]) {
-//                  [dataImageDict setObject:@"" forKey:imageName];
-//        }else{
-//            NSData *imageData = UIImageJPEGRepresentation(picAll[i], 0.5);
-//            [dataImageDict setObject:imageData forKey:imageName];
-//        }
-//    
-//    }
+    if ([[_textfield text] isEqual:@""]) {
+        [self showToastViewWithTitle:@"请输入详细地址"];
+        return;
+    }
+    if ([_goTimeString isEqual:@""] ||(!_goTimeString)) {
+        [self showToastViewWithTitle:@"请选择预约上门时间"];
+        return;
+    }
     
     NSMutableDictionary *allDict=[NSMutableDictionary dictionary];
     [allDict setObject:_orderID forKey:@"orderId"];

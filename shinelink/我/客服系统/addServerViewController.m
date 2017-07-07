@@ -631,13 +631,14 @@
     _imageV5.image = IMAGE(@"pop_frame.png");
     [_scrollView addSubview:_imageV5];
     
-    UILabel *PV1Lable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width-20*NOW_SIZE,40*HEIGHT_SIZE )];
+    UILabel *PV1Lable=[[UILabel alloc]initWithFrame:CGRectMake(8*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width-36*NOW_SIZE,40*HEIGHT_SIZE )];
     PV1Lable.text=root_shouji_meiyou_yanzheng;
     if ([_phoneOrEmail isEqualToString:@"2"]) {
         PV1Lable.text=root_youxiang_meiyou_yanzheng;
     }
     PV1Lable.textAlignment=NSTextAlignmentCenter;
     PV1Lable.textColor=MainColor;
+    PV1Lable.adjustsFontSizeToFitWidth=YES;
     PV1Lable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [_imageV5 addSubview:PV1Lable];
 }

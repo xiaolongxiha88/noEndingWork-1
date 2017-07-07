@@ -699,8 +699,8 @@
 #define  root_zhuce_tianxie_shoujihao  NSLocalizedString(@"99您注册时填写的手机号是", nil)
 #define  root_guanbi_wenti  NSLocalizedString(@"100关闭问题", nil)
 #define  root_huifu_jilu  NSLocalizedString(@"101回复记录", nil)
-
-
+#define  root_shifou_guanbi_wenti  NSLocalizedString(@"102是否关闭问题", nil)
+#define  root_caozuo_chenggong  NSLocalizedString(@"103操作成功", nil)
 
 
 
