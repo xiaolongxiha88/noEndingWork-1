@@ -44,6 +44,10 @@ float Time=20.f;
     AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.requestSerializer.timeoutInterval=Time;
+    if ([site isEqualToString:@"/api/v1/login/userLogin"]) {
+        manager.requestSerializer.timeoutInterval=10.f;
+    }
+    
     NSString *url = [NSString stringWithFormat:@"%@%@",method,site];
     NSLog(@"%@", url);
     [UserInfo defaultUserInfo].R_timer.fireDate=[NSDate distantPast];

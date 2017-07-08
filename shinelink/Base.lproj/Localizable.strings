@@ -78,7 +78,7 @@
 "充电桩"="EV charger";
 "功率调节器"="Power regulator";
 "未连接"="Not connected";
-"添加设备"="Add device";
+"添加设备"="Add datalogger";
 "系统错误"="System error";
 "删除成功"="Deleted successfully";
 "采集器列表"="Datalogger list";
@@ -186,7 +186,7 @@
 "设备类型"="Device type";
 "数据更新时间"="Data refreshing time";
 
-"添加设备"="Add device";
+
 "添加出错"="Add device error";
 "没有权限"="Unauthorized";
 "采集器序列号错误"="Datalogger SN incorrect";

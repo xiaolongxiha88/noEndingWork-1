@@ -36,7 +36,7 @@
 @implementation listViewController
 
 -(void)viewWillAppear:(BOOL)animated{
-      [self showProgressView];
+      [self hideProgressView];
     [self netquestion];
     
 }

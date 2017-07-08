@@ -344,7 +344,7 @@ class ossFistVC: RootViewController {
             
             let  lable1=UILabel()
             lable1.frame=CGRect(x: 10*NOW_SIZE+imageH+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 150*NOW_SIZE, height: lableH)
-            lable1.text="客服系统"
+            lable1.text="在线客服"
             if i==1 {
              lable1.text="工单系统"
             }

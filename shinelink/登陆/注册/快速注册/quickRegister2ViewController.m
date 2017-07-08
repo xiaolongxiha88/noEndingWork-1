@@ -306,7 +306,7 @@ _getServerAddressNum=0;
         [self hideProgressView];
         if (content) {
             if ([content[@"success"] integerValue] == 0) {
-                
+                  [self showProgressView];
                 [BaseRequest requestWithMethod:HEAD_URL paramars:_dataDic paramarsSite:@"/newRegisterAPI.do?op=mobileRegister" sucessBlock:^(id content) {
                     NSLog(@"creatAccount: %@", content);
                     [self hideProgressView];
@@ -371,7 +371,7 @@ _getServerAddressNum=0;
                 
             }else{
                 [self showAlertViewWithTitle:nil message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
-                [self.navigationController popViewControllerAnimated:NO];
+              //  [self.navigationController popViewControllerAnimated:NO];
             }
         }
         

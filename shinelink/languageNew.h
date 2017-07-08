@@ -222,7 +222,7 @@
 #define root_shebei_leixing    NSLocalizedString(@"设备类型", nil)
 #define root_data_update_interval       NSLocalizedString(@"数据更新时间", nil)
 
-#define root_tianjia_shebei      NSLocalizedString(@"添加设备", nil)
+
 #define root_tianjia_chucuo      NSLocalizedString(@"添加出错", nil)
 #define root_meiyou_quanxian      NSLocalizedString(@"没有权限", nil)
 #define root_xuliehao_cuowu      NSLocalizedString(@"采集器序列号错误", nil)

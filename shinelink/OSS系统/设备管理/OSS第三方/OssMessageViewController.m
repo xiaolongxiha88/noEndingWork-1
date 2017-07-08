@@ -344,8 +344,11 @@
             if ([jsonObj[@"result"] intValue]==1) {
                 if ([_addQuestionType isEqualToString:@"1"]) {
                        [[NSUserDefaults standardUserDefaults] setObject:[_textField text] forKey:@"TelNumber"];
+                    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isValiPhone"];
+                    
                 }else{
                   [[NSUserDefaults standardUserDefaults] setObject:[_textField text] forKey:@"email"];
+                      [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isValiEmail"];
                 }
              
               
