@@ -53,6 +53,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         self.view.backgroundColor=UIColor.white
         
+           self.navigationController?.navigationBar.barTintColor=MainColor
+        
       self.initUI()
             self.initUiTwo()
         

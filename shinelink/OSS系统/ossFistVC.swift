@@ -32,13 +32,20 @@ class ossFistVC: RootViewController {
     
     var  lable3:UILabel!
     
-    let heigh0=96*NOW_SIZE
+    var heigh0=96*NOW_SIZE
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+             self.navigationController?.navigationBar.barTintColor=COLOR(_R: 0, _G: 156, _B: 255, _A: 1)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
 //  [self.navigationController.navigationBar setBarTintColor:MainColor];
-        self.navigationController?.navigationBar.barTintColor=MainColor
+        
+
         self.navigationItem.hidesBackButton=true
         
         self.title="OSS系统"
@@ -79,7 +86,7 @@ class ossFistVC: RootViewController {
     
         imageOne=UIImageView()
         self.imageOne.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: heigh0)
-         imageOne.image=UIImage(named: "title_bg.png")
+         imageOne.image=UIImage(named: "head_bg_oss_first.png")
         self.view.addSubview(imageOne)
         
     }
@@ -207,23 +214,117 @@ class ossFistVC: RootViewController {
     
     func initUItwo(){
      
-        buttonOne=UIButton()
-        buttonOne.frame=CGRect(x: 10*NOW_SIZE, y: heigh0+10*HEIGHT_SIZE, width: 300*NOW_SIZE, height:heigh0)
-        buttonOne.setBackgroundImage(UIImage(named: "gongdan_bg.png"), for: .normal)
-        // buttonOne.setTitle(root_finish, for: .normal)
-        buttonOne.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
-        self.view.addSubview(buttonOne)
+//        buttonOne=UIButton()
+//        buttonOne.frame=CGRect(x: 10*NOW_SIZE, y: heigh0+10*HEIGHT_SIZE, width: 300*NOW_SIZE, height:heigh0)
+//        buttonOne.setBackgroundImage(UIImage(named: "gongdan_bg.png"), for: .normal)
+//        // buttonOne.setTitle(root_finish, for: .normal)
+//        buttonOne.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
+//        self.view.addSubview(buttonOne)
         
+
+             let lableH=40*HEIGHT_SIZE
    
-        let AllH=160*HEIGHT_SIZE;
+        let deviceView=UIView()
+        deviceView.frame=CGRect(x: 0*NOW_SIZE, y: heigh0, width: SCREEN_Width, height: lableH)
+        deviceView.backgroundColor=UIColor.clear
+        deviceView.isUserInteractionEnabled=true
+        let tap10=UITapGestureRecognizer(target: self, action: #selector(gotoDevice))
+        deviceView.addGestureRecognizer(tap10)
+        self.view.addSubview(deviceView)
+        
+        let imageH=20*HEIGHT_SIZE
+        let imageV = UIImageView()
+        imageV.frame=CGRect(x: 10*NOW_SIZE, y: (lableH-imageH)/2, width: imageH, height: imageH)
+        imageV.image=UIImage(named: "device_search_icon.png")
+        deviceView.addSubview(imageV)
+        
+        let  lable1=UILabel()
+        lable1.frame=CGRect(x: 10*NOW_SIZE+imageH+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 150*NOW_SIZE, height: lableH)
+        lable1.text="设备搜索"
+        lable1.textColor=UIColor.black
+        lable1.textAlignment=NSTextAlignment.left
+        lable1.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
+        deviceView.addSubview(lable1)
+        
+        let imageH2=20*HEIGHT_SIZE
+        let imageV2 = UIImageView()
+        imageV2.frame=CGRect(x: (SCREEN_Width-20*NOW_SIZE)-imageH2, y: (lableH-imageH2)/2, width: imageH2, height: imageH2)
+        imageV2.image=UIImage(named: "firstGo.png")
+        deviceView.addSubview(imageV2)
+
+        let viewLine=UIView()
+            viewLine.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH, width: SCREEN_Width, height: 1*HEIGHT_SIZE)
+        viewLine.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
+        self.view.addSubview(viewLine)
+        
+
+            view2=UIView()
+            view2.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH, width: SCREEN_Width, height: lableH)
+            view2.backgroundColor=UIColor.clear
+            view2.isUserInteractionEnabled=false
+            let tap=UITapGestureRecognizer(target: self, action: #selector(goToNew))
+            view2.addGestureRecognizer(tap)
+            self.view.addSubview(view2)
+        
+            let gifWebH2=20*HEIGHT_SIZE
+            
+            let time: TimeInterval = 1.0
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
+                
+                let bundleDBPath:String? = Bundle.main.path(forResource: "message_icon2", ofType: "gif")
+                let data1=NSData.init(contentsOfFile:bundleDBPath!)
+                
+                let gifWeb=UIWebView()
+                gifWeb.frame=CGRect(x: 10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: gifWebH2, height: gifWebH2*1.2)
+                gifWeb.load(data1! as Data, mimeType:"image/gif", textEncodingName: String(), baseURL:NSURLComponents().url!)
+                gifWeb.isUserInteractionEnabled=false
+                gifWeb.scalesPageToFit=true
+                gifWeb.isOpaque=false
+                gifWeb.backgroundColor=UIColor.clear
+                self.view2.addSubview(gifWeb)
+                
+            }
+            
+            
+            let  lable2=UILabel()
+            lable2.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 250*NOW_SIZE, height: 20*HEIGHT_SIZE)
+            lable2.text="最新接收消息"
+            lable2.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
+            lable2.textAlignment=NSTextAlignment.left
+            lable2.font=UIFont.systemFont(ofSize: 14*HEIGHT_SIZE)
+            view2.addSubview(lable2)
+            
+            let image4H=5*HEIGHT_SIZE
+            image4=UIImageView()
+            image4.layer.masksToBounds=true
+            image4.layer.cornerRadius=image4H/2
+            image4.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE, y: 20*HEIGHT_SIZE+(20*HEIGHT_SIZE-image4H)/2, width: image4H, height: image4H)
+            
+            view2.addSubview(image4)
+            
+            lable3=UILabel()
+            lable3.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE+image4H+5*NOW_SIZE, y: 20*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 20*HEIGHT_SIZE)
+            
+            lable3.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
+            lable3.textAlignment=NSTextAlignment.left
+            lable3.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
+            view2.addSubview(lable3)
+            
+        let viewLine1=UIView()
+        viewLine1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH+lableH, width: SCREEN_Width, height: 1*HEIGHT_SIZE)
+        viewLine1.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
+        self.view.addSubview(viewLine1)
+        
+        
+        let AllH=160*HEIGHT_SIZE-45*HEIGHT_SIZE;
         for i in 0...1 {
             let viewAll=UIView()
-            viewAll.frame=CGRect(x: 0*NOW_SIZE, y: (heigh0+10*HEIGHT_SIZE)*2+(AllH+5*HEIGHT_SIZE)*CGFloat(i), width: SCREEN_Width, height: AllH)
+            viewAll.frame=CGRect(x: 0*NOW_SIZE, y: viewLine1.frame.origin.y+(AllH+5*HEIGHT_SIZE)*CGFloat(i), width: SCREEN_Width, height: AllH)
             viewAll.backgroundColor=UIColor.clear
             self.view.addSubview(viewAll)
             
             let view1=UIView()
-            view1.frame=CGRect(x: 0*NOW_SIZE, y: 0, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
+            view1.frame=CGRect(x: 0*NOW_SIZE, y: 0, width: SCREEN_Width, height: lableH)
             view1.backgroundColor=UIColor.clear
             view1.isUserInteractionEnabled=true
             view1.tag=2000+i
@@ -233,107 +334,38 @@ class ossFistVC: RootViewController {
             
             let imageH=20*HEIGHT_SIZE
             let imageV = UIImageView()
-            imageV.frame=CGRect(x: 10*NOW_SIZE, y: (30*HEIGHT_SIZE-imageH)/2, width: imageH, height: imageH)
+            imageV.frame=CGRect(x: 10*NOW_SIZE, y: (lableH-imageH)/2, width: imageH, height: imageH)
             imageV.image=UIImage(named: "workorderFirst.png")
             if i==0 {
-                 imageV.image=UIImage(named: "Customer.png")
+                 imageV.image=UIImage(named: "online_server_icon.png")
             }
          
             view1.addSubview(imageV)
             
             let  lable1=UILabel()
-            lable1.frame=CGRect(x: 10*NOW_SIZE+imageH+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 30*HEIGHT_SIZE)
+            lable1.frame=CGRect(x: 10*NOW_SIZE+imageH+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 150*NOW_SIZE, height: lableH)
             lable1.text="客服系统"
             if i==1 {
              lable1.text="工单系统"
             }
-            lable1.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
+            lable1.textColor=UIColor.black
             lable1.textAlignment=NSTextAlignment.left
             lable1.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
             view1.addSubview(lable1)
             
             let imageH2=20*HEIGHT_SIZE
             let imageV2 = UIImageView()
-            imageV2.frame=CGRect(x: (SCREEN_Width-20*NOW_SIZE)-imageH2, y: (30*HEIGHT_SIZE-imageH2)/2, width: imageH2, height: imageH2)
+            imageV2.frame=CGRect(x: (SCREEN_Width-20*NOW_SIZE)-imageH2, y: (lableH-imageH2)/2, width: imageH2, height: imageH2)
             imageV2.image=UIImage(named: "firstGo.png")
             view1.addSubview(imageV2)
-            if i==0 {
 
-                 view2=UIView()
-                view2.frame=CGRect(x: 0*NOW_SIZE, y: 35*HEIGHT_SIZE, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
-                view2.backgroundColor=UIColor.clear
-                view2.isUserInteractionEnabled=false
-                let tap=UITapGestureRecognizer(target: self, action: #selector(goToNew))
-                view2.addGestureRecognizer(tap)
-                
-                viewAll.addSubview(view2)
-                
-           
-                
-             let gifWebH2=20*HEIGHT_SIZE
-               
-                let time: TimeInterval = 1.0
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
-                    
-                    let bundleDBPath:String? = Bundle.main.path(forResource: "message_icon2", ofType: "gif")
-                    let data1=NSData.init(contentsOfFile:bundleDBPath!)
-               
-                    let gifWeb=UIWebView()
-                    gifWeb.frame=CGRect(x: 10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: gifWebH2, height: gifWebH2*1.2)
-                    gifWeb.load(data1! as Data, mimeType:"image/gif", textEncodingName: String(), baseURL:NSURLComponents().url!)
-                    gifWeb.isUserInteractionEnabled=false
-                    gifWeb.scalesPageToFit=true
-                    gifWeb.isOpaque=false
-                    gifWeb.backgroundColor=UIColor.clear
-                       self.view2.addSubview(gifWeb)
-                    
-//                    if (((UserDefaults.standard.object(forKey: "newInfoEnble")  as AnyObject).isEqual(NSNull.init())) == false){
-//                        let newInfoEnble=UserDefaults.standard.object(forKey: "newInfoEnble") as! Bool
-//                        if newInfoEnble {
-//                            self.view2.addSubview(gifWeb)
-//                        }
-//                    }else{
-//                        self.view2.addSubview(gifWeb)
-//                    }
-                 
-                }
-                
-                
-                let  lable2=UILabel()
-                lable2.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 250*NOW_SIZE, height: 20*HEIGHT_SIZE)
-                lable2.text="最新接收消息"
-                lable2.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
-                lable2.textAlignment=NSTextAlignment.left
-                lable2.font=UIFont.systemFont(ofSize: 14*HEIGHT_SIZE)
-                view2.addSubview(lable2)
-                
-                let image4H=5*HEIGHT_SIZE
-                  image4=UIImageView()
-                image4.layer.masksToBounds=true
-                image4.layer.cornerRadius=image4H/2
-                image4.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE, y: 20*HEIGHT_SIZE+(20*HEIGHT_SIZE-image4H)/2, width: image4H, height: image4H)
- 
-                view2.addSubview(image4)
-                
-                  lable3=UILabel()
-                lable3.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE+image4H+5*NOW_SIZE, y: 20*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 20*HEIGHT_SIZE)
-             
-                lable3.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
-                lable3.textAlignment=NSTextAlignment.left
-                lable3.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
-                view2.addSubview(lable3)
-                
-            }
- 
-            
             
             let viewLine=UIView()
             if i==0 {
-                 viewLine.frame=CGRect(x: 0*NOW_SIZE, y: 80*HEIGHT_SIZE, width: SCREEN_Width, height: 1*HEIGHT_SIZE)
+                 viewLine.frame=CGRect(x: 0*NOW_SIZE, y:lableH, width: SCREEN_Width, height: 1*HEIGHT_SIZE)
             }else{
-               viewLine.frame=CGRect(x: 0*NOW_SIZE, y: 35*HEIGHT_SIZE, width: SCREEN_Width, height: 1*HEIGHT_SIZE)
+               viewLine.frame=CGRect(x: 0*NOW_SIZE, y: lableH, width: SCREEN_Width, height: 1*HEIGHT_SIZE)
             }
-           
             viewLine.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
             viewAll.addSubview(viewLine)
             
@@ -472,7 +504,7 @@ class ossFistVC: RootViewController {
  
      //   self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v1/serviceQuestion/question/service_overview_data", sucessBlock: {(successBlock)->() in
-            self.hideProgressView()
+        //    self.hideProgressView()
             
             let data:Data=successBlock as! Data
             
@@ -534,7 +566,7 @@ class ossFistVC: RootViewController {
             
         }, failure: {(error) in
               self.initUItwo2()
-               self.hideProgressView()
+            //   self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         
@@ -545,9 +577,9 @@ class ossFistVC: RootViewController {
     func initNet1(){
         
              integratorValueArray=[0,0,0,0];
-        self.showProgressView()
+     //   self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v1/customer/customer_overview_data", sucessBlock: {(successBlock)->() in
-            self.hideProgressView()
+      //      self.hideProgressView()
             
             let data:Data=successBlock as! Data
             
@@ -579,7 +611,7 @@ class ossFistVC: RootViewController {
             
         }, failure: {(error) in
             self.initUIThree3()
-            self.hideProgressView()
+         //   self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         

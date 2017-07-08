@@ -56,6 +56,8 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         let rightItem=UIBarButtonItem.init(title: "搜索设备", style: .plain, target: self, action:#selector(goToDevice) )
         self.navigationItem.rightBarButtonItem=rightItem
         
+         self.navigationController?.navigationBar.barTintColor=MainColor
+        
         contentString=""
         pageNum=0
      
