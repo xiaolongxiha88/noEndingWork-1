@@ -51,6 +51,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         tap.cancelsTouchesInView=false
         self.view.addGestureRecognizer(tap)
         
+        self.view.backgroundColor=UIColor.white
+        
       self.initUI()
             self.initUiTwo()
         
