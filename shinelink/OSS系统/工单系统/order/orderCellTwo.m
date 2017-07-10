@@ -26,9 +26,16 @@ static NSString *statusNum = @"3";
     return self;
 }
 
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    [_textfield resignFirstResponder];
+    [_textfield2 resignFirstResponder];
+}
 
 -(void)initUI{
     
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.contentView addGestureRecognizer:tapGestureRecognizer];
     
     //   self.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -1028,8 +1035,8 @@ static NSString *statusNum = @"3";
       //  float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-40*HEIGHT_SIZE;
         float Vx=_View3.frame.origin.x; float Vy=_View3.frame.origin.y;
         
-         _scrollView.frame=CGRectMake(0, y, SCREEN_Width, buttonY+60*HEIGHT_SIZE);
-        _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,buttonY+170*HEIGHT_SIZE);
+         _scrollView.frame=CGRectMake(0, y, SCREEN_Width, buttonY+60*HEIGHT_SIZE+140*HEIGHT_SIZE);
+        _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,buttonY+170*HEIGHT_SIZE+140*HEIGHT_SIZE);
         
         [_moreTextBtn setImage:IMAGE(@"oss_more_up.png") forState:UIControlStateNormal];
         
@@ -1050,7 +1057,7 @@ static NSString *statusNum = @"3";
 // MARK: - 获取展开后的高度
 + (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status remarkH:(CGFloat) remarkH{
     
-    float H=620*HEIGHT_SIZE+remarkH-20*HEIGHT_SIZE;
+    float H=620*HEIGHT_SIZE+remarkH-20*HEIGHT_SIZE+140*HEIGHT_SIZE;
     if (![status isEqualToString:@"3"]) {
         H=270*HEIGHT_SIZE;
     }

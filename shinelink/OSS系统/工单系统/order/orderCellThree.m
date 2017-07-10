@@ -202,7 +202,9 @@
         UIViewController *Controller = (UIViewController *)[self findViewController:self.contentView];
     
     GetServerViewController *get=[[GetServerViewController alloc]init];
-    if (Tap.view.tag==2100) {
+    
+    int T=(int)Tap.view.tag;
+    if (T==2200) {
          get.picArray=[NSMutableArray arrayWithArray:_picArray];
     }else{
        get.picArray=[NSMutableArray arrayWithArray:_picArray1];

@@ -172,7 +172,7 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
             
             if (jsonDate0 != nil){
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
-                print("/api/v1/device/info",jsonDate)
+                print("/api/v1/deviceSet/set/datalog",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
                 let result1=jsonDate["result"] as! Int
                 

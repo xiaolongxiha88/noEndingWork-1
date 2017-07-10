@@ -24,9 +24,16 @@ static NSString *statusNum = @"2";
     return self;
 }
 
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    [_textfield resignFirstResponder];
+    [_textfield2 resignFirstResponder];
+}
 
 -(void)initUI{
 
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.contentView addGestureRecognizer:tapGestureRecognizer];
 
      //   self.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -457,11 +464,11 @@ static NSString *statusNum = @"2";
         // 计算文本高度
            float y=_scrollView.frame.origin.y;
            float buttonY=_goBut.frame.origin.y;
-     _scrollView.frame=CGRectMake(0, y, SCREEN_Width, buttonY+100*HEIGHT_SIZE);
+     _scrollView.frame=CGRectMake(0, y, SCREEN_Width, buttonY+160*HEIGHT_SIZE);
            
  //           float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-70*HEIGHT_SIZE;
            float Vx=_View3.frame.origin.x; float Vy=_View3.frame.origin.y;
-                _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,buttonY+100*HEIGHT_SIZE);
+                _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,buttonY+160*HEIGHT_SIZE);
            
         [_moreTextBtn setImage:IMAGE(@"oss_more_up.png") forState:UIControlStateNormal];
            
@@ -482,7 +489,7 @@ static NSString *statusNum = @"2";
 // MARK: - 获取展开后的高度
 + (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status remarkH:(CGFloat) remarkH{
     
-    float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-navigationH+remarkH+40*HEIGHT_SIZE;
+    float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-navigationH+remarkH+100*HEIGHT_SIZE;
     if (![status isEqualToString:@"2"]) {
         H=250*HEIGHT_SIZE;
     }

@@ -124,7 +124,7 @@ class ossFistVC: RootViewController {
         view1.addSubview(imageV2)
 
         let imageAll = UIImageView()
-        imageAll.frame=CGRect(x: 5*NOW_SIZE, y:heigh0+55*HEIGHT_SIZE, width: SCREEN_Width-10*NOW_SIZE, height: 180*HEIGHT_SIZE)
+        imageAll.frame=CGRect(x: 2*NOW_SIZE, y:heigh0+55*HEIGHT_SIZE, width: SCREEN_Width-4*NOW_SIZE, height: 180*HEIGHT_SIZE)
         imageAll.image=UIImage(named: "frameIntergrator.png")
          self.view.addSubview(imageAll)
         

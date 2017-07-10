@@ -432,7 +432,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
             let button2=UIButton()
             button2.frame=CGRect(x: 5*NOW_SIZE+95*NOW_SIZE*CGFloat(i), y: 0*HEIGHT_SIZE, width: 50*NOW_SIZE, height:20*HEIGHT_SIZE)
-            button2.setTitle(root_xunliehao, for: .normal)
+            button2.setTitle("序列号", for: .normal)
             button2.setTitleColor(MainColor, for: .normal)
             button2.setTitleColor(UIColor.white, for: .highlighted)
             button2.tag=2007
@@ -807,7 +807,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     if self.plantListArray.count==1 {
                         let vc=deviceControlView()
                         vc.deviceTypeString=NSString(format: "%d", deviceType)
-                        vc.deviceSnString=value2 as NSString!
+                        vc.deviceSnString=(plantAll[0] as! NSDictionary)["serialNum"] as!NSString
                         self.navigationController?.pushViewController(vc, animated: false)
                     }
                     
@@ -827,6 +827,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     
                     
                 }else{
+                     self.hideProgressView()
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
                 }
                 

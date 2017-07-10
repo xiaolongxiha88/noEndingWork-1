@@ -78,7 +78,7 @@
 "充电桩"="EV charger";
 "功率调节器"="Power regulator";
 "未连接"="Not connected";
-"添加设备"="Add device";
+
 "系统错误"="System error";
 "删除成功"="Deleted successfully";
 "采集器列表"="Datalogger list";
@@ -186,7 +186,7 @@
 "设备类型"="Device type";
 "数据更新时间"="Data refreshing time";
 
-"添加设备"="Add device";
+"添加设备"="Add datalogger";
 "添加出错"="Add device error";
 "没有权限"="Unauthorized";
 "采集器序列号错误"="Datalogger SN incorrect";
@@ -642,3 +642,53 @@
 "601能源产出"="Storage";
 "621用电消耗"="grid";
 "71工具"="Tools";
+"72无法查看未来数据"="Data can not be viewed in the future";
+
+
+//翻译后1
+"73待处理"="Pending";
+"74处理中"="Processing";
+"75已处理"="Processed";
+"76待跟进"="Waiting";
+
+"77请输入相关问题的详细描述"="Please enter a detailed description of the problem...";
+"78当前服务器地址:"="Current server address:";
+"79点击获取服务器地址"="Click to get the server address";
+"80获取服务器地址不成功"="Obtain server address unsuccessful";
+"81请输入正确邮箱格式"="Please enter the correct email box format";
+"82手机号:"="Phone number:";
+"83邮箱:"="Email address:";
+
+"84充电使能"="Charge enable";
+"85充电时间段"="Charging time";
+"86充电电池SOC设置"="Rechargeable battery SOC";
+"87设置市电电压下限"="Set grid voltage low";
+"88使能"="On";
+"89禁止"="Off";
+"90提交问题"="Submit the question";
+"91至少输入一种联系方式"="Enter at least one contact method";
+"92最多上传3张图片"="Upload up to three pictures";
+"93选择联系方式"="Select contact method";
+"94您的手机号还未验证"="Your phone number has not been verified, please click verify.";
+"95您的邮箱还未验证"="Your email is not verified. Please click verify.";
+"96请验证注册时填写的手机号码"="Please verify the phone number";
+"97验证用户手机号码"="Verify the user's phone number";
+"98验证用户邮箱"="Verify the user's email address";
+"99您注册时填写的手机号是"="You fill out the registration phone number is";
+"100关闭问题"="Close question";
+"101回复记录"="Reply record";
+"102是否关闭问题"="Whether to close the question?";
+"103操作成功"="Successful operation";
+
+
+
+
+
+
+
+
+
+
+
+
+
