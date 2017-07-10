@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSMutableDictionary *dataDic;
 @property (nonatomic, strong)  NSString *getCheckNum;
 @property (nonatomic, strong)  NSString *getPhoneNum;
+@property (nonatomic, strong)QCCountdownButton *btn;
 
 
 @end
@@ -159,31 +160,31 @@
     line1.backgroundColor=COLOR(255, 255, 255, 0.5);
     [self.view addSubview:line1];
     
-    QCCountdownButton *btn = [QCCountdownButton countdownButton];
-    btn.title =root_fasong_yanzhengma;
+    _btn = [QCCountdownButton countdownButton];
+    _btn.title =root_fasong_yanzhengma;
     
     
     if ([currentLanguage hasPrefix:@"zh-Hans"]) {
-        [btn setFrame:CGRectMake(235*NOW_SIZE,80*HEIGHT_SIZE,70*NOW_SIZE, 29*HEIGHT_SIZE)];
-        btn.titleLabelFont = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_btn setFrame:CGRectMake(235*NOW_SIZE,80*HEIGHT_SIZE,70*NOW_SIZE, 29*HEIGHT_SIZE)];
+        _btn.titleLabelFont = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     }else {
-        [btn setFrame:CGRectMake(217*NOW_SIZE,80*HEIGHT_SIZE,100*NOW_SIZE, 29*HEIGHT_SIZE)];
-        btn.titleLabelFont = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
+        [_btn setFrame:CGRectMake(217*NOW_SIZE,80*HEIGHT_SIZE,100*NOW_SIZE, 29*HEIGHT_SIZE)];
+        _btn.titleLabelFont = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
     }
     
     
-    btn.nomalBackgroundColor = COLOR(144, 195, 32, 1);
-    btn.disabledBackgroundColor = [UIColor grayColor];
-    btn.totalSecond = 180;
-    [btn addTarget:self action:@selector(getCode0) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btn];
+    _btn.nomalBackgroundColor = COLOR(144, 195, 32, 1);
+    _btn.disabledBackgroundColor = [UIColor grayColor];
+    _btn.totalSecond = 180;
+    [_btn addTarget:self action:@selector(getCode0) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_btn];
     
     //进度b
-    [btn processBlock:^(NSUInteger second) {
-        btn.phoneNum=[_textField text];
-        btn.title = [NSString stringWithFormat:@"%lis", second] ;
+    [_btn processBlock:^(NSUInteger second) {
+        _btn.phoneNum=[_textField text];
+        _btn.title = [NSString stringWithFormat:@"%lis", second] ;
     } onFinishedBlock:^{  // 倒计时完毕
-        btn.title = root_fasong_yanzhengma;
+        _btn.title = root_fasong_yanzhengma;
     }];
     
     
@@ -240,6 +241,9 @@
         
         if ([[_textField text] isEqual:@""]) {
             [self showToastViewWithTitle:root_Enter_phone_number];
+            
+            [_btn stopTime];
+            
             return;
         }
 
@@ -300,6 +304,9 @@
                     
                 }
             }else{
+                
+                     [_btn stopTime];
+                
                 if ([jsonObj[@"msg"] intValue]==502) {
                     [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:@"验证条件为空" cancelButtonTitle:root_Yes];
                 }else if ([jsonObj[@"msg"] intValue]==503) {
@@ -361,6 +368,8 @@
              
                 
             }else{
+                     [_btn stopTime];
+                
                 if ([jsonObj[@"msg"] intValue]==502) {
                     [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:@"修改失败" cancelButtonTitle:root_Yes];
                 }else if ([jsonObj[@"msg"] intValue]==503) {
@@ -411,6 +420,8 @@
                     
                 }
             }else{
+                     [_btn stopTime];
+                
                 if ([jsonObj[@"msg"] intValue]==501) {
                     [self showAlertViewWithTitle:root_fasongduanxin_yanzhengma_buchenggong message:root_fasongduanxin_yanzhengma_buchenggong cancelButtonTitle:root_Yes];
                 }else if ([jsonObj[@"msg"] intValue]==502) {
@@ -448,6 +459,9 @@
             [[NSUserDefaults standardUserDefaults] setObject:_OssName forKey:@"OssName"];
             [[NSUserDefaults standardUserDefaults] setObject:_OssPassword forKey:@"OssPassword"];
             
+            [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"firstGoToOss"];
+          
+            
             ossFistVC *goView=[[ossFistVC alloc]init];
             goView.serverListArray=[NSMutableArray arrayWithArray:_serverListArray];
             [self.navigationController pushViewController:goView animated:NO];
@@ -468,7 +482,16 @@
 
 
 
+-(void)viewWillDisappear:(BOOL)animated{
 
+    NSString  * OssFirst=[[NSUserDefaults standardUserDefaults] objectForKey:@"firstGoToOss"];
+
+    if ([OssFirst isEqualToString:@"N"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"OssName"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"OssPassword"];
+    }
+    
+}
 
 
 

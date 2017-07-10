@@ -424,6 +424,25 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
                     _imageViewAll=nil;
                 }
                 
+                if (_image1) {
+                    [_image1 removeFromSuperview];
+                    [_button1 removeFromSuperview];
+                    _image1=nil;
+                    _button1=nil;
+                }
+                if (_image2) {
+                    [_image2 removeFromSuperview];
+                    [_button2 removeFromSuperview];
+                    _image2=nil;
+                    _button2=nil;
+                }
+                if (_image3) {
+                    [_image3 removeFromSuperview];
+                    [_button3 removeFromSuperview];
+                    _image3=nil;
+                    _button3=nil;
+                }
+                
                   [_textView resignFirstResponder];
              NSNotification * notice = [NSNotification notificationWithName:@"ReLoadttTableView" object:nil userInfo:nil];
                 [self keyHiden:notice];

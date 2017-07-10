@@ -53,7 +53,28 @@ float Time=20.f;
     [UserInfo defaultUserInfo].R_timer.fireDate=[NSDate distantPast];
     
     [manager POST:url parameters:paramars success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if ([method isEqualToString:OSS_HEAD_URL]) {
+              id jsonObj = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+            if ([jsonObj isKindOfClass:[NSDictionary class]]) {
+                NSDictionary *allDic=[NSDictionary dictionaryWithDictionary:jsonObj];
+                if ([allDic.allKeys containsObject:@"result"]) {
+                    if ([allDic[@"result"] intValue]==22) {
+                        
+                        NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"loginOssEnable"];
+                        if ([lostLogin isEqualToString:@"Y"]) {
+                            [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"loginOssEnable"];
+                        }else{
+                          [self netRequestOss];
+                        }
+                    }
+                }
+                
+            }
+        }
+
         successBlock(responseObject);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",[error localizedDescription]);
         failure(error);
@@ -286,6 +307,35 @@ float Time=20.f;
         }];
     }
 }
+
+
++(void)netRequestOss{
+    
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *reUsername=[ud objectForKey:@"OssName"];
+    NSString *rePassword=[ud objectForKey:@"OssPassword"];
+    
+//    int loginOssTimeNum=(int)[[NSUserDefaults standardUserDefaults] objectForKey:@"loginOssTime"];
+    
+   [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"loginOssEnable"];
+    
+    if (!(reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] ))){
+        
+        [BaseRequest requestWithMethod:OSS_HEAD_URL_Demo paramars:@{@"userName":reUsername, @"userPassword":[self MD5:rePassword]} paramarsSite:@"/api/v1/login/userLogin" sucessBlock:^(id content) {
+            
+            NSLog(@"/api/v1/login/userLogin:%@",content);
+            if (content) {
+    
+            }
+            
+        } failure:^(NSError *error) {
+            
+            
+        }];
+    }
+}
+
+
 
 
 

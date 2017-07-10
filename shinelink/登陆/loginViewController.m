@@ -59,6 +59,9 @@
 -(void)viewDidAppear:(BOOL)animated{
      animated=NO;
  [self.navigationController setNavigationBarHidden:YES];
+    
+    
+    
 }
 
 - (void)viewDidLoad {
@@ -115,11 +118,7 @@
             [self addSubViews];
         }else{
             _OssFirst=@"N";
-            _userTextField=[[UITextField alloc]init];
-            _pwdTextField=[[UITextField alloc]init];
-            
-            _userTextField.text=OssName;
-            _pwdTextField.text=OssPassword;
+      
             _loginUserName=OssName;
             _loginUserPassword=OssPassword;
               [self performSelectorOnMainThread:@selector(getOSSnet) withObject:nil waitUntilDone:NO];
@@ -141,11 +140,7 @@
             [self addSubViews];
             
         }else{
-            _userTextField=[[UITextField alloc]init];
-            _pwdTextField=[[UITextField alloc]init];
-            
-                        _userTextField.text=reUsername;
-            _pwdTextField.text=rePassword;
+   
             _loginUserName=reUsername;
             _loginUserPassword=rePassword;
             if ([_LogType isEqualToString:@"1"]) {
@@ -550,6 +545,7 @@ NSLog(@"体验馆");
 //判断登录
 - (void)loginBtnAction:(LoginButton *)loginBtn {
    
+  
     
     if (_userTextField.text == nil || _userTextField.text == NULL || [_userTextField.text isEqualToString:@""]) {//判断用户名为空
         //按钮动画还原
@@ -698,6 +694,8 @@ NSLog(@"体验馆");
 
 -(void)getOSSnet{
    [self showProgressView];
+    
+    
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo paramars:@{@"userName":_loginUserName, @"userPassword":[self MD5:_loginUserPassword]} paramarsSite:@"/api/v1/login/userLogin" sucessBlock:^(id content) {
         [self hideProgressView];
        
@@ -743,12 +741,19 @@ NSLog(@"体验馆");
                                 if ([objDic.allKeys containsObject:@"user"]) {
                                     PhoneNum=objDic[@"user"][@"phone"];
                                 }
+                                
+                                
                                 [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];
+                                [[NSUserDefaults standardUserDefaults] setObject:_loginUserName forKey:@"OssName"];
+                                [[NSUserDefaults standardUserDefaults] setObject:_loginUserPassword forKey:@"OssPassword"];
+                                
                                 
                                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]] forKey:@"roleNum"];
                                 
                                 
-                                if ([_OssFirst isEqualToString:@"N"]) {
+                                _OssFirst=[[NSUserDefaults standardUserDefaults] objectForKey:@"firstGoToOss"];
+                                
+                                if ([_OssFirst isEqualToString:@"Y"]) {
                                     ossFistVC *OSSView=[[ossFistVC alloc]init];
                                     OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
                                     [self.navigationController pushViewController:OSSView animated:NO];

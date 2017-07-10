@@ -126,6 +126,12 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                     
                     
                 }else{
+                    
+                    if (self.tableView != nil){
+                        self.tableView.removeFromSuperview()
+                        self.tableView=nil
+                    }
+                    
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
                 }
                 

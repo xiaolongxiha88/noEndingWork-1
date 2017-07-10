@@ -496,6 +496,9 @@
     [_allDict setObject:[_textView text] forKey:@"message"];
     [_allDict setObject:_qusetionId forKey:@"questionId"];
     [_allDict setObject:_serverUrl forKey:@"serverUrl"];
+     [_allDict setObject:_accountNameString forKey:@"accountName"];
+    
+    
     
     [self showProgressView];
     [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:_allDict paramarsSite:@"/api/v1/serviceQuestion/question/reply" dataImageDict:dataImageDict sucessBlock:^(id content) {
@@ -508,6 +511,25 @@
                 if (_imageViewAll) {
                     [ _imageViewAll removeFromSuperview];
                     _imageViewAll=nil;
+                }
+                
+                if (_image1) {
+                    [_image1 removeFromSuperview];
+                    [_button1 removeFromSuperview];
+                    _image1=nil;
+                    _button1=nil;
+                }
+                if (_image2) {
+                    [_image2 removeFromSuperview];
+                    [_button2 removeFromSuperview];
+                    _image2=nil;
+                    _button2=nil;
+                }
+                    if (_image3) {
+                    [_image3 removeFromSuperview];
+                    [_button3 removeFromSuperview];
+                    _image3=nil;
+                    _button3=nil;
                 }
                 
                 [_textView resignFirstResponder];

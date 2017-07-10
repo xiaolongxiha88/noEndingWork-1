@@ -55,14 +55,16 @@ class deviceControlView: RootViewController {
             status="离线"}else{status="在线"}
         
         if typeNum=="0"{
-         lableNameArray=["序列号","别名","设备类型","用户名","连接状态","IP及端口号","固件版本","服务器IP地址","更新时间","创建日期"]
+         lableNameArray=["序列号","别名","设备类型","用户名","连接状态","IP及端口号","固件版本","服务器地址","更新时间","创建日期"]
                 let paramBean=valueDic["paramBean"] as! Dictionary<String, Any>
             var version=""
+            var serverUrl=""
        
             if paramBean.count>0 {
                 version=paramBean["firmwareVersionBuild"] as! String
+                serverUrl=paramBean["serverUrl"] as! String
             }
-            lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["deviceType"]as! NSString,valueDic["userName"]as! NSString,status,valueDic["clientUrl"]as! NSString,version,valueDic["tcpServerIp"] as! NSString,valueDic["lastUpdateTimeText"] as! NSString,valueDic["createDate"] as! NSString]
+            lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["deviceType"]as! NSString,valueDic["userName"]as! NSString,status,valueDic["clientUrl"]as! NSString,version,serverUrl,valueDic["lastUpdateTimeText"] as! NSString,valueDic["createDate"] as! NSString]
         }else if typeNum=="1"{
             let nominalString=NSString(format: "%.f", valueDic["nominalPower"]as! Float)
               let powerString=NSString(format: "%.f", valueDic["power"]as! Float)
@@ -92,8 +94,8 @@ class deviceControlView: RootViewController {
             }
     
             
-            lableNameArray=["序列号","别名","所属采集器","连接状态","充电功率(W)","放电功率(W)","储能机状态","服务器IP地址","储能机型号","最后更新时间"]
-               lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"]as? NSString ?? "",valueDic["dataLogSn"]as? NSString ?? "",status,pChargeString,pDischargeString,statueString ?? ""  ,valueDic["tcpServerIp"] as? NSString ?? "",type,valueDic["lastUpdateTimeText"] as? NSString ?? ""]
+            lableNameArray=["序列号","别名","所属采集器","连接状态","充电功率(W)","放电功率(W)","储能机状态","固件版本","储能机型号","最后更新时间"]
+               lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"]as? NSString ?? "",valueDic["dataLogSn"]as? NSString ?? "",status,pChargeString,pDischargeString,statueString ?? ""  ,valueDic["fwVersion"] as? NSString ?? "",type,valueDic["lastUpdateTimeText"] as? NSString ?? ""]
             
         }
         

@@ -34,6 +34,7 @@ class ossFistVC: RootViewController {
     
     var heigh0=96*NOW_SIZE
     
+     var lineH=0.6*HEIGHT_SIZE
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -253,7 +254,7 @@ class ossFistVC: RootViewController {
         deviceView.addSubview(imageV2)
 
         let viewLine=UIView()
-            viewLine.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH, width: SCREEN_Width, height: 1*HEIGHT_SIZE)
+            viewLine.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH, width: SCREEN_Width, height: lineH)
         viewLine.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
         self.view.addSubview(viewLine)
         
@@ -311,7 +312,7 @@ class ossFistVC: RootViewController {
             view2.addSubview(lable3)
             
         let viewLine1=UIView()
-        viewLine1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH+lableH, width: SCREEN_Width, height: 1*HEIGHT_SIZE)
+        viewLine1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH+lableH, width: SCREEN_Width, height: lineH)
         viewLine1.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
         self.view.addSubview(viewLine1)
         
@@ -362,9 +363,9 @@ class ossFistVC: RootViewController {
             
             let viewLine=UIView()
             if i==0 {
-                 viewLine.frame=CGRect(x: 0*NOW_SIZE, y:lableH, width: SCREEN_Width, height: 1*HEIGHT_SIZE)
+                 viewLine.frame=CGRect(x: 0*NOW_SIZE, y:lableH, width: SCREEN_Width, height: lineH)
             }else{
-               viewLine.frame=CGRect(x: 0*NOW_SIZE, y: lableH, width: SCREEN_Width, height: 1*HEIGHT_SIZE)
+               viewLine.frame=CGRect(x: 0*NOW_SIZE, y: lableH, width: SCREEN_Width, height: lineH)
             }
             viewLine.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
             viewAll.addSubview(viewLine)
@@ -377,7 +378,7 @@ class ossFistVC: RootViewController {
             viewAll.addSubview(viewLineCenter)
             
             let viewButton=UIView()
-            viewButton.frame=CGRect(x: 0*NOW_SIZE, y: viewLine.frame.origin.y+1*HEIGHT_SIZE, width: SCREEN_Width/2, height: viewButtonH)
+            viewButton.frame=CGRect(x: 0*NOW_SIZE, y: viewLine.frame.origin.y+lineH, width: SCREEN_Width/2, height: viewButtonH)
             viewButton.backgroundColor=UIColor.clear
             viewButton.isUserInteractionEnabled=true
             viewButton.tag=3000+i
@@ -405,7 +406,7 @@ class ossFistVC: RootViewController {
             viewButton.addSubview(ButtonLable2)
             
             let viewButton1=UIView()
-            viewButton1.frame=CGRect(x: SCREEN_Width/2, y: viewLine.frame.origin.y+1*HEIGHT_SIZE, width: SCREEN_Width/2, height: viewButtonH)
+            viewButton1.frame=CGRect(x: SCREEN_Width/2, y: viewLine.frame.origin.y+lineH, width: SCREEN_Width/2, height: viewButtonH)
             viewButton1.backgroundColor=UIColor.clear
             viewButton1.isUserInteractionEnabled=true
             viewButton1.tag=4000+i
@@ -436,7 +437,7 @@ class ossFistVC: RootViewController {
             viewButton1.addSubview(ButtonLable21)
             
             let viewLine1=UIView()
-            viewLine1.frame=CGRect(x: 0*NOW_SIZE, y: viewLine.frame.origin.y+1*HEIGHT_SIZE+viewButtonH, width: SCREEN_Width, height: 1*HEIGHT_SIZE)
+            viewLine1.frame=CGRect(x: 0*NOW_SIZE, y: viewLine.frame.origin.y+lineH+viewButtonH, width: SCREEN_Width, height: lineH)
             viewLine1.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
             viewAll.addSubview(viewLine1)
 
@@ -630,6 +631,11 @@ class ossFistVC: RootViewController {
             UserDefaults.standard.set("", forKey: "OssPassword")
         UserDefaults.standard.set("", forKey: "server")
         
+             UserDefaults.standard.set("N", forKey: "firstGoToOss")
+        
+        
+      
+        
         let vc=loginViewController()
         vc.oldName=oldName as! String!
             vc.oldPassword=oldPassword as! String!
@@ -694,6 +700,8 @@ class ossFistVC: RootViewController {
     func gotoDevice()  {
         
         if roleString=="2" || roleString=="0" || roleString=="1"{
+              UserDefaults.standard.set("", forKey: "searchDeviceAddress")
+            
             let vc=ossDeviceFirst()
             vc.serverListArray=self.serverListArray
             self.navigationController?.pushViewController(vc, animated: true)

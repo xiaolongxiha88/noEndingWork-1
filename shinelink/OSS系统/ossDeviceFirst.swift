@@ -17,6 +17,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
      var view2:UIView!
     var button22:UIButton!
     
+    var addressLable:UILabel!
     var view3:UIView!
      var view4:UIView!
     var goNetString:NSString!
@@ -112,7 +113,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     func initUiTwo(){
         
         view3=UIView()
-        view3.frame=CGRect(x: 0*NOW_SIZE, y: 40*HEIGHT_SIZE, width: SCREEN_Width, height: 500*HEIGHT_SIZE)
+        view3.frame=CGRect(x: 0*NOW_SIZE, y: 40*HEIGHT_SIZE, width: SCREEN_Width, height: SCREEN_Height-30*HEIGHT_SIZE)
         view3.backgroundColor=UIColor.clear
         self.view.addSubview(view3)
         
@@ -190,6 +191,21 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             
         }
         
+        var searchDeviceAddressString=""
+        if UserDefaults.standard.object(forKey: "searchDeviceAddress") as? String != nil {
+             searchDeviceAddressString=UserDefaults.standard.object(forKey: "searchDeviceAddress") as! String
+        }
+        
+        
+         addressLable=UILabel()
+        addressLable.frame=CGRect(x: 0*NOW_SIZE, y: 420*HEIGHT_SIZE, width: SCREEN_Width, height: 20*HEIGHT_SIZE)
+        addressLable.text=searchDeviceAddressString 
+        addressLable.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
+        addressLable.textAlignment=NSTextAlignment.center
+        addressLable.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
+        view3.addSubview(addressLable)
+        
+        
     }
     
     
@@ -228,6 +244,10 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
              print("选择11了"+String(describing: selectIndex))
         }, selectValue: {
             (selectValue)in
+            let searchDeviceAddressString=String(format: "搜索服务器-%@", selectValue!)
+              UserDefaults.standard.set(searchDeviceAddressString, forKey: "searchDeviceAddress")
+              self.addressLable.text=searchDeviceAddressString
+            
             print("选择了"+String(describing: selectValue))
             self.button22.setTitle(selectValue, for: .normal)
         }, showCloseButton: true)
