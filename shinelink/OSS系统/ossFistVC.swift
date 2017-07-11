@@ -38,7 +38,7 @@ class ossFistVC: RootViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-             self.navigationController?.navigationBar.barTintColor=COLOR(_R: 0, _G: 156, _B: 255, _A: 1)
+             self.navigationController?.navigationBar.barTintColor=MainColor
     }
     
     override func viewDidLoad() {
@@ -55,10 +55,21 @@ class ossFistVC: RootViewController {
         
    self.navigationController?.setNavigationBarHidden(false, animated: false)
 
-        let leftItem=UIBarButtonItem.init(image:UIImage(named: "layout.png") , style: .plain, target: self, action: #selector(resisgerName))
-     //   let leftItem=UIBarButtonItem.init(title: "退出账户", style: .plain, target: self, action:#selector(resisgerName) )
-          self.navigationItem.leftBarButtonItem=leftItem
+//       let H2=self.navigationController?.navigationBar.frame.size.height;
+//        let bH=18*HEIGHT_SIZE
+//        let layoutButton=UIButton()
+//        layoutButton.frame=CGRect(x: 0*NOW_SIZE, y: (H2!-bH)/2, width: bH*1.1, height: bH)
+//        layoutButton.setBackgroundImage(UIImage(named: "layout.png"), for: .normal)
+//        layoutButton.addTarget(self, action:#selector(resisgerName), for: .touchUpInside)
+//        self.view.addSubview(layoutButton)
+//        
+//        let leftItem=UIBarButtonItem.init(customView: layoutButton)
+//        //let leftItem=UIBarButtonItem.init(image:UIImage(named: "layout.png") , style: .plain, target: self, action: #selector(resisgerName))
+//     //   let leftItem=UIBarButtonItem.init(title: "退出账户", style: .plain, target: self, action:#selector(resisgerName) )
+//          self.navigationItem.leftBarButtonItem=leftItem
         
+        
+        self.initLeftItem()
            roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString!
         
         serverNumArray=[0,0]
@@ -83,6 +94,53 @@ class ossFistVC: RootViewController {
        
     }
 
+    
+    func initLeftItem(){
+        let item0Name="退出账户"
+        let item0=DTKDropdownItem.init(title: item0Name, iconName: "Quick", callBack:{ (dropMenuCallBack)->() in
+       self.initAlertView()
+            
+        } )
+        
+        let attributes1:NSDictionary = NSDictionary(object:UIFont.systemFont(ofSize: 14*HEIGHT_SIZE),
+                                                    forKey: NSFontAttributeName as NSCopying)
+        let size1=item0Name.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 30*HEIGHT_SIZE), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes1 as? [String : AnyObject], context: nil)
+        
+        let menuView=DTKDropdownMenuView.init(type:dropDownTypeLeftItem , frame: CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 44.0, height: 44.0), dropdownItems: [item0!], icon:"layout.png")!
+
+        menuView.dropWidth = size1.width+10*NOW_SIZE
+        menuView.cellHeight = 30*HEIGHT_SIZE
+        menuView.titleFont = UIFont.systemFont(ofSize:14*HEIGHT_SIZE)
+        menuView.textColor = COLOR(_R: 102, _G: 102, _B: 102, _A: 1);
+        menuView.cellSeparatorColor =  COLOR(_R: 229, _G: 229, _B: 229, _A: 1);
+        menuView.textFont = UIFont.systemFont(ofSize:14*HEIGHT_SIZE)
+        menuView.animationDuration = 0.2;
+   
+        let leftItem=UIBarButtonItem.init(customView: menuView)
+             self.navigationItem.leftBarButtonItem=leftItem
+        
+
+    }
+    
+    
+    func initAlertView(){
+        let alertController = UIAlertController(title: "是否退出账户?", message: nil, preferredStyle:.alert)
+        
+        // 设置2个UIAlertAction
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        let okAction = UIAlertAction(title: "确认", style: .default) { (UIAlertAction) in
+  
+           self.resisgerName()
+        }
+        // 添加
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        // 弹出
+        self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    
     
     func initUI(){
     
@@ -388,7 +446,7 @@ class ossFistVC: RootViewController {
             let imageH=20*HEIGHT_SIZE
             let imageV = UIImageView()
             imageV.frame=CGRect(x: 10*NOW_SIZE, y: (lableH-imageH)/2, width: imageH, height: imageH)
-            imageV.image=UIImage(named: "workorderFirst.png")
+            imageV.image=UIImage(named: "work_order_icon.png")
             if i==0 {
                  imageV.image=UIImage(named: "online_server_icon.png")
             }

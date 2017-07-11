@@ -25,6 +25,7 @@
 		332692681D780F410058C5B7 /* backAV.png in Resources */ = {isa = PBXBuildFile; fileRef = 332692671D780F410058C5B7 /* backAV.png */; };
 		3326926B1D794AB00058C5B7 /* AvCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3326926A1D794AB00058C5B7 /* AvCell.m */; };
 		3326926E1D79728F0058C5B7 /* AVfirstView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3326926D1D79728F0058C5B7 /* AVfirstView.m */; };
+		3330F4D91F14B8330076C237 /* work_order_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4D81F14B8330076C237 /* work_order_icon.png */; };
 		333300321F0FA30B00754C6F /* message_icon2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 333300311F0FA30B00754C6F /* message_icon2.gif */; };
 		333300341F10B4BB00754C6F /* device_search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 333300331F10B4BB00754C6F /* device_search_icon.png */; };
 		333300361F10B4D300754C6F /* online_server_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 333300351F10B4D300754C6F /* online_server_icon.png */; };
@@ -414,7 +415,6 @@
 		337CB59D1DB4A837002ABB88 /* firstToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB59C1DB4A837002ABB88 /* firstToolViewController.m */; };
 		337CB5A11DB608B0002ABB88 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 337CB5A01DB608B0002ABB88 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		337F96101F0B90F800840527 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F960F1F0B90F800840527 /* phone.png */; };
-		337F96141F0CCA8B00840527 /* workorderFirst.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F96131F0CCA8B00840527 /* workorderFirst.png */; };
 		337F96181F0CCB2900840527 /* follow-up.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F96171F0CCB2900840527 /* follow-up.png */; };
 		337F961A1F0CCB8B00840527 /* Untreated1111.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F96191F0CCB8B00840527 /* Untreated1111.png */; };
 		337F961C1F0CCBCA00840527 /* Follow-up2.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F961B1F0CCBCA00840527 /* Follow-up2.png */; };
@@ -744,6 +744,7 @@
 		3326926A1D794AB00058C5B7 /* AvCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvCell.m; sourceTree = "<group>"; };
 		3326926C1D79728F0058C5B7 /* AVfirstView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVfirstView.h; path = ../AVfirstView.h; sourceTree = "<group>"; };
 		3326926D1D79728F0058C5B7 /* AVfirstView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVfirstView.m; path = ../AVfirstView.m; sourceTree = "<group>"; };
+		3330F4D81F14B8330076C237 /* work_order_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = work_order_icon.png; sourceTree = "<group>"; };
 		333300311F0FA30B00754C6F /* message_icon2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = message_icon2.gif; sourceTree = "<group>"; };
 		333300331F10B4BB00754C6F /* device_search_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = device_search_icon.png; sourceTree = "<group>"; };
 		333300351F10B4D300754C6F /* online_server_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = online_server_icon.png; sourceTree = "<group>"; };
@@ -1357,7 +1358,6 @@
 		337CB59E1DB6010C002ABB88 /* ShinePhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShinePhone.entitlements; sourceTree = "<group>"; };
 		337CB5A01DB608B0002ABB88 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		337F960F1F0B90F800840527 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
-		337F96131F0CCA8B00840527 /* workorderFirst.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = workorderFirst.png; sourceTree = "<group>"; };
 		337F96171F0CCB2900840527 /* follow-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "follow-up.png"; sourceTree = "<group>"; };
 		337F96191F0CCB8B00840527 /* Untreated1111.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Untreated1111.png; sourceTree = "<group>"; };
 		337F961B1F0CCBCA00840527 /* Follow-up2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Follow-up2.png"; sourceTree = "<group>"; };
@@ -2908,6 +2908,7 @@
 		336F04151F06207300DE7CD7 /* order图片 */ = {
 			isa = PBXGroup;
 			children = (
+				3330F4D81F14B8330076C237 /* work_order_icon.png */,
 				3378D65D1F147AFD00632CBD /* layout.png */,
 				333300311F0FA30B00754C6F /* message_icon2.gif */,
 				337F962F1F0DE47600840527 /* device_iconI.png */,
@@ -2921,7 +2922,6 @@
 				337F961B1F0CCBCA00840527 /* Follow-up2.png */,
 				337F96191F0CCB8B00840527 /* Untreated1111.png */,
 				337F96171F0CCB2900840527 /* follow-up.png */,
-				337F96131F0CCA8B00840527 /* workorderFirst.png */,
 				336F04161F0666A300DE7CD7 /* workorder_icon.png */,
 				336F04001F04EFAD00DE7CD7 /* yuan_1.png */,
 				336F04011F04EFAD00DE7CD7 /* yuan_2.png */,
@@ -4325,6 +4325,7 @@
 				333300341F10B4BB00754C6F /* device_search_icon.png in Resources */,
 				33FEFD631C7DB38400324374 /* icon---Username@2x.png in Resources */,
 				33FEFD561C7DB38400324374 /* icon_press@3x.png in Resources */,
+				3330F4D91F14B8330076C237 /* work_order_icon.png in Resources */,
 				3333003C1F1312B900754C6F /* head_bg_oss_first.png in Resources */,
 				338964591E51979800A7B1AE /* device_bg.jpg in Resources */,
 				33768AB41D475E5400873E82 /* charge-cn.png in Resources */,
@@ -4390,7 +4391,6 @@
 				336A246C1DF00AC20002D1AD /* deviceHead1.png in Resources */,
 				33C300021D3E33E00016351C /* L9.png in Resources */,
 				334FF0B71CF53C7C001E6716 /* about.png in Resources */,
-				337F96141F0CCA8B00840527 /* workorderFirst.png in Resources */,
 				33E42E0F1DC9CE050024FFBB /* peizhi_btn.png in Resources */,
 				337584431D267D12006AC140 /* product.jpg in Resources */,
 				334F3AD61D9B9FA4001D7F75 /* shinewifi.png in Resources */,

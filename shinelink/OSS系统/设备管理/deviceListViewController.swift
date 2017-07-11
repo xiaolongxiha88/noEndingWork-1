@@ -34,6 +34,7 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
     override func viewWillAppear(_ animated: Bool) {
         pageNum=0
         
+            self.navigationController?.navigationBar.barTintColor=MainColor
         self.initNet1()
     }
     

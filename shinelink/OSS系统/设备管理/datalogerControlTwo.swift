@@ -24,7 +24,7 @@ class datalogerControlTwo: RootViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
- self.view.backgroundColor=MainColor
+      self.view.backgroundColor=OldMainColor
         
         if typeNum=="4" {
             self.initUItwo()

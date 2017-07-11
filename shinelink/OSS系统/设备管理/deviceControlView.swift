@@ -38,7 +38,11 @@ class deviceControlView: RootViewController {
         self.initNet0()
         }
         
+         self.navigationController?.navigationBar.barTintColor=OldMainColor
+        
     }
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +50,7 @@ class deviceControlView: RootViewController {
         pageNum=0
         typeNum=deviceTypeString
        // self.initNet0()
+        
         
     }
 

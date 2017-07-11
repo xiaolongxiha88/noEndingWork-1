@@ -98,7 +98,13 @@ class uibuttonView0: UIView{
         
         
         if uibutton.isSelected {
-            uibutton.backgroundColor=backgroundGrayColor
+         
+           
+            if (typeNum==3) && (goToNetNum==3) {
+                uibutton.backgroundColor=UIColor.clear
+            }else{
+             uibutton.backgroundColor=backgroundGrayColor
+            }
             uibutton.setTitleColor(MainColor, for: .normal)
             uibutton.isSelected=false
             
@@ -161,7 +167,13 @@ class uibuttonView0: UIView{
         
         let B1 = self.viewWithTag(A) as! UIButton
         B1.isSelected=false
-        B1.backgroundColor=backgroundGrayColor
+        if (typeNum==3) && (goToNetNum==3) {
+            B1.backgroundColor=UIColor.clear
+        }else{
+            B1.backgroundColor=backgroundGrayColor
+        }
+        
+       // B1.backgroundColor=backgroundGrayColor
         B1.setTitleColor(MainColor, for: .normal)
         
         

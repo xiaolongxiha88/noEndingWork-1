@@ -21,7 +21,7 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     self.view.backgroundColor=MainColor
+     self.view.backgroundColor=OldMainColor
       self.initUI()
     }
 
@@ -32,7 +32,7 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
         tableView.frame=CGRect(x: 0, y: H1, width: SCREEN_Width, height: SCREEN_Height-H1)
         tableView.delegate=self
         tableView.dataSource=self
-        tableView.backgroundColor=MainColor
+        tableView.backgroundColor=OldMainColor
         tableView.separatorColor=UIColor.white;
          tableView.tableFooterView = UIView.init(frame: .zero);
        // tableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -73,7 +73,7 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
         if cell == nil {
             cell = UITableViewCell (style: UITableViewCellStyle.subtitle, reuseIdentifier: cellId)
         }
-        cell?.backgroundColor=MainColor
+        cell?.backgroundColor=OldMainColor
          cell?.textLabel?.text = cellNameArray[indexPath.row] as? String
         if indexPath.row==0 {
         //    cell?.detailTextLabel?.text=valueDic[""]
