@@ -98,7 +98,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         self.view.addSubview(view2)
         
         button1=UIButton()
-        button1.frame=CGRect(x: 5*NOW_SIZE, y: 4*HEIGHT_SIZE, width: 22*HEIGHT_SIZE, height:20*HEIGHT_SIZE)
+        button1.frame=CGRect(x: 5*NOW_SIZE, y: 4*HEIGHT_SIZE, width: 20*HEIGHT_SIZE, height:20*HEIGHT_SIZE)
         button1.setBackgroundImage(UIImage(named: "icon_search.png"), for: .normal)
         // buttonOne.setTitle(root_finish, for: .normal)
         button1.addTarget(self, action:#selector(searchDevice), for: .touchUpInside)

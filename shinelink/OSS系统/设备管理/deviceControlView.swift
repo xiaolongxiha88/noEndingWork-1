@@ -418,6 +418,7 @@ class deviceControlView: RootViewController {
             if  dataloggerTypeString==6 {                //新WiFi
                    let goView=AddDeviceViewController()
                 goView.snString=valueDic["serialNum"]as! String
+                goView.ossType="1";
                 goView.hidesBottomBarWhenPushed=true
                      self.navigationController?.pushViewController(goView, animated: true)
                 

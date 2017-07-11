@@ -27,7 +27,7 @@ class ossFistVC: RootViewController {
     
      var roleString:NSString!
     
-    var view2:UIView!
+    var view2:UIButton!
     var  image4:UIImageView!
     
     var  lable3:UILabel!
@@ -55,7 +55,8 @@ class ossFistVC: RootViewController {
         
    self.navigationController?.setNavigationBarHidden(false, animated: false)
 
-        let leftItem=UIBarButtonItem.init(title: "退出账户", style: .plain, target: self, action:#selector(resisgerName) )
+        let leftItem=UIBarButtonItem.init(image:UIImage(named: "layout.png") , style: .plain, target: self, action: #selector(resisgerName))
+     //   let leftItem=UIBarButtonItem.init(title: "退出账户", style: .plain, target: self, action:#selector(resisgerName) )
           self.navigationItem.leftBarButtonItem=leftItem
         
            roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString!
@@ -95,13 +96,27 @@ class ossFistVC: RootViewController {
     
     func initUIThree(){
       
-        let view1=UIView()
-        view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+10*HEIGHT_SIZE, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
-        view1.backgroundColor=UIColor.clear
-        view1.isUserInteractionEnabled=true
-        let tap0=UITapGestureRecognizer(target: self, action: #selector(gotoDevice))
-        view1.addGestureRecognizer(tap0)
-         self.view.addSubview(view1)
+//        let view1=UIView()
+//        view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+10*HEIGHT_SIZE, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
+//        view1.backgroundColor=UIColor.clear
+//        view1.isUserInteractionEnabled=true
+//        let tap0=UITapGestureRecognizer(target: self, action: #selector(gotoDevice))
+//        view1.addGestureRecognizer(tap0)
+//         self.view.addSubview(view1)
+        
+        let lableH=40*HEIGHT_SIZE
+        let imageColor1=self.getImageWithColor(color: UIColor.clear, size: CGSize(width: SCREEN_Width, height: lableH))
+        let imageColor2=self.getImageWithColor(color: COLOR(_R: 222, _G: 222, _B: 222, _A: 1), size: CGSize(width: SCREEN_Width, height: lableH))
+
+      let view1=UIButton()
+        view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+10*HEIGHT_SIZE, width: SCREEN_Width, height: lableH)
+        view1.setBackgroundImage(imageColor1, for: .normal)
+        view1.setBackgroundImage(imageColor2, for: .highlighted)
+        view1.setBackgroundImage(imageColor2, for: .selected)
+        view1.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
+        self.view.addSubview(view1)
+        
+          
         
         let imageH=20*HEIGHT_SIZE
         let imageV = UIImageView()
@@ -212,26 +227,42 @@ class ossFistVC: RootViewController {
     
     }
     
+     func getImageWithColor(color: UIColor, size: CGSize) -> UIImage
+    {
+        let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: CGSize(width: size.width, height: size.height))
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        color.setFill()
+        UIRectFill(rect)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return image
+    }
     
     func initUItwo(){
      
-//        buttonOne=UIButton()
-//        buttonOne.frame=CGRect(x: 10*NOW_SIZE, y: heigh0+10*HEIGHT_SIZE, width: 300*NOW_SIZE, height:heigh0)
-//        buttonOne.setBackgroundImage(UIImage(named: "gongdan_bg.png"), for: .normal)
-//        // buttonOne.setTitle(root_finish, for: .normal)
-//        buttonOne.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
-//        self.view.addSubview(buttonOne)
-        
 
              let lableH=40*HEIGHT_SIZE
    
-        let deviceView=UIView()
+//        let deviceView=UIView()
+//        deviceView.frame=CGRect(x: 0*NOW_SIZE, y: heigh0, width: SCREEN_Width, height: lableH)
+//        deviceView.backgroundColor=UIColor.clear
+//        deviceView.isUserInteractionEnabled=true
+//        let tap10=UITapGestureRecognizer(target: self, action: #selector(gotoDevice))
+//        deviceView.addGestureRecognizer(tap10)
+//        self.view.addSubview(deviceView)
+        
+        let imageColor1=self.getImageWithColor(color: UIColor.clear, size: CGSize(width: SCREEN_Width, height: lableH))
+        let imageColor2=self.getImageWithColor(color: COLOR(_R: 222, _G: 222, _B: 222, _A: 1), size: CGSize(width: SCREEN_Width, height: lableH))
+        
+        
+       let deviceView=UIButton()
         deviceView.frame=CGRect(x: 0*NOW_SIZE, y: heigh0, width: SCREEN_Width, height: lableH)
-        deviceView.backgroundColor=UIColor.clear
-        deviceView.isUserInteractionEnabled=true
-        let tap10=UITapGestureRecognizer(target: self, action: #selector(gotoDevice))
-        deviceView.addGestureRecognizer(tap10)
+        deviceView.setBackgroundImage(imageColor1, for: .normal)
+        deviceView.setBackgroundImage(imageColor2, for: .highlighted)
+         deviceView.setBackgroundImage(imageColor2, for: .selected)
+        deviceView.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
         self.view.addSubview(deviceView)
+        
         
         let imageH=20*HEIGHT_SIZE
         let imageV = UIImageView()
@@ -254,18 +285,27 @@ class ossFistVC: RootViewController {
         deviceView.addSubview(imageV2)
 
         let viewLine=UIView()
-            viewLine.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH, width: SCREEN_Width, height: lineH)
+            viewLine.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH-lineH, width: SCREEN_Width, height: lineH)
         viewLine.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
         self.view.addSubview(viewLine)
         
 
-            view2=UIView()
-            view2.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH, width: SCREEN_Width, height: lableH)
-            view2.backgroundColor=UIColor.clear
-            view2.isUserInteractionEnabled=false
-            let tap=UITapGestureRecognizer(target: self, action: #selector(goToNew))
-            view2.addGestureRecognizer(tap)
-            self.view.addSubview(view2)
+//            view2=UIView()
+//            view2.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH, width: SCREEN_Width, height: lableH)
+//            view2.backgroundColor=UIColor.clear
+//            view2.isUserInteractionEnabled=false
+//            let tap=UITapGestureRecognizer(target: self, action: #selector(goToNew))
+//            view2.addGestureRecognizer(tap)
+//            self.view.addSubview(view2)
+        
+       view2=UIButton()
+        view2.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH, width: SCREEN_Width, height: lableH)
+        view2.setBackgroundImage(imageColor1, for: .normal)
+        view2.setBackgroundImage(imageColor2, for: .highlighted)
+        view2.setBackgroundImage(imageColor2, for: .selected)
+        view2.addTarget(self, action:#selector(goToNew), for: .touchUpInside)
+        self.view.addSubview(view2)
+        
         
             let gifWebH2=20*HEIGHT_SIZE
             
@@ -324,14 +364,26 @@ class ossFistVC: RootViewController {
             viewAll.backgroundColor=UIColor.clear
             self.view.addSubview(viewAll)
             
-            let view1=UIView()
+            
+            let view1=UIButton()
             view1.frame=CGRect(x: 0*NOW_SIZE, y: 0, width: SCREEN_Width, height: lableH)
-            view1.backgroundColor=UIColor.clear
-            view1.isUserInteractionEnabled=true
-            view1.tag=2000+i
-            let tap0=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
-                view1.addGestureRecognizer(tap0)
+            view1.setBackgroundImage(imageColor1, for: .normal)
+            view1.setBackgroundImage(imageColor2, for: .highlighted)
+            view1.setBackgroundImage(imageColor2, for: .selected)
+             view1.tag=2000+i
+            view1.addTarget(self, action:#selector(gotoServer), for: .touchUpInside)
             viewAll.addSubview(view1)
+            
+            
+//            let view1=UIView()
+//            view1.frame=CGRect(x: 0*NOW_SIZE, y: 0, width: SCREEN_Width, height: lableH)
+//            view1.backgroundColor=UIColor.clear
+//            view1.isUserInteractionEnabled=true
+//            view1.tag=2000+i
+//            let tap0=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
+//                view1.addGestureRecognizer(tap0)
+//            viewAll.addSubview(view1)
+            
             
             let imageH=20*HEIGHT_SIZE
             let imageV = UIImageView()
@@ -377,15 +429,28 @@ class ossFistVC: RootViewController {
             viewLineCenter.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
             viewAll.addSubview(viewLineCenter)
             
-            let viewButton=UIView()
-            viewButton.frame=CGRect(x: 0*NOW_SIZE, y: viewLine.frame.origin.y+lineH, width: SCREEN_Width/2, height: viewButtonH)
-            viewButton.backgroundColor=UIColor.clear
-            viewButton.isUserInteractionEnabled=true
-            viewButton.tag=3000+i
-            let tap2=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
-            viewButton.addGestureRecognizer(tap2)
             
+            let imageColor3=self.getImageWithColor(color: UIColor.clear, size: CGSize(width:  SCREEN_Width/2, height: viewButtonH))
+            let imageColor4=self.getImageWithColor(color: COLOR(_R: 222, _G: 222, _B: 222, _A: 1), size: CGSize(width:  SCREEN_Width/2, height: viewButtonH))
+            
+            let viewButton=UIButton()
+            viewButton.frame=CGRect(x: 0*NOW_SIZE, y: viewLine.frame.origin.y+lineH, width: SCREEN_Width/2, height: viewButtonH)
+            viewButton.setBackgroundImage(imageColor3, for: .normal)
+            viewButton.setBackgroundImage(imageColor4, for: .highlighted)
+            viewButton.setBackgroundImage(imageColor4, for: .selected)
+            viewButton.tag=3000+i
+            viewButton.addTarget(self, action:#selector(gotoServer), for: .touchUpInside)
             viewAll.addSubview(viewButton)
+            
+            
+//            let viewButton=UIView()
+//            viewButton.frame=CGRect(x: 0*NOW_SIZE, y: viewLine.frame.origin.y+lineH, width: SCREEN_Width/2, height: viewButtonH)
+//            viewButton.backgroundColor=UIColor.clear
+//            viewButton.isUserInteractionEnabled=true
+//            viewButton.tag=3000+i
+//            let tap2=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
+//            viewButton.addGestureRecognizer(tap2)
+      //      viewAll.addSubview(viewButton)
             
             let ButtonImageH=40*HEIGHT_SIZE
             let ButtonImag = UIImageView()
@@ -405,14 +470,24 @@ class ossFistVC: RootViewController {
             ButtonLable2.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
             viewButton.addSubview(ButtonLable2)
             
-            let viewButton1=UIView()
+            
+            let viewButton1=UIButton()
             viewButton1.frame=CGRect(x: SCREEN_Width/2, y: viewLine.frame.origin.y+lineH, width: SCREEN_Width/2, height: viewButtonH)
-            viewButton1.backgroundColor=UIColor.clear
-            viewButton1.isUserInteractionEnabled=true
+            viewButton1.setBackgroundImage(imageColor3, for: .normal)
+            viewButton1.setBackgroundImage(imageColor4, for: .highlighted)
+            viewButton1.setBackgroundImage(imageColor4, for: .selected)
             viewButton1.tag=4000+i
-            let tap3=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
-            viewButton1.addGestureRecognizer(tap3)
+            viewButton1.addTarget(self, action:#selector(gotoServer), for: .touchUpInside)
             viewAll.addSubview(viewButton1)
+            
+//            let viewButton1=UIView()
+//            viewButton1.frame=CGRect(x: SCREEN_Width/2, y: viewLine.frame.origin.y+lineH, width: SCREEN_Width/2, height: viewButtonH)
+//            viewButton1.backgroundColor=UIColor.clear
+//            viewButton1.isUserInteractionEnabled=true
+//            viewButton1.tag=4000+i
+//            let tap3=UITapGestureRecognizer(target: self, action: #selector(gotoServer))
+//            viewButton1.addGestureRecognizer(tap3)
+//            viewAll.addSubview(viewButton1)
             
             
             let ButtonImag1 = UIImageView()
@@ -444,6 +519,8 @@ class ossFistVC: RootViewController {
         }
         
     }
+    
+
     
     
     func initUItwo2(){
@@ -503,9 +580,9 @@ class ossFistVC: RootViewController {
     func initNet0(){
         
  
-     //   self.showProgressView()
+      self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v1/serviceQuestion/question/service_overview_data", sucessBlock: {(successBlock)->() in
-        //    self.hideProgressView()
+          self.hideProgressView()
             
             let data:Data=successBlock as! Data
             
@@ -567,7 +644,7 @@ class ossFistVC: RootViewController {
             
         }, failure: {(error) in
               self.initUItwo2()
-            //   self.hideProgressView()
+              self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         
@@ -578,9 +655,9 @@ class ossFistVC: RootViewController {
     func initNet1(){
         
              integratorValueArray=[0,0,0,0];
-     //   self.showProgressView()
+     self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v1/customer/customer_overview_data", sucessBlock: {(successBlock)->() in
-      //      self.hideProgressView()
+        self.hideProgressView()
             
             let data:Data=successBlock as! Data
             
@@ -612,7 +689,7 @@ class ossFistVC: RootViewController {
             
         }, failure: {(error) in
             self.initUIThree3()
-         //   self.hideProgressView()
+         self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         
@@ -647,46 +724,46 @@ class ossFistVC: RootViewController {
     }
     
     
-    func gotoServer(Tap:UITapGestureRecognizer ) {
+    func gotoServer(Tap:UIButton ) {
         
         
         
         let vc=ossServerFirst()
-        if Tap.view?.tag==2000 {
+        if Tap.tag==2000 {
                vc.questionOrOrder=1
               vc.statusInt=10
                vc.firstNum=0
             vc.secondNum=0
         }
-        if Tap.view?.tag==2001 {
+        if Tap.tag==2001 {
             vc.questionOrOrder=2
             vc.statusInt=0
             vc.firstNum=1
             vc.secondNum=0
         }
         
-        if Tap.view?.tag==3000 {
+        if Tap.tag==3000 {
             vc.questionOrOrder=1
             vc.statusInt=3
             vc.secondNum=2
             vc.firstNum=0
         }
         
-        if Tap.view?.tag==4000 {
+        if Tap.tag==4000 {
             vc.questionOrOrder=1
             vc.statusInt=0
             vc.secondNum=1
             vc.firstNum=0
         }
         
-        if Tap.view?.tag==3001 {
+        if Tap.tag==3001 {
             vc.questionOrOrder=2
             vc.statusInt=2
             vc.secondNum=1
             vc.firstNum=1
         }
         
-        if Tap.view?.tag==4001{
+        if Tap.tag==4001{
             vc.questionOrOrder=2
             vc.statusInt=3
             vc.secondNum=2

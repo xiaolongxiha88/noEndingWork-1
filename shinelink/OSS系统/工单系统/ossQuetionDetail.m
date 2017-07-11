@@ -77,7 +77,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     // [self.view removeFromSuperview];
-    //  [self netGetAgain];
+ // [self netGetAgain];
 }
 
 - (void)viewDidLoad {
@@ -95,7 +95,7 @@
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"搜索设备" style:UIBarButtonItemStylePlain target:self action:@selector(goToDevice)];
     self.navigationItem.rightBarButtonItem=rightItem;
     
-    [self netGetAgain];
+     [self netGetAgain];
 }
 
 -(void)goToDevice{
@@ -280,15 +280,23 @@
     [_headView addSubview:LableS];
     
     if (_questionPicArray.count>1) {
-        UILabel *LableImage=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, imageW+lableH*4+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
-        LableImage.text=@"查看图片";
-        LableImage.textAlignment=NSTextAlignmentRight;
-        LableImage.textColor=COLOR(153, 153, 153, 1);
-        LableImage.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
-        LableImage.userInteractionEnabled=YES;
-        UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
-        [LableImage addGestureRecognizer:labelTap1];
-        [_headView addSubview:LableImage];
+//        UILabel *LableImage=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, imageW+lableH*4+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,90*NOW_SIZE, 20*HEIGHT_SIZE)];
+//        LableImage.text=@"查看图片";
+//        LableImage.textAlignment=NSTextAlignmentRight;
+//        LableImage.textColor=COLOR(153, 153, 153, 1);
+//        LableImage.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
+//        LableImage.userInteractionEnabled=YES;
+//        UITapGestureRecognizer * labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
+//        [LableImage addGestureRecognizer:labelTap1];
+//        [_headView addSubview:LableImage];
+        
+        UIImageView *image55=[[UIImageView alloc]initWithFrame:CGRectMake(280*NOW_SIZE, imageW+lableH*4+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,20*NOW_SIZE, 20*HEIGHT_SIZE)];
+        image55.userInteractionEnabled = YES;
+        image55.image = IMAGE(@"pic_icon.png");
+        UITapGestureRecognizer * labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
+        [image55 addGestureRecognizer:labelTap2];
+        [_headView addSubview:image55];
+        
     }
     
     UIView *V1 = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, imageW+lableH*4+5*HEIGHT_SIZE+Lrect.height+45*HEIGHT_SIZE, SCREEN_Width,2*HEIGHT_SIZE )];
@@ -380,6 +388,12 @@
                 }else if ([_QuestionTypeString isEqualToString:@"6"]){
                     _QuestionTypeString=root_ME_qita_wenti;
                 }
+                
+                NSString *questionPIC1=[NSString stringWithFormat:@"%@",questionDic[@"attachment"]];
+                _questionPicArray=[NSMutableArray arrayWithArray:[questionPIC1 componentsSeparatedByString:@"_"]];
+                
+                
+                
                 _createrTimeString=[NSString stringWithFormat:@"%@",questionDic[@"createrTime"]];
                 _statusString=[NSString stringWithFormat:@"%@",questionDic[@"status"]];
                 _ContentString=[NSString stringWithFormat:@"%@",questionDic[@"content"]];

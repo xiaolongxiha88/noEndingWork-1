@@ -391,6 +391,7 @@
 		33775AEF1D2E3BC00070742E /* 打勾.png in Resources */ = {isa = PBXBuildFile; fileRef = 33775AEE1D2E3BC00070742E /* 打勾.png */; };
 		33775AF11D2E40290070742E /* 客服.png in Resources */ = {isa = PBXBuildFile; fileRef = 33775AF01D2E40290070742E /* 客服.png */; };
 		33775AF31D2E404D0070742E /* 客户.png in Resources */ = {isa = PBXBuildFile; fileRef = 33775AF21D2E404D0070742E /* 客户.png */; };
+		3378D65E1F147AFD00632CBD /* layout.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378D65D1F147AFD00632CBD /* layout.png */; };
 		33793D141CE583AD000D0F9E /* storage4.png in Resources */ = {isa = PBXBuildFile; fileRef = 33793D131CE583AD000D0F9E /* storage4.png */; };
 		33793D161CE583E4000D0F9E /* solar4.png in Resources */ = {isa = PBXBuildFile; fileRef = 33793D151CE583E4000D0F9E /* solar4.png */; };
 		337960771DB0D065009AC610 /* massage_en2.png in Resources */ = {isa = PBXBuildFile; fileRef = 337960761DB0D065009AC610 /* massage_en2.png */; };
@@ -1322,6 +1323,7 @@
 		33775AEE1D2E3BC00070742E /* 打勾.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "打勾.png"; sourceTree = "<group>"; };
 		33775AF01D2E40290070742E /* 客服.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "客服.png"; sourceTree = "<group>"; };
 		33775AF21D2E404D0070742E /* 客户.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "客户.png"; sourceTree = "<group>"; };
+		3378D65D1F147AFD00632CBD /* layout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = layout.png; sourceTree = "<group>"; };
 		33793D131CE583AD000D0F9E /* storage4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = storage4.png; sourceTree = "<group>"; };
 		33793D151CE583E4000D0F9E /* solar4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = solar4.png; sourceTree = "<group>"; };
 		337960761DB0D065009AC610 /* massage_en2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = massage_en2.png; sourceTree = "<group>"; };
@@ -2906,6 +2908,7 @@
 		336F04151F06207300DE7CD7 /* order图片 */ = {
 			isa = PBXGroup;
 			children = (
+				3378D65D1F147AFD00632CBD /* layout.png */,
 				333300311F0FA30B00754C6F /* message_icon2.gif */,
 				337F962F1F0DE47600840527 /* device_iconI.png */,
 				337F962D1F0DE13E00840527 /* frameIntergrator.png */,
@@ -4302,6 +4305,7 @@
 				335BF1E71D100558008EEE99 /* message.png in Resources */,
 				3360EE0F1D878D3200DD75AC /* energy2@2x.png in Resources */,
 				334B8F5E1C914B4E00798A69 /* LICENSE in Resources */,
+				3378D65E1F147AFD00632CBD /* layout.png in Resources */,
 				336664F01CB77CD3005573FB /* user-agreement@3x.png in Resources */,
 				335D9C4F1CE32583007535BF /* frame_add.png in Resources */,
 				336664ED1CB77CD3005573FB /* update@2x.png in Resources */,

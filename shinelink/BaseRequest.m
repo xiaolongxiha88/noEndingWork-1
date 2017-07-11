@@ -78,13 +78,15 @@ float Time=20.f;
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",[error localizedDescription]);
         failure(error);
-        
-        NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"lostLogin"];
-        if ([lostLogin isEqualToString:@"Y"]) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"lostLogin"];
-        }else{
-            [self netRequest];
+        if ([method isEqualToString:HEAD_URL]) {
+            NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"lostLogin"];
+            if ([lostLogin isEqualToString:@"Y"]) {
+                [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"lostLogin"];
+            }else{
+                [self netRequest];
+            }
         }
+
     }];
 }
 

@@ -61,9 +61,12 @@ static void *context = NULL;
     
     _isNewWIFI=@"noValue";
     
-    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_back style:UIBarButtonItemStylePlain target:self action:@selector(goBackToFirst)];
-    rightItem.tag=10;
-    self.navigationItem.rightBarButtonItem=rightItem;
+    if (![_OssType isEqualToString:@"1"]) {
+        UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_back style:UIBarButtonItemStylePlain target:self action:@selector(goBackToFirst)];
+        rightItem.tag=10;
+        self.navigationItem.rightBarButtonItem=rightItem;
+    }
+
     
     
     [self initUI];

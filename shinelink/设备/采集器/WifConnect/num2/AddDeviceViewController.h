@@ -23,6 +23,8 @@
 @property (strong, nonatomic)  NSString *SnString;
 @property (strong, nonatomic)  NSString *LogType;
 
+@property (strong, nonatomic)  NSString *OssType;
+
 @property(nonatomic) NSInteger cellCount0;
 
 @property (strong, nonatomic)  UITextField *ipName;
