@@ -47,7 +47,7 @@
         [self.contentView addSubview:_image];
         
         
-        _picLabel=[[UIImageView alloc]initWithFrame:CGRectMake(280*NOW_SIZE, 10*HEIGHT_SIZE,20*NOW_SIZE, 20*HEIGHT_SIZE)];
+        _picLabel=[[UIImageView alloc]initWithFrame:CGRectMake(280*NOW_SIZE, 10*HEIGHT_SIZE,20*HEIGHT_SIZE*1.1, 20*HEIGHT_SIZE)];
 
         _picLabel.image = IMAGE(@"pic_icon.png");
     

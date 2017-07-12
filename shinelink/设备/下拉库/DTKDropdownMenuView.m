@@ -477,6 +477,10 @@ UITableViewDataSource
     if (![_icon isEqualToString:icon]) {
         _icon = icon;
         if (self.dropDownType != dropDownTypeTitle) {
+//            float H2=44.f;
+//            float bH=36.f;
+//            _titleButton.frame=CGRectMake(0, (H2-bH)/2, bH, bH);
+//            
             [self.titleButton setImage:[UIImage imageNamed:_icon] forState:UIControlStateNormal];
             [self.titleButton setImage:[UIImage imageNamed:_icon] forState:UIControlStateSelected];
         }
@@ -509,6 +513,8 @@ UITableViewDataSource
     if (!_titleButton)
     {
         _titleButton = [[DTKDropdownButton alloc] init];
+        
+
         DTKDropdownItem *item = self.items[0];
         [_titleButton setTitle:item.title forState:UIControlStateNormal];
         [_titleButton addTarget:self action:@selector(handleTapOnTitleButton:) forControlEvents:UIControlEventTouchDown];

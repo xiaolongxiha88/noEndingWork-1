@@ -106,8 +106,10 @@ class ossFistVC: RootViewController {
                                                     forKey: NSFontAttributeName as NSCopying)
         let size1=item0Name.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 30*HEIGHT_SIZE), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes1 as? [String : AnyObject], context: nil)
         
-        let menuView=DTKDropdownMenuView.init(type:dropDownTypeLeftItem , frame: CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 44.0, height: 44.0), dropdownItems: [item0!], icon:"layout.png")!
-
+               let H2=self.navigationController?.navigationBar.frame.size.height;
+                let bH=16*HEIGHT_SIZE
+        
+        let menuView=DTKDropdownMenuView.init(type:dropDownTypeLeftItem , frame: CGRect(x: 0*NOW_SIZE, y: (H2!-bH)/2, width: bH, height: bH), dropdownItems: [item0!], icon:"more@2x.png")!
         menuView.dropWidth = size1.width+10*NOW_SIZE
         menuView.cellHeight = 30*HEIGHT_SIZE
         menuView.titleFont = UIFont.systemFont(ofSize:14*HEIGHT_SIZE)
@@ -118,7 +120,8 @@ class ossFistVC: RootViewController {
    
         let leftItem=UIBarButtonItem.init(customView: menuView)
              self.navigationItem.leftBarButtonItem=leftItem
-        
+        self.navigationItem.leftBarButtonItem?.width=bH
+   
 
     }
     
@@ -301,63 +304,14 @@ class ossFistVC: RootViewController {
 
              let lableH=40*HEIGHT_SIZE
    
-//        let deviceView=UIView()
-//        deviceView.frame=CGRect(x: 0*NOW_SIZE, y: heigh0, width: SCREEN_Width, height: lableH)
-//        deviceView.backgroundColor=UIColor.clear
-//        deviceView.isUserInteractionEnabled=true
-//        let tap10=UITapGestureRecognizer(target: self, action: #selector(gotoDevice))
-//        deviceView.addGestureRecognizer(tap10)
-//        self.view.addSubview(deviceView)
-        
         let imageColor1=self.getImageWithColor(color: UIColor.clear, size: CGSize(width: SCREEN_Width, height: lableH))
         let imageColor2=self.getImageWithColor(color: COLOR(_R: 222, _G: 222, _B: 222, _A: 1), size: CGSize(width: SCREEN_Width, height: lableH))
         
-        
-       let deviceView=UIButton()
-        deviceView.frame=CGRect(x: 0*NOW_SIZE, y: heigh0, width: SCREEN_Width, height: lableH)
-        deviceView.setBackgroundImage(imageColor1, for: .normal)
-        deviceView.setBackgroundImage(imageColor2, for: .highlighted)
-         deviceView.setBackgroundImage(imageColor2, for: .selected)
-        deviceView.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
-        self.view.addSubview(deviceView)
-        
-        
-        let imageH=20*HEIGHT_SIZE
-        let imageV = UIImageView()
-        imageV.frame=CGRect(x: 10*NOW_SIZE, y: (lableH-imageH)/2, width: imageH, height: imageH)
-        imageV.image=UIImage(named: "device_search_icon.png")
-        deviceView.addSubview(imageV)
-        
-        let  lable1=UILabel()
-        lable1.frame=CGRect(x: 10*NOW_SIZE+imageH+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 150*NOW_SIZE, height: lableH)
-        lable1.text="设备搜索"
-        lable1.textColor=UIColor.black
-        lable1.textAlignment=NSTextAlignment.left
-        lable1.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
-        deviceView.addSubview(lable1)
-        
-        let imageH2=20*HEIGHT_SIZE
-        let imageV2 = UIImageView()
-        imageV2.frame=CGRect(x: (SCREEN_Width-20*NOW_SIZE)-imageH2, y: (lableH-imageH2)/2, width: imageH2, height: imageH2)
-        imageV2.image=UIImage(named: "firstGo.png")
-        deviceView.addSubview(imageV2)
 
-        let viewLine=UIView()
-            viewLine.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH-lineH, width: SCREEN_Width, height: lineH)
-        viewLine.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
-        self.view.addSubview(viewLine)
         
-
-//            view2=UIView()
-//            view2.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH, width: SCREEN_Width, height: lableH)
-//            view2.backgroundColor=UIColor.clear
-//            view2.isUserInteractionEnabled=false
-//            let tap=UITapGestureRecognizer(target: self, action: #selector(goToNew))
-//            view2.addGestureRecognizer(tap)
-//            self.view.addSubview(view2)
-        
+        let view2H=50*HEIGHT_SIZE
        view2=UIButton()
-        view2.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH, width: SCREEN_Width, height: lableH)
+        view2.frame=CGRect(x: 0*NOW_SIZE, y: heigh0, width: SCREEN_Width, height: view2H)
         view2.setBackgroundImage(imageColor1, for: .normal)
         view2.setBackgroundImage(imageColor2, for: .highlighted)
         view2.setBackgroundImage(imageColor2, for: .selected)
@@ -374,7 +328,7 @@ class ossFistVC: RootViewController {
                 let data1=NSData.init(contentsOfFile:bundleDBPath!)
                 
                 let gifWeb=UIWebView()
-                gifWeb.frame=CGRect(x: 10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: gifWebH2, height: gifWebH2*1.2)
+                gifWeb.frame=CGRect(x: 10*NOW_SIZE, y: 4*HEIGHT_SIZE, width: gifWebH2, height: gifWebH2*1.2)
                 gifWeb.load(data1! as Data, mimeType:"image/gif", textEncodingName: String(), baseURL:NSURLComponents().url!)
                 gifWeb.isUserInteractionEnabled=false
                 gifWeb.scalesPageToFit=true
@@ -384,9 +338,10 @@ class ossFistVC: RootViewController {
                 
             }
             
-            
+        
+        let lable2H=25*HEIGHT_SIZE
             let  lable2=UILabel()
-            lable2.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 250*NOW_SIZE, height: 20*HEIGHT_SIZE)
+            lable2.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 250*NOW_SIZE, height: lable2H)
             lable2.text="最新接收消息"
             lable2.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
             lable2.textAlignment=NSTextAlignment.left
@@ -397,20 +352,19 @@ class ossFistVC: RootViewController {
             image4=UIImageView()
             image4.layer.masksToBounds=true
             image4.layer.cornerRadius=image4H/2
-            image4.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE, y: 20*HEIGHT_SIZE+(20*HEIGHT_SIZE-image4H)/2, width: image4H, height: image4H)
+            image4.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE, y: lable2H-2*HEIGHT_SIZE+(lable2H-image4H)/2, width: image4H, height: image4H)
             
             view2.addSubview(image4)
             
             lable3=UILabel()
-            lable3.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE+image4H+5*NOW_SIZE, y: 20*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 20*HEIGHT_SIZE)
-            
+            lable3.frame=CGRect(x: 10*NOW_SIZE+gifWebH2+10*NOW_SIZE+image4H+5*NOW_SIZE, y: lable2H-2*HEIGHT_SIZE, width: 150*NOW_SIZE, height: lable2H)
             lable3.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
             lable3.textAlignment=NSTextAlignment.left
             lable3.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
             view2.addSubview(lable3)
             
         let viewLine1=UIView()
-        viewLine1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+lableH+lableH, width: SCREEN_Width, height: lineH)
+        viewLine1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+view2H, width: SCREEN_Width, height: lineH)
         viewLine1.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
         self.view.addSubview(viewLine1)
         
@@ -575,6 +529,19 @@ class ossFistVC: RootViewController {
             viewAll.addSubview(viewLine1)
 
         }
+        
+        
+        let deviceViewY=viewLine1.frame.origin.y+115*HEIGHT_SIZE+115*HEIGHT_SIZE+15*HEIGHT_SIZE
+         let deviceViewH=70*HEIGHT_SIZE
+               let deviceView=UIButton()
+                deviceView.frame=CGRect(x: (SCREEN_Width-deviceViewH)/2, y: deviceViewY+15*HEIGHT_SIZE, width: deviceViewH, height: deviceViewH)
+                deviceView.setBackgroundImage(UIImage(named: "search_icon_nor.png"), for: .normal)
+                deviceView.setBackgroundImage(UIImage(named: "search_icon_click.png"), for: .highlighted)
+                 deviceView.setBackgroundImage(UIImage(named: "search_icon_click.png"), for: .selected)
+                deviceView.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
+                self.view.addSubview(deviceView)
+        
+        
         
     }
     

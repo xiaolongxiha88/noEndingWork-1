@@ -132,7 +132,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     [VI addGestureRecognizer:forget1];
     [_textViewAll addSubview:VI];
     
-    UIImageView *image4=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE, 20*HEIGHT_SIZE,20*HEIGHT_SIZE )];
+    UIImageView *image4=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE, 20*HEIGHT_SIZE*1.1,20*HEIGHT_SIZE )];
     image4.userInteractionEnabled = YES;
     image4.image = IMAGE(@"pic_icon.png");
     [VI addSubview:image4];
@@ -259,7 +259,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     [_headView addSubview:LableS];
     
     if (_questionPicArray.count>1) {
-        UIImageView *image55=[[UIImageView alloc]initWithFrame:CGRectMake(280*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,20*NOW_SIZE, 20*HEIGHT_SIZE)];
+        UIImageView *image55=[[UIImageView alloc]initWithFrame:CGRectMake(280*NOW_SIZE, imageW+lableH*3+5*HEIGHT_SIZE+Lrect.height+25*HEIGHT_SIZE,20*HEIGHT_SIZE*1.1, 20*HEIGHT_SIZE)];
         image55.userInteractionEnabled = YES;
         image55.image = IMAGE(@"pic_icon.png");
         UITapGestureRecognizer * labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto)];
