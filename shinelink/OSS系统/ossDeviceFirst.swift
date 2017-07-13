@@ -242,12 +242,14 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             self.addressString=addressArray[selectIndex] as! NSString
             self.getAddress=self.addressString
              print("选择11了"+String(describing: selectIndex))
+            
+            let searchDeviceAddressString=String(format: "搜索服务器:%@", self.addressString)
+            UserDefaults.standard.set(self.addressString, forKey: "searchDeviceAddress")
+            self.addressLable.text=searchDeviceAddressString
+            
         }, selectValue: {
             (selectValue)in
-            let searchDeviceAddressString=String(format: "搜索服务器-%@", selectValue!)
-              UserDefaults.standard.set(searchDeviceAddressString, forKey: "searchDeviceAddress")
-              self.addressLable.text=searchDeviceAddressString
-            
+    
             print("选择了"+String(describing: selectValue))
             self.button22.setTitle(selectValue, for: .normal)
         }, showCloseButton: true)

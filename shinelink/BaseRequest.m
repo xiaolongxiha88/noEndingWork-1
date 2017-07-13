@@ -59,7 +59,7 @@ float Time=20.f;
             if ([jsonObj isKindOfClass:[NSDictionary class]]) {
                 NSDictionary *allDic=[NSDictionary dictionaryWithDictionary:jsonObj];
                 if ([allDic.allKeys containsObject:@"result"]) {
-                    if ([allDic[@"result"] intValue]==22) {
+                    if ([allDic[@"result"] intValue]==22) {                  //22
                         
                         NSString *lostLogin=[[NSUserDefaults standardUserDefaults] objectForKey:@"loginOssEnable"];
                         if ([lostLogin isEqualToString:@"Y"]) {
@@ -318,6 +318,7 @@ float Time=20.f;
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     NSString *reUsername=[ud objectForKey:@"OssName"];
     NSString *rePassword=[ud objectForKey:@"OssPassword"];
+    NSString *searchDeviceAddress=[ud objectForKey:@"searchDeviceAddress"];
     
 //    int loginOssTimeNum=(int)[[NSUserDefaults standardUserDefaults] objectForKey:@"loginOssTime"];
     
@@ -325,9 +326,9 @@ float Time=20.f;
     
     if (!(reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] ))){
         
-        [BaseRequest requestWithMethod:OSS_HEAD_URL_Demo paramars:@{@"userName":reUsername, @"userPassword":[self MD5:rePassword]} paramarsSite:@"/api/v1/login/userLogin" sucessBlock:^(id content) {
+        [BaseRequest requestWithMethod:OSS_HEAD_URL_Demo paramars:@{@"userName":reUsername, @"serverUrl":searchDeviceAddress, @"userPassword":[self MD5:rePassword]} paramarsSite:@"/api/v1/login/userResetLogin" sucessBlock:^(id content) {
             
-            NSLog(@"/api/v1/login/userLogin:%@",content);
+            NSLog(@"/api/v1/login/userResetLogin:%@",content);
             if (content) {
     
             }

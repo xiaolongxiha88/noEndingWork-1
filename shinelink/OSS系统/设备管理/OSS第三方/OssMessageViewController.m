@@ -276,16 +276,19 @@
 
 -(void)getCode2{
     
-    NSString *typeString;
+    NSString *typeString; NSString *contentString;
     if ([_addQuestionType isEqualToString:@"1"]) {
         typeString=@"1";
+        contentString=[NSString stringWithFormat:@"%@%@",_getPhone,[_textField text]];
     }
     if ([_addQuestionType isEqualToString:@"2"]) {
         typeString=@"0";
+        contentString=[NSString stringWithFormat:@"%@",[_textField text]];
     }
     
     _dataDic=[NSMutableDictionary new];
-    NSString *contentString=[NSString stringWithFormat:@"%@%@",_getPhone,[_textField text]];
+    
+   
     [_dataDic setObject:contentString forKey:@"content"];
     [_dataDic setObject:typeString forKey:@"type"];
     [self showProgressView];

@@ -813,6 +813,8 @@ class ossFistVC: RootViewController {
             vc.serverListArray=self.serverListArray
             self.navigationController?.pushViewController(vc, animated: true)
         }else if roleString=="5"{
+            UserDefaults.standard.set("", forKey: "searchDeviceAddress")
+            
             let vc=IntegratorFirst()
               vc.firstNum=0
             self.navigationController?.pushViewController(vc, animated: true)

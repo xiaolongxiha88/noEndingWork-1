@@ -11,7 +11,7 @@
 #import "OssMessageViewController.h"
 
 @interface addServerViewController ()<UITextFieldDelegate,UIActionSheetDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate>
-@property (nonatomic, strong) UIView *scrollView;
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray *labelArray;
 @property (nonatomic, strong) UITextField *userTextField;
 @property (nonatomic, strong) UITextField *SNTextField;
@@ -97,8 +97,11 @@
 
 
 -(void)initUI{
-    _scrollView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
+          float imageH=50*HEIGHT_SIZE;
+    
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height-imageH)];
     _scrollView.backgroundColor=[UIColor clearColor];
+    _scrollView.contentSize=CGSizeMake(SCREEN_Width, SCREEN_Height*1.2);
     _scrollView.userInteractionEnabled=YES;
     [self.view addSubview:_scrollView];
     
@@ -202,9 +205,9 @@
     lineV3.backgroundColor=COLOR(222, 222, 222, 1);
     [_scrollView addSubview:lineV3];
     
-      float imageH=50*HEIGHT_SIZE;
+
     
-    self.contentView = [[UITextView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, Nsize*5, 300*NOW_SIZE,SCREEN_Height-imageH-Nsize*5-10*HEIGHT_SIZE )];
+    self.contentView = [[UITextView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, Nsize*5, 300*NOW_SIZE,100*HEIGHT_SIZE )];
     _contentView.text=root_xiangguang_wenti_miaoshu;
     self.contentView.textColor = COLOR(153, 153, 153, 1);
     self.contentView.tintColor = COLOR(153, 153, 153, 1);
@@ -213,12 +216,16 @@
     self.contentView.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [_scrollView addSubview:_contentView];
     
+    UIView *lineV4=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, Nsize*5+100*HEIGHT_SIZE , SCREEN_Width-20*NOW_SIZE, 1*HEIGHT_SIZE)];
+    lineV4.backgroundColor=COLOR(222, 222, 222, 1);
+    [_scrollView addSubview:lineV4];
+    
 //     float H2=self.navigationController.navigationBar.frame.size.height;
     float H1=[[UIApplication sharedApplication] statusBarFrame].size.height+self.navigationController.navigationBar.frame.size.height;
     _imageViewAll = [[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_Height-imageH-H1, SCREEN_Width,imageH )];
     _imageViewAll.backgroundColor =COLOR(242, 242, 242, 1);
     _imageViewAll.userInteractionEnabled = YES;
-    [_scrollView addSubview:_imageViewAll];
+    [self.view addSubview:_imageViewAll];
     
     UIView *VI = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_Width-imageH-10*NOW_SIZE, 0*HEIGHT_SIZE, imageH,imageH )];
     VI.backgroundColor =[UIColor clearColor];
@@ -326,11 +333,31 @@
 
 
 -(void)finishDone{
+    
+
+    
     UITextField *textF=[_scrollView viewWithTag:6000];
     UITextField *textF2=[_scrollView viewWithTag:6002];
     UITextField *textF3=[_scrollView viewWithTag:6003];
     UITextField *textF4=[_scrollView viewWithTag:6004];
 
+    
+    if ([_phoneOrEmail isEqualToString:@"1"]) {
+        NSString *isValiPhone=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiPhone"];
+        if (![isValiPhone isEqualToString:@"1"]) {
+            [self showToastViewWithTitle:@"请验证您的手机号码"];
+            return;
+        }
+    }
+    
+    if ([_phoneOrEmail isEqualToString:@"2"]) {
+        NSString *isValiEmail=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiEmail"];
+        if (![isValiEmail isEqualToString:@"1"]) {
+            [self showToastViewWithTitle:@"请验证您的邮箱地址"];
+            return;
+        }
+    }
+    
       NSMutableDictionary *dataImageDict = [NSMutableDictionary dictionary];
     
     NSMutableArray *picAll=[NSMutableArray arrayWithArray:_picArray];
@@ -559,6 +586,17 @@
 }
 
 -(void)removeAlert{
+    UITextField *A=[_scrollView viewWithTag:6003];
+    
+    if ([_phoneOrEmail isEqualToString:@"1"]) {
+       NSString *phoneNum=[[NSUserDefaults standardUserDefaults] objectForKey:@"TelNumber"];
+        A.text=phoneNum;
+    }
+    if ([_phoneOrEmail isEqualToString:@"2"]) {
+        NSString *phoneNum=[[NSUserDefaults standardUserDefaults] objectForKey:@"email"];
+        A.text=phoneNum;
+    }
+    
     if (_imageV5) {
         [_imageV5 removeFromSuperview];
         _imageV5=nil;
@@ -570,7 +608,13 @@
 -(void)tapInfo{
     NSArray *infoArray=[NSArray arrayWithObjects:root_shoujihao,root_youxiang, nil];
     [ZJBLStoreShopTypeAlert showWithTitle:root_xuanzhe_lianxi_fangshi titles:infoArray selectIndex:^(NSInteger selectIndex) {
-        _phoneOrEmail=[NSString stringWithFormat:@"%ld",selectIndex+1];
+        if (_imageV5) {
+            [_imageV5 removeFromSuperview];
+            _imageV5=nil;
+        }
+        
+        int A=selectIndex;
+        _phoneOrEmail=[NSString stringWithFormat:@"%d",A+1];
         UITextField *text=[_scrollView viewWithTag:6003];
         if (selectIndex==0) {
             text.placeholder=root_Enter_phone_number;
@@ -586,6 +630,7 @@
             if ([isValiPhone isEqualToString:@"1"]) {
                 NSString *phoneNum=[[NSUserDefaults standardUserDefaults] objectForKey:@"TelNumber"];
                 text.text=phoneNum;
+                
             }else{
                 text.text=nil;
                   [self showAlert];
