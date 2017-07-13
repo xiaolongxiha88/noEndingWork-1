@@ -390,20 +390,20 @@
         if (content) {
             if ([content[@"success"] integerValue] == 0) {
                 //登陆失败
-                if ([content[@"msg"] integerValue] == 501) {
-                    
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"User name or password is blank" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
-                    [alertView show];
-                }
-                if ([content[@"msg"] integerValue] ==502) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"username password error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
-                    [alertView show];
-                }
-                if ([content[@"msg"] integerValue] ==503) {
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"server error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
-                    [alertView show];
-                }
-            }            
+//                if ([content[@"msg"] integerValue] == 501) {
+//                    
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"User name or password is blank" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+//                    [alertView show];
+//                }
+//                if ([content[@"msg"] integerValue] ==502) {
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"username password error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+//                    [alertView show];
+//                }
+//                if ([content[@"msg"] integerValue] ==503) {
+//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"server error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+//                    [alertView show];
+//                }
+            }
             
         }
         

@@ -775,10 +775,19 @@ NSLog(@"体验馆");
                     }
                 } else if ([allDic[@"result"] intValue]==0) {
                      [self showToastViewWithTitle:root_Networking];
+                    if (!_scrollView) {
+                        [self addSubViews];
+                    }
                 }else if ([allDic[@"result"] intValue]==4) {
                     [self showToastViewWithTitle:root_WO_yonghu_bucunzai];
+                    if (!_scrollView) {
+                        [self addSubViews];
+                    }
                 }else if ([allDic[@"result"] intValue]==5) {
                     [self showToastViewWithTitle:root_yongHuMing_mima_cuowu];
+                    if (!_scrollView) {
+                        [self addSubViews];
+                    }
                 }else{
                     _getServerAddressNum=0;
                     [self netServerInit];
