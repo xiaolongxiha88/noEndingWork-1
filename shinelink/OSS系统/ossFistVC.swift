@@ -75,7 +75,7 @@ class ossFistVC: RootViewController {
         serverNumArray=[0,0]
         orderNumArray=[0,0]
         infoString=""
-        
+        newInfoType=0
      
         
        self.initUI()
@@ -509,7 +509,7 @@ class ossFistVC: RootViewController {
                 ButtonImag1.image=UIImage(named: "Untreated1111.png")
             }
             if i==0{
-             ButtonImag1.image=UIImage(named: "Untreated22.png")
+             ButtonImag1.image=UIImage(named: "processingOss.png")
             }
             viewButton1.addSubview(ButtonImag1)
             
@@ -551,7 +551,12 @@ class ossFistVC: RootViewController {
     func initUItwo2(){
         
            view2.isUserInteractionEnabled=true
-           lable3.text=infoString! as String
+        if infoString=="" {
+            lable3.text="暂无消息"
+        }else{
+             lable3.text=infoString! as String
+        }
+      
         
         let L1=self.view.viewWithTag(3100) as! UILabel
         L1.text=String(format: "%@:%d", "待跟进",(serverNumArray[0] as? Int)!)
@@ -560,7 +565,7 @@ class ossFistVC: RootViewController {
         L2.text=String(format: "%@:%d", "待接收",(orderNumArray[0] as? Int)!)
         
         let L3=self.view.viewWithTag(4100) as! UILabel
-        L3.text=String(format: "%@:%d", "未处理",serverNumArray[1] as! Int)
+        L3.text=String(format: "%@:%d", "处理中",serverNumArray[1] as! Int)
         
         let L4=self.view.viewWithTag(4101) as! UILabel
         L4.text=String(format: "%@:%d", "服务中",orderNumArray[1] as! Int)
@@ -776,8 +781,8 @@ class ossFistVC: RootViewController {
         
         if Tap.tag==4000 {
             vc.questionOrOrder=1
-            vc.statusInt=0
-            vc.secondNum=1
+            vc.statusInt=1
+            vc.secondNum=3
             vc.firstNum=0
         }
         

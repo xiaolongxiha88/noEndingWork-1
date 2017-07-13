@@ -37,7 +37,7 @@ class IntegratorFirst: RootViewController {
     self.navigationController?.setNavigationBarHidden(false, animated: false)
         
         deviceType=0
-        accessStatus=0
+        accessStatus=1
         agentCodeString="0"
         plantName = ""
         userName = ""
@@ -314,7 +314,7 @@ class IntegratorFirst: RootViewController {
             }
         }
       //  nameArray=["在线:","离线:","充电:","放电:","故障:"]
-        if self.deviceType==0{
+        if self.deviceType==1{
             if Tag==2600{
                 deviceStatusType=0
             }else if Tag==2500{

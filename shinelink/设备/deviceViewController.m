@@ -480,7 +480,7 @@
     totalPowerArray=[NSMutableArray array];
     SNArray=[NSMutableArray array];
     imageStatueArray=[NSMutableArray array];
-    imageArray2=[[NSMutableArray alloc]initWithObjects:@"inverter2.png", @"储能机.png", @"充电桩.png",@"PowerRegulator.png",nil];
+    imageArray2=[[NSMutableArray alloc]initWithObjects:@"inverter2.png", @"储能机.png", @"充电桩.png",@"MeBoost.png",nil];
     nameArray2=[[NSMutableArray alloc]initWithObjects:root_niBianQi, root_chuNengJi, root_chongDianZhuang, root_gongLvTiaoJieQi,  nil];
     statueArray2=[[NSMutableArray alloc]initWithObjects:root_wei_LianJie, root_wei_LianJie, root_wei_LianJie,root_wei_LianJie,nil];
     powerArray2=[[NSMutableArray alloc]initWithObjects:@"50KW", @"50KW", @"5000W", @"5000W",  nil];

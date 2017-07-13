@@ -108,7 +108,18 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                             self.cellValue1Array.add((plantAll[i] as! NSDictionary)["userName"] as!NSString)
                             self.cellValue2Array.add((plantAll[i] as! NSDictionary)["plantName"] as!NSString)
                             self.cellValue3Array.add((plantAll[i] as! NSDictionary)["agentName"] as!NSString)
-                            self.cellValue4Array.add((plantAll[i] as! NSDictionary)["lost"] as! NSString)
+                            if ((plantAll[i] as! NSDictionary)["status"] ) is NSString{
+                                let A=(plantAll[i] as! NSDictionary)["status"] as! NSString
+                                if A=="" {
+                                   self.cellValue4Array.add(10)
+                                }else{
+                                 self.cellValue4Array.add(A.integerValue)
+                                }
+                             
+                            }else{
+                                self.cellValue4Array.add((plantAll[i] as! NSDictionary)["status"] as? Int ?? 10)
+                            }
+                          
                             self.cellValue5Array.add((plantAll[i] as! NSDictionary)["seriaNum"] as!NSString)
                             self.plantListArray.add(plantAll[i])
                             
@@ -168,15 +179,62 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
         
         let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,cellValue1Array[indexPath.row]as!NSString)
       
-        let lable41 = cellValue4Array[indexPath.row]as!NSString
-        var lable42:NSString
-        if lable41=="1" {
-            lable42="掉线"
-        }else{
-            lable42="在线"
+        
+//        let lable41 = cellValue4Array[indexPath.row]as!NSString
+//        var lable22:NSString
+//        if lable41=="1" {
+//            lable42="掉线"
+//        }else{
+//            lable42="在线"
+//        }
+//          let lable4=NSString(format: "%@%@", cellNameArray[3]as!NSString,lable42)
+//                cell.TitleLabel4.text=lable4 as String?
+        
+        var lable22:NSString
+        if self.deviceType==0{
+            if (cellValue4Array[indexPath.row]as! Int == 0) {
+                lable22 = "等待"
+                cell.TitleLabel4.textColor=COLOR(_R: 17, _G: 183, _B: 243, _A: 1)
+            }else if (cellValue4Array[indexPath.row]as! Int == 1){
+                lable22 = "正常"
+                cell.TitleLabel4.textColor=COLOR(_R: 119, _G: 213, _B: 59, _A: 1)
+            }else if (cellValue4Array[indexPath.row]as!Int == 3){
+                lable22 = "故障"
+                cell.TitleLabel4.textColor=COLOR(_R: 209, _G: 56, _B: 56, _A: 1)
+            }else{
+                lable22 = "离线"
+                cell.TitleLabel4.textColor=COLOR(_R: 153, _G: 153, _B: 153, _A: 1)
+            }
+            let lable2=NSString(format: "%@:%@", cellNameArray[3]as!NSString, lable22)
+            cell.TitleLabel4.text=lable2 as String
+
         }
         
-          let lable4=NSString(format: "%@%@", cellNameArray[3]as!NSString,lable42)
+        if self.deviceType==1{
+            if (cellValue4Array[indexPath.row]as! Int == 0) {
+                lable22 = "闲置"
+                cell.TitleLabel4.textColor=COLOR(_R: 45, _G: 226, _B: 233, _A: 1)
+            }else if (cellValue4Array[indexPath.row]as! Int == 1){
+                lable22 = "充电"
+                cell.TitleLabel4.textColor=COLOR(_R: 121, _G: 230, _B: 129, _A: 1)
+            }else if (cellValue4Array[indexPath.row]as! Int == 2){
+                lable22 = "放电"
+                cell.TitleLabel4.textColor=COLOR(_R: 222, _G: 211, _B: 91, _A: 1)
+            }else if (cellValue4Array[indexPath.row]as! Int == 3){
+                lable22 = "故障"
+                cell.TitleLabel4.textColor=COLOR(_R: 241, _G: 86, _B: 82, _A: 1)
+            }else if (cellValue4Array[indexPath.row]as! Int == 4){
+                lable22 = "等待"
+                cell.TitleLabel4.textColor=COLOR(_R: 17, _G: 183, _B: 243, _A: 1)
+            }else{
+                lable22 = "离线"
+                cell.TitleLabel4.textColor=COLOR(_R: 153, _G: 153, _B: 153, _A: 1)
+            }
+            let lable2=NSString(format: "%@:%@", cellNameArray[3]as!NSString, lable22)
+            cell.TitleLabel4.text=lable2 as String
+            
+        }
+        
         let  lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,cellValue2Array[indexPath.row]as!NSString)
         let  lable3=NSString(format: "%@%@", cellNameArray[2]as!NSString,cellValue3Array[indexPath.row]as!NSString)
         
@@ -187,7 +245,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
         cell.TitleLabel1.text=lable1 as String
         cell.TitleLabel2.text=lable2 as String
         cell.TitleLabel3.text=lable3 as String?
-        cell.TitleLabel4.text=lable4 as String?
+
         
         
         return cell

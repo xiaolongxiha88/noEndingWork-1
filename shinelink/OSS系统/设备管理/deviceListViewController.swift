@@ -151,7 +151,14 @@ deviceTypeString="1"
                         for i in 0..<plantAll.count{
                             self.cellValue0Array.add((plantAll[i] as! NSDictionary)["alias"] as!NSString)
                              self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as!NSString)
-                                self.cellValue2Array.add((plantAll[i] as! NSDictionary)["lost"] as!Bool)
+                            if ((plantAll[i] as! NSDictionary)["status"] ) is NSString{
+                                let A=(plantAll[i] as! NSDictionary)["status"] as! NSString
+                                self.cellValue2Array.add(A.integerValue)
+                            }else{
+                               self.cellValue2Array.add((plantAll[i] as! NSDictionary)["status"] as? Int ?? 10)
+                            }
+                            
+                               // self.cellValue2Array.add((plantAll[i] as! NSDictionary)["status"] as? Int ?? 0)
                                self.cellValue3Array.add((plantAll[i] as! NSDictionary)["dataLogSn"] as!NSString)
                             self.cellValue4Array.add((plantAll[i] as! NSDictionary)["modelText"] as!NSString)
                             self.plantListArray.add(plantAll[i])
@@ -163,7 +170,7 @@ deviceTypeString="1"
                         for i in 0..<plantAll.count{
                             self.cellValue0Array.add((plantAll[i] as! NSDictionary)["alias"] as!NSString)
                             self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as!NSString)
-                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["lost"] as!Bool)
+                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["status"] as? Int ?? 7)
                             self.cellValue3Array.add((plantAll[i] as! NSDictionary)["dataLogSn"] as!NSString)
                             let Type=(plantAll[i] as! NSDictionary)["deviceType"] as!Int
                             var typeString:NSString=""
@@ -241,35 +248,81 @@ deviceTypeString="1"
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if deviceTypeString=="0" {
-              cellNameArray=[root_xunliehao,root_zhuantai,root_ip_he_duankou,root_leixing];
-        }else if deviceTypeString=="1"{
-          cellNameArray=[root_xunliehao,root_zhuantai,root_suoshu_caijiqi,root_xinghao];
-        }else if deviceTypeString=="2"{
-            cellNameArray=[root_xunliehao,root_zhuantai,root_suoshu_caijiqi,root_xinghao];
-        }
+
        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!deviceListCell
         
-        let lable1=NSString(format: "%@:%@", cellNameArray[0]as!NSString,cellValue1Array[indexPath.row]as!NSString)
-     
-        var lable22:NSString
-        if (cellValue2Array[indexPath.row]as!Bool)==true {
-            lable22 = root_lixian as NSString
-        }else{
-          lable22 = root_zaixian as NSString
+             var lable22:NSString
+        if deviceTypeString=="0" {
+            cellNameArray=[root_xunliehao,root_zhuantai,root_ip_he_duankou,root_leixing];
+            if (cellValue2Array[indexPath.row]as!Bool)==true {
+                lable22 = root_lixian as NSString
+                  cell.TitleLabel2.textColor=COLOR(_R: 153, _G: 153, _B: 153, _A: 1)
+            }else{
+                lable22 = root_zaixian as NSString
+                  cell.TitleLabel2.textColor=COLOR(_R: 119, _G: 213, _B: 59, _A: 1)
+            }
+            let lable2=NSString(format: "%@:%@", cellNameArray[1]as!NSString, lable22)
+            cell.TitleLabel2.text=lable2 as String
+            
+            
+        }else if deviceTypeString=="1"{
+            cellNameArray=[root_xunliehao,root_zhuantai,root_suoshu_caijiqi,root_xinghao];
+            if (cellValue2Array[indexPath.row]as! Int == 0) {
+                lable22 = "等待"
+                   cell.TitleLabel2.textColor=COLOR(_R: 17, _G: 183, _B: 243, _A: 1)
+            }else if (cellValue2Array[indexPath.row]as! Int == 1){
+                lable22 = "正常"
+                  cell.TitleLabel2.textColor=COLOR(_R: 119, _G: 213, _B: 59, _A: 1)
+            }else if (cellValue2Array[indexPath.row]as!Int == 3){
+                lable22 = "故障"
+                  cell.TitleLabel2.textColor=COLOR(_R: 209, _G: 56, _B: 56, _A: 1)
+            }else{
+            lable22 = "离线"
+                 cell.TitleLabel2.textColor=COLOR(_R: 153, _G: 153, _B: 153, _A: 1)
+            }
+            let lable2=NSString(format: "%@:%@", cellNameArray[1]as!NSString, lable22)
+            cell.TitleLabel2.text=lable2 as String
+            
+        }else if deviceTypeString=="2"{
+            cellNameArray=[root_xunliehao,root_zhuantai,root_suoshu_caijiqi,root_xinghao];
+            if (cellValue2Array[indexPath.row]as! Int == 0) {
+                lable22 = "闲置"
+                cell.TitleLabel2.textColor=COLOR(_R: 45, _G: 226, _B: 233, _A: 1)
+            }else if (cellValue2Array[indexPath.row]as! Int == 1){
+                lable22 = "充电"
+                cell.TitleLabel2.textColor=COLOR(_R: 121, _G: 230, _B: 129, _A: 1)
+            }else if (cellValue2Array[indexPath.row]as! Int == 2){
+                lable22 = "放电"
+                cell.TitleLabel2.textColor=COLOR(_R: 222, _G: 211, _B: 91, _A: 1)
+            }else if (cellValue2Array[indexPath.row]as! Int == 3){
+                lable22 = "故障"
+                cell.TitleLabel2.textColor=COLOR(_R: 241, _G: 86, _B: 82, _A: 1)
+            }else if (cellValue2Array[indexPath.row]as! Int == 4){
+                lable22 = "等待"
+                cell.TitleLabel2.textColor=COLOR(_R: 17, _G: 183, _B: 243, _A: 1)
+            }else{
+                lable22 = "离线"
+                cell.TitleLabel2.textColor=COLOR(_R: 153, _G: 153, _B: 153, _A: 1)
+            }
+            let lable2=NSString(format: "%@:%@", cellNameArray[1]as!NSString, lable22)
+            cell.TitleLabel2.text=lable2 as String
+            
         }
-           let lable2=NSString(format: "%@:%@", cellNameArray[1]as!NSString, lable22)
+        
+        
+      
+        
+        let lable1=NSString(format: "%@:%@", cellNameArray[0]as!NSString,cellValue1Array[indexPath.row]as!NSString)
         let  lable3=NSString(format: "%@:%@", cellNameArray[2]as!NSString,cellValue3Array[indexPath.row]as!NSString)
          let  lable4=NSString(format: "%@:%@", cellNameArray[3]as!NSString,cellValue4Array[indexPath.row]as!NSString)
 
+   
         
-       
          cell.TitleLabel0.text=cellValue0Array[indexPath.row] as? String
         
         cell.TitleLabel1.text=lable1 as String
-        cell.TitleLabel2.text=lable2 as String
          cell.TitleLabel3.text=lable3 as String?
             cell.TitleLabel4.text=lable4 as String?
         
