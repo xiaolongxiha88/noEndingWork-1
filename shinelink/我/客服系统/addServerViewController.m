@@ -345,7 +345,7 @@
     if ([_phoneOrEmail isEqualToString:@"1"]) {
         NSString *isValiPhone=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiPhone"];
         if (![isValiPhone isEqualToString:@"1"]) {
-            [self showToastViewWithTitle:@"请验证您的手机号码"];
+            [self showToastViewWithTitle:root_yanzheng_shouji];
             return;
         }
     }
@@ -353,7 +353,7 @@
     if ([_phoneOrEmail isEqualToString:@"2"]) {
         NSString *isValiEmail=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiEmail"];
         if (![isValiEmail isEqualToString:@"1"]) {
-            [self showToastViewWithTitle:@"请验证您的邮箱地址"];
+            [self showToastViewWithTitle:root_yanzheng_youxiang];
             return;
         }
     }

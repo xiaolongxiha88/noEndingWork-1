@@ -29,9 +29,9 @@
 		3330F4E01F15B1E20076C237 /* search_icon_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4DE1F15B1E20076C237 /* search_icon_click.png */; };
 		3330F4E11F15B1E20076C237 /* search_icon_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4DF1F15B1E20076C237 /* search_icon_nor.png */; };
 		3330F4E91F15CB780076C237 /* send_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4E81F15CB780076C237 /* send_icon.png */; };
-		3330F4EB1F15CF030076C237 /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4EA1F15CF030076C237 /* more@2x.png */; };
 		3330F4ED1F16173B0076C237 /* processingOss.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4EC1F16173B0076C237 /* processingOss.png */; };
 		3330F4EF1F1716AC0076C237 /* MeBoost.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4EE1F1716AC0076C237 /* MeBoost.png */; };
+		3330F4F11F177B920076C237 /* more2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4F01F177B920076C237 /* more2@2x.png */; };
 		333300321F0FA30B00754C6F /* message_icon2.gif in Resources */ = {isa = PBXBuildFile; fileRef = 333300311F0FA30B00754C6F /* message_icon2.gif */; };
 		333300341F10B4BB00754C6F /* device_search_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 333300331F10B4BB00754C6F /* device_search_icon.png */; };
 		333300361F10B4D300754C6F /* online_server_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 333300351F10B4D300754C6F /* online_server_icon.png */; };
@@ -752,9 +752,9 @@
 		3330F4DE1F15B1E20076C237 /* search_icon_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon_click.png; sourceTree = "<group>"; };
 		3330F4DF1F15B1E20076C237 /* search_icon_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon_nor.png; sourceTree = "<group>"; };
 		3330F4E81F15CB780076C237 /* send_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = send_icon.png; sourceTree = "<group>"; };
-		3330F4EA1F15CF030076C237 /* more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@2x.png"; sourceTree = "<group>"; };
 		3330F4EC1F16173B0076C237 /* processingOss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = processingOss.png; sourceTree = "<group>"; };
 		3330F4EE1F1716AC0076C237 /* MeBoost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MeBoost.png; sourceTree = "<group>"; };
+		3330F4F01F177B920076C237 /* more2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more2@2x.png"; sourceTree = "<group>"; };
 		333300311F0FA30B00754C6F /* message_icon2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = message_icon2.gif; sourceTree = "<group>"; };
 		333300331F10B4BB00754C6F /* device_search_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = device_search_icon.png; sourceTree = "<group>"; };
 		333300351F10B4D300754C6F /* online_server_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = online_server_icon.png; sourceTree = "<group>"; };
@@ -2917,8 +2917,8 @@
 		336F04151F06207300DE7CD7 /* order图片 */ = {
 			isa = PBXGroup;
 			children = (
+				3330F4F01F177B920076C237 /* more2@2x.png */,
 				3330F4EC1F16173B0076C237 /* processingOss.png */,
-				3330F4EA1F15CF030076C237 /* more@2x.png */,
 				3330F4DE1F15B1E20076C237 /* search_icon_click.png */,
 				3330F4DF1F15B1E20076C237 /* search_icon_nor.png */,
 				3330F4E81F15CB780076C237 /* send_icon.png */,
@@ -4160,6 +4160,7 @@
 				33FEFD5C1C7DB38400324374 /* icon---Name.png in Resources */,
 				33C300041D3E33E00016351C /* L11.png in Resources */,
 				3319E0911D5B121E006623A9 /* play_icon.png in Resources */,
+				3330F4F11F177B920076C237 /* more2@2x.png in Resources */,
 				334AED601CA3763D007E39F3 /* 资料管理.png in Resources */,
 				338964981E5D8A6900A7B1AE /* frame_password.png in Resources */,
 				338234371D9A4AF0002062AE /* Warranty_en2.png in Resources */,
@@ -4354,7 +4355,6 @@
 				338234391D9A50AD002062AE /* Prompt message_en2.png in Resources */,
 				33C300011D3E33E00016351C /* L8.png in Resources */,
 				338964991E5D8A6900A7B1AE /* frame_user.png in Resources */,
-				3330F4EB1F15CF030076C237 /* more@2x.png in Resources */,
 				3389647B1E57E7E600A7B1AE /* icon_solor.png in Resources */,
 				33FEFD681C7DB38400324374 /* iconfont-address@3x.png in Resources */,
 				337C44AF1E78CC9100135304 /* ledred.gif in Resources */,

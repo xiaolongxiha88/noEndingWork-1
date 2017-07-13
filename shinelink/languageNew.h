@@ -702,6 +702,10 @@
 #define  root_shifou_guanbi_wenti  NSLocalizedString(@"102是否关闭问题", nil)
 #define  root_caozuo_chenggong  NSLocalizedString(@"103操作成功", nil)
 
+#define  root_yanzheng_shouji  NSLocalizedString(@"104请验证您的手机号码", nil)
+#define  root_yanzheng_youxiang  NSLocalizedString(@"105请验证您的邮箱地址", nil)
+
+
 
 
 #endif /* languageNew_h */

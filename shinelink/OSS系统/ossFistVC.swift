@@ -109,7 +109,7 @@ class ossFistVC: RootViewController {
                let H2=self.navigationController?.navigationBar.frame.size.height;
                 let bH=16*HEIGHT_SIZE
         
-        let menuView=DTKDropdownMenuView.init(type:dropDownTypeLeftItem , frame: CGRect(x: 0*NOW_SIZE, y: (H2!-bH)/2, width: bH, height: bH), dropdownItems: [item0!], icon:"more@2x.png")!
+        let menuView=DTKDropdownMenuView.init(type:dropDownTypeLeftItem , frame: CGRect(x: 0*NOW_SIZE, y: (H2!-bH)/2, width: bH, height: bH), dropdownItems: [item0!], icon:"more2@2x.png")!
         menuView.dropWidth = size1.width+10*NOW_SIZE
         menuView.cellHeight = 30*HEIGHT_SIZE
         menuView.titleFont = UIFont.systemFont(ofSize:14*HEIGHT_SIZE)
