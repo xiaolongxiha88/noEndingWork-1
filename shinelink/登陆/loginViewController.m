@@ -631,7 +631,7 @@ NSLog(@"体验馆");
                 
                 
                 
-                [[UserInfo defaultUserInfo] setUserPassword:_pwdTextField.text];
+                [[UserInfo defaultUserInfo] setUserPassword:_loginUserPassword];
                 [[UserInfo defaultUserInfo] setUserName:_userNameGet];
                 
       

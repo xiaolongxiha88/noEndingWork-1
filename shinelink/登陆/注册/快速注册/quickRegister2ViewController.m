@@ -394,6 +394,8 @@ _getServerAddressNum=0;
     [[UserInfo defaultUserInfo] setUserPassword:pwd];
       [[NSUserDefaults standardUserDefaults] setObject:@"S" forKey:@"LoginType"];
     
+    //   NSString *rePassword=[[NSUserDefaults standardUserDefaults] objectForKey:@"userPassword"];
+    
     
     NSString *demoName1=@"ShineWIFI";           //新wifi
     NSString *demoName2=@"ShineLan";            //旧wifi
