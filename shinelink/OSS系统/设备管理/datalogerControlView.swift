@@ -188,6 +188,7 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
             }
             
         }, failure: {(error) in
+            self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         

@@ -151,6 +151,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
             }
             
         }, failure: {(error) in
+            self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         

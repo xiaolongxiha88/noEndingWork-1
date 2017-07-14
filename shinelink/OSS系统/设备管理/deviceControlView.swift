@@ -160,6 +160,7 @@ class deviceControlView: RootViewController {
             }
             
         }, failure: {(error) in
+            self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         
@@ -216,6 +217,7 @@ class deviceControlView: RootViewController {
             }
             
         }, failure: {(error) in
+            self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         
@@ -476,6 +478,7 @@ class deviceControlView: RootViewController {
             }
             
         }, failure: {(error) in
+            self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         

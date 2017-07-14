@@ -19,9 +19,18 @@
 //    UIImage *bgImage = IMAGE(@"bg4.png");
 //    self.view.layer.contents = (id)bgImage.CGImage;
 
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
     self.view.backgroundColor=MainColor;
     [self initUI];
 }
+
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+
+}
+
 
 
 -(void)initUI{
@@ -42,6 +51,7 @@
         textField.text=array[i];
         textField.layer.borderWidth=0.8;
         textField.layer.cornerRadius=5;
+        textField.tag=2000+i;
         textField.layer.borderColor=[UIColor whiteColor].CGColor;
         textField.tintColor = [UIColor whiteColor];
         [textField setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
@@ -73,7 +83,7 @@
 //    [self.view addSubview:addButton];
     
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(60*NOW_SIZE,250*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    goBut.frame=CGRectMake(60*NOW_SIZE,200*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
 //    [goBut.layer setMasksToBounds:YES];
 //    [goBut.layer setCornerRadius:25.0];
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];

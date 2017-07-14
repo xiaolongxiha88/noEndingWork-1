@@ -424,6 +424,7 @@ class IntegratorFirst: RootViewController {
             }
             
         }, failure: {(error) in
+              self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         
@@ -470,6 +471,7 @@ self.valueDic=["chargeNum":objDic["chargeNum"]as! Int,"dischargeNum":objDic["dis
             }
             
         }, failure: {(error) in
+              self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
         

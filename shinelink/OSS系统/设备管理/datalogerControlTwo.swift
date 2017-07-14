@@ -176,6 +176,7 @@ class datalogerControlTwo: RootViewController {
             }
             
         }, failure: {(error) in
+            self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
 

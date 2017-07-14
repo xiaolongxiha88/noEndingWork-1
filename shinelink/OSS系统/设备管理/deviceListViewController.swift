@@ -214,6 +214,7 @@ deviceTypeString="1"
             }
             
         }, failure: {(error) in
+            self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
 

@@ -814,7 +814,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     }
                     
                     if self.plantListArray.count>1{
-                           self.cellNameArray=[root_xunliehao,root_bieming];
+                           self.cellNameArray=["序列号","别名"];
                         if (self.view3 != nil){
                             self.view3.removeFromSuperview()
                             self.view3=nil
