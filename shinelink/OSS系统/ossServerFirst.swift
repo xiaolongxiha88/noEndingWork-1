@@ -103,7 +103,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         self.view2.frame=CGRect(x: 280*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 40*NOW_SIZE, height:30*HEIGHT_SIZE)
         view2.backgroundColor=MainColor
         view2.isUserInteractionEnabled=true
-        let tap=UITapGestureRecognizer(target: self, action: #selector(ossDeviceFirst.searchDevice))
+        let tap=UITapGestureRecognizer(target: self, action: #selector(initNet1))
         view2.addGestureRecognizer(tap)
         self.view.addSubview(view2)
         
