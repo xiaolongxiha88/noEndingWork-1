@@ -27,7 +27,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-  self.pageNum=0
+  self.pageNum=1
     self.initNet1()
     }
 
@@ -138,9 +138,11 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                     
                 }else{
                     
-                    if (self.tableView != nil){
-                        self.tableView.removeFromSuperview()
-                        self.tableView=nil
+                    if self.pageNum==1{
+                        if (self.tableView != nil){
+                            self.tableView.removeFromSuperview()
+                            self.tableView=nil
+                        }
                     }
                     
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)

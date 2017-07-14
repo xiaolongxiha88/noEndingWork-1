@@ -47,7 +47,7 @@ class deviceControlView: RootViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pageNum=0
+        pageNum=1
         typeNum=deviceTypeString
        // self.initNet0()
         

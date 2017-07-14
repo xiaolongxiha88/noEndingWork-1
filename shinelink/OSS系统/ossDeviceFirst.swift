@@ -46,7 +46,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         
     self.title=root_shebei_soushuo
-        pageNum=0
+        pageNum=1
        
         let tap=UITapGestureRecognizer(target: self, action: #selector(keyboardHide(tap:)))
         tap.cancelsTouchesInView=false
@@ -121,7 +121,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         button22.frame=CGRect(x: 50*NOW_SIZE, y: 10*HEIGHT_SIZE, width: 220*NOW_SIZE, height:25*HEIGHT_SIZE)
         
         if (getAddress==nil)||(getAddress=="") {
-          button22.setTitle(root_dianji_huoqu_fuwuqi, for: .normal)
+          button22.setTitle("点击获取服务器地址", for: .normal)
         }else{
           button22.setTitle(getAddress as String?, for: .normal)
             addressString=getAddress
@@ -148,8 +148,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         RfSnLable.font=UIFont.systemFont(ofSize: 15*HEIGHT_SIZE)
         view3.addSubview(RfSnLable)
         
-        let buttonNameArray1=[root_yonghuming,root_dianzhanming,root_shoujihao,root_youxiang]
-         let buttonNameArray2=[root_caijiqi,root_niBianQi,root_chuNengJi]
+        let buttonNameArray1=["用户名","电站名","手机号","邮箱"]
+         let buttonNameArray2=["采集器","逆变器","储能机"]
         
         for i in 0...3{
             let button2=UIButton()
@@ -313,7 +313,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!deviceFirstCell
         
         let lable1=NSString(format: "%@:%@", cellNameArray[0]as!NSString,self.cellValue1Array.object(at: indexPath.row) as! CVarArg)
-         let lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,self.cellValue2Array.object(at: indexPath.row) as! CVarArg)
+         let lable2=NSString(format: "%@:%@", cellNameArray[1]as!NSString,self.cellValue2Array.object(at: indexPath.row) as! CVarArg)
         cell.TitleLabel1.text=lable1 as String
          cell.TitleLabel2.text=lable2 as String
 
@@ -450,7 +450,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         let button4=UIButton()
         button4.frame=CGRect(x: 75*NOW_SIZE+95*NOW_SIZE*CGFloat(i), y: 0*HEIGHT_SIZE, width: 50*NOW_SIZE, height:20*HEIGHT_SIZE)
-        button4.setTitle(root_bieming, for: .normal)
+        button4.setTitle("别名", for: .normal)
         button4.setTitleColor(MainColor, for: .normal)
         button4.setTitleColor(UIColor.white, for: .highlighted)
         button4.tag=2008
@@ -573,7 +573,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         self.cellValue2Array=[]
         self.cellValue3Array=[]
         self.plantListArray=[]
-        pageNum=0
+        pageNum=1
         
         if searchNum==0 {
             typeNum=0
@@ -738,7 +738,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         self.cellValue2Array=[]
         self.cellValue3Array=[]
         self.plantListArray=[]
-        pageNum=0
+        pageNum=1
         typeNum=4
             
         self.initNet3()

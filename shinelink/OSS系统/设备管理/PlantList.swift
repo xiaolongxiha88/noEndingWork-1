@@ -27,7 +27,7 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageNum=0;
+        pageNum=1;
 
         let rightItem=UIBarButtonItem.init(title: root_xiugai_yonghu_xinxi, style: .plain, target: self, action:#selector(changeUserInfo) )
         self.navigationItem.rightBarButtonItem=rightItem

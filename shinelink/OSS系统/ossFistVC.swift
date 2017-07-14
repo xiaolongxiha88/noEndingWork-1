@@ -39,6 +39,16 @@ class ossFistVC: RootViewController {
     override func viewWillAppear(_ animated: Bool) {
         
              self.navigationController?.navigationBar.barTintColor=MainColor
+        
+        if roleString=="2" || roleString=="0" || roleString=="1"{
+           // self.initUItwo()
+            self.initNet0()
+        }else if roleString=="5"{
+         //   self.initUIThree()
+            self.initNet1()
+            
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -83,10 +93,10 @@ class ossFistVC: RootViewController {
    
         if roleString=="2" || roleString=="0" || roleString=="1"{
                 self.initUItwo()
-               self.initNet0()
+            //   self.initNet0()
         }else if roleString=="5"{
               self.initUIThree()
-            self.initNet1()
+            //self.initNet1()
             
         }
 

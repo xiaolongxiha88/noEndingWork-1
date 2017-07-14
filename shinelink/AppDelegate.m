@@ -382,36 +382,43 @@
     NSString *reUsername=[ud objectForKey:@"userName"];
     NSString *rePassword=[ud objectForKey:@"userPassword"];
     
-     if (!(reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] ))){
-
-    [BaseRequest requestWithMethod:HEAD_URL paramars:@{@"userName":reUsername, @"password":[self MD5:rePassword]} paramarsSite:@"/newLoginAPI.do" sucessBlock:^(id content) {
-        
-        NSLog(@"loginIn:%@",content);
-        if (content) {
-            if ([content[@"success"] integerValue] == 0) {
-                //登陆失败
-//                if ([content[@"msg"] integerValue] == 501) {
-//                    
-//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"User name or password is blank" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
-//                    [alertView show];
-//                }
-//                if ([content[@"msg"] integerValue] ==502) {
-//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"username password error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
-//                    [alertView show];
-//                }
-//                if ([content[@"msg"] integerValue] ==503) {
-//                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"server error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
-//                    [alertView show];
-//                }
-            }
+    NSString *LoginType=@"First";
+    LoginType=[[NSUserDefaults standardUserDefaults] objectForKey:@"LoginType"];
+    if ([LoginType isEqualToString:@"S"]){
+    
+        if (!(reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] ))){
             
+            [BaseRequest requestWithMethod:HEAD_URL paramars:@{@"userName":reUsername, @"password":[self MD5:rePassword]} paramarsSite:@"/newLoginAPI.do" sucessBlock:^(id content) {
+                
+                NSLog(@"loginIn:%@",content);
+                if (content) {
+                    if ([content[@"success"] integerValue] == 0) {
+                        //登陆失败
+                        //                if ([content[@"msg"] integerValue] == 501) {
+                        //
+                        //                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"User name or password is blank" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+                        //                    [alertView show];
+                        //                }
+                        //                if ([content[@"msg"] integerValue] ==502) {
+                        //                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"username password error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+                        //                    [alertView show];
+                        //                }
+                        //                if ([content[@"msg"] integerValue] ==503) {
+                        //                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"server error" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:nil];
+                        //                    [alertView show];
+                        //                }
+                    }
+                    
+                }
+                
+            } failure:^(NSError *error) {
+                
+                
+            }];
         }
-        
-    } failure:^(NSError *error) {
-        
-        
-         }];
-     }
+    }
+    
+  
 }
 
 

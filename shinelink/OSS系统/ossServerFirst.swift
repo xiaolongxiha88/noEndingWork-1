@@ -59,7 +59,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
          self.navigationController?.navigationBar.barTintColor=MainColor
         
         contentString=""
-        pageNum=0
+        pageNum=1
      
         
        self.initUI()
@@ -379,7 +379,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     func initNet1(){
         
-        pageNum=0
+        pageNum=1
         self.cellValue1Array=[]
         self.cellValue2Array=[]
         self.cellValue3Array=[]
@@ -475,9 +475,11 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     }else{
     
-        if (self.tableView != nil){
-            self.tableView.removeFromSuperview()
-            self.tableView=nil
+        if self.pageNum==1{
+            if (self.tableView != nil){
+                self.tableView.removeFromSuperview()
+                self.tableView=nil
+            }
         }
     self.showToastView(withTitle: jsonDate["msg"] as! String!)
     }
@@ -563,10 +565,12 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
                 }else{
        
                
+                    if self.pageNum==1{
                         if (self.tableView != nil){
                             self.tableView.removeFromSuperview()
                             self.tableView=nil
                         }
+                    }
                
                     
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)

@@ -32,7 +32,7 @@ class deviceListViewController: RootViewController,UITableViewDataSource,UITable
     
 
     override func viewWillAppear(_ animated: Bool) {
-        pageNum=0
+        pageNum=1
         
             self.navigationController?.navigationBar.barTintColor=MainColor
         self.initNet1()
@@ -55,7 +55,7 @@ deviceTypeString="1"
         buttonView.goToNetNum=1
         buttonView.isUserInteractionEnabled=true
         buttonView.backgroundColor=backgroundGrayColor
-        buttonView.buttonArray=[root_caijiqi,root_niBianQi,root_chuNengJi]
+        buttonView.buttonArray=["采集器","逆变器","储能机"]
         buttonView.initUI()
         self.view .addSubview(buttonView)
         
@@ -199,10 +199,14 @@ deviceTypeString="1"
                     
                     
                 }else{
-                    if (self.tableView != nil){
-                     self.tableView.removeFromSuperview()
-                        self.tableView=nil
+                    
+                    if self.pageNum==1{
+                        if (self.tableView != nil){
+                            self.tableView.removeFromSuperview()
+                            self.tableView=nil
+                        }
                     }
+                 
                     
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
                 }
@@ -229,7 +233,7 @@ deviceTypeString="1"
         if Tag==2002{
    deviceTypeString="2"
         }
-          pageNum=0
+          pageNum=1
        self.initNet1()
     }
     
@@ -255,7 +259,7 @@ deviceTypeString="1"
         
              var lable22:NSString
         if deviceTypeString=="0" {
-            cellNameArray=[root_xunliehao,root_zhuantai,root_ip_he_duankou,root_leixing];
+            cellNameArray=["序列号",root_zhuantai,root_ip_he_duankou,root_leixing];
             if (cellValue2Array[indexPath.row]as!Bool)==true {
                 lable22 = root_lixian as NSString
                   cell.TitleLabel2.textColor=COLOR(_R: 153, _G: 153, _B: 153, _A: 1)
@@ -268,7 +272,7 @@ deviceTypeString="1"
             
             
         }else if deviceTypeString=="1"{
-            cellNameArray=[root_xunliehao,root_zhuantai,root_suoshu_caijiqi,root_xinghao];
+            cellNameArray=["序列号",root_zhuantai,root_suoshu_caijiqi,"型号"];
             if (cellValue2Array[indexPath.row]as! Int == 0) {
                 lable22 = "等待"
                    cell.TitleLabel2.textColor=COLOR(_R: 17, _G: 183, _B: 243, _A: 1)
@@ -286,7 +290,7 @@ deviceTypeString="1"
             cell.TitleLabel2.text=lable2 as String
             
         }else if deviceTypeString=="2"{
-            cellNameArray=[root_xunliehao,root_zhuantai,root_suoshu_caijiqi,root_xinghao];
+            cellNameArray=["序列号",root_zhuantai,root_suoshu_caijiqi,"型号"];
             if (cellValue2Array[indexPath.row]as! Int == 0) {
                 lable22 = "闲置"
                 cell.TitleLabel2.textColor=COLOR(_R: 45, _G: 226, _B: 233, _A: 1)
