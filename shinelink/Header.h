@@ -56,6 +56,10 @@
 //#define HEAD_URL_Demo  @"http://test.growatt.com"
 //#define HEAD_URL_Demo_CN  @"http://test.growatt.com"
 
+#define OSS_HEAD_URL_Demo  @"http://oss1.growatt.com"
+#define OSS_HEAD_URL  [UserInfo defaultUserInfo].OSSserver
+
+
 //#define HEAD_URL   @"http://odm.growatt.com"
 //#define HEAD_URL_Demo  @"http://odm.growatt.com"
 //#define HEAD_URL_Demo_CN  @"http://odm.growatt.com"
@@ -69,8 +73,7 @@
 
 
 
-#define OSS_HEAD_URL_Demo  @"http://oss1.growatt.com"
-#define OSS_HEAD_URL  [UserInfo defaultUserInfo].OSSserver
+
 
 
 #define mainColor [UIColor colorWithRed:130/255.0f green:200/255.0f blue:250/255.0f alpha:1]

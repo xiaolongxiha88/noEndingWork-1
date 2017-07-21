@@ -53,14 +53,15 @@
 @property (nonatomic, strong) NSString *userNameGet;
 @property (nonatomic) int getServerAddressNum;
 
+@property (nonatomic, strong)UIImageView *userBgImageView;
+@property (nonatomic, strong)UIImageView *pwdBgImageView;
+
 @end
 
 @implementation loginViewController
 -(void)viewDidAppear:(BOOL)animated{
      animated=NO;
  [self.navigationController setNavigationBarHidden:YES];
-    
-    
     
 }
 
@@ -82,18 +83,17 @@
     }else{
         _languageValue=@"2";
     }
-       [self.navigationController setNavigationBarHidden:YES];
+   [self.navigationController setNavigationBarHidden:YES];
 
     
     //////////测试区域
-        NSString *testDemo=@"O";
-        if ([testDemo isEqualToString:@"OK"]) {
-            IntegratorFirst *testView=[[IntegratorFirst alloc]init];
-            [self.navigationController pushViewController:testView animated:NO];
-        }else{
-          [self getLoginType];
-        }
-    
+    NSString *testDemo=@"O";
+    if ([testDemo isEqualToString:@"OK"]) {
+        IntegratorFirst *testView=[[IntegratorFirst alloc]init];
+        [self.navigationController pushViewController:testView animated:NO];
+    }else{
+        [self getLoginType];
+    }
 
 }
 
@@ -179,13 +179,12 @@
 - (void)addSubViews {
     float sizeH=20*HEIGHT_SIZE;
     
-    if (_userTextField) {
-        [_userTextField removeFromSuperview];
-        _userTextField=nil;
-    }
-    if (_pwdTextField) {
-        [_pwdTextField removeFromSuperview];
-        _pwdTextField=nil;
+  
+  
+    
+    if (_scrollView) {
+        [_scrollView removeFromSuperview];
+        _scrollView=nil;
     }
     
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
@@ -202,108 +201,132 @@
     logo.image = IMAGE(@"logo.png");
     [_scrollView addSubview:logo];
     
-    //用户名
-    UIImageView *userBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 145*HEIGHT_SIZE+sizeH, SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE)];
-    userBgImageView.userInteractionEnabled = YES;
-    userBgImageView.image = IMAGE(@"frame_user.png");
-    [_scrollView addSubview:userBgImageView];
-    
-    if (!_userTextField) {
-         self.userTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(userBgImageView.frame) - 50*NOW_SIZE, 35*HEIGHT_SIZE)];
+    if (_userBgImageView) {
+        [_userBgImageView removeFromSuperview];
+        _userBgImageView=nil;
     }
-   
-    self.userTextField.placeholder = root_Alet_user_messge;
+    
+    //用户名
+    _userBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 145*HEIGHT_SIZE+sizeH, SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE)];
+    _userBgImageView.userInteractionEnabled = YES;
+    _userBgImageView.image = IMAGE(@"frame_user.png");
+    [_scrollView addSubview:_userBgImageView];
+    
+  
+    if (_userTextField) {
+        [_userTextField removeFromSuperview];
+        _userTextField=nil;
+    }
+         _userTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(_userBgImageView.frame) - 50*NOW_SIZE, 35*HEIGHT_SIZE)];
+
+    _userTextField.placeholder = root_Alet_user_messge;
     if (_oldName) {
-        self.userTextField.text = _oldName;
+        _userTextField.text = _oldName;
 
     }
+    _userTextField.delegate=self;
+    _userTextField.textColor = [UIColor whiteColor];
+    _userTextField.tintColor = [UIColor whiteColor];
+    [_userTextField setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [_userTextField setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    _userTextField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [_userBgImageView addSubview:_userTextField];
     
-    self.userTextField.textColor = [UIColor whiteColor];
-    self.userTextField.tintColor = [UIColor whiteColor];
-    [self.userTextField setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.userTextField setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
-    self.userTextField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [userBgImageView addSubview:_userTextField];
-    
-    //密码
-    UIImageView *pwdBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE,200*HEIGHT_SIZE+sizeH , SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE)];
-    pwdBgImageView.image = IMAGE(@"frame_password.png");
-    pwdBgImageView.userInteractionEnabled = YES;
-    [_scrollView addSubview:pwdBgImageView];
-    
-    if (!_pwdTextField) {
-      self.pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(pwdBgImageView.frame) - 50*NOW_SIZE, 35*HEIGHT_SIZE)];
+    if (_pwdBgImageView) {
+        [_pwdBgImageView removeFromSuperview];
+        _pwdBgImageView=nil;
     }
-    self.pwdTextField.placeholder = root_Alet_user_pwd;
+    //密码
+    _pwdBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE,200*HEIGHT_SIZE+sizeH , SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE)];
+    _pwdBgImageView.image = IMAGE(@"frame_password.png");
+    _pwdBgImageView.userInteractionEnabled = YES;
+    [_scrollView addSubview:_pwdBgImageView];
+    
+
+    if (_pwdTextField) {
+        [_pwdTextField removeFromSuperview];
+        _pwdTextField=nil;
+    }
+      _pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 0, CGRectGetWidth(_pwdBgImageView.frame) - 50*NOW_SIZE, 35*HEIGHT_SIZE)];
+ 
+       _pwdTextField.delegate=self;
+    _pwdTextField.placeholder = root_Alet_user_pwd;
     if (_oldPassword) {
         self.pwdTextField.text = _oldPassword;
     }
-    self.pwdTextField.keyboardType = UIKeyboardTypeASCIICapable;
-    self.pwdTextField.secureTextEntry = YES;
-    self.pwdTextField.textColor = [UIColor whiteColor];
-    self.pwdTextField.tintColor = [UIColor whiteColor];
-    [self.pwdTextField setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.pwdTextField setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
-    self.pwdTextField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [pwdBgImageView addSubview:_pwdTextField];
+    _pwdTextField.keyboardType = UIKeyboardTypeASCIICapable;
+    _pwdTextField.secureTextEntry = YES;
+    _pwdTextField.textColor = [UIColor whiteColor];
+    _pwdTextField.tintColor = [UIColor whiteColor];
+    [_pwdTextField setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [_pwdTextField setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    _pwdTextField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [_pwdBgImageView addSubview:_pwdTextField];
     
  
     float H_down=20*HEIGHT_SIZE;
     
-    if (!_forgetLable) {
-     self.forgetLable= [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, 140*NOW_SIZE, 40*HEIGHT_SIZE)];
+    
+    if (_forgetLable) {
+        [_forgetLable removeFromSuperview];
+            _forgetLable=nil;
     }
     
+   _forgetLable= [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, 140*NOW_SIZE, 40*HEIGHT_SIZE)];
+
  NSString *LableContent1=root_forget_pwd;
        NSDictionary *attributes1 = @{NSFontAttributeName:[UIFont systemFontOfSize:14*HEIGHT_SIZE],};
     CGSize textSize1 = [LableContent1 boundingRectWithSize:CGSizeMake(140*NOW_SIZE,40*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes1 context:nil].size;
-     [ self.forgetLable setFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, textSize1.width, 40*HEIGHT_SIZE)];
+     [ _forgetLable setFrame:CGRectMake(40*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, textSize1.width, 40*HEIGHT_SIZE)];
     
-    self.forgetLable.text=root_forget_pwd;
-     self.forgetLable.textColor=[UIColor whiteColor];
-        self.forgetLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    self.forgetLable.textAlignment = NSTextAlignmentLeft;
+    _forgetLable.text=root_forget_pwd;
+     _forgetLable.textColor=[UIColor whiteColor];
+        _forgetLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    _forgetLable.textAlignment = NSTextAlignmentLeft;
  //   _forgetLable.adjustsFontSizeToFitWidth=YES;
-     self.forgetLable.userInteractionEnabled=YES;
+     _forgetLable.userInteractionEnabled=YES;
     UITapGestureRecognizer * forget2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(forget2)];
-    [self.forgetLable addGestureRecognizer:forget2];
-    [_scrollView addSubview:self.forgetLable];
+    [_forgetLable addGestureRecognizer:forget2];
+    [_scrollView addSubview:_forgetLable];
     
-    if (!_registLable) {
-        _registLable= [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, 115*NOW_SIZE, 40*HEIGHT_SIZE)];
+    
+    if (_registLable) {
+        [_registLable removeFromSuperview];
+        _registLable=nil;
     }
-    
+        _registLable= [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 265*HEIGHT_SIZE+sizeH-H_down, 115*NOW_SIZE, 40*HEIGHT_SIZE)];
     NSString *LableContent2=root_register;
     NSDictionary *attributes2 = @{NSFontAttributeName:[UIFont systemFontOfSize:14*HEIGHT_SIZE],};
     CGSize textSize2 = [LableContent2 boundingRectWithSize:CGSizeMake(120*NOW_SIZE,40*HEIGHT_SIZE) options:NSStringDrawingTruncatesLastVisibleLine attributes:attributes2 context:nil].size;
-    [ self.registLable setFrame:CGRectMake(280*NOW_SIZE-textSize2.width, 265*HEIGHT_SIZE+sizeH-H_down, textSize2.width, 40*HEIGHT_SIZE)];
+    [ _registLable setFrame:CGRectMake(280*NOW_SIZE-textSize2.width, 265*HEIGHT_SIZE+sizeH-H_down, textSize2.width, 40*HEIGHT_SIZE)];
     
-    self.registLable.text=root_register;
-    self.registLable.textColor=[UIColor whiteColor];
-    self.registLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    _registLable.text=root_register;
+    _registLable.textColor=[UIColor whiteColor];
+    _registLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
    // self.registLable.font =_forgetLable.font;
-    self.registLable.textAlignment = NSTextAlignmentRight;
-    self.registLable.userInteractionEnabled=YES;
+    _registLable.textAlignment = NSTextAlignmentRight;
+   _registLable.userInteractionEnabled=YES;
     UITapGestureRecognizer * forget1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLable2)];
     [self.registLable addGestureRecognizer:forget1];
-    [_scrollView addSubview:self.registLable];
+    [_scrollView addSubview:_registLable];
     
     
-    
-    if (!_demoLable) {
-            _demoLable= [[UILabel alloc] initWithFrame:CGRectMake(100*NOW_SIZE, 317*HEIGHT_SIZE+sizeH+90*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+    if (_demoLable) {
+        [_demoLable removeFromSuperview];
+        _demoLable=nil;
     }
-    self.demoLable.text=root_demo_test;
+            _demoLable= [[UILabel alloc] initWithFrame:CGRectMake(100*NOW_SIZE, 317*HEIGHT_SIZE+sizeH+90*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+    _demoLable.text=root_demo_test;
 //    self.demoLable.textColor=COLOR(210, 210, 210, 1);
-      self.demoLable.textColor=[UIColor whiteColor];
-    self.demoLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    self.demoLable.textAlignment = NSTextAlignmentCenter;
-    self.demoLable.userInteractionEnabled=YES;
+      _demoLable.textColor=[UIColor whiteColor];
+    _demoLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    _demoLable.textAlignment = NSTextAlignmentCenter;
+    _demoLable.userInteractionEnabled=YES;
     UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(demoTest)];
-    [self.demoLable addGestureRecognizer:demo1];
-       [self.demoLable sizeToFit];
+    [_demoLable addGestureRecognizer:demo1];
+       [_demoLable sizeToFit];
     _demoLable.center=CGPointMake(SCREEN_Width/2, 317*HEIGHT_SIZE+sizeH+90*HEIGHT_SIZE+20*HEIGHT_SIZE);
-    [_scrollView addSubview:self.demoLable];
+    [_scrollView addSubview:_demoLable];
     
             NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:16*HEIGHT_SIZE] forKey:NSFontAttributeName];
             CGSize size = [root_demo_test boundingRectWithSize:CGSizeMake(MAXFLOAT, 40*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
@@ -387,10 +410,13 @@
     [_pwdTextField resignFirstResponder];
     return YES;
 }
+
 -(void)textFieldDidEndEditing:(UITextField *)textField{
     [_userTextField resignFirstResponder];
     [_pwdTextField resignFirstResponder];
 }
+
+
 - (BOOL)disablesAutomaticKeyboardDismissal
 {
     return NO;
@@ -400,8 +426,6 @@
 -(void)forget2{
   
     forgetOneViewController *registerRoot=[[forgetOneViewController alloc]init];
-    
-
     
     [self.navigationController pushViewController:registerRoot animated:YES];
     
@@ -413,9 +437,10 @@
 NSLog(@"体验馆");
     
     
-    _userTextField=[[UITextField alloc]init];
+
+    
     _loginUserName=Demo_Name;
-    _pwdTextField=[[UITextField alloc]init];
+    
    _loginUserPassword=Demo_password;
     
      [[NSUserDefaults standardUserDefaults] setObject:@"isDemo" forKey:@"isDemo"];
@@ -536,12 +561,17 @@ NSLog(@"体验馆");
 //模拟网络访问
 - (void)PresentCtrl:(LoginButton *)loginBtn {
     
+   //  [self loginBtnAction:loginBtn];
+    
     typeof(self) __weak weak = self;
     //模拟网络访问
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [weak loginBtnAction:loginBtn];
     });
+    
 }
+
+
 //判断登录
 - (void)loginBtnAction:(LoginButton *)loginBtn {
    
