@@ -40,7 +40,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
         tableView.delegate=self
         tableView.dataSource=self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
-        tableView.register(deviceListCell.classForCoder(), forCellReuseIdentifier: "cell")
+        tableView.register(intergratorDeviceCell.classForCoder(), forCellReuseIdentifier: "cell")
         self.view.addSubview(tableView)
         
         let foot=MJRefreshAutoNormalFooter(refreshingBlock: {
@@ -168,30 +168,22 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 65*HEIGHT_SIZE
+        return 108*HEIGHT_SIZE
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
      
-            cellNameArray=["所属用户:","所属电站:","所属代理商:","状态:"];
+        //    cellNameArray=["所属用户:","所属电站:","所属代理商:","状态:"];
 
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!deviceListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!intergratorDeviceCell
         
-        let lable1=NSString(format: "%@%@", cellNameArray[0]as!NSString,cellValue1Array[indexPath.row]as!NSString)
+        let lable1=NSString(format: "%@", cellValue1Array[indexPath.row]as!NSString)
       
         
-//        let lable41 = cellValue4Array[indexPath.row]as!NSString
-//        var lable22:NSString
-//        if lable41=="1" {
-//            lable42="掉线"
-//        }else{
-//            lable42="在线"
-//        }
-//          let lable4=NSString(format: "%@%@", cellNameArray[3]as!NSString,lable42)
-//                cell.TitleLabel4.text=lable4 as String?
+
         
         var lable22:NSString
         if self.deviceType==0{
@@ -208,7 +200,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                 lable22 = "离线"
                 cell.TitleLabel4.textColor=COLOR(_R: 153, _G: 153, _B: 153, _A: 1)
             }
-            let lable2=NSString(format: "%@:%@", cellNameArray[3]as!NSString, lable22)
+            let lable2=NSString(format: "%@", lable22)
             cell.TitleLabel4.text=lable2 as String
 
         }
@@ -233,21 +225,34 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                 lable22 = "离线"
                 cell.TitleLabel4.textColor=COLOR(_R: 153, _G: 153, _B: 153, _A: 1)
             }
-            let lable2=NSString(format: "%@:%@", cellNameArray[3]as!NSString, lable22)
+            let lable2=NSString(format: "%@", lable22)
             cell.TitleLabel4.text=lable2 as String
             
         }
         
-        let  lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,cellValue2Array[indexPath.row]as!NSString)
-        let  lable3=NSString(format: "%@%@", cellNameArray[2]as!NSString,cellValue3Array[indexPath.row]as!NSString)
+        let  lable2=NSString(format: "%@",cellValue2Array[indexPath.row]as!NSString)
+        let  lable3=NSString(format: "%@",cellValue3Array[indexPath.row]as!NSString)
         
         
         
         cell.TitleLabel0.text=cellValue0Array[indexPath.row] as? String
         
-        cell.TitleLabel1.text=lable1 as String
-        cell.TitleLabel2.text=lable2 as String
-        cell.TitleLabel3.text=lable3 as String?
+        if lable1=="" {
+            cell.TitleLabel1.text="--暂无--"
+        }else{
+         cell.TitleLabel1.text=lable1 as String
+        }
+        if lable2=="" {
+            cell.TitleLabel2.text="--暂无--"
+        }else{
+         cell.TitleLabel2.text=lable2 as String
+        }
+        if lable3=="" {
+            cell.TitleLabel3.text="--暂无--"
+        }else{
+               cell.TitleLabel3.text=lable3 as String?
+        }
+    
 
         
         

@@ -788,12 +788,25 @@ NSLog(@"体验馆");
                                     OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
                                     [self.navigationController pushViewController:OSSView animated:NO];
                                 }else{
-                                    OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
-                                    OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
-                                    OSSView.phoneNum=PhoneNum;
-                                    OSSView.OssName=_loginUserName;
-                                    OSSView.OssPassword=_loginUserPassword;
-                                    [self.navigationController pushViewController:OSSView animated:NO];
+                                    NSString *roleNum=[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]];
+                                    if ([roleNum isEqualToString:@"5"]) {
+                                        ossFistVC *OSSView=[[ossFistVC alloc]init];
+                                        OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
+                                        [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];
+                                        [[NSUserDefaults standardUserDefaults] setObject:_loginUserName forKey:@"OssName"];
+                                        [[NSUserDefaults standardUserDefaults] setObject:_loginUserPassword forKey:@"OssPassword"];
+                                        [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"firstGoToOss"];
+                                        
+                                        [self.navigationController pushViewController:OSSView animated:NO];
+                                    }else{
+                                        OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
+                                        OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
+                                        OSSView.phoneNum=PhoneNum;
+                                        OSSView.OssName=_loginUserName;
+                                        OSSView.OssPassword=_loginUserPassword;
+                                        [self.navigationController pushViewController:OSSView animated:NO];
+                                    }
+                          
                                 }
                                 
                                 

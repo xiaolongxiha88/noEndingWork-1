@@ -207,7 +207,7 @@ class IntegratorFirst: RootViewController {
         self.view.addSubview(view1)
     
        let view2=UIView()
-        view2.frame=CGRect(x: 80*NOW_SIZE, y: 5*HEIGHT_SIZE, width: SCREEN_Width/2, height: 30*HEIGHT_SIZE)
+        view2.frame=CGRect(x: 5*NOW_SIZE, y: 5*HEIGHT_SIZE, width: 310*NOW_SIZE, height: 30*HEIGHT_SIZE)
         view2.backgroundColor=UIColor.clear
         view2.isUserInteractionEnabled=true
         view2.tag=2600
@@ -216,11 +216,19 @@ class IntegratorFirst: RootViewController {
        view1.addSubview(view2)
         
         let Lable3=UILabel()
-        Lable3.frame=CGRect(x: 15*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 130*NOW_SIZE, height: 30*HEIGHT_SIZE)
-        let lable3String="设备总数:"
-        let lable3AllString=NSString(format: "%@%d", lable3String,valueDic.object(forKey: "totalNum") as! Int)
+        Lable3.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 310*NOW_SIZE, height: 30*HEIGHT_SIZE)
+        
+        var lable3Name0 = ""
+        let lable3Name1=["全部","已接入","未接入"]
+        if deviceType==1 {
+            lable3Name0=String(format: "%@储能机总数:", lable3Name1[accessStatus])
+        }else{
+             lable3Name0=String(format: "%@逆变器总数:", lable3Name1[accessStatus])
+        }
+        
+        let lable3AllString=NSString(format: "%@%d", lable3Name0,valueDic.object(forKey: "totalNum") as! Int)
         Lable3.text=lable3AllString as String
-        Lable3.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
+        Lable3.textColor=MainColor
         Lable3.textAlignment=NSTextAlignment.center
         Lable3.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
          Lable3.adjustsFontSizeToFitWidth=true
@@ -229,7 +237,7 @@ class IntegratorFirst: RootViewController {
        let size1=self.getStringSize(Float(16*HEIGHT_SIZE), wsize: MAXFLOAT, hsize: Float(30*HEIGHT_SIZE), stringName: lable3AllString as String!)
 
         let image1=UIImageView()
-        image1.frame=CGRect(x: (160*NOW_SIZE+size1.width)/2+10*NOW_SIZE, y: 11.5*HEIGHT_SIZE, width: 5*HEIGHT_SIZE, height: 8*HEIGHT_SIZE)
+        image1.frame=CGRect(x: (310*NOW_SIZE+size1.width)/2+10*NOW_SIZE, y: 11.5*HEIGHT_SIZE, width: 5*HEIGHT_SIZE, height: 8*HEIGHT_SIZE)
         image1.image=UIImage.init(named:"moreOSS.png")
         view2.addSubview(image1)
         

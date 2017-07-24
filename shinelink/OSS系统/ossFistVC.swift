@@ -10,6 +10,10 @@ import UIKit
 
 class ossFistVC: RootViewController {
 
+     var deviceStatusType:Int!
+        var valueDic:NSDictionary!
+      var deviceType:Int!
+    // var view1:UIView!
      var imageOne:UIImageView!
        var buttonOne:UIButton!
        var buttonTwo:UIButton!
@@ -41,12 +45,12 @@ class ossFistVC: RootViewController {
              self.navigationController?.navigationBar.barTintColor=MainColor
         
         if roleString=="2" || roleString=="0" || roleString=="1"{
-           // self.initUItwo()
+    
             self.initNet0()
         }else if roleString=="5"{
-         //   self.initUIThree()
+       
             self.initNet1()
-            
+            self.initNet4()
         }
         
     }
@@ -65,20 +69,7 @@ class ossFistVC: RootViewController {
         
    self.navigationController?.setNavigationBarHidden(false, animated: false)
 
-//       let H2=self.navigationController?.navigationBar.frame.size.height;
-//        let bH=18*HEIGHT_SIZE
-//        let layoutButton=UIButton()
-//        layoutButton.frame=CGRect(x: 0*NOW_SIZE, y: (H2!-bH)/2, width: bH*1.1, height: bH)
-//        layoutButton.setBackgroundImage(UIImage(named: "layout.png"), for: .normal)
-//        layoutButton.addTarget(self, action:#selector(resisgerName), for: .touchUpInside)
-//        self.view.addSubview(layoutButton)
-//        
-//        let leftItem=UIBarButtonItem.init(customView: layoutButton)
-//        //let leftItem=UIBarButtonItem.init(image:UIImage(named: "layout.png") , style: .plain, target: self, action: #selector(resisgerName))
-//     //   let leftItem=UIBarButtonItem.init(title: "退出账户", style: .plain, target: self, action:#selector(resisgerName) )
-//          self.navigationItem.leftBarButtonItem=leftItem
-        
-        
+
         self.initLeftItem()
            roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString!
         
@@ -93,10 +84,10 @@ class ossFistVC: RootViewController {
    
         if roleString=="2" || roleString=="0" || roleString=="1"{
                 self.initUItwo()
-            //   self.initNet0()
+        
         }else if roleString=="5"{
               self.initUIThree()
-            //self.initNet1()
+         
             
         }
 
@@ -167,16 +158,10 @@ class ossFistVC: RootViewController {
     
     func initUIThree(){
       
-//        let view1=UIView()
-//        view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+10*HEIGHT_SIZE, width: SCREEN_Width, height: 40*HEIGHT_SIZE)
-//        view1.backgroundColor=UIColor.clear
-//        view1.isUserInteractionEnabled=true
-//        let tap0=UITapGestureRecognizer(target: self, action: #selector(gotoDevice))
-//        view1.addGestureRecognizer(tap0)
-//         self.view.addSubview(view1)
+       self.view.backgroundColor=backgroundGrayColor
         
         let lableH=40*HEIGHT_SIZE
-        let imageColor1=self.getImageWithColor(color: UIColor.clear, size: CGSize(width: SCREEN_Width, height: lableH))
+        let imageColor1=self.getImageWithColor(color: UIColor.white, size: CGSize(width: SCREEN_Width, height: lableH))
         let imageColor2=self.getImageWithColor(color: COLOR(_R: 222, _G: 222, _B: 222, _A: 1), size: CGSize(width: SCREEN_Width, height: lableH))
 
       let view1=UIButton()
@@ -210,15 +195,15 @@ class ossFistVC: RootViewController {
         view1.addSubview(imageV2)
 
         let imageAll = UIImageView()
-        imageAll.frame=CGRect(x: 2*NOW_SIZE, y:heigh0+55*HEIGHT_SIZE, width: SCREEN_Width-4*NOW_SIZE, height: 180*HEIGHT_SIZE)
-        imageAll.image=UIImage(named: "frameIntergrator.png")
+        imageAll.frame=CGRect(x: 2*NOW_SIZE, y:heigh0+55*HEIGHT_SIZE, width: SCREEN_Width-4*NOW_SIZE, height: 170*HEIGHT_SIZE)
+        imageAll.image=UIImage(named: "intergrator_device.png")
          self.view.addSubview(imageAll)
         
         for i in 0...1 {
             for K in 0...1 {
                 
                 let viewW=155*NOW_SIZE
-                 let viewH=90*HEIGHT_SIZE
+                 let viewH=80*HEIGHT_SIZE
                 let viewA=UIView()
                 viewA.frame=CGRect(x:0*NOW_SIZE+viewW*CGFloat(i), y:0+viewH*CGFloat(K), width:viewW, height: viewH)
                 viewA.backgroundColor=UIColor.clear
@@ -297,6 +282,182 @@ class ossFistVC: RootViewController {
    
     
     }
+    
+    
+    
+    func initUIFour(){
+
+        let view1 = UIImageView()
+        view1.frame=CGRect(x: 2*NOW_SIZE, y:heigh0+55*HEIGHT_SIZE+170*HEIGHT_SIZE, width: SCREEN_Width-4*NOW_SIZE, height: 170*HEIGHT_SIZE)
+        view1.isUserInteractionEnabled=true
+        view1.image=UIImage(named: "intergrator_device.png")
+        self.view.addSubview(view1)
+        
+        let view1W=SCREEN_Width-4*NOW_SIZE
+        
+        let view2=UIView()
+        view2.frame=CGRect(x:0*NOW_SIZE, y: 10*HEIGHT_SIZE, width:view1W, height: 30*HEIGHT_SIZE)
+        view2.backgroundColor=UIColor.clear
+        view2.isUserInteractionEnabled=true
+        view2.tag=2600
+        let tap=UITapGestureRecognizer(target: self, action: #selector(goDetailDevice(tap:)))
+        view2.addGestureRecognizer(tap)
+        view1.addSubview(view2)
+        
+        let Lable3=UILabel()
+        Lable3.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: view1W, height: 30*HEIGHT_SIZE)
+        let lable3String="已接入逆变器总数:"
+        let lable3AllString=NSString(format: "%@%d", lable3String,valueDic.object(forKey: "totalNum") as! Int)
+        Lable3.text=lable3AllString as String
+        Lable3.textColor=MainColor
+        Lable3.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
+        Lable3.adjustsFontSizeToFitWidth=true
+           Lable3.textAlignment=NSTextAlignment.center
+        view2.addSubview(Lable3)
+        
+        let size1=self.getStringSize(Float(16*HEIGHT_SIZE), wsize: MAXFLOAT, hsize: Float(30*HEIGHT_SIZE), stringName: lable3AllString as String!)
+        
+        let image1=UIImageView()
+        image1.frame=CGRect(x:(view1W+size1.width)/2+15*NOW_SIZE, y: 11.5*HEIGHT_SIZE, width: 5*HEIGHT_SIZE, height: 8*HEIGHT_SIZE)
+        image1.image=UIImage.init(named:"moreOSS.png")
+        view2.addSubview(image1)
+        
+        var nameArray:NSArray=[]
+        var colorArray:NSArray=[]
+        var valueArray:NSArray=[]
+        if self.deviceType==0{
+            nameArray=["在线:","等待:","故障:","离线:"]
+            colorArray=[COLOR(_R: 2, _G: 232, _B:2, _A: 1),COLOR(_R: 233, _G: 223, _B:74, _A: 1),COLOR(_R: 238, _G: 73, _B:51, _A: 1),COLOR(_R: 181, _G: 186, _B:189, _A: 1)]
+            valueArray=[valueDic.object(forKey: "onlineNum") as! Int,valueDic.object(forKey: "waitNum") as! Int,valueDic.object(forKey: "faultNum") as! Int,valueDic.object(forKey: "offlineNum") as! Int]
+        }
+        
+        if self.deviceType==1{
+            colorArray=[COLOR(_R: 2, _G: 232, _B:2, _A: 1),COLOR(_R: 181, _G: 186, _B:189, _A: 1),COLOR(_R: 154, _G: 229, _B:128, _A: 1),COLOR(_R: 222, _G: 211, _B:91, _A: 1),COLOR(_R: 238, _G: 73, _B:51, _A: 1)]
+            nameArray=["在线:","离线:","充电:","放电:","故障:"]
+            valueArray=[valueDic.object(forKey: "onlineNum") as! Int,valueDic.object(forKey: "offlineNum") as! Int,valueDic.object(forKey: "chargeNum") as! Int,valueDic.object(forKey: "dischargeNum") as! Int,valueDic.object(forKey: "faultNum") as! Int]
+        }
+        
+        
+        let Yu=nameArray.count%2
+        let Num=nameArray.count/2
+        for i in 0...1 {
+            for K in 0..<(Num+Yu){
+                if i==1 && Yu==1 && K==(Num+Yu-1) {
+                    break
+                }
+                let view2=UIView()
+                view2.frame=CGRect(x: 0*NOW_SIZE+160*NOW_SIZE*CGFloat(i), y: 45*HEIGHT_SIZE+60*HEIGHT_SIZE*CGFloat(K), width: SCREEN_Width/2, height: 40*HEIGHT_SIZE)
+                view2.backgroundColor=UIColor.clear
+                view2.isUserInteractionEnabled=true
+                view2.tag=2500+K*2+i
+                let tap=UITapGestureRecognizer(target: self, action: #selector(goDetailDevice(tap:)))
+                view2.addGestureRecognizer(tap)
+                view1.addSubview(view2)
+                
+                let Lable3=UILabel()
+                Lable3.frame=CGRect(x: 15*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 130*NOW_SIZE, height: 30*HEIGHT_SIZE)
+                let lable3String=String(format: "%@%d", nameArray[i+2*K] as! NSString,valueArray[i+2*K] as! Int)
+                Lable3.text=lable3String
+                Lable3.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
+                Lable3.textAlignment=NSTextAlignment.center
+                Lable3.font=UIFont.systemFont(ofSize: 14*HEIGHT_SIZE)
+                Lable3.adjustsFontSizeToFitWidth=true
+                view2.addSubview(Lable3)
+                
+                let size1=self.getStringSize(Float(16*HEIGHT_SIZE), wsize: MAXFLOAT, hsize: Float(30*HEIGHT_SIZE), stringName: lable3String)
+                
+                let image1=UIImageView()
+                image1.frame=CGRect(x: (160*NOW_SIZE+size1.width)/2+10*NOW_SIZE, y: 11.5*HEIGHT_SIZE, width: 5*HEIGHT_SIZE, height: 8*HEIGHT_SIZE)
+                image1.image=UIImage.init(named:"moreOSS.png")
+                view2.addSubview(image1)
+                
+                let image2=UIImageView()
+                image2.frame=CGRect(x: (160*NOW_SIZE-size1.width)/2, y: 30*HEIGHT_SIZE, width:size1.width+10*NOW_SIZE+5*HEIGHT_SIZE, height: 5*HEIGHT_SIZE)
+                image2.backgroundColor=colorArray[i+2*K] as? UIColor
+                image2.layer.borderWidth=0.2*HEIGHT_SIZE;
+                image2.layer.cornerRadius=3*HEIGHT_SIZE;
+                image2.layer.borderColor=UIColor.clear.cgColor
+                view2.addSubview(image2)
+                
+            }
+        }
+        
+    }
+
+    func goDetailDevice(tap:UITapGestureRecognizer){
+        let Tag=tap.view?.tag
+        
+        //   nameArray=["在线:","等待:","故障:","离线:"]
+        if self.deviceType==0{
+            if Tag==2600{
+                deviceStatusType=0
+            }else if Tag==2500{
+                deviceStatusType=2
+            }else if Tag==2501{
+                deviceStatusType=4
+            }else if Tag==2502{
+                deviceStatusType=3
+            }else if Tag==2503{
+                deviceStatusType=1
+            }
+        }
+        //  nameArray=["在线:","离线:","充电:","放电:","故障:"]
+
+        
+        let vc=intergratorDeviceList()
+        vc.deviceStatusType=self.deviceStatusType
+  
+        vc.netDic=["deviceType":deviceType,"accessStatus":1,"agentCode":0,"plantName":"","userName":"","datalogSn":"","deviceSn":""]
+        vc.deviceType=self.deviceType
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    func initNet4(){
+        
+    self.deviceType=0
+     let   netDic1=["deviceType":deviceType,"accessStatus":1,"agentCode":0,"plantName":"","userName":"","datalogSn":"","deviceSn":""] as [String : Any]
+        
+        self.showProgressView()
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic1 as [AnyHashable : Any]!, paramarsSite: "/api/v1/customer/device_num", sucessBlock: {(successBlock)->() in
+            self.hideProgressView()
+            
+            let data:Data=successBlock as! Data
+            
+            let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
+            
+            if (jsonDate0 != nil){
+                let jsonDate=jsonDate0 as! Dictionary<String, Any>
+                print("/api/v1/customer/device_num=",jsonDate)
+                // let result:NSString=NSString(format:"%s",jsonDate["result"] )
+                let result1=jsonDate["result"] as! Int
+                
+                if result1==1 {
+                    let objDic=jsonDate["obj"] as! Dictionary<String, Any>
+                    if self.deviceType==0{
+                        self.valueDic=["faultNum":objDic["faultNum"] as! Int,"nullNum":objDic["nullNum"] as! Int,"offlineNum":objDic["offlineNum"] as! Int,"onlineNum":objDic["onlineNum"] as! Int,"totalNum":objDic["totalNum"] as! Int,"waitNum":objDic["waitNum"] as! Int]
+                    }
+                    if self.deviceType==1{
+                        self.valueDic=["chargeNum":objDic["chargeNum"]as! Int,"dischargeNum":objDic["dischargeNum"]as! Int,"faultNum":objDic["faultNum"]as! Int,"nullNum":objDic["nullNum"]as! Int,"offlineNum":objDic["offlineNum"]as! Int,"onlineNum":objDic["onlineNum"]as! Int,"totalNum":objDic["totalNum"]as! Int]
+                    }
+                    
+                    
+                    self.initUIFour()
+                }else{
+                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                }
+                
+            }
+            
+        }, failure: {(error) in
+            self.hideProgressView()
+            self.showToastView(withTitle: root_Networking)
+        })
+        
+    }
+    
+
+    
     
      func getImageWithColor(color: UIColor, size: CGSize) -> UIImage
     {

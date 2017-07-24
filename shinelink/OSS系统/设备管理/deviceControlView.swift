@@ -237,7 +237,8 @@ class deviceControlView: RootViewController {
         for i in 0..<Num {
             for k in 0...1 {
                 let lable0=UILabel()
-                lable0.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
+          //      lable0.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
+                lable0.textColor=MainColor
                 lable0.textAlignment=NSTextAlignment.center
                 lable0.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
                 lable0.frame=CGRect(x: 0*NOW_SIZE+160*NOW_SIZE*CGFloat(Float(k)), y: 0*HEIGHT_SIZE+H*HEIGHT_SIZE*CGFloat(Float(i)), width: 160*NOW_SIZE, height: 20*HEIGHT_SIZE)
