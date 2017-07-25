@@ -15,7 +15,6 @@
 #import "parameterPV.h"
 #import "PvLogTableViewController.h"
 #import "EquipGraphViewController.h"
-#import "newLine.h"
 #import "PopoverView00.h"
 
 #define SizeH 45*HEIGHT_SIZE
@@ -49,8 +48,8 @@
     _scrollView.scrollEnabled=NO;
  
     [self.view addSubview:_scrollView];
-      //[self.navigationController.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]];
-[self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
+    
+[self.navigationController.navigationBar setBarTintColor:MainColor];
   
      //[self addRightItem];
     [self addGraph];

@@ -1086,7 +1086,7 @@ static NSString *statusNum = @"3";
     } else {
         self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SCREEN_Height-buttonH-40*HEIGHT_SIZE, SCREEN_Width, 40*HEIGHT_SIZE)];
         self.toolBar.barStyle = UIBarStyleDefault;
-        self.toolBar.barTintColor = COLOR(17, 183, 243, 1);
+        self.toolBar.barTintColor = MainColor;
         [self.contentView addSubview:self.toolBar];
         
         UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(removeToolBar)];

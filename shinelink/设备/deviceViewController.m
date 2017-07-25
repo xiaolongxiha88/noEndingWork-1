@@ -560,7 +560,7 @@
     menuView.dropWidth = 150.f;
     menuView.titleColor=[UIColor whiteColor];
     menuView.titleFont = [UIFont systemFontOfSize:18.f];
-    menuView.textColor =COLOR(17, 183, 243, 1);
+    menuView.textColor =MainColor;
     menuView.textFont = [UIFont systemFontOfSize:13.f];
     menuView.cellSeparatorColor =COLOR(231, 231, 231, 1);
     menuView.textFont = [UIFont systemFontOfSize:14.f];
@@ -1637,7 +1637,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
         [headValueArray addObject:@"0"]; [headValueArray addObject:@"0"]; [headValueArray addObject:@"0"];
         [headValue1Array addObject:@""]; [headValue1Array addObject:@""]; [headValue1Array addObject:@""];
     }
-    NSArray *headColorArray=[NSArray arrayWithObjects: COLOR(17, 183, 243, 1),COLOR(219, 210, 74, 1),COLOR(83, 218, 118, 1),nil];
+    NSArray *headColorArray=[NSArray arrayWithObjects: MainColor,COLOR(219, 210, 74, 1),COLOR(83, 218, 118, 1),nil];
     NSArray *headImageNameArray11=[NSArray arrayWithObjects: @"deviceHead1.png",@"deviceHead2.png",@"deviceHead33.png",nil];
     
     for (int i=0; i<headValueArray.count; i++) {
@@ -2127,7 +2127,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             cell.electric.text = root_ri_dianLiang;
             if ([getDevice.statueData isEqualToString:@"1"]){
                 cell.stateValue.text =root_dengDai ;
-                cell.stateValue.textColor=COLOR(17, 183, 243, 1);
+                cell.stateValue.textColor=MainColor;
             }else if ([getDevice.statueData isEqualToString:@"2"]){
                 cell.stateValue.text =root_zhengChang ;
                   cell.stateValue.textColor=COLOR(121, 230, 129, 1);
@@ -2163,7 +2163,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
                   cell.stateValue.textColor=COLOR(255, 86, 82, 1);
             }else if ([getDevice.statueData isEqualToString:@"4"]){
                 cell.stateValue.text =root_dengDai ;
-                  cell.stateValue.textColor=COLOR(17, 183, 243, 1);
+                  cell.stateValue.textColor=MainColor;
             }else if ([getDevice.statueData isEqualToString:@"-1"]){
                 cell.stateValue.text =root_duanKai ;
                 cell.stateValue.textColor=COLOR(163, 163, 163, 1);

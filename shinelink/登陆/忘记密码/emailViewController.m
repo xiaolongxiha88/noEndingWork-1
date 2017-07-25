@@ -18,9 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.title=root_zhaohui_mima;
-    UIImage *bgImage = IMAGE(@"bg.png");
-    self.view.layer.contents = (id)bgImage.CGImage;
-    
+//    UIImage *bgImage = IMAGE(@"bg.png");
+//    self.view.layer.contents = (id)bgImage.CGImage;
+     self.view.backgroundColor=MainColor;
     UIImageView *userBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 90*HEIGHT_SIZE, SCREEN_Width - 80*NOW_SIZE, 45*HEIGHT_SIZE)];
     userBgImageView.userInteractionEnabled = YES;
     userBgImageView.image = IMAGE(@"圆角矩形空心.png");

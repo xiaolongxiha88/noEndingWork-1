@@ -85,7 +85,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         // self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.hidesBackButton=YES;
         self.navigationItem.backBarButtonItem.title=@"";
-        [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
+        [self.navigationController.navigationBar setBarTintColor:MainColor];
         [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                           NSForegroundColorAttributeName :[UIColor whiteColor]
                                                                           }];

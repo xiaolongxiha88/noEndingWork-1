@@ -20,10 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title=root_zhaohui_mima;
-    UIImage *bgImage = IMAGE(@"bg.png");
-    self.view.layer.contents = (id)bgImage.CGImage;
+//    UIImage *bgImage = IMAGE(@"bg.png");
+//    self.view.layer.contents = (id)bgImage.CGImage;
+     self.view.backgroundColor=MainColor;
     [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
     
     UIButton *byEmail =  [UIButton buttonWithType:UIButtonTypeCustom];
     byEmail.frame=CGRectMake(60*NOW_SIZE,100*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);

@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor=COLOR(17, 183, 243, 1);
+    self.view.backgroundColor=MainColor;
        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
        self.tableView.separatorColor=[UIColor whiteColor];
     self.dataArray =[NSMutableArray arrayWithObjects:root_WO_anzhuang,root_WO_dili,root_WO_zijin,root_WO_tupian,nil];

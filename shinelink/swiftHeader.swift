@@ -17,7 +17,9 @@ func COLOR(_R:Float,_G:Float,_B:Float,_A: Float) -> UIColor {
 
 let MainColor=COLOR(_R: 0, _G: 156, _B: 255, _A: 1)
 
-let OldMainColor=COLOR(_R: 17, _G: 183, _B: 243, _A: 1)
+let OldMainColor=COLOR(_R: 0, _G: 156, _B: 255, _A: 1)
+
+//let OldMainColor=COLOR(_R: 17, _G: 183, _B: 243, _A: 1)
 
 
 let backgroundGrayColor=COLOR(_R: 242, _G: 242, _B: 242, _A: 1)

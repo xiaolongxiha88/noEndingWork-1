@@ -284,7 +284,6 @@
 		33692BF11C926B4500698375 /* rili.png in Resources */ = {isa = PBXBuildFile; fileRef = 33692BF01C926B4500698375 /* rili.png */; };
 		33692BF31C926B4B00698375 /* shang.png in Resources */ = {isa = PBXBuildFile; fileRef = 33692BF21C926B4B00698375 /* shang.png */; };
 		33692BF51C926B5000698375 /* xia.png in Resources */ = {isa = PBXBuildFile; fileRef = 33692BF41C926B5000698375 /* xia.png */; };
-		33692BF91C92952000698375 /* engrgySencondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33692BF81C92952000698375 /* engrgySencondViewController.m */; };
 		33699BB31DACCEAE00C55CFF /* meConfigerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */; };
 		33699BB51DADE6FF00C55CFF /* PV_t1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33699BB41DADE6FF00C55CFF /* PV_t1.png */; };
 		33699BB71DADE72800C55CFF /* PV_t2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33699BB61DADE72800C55CFF /* PV_t2.png */; };
@@ -513,6 +512,7 @@
 		33860FF41EEB8C28004150FD /* plantListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33860FF31EEB8C28004150FD /* plantListCell.swift */; };
 		338614AA1F25D6F1000F515E /* intergrator_device.png in Resources */ = {isa = PBXBuildFile; fileRef = 338614A91F25D6F1000F515E /* intergrator_device.png */; };
 		338614AC1F2606A0000F515E /* intergratorDeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338614AB1F2606A0000F515E /* intergratorDeviceCell.swift */; };
+		338614AF1F26E59B000F515E /* newLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614AE1F26E59B000F515E /* newLine.m */; };
 		33875A4F1EB96A7900F7E0E6 /* newEnergyDetailData.m in Sources */ = {isa = PBXBuildFile; fileRef = 33875A4E1EB96A7900F7E0E6 /* newEnergyDetailData.m */; };
 		33875A521EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 33875A511EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m */; };
 		33875A541EBABDE700F7E0E6 /* toolx_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33875A531EBABDE700F7E0E6 /* toolx_icon.png */; };
@@ -647,7 +647,6 @@
 		33EFB6701C98F9B1003F336F /* ZFLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB65F1C98F9B1003F336F /* ZFLineChart.m */; };
 		33EFB6711C98F9B1003F336F /* ZFPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB6621C98F9B1003F336F /* ZFPieChart.m */; };
 		33EFB6721C98F9B1003F336F /* ZFTranslucencePath.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB6641C98F9B1003F336F /* ZFTranslucencePath.m */; };
-		33EFB6781C98FA7F003F336F /* newLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EFB6771C98FA7F003F336F /* newLine.m */; };
 		33EFB67A1C9931D2003F336F /* 按钮2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EFB6791C9931D2003F336F /* 按钮2.png */; };
 		33EFB67C1C99320B003F336F /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EFB67B1C99320B003F336F /* logo.png */; };
 		33EFB6801C997001003F336F /* inverter.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EFB67F1C997001003F336F /* inverter.png */; };
@@ -1170,8 +1169,6 @@
 		33692BF01C926B4500698375 /* rili.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rili.png; path = "../设备二级界面/rili.png"; sourceTree = "<group>"; };
 		33692BF21C926B4B00698375 /* shang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shang.png; path = "../设备二级界面/shang.png"; sourceTree = "<group>"; };
 		33692BF41C926B5000698375 /* xia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = xia.png; path = "../设备二级界面/xia.png"; sourceTree = "<group>"; };
-		33692BF71C92952000698375 /* engrgySencondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = engrgySencondViewController.h; path = ../engrgySencondViewController.h; sourceTree = "<group>"; };
-		33692BF81C92952000698375 /* engrgySencondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = engrgySencondViewController.m; path = ../engrgySencondViewController.m; sourceTree = "<group>"; };
 		33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = meConfigerViewController.h; path = ../meConfigerViewController.h; sourceTree = "<group>"; };
 		33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = meConfigerViewController.m; path = ../meConfigerViewController.m; sourceTree = "<group>"; };
 		33699BB41DADE6FF00C55CFF /* PV_t1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PV_t1.png; sourceTree = "<group>"; };
@@ -1508,6 +1505,8 @@
 		33860FF31EEB8C28004150FD /* plantListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = plantListCell.swift; sourceTree = "<group>"; };
 		338614A91F25D6F1000F515E /* intergrator_device.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = intergrator_device.png; path = "../集成商/intergrator_device.png"; sourceTree = "<group>"; };
 		338614AB1F2606A0000F515E /* intergratorDeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = intergratorDeviceCell.swift; sourceTree = "<group>"; };
+		338614AD1F26E595000F515E /* newLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = newLine.h; sourceTree = "<group>"; };
+		338614AE1F26E59B000F515E /* newLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newLine.m; sourceTree = "<group>"; };
 		33875A4D1EB96A7900F7E0E6 /* newEnergyDetailData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newEnergyDetailData.h; sourceTree = "<group>"; };
 		33875A4E1EB96A7900F7E0E6 /* newEnergyDetailData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newEnergyDetailData.m; sourceTree = "<group>"; };
 		33875A501EB9B28C00F7E0E6 /* newEnergyDetaiTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newEnergyDetaiTwo.h; sourceTree = "<group>"; };
@@ -1704,8 +1703,6 @@
 		33EFB6621C98F9B1003F336F /* ZFPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFPieChart.m; sourceTree = "<group>"; };
 		33EFB6631C98F9B1003F336F /* ZFTranslucencePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFTranslucencePath.h; sourceTree = "<group>"; };
 		33EFB6641C98F9B1003F336F /* ZFTranslucencePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFTranslucencePath.m; sourceTree = "<group>"; };
-		33EFB6761C98FA7F003F336F /* newLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = newLine.h; path = ../newLine.h; sourceTree = "<group>"; };
-		33EFB6771C98FA7F003F336F /* newLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = newLine.m; path = ../newLine.m; sourceTree = "<group>"; };
 		33EFB6791C9931D2003F336F /* 按钮2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "按钮2.png"; sourceTree = "<group>"; };
 		33EFB67B1C99320B003F336F /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		33EFB67F1C997001003F336F /* inverter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inverter.png; sourceTree = "<group>"; };
@@ -2768,12 +2765,13 @@
 		33692BF61C9294D300698375 /* 能源二级 */ = {
 			isa = PBXGroup;
 			children = (
-				3381ECDF1CBC8F7100DCF0D2 /* 能源二级旧版 */,
 				33EFB6401C98F9B1003F336F /* ZFChart */,
 				3381ECE31CBC900900DCF0D2 /* EquitGraph2ViewController.h */,
 				3381ECE41CBC900900DCF0D2 /* EquitGraph2ViewController.m */,
 				3381ECE61CBC906600DCF0D2 /* Line3View.h */,
 				3381ECE71CBC906600DCF0D2 /* Line3View.m */,
+				338614AD1F26E595000F515E /* newLine.h */,
+				338614AE1F26E59B000F515E /* newLine.m */,
 			);
 			path = "能源二级";
 			sourceTree = "<group>";
@@ -3330,17 +3328,6 @@
 			children = (
 			);
 			path = "检查网络";
-			sourceTree = "<group>";
-		};
-		3381ECDF1CBC8F7100DCF0D2 /* 能源二级旧版 */ = {
-			isa = PBXGroup;
-			children = (
-				33692BF71C92952000698375 /* engrgySencondViewController.h */,
-				33692BF81C92952000698375 /* engrgySencondViewController.m */,
-				33EFB6761C98FA7F003F336F /* newLine.h */,
-				33EFB6771C98FA7F003F336F /* newLine.m */,
-			);
-			path = "能源二级旧版";
 			sourceTree = "<group>";
 		};
 		3381ECEF1CBCA59900DCF0D2 /* 能源图片 */ = {
@@ -4632,6 +4619,7 @@
 				3343F3C61C80403C009F69BC /* AFURLResponseSerialization.m in Sources */,
 				3379E4ED1E94BE54000A4198 /* CircleMapView.m in Sources */,
 				33AF3D211D8E67210007D6C2 /* NSTimer+EasyTimeline.m in Sources */,
+				338614AF1F26E59B000F515E /* newLine.m in Sources */,
 				337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */,
 				3377156A1D8E6CCC002EEEDF /* AddDeviceViewController.mm in Sources */,
 				338122261D864B3700C7704B /* AvCachTableViewCell.m in Sources */,
@@ -4746,7 +4734,6 @@
 				3379E4E81E94BE37000A4198 /* CircleView1.m in Sources */,
 				336F1A161D88E46900CD4C2B /* SDImageCache.m in Sources */,
 				334FF0C11CF53C7C001E6716 /* UINavigationController+CustomNavigation.m in Sources */,
-				33692BF91C92952000698375 /* engrgySencondViewController.m in Sources */,
 				334FF09A1CF53C7C001E6716 /* deviceRootViewController.m in Sources */,
 				33EFB66E1C98F9B1003F336F /* ZFCirque.m in Sources */,
 				338A623F1E71567A000E7CE4 /* PopoverViewCell.m in Sources */,
@@ -4821,7 +4808,6 @@
 				33860FEF1EEA75C5004150FD /* UIScrollView+MJRefresh.m in Sources */,
 				33528FF61C83E95F00D07889 /* listTableViewCell.m in Sources */,
 				334FF0921CF53C7C001E6716 /* GCDAsyncUdpSocket.m in Sources */,
-				33EFB6781C98FA7F003F336F /* newLine.m in Sources */,
 				33860FED1EEA75C5004150FD /* NSBundle+MJRefresh.m in Sources */,
 				3343F3C31C80403C009F69BC /* AFSecurityPolicy.m in Sources */,
 				3383ACE41D7D6DC200C2F4A3 /* MRNavigationLabel.m in Sources */,

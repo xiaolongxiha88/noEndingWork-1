@@ -22,8 +22,8 @@
     // Do any additional setup after loading the view.
     
     //背景图
-    UIImage *bgImage = IMAGE(@"bg_login.png");
-    self.view.layer.contents = (id)bgImage.CGImage;
+//    UIImage *bgImage = IMAGE(@"bg_login.png");
+//    self.view.layer.contents = (id)bgImage.CGImage;
     
     //导航栏
     [self.navigationController.navigationBar setTitleTextAttributes:@{

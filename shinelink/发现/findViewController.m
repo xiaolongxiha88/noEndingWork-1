@@ -56,7 +56,7 @@
                                                                       }];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self setTitle:root_service];
-      [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
+      [self.navigationController.navigationBar setBarTintColor:MainColor];
     //arrayName=@[root_ME_kefu,root_ME_zhibao,root_ME_zengzhi,root_ME_gengduo];
     arrayName=@[root_ME_kefu,root_ziliao_zhongxin,root_ME_zengzhi,root_ME_gengduo];
     

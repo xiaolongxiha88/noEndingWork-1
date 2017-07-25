@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor=COLOR(17, 183, 243, 1);
+    self.view.backgroundColor=MainColor;
   //  UIImage *bgImage = IMAGE(@"bg4.png");
   //  self.view.layer.contents = (id)bgImage.CGImage;
        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

@@ -160,7 +160,7 @@
     self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 60*HEIGHT_SIZE+headH+headH2, SCREEN_Width/2, buttonHead);
     [self.dayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
    [self.dayButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateNormal];
-   [self.dayButton setBackgroundImage:[self createImageWithColor:COLOR(17, 183, 243, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateHighlighted];
+   [self.dayButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateHighlighted];
    [self.dayButton setBackgroundImage:[self createImageWithColor:COLOR(14, 159, 211, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateSelected];
     self.dayButton.tag = 1000;
     [self.dayButton setTitle:root_ME_gaisu forState:UIControlStateNormal];
@@ -172,7 +172,7 @@
     self.monthButton.frame = CGRectMake(1 * SCREEN_Width/2, 60*HEIGHT_SIZE+headH+headH2, SCREEN_Width/2, buttonHead);
     [self.monthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.monthButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateNormal];
-   [self.monthButton setBackgroundImage:[self createImageWithColor:COLOR(17, 183, 243, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateHighlighted];
+   [self.monthButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateHighlighted];
    [self.monthButton setBackgroundImage:[self createImageWithColor:COLOR(14, 159, 211, 1) rect:CGRectMake(0, 0, SCREEN_Width/2, buttonHead)] forState:UIControlStateSelected];
     self.monthButton.tag = 1001;
     [self.monthButton setTitle:root_ME_canshu forState:UIControlStateNormal];

@@ -67,6 +67,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+     [self.navigationController setNavigationBarHidden:YES];
+    
     // Do any additional setup after loading the view.
     UIImage *bgImage = IMAGE(@"bg3.jpg");
     self.view.layer.contents = (id)bgImage.CGImage;

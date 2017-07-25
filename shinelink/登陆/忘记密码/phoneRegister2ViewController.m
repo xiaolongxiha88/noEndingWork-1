@@ -19,10 +19,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImage *bgImage = IMAGE(@"bg.png");
-    self.view.layer.contents = (id)bgImage.CGImage;
+//    UIImage *bgImage = IMAGE(@"bg.png");
+//    self.view.layer.contents = (id)bgImage.CGImage;
+     self.view.backgroundColor=MainColor;
     [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     tapGestureRecognizer.cancelsTouchesInView = NO;

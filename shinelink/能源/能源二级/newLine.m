@@ -108,23 +108,17 @@
 
 - (void)showLineChartWithDataDict:(NSMutableDictionary *)dataDict{
      [self setDataDict:dataDict];
-    self.valuesArrayLine=[NSMutableArray array];
-    for (NSString *key in self.xArray) {
-        [self.valuesArrayLine addObject:dataDict[key]];
-    }
-    
     if (_barChart) {
         [_barChart removeFromSuperview];
     }
     if (_lineChart) {
         [_lineChart removeFromSuperview];
     }
-    _lineChart = [[ZFLineChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH-10*NOW_SIZE, 200*NOW_SIZE)];
-    //_lineChart.title = @"曲线图";
+    _lineChart = [[ZFLineChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - 64)];
+    _lineChart.title = @"曲线图";
     _lineChart.xLineValueArray = [NSMutableArray arrayWithArray:self.valuesArrayLine];
-   // _lineChart.xLineTitleArray =[NSMutableArray arrayWithArray:self.xArray];
-    NSNumber *maxyAxisValue = [_valuesArray valueForKeyPath:@"@max.floatValue"];
-    _lineChart.yLineMaxValue = maxyAxisValue.floatValue;
+    _lineChart.xLineTitleArray =[NSMutableArray arrayWithArray:self.xArray];
+    _lineChart.yLineMaxValue = 500;
     _lineChart.yLineSectionCount = 10;
     [self addSubview:_lineChart];
     [_lineChart strokePath];
@@ -139,7 +133,7 @@
         [_lineChart removeFromSuperview];
     }
     _pieChart = [[ZFPieChart alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - NAVIGATIONBAR_HEIGHT)];
-    _pieChart.title = root_energy_jiating_yongdian_zhanbi;
+    _pieChart.title = @"家庭用电占比";
     
       _pieChart.nameArray = [NSMutableArray array];
     _pieChart.nameArray=(NSMutableArray*)dataDict.allKeys;
@@ -149,7 +143,6 @@
     }
    _pieChart.valueArray = [NSMutableArray arrayWithArray:value];
     _pieChart.colorArray = [NSMutableArray arrayWithObjects:ZFColor(71, 204, 255, 1), ZFColor(253, 203, 76, 1), ZFColor(214, 205, 153, 1), ZFColor(78, 250, 188, 1), ZFColor(16, 140, 39, 1), ZFColor(45, 92, 34, 1), nil];
-    _pieChart.percentOnChartFontSize=12*HEIGHT_SIZE;
     _pieChart.percentType = kPercentTypeInteger;
     [self addSubview:_pieChart];
     [_pieChart strokePath];

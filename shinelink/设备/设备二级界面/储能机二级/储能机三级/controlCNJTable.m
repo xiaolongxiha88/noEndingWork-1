@@ -20,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.view.backgroundColor=COLOR(17, 183, 243, 1);
+     self.view.backgroundColor=MainColor;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.separatorColor=[UIColor whiteColor];
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {

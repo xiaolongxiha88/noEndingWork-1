@@ -29,7 +29,7 @@
             btn.tag = i;
             self.userInteractionEnabled = YES;
             [btn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-            [btn setTitleColor:COLOR(17, 183, 243, 1) forState:UIControlStateSelected];
+            [btn setTitleColor:MainColor forState:UIControlStateSelected];
             btn.titleLabel.font = [UIFont systemFontOfSize:15];
             [btn setTitle:itemsArray[i] forState:UIControlStateNormal];
             [btn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchDown];

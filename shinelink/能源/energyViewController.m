@@ -8,7 +8,6 @@
 
 #import "energyViewController.h"
 #import "energyTableViewCell.h"
-#import "engrgySencondViewController.h"
 #import "homeDeviceViewController.h"
 #import "EquitGraph2ViewController.h"
 #import "EquipGraphViewController.h"
@@ -36,7 +35,7 @@
 -(void)viewWillAppear:(BOOL)animated{
 
     [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                       NSForegroundColorAttributeName :[UIColor whiteColor]
                                                                       }];
@@ -82,7 +81,7 @@
 
 -(void)initFirst{
 
-    [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
     [self.navigationController.navigationBar setTitleTextAttributes:@{
                                                                       NSForegroundColorAttributeName :[UIColor whiteColor]
                                                                       }];

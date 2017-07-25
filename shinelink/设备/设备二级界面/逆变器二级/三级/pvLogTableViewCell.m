@@ -30,7 +30,7 @@
         _scrollView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width,65*HEIGHT_SIZE)];
         //UIImage *bgImage = IMAGE(@"bg4.png");
         
-       _scrollView.backgroundColor = COLOR(92, 205, 246, 1);
+       _scrollView.backgroundColor = MainColor;
            [self addSubview:_scrollView];
         
         float wSize=60*NOW_SIZE,Size1=15*NOW_SIZE,Size2=40*HEIGHT_SIZE;

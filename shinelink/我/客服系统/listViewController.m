@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-        [self.navigationController.navigationBar setBarTintColor:COLOR(17, 183, 243, 1)];
+        [self.navigationController.navigationBar setBarTintColor:MainColor];
     //self.edgesForExtendedLayout = UIRectEdgeNone;
  //   [self setAutomaticallyAdjustsScrollViewInsets:NO];
     

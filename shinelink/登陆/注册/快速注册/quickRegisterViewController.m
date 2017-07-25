@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO];
-    [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg.png"]]];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
     
     self.title=root_saomiao_sn;
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_tiaoguo style:UIBarButtonItemStylePlain target:self action:@selector(nextRegister)];

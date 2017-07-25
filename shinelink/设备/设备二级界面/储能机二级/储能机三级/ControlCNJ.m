@@ -51,7 +51,7 @@
     _param3=@"";
     _param4=@"";
     _typeName=@"";
-        self.view.backgroundColor=COLOR(17, 183, 243, 1);
+        self.view.backgroundColor=MainColor;
 //    UIImage *bgImage = IMAGE(@"bg4.png");
 //    self.view.layer.contents = (id)bgImage.CGImage;
    
@@ -716,7 +716,7 @@
     } else {
         self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 45*HEIGHT_SIZE+buttonSize+5*HEIGHT_SIZE+55*HEIGHT_SIZE+85*HEIGHT_SIZE*2-toolBarH, SCREEN_Width, toolBarH)];
         self.toolBar.barStyle = UIBarStyleDefault;
-        self.toolBar.barTintColor = COLOR(17, 183, 243, 1);
+        self.toolBar.barTintColor =MainColor;
         [self.view addSubview:self.toolBar];
         
         UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];

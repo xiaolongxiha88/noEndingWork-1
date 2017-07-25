@@ -19,8 +19,10 @@
 @implementation SNViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImage *bgImage = IMAGE(@"bg.png");
-    self.view.layer.contents = (id)bgImage.CGImage;
+//    UIImage *bgImage = IMAGE(@"bg.png");
+//    self.view.layer.contents = (id)bgImage.CGImage;
+    
+     self.view.backgroundColor=MainColor;
      self.title=root_zhaohui_mima;
     
     [self initUI];

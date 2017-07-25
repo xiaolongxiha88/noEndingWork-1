@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _dataDic=[NSMutableDictionary new];
-     self.view.backgroundColor=COLOR(17, 183, 243, 1);
+     self.view.backgroundColor=MainColor;
 //    UIImage *bgImage = IMAGE(@"bg4.png");
 //    self.view.layer.contents = (id)bgImage.CGImage;
     [self initUI];
@@ -464,7 +464,7 @@
     } else {
         self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SCREEN_Height-300*HEIGHT_SIZE-44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE)];
         self.toolBar.barStyle = UIBarStyleDefault;
-        self.toolBar.barTintColor = COLOR(17, 183, 243, 1);
+        self.toolBar.barTintColor = MainColor;
         [self.view addSubview:self.toolBar];
         
           UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(removeToolBar)];
