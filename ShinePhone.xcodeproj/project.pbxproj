@@ -513,6 +513,19 @@
 		338614AA1F25D6F1000F515E /* intergrator_device.png in Resources */ = {isa = PBXBuildFile; fileRef = 338614A91F25D6F1000F515E /* intergrator_device.png */; };
 		338614AC1F2606A0000F515E /* intergratorDeviceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338614AB1F2606A0000F515E /* intergratorDeviceCell.swift */; };
 		338614AF1F26E59B000F515E /* newLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614AE1F26E59B000F515E /* newLine.m */; };
+		338614D51F2839A9000F515E /* ESP_ByteUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614B41F2839A9000F515E /* ESP_ByteUtil.m */; };
+		338614D61F2839A9000F515E /* ESP_CRC8.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614B61F2839A9000F515E /* ESP_CRC8.m */; };
+		338614D71F2839A9000F515E /* ESP_NetUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614B81F2839A9000F515E /* ESP_NetUtil.m */; };
+		338614D81F2839A9000F515E /* ESP_WifiUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614BA1F2839A9000F515E /* ESP_WifiUtil.m */; };
+		338614DA1F2839A9000F515E /* ESPDataCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614BE1F2839A9000F515E /* ESPDataCode.m */; };
+		338614DB1F2839A9000F515E /* ESPDatumCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614C01F2839A9000F515E /* ESPDatumCode.m */; };
+		338614DC1F2839A9000F515E /* ESPGuideCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614C21F2839A9000F515E /* ESPGuideCode.m */; };
+		338614DE1F2839A9000F515E /* ESPTouchGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614C71F2839A9000F515E /* ESPTouchGenerator.m */; };
+		338614DF1F2839A9000F515E /* ESPTouchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614C91F2839A9000F515E /* ESPTouchResult.m */; };
+		338614E01F2839A9000F515E /* ESPTouchTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614CB1F2839A9000F515E /* ESPTouchTask.m */; };
+		338614E11F2839A9000F515E /* ESPTouchTaskParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614CD1F2839A9000F515E /* ESPTouchTaskParameter.m */; };
+		338614E21F2839A9000F515E /* ESPUDPSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614CF1F2839A9000F515E /* ESPUDPSocketClient.m */; };
+		338614E31F2839A9000F515E /* ESPUDPSocketServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 338614D11F2839A9000F515E /* ESPUDPSocketServer.m */; };
 		33875A4F1EB96A7900F7E0E6 /* newEnergyDetailData.m in Sources */ = {isa = PBXBuildFile; fileRef = 33875A4E1EB96A7900F7E0E6 /* newEnergyDetailData.m */; };
 		33875A521EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 33875A511EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m */; };
 		33875A541EBABDE700F7E0E6 /* toolx_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33875A531EBABDE700F7E0E6 /* toolx_icon.png */; };
@@ -545,6 +558,7 @@
 		338990AF1CEAB61400A708F8 /* mebg.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990AE1CEAB61300A708F8 /* mebg.png */; };
 		338990B11CEAB73400A708F8 /* logo3.png in Resources */ = {isa = PBXBuildFile; fileRef = 338990B01CEAB73400A708F8 /* logo3.png */; };
 		338990B51CEB1F9D00A708F8 /* DemoDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338990B41CEB1F9D00A708F8 /* DemoDeviceViewController.m */; };
+		338A528E1F28961F000611F3 /* configWifiSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A528D1F28961F000611F3 /* configWifiSViewController.m */; };
 		338A623D1E71567A000E7CE4 /* PopoverAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A62381E71567A000E7CE4 /* PopoverAction.m */; };
 		338A623E1E71567A000E7CE4 /* PopoverView00.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A623A1E71567A000E7CE4 /* PopoverView00.m */; };
 		338A623F1E71567A000E7CE4 /* PopoverViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A623C1E71567A000E7CE4 /* PopoverViewCell.m */; };
@@ -1182,7 +1196,7 @@
 		336A24691DF00ABD0002D1AD /* deviceHead33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deviceHead33.png; sourceTree = "<group>"; };
 		336A246B1DF00AC20002D1AD /* deviceHead1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = deviceHead1.png; sourceTree = "<group>"; };
 		336D3FD41DF80C4600BE8422 /* ShinePhone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ShinePhone-Bridging-Header.h"; path = "设备/采集器/ShinePhone-Bridging-Header.h"; sourceTree = "<group>"; };
-		336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RfStickSwift.swift; sourceTree = "<group>"; };
+		336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RfStickSwift.swift; path = ../RfStickSwift.swift; sourceTree = "<group>"; };
 		336D3FFC1D6FE76100ECFA34 /* AnotherSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherSearchViewController.h; sourceTree = "<group>"; };
 		336D3FFD1D6FE76100ECFA34 /* AnotherSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnotherSearchViewController.m; sourceTree = "<group>"; };
 		336D40011D6FEA7600ECFA34 /* HCSortString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCSortString.h; sourceTree = "<group>"; };
@@ -1320,8 +1334,8 @@
 		33768AB31D475E5400873E82 /* charge-en.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "charge-en.png"; sourceTree = "<group>"; };
 		33768AB61D475E8000873E82 /* demobgcn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demobgcn.png; sourceTree = "<group>"; };
 		33768AB71D475E8000873E82 /* demobgen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demobgen.png; sourceTree = "<group>"; };
-		337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddDeviceViewController.h; path = WifConnect/num2/AddDeviceViewController.h; sourceTree = "<group>"; };
-		337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AddDeviceViewController.mm; path = WifConnect/num2/AddDeviceViewController.mm; sourceTree = "<group>"; };
+		337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddDeviceViewController.h; path = ../WifConnect/num2/AddDeviceViewController.h; sourceTree = "<group>"; };
+		337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AddDeviceViewController.mm; path = ../WifConnect/num2/AddDeviceViewController.mm; sourceTree = "<group>"; };
 		3377156B1D8E6D28002EEEDF /* elian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = elian.h; path = OtherThing/cloudServices/elian.h; sourceTree = "<group>"; };
 		33771D511E8369B000786FCE /* zhushi11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhushi11.png; sourceTree = "<group>"; };
 		33775AD71D2CD7520070742E /* RKAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKAlertView.h; sourceTree = "<group>"; };
@@ -1351,13 +1365,13 @@
 		337A70FD1E9C7F0200FE5F3C /* newEnergyStorage2000.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newEnergyStorage2000.m; sourceTree = "<group>"; };
 		337C30521CCDAF3C002B99B7 /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
 		337C30531CCDAF3C002B99B7 /* protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = protocol.m; sourceTree = "<group>"; };
-		337C44AA1E78CC9100135304 /* ledblue.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ledblue.gif; sourceTree = "<group>"; };
-		337C44AB1E78CC9100135304 /* ledgreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ledgreen.gif; sourceTree = "<group>"; };
-		337C44AC1E78CC9100135304 /* ledred.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = ledred.gif; sourceTree = "<group>"; };
+		337C44AA1E78CC9100135304 /* ledblue.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = ledblue.gif; path = ../../ledblue.gif; sourceTree = "<group>"; };
+		337C44AB1E78CC9100135304 /* ledgreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = ledgreen.gif; path = ../../ledgreen.gif; sourceTree = "<group>"; };
+		337C44AC1E78CC9100135304 /* ledred.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = ledred.gif; path = ../../ledred.gif; sourceTree = "<group>"; };
 		337C8D971E6545CF0013D650 /* phoneRegister2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = phoneRegister2ViewController.h; sourceTree = "<group>"; };
 		337C8D981E6545CF0013D650 /* phoneRegister2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = phoneRegister2ViewController.m; sourceTree = "<group>"; };
-		337C8D9A1E66ACD30013D650 /* GifNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifNewViewController.h; path = WifConnect/GifNewViewController.h; sourceTree = "<group>"; };
-		337C8D9B1E66ACD30013D650 /* GifNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifNewViewController.m; path = WifConnect/GifNewViewController.m; sourceTree = "<group>"; };
+		337C8D9A1E66ACD30013D650 /* GifNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifNewViewController.h; path = ../WifConnect/GifNewViewController.h; sourceTree = "<group>"; };
+		337C8D9B1E66ACD30013D650 /* GifNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifNewViewController.m; path = ../WifConnect/GifNewViewController.m; sourceTree = "<group>"; };
 		337CB5981DB4A787002ABB88 /* WiFiSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiSignalViewController.h; sourceTree = "<group>"; };
 		337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiSignalViewController.m; sourceTree = "<group>"; };
 		337CB59B1DB4A837002ABB88 /* firstToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = firstToolViewController.h; sourceTree = "<group>"; };
@@ -1457,10 +1471,10 @@
 		3383F1391C9FFD3E0075E834 /* 家庭用电设备.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "家庭用电设备.png"; sourceTree = "<group>"; };
 		3383F13B1C9FFD540075E834 /* 光伏电量.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "光伏电量.png"; sourceTree = "<group>"; };
 		3383F13D1C9FFDA10075E834 /* 光伏收益.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "光伏收益.png"; sourceTree = "<group>"; };
-		338418E01DC840AB00D679CA /* GifConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifConfigViewController.h; path = WifConnect/GifConfigViewController.h; sourceTree = "<group>"; };
-		338418E11DC840AB00D679CA /* GifConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifConfigViewController.m; path = WifConnect/GifConfigViewController.m; sourceTree = "<group>"; };
-		338418E51DC9783500D679CA /* GFWaterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFWaterView.h; sourceTree = "<group>"; };
-		338418E61DC9783500D679CA /* GFWaterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFWaterView.m; sourceTree = "<group>"; };
+		338418E01DC840AB00D679CA /* GifConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifConfigViewController.h; path = ../WifConnect/GifConfigViewController.h; sourceTree = "<group>"; };
+		338418E11DC840AB00D679CA /* GifConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifConfigViewController.m; path = ../WifConnect/GifConfigViewController.m; sourceTree = "<group>"; };
+		338418E51DC9783500D679CA /* GFWaterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFWaterView.h; path = ../GFWaterView.h; sourceTree = "<group>"; };
+		338418E61DC9783500D679CA /* GFWaterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFWaterView.m; path = ../GFWaterView.m; sourceTree = "<group>"; };
 		33860FB01EEA75C5004150FD /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		33860FB11EEA75C5004150FD /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		33860FB21EEA75C5004150FD /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -1507,6 +1521,34 @@
 		338614AB1F2606A0000F515E /* intergratorDeviceCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = intergratorDeviceCell.swift; sourceTree = "<group>"; };
 		338614AD1F26E595000F515E /* newLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = newLine.h; sourceTree = "<group>"; };
 		338614AE1F26E59B000F515E /* newLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newLine.m; sourceTree = "<group>"; };
+		338614B31F2839A9000F515E /* ESP_ByteUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESP_ByteUtil.h; sourceTree = "<group>"; };
+		338614B41F2839A9000F515E /* ESP_ByteUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESP_ByteUtil.m; sourceTree = "<group>"; };
+		338614B51F2839A9000F515E /* ESP_CRC8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESP_CRC8.h; sourceTree = "<group>"; };
+		338614B61F2839A9000F515E /* ESP_CRC8.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESP_CRC8.m; sourceTree = "<group>"; };
+		338614B71F2839A9000F515E /* ESP_NetUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESP_NetUtil.h; sourceTree = "<group>"; };
+		338614B81F2839A9000F515E /* ESP_NetUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESP_NetUtil.m; sourceTree = "<group>"; };
+		338614B91F2839A9000F515E /* ESP_WifiUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESP_WifiUtil.h; sourceTree = "<group>"; };
+		338614BA1F2839A9000F515E /* ESP_WifiUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESP_WifiUtil.m; sourceTree = "<group>"; };
+		338614BD1F2839A9000F515E /* ESPDataCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPDataCode.h; sourceTree = "<group>"; };
+		338614BE1F2839A9000F515E /* ESPDataCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPDataCode.m; sourceTree = "<group>"; };
+		338614BF1F2839A9000F515E /* ESPDatumCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPDatumCode.h; sourceTree = "<group>"; };
+		338614C01F2839A9000F515E /* ESPDatumCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPDatumCode.m; sourceTree = "<group>"; };
+		338614C11F2839A9000F515E /* ESPGuideCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPGuideCode.h; sourceTree = "<group>"; };
+		338614C21F2839A9000F515E /* ESPGuideCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPGuideCode.m; sourceTree = "<group>"; };
+		338614C31F2839A9000F515E /* ESPTouchDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPTouchDelegate.h; sourceTree = "<group>"; };
+		338614C61F2839A9000F515E /* ESPTouchGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPTouchGenerator.h; sourceTree = "<group>"; };
+		338614C71F2839A9000F515E /* ESPTouchGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPTouchGenerator.m; sourceTree = "<group>"; };
+		338614C81F2839A9000F515E /* ESPTouchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPTouchResult.h; sourceTree = "<group>"; };
+		338614C91F2839A9000F515E /* ESPTouchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPTouchResult.m; sourceTree = "<group>"; };
+		338614CA1F2839A9000F515E /* ESPTouchTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPTouchTask.h; sourceTree = "<group>"; };
+		338614CB1F2839A9000F515E /* ESPTouchTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPTouchTask.m; sourceTree = "<group>"; };
+		338614CC1F2839A9000F515E /* ESPTouchTaskParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPTouchTaskParameter.h; sourceTree = "<group>"; };
+		338614CD1F2839A9000F515E /* ESPTouchTaskParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPTouchTaskParameter.m; sourceTree = "<group>"; };
+		338614CE1F2839A9000F515E /* ESPUDPSocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPUDPSocketClient.h; sourceTree = "<group>"; };
+		338614CF1F2839A9000F515E /* ESPUDPSocketClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPUDPSocketClient.m; sourceTree = "<group>"; };
+		338614D01F2839A9000F515E /* ESPUDPSocketServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPUDPSocketServer.h; sourceTree = "<group>"; };
+		338614D11F2839A9000F515E /* ESPUDPSocketServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPUDPSocketServer.m; sourceTree = "<group>"; };
+		338614D21F2839A9000F515E /* ESPVersionMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPVersionMacro.h; sourceTree = "<group>"; };
 		33875A4D1EB96A7900F7E0E6 /* newEnergyDetailData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newEnergyDetailData.h; sourceTree = "<group>"; };
 		33875A4E1EB96A7900F7E0E6 /* newEnergyDetailData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newEnergyDetailData.m; sourceTree = "<group>"; };
 		33875A501EB9B28C00F7E0E6 /* newEnergyDetaiTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newEnergyDetaiTwo.h; sourceTree = "<group>"; };
@@ -1547,6 +1589,8 @@
 		338990B01CEAB73400A708F8 /* logo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo3.png; path = ../logo3.png; sourceTree = "<group>"; };
 		338990B31CEB1F9D00A708F8 /* DemoDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoDeviceViewController.h; sourceTree = "<group>"; };
 		338990B41CEB1F9D00A708F8 /* DemoDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoDeviceViewController.m; sourceTree = "<group>"; };
+		338A528C1F28961F000611F3 /* configWifiSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = configWifiSViewController.h; sourceTree = "<group>"; };
+		338A528D1F28961F000611F3 /* configWifiSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = configWifiSViewController.m; sourceTree = "<group>"; };
 		338A62371E71567A000E7CE4 /* PopoverAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverAction.h; sourceTree = "<group>"; };
 		338A62381E71567A000E7CE4 /* PopoverAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverAction.m; sourceTree = "<group>"; };
 		338A62391E71567A000E7CE4 /* PopoverView00.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverView00.h; sourceTree = "<group>"; };
@@ -1659,14 +1703,14 @@
 		33EA4A0C1E8F790C0044A01A /* JHChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHChart.h; sourceTree = "<group>"; };
 		33EA4A0D1E8F790C0044A01A /* JHChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHChart.m; sourceTree = "<group>"; };
 		33ECDCF21CDC9D3400E20AF8 /* deviceCore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = deviceCore.xcdatamodel; sourceTree = "<group>"; };
-		33EFB5F71C979B5F003F336F /* StationCellectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationCellectViewController.h; sourceTree = "<group>"; };
-		33EFB5F81C979B5F003F336F /* StationCellectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationCellectViewController.m; sourceTree = "<group>"; };
-		33EFB5F91C979B5F003F336F /* StationCellectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StationCellectTableViewCell.h; sourceTree = "<group>"; };
-		33EFB5FA1C979B5F003F336F /* StationCellectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StationCellectTableViewCell.m; sourceTree = "<group>"; };
-		33EFB5FB1C979B5F003F336F /* EditCellectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditCellectView.h; sourceTree = "<group>"; };
-		33EFB5FC1C979B5F003F336F /* EditCellectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditCellectView.m; sourceTree = "<group>"; };
-		33EFB5FF1C979B5F003F336F /* ChangeCellectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeCellectViewController.h; sourceTree = "<group>"; };
-		33EFB6001C979B5F003F336F /* ChangeCellectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeCellectViewController.m; sourceTree = "<group>"; };
+		33EFB5F71C979B5F003F336F /* StationCellectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StationCellectViewController.h; path = ../StationCellectViewController.h; sourceTree = "<group>"; };
+		33EFB5F81C979B5F003F336F /* StationCellectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationCellectViewController.m; path = ../StationCellectViewController.m; sourceTree = "<group>"; };
+		33EFB5F91C979B5F003F336F /* StationCellectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StationCellectTableViewCell.h; path = ../StationCellectTableViewCell.h; sourceTree = "<group>"; };
+		33EFB5FA1C979B5F003F336F /* StationCellectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StationCellectTableViewCell.m; path = ../StationCellectTableViewCell.m; sourceTree = "<group>"; };
+		33EFB5FB1C979B5F003F336F /* EditCellectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditCellectView.h; path = ../EditCellectView.h; sourceTree = "<group>"; };
+		33EFB5FC1C979B5F003F336F /* EditCellectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditCellectView.m; path = ../EditCellectView.m; sourceTree = "<group>"; };
+		33EFB5FF1C979B5F003F336F /* ChangeCellectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeCellectViewController.h; path = ../ChangeCellectViewController.h; sourceTree = "<group>"; };
+		33EFB6001C979B5F003F336F /* ChangeCellectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangeCellectViewController.m; path = ../ChangeCellectViewController.m; sourceTree = "<group>"; };
 		33EFB6321C97DAB5003F336F /* 控制.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "控制.jpg"; path = "../设备二级界面/控制.jpg"; sourceTree = "<group>"; };
 		33EFB6381C97E0C8003F336F /* secondCNJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = secondCNJ.h; sourceTree = "<group>"; };
 		33EFB6391C97E0C8003F336F /* secondCNJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = secondCNJ.m; sourceTree = "<group>"; };
@@ -2382,6 +2426,9 @@
 		3355AD931CF6A48B00AE6891 /* 图片WIFI */ = {
 			isa = PBXGroup;
 			children = (
+				337C44AA1E78CC9100135304 /* ledblue.gif */,
+				337C44AB1E78CC9100135304 /* ledgreen.gif */,
+				337C44AC1E78CC9100135304 /* ledred.gif */,
 				33E42E161DCB2EE80024FFBB /* connected-ok.gif */,
 				33E42E1A1DCB36BD0024FFBB /* connected-failed.gif */,
 				33E42E1E1DCC28840024FFBB /* singal.png */,
@@ -3501,6 +3548,75 @@
 			path = Header;
 			sourceTree = "<group>";
 		};
+		338614B01F2838CC000F515E /* 采集器首页 */ = {
+			isa = PBXGroup;
+			children = (
+				33EFB5F71C979B5F003F336F /* StationCellectViewController.h */,
+				336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */,
+				33EFB5F81C979B5F003F336F /* StationCellectViewController.m */,
+				33EFB5F91C979B5F003F336F /* StationCellectTableViewCell.h */,
+				33EFB5FA1C979B5F003F336F /* StationCellectTableViewCell.m */,
+				33EFB5FB1C979B5F003F336F /* EditCellectView.h */,
+				33EFB5FC1C979B5F003F336F /* EditCellectView.m */,
+				33EFB5FF1C979B5F003F336F /* ChangeCellectViewController.h */,
+				33EFB6001C979B5F003F336F /* ChangeCellectViewController.m */,
+				337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */,
+				337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */,
+				338418E01DC840AB00D679CA /* GifConfigViewController.h */,
+				338418E11DC840AB00D679CA /* GifConfigViewController.m */,
+				337C8D9A1E66ACD30013D650 /* GifNewViewController.h */,
+				337C8D9B1E66ACD30013D650 /* GifNewViewController.m */,
+				338418E51DC9783500D679CA /* GFWaterView.h */,
+				338418E61DC9783500D679CA /* GFWaterView.m */,
+			);
+			path = "采集器首页";
+			sourceTree = "<group>";
+		};
+		338614B11F28393C000F515E /* WiFi-S */ = {
+			isa = PBXGroup;
+			children = (
+				338614B21F283992000F515E /* WiFi-s1 */,
+				338A528C1F28961F000611F3 /* configWifiSViewController.h */,
+				338A528D1F28961F000611F3 /* configWifiSViewController.m */,
+			);
+			path = "WiFi-S";
+			sourceTree = "<group>";
+		};
+		338614B21F283992000F515E /* WiFi-s1 */ = {
+			isa = PBXGroup;
+			children = (
+				338614B31F2839A9000F515E /* ESP_ByteUtil.h */,
+				338614B41F2839A9000F515E /* ESP_ByteUtil.m */,
+				338614B51F2839A9000F515E /* ESP_CRC8.h */,
+				338614B61F2839A9000F515E /* ESP_CRC8.m */,
+				338614B71F2839A9000F515E /* ESP_NetUtil.h */,
+				338614B81F2839A9000F515E /* ESP_NetUtil.m */,
+				338614B91F2839A9000F515E /* ESP_WifiUtil.h */,
+				338614BA1F2839A9000F515E /* ESP_WifiUtil.m */,
+				338614BD1F2839A9000F515E /* ESPDataCode.h */,
+				338614BE1F2839A9000F515E /* ESPDataCode.m */,
+				338614BF1F2839A9000F515E /* ESPDatumCode.h */,
+				338614C01F2839A9000F515E /* ESPDatumCode.m */,
+				338614C11F2839A9000F515E /* ESPGuideCode.h */,
+				338614C21F2839A9000F515E /* ESPGuideCode.m */,
+				338614C31F2839A9000F515E /* ESPTouchDelegate.h */,
+				338614C61F2839A9000F515E /* ESPTouchGenerator.h */,
+				338614C71F2839A9000F515E /* ESPTouchGenerator.m */,
+				338614C81F2839A9000F515E /* ESPTouchResult.h */,
+				338614C91F2839A9000F515E /* ESPTouchResult.m */,
+				338614CA1F2839A9000F515E /* ESPTouchTask.h */,
+				338614CB1F2839A9000F515E /* ESPTouchTask.m */,
+				338614CC1F2839A9000F515E /* ESPTouchTaskParameter.h */,
+				338614CD1F2839A9000F515E /* ESPTouchTaskParameter.m */,
+				338614CE1F2839A9000F515E /* ESPUDPSocketClient.h */,
+				338614CF1F2839A9000F515E /* ESPUDPSocketClient.m */,
+				338614D01F2839A9000F515E /* ESPUDPSocketServer.h */,
+				338614D11F2839A9000F515E /* ESPUDPSocketServer.m */,
+				338614D21F2839A9000F515E /* ESPVersionMacro.h */,
+			);
+			path = "WiFi-s1";
+			sourceTree = "<group>";
+		};
 		3389645E1E52E4EF00A7B1AE /* 手机验证 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3875,28 +3991,10 @@
 		33EFB5F61C979B54003F336F /* 采集器 */ = {
 			isa = PBXGroup;
 			children = (
+				338614B11F28393C000F515E /* WiFi-S */,
+				338614B01F2838CC000F515E /* 采集器首页 */,
 				3355AD931CF6A48B00AE6891 /* 图片WIFI */,
 				334FF0251CF53C7B001E6716 /* WifConnect */,
-				33EFB5F71C979B5F003F336F /* StationCellectViewController.h */,
-				336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */,
-				33EFB5F81C979B5F003F336F /* StationCellectViewController.m */,
-				33EFB5F91C979B5F003F336F /* StationCellectTableViewCell.h */,
-				33EFB5FA1C979B5F003F336F /* StationCellectTableViewCell.m */,
-				33EFB5FB1C979B5F003F336F /* EditCellectView.h */,
-				33EFB5FC1C979B5F003F336F /* EditCellectView.m */,
-				33EFB5FF1C979B5F003F336F /* ChangeCellectViewController.h */,
-				33EFB6001C979B5F003F336F /* ChangeCellectViewController.m */,
-				337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */,
-				337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */,
-				338418E01DC840AB00D679CA /* GifConfigViewController.h */,
-				338418E11DC840AB00D679CA /* GifConfigViewController.m */,
-				337C8D9A1E66ACD30013D650 /* GifNewViewController.h */,
-				337C8D9B1E66ACD30013D650 /* GifNewViewController.m */,
-				338418E51DC9783500D679CA /* GFWaterView.h */,
-				338418E61DC9783500D679CA /* GFWaterView.m */,
-				337C44AA1E78CC9100135304 /* ledblue.gif */,
-				337C44AB1E78CC9100135304 /* ledgreen.gif */,
-				337C44AC1E78CC9100135304 /* ledred.gif */,
 			);
 			path = "采集器";
 			sourceTree = "<group>";
@@ -4518,6 +4616,7 @@
 				336D401D1D6FEA7600ECFA34 /* PinyinFormatter.m in Sources */,
 				33AF3D191D8E67210007D6C2 /* DeviceManageViewController.m in Sources */,
 				33EFB6651C98F9B1003F336F /* NSString+Zirkfied.m in Sources */,
+				338614DB1F2839A9000F515E /* ESPDatumCode.m in Sources */,
 				338D51BF1EE151D9003FE4D2 /* IntegratorFirst.swift in Sources */,
 				3356146A1CB397220071BAC9 /* LZPageViewController.m in Sources */,
 				33EFB6661C98F9B1003F336F /* UIColor+Zirkfied.m in Sources */,
@@ -4549,6 +4648,7 @@
 				3343F3AA1C803DC9009F69BC /* BaseRequest.m in Sources */,
 				335881311CB66E460068EFAD /* qualityCell.m in Sources */,
 				335047201C9BA6F600BF8683 /* EGOCache.m in Sources */,
+				338A528E1F28961F000611F3 /* configWifiSViewController.m in Sources */,
 				336F1A1E1D88E46900CD4C2B /* UIImage+GIF.m in Sources */,
 				33801EB31D58274D00047232 /* addStationViewController.m in Sources */,
 				33742B421ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.m in Sources */,
@@ -4614,6 +4714,7 @@
 				33EFB63D1C97E1E3003F336F /* VWWWaterView.m in Sources */,
 				33AF3D1C1D8E67210007D6C2 /* EasyTimeline.m in Sources */,
 				3367CB4E1C86806700EF460C /* MASViewConstraint.m in Sources */,
+				338614E31F2839A9000F515E /* ESPUDPSocketServer.m in Sources */,
 				3381ED011CBCD85700DCF0D2 /* myListSecondTableViewCell.m in Sources */,
 				335D69B51D77BA4D00894D90 /* NSString+HCD.m in Sources */,
 				3343F3C61C80403C009F69BC /* AFURLResponseSerialization.m in Sources */,
@@ -4621,6 +4722,7 @@
 				33AF3D211D8E67210007D6C2 /* NSTimer+EasyTimeline.m in Sources */,
 				338614AF1F26E59B000F515E /* newLine.m in Sources */,
 				337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */,
+				338614D51F2839A9000F515E /* ESP_ByteUtil.m in Sources */,
 				3377156A1D8E6CCC002EEEDF /* AddDeviceViewController.mm in Sources */,
 				338122261D864B3700C7704B /* AvCachTableViewCell.m in Sources */,
 				335456BF1C852EEB00275478 /* SHBQRView.m in Sources */,
@@ -4667,6 +4769,7 @@
 				337F9CC81C71ABFB0016FE43 /* findViewController.m in Sources */,
 				336F1A211D88E46900CD4C2B /* UIImageView+HighlightedWebCache.m in Sources */,
 				338964611E52E52700A7B1AE /* phoneRegisterViewController.m in Sources */,
+				338614D61F2839A9000F515E /* ESP_CRC8.m in Sources */,
 				337F9E111C71C4D90016FE43 /* TableViewCell.m in Sources */,
 				33860FE91EEA75C5004150FD /* MJRefreshNormalHeader.m in Sources */,
 				3353B1B21CA126EB00577595 /* DemoDevice+CoreDataProperties.m in Sources */,
@@ -4695,6 +4798,7 @@
 				33860FDE1EEA75C5004150FD /* MJRefreshBackFooter.m in Sources */,
 				33860FEC1EEA75C5004150FD /* MJRefreshConst.m in Sources */,
 				33EFB6011C979B5F003F336F /* StationCellectViewController.m in Sources */,
+				338614DE1F2839A9000F515E /* ESPTouchGenerator.m in Sources */,
 				33EFB6701C98F9B1003F336F /* ZFLineChart.m in Sources */,
 				3355F2681C7469AB006DDE5A /* aboutViewController.m in Sources */,
 				3343F3DC1C80405D009F69BC /* UIAlertView+AFNetworking.m in Sources */,
@@ -4705,6 +4809,7 @@
 				334B8F571C914A6D00798A69 /* PNScatterChartDataItem.m in Sources */,
 				3381ED091CBCE94200DCF0D2 /* AnswerViewController.m in Sources */,
 				337F9C851C71A6710016FE43 /* main.m in Sources */,
+				338614D71F2839A9000F515E /* ESP_NetUtil.m in Sources */,
 				3367CB491C86806600EF460C /* MASCompositeConstraint.m in Sources */,
 				3367CB4A1C86806600EF460C /* MASConstraint.m in Sources */,
 				33860FF41EEB8C28004150FD /* plantListCell.swift in Sources */,
@@ -4718,6 +4823,7 @@
 				338964641E53E8E200A7B1AE /* QCCountdownButton.m in Sources */,
 				3306CE5E1EF3CCE1002699BA /* intergratorDeviceList.swift in Sources */,
 				334720E11C8E7048006388C8 /* energyTableViewCell.m in Sources */,
+				338614DC1F2839A9000F515E /* ESPGuideCode.m in Sources */,
 				3370794D1D92176600D7DA98 /* manualTableViewController.m in Sources */,
 				335456B61C852E6200275478 /* AddCellectViewController.m in Sources */,
 				334B8F531C914A6D00798A69 /* PNPieChart.m in Sources */,
@@ -4725,6 +4831,7 @@
 				338418E71DC9783500D679CA /* GFWaterView.m in Sources */,
 				336F1A191D88E46900CD4C2B /* SDWebImageDownloader.m in Sources */,
 				336F040A1F050D8600DE7CD7 /* orderCellTwo.m in Sources */,
+				338614DA1F2839A9000F515E /* ESPDataCode.m in Sources */,
 				33AF3D221D8E67210007D6C2 /* Reachability.m in Sources */,
 				3319E0861D5AFAA7006623A9 /* HtmlCommon.m in Sources */,
 				33860FDD1EEA75C5004150FD /* MJRefreshAutoFooter.m in Sources */,
@@ -4732,7 +4839,10 @@
 				334B8F4F1C914A6D00798A69 /* PNGenericChart.m in Sources */,
 				338418E21DC840AB00D679CA /* GifConfigViewController.m in Sources */,
 				3379E4E81E94BE37000A4198 /* CircleView1.m in Sources */,
+				338614DF1F2839A9000F515E /* ESPTouchResult.m in Sources */,
 				336F1A161D88E46900CD4C2B /* SDImageCache.m in Sources */,
+				338614E01F2839A9000F515E /* ESPTouchTask.m in Sources */,
+				338614E11F2839A9000F515E /* ESPTouchTaskParameter.m in Sources */,
 				334FF0C11CF53C7C001E6716 /* UINavigationController+CustomNavigation.m in Sources */,
 				334FF09A1CF53C7C001E6716 /* deviceRootViewController.m in Sources */,
 				33EFB66E1C98F9B1003F336F /* ZFCirque.m in Sources */,
@@ -4784,6 +4894,7 @@
 				33ECDCF31CDC9D3400E20AF8 /* deviceCore.xcdatamodeld in Sources */,
 				3367CB4D1C86806600EF460C /* MASViewAttribute.m in Sources */,
 				33AF3D241D8E67210007D6C2 /* SIAlertView.m in Sources */,
+				338614D81F2839A9000F515E /* ESP_WifiUtil.m in Sources */,
 				33AF3D201D8E67210007D6C2 /* JDStatusBarView.m in Sources */,
 				33AF3D1F1D8E67210007D6C2 /* JDStatusBarStyle.m in Sources */,
 				33FEFCD61C7D8E8300324374 /* UIViewExt.m in Sources */,
@@ -4829,6 +4940,7 @@
 				3326926E1D79728F0058C5B7 /* AVfirstView.m in Sources */,
 				335456D41C8588E200275478 /* SNViewController.m in Sources */,
 				335D69B41D77BA4D00894D90 /* HcdVideoRequestTask.m in Sources */,
+				338614E21F2839A9000F515E /* ESPUDPSocketClient.m in Sources */,
 				335456D11C8588D500275478 /* emailViewController.m in Sources */,
 				335B89601EF51DAC00EE82D4 /* changUserInfo.swift in Sources */,
 				33860FE11EEA75C5004150FD /* MJRefreshHeader.m in Sources */,

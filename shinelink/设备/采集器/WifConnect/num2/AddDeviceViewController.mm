@@ -18,7 +18,13 @@
 #import "StationCellectViewController.h"
 #import "GifNewViewController.h"
 
+
+
+
 #define WifiTime 200
+
+
+
 
 @interface AddDeviceViewController ()
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -30,6 +36,9 @@
 @property(nonatomic,strong)UIView *animationView;
 @property(nonatomic,strong)UILabel *timeLable;
 @property(nonatomic,strong)NSString *isNewWIFI;
+
+
+
 @end
 
 @implementation AddDeviceViewController{
@@ -74,9 +83,7 @@ static void *context = NULL;
     
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
-    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
     tapGestureRecognizer.cancelsTouchesInView = NO;
-    //将触摸事件添加到当前view
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
             self.title = root_peizhi_shinewifi_E;
@@ -87,6 +94,7 @@ static void *context = NULL;
     
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSString *ssid = [delegate getWifiName];
+
     
     if(ssid!=nil&&ssid.length>0 )
     {
@@ -95,6 +103,7 @@ static void *context = NULL;
     //self.pswd.secureTextEntry = true;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotDeviceByScan:) name:kOnGotDeviceByScan object:nil];
 }
+
 
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
     [_ipName resignFirstResponder];
@@ -206,8 +215,8 @@ static void *context = NULL;
 
 
 - (void)tapButton:(UIButton *)button{
-    _setButton.selected = !_setButton.selected;
     
+    _setButton.selected = !_setButton.selected;
     if (button.isSelected) {
         [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_2.png") forState:UIControlStateNormal];
         [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click_2.png") forState:UIControlStateHighlighted];
@@ -216,8 +225,8 @@ static void *context = NULL;
         _pswd.userInteractionEnabled=NO;
         _ipName.userInteractionEnabled=NO;
 
-        [self deviceSearchStart];
-        
+        [self configFirst];
+    
     }else{
         _pswd.userInteractionEnabled=YES;
         _ipName.userInteractionEnabled=YES;
@@ -232,16 +241,26 @@ static void *context = NULL;
         
  _timeLable.text=@"";
         
-                 [self StopTime];
-                [self  stopSearch];
-                if ([_timelineConfig isRunning]) {
-                    [_timelineConfig stop];
-                }
+        
+     
+            [self StopTime];
+            [self  stopSearch];
+            if ([_timelineConfig isRunning]) {
+                [_timelineConfig stop];
+            }
+       
+        
+        
 
     }
     
 }
 
+
+
+
+
+//WIFI-E 配置
 
 -(void)StopConfigerUI{
     _pswd.userInteractionEnabled=YES;
@@ -376,7 +395,7 @@ static void *context = NULL;
     
     if (![_deviceArray containsObject:deviceMac]) {
         [_deviceArray addObject:deviceMac];
-        int count =(int)[_deviceArray count];
+   //     int count =(int)[_deviceArray count];
        // NSLog(@"Countt=%d",count);
           NSLog(@"cellCount0=%ld",(long)self.cellCount0);
         
@@ -396,26 +415,19 @@ static void *context = NULL;
 }
 
 
+-(void)configFirst{
 
-
-//开始查找设备
--(void) deviceSearchStart{
-    
     if ([[_pswd text] isEqual:@""]) {
         _pswd.userInteractionEnabled=YES;
         _ipName.userInteractionEnabled=YES;
-          _setButton.selected = !_setButton.selected;
+        _setButton.selected = !_setButton.selected;
         [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
         [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click.png") forState:UIControlStateHighlighted];
         [_setButton setTitle:root_set forState:UIControlStateNormal];
         
-       [self showAlertViewWithTitle:nil message:root_Enter_your_pwd cancelButtonTitle:root_Yes];
+        [self showAlertViewWithTitle:nil message:root_Enter_your_pwd cancelButtonTitle:root_Yes];
         return;
     }
-    
-    
-    _deviceArray = nil;
-    _deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
     
     
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -433,13 +445,13 @@ static void *context = NULL;
         [_setButton setBackgroundImage:IMAGE(@"peizhi_btn.png") forState:UIControlStateNormal];
         [_setButton setBackgroundImage:IMAGE(@"peizhi_btn_click.png") forState:UIControlStateHighlighted];
         [_setButton setTitle:root_set forState:UIControlStateNormal];
-           [self showAlertViewWithTitle:nil message:root_lianjie_luyouqi cancelButtonTitle:root_Yes];
+        [self showAlertViewWithTitle:nil message:root_lianjie_luyouqi cancelButtonTitle:root_Yes];
         return;
     }
     
-
-   [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
-
+    
+    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(StopConfigerUI) name:@"StopConfigerUI" object:nil];
     
     //添加定时器
@@ -451,41 +463,18 @@ static void *context = NULL;
         _timerStop = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(clickAnimation:) userInfo:nil repeats:YES];
     }
     
+
+        [self deviceSearchStart];
+  
     
     
-//     myAlertView = [[SIAlertView alloc] initWithTitle:root_Alet_user andMessage:root_peizhi_shinewifi_peizhi_tishi];
-//    [myAlertView addButtonWithTitle:root_stop_config
-//                               type:SIAlertViewButtonTypeDestructive
-//                            handler:^(SIAlertView *alertView) {
-//                                [alertView dismissAnimated:YES];
-//                            }];
-//    myAlertView.willShowHandler = ^(SIAlertView *alertView) {
-//        NSLog(@"%@, willShowHandler", alertView);
-//    };
-//    myAlertView.didShowHandler = ^(SIAlertView *alertView) {
-//        NSLog(@"%@, didShowHandler", alertView);
-//    };
-//    myAlertView.willDismissHandler = ^(SIAlertView *alertView) {
-//       
-//        //停止扫描
-//        [self  stopSearch];
-//        
-//        if ([_timelineConfig isRunning]) {
-//            [_timelineConfig stop];
-//        }
-//        
-//    };
-//    myAlertView.didDismissHandler = ^(SIAlertView *alertView) {
-//        
-//        _timer.fireDate=[NSDate distantFuture];
-//        _timer=nil;
-//        
-//        NSLog(@"%@, didDismissHandler", alertView);
-//    };
-//    myAlertView.showIndicator = YES;
-//    [myAlertView show];
+}
+
+//开始查找设备
+-(void) deviceSearchStart{
     
-    
+    _deviceArray = nil;
+    _deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
     
     isSearching= true;
     [self performSelectorInBackground:@selector(doneSearchDeviceAutoThread) withObject:nil];
@@ -580,7 +569,7 @@ static void *context = NULL;
     const char *s_authmode = [authMode cStringUsingEncoding:NSASCIIStringEncoding];
     int authmode = atoi(s_authmode);
     const char *password = [pswd cStringUsingEncoding:NSASCIIStringEncoding];
-    unsigned char target[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+  //  unsigned char target[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
     
     NSLog(@"OnSend: ssid = %s, authmode = %d, password = %s", ssid, authmode, password);
     if (context)

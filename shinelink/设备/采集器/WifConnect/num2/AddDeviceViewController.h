@@ -25,6 +25,8 @@
 
 @property (strong, nonatomic)  NSString *OssType;
 
+@property (strong, nonatomic)  NSString *wifiType;
+
 @property(nonatomic) NSInteger cellCount0;
 
 @property (strong, nonatomic)  UITextField *ipName;

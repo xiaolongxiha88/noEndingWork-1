@@ -32,6 +32,9 @@
 #import "ShinePhone-Swift.h"
 #import "OssMessageViewController.h"
 
+//测试头
+#import "configWifiSViewController.h"
+
 
 @interface loginViewController ()<UINavigationControllerDelegate,UITextFieldDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -90,9 +93,9 @@
 
     
     //////////测试区域
-    NSString *testDemo=@"O";
+    NSString *testDemo=@"OK";
     if ([testDemo isEqualToString:@"OK"]) {
-        IntegratorFirst *testView=[[IntegratorFirst alloc]init];
+        configWifiSViewController *testView=[[configWifiSViewController alloc]init];
         [self.navigationController pushViewController:testView animated:NO];
     }else{
         [self getLoginType];
