@@ -11,7 +11,7 @@
 #import "SHBQRView.h"
 #import "MainViewController.h"
 #import "AddDeviceViewController.h"
-
+#import "configWifiSViewController.h"
 
 @interface addDevice ()<SHBQRViewDelegate>
 @property(nonatomic,strong)UITextField *cellectId;
@@ -158,12 +158,10 @@
  [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{_param1Name:_param1,_param2Name:_param2,_param3Name:_param3}  paramarsSite:@"/newDatalogAPI.do?op=addDatalog" sucessBlock:^(id content) {
         
         [self hideProgressView];
-        NSLog(@"addDatalog: %@", content);
      
-        
         if (content) {
                 id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-            
+            NSLog(@"addDatalog: %@", jsonObj);
             if ([[jsonObj objectForKey:@"success"] integerValue] ==0) {
                 if ([[jsonObj objectForKey:@"msg"]integerValue]==501) {
                     [self showAlertViewWithTitle:nil message:root_tianjia_chucuo cancelButtonTitle:root_Yes];
@@ -193,12 +191,13 @@
                 NSString *demoName1=@"ShineWIFI";           //新wifi
                 NSString *demoName2=@"ShineLan";            //旧wifi
                 NSString *demoName3=@"ShineWifiBox";          //旧wifi
-                
+                  NSString *demoName4=@"ShineWIFI-S";          //wifi-S
                // _SetName=@"ShineWIFI";
                 
                 BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
                 BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
                 BOOL result3 = [_SetName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+                 BOOL result4 = [_SetName compare:demoName4 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
                 
                 if (result1) {
                     AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
@@ -211,6 +210,12 @@
                     
                 }else if (result3){
                     MainViewController *rootView = [[MainViewController alloc]init];
+                    [self.navigationController pushViewController:rootView animated:YES];
+                    
+                }else if (result4){
+                    configWifiSViewController *rootView = [[configWifiSViewController alloc]init];
+                    rootView.SnString=_param2;
+                    rootView.hidesBottomBarWhenPushed=YES;
                     [self.navigationController pushViewController:rootView animated:YES];
                     
                 }else{
@@ -299,8 +304,9 @@
     
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{_param1Name:_param1,_param2Name:_param2,_param3Name:_param3}  paramarsSite:@"/newDatalogAPI.do?op=addDatalog" sucessBlock:^(id content) {
         [self hideProgressView];
-        NSLog(@"addDatalog: %@", content);
+
           id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+                NSLog(@"addDatalog: %@", jsonObj);
         if (content) {
             if ([[jsonObj objectForKey:@"success"] integerValue] ==0) {
                 if ([[jsonObj objectForKey:@"msg"]integerValue]==501) {
@@ -330,12 +336,14 @@
                 NSString *demoName1=@"ShineWIFI";           //新wifi
                 NSString *demoName2=@"ShineLan";            //旧wifi
                 NSString *demoName3=@"ShineWifiBox";          //旧wifi
-                
+                 NSString *demoName4=@"ShineWIFI-S";          //wifi-S
                 
                 
                 BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
                 BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
                 BOOL result3 = [_SetName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+                  BOOL result4 = [_SetName compare:demoName4 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+                
                 
                 if (result1) {
                     AddDeviceViewController *rootView = [[AddDeviceViewController alloc]init];
@@ -348,6 +356,12 @@
                     
                 }else if (result3){
                     MainViewController *rootView = [[MainViewController alloc]init];
+                    [self.navigationController pushViewController:rootView animated:YES];
+                    
+                }else if (result4){
+                    configWifiSViewController *rootView = [[configWifiSViewController alloc]init];
+                    rootView.SnString=_param2;
+                    rootView.hidesBottomBarWhenPushed=YES;
                     [self.navigationController pushViewController:rootView animated:YES];
                     
                 }else{

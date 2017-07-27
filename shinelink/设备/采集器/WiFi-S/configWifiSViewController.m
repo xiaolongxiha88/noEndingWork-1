@@ -506,7 +506,7 @@
                             [mutableStr appendString:[NSString stringWithFormat:@"\nthere's %lu more result(s) without showing\n",(unsigned long)([esptouchResultArray count] - count)]];
                         }
      //   [[[UIAlertView alloc]initWithTitle:@"Execute Result" message:mutableStr delegate:nil cancelButtonTitle:@"I know" otherButtonTitles:nil]show];
-                        [self showToastViewWithTitle:@"采集器已经连接路由器,正在连接服务器中..."];
+                        [self showToastViewWithTitle:root_wifi_lianjie_luyouqi];
                         
                     }else{
 //                        [[[UIAlertView alloc]initWithTitle:@"Execute Result" message:@"Esptouch fail" delegate:nil cancelButtonTitle:@"I know" otherButtonTitles:nil]show];

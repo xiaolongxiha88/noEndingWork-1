@@ -12,6 +12,7 @@
 #import "loginViewController.h"
 #import "MainViewController.h"
 #import "AddDeviceViewController.h"
+#import "configWifiSViewController.h"
 
 @interface AddCellectViewController ()<SHBQRViewDelegate>
 @property(nonatomic,strong)UITextField *cellectId;
@@ -399,10 +400,13 @@
     NSString *demoName1=@"ShineWIFI";           //新wifi
     NSString *demoName2=@"ShineLan";            //旧wifi
     NSString *demoName3=@"ShineWifiBox";          //旧wifi
+     NSString *demoName4=@"ShineWIFI-S";          //wifi-S
+    
     
     BOOL result1 = [_setDeviceName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
     BOOL result2 = [_setDeviceName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
     BOOL result3 = [_setDeviceName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+      BOOL result4 = [_setDeviceName compare:demoName4 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
     
     if (result1) {
 
@@ -421,6 +425,13 @@
         MainViewController *rootView = [[MainViewController alloc]init];
         [self.navigationController pushViewController:rootView animated:YES];
         
+    }else if (result4){
+        configWifiSViewController *rootView = [[configWifiSViewController alloc]init];
+        rootView.SnString=_cellectId.text;
+         rootView.LogType=@"1";
+        rootView.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:rootView animated:YES];
+        
     }else{
     
            [[UserInfo defaultUserInfo] setServer:HEAD_URL_Demo];
@@ -430,6 +441,8 @@
         [self.navigationController pushViewController:goView animated:NO];
     }
 
+    
+    
 }
 
 

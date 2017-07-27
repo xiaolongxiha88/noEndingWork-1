@@ -684,7 +684,7 @@
 "105请验证您的邮箱地址"="Please verify your email address";
 
 "106wifi信号强度提示"="The current Wifi signal is weak, please configure in a Wifi signal strong place.";
-
+"107wifi连接路由器"="The datalogger is already connected to the router and is being connected to the server...";
 
 
 

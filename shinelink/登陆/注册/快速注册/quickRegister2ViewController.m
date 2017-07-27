@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "loginViewController.h"
 #import "protocol.h"
+#import "configWifiSViewController.h"
 
 @interface quickRegister2ViewController ()
 @property (nonatomic, strong)  UITextField *textField;
@@ -400,10 +401,12 @@ _getServerAddressNum=0;
     NSString *demoName1=@"ShineWIFI";           //新wifi
     NSString *demoName2=@"ShineLan";            //旧wifi
     NSString *demoName3=@"ShineWifiBox";          //旧wifi
+    NSString *demoName4=@"ShineWIFI-S";          //wifi-S
     
     BOOL result1 = [_setDeviceName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
     BOOL result2 = [_setDeviceName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
     BOOL result3 = [_setDeviceName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+     BOOL result4 = [_setDeviceName compare:demoName4 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
     
     if (result1) {
         
@@ -420,6 +423,13 @@ _getServerAddressNum=0;
     }else if (result3){
         [self showAlertViewWithTitle:nil message:root_shuaxin_liebiao cancelButtonTitle:root_Yes];
         MainViewController *rootView = [[MainViewController alloc]init];
+        [self.navigationController pushViewController:rootView animated:YES];
+        
+    }else if (result4){
+        configWifiSViewController *rootView = [[configWifiSViewController alloc]init];
+         rootView.LogType=@"1";
+        rootView.SnString=_SnCode;
+        rootView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:rootView animated:YES];
         
     }else{

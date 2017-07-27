@@ -17,6 +17,8 @@
 #import "MainViewController.h"
 #import "AddDeviceViewController.h"
 #import "ShinePhone-Swift.h"
+#import "configWifiSViewController.h"
+
 
 @interface StationCellectViewController ()<EditCellectViewDelegate,UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)EditCellectView *editCellect;
@@ -220,13 +222,15 @@
         NSString *demoName1=@"ShineWIFI";           //新wifi
         NSString *demoName2=@"ShineLan";            //旧wifi
         NSString *demoName3=@"ShineWifiBox";          //旧wifi
-        NSString *demoName4=@"ShineLanBox";
+        NSString *demoName5=@"ShineLanBox";
+          NSString *demoName4=@"ShineWIFI-S";          //wifi-S
         
         //_SetName=@"ShineWIFI";
         
         BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
         BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
         BOOL result3 = [_SetName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+          BOOL result5 = [_SetName compare:demoName5 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
           BOOL result4 = [_SetName compare:demoName4 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
         
         if (result1) {
@@ -242,14 +246,17 @@
             MainViewController *rootView = [[MainViewController alloc]init];
             [self.navigationController pushViewController:rootView animated:YES];
             
-        }else if(result4){
+        }else if (result4){
+            configWifiSViewController *rootView = [[configWifiSViewController alloc]init];
+            rootView.SnString=_arrayData[_indexPath.row][@"datalog_sn"];
+            rootView.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:rootView animated:YES];
+        }else if(result5){
             
-//            UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"rfStickStoryboard" bundle:[NSBundle mainBundle]];
-//            RfStickSwift *vc = [storyboard instantiateViewControllerWithIdentifier:@"RfStickSwift"];
-        
             RfStickSwift *rootView=[[RfStickSwift alloc]init];
              [self.navigationController pushViewController:rootView animated:YES];
         }
+        
         
     }else{
     

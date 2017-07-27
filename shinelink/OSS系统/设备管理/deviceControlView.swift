@@ -441,6 +441,15 @@ class deviceControlView: RootViewController {
                 self.navigationController?.pushViewController(goView, animated: true)
                 
             }
+            
+            if  dataloggerTypeString==11 {                  //WiFi-S
+                let goView=configWifiSViewController()
+                goView.snString=valueDic["serialNum"]as! String
+                goView.hidesBottomBarWhenPushed=true
+                self.navigationController?.pushViewController(goView, animated: true)
+                
+            }
+            
         }
         
 
