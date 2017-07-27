@@ -99,9 +99,36 @@ static void *context = NULL;
     if(ssid!=nil&&ssid.length>0 )
     {
         self.ipName.text = ssid;
+    }else{
+        
+        [self showAlertViewWithTitle:nil message:root_lianjie_luyouqi cancelButtonTitle:root_OK];
+        return;
     }
-    //self.pswd.secureTextEntry = true;
+    
+     [self getSignalStrength];
+  
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotDeviceByScan:) name:kOnGotDeviceByScan object:nil];
+}
+
+- (void)getSignalStrength{
+    UIApplication *app = [UIApplication sharedApplication];
+    NSArray *subviews = [[[app valueForKey:@"statusBar"] valueForKey:@"foregroundView"] subviews];
+    NSString *dataNetworkItemView = nil;
+    
+    for (id subview in subviews) {
+        if([subview isKindOfClass:[NSClassFromString(@"UIStatusBarDataNetworkItemView") class]]) {
+            dataNetworkItemView = subview;
+            break;
+        }
+    }
+    
+    
+    int signalStrength = [[dataNetworkItemView valueForKey:@"_wifiStrengthBars"] intValue];
+    if (signalStrength<2) {
+        [self showAlertViewWithTitle:nil message:root_wifi_xinhao_tishi cancelButtonTitle:root_OK];
+    }
+    
+    NSLog(@"signal= %d", signalStrength);
 }
 
 

@@ -18,7 +18,7 @@
 #import "GFWaterView.h"
 
 
-#define WifiTime 200
+#define WifiTime 120
 
 @interface EspTouchDelegateImpl : NSObject<ESPTouchDelegate>
 
@@ -33,12 +33,12 @@
 
 -(void) showAlertWithResult: (ESPTouchResult *) result
 {
-    NSString *title = nil;
-    NSString *message = [NSString stringWithFormat:@"%@ is connected to the wifi" , result.bssid];
-    NSTimeInterval dismissSeconds = 3.5;
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:title message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
-    [alertView show];
-    [self performSelector:@selector(dismissAlert:) withObject:alertView afterDelay:dismissSeconds];
+ //   NSString *title = nil;
+  //  NSString *message = [NSString stringWithFormat:@"%@ is connected to the wifi" , result.bssid];
+//    NSTimeInterval dismissSeconds = 3.5;
+//    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:title message:nil delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+//    [alertView show];
+//    [self performSelector:@selector(dismissAlert:) withObject:alertView afterDelay:dismissSeconds];
 }
 
 -(void) onEsptouchResultAddedWithResult: (ESPTouchResult *) result
@@ -69,9 +69,20 @@
 @property(nonatomic,strong)NSString *bssid;
 @property (nonatomic, strong) EspTouchDelegateImpl *_esptouchDelegate;
 
+@property (nonatomic, assign) BOOL isFirstConfig;
+
 @end
 
 @implementation configWifiSViewController
+
+
+-(void)viewWillDisappear:(BOOL)animated{
+     [self cancel];
+    if (_timeLable) {
+        _timeLable.text=@"";
+    }
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -93,11 +104,39 @@
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSString *ssid = [delegate getWifiName];
     
+    
     if(ssid!=nil&&ssid.length>0 )
     {
         self.ipName.text = ssid;
+    }else{
+    
+        [self showAlertViewWithTitle:nil message:root_lianjie_luyouqi cancelButtonTitle:root_OK];
+        return;
     }
     
+    [self getSignalStrength];
+    
+}
+
+- (void)getSignalStrength{
+    UIApplication *app = [UIApplication sharedApplication];
+    NSArray *subviews = [[[app valueForKey:@"statusBar"] valueForKey:@"foregroundView"] subviews];
+    NSString *dataNetworkItemView = nil;
+    
+    for (id subview in subviews) {
+        if([subview isKindOfClass:[NSClassFromString(@"UIStatusBarDataNetworkItemView") class]]) {
+            dataNetworkItemView = subview;
+            break;
+        }
+    }
+    
+    
+    int signalStrength = [[dataNetworkItemView valueForKey:@"_wifiStrengthBars"] intValue];
+    if (signalStrength<2) {
+        [self showAlertViewWithTitle:nil message:root_wifi_xinhao_tishi cancelButtonTitle:root_OK];
+    }
+    
+    NSLog(@"signal= %d", signalStrength);
 }
 
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
@@ -220,6 +259,7 @@
         _pswd.userInteractionEnabled=NO;
         _ipName.userInteractionEnabled=NO;
         
+        _isFirstConfig=YES;
         [self configFirst];
         
     }else{
@@ -236,13 +276,9 @@
         
         _timeLable.text=@"";
         
-        
-     
             self._isConfirmState=NO;
             [self cancel];
-
-        
-        
+           [self StopTime];
         
     }
     
@@ -303,8 +339,6 @@
     }
     
     
-    
- 
         self._isConfirmState=YES;
         [self tapConfirmForResults];
  
@@ -327,7 +361,7 @@
     //  NSString *setButtonValue=[NSString stringWithFormat:@"%@s",_timeLableString];
     
     _timeLable.text=@"";
-    
+     [self cancel];
     [self StopTime];
   
 
@@ -358,7 +392,7 @@
         _timeLableString=_firstLableString;
         
         
-        
+         [self cancel];
         [self StopTime];
   
         
@@ -471,12 +505,17 @@
                         {
                             [mutableStr appendString:[NSString stringWithFormat:@"\nthere's %lu more result(s) without showing\n",(unsigned long)([esptouchResultArray count] - count)]];
                         }
-                        [[[UIAlertView alloc]initWithTitle:@"Execute Result" message:mutableStr delegate:nil cancelButtonTitle:@"I know" otherButtonTitles:nil]show];
-                    }
-                    
-                    else
-                    {
-                        [[[UIAlertView alloc]initWithTitle:@"Execute Result" message:@"Esptouch fail" delegate:nil cancelButtonTitle:@"I know" otherButtonTitles:nil]show];
+     //   [[[UIAlertView alloc]initWithTitle:@"Execute Result" message:mutableStr delegate:nil cancelButtonTitle:@"I know" otherButtonTitles:nil]show];
+                        [self showToastViewWithTitle:@"采集器已经连接路由器,正在连接服务器中..."];
+                        
+                    }else{
+//                        [[[UIAlertView alloc]initWithTitle:@"Execute Result" message:@"Esptouch fail" delegate:nil cancelButtonTitle:@"I know" otherButtonTitles:nil]show];
+                        
+                        if (_isFirstConfig) {
+                         [self tapConfirmForResults];
+                            _isFirstConfig=NO;
+                        }
+                        
                     }
                 }
                 
@@ -574,6 +613,7 @@
                 _timeLableString=_firstLableString;
                 _timeLable.text=@"";
                 
+                 [self cancel];
                 [self StopTime];
                 
                 
