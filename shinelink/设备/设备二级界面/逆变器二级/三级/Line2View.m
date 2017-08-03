@@ -132,7 +132,7 @@
 
         NSString *test=@"test";
         NSLog(@"TEST:%@",[_valuesArray[0] class]);
-        NSLog(@"TEST:%@",[test class]);
+
         
         int i=0;
         int j=5;
@@ -269,6 +269,25 @@
         NSNumber *avg = [_valuesArray valueForKeyPath:@"@avg.floatValue"];
         if ([avg floatValue] != 0) {
             NSNumber *maxyAxisValue = [_valuesArray valueForKeyPath:@"@max.floatValue"];
+            float getY0=[maxyAxisValue floatValue]/6;
+            int getY1=ceil(getY0);
+            if ((0<getY1)&&(getY1<10)) {
+                maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+            }else if ((10<getY1)&&(getY1<100)) {
+                getY1=ceil(getY0/5)*5;
+                maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+            }else if ((100<getY1)&&(getY1<1000)) {
+                getY1=ceil(getY0/50)*50;
+                maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+            }else if ((1000<getY1)&&(getY1<10000)) {
+                getY1=ceil(getY0/500)*500;
+                maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+            }else if ((10000<getY1)&&(getY1<100000)) {
+                getY1=ceil(getY0/5000)*5000;
+                maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+            }
+            
+            
             self.lineChartView.yAxisRange = maxyAxisValue;
             self.lineChartView.yAxisSuffix = @"";
             

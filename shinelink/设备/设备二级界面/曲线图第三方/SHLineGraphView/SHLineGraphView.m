@@ -29,7 +29,7 @@
 
 #define BOTTOM_MARGIN_TO_LEAVE 30.0
 #define TOP_MARGIN_TO_LEAVE 30.0
-#define INTERVAL_COUNT 9
+#define INTERVAL_COUNT 6
 #define PLOT_WIDTH (self.bounds.size.width - _leftMarginToLeave)
 
 #define kXLabelHeight -10
@@ -41,6 +41,7 @@
 @property (nonatomic) CGFloat chartMargin;
 @property (nonatomic) CAShapeLayer * chartBottomLine;
 @property (nonatomic) CAShapeLayer * chartLeftLine;
+@property (nonatomic) BOOL islongTap;
 
 @end
 
@@ -195,7 +196,8 @@
     /*
      actual plot drawing
      */
- [self drawPlot:plot];
+    
+[self drawPlot:plot];
 }
 
 -(void)getDirct{
@@ -277,6 +279,11 @@
     [graphLayer setLineWidth:((NSNumber *)theme[kPlotStrokeWidthKey]).intValue];
     
 
+//    double yRange = [_yAxisRange doubleValue];
+//    int yIntervalValue = yRange / INTERVAL_COUNT;
+//    yIntervalValue =yIntervalValue/100;
+//    yIntervalValue=yIntervalValue*100;
+ 
     
     double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
     double yIntervalValue = yRange / INTERVAL_COUNT;
@@ -364,22 +371,19 @@
     [self.layer addSublayer:circleLayer];
     [self.layer addSublayer:backgroundLayer];
     
-// NSUInteger count2 = _xAxisValues.count;
-//    for(int i=0; i< count2; i++){
-//        CGPoint point = plot.xPoints[i];
-//        UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        
-//        btn.backgroundColor = [UIColor clearColor];
-//        btn.tag = i;
-//        btn.frame = CGRectMake(point.x - 20, point.y - 20, 40, 40);
-//        [btn addTarget:self action:@selector(clicked:) forControlEvents:UIControlEventTouchUpInside];
-//        objc_setAssociatedObject(btn, kAssociatedPlotObject, plot, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-//        
-//        [self addSubview:btn];
-//    }
+    _islongTap=NO;
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
+    [self addGestureRecognizer:longPress];
+    
+
+    
 }
 
+
+
+
 - (void)drawXLabels:(SHPlot *)plot {
+    
     int xIntervalCount =(int) _xAxisValues.count;
     double xIntervalInPx = PLOT_WIDTH / _xAxisValues.count;
     NSMutableArray *lableName=[NSMutableArray array];
@@ -417,6 +421,12 @@
 
 - (void)drawYLabels:(SHPlot *)plot {
     double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
+    
+//    int yIntervalValue = yRange / INTERVAL_COUNT;
+//    yIntervalValue =yIntervalValue/100;
+//    yIntervalValue=yIntervalValue*100;
+//    int intervalInPx = (self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE ) / (INTERVAL_COUNT +1);
+    
     double yIntervalValue = yRange / INTERVAL_COUNT;
     double intervalInPx = (self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE ) / (INTERVAL_COUNT +1);
     
@@ -433,9 +443,9 @@
             yAxisLabel.font = (UIFont *)_themeAttributes[kYAxisLabelFontKey];
             yAxisLabel.textColor = (UIColor *)_themeAttributes[kYAxisLabelColorKey];
             yAxisLabel.textAlignment = NSTextAlignmentCenter;
-            float val = (yIntervalValue * (10 - i));
+            float val = (yIntervalValue * ((INTERVAL_COUNT +1) - i));
             if(val > 0){
-                yAxisLabel.text = [NSString stringWithFormat:@"%.1f%@", val, _yAxisSuffix];
+                yAxisLabel.text = [NSString stringWithFormat:@"%.0f%@", val, _yAxisSuffix];
             } else {
                 yAxisLabel.text = [NSString stringWithFormat:@"%.0f", val];
             }
@@ -521,151 +531,175 @@
     }
 }
 
+- (void)event_longPressAction:(UILongPressGestureRecognizer *)longPress {
+    
+        if(UIGestureRecognizerStateBegan == longPress.state) {
+            _islongTap=YES;
+        }
+    
+//    if(UIGestureRecognizerStateChanged == longPress.state || UIGestureRecognizerStateBegan == longPress.state) {
+//        
+//        _islongTap=YES;
+//    }
+    
+    if(longPress.state == UIGestureRecognizerStateEnded)
+    {
+        
+        //      _islongTap=NO;
+    }
+}
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
-    CGPoint touchPoint = [touch locationInView:self];
-    
-      //  int count = (int)_xAxisValues.count;
+  
+        UITouch *touch = [touches anyObject];
+
    
-    
-    double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
-    double yIntervalValue = yRange / INTERVAL_COUNT;
-     int ShCount=(int)SHPlotValue.plottingValues.count;
-    
-    [SHPlotValue.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *dic = (NSDictionary *)obj;
+    if (_islongTap) {
+        CGPoint touchPoint = [touch locationInView:self];
         
-        __block NSNumber *_key = nil;
-        __block NSNumber *_value = nil;
+        //  int count = (int)_xAxisValues.count;
         
-        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            _key = (NSNumber *)key;
-            _value = (NSNumber *)obj;
+        
+        double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
+        double yIntervalValue = yRange / INTERVAL_COUNT;
+        int ShCount=(int)SHPlotValue.plottingValues.count;
+        
+        [SHPlotValue.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSDictionary *dic = (NSDictionary *)obj;
+            
+            __block NSNumber *_key = nil;
+            __block NSNumber *_value = nil;
+            
+            [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                _key = (NSNumber *)key;
+                _value = (NSNumber *)obj;
+            }];
+            
+            int xIndex = [self getIndexForValue:_key forPlot:SHPlotValue];
+            
+            //x value
+            double height = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE;
+            double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
+            (SHPlotValue.xPoints[xIndex]).x = ceil((SHPlotValue.xPoints[xIndex]).x);
+            (SHPlotValue.xPoints[xIndex]).y = ceil(y);
+            
         }];
         
-        int xIndex = [self getIndexForValue:_key forPlot:SHPlotValue];
+        int dirInt=0;
         
-        //x value
-        double height = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE;
-        double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
-        (SHPlotValue.xPoints[xIndex]).x = ceil((SHPlotValue.xPoints[xIndex]).x);
-        (SHPlotValue.xPoints[xIndex]).y = ceil(y);
-        
-    }];
-    
-    int dirInt=0;
-   
-    for (int k=0; k<ShCount; k++) {
-        
-        float plotX1=(SHPlotValue.xPoints[k]).x;
-           float plotX2=(SHPlotValue.xPoints[k+1]).x;
-        float plot0=touchPoint.x;
-        if( (plotX1<plot0)&&(plotX2>plot0) ){
-           
-            if ((plot0-plotX1)>(plotX2-plot0)) {
-                 dirInt=k+1;
-            }else{
-                dirInt=k;
+        for (int k=0; k<ShCount; k++) {
+            
+            float plotX1=(SHPlotValue.xPoints[k]).x;
+            float plotX2=(SHPlotValue.xPoints[k+1]).x;
+            float plot0=touchPoint.x;
+            if( (plotX1<plot0)&&(plotX2>plot0) ){
+                
+                if ((plot0-plotX1)>(plotX2-plot0)) {
+                    dirInt=k+1;
+                }else{
+                    dirInt=k;
+                }
             }
+            
         }
         
+        if (dirInt<ShCount) {
+            float xDirectrixX=(SHPlotValue.xPoints[dirInt]).x;
+            double xDirectrixY = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE-DirectriLableH;
+            xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
+            xDirectrix.hidden = NO;
+            [self bringSubviewToFront:xDirectrix];
+            
+            float yDirectrixY=(SHPlotValue.xPoints[dirInt]).y;
+            yDirectriy.frame = CGRectMake(_leftMarginToLeave,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
+            yDirectriy.hidden = NO;
+            [self bringSubviewToFront: yDirectriy];
+            
+            NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_dirLableValuesY[dirInt]] floatValue]];
+            NSString*xLableValue=[NSString stringWithFormat:@"%@",_dirLableValuesX[dirInt]];
+            NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_shijian,xLableValue,root_shuzhi,xDirY0];
+            xyLableValue.text=xyLableText;
+            
+        }
+
     }
     
-    if (dirInt<ShCount) {
-        float xDirectrixX=(SHPlotValue.xPoints[dirInt]).x;
-        double xDirectrixY = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE-DirectriLableH;
-        xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
-        xDirectrix.hidden = NO;
-        [self bringSubviewToFront:xDirectrix];
-        
-        float yDirectrixY=(SHPlotValue.xPoints[dirInt]).y;
-        yDirectriy.frame = CGRectMake(_leftMarginToLeave,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
-        yDirectriy.hidden = NO;
-        [self bringSubviewToFront: yDirectriy];
-        
-        NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_dirLableValuesY[dirInt]] floatValue]];
-        NSString*xLableValue=[NSString stringWithFormat:@"%@",_dirLableValuesX[dirInt]];
-        NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_shijian,xLableValue,root_shuzhi,xDirY0];
-        xyLableValue.text=xyLableText;
-        
-        
-    }
-   
-    
+
 }
 
 
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
-    UITouch *touch = [touches anyObject];
-    CGPoint touchPoint = [touch locationInView:self];
-
-    double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
-    double yIntervalValue = yRange / INTERVAL_COUNT;
-    int ShCount=(int)SHPlotValue.plottingValues.count;
-    
-    [SHPlotValue.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *dic = (NSDictionary *)obj;
+    if (_islongTap) {
+        UITouch *touch = [touches anyObject];
+        CGPoint touchPoint = [touch locationInView:self];
         
-        __block NSNumber *_key = nil;
-        __block NSNumber *_value = nil;
+        double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
+        double yIntervalValue = yRange / INTERVAL_COUNT;
+        int ShCount=(int)SHPlotValue.plottingValues.count;
         
-        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            _key = (NSNumber *)key;
-            _value = (NSNumber *)obj;
+        [SHPlotValue.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NSDictionary *dic = (NSDictionary *)obj;
+            
+            __block NSNumber *_key = nil;
+            __block NSNumber *_value = nil;
+            
+            [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                _key = (NSNumber *)key;
+                _value = (NSNumber *)obj;
+            }];
+            
+            int xIndex = [self getIndexForValue:_key forPlot:SHPlotValue];
+            
+            //x value
+            double height = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE;
+            double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
+            (SHPlotValue.xPoints[xIndex]).x = ceil((SHPlotValue.xPoints[xIndex]).x);
+            (SHPlotValue.xPoints[xIndex]).y = ceil(y);
+            
         }];
         
-        int xIndex = [self getIndexForValue:_key forPlot:SHPlotValue];
+        int dirInt=0;
         
-        //x value
-        double height = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE;
-        double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
-        (SHPlotValue.xPoints[xIndex]).x = ceil((SHPlotValue.xPoints[xIndex]).x);
-        (SHPlotValue.xPoints[xIndex]).y = ceil(y);
-        
-    }];
-    
-    int dirInt=0;
-    
-    for (int k=0; k<ShCount; k++) {
-        
-        float plotX1=(SHPlotValue.xPoints[k]).x;
-        float plotX2=(SHPlotValue.xPoints[k+1]).x;
-        float plot0=touchPoint.x;
-        if( (plotX1<plot0)&&(plotX2>plot0) ){
+        for (int k=0; k<ShCount; k++) {
             
-            if ((plot0-plotX1)>(plotX2-plot0)) {
-                dirInt=k+1;
-            }else{
-                dirInt=k;
+            float plotX1=(SHPlotValue.xPoints[k]).x;
+            float plotX2=(SHPlotValue.xPoints[k+1]).x;
+            float plot0=touchPoint.x;
+            if( (plotX1<plot0)&&(plotX2>plot0) ){
+                
+                if ((plot0-plotX1)>(plotX2-plot0)) {
+                    dirInt=k+1;
+                }else{
+                    dirInt=k;
+                }
             }
+            
         }
         
-    }
-    
-    if (dirInt<ShCount) {
-        float xDirectrixX=(SHPlotValue.xPoints[dirInt]).x;
-        double xDirectrixY = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE-DirectriLableH;
-        xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
-        xDirectrix.hidden = NO;
-        [self bringSubviewToFront:xDirectrix];
-        
-        float yDirectrixY=(SHPlotValue.xPoints[dirInt]).y;
-        yDirectriy.frame = CGRectMake(_leftMarginToLeave,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
-        yDirectriy.hidden = NO;
-        [self bringSubviewToFront: yDirectriy];
-        
-        NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_dirLableValuesY[dirInt]] floatValue]];
-        NSString*xLableValue=[NSString stringWithFormat:@"%@",_dirLableValuesX[dirInt]];
-          NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_shijian,xLableValue,root_shuzhi,xDirY0];
-        xyLableValue.text=xyLableText;
-        
-        
-    }
+        if (dirInt<ShCount) {
+            float xDirectrixX=(SHPlotValue.xPoints[dirInt]).x;
+            double xDirectrixY = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE-DirectriLableH;
+            xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
+            xDirectrix.hidden = NO;
+            [self bringSubviewToFront:xDirectrix];
+            
+            float yDirectrixY=(SHPlotValue.xPoints[dirInt]).y;
+            yDirectriy.frame = CGRectMake(_leftMarginToLeave,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
+            yDirectriy.hidden = NO;
+            [self bringSubviewToFront: yDirectriy];
+            
+            NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_dirLableValuesY[dirInt]] floatValue]];
+            NSString*xLableValue=[NSString stringWithFormat:@"%@",_dirLableValuesX[dirInt]];
+            NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_shijian,xLableValue,root_shuzhi,xDirY0];
+            xyLableValue.text=xyLableText;
+            
+            
+        }
 
+    }
     
 }
 
@@ -674,6 +708,7 @@
     
 [self performSelector:@selector(delayMethod) withObject:nil afterDelay:2.0f];
     
+    _islongTap=NO;
 }
 
 -(void)delayMethod{
