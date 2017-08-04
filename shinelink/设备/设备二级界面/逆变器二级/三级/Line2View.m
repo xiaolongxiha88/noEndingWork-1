@@ -149,14 +149,14 @@
             }
         }
         
-        
+        float fontW=8*HEIGHT_SIZE;
         if ([_frameType isEqualToString:@"1"]) {
              self.lineChartView = [[SHLineGraphView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE, 320*NOW_SIZE, 220*HEIGHT_SIZE)];
             NSDictionary *_themeAttributes = @{
                                                kXAxisLabelColorKey : [UIColor blackColor],
-                                               kXAxisLabelFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE],
+                                               kXAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
                                                kYAxisLabelColorKey : [UIColor blackColor],
-                                               kYAxisLabelFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE],
+                                               kYAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
                                                //                                           kYAxisLabelSideMarginsKey : @(j*NOW_SIZE),
                                                kPlotBackgroundLineColorKey : [UIColor colorWithRed:0.48 green:0.48 blue:0.49 alpha:0.4],
                                                kDotSizeKey : @0
@@ -166,9 +166,9 @@
         self.lineChartView = [[SHLineGraphView alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 320*NOW_SIZE, 250*HEIGHT_SIZE)];
         NSDictionary *_themeAttributes = @{
                                            kXAxisLabelColorKey : [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0],
-                                           kXAxisLabelFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE],
+                                           kXAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
                                            kYAxisLabelColorKey : [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0],
-                                           kYAxisLabelFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE],
+                                           kYAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
 //                                           kYAxisLabelSideMarginsKey : @(j*NOW_SIZE),
                                            kPlotBackgroundLineColorKey : [UIColor colorWithRed:0.48 green:0.48 blue:0.49 alpha:0.4],
                                            kDotSizeKey : @0
@@ -178,6 +178,44 @@
        
         NSLog(@"TEST:%d",j);
 
+
+        
+        NSMutableArray *newXarray=[NSMutableArray arrayWithArray:_xArray];
+         NSMutableArray *newYarray=[NSMutableArray arrayWithArray:_valuesArray];
+        
+        for (int i=0; i<_valuesArray.count; i++) {
+              NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i+1]];
+            if (![value1 isEqualToString:@"0"]) {
+               break;
+            }
+            NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
+            if ([value isEqualToString:@"0"]) {
+                [newYarray removeObjectAtIndex:0];
+                [newXarray removeObjectAtIndex:0];
+                
+            }else{
+                break;
+            }
+        }
+        
+        for (int i=(int)(_valuesArray.count-1); i>-1; i--) {
+            NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
+            
+            NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i-1]];
+            if (![value1 isEqualToString:@"0"]) {
+                break;
+            }
+            if ([value isEqualToString:@"0"]) {
+                [newYarray removeLastObject];
+                [newXarray removeLastObject];
+            }else{
+                break;
+            }
+        }
+      
+        _xArray=[NSArray arrayWithArray:newXarray];
+         _valuesArray=[NSMutableArray arrayWithArray:newYarray];
+        
         NSMutableArray *tempXArr = [NSMutableArray array];
         if (_xArray.count > 0) {
             NSString *flag = [[NSMutableString stringWithString:_xArray[0]] substringWithRange:NSMakeRange(1, 1)];
@@ -239,7 +277,7 @@
 }
 
 - (void)refreshLineChartViewWithDataDict:(NSMutableDictionary *)dataDict {
-    //
+ 
     [self setDataDict:dataDict];
     
     //

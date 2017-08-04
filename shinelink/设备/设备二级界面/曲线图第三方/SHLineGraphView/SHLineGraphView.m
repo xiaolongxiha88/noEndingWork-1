@@ -27,8 +27,8 @@
 #import "PNColor.h"
 #import <objc/runtime.h>
 
-#define BOTTOM_MARGIN_TO_LEAVE 30.0
-#define TOP_MARGIN_TO_LEAVE 30.0
+#define BOTTOM_MARGIN_TO_LEAVE (22.0*HEIGHT_SIZE)
+#define TOP_MARGIN_TO_LEAVE (30.0*HEIGHT_SIZE)
 #define INTERVAL_COUNT 6
 #define PLOT_WIDTH (self.bounds.size.width - _leftMarginToLeave)
 
@@ -42,6 +42,12 @@
 @property (nonatomic) CAShapeLayer * chartBottomLine;
 @property (nonatomic) CAShapeLayer * chartLeftLine;
 @property (nonatomic) BOOL islongTap;
+@property (nonatomic) BOOL isTwoTap;
+@property (strong, nonatomic) UIScrollView *scrollView;
+
+@property (assign, nonatomic) CGFloat spaceValue;//间距
+@property (assign, nonatomic) NSInteger lableLookNum;//间距
+@property (assign, nonatomic) CGFloat maxScrollW;//最大距离
 
 @end
 
@@ -66,10 +72,7 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
-    [self loadDefaultTheme];
-}
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -90,12 +93,13 @@
                          kPlotBackgroundLineColorKey : [UIColor colorWithRed:0.48 green:0.48 blue:0.49 alpha:0.4],
                          kDotSizeKey : @10.0
                          };
-    [self drawBorder];
+ 
 }
 
 - (void)drawBorder {
     self.backgroundColor = [UIColor clearColor];
-    _chartMargin = 40.0;
+    _chartMargin = BOTTOM_MARGIN_TO_LEAVE;
+      float minY=TOP_MARGIN_TO_LEAVE-1.5*HEIGHT_SIZE;
     
     _chartBottomLine = [CAShapeLayer layer];
     _chartBottomLine.lineCap      = kCALineCapButt;
@@ -105,14 +109,14 @@
     
     UIBezierPath *progressline = [UIBezierPath bezierPath];
     
-    [progressline moveToPoint:CGPointMake(_chartMargin, self.frame.size.height - kXLabelHeight - _chartMargin)];
-    [progressline addLineToPoint:CGPointMake(self.frame.size.width,  self.frame.size.height - kXLabelHeight - _chartMargin)];
+    [progressline moveToPoint:CGPointMake(_chartMargin, self.frame.size.height -minY)];
+    [progressline addLineToPoint:CGPointMake(_chartMargin+_maxScrollW,  self.frame.size.height -minY)];
     
     [progressline setLineWidth:1.0];
     [progressline setLineCapStyle:kCGLineCapSquare];
     _chartBottomLine.path = progressline.CGPath;
     
-    _chartBottomLine.strokeColor = PNLightGrey.CGColor;
+    _chartBottomLine.strokeColor = [UIColor blackColor].CGColor;
     
     
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
@@ -128,23 +132,25 @@
     
     //Add left Chart Line
     
+    float lineWidthW=0.5*NOW_SIZE;
     _chartLeftLine = [CAShapeLayer layer];
     _chartLeftLine.lineCap      = kCALineCapButt;
     _chartLeftLine.fillColor    = [[UIColor blueColor] CGColor];
-    _chartLeftLine.lineWidth    = 1.0;
+    _chartLeftLine.lineWidth    = lineWidthW;
     _chartLeftLine.strokeEnd    = 0.0;
     
     UIBezierPath *progressLeftline = [UIBezierPath bezierPath];
     
-    [progressLeftline moveToPoint:CGPointMake(_chartMargin, self.frame.size.height - kXLabelHeight - _chartMargin)];
-    [progressLeftline addLineToPoint:CGPointMake(_chartMargin,  -kXLabelHeight)];
+
+    [progressLeftline moveToPoint:CGPointMake(_chartMargin, self.frame.size.height -minY)];
+    [progressLeftline addLineToPoint:CGPointMake(_chartMargin,  15*HEIGHT_SIZE)];
     
     [progressLeftline setLineWidth:1.0];
     [progressLeftline setLineCapStyle:kCGLineCapSquare];
     _chartLeftLine.path = progressLeftline.CGPath;
     
     
-//    _chartLeftLine.strokeColor = PNLightGrey.CGColor;
+   _chartLeftLine.strokeColor =  [UIColor blackColor].CGColor;
     
     
     CABasicAnimation *pathLeftAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
@@ -173,16 +179,29 @@
 
 - (void)setupTheView
 {
+    _lableLookNum=6;
+    _leftMarginToLeave=BOTTOM_MARGIN_TO_LEAVE;
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(_leftMarginToLeave, 0, self.frame.size.width-_leftMarginToLeave,  self.bounds.size.height)];
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    _scrollView.userInteractionEnabled=YES;
+    _scrollView.bounces = NO;
+    [self addSubview:_scrollView];
+    
+    [self getSpaceValue];
+     [self getDirct];
+    
     for(SHPlot *plot in _plots) {
         [self drawPlotWithPlot:plot];
     }
 }
 
+
+
+
 #pragma mark - Actual Plot Drawing Methods
 
 - (void)drawPlotWithPlot:(SHPlot *)plot {
-    [self getDirct];
-    
+   
     //draw y-axis labels. this has to be done first, so that we can determine the left margin to leave according to the
     //y-axis lables.
     [self drawYLabels:plot];
@@ -196,8 +215,8 @@
     /*
      actual plot drawing
      */
-    
 [self drawPlot:plot];
+    
 }
 
 -(void)getDirct{
@@ -205,13 +224,13 @@
     xDirectrix.hidden = YES;
     xDirectrix.backgroundColor = COLOR(232, 114, 86, 1);
     xDirectrix.alpha = .5f;
-    [self addSubview:xDirectrix];
+    [_scrollView addSubview:xDirectrix];
     
     yDirectriy = [[UIView alloc] initWithFrame:CGRectZero];
     yDirectriy.hidden = YES;
     yDirectriy.backgroundColor = COLOR(232, 114, 86, 1);
     yDirectriy.alpha = .5f;
-    [self addSubview: yDirectriy];
+    [_scrollView addSubview: yDirectriy];
     
     DirectriLableH=20*HEIGHT_SIZE;
     
@@ -219,7 +238,7 @@
     xyLableValue.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     xyLableValue.textColor = COLOR(86, 103, 232, 1);
     [xyLableValue setTextAlignment:NSTextAlignmentCenter];
-    [self addSubview:xyLableValue];
+    [_scrollView addSubview:xyLableValue];
     
 
 
@@ -278,11 +297,6 @@
     [graphLayer setStrokeColor:((UIColor *)theme[kPlotStrokeColorKey]).CGColor];
     [graphLayer setLineWidth:((NSNumber *)theme[kPlotStrokeWidthKey]).intValue];
     
-
-//    double yRange = [_yAxisRange doubleValue];
-//    int yIntervalValue = yRange / INTERVAL_COUNT;
-//    yIntervalValue =yIntervalValue/100;
-//    yIntervalValue=yIntervalValue*100;
  
     
     double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
@@ -303,7 +317,7 @@
         int xIndex = [self getIndexForValue:_key forPlot:plot];
         
         //x value
-        double height = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE;
+        double height = self.bounds.size.height - TOP_MARGIN_TO_LEAVE;
         double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
         (plot.xPoints[xIndex]).x = ceil((plot.xPoints[xIndex]).x);
         (plot.xPoints[xIndex]).y = ceil(y);
@@ -316,10 +330,10 @@
     
     //move to initial point for path and background.
     
-     [graphPath moveToPoint:CGPointMake(_leftMarginToLeave,  plot.xPoints[0].y)];
+     [graphPath moveToPoint:CGPointMake(0,  plot.xPoints[0].y)];
     
   //  CGPathMoveToPoint(graphPath, NULL, _leftMarginToLeave, plot.xPoints[0].y);
-    CGPathMoveToPoint(backgroundPath, NULL, _leftMarginToLeave, plot.xPoints[0].y);
+    CGPathMoveToPoint(backgroundPath, NULL, 0, plot.xPoints[0].y);
     
     int count = (int)_xAxisValues.count;
     for(int i=0; i< count; i++){
@@ -340,15 +354,16 @@
         CGPathAddEllipseInRect(circlePath, NULL, CGRectMake(point.x - dotsSize/2.0f, point.y - dotsSize/2.0f, dotsSize, dotsSize));
     }
     
+    float LastW=_maxScrollW;
     //move to initial point for path and background.
    // CGPathAddLineToPoint(graphPath, NULL, _leftMarginToLeave + PLOT_WIDTH, plot.xPoints[count -1].y);
-         [graphPath addLineToPoint:CGPointMake(_leftMarginToLeave + PLOT_WIDTH, plot.xPoints[count -1].y)];
+         [graphPath addLineToPoint:CGPointMake(LastW, plot.xPoints[count -1].y)];
     
-    CGPathAddLineToPoint(backgroundPath, NULL, _leftMarginToLeave + PLOT_WIDTH, plot.xPoints[count - 1].y);
+    CGPathAddLineToPoint(backgroundPath, NULL, LastW, plot.xPoints[count - 1].y);
     
     //additional points for background.
-    CGPathAddLineToPoint(backgroundPath, NULL, _leftMarginToLeave + PLOT_WIDTH, self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE);
-    CGPathAddLineToPoint(backgroundPath, NULL, _leftMarginToLeave, self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE);
+    CGPathAddLineToPoint(backgroundPath, NULL, LastW, self.bounds.size.height - TOP_MARGIN_TO_LEAVE);
+    CGPathAddLineToPoint(backgroundPath, NULL, 0, self.bounds.size.height - TOP_MARGIN_TO_LEAVE);
     CGPathCloseSubpath(backgroundPath);
     
     backgroundLayer.path = backgroundPath;
@@ -367,75 +382,89 @@
     graphLayer.zPosition = 1;
     circleLayer.zPosition = 2;
     
-    [self.layer addSublayer:graphLayer];
-    [self.layer addSublayer:circleLayer];
-    [self.layer addSublayer:backgroundLayer];
+    [_scrollView.layer addSublayer:graphLayer];
+    [_scrollView.layer addSublayer:circleLayer];
+    [_scrollView.layer addSublayer:backgroundLayer];
     
     _islongTap=NO;
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
-    [self addGestureRecognizer:longPress];
+    
+   // UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
+  //  [self addGestureRecognizer:longPress];
     
 
     
 }
 
 
+-(void)getSpaceValue{
+    
+    if (_dirLableValuesY.count<10) {
+        _spaceValue=(self.bounds.size.width-_leftMarginToLeave)/_dirLableValuesY.count;
+    }else{
+        _spaceValue=5*NOW_SIZE;
+    }
+    if (_spaceValue*_dirLableValuesY.count>PLOT_WIDTH) {
+         _scrollView.contentSize = CGSizeMake(_spaceValue*_dirLableValuesY.count+30*NOW_SIZE, 0);
+        _maxScrollW=_spaceValue*_dirLableValuesY.count+30*NOW_SIZE;
+    }else{
+      _scrollView.contentSize = CGSizeMake(PLOT_WIDTH, 0);
+           _maxScrollW=PLOT_WIDTH;
+    }
+    
+       [self drawBorder];
+  
+    
+}
 
 
 - (void)drawXLabels:(SHPlot *)plot {
     
-    int xIntervalCount =(int) _xAxisValues.count;
-    double xIntervalInPx = PLOT_WIDTH / _xAxisValues.count;
-    NSMutableArray *lableName=[NSMutableArray array];
+    int xIntervalCount =(int) _dirLableValuesX.count;
+    
+   // double xIntervalInPx = PLOT_WIDTH / _xAxisValues.count;
     //initialize actual x points values where the circle will be
     plot.xPoints = calloc(sizeof(CGPoint), xIntervalCount);
     
     for(int i=0; i < xIntervalCount; i++){
-        CGPoint currentLabelPoint = CGPointMake((xIntervalInPx * i) + _leftMarginToLeave, self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE);
-        CGRect xLabelFrame = CGRectMake(currentLabelPoint.x, currentLabelPoint.y, xIntervalInPx + 10*NOW_SIZE, BOTTOM_MARGIN_TO_LEAVE);
+       
+        CGPoint currentLabelPoint = CGPointMake((_spaceValue * i), _scrollView.bounds.size.height - TOP_MARGIN_TO_LEAVE);
+        float xLabelFrameW=30*NOW_SIZE;
+      CGRect xLabelFrame = CGRectMake(currentLabelPoint.x, currentLabelPoint.y, xLabelFrameW, TOP_MARGIN_TO_LEAVE);
         
         plot.xPoints[i] = CGPointMake((int) xLabelFrame.origin.x + (xLabelFrame.size.width /2) , (int) 0);
         
         UILabel *xAxisLabel = [[UILabel alloc] initWithFrame:xLabelFrame];
         xAxisLabel.backgroundColor = [UIColor clearColor];
         xAxisLabel.font = (UIFont *)_themeAttributes[kXAxisLabelFontKey];
-        
         xAxisLabel.textColor = (UIColor *)_themeAttributes[kXAxisLabelColorKey];
         xAxisLabel.textAlignment = NSTextAlignmentCenter;
-        
-        NSDictionary *dic = [_xAxisValues objectAtIndex:i];
-        __block NSString *xLabel = nil;
-        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            xLabel = (NSString *)obj;
-        }];
-        if (![lableName containsObject:xLabel]) {
-            [lableName addObject:xLabel];
-            xAxisLabel.text = [NSString stringWithFormat:@"%@", xLabel];
-        }else{
-            xAxisLabel.text = nil;
+          xAxisLabel.adjustsFontSizeToFitWidth=YES;
+      //  [xAxisLabel sizeToFit];
+        NSString *A=[NSString stringWithFormat:@"%@",_dirLableValuesX[i]];
+        xAxisLabel.text=A;
+        if (i%_lableLookNum==0) {
+              [_scrollView addSubview:xAxisLabel];
         }
-       
-        [self addSubview:xAxisLabel];
+        
+      
     }
+    
+  
+    
 }
 
 - (void)drawYLabels:(SHPlot *)plot {
     double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
     
-//    int yIntervalValue = yRange / INTERVAL_COUNT;
-//    yIntervalValue =yIntervalValue/100;
-//    yIntervalValue=yIntervalValue*100;
-//    int intervalInPx = (self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE ) / (INTERVAL_COUNT +1);
-    
     double yIntervalValue = yRange / INTERVAL_COUNT;
-    double intervalInPx = (self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE ) / (INTERVAL_COUNT +1);
+    double intervalInPx = (self.bounds.size.height - TOP_MARGIN_TO_LEAVE ) / (INTERVAL_COUNT +1);
     
     NSMutableArray *labelArray = [NSMutableArray array];
     float maxWidth = 0;
     
     for(int i= INTERVAL_COUNT + 1; i >= 0; i--){
         CGPoint currentLinePoint = CGPointMake(_leftMarginToLeave, i * intervalInPx);
-        CGRect lableFrame = CGRectMake(0, currentLinePoint.y - (intervalInPx / 2), 100, intervalInPx);
+        CGRect lableFrame = CGRectMake(0, currentLinePoint.y - (intervalInPx / 2), _leftMarginToLeave, intervalInPx);
         
         if(i != 0) {
             UILabel *yAxisLabel = [[UILabel alloc] initWithFrame:lableFrame];
@@ -443,6 +472,7 @@
             yAxisLabel.font = (UIFont *)_themeAttributes[kYAxisLabelFontKey];
             yAxisLabel.textColor = (UIColor *)_themeAttributes[kYAxisLabelColorKey];
             yAxisLabel.textAlignment = NSTextAlignmentCenter;
+            yAxisLabel.adjustsFontSizeToFitWidth=YES;
             float val = (yIntervalValue * ((INTERVAL_COUNT +1) - i));
             if(val > 0){
                 yAxisLabel.text = [NSString stringWithFormat:@"%.0f%@", val, _yAxisSuffix];
@@ -462,7 +492,7 @@
         }
     }
     
-    _leftMarginToLeave = maxWidth + [_themeAttributes[kYAxisLabelSideMarginsKey] doubleValue];
+   //_leftMarginToLeave = maxWidth + [_themeAttributes[kYAxisLabelSideMarginsKey] doubleValue];
     
     for( UILabel *l in labelArray) {
         CGSize newSize = CGSizeMake(_leftMarginToLeave, l.frame.size.height);
@@ -483,17 +513,17 @@
     
     CGMutablePathRef linesPath = CGPathCreateMutable();
     
-    double intervalInPx = (self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE) / (INTERVAL_COUNT + 1);
+    double intervalInPx = (self.bounds.size.height - TOP_MARGIN_TO_LEAVE) / (INTERVAL_COUNT + 1);
     for(int i= INTERVAL_COUNT + 1; i > 0; i--){
         
-        CGPoint currentLinePoint = CGPointMake(_leftMarginToLeave, (i * intervalInPx));
+        CGPoint currentLinePoint = CGPointMake(0, (i * intervalInPx));
         
         CGPathMoveToPoint(linesPath, NULL, currentLinePoint.x, currentLinePoint.y);
-        CGPathAddLineToPoint(linesPath, NULL, currentLinePoint.x + PLOT_WIDTH, currentLinePoint.y);
+        CGPathAddLineToPoint(linesPath, NULL, currentLinePoint.x + _maxScrollW, currentLinePoint.y);
     }
     
     linesLayer.path = linesPath;
-    [self.layer addSublayer:linesLayer];
+    [_scrollView.layer addSublayer:linesLayer];
 }
 
 #pragma mark - UIButton event methods
@@ -554,8 +584,12 @@
   
         UITouch *touch = [touches anyObject];
 
+    if (touch.tapCount==2) {
+        _islongTap=YES;
+        NSLog(@"touch2");
+    }
    
-    if (_islongTap) {
+  
         CGPoint touchPoint = [touch locationInView:self];
         
         //  int count = (int)_xAxisValues.count;
@@ -579,7 +613,7 @@
             int xIndex = [self getIndexForValue:_key forPlot:SHPlotValue];
             
             //x value
-            double height = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE;
+            double height = self.bounds.size.height - TOP_MARGIN_TO_LEAVE;
             double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
             (SHPlotValue.xPoints[xIndex]).x = ceil((SHPlotValue.xPoints[xIndex]).x);
             (SHPlotValue.xPoints[xIndex]).y = ceil(y);
@@ -606,7 +640,7 @@
         
         if (dirInt<ShCount) {
             float xDirectrixX=(SHPlotValue.xPoints[dirInt]).x;
-            double xDirectrixY = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE-DirectriLableH;
+            double xDirectrixY = self.bounds.size.height - TOP_MARGIN_TO_LEAVE-DirectriLableH;
             xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
             xDirectrix.hidden = NO;
             [self bringSubviewToFront:xDirectrix];
@@ -623,7 +657,7 @@
             
         }
 
-    }
+    
     
 
 }
@@ -654,7 +688,7 @@
             int xIndex = [self getIndexForValue:_key forPlot:SHPlotValue];
             
             //x value
-            double height = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE;
+            double height = self.bounds.size.height - TOP_MARGIN_TO_LEAVE;
             double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
             (SHPlotValue.xPoints[xIndex]).x = ceil((SHPlotValue.xPoints[xIndex]).x);
             (SHPlotValue.xPoints[xIndex]).y = ceil(y);
@@ -681,7 +715,7 @@
         
         if (dirInt<ShCount) {
             float xDirectrixX=(SHPlotValue.xPoints[dirInt]).x;
-            double xDirectrixY = self.bounds.size.height - BOTTOM_MARGIN_TO_LEAVE-DirectriLableH;
+            double xDirectrixY = self.bounds.size.height - TOP_MARGIN_TO_LEAVE-DirectriLableH;
             xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
             xDirectrix.hidden = NO;
             [self bringSubviewToFront:xDirectrix];
@@ -705,13 +739,23 @@
 
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (_islongTap) {
+        [self performSelector:@selector(delayMethod) withObject:nil afterDelay:2.0f];
+    }else{
+      [self performSelector:@selector(delayMethod1) withObject:nil afterDelay:2.0f];
+    }
     
-[self performSelector:@selector(delayMethod) withObject:nil afterDelay:2.0f];
+}
+
+-(void)delayMethod1{
+    xDirectrix.hidden = YES;
+    yDirectriy.hidden = YES;
+    xyLableValue.text=nil;
     
-    _islongTap=NO;
 }
 
 -(void)delayMethod{
+    _islongTap=NO;
    xDirectrix.hidden = YES;
       yDirectriy.hidden = YES;
      xyLableValue.text=nil;
