@@ -14,7 +14,7 @@
 #import <SystemConfiguration/CaptiveNetwork.h>
 #import <CommonCrypto/CommonDigest.h>
 
-float Time=20.f;
+float Time=30.f;
 @implementation BaseRequest
 + (void)requestWithMethod:(NSString *)method paramars:(NSDictionary *)paramars paramarsSite:(NSString *)site sucessBlock:(successBlock)successBlock failure:(void (^)(NSError *))failure {
     AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];

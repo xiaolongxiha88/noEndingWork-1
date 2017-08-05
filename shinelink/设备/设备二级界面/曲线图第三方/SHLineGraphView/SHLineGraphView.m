@@ -36,7 +36,7 @@
 
 #define kAssociatedPlotObject @"kAssociatedPlotObject"
 
-@interface SHLineGraphView ()
+@interface SHLineGraphView ()<UIScrollViewDelegate>
 
 @property (nonatomic) CGFloat chartMargin;
 @property (nonatomic) CAShapeLayer * chartBottomLine;
@@ -44,6 +44,7 @@
 @property (nonatomic) BOOL islongTap;
 @property (nonatomic) BOOL isTwoTap;
 @property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UILabel *firstLable;
 
 @property (assign, nonatomic) CGFloat spaceValue;//间距
 @property (assign, nonatomic) NSInteger lableLookNum;//间距
@@ -185,7 +186,11 @@
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.userInteractionEnabled=YES;
     _scrollView.bounces = NO;
+    _scrollView.delegate=self;
     [self addSubview:_scrollView];
+    
+     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
+      [_scrollView addGestureRecognizer:longPress];
     
     [self getSpaceValue];
      [self getDirct];
@@ -388,8 +393,7 @@
     
     _islongTap=NO;
     
-   // UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
-  //  [self addGestureRecognizer:longPress];
+
     
 
     
@@ -397,11 +401,12 @@
 
 
 -(void)getSpaceValue{
-    
-    if (_dirLableValuesY.count<10) {
+    float intSpace=5*NOW_SIZE;
+    int minSpaceNum=ceil(PLOT_WIDTH/intSpace);
+    if (_dirLableValuesY.count<minSpaceNum) {
         _spaceValue=(self.bounds.size.width-_leftMarginToLeave)/_dirLableValuesY.count;
     }else{
-        _spaceValue=5*NOW_SIZE;
+        _spaceValue=intSpace;
     }
     if (_spaceValue*_dirLableValuesY.count>PLOT_WIDTH) {
          _scrollView.contentSize = CGSizeMake(_spaceValue*_dirLableValuesY.count+30*NOW_SIZE, 0);
@@ -426,9 +431,9 @@
     plot.xPoints = calloc(sizeof(CGPoint), xIntervalCount);
     
     for(int i=0; i < xIntervalCount; i++){
-       
-        CGPoint currentLabelPoint = CGPointMake((_spaceValue * i), _scrollView.bounds.size.height - TOP_MARGIN_TO_LEAVE);
-        float xLabelFrameW=30*NOW_SIZE;
+             float xLabelFrameW=30*NOW_SIZE;
+        
+        CGPoint currentLabelPoint = CGPointMake((_spaceValue * i)-xLabelFrameW/2, _scrollView.bounds.size.height - TOP_MARGIN_TO_LEAVE);
       CGRect xLabelFrame = CGRectMake(currentLabelPoint.x, currentLabelPoint.y, xLabelFrameW, TOP_MARGIN_TO_LEAVE);
         
         plot.xPoints[i] = CGPointMake((int) xLabelFrame.origin.x + (xLabelFrame.size.width /2) , (int) 0);
@@ -443,7 +448,14 @@
         NSString *A=[NSString stringWithFormat:@"%@",_dirLableValuesX[i]];
         xAxisLabel.text=A;
         if (i%_lableLookNum==0) {
-              [_scrollView addSubview:xAxisLabel];
+            if (i!=0) {
+                 [_scrollView addSubview:xAxisLabel];
+            }else{
+                xAxisLabel.frame=CGRectMake(currentLabelPoint.x+_leftMarginToLeave, currentLabelPoint.y, xLabelFrameW, TOP_MARGIN_TO_LEAVE);
+                _firstLable=xAxisLabel;
+              [self addSubview:_firstLable];
+            }
+            
         }
         
       
@@ -563,21 +575,109 @@
 
 - (void)event_longPressAction:(UILongPressGestureRecognizer *)longPress {
     
-        if(UIGestureRecognizerStateBegan == longPress.state) {
-            _islongTap=YES;
+           if(UIGestureRecognizerStateChanged == longPress.state || UIGestureRecognizerStateBegan == longPress.state) {
+            
+                 CGPoint location = [longPress locationInView:_scrollView];
+               [self getPointToShow:location];
         }
     
-//    if(UIGestureRecognizerStateChanged == longPress.state || UIGestureRecognizerStateBegan == longPress.state) {
-//        
-//        _islongTap=YES;
-//    }
+
     
     if(longPress.state == UIGestureRecognizerStateEnded)
     {
         
-        //      _islongTap=NO;
+       [self performSelector:@selector(delayMethod) withObject:nil afterDelay:2.0f];
     }
 }
+
+
+-(void)getPointToShow:(CGPoint)touchPoint{
+    
+
+    double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
+    double yIntervalValue = yRange / INTERVAL_COUNT;
+    int ShCount=(int)SHPlotValue.plottingValues.count;
+    
+    [SHPlotValue.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dic = (NSDictionary *)obj;
+        
+        __block NSNumber *_key = nil;
+        __block NSNumber *_value = nil;
+        
+        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            _key = (NSNumber *)key;
+            _value = (NSNumber *)obj;
+        }];
+        
+        int xIndex = [self getIndexForValue:_key forPlot:SHPlotValue];
+        
+        //x value
+        double height = self.bounds.size.height - TOP_MARGIN_TO_LEAVE;
+        double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
+        (SHPlotValue.xPoints[xIndex]).x = ceil((SHPlotValue.xPoints[xIndex]).x);
+        (SHPlotValue.xPoints[xIndex]).y = ceil(y);
+        
+    }];
+    
+    int dirInt=0;
+    
+    for (int k=0; k<ShCount; k++) {
+        
+        float plotX1=(SHPlotValue.xPoints[k]).x;
+        float plotX2=(SHPlotValue.xPoints[k+1]).x;
+        float plot0=touchPoint.x;
+        if( (plotX1<plot0)&&(plotX2>plot0) ){
+            
+            if ((plot0-plotX1)>(plotX2-plot0)) {
+                dirInt=k+1;
+            }else{
+                dirInt=k;
+            }
+        }
+        
+    }
+    
+    if (dirInt<ShCount) {
+        float xDirectrixX=(SHPlotValue.xPoints[dirInt]).x;
+        double xDirectrixY = self.bounds.size.height - TOP_MARGIN_TO_LEAVE-DirectriLableH;
+        xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
+        xDirectrix.hidden = NO;
+        [self bringSubviewToFront:xDirectrix];
+        
+        float yDirectrixY=(SHPlotValue.xPoints[dirInt]).y;
+        yDirectriy.frame = CGRectMake(0,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
+        yDirectriy.hidden = NO;
+        [self bringSubviewToFront: yDirectriy];
+        
+        NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_dirLableValuesY[dirInt]] floatValue]];
+        NSString*xLableValue=[NSString stringWithFormat:@"%@",_dirLableValuesX[dirInt]];
+        NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_shijian,xLableValue,root_shuzhi,xDirY0];
+        xyLableValue.text=xyLableText;
+        
+    }
+    
+}
+
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    int x= scrollView.contentOffset.x; //获取横向滑动的距离
+   // NSLog(@"x=%.1f",x);
+    
+    if (x==0) {
+        _firstLable.hidden=NO;
+    }else{
+     _firstLable.hidden=YES;
+    }
+    
+}
+
+
+
+
+
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -755,7 +855,6 @@
 }
 
 -(void)delayMethod{
-    _islongTap=NO;
    xDirectrix.hidden = YES;
       yDirectriy.hidden = YES;
      xyLableValue.text=nil;
