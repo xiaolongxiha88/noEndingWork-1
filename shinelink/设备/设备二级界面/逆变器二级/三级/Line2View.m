@@ -184,10 +184,13 @@
          NSMutableArray *newYarray=[NSMutableArray arrayWithArray:_valuesArray];
         
         for (int i=0; i<_valuesArray.count; i++) {
-              NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i+1]];
-            if (![value1 isEqualToString:@"0"]) {
-               break;
+            if (i<_valuesArray.count-1) {
+                NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i+1]];
+                if (![value1 isEqualToString:@"0"]) {
+                    break;
+                }
             }
+          
             NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
             if ([value isEqualToString:@"0"]) {
                 [newYarray removeObjectAtIndex:0];
@@ -200,11 +203,13 @@
         
         for (int i=(int)(_valuesArray.count-1); i>-1; i--) {
             NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
-            
-            NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i-1]];
-            if (![value1 isEqualToString:@"0"]) {
-                break;
+            if (i>1) {
+                NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i-1]];
+                if (![value1 isEqualToString:@"0"]) {
+                    break;
+                }
             }
+          
             if ([value isEqualToString:@"0"]) {
                 [newYarray removeLastObject];
                 [newXarray removeLastObject];

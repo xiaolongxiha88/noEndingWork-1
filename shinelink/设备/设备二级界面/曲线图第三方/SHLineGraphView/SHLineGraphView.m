@@ -27,6 +27,8 @@
 #import "PNColor.h"
 #import <objc/runtime.h>
 
+#define LableW  (30.0*NOW_SIZE)
+
 #define BOTTOM_MARGIN_TO_LEAVE (22.0*HEIGHT_SIZE)
 #define TOP_MARGIN_TO_LEAVE (30.0*HEIGHT_SIZE)
 #define INTERVAL_COUNT 6
@@ -47,8 +49,10 @@
 @property (strong, nonatomic) UILabel *firstLable;
 
 @property (assign, nonatomic) CGFloat spaceValue;//间距
-@property (assign, nonatomic) NSInteger lableLookNum;//间距
+@property (assign, nonatomic) NSInteger lableLookNum;//间距数量
 @property (assign, nonatomic) CGFloat maxScrollW;//最大距离
+@property (assign, nonatomic) CGFloat offX;//scrollView偏移
+@property (assign, nonatomic) CGFloat lastLableX;
 
 @end
 
@@ -100,7 +104,7 @@
 - (void)drawBorder {
     self.backgroundColor = [UIColor clearColor];
     _chartMargin = BOTTOM_MARGIN_TO_LEAVE;
-      float minY=TOP_MARGIN_TO_LEAVE-1.5*HEIGHT_SIZE;
+      float minY=TOP_MARGIN_TO_LEAVE-1.0*HEIGHT_SIZE;
     
     _chartBottomLine = [CAShapeLayer layer];
     _chartBottomLine.lineCap      = kCALineCapButt;
@@ -180,36 +184,63 @@
 
 - (void)setupTheView
 {
+  
+   // int minSpaceNum=ceil(PLOT_WIDTH/intSpace);
+  
+        _spaceValue=PLOT_WIDTH/_dirLableValuesY.count;
+   
     _lableLookNum=6;
     _leftMarginToLeave=BOTTOM_MARGIN_TO_LEAVE;
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(_leftMarginToLeave, 0, self.frame.size.width-_leftMarginToLeave,  self.bounds.size.height)];
+    
+    [self firstToChar];
+    
+    [self getSpaceValue];
+    
+    
+       [self drawBorder];
+    
+     [self getDirct];
+    
+    [self getPlotDraw];
+}
+
+-(void)getPlotDraw{
+    for(SHPlot *plot in _plots) {
+
+        [self drawYLabels:plot];
+        
+        [self drawPlotWithPlot:plot];
+    }
+}
+
+-(void)firstToChar{
+
+    if (_scrollView) {
+        [_scrollView removeFromSuperview];
+        _scrollView=nil;
+    }
+    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(_leftMarginToLeave, 0, PLOT_WIDTH,  self.bounds.size.height)];
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.userInteractionEnabled=YES;
     _scrollView.bounces = NO;
     _scrollView.delegate=self;
     [self addSubview:_scrollView];
     
-     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
-      [_scrollView addGestureRecognizer:longPress];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
+    [_scrollView addGestureRecognizer:longPress];
     
-    [self getSpaceValue];
-     [self getDirct];
+    UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGesture:)];
+    [_scrollView addGestureRecognizer:pinch];
     
-    for(SHPlot *plot in _plots) {
-        [self drawPlotWithPlot:plot];
-    }
+
+
 }
-
-
-
 
 #pragma mark - Actual Plot Drawing Methods
 
 - (void)drawPlotWithPlot:(SHPlot *)plot {
    
-    //draw y-axis labels. this has to be done first, so that we can determine the left margin to leave according to the
-    //y-axis lables.
-    [self drawYLabels:plot];
+
     
     //draw x-labels
     [self drawXLabels:plot];
@@ -239,7 +270,7 @@
     
     DirectriLableH=20*HEIGHT_SIZE;
     
-    xyLableValue=[[UILabel alloc]initWithFrame:CGRectMake(160*NOW_SIZE, 0*HEIGHT_SIZE, 160*NOW_SIZE, DirectriLableH)];
+    xyLableValue=[[UILabel alloc]initWithFrame:CGRectMake(140*NOW_SIZE, 0*HEIGHT_SIZE, 160*NOW_SIZE, DirectriLableH)];
     xyLableValue.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     xyLableValue.textColor = COLOR(86, 103, 232, 1);
     [xyLableValue setTextAlignment:NSTextAlignmentCenter];
@@ -401,22 +432,16 @@
 
 
 -(void)getSpaceValue{
-    float intSpace=5*NOW_SIZE;
-    int minSpaceNum=ceil(PLOT_WIDTH/intSpace);
-    if (_dirLableValuesY.count<minSpaceNum) {
-        _spaceValue=(self.bounds.size.width-_leftMarginToLeave)/_dirLableValuesY.count;
-    }else{
-        _spaceValue=intSpace;
-    }
+
     if (_spaceValue*_dirLableValuesY.count>PLOT_WIDTH) {
-         _scrollView.contentSize = CGSizeMake(_spaceValue*_dirLableValuesY.count+30*NOW_SIZE, 0);
-        _maxScrollW=_spaceValue*_dirLableValuesY.count+30*NOW_SIZE;
+         _scrollView.contentSize = CGSizeMake(_spaceValue*_dirLableValuesY.count, 0);
+        _maxScrollW=_spaceValue*_dirLableValuesY.count;
     }else{
       _scrollView.contentSize = CGSizeMake(PLOT_WIDTH, 0);
            _maxScrollW=PLOT_WIDTH;
     }
     
-       [self drawBorder];
+    
   
     
 }
@@ -426,12 +451,20 @@
     
     int xIntervalCount =(int) _dirLableValuesX.count;
     
-   // double xIntervalInPx = PLOT_WIDTH / _xAxisValues.count;
-    //initialize actual x points values where the circle will be
     plot.xPoints = calloc(sizeof(CGPoint), xIntervalCount);
     
+    CAShapeLayer *linesLayer = [CAShapeLayer layer];
+    linesLayer.frame = self.bounds;
+    linesLayer.fillColor = [UIColor blueColor].CGColor;
+    linesLayer.backgroundColor = [UIColor clearColor].CGColor;
+    linesLayer.strokeColor = ((UIColor *)_themeAttributes[kPlotBackgroundLineColorKey]).CGColor;
+    linesLayer.lineWidth = 0.5*HEIGHT_SIZE;
+    
+    CGMutablePathRef linesPath = CGPathCreateMutable();
+    
+    
     for(int i=0; i < xIntervalCount; i++){
-             float xLabelFrameW=30*NOW_SIZE;
+             float xLabelFrameW=LableW;
         
         CGPoint currentLabelPoint = CGPointMake((_spaceValue * i)-xLabelFrameW/2, _scrollView.bounds.size.height - TOP_MARGIN_TO_LEAVE);
       CGRect xLabelFrame = CGRectMake(currentLabelPoint.x, currentLabelPoint.y, xLabelFrameW, TOP_MARGIN_TO_LEAVE);
@@ -447,21 +480,34 @@
       //  [xAxisLabel sizeToFit];
         NSString *A=[NSString stringWithFormat:@"%@",_dirLableValuesX[i]];
         xAxisLabel.text=A;
-        if (i%_lableLookNum==0) {
+      
             if (i!=0) {
-                 [_scrollView addSubview:xAxisLabel];
+                if (currentLabelPoint.x>(_lastLableX+40*NOW_SIZE)) {
+                    _lastLableX=currentLabelPoint.x;
+                      [_scrollView addSubview:xAxisLabel];
+                    
+                    CGPoint currentLinePoint = CGPointMake(currentLabelPoint.x+xLabelFrameW/2, currentLabelPoint.y);
+                    CGPathMoveToPoint(linesPath, NULL, currentLinePoint.x, currentLinePoint.y);
+                    CGPathAddLineToPoint(linesPath, NULL, currentLinePoint.x , 15*HEIGHT_SIZE);
+                    
+                }
+               
             }else{
+                _lastLableX=-xLabelFrameW/2;
                 xAxisLabel.frame=CGRectMake(currentLabelPoint.x+_leftMarginToLeave, currentLabelPoint.y, xLabelFrameW, TOP_MARGIN_TO_LEAVE);
+                if (_firstLable) {
+                    [_firstLable removeFromSuperview];
+                    _firstLable=nil;
+                }
                 _firstLable=xAxisLabel;
               [self addSubview:_firstLable];
             }
-            
-        }
         
-      
     }
     
-  
+    
+    linesLayer.path = linesPath;
+    [_scrollView.layer addSublayer:linesLayer];
     
 }
 
@@ -521,7 +567,7 @@
     linesLayer.fillColor = [UIColor blueColor].CGColor;
     linesLayer.backgroundColor = [UIColor clearColor].CGColor;
     linesLayer.strokeColor = ((UIColor *)_themeAttributes[kPlotBackgroundLineColorKey]).CGColor;
-    linesLayer.lineWidth = 1;
+    linesLayer.lineWidth = 0.5*HEIGHT_SIZE;
     
     CGMutablePathRef linesPath = CGPathCreateMutable();
     
@@ -538,40 +584,6 @@
     [_scrollView.layer addSublayer:linesLayer];
 }
 
-#pragma mark - UIButton event methods
-
-- (void)clicked:(id)sender
-{
-    @try {
-        UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 30)];
-        lbl.backgroundColor = [UIColor clearColor];
-        UIButton *btn = (UIButton *)sender;
-        NSUInteger tag = btn.tag;
-        
-        SHPlot *_plot = objc_getAssociatedObject(btn, kAssociatedPlotObject);
-        NSString *text = [_plot.plottingPointsLabels objectAtIndex:tag];
-        
-        lbl.text = text;
-        lbl.textColor = [UIColor whiteColor];
-        lbl.textAlignment = NSTextAlignmentCenter;
-        lbl.font = (UIFont *)_plot.plotThemeAttributes[kPlotPointValueFontKey];
-        [lbl sizeToFit];
-        lbl.frame = CGRectMake(0, 0, lbl.frame.size.width + 5, lbl.frame.size.height);
-        
-        CGPoint point =((UIButton *)sender).center;
-        point.y -= 15;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [PopoverView showPopoverAtPoint:point
-                                     inView:self
-                            withContentView:lbl
-                                   delegate:nil];
-        });
-    }
-    @catch (NSException *exception) {
-        NSLog(@"plotting label is not available for this point");
-    }
-}
 
 - (void)event_longPressAction:(UILongPressGestureRecognizer *)longPress {
     
@@ -642,16 +654,18 @@
         double xDirectrixY = self.bounds.size.height - TOP_MARGIN_TO_LEAVE-DirectriLableH;
         xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
         xDirectrix.hidden = NO;
-        [self bringSubviewToFront:xDirectrix];
+        [_scrollView bringSubviewToFront:xDirectrix];
         
         float yDirectrixY=(SHPlotValue.xPoints[dirInt]).y;
-        yDirectriy.frame = CGRectMake(0,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
+        yDirectriy.frame = CGRectMake(_offX,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
         yDirectriy.hidden = NO;
-        [self bringSubviewToFront: yDirectriy];
+        [_scrollView bringSubviewToFront: yDirectriy];
         
         NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_dirLableValuesY[dirInt]] floatValue]];
         NSString*xLableValue=[NSString stringWithFormat:@"%@",_dirLableValuesX[dirInt]];
         NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_shijian,xLableValue,root_shuzhi,xDirY0];
+        
+        xyLableValue.frame=CGRectMake(140*NOW_SIZE+_offX, 0*HEIGHT_SIZE, 160*NOW_SIZE, DirectriLableH);
         xyLableValue.text=xyLableText;
         
     }
@@ -662,8 +676,9 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
-    int x= scrollView.contentOffset.x; //获取横向滑动的距离
-   // NSLog(@"x=%.1f",x);
+    float x= scrollView.contentOffset.x; //获取横向滑动的距离
+      // NSLog(@"x=%.1f",x);
+    _offX=x;
     
     if (x==0) {
         _firstLable.hidden=NO;
@@ -674,185 +689,81 @@
 }
 
 
-
-
-
-
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+// 捏合手势监听方法
+- (void)pinchGesture:(UIPinchGestureRecognizer *)recognizer
 {
-  
-        UITouch *touch = [touches anyObject];
 
-    if (touch.tapCount==2) {
-        _islongTap=YES;
-        NSLog(@"touch2");
-    }
-   
-  
-        CGPoint touchPoint = [touch locationInView:self];
+    if (recognizer.state==UIGestureRecognizerStateBegan || recognizer.state==UIGestureRecognizerStateChanged)
+    {
+//        UIView *view=[recognizer view];
+//    view.transform=CGAffineTransformScale(view.transform, recognizer.scale, 1);
+//        float Scale=recognizer.scale;
+//        recognizer.scale=1;
         
-        //  int count = (int)_xAxisValues.count;
-        
-        
-        double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
-        double yIntervalValue = yRange / INTERVAL_COUNT;
-        int ShCount=(int)SHPlotValue.plottingValues.count;
-        
-        [SHPlotValue.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSDictionary *dic = (NSDictionary *)obj;
+        CGFloat currentIndex,leftMagin;
+        if( recognizer.numberOfTouches == 2 ) {
             
-            __block NSNumber *_key = nil;
-            __block NSNumber *_value = nil;
-            
-            [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                _key = (NSNumber *)key;
-                _value = (NSNumber *)obj;
-            }];
-            
-            int xIndex = [self getIndexForValue:_key forPlot:SHPlotValue];
-            
-            //x value
-            double height = self.bounds.size.height - TOP_MARGIN_TO_LEAVE;
-            double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
-            (SHPlotValue.xPoints[xIndex]).x = ceil((SHPlotValue.xPoints[xIndex]).x);
-            (SHPlotValue.xPoints[xIndex]).y = ceil(y);
-            
-        }];
-        
-        int dirInt=0;
-        
-        for (int k=0; k<ShCount; k++) {
-            
-            float plotX1=(SHPlotValue.xPoints[k]).x;
-            float plotX2=(SHPlotValue.xPoints[k+1]).x;
-            float plot0=touchPoint.x;
-            if( (plotX1<plot0)&&(plotX2>plot0) ){
+           
+            if ((recognizer.scale>1.3)||(recognizer.scale<0.7)) {
+                //2.获取捏合中心点 -> 捏合中心点距离scrollviewcontent左侧的距离
+                CGPoint p1 = [recognizer locationOfTouch:0 inView:_scrollView];
+                CGPoint p2 = [recognizer locationOfTouch:1 inView:_scrollView];
+                CGFloat centerX = (p1.x+p2.x)/2;
+                leftMagin = centerX - self.scrollView.contentOffset.x;
                 
-                if ((plot0-plotX1)>(plotX2-plot0)) {
-                    dirInt=k+1;
-                }else{
-                    dirInt=k;
-                }
-            }
-            
-        }
-        
-        if (dirInt<ShCount) {
-            float xDirectrixX=(SHPlotValue.xPoints[dirInt]).x;
-            double xDirectrixY = self.bounds.size.height - TOP_MARGIN_TO_LEAVE-DirectriLableH;
-            xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
-            xDirectrix.hidden = NO;
-            [self bringSubviewToFront:xDirectrix];
-            
-            float yDirectrixY=(SHPlotValue.xPoints[dirInt]).y;
-            yDirectriy.frame = CGRectMake(_leftMarginToLeave,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
-            yDirectriy.hidden = NO;
-            [self bringSubviewToFront: yDirectriy];
-            
-            NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_dirLableValuesY[dirInt]] floatValue]];
-            NSString*xLableValue=[NSString stringWithFormat:@"%@",_dirLableValuesX[dirInt]];
-            NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_shijian,xLableValue,root_shuzhi,xDirY0];
-            xyLableValue.text=xyLableText;
-            
-        }
-
-    
-    
-
-}
-
-
-
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
-    if (_islongTap) {
-        UITouch *touch = [touches anyObject];
-        CGPoint touchPoint = [touch locationInView:self];
-        
-        double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
-        double yIntervalValue = yRange / INTERVAL_COUNT;
-        int ShCount=(int)SHPlotValue.plottingValues.count;
-        
-        [SHPlotValue.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-            NSDictionary *dic = (NSDictionary *)obj;
-            
-            __block NSNumber *_key = nil;
-            __block NSNumber *_value = nil;
-            
-            [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                _key = (NSNumber *)key;
-                _value = (NSNumber *)obj;
-            }];
-            
-            int xIndex = [self getIndexForValue:_key forPlot:SHPlotValue];
-            
-            //x value
-            double height = self.bounds.size.height - TOP_MARGIN_TO_LEAVE;
-            double y = height - ((height / ([_yAxisRange doubleValue] + yIntervalValue)) * [_value doubleValue]);
-            (SHPlotValue.xPoints[xIndex]).x = ceil((SHPlotValue.xPoints[xIndex]).x);
-            (SHPlotValue.xPoints[xIndex]).y = ceil(y);
-            
-        }];
-        
-        int dirInt=0;
-        
-        for (int k=0; k<ShCount; k++) {
-            
-            float plotX1=(SHPlotValue.xPoints[k]).x;
-            float plotX2=(SHPlotValue.xPoints[k+1]).x;
-            float plot0=touchPoint.x;
-            if( (plotX1<plot0)&&(plotX2>plot0) ){
+                currentIndex = centerX / _spaceValue;
+                //            NSLog(@"currentIndex = %f",currentIndex);
                 
-                if ((plot0-plotX1)>(plotX2-plot0)) {
-                    dirInt=k+1;
-                }else{
-                    dirInt=k;
+               
+                float maxSpaceValue=LableW*1.5;
+                _spaceValue= recognizer.scale*_spaceValue;
+                _spaceValue = _spaceValue > maxSpaceValue ? maxSpaceValue :_spaceValue;
+                
+                if ((_spaceValue*_dirLableValuesY.count)<PLOT_WIDTH) {
+                      _spaceValue=PLOT_WIDTH/_dirLableValuesY.count;
+                    leftMagin=0;
                 }
-            }
+                
+                float offW=currentIndex*_spaceValue;
+                 NSLog(@"offW = %f",offW);
+                  NSLog(@"leftMagin = %f",leftMagin);
+                 NSLog(@" self.scrollView.contentOffset.x = %f", self.scrollView.contentOffset.x);
+                
+                    [self refreshUI];
+                
+                if (recognizer.scale >1) {
+                      self.scrollView.contentOffset = CGPointMake(currentIndex*_spaceValue-leftMagin, 0);
+                }
+                
+                recognizer.scale = 1.0;
+                
             
+                
+            
+                
+            }
+  
         }
         
-        if (dirInt<ShCount) {
-            float xDirectrixX=(SHPlotValue.xPoints[dirInt]).x;
-            double xDirectrixY = self.bounds.size.height - TOP_MARGIN_TO_LEAVE-DirectriLableH;
-            xDirectrix.frame = CGRectMake(xDirectrixX,DirectriLableH,1*NOW_SIZE, xDirectrixY);
-            xDirectrix.hidden = NO;
-            [self bringSubviewToFront:xDirectrix];
-            
-            float yDirectrixY=(SHPlotValue.xPoints[dirInt]).y;
-            yDirectriy.frame = CGRectMake(_leftMarginToLeave,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
-            yDirectriy.hidden = NO;
-            [self bringSubviewToFront: yDirectriy];
-            
-            NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_dirLableValuesY[dirInt]] floatValue]];
-            NSString*xLableValue=[NSString stringWithFormat:@"%@",_dirLableValuesX[dirInt]];
-            NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_shijian,xLableValue,root_shuzhi,xDirY0];
-            xyLableValue.text=xyLableText;
-            
-            
-        }
-
     }
     
 }
 
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    if (_islongTap) {
-        [self performSelector:@selector(delayMethod) withObject:nil afterDelay:2.0f];
-    }else{
-      [self performSelector:@selector(delayMethod1) withObject:nil afterDelay:2.0f];
-    }
+-(void)refreshUI{
+    [self firstToChar];
     
+    [self getSpaceValue];
+    
+    [self getDirct];
+    
+    for(SHPlot *plot in _plots) {
+   [self drawPlotWithPlot:plot];
+    }
+
 }
 
--(void)delayMethod1{
-    xDirectrix.hidden = YES;
-    yDirectriy.hidden = YES;
-    xyLableValue.text=nil;
-    
-}
+
 
 -(void)delayMethod{
    xDirectrix.hidden = YES;
