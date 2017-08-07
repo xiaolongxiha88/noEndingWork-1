@@ -14,6 +14,8 @@
 @interface Line2View () <PNChartDelegate>
 
 @property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) NSInteger barType;
+@property (nonatomic, strong) NSArray *firstValueArray;
 @property (nonatomic, strong) NSMutableDictionary *dataDict;
 
 @property (nonatomic, strong) UILabel *moneyLabel;
@@ -44,16 +46,20 @@
         self.unitLabel.hidden = NO;
         //[self addSubview:self.noDataLabel];
         dict=[NSMutableDictionary new];
-        [dict setObject:@"0.0" forKey:@"08:30"];
-        [dict setObject:@"0.0" forKey:@"09:30"];
-        [dict setObject:@"0.0" forKey:@"10:30"];
-        [dict setObject:@"0.0" forKey:@"11:30"];
-        [dict setObject:@"0.0" forKey:@"12:30"];
-        [dict setObject:@"0.0" forKey:@"13:30"];
-        [dict setObject:@"0.0" forKey:@"14:30"];
-        [dict setObject:@"0.0" forKey:@"15:30"];
-        [dict setObject:@"0.0" forKey:@"16:30"];
-        [dict setObject:@"0.0" forKey:@"17:30"];
+        if (_barType==1) {
+            _firstValueArray=[NSArray arrayWithObjects:@"06:30", @"07:30",@"08:30",@"09:30",@"10:30",@"11:30",@"12:30",@"13:30",@"14:30",@"15:30",@"16:30",@"17:30",@"18:30",nil];
+        }else if (_barType==2) {
+            _firstValueArray=[NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24",@"25",@"26",@"27",@"28",@"29",@"30",nil];
+        }else if (_barType==3) {
+            _firstValueArray=[NSArray arrayWithObjects:@"1", @"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",nil];
+        }else if (_barType==4) {
+            _firstValueArray=[NSArray arrayWithObjects:@"2014", @"2015",@"2016",@"2017",nil];
+        }
+        
+        for (int i=0; i<_firstValueArray.count; i++) {
+                [dict setObject:@"0.0" forKey:_firstValueArray[i]];
+        }
+      
 
     } else {
         if (_noDataLabel) {
@@ -177,49 +183,57 @@
         }
        
         NSLog(@"TEST:%d",j);
-
-
-        
-        NSMutableArray *newXarray=[NSMutableArray arrayWithArray:_xArray];
-         NSMutableArray *newYarray=[NSMutableArray arrayWithArray:_valuesArray];
-        
+        BOOL isNoZero=NO;
         for (int i=0; i<_valuesArray.count; i++) {
-            if (i<_valuesArray.count-1) {
-                NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i+1]];
-                if (![value1 isEqualToString:@"0"]) {
-                    break;
-                }
-            }
-          
             NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
-            if ([value isEqualToString:@"0"]) {
-                [newYarray removeObjectAtIndex:0];
-                [newXarray removeObjectAtIndex:0];
+            if (![value isEqualToString:@"0"]) {
+                isNoZero=YES;
+                break;
+            }
+        }
+        if (isNoZero) {
+            NSMutableArray *newXarray=[NSMutableArray arrayWithArray:_xArray];
+            NSMutableArray *newYarray=[NSMutableArray arrayWithArray:_valuesArray];
+            
+            for (int i=0; i<_valuesArray.count; i++) {
+                if (i<_valuesArray.count-1) {
+                    NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i+1]];
+                    if (![value1 isEqualToString:@"0"]) {
+                        break;
+                    }
+                }
                 
-            }else{
-                break;
-            }
-        }
-        
-        for (int i=(int)(_valuesArray.count-1); i>-1; i--) {
-            NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
-            if (i>1) {
-                NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i-1]];
-                if (![value1 isEqualToString:@"0"]) {
+                NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
+                if ([value isEqualToString:@"0"]) {
+                    [newYarray removeObjectAtIndex:0];
+                    [newXarray removeObjectAtIndex:0];
+                    
+                }else{
                     break;
                 }
             }
-          
-            if ([value isEqualToString:@"0"]) {
-                [newYarray removeLastObject];
-                [newXarray removeLastObject];
-            }else{
-                break;
+            
+            for (int i=(int)(_valuesArray.count-1); i>-1; i--) {
+                NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
+                if (i>1) {
+                    NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i-1]];
+                    if (![value1 isEqualToString:@"0"]) {
+                        break;
+                    }
+                }
+                
+                if ([value isEqualToString:@"0"]) {
+                    [newYarray removeLastObject];
+                    [newXarray removeLastObject];
+                }else{
+                    break;
+                }
             }
+            
+            _xArray=[NSArray arrayWithArray:newXarray];
+            _valuesArray=[NSMutableArray arrayWithArray:newYarray];
         }
-      
-        _xArray=[NSArray arrayWithArray:newXarray];
-         _valuesArray=[NSMutableArray arrayWithArray:newYarray];
+
         
         NSMutableArray *tempXArr = [NSMutableArray array];
         if (_xArray.count > 0) {
@@ -283,6 +297,7 @@
 
 - (void)refreshLineChartViewWithDataDict:(NSMutableDictionary *)dataDict {
  
+    _barType=1;
     [self setDataDict:dataDict];
     
     //
@@ -373,19 +388,19 @@
 #pragma mark - bar chart
 - (PNBarChart *)barChartView {
     if (!_barChartView) {
-        self.barChartView = [[PNBarChart alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 315*NOW_SIZE, 250*HEIGHT_SIZE)];
+        self.barChartView = [[PNBarChart alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 310*NOW_SIZE, 250*HEIGHT_SIZE)];
         self.barChartView.backgroundColor = [UIColor clearColor];
         self.barChartView.barBackgroundColor = [UIColor clearColor];
         [self.barChartView setStrokeColor:[UIColor whiteColor]];
         [self.barChartView setLabelTextColor:[UIColor whiteColor]];
-        self.barChartView.yChartLabelWidth = 20*NOW_SIZE;
-        self.barChartView.chartMargin = 30*NOW_SIZE;
+        self.barChartView.yChartLabelWidth = 26*HEIGHT_SIZE;
+        self.barChartView.chartMargin = 30*HEIGHT_SIZE;
         self.barChartView.yLabelFormatter = ^(CGFloat yValue){
             CGFloat yValueParsed = yValue;
-            NSString *labelText = [NSString stringWithFormat:@"%.1f",yValueParsed];
+            NSString *labelText = [NSString stringWithFormat:@"%.0f",yValueParsed];
             return labelText;
         };
-        self.barChartView.labelMarginTop = 5.0;
+        self.barChartView.labelMarginTop = 5*HEIGHT_SIZE;
         self.barChartView.showChartBorder = YES;
         
     }
@@ -393,7 +408,44 @@
 }
 
 - (void)refreshBarChartViewWithDataDict:(NSMutableDictionary *)dataDict chartType:(NSInteger)type {
-    [self setDataDict:dataDict];
+    _barType=type;
+    NSArray *keysArray=[NSArray arrayWithArray:[dataDict allKeys]];
+    NSMutableArray *newkeysArray=[NSMutableArray new];
+    for (int i=0; i<keysArray.count; i++) {
+        [newkeysArray addObject:[NSString stringWithFormat:@"%@",keysArray[i]]];
+    }
+    
+    
+    NSMutableDictionary *dataDict0=[NSMutableDictionary dictionaryWithDictionary:dataDict];
+    
+    for (int i=0; i<keysArray.count; i++) {
+        NSString *key=[NSString stringWithFormat:@"%@",keysArray[i]];
+        if (key.length>1) {
+            if ([key hasPrefix:@"0"]) {
+                NSString *key1=[key substringFromIndex:1];
+                NSString *value=[dataDict0 objectForKey:key];
+                [dataDict0 setObject:value forKey:key1];
+                [dataDict0 removeObjectForKey:key];
+            }
+        }
+        
+    }
+    
+    NSArray *newkeysArray2=[NSArray arrayWithArray:[dataDict0 allKeys]];
+    NSNumber *maxX = [newkeysArray2 valueForKeyPath:@"@max.intValue"];
+    int xMax=[maxX intValue];
+    
+    if ((_barType==2)||(_barType==3)) {
+        for (int i=xMax; i>0; i--) {
+            if (![newkeysArray2 containsObject:[NSString stringWithFormat:@"%d",i]]) {
+                [dataDict0 setObject:@"0" forKey:[NSString stringWithFormat:@"%d",i]];
+            }
+        }
+    }
+    
+  
+    
+    [self setDataDict:dataDict0];
     [self setType:type];
     
     if (_lineChartView) {
@@ -409,12 +461,36 @@
     if (_barChartView) {
         [_barChartView removeFromSuperview];
         _barChartView = nil;
-        
-        [self addSubview:self.barChartView];
-    } else {
-        [self addSubview:self.barChartView];
     }
     
+    NSNumber *maxyAxisValue = [_valuesArray valueForKeyPath:@"@max.floatValue"];
+    if ([maxyAxisValue floatValue]==0) {
+        maxyAxisValue=[NSNumber numberWithInt:120];
+    }
+    float getY0=[maxyAxisValue floatValue]/6;
+    int getY1=ceil(getY0);
+    if ((0<getY1)&&(getY1<10)) {
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }else if ((10<getY1)&&(getY1<100)) {
+        getY1=ceil(getY0/5)*5;
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }else if ((100<getY1)&&(getY1<1000)) {
+        getY1=ceil(getY0/50)*50;
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }else if ((1000<getY1)&&(getY1<10000)) {
+        getY1=ceil(getY0/500)*500;
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }else if ((10000<getY1)&&(getY1<100000)) {
+        getY1=ceil(getY0/5000)*5000;
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }else if ((100000<getY1)&&(getY1<1000000)) {
+        getY1=ceil(getY0/50000)*50000;
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }
+    self.barChartView.everyYvalue=getY1;
+     self.barChartView.maxYvalue=[maxyAxisValue floatValue];
+    
+
     if (type == 2) {
         //当展示月时，x轴只显示偶数
         NSMutableArray *tempArr = [NSMutableArray array];
@@ -426,7 +502,13 @@
             }
         }
         self.barChartView.xValues=[NSArray arrayWithArray:_xArray];
-        [self.barChartView setXLabels:tempArr];
+        
+        if (_xArray.count>12) {
+             [self.barChartView setXLabels:tempArr];
+        }else{
+           [self.barChartView setXLabels:_xArray];
+        }
+       
     } else {
          self.barChartView.xValues=[NSArray arrayWithArray:_xArray];
         [self.barChartView setXLabels:_xArray];

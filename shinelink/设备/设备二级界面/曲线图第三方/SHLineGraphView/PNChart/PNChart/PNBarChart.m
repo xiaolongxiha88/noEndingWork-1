@@ -10,6 +10,7 @@
 #import "PNColor.h"
 #import "PNChartLabel.h"
 
+#define PLOT_WIDTH (self.bounds.size.width - _chartMargin-10*HEIGHT_SIZE)
 
 @interface PNBarChart () {
     NSMutableArray *_xChartLabels;
@@ -92,6 +93,7 @@
 {
     _yValues = yValues;
 
+
     //make the _yLabelSum value dependant of the distinct values of yValues to avoid duplicates on yAxis
     int yLabelsDifTotal = (int)[NSSet setWithArray:yValues].count;
     _yLabelSum = yLabelsDifTotal % 2 == 0 ? yLabelsDifTotal : yLabelsDifTotal + 1;
@@ -111,19 +113,24 @@
     if (_showLabel) {
         //Add y labels
         
-        float yLabelSectionHeight = (self.frame.size.height - _chartMargin * 2 - kXLabelHeight) / _yLabelSum;
+  
         
-        for (int index = 0; index < _yLabelSum; index++) {
+       float yLabelSectionHeight = (self.frame.size.height - _chartMargin * 2 - kXLabelHeight) / 6;
+        int numCount=7;
+        for (int index = 0; index < numCount; index++) {
             
-            NSString *labelText = _yLabelFormatter((float)_yValueMax * ( (_yLabelSum - index) / (float)_yLabelSum ));
+         //   NSString *labelText = _yLabelFormatter((float)_yValueMax * ( (_yLabelSum - index) / (float)_yLabelSum ));
+            
+             NSString *labelText = _yLabelFormatter(index*_everyYvalue);
             
             PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake(0,
-                                                                                  yLabelSectionHeight * index + _chartMargin - kYLabelHeight/2.0,
+                                                                                  yLabelSectionHeight * (numCount-1-index) + _chartMargin - kYLabelHeight/2.0,
                                                                                   _yChartLabelWidth,
                                                                                   kYLabelHeight)];
-            label.font = _labelFont;
+            label.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
             label.textColor = _labelTextColor;
             [label setTextAlignment:NSTextAlignmentRight];
+            label.adjustsFontSizeToFitWidth=YES;
             label.text = labelText;
             
             [_yChartLabels addObject:label];
@@ -161,7 +168,7 @@
     }
     
     if (_showLabel) {
-        _xLabelWidth = (self.frame.size.width - _chartMargin * 2) / [xLabels count];
+        _xLabelWidth = PLOT_WIDTH / [xLabels count];
         int labelAddCount = 0;
         for (int index = 0; index < _xLabels.count; index++) {
             labelAddCount += 1;
@@ -169,7 +176,13 @@
             if (labelAddCount == _xLabelSkip) {
                 NSString *labelText = [_xLabels[index] description];
                 PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake(0, 0, _xLabelWidth, kXLabelHeight)];
-                label.font = _labelFont;
+                    label.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+                if (_xLabels.count>12) {
+                    label.frame=CGRectMake(0, 0, _xLabelWidth*1.5, kXLabelHeight);
+                }else{
+                   label.frame=CGRectMake(0, 0, _xLabelWidth, kXLabelHeight);
+                }
+               
                 label.textColor = _labelTextColor;
                 [label setTextAlignment:NSTextAlignmentCenter];
                 label.text = labelText;
@@ -261,7 +274,7 @@
         //Height Of Bar
         float value = [valueString floatValue];
         
-        float grade = (float)value / (float)_yValueMax;
+        float grade = (float)value / (float)_maxYvalue;
         
         if (isnan(grade)) {
             grade = 0;
@@ -295,7 +308,7 @@
         UIBezierPath *progressline = [UIBezierPath bezierPath];
 
         [progressline moveToPoint:CGPointMake(_chartMargin, self.frame.size.height - kXLabelHeight - _chartMargin)];
-        [progressline addLineToPoint:CGPointMake(self.frame.size.width - _chartMargin,  self.frame.size.height - kXLabelHeight - _chartMargin)];
+        [progressline addLineToPoint:CGPointMake(_chartMargin+PLOT_WIDTH,  self.frame.size.height - kXLabelHeight - _chartMargin)];
 
         [progressline setLineWidth:1.0];
         [progressline setLineCapStyle:kCGLineCapSquare];
@@ -379,9 +392,6 @@
 {
    // [self touchPoint:touches withEvent:event];
     
-  
-    
-    
     [super touchesBegan:touches withEvent:event];
     
        UITouch *touch = [touches anyObject];
@@ -392,8 +402,8 @@
         float xDirX=_chartMargin+(i+1)*_xLabelWidth-_xLabelWidth/2;
         
         float xDirY1=[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue];
-        NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
-        float maxY=[[NSString stringWithFormat:@"%@",maxY1] floatValue];
+      //  NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
+        float maxY=_maxYvalue;
         
         if (maxY>0) {
             float xDirY2=self.frame.size.height - _chartMargin*2- kXLabelHeight;
@@ -434,8 +444,8 @@
         xDirectrix.frame = CGRectMake(xDirX, _chartMargin,1*NOW_SIZE, self.frame.size.height - kXLabelHeight - _chartMargin*2);
         
         float xDirY1=[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue];
-        NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
-        float maxY=[[NSString stringWithFormat:@"%@",maxY1] floatValue];
+      //  NSNumber *maxY1=[_yValues valueForKeyPath:@"@max.doubleValue"];
+        float maxY=_maxYvalue;
         
         if (maxY>0) {
             float xDirY2=self.frame.size.height - _chartMargin*2- kXLabelHeight;

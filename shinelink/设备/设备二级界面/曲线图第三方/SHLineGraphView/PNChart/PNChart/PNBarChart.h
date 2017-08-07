@@ -13,7 +13,7 @@
 
 #define kXLabelMargin 15
 #define kYLabelMargin 15
-#define kYLabelHeight 11
+#define kYLabelHeight 12*HEIGHT_SIZE
 #define kXLabelHeight 20
 
 typedef NSString *(^PNYLabelFormatter)(CGFloat yLabelValue);
@@ -37,6 +37,8 @@ typedef NSString *(^PNYLabelFormatter)(CGFloat yLabelValue);
 @property (nonatomic) UIColor *strokeColor;
 @property (nonatomic) NSArray *strokeColors;
 
+@property (nonatomic) CGFloat maxYvalue;
+@property (nonatomic) CGFloat everyYvalue;
 
 /** Update Values. */
 - (void)updateChartData:(NSArray *)data;

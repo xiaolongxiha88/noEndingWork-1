@@ -94,7 +94,6 @@
 		334B8F211C91250300798A69 /* PopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F1A1C91250300798A69 /* PopoverView.m */; };
 		334B8F221C91250300798A69 /* SHLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F1E1C91250300798A69 /* SHLineGraphView.m */; };
 		334B8F231C91250300798A69 /* SHPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F201C91250300798A69 /* SHPlot.m */; };
-		334B8F491C914A6D00798A69 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 334B8F281C914A6D00798A69 /* LICENSE */; };
 		334B8F4A1C914A6D00798A69 /* PNBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F2B1C914A6D00798A69 /* PNBar.m */; };
 		334B8F4B1C914A6D00798A69 /* PNBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F2D1C914A6D00798A69 /* PNBarChart.m */; };
 		334B8F4C1C914A6D00798A69 /* PNChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F311C914A6D00798A69 /* PNChartLabel.m */; };
@@ -109,7 +108,6 @@
 		334B8F551C914A6D00798A69 /* PNScatterChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F431C914A6D00798A69 /* PNScatterChart.m */; };
 		334B8F561C914A6D00798A69 /* PNScatterChartData.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F451C914A6D00798A69 /* PNScatterChartData.m */; };
 		334B8F571C914A6D00798A69 /* PNScatterChartDataItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F471C914A6D00798A69 /* PNScatterChartDataItem.m */; };
-		334B8F581C914A6D00798A69 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F481C914A6D00798A69 /* README.md */; };
 		334B8F5E1C914B4E00798A69 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 334B8F5A1C914B4E00798A69 /* LICENSE */; };
 		334B8F5F1C914B4E00798A69 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F5B1C914B4E00798A69 /* README.md */; };
 		334B8F601C914B4E00798A69 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 334B8F5D1C914B4E00798A69 /* UICountingLabel.m */; };
@@ -868,7 +866,6 @@
 		334B8F1E1C91250300798A69 /* SHLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHLineGraphView.m; sourceTree = "<group>"; };
 		334B8F1F1C91250300798A69 /* SHPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHPlot.h; sourceTree = "<group>"; };
 		334B8F201C91250300798A69 /* SHPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHPlot.m; sourceTree = "<group>"; };
-		334B8F281C914A6D00798A69 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		334B8F2A1C914A6D00798A69 /* PNBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBar.h; sourceTree = "<group>"; };
 		334B8F2B1C914A6D00798A69 /* PNBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNBar.m; sourceTree = "<group>"; };
 		334B8F2C1C914A6D00798A69 /* PNBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBarChart.h; sourceTree = "<group>"; };
@@ -877,29 +874,28 @@
 		334B8F2F1C914A6D00798A69 /* PNChartDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartDelegate.h; sourceTree = "<group>"; };
 		334B8F301C914A6D00798A69 /* PNChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartLabel.h; sourceTree = "<group>"; };
 		334B8F311C914A6D00798A69 /* PNChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNChartLabel.m; sourceTree = "<group>"; };
-		334B8F321C914A6D00798A69 /* PNCircleChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNCircleChart.h; sourceTree = "<group>"; };
-		334B8F331C914A6D00798A69 /* PNCircleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNCircleChart.m; sourceTree = "<group>"; };
-		334B8F341C914A6D00798A69 /* PNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNColor.h; sourceTree = "<group>"; };
-		334B8F351C914A6D00798A69 /* PNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNColor.m; sourceTree = "<group>"; };
-		334B8F361C914A6D00798A69 /* PNGenericChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNGenericChart.h; sourceTree = "<group>"; };
-		334B8F371C914A6D00798A69 /* PNGenericChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNGenericChart.m; sourceTree = "<group>"; };
-		334B8F381C914A6D00798A69 /* PNLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChart.h; sourceTree = "<group>"; };
-		334B8F391C914A6D00798A69 /* PNLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChart.m; sourceTree = "<group>"; };
-		334B8F3A1C914A6D00798A69 /* PNLineChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChartData.h; sourceTree = "<group>"; };
-		334B8F3B1C914A6D00798A69 /* PNLineChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChartData.m; sourceTree = "<group>"; };
-		334B8F3C1C914A6D00798A69 /* PNLineChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChartDataItem.h; sourceTree = "<group>"; };
-		334B8F3D1C914A6D00798A69 /* PNLineChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChartDataItem.m; sourceTree = "<group>"; };
-		334B8F3E1C914A6D00798A69 /* PNPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPieChart.h; sourceTree = "<group>"; };
-		334B8F3F1C914A6D00798A69 /* PNPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPieChart.m; sourceTree = "<group>"; };
-		334B8F401C914A6D00798A69 /* PNPieChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNPieChartDataItem.h; sourceTree = "<group>"; };
-		334B8F411C914A6D00798A69 /* PNPieChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNPieChartDataItem.m; sourceTree = "<group>"; };
-		334B8F421C914A6D00798A69 /* PNScatterChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNScatterChart.h; sourceTree = "<group>"; };
-		334B8F431C914A6D00798A69 /* PNScatterChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNScatterChart.m; sourceTree = "<group>"; };
-		334B8F441C914A6D00798A69 /* PNScatterChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNScatterChartData.h; sourceTree = "<group>"; };
-		334B8F451C914A6D00798A69 /* PNScatterChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNScatterChartData.m; sourceTree = "<group>"; };
-		334B8F461C914A6D00798A69 /* PNScatterChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNScatterChartDataItem.h; sourceTree = "<group>"; };
-		334B8F471C914A6D00798A69 /* PNScatterChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNScatterChartDataItem.m; sourceTree = "<group>"; };
-		334B8F481C914A6D00798A69 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		334B8F321C914A6D00798A69 /* PNCircleChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNCircleChart.h; path = ../PNCircleChart.h; sourceTree = "<group>"; };
+		334B8F331C914A6D00798A69 /* PNCircleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PNCircleChart.m; path = ../PNCircleChart.m; sourceTree = "<group>"; };
+		334B8F341C914A6D00798A69 /* PNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNColor.h; path = ../PNColor.h; sourceTree = "<group>"; };
+		334B8F351C914A6D00798A69 /* PNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PNColor.m; path = ../PNColor.m; sourceTree = "<group>"; };
+		334B8F361C914A6D00798A69 /* PNGenericChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNGenericChart.h; path = ../PNGenericChart.h; sourceTree = "<group>"; };
+		334B8F371C914A6D00798A69 /* PNGenericChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PNGenericChart.m; path = ../PNGenericChart.m; sourceTree = "<group>"; };
+		334B8F381C914A6D00798A69 /* PNLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNLineChart.h; path = ../PNLineChart.h; sourceTree = "<group>"; };
+		334B8F391C914A6D00798A69 /* PNLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PNLineChart.m; path = ../PNLineChart.m; sourceTree = "<group>"; };
+		334B8F3A1C914A6D00798A69 /* PNLineChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNLineChartData.h; path = ../PNLineChartData.h; sourceTree = "<group>"; };
+		334B8F3B1C914A6D00798A69 /* PNLineChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PNLineChartData.m; path = ../PNLineChartData.m; sourceTree = "<group>"; };
+		334B8F3C1C914A6D00798A69 /* PNLineChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNLineChartDataItem.h; path = ../PNLineChartDataItem.h; sourceTree = "<group>"; };
+		334B8F3D1C914A6D00798A69 /* PNLineChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PNLineChartDataItem.m; path = ../PNLineChartDataItem.m; sourceTree = "<group>"; };
+		334B8F3E1C914A6D00798A69 /* PNPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNPieChart.h; path = ../PNPieChart.h; sourceTree = "<group>"; };
+		334B8F3F1C914A6D00798A69 /* PNPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PNPieChart.m; path = ../PNPieChart.m; sourceTree = "<group>"; };
+		334B8F401C914A6D00798A69 /* PNPieChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNPieChartDataItem.h; path = ../PNPieChartDataItem.h; sourceTree = "<group>"; };
+		334B8F411C914A6D00798A69 /* PNPieChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PNPieChartDataItem.m; path = ../PNPieChartDataItem.m; sourceTree = "<group>"; };
+		334B8F421C914A6D00798A69 /* PNScatterChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNScatterChart.h; path = ../PNScatterChart.h; sourceTree = "<group>"; };
+		334B8F431C914A6D00798A69 /* PNScatterChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PNScatterChart.m; path = ../PNScatterChart.m; sourceTree = "<group>"; };
+		334B8F441C914A6D00798A69 /* PNScatterChartData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNScatterChartData.h; path = ../PNScatterChartData.h; sourceTree = "<group>"; };
+		334B8F451C914A6D00798A69 /* PNScatterChartData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PNScatterChartData.m; path = ../PNScatterChartData.m; sourceTree = "<group>"; };
+		334B8F461C914A6D00798A69 /* PNScatterChartDataItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PNScatterChartDataItem.h; path = ../PNScatterChartDataItem.h; sourceTree = "<group>"; };
+		334B8F471C914A6D00798A69 /* PNScatterChartDataItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PNScatterChartDataItem.m; path = ../PNScatterChartDataItem.m; sourceTree = "<group>"; };
 		334B8F5A1C914B4E00798A69 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		334B8F5B1C914B4E00798A69 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		334B8F5C1C914B4E00798A69 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
@@ -2054,9 +2050,7 @@
 		334B8F271C914A6D00798A69 /* PNChart */ = {
 			isa = PBXGroup;
 			children = (
-				334B8F281C914A6D00798A69 /* LICENSE */,
 				334B8F291C914A6D00798A69 /* PNChart */,
-				334B8F481C914A6D00798A69 /* README.md */,
 			);
 			path = PNChart;
 			sourceTree = "<group>";
@@ -2064,6 +2058,7 @@
 		334B8F291C914A6D00798A69 /* PNChart */ = {
 			isa = PBXGroup;
 			children = (
+				3370EB931F380CA000F37149 /* noUserPNChar */,
 				334B8F2A1C914A6D00798A69 /* PNBar.h */,
 				334B8F2B1C914A6D00798A69 /* PNBar.m */,
 				334B8F2C1C914A6D00798A69 /* PNBarChart.h */,
@@ -2072,28 +2067,6 @@
 				334B8F2F1C914A6D00798A69 /* PNChartDelegate.h */,
 				334B8F301C914A6D00798A69 /* PNChartLabel.h */,
 				334B8F311C914A6D00798A69 /* PNChartLabel.m */,
-				334B8F321C914A6D00798A69 /* PNCircleChart.h */,
-				334B8F331C914A6D00798A69 /* PNCircleChart.m */,
-				334B8F341C914A6D00798A69 /* PNColor.h */,
-				334B8F351C914A6D00798A69 /* PNColor.m */,
-				334B8F361C914A6D00798A69 /* PNGenericChart.h */,
-				334B8F371C914A6D00798A69 /* PNGenericChart.m */,
-				334B8F381C914A6D00798A69 /* PNLineChart.h */,
-				334B8F391C914A6D00798A69 /* PNLineChart.m */,
-				334B8F3A1C914A6D00798A69 /* PNLineChartData.h */,
-				334B8F3B1C914A6D00798A69 /* PNLineChartData.m */,
-				334B8F3C1C914A6D00798A69 /* PNLineChartDataItem.h */,
-				334B8F3D1C914A6D00798A69 /* PNLineChartDataItem.m */,
-				334B8F3E1C914A6D00798A69 /* PNPieChart.h */,
-				334B8F3F1C914A6D00798A69 /* PNPieChart.m */,
-				334B8F401C914A6D00798A69 /* PNPieChartDataItem.h */,
-				334B8F411C914A6D00798A69 /* PNPieChartDataItem.m */,
-				334B8F421C914A6D00798A69 /* PNScatterChart.h */,
-				334B8F431C914A6D00798A69 /* PNScatterChart.m */,
-				334B8F441C914A6D00798A69 /* PNScatterChartData.h */,
-				334B8F451C914A6D00798A69 /* PNScatterChartData.m */,
-				334B8F461C914A6D00798A69 /* PNScatterChartDataItem.h */,
-				334B8F471C914A6D00798A69 /* PNScatterChartDataItem.m */,
 			);
 			path = PNChart;
 			sourceTree = "<group>";
@@ -3098,6 +3071,35 @@
 				3370794F1D9217D700D7DA98 /* manualTableViewCell.m */,
 			);
 			path = "安装手册";
+			sourceTree = "<group>";
+		};
+		3370EB931F380CA000F37149 /* noUserPNChar */ = {
+			isa = PBXGroup;
+			children = (
+				334B8F321C914A6D00798A69 /* PNCircleChart.h */,
+				334B8F331C914A6D00798A69 /* PNCircleChart.m */,
+				334B8F341C914A6D00798A69 /* PNColor.h */,
+				334B8F351C914A6D00798A69 /* PNColor.m */,
+				334B8F361C914A6D00798A69 /* PNGenericChart.h */,
+				334B8F371C914A6D00798A69 /* PNGenericChart.m */,
+				334B8F381C914A6D00798A69 /* PNLineChart.h */,
+				334B8F391C914A6D00798A69 /* PNLineChart.m */,
+				334B8F3A1C914A6D00798A69 /* PNLineChartData.h */,
+				334B8F3B1C914A6D00798A69 /* PNLineChartData.m */,
+				334B8F3C1C914A6D00798A69 /* PNLineChartDataItem.h */,
+				334B8F3D1C914A6D00798A69 /* PNLineChartDataItem.m */,
+				334B8F3E1C914A6D00798A69 /* PNPieChart.h */,
+				334B8F3F1C914A6D00798A69 /* PNPieChart.m */,
+				334B8F401C914A6D00798A69 /* PNPieChartDataItem.h */,
+				334B8F411C914A6D00798A69 /* PNPieChartDataItem.m */,
+				334B8F421C914A6D00798A69 /* PNScatterChart.h */,
+				334B8F431C914A6D00798A69 /* PNScatterChart.m */,
+				334B8F441C914A6D00798A69 /* PNScatterChartData.h */,
+				334B8F451C914A6D00798A69 /* PNScatterChartData.m */,
+				334B8F461C914A6D00798A69 /* PNScatterChartDataItem.h */,
+				334B8F471C914A6D00798A69 /* PNScatterChartDataItem.m */,
+			);
+			path = noUserPNChar;
 			sourceTree = "<group>";
 		};
 		33742B3F1ED6858C0015F2EA /* OSS第三方 */ = {
@@ -4331,7 +4333,6 @@
 				33EA1CBC1EFA8E0B00A39192 /* pop_frame.png in Resources */,
 				3382341B1D98ED8A002062AE /* adCancel.png in Resources */,
 				33FFBD4F1CEC71FA003C56E1 /* name3.jpg in Resources */,
-				334B8F491C914A6D00798A69 /* LICENSE in Resources */,
 				3383F1321C9FF4210075E834 /* TemperatureController.png in Resources */,
 				33627A5E1DFEA3260001C00B /* 采集器_en.jpg in Resources */,
 				33E42E1B1DCB36BD0024FFBB /* connected-failed.gif in Resources */,
@@ -4940,7 +4941,6 @@
 				3353B1B61CA1272C00577595 /* CoreDataManager.m in Sources */,
 				335BF1ED1D100761008EEE99 /* MessageCeterTableViewController.m in Sources */,
 				3379E4F61E960C1C000A4198 /* JHColumnChart.m in Sources */,
-				334B8F581C914A6D00798A69 /* README.md in Sources */,
 				3367EB9E1CD0B2A700D2EF67 /* StationEarningsViewController.m in Sources */,
 				33860FEE1EEA75C5004150FD /* UIScrollView+MJExtension.m in Sources */,
 				338990B51CEB1F9D00A708F8 /* DemoDeviceViewController.m in Sources */,

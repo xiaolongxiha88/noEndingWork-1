@@ -30,6 +30,7 @@
 @property (nonatomic, strong) PNBarChart *barChartView;
 
 @property (nonatomic, strong) UILabel *noDataLabel;
+@property (nonatomic, assign) NSInteger barType;
 
 @end
 
@@ -255,6 +256,60 @@
         
         NSLog(@"TEST:%d",j);
         
+        BOOL isNoZero=NO;
+        for (int i=0; i<_valuesArray.count; i++) {
+            NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
+            if (![value isEqualToString:@"0"]) {
+                isNoZero=YES;
+                break;
+            }
+        }
+        if (isNoZero) {
+            NSMutableArray *newXarray=[NSMutableArray arrayWithArray:_xArray];
+            NSMutableArray *newYarray=[NSMutableArray arrayWithArray:_valuesArray];
+            
+            for (int i=0; i<_valuesArray.count; i++) {
+                if (i<_valuesArray.count-1) {
+                    NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i+1]];
+                    if (![value1 isEqualToString:@"0"]) {
+                        break;
+                    }
+                }
+                
+                NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
+                if ([value isEqualToString:@"0"]) {
+                    [newYarray removeObjectAtIndex:0];
+                    [newXarray removeObjectAtIndex:0];
+                    
+                }else{
+                    break;
+                }
+            }
+            
+            for (int i=(int)(_valuesArray.count-1); i>-1; i--) {
+                NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
+                if (i>1) {
+                    NSString *value1=[NSString stringWithFormat:@"%@",_valuesArray[i-1]];
+                    if (![value1 isEqualToString:@"0"]) {
+                        break;
+                    }
+                }
+                
+                if ([value isEqualToString:@"0"]) {
+                    [newYarray removeLastObject];
+                    [newXarray removeLastObject];
+                }else{
+                    break;
+                }
+            }
+            
+            _xArray=[NSArray arrayWithArray:newXarray];
+            _valuesArray=[NSMutableArray arrayWithArray:newYarray];
+        }
+     
+        
+        
+        
         NSMutableArray *tempXArr = [NSMutableArray array];
         if (_xArray.count > 0) {
             NSString *flag = [[NSMutableString stringWithString:_xArray[0]] substringWithRange:NSMakeRange(1, 1)];
@@ -346,8 +401,30 @@
         NSNumber *avg = [_valuesArray valueForKeyPath:@"@avg.floatValue"];
         if ([avg floatValue] != 0) {
             NSNumber *maxyAxisValue = [_valuesArray valueForKeyPath:@"@max.floatValue"];
+            
+            float getY0=[maxyAxisValue floatValue]/6;
+            int getY1=ceil(getY0);
+            if ((0<getY1)&&(getY1<10)) {
+                maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+            }else if ((10<getY1)&&(getY1<100)) {
+                getY1=ceil(getY0/5)*5;
+                maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+            }else if ((100<getY1)&&(getY1<1000)) {
+                getY1=ceil(getY0/50)*50;
+                maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+            }else if ((1000<getY1)&&(getY1<10000)) {
+                getY1=ceil(getY0/500)*500;
+                maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+            }else if ((10000<getY1)&&(getY1<100000)) {
+                getY1=ceil(getY0/5000)*5000;
+                maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+            }
+            
+            
             self.lineChartView.yAxisRange = maxyAxisValue;
             self.lineChartView.yAxisSuffix = @"";
+
+          
             
             NSMutableArray *tempValuesArray = [NSMutableArray array];
             for (int i = 0; i < _valuesArray.count; i++) {
@@ -395,11 +472,11 @@
         self.barChartView.barBackgroundColor = [UIColor clearColor];
         [self.barChartView setStrokeColor:[UIColor whiteColor]];
         [self.barChartView setLabelTextColor:[UIColor whiteColor]];
-        self.barChartView.yChartLabelWidth = 20*HEIGHT_SIZE;
+        self.barChartView.yChartLabelWidth = 26*HEIGHT_SIZE;
         self.barChartView.chartMargin = 30*HEIGHT_SIZE;
         self.barChartView.yLabelFormatter = ^(CGFloat yValue){
             CGFloat yValueParsed = yValue;
-            NSString *labelText = [NSString stringWithFormat:@"%.1f",yValueParsed];
+            NSString *labelText = [NSString stringWithFormat:@"%.0f",yValueParsed];
             return labelText;
         };
         self.barChartView.labelMarginTop = 5.0;
@@ -410,7 +487,45 @@
 }
 
 - (void)refreshBarChartViewWithDataDict:(NSMutableDictionary *)dataDict chartType:(NSInteger)type {
-    [self setDataDict:dataDict];
+  
+        _barType=type;
+    NSArray *keysArray=[NSArray arrayWithArray:[dataDict allKeys]];
+    NSMutableArray *newkeysArray=[NSMutableArray new];
+    for (int i=0; i<keysArray.count; i++) {
+        [newkeysArray addObject:[NSString stringWithFormat:@"%@",keysArray[i]]];
+    }
+  
+    
+    NSMutableDictionary *dataDict0=[NSMutableDictionary dictionaryWithDictionary:dataDict];
+    
+    for (int i=0; i<keysArray.count; i++) {
+        NSString *key=[NSString stringWithFormat:@"%@",keysArray[i]];
+        if (key.length>1) {
+            if ([key hasPrefix:@"0"]) {
+                NSString *key1=[key substringFromIndex:1];
+                NSString *value=[dataDict0 objectForKey:key];
+                [dataDict0 setObject:value forKey:key1];
+                [dataDict0 removeObjectForKey:key];
+            }
+        }
+ 
+    }
+    
+        NSArray *newkeysArray2=[NSArray arrayWithArray:[dataDict0 allKeys]];
+    NSNumber *maxX = [newkeysArray2 valueForKeyPath:@"@max.intValue"];
+    int xMax=[maxX intValue];
+    
+    if ((_barType==2)||(_barType==3)) {
+        for (int i=xMax; i>0; i--) {
+            if (![newkeysArray2 containsObject:[NSString stringWithFormat:@"%d",i]]) {
+                [dataDict0 setObject:@"0" forKey:[NSString stringWithFormat:@"%d",i]];
+            }
+        }
+    }
+    
+    
+    [self setDataDict:dataDict0];
+    
     [self setType:type];
     
     if (_lineChartView) {
@@ -432,6 +547,35 @@
         [self addSubview:self.barChartView];
     }
     
+    NSNumber *maxyAxisValue = [_valuesArray valueForKeyPath:@"@max.floatValue"];
+    if ([maxyAxisValue floatValue]==0) {
+        maxyAxisValue=[NSNumber numberWithInt:120];
+    }
+    float getY0=[maxyAxisValue floatValue]/6;
+    int getY1=ceil(getY0);
+    if ((0<getY1)&&(getY1<10)) {
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }else if ((10<getY1)&&(getY1<100)) {
+        getY1=ceil(getY0/5)*5;
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }else if ((100<getY1)&&(getY1<1000)) {
+        getY1=ceil(getY0/50)*50;
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }else if ((1000<getY1)&&(getY1<10000)) {
+        getY1=ceil(getY0/500)*500;
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }else if ((10000<getY1)&&(getY1<100000)) {
+        getY1=ceil(getY0/5000)*5000;
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }else if ((100000<getY1)&&(getY1<1000000)) {
+        getY1=ceil(getY0/50000)*50000;
+        maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+    }
+    self.barChartView.everyYvalue=getY1;
+    self.barChartView.maxYvalue=[maxyAxisValue floatValue];
+    
+
+    
     if (type == 2) {
         //当展示月时，x轴只显示偶数
         NSMutableArray *tempArr = [NSMutableArray array];
@@ -442,7 +586,12 @@
                 [tempArr addObject:@""];
             }
         }
-        [self.barChartView setXLabels:tempArr];
+        if (_xArray.count>12) {
+            [self.barChartView setXLabels:tempArr];
+        }else{
+            [self.barChartView setXLabels:_xArray];
+        }
+        
     } else {
         [self.barChartView setXLabels:_xArray];
     }

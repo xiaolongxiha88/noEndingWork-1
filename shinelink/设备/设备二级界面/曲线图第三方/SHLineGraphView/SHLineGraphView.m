@@ -32,7 +32,7 @@
 #define BOTTOM_MARGIN_TO_LEAVE (22.0*HEIGHT_SIZE)
 #define TOP_MARGIN_TO_LEAVE (30.0*HEIGHT_SIZE)
 #define INTERVAL_COUNT 6
-#define PLOT_WIDTH (self.bounds.size.width - _leftMarginToLeave)
+#define PLOT_WIDTH (self.bounds.size.width - _leftMarginToLeave-5*HEIGHT_SIZE)
 
 #define kXLabelHeight -10
 
@@ -115,7 +115,7 @@
     UIBezierPath *progressline = [UIBezierPath bezierPath];
     
     [progressline moveToPoint:CGPointMake(_chartMargin, self.frame.size.height -minY)];
-    [progressline addLineToPoint:CGPointMake(_chartMargin+_maxScrollW,  self.frame.size.height -minY)];
+    [progressline addLineToPoint:CGPointMake(_chartMargin+PLOT_WIDTH,  self.frame.size.height -minY)];
     
     [progressline setLineWidth:1.0];
     [progressline setLineCapStyle:kCGLineCapSquare];
@@ -232,7 +232,8 @@
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGesture:)];
     [_scrollView addGestureRecognizer:pinch];
     
-
+    UITapGestureRecognizer *tapPress = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapPressAction:)];
+    [_scrollView addGestureRecognizer:tapPress];
 
 }
 
@@ -313,7 +314,7 @@
     [backgroundLayer setStrokeColor:[UIColor clearColor].CGColor];
     [backgroundLayer setLineWidth:((NSNumber *)theme[kPlotStrokeWidthKey]).intValue];
     
-    CGMutablePathRef backgroundPath = CGPathCreateMutable();
+   
     
     //
     CAShapeLayer *circleLayer = [CAShapeLayer layer];
@@ -363,13 +364,14 @@
     
       //  CGMutablePathRef graphPath = CGPathCreateMutable();
      UIBezierPath *graphPath = [UIBezierPath bezierPath];
+     UIBezierPath *backgroundPath =[UIBezierPath bezierPath];
     
     //move to initial point for path and background.
     
      [graphPath moveToPoint:CGPointMake(0,  plot.xPoints[0].y)];
-    
+     [backgroundPath moveToPoint:CGPointMake(0,  plot.xPoints[0].y)];
   //  CGPathMoveToPoint(graphPath, NULL, _leftMarginToLeave, plot.xPoints[0].y);
-    CGPathMoveToPoint(backgroundPath, NULL, 0, plot.xPoints[0].y);
+ //   CGPathMoveToPoint(backgroundPath, NULL, 0, plot.xPoints[0].y);
     
     int count = (int)_xAxisValues.count;
     for(int i=0; i< count; i++){
@@ -382,10 +384,10 @@
         }
        
            [graphPath addCurveToPoint:point controlPoint1:CGPointMake((point.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((point.x+prePoint.x)/2, point.y)];
-        
+             [backgroundPath addCurveToPoint:point controlPoint1:CGPointMake((point.x+prePoint.x)/2, prePoint.y) controlPoint2:CGPointMake((point.x+prePoint.x)/2, point.y)];
        
       //  CGPathAddLineToPoint(graphPath, NULL, point.x, point.y);
-        CGPathAddLineToPoint(backgroundPath, NULL, point.x, point.y);
+      //  CGPathAddLineToPoint(backgroundPath, NULL, point.x, point.y);
         CGFloat dotsSize = [_themeAttributes[kDotSizeKey] floatValue];
         CGPathAddEllipseInRect(circlePath, NULL, CGRectMake(point.x - dotsSize/2.0f, point.y - dotsSize/2.0f, dotsSize, dotsSize));
     }
@@ -394,22 +396,27 @@
     //move to initial point for path and background.
    // CGPathAddLineToPoint(graphPath, NULL, _leftMarginToLeave + PLOT_WIDTH, plot.xPoints[count -1].y);
          [graphPath addLineToPoint:CGPointMake(LastW, plot.xPoints[count -1].y)];
+    [backgroundPath addLineToPoint:CGPointMake(LastW, plot.xPoints[count -1].y)];
     
-    CGPathAddLineToPoint(backgroundPath, NULL, LastW, plot.xPoints[count - 1].y);
+   // CGPathAddLineToPoint(backgroundPath, NULL, LastW, plot.xPoints[count - 1].y);
     
     //additional points for background.
-    CGPathAddLineToPoint(backgroundPath, NULL, LastW, self.bounds.size.height - TOP_MARGIN_TO_LEAVE);
-    CGPathAddLineToPoint(backgroundPath, NULL, 0, self.bounds.size.height - TOP_MARGIN_TO_LEAVE);
-    CGPathCloseSubpath(backgroundPath);
     
-    backgroundLayer.path = backgroundPath;
+      [backgroundPath addLineToPoint:CGPointMake(LastW, self.bounds.size.height - TOP_MARGIN_TO_LEAVE)];
+     [backgroundPath addLineToPoint:CGPointMake( 0, self.bounds.size.height - TOP_MARGIN_TO_LEAVE)];
+    [backgroundPath closePath];
+//    CGPathAddLineToPoint(backgroundPath, NULL, LastW, self.bounds.size.height - TOP_MARGIN_TO_LEAVE);
+//    CGPathAddLineToPoint(backgroundPath, NULL, 0, self.bounds.size.height - TOP_MARGIN_TO_LEAVE);
+//    CGPathCloseSubpath(backgroundPath);
+    
+    backgroundLayer.path = backgroundPath.CGPath;
   //  graphLayer.path = graphPath;
      graphLayer.path = graphPath.CGPath;
     circleLayer.path = circlePath;
     
     //animation
     CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
-    animation.duration = 1;
+    animation.duration = 0.5;
     animation.fromValue = @(0.0);
     animation.toValue = @(1.0);
     [graphLayer addAnimation:animation forKey:@"strokeEnd"];
@@ -687,6 +694,18 @@
     }
     
 }
+
+
+- (void)tapPressAction:(UITapGestureRecognizer *)recognizer
+{
+    
+        CGPoint location = [recognizer locationInView:_scrollView];
+        [self getPointToShow:location];
+ 
+        [self performSelector:@selector(delayMethod) withObject:nil afterDelay:3.0f];
+   
+}
+
 
 
 // 捏合手势监听方法
