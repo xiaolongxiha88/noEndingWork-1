@@ -56,6 +56,8 @@ typedef NS_ENUM(NSInteger,JHLineChartQuadrantType){
 
 @interface JHLineChart :JHChart
 
+@property (assign, nonatomic) BOOL isOnlyOne;
+
 /**
  *  X axis scale data of a broken line graph, the proposed use of NSNumber or the number of strings
  */

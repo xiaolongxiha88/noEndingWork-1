@@ -49,7 +49,7 @@
 @property (strong, nonatomic) UILabel *firstLable;
 
 @property (assign, nonatomic) CGFloat spaceValue;//间距
-@property (assign, nonatomic) NSInteger lableLookNum;//间距数量
+
 @property (assign, nonatomic) CGFloat maxScrollW;//最大距离
 @property (assign, nonatomic) CGFloat offX;//scrollView偏移
 @property (assign, nonatomic) CGFloat lastLableX;
@@ -189,7 +189,7 @@
   
         _spaceValue=PLOT_WIDTH/_dirLableValuesY.count;
    
-    _lableLookNum=6;
+  //  _lableLookNum=6;
     _leftMarginToLeave=BOTTOM_MARGIN_TO_LEAVE;
     
     [self firstToChar];
@@ -521,13 +521,13 @@
 - (void)drawYLabels:(SHPlot *)plot {
     double yRange = [_yAxisRange doubleValue]; // this value will be in dollars
     
-    double yIntervalValue = yRange / INTERVAL_COUNT;
-    double intervalInPx = (self.bounds.size.height - TOP_MARGIN_TO_LEAVE ) / (INTERVAL_COUNT +1);
+    double yIntervalValue = yRange / _lableLookNum;
+    double intervalInPx = (self.bounds.size.height - TOP_MARGIN_TO_LEAVE ) / (_lableLookNum +1);
     
     NSMutableArray *labelArray = [NSMutableArray array];
     float maxWidth = 0;
     
-    for(int i= INTERVAL_COUNT + 1; i >= 0; i--){
+    for(int i= (int)_lableLookNum + 1; i >= 0; i--){
         CGPoint currentLinePoint = CGPointMake(_leftMarginToLeave, i * intervalInPx);
         CGRect lableFrame = CGRectMake(0, currentLinePoint.y - (intervalInPx / 2), _leftMarginToLeave, intervalInPx);
         
@@ -538,7 +538,7 @@
             yAxisLabel.textColor = (UIColor *)_themeAttributes[kYAxisLabelColorKey];
             yAxisLabel.textAlignment = NSTextAlignmentCenter;
             yAxisLabel.adjustsFontSizeToFitWidth=YES;
-            float val = (yIntervalValue * ((INTERVAL_COUNT +1) - i));
+            float val = (yIntervalValue * ((_lableLookNum +1) - i));
             if(val > 0){
                 yAxisLabel.text = [NSString stringWithFormat:@"%.0f%@", val, _yAxisSuffix];
             } else {
@@ -578,8 +578,8 @@
     
     CGMutablePathRef linesPath = CGPathCreateMutable();
     
-    double intervalInPx = (self.bounds.size.height - TOP_MARGIN_TO_LEAVE) / (INTERVAL_COUNT + 1);
-    for(int i= INTERVAL_COUNT + 1; i > 0; i--){
+    double intervalInPx = (self.bounds.size.height - TOP_MARGIN_TO_LEAVE) / (_lableLookNum + 1);
+    for(int i= ((int)_lableLookNum + 1); i > 0; i--){
         
         CGPoint currentLinePoint = CGPointMake(0, (i * intervalInPx));
         

@@ -518,6 +518,21 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [yArray addObject:_dataTwoDic[key]];
     }
     
+        NSMutableArray *yArray1 = [NSMutableArray array];
+       NSMutableArray *xArray1 = [NSMutableArray array];
+    for (int i=0; i<xArray.count-2; i++) {
+        if (i%3==0) {
+               float y1=([[yArray[i] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+1] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+2] objectForKey:@"pacToUser"] floatValue])/3;
+               float y2=([[yArray[i] objectForKey:@"ppv"] floatValue]+[[yArray[i+1] objectForKey:@"ppv"] floatValue]+[[yArray[i+2] objectForKey:@"ppv"] floatValue])/3;
+               float y3=([[yArray[i] objectForKey:@"sysOut"] floatValue]+[[yArray[i+1] objectForKey:@"sysOut"] floatValue]+[[yArray[i+2] objectForKey:@"sysOut"] floatValue])/3;
+               float y4=([[yArray[i] objectForKey:@"userLoad"] floatValue]+[[yArray[i+1] objectForKey:@"userLoad"] floatValue]+[[yArray[i+2] objectForKey:@"userLoad"] floatValue])/3;
+            NSDictionary *y0=@{@"pacToUser":[NSNumber numberWithFloat:y1],@"ppv":[NSNumber numberWithFloat:y2],@"sysOut":[NSNumber numberWithFloat:y3],@"userLoad":[NSNumber numberWithFloat:y4]};
+            [xArray1 addObject:xArray[i]];
+             [yArray1 addObject:y0];
+        }
+    }
+    xArray=[NSMutableArray arrayWithArray:xArray1];
+    yArray=[NSMutableArray arrayWithArray:yArray1];
     
     NSMutableArray*Y1=[NSMutableArray array];
     NSMutableArray*Y2=[NSMutableArray array];
@@ -602,31 +617,31 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         _lineChart=nil;
     }
     
-    _lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 620*ScreenProH-view1H-viewAA, 730*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
+    _lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 620*ScreenProH-view1H-viewAA, 740*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
     _lineChart.xlableNameArray=[NSArray arrayWithArray:tempXArr];
     _lineChart.xLineDataArr =xArray;
-    _lineChart.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 10*ScreenProW);
+    _lineChart.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 0*ScreenProW);
     
     _lineChart.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
     
     _lineChart.valueArr = @[Y1,Y2,Y3,Y4];
     _lineChart.showYLevelLine = YES;
-    _lineChart.showYLine = NO;
-    _lineChart.showValueLeadingLine = YES;
+    _lineChart.showYLine = YES;
+ //   _lineChart.showValueLeadingLine = YES;
     _lineChart.xDescTextFontSize=20*ScreenProH;
     _lineChart.yDescTextFontSize=20*ScreenProH;
     _lineChart.lineWidth=2*ScreenProH;
     _lineChart.backgroundColor = [UIColor clearColor];
     _lineChart.hasPoint=NO;
-    //   lineChart.showValueLeadingLine=YES;
+
     _lineChart.valueLineColorArr =@[COLOR(255, 217, 35, 1),COLOR(32, 219, 118, 1),COLOR(104, 247, 252, 1),COLOR(55, 110, 251, 1)];
     // _lineChart.pointColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
     _lineChart.xAndYLineColor = COLOR(255, 255, 255, 0.9);
     _lineChart.xAndYNumberColor = COLOR(255, 255, 255, 0.8);
     _lineChart.positionLineColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
-    _lineChart.contentFill = NO;
-    _lineChart.pathCurve = YES;
-    //_lineChart.contentFillColorArr = @[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(14, 222, 228, 0.5)];
+    _lineChart.contentFill = YES;
+    _lineChart.pathCurve = NO;
+    _lineChart.contentFillColorArr = @[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(14, 222, 228, 0.5)];
     [_scrollView addSubview:_lineChart];
     [_lineChart showAnimation];
     
@@ -702,7 +717,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _lineChart2.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 10*ScreenProW);
     
     _lineChart2.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
-    
+    _lineChart2.isOnlyOne=YES;
     _lineChart2.valueArr = @[yArray];
     _lineChart2.showYLevelLine = YES;
     _lineChart2.showYLine = NO;

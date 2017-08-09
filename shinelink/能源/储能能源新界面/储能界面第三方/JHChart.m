@@ -22,7 +22,7 @@
     if (self = [super initWithFrame:frame]) {
         _xDescTextFontSize = _yDescTextFontSize = 8.0;
         self.xAndYLineColor = [UIColor darkGrayColor];
-        self.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 10*ScreenProW);
+        self.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 0*ScreenProW);
         self.chartOrigin = P_M(self.contentInsets.left, CGRectGetHeight(self.frame) - self.contentInsets.bottom);
     }
     return self;

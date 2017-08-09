@@ -213,6 +213,7 @@
                 NSString *value0=dayDict0[key];
                 [_dayDict setValue:value0 forKey:key0];
             }
+            self.line2View.isStorage=YES;
             [self.line2View refreshLineChartViewWithDataDict:_dayDict];
         }
         

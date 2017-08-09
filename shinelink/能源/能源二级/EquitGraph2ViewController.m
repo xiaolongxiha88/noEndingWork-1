@@ -320,10 +320,11 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     for (NSString *key in daydic) {
         [valueFor2 addObject:daydic[key]];
     }
-    NSNumber *sum = [valueFor2 valueForKeyPath:@"@avg.intValue"];
+    NSNumber *sum = [valueFor2 valueForKeyPath:@"@avg.floatValue"];
     
   
     float k=[sum floatValue];
+    
      NSNumber *max = [valueFor2 valueForKeyPath:@"@max.floatValue"];
     
   

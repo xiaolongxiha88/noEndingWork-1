@@ -9,7 +9,7 @@
 #import "JHLineChart.h"
 #define kXandYSpaceForSuperView 20.0
 
-@interface JHLineChart ()
+@interface JHLineChart ()<CAAnimationDelegate>
 
 @property (assign, nonatomic)   CGFloat  xLength;
 @property (assign , nonatomic)  CGFloat  yLength;
@@ -88,26 +88,8 @@
     switch (_lineChartQuadrantType) {
         case JHLineChartQuadrantTypeFirstQuardrant:
         {
-            _perXLen = (_xLength-kXandYSpaceForSuperView)/(_xLineDataArr.count-1);
+            _perXLen = (_xLength-5*HEIGHT_SIZE)/(_xLineDataArr.count-1);
             _perYlen = (_yLength-kXandYSpaceForSuperView)/_yLineDataArr.count;
-        }
-            break;
-        case JHLineChartQuadrantTypeFirstAndSecondQuardrant:
-        {
-            _perXLen = (_xLength/2-kXandYSpaceForSuperView)/[_xLineDataArr[0] count];
-            _perYlen = (_yLength-kXandYSpaceForSuperView)/_yLineDataArr.count;
-        }
-            break;
-        case JHLineChartQuadrantTypeFirstAndFouthQuardrant:
-        {
-            _perXLen = (_xLength-kXandYSpaceForSuperView)/(_xLineDataArr.count-1);
-            _perYlen = (_yLength/2-kXandYSpaceForSuperView)/[_yLineDataArr[0] count];
-        }
-            break;
-        case JHLineChartQuadrantTypeAllQuardrant:
-        {
-             _perXLen = (_xLength/2-kXandYSpaceForSuperView)/([_xLineDataArr[0] count]);
-             _perYlen = (_yLength/2-kXandYSpaceForSuperView)/[_yLineDataArr[0] count];
         }
             break;
             
@@ -159,147 +141,8 @@
  */
 - (void)updateYScale{
         switch (_lineChartQuadrantType) {
-        case JHLineChartQuadrantTypeFirstAndFouthQuardrant:{
-            
-            NSInteger max = 0;
-            NSInteger min = 0;
-            
-            for (NSArray *arr in _valueArr) {
-                for (NSString * numer  in arr) {
-                    NSInteger i = [numer integerValue];
-                    if (i>=max) {
-                        max = i;
-                    }
-                    if (i<=min) {
-                        min = i;
-                    }
-                }
-                
-            }
-            
-         min = labs(min);
-         max = (min<max?(max):(min));
-        if (max%5==0) {
-                max = max;
-            }else
-                max = (max/5+1)*5;
-        NSMutableArray *arr = [NSMutableArray array];
-        NSMutableArray *minArr = [NSMutableArray array];
-        if (max<=5) {
-            for (NSInteger i = 0; i<5; i++) {
-                    
-                [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*1]];
-                [minArr addObject:[NSString stringWithFormat:@"-%ld",(i+1)*1]];
-                }
-            }
-            
-        if (max<=10&&max>5) {
-                
-                
-            for (NSInteger i = 0; i<5; i++) {
-                    
-                    [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*2]];
-                [minArr addObject:[NSString stringWithFormat:@"-%ld",(i+1)*2]];
-
-                }
-                
-        }else if(max>10&&max<=100){
-            
-            
-            for (NSInteger i = 0; i<max/5; i++) {
-                [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*5]];
-                [minArr addObject:[NSString stringWithFormat:@"-%ld",(i+1)*5]];
-            }
-            
-        }else{
-            
-            NSInteger count = max / 10;
-            
-            for (NSInteger i = 0; i<11; i++) {
-                [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*count]];
-                [minArr addObject:[NSString stringWithFormat:@"-%ld",(i+1)*count]];
-            }
-            
-        }
-
         
-            
-            _yLineDataArr = @[[arr copy],[minArr copy]];
-            
-            
-            [self setNeedsDisplay];
-            
-            
-        }break;
-        case JHLineChartQuadrantTypeAllQuardrant:{
-            
-            NSInteger max = 0;
-            NSInteger min = 0;
-            
-            
-            for (NSArray *arr in _valueArr) {
-                for (NSString * numer  in arr) {
-                    NSInteger i = [numer integerValue];
-                    if (i>=max) {
-                        max = i;
-                    }
-                    if (i<=min) {
-                        min = i;
-                    }
-                }
-                
-            }
-
-            
-            min = labs(min);
-            max = (min<max?(max):(min));
-            if (max%5==0) {
-                max = max;
-            }else
-                max = (max/5+1)*5;
-            NSMutableArray *arr = [NSMutableArray array];
-            NSMutableArray *minArr = [NSMutableArray array];
-            if (max<=5) {
-                for (NSInteger i = 0; i<5; i++) {
-                    
-                    [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*1]];
-                    [minArr addObject:[NSString stringWithFormat:@"-%ld",(i+1)*1]];
-                }
-            }
-            
-            if (max<=10&&max>5) {
-                
-                
-                for (NSInteger i = 0; i<5; i++) {
-                    
-                    [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*2]];
-                    [minArr addObject:[NSString stringWithFormat:@"-%ld",(i+1)*2]];
-                    
-                }
-                
-            }else if(max>10&&max<=100){
-                
-                
-                for (NSInteger i = 0; i<max/5; i++) {
-                    [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*5]];
-                    [minArr addObject:[NSString stringWithFormat:@"-%ld",(i+1)*5]];
-                }
-                
-            }else{
-                
-                NSInteger count = max / 10;
-                
-                for (NSInteger i = 0; i<11; i++) {
-                    [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*count]];
-                    [minArr addObject:[NSString stringWithFormat:@"-%ld",(i+1)*count]];
-                }
-                
-            }
-
-            _yLineDataArr = @[[arr copy],[minArr copy]];
-            
-            [self setNeedsDisplay];
-        }break;
+     
         default:{
             if (_valueArr.count) {
                 
@@ -319,8 +162,14 @@
                 
                 if (max%5==0) {
                     max = max;
-                }else
+                }else{
                     max = (max/5+1)*5;
+                }
+                
+                if (_isOnlyOne) {
+            max=100;
+                }
+                
                 _yLineDataArr = nil;
                 NSMutableArray *arr = [NSMutableArray array];
                 if (max<=5) {
@@ -392,21 +241,6 @@
         case JHLineChartQuadrantTypeFirstQuardrant:
         {
             self.chartOrigin = CGPointMake(self.contentInsets.left, self.frame.size.height-self.contentInsets.bottom);
-        }
-            break;
-        case JHLineChartQuadrantTypeFirstAndSecondQuardrant:
-        {
-            self.chartOrigin = CGPointMake(self.contentInsets.left+_xLength/2, CGRectGetHeight(self.frame)-self.contentInsets.bottom);
-        }
-            break;
-        case JHLineChartQuadrantTypeFirstAndFouthQuardrant:
-        {
-            self.chartOrigin = CGPointMake(self.contentInsets.left, self.contentInsets.top+_yLength/2);
-        }
-            break;
-        case JHLineChartQuadrantTypeAllQuardrant:
-        {
-             self.chartOrigin = CGPointMake(self.contentInsets.left+_xLength/2, self.contentInsets.top+_yLength/2);
         }
             break;
             
@@ -539,81 +373,9 @@
 
             
         }break;
-        case JHLineChartQuadrantTypeFirstAndSecondQuardrant:{
-            
-            _perValue = _perYlen/[[_yLineDataArr firstObject] floatValue];
-            
-            
-            
-            for (NSArray *valueArr in _valueArr) {
-                NSMutableArray *dataMArr = [NSMutableArray array];
-              
-                    
-                    CGPoint p ;
-                    for (NSInteger i = 0; i<[_xLineDataArr[0] count]; i++) {
-                        p = P_M(self.contentInsets.left + kXandYSpaceForSuperView+i*_perXLen, self.contentInsets.top + _yLength - [valueArr[i] floatValue]*_perValue);
-                        [dataMArr addObject:[NSValue valueWithCGPoint:p]];
-                    }
-                    
-                    for (NSInteger i = 0; i<[_xLineDataArr[1] count]; i++) {
-                        p = P_M(self.chartOrigin.x+i*_perXLen, self.contentInsets.top + _yLength - [valueArr[i+[_xLineDataArr[0] count]] floatValue]*_perValue);
-                        [dataMArr addObject:[NSValue valueWithCGPoint:p]];
-                        
-                    }
-                    
-                    
-               
-                [_drawDataArr addObject:[dataMArr copy]];
-                
-            }
 
 
-            
-            
-        }break;
-        case JHLineChartQuadrantTypeFirstAndFouthQuardrant:{
-            _perValue = _perYlen/[[_yLineDataArr[0] firstObject] floatValue];
-            for (NSArray *valueArr in _valueArr) {
-                NSMutableArray *dataMArr = [NSMutableArray array];
-                for (NSInteger i = 0; i<valueArr.count; i++) {
-                    
-                    CGPoint p = P_M(i*_perXLen+self.chartOrigin.x,self.chartOrigin.y - [valueArr[i] floatValue]*_perValue);
-                    NSValue *value = [NSValue valueWithCGPoint:p];
-                    [dataMArr addObject:value];
-                }
-                [_drawDataArr addObject:[dataMArr copy]];
-                
-            }
-            
-        }break;
-        case JHLineChartQuadrantTypeAllQuardrant:{
-            
-            
-            
-            _perValue = _perYlen/[[_yLineDataArr[0] firstObject] floatValue];
-            for (NSArray *valueArr in _valueArr) {
-                NSMutableArray *dataMArr = [NSMutableArray array];
-             
-                    
-                    CGPoint p ;
-                    for (NSInteger i = 0; i<[_xLineDataArr[0] count]; i++) {
-                        p = P_M(self.contentInsets.left + kXandYSpaceForSuperView+i*_perXLen, self.chartOrigin.y-[valueArr[i] floatValue]*_perValue);
-                        [dataMArr addObject:[NSValue valueWithCGPoint:p]];
-                    }
-                    
-                    for (NSInteger i = 0; i<[_xLineDataArr[1] count]; i++) {
-                        p = P_M(self.chartOrigin.x+i*_perXLen, self.chartOrigin.y-[valueArr[i+[_xLineDataArr[0] count]] floatValue]*_perValue);
-                        [dataMArr addObject:[NSValue valueWithCGPoint:p]];
-                        
-                    }
-                    
-                    
-           
-                [_drawDataArr addObject:[dataMArr copy]];
-                
-            }
-
-        }break;
+    
         default:
             break;
     }
@@ -808,8 +570,8 @@
 
             
             if (_showValueLeadingLine) {
-                [self drawLineWithContext:context andStarPoint:P_M(self.chartOrigin.x, p.y) andEndPoint:p andIsDottedLine:YES andColor:positionLineColor];
-                [self drawLineWithContext:context andStarPoint:P_M(p.x, self.chartOrigin.y) andEndPoint:p andIsDottedLine:YES andColor:positionLineColor];
+                [self drawLineWithContext:context andStarPoint:P_M(self.chartOrigin.x, p.y) andEndPoint:p andIsDottedLine:NO andColor:positionLineColor];
+                [self drawLineWithContext:context andStarPoint:P_M(p.x, self.chartOrigin.y) andEndPoint:p andIsDottedLine:NO andColor:positionLineColor];
             }
           
             

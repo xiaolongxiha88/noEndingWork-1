@@ -274,7 +274,7 @@
         NSDictionary *_plotThemeAttributes = @{
                                                kPlotFillColorKey : COLOR(141, 235, 252, 0.6),
                                                kPlotStrokeWidthKey : @1,
-                                               kPlotStrokeColorKey :  COLOR(74, 194, 240, 1),
+                                               kPlotStrokeColorKey : COLOR(141, 235, 252, 1),
                                                kPlotPointFillColorKey : COLOR(78, 225, 252, 0.6),
                                                kPlotPointValueFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE]
                                                };
@@ -345,8 +345,15 @@
                 maxyAxisValue=[NSNumber numberWithInt:getY1*6];
             }
             
+            if (_isStorage) {
+                self.lineChartView.lableLookNum=5;
+                 self.lineChartView.yAxisRange = [NSNumber numberWithInt:100];
+            }else{
+                 self.lineChartView.lableLookNum=6;
+                   self.lineChartView.yAxisRange = maxyAxisValue;
+            }
             
-            self.lineChartView.yAxisRange = maxyAxisValue;
+         
             self.lineChartView.yAxisSuffix = @"";
             
             NSMutableArray *tempValuesArray = [NSMutableArray array];

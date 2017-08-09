@@ -26,6 +26,8 @@
 
 @interface SHLineGraphView : UIView
 
+@property (assign, nonatomic) NSInteger lableLookNum;//间距数量
+
 @property (nonatomic) NSArray *dirLableValuesX;
 @property (nonatomic) NSArray *dirLableValuesY;
 

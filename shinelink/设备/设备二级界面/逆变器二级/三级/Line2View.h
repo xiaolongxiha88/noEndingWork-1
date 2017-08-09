@@ -15,6 +15,8 @@
 @property (nonatomic, strong) UILabel *energyTitleLabel;
 @property (nonatomic, strong) NSString *frameType;
 
+@property (assign, nonatomic) BOOL isStorage;//间距数量
+
 - (void)refreshLineChartViewWithDataDict:(NSMutableDictionary *)dataDict;
 
 - (void)refreshBarChartViewWithDataDict:(NSMutableDictionary *)dataDict chartType:(NSInteger)type;

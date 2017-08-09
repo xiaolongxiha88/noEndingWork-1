@@ -821,8 +821,8 @@
 		3343F3E81C805BD2009F69BC /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		3343F3E91C805BD2009F69BC /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		3343F3EA1C805BD2009F69BC /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.mdown; sourceTree = "<group>"; };
-		334720DF1C8E7048006388C8 /* energyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = energyTableViewCell.h; sourceTree = "<group>"; };
-		334720E01C8E7048006388C8 /* energyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = energyTableViewCell.m; sourceTree = "<group>"; };
+		334720DF1C8E7048006388C8 /* energyTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = energyTableViewCell.h; path = ../energyTableViewCell.h; sourceTree = "<group>"; };
+		334720E01C8E7048006388C8 /* energyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = energyTableViewCell.m; path = ../energyTableViewCell.m; sourceTree = "<group>"; };
 		334770F91C9A3D91003A6F13 /* server@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "server@2x.png"; sourceTree = "<group>"; };
 		334770FB1C9A3DEE003A6F13 /* energyTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "energyTab@2x.png"; sourceTree = "<group>"; };
 		334770FD1C9A3E35003A6F13 /* equipment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "equipment@2x.png"; sourceTree = "<group>"; };
@@ -1030,8 +1030,8 @@
 		335614631CB397220071BAC9 /* LZPageContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZPageContentView.m; sourceTree = "<group>"; };
 		335614641CB397220071BAC9 /* LZPageMainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZPageMainCell.h; sourceTree = "<group>"; };
 		335614651CB397220071BAC9 /* LZPageMainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZPageMainCell.m; sourceTree = "<group>"; };
-		335614661CB397220071BAC9 /* LZPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LZPageViewController.h; path = "../我/客服系统/Classes/LZPageViewController.h"; sourceTree = "<group>"; };
-		335614671CB397220071BAC9 /* LZPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LZPageViewController.m; path = "../我/客服系统/Classes/LZPageViewController.m"; sourceTree = "<group>"; };
+		335614661CB397220071BAC9 /* LZPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LZPageViewController.h; path = "../../我/客服系统/Classes/LZPageViewController.h"; sourceTree = "<group>"; };
+		335614671CB397220071BAC9 /* LZPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LZPageViewController.m; path = "../../我/客服系统/Classes/LZPageViewController.m"; sourceTree = "<group>"; };
 		335614921CB3A0AA0071BAC9 /* commonTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commonTableViewController.h; path = ../commonTableViewController.h; sourceTree = "<group>"; };
 		335614931CB3A0AA0071BAC9 /* commonTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = commonTableViewController.m; path = ../commonTableViewController.m; sourceTree = "<group>"; };
 		335614951CB3A6A30071BAC9 /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
@@ -1422,8 +1422,8 @@
 		3381ECE41CBC900900DCF0D2 /* EquitGraph2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquitGraph2ViewController.m; sourceTree = "<group>"; };
 		3381ECE61CBC906600DCF0D2 /* Line3View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line3View.h; sourceTree = "<group>"; };
 		3381ECE71CBC906600DCF0D2 /* Line3View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line3View.m; sourceTree = "<group>"; };
-		3381ECEC1CBCA3ED00DCF0D2 /* energyDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = energyDemo.h; sourceTree = "<group>"; };
-		3381ECED1CBCA3ED00DCF0D2 /* energyDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = energyDemo.m; sourceTree = "<group>"; };
+		3381ECEC1CBCA3ED00DCF0D2 /* energyDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = energyDemo.h; path = ../energyDemo.h; sourceTree = "<group>"; };
+		3381ECED1CBCA3ED00DCF0D2 /* energyDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = energyDemo.m; path = ../energyDemo.m; sourceTree = "<group>"; };
 		3381ECF01CBCA5F900DCF0D2 /* 峰谷电价设置切图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "峰谷电价设置切图.png"; path = "../峰谷电价设置切图.png"; sourceTree = "<group>"; };
 		3381ECF21CBCA60C00DCF0D2 /* 智能调整优先设置.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "智能调整优先设置.png"; path = "../智能调整优先设置.png"; sourceTree = "<group>"; };
 		3381ECF41CBCA61200DCF0D2 /* 智能联动设置切图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "智能联动设置切图.png"; path = "../智能联动设置切图.png"; sourceTree = "<group>"; };
@@ -2766,6 +2766,12 @@
 		33692BF61C9294D300698375 /* 能源二级 */ = {
 			isa = PBXGroup;
 			children = (
+				335614661CB397220071BAC9 /* LZPageViewController.h */,
+				335614671CB397220071BAC9 /* LZPageViewController.m */,
+				334720DF1C8E7048006388C8 /* energyTableViewCell.h */,
+				334720E01C8E7048006388C8 /* energyTableViewCell.m */,
+				3381ECEC1CBCA3ED00DCF0D2 /* energyDemo.h */,
+				3381ECED1CBCA3ED00DCF0D2 /* energyDemo.m */,
 				33EFB6401C98F9B1003F336F /* ZFChart */,
 				3381ECE31CBC900900DCF0D2 /* EquitGraph2ViewController.h */,
 				3381ECE41CBC900900DCF0D2 /* EquitGraph2ViewController.m */,
@@ -3298,12 +3304,6 @@
 				33692BF61C9294D300698375 /* 能源二级 */,
 				337F9CC91C71AC200016FE43 /* energyViewController.h */,
 				337F9CCA1C71AC200016FE43 /* energyViewController.m */,
-				335614661CB397220071BAC9 /* LZPageViewController.h */,
-				335614671CB397220071BAC9 /* LZPageViewController.m */,
-				334720DF1C8E7048006388C8 /* energyTableViewCell.h */,
-				334720E01C8E7048006388C8 /* energyTableViewCell.m */,
-				3381ECEC1CBCA3ED00DCF0D2 /* energyDemo.h */,
-				3381ECED1CBCA3ED00DCF0D2 /* energyDemo.m */,
 			);
 			path = "能源";
 			sourceTree = "<group>";
