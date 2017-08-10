@@ -330,7 +330,8 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    [self drawXAndYLineWithContext:context];
+    
+ [self drawXAndYLineWithContext:context];
     
     
     if (!_isEndAnimation) {
@@ -338,7 +339,7 @@
     }
     
     if (_drawDataArr.count) {
-        [self drawPositionLineWithContext:context];
+     [self drawPositionLineWithContext:context];
     }
     
 }

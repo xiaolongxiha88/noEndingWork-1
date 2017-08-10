@@ -43,7 +43,7 @@
     noticeLable.adjustsFontSizeToFitWidth=YES;
     [_scrollView addSubview:noticeLable];
     
- NSData *data = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"connected-ok" ofType:@"gif"]];
+ NSData *data = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"LEDold2" ofType:@"gif"]];
     float gifwidth=140*NOW_SIZE;
     _GifViewNo =[[UIWebView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE+sizeH1+10*HEIGHT_SIZE, gifwidth, gifwidth*1.11)];
     [_GifViewNo loadData:data MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
@@ -55,7 +55,7 @@
     _GifViewNo.backgroundColor=[UIColor clearColor];
     [_scrollView addSubview:_GifViewNo];
     
-     NSData *data2 = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"connected-failed" ofType:@"gif"]];
+     NSData *data2 = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:@"LEDold22" ofType:@"gif"]];
     _GifViewNo2 =[[UIWebView alloc]initWithFrame:CGRectMake(30*NOW_SIZE+gifwidth, 10*HEIGHT_SIZE+sizeH1+10*HEIGHT_SIZE, gifwidth, gifwidth*1.11)];
     [_GifViewNo2 loadData:data2 MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
     _GifViewNo2.delegate = self;

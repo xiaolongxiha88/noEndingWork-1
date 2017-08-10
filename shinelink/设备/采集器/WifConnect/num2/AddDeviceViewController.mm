@@ -339,7 +339,11 @@ static void *context = NULL;
         
           [self showAlertViewWithTitle:nil message:root_wifi_tiaozhuan_tishi cancelButtonTitle:root_Yes];
         
-      //  _isNewWIFI=@"1";
+        
+        
+   // _isNewWIFI=@"0";
+        
+        
         if ([_isNewWIFI isEqualToString:@"1"]) {
             GifNewViewController *get=[[GifNewViewController alloc]init];
             [self.navigationController pushViewController:get animated:NO];

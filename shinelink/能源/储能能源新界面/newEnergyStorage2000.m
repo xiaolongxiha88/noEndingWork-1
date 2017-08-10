@@ -347,7 +347,11 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
 }
 
-
+-(void)getCharNum:(UITapGestureRecognizer*)tap{
+    int Num=tap.view.tag;
+    
+    
+}
 
 -(void)getUITwoLable{
     
@@ -366,10 +370,14 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     for (int i=0; i<4; i++) {
         UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(5*ScreenProW+185*ScreenProW*i, 1160*ScreenProH-HH, 180*ScreenProW, ScreenProH*55)];
         V1.userInteractionEnabled = YES;
+        V1.tag=3000+i;
+        UITapGestureRecognizer * Tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getCharNum:)];
+        [V1 addGestureRecognizer:Tap];
         [_uiview2 addSubview:V1];
         
         UIButton *button1= [UIButton buttonWithType:UIButtonTypeCustom];
         button1.frame= CGRectMake(40*ScreenProW, 0*ScreenProH, 100*ScreenProW, ScreenProH*20);
+    //    [button1 setBackgroundImage:<#(nullable UIImage *)#> forState:<#(UIControlState)#>];
         button1.backgroundColor=colorArray[i];
         [V1 addSubview:button1];
         // [button1 addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
