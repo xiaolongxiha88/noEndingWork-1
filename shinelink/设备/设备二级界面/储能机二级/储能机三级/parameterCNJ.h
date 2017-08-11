@@ -13,4 +13,7 @@
 @property (nonatomic, strong) NSString *normalPower;
 @property (nonatomic, strong) NSMutableDictionary *params2Dict;
 @property (nonatomic, strong) NSString *storageType;
+
+@property (nonatomic, strong) NSString *typeNum;
+
 @end

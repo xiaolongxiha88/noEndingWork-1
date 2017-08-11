@@ -22,4 +22,6 @@
 @property (nonatomic, strong) NSDictionary *dictYear;
 @property (nonatomic, strong) NSDictionary *dictAll;
 
+@property (nonatomic, strong) NSString *StorageTypeNum;
+
 @end

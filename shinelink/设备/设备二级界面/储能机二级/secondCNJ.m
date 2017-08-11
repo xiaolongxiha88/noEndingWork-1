@@ -36,6 +36,8 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSString *capacity;
 @property (nonatomic, strong) NSString *storageType;
+@property (nonatomic, strong)VWWWaterView *waterView;
+@property (nonatomic, assign) float pointCenterNum;
 @end
 
 @implementation secondCNJ
@@ -164,6 +166,7 @@
     PC.deviceSN=_deviceSN;
     PC.normalPower=_normalPower2;
     PC.storageType=_storageType;
+    PC.typeNum=_typeNum;
     [self.navigationController pushViewController:PC animated:NO];
 }
 
@@ -171,6 +174,7 @@
     EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
     equipGraph.deviceType=@"S";
        equipGraph.SnID=_deviceSN;
+    equipGraph.StorageTypeNum=_typeNum;
     equipGraph.dictInfo=@{@"equipId":_deviceSN,
                           @"daySite":@"/newStorageAPI.do?op=getDayLineStorage",
                           @"monthSite":@"/newStorageAPI.do?op=getMonthLineStorage",
@@ -183,6 +187,7 @@
     [self.navigationController pushViewController:equipGraph animated:YES];
     
 }
+
 -(void)addGraph{
   
     
@@ -226,6 +231,7 @@
 }
 
 -(void)addProcess{
+       _typeNum=@"1";
     
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages objectAtIndex:0];
@@ -242,92 +248,130 @@
     UIImage *bgImage = IMAGE(@"bg3.png");
     processView.layer.contents = (id)bgImage.CGImage;
     [self.scrollView addSubview:processView];
-    UILabel *leftName=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE, 190*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
-    leftName.text=_dayDischarge;
-    leftName.userInteractionEnabled=YES;
-    UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
-    tapGestureRecognizer2.cancelsTouchesInView = NO;
-    [leftName addGestureRecognizer:tapGestureRecognizer2];
-    leftName.textAlignment=NSTextAlignmentLeft;
-    leftName.textColor=[UIColor whiteColor];
-    leftName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [self.scrollView addSubview:leftName];
-    UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(2*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
-    if ([_languageValue isEqualToString:@"0"]) {
-        leftState.frame=CGRectMake(14*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE );
+    
+    if (![_typeNum isEqualToString:@"1"]) {
+        UILabel *leftName=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE, 190*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+        leftName.text=_dayDischarge;
+        leftName.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+        tapGestureRecognizer2.cancelsTouchesInView = NO;
+        [leftName addGestureRecognizer:tapGestureRecognizer2];
+        leftName.textAlignment=NSTextAlignmentLeft;
+        leftName.textColor=[UIColor whiteColor];
+        leftName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        [self.scrollView addSubview:leftName];
+        UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(2*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
+        if ([_languageValue isEqualToString:@"0"]) {
+            leftState.frame=CGRectMake(14*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE );
+        }
+        leftState.text=root_ri_fangdianliang;
+        leftState.textAlignment=NSTextAlignmentLeft;
+        leftState.textColor=[UIColor whiteColor];
+        leftState.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        leftState.adjustsFontSizeToFitWidth=YES;
+        [self.scrollView addSubview:leftState];
+        
+        
+        UILabel *rightName=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-104*NOW_SIZE, 195*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+        rightName.text=_totalDischarge;
+        rightName.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tapGestureRecognizer0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+        tapGestureRecognizer0.cancelsTouchesInView = NO;
+        [rightName addGestureRecognizer:tapGestureRecognizer0];
+        rightName.textAlignment=NSTextAlignmentRight;
+        rightName.textColor=[UIColor whiteColor];
+        rightName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        [self.scrollView addSubview:rightName];
+        
+        UILabel *rightState=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-116*NOW_SIZE, 215*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
+        if ([_languageValue isEqualToString:@"0"]) {
+            rightState.frame=CGRectMake(kScreenWidth-128*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE );
+        }
+        rightState.text=root_zong_fangdianliang;
+        rightState.textAlignment=NSTextAlignmentRight;
+        rightState.textColor=[UIColor whiteColor];
+        rightState.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        rightState.adjustsFontSizeToFitWidth=YES;
+        [self.scrollView addSubview:rightState];
+        
+        UILabel *dataName=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 245*HEIGHT_SIZE-SizeH, 180*NOW_SIZE,20*HEIGHT_SIZE )];
+        dataName.text=root_dianchi;
+        dataName.textAlignment=NSTextAlignmentLeft;
+        dataName.textColor=[UIColor blackColor];
+        dataName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        dataName.adjustsFontSizeToFitWidth=YES;
+        [self.scrollView addSubview:dataName];
+
+    }else{
+        NSArray *lableNameArray=@[root_ri_fangdianliang,root_zong_fangdianliang,@"今日收益",@"总收益"];
+          NSArray *lableValueArray=@[@"1000",@"1000",@"1000",@"1000"];
+        float lableW=SCREEN_Width/4;
+        for (int i=0; i<lableValueArray.count; i++) {
+            UILabel *valueLable=[[UILabel alloc]initWithFrame:CGRectMake(0+lableW*i, 190*HEIGHT_SIZE-SizeH, lableW,20*HEIGHT_SIZE )];
+            valueLable.text=lableValueArray[i];
+            valueLable.userInteractionEnabled=YES;
+            UITapGestureRecognizer *tapGestureRecognizer0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+            tapGestureRecognizer0.cancelsTouchesInView = NO;
+            [valueLable addGestureRecognizer:tapGestureRecognizer0];
+            valueLable.textAlignment=NSTextAlignmentCenter;
+            valueLable.textColor=[UIColor whiteColor];
+            valueLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            [self.scrollView addSubview:valueLable];
+            
+            UILabel *nameLable=[[UILabel alloc]initWithFrame:CGRectMake(0+lableW*i, 210*HEIGHT_SIZE-SizeH, lableW,20*HEIGHT_SIZE )];
+            nameLable.text=lableNameArray[i];
+            nameLable.textAlignment=NSTextAlignmentCenter;
+            nameLable.textColor=[UIColor whiteColor];
+            nameLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [self.scrollView addSubview:nameLable];
+        }
+        
     }
-    leftState.text=root_ri_fangdianliang;
-    leftState.textAlignment=NSTextAlignmentLeft;
-    leftState.textColor=[UIColor whiteColor];
-    leftState.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-      leftState.adjustsFontSizeToFitWidth=YES;
-    [self.scrollView addSubview:leftState];
+    
+
     
     
-    UILabel *rightName=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-104*NOW_SIZE, 190*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
-    rightName.text=_totalDischarge;
-    rightName.userInteractionEnabled=YES;
-    UITapGestureRecognizer *tapGestureRecognizer0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
-    tapGestureRecognizer0.cancelsTouchesInView = NO;
-    [rightName addGestureRecognizer:tapGestureRecognizer0];
-    rightName.textAlignment=NSTextAlignmentRight;
-    rightName.textColor=[UIColor whiteColor];
-    rightName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-    [self.scrollView addSubview:rightName];
-    UILabel *rightState=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-116*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
-    if ([_languageValue isEqualToString:@"0"]) {
-        rightState.frame=CGRectMake(kScreenWidth-128*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE );
+    if ([_typeNum isEqualToString:@"1"]) {
+        _pointCenterNum=20*HEIGHT_SIZE;
+       _waterView = [[VWWWaterView alloc]initWithFrame:CGRectMake(0, 0*NOW_SIZE, 120*HEIGHT_SIZE, 120*HEIGHT_SIZE)];
+        _waterView.center = CGPointMake(CGRectGetMidX( [UIScreen mainScreen].bounds), 100*HEIGHT_SIZE-_pointCenterNum);
+    }else{
+       _waterView = [[VWWWaterView alloc]initWithFrame:CGRectMake(0, 0*NOW_SIZE, 160*HEIGHT_SIZE, 160*HEIGHT_SIZE)];
+        _waterView.center = CGPointMake(CGRectGetMidX( [UIScreen mainScreen].bounds), 100*HEIGHT_SIZE);
     }
-    rightState.text=root_zong_fangdianliang;
-    rightState.textAlignment=NSTextAlignmentRight;
-    rightState.textColor=[UIColor whiteColor];
-    rightState.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    rightState.adjustsFontSizeToFitWidth=YES;
-    [self.scrollView addSubview:rightState];
+ 
     
-    UILabel *dataName=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 245*HEIGHT_SIZE-SizeH, 180*NOW_SIZE,20*HEIGHT_SIZE )];
-    dataName.text=root_dianchi;
-    dataName.textAlignment=NSTextAlignmentLeft;
-    dataName.textColor=[UIColor blackColor];
-    dataName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    dataName.adjustsFontSizeToFitWidth=YES;
-    [self.scrollView addSubview:dataName];
-    
-    //_status=@"1";
-    VWWWaterView *waterView = [[VWWWaterView alloc]initWithFrame:CGRectMake(0, 0*NOW_SIZE, 160*HEIGHT_SIZE, 160*HEIGHT_SIZE)];
-    CGPoint center = CGPointMake(CGRectGetMidX( [UIScreen mainScreen].bounds), 100*HEIGHT_SIZE);
-    waterView.center = center;
     if ([_status isEqualToString:@"0"]) {
-        waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
-        waterView.currentWaterColor = [UIColor colorWithRed:45/ 255.0f green:226/ 255.0f blue:233/ 255.0f alpha:1];//水波颜色
+        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.currentWaterColor = [UIColor colorWithRed:45/ 255.0f green:226/ 255.0f blue:233/ 255.0f alpha:1];//水波颜色
         _statusText=root_xianZhi;
     }else if ([_status isEqualToString:@"1"]) {
-        waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
-        waterView.currentWaterColor = [UIColor colorWithRed:121/ 255.0f green:230/ 255.0f blue:129/ 255.0f alpha:1];//水波颜色
+        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.currentWaterColor = [UIColor colorWithRed:121/ 255.0f green:230/ 255.0f blue:129/ 255.0f alpha:1];//水波颜色
          _statusText=root_chongDian;
     }else if ([_status isEqualToString:@"2"]) {
-        waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
-        waterView.currentWaterColor = [UIColor colorWithRed:222/ 255.0f green:211/ 255.0f blue:91/ 255.0f alpha:1];//水波颜色
+        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.currentWaterColor = [UIColor colorWithRed:222/ 255.0f green:211/ 255.0f blue:91/ 255.0f alpha:1];//水波颜色
          _statusText=root_fangDian;
     }else if ([_status isEqualToString:@"3"]) {
-        waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
-        waterView.currentWaterColor = [UIColor colorWithRed:105/ 255.0f green:214/ 255.0f blue:249/ 255.0f alpha:1];//水波颜色
+        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.currentWaterColor = [UIColor colorWithRed:105/ 255.0f green:214/ 255.0f blue:249/ 255.0f alpha:1];//水波颜色
          _statusText=root_cuoWu;
     }else if ([_status isEqualToString:@"4"]) {
-        waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
-        waterView.currentWaterColor = [UIColor colorWithRed:45/ 255.0f green:226/ 255.0f blue:233/ 255.0f alpha:1];//水波颜色
+        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.currentWaterColor = [UIColor colorWithRed:45/ 255.0f green:226/ 255.0f blue:233/ 255.0f alpha:1];//水波颜色
         _statusText=root_dengDai;
     }else if ([_status isEqualToString:@"-1"]) {
-        waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
-        waterView.currentWaterColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//水波颜色
+        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.currentWaterColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//水波颜色
         _statusText=root_duanKai;
     }
     float k1=[_capacity floatValue]*0.01;
-    waterView.percentum = k1;//百分比
-    [self.scrollView addSubview:waterView];
+    _waterView.percentum = k1;//百分比
+    [self.scrollView addSubview:_waterView];
     
     float SizeH3=10*HEIGHT_SIZE;
-    UILabel *Ca=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3, 100*NOW_SIZE,60*HEIGHT_SIZE )];
+    UILabel *Ca=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3-_pointCenterNum, 100*NOW_SIZE,60*HEIGHT_SIZE )];
     Ca.text=_capacity;
     Ca.textAlignment=NSTextAlignmentCenter;
     if ([_status isEqualToString:@"3"]) {
@@ -338,7 +382,7 @@
     Ca.font = [UIFont systemFontOfSize:30*HEIGHT_SIZE];
     [self.scrollView addSubview:Ca];
     
-    UILabel *Status=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3+55*HEIGHT_SIZE, 100*NOW_SIZE,40*HEIGHT_SIZE )];
+    UILabel *Status=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3+55*HEIGHT_SIZE-_pointCenterNum, 100*NOW_SIZE,40*HEIGHT_SIZE )];
     Status.text=_statusText;
     Status.textAlignment=NSTextAlignmentCenter;
     if ([_status isEqualToString:@"3"]) {
@@ -350,7 +394,7 @@
      Status.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:Status];
     
-    UILabel *power1=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3+35*HEIGHT_SIZE, 100*NOW_SIZE,40*HEIGHT_SIZE )];
+    UILabel *power1=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3+35*HEIGHT_SIZE-_pointCenterNum, 100*NOW_SIZE,40*HEIGHT_SIZE )];
     power1.text=_power;
     power1.textAlignment=NSTextAlignmentCenter;
         power1.textColor=[UIColor whiteColor];

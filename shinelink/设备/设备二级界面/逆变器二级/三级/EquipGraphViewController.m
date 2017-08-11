@@ -145,15 +145,14 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     self.dayButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
-    
+    if ([_StorageTypeNum isEqualToString:@"1"]) {
+          self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 0, SCREEN_Width/2, 40*HEIGHT_SIZE);
+    }
     [self.dayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
        [self.dayButton setTitle:root_DAY forState:UIControlStateNormal];
-    [self.dayButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
-    [self.dayButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
-    [self.dayButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
+    [self setButtonColor:_dayButton];
     self.dayButton.tag = 1000;
      _dayButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
- 
  self.dayButton.selected = YES;
     [self.dayButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:self.dayButton];
@@ -161,33 +160,36 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     self.monthButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.monthButton.frame = CGRectMake(1 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
     [self.monthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.monthButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
-    [self.monthButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
-    [self.monthButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
+  [self setButtonColor:_monthButton];
     self.monthButton.tag = 1001;
      _monthButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.monthButton setTitle:root_MONTH forState:UIControlStateNormal];
     [self.monthButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:self.monthButton];
+    if (![_StorageTypeNum isEqualToString:@"1"]) {
+           [_scrollView addSubview:self.monthButton];
+    }
+ 
     
     self.yearButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.yearButton.frame = CGRectMake(2 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
     [self.yearButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.yearButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
-    [self.yearButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
-    [self.yearButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
+      [self setButtonColor:_yearButton];
     self.yearButton.tag = 1002;
     _yearButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.yearButton setTitle:root_YEAR forState:UIControlStateNormal];
     [self.yearButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:self.yearButton];
+    if (![_StorageTypeNum isEqualToString:@"1"]) {
+        [_scrollView addSubview:self.yearButton];
+    }
+  
     
     self.totalButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.totalButton.frame = CGRectMake(3 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
+    if ([_StorageTypeNum isEqualToString:@"1"]) {
+    self.totalButton.frame = CGRectMake(1 * SCREEN_Width/2, 0, SCREEN_Width/2, 40*HEIGHT_SIZE);
+    }
     [self.totalButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.totalButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
-    [self.totalButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
-    [self.totalButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
+       [self setButtonColor:_totalButton];
     self.totalButton.tag = 1003;
     _totalButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.totalButton setTitle:root_TOTAL forState:UIControlStateNormal];
@@ -347,7 +349,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 }
 
 
+-(void)setButtonColor:(UIButton*)button{
 
+    [button setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
+    [button setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
+    [button setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
+
+}
 
 
 #pragma mark - 获取、保存曲线图数据

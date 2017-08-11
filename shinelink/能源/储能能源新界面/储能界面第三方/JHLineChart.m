@@ -511,7 +511,7 @@
     
     ani.toValue = @1;
     
-    ani.duration = 2.0;
+    ani.duration = 1;
     
     ani.delegate = self;
     

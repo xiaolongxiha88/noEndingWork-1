@@ -27,7 +27,7 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    self = [super initWithFrame:CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, frame.size.width)];
     if (self) {
         
         [self setBackgroundColor:[UIColor clearColor]];

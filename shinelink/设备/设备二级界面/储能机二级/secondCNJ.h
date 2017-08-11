@@ -10,4 +10,6 @@
 
 @interface secondCNJ : RootViewController
 @property (nonatomic, strong) NSString *deviceSN;
+
+@property (nonatomic, strong) NSString *typeNum;
 @end

@@ -59,6 +59,9 @@
 @property (nonatomic, strong) NSMutableArray *toDetaiDataArray2;
 @property (nonatomic, strong) NSMutableArray *toDetaiDataArray3;
 
+@property (nonatomic, strong) NSMutableArray *boolArray;
+@property (nonatomic, strong) NSArray *colorArray;
+
 @end
 
 
@@ -76,7 +79,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     [self initUI];
     
+    _boolArray=[NSMutableArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO], nil];
     
+        _colorArray=@[COLOR(255, 217, 35, 1),COLOR(32, 219, 118, 1),COLOR(104, 247, 252, 1),COLOR(55, 110, 251, 1)];
 }
 
 
@@ -89,7 +94,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     [self.view addSubview:_scrollView];
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,3050*ScreenProH-view1H-view2H+120*ScreenProH);
+    _scrollView.contentSize = CGSizeMake(SCREEN_Width,3050*ScreenProH-view1H-view2H+160*ScreenProH);
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.colors = @[(__bridge id)COLOR(7, 149, 239, 1).CGColor, (__bridge id)COLOR(2, 201, 222, 1).CGColor];
     gradientLayer.locations = nil;
@@ -348,7 +353,19 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 }
 
 -(void)getCharNum:(UITapGestureRecognizer*)tap{
-    int Num=tap.view.tag;
+    int Num=(int)tap.view.tag-3000;
+    UIButton *button=[tap.view viewWithTag:Num+4000];
+ 
+    BOOL isbool=[_boolArray[Num] boolValue];
+    isbool=!isbool;
+    [_boolArray replaceObjectAtIndex:Num withObject:[NSNumber numberWithBool:isbool]];
+    if (isbool) {
+        button.backgroundColor=_colorArray[Num];
+    }else{
+       button.backgroundColor=[UIColor grayColor];
+    }
+    
+    [self initUILineChart];
     
     
 }
@@ -364,7 +381,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _uiview2=[[UIView alloc]initWithFrame:CGRectMake(0*ScreenProW, 1160*ScreenProH-view1H-viewAA, 750*ScreenProW, ScreenProH*140)];
     [_scrollView addSubview:_uiview2];
     
-    NSArray *colorArray=@[COLOR(255, 217, 35, 1),COLOR(32, 219, 118, 1),COLOR(104, 247, 252, 1),COLOR(55, 110, 251, 1)];
+
     NSArray *nameArray=@[root_guangfu_chanchu_1,root_nengyuan_chanch_1,root_yongdian_xiaohao,root_yongdian_xiaohao_1];
     
     for (int i=0; i<4; i++) {
@@ -375,16 +392,25 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [V1 addGestureRecognizer:Tap];
         [_uiview2 addSubview:V1];
         
-        UIButton *button1= [UIButton buttonWithType:UIButtonTypeCustom];
+        UIView *button1= [[UIView alloc]init];
         button1.frame= CGRectMake(40*ScreenProW, 0*ScreenProH, 100*ScreenProW, ScreenProH*20);
-    //    [button1 setBackgroundImage:<#(nullable UIImage *)#> forState:<#(UIControlState)#>];
-        button1.backgroundColor=colorArray[i];
+            BOOL isbool=[_boolArray[i] boolValue];
+        if (isbool) {
+             button1.backgroundColor=_colorArray[i];
+        }else{
+            button1.backgroundColor=[UIColor grayColor];
+
+        }
+       
+          button1.userInteractionEnabled=YES;
+        button1.tag=4000+i;
         [V1 addSubview:button1];
         // [button1 addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
         
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 25*ScreenProH, 180*ScreenProW, ScreenProH*30)];
         VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
            VL1.adjustsFontSizeToFitWidth=YES;
+         VL1.userInteractionEnabled=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=nameArray[i];
         VL1.textColor =COLOR(255, 255, 255, 0.8);
@@ -513,6 +539,11 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 
 
+
+
+
+
+
 -(void)initUILineChart{
     
     NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch|NSNumericSearch|NSWidthInsensitiveSearch|NSForcedOrderingSearch;
@@ -620,6 +651,26 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [tempXArr removeObjectAtIndex:0];
     }
     
+    
+    NSArray *valueArray0=@[Y1,Y2,Y3,Y4];
+    NSArray *valueLineColorArray0=@[COLOR(255, 217, 35, 1),COLOR(32, 219, 118, 1),COLOR(104, 247, 252, 1),COLOR(55, 110, 251, 1)];
+        NSArray *contentFillColorArray0=@[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(14, 222, 228, 0.5)];
+    
+    NSMutableArray *valueArray=[NSMutableArray new];
+    NSMutableArray *valueLineColorArray=[NSMutableArray new];
+    NSMutableArray *contentFillColorArray=[NSMutableArray new];
+     NSMutableArray *positionLineColorArray=[NSMutableArray new];
+    for (int i=0; i<_boolArray.count; i++) {
+        BOOL value=[_boolArray[i] boolValue];
+        if (value) {
+            [valueArray addObject:valueArray0[i]];
+             [valueLineColorArray addObject:valueLineColorArray0[i]];
+              [contentFillColorArray addObject:contentFillColorArray0[i]];
+              [positionLineColorArray addObject:[UIColor clearColor]];
+        }
+    }
+    
+    
     if (_lineChart) {
         [_lineChart removeFromSuperview];
         _lineChart=nil;
@@ -632,7 +683,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     _lineChart.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
     
-    _lineChart.valueArr = @[Y1,Y2,Y3,Y4];
+    _lineChart.valueArr = valueArray;
     _lineChart.showYLevelLine = YES;
     _lineChart.showYLine = YES;
  //   _lineChart.showValueLeadingLine = YES;
@@ -642,14 +693,14 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _lineChart.backgroundColor = [UIColor clearColor];
     _lineChart.hasPoint=NO;
 
-    _lineChart.valueLineColorArr =@[COLOR(255, 217, 35, 1),COLOR(32, 219, 118, 1),COLOR(104, 247, 252, 1),COLOR(55, 110, 251, 1)];
+    _lineChart.valueLineColorArr =valueLineColorArray;
     // _lineChart.pointColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
     _lineChart.xAndYLineColor = COLOR(255, 255, 255, 0.9);
     _lineChart.xAndYNumberColor = COLOR(255, 255, 255, 0.8);
-    _lineChart.positionLineColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
+    _lineChart.positionLineColorArr = positionLineColorArray;
     _lineChart.contentFill = YES;
     _lineChart.pathCurve = NO;
-    _lineChart.contentFillColorArr = @[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(14, 222, 228, 0.5)];
+    _lineChart.contentFillColorArr = contentFillColorArray;
     [_scrollView addSubview:_lineChart];
     [_lineChart showAnimation];
     
@@ -728,7 +779,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _lineChart2.isOnlyOne=YES;
     _lineChart2.valueArr = @[yArray];
     _lineChart2.showYLevelLine = YES;
-    _lineChart2.showYLine = NO;
+    _lineChart2.showYLine = YES;
     _lineChart2.showValueLeadingLine = YES;
     _lineChart2.xDescTextFontSize=20*ScreenProH;
     _lineChart2.yDescTextFontSize=20*ScreenProH;
@@ -833,7 +884,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _uiviewThree=[[UIView alloc]initWithFrame:CGRectMake(0, 2400*ScreenProH-view2H-viewAA, SCREEN_Width, ScreenProH*600)];
     [_scrollView addSubview:_uiviewThree];
     
-    JHColumnChart *column = [[JHColumnChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 2400*ScreenProH-HH, 730*ScreenProW, 530*ScreenProH)];
+    JHColumnChart *column = [[JHColumnChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 2400*ScreenProH-HH+40*ScreenProH, 730*ScreenProW, 530*ScreenProH)];
     column.valueArr = valueArr00;
     
     // column.valueArr =[NSArray arrayWithObjects:A1, nil];
@@ -843,7 +894,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     /*    The first column of the distance from the starting point     */
     column.drawFromOriginX = 10*ScreenProW;
     column.typeSpace = 30*ScreenProW;
-    column.isShowYLine = NO;
+    column.isShowYLine = YES;
     column.columnWidth = 30*ScreenProW;
     column.xDescTextFontSize=20*ScreenProH;
     column.yDescTextFontSize=20*ScreenProH;
@@ -863,7 +914,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [column showAnimation];
     [_uiviewThree addSubview:column];
     
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2950*ScreenProH-HH, 730*ScreenProW, 40*ScreenProH)];
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2950*ScreenProH-HH+40*ScreenProH, 730*ScreenProW, 40*ScreenProH)];
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL2.textAlignment = NSTextAlignmentCenter;
     VL2.text=root_chuneng_congfang_xinxi;
