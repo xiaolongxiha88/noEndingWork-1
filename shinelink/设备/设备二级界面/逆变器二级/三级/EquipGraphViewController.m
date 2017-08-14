@@ -55,6 +55,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 @property(nonatomic,strong)NSString *type;
 @property(nonatomic,strong)UIButton *selectButton;
 @property(nonatomic,strong)UIScrollView *scrollView;
+@property(nonatomic,strong)UIView *colorBackView;
+@property(nonatomic,strong)UIView *colorBackView2;
+@property(nonatomic,strong)UIView* selectV;
+
 @property(nonatomic,strong)UIPageControl *pageControl;
 @property (nonatomic, strong) NSMutableArray *timeDataArray;
 @property (nonatomic, strong) NSMutableArray *dateDataArray;
@@ -72,7 +76,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
     _type=@"1";
   self.navigationController.navigationBarHidden=NO;
-    self.view.backgroundColor=MainColor;
+    self.view.backgroundColor=[UIColor whiteColor];
     [self initData];
 }
 
@@ -132,11 +136,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _scrollView.contentSize = CGSizeMake(SCREEN_Width,3*SCREEN_Height);
        [self.view addSubview:_scrollView];
     
-//    _pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0,SCREEN_Height-20*HEIGHT_SIZE,40*NOW_SIZE,SCREEN_Height)];
-//     self.pageControl.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-//    _pageControl.numberOfPages =2;
-//    _pageControl.currentPage=0;
-//      [self.view addSubview:self.pageControl];
+    _colorBackView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 75*HEIGHT_SIZE)];
+    _colorBackView.backgroundColor=MainColor;
+    [_scrollView addSubview:_colorBackView];
  
     UISwipeGestureRecognizer *upMove=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(goDown)];
      upMove.direction=UISwipeGestureRecognizerDirectionUp;
@@ -155,7 +157,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
      _dayButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
  self.dayButton.selected = YES;
     [self.dayButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:self.dayButton];
+    [_colorBackView addSubview:self.dayButton];
     
     self.monthButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.monthButton.frame = CGRectMake(1 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
@@ -166,7 +168,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [self.monthButton setTitle:root_MONTH forState:UIControlStateNormal];
     [self.monthButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
     if (![_StorageTypeNum isEqualToString:@"1"]) {
-           [_scrollView addSubview:self.monthButton];
+           [_colorBackView addSubview:self.monthButton];
     }
  
     
@@ -179,7 +181,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [self.yearButton setTitle:root_YEAR forState:UIControlStateNormal];
     [self.yearButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
     if (![_StorageTypeNum isEqualToString:@"1"]) {
-        [_scrollView addSubview:self.yearButton];
+        [_colorBackView addSubview:self.yearButton];
     }
   
     
@@ -194,17 +196,19 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _totalButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.totalButton setTitle:root_TOTAL forState:UIControlStateNormal];
     [self.totalButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:self.totalButton];
+    [_colorBackView addSubview:self.totalButton];
     
+     [self changButtonColor];
     
-    //
-    self.timeDisplayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + 40*HEIGHT_SIZE, SCREEN_Width, 30*HEIGHT_SIZE)];
-    self.timeDisplayView.backgroundColor = COLOR(87, 208, 250, 1);
-    [_scrollView addSubview:self.timeDisplayView];
+    //时间选择器
+    self.timeDisplayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + 45*HEIGHT_SIZE, SCREEN_Width, 30*HEIGHT_SIZE)];
+    self.timeDisplayView.backgroundColor =MainColor;
+    [_colorBackView addSubview:self.timeDisplayView];
     
     UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_Width - 120*NOW_SIZE)/2, 4*HEIGHT_SIZE, 120*NOW_SIZE, 30*HEIGHT_SIZE - 8*HEIGHT_SIZE)];
-   // bgImageView.backgroundColor=COLOR(123, 239, 227, 1);
-   bgImageView.image = IMAGE(@"rili.png");
+  bgImageView.backgroundColor=[UIColor whiteColor];
+           bgImageView.layer.cornerRadius=5;
+ //  bgImageView.image = IMAGE(@"rili.png");
     bgImageView.userInteractionEnabled = YES;
     [self.timeDisplayView addSubview:bgImageView];
     
@@ -245,6 +249,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     self.datePickerButton.titleLabel.font = [UIFont boldSystemFontOfSize:10*HEIGHT_SIZE];
     [self.datePickerButton addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
     [bgImageView addSubview:self.datePickerButton];
+    
+   
     
     [self showProgressView];
     
@@ -310,28 +316,42 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             _upAlert=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width/2-100*NOW_SIZE, CGRectGetMaxY(self.line2View.frame)+12*HEIGHT_SIZE, 200*NOW_SIZE, 20*HEIGHT_SIZE)];
             _upAlert.text=root_shanghua_chakan_xianxi_shuju;
             _upAlert.textAlignment=NSTextAlignmentCenter;
-            _upAlert.textColor=[UIColor whiteColor];
+            _upAlert.textColor=COLOR(102, 102, 102, 1);
             _upAlert.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
              [_upAlert.layer addAnimation:[self opacityForever_Animation:2] forKey:nil];
             [_scrollView addSubview:_upAlert];
             
-            _selectButton=[[UIButton alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 50*HEIGHT_SIZE, 230*NOW_SIZE, 30*HEIGHT_SIZE)];
+            
+            _colorBackView2=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 90*HEIGHT_SIZE)];
+            _colorBackView2.backgroundColor=MainColor;
+            [_line2View addSubview:_colorBackView2];
+            
+            _selectV=[[UIView alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 40*HEIGHT_SIZE, 200*NOW_SIZE, 30*HEIGHT_SIZE)];
+            _selectV.layer.borderWidth=0.5;
+            _selectV.layer.cornerRadius=5;
+            _selectV.layer.borderColor=[UIColor whiteColor].CGColor;
+            _selectV.backgroundColor=[UIColor clearColor];
+            [_colorBackView2 addSubview:_selectV];
+            
+            _selectButton=[[UIButton alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, 170*NOW_SIZE, 30*HEIGHT_SIZE)];
             [_selectButton setTitle:_dict[@"1"] forState:0];
+            _selectButton.titleLabel.adjustsFontSizeToFitWidth=YES;
             [_selectButton addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
-            _selectButton.backgroundColor = COLOR(39, 183, 99, 1);
+            _selectButton.backgroundColor = [UIColor clearColor];
             _selectButton.layer.cornerRadius = 5*HEIGHT_SIZE;
             _selectButton.clipsToBounds = YES;
-            [_line2View addSubview:_selectButton];
+            [_selectV addSubview:_selectButton];
+            
             _scrollView.contentSize=CGSizeMake(SCREEN_Width, CGRectGetMaxY(_line2View.frame)+20*HEIGHT_SIZE);
             
             
-                _selectViewBg = [[UIImageView alloc] initWithFrame:CGRectMake(290*NOW_SIZE, 50*HEIGHT_SIZE, 30*NOW_SIZE, 30*HEIGHT_SIZE)];
+                _selectViewBg = [[UIImageView alloc] initWithFrame:CGRectMake(170*NOW_SIZE, 0*HEIGHT_SIZE, 30*NOW_SIZE, 30*HEIGHT_SIZE)];
                 // bgImageView.backgroundColor=COLOR(123, 239, 227, 1);
-                _selectViewBg.backgroundColor= COLOR(39, 183, 99, 1);
+                _selectViewBg.backgroundColor= [UIColor clearColor];
                 _selectViewBg.userInteractionEnabled=YES;
                 UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(buttonPressed)];
                 [_selectViewBg addGestureRecognizer:demo1];
-                [_line2View addSubview:_selectViewBg];
+                [_selectV addSubview:_selectViewBg];
                 
                 UIImageView *selectView = [[UIImageView alloc] initWithFrame:CGRectMake(8*HEIGHT_SIZE, 9*HEIGHT_SIZE, 15*HEIGHT_SIZE, 12*HEIGHT_SIZE)];
                 // bgImageView.backgroundColor=COLOR(123, 239, 227, 1);
@@ -351,10 +371,23 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 -(void)setButtonColor:(UIButton*)button{
 
-    [button setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
-    [button setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
-    [button setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
+    [button setBackgroundImage:[self createImageWithColor:COLOR(0, 151, 245, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
+    [button setBackgroundImage:[self createImageWithColor:[UIColor whiteColor] rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
+    [button setBackgroundImage:[self createImageWithColor:[UIColor whiteColor] rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
 
+}
+
+
+-(void)changButtonColor{
+    NSArray *buttonArray=@[_dayButton,_monthButton,_yearButton,_totalButton];
+    for (UIButton* button in buttonArray) {
+        bool isSelected=button.selected;
+        if (isSelected) {
+                [button setTitleColor:MainColor forState:UIControlStateNormal];
+        }else{
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
+    }
 }
 
 
@@ -701,12 +734,14 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         self.yearButton.selected = NO;
         self.totalButton.selected = NO;
         if (_dict[@"1"]) {
-            [_line2View addSubview:_selectButton];
-            [_line2View addSubview:_selectViewBg];
+            [_colorBackView2 addSubview:_selectV];
+            [_selectV addSubview:_selectButton];
+            [_selectV addSubview:_selectViewBg];
             [_selectButton setTitle:_dict[@"1"] forState:0];
             self.line2View.energyTitleLabel.text = root_Today_Energy;
             self.line2View.unitLabel.text = root_Powre;
         }else{
+               [_selectV removeFromSuperview];
             [_selectButton removeFromSuperview];
             [_selectViewBg removeFromSuperview];
         }
@@ -744,9 +779,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         self.yearButton.selected = NO;
         self.totalButton.selected = NO;
         if (_dictMonth[@"1"]) {
+            [_colorBackView2 addSubview:_selectV];
+            [_selectV addSubview:_selectButton];
+            [_selectV addSubview:_selectViewBg];
             [_selectButton setTitle:_dictMonth[@"1"] forState:0];
-            [_line2View addSubview:_selectViewBg];
+          
         }else{
+            [_selectV removeFromSuperview];
             [_selectButton removeFromSuperview];
             [_selectViewBg removeFromSuperview];
         }
@@ -784,11 +823,15 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         self.yearButton.selected = YES;
         self.totalButton.selected = NO;
         if (_dictYear[@"1"]) {
+            [_colorBackView2 addSubview:_selectV];
+            [_selectV addSubview:_selectButton];
+            [_selectV addSubview:_selectViewBg];
             [_selectButton setTitle:_dictYear[@"1"] forState:0];
-              [_line2View addSubview:_selectViewBg];
+       //       [_line2View addSubview:_selectViewBg];
         }else{
+            [_selectV removeFromSuperview];
             [_selectButton removeFromSuperview];
-                [_selectViewBg removeFromSuperview];
+            [_selectViewBg removeFromSuperview];
         }
         [UIView animateWithDuration:0.3f animations:^{
             self.timeDisplayView.alpha = 1;
@@ -824,11 +867,15 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         self.yearButton.selected = NO;
         self.totalButton.selected = YES;
         if (_dictAll[@"1"]) {
+            [_colorBackView2 addSubview:_selectV];
+            [_selectV addSubview:_selectButton];
+            [_selectV addSubview:_selectViewBg];
             [_selectButton setTitle:_dictAll[@"1"] forState:0];
-                [_line2View addSubview:_selectViewBg];
+           //     [_line2View addSubview:_selectViewBg];
         }else{
+            [_selectV removeFromSuperview];
             [_selectButton removeFromSuperview];
-               [_selectViewBg removeFromSuperview];
+            [_selectViewBg removeFromSuperview];
         }
         [UIView animateWithDuration:0.3f animations:^{
             self.timeDisplayView.alpha = 0;
@@ -864,6 +911,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         
         [self requestTotalDatas];
     }
+    
+     [self changButtonColor];
 }
 
 #pragma mark - datePickerButton点击事件 选择时间

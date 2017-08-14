@@ -21,7 +21,7 @@
         [self addSubview:cancelButton];
         
         UIScrollView *bgImageView = [[UIScrollView alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 150*HEIGHT_SIZE, 220*NOW_SIZE, 200*HEIGHT_SIZE)];
-        bgImageView.backgroundColor=COLOR(82, 201, 194, 1);
+        bgImageView.backgroundColor=[UIColor whiteColor];
         [self addSubview:bgImageView];
         bgImageView.contentSize=CGSizeMake(220*NOW_SIZE, 50*dictionary.count*HEIGHT_SIZE);
         
@@ -39,7 +39,7 @@
             }
             addButton.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
             addButton.titleLabel.adjustsFontSizeToFitWidth=YES;
-            [addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [addButton setTitleColor:COLOR(51, 51, 51, 1) forState:UIControlStateNormal];
             [addButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
             addButton.tag = 1051+i;
             [addButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];

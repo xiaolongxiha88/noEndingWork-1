@@ -124,7 +124,7 @@
         
         self.unitLabel = [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 120*HEIGHT_SIZE, 100*NOW_SIZE, 30*HEIGHT_SIZE)];
         self.unitLabel.font = [UIFont boldSystemFontOfSize:10*HEIGHT_SIZE];
-        self.unitLabel.textColor = [UIColor whiteColor];
+        self.unitLabel.textColor = COLOR(102, 102, 102, 1);
         [self addSubview:self.unitLabel];
         
     }
@@ -156,12 +156,14 @@
         }
         
         float fontW=8*HEIGHT_SIZE;
+        UIColor *fontColor=COLOR(102, 102, 102, 1);
+        
         if ([_frameType isEqualToString:@"1"]) {
              self.lineChartView = [[SHLineGraphView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE, 320*NOW_SIZE, 220*HEIGHT_SIZE)];
             NSDictionary *_themeAttributes = @{
-                                               kXAxisLabelColorKey : [UIColor blackColor],
+                                               kXAxisLabelColorKey : fontColor,
                                                kXAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
-                                               kYAxisLabelColorKey : [UIColor blackColor],
+                                               kYAxisLabelColorKey : fontColor,
                                                kYAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
                                                //                                           kYAxisLabelSideMarginsKey : @(j*NOW_SIZE),
                                                kPlotBackgroundLineColorKey : [UIColor colorWithRed:0.48 green:0.48 blue:0.49 alpha:0.4],
@@ -171,9 +173,9 @@
         }else {
         self.lineChartView = [[SHLineGraphView alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 320*NOW_SIZE, 250*HEIGHT_SIZE)];
         NSDictionary *_themeAttributes = @{
-                                           kXAxisLabelColorKey : [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0],
+                                           kXAxisLabelColorKey :fontColor,
                                            kXAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
-                                           kYAxisLabelColorKey : [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0],
+                                           kYAxisLabelColorKey : fontColor,
                                            kYAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
 //                                           kYAxisLabelSideMarginsKey : @(j*NOW_SIZE),
                                            kPlotBackgroundLineColorKey : [UIColor colorWithRed:0.48 green:0.48 blue:0.49 alpha:0.4],
@@ -272,19 +274,19 @@
         self.lineChartPlot = [[SHPlot alloc] init];
         if ([_frameType isEqualToString:@"1"]) {
         NSDictionary *_plotThemeAttributes = @{
-                                               kPlotFillColorKey : COLOR(141, 235, 252, 0.6),
-                                               kPlotStrokeWidthKey : @1,
-                                               kPlotStrokeColorKey : COLOR(141, 235, 252, 1),
-                                               kPlotPointFillColorKey : COLOR(78, 225, 252, 0.6),
+                                               kPlotFillColorKey : COLOR(89, 225, 151, 0.6),
+                                               kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",2*HEIGHT_SIZE],
+                                               kPlotStrokeColorKey : COLOR(89, 225, 151, 1),
+                                               kPlotPointFillColorKey : COLOR(89, 225, 151, 0.6),
                                                kPlotPointValueFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE]
                                                };
             self.lineChartPlot.plotThemeAttributes = _plotThemeAttributes;
           }else{
               NSDictionary *_plotThemeAttributes = @{
-                                                     kPlotFillColorKey : [UIColor colorWithRed:0.47 green:0.75 blue:0.78 alpha:0.5],
-                                                     kPlotStrokeWidthKey : @1,
-                                                     kPlotStrokeColorKey : [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1],
-                                                     kPlotPointFillColorKey : [UIColor colorWithRed:0.18 green:0.36 blue:0.41 alpha:1],
+                                                     kPlotFillColorKey : COLOR(89, 225, 151, 0.6),
+                                                     kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",2*HEIGHT_SIZE],
+                                                     kPlotStrokeColorKey : COLOR(89, 225, 151, 1),
+                                                     kPlotPointFillColorKey : COLOR(89, 225, 151, 0.6),
                                                      kPlotPointValueFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE]
                                                      };
               self.lineChartPlot.plotThemeAttributes = _plotThemeAttributes;

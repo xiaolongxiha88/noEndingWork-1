@@ -19,6 +19,7 @@ let MainColor=COLOR(_R: 0, _G: 156, _B: 255, _A: 1)
 
 let OldMainColor=COLOR(_R: 0, _G: 156, _B: 255, _A: 1)
 
+//#define MainColor COLOR(0, 161, 255, 1)
 //let OldMainColor=COLOR(_R: 17, _G: 183, _B: 243, _A: 1)
 
 

@@ -106,10 +106,14 @@
     _chartMargin = BOTTOM_MARGIN_TO_LEAVE;
       float minY=TOP_MARGIN_TO_LEAVE-1.0*HEIGHT_SIZE;
     
+    UIColor *lineColor=COLOR(153, 153, 153, 1);
+    float lineWidthW=0.8*HEIGHT_SIZE;
+    
+    
     _chartBottomLine = [CAShapeLayer layer];
     _chartBottomLine.lineCap      = kCALineCapButt;
-    _chartBottomLine.fillColor    = [[UIColor blueColor] CGColor];
-    _chartBottomLine.lineWidth    = 1.0;
+    _chartBottomLine.fillColor    = lineColor.CGColor;
+    _chartBottomLine.lineWidth    = lineWidthW;
     _chartBottomLine.strokeEnd    = 0.0;
     
     UIBezierPath *progressline = [UIBezierPath bezierPath];
@@ -117,11 +121,11 @@
     [progressline moveToPoint:CGPointMake(_chartMargin, self.frame.size.height -minY)];
     [progressline addLineToPoint:CGPointMake(_chartMargin+PLOT_WIDTH,  self.frame.size.height -minY)];
     
-    [progressline setLineWidth:1.0];
+    [progressline setLineWidth:lineWidthW];
     [progressline setLineCapStyle:kCGLineCapSquare];
     _chartBottomLine.path = progressline.CGPath;
     
-    _chartBottomLine.strokeColor = [UIColor blackColor].CGColor;
+    _chartBottomLine.strokeColor =lineColor.CGColor;
     
     
     CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
@@ -137,10 +141,10 @@
     
     //Add left Chart Line
     
-    float lineWidthW=0.5*NOW_SIZE;
+    
     _chartLeftLine = [CAShapeLayer layer];
     _chartLeftLine.lineCap      = kCALineCapButt;
-    _chartLeftLine.fillColor    = [[UIColor blueColor] CGColor];
+    _chartLeftLine.fillColor    = lineColor.CGColor;
     _chartLeftLine.lineWidth    = lineWidthW;
     _chartLeftLine.strokeEnd    = 0.0;
     
@@ -155,7 +159,7 @@
     _chartLeftLine.path = progressLeftline.CGPath;
     
     
-   _chartLeftLine.strokeColor =  [UIColor blackColor].CGColor;
+   _chartLeftLine.strokeColor =lineColor.CGColor;
     
     
     CABasicAnimation *pathLeftAnimation = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];

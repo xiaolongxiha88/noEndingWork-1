@@ -95,14 +95,15 @@
 //_scrollView.
 -(void)addbutton{
     float SizeH2=15*HEIGHT_SIZE;
+    UIColor *fontColor=COLOR(51, 51, 51, 1);
     UIButton *firstB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*NOW_SIZE,50*HEIGHT_SIZE )];
-    [firstB setImage:[UIImage imageNamed:@"控制.jpg"] forState:UIControlStateNormal];
+    [firstB setImage:[UIImage imageNamed:@"控制.png"] forState:UIControlStateNormal];
     [firstB addTarget:self action:@selector(controlCNJ) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:firstB];
     UILabel *firstL=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE, 540*HEIGHT_SIZE-SizeH-SizeH2, 70*NOW_SIZE,20*HEIGHT_SIZE )];
     firstL.text=root_kongzhi;
     firstL.textAlignment=NSTextAlignmentCenter;
-    firstL.textColor=[UIColor blackColor];
+    firstL.textColor=fontColor;
     firstL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
      firstL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:firstL];
@@ -114,7 +115,7 @@
     UILabel *secondL=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE+74*NOW_SIZE, 540*HEIGHT_SIZE-SizeH-SizeH2, 70*NOW_SIZE,20*HEIGHT_SIZE )];
     secondL.text=root_canshu;
     secondL.textAlignment=NSTextAlignmentCenter;
-    secondL.textColor=[UIColor blackColor];
+    secondL.textColor=fontColor;
     secondL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     secondL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:secondL];
@@ -126,7 +127,7 @@
     UILabel *threeL=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE+74*NOW_SIZE*2, 540*HEIGHT_SIZE-SizeH-SizeH2, 70*NOW_SIZE,20*HEIGHT_SIZE )];
     threeL.text=root_shuju;
     threeL.textAlignment=NSTextAlignmentCenter;
-    threeL.textColor=[UIColor blackColor];
+    threeL.textColor=fontColor;
     threeL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     threeL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:threeL];
@@ -138,7 +139,7 @@
     UILabel *fourL=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE+74*NOW_SIZE*3, 540*HEIGHT_SIZE-SizeH-SizeH2, 70*NOW_SIZE,20*HEIGHT_SIZE )];
     fourL.text=root_rizhi;
     fourL.textAlignment=NSTextAlignmentCenter;
-    fourL.textColor=[UIColor blackColor];
+    fourL.textColor=fontColor;
     fourL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     fourL.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:fourL];
@@ -231,7 +232,8 @@
 }
 
 -(void)addProcess{
-       _typeNum=@"1";
+       _typeNum=@"2";
+    UIColor *valueColor=COLOR(163, 255, 188, 1);
     
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages objectAtIndex:0];
@@ -245,8 +247,15 @@
     }
     
     UIView *processView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 240*HEIGHT_SIZE-SizeH)];
-    UIImage *bgImage = IMAGE(@"bg3.png");
-    processView.layer.contents = (id)bgImage.CGImage;
+//    UIImage *bgImage = IMAGE(@"bg3.png");
+//    processView.layer.contents = (id)bgImage.CGImage;
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[(__bridge id)COLOR(0, 156, 255, 1).CGColor, (__bridge id)COLOR(11, 182, 255, 1).CGColor];
+    gradientLayer.locations = nil;
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(1, 1);
+    gradientLayer.frame = CGRectMake(0, 0, processView.frame.size.width, processView.frame.size.height);
+    [processView.layer addSublayer:gradientLayer];
     [self.scrollView addSubview:processView];
     
     if (![_typeNum isEqualToString:@"1"]) {
@@ -257,7 +266,7 @@
         tapGestureRecognizer2.cancelsTouchesInView = NO;
         [leftName addGestureRecognizer:tapGestureRecognizer2];
         leftName.textAlignment=NSTextAlignmentLeft;
-        leftName.textColor=[UIColor whiteColor];
+        leftName.textColor=valueColor;
         leftName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
         [self.scrollView addSubview:leftName];
         UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(2*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
@@ -279,7 +288,7 @@
         tapGestureRecognizer0.cancelsTouchesInView = NO;
         [rightName addGestureRecognizer:tapGestureRecognizer0];
         rightName.textAlignment=NSTextAlignmentRight;
-        rightName.textColor=[UIColor whiteColor];
+        rightName.textColor=valueColor;
         rightName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
         [self.scrollView addSubview:rightName];
         
@@ -294,13 +303,7 @@
         rightState.adjustsFontSizeToFitWidth=YES;
         [self.scrollView addSubview:rightState];
         
-        UILabel *dataName=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 245*HEIGHT_SIZE-SizeH, 180*NOW_SIZE,20*HEIGHT_SIZE )];
-        dataName.text=root_dianchi;
-        dataName.textAlignment=NSTextAlignmentLeft;
-        dataName.textColor=[UIColor blackColor];
-        dataName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        dataName.adjustsFontSizeToFitWidth=YES;
-        [self.scrollView addSubview:dataName];
+    
 
     }else{
         NSArray *lableNameArray=@[root_ri_fangdianliang,root_zong_fangdianliang,@"今日收益",@"总收益"];
@@ -314,7 +317,7 @@
             tapGestureRecognizer0.cancelsTouchesInView = NO;
             [valueLable addGestureRecognizer:tapGestureRecognizer0];
             valueLable.textAlignment=NSTextAlignmentCenter;
-            valueLable.textColor=[UIColor whiteColor];
+            valueLable.textColor=valueColor;
             valueLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
             [self.scrollView addSubview:valueLable];
             
@@ -329,6 +332,13 @@
     }
     
 
+    UILabel *dataName=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 245*HEIGHT_SIZE-SizeH, 180*NOW_SIZE,20*HEIGHT_SIZE )];
+    dataName.text=root_dianchi;
+    dataName.textAlignment=NSTextAlignmentLeft;
+    dataName.textColor=COLOR(51, 51, 51, 1);
+    dataName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    dataName.adjustsFontSizeToFitWidth=YES;
+    [self.scrollView addSubview:dataName];
     
     
     if ([_typeNum isEqualToString:@"1"]) {

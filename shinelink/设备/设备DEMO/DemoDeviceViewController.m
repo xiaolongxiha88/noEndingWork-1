@@ -37,7 +37,7 @@
     
     float SizeH2=10*HEIGHT_SIZE;
     UIButton *firstB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*HEIGHT_SIZE,50*HEIGHT_SIZE )];
-    [firstB setImage:[UIImage imageNamed:@"控制.jpg"] forState:UIControlStateNormal];
+    [firstB setImage:[UIImage imageNamed:@"控制.png"] forState:UIControlStateNormal];
     [firstB addTarget:self action:@selector(clickDemo) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:firstB];
     UILabel *firstL=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE, 540*HEIGHT_SIZE-SizeH-SizeH2, 70*HEIGHT_SIZE,20*HEIGHT_SIZE )];

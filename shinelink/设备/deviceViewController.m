@@ -480,7 +480,7 @@
     totalPowerArray=[NSMutableArray array];
     SNArray=[NSMutableArray array];
     imageStatueArray=[NSMutableArray array];
-    imageArray2=[[NSMutableArray alloc]initWithObjects:@"inverter2.png", @"储能机.png", @"充电桩.png",@"MeBoost.png",nil];
+    imageArray2=[[NSMutableArray alloc]initWithObjects:@"PV_head0.png", @"storage.png", @"充电桩.png",@"MeBoost.png",nil];
     nameArray2=[[NSMutableArray alloc]initWithObjects:root_niBianQi, root_chuNengJi, root_chongDianZhuang, root_gongLvTiaoJieQi,  nil];
     statueArray2=[[NSMutableArray alloc]initWithObjects:root_wei_LianJie, root_wei_LianJie, root_wei_LianJie,root_wei_LianJie,nil];
     powerArray2=[[NSMutableArray alloc]initWithObjects:@"50KW", @"50KW", @"5000W", @"5000W",  nil];
@@ -878,7 +878,13 @@
         for (NSManagedObject *obj in fetchResult)
         {
             GetDevice *get=obj;
-            [SN addObject:get.deviceSN];
+            
+            if ([SNArray containsObject:get.deviceSN]) {
+                   [SN addObject:get.deviceSN];
+            }else{
+                [_manager.managedObjContext deleteObject:obj];
+            }
+         
         }
        
         for(int i=0;i<SNArray.count;i++)
@@ -1060,22 +1066,14 @@
     
   //  pvSn2=@"3N";
     
-    NSArray*pvArray1=[NSArray arrayWithObjects:@"R9",@"Z3",@"Z4",@"Z5",@"6A",@"7A",@"8A",@"9A",@"0B",@"1B",@"2B",@"3B",@"4B",@"5B",@"3C",@"3F",@"4F",@"5F",@"6F",@"7F",@"8F",@"9F",@"0G",@"1G",@"2G",@"3G",@"4G",@"5G",@"6G",@"7G",@"8G",@"9G",@"0H",@"1H",@"2H",@"3H",@"4H",@"5H",@"6H",@"7H",@"8H",@"9H",@"0I",@"1I",@"2I",@"3I",@"4I",@"5I",@"6I",@"7I",@"8I",@"9I",@"0J",@"1J",@"2J",@"3J",@"0K",@"1K",@"7K",@"8K",@"9K",@"0L",@"1L",@"2L",@"3L",@"4L",@"5L",@"6L",@"7L",@"4M",@"5M",@"6M",@"7M",@"8M",@"9M",@"0N",@"1N",@"2N",@"3N",@"4N",@"5N",@"9R",@"3S",@"4S",@"7U",@"8U",@"9U",@"0V",@"1V",@"2V",@"3V",@"4V",@"5V",@"6V",@"7V",@"8V",@"9V",@"0W",@"8W",@"8X",@"9X",@"0Y",@"1Y",@"2Y",@"3Y",@"4Y",@"5Y",@"6Y",@"7Y",@"8Y",@"9Y",@"0Z",@"1Z",@"2Z",@"3Z",@"4Z",@"5Z",@"6Z",@"7Z",@"14",@"15",@"16",@"17",@"18",@"25",@"26",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"89",@"90",@"AM",@"AN",@"AO",@"AQ",@"CW",@"CX",@"CV", nil];
+//    NSArray*pvArray1=[NSArray arrayWithObjects:@"R9",@"Z3",@"Z4",@"Z5",@"6A",@"7A",@"8A",@"9A",@"0B",@"1B",@"2B",@"3B",@"4B",@"5B",@"3C",@"3F",@"4F",@"5F",@"6F",@"7F",@"8F",@"9F",@"0G",@"1G",@"2G",@"3G",@"4G",@"5G",@"6G",@"7G",@"8G",@"9G",@"0H",@"1H",@"2H",@"3H",@"4H",@"5H",@"6H",@"7H",@"8H",@"9H",@"0I",@"1I",@"2I",@"3I",@"4I",@"5I",@"6I",@"7I",@"8I",@"9I",@"0J",@"1J",@"2J",@"3J",@"0K",@"1K",@"7K",@"8K",@"9K",@"0L",@"1L",@"2L",@"3L",@"4L",@"5L",@"6L",@"7L",@"4M",@"5M",@"6M",@"7M",@"8M",@"9M",@"0N",@"1N",@"2N",@"3N",@"4N",@"5N",@"9R",@"3S",@"4S",@"7U",@"8U",@"9U",@"0V",@"1V",@"2V",@"3V",@"4V",@"5V",@"6V",@"7V",@"8V",@"9V",@"0W",@"8W",@"8X",@"9X",@"0Y",@"1Y",@"2Y",@"3Y",@"4Y",@"5Y",@"6Y",@"7Y",@"8Y",@"9Y",@"0Z",@"1Z",@"2Z",@"3Z",@"4Z",@"5Z",@"6Z",@"7Z",@"14",@"15",@"16",@"17",@"18",@"25",@"26",@"28",@"29",@"30",@"31",@"32",@"33",@"34",@"35",@"36",@"37",@"38",@"39",@"40",@"41",@"42",@"43",@"44",@"45",@"46",@"47",@"48",@"49",@"89",@"90",@"AM",@"AN",@"AO",@"AQ",@"CW",@"CX",@"CV", nil];
+//    
+//    NSArray*pvArray2=[NSArray arrayWithObjects:@"D5",@"D6",@"D7",@"D8",@"D9",@"E0",@"E1",@"9L",@"0M",@"1M",@"2M",@"3M",@"3O",@"4O",@"5O",@"19",@"20",@"21",@"22",@"23",@"74",@"75",@"76",@"77",@"78",@"DP",@"DO",@"DN",@"DA",@"DQ",@"DW",@"DV",@"C8",@"C9",@"D5",@"D6",@"D7",@"D8",@"D9",@"E0",@"E1",nil];
+//    
+//    NSArray*pvArray3=[NSArray arrayWithObjects:@"4U",@"5U",@"6U",@"2W",@"3W",@"4W",@"83",@"84",@"85",@"86",@"87",@"88",@"AF",@"AG",@"AH",@"AI",@"AJ",@"AK",@"AL",@"BA",@"BB",@"BC",@"BD",@"BE",@"BF",@"BS",@"BT",@"E7",nil];
     
-    NSArray*pvArray2=[NSArray arrayWithObjects:@"D5",@"D6",@"D7",@"D8",@"D9",@"E0",@"E1",@"9L",@"0M",@"1M",@"2M",@"3M",@"3O",@"4O",@"5O",@"19",@"20",@"21",@"22",@"23",@"74",@"75",@"76",@"77",@"78",@"DP",@"DO",@"DN",@"DA",@"DQ",@"DW",@"DV",@"C8",@"C9",@"D5",@"D6",@"D7",@"D8",@"D9",@"E0",@"E1",nil];
+         pvPicName=@"PV_head0.png";
     
-    NSArray*pvArray3=[NSArray arrayWithObjects:@"4U",@"5U",@"6U",@"2W",@"3W",@"4W",@"83",@"84",@"85",@"86",@"87",@"88",@"AF",@"AG",@"AH",@"AI",@"AJ",@"AK",@"AL",@"BA",@"BB",@"BC",@"BD",@"BE",@"BF",@"BS",@"BT",@"E7",nil];
-    
-    if ([pvArray1 containsObject:pvSn2]) {
-        pvPicName=@"PV_t1.png";
-    }else if ([pvArray2 containsObject:pvSn2]){
-      pvPicName=@"PV_t3.png";
-    }else if ([pvArray3 containsObject:pvSn2]){
-        pvPicName=@"PV_t4.png";
-    }else{
-    pvPicName=@"PV_t2.png";
-    }
-      
     return pvPicName;
 }
 
@@ -1109,9 +1107,6 @@
 
 -(void)refreshStateChange:(UIRefreshControl *)control{
  
-//    [self getAnimation:_headImage1];
-//    [self getAnimation:_headImage2];
-//    [self getAnimation:_headImage3];
 
     [self netRequest];
     
@@ -1153,7 +1148,7 @@
     }else if ([intAngle isEqualToString:@"2"]){
      arcStartAngle = -M_PI_2;
          arcEndAngle = M_PI * 2 - M_PI_2 + M_PI / 8.0;
-    }else if ([intAngle isEqualToString:@"3"]){
+    }else {
         arcStartAngle = -M_PI;
         arcEndAngle = M_PI * 2 - M_PI_2 + M_PI / 8.0;
 
@@ -1220,9 +1215,16 @@
     _tableView.tableHeaderView = _headerView;
    
     float headHeight=_headerView.bounds.size.height;
-    _headPicName=@"device_bg.jpg";
+
+    
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,Kwidth,headHeight)];
-    imageView.image = [UIImage imageNamed:_headPicName];
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[(__bridge id)COLOR(0, 156, 255, 1).CGColor, (__bridge id)COLOR(11, 182, 255, 1).CGColor];
+    gradientLayer.locations = nil;
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(1, 1);
+    gradientLayer.frame = CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height);
+    [imageView.layer addSublayer:gradientLayer];
     [_headerView addSubview:imageView];
     
     //_deviceHeadType=@"1";

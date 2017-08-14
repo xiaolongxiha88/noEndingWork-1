@@ -177,6 +177,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(90*ScreenProW, 0*ScreenProH, 300*ScreenProH, ScreenProH*60)];
     VL1.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL1.textAlignment = NSTextAlignmentLeft;
+ 
     VL1.text=root_nengyuan_gailan;
     VL1.textColor =[UIColor whiteColor];
     [V1 addSubview:VL1];

@@ -29,6 +29,9 @@
 #define MainColor COLOR(0, 156, 255, 1)
 //#define MainColor COLOR(17, 183, 243, 1)
 
+#define mainColor [UIColor colorWithRed:0/255.0f green:156/255.0f blue:255/255.0f alpha:1]
+//#define mainColor [UIColor colorWithRed:130/255.0f green:200/255.0f blue:250/255.0f alpha:1]
+
 #define SCREEN_Width [UIScreen mainScreen].bounds.size.width
 #define colorGary COLOR(212, 212, 212, 1)
 #define SCREEN_Height [UIScreen mainScreen].bounds.size.height
@@ -82,8 +85,6 @@
 
 
 
-#define mainColor [UIColor colorWithRed:0/255.0f green:156/255.0f blue:255/255.0f alpha:1]
-//#define mainColor [UIColor colorWithRed:130/255.0f green:200/255.0f blue:250/255.0f alpha:1]
 
 
 
