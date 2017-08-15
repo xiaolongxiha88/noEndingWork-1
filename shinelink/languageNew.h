@@ -706,6 +706,7 @@
 #define  root_yanzheng_youxiang  NSLocalizedString(@"105请验证您的邮箱地址", nil)
 #define  root_wifi_xinhao_tishi  NSLocalizedString(@"106wifi信号强度提示", nil)
 #define  root_wifi_lianjie_luyouqi  NSLocalizedString(@"107wifi连接路由器", nil)
-
+#define  root_wifi_tishi_2  NSLocalizedString(@"108wifi提示2", nil)
+#define  root_wifi_tishi_3  NSLocalizedString(@"109wifi提示3", nil)
 
 #endif /* languageNew_h */

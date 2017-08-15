@@ -70,6 +70,7 @@
 @property (nonatomic, strong) EspTouchDelegateImpl *_esptouchDelegate;
 
 @property (nonatomic, assign) BOOL isFirstConfig;
+@property(nonatomic,assign)float noticeH;
 
 @end
 
@@ -151,23 +152,30 @@
     
     [self.view addSubview:_scrollView];
     
-    //    UIImageView *pwdBgImageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 85*HEIGHT_SIZE, 300*NOW_SIZE,110*HEIGHT_SIZE+sizeH1 )];
-    //    pwdBgImageView2.image = IMAGE(@"addDevice.jpg");
-    //    pwdBgImageView2.userInteractionEnabled = YES;
-    //    [_scrollView addSubview:pwdBgImageView2];
     
-    CGRect fcRect = [root_lianjie_luyouqi boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18 *HEIGHT_SIZE]} context:nil];
-    float sizeH1=fcRect.size.height;
+    NSArray *noticeName=@[root_lianjie_luyouqi,root_wifi_tishi_2,root_wifi_tishi_3];
+    
+    for (int i=0; i<noticeName.count; i++) {
+        CGRect fcRect = [noticeName[i] boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12 *HEIGHT_SIZE]} context:nil];
+        
+        UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE+_noticeH, 300*NOW_SIZE,fcRect.size.height)];
+        noticeLable.text=[NSString stringWithFormat:@"%d.%@",i+1,noticeName[i]];
+        noticeLable.textAlignment=NSTextAlignmentCenter;
+        noticeLable.textColor=[UIColor whiteColor];
+        noticeLable.numberOfLines=0;
+        noticeLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_scrollView addSubview:noticeLable];
+        
+        _noticeH=fcRect.size.height+_noticeH+10*HEIGHT_SIZE;
+    }
+    
+    
+    
+    
     float lableHeigh=40*HEIGHT_SIZE;
     float twoHeigh=5*HEIGHT_SIZE;
-    
-    UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 10*HEIGHT_SIZE, 320*NOW_SIZE,sizeH1)];
-    noticeLable.text=root_lianjie_luyouqi;
-    noticeLable.textAlignment=NSTextAlignmentCenter;
-    noticeLable.textColor=[UIColor whiteColor];
-    noticeLable.numberOfLines=0;
-    noticeLable.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
-    [_scrollView addSubview:noticeLable];
+      float sizeH1=_noticeH;
+  
     
     UILabel *wifiName=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, sizeH1+twoHeigh*4, 100*NOW_SIZE,lableHeigh )];
     wifiName.text=root_peizhi_shinewifi_E_mingzi;
@@ -213,7 +221,7 @@
     view2.backgroundColor=[UIColor lightTextColor];
     [_scrollView addSubview:view2];
     
-    _animationView=[[UIView alloc]initWithFrame:CGRectMake(0, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE+60*HEIGHT_SIZE, SCREEN_Width,200*HEIGHT_SIZE)];
+    _animationView=[[UIView alloc]initWithFrame:CGRectMake(0, sizeH1+twoHeigh*5+lableHeigh*2-20*HEIGHT_SIZE+60*HEIGHT_SIZE, SCREEN_Width,200*HEIGHT_SIZE)];
     [_scrollView addSubview:_animationView];
     
     float animationH=CGRectGetMaxY(_animationView.frame);

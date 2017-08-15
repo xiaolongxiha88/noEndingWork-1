@@ -275,7 +275,7 @@
         if ([_frameType isEqualToString:@"1"]) {
         NSDictionary *_plotThemeAttributes = @{
                                                kPlotFillColorKey : COLOR(89, 225, 151, 0.6),
-                                               kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",2*HEIGHT_SIZE],
+                                               kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",1*HEIGHT_SIZE],
                                                kPlotStrokeColorKey : COLOR(89, 225, 151, 1),
                                                kPlotPointFillColorKey : COLOR(89, 225, 151, 0.6),
                                                kPlotPointValueFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE]
@@ -284,7 +284,7 @@
           }else{
               NSDictionary *_plotThemeAttributes = @{
                                                      kPlotFillColorKey : COLOR(89, 225, 151, 0.6),
-                                                     kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",2*HEIGHT_SIZE],
+                                                     kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",1*HEIGHT_SIZE],
                                                      kPlotStrokeColorKey : COLOR(89, 225, 151, 1),
                                                      kPlotPointFillColorKey : COLOR(89, 225, 151, 0.6),
                                                      kPlotPointValueFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE]
@@ -302,8 +302,10 @@
     _barType=1;
     [self setDataDict:dataDict];
     
-    //
-//    [self setType:1];
+    if (![_frameType isEqualToString:@"1"]) {
+     [self setType:1];
+    }
+
     
     if (_barChartView) {
         [_barChartView removeFromSuperview];
@@ -397,11 +399,11 @@
 #pragma mark - bar chart
 - (PNBarChart *)barChartView {
     if (!_barChartView) {
-        self.barChartView = [[PNBarChart alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 310*NOW_SIZE, 250*HEIGHT_SIZE)];
+        self.barChartView = [[PNBarChart alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 310*NOW_SIZE, 300*HEIGHT_SIZE)];
         self.barChartView.backgroundColor = [UIColor clearColor];
         self.barChartView.barBackgroundColor = [UIColor clearColor];
-        [self.barChartView setStrokeColor:[UIColor whiteColor]];
-        [self.barChartView setLabelTextColor:[UIColor whiteColor]];
+        [self.barChartView setStrokeColor:COLOR(122, 230, 129, 1)];
+        [self.barChartView setLabelTextColor:COLOR(102, 102, 102, 1)];
         self.barChartView.yChartLabelWidth = 26*HEIGHT_SIZE;
         self.barChartView.chartMargin = 30*HEIGHT_SIZE;
         self.barChartView.yLabelFormatter = ^(CGFloat yValue){

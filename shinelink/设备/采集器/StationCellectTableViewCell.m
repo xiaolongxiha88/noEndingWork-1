@@ -27,8 +27,8 @@
         self.backgroundColor = [UIColor clearColor];
         
         //背景
-        self.bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, 200*HEIGHT_SIZE)];
-        self.bgView.backgroundColor = COLOR(33, 188, 234, 1);
+        self.bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, 160*HEIGHT_SIZE)];
+        self.bgView.backgroundColor =MainColor;
         [self.contentView addSubview:_bgView];
 //        UIImage *bgImage = IMAGE(@"bg4.png");
 //        self.layer.contents = (id)bgImage.CGImage;
@@ -76,50 +76,51 @@
         line2.backgroundColor=[UIColor whiteColor];
         [self.contentView addSubview:line2];
         
-        //组别
-        UILabel *totalEnergyTitleLable = [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 80*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
-        totalEnergyTitleLable.text = root_zubie;
-        totalEnergyTitleLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        totalEnergyTitleLable.textColor = [UIColor whiteColor];
-        [self.contentView addSubview:totalEnergyTitleLable];
+        float H=40*HEIGHT_SIZE;
+//        //组别
+//        UILabel *totalEnergyTitleLable = [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 80*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+//        totalEnergyTitleLable.text = root_zubie;
+//        totalEnergyTitleLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+//        totalEnergyTitleLable.textColor = [UIColor whiteColor];
+//        [self.contentView addSubview:totalEnergyTitleLable];
+//        
+//        self.totalEnergyLabel = [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 80*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+//        self.totalEnergyLabel.text = @"group";
+//        self.totalEnergyLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+//        self.totalEnergyLabel.textColor = [UIColor whiteColor];
+//        [self.contentView addSubview:_totalEnergyLabel];
         
-        self.totalEnergyLabel = [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 80*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
-        self.totalEnergyLabel.text = @"group";
-        self.totalEnergyLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        self.totalEnergyLabel.textColor = [UIColor whiteColor];
-        [self.contentView addSubview:_totalEnergyLabel];
-        
-        UIView *line3=[[UIView alloc]initWithFrame:CGRectMake(40*NOW_SIZE, 120*HEIGHT_SIZE, 240*NOW_SIZE, 0.5*HEIGHT_SIZE)];
+        UIView *line3=[[UIView alloc]initWithFrame:CGRectMake(40*NOW_SIZE, 120*HEIGHT_SIZE-H, 240*NOW_SIZE, 0.5*HEIGHT_SIZE)];
         line3.backgroundColor=[UIColor whiteColor];
         [self.contentView addSubview:line3];
         
         //设备类型
-        UILabel *currentPowerTitleLable = [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 120*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+        UILabel *currentPowerTitleLable = [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 120*HEIGHT_SIZE-H, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
         currentPowerTitleLable.text = root_shebei_leixing;
         currentPowerTitleLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         currentPowerTitleLable.adjustsFontSizeToFitWidth=YES;
         currentPowerTitleLable.textColor = [UIColor whiteColor];
         [self.contentView addSubview:currentPowerTitleLable];
         
-        self.currentPowerLabel = [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 120*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+        self.currentPowerLabel = [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 120*HEIGHT_SIZE-H, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
         self.currentPowerLabel.text = @"device type";
         self.currentPowerLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         self.currentPowerLabel.textColor = [UIColor whiteColor];
         [self.contentView addSubview:_currentPowerLabel];
         
-        UIView *line4=[[UIView alloc]initWithFrame:CGRectMake(40*NOW_SIZE, 160*HEIGHT_SIZE, 240*NOW_SIZE, 0.5*HEIGHT_SIZE)];
+        UIView *line4=[[UIView alloc]initWithFrame:CGRectMake(40*NOW_SIZE, 160*HEIGHT_SIZE-H, 240*NOW_SIZE, 0.5*HEIGHT_SIZE)];
         line4.backgroundColor=[UIColor whiteColor];
         [self.contentView addSubview:line4];
         
         //更新间隔
-        UILabel *moneyTitleLable = [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 160*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+        UILabel *moneyTitleLable = [[UILabel alloc] initWithFrame:CGRectMake(40*NOW_SIZE, 160*HEIGHT_SIZE-H, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
         moneyTitleLable.text = root_data_update_interval;
         moneyTitleLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
          moneyTitleLable.adjustsFontSizeToFitWidth=YES;
         moneyTitleLable.textColor = [UIColor whiteColor];
         [self.contentView addSubview:moneyTitleLable];
         
-        self.moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 160*HEIGHT_SIZE, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
+        self.moneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(160*NOW_SIZE, 160*HEIGHT_SIZE-H, 120*NOW_SIZE, 40*HEIGHT_SIZE)];
         self.moneyLabel.text = root_data_update_interval;
         self.moneyLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         self.moneyLabel.adjustsFontSizeToFitWidth=YES;

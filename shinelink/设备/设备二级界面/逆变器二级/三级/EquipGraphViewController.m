@@ -144,7 +144,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
      upMove.direction=UISwipeGestureRecognizerDirectionUp;
     [_scrollView addGestureRecognizer:upMove];
     
-    
+    float layerW=0.5;
     self.dayButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
     if ([_StorageTypeNum isEqualToString:@"1"]) {
@@ -152,6 +152,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     [self.dayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
        [self.dayButton setTitle:root_DAY forState:UIControlStateNormal];
+    _dayButton.layer.borderWidth=layerW;
+    _dayButton.layer.borderColor=COLOR(108, 199, 255, 1).CGColor;
     [self setButtonColor:_dayButton];
     self.dayButton.tag = 1000;
      _dayButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
@@ -162,6 +164,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     self.monthButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.monthButton.frame = CGRectMake(1 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
     [self.monthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _monthButton.layer.borderWidth=layerW;
+    _monthButton.layer.borderColor=COLOR(108, 199, 255, 1).CGColor;
   [self setButtonColor:_monthButton];
     self.monthButton.tag = 1001;
      _monthButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
@@ -175,6 +179,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     self.yearButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.yearButton.frame = CGRectMake(2 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
     [self.yearButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _yearButton.layer.borderWidth=layerW;
+       _yearButton.layer.borderColor=COLOR(108, 199, 255, 1).CGColor;
       [self setButtonColor:_yearButton];
     self.yearButton.tag = 1002;
     _yearButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
@@ -191,6 +197,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     self.totalButton.frame = CGRectMake(1 * SCREEN_Width/2, 0, SCREEN_Width/2, 40*HEIGHT_SIZE);
     }
     [self.totalButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _totalButton.layer.borderWidth=layerW;
+    _totalButton.layer.borderColor=COLOR(108, 199, 255, 1).CGColor;
        [self setButtonColor:_totalButton];
     self.totalButton.tag = 1003;
     _totalButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
@@ -308,6 +316,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             self.line2View.energyTitleLabel.text = root_Today_Energy;
             self.line2View.unitLabel.text = root_Powre;
             
+            //上滑提示
            _upImage= [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_Width/2-8*NOW_SIZE, CGRectGetMaxY(self.line2View.frame)+0*HEIGHT_SIZE, 16*NOW_SIZE, 12*HEIGHT_SIZE )];
                   _upImage.image = IMAGE(@"upGo.png");
              [_upImage.layer addAnimation:[self opacityForever_Animation:2] forKey:nil];
@@ -321,15 +330,15 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
              [_upAlert.layer addAnimation:[self opacityForever_Animation:2] forKey:nil];
             [_scrollView addSubview:_upAlert];
             
-            
+             //曲线参数选择器
             _colorBackView2=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 90*HEIGHT_SIZE)];
             _colorBackView2.backgroundColor=MainColor;
             [_line2View addSubview:_colorBackView2];
             
             _selectV=[[UIView alloc]initWithFrame:CGRectMake(60*NOW_SIZE, 40*HEIGHT_SIZE, 200*NOW_SIZE, 30*HEIGHT_SIZE)];
-            _selectV.layer.borderWidth=0.5;
+            _selectV.layer.borderWidth=1.5;
             _selectV.layer.cornerRadius=5;
-            _selectV.layer.borderColor=[UIColor whiteColor].CGColor;
+            _selectV.layer.borderColor=COLOR(108, 199, 255, 1).CGColor;
             _selectV.backgroundColor=[UIColor clearColor];
             [_colorBackView2 addSubview:_selectV];
             

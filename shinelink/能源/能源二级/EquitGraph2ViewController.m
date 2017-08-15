@@ -42,7 +42,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 @property (nonatomic, strong) NSMutableArray *yearsArr;
 @property (nonatomic, strong) NSMutableArray *monthArr;
-
+@property(nonatomic,strong)UIView *colorBackView;
+@property(nonatomic,strong)UIView *colorBackView2;
+@property(nonatomic,strong)UIView* selectV;
 
 @property (nonatomic, strong) UIDatePicker *dayPicker;
 @property (nonatomic, strong) UIPickerView *monthPicker;
@@ -74,7 +76,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor=MainColor;
+    self.view.backgroundColor=[UIColor whiteColor];
 
     [self initUI];
 }
@@ -101,70 +103,82 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     [self.view addSubview:_scrollView];
     
+    _colorBackView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 195*HEIGHT_SIZE)];
+    _colorBackView.backgroundColor=MainColor;
+    [_scrollView addSubview:_colorBackView];
+    
     if ([_dicType isEqualToString:@"2"]){
             _valueName=[NSMutableArray arrayWithObjects:root_energy_fadianliang,root_energy_zuidazhi,root_energy_pingjunzhi,nil];
     }else if ([_dicType isEqualToString:@"3"]){
     _valueName=[NSMutableArray arrayWithObjects:root_energy_fangdianliang,root_energy_zuidazhi,root_energy_pingjunzhi,nil];
     }
     
+    float layerW=0.5;
     self.dayButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
+
     [self.dayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.dayButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
-    [self.dayButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
-    [self.dayButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
-    self.dayButton.tag = 1000;
-     _dayButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.dayButton setTitle:root_DAY forState:UIControlStateNormal];
+    _dayButton.layer.borderWidth=layerW;
+    _dayButton.layer.borderColor=COLOR(108, 199, 255, 1).CGColor;
+    [self setButtonColor:_dayButton];
+    self.dayButton.tag = 1000;
+    _dayButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     self.dayButton.selected = YES;
     [self.dayButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:self.dayButton];
+    [_colorBackView addSubview:self.dayButton];
     
     self.monthButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.monthButton.frame = CGRectMake(1 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
     [self.monthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.monthButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
-    [self.monthButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
-    [self.monthButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
+    _monthButton.layer.borderWidth=layerW;
+    _monthButton.layer.borderColor=COLOR(108, 199, 255, 1).CGColor;
+    [self setButtonColor:_monthButton];
     self.monthButton.tag = 1001;
-     _monthButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+    _monthButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.monthButton setTitle:root_MONTH forState:UIControlStateNormal];
     [self.monthButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:self.monthButton];
+  [_colorBackView addSubview:self.monthButton];
+    
     
     self.yearButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.yearButton.frame = CGRectMake(2 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
     [self.yearButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.yearButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
-    [self.yearButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
-    [self.yearButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
+    _yearButton.layer.borderWidth=layerW;
+    _yearButton.layer.borderColor=COLOR(108, 199, 255, 1).CGColor;
+    [self setButtonColor:_yearButton];
     self.yearButton.tag = 1002;
-     _yearButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+    _yearButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.yearButton setTitle:root_YEAR forState:UIControlStateNormal];
     [self.yearButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:self.yearButton];
+   [_colorBackView addSubview:self.yearButton];
+    
     
     self.totalButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.totalButton.frame = CGRectMake(3 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
     [self.totalButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.totalButton setBackgroundImage:[self createImageWithColor:COLOR(47, 200, 255, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
-    [self.totalButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
-    [self.totalButton setBackgroundImage:[self createImageWithColor:MainColor rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
+    _totalButton.layer.borderWidth=layerW;
+    _totalButton.layer.borderColor=COLOR(108, 199, 255, 1).CGColor;
+    [self setButtonColor:_totalButton];
     self.totalButton.tag = 1003;
     _totalButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.totalButton setTitle:root_TOTAL forState:UIControlStateNormal];
     [self.totalButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:self.totalButton];
+    [_colorBackView addSubview:self.totalButton];
+    
+    [self changButtonColor];
+
     
     
-    //
-    self.timeDisplayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + 40*HEIGHT_SIZE, SCREEN_Width, 30*HEIGHT_SIZE)];
-    self.timeDisplayView.backgroundColor = COLOR(87, 208, 250, 1);
-    [_scrollView addSubview:self.timeDisplayView];
+       //时间选择器
+    self.timeDisplayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 + 45*HEIGHT_SIZE, SCREEN_Width, 30*HEIGHT_SIZE)];
+    self.timeDisplayView.backgroundColor = MainColor;
+    [_colorBackView addSubview:self.timeDisplayView];
     
     UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_Width - 120*NOW_SIZE)/2, 4*HEIGHT_SIZE, 120*NOW_SIZE, 30*HEIGHT_SIZE - 8*HEIGHT_SIZE)];
-    // bgImageView.backgroundColor=COLOR(123, 239, 227, 1);
-    bgImageView.image = IMAGE(@"rili.png");
+    bgImageView.backgroundColor=[UIColor whiteColor];
+    bgImageView.layer.cornerRadius=5;
+
     bgImageView.userInteractionEnabled = YES;
     [self.timeDisplayView addSubview:bgImageView];
     
@@ -208,31 +222,25 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     float size1=35*HEIGHT_SIZE;
     for (int i=0; i<_valueName.count; i++) {
-        UILabel *valueLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 330*HEIGHT_SIZE+size1*i, 140*NOW_SIZE, 25*HEIGHT_SIZE)];
+        UILabel *valueLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 85*HEIGHT_SIZE+size1*i, 140*NOW_SIZE, 25*HEIGHT_SIZE)];
         valueLable.text=_valueName[i];
         valueLable.textAlignment=NSTextAlignmentCenter;
         valueLable.textColor=[UIColor whiteColor];
         valueLable.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
-        [_scrollView addSubview:valueLable];
+        [_colorBackView addSubview:valueLable];
         
-//        UILabel *valueLable2=[[UILabel alloc]initWithFrame:CGRectMake(170*NOW_SIZE, 330*NOW_SIZE+size1*i, 140*NOW_SIZE, 25*NOW_SIZE)];
-//        valueLable2.text=_valueArray[i];
-//        valueLable2.textAlignment=NSTextAlignmentCenter;
-//        valueLable2.textColor=[UIColor whiteColor];
-//        valueLable2.font = [UIFont systemFontOfSize:15*NOW_SIZE];
-//        [_scrollView addSubview:valueLable2];
     }
     for (int i=0; i<_valueName.count+1; i++) {
     
-        UIView *line=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 325*HEIGHT_SIZE+size1*i, 300*NOW_SIZE, 1*HEIGHT_SIZE)];
+        UIView *line=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 80*HEIGHT_SIZE+size1*i, 300*NOW_SIZE, 1*HEIGHT_SIZE)];
        line.backgroundColor=COLOR(140, 221, 249, 1);
-        [_scrollView addSubview:line];
+        [_colorBackView addSubview:line];
         
     }
     
-    UIView *line4=[[UIView alloc]initWithFrame:CGRectMake(160*NOW_SIZE, 325*HEIGHT_SIZE, 1*NOW_SIZE, 105*HEIGHT_SIZE)];
+    UIView *line4=[[UIView alloc]initWithFrame:CGRectMake(160*NOW_SIZE, 80*HEIGHT_SIZE, 1*NOW_SIZE, 105*HEIGHT_SIZE)];
     line4.backgroundColor=COLOR(140, 221, 249, 1);
-    [_scrollView addSubview:line4];
+    [_colorBackView addSubview:line4];
     
    
     
@@ -289,7 +297,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             [self updataUI:_dayDict];
             
             //[self.dayDict setObject:content forKey:@"data"];
-            self.line2View = [[Line3View alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.timeDisplayView.frame), SCREEN_Width, SCREEN_Height - self.tabBarController.tabBar.frame.size.height - CGRectGetMaxY(self.timeDisplayView.frame))];
+            self.line2View = [[Line3View alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_colorBackView.frame), SCREEN_Width, SCREEN_Height - self.tabBarController.tabBar.frame.size.height - CGRectGetMaxY(_colorBackView.frame))];
             self.line2View.flag=@"1";
             self.line2View.frameType=@"2";
                self.line2View.deviceType=_dicType;
@@ -312,6 +320,27 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [self hideProgressView];
     }];
     
+}
+
+-(void)setButtonColor:(UIButton*)button{
+    
+    [button setBackgroundImage:[self createImageWithColor:COLOR(0, 151, 245, 1) rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateNormal];
+    [button setBackgroundImage:[self createImageWithColor:[UIColor whiteColor] rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateHighlighted];
+    [button setBackgroundImage:[self createImageWithColor:[UIColor whiteColor] rect:CGRectMake(0, 0, SCREEN_Width/4, 40*HEIGHT_SIZE)] forState:UIControlStateSelected];
+    
+}
+
+
+-(void)changButtonColor{
+    NSArray *buttonArray=@[_dayButton,_monthButton,_yearButton,_totalButton];
+    for (UIButton* button in buttonArray) {
+        bool isSelected=button.selected;
+        if (isSelected) {
+            [button setTitleColor:MainColor forState:UIControlStateNormal];
+        }else{
+            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
+    }
 }
 
 -(void)updataUI:(NSMutableDictionary*)daydic{
@@ -384,26 +413,26 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [_valueArray addObject:@"0"];
         [_valueArray addObject:@"0"];
    }
-       _value1Lable=[[UILabel alloc]initWithFrame:CGRectMake(170*NOW_SIZE, 330*HEIGHT_SIZE+size1*0, 140*NOW_SIZE, 25*HEIGHT_SIZE)];
+       _value1Lable=[[UILabel alloc]initWithFrame:CGRectMake(170*NOW_SIZE, 85*HEIGHT_SIZE+size1*0, 140*NOW_SIZE, 25*HEIGHT_SIZE)];
         _value1Lable.text=_valueArray[0];
         _value1Lable.textAlignment=NSTextAlignmentCenter;
         _value1Lable.textColor=[UIColor whiteColor];
         _value1Lable.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
-        [_scrollView addSubview:_value1Lable];
+        [_colorBackView addSubview:_value1Lable];
     
-    _value2Lable=[[UILabel alloc]initWithFrame:CGRectMake(170*NOW_SIZE, 330*HEIGHT_SIZE+size1*1, 140*NOW_SIZE, 25*HEIGHT_SIZE)];
+    _value2Lable=[[UILabel alloc]initWithFrame:CGRectMake(170*NOW_SIZE, 85*HEIGHT_SIZE+size1*1, 140*NOW_SIZE, 25*HEIGHT_SIZE)];
     _value2Lable.text=_valueArray[1];
     _value2Lable.textAlignment=NSTextAlignmentCenter;
     _value2Lable.textColor=[UIColor whiteColor];
     _value2Lable.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
-    [_scrollView addSubview:_value2Lable];
+    [_colorBackView addSubview:_value2Lable];
     
-    _value3Lable=[[UILabel alloc]initWithFrame:CGRectMake(170*NOW_SIZE, 330*HEIGHT_SIZE+size1*2, 140*NOW_SIZE, 25*HEIGHT_SIZE)];
+    _value3Lable=[[UILabel alloc]initWithFrame:CGRectMake(170*NOW_SIZE, 85*HEIGHT_SIZE+size1*2, 140*NOW_SIZE, 25*HEIGHT_SIZE)];
     _value3Lable.text=_valueArray[2];
     _value3Lable.textAlignment=NSTextAlignmentCenter;
     _value3Lable.textColor=[UIColor whiteColor];
     _value3Lable.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
-    [_scrollView addSubview:_value3Lable];
+    [_colorBackView addSubview:_value3Lable];
    
 
 }
@@ -1000,6 +1029,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         
         [self requestTotalDatas];
     }
+    
+      [self changButtonColor];
 }
 
 #pragma mark - datePickerButton点击事件 选择时间

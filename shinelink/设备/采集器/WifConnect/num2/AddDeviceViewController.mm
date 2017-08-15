@@ -37,6 +37,7 @@
 @property(nonatomic,strong)UILabel *timeLable;
 @property(nonatomic,strong)NSString *isNewWIFI;
 
+@property(nonatomic,assign)float noticeH;
 
 
 @end
@@ -138,35 +139,39 @@ static void *context = NULL;
 }
 
 -(void)initUI{
-
+    _noticeH=0;
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _scrollView.scrollEnabled=YES;
  
     [self.view addSubview:_scrollView];
     
-//    UIImageView *pwdBgImageView2 = [[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 85*HEIGHT_SIZE, 300*NOW_SIZE,110*HEIGHT_SIZE+sizeH1 )];
-//    pwdBgImageView2.image = IMAGE(@"addDevice.jpg");
-//    pwdBgImageView2.userInteractionEnabled = YES;
-//    [_scrollView addSubview:pwdBgImageView2];
+    NSArray *noticeName=@[root_lianjie_luyouqi,root_wifi_tishi_2,root_wifi_tishi_3];
     
-      CGRect fcRect = [root_lianjie_luyouqi boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18 *HEIGHT_SIZE]} context:nil];
-          float sizeH1=fcRect.size.height;
+    for (int i=0; i<noticeName.count; i++) {
+        CGRect fcRect = [noticeName[i] boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12 *HEIGHT_SIZE]} context:nil];
+        
+        UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE+_noticeH, 300*NOW_SIZE,fcRect.size.height)];
+        noticeLable.text=[NSString stringWithFormat:@"%d.%@",i+1,noticeName[i]];
+        noticeLable.textAlignment=NSTextAlignmentCenter;
+        noticeLable.textColor=[UIColor whiteColor];
+        noticeLable.numberOfLines=0;
+        noticeLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_scrollView addSubview:noticeLable];
+        
+        _noticeH=fcRect.size.height+_noticeH+10*HEIGHT_SIZE;
+    }
+    
+    
+    
+
     float lableHeigh=40*HEIGHT_SIZE;
-      float twoHeigh=5*HEIGHT_SIZE;
-    
-    UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 10*HEIGHT_SIZE, 320*NOW_SIZE,sizeH1)];
-    noticeLable.text=root_lianjie_luyouqi;
-    noticeLable.textAlignment=NSTextAlignmentCenter;
-    noticeLable.textColor=[UIColor whiteColor];
-    noticeLable.numberOfLines=0;
-    noticeLable.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
-    [_scrollView addSubview:noticeLable];
-    
+    float twoHeigh=5*HEIGHT_SIZE;
+            float sizeH1=_noticeH;
      UILabel *wifiName=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, sizeH1+twoHeigh*4, 100*NOW_SIZE,lableHeigh )];
     wifiName.text=root_peizhi_shinewifi_E_mingzi;
     wifiName.textAlignment=NSTextAlignmentRight;
     wifiName.textColor=[UIColor whiteColor];
-    wifiName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    wifiName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:wifiName];
     
     self.ipName = [[UITextField alloc] initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*4, 180*NOW_SIZE,lableHeigh)];
@@ -177,7 +182,7 @@ static void *context = NULL;
     self.ipName.tintColor = [UIColor whiteColor];
     [self.ipName setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.ipName setValue:[UIFont systemFontOfSize:9*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
-    self.ipName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    self.ipName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:_ipName];
     
     UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*4+lableHeigh-7*HEIGHT_SIZE, 180*NOW_SIZE,1*HEIGHT_SIZE )];
@@ -188,7 +193,7 @@ static void *context = NULL;
     Password.text=root_peizhi_shinewifi_mima;
     Password.textAlignment=NSTextAlignmentRight;
     Password.textColor=[UIColor whiteColor];
-    Password.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    Password.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:Password];
     
     self.pswd = [[UITextField alloc] initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*5+lableHeigh, 180*NOW_SIZE,lableHeigh)];
@@ -199,14 +204,14 @@ static void *context = NULL;
     self.pswd.tintColor = [UIColor whiteColor];
     [self.pswd setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.pswd setValue:[UIFont systemFontOfSize:9*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
-    self.pswd.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    self.pswd.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:_pswd];
     
     UIView *view2=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE, 180*NOW_SIZE,1*HEIGHT_SIZE )];
     view2.backgroundColor=[UIColor lightTextColor];
     [_scrollView addSubview:view2];
     
-    _animationView=[[UIView alloc]initWithFrame:CGRectMake(0, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE+60*HEIGHT_SIZE, SCREEN_Width,200*HEIGHT_SIZE)];
+    _animationView=[[UIView alloc]initWithFrame:CGRectMake(0, sizeH1+twoHeigh*5+lableHeigh*2-20*HEIGHT_SIZE+60*HEIGHT_SIZE, SCREEN_Width,200*HEIGHT_SIZE)];
     [_scrollView addSubview:_animationView];
 
     float animationH=CGRectGetMaxY(_animationView.frame);

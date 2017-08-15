@@ -1639,7 +1639,7 @@ UIImageView  *_animationView = [[UIImageView alloc] initWithFrame:CGRectMake(sta
         [headValueArray addObject:@"0"]; [headValueArray addObject:@"0"]; [headValueArray addObject:@"0"];
         [headValue1Array addObject:@""]; [headValue1Array addObject:@""]; [headValue1Array addObject:@""];
     }
-    NSArray *headColorArray=[NSArray arrayWithObjects: MainColor,COLOR(219, 210, 74, 1),COLOR(83, 218, 118, 1),nil];
+    NSArray *headColorArray=[NSArray arrayWithObjects: COLOR(89, 220, 255, 1),COLOR(179, 218, 138, 1),COLOR(78, 224, 180, 1),nil];
     NSArray *headImageNameArray11=[NSArray arrayWithObjects: @"deviceHead1.png",@"deviceHead2.png",@"deviceHead33.png",nil];
     
     for (int i=0; i<headValueArray.count; i++) {

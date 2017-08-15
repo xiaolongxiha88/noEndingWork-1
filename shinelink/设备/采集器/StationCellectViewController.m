@@ -225,7 +225,7 @@
         NSString *demoName5=@"ShineLanBox";
           NSString *demoName4=@"ShineWIFI-S";          //wifi-S
         
-        //_SetName=@"ShineWIFI";
+       //_SetName=@"ShineWIFI-S";
         
         BOOL result1 = [_SetName compare:demoName1 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
         BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
@@ -342,7 +342,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 220*HEIGHT_SIZE;
+    return 180*HEIGHT_SIZE;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

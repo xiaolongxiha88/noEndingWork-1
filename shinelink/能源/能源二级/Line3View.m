@@ -196,7 +196,7 @@
         self.backgroundColor = [UIColor clearColor];
         self.unitLabel = [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 10*HEIGHT_SIZE, 100*NOW_SIZE, 30*HEIGHT_SIZE)];
         self.unitLabel.font = [UIFont boldSystemFontOfSize:12*HEIGHT_SIZE];
-        self.unitLabel.textColor = [UIColor whiteColor];
+        self.unitLabel.textColor =COLOR(102, 102, 102, 1);
         [self addSubview:self.unitLabel];
         
     }
@@ -210,7 +210,7 @@
         
         NSString *test=@"test";
         NSLog(@"TEST:%@",[_valuesArray[0] class]);
-        NSLog(@"TEST:%@",[test class]);
+        
         
         int i=0;
         int j=5;
@@ -227,26 +227,28 @@
             }
         }
         
+        float fontW=8*HEIGHT_SIZE;
+        UIColor *fontColor=COLOR(102, 102, 102, 1);
         
         if ([_frameType isEqualToString:@"1"]) {
-            self.lineChartView = [[SHLineGraphView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE, 300*NOW_SIZE, 220*HEIGHT_SIZE)];
+            self.lineChartView = [[SHLineGraphView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE, 320*NOW_SIZE, 220*HEIGHT_SIZE)];
             NSDictionary *_themeAttributes = @{
-                                               kXAxisLabelColorKey : [UIColor blackColor],
-                                               kXAxisLabelFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE],
-                                               kYAxisLabelColorKey : [UIColor blackColor],
-                                               kYAxisLabelFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE],
+                                               kXAxisLabelColorKey : fontColor,
+                                               kXAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
+                                               kYAxisLabelColorKey : fontColor,
+                                               kYAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
                                                //                                           kYAxisLabelSideMarginsKey : @(j*NOW_SIZE),
                                                kPlotBackgroundLineColorKey : [UIColor colorWithRed:0.48 green:0.48 blue:0.49 alpha:0.4],
                                                kDotSizeKey : @0
                                                };
             self.lineChartView.themeAttributes = _themeAttributes;
         }else {
-            self.lineChartView = [[SHLineGraphView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 20*HEIGHT_SIZE, 300*NOW_SIZE, 220*HEIGHT_SIZE)];
+            self.lineChartView = [[SHLineGraphView alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 25*HEIGHT_SIZE, 320*NOW_SIZE, 270*HEIGHT_SIZE)];
             NSDictionary *_themeAttributes = @{
-                                               kXAxisLabelColorKey : [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0],
-                                               kXAxisLabelFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE],
-                                               kYAxisLabelColorKey : [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0],
-                                               kYAxisLabelFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE],
+                                               kXAxisLabelColorKey :fontColor,
+                                               kXAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
+                                               kYAxisLabelColorKey : fontColor,
+                                               kYAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
                                                //                                           kYAxisLabelSideMarginsKey : @(j*NOW_SIZE),
                                                kPlotBackgroundLineColorKey : [UIColor colorWithRed:0.48 green:0.48 blue:0.49 alpha:0.4],
                                                kDotSizeKey : @0
@@ -255,7 +257,6 @@
         }
         
         NSLog(@"TEST:%d",j);
-        
         BOOL isNoZero=NO;
         for (int i=0; i<_valuesArray.count; i++) {
             NSString *value=[NSString stringWithFormat:@"%@",_valuesArray[i]];
@@ -306,8 +307,6 @@
             _xArray=[NSArray arrayWithArray:newXarray];
             _valuesArray=[NSMutableArray arrayWithArray:newYarray];
         }
-     
-        
         
         
         NSMutableArray *tempXArr = [NSMutableArray array];
@@ -347,19 +346,19 @@
         self.lineChartPlot = [[SHPlot alloc] init];
         if ([_frameType isEqualToString:@"1"]) {
             NSDictionary *_plotThemeAttributes = @{
-                                                   kPlotFillColorKey : [UIColor colorWithRed:0.47 green:0.75 blue:0.78 alpha:0.5],
-                                                   kPlotStrokeWidthKey : @1,
-                                                   kPlotStrokeColorKey : [UIColor blueColor],
-                                                   kPlotPointFillColorKey : [UIColor colorWithRed:0.18 green:0.36 blue:0.41 alpha:1],
+                                                   kPlotFillColorKey : COLOR(89, 225, 151, 0.6),
+                                                   kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",1*HEIGHT_SIZE],
+                                                   kPlotStrokeColorKey : COLOR(89, 225, 151, 1),
+                                                   kPlotPointFillColorKey : COLOR(89, 225, 151, 0.6),
                                                    kPlotPointValueFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE]
                                                    };
             self.lineChartPlot.plotThemeAttributes = _plotThemeAttributes;
         }else{
             NSDictionary *_plotThemeAttributes = @{
-                                                   kPlotFillColorKey : [UIColor colorWithRed:0.47 green:0.75 blue:0.78 alpha:0.5],
-                                                   kPlotStrokeWidthKey : @1,
-                                                   kPlotStrokeColorKey : [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1],
-                                                   kPlotPointFillColorKey : [UIColor colorWithRed:0.18 green:0.36 blue:0.41 alpha:1],
+                                                   kPlotFillColorKey : COLOR(89, 225, 151, 0.6),
+                                                   kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",1*HEIGHT_SIZE],
+                                                   kPlotStrokeColorKey : COLOR(89, 225, 151, 1),
+                                                   kPlotPointFillColorKey : COLOR(89, 225, 151, 0.6),
                                                    kPlotPointValueFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE]
                                                    };
             self.lineChartPlot.plotThemeAttributes = _plotThemeAttributes;
@@ -370,12 +369,14 @@
     return _lineChartView;
 }
 
+
 - (void)refreshLineChartViewWithDataDict:(NSMutableDictionary *)dataDict {
-    //
+    
+    _barType=1;
     [self setDataDict:dataDict];
     
     //
-    [self setType:1];
+     [self setType:1];
     
     if (_barChartView) {
         [_barChartView removeFromSuperview];
@@ -401,7 +402,6 @@
         NSNumber *avg = [_valuesArray valueForKeyPath:@"@avg.floatValue"];
         if ([avg floatValue] != 0) {
             NSNumber *maxyAxisValue = [_valuesArray valueForKeyPath:@"@max.floatValue"];
-            
             float getY0=[maxyAxisValue floatValue]/6;
             int getY1=ceil(getY0);
             if ((0<getY1)&&(getY1<10)) {
@@ -420,11 +420,13 @@
                 maxyAxisValue=[NSNumber numberWithInt:getY1*6];
             }
             
+    
+                self.lineChartView.lableLookNum=6;
+                self.lineChartView.yAxisRange = maxyAxisValue;
+        
             
-            self.lineChartView.yAxisRange = maxyAxisValue;
+            
             self.lineChartView.yAxisSuffix = @"";
-
-          
             
             NSMutableArray *tempValuesArray = [NSMutableArray array];
             for (int i = 0; i < _valuesArray.count; i++) {
@@ -438,7 +440,7 @@
             [self.lineChartView addPlot:self.lineChartPlot];
             [self.lineChartView setupTheView];
         } else {
-            self.lineChartView.yAxisRange = @9000;
+            self.lineChartView.yAxisRange = @100;
             self.lineChartView.yAxisSuffix = @"";
             
             NSMutableArray *tempValuesArray = [NSMutableArray array];
@@ -453,25 +455,24 @@
             }
             
             self.lineChartPlot.plottingValues = tempValuesArray;
-                 
             self.lineChartPlot.plottingPointsLabels = _valuesArray;
             
             [self.lineChartView addPlot:self.lineChartPlot];
             [self.lineChartView setupTheView];
-            
         }
     }
 }
 
 
+
 #pragma mark - bar chart
 - (PNBarChart *)barChartView {
     if (!_barChartView) {
-        self.barChartView = [[PNBarChart alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 20*HEIGHT_SIZE, 315*NOW_SIZE, 250*HEIGHT_SIZE)];
+        self.barChartView = [[PNBarChart alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 25*HEIGHT_SIZE, 310*NOW_SIZE, 300*HEIGHT_SIZE)];
         self.barChartView.backgroundColor = [UIColor clearColor];
         self.barChartView.barBackgroundColor = [UIColor clearColor];
-        [self.barChartView setStrokeColor:[UIColor whiteColor]];
-        [self.barChartView setLabelTextColor:[UIColor whiteColor]];
+        [self.barChartView setStrokeColor:COLOR(122, 230, 129, 1)];
+        [self.barChartView setLabelTextColor:COLOR(102, 102, 102, 1)];
         self.barChartView.yChartLabelWidth = 26*HEIGHT_SIZE;
         self.barChartView.chartMargin = 30*HEIGHT_SIZE;
         self.barChartView.yLabelFormatter = ^(CGFloat yValue){
@@ -479,7 +480,7 @@
             NSString *labelText = [NSString stringWithFormat:@"%.0f",yValueParsed];
             return labelText;
         };
-        self.barChartView.labelMarginTop = 5.0;
+        self.barChartView.labelMarginTop = 5*HEIGHT_SIZE;
         self.barChartView.showChartBorder = YES;
         
     }

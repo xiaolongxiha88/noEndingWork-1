@@ -490,7 +490,7 @@
 "用户协议1"="Agree the user agreement ";
 "选择用户协议"="Please tick user Agreement";
 "添加1"="Add";
-"连接路由器2"="Connect your phone to the router to which the WIFI-E module is to be connected";
+"连接路由器2"="Connect your phone to the router to which the WiFi module is to be connected";
 "刷新设备列表"="Please drop down  to refresh device list to get device information after 5 mimutes ";
 "配置成功"="Configured successfully";
 
@@ -686,7 +686,8 @@
 "106wifi信号强度提示"="The current Wifi signal is weak, please configure in a Wifi signal strong place.";
 "107wifi连接路由器"="The datalogger is already connected to the router and is being connected to the server...";
 
-
+"108wifi提示2"="Reset the WiFi datalogger. Please press the KEY button on the datalogger for more than 3 seconds until the LED light is long bright.";
+"109wifi提示3"="Please enter the router name and password，then click the 'Set' button";
 
 
 

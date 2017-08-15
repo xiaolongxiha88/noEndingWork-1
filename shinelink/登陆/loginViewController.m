@@ -185,9 +185,6 @@
 - (void)addSubViews {
     float sizeH=20*HEIGHT_SIZE;
     
-  
-  
-    
     if (_scrollView) {
         [_scrollView removeFromSuperview];
         _scrollView=nil;
@@ -204,7 +201,7 @@
     
     //logo
     UIImageView *logo = [[UIImageView alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 60*HEIGHT_SIZE, SCREEN_Width - 100*NOW_SIZE, 55*HEIGHT_SIZE)];
-    logo.image = IMAGE(@"logo.png");
+    logo.image = IMAGE(@"logo2.png");
     [_scrollView addSubview:logo];
     
     if (_userBgImageView) {

@@ -17,7 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-     self.title = _titleString;
+   //  self.title = _titleString;
+    self.title = [NSString stringWithFormat:@"%@(Demo)",_titleString];
     
     self.line2View = [[newLine alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width,280*HEIGHT_SIZE )];
     [self.view addSubview:self.line2View];
