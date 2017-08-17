@@ -13,19 +13,19 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "iPhoneSpootlight5_29pt@2x-1.png",
+      "filename" : "iPadSpootlight5_29pt@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "iPhoneSpootlight5_29pt@3x-1.png",
+      "filename" : "iPhoneSpootlight5_29pt@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "iPhoneSpootlight7_40pt@2x-1.png",
+      "filename" : "iPhoneSpootlight7_40pt@2x.png",
       "scale" : "2x"
     },
     {
@@ -37,7 +37,7 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "iPhoneApp_60pt@2x.png",
+      "filename" : "iPhoneApp_60pt@2x-1.png",
       "scale" : "2x"
     },
     {
@@ -52,8 +52,9 @@
       "scale" : "1x"
     },
     {
-      "idiom" : "ipad",
       "size" : "20x20",
+      "idiom" : "ipad",
+      "filename" : "iPadSpootlight7_40pt.png",
       "scale" : "2x"
     },
     {
@@ -65,19 +66,19 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "iPadSpootlight5_29pt@2x.png",
+      "filename" : "iPadSpootlight5_29pt@2x-1.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "iPadSpootlight7_40pt.png",
+      "filename" : "iPadSpootlight7_40pt-1.png",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "iPhoneSpootlight7_40pt@2x.png",
+      "filename" : "iPadSpootlight7_40pt@2x-1.png",
       "scale" : "2x"
     },
     {
@@ -95,8 +96,20 @@
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "logo41.png",
+      "filename" : "shortLook_98pt@2x.png",
       "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "car",
+      "filename" : "iPhoneApp_60pt@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "car",
+      "filename" : "iPadSpootlight7_40pt@2x.png",
+      "scale" : "3x"
     },
     {
       "size" : "24x24",

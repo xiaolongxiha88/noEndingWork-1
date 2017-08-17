@@ -370,6 +370,8 @@
 		3370EBC71F41ABB200F37149 /* right.png in Resources */ = {isa = PBXBuildFile; fileRef = 3370EBC61F41ABB200F37149 /* right.png */; };
 		3370EBC91F42A24000F37149 /* bg3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3370EBC81F42A24000F37149 /* bg3.jpg */; };
 		3370EBCB1F42A32C00F37149 /* logo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3370EBCA1F42A32C00F37149 /* logo2.png */; };
+		3370EBCF1F45742B00F37149 /* storageHead.m in Sources */ = {isa = PBXBuildFile; fileRef = 3370EBCE1F45742B00F37149 /* storageHead.m */; };
+		3370EBD31F45874B00F37149 /* SPF5000Head.m in Sources */ = {isa = PBXBuildFile; fileRef = 3370EBD21F45874B00F37149 /* SPF5000Head.m */; };
 		33724D9D1CFE85FB005F3965 /* pic_service.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9C1CFE85FB005F3965 /* pic_service.png */; };
 		33724D9F1CFE89BE005F3965 /* touxiang.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9E1CFE89BE005F3965 /* touxiang.png */; };
 		337284D11EF769390004FAB9 /* changUserInfoTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337284D01EF769390004FAB9 /* changUserInfoTwo.swift */; };
@@ -815,8 +817,8 @@
 		334770FB1C9A3DEE003A6F13 /* energyTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "energyTab@2x.png"; sourceTree = "<group>"; };
 		334770FD1C9A3E35003A6F13 /* equipment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "equipment@2x.png"; sourceTree = "<group>"; };
 		334770FF1C9A3E57003A6F13 /* mine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mine@2x.png"; sourceTree = "<group>"; };
-		334771021C9A6219003A6F13 /* aliasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aliasViewController.h; sourceTree = "<group>"; };
-		334771031C9A6219003A6F13 /* aliasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = aliasViewController.m; sourceTree = "<group>"; };
+		334771021C9A6219003A6F13 /* aliasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aliasViewController.h; path = ../aliasViewController.h; sourceTree = "<group>"; };
+		334771031C9A6219003A6F13 /* aliasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = aliasViewController.m; path = ../aliasViewController.m; sourceTree = "<group>"; };
 		3349A7B11C75B7DF009172C2 /* 圆角矩形3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "圆角矩形3.png"; path = "../圆角矩形3.png"; sourceTree = "<group>"; };
 		3349A7B41C75B8F4009172C2 /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginViewController.h; sourceTree = "<group>"; };
 		3349A7B51C75B8F4009172C2 /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginViewController.m; sourceTree = "<group>"; };
@@ -943,14 +945,14 @@
 		334FF08A1CF53C7C001E6716 /* top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top.png; sourceTree = "<group>"; };
 		334FF08B1CF53C7C001E6716 /* UINavigationController+CustomNavigation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+CustomNavigation.h"; sourceTree = "<group>"; };
 		334FF08C1CF53C7C001E6716 /* UINavigationController+CustomNavigation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+CustomNavigation.m"; sourceTree = "<group>"; };
-		3350471E1C9BA6F600BF8683 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
-		3350471F1C9BA6F600BF8683 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
+		3350471E1C9BA6F600BF8683 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EGOCache.h; path = ../EGOCache.h; sourceTree = "<group>"; };
+		3350471F1C9BA6F600BF8683 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EGOCache.m; path = ../EGOCache.m; sourceTree = "<group>"; };
 		335047221C9BF39A00BF8683 /* homeDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = homeDeviceViewController.h; sourceTree = "<group>"; };
 		335047231C9BF39A00BF8683 /* homeDeviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = homeDeviceViewController.m; sourceTree = "<group>"; };
 		335088D71C73011300D7AA03 /* addDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addDevice.h; sourceTree = "<group>"; };
 		335088D81C73011300D7AA03 /* addDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addDevice.m; sourceTree = "<group>"; };
-		335089191C73112000D7AA03 /* EditStationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditStationMenuView.h; path = ../../EditStationMenuView.h; sourceTree = "<group>"; };
-		3350891A1C73112000D7AA03 /* EditStationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditStationMenuView.m; path = ../../EditStationMenuView.m; sourceTree = "<group>"; };
+		335089191C73112000D7AA03 /* EditStationMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditStationMenuView.h; path = ../../../EditStationMenuView.h; sourceTree = "<group>"; };
+		3350891A1C73112000D7AA03 /* EditStationMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditStationMenuView.m; path = ../../../EditStationMenuView.m; sourceTree = "<group>"; };
 		335089201C73178100D7AA03 /* btn_cha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = btn_cha.png; path = "../设备/btn_cha.png"; sourceTree = "<group>"; };
 		335089221C73179400D7AA03 /* bg_list_popver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg_list_popver.png; path = "../设备/bg_list_popver.png"; sourceTree = "<group>"; };
 		335089241C7323C200D7AA03 /* frag4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frag4.png; path = "../设备/frag4.png"; sourceTree = "<group>"; };
@@ -1303,6 +1305,10 @@
 		3370EBC61F41ABB200F37149 /* right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right.png; sourceTree = "<group>"; };
 		3370EBC81F42A24000F37149 /* bg3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bg3.jpg; sourceTree = "<group>"; };
 		3370EBCA1F42A32C00F37149 /* logo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo2.png; sourceTree = "<group>"; };
+		3370EBCD1F45742B00F37149 /* storageHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = storageHead.h; sourceTree = "<group>"; };
+		3370EBCE1F45742B00F37149 /* storageHead.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = storageHead.m; sourceTree = "<group>"; };
+		3370EBD11F45874B00F37149 /* SPF5000Head.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPF5000Head.h; sourceTree = "<group>"; };
+		3370EBD21F45874B00F37149 /* SPF5000Head.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPF5000Head.m; sourceTree = "<group>"; };
 		33724D9C1CFE85FB005F3965 /* pic_service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pic_service.png; path = "../发现/pic_service.png"; sourceTree = "<group>"; };
 		33724D9E1CFE89BE005F3965 /* touxiang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = touxiang.png; path = "../我/touxiang.png"; sourceTree = "<group>"; };
 		337284D01EF769390004FAB9 /* changUserInfoTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changUserInfoTwo.swift; sourceTree = "<group>"; };
@@ -1932,12 +1938,8 @@
 		334771011C9A61B1003A6F13 /* 编辑设备 */ = {
 			isa = PBXGroup;
 			children = (
-				334771021C9A6219003A6F13 /* aliasViewController.h */,
-				334771031C9A6219003A6F13 /* aliasViewController.m */,
-				335089191C73112000D7AA03 /* EditStationMenuView.h */,
-				3350891A1C73112000D7AA03 /* EditStationMenuView.m */,
-				3350471E1C9BA6F600BF8683 /* EGOCache.h */,
-				3350471F1C9BA6F600BF8683 /* EGOCache.m */,
+				3370EBD01F4574F900F37149 /* 别名设置 */,
+				3370EBCC1F4573E500F37149 /* head动画 */,
 			);
 			name = "编辑设备";
 			path = "设备二级界面/编辑设备";
@@ -3083,6 +3085,30 @@
 				334B8F471C914A6D00798A69 /* PNScatterChartDataItem.m */,
 			);
 			path = noUserPNChar;
+			sourceTree = "<group>";
+		};
+		3370EBCC1F4573E500F37149 /* head动画 */ = {
+			isa = PBXGroup;
+			children = (
+				3370EBCD1F45742B00F37149 /* storageHead.h */,
+				3370EBCE1F45742B00F37149 /* storageHead.m */,
+				3370EBD11F45874B00F37149 /* SPF5000Head.h */,
+				3370EBD21F45874B00F37149 /* SPF5000Head.m */,
+			);
+			path = "head动画";
+			sourceTree = "<group>";
+		};
+		3370EBD01F4574F900F37149 /* 别名设置 */ = {
+			isa = PBXGroup;
+			children = (
+				334771021C9A6219003A6F13 /* aliasViewController.h */,
+				334771031C9A6219003A6F13 /* aliasViewController.m */,
+				335089191C73112000D7AA03 /* EditStationMenuView.h */,
+				3350891A1C73112000D7AA03 /* EditStationMenuView.m */,
+				3350471E1C9BA6F600BF8683 /* EGOCache.h */,
+				3350471F1C9BA6F600BF8683 /* EGOCache.m */,
+			);
+			path = "别名设置";
 			sourceTree = "<group>";
 		};
 		33742B3F1ED6858C0015F2EA /* OSS第三方 */ = {
@@ -4702,6 +4728,7 @@
 				336F1A231D88E46900CD4C2B /* UIView+WebCacheOperation.m in Sources */,
 				335431BA1CCF549000CEAFFC /* SNLocationManager.m in Sources */,
 				336F1A1A1D88E46900CD4C2B /* SDWebImageDownloaderOperation.m in Sources */,
+				3370EBD31F45874B00F37149 /* SPF5000Head.m in Sources */,
 				336E03F51EC9411B0034BC86 /* ossFistVC.swift in Sources */,
 				3319E08C1D5AFB39006623A9 /* LWLoadingAnimationView.m in Sources */,
 				336D40191D6FEA7600ECFA34 /* ChineseInclude.m in Sources */,
@@ -4864,6 +4891,7 @@
 				33652A281CEC0AC8004EBAE5 /* extensionListTableViewController.m in Sources */,
 				335317431CA2423D003F106D /* GetDevice+CoreDataProperties.m in Sources */,
 				336E03FE1EC957EF0034BC86 /* ossServerFirst.swift in Sources */,
+				3370EBCF1F45742B00F37149 /* storageHead.m in Sources */,
 				33ECDCF31CDC9D3400E20AF8 /* deviceCore.xcdatamodeld in Sources */,
 				3367CB4D1C86806600EF460C /* MASViewAttribute.m in Sources */,
 				33AF3D241D8E67210007D6C2 /* SIAlertView.m in Sources */,
