@@ -15,7 +15,7 @@
 
 -(void)initUI{
     [self getPCSHeadUI];
-    //[self getPCSHead];
+    [self getPCSHead];
 }
 
 -(void)getPCSHeadUI{
@@ -32,11 +32,19 @@
     NSString *pCharge1=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pCharge1"] floatValue]];
     NSString *pCharge2=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pCharge2"] floatValue]];
     
-    float lableW=75*NOW_SIZE;float lableH=15*HEIGHT_SIZE;float lableH0=10*HEIGHT_SIZE;
-    float H0=8*HEIGHT_SIZE,W1=15*NOW_SIZE,H1=40*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
-    float imageH1=H1+imageSize/2;
+    float lableW=70*NOW_SIZE;float lableH=15*HEIGHT_SIZE;float lableH0=10*HEIGHT_SIZE;
+    float W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
    float imageSizeBig=70*HEIGHT_SIZE;
      float aAndbW=10*HEIGHT_SIZE;
+    float fontSize=10*HEIGHT_SIZE;
+  //  float valueLableW=50*NOW_SIZE;
+    
+    UILabel *lableAll=[[UILabel alloc] initWithFrame:CGRectMake(0, 5*HEIGHT_SIZE,SCREEN_Width,20*HEIGHT_SIZE)];
+    lableAll.text=@"我的状态是什么";
+    lableAll.textColor=[UIColor whiteColor];
+    lableAll.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    lableAll.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:lableAll];
     
     //光伏
     UIImageView *imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(W1,H1,imageSize,imageSize)];
@@ -45,14 +53,15 @@
     UILabel *solorLable=[[UILabel alloc] initWithFrame:CGRectMake(W1+(imageSize-lableW)/2,H1-lableH,lableW,lableH)];
     solorLable.text=root_PCS_guangfu;
     solorLable.textColor=[UIColor whiteColor];
-    solorLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable.font = [UIFont systemFontOfSize:fontSize];
     solorLable.adjustsFontSizeToFitWidth=YES;
     solorLable.textAlignment = NSTextAlignmentCenter;
     [self addSubview:solorLable];
-    UILabel *solorLableA=[[UILabel alloc] initWithFrame:CGRectMake(W1+imageSize, imageH1-H0-lableH0,37*NOW_SIZE,lableH0+2*HEIGHT_SIZE)];
+    UILabel *solorLableA=[[UILabel alloc] initWithFrame:CGRectMake(W1+imageSize+0*NOW_SIZE, H1+imageSize/2-lableH,lableW,lableH)];
     solorLableA.text=ppv1;
     solorLableA.textColor=[UIColor whiteColor];
-    solorLableA.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
+    solorLableA.adjustsFontSizeToFitWidth=YES;
+    solorLableA.font = [UIFont systemFontOfSize:fontSize];
     solorLableA.textAlignment = NSTextAlignmentCenter;
     [self addSubview:solorLableA];
   
@@ -63,11 +72,18 @@
     UILabel *solorLable3=[[UILabel alloc] initWithFrame:CGRectMake(W1+(imageSize-lableW)/2,H1+imageSize*2+10*HEIGHT_SIZE,lableW,lableH)];
     solorLable3.text=root_PCS_dianwang;
     solorLable3.textColor=[UIColor whiteColor];
-    solorLable3.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable3.font = [UIFont systemFontOfSize:fontSize];
     solorLable3.adjustsFontSizeToFitWidth=YES;
     solorLable3.textAlignment = NSTextAlignmentCenter;
     [self addSubview:solorLable3];
     
+    UILabel *solorLableB2=[[UILabel alloc] initWithFrame:CGRectMake(W1+imageSize+0*NOW_SIZE, H1+imageSize/2-lableH+imageSize+aAndbW,lableW,lableH)];
+    solorLableB2.text=pacCharge;
+    solorLableB2.textColor=[UIColor whiteColor];
+     solorLableB2.adjustsFontSizeToFitWidth=YES;
+    solorLableB2.font = [UIFont systemFontOfSize:fontSize];
+    solorLableB2.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:solorLableB2];
     
     //SPF5000
     float SPF5000H=15*HEIGHT_SIZE;
@@ -77,78 +93,54 @@
     UILabel *solorLable1=[[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width-imageSizeBig)/2+(imageSizeBig-lableW)/2,H1+SPF5000H-lableH,lableW,lableH)];
     solorLable1.text=root_PCS_chunengji;
     solorLable1.textColor=[UIColor whiteColor];
-    solorLable1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable1.font = [UIFont systemFontOfSize:fontSize];
     solorLable1.adjustsFontSizeToFitWidth=YES;
     solorLable1.textAlignment = NSTextAlignmentCenter;
     [self addSubview:solorLable1];
+    
+    UILabel *solorLableB5=[[UILabel alloc] initWithFrame:CGRectMake(SCREEN_Width/2+6*NOW_SIZE,self.frame.size.height-imageSize-30*HEIGHT_SIZE,lableW,lableH)];
+    solorLableB5.text=userLoad;
+    solorLableB5.textColor=[UIColor whiteColor];
+    solorLableB5.font = [UIFont systemFontOfSize:fontSize];
+    solorLableB5.adjustsFontSizeToFitWidth=YES;
+    solorLableB5.textAlignment = NSTextAlignmentLeft;
+    [self addSubview:solorLableB5];
     
     //负载
     UIImageView *imageView22 = [[UIImageView alloc] initWithFrame:CGRectMake(W1+3*W2,H1+imageSize/2+aAndbW/2,imageSize,imageSize)];
     imageView22.image = [UIImage imageNamed:@"icon_load.png"];
     [self addSubview:imageView22];
-    UILabel *solorLable5=[[UILabel alloc] initWithFrame:CGRectMake(W1+2.5*W2+(imageSize-lableW)/2,H1+H2+imageSize,lableW,lableH)];
+    UILabel *solorLable5=[[UILabel alloc] initWithFrame:CGRectMake(W1+3*W2+(imageSize-lableW)/2,H1+imageSize/2+aAndbW/2-lableH,lableW,lableH)];
     solorLable5.text=root_PCS_fuzhai;
     solorLable5.textColor=[UIColor whiteColor];
-    solorLable5.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+       solorLable5.adjustsFontSizeToFitWidth=YES;
+    solorLable5.font = [UIFont systemFontOfSize:fontSize];
     solorLable5.textAlignment = NSTextAlignmentCenter;
     [self addSubview:solorLable5];
     
-    UILabel *solorLableB5=[[UILabel alloc] initWithFrame:CGRectMake(W1+3*W2+(imageSize-lableW)/2,H1+imageSize/2+aAndbW/2+imageSize,lableW,lableH0)];
-    solorLableB5.text=userLoad;
-    solorLableB5.textColor=[UIColor whiteColor];
-    solorLableB5.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
-    solorLableB5.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:solorLableB5];
+    UILabel *solorLableB1=[[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width+imageSizeBig)/2+0*NOW_SIZE, H1+SPF5000H+imageSizeBig/2-lableH,lableW,lableH)];
+    solorLableB1.text=pCharge;
+    solorLableB1.textColor=[UIColor whiteColor];
+         solorLableB1.adjustsFontSizeToFitWidth=YES;
+    solorLableB1.font = [UIFont systemFontOfSize:fontSize];
+    solorLableB1.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:solorLableB1];
+    
+    
     //电池
-    UIImageView *imageView12 = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_Width-imageSize)/2,self.frame.size.height-imageSize-5*HEIGHT_SIZE,imageSize,imageSize)];
+    UIImageView *imageView12 = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_Width-imageSize)/2,self.frame.size.height-imageSize-15*HEIGHT_SIZE,imageSize,imageSize)];
     imageView12.image = [UIImage imageNamed:@"icon_bat.png"];
     [self addSubview:imageView12];
-    UILabel *solorLable4=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+(imageSize-lableW)/2,H1+H2+imageSize,lableW,lableH)];
-    solorLable4.text=root_PCS_dianyuan;
+    UILabel *solorLable4=[[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width-imageSize)/2+(imageSize-lableW)/2,self.frame.size.height-15*HEIGHT_SIZE,lableW,lableH0)];
+      solorLable4.text=[NSString stringWithFormat:@"%@:%@",root_PCS_dianyuan,capacity];
     solorLable4.textColor=[UIColor whiteColor];
-    solorLable4.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+       solorLable4.adjustsFontSizeToFitWidth=YES;
+    solorLable4.font = [UIFont systemFontOfSize:fontSize];
     solorLable4.textAlignment = NSTextAlignmentCenter;
     [self addSubview:solorLable4];
     
     
     
-    UILabel *solorLableB1=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+imageSize/2-65*NOW_SIZE, imageH1+imageSize/2+20*HEIGHT_SIZE,60*NOW_SIZE,lableH0)];
-    if([[_pcsDataDic objectForKey:@"status"] intValue]==1){
-        solorLableB1.text=pCharge;
-    }else{
-        solorLableB1.text=pDisCharge;
-    }
-    
-    solorLableB1.textColor=[UIColor whiteColor];
-    solorLableB1.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
-    solorLableB1.textAlignment = NSTextAlignmentRight;
-    [self addSubview:solorLableB1];
-    UILabel *solorLableB2=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+imageSize/2+44*NOW_SIZE, imageH1+imageSize/2+20*HEIGHT_SIZE,60*NOW_SIZE,lableH0)];
-    solorLableB2.text=pacCharge;
-    solorLableB2.textColor=[UIColor whiteColor];
-    solorLableB2.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
-    solorLableB2.textAlignment = NSTextAlignmentLeft;
-    [self addSubview:solorLableB2];
-    UILabel *solorLableB3=[[UILabel alloc] initWithFrame:CGRectMake(W1+3*W2+(imageSize-lableW)/2,H1+imageSize+4*HEIGHT_SIZE,lableW,lableH0)];
-    if ([pacToGrid floatValue]>0) {
-        solorLableB3.text=pacToGrid;
-    }else if ([pacToUser floatValue]>0){
-        solorLableB3.text=pacToUser;
-    }
-    solorLableB3.textColor=[UIColor whiteColor];
-    solorLableB3.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
-    solorLableB3.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:solorLableB3];
-    UILabel *solorLableB4=[[UILabel alloc] initWithFrame:CGRectMake(W1+W2+(imageSize-lableW)/2,H1+H2+imageSize+lableH+0*HEIGHT_SIZE,lableW,lableH0)];
-    solorLableB4.text=capacity;
-    solorLableB4.textColor=[UIColor whiteColor];
-    solorLableB4.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
-    solorLableB4.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:solorLableB4];
- 
-    
-
-
     
     UILabel *solorLableB6=[[UILabel alloc] initWithFrame:CGRectMake(0*NOW_SIZE,H1+H2+imageSize+8*HEIGHT_SIZE,40*NOW_SIZE,lableH)];
     NSString *B1=root_PCS_danwei;
@@ -227,43 +219,31 @@
     //    [_animationView removeFromSuperview];
     //    _animationView=nil;
     
-    // float H0=7*HEIGHT_SIZE,
-    float W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
-    float imageH1=H1+imageSize/2;  float imageH12=7*HEIGHT_SIZE,imageW12=12*HEIGHT_SIZE;float WW2=5*NOW_SIZE;
-    
-    //上—1-0
+    float imageSizeBig=70*HEIGHT_SIZE;    float aAndbW=10*HEIGHT_SIZE; float SPF5000H=15*HEIGHT_SIZE;
+    float W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,W2=(SCREEN_Width-imageSizeBig)/2;
+    float imageH1=H1+imageSize/2;
+   float W3=82*NOW_SIZE;
+    //光伏-储能机
     CGPoint pointStart=CGPointMake(W1+imageSize, imageH1);
     CGPoint pointtEnd=CGPointMake(W1+W2, imageH1);
     
-    //    //上—1-1
-    //    CGPoint pointStart0=CGPointMake(W1+imageSize, imageH1+H0);
-    //    CGPoint pointtEnd0=CGPointMake(W1+W2, imageH1+H0);
+        //电网-储能机
+        CGPoint pointStart0=CGPointMake(W1+imageSize, imageH1+imageSize+aAndbW);
+        CGPoint pointtEnd0=CGPointMake(W1+W2, imageH1+imageSize+aAndbW);
     
-    //上—2-1
-    CGPoint pointStart1=CGPointMake(W1+W2+imageSize, imageH1-imageH12);
-    CGPoint pointtEnd1=CGPointMake(W1+2*W2, imageH1-imageH12);
+    //储能机-负载
+    CGPoint pointStart1=CGPointMake((SCREEN_Width+imageSizeBig)/2, H1+SPF5000H+imageSizeBig/2);
+    CGPoint pointtEnd1=CGPointMake(W1+3*W3, H1+SPF5000H+imageSizeBig/2);
     
-    //上—2-2
-    CGPoint pointStart2=CGPointMake(W1+W2+imageSize, imageH1+imageH12);
-    CGPoint pointtEnd2=CGPointMake(W1+2*W2-imageW12, imageH1+imageH12);
-    CGPoint pointtEnd21=CGPointMake(W1+2*W2-imageW12, imageH1+imageH12+33*HEIGHT_SIZE);
-    CGPoint pointtEnd22=CGPointMake(W1+3*W2-imageW12-WW2-1.5*NOW_SIZE, imageH1+imageH12+33*HEIGHT_SIZE);
-    //上—3
-    CGPoint pointStart3=CGPointMake(W1+2*W2+imageSize, imageH1);
-    CGPoint pointtEnd3=CGPointMake(W1+3*W2, imageH1);
-    
-    //下—1
-    CGPoint pointtStartW1=CGPointMake(W1+W2+imageSize/2, imageH1+imageSize/2);
-    CGPoint pointtEndW1=CGPointMake(W1+W2+imageSize/2, imageH1+H2-imageSize/2);
-    
-    //下—2
-    CGPoint pointtStartW2=CGPointMake(W1+2*W2+1.5*imageSize-WW2, imageH1);
-    CGPoint pointtEndW2=CGPointMake(W1+2*W2+1.5*imageSize-WW2, imageH1+H2-imageSize/2);
+   //储能机-电池
+    CGPoint pointStart2=CGPointMake(SCREEN_Width/2, H1+SPF5000H+imageSizeBig);
+    CGPoint pointtEnd2=CGPointMake(SCREEN_Width/2, self.frame.size.height-imageSize-15*HEIGHT_SIZE);
+
     
     
-    NSArray *startArray=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointtStartW1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointStart2], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtStartW2], nil];
+    NSArray *startArray=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart], [NSValue valueWithCGPoint:pointStart0], [NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointStart2], nil];
     
-    NSArray *endArray=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd1], [NSValue valueWithCGPoint:pointtEndW1], [NSValue valueWithCGPoint:pointtEnd3], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEndW2], [NSValue valueWithCGPoint:pointtEndW2], nil];
+    NSArray *endArray=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd0],[NSValue valueWithCGPoint:pointtEnd1],[NSValue valueWithCGPoint:pointtEnd2],nil];
     
     if (_animationNumber==0) {
         _animationNumber=1;
@@ -273,61 +253,35 @@
         }
     }
     
-    float TIME=8;
-    //路径一
-    NSArray *startArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointtStartW2],nil];
+    float TIME=8; float TIME2=5;
+    //路径一 光伏到电池
+    NSArray *startArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart2], nil];
     
-    NSArray *endArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd1], [NSValue valueWithCGPoint:pointtStartW2],[NSValue valueWithCGPoint:pointtEndW2],nil];
+    NSArray *endArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd2], nil];
     
-    [self getHeadAnimation:startArray0 second:endArray0 three:TIME];
+    [self getHeadAnimation:startArray0 second:endArray0 three:TIME2];
     
-    ////////////////////////////////
-    NSArray *startArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointtStartW2],nil];
+    /////路径二 电网到电池
+    NSArray *startArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart0],[NSValue valueWithCGPoint:pointStart2], nil];
     
-    NSArray *endArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd1], [NSValue valueWithCGPoint:pointtStartW2],[NSValue valueWithCGPoint:pointtEndW2],nil];
+    NSArray *endArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd0],[NSValue valueWithCGPoint:pointtEnd2], nil];
     
-    [self getHeadAnimation:startArray01 second:endArray01 three:TIME];
+    [self getHeadAnimation:startArray01 second:endArray01 three:TIME2];
     
-    float pacToUser=[[_pcsDataDic objectForKey:@"pacToUser"] floatValue];
-    float pacToGrid=[[_pcsDataDic objectForKey:@"pacToGrid"] floatValue];
-    int status=[[_pcsDataDic objectForKey:@"status"] intValue];
+    /////路径三 电网到负载
+    NSArray *startArray03=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart0],[NSValue valueWithCGPoint:pointStart1], nil];
     
-    // status=2;
-    if (pacToGrid>0) {
-        //路径二
-        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart3], nil];
-        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3], nil];
-        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.27];
-    }
+    NSArray *endArray03=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd0],[NSValue valueWithCGPoint:pointtEnd1], nil];
     
-    if( (pacToUser>0)&&(status==1)) {
-        //路径三
-        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3],[NSValue valueWithCGPoint:pointtStartW2],  [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd2],nil];
-        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW2], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointStart2],nil];
-        
-        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*1.4];
-    }
-    
-    if (pacToUser>0) {
-        NSArray *startArray022=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3],[NSValue valueWithCGPoint:pointtStartW2],  [NSValue valueWithCGPoint:pointtEnd22], nil];
-        NSArray *endArray022=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW2], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEndW2], nil];
-        
-        [self getHeadAnimation:startArray022 second:endArray022 three:TIME*0.46];
-        
-    }
+    [self getHeadAnimation:startArray03 second:endArray03 three:TIME];
     
     
+    /////路径四 电池到负载
+    NSArray *startArray04=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd2],[NSValue valueWithCGPoint:pointStart1], nil];
     
-    if (status==1) {
-        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW1], nil];
-        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEndW1], nil];
-        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.33];
-    }
-    if (status==2) {
-        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEndW1], nil];
-        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW1], nil];
-        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.33];
-    }
+    NSArray *endArray04=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart2],[NSValue valueWithCGPoint:pointtEnd1], nil];
+    
+    [self getHeadAnimation:startArray04 second:endArray04 three:TIME2];
     
 }
 
