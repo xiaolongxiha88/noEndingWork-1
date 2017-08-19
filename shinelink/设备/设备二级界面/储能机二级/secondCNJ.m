@@ -95,55 +95,30 @@
 //_scrollView.
 -(void)addbutton{
     float SizeH2=15*HEIGHT_SIZE;
+    float buttonSize=45*HEIGHT_SIZE;
+    float W=(SCREEN_Width-4*buttonSize)/5;
     UIColor *fontColor=COLOR(51, 51, 51, 1);
-    UIButton *firstB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*NOW_SIZE,50*HEIGHT_SIZE )];
-    [firstB setImage:[UIImage imageNamed:@"控制.png"] forState:UIControlStateNormal];
-    [firstB addTarget:self action:@selector(controlCNJ) forControlEvents:UIControlEventTouchUpInside];
-    [self.scrollView addSubview:firstB];
-    UILabel *firstL=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE, 540*HEIGHT_SIZE-SizeH-SizeH2, 70*NOW_SIZE,20*HEIGHT_SIZE )];
-    firstL.text=root_kongzhi;
-    firstL.textAlignment=NSTextAlignmentCenter;
-    firstL.textColor=fontColor;
-    firstL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-     firstL.adjustsFontSizeToFitWidth=YES;
-    [self.scrollView addSubview:firstL];
+    float buttonAndW=W+buttonSize;
     
-    UIButton *secondB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE+74*NOW_SIZE, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*NOW_SIZE,50*HEIGHT_SIZE )];
-    [secondB setImage:[UIImage imageNamed:@"参数.png"] forState:UIControlStateNormal];
-     [secondB addTarget:self action:@selector(parameterCNJ) forControlEvents:UIControlEventTouchUpInside];
-    [self.scrollView addSubview:secondB];
-    UILabel *secondL=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE+74*NOW_SIZE, 540*HEIGHT_SIZE-SizeH-SizeH2, 70*NOW_SIZE,20*HEIGHT_SIZE )];
-    secondL.text=root_canshu;
-    secondL.textAlignment=NSTextAlignmentCenter;
-    secondL.textColor=fontColor;
-    secondL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    secondL.adjustsFontSizeToFitWidth=YES;
-    [self.scrollView addSubview:secondL];
+    NSArray *imageNameArray=@[@"控制.png",@"参数.png",@"数据.png",@"日志.png"];
+    NSArray *lableNameArray=@[root_kongzhi,root_canshu,root_shuju,root_rizhi];
+    NSArray *selNameArray=@[@"controlCNJ",@"parameterCNJ",@"goThree",@"gofour"];
     
-    UIButton *threeB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE+74*NOW_SIZE*2, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*NOW_SIZE,50*HEIGHT_SIZE )];
-    [threeB setImage:[UIImage imageNamed:@"数据.png"] forState:UIControlStateNormal];
-      [threeB addTarget:self action:@selector(goThree) forControlEvents:UIControlEventTouchUpInside];
-    [self.scrollView addSubview:threeB];
-    UILabel *threeL=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE+74*NOW_SIZE*2, 540*HEIGHT_SIZE-SizeH-SizeH2, 70*NOW_SIZE,20*HEIGHT_SIZE )];
-    threeL.text=root_shuju;
-    threeL.textAlignment=NSTextAlignmentCenter;
-    threeL.textColor=fontColor;
-    threeL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    threeL.adjustsFontSizeToFitWidth=YES;
-    [self.scrollView addSubview:threeL];
-    
-    UIButton *fourB=[[UIButton alloc]initWithFrame:CGRectMake(24*NOW_SIZE+74*NOW_SIZE*3, 490*HEIGHT_SIZE-SizeH-SizeH2, 50*NOW_SIZE,50*HEIGHT_SIZE )];
-    [fourB setImage:[UIImage imageNamed:@"日志.png"] forState:UIControlStateNormal];
-  [fourB addTarget:self action:@selector(gofour) forControlEvents:UIControlEventTouchUpInside];
-    [self.scrollView addSubview:fourB];
-    UILabel *fourL=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE+74*NOW_SIZE*3, 540*HEIGHT_SIZE-SizeH-SizeH2, 70*NOW_SIZE,20*HEIGHT_SIZE )];
-    fourL.text=root_rizhi;
-    fourL.textAlignment=NSTextAlignmentCenter;
-    fourL.textColor=fontColor;
-    fourL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    fourL.adjustsFontSizeToFitWidth=YES;
-    [self.scrollView addSubview:fourL];
-    
+    for (int i=0; i<imageNameArray.count; i++) {
+        UIButton *firstB=[[UIButton alloc]initWithFrame:CGRectMake(W+buttonAndW*i, 490*HEIGHT_SIZE-SizeH-SizeH2+3*HEIGHT_SIZE, buttonSize,buttonSize )];
+        [firstB setImage:[UIImage imageNamed:imageNameArray[i]] forState:UIControlStateNormal];
+        SEL aSelector = NSSelectorFromString(selNameArray[i]);
+        [firstB addTarget:self action:aSelector forControlEvents:UIControlEventTouchUpInside];
+        [self.scrollView addSubview:firstB];
+        UILabel *firstL=[[UILabel alloc]initWithFrame:CGRectMake(W/2+buttonAndW*i, 540*HEIGHT_SIZE-SizeH-SizeH2, buttonSize+W,20*HEIGHT_SIZE )];
+        firstL.text=lableNameArray[i];
+        firstL.textAlignment=NSTextAlignmentCenter;
+        firstL.textColor=fontColor;
+        firstL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        firstL.adjustsFontSizeToFitWidth=YES;
+        [self.scrollView addSubview:firstL];
+    }
+      
     _scrollView.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height+20*HEIGHT_SIZE);
 }
 
@@ -233,7 +208,13 @@
 
 -(void)addProcess{
        _typeNum=@"2";
-    UIColor *valueColor=COLOR(163, 255, 188, 1);
+    UIColor *valueColor;
+    if (![_typeNum isEqualToString:@"1"]) {
+    valueColor=[UIColor whiteColor];
+    }else{
+    valueColor=COLOR(163, 255, 188, 1);
+    }
+   
     
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages objectAtIndex:0];
@@ -350,29 +331,29 @@
         _waterView.center = CGPointMake(CGRectGetMidX( [UIScreen mainScreen].bounds), 100*HEIGHT_SIZE);
     }
  
-    
+    UIColor *backColor=COLOR(14, 138, 243, 1);
     if ([_status isEqualToString:@"0"]) {
-        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:45/ 255.0f green:226/ 255.0f blue:233/ 255.0f alpha:1];//水波颜色
         _statusText=root_xianZhi;
     }else if ([_status isEqualToString:@"1"]) {
-        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:121/ 255.0f green:230/ 255.0f blue:129/ 255.0f alpha:1];//水波颜色
          _statusText=root_chongDian;
     }else if ([_status isEqualToString:@"2"]) {
-        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:222/ 255.0f green:211/ 255.0f blue:91/ 255.0f alpha:1];//水波颜色
          _statusText=root_fangDian;
     }else if ([_status isEqualToString:@"3"]) {
-        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:105/ 255.0f green:214/ 255.0f blue:249/ 255.0f alpha:1];//水波颜色
          _statusText=root_cuoWu;
     }else if ([_status isEqualToString:@"4"]) {
-        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:45/ 255.0f green:226/ 255.0f blue:233/ 255.0f alpha:1];//水波颜色
         _statusText=root_dengDai;
     }else if ([_status isEqualToString:@"-1"]) {
-        _waterView.backgroundColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//页面背景颜色改背景
+        _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//水波颜色
         _statusText=root_duanKai;
     }

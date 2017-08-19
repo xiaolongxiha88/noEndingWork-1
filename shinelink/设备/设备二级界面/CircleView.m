@@ -45,7 +45,7 @@
     _progress           = 0;
     _trackLineWidth     = DefaultTrackLineWidth;
     _progressLineWidth  = DefaultProgressLineWidth;
-    _trackColor         = COLOR(2, 156, 217, 1);
+    _trackColor         = COLOR(14, 138, 243, 1);
     _startAngle         = CoverToRadian(-360);
     _endAngle           = CoverToRadian(0);
     _colockwise         = YES;

@@ -16,6 +16,7 @@
 @interface quickRegister2ViewController ()
 @property (nonatomic, strong)  UITextField *textField;
 @property (nonatomic, strong)  UITextField *textField2;
+@property (nonatomic, strong)  UITextField *textField3;
 @property (nonatomic, strong)  NSString *getCountry;
 @property (nonatomic, strong)  NSString *getZone;
 @property (nonatomic, strong) NSMutableDictionary *dataDic;
@@ -29,8 +30,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIImage *bgImage = IMAGE(@"bg.png");
-    self.view.layer.contents = (id)bgImage.CGImage;
+//    UIImage *bgImage = IMAGE(@"bg.png");
+//    self.view.layer.contents = (id)bgImage.CGImage;
+    self.view.backgroundColor=MainColor;
     self.title=@"一键注册";
     _dataDic=[NSMutableDictionary new];
     _userEnable=@"ok";
@@ -75,6 +77,16 @@
 -(void)initUI{
 
     float H1=20*HEIGHT_SIZE;float H2=10*HEIGHT_SIZE;
+    float H3=58*HEIGHT_SIZE;
+    
+    for (int i=0; i<2; i++) {
+        UILabel *lable1= [[UILabel alloc] initWithFrame:CGRectMake(38*NOW_SIZE,72*HEIGHT_SIZE-H1+68*HEIGHT_SIZE*i,6*NOW_SIZE, 25*HEIGHT_SIZE)];
+        lable1.text=@"*";
+        lable1.textColor=[UIColor whiteColor];
+        lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        lable1.textAlignment = NSTextAlignmentRight;
+        [self.view addSubview:lable1];
+    }
     _textField = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE,70*HEIGHT_SIZE-H1,220*NOW_SIZE, 25*HEIGHT_SIZE)];
     _textField.placeholder =root_Enter_phone_number;
     _textField.textColor = [UIColor whiteColor];
@@ -113,8 +125,22 @@
     line1.backgroundColor=COLOR(255, 255, 255, 0.5);
     [self.view addSubview:line1];
     
+    _textField3 = [[UITextField alloc] initWithFrame:CGRectMake(50*NOW_SIZE,128*HEIGHT_SIZE-H1+H2+H3,220*NOW_SIZE, 25*HEIGHT_SIZE)];
+    _textField3.placeholder =root_shuRu_daiLiShangBianHao;
+    _textField3.textColor = [UIColor whiteColor];
+    _textField3.tintColor = [UIColor whiteColor];
+    _textField3.textAlignment = NSTextAlignmentCenter;
+    [_textField3 setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
+    [_textField3 setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
+    _textField3.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [self.view addSubview:_textField3];
+    
+    UIView *line2=[[UIView alloc]initWithFrame:CGRectMake(50*NOW_SIZE,153*HEIGHT_SIZE-H1+H2+H3,220*NOW_SIZE, 1*HEIGHT_SIZE)];
+    line2.backgroundColor=COLOR(255, 255, 255, 0.5);
+    [self.view addSubview:line2];
+    
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(60*NOW_SIZE,215*HEIGHT_SIZE+H2, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    goBut.frame=CGRectMake(60*NOW_SIZE,215*HEIGHT_SIZE+H2+H3, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     [goBut.layer setMasksToBounds:YES];
     [goBut.layer setCornerRadius:20.0];
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
@@ -132,7 +158,7 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
     CGSize size = [root_yonghu_xieyi boundingRectWithSize:CGSizeMake(MAXFLOAT, 16*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     
-    UILabel *userOk= [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width-size.width)/2,156*HEIGHT_SIZE-H1+20*HEIGHT_SIZE+H2, size.width, 16*HEIGHT_SIZE)];
+    UILabel *userOk= [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width-size.width)/2,156*HEIGHT_SIZE-H1+20*HEIGHT_SIZE+H2+H3, size.width, 16*HEIGHT_SIZE)];
     userOk.text=root_yonghu_xieyi;
     userOk.textColor=[UIColor whiteColor];
     userOk.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -143,9 +169,9 @@
     [self.view addSubview:userOk];
              [userOk sizeToFit];
     
-      selectButton.frame=CGRectMake((SCREEN_Width-size.width)/2-22*NOW_SIZE,156*HEIGHT_SIZE-H1+21*HEIGHT_SIZE+H2, 16*HEIGHT_SIZE, 16*HEIGHT_SIZE);
+      selectButton.frame=CGRectMake((SCREEN_Width-size.width)/2-22*NOW_SIZE,156*HEIGHT_SIZE-H1+21*HEIGHT_SIZE+H2+H3, 16*HEIGHT_SIZE, 16*HEIGHT_SIZE);
     
-    UIView *userView= [[UIView alloc] initWithFrame:CGRectMake((SCREEN_Width-size.width)/2,156*HEIGHT_SIZE-H1+20*HEIGHT_SIZE+20*HEIGHT_SIZE+H2, size.width, 1*HEIGHT_SIZE)];
+    UIView *userView= [[UIView alloc] initWithFrame:CGRectMake((SCREEN_Width-size.width)/2,156*HEIGHT_SIZE-H1+20*HEIGHT_SIZE+20*HEIGHT_SIZE+H2+H3, size.width, 1*HEIGHT_SIZE)];
     userView.backgroundColor=COLOR(255, 255, 255, 0.5);
     [self.view addSubview:userView];
     
@@ -285,7 +311,7 @@ _getServerAddressNum=0;
     
     [_dataDic setObject:[_textField text] forKey:@"regUserName"];
     [_dataDic setObject:[_textField2 text] forKey:@"regPassword"];
-    
+      [_dataDic setObject:[_textField3 text] forKey:@"agentCode"];
     
     if (_SnCode==nil) {
            [_dataDic setObject:@"" forKey:@"regDataLoggerNo"];

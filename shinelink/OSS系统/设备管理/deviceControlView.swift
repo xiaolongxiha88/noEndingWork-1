@@ -54,13 +54,16 @@ class deviceControlView: RootViewController {
         
     }
 
+  
+    
     func initData(){
              var status=""
         if (valueDic["lost"] as! Bool){
             status="离线"}else{status="在线"}
         
         if typeNum=="0"{
-         lableNameArray=["序列号","别名","设备类型","用户名","连接状态","IP及端口号","固件版本","服务器地址","更新时间","创建日期"]
+           let snCode=self.getValidCode(valueDic["serialNum"] as! String)
+         lableNameArray=["序列号","别名","设备类型","用户名","连接状态","IP及端口号","固件版本","服务器地址","更新时间","校验码"]
                 let paramBean=valueDic["paramBean"] as! Dictionary<String, Any>
             var version=""
             var serverUrl=""
@@ -69,7 +72,7 @@ class deviceControlView: RootViewController {
                 version=paramBean["firmwareVersionBuild"] as! String
                 serverUrl=paramBean["serverUrl"] as! String
             }
-            lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["deviceType"]as! NSString,valueDic["userName"]as! NSString,status,valueDic["clientUrl"]as! NSString,version,serverUrl,valueDic["lastUpdateTimeText"] as! NSString,valueDic["createDate"] as! NSString]
+            lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["deviceType"]as! NSString,valueDic["userName"]as! NSString,status,valueDic["clientUrl"]as! NSString,version,serverUrl,valueDic["lastUpdateTimeText"] as! NSString,snCode as NSString? ?? ""]
         }else if typeNum=="1"{
             let nominalString=NSString(format: "%.f", valueDic["nominalPower"]as! Float)
               let powerString=NSString(format: "%.f", valueDic["power"]as! Float)

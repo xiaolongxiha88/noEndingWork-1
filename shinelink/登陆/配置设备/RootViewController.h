@@ -18,6 +18,8 @@
 
 - (void)hideProgressView;
 
+-(NSString*)getValidCode:(NSString*)serialNum;
+
 -(CGSize)getStringSize:(float)fontSize  Wsize:(float)Wsize Hsize:(float)Hsize stringName:(NSString*)stringName;
 
 - (NSString *)MD5:(NSString *)str;

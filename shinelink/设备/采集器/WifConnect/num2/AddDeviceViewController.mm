@@ -614,7 +614,7 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销1  2
-//        elianStop(context);
+ //      elianStop(context);
 //        elianDestroy(context);
         
         

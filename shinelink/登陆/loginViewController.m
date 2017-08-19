@@ -711,6 +711,9 @@ NSLog(@"体验馆");
         }
         
     } failure:^(NSError *error) {
+        if (!_scrollView) {
+            [self addSubViews];
+        }
           [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];
          [[NSUserDefaults standardUserDefaults] setObject:_loginUserName forKey:@"OssName"];
          [[NSUserDefaults standardUserDefaults] setObject:_loginUserPassword forKey:@"OssPassword"];
@@ -943,6 +946,13 @@ NSLog(@"体验馆");
         if (_getServerAddressNum==1) {
             [self netServerInit];
         }else{
+            if (!_scrollView) {
+                [self addSubViews];
+            }
+            [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];
+            [[NSUserDefaults standardUserDefaults] setObject:_loginUserName forKey:@"OssName"];
+            [[NSUserDefaults standardUserDefaults] setObject:_loginUserPassword forKey:@"OssPassword"];
+            
             [self showToastViewWithTitle:root_Networking];
         }
        

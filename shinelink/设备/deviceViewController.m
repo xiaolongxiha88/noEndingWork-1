@@ -1049,7 +1049,7 @@
                     
                 }
                 
-                _storageType=@"2";
+                _storageType=@"1";
                 
                 if ([_storageType isEqualToString:@"1"]) {
                     storageHead *StorageV=[[storageHead alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];
