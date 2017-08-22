@@ -28,7 +28,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [super viewDidLoad];
+   
+    self.view.backgroundColor=[UIColor whiteColor];
     [self netParameter];
     [self initdata];
     
@@ -231,11 +232,13 @@
         UILabel *PVLable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 15*HEIGHT_SIZE+SIZE1*i, 160*NOW_SIZE,20*HEIGHT_SIZE )];
         PVLable.text=_dateN1[i];
         PVLable.textAlignment=NSTextAlignmentCenter;
+        PVLable.adjustsFontSizeToFitWidth=YES;
         PVLable.textColor=[UIColor whiteColor];
         PVLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:PVLable];
         UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 40*HEIGHT_SIZE+SIZE1*i, 160*NOW_SIZE,20*HEIGHT_SIZE )];
         Lable1.text=_dateN2[i];
+         Lable1.adjustsFontSizeToFitWidth=YES;
         Lable1.textAlignment=NSTextAlignmentCenter;
         Lable1.textColor=[UIColor whiteColor];
         Lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -246,11 +249,13 @@
         PV2Lable.textAlignment=NSTextAlignmentCenter;
         PV2Lable.textColor=[UIColor whiteColor];
         PV2Lable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+         PV2Lable.adjustsFontSizeToFitWidth=YES;
         [_scrollView addSubview:PV2Lable];
         UILabel *Lable2=[[UILabel alloc]initWithFrame:CGRectMake(160*NOW_SIZE, 40*HEIGHT_SIZE+SIZE1*i, 160*NOW_SIZE,20*HEIGHT_SIZE )];
         Lable2.text=_dateY2[i];
         Lable2.textAlignment=NSTextAlignmentCenter;
         Lable2.textColor=[UIColor whiteColor];
+          Lable2.adjustsFontSizeToFitWidth=YES;
         Lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_scrollView addSubview:Lable2];
         

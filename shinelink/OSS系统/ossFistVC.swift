@@ -98,8 +98,14 @@ class ossFistVC: RootViewController {
     
     func initLeftItem(){
         let item0Name="退出账户"
+          let item1Name="工具"
         let item0=DTKDropdownItem.init(title: item0Name, iconName: "Quick", callBack:{ (dropMenuCallBack)->() in
        self.initAlertView()
+            
+        } )
+        let item1=DTKDropdownItem.init(title: item1Name, iconName: "Check", callBack:{ (dropMenuCallBack)->() in
+            let vc=ossTool()
+            self.navigationController?.pushViewController(vc, animated: true)
             
         } )
         
@@ -110,7 +116,7 @@ class ossFistVC: RootViewController {
                let H2=self.navigationController?.navigationBar.frame.size.height;
                 let bH=16*HEIGHT_SIZE
         
-        let menuView=DTKDropdownMenuView.init(type:dropDownTypeLeftItem , frame: CGRect(x: 0*NOW_SIZE, y: (H2!-bH)/2, width: bH, height: bH), dropdownItems: [item0!], icon:"more2@2x.png")!
+        let menuView=DTKDropdownMenuView.init(type:dropDownTypeLeftItem , frame: CGRect(x: 0*NOW_SIZE, y: (H2!-bH)/2, width: bH, height: bH), dropdownItems: [item0!,item1!], icon:"more2@2x.png")!
         menuView.dropWidth = size1.width+10*NOW_SIZE
         menuView.cellHeight = 30*HEIGHT_SIZE
         menuView.titleFont = UIFont.systemFont(ofSize:14*HEIGHT_SIZE)

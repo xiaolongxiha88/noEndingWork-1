@@ -119,12 +119,10 @@
 		334F3AD61D9B9FA4001D7F75 /* shinewifi.png in Resources */ = {isa = PBXBuildFile; fileRef = 334F3AD51D9B9FA4001D7F75 /* shinewifi.png */; };
 		334FEF841CF45264001E6716 /* LZQStratViewController_25.m in Sources */ = {isa = PBXBuildFile; fileRef = 334FEF831CF45264001E6716 /* LZQStratViewController_25.m */; };
 		334FEF8E1CF45AEB001E6716 /* btn1.png in Resources */ = {isa = PBXBuildFile; fileRef = 334FEF8D1CF45AEB001E6716 /* btn1.png */; };
-		334FF0901CF53C7C001E6716 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 334FF0291CF53C7B001E6716 /* Documentation.html */; };
 		334FF0911CF53C7C001E6716 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 334FF02B1CF53C7B001E6716 /* GCDAsyncSocket.m */; };
 		334FF0921CF53C7C001E6716 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 334FF02D1CF53C7B001E6716 /* GCDAsyncUdpSocket.m */; };
 		334FF0931CF53C7C001E6716 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 334FF0301CF53C7B001E6716 /* AsyncSocket.m */; };
 		334FF0941CF53C7C001E6716 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 334FF0321CF53C7B001E6716 /* AsyncUdpSocket.m */; };
-		334FF0951CF53C7C001E6716 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = 334FF0331CF53C7B001E6716 /* Documentation.html */; };
 		334FF0991CF53C7C001E6716 /* ConnetService.m in Sources */ = {isa = PBXBuildFile; fileRef = 334FF03A1CF53C7C001E6716 /* ConnetService.m */; };
 		334FF09A1CF53C7C001E6716 /* deviceRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 334FF03C1CF53C7C001E6716 /* deviceRootViewController.m */; };
 		334FF09B1CF53C7C001E6716 /* InfoSend.m in Sources */ = {isa = PBXBuildFile; fileRef = 334FF03E1CF53C7C001E6716 /* InfoSend.m */; };
@@ -500,6 +498,7 @@
 		3383F13E1C9FFDA10075E834 /* 光伏收益.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383F13D1C9FFDA10075E834 /* 光伏收益.png */; };
 		338418E21DC840AB00D679CA /* GifConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338418E11DC840AB00D679CA /* GifConfigViewController.m */; };
 		338418E71DC9783500D679CA /* GFWaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338418E61DC9783500D679CA /* GFWaterView.m */; };
+		3385A3A81F4AB0D7004FF3C7 /* ossTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385A3A71F4AB0D7004FF3C7 /* ossTool.swift */; };
 		33860FDD1EEA75C5004150FD /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 33860FB11EEA75C5004150FD /* MJRefreshAutoFooter.m */; };
 		33860FDE1EEA75C5004150FD /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 33860FB31EEA75C5004150FD /* MJRefreshBackFooter.m */; };
 		33860FDF1EEA75C5004150FD /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 33860FB51EEA75C5004150FD /* MJRefreshComponent.m */; };
@@ -912,7 +911,6 @@
 		334FEF831CF45264001E6716 /* LZQStratViewController_25.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZQStratViewController_25.m; sourceTree = "<group>"; };
 		334FEF8D1CF45AEB001E6716 /* btn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn1.png; sourceTree = "<group>"; };
 		334FF0261CF53C7B001E6716 /* AppMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
-		334FF0291CF53C7B001E6716 /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
 		334FF02A1CF53C7B001E6716 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
 		334FF02B1CF53C7B001E6716 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		334FF02C1CF53C7B001E6716 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
@@ -921,7 +919,6 @@
 		334FF0301CF53C7B001E6716 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
 		334FF0311CF53C7B001E6716 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
 		334FF0321CF53C7B001E6716 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
-		334FF0331CF53C7B001E6716 /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
 		334FF0391CF53C7B001E6716 /* ConnetService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnetService.h; sourceTree = "<group>"; };
 		334FF03A1CF53C7C001E6716 /* ConnetService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnetService.m; sourceTree = "<group>"; };
 		334FF03B1CF53C7C001E6716 /* deviceRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = deviceRootViewController.h; sourceTree = "<group>"; };
@@ -1480,6 +1477,7 @@
 		338418E11DC840AB00D679CA /* GifConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifConfigViewController.m; path = ../WifConnect/GifConfigViewController.m; sourceTree = "<group>"; };
 		338418E51DC9783500D679CA /* GFWaterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFWaterView.h; path = ../GFWaterView.h; sourceTree = "<group>"; };
 		338418E61DC9783500D679CA /* GFWaterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFWaterView.m; path = ../GFWaterView.m; sourceTree = "<group>"; };
+		3385A3A71F4AB0D7004FF3C7 /* ossTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ossTool.swift; sourceTree = "<group>"; };
 		33860FB01EEA75C5004150FD /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		33860FB11EEA75C5004150FD /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
 		33860FB21EEA75C5004150FD /* MJRefreshBackFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBackFooter.h; sourceTree = "<group>"; };
@@ -2181,7 +2179,6 @@
 		334FF0281CF53C7B001E6716 /* GCD */ = {
 			isa = PBXGroup;
 			children = (
-				334FF0291CF53C7B001E6716 /* Documentation.html */,
 				334FF02A1CF53C7B001E6716 /* GCDAsyncSocket.h */,
 				334FF02B1CF53C7B001E6716 /* GCDAsyncSocket.m */,
 				334FF02C1CF53C7B001E6716 /* GCDAsyncUdpSocket.h */,
@@ -2197,7 +2194,6 @@
 				334FF0301CF53C7B001E6716 /* AsyncSocket.m */,
 				334FF0311CF53C7B001E6716 /* AsyncUdpSocket.h */,
 				334FF0321CF53C7B001E6716 /* AsyncUdpSocket.m */,
-				334FF0331CF53C7B001E6716 /* Documentation.html */,
 			);
 			path = RunLoop;
 			sourceTree = "<group>";
@@ -2847,6 +2843,7 @@
 			isa = PBXGroup;
 			children = (
 				336E03F41EC9411B0034BC86 /* ossFistVC.swift */,
+				3385A3A61F4AB0AB004FF3C7 /* oss工具 */,
 				338D51BD1EE15186003FE4D2 /* 集成商 */,
 				336E04041ECAFE8C0034BC86 /* 工单系统 */,
 				336E04031ECAFE710034BC86 /* 设备管理 */,
@@ -3464,6 +3461,14 @@
 				33ECDCF11CDC9D3400E20AF8 /* deviceCore.xcdatamodeld */,
 			);
 			path = datacore;
+			sourceTree = "<group>";
+		};
+		3385A3A61F4AB0AB004FF3C7 /* oss工具 */ = {
+			isa = PBXGroup;
+			children = (
+				3385A3A71F4AB0D7004FF3C7 /* ossTool.swift */,
+			);
+			path = "oss工具";
 			sourceTree = "<group>";
 		};
 		33860FAE1EEA75C5004150FD /* MJRefresh */ = {
@@ -4266,7 +4271,6 @@
 				33768AAF1D475D0A00873E82 /* storagebgen.png in Resources */,
 				33EA49FA1E8E4E5E0044A01A /* energyinfo_icon.png in Resources */,
 				3382342E1D9A4A22002062AE /* massage_cn2.png in Resources */,
-				334FF0951CF53C7C001E6716 /* Documentation.html in Resources */,
 				334771001C9A3E57003A6F13 /* mine@2x.png in Resources */,
 				337079491D913D9600D7DA98 /* question_icon.png in Resources */,
 				3370EBBF1F41918400F37149 /* deviceHead1.png in Resources */,
@@ -4373,7 +4377,6 @@
 				33FEFD7A1C7DB38400324374 /* shebei_press@3x.png in Resources */,
 				33775AEF1D2E3BC00070742E /* 打勾.png in Resources */,
 				334FF0BF1CF53C7C001E6716 /* text_bg.png in Resources */,
-				334FF0901CF53C7C001E6716 /* Documentation.html in Resources */,
 				33EFB67A1C9931D2003F336F /* 按钮2.png in Resources */,
 				336D40201D6FEA7600ECFA34 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				3381ECF91CBCA63000DCF0D2 /* 控制优先级设置切图.png in Resources */,
@@ -4808,6 +4811,7 @@
 				33775AD91D2CD7520070742E /* RKAlertView.m in Sources */,
 				334B8F571C914A6D00798A69 /* PNScatterChartDataItem.m in Sources */,
 				3381ED091CBCE94200DCF0D2 /* AnswerViewController.m in Sources */,
+				3385A3A81F4AB0D7004FF3C7 /* ossTool.swift in Sources */,
 				337F9C851C71A6710016FE43 /* main.m in Sources */,
 				338614D71F2839A9000F515E /* ESP_NetUtil.m in Sources */,
 				3367CB491C86806600EF460C /* MASCompositeConstraint.m in Sources */,

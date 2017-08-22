@@ -445,7 +445,7 @@ typedef enum AsyncSocketError AsyncSocketError;
  * Reads bytes until (and including) the passed "data" parameter, which acts as a separator.
  * 
  * If the timeout value is negative, the read operation will not use a timeout.
- * 
+ *
  * If you pass nil or zero-length data as the "data" parameter,
  * the method will do nothing, and the delegate will not be called.
  * 

@@ -690,8 +690,23 @@
 "109wifi提示3"="Please enter the router name and password，then click the 'Set' button";
 
 
+"111PV充电"="PV charge ";
+"112AC充电"="AC charge";
+"113联合充电模式"="Combine charge";
+"114PV充电和电池带载"="PV charge and Discharge";
+"115PV充电和市电旁路带载"="PV charge and Bypass";
+"116AC充电和市电旁路带载"="AC charge and Bypass";
+"117联合充电和市电旁路带载"="Combine charge and Bypass ";
+"118市电旁路带载"="Bypass";
 
-
-
-
+"119电池电压"="battery voltage";
+"120PV1/PV2电压"="PV1/PV2 Voltage";
+"121PV1/PV2充电电流"="PV1/PV2 recharging current";
+"122总充电电流"="Total charge current";
+"123AC输入电压和频率"="AC input voltage/frequency";
+"124AC输出电压和频率"="AC output voltage/frequenc";
+"125负载功率"="Consumption power";
+"126负载百分比"="Load percentage";
+"127今日收益"="Profit today";
+"128总收益"="Total revenue";
 

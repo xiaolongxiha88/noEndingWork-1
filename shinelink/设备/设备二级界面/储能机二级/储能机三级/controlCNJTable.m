@@ -61,7 +61,7 @@
         
     } failure:^(NSError *error) {
   
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"没有获取密码，请重新进入页面。" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"没有获取密码，请重新进入页面。" message:nil delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
         [alertView show];
         
     }];

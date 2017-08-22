@@ -38,6 +38,8 @@
 @property (nonatomic, strong) NSString *storageType;
 @property (nonatomic, strong)VWWWaterView *waterView;
 @property (nonatomic, assign) float pointCenterNum;
+@property (nonatomic, strong) NSDictionary *allDict;
+
 @end
 
 @implementation secondCNJ
@@ -66,7 +68,7 @@
         [self hideProgressView];
            NSLog(@"getStorageParams: %@", content);
         if (content) {
-        
+            _allDict=[NSDictionary dictionaryWithDictionary:content];
             _storageType=[NSString stringWithFormat:@"%@",content[@"storageType"]];
             _paramsDict=[NSMutableDictionary dictionaryWithDictionary:content[@"storageBean"]];
             _dayDischarge=[NSString stringWithFormat:@"%@",content[@"storageDetailBean"][@"eDischargeTodayText"]];
@@ -207,7 +209,7 @@
 }
 
 -(void)addProcess{
-       _typeNum=@"2";
+     //  _typeNum=@"2";
     UIColor *valueColor;
     if (![_typeNum isEqualToString:@"1"]) {
     valueColor=[UIColor whiteColor];
@@ -287,8 +289,9 @@
     
 
     }else{
-        NSArray *lableNameArray=@[root_ri_fangdianliang,root_zong_fangdianliang,@"今日收益",@"总收益"];
-          NSArray *lableValueArray=@[@"1000",@"1000",@"1000",@"1000"];
+        NSArray *lableNameArray=@[root_ri_fangdianliang,root_zong_fangdianliang,root_jinri_shouyi,root_zong_shouyi];
+        
+          NSArray *lableValueArray=@[_allDict[@"storageDetailBean"][@"eDischargeTodayText"],_allDict[@"storageDetailBean"][@"eDischargeTotalText"],_allDict[@"todayRevenue"],_allDict[@"totalRevenue"]];
         float lableW=SCREEN_Width/4;
         for (int i=0; i<lableValueArray.count; i++) {
             UILabel *valueLable=[[UILabel alloc]initWithFrame:CGRectMake(0+lableW*i, 190*HEIGHT_SIZE-SizeH, lableW,20*HEIGHT_SIZE )];

@@ -709,4 +709,28 @@
 #define  root_wifi_tishi_2  NSLocalizedString(@"108wifi提示2", nil)
 #define  root_wifi_tishi_3  NSLocalizedString(@"109wifi提示3", nil)
 
+#define  root_5000_dianchi_fangdian  NSLocalizedString(@"110电池放电", nil)
+#define  root_5000_pv_chongdian  NSLocalizedString(@"111PV充电", nil)
+#define  root_5000_ac_chongdian  NSLocalizedString(@"112AC充电", nil)
+#define  root_5000_lianhe_chongdian  NSLocalizedString(@"113联合充电模式", nil)
+#define  root_5000_pvchong_dianchifang  NSLocalizedString(@"114PV充电和电池带载", nil)
+#define  root_5000_pvchong_acfang  NSLocalizedString(@"115PV充电和市电旁路带载", nil)
+#define  root_5000_acchong_acfang  NSLocalizedString(@"116AC充电和市电旁路带载", nil)
+#define  root_5000_lianhechong_acfang  NSLocalizedString(@"117联合充电和市电旁路带载", nil)
+#define  root_5000_ac_fang  NSLocalizedString(@"118市电旁路带载", nil)
+
+#define  root_5000xianqing_dianchi_dianya  NSLocalizedString(@"119电池电压", nil)
+#define  root_5000xianqing_PV_dianya  NSLocalizedString(@"120PV1/PV2电压", nil)
+#define  root_5000xianqing_PV_dianliu  NSLocalizedString(@"121PV1/PV2充电电流", nil)
+#define  root_5000xianqing_zongChongdian_dianliu  NSLocalizedString(@"122总充电电流", nil)
+#define  root_5000xianqing_ac_shuru  NSLocalizedString(@"123AC输入电压和频率", nil)
+#define  root_5000xianqing_ac_shuchu  NSLocalizedString(@"124AC输出电压和频率", nil)
+#define  root_5000xianqing_fuzai_gonglv  NSLocalizedString(@"125负载功率", nil)
+#define  root_5000xianqing_fuzai_baifengbi  NSLocalizedString(@"126负载百分比", nil)
+
+#define  root_jinri_shouyi  NSLocalizedString(@"127今日收益", nil)
+#define  root_zong_shouyi  NSLocalizedString(@"128总收益", nil)
+
+
+
 #endif /* languageNew_h */

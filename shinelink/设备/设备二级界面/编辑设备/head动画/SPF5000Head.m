@@ -18,19 +18,34 @@
     [self getPCSHead];
 }
 
--(void)getPCSHeadUI{
-    NSString *ppv1=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"ppv1"] floatValue]+[[_pcsDataDic objectForKey:@"ppv2"] floatValue]];
+-(NSString*)statueString:(int)statue{
+    NSString *statueString;
+    NSArray *statueArray=@[root_xianZhi,root_chongDian,root_fangDian,root_cuoWu,root_dengDai,root_5000_pv_chongdian,root_5000_ac_chongdian,root_5000_lianhe_chongdian,root_5000_lianhechong_acfang,root_5000_pvchong_acfang,root_5000_acchong_acfang,root_5000_ac_fang,root_5000_pvchong_dianchifang];
+        statueString=statueArray[statue];
     
-    NSString *ppv2=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"ppv2"] floatValue]];
-    NSString *pCharge=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pCharge"] floatValue]];
-    NSString *pDisCharge=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pDisCharge"] floatValue]];
-    NSString *capacity=[NSString stringWithFormat:@"%.1f%%",[[_pcsDataDic objectForKey:@"capacity"] floatValue]];
-    NSString *pacCharge=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pacCharge"] floatValue]];
-    NSString *userLoad=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"userLoad"] floatValue]];
-    NSString *pacToGrid=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pacToGrid"] floatValue]];
-    NSString *pacToUser=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pacToUser"] floatValue]];
-    NSString *pCharge1=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pCharge1"] floatValue]];
-    NSString *pCharge2=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"pCharge2"] floatValue]];
+    return statueString;
+}
+
+-(void)getPCSHeadUI{
+    
+    NSString *panelPower=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"panelPower"] floatValue]];
+       NSString *gridPower=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"gridPower"] floatValue]];
+         NSString *loadPower=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"loadPower"] floatValue]];
+         NSString *batPower=[NSString stringWithFormat:@"%.1f",fabsf([[_pcsDataDic objectForKey:@"batPower"] floatValue])];
+        NSString *capacity=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"capacity"] floatValue]];
+    int PcsStatue=[[_pcsDataDic objectForKey:@"status"] floatValue];
+    NSString *statueString=[self statueString:PcsStatue];
+    
+    
+    NSString *vBat=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"vBat"] floatValue]];
+    NSString *vpv=[NSString stringWithFormat:@"%.1f/%.1f",[[_pcsDataDic objectForKey:@"vpv1"] floatValue],[[_pcsDataDic objectForKey:@"vpv2"] floatValue]];
+    NSString *iChargePV=[NSString stringWithFormat:@"%.1f/%.1f",[[_pcsDataDic objectForKey:@"iChargePV1"] floatValue],[[_pcsDataDic objectForKey:@"iChargePV2"] floatValue]];
+     NSString *iChargePV0=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"iChargePV"] floatValue]];
+      NSString *acIn=[NSString stringWithFormat:@"%.1fV/%.1fHZ",[[_pcsDataDic objectForKey:@"vGrid"] floatValue],[[_pcsDataDic objectForKey:@"freqGrid"] floatValue]];
+    NSString *acOut=[NSString stringWithFormat:@"%.1fV/%.1fHZ",[[_pcsDataDic objectForKey:@"outPutVolt"] floatValue],[[_pcsDataDic objectForKey:@"freqOutPut"] floatValue]];
+     NSString *loadPercent=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"loadPercent"] floatValue]];
+    
+    
     
     float lableW=70*NOW_SIZE;float lableH=15*HEIGHT_SIZE;float lableH0=10*HEIGHT_SIZE;
     float W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
@@ -40,7 +55,7 @@
   //  float valueLableW=50*NOW_SIZE;
     
     UILabel *lableAll=[[UILabel alloc] initWithFrame:CGRectMake(0, 5*HEIGHT_SIZE,SCREEN_Width,20*HEIGHT_SIZE)];
-    lableAll.text=@"我的状态是什么";
+    lableAll.text=statueString;
     lableAll.textColor=[UIColor whiteColor];
     lableAll.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     lableAll.textAlignment = NSTextAlignmentCenter;
@@ -58,7 +73,7 @@
     solorLable.textAlignment = NSTextAlignmentCenter;
     [self addSubview:solorLable];
     UILabel *solorLableA=[[UILabel alloc] initWithFrame:CGRectMake(W1+imageSize+0*NOW_SIZE, H1+imageSize/2-lableH,lableW,lableH)];
-    solorLableA.text=ppv1;
+    solorLableA.text=panelPower;
     solorLableA.textColor=[UIColor whiteColor];
     solorLableA.adjustsFontSizeToFitWidth=YES;
     solorLableA.font = [UIFont systemFontOfSize:fontSize];
@@ -78,7 +93,7 @@
     [self addSubview:solorLable3];
     
     UILabel *solorLableB2=[[UILabel alloc] initWithFrame:CGRectMake(W1+imageSize+0*NOW_SIZE, H1+imageSize/2-lableH+imageSize+aAndbW,lableW,lableH)];
-    solorLableB2.text=pacCharge;
+    solorLableB2.text=gridPower;
     solorLableB2.textColor=[UIColor whiteColor];
      solorLableB2.adjustsFontSizeToFitWidth=YES;
     solorLableB2.font = [UIFont systemFontOfSize:fontSize];
@@ -99,7 +114,7 @@
     [self addSubview:solorLable1];
     
     UILabel *solorLableB5=[[UILabel alloc] initWithFrame:CGRectMake(SCREEN_Width/2+6*NOW_SIZE,self.frame.size.height-imageSize-30*HEIGHT_SIZE,lableW,lableH)];
-    solorLableB5.text=userLoad;
+    solorLableB5.text=batPower;
     solorLableB5.textColor=[UIColor whiteColor];
     solorLableB5.font = [UIFont systemFontOfSize:fontSize];
     solorLableB5.adjustsFontSizeToFitWidth=YES;
@@ -119,7 +134,7 @@
     [self addSubview:solorLable5];
     
     UILabel *solorLableB1=[[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width+imageSizeBig)/2+0*NOW_SIZE, H1+SPF5000H+imageSizeBig/2-lableH,lableW,lableH)];
-    solorLableB1.text=pCharge;
+    solorLableB1.text=loadPower;
     solorLableB1.textColor=[UIColor whiteColor];
          solorLableB1.adjustsFontSizeToFitWidth=YES;
     solorLableB1.font = [UIFont systemFontOfSize:fontSize];
@@ -154,19 +169,19 @@
     UIImageView *image00 = [[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE,H1+H2+imageSize-6*HEIGHT_SIZE,15*NOW_SIZE,15*NOW_SIZE)];
     image00.image = [UIImage imageNamed:@"zhushi11.png"];
     
-    NSString *name1=root_PCS_guangfu_1;  NSString *name11=[NSString stringWithFormat:@"%@:%@W",name1,ppv1];
-    NSString *name2=root_PCS_guangfu_2;  NSString *name22=[NSString stringWithFormat:@"%@:%@W",name2,ppv2];
-    NSString *name3=root_PCS_chongdian_1;  NSString *name33=[NSString stringWithFormat:@"%@:%@W",name3,pCharge1];
-    NSString *name4=root_PCS_chongdian_2;  NSString *name44=[NSString stringWithFormat:@"%@:%@W",name4,pCharge2];
-    NSString *name0=root_PCS_fangdian_gonglv;  NSString *name00=[NSString stringWithFormat:@"%@:%@W",name0,pDisCharge];
-    NSString *name5=root_PCS_dianchi_baifenbi;  NSString *name55=[NSString stringWithFormat:@"%@:%@",name5,capacity];
-    NSString *name6=root_PCS_dianwang_chongdian_gonglv;  NSString *name66=[NSString stringWithFormat:@"%@:%@W",name6,pacCharge];
-    NSString *name7=root_PCS_fuzai_gonglv;  NSString *name77=[NSString stringWithFormat:@"%@:%@W",name7,userLoad];
-    NSString *name8=root_PCS_to_dianwang;  NSString *name88=[NSString stringWithFormat:@"%@:%@W",name8,pacToGrid];
-    NSString *name9=root_PCS_from_dianwang;  NSString *name99=[NSString stringWithFormat:@"%@:%@W",name9,pacToUser];
+  NSString *name11=[NSString stringWithFormat:@"%@:%@V",root_5000xianqing_dianchi_dianya,vBat];
+  NSString *name22=[NSString stringWithFormat:@"%@:%@V",root_5000xianqing_PV_dianya,vpv];
+    NSString *name33=[NSString stringWithFormat:@"%@:%@A",root_5000xianqing_PV_dianliu,iChargePV];
+    NSString *name44=[NSString stringWithFormat:@"%@:%@A",root_5000xianqing_zongChongdian_dianliu,iChargePV0];
     
+    NSString *name55=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_ac_shuru,acIn];
+    NSString *name66=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_ac_shuchu,acOut];
+    NSString *name77=[NSString stringWithFormat:@"%@:%@W",root_5000xianqing_fuzai_gonglv,loadPower];
+    NSString *name88=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_fuzai_baifengbi,loadPercent];
     
-    NSArray *lableName=[NSArray arrayWithObjects:name11,name22,name33,name44,name00,name55,name66,name77,name88,name99,nil];
+  
+    
+    NSArray *lableName=[NSArray arrayWithObjects:name11,name22,name33,name44,name55,name66,name77,name88,nil];
     image00.userInteractionEnabled=YES;
     objc_setAssociatedObject(image00, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
@@ -256,32 +271,39 @@
     float TIME=8; float TIME2=5;
     //路径一 光伏到电池
     NSArray *startArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart2], nil];
-    
     NSArray *endArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd2], nil];
     
-    [self getHeadAnimation:startArray0 second:endArray0 three:TIME2];
     
     /////路径二 电网到电池
     NSArray *startArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart0],[NSValue valueWithCGPoint:pointStart2], nil];
-    
     NSArray *endArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd0],[NSValue valueWithCGPoint:pointtEnd2], nil];
-    
-    [self getHeadAnimation:startArray01 second:endArray01 three:TIME2];
+
     
     /////路径三 电网到负载
     NSArray *startArray03=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart0],[NSValue valueWithCGPoint:pointStart1], nil];
-    
     NSArray *endArray03=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd0],[NSValue valueWithCGPoint:pointtEnd1], nil];
-    
-    [self getHeadAnimation:startArray03 second:endArray03 three:TIME];
+  
     
     
     /////路径四 电池到负载
     NSArray *startArray04=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd2],[NSValue valueWithCGPoint:pointStart1], nil];
-    
     NSArray *endArray04=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart2],[NSValue valueWithCGPoint:pointtEnd1], nil];
     
-    [self getHeadAnimation:startArray04 second:endArray04 three:TIME2];
+
+       int PcsStatue=[[_pcsDataDic objectForKey:@"status"] floatValue];
+    
+    if (PcsStatue==5 || PcsStatue==7 || PcsStatue==8 || PcsStatue==9 || PcsStatue==12) {
+        [self getHeadAnimation:startArray0 second:endArray0 three:TIME2];          //路径一 光伏到电池
+    }
+    if (PcsStatue==6 || PcsStatue==7 || PcsStatue==8 || PcsStatue==10) {
+      [self getHeadAnimation:startArray01 second:endArray01 three:TIME2];         /////路径二 电网到电池
+    }
+    if (PcsStatue==8 || PcsStatue==9 || PcsStatue==10 || PcsStatue==11) {
+        [self getHeadAnimation:startArray03 second:endArray03 three:TIME];         /////路径三 电网到负载
+    }
+    if (PcsStatue==2 || PcsStatue==12) {
+        [self getHeadAnimation:startArray04 second:endArray04 three:TIME2];           /////路径四 电池到负载
+    }
     
 }
 

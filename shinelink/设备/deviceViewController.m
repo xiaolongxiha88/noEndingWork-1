@@ -59,15 +59,6 @@
 @property (nonatomic, strong) NSString *netType;
 @property (nonatomic, strong) NSString *stationIdOne;
 @property (nonatomic, strong) NSString *headPicName;
-@property (nonatomic, strong) NSString *head11;
-@property (nonatomic, strong) NSString *head12;
-@property (nonatomic, strong) NSString *head13;
-@property (nonatomic, strong) NSString *head21;
-@property (nonatomic, strong) NSString *head22;
-@property (nonatomic, strong) NSString *head23;
-@property (nonatomic, strong) NSString *head31;
-@property (nonatomic, strong) NSString *head32;
-@property (nonatomic, strong) NSString *head33;
 @property (nonatomic, strong)UIView *headerView;
 @property (nonatomic, strong) UIAlertView *Alert1;
 @property (nonatomic, strong) UIImageView *guideImageView;
@@ -86,9 +77,12 @@
 @property (nonatomic, strong) NSString *pcsNetPlantID;
 @property (nonatomic, strong) NSString *pcsNetStorageSN;
 @property (nonatomic, strong) NSMutableDictionary *pcsDataDic;
-@property (nonatomic, strong) NSString *storageType;
+@property (nonatomic, assign) int storageType;
 
 @property (nonatomic) BOOL isPvType;
+
+@property (nonatomic, strong) NSMutableDictionary *storageTypeDic;
+
 @end
 
 @implementation deviceViewController
@@ -468,6 +462,8 @@
 }
 
 -(void)initData{
+  
+    _storageType=0;
     _DemoPicName2=[[NSMutableArray alloc]initWithObjects:@"storagecn.png", @"powercn.png", @"pvcn.png",@"charge-cn.png",nil];
      _DemoPicName22=[[NSMutableArray alloc]initWithObjects:@"storageen.png", @"poweren.png", @"pven.png",@"charge-en.png",nil];
     
@@ -655,7 +651,7 @@
 
 -(void)netRequest{
     
-
+    _storageTypeDic=[NSMutableDictionary new];
   
     if (_isPvType) {
          [self getAnimation:_headImage1];
@@ -731,7 +727,7 @@
             }else if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"storage"]){
                 
                  _isPvType=NO;
-                _pcsNetStorageSN=content[@"deviceList"][i][@"deviceSn"];
+               
                 _deviceHeadType=@"1";
                 [imageArray addObject:@"storage.png"];
                 NSString *PO=[NSString stringWithFormat:@"%@W",content[@"deviceList"][i][@"pCharge"]];
@@ -758,13 +754,24 @@
                     [statueArray addObject:ST];
                 }
 
+                NSDictionary *deviceDic=content[@"deviceList"][i];
+                if ([deviceDic.allKeys containsObject:@"storageType"]) {
+                    NSString *type=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"storageType"]];
+                    if ([type intValue]>_storageType) {
+                        _storageType=[type intValue];
+                        _pcsNetStorageSN=content[@"deviceList"][i][@"deviceSn"];
+                    }
+                    
+                    [_storageTypeDic setValue:content[@"deviceList"][i][@"storageType"] forKey:content[@"deviceList"][i][@"deviceSn"]];
+                }
+                
                 
             }
             
            
         }
         
-        // _head11=@"88888";_head21=@"88888";_head31=@"88888";
+      
         
         if ([_typeArr containsObject:@"storage"]) {
             _head13=root_Ppv;
@@ -1030,28 +1037,17 @@
                 
                 if (jsonObj[@"obj"]==nil || jsonObj[@"obj"]==NULL||([jsonObj[@"obj"] isEqual:@""] )) {
                 }else{
-                    NSString *deviceType=jsonObj[@"obj"][@"deviceType"];
+                    NSString *deviceType=[NSString stringWithFormat:@"%@",jsonObj[@"obj"][@"deviceType"]];
                         [[NSUserDefaults standardUserDefaults] setObject:deviceType forKey:@"PcsDeviceType"];
                     
-                    _pcsDataDic=[NSMutableDictionary new];
-                    [_pcsDataDic setObject:jsonObj[@"obj"][@"capacity"] forKey:@"capacity"];
-                      [_pcsDataDic setObject:jsonObj[@"obj"][@"pCharge"] forKey:@"pCharge"];
-                     [_pcsDataDic setObject:jsonObj[@"obj"][@"pDisCharge"] forKey:@"pDisCharge"];
-                     [_pcsDataDic setObject:jsonObj[@"obj"][@"pacCharge"] forKey:@"pacCharge"];
-                     [_pcsDataDic setObject:jsonObj[@"obj"][@"pacToGrid"] forKey:@"pacToGrid"];
-                     [_pcsDataDic setObject:jsonObj[@"obj"][@"pacToUser"] forKey:@"pacToUser"];
-                     [_pcsDataDic setObject:jsonObj[@"obj"][@"ppv1"] forKey:@"ppv1"];
-                     [_pcsDataDic setObject:jsonObj[@"obj"][@"ppv2"] forKey:@"ppv2"];
-                     [_pcsDataDic setObject:jsonObj[@"obj"][@"status"] forKey:@"status"];
-                     [_pcsDataDic setObject:jsonObj[@"obj"][@"userLoad"] forKey:@"userLoad"];
-                    [_pcsDataDic setObject:jsonObj[@"obj"][@"pCharge1"] forKey:@"pCharge1"];
-                    [_pcsDataDic setObject:jsonObj[@"obj"][@"pCharge2"] forKey:@"pCharge2"];
-                    
+                  
+                    _pcsDataDic=[NSMutableDictionary dictionaryWithDictionary:jsonObj[@"obj"]];
+   
                 }
                 
-                _storageType=@"1";
+               
                 
-                if ([_storageType isEqualToString:@"1"]) {
+                if (_storageType!=2) {
                     storageHead *StorageV=[[storageHead alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];
                     StorageV.pcsDataDic=_pcsDataDic;
                     StorageV.animationNumber=animationNumber;
@@ -1660,6 +1656,17 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
     else if([getDevice.type  isEqualToString:@"storage"]){
         secondCNJ *sd=[[secondCNJ alloc ]init];
         sd.deviceSN=getDevice.deviceSN;
+        if (_storageTypeDic.count>0) {
+            NSString *type=[NSString stringWithFormat:@"%@",[_storageTypeDic objectForKey:getDevice.deviceSN]];
+       
+            if ([type isEqualToString:@"2"]) {
+                sd.typeNum=@"1";
+            }else{
+                sd.typeNum=@"2";
+            }
+        }
+      
+        
         sd.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:sd animated:NO];}}
     else{
