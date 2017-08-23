@@ -135,6 +135,7 @@
 -(void)controlCNJ{
     controlCNJTable *CNJ=[[controlCNJTable alloc]init];
     CNJ.CnjSn=_deviceSN;
+    CNJ.typeNum=_typeNum;
     [self.navigationController pushViewController:CNJ animated:YES];
 }
 
@@ -214,7 +215,8 @@
     if (![_typeNum isEqualToString:@"1"]) {
     valueColor=[UIColor whiteColor];
     }else{
-    valueColor=COLOR(163, 255, 188, 1);
+            valueColor=[UIColor whiteColor];
+  //  valueColor=COLOR(163, 255, 188, 1);
     }
    
     

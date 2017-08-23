@@ -22,6 +22,7 @@
 		33209FD11D2A553E00186893 /* main1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33209FD01D2A553E00186893 /* main1.jpg */; };
 		332283A91DFAA03B00C546B4 /* swiftHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332283A81DFAA03B00C546B4 /* swiftHeader.swift */; };
 		33238B491CBF816400E82B86 /* 外框@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33238B481CBF816400E82B86 /* 外框@3x.png */; };
+		33252FC11F4D4F320054BBC7 /* SPF5000Control.m in Sources */ = {isa = PBXBuildFile; fileRef = 33252FC01F4D4F320054BBC7 /* SPF5000Control.m */; };
 		332692681D780F410058C5B7 /* backAV.png in Resources */ = {isa = PBXBuildFile; fileRef = 332692671D780F410058C5B7 /* backAV.png */; };
 		3326926B1D794AB00058C5B7 /* AvCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3326926A1D794AB00058C5B7 /* AvCell.m */; };
 		3326926E1D79728F0058C5B7 /* AVfirstView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3326926D1D79728F0058C5B7 /* AVfirstView.m */; };
@@ -747,6 +748,8 @@
 		33209FD01D2A553E00186893 /* main1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = main1.jpg; path = AsyncSocket/main1.jpg; sourceTree = "<group>"; };
 		332283A81DFAA03B00C546B4 /* swiftHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = swiftHeader.swift; sourceTree = "<group>"; };
 		33238B481CBF816400E82B86 /* 外框@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "外框@3x.png"; path = "../../我/客服系统/我的问题/外框@3x.png"; sourceTree = "<group>"; };
+		33252FBF1F4D4F320054BBC7 /* SPF5000Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPF5000Control.h; sourceTree = "<group>"; };
+		33252FC01F4D4F320054BBC7 /* SPF5000Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPF5000Control.m; sourceTree = "<group>"; };
 		332692671D780F410058C5B7 /* backAV.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backAV.png; sourceTree = "<group>"; };
 		332692691D794AB00058C5B7 /* AvCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvCell.h; sourceTree = "<group>"; };
 		3326926A1D794AB00058C5B7 /* AvCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvCell.m; sourceTree = "<group>"; };
@@ -2109,6 +2112,8 @@
 				334E9BE31CACB78900C8271F /* ControlCNJ.m */,
 				334E9BED1CAD036700C8271F /* parameterCNJ.h */,
 				334E9BEE1CAD036700C8271F /* parameterCNJ.m */,
+				33252FBF1F4D4F320054BBC7 /* SPF5000Control.h */,
+				33252FC01F4D4F320054BBC7 /* SPF5000Control.m */,
 			);
 			path = "储能机三级";
 			sourceTree = "<group>";
@@ -4707,6 +4712,7 @@
 				3389649C1E5E767700A7B1AE /* forgetOneViewController.m in Sources */,
 				3379E4EB1E94BE40000A4198 /* UIColor+Hex.m in Sources */,
 				334B8F541C914A6D00798A69 /* PNPieChartDataItem.m in Sources */,
+				33252FC11F4D4F320054BBC7 /* SPF5000Control.m in Sources */,
 				337284D11EF769390004FAB9 /* changUserInfoTwo.swift in Sources */,
 				334B8F4D1C914A6D00798A69 /* PNCircleChart.m in Sources */,
 				33860FE81EEA75C5004150FD /* MJRefreshGifHeader.m in Sources */,

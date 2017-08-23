@@ -710,3 +710,33 @@
 "127今日收益"="Profit today";
 "128总收益"="Total revenue";
 
+"129AC输出源"="AC output source";
+"130充电源"="Charge source";
+"131市电输出"="UTI output";
+"132市电充电"="UTI charge";
+"133光伏接入模式"="PV input model";
+"134AC输入模式"="AC input model";
+"135AC输出电压"="AC discharge voltage";
+"136AC输出频率"="AC discharge frequency";
+"137过载重启"="Overload restart";
+"138过温重启"="OverTemp restart";
+"139蜂鸣器"="Buzzer";
+"140最大充电电流"="Maximum charge current";
+"141电池低压点"="Low battery point";
+"142系统时间"="System time";
+"143电池类型"="Battery type";
+
+"144光伏优先"="PV first";
+"145光伏和市电"="PV&UTI";
+"146仅光伏"="Only PV";
+"147电池优先"="Bat first";
+"148市电优先"="UTI first";
+"149独立"="Independent";
+"150并联"="Parallet";
+"151重启"="Restart";
+"152不重启"="Not restart";
+"153切换到市电"="Switch to UTI";
+"154锂电池"="Lithium battery";
+"155铅酸电池"="Lead-acid batteries";
+"156自定义铅酸电池"="Custom lead-acid batteries";
+

@@ -9,6 +9,8 @@
 #import "controlCNJTable.h"
 #import "ControlCNJ.h"
 #import "RKAlertView.h"
+#import "SPF5000Control.h"
+
 #define AlertContent @"Growatt"
 
 @interface controlCNJTable ()
@@ -33,10 +35,12 @@
     [self getPassword];
     
     self.dataArray =[NSMutableArray arrayWithObjects:root_CNJ_kaiguan,root_CNJ_SOC,root_CNJ_shijian,root_CNJ_fangdian_kaiguan,root_CNJ_fangdian_shijian,root_CNJ_SP,root_chongdian_shineng,root_chongdian_shijianduan,root_chongdian_dianchi_soc,nil];
-//    if ([_controlType isEqualToString:@"2"]) {
-//        [_dataArray addObject:@"高级设置"];
-//    }
+
+    if([_typeNum isEqualToString:@"1"]){
+      self.dataArray =[NSMutableArray arrayWithObjects:root_5000Control_129,root_5000Control_130,root_5000Control_131,root_5000Control_132,root_5000Control_133,root_5000Control_134,root_5000Control_135,root_5000Control_136,root_5000Control_137,root_5000Control_138,root_5000Control_139,root_5000Control_140,root_5000Control_141,root_5000Control_142,root_5000Control_143,nil];
+    }
     
+
     
 }
 
@@ -135,107 +139,111 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-   ControlCNJ  *go=[[ControlCNJ alloc]init];
+    if([_typeNum isEqualToString:@"1"]){
+        [self goSPF5000:indexPath];
+    }else{
+     [self goSP2000And3000:indexPath];
+    }
+    
 
+}
+
+
+-(void)goSP2000And3000:(NSIndexPath *)indexPath{
+    ControlCNJ  *go=[[ControlCNJ alloc]init];
     go.type=[NSString stringWithFormat:@"%ld",(long)indexPath.row];
     go.CnjSN=_CnjSn;
     
-        if ([_controlType isEqualToString:@"2"]) {
-            go.controlType=_controlType;
-           [self.navigationController pushViewController:go animated:YES];
+    if ([_controlType isEqualToString:@"2"]) {
+        go.controlType=_controlType;
+        [self.navigationController pushViewController:go animated:YES];
+    }else{
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+            [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+            return;
         }else{
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
-                [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
-                return;
-            }else{
+            
+            if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==3)||(indexPath.row==5)||(indexPath.row==7)||(indexPath.row==6)||(indexPath.row==9)||(indexPath.row==8)) {
                 
-                if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==3)||(indexPath.row==5)||(indexPath.row==7)||(indexPath.row==6)||(indexPath.row==9)||(indexPath.row==8)) {
+                [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
+                    NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
+                    NSString *alert1=[alertView textFieldAtIndex:0].text;
                     
-                    [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
-                        NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
-                        NSString *alert1=[alertView textFieldAtIndex:0].text;
-                        
-                        if ([alert1 isEqualToString:_password]) {
-                            [self.navigationController pushViewController:go animated:YES];
-                        }else{
-                            [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
-                                
-                            }];
+                    if ([alert1 isEqualToString:_password]) {
+                        [self.navigationController pushViewController:go animated:YES];
+                    }else{
+                        [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
                             
-                        }
+                        }];
                         
-                    } cancelBlock:^{
-                        NSLog(@"取消了");
+                    }
+                    
+                } cancelBlock:^{
+                    NSLog(@"取消了");
+                }];
+                
+                
+            }else  if ((indexPath.row==2)||(indexPath.row==4)) {
+                
+                [self.navigationController pushViewController:go animated:YES];
+            }
+            
+            
+            [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+        }
+    }
+    
+}
+
+
+
+
+-(void)goSPF5000:(NSIndexPath *)indexPath{
+    SPF5000Control  *go=[[SPF5000Control alloc]init];
+    go.type=(int)indexPath.row;
+    go.titleString=_dataArray[indexPath.row];
+    go.CnjSN=_CnjSn;
+    
+           [self.navigationController pushViewController:go animated:YES];       //DEMO
+    
+    if ([_controlType isEqualToString:@"2"]) {
+        go.controlType=_controlType;
+        [self.navigationController pushViewController:go animated:YES];
+    }else{
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+            [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+            return;
+        }else{
+            [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
+                NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
+                NSString *alert1=[alertView textFieldAtIndex:0].text;
+                
+                
+                if ([alert1 isEqualToString:_password]) {
+                    [self.navigationController pushViewController:go animated:YES];
+                }else{
+                    [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
+                        
                     }];
                     
-                    
-                }else  if ((indexPath.row==2)||(indexPath.row==4)) {
-                    
-                    [self.navigationController pushViewController:go animated:YES];
                 }
-                [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-                //   tableView.deselectRow(at: indexPath, animated: true)
-            }
+                
+            } cancelBlock:^{
+                NSLog(@"取消了");
+            }];
+
         }
     
-  
-    
+    }
+   
+
 }
 
 
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
