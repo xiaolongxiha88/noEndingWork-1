@@ -373,6 +373,7 @@
             [self.lineChartView setupTheView];
         } else {
             self.lineChartView.yAxisRange = @100;
+               self.lineChartView.lableLookNum=5;
             self.lineChartView.yAxisSuffix = @"";
             
             NSMutableArray *tempValuesArray = [NSMutableArray array];

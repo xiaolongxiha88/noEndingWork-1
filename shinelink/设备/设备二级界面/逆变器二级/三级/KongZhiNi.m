@@ -263,6 +263,7 @@
 }
 
 -(void)finishSet{
+    
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
         [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
         return;

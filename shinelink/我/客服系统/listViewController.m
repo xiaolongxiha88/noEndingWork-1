@@ -119,102 +119,117 @@
     self.answerName=[NSMutableArray array];
     
       [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfoNew" sucessBlock:^(id content1) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo paramars:@{@"userId":userID} paramarsSite:@"/api/v2/question/list" sucessBlock:^(id content1) {
         [self hideProgressView];
-   NSLog(@"questionList=: %@", content1);
+ 
         if(content1){
-            _allArray=[NSMutableArray arrayWithArray:content1];
+            id jsonObj = [NSJSONSerialization JSONObjectWithData:content1 options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"/api/v2/question/list:%@",jsonObj);
             
-          //NSLog(@"questionList=11");
-        
-            
-            if(_allArray.count==0){
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:jsonObj];
+            if ([firstDic[@"result"] intValue]==1) {
                 
-                if (!_AlertView) {
-                    if ([_languageValue isEqualToString:@"0"]) {
-                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
-                        _AlertView.image=[UIImage imageNamed:@"Prompt_message_cn2.png"];
-                        [self.view addSubview:_AlertView];
-                    }else{
-                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
-                        _AlertView.image=[UIImage imageNamed:@"Prompt message_en2.png"];
-                        [self.view addSubview:_AlertView];
-                       }
-                   }
+                _allArray=[NSMutableArray arrayWithArray:firstDic[@"obj"]];
                 
-//                if (_tableView) {
-//                    [_tableView removeFromSuperview];
-//                    _tableView=nil;
-//                }
-                   [self.tableView reloadData];
+                if(_allArray.count==0){
+                    
+                    if (!_AlertView) {
+                        if ([_languageValue isEqualToString:@"0"]) {
+                            _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                            _AlertView.image=[UIImage imageNamed:@"Prompt_message_cn2.png"];
+                            [self.view addSubview:_AlertView];
+                        }else{
+                            _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                            _AlertView.image=[UIImage imageNamed:@"Prompt message_en2.png"];
+                            [self.view addSubview:_AlertView];
+                        }
+                    }
+                    
+                    //                if (_tableView) {
+                    //                    [_tableView removeFromSuperview];
+                    //                    _tableView=nil;
+                    //                }
+                    [self.tableView reloadData];
+                    
+                }
                 
+                if (_allArray.count>0) {
+                    
+                    NSArray *content = [_allArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                        
+                        //      return [obj2[@"status"] compare:obj1[@"status"]]; //升序
+                        return [obj1[@"status"] compare:obj2[@"status"]];
+                        
+                    }];
+                    
+                    if (_AlertView) {
+                        [_AlertView removeFromSuperview];
+                        _AlertView=nil;
+                    }
+                    
+                    for(int i=0;i<content.count;i++){
+                        
+                        
+                        NSString *title=[NSString stringWithFormat:@"%@",content[i][@"title"]];
+                        NSString *status=[NSString stringWithFormat:@"%@",content[i][@"status"]];
+                        NSString *contentS1=[NSString stringWithFormat:@"%@",content[i][@"content"]];
+                        NSString *time=[NSString stringWithFormat:@"%@",content[i][@"lastTime"]];
+                        NSString *question=[NSString stringWithFormat:@"%@",content[i][@"id"]];
+                        NSString *questiontype=[NSString stringWithFormat:@"%@",content[i][@"questionType"]];
+                        NSString *questionPIC=[NSString stringWithFormat:@"%@",content[i][@"attachment"]];
+                        NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
+                        
+                        NSArray *contentS2=[NSArray arrayWithArray:content[i][@"questionReply"]];
+                        if (contentS2.count>0) {
+                            if(contentS2[0] != nil && ![(NSArray*)contentS2[0] isKindOfClass:[NSNull class]] && ((NSArray*)contentS2[0]).count !=0)
+                            {
+                                
+                                
+                                if ([contentS2[0][@"message"] length]>0) {
+                                    NSString *contentS3=[NSString stringWithFormat:@"%@",contentS2[0][@"message"]];
+                                    [_contentArray addObject:contentS3];
+                                    
+                                    NSString *contentS4=[NSString stringWithFormat:@"%@:",contentS2[0][@"userName"]];
+                                    [_answerName addObject:contentS4];
+                                    
+                                }else{
+                                    [_answerName addObject:root_wenti_leirong];
+                                    [_contentArray addObject:contentS1];
+                                }
+                            }else{
+                                [_answerName addObject:root_wenti_leirong];
+                                [_contentArray addObject:contentS1];
+                            }
+                        }else{
+                            [_answerName addObject:root_wenti_leirong];
+                            [_contentArray addObject:contentS1];
+
+                        }
+                       
+                        
+                        
+                        
+                        [_contentSecondArray addObject:contentS1];
+                        [_questionPicArray addObject:PIC];
+                        [_titleArray addObject:title];
+                        [_statusArray addObject:status];
+                        
+                        [_timeArray addObject:time];
+                        [_questionID addObject:question];
+                        [_questionTypeArray addObject:questiontype];
+                    }
+                    if (_titleArray.count==_allArray.count) {
+                        
+                        [self.tableView reloadData];
+                    }
+                    
+                    //   NSLog(@"questionList=22");
+                }
+                
+            }else{
+            [self showToastViewWithTitle:root_server_error];
             }
             
-            if (_allArray.count>0) {
-                
-                NSArray *content = [content1 sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                    
-
-                    
-              //      return [obj2[@"status"] compare:obj1[@"status"]]; //升序
-                     return [obj1[@"status"] compare:obj2[@"status"]];
-                    
-                }];
-                
-                if (_AlertView) {
-                    [_AlertView removeFromSuperview];
-                    _AlertView=nil;
-                }
-            
-            for(int i=0;i<_allArray.count;i++){
-                
-                
-                NSString *title=[NSString stringWithFormat:@"%@",content[i][@"title"]];
-                NSString *status=[NSString stringWithFormat:@"%@",content[i][@"status"]];
-                NSString *contentS1=[NSString stringWithFormat:@"%@",content[i][@"content"]];
-                NSString *time=[NSString stringWithFormat:@"%@",content[i][@"lastTime"]];
-                NSString *question=[NSString stringWithFormat:@"%@",content[i][@"id"]];
-                NSString *questiontype=[NSString stringWithFormat:@"%@",content[i][@"questionType"]];
-                NSString *questionPIC=[NSString stringWithFormat:@"%@",content[i][@"attachment"]];
-                NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
-                
-                 NSArray *contentS2=[NSArray arrayWithArray:content[i][@"serviceQuestionReplyBean"]];
-                if(contentS2[0] != nil && ![(NSArray*)contentS2[0] isKindOfClass:[NSNull class]] && ((NSArray*)contentS2[0]).count !=0)
-                {
-                    
-                    
-                if ([contentS2[0][@"message"] length]>0) {
-                    NSString *contentS3=[NSString stringWithFormat:@"%@",contentS2[0][@"message"]];
-                      [_contentArray addObject:contentS3];
-                  
-                     NSString *contentS4=[NSString stringWithFormat:@"%@:",contentS2[0][@"userName"]];
-                       [_answerName addObject:contentS4];
-                    
-                }else{
-                         [_answerName addObject:root_wenti_leirong];
-                  [_contentArray addObject:contentS1];
-                }
-                }else{
-                     [_answerName addObject:root_wenti_leirong];
-                  [_contentArray addObject:contentS1];
-                }
-                
-                [_contentSecondArray addObject:contentS1];
-                [_questionPicArray addObject:PIC];
-                [_titleArray addObject:title];
-                [_statusArray addObject:status];
-              
-                [_timeArray addObject:time];
-                [_questionID addObject:question];
-                [_questionTypeArray addObject:questiontype];
-              }
-                if (_titleArray.count==_allArray.count) {
-                    
-                      [self.tableView reloadData];
-                }
-                
-         //   NSLog(@"questionList=22");
-          }
            
         }
         //  NSLog(@"questionList=33");

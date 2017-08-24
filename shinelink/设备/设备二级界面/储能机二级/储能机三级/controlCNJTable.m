@@ -206,8 +206,7 @@
     go.titleString=_dataArray[indexPath.row];
     go.CnjSN=_CnjSn;
     
-           [self.navigationController pushViewController:go animated:YES];       //DEMO
-    
+
     if ([_controlType isEqualToString:@"2"]) {
         go.controlType=_controlType;
         [self.navigationController pushViewController:go animated:YES];

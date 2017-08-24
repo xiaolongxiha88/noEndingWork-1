@@ -93,6 +93,9 @@
 
     
     //////////测试区域
+    //上线检查
+     [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:is_Test];
+    
     NSString *testDemo=@"O";
     if ([testDemo isEqualToString:@"OK"]) {
         configWifiSViewController *testView=[[configWifiSViewController alloc]init];
@@ -732,7 +735,7 @@ NSLog(@"体验馆");
    [self showProgressView];
     
     
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo paramars:@{@"userName":_loginUserName, @"userPassword":[self MD5:_loginUserPassword]} paramarsSite:@"/api/v1/login/userLogin" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo paramars:@{@"userName":_loginUserName, @"password":[self MD5:_loginUserPassword]} paramarsSite:@"/api/v2/login" sucessBlock:^(id content) {
         [self hideProgressView];
        
         if (content) {
@@ -795,6 +798,12 @@ NSLog(@"体验馆");
                                     [self.navigationController pushViewController:OSSView animated:NO];
                                 }else{
                                     NSString *roleNum=[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]];
+                                    
+                                    if ([[[NSUserDefaults standardUserDefaults] objectForKey:is_Test] isEqualToString:@"Y"]) {         //测试模块
+                                        roleNum=@"1";
+                    [[NSUserDefaults standardUserDefaults] setObject:roleNum forKey:@"roleNum"];
+                                    }
+                                    
                                     if ([roleNum isEqualToString:@"5"]) {
                                         ossFistVC *OSSView=[[ossFistVC alloc]init];
                                         OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];

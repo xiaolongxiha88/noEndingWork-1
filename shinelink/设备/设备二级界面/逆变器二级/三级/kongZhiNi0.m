@@ -117,6 +117,8 @@
      go.PvSn=_PvSn;
      go.type=[NSString stringWithFormat:@"%ld",(long)indexPath.row];
     
+     // [self.navigationController pushViewController:go animated:YES]; //DEMO
+    
     if ([_controlType isEqualToString:@"2"]) {
         go.controlType=_controlType;
          [self.navigationController pushViewController:go animated:YES];

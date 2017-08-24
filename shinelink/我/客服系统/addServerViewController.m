@@ -68,7 +68,7 @@
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     NSString *plantId=[ud objectForKey:@"plantID"];
     //[self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":plantId,@"pageNum":@"1", @"pageSize":@"20"} paramarsSite:@"/newQualityAPI.do?op=getQualityInformation" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":plantId,@"pageNum":@"1", @"pageSize":@"40"} paramarsSite:@"/newQualityAPI.do?op=getQualityInformation" sucessBlock:^(id content) {
         [self hideProgressView];
         
         if (content) {
@@ -241,8 +241,15 @@
     
     NSString *isValiPhone=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiPhone"];
     NSString *isValiEmail=[[NSUserDefaults standardUserDefaults] objectForKey:@"isValiEmail"];
+       NSString *phoneNum=[[NSUserDefaults standardUserDefaults] objectForKey:@"TelNumber"];
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:is_Test] isEqualToString:@"Y"]) {         //测试模块
+        isValiPhone=@"1";
+       phoneNum=@"18588241101";
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isValiPhone"];
+    }
+    
     if ([isValiPhone isEqualToString:@"1"]) {
-        NSString *phoneNum=[[NSUserDefaults standardUserDefaults] objectForKey:@"TelNumber"];
             UITextField *text=[_scrollView viewWithTag:6003];
         text.text=phoneNum;
     }else{
@@ -393,6 +400,13 @@
     }
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     NSString *userID=[ud objectForKey:@"userID"];
+    NSString *userName=[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
+    NSString *counrtyName=[[NSUserDefaults standardUserDefaults] objectForKey:@"counrtyName"];
+
+    NSString *serverAddress=[HEAD_URL substringFromIndex:7];
+    [_allDict setObject:serverAddress forKey:@"serverUrl"];
+      [_allDict setObject:counrtyName forKey:@"counrtyName"];
+     [_allDict setObject:userName forKey:@"userName"];
     
     [_allDict setObject:[textF text] forKey:@"title"];
    [_allDict setObject:_typeNum forKey:@"questionType"];
@@ -409,16 +423,17 @@
   
     //NSError *error;
     [self showProgressView];
-    [BaseRequest uplodImageWithMethod:HEAD_URL paramars:_allDict paramarsSite:@"/questionAPI.do?op=addCustomerQuestion" dataImageDict:dataImageDict sucessBlock:^(id content) {
-        NSLog(@"addCustomerQuestion==%@", content);
+    [BaseRequest uplodImageWithMethod:OSS_HEAD_URL_Demo paramars:_allDict paramarsSite:@"/api/v2/question/add" dataImageDict:dataImageDict sucessBlock:^(id content) {
+       
         [self hideProgressView];
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSString *result0=[NSString stringWithFormat:@"%@",content1];
+         NSLog(@"/api/v2/question/add==%@", content1);
+
         if (content1) {
             
-            if ([result0 integerValue] == 1) {
-               
-                    [self showAlertViewWithTitle:nil message:root_ME_tianjia_chenggong cancelButtonTitle:root_Yes];
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            if ([firstDic[@"result"] intValue]==1) {
+                [self showAlertViewWithTitle:nil message:root_ME_tianjia_chenggong cancelButtonTitle:root_Yes];
                 [self.navigationController popViewControllerAnimated:NO];
             }else{
                 [self showAlertViewWithTitle:nil message:root_ME_tianjia_shibai cancelButtonTitle:root_Yes];     
@@ -427,7 +442,6 @@
             }else{
                 
                 [self showAlertViewWithTitle:nil message:root_ME_tianjia_shibai cancelButtonTitle:root_Yes];
-                
                  [self.navigationController popViewControllerAnimated:NO];
             }
         }

@@ -314,66 +314,75 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     self.labelArray=[NSMutableArray arrayWithObjects:root_ME_biaoti,root_NBQ_leixing, root_ME_huifu_jilu,nil];
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/questionAPI.do?op=getQuestionInfo" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/api/v2/question/detail" sucessBlock:^(id content) {
         [self hideProgressView];
-        NSLog(@"getQuestionInfo=: %@", content);
         if(content){
-            _allDic=[NSMutableDictionary dictionaryWithDictionary:content];
-            _titleString=content[@"title"];
-            _SnString=[NSString stringWithFormat:@"%@",content[@"questionDevice"]];
-            _QuestionTypeString=[NSString stringWithFormat:@"%@",content[@"questionType"]];
-            if ([_QuestionTypeString isEqualToString:@"1"]) {
-                _QuestionTypeString=root_ME_nibianqi_guzhan;
-            }else if ([_QuestionTypeString isEqualToString:@"2"]){
-                _QuestionTypeString=root_ME_chunengji_guzhan;
-            }else if ([_QuestionTypeString isEqualToString:@"3"]){
-                _QuestionTypeString=root_ME_ruanjian_jianyi;
-            }else if ([_QuestionTypeString isEqualToString:@"4"]){
-                _QuestionTypeString=root_ME_ruanjian_guzhan;
-            }else if ([_QuestionTypeString isEqualToString:@"5"]){
-                _QuestionTypeString=root_ME_qita_shebei_guzhan;
-            }else if ([_QuestionTypeString isEqualToString:@"6"]){
-                _QuestionTypeString=root_ME_qita_wenti;
-            }
-            _createrTimeString=[NSString stringWithFormat:@"%@",content[@"createrTime"]];
-            _statusString=[NSString stringWithFormat:@"%@",content[@"status"]];
+            id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"/api/v2/question/worker/detail:%@",jsonObj);
             
-            _ContentString=[NSString stringWithFormat:@"%@",content[@"content"]];
-            
-            
-            _questionAll=[NSMutableArray arrayWithArray:content[@"serviceQuestionReplyBean"]];
-            // NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
-            //   [_questionAll sortUsingDescriptors:[NSArray arrayWithObject:sort1]];
-            
-            for(int i=0;i<_questionAll.count;i++){
-                NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
-                NSString *nameId=[NSString stringWithFormat:@"%@",_questionAll[i][@"isAdmin"]];
-                NSString *timeA=[NSString stringWithFormat:@"%@",_questionAll[i][@"time"]];
-                NSString *contentA=[NSString stringWithFormat:@"%@",_questionAll[i][@"message"]];
-                //NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"imageName"]];
-                //                                NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
-                NSString *questionPIC=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
-                NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:jsonObj];
+            if ([firstDic[@"result"] intValue]==1) {
+                NSDictionary *QuestionDic=[NSDictionary dictionaryWithDictionary:firstDic[@"obj"][@"question"]];
+                _titleString=QuestionDic[@"title"];
+                _SnString=[NSString stringWithFormat:@"%@",QuestionDic[@"questionDevice"]];
+                _QuestionTypeString=[NSString stringWithFormat:@"%@",QuestionDic[@"questionType"]];
+                if ([_QuestionTypeString isEqualToString:@"1"]) {
+                    _QuestionTypeString=root_ME_nibianqi_guzhan;
+                }else if ([_QuestionTypeString isEqualToString:@"2"]){
+                    _QuestionTypeString=root_ME_chunengji_guzhan;
+                }else if ([_QuestionTypeString isEqualToString:@"3"]){
+                    _QuestionTypeString=root_ME_ruanjian_jianyi;
+                }else if ([_QuestionTypeString isEqualToString:@"4"]){
+                    _QuestionTypeString=root_ME_ruanjian_guzhan;
+                }else if ([_QuestionTypeString isEqualToString:@"5"]){
+                    _QuestionTypeString=root_ME_qita_shebei_guzhan;
+                }else if ([_QuestionTypeString isEqualToString:@"6"]){
+                    _QuestionTypeString=root_ME_qita_wenti;
+                }
+                _createrTimeString=[NSString stringWithFormat:@"%@",QuestionDic[@"createrTime"]];
+                _statusString=[NSString stringWithFormat:@"%@",QuestionDic[@"status"]];
                 
-                [_nameArray addObject:nameU];
-                [_nameID addObject:nameId];
-                [_timeArray addObject:timeA];
-                [_contentArray addObject:contentA];
-                [_imageName addObject:PIC];
-            }
-            //              [self initUI];
-            
-            if (_questionAll.count==_nameArray.count) {
+                _ContentString=[NSString stringWithFormat:@"%@",QuestionDic[@"content"]];
                 
-                if (_tableView) {
-                    [self.tableView reloadData];
-                }else{
-                    [self initHeadView];
+                
+                _questionAll=[NSMutableArray arrayWithArray:QuestionDic[@"replyList"]];
+                // NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
+                //   [_questionAll sortUsingDescriptors:[NSArray arrayWithObject:sort1]];
+                
+                for(int i=0;i<_questionAll.count;i++){
+                    NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
+                    NSString *nameId=[NSString stringWithFormat:@"%@",_questionAll[i][@"isAdmin"]];
+                    NSString *timeA=[NSString stringWithFormat:@"%@",_questionAll[i][@"time"]];
+                    NSString *contentA=[NSString stringWithFormat:@"%@",_questionAll[i][@"message"]];
+                    //NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"imageName"]];
+                    //                                NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
+                    NSString *questionPIC=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
+                    NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
+                    
+                    [_nameArray addObject:nameU];
+                    [_nameID addObject:nameId];
+                    [_timeArray addObject:timeA];
+                    [_contentArray addObject:contentA];
+                    [_imageName addObject:PIC];
+                }
+                //              [self initUI];
+                
+                if (_questionAll.count==_nameArray.count) {
+                    
+                    if (_tableView) {
+                        [self.tableView reloadData];
+                    }else{
+                        [self initHeadView];
+                    }
+                    
+                    
                 }
                 
-                
+            }else{
+               [self showToastViewWithTitle:root_server_error];
             }
             
+      
             
         }
     } failure:^(NSError *error) {

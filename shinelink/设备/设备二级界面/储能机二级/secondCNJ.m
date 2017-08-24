@@ -191,12 +191,15 @@
                 [dayDict0 addEntriesFromDictionary:content];
             }
             self.dayDict=[NSMutableDictionary new];
-            for (NSString *key in dayDict0) {
-                NSRange rang = NSMakeRange(11, 5);
-                NSString *key0=[key substringWithRange:rang];
-                NSString *value0=dayDict0[key];
-                [_dayDict setValue:value0 forKey:key0];
+            if (dayDict0.count>0) {
+                for (NSString *key in dayDict0) {
+                    NSRange rang = NSMakeRange(11, 5);
+                    NSString *key0=[key substringWithRange:rang];
+                    NSString *value0=dayDict0[key];
+                    [_dayDict setValue:value0 forKey:key0];
+                }
             }
+           
             self.line2View.isStorage=YES;
             [self.line2View refreshLineChartViewWithDataDict:_dayDict];
         }
