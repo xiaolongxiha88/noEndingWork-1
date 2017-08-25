@@ -240,14 +240,14 @@
         [_headView addSubview:Lable1];
     }
     
-    NSArray *lableArray2=[NSArray arrayWithObjects:_infoNumOne, _infoNumTwo,nil];
-    for (int i=0; i<lableArray.count; i++) {
-        UILabel *Lable0=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize+lableW*i, imageW+lableH*3, lableW,lableH )];
-        Lable0.text=lableArray2[i];
+//    NSArray *lableArray2=[NSArray arrayWithObjects:_infoNumOne, _infoNumTwo,nil];
+ 
+        UILabel *Lable0=[[UILabel alloc]initWithFrame:CGRectMake(imageW*2+imageSize+lableW*0, imageW+lableH*3, lableW,lableH )];
+        Lable0.text=_infoNumOne;
         Lable0.textAlignment=NSTextAlignmentLeft;
         // Lable0.adjustsFontSizeToFitWidth=YES;
         Lable0.userInteractionEnabled=YES;
-          NSArray *lableName=[NSArray arrayWithObject:lableArray2[i]];
+          NSArray *lableName=[NSArray arrayWithObject:_infoNumOne];
         objc_setAssociatedObject(Lable0, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
         //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
@@ -258,7 +258,7 @@
         Lable0.textColor=COLOR(102, 102, 102, 1);
         Lable0.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         [_headView addSubview:Lable0];
-    }
+   
     
     float LableContentW=SCREEN_Width-2*imageW;
     NSString *LableContentText=_ContentString;
@@ -362,14 +362,14 @@
     self.labelArray=[NSMutableArray arrayWithObjects:root_ME_biaoti,root_NBQ_leixing, root_ME_huifu_jilu,nil];
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"questionId":_qusetionId,@"serverUrl":_serverUrl} paramarsSite:@"/api/v1/serviceQuestion/question/detail_info" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"questionId":_qusetionId} paramarsSite:@"/api/v2/question/worker/detail" sucessBlock:^(id content) {
         [self hideProgressView];
          id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"/api/v1/serviceQuestion/question/detail_info=: %@", jsonObj);
         if(jsonObj){
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:jsonObj];
             if ([firstDic[@"result"] intValue]==1) {
-                 NSDictionary *objDic=[NSDictionary dictionaryWithDictionary:firstDic[@"obj"]];
+                 NSDictionary *objDic=[NSDictionary dictionaryWithDictionary:firstDic[@"obj"][@"datas"]];
                  NSDictionary *questionDic=[NSDictionary dictionaryWithDictionary:objDic[@"question"]];
           //      _allDic=[NSMutableDictionary dictionaryWithDictionary:content];
                 _titleString=questionDic[@"title"];
@@ -399,41 +399,20 @@
                 _ContentString=[NSString stringWithFormat:@"%@",questionDic[@"content"]];
                 _accountNameString=[NSString stringWithFormat:@"%@",questionDic[@"accountName"]];
                 
-                NSString *phone1=[NSString stringWithFormat:@"%@",questionDic[@"phoneNum"]];
-                 NSString *phone2=[NSString stringWithFormat:@"%@",questionDic[@"isValiPhoneNum"]];
-                 NSString *email1=[NSString stringWithFormat:@"%@",questionDic[@"email"]];
-                 NSString *email2=[NSString stringWithFormat:@"%@",questionDic[@"isValiEmail"]];
-                
-                if ((phone1==nil || phone1==NULL||([phone1 isEqual:@""] ))) {        //手机号为空
-                    if ([email1 isEqualToString:email2]) {
-                        _infoNumOne=email1;
-                        if ((phone2==nil || phone2==NULL||([phone2 isEqual:@""] ))) {
-                              _infoNumTwo=@"";
-                        }else{
-                          _infoNumTwo=phone2;
-                        }
-                        
-                    }else{
-                        _infoNumOne=email1;
-                        if ((phone2==nil || phone2==NULL||([phone2 isEqual:@""] ))) {
-                            _infoNumTwo=email2;
-                        }else{
-                            _infoNumTwo=phone2;
-                        }
-                    }
-                }else{                                //手机号不为空
-                    if ([phone1 isEqualToString:phone2]) {
-                        _infoNumOne=phone1;
-                        if ((email2==nil || email2==NULL||([email2 isEqual:@""] ))) {
-                            _infoNumTwo=@"";
-                        }else{
-                            _infoNumTwo=email2;
-                        }
+                NSString *phone1;
+                if ([questionDic.allKeys containsObject:@"phoneNum"]) {
+                    phone1=[NSString stringWithFormat:@"%@",questionDic[@"phoneNum"]];
+                }else{
+                phone1=@"";
+                }
+           
+               NSString *email1=[NSString stringWithFormat:@"%@",questionDic[@"email"]];
 
-                    }else{
-                        _infoNumOne=phone1;
-                        _infoNumTwo=phone2;
-                    }
+
+                if ((phone1==nil || phone1==NULL||([phone1 isEqual:@""] ))) {        //手机号为空
+                    _infoNumOne=email1;
+                }else{                                //手机号不为空
+                    _infoNumOne=phone1;
                 }
                
                 
@@ -443,7 +422,7 @@
                 //   [_questionAll sortUsingDescriptors:[NSArray arrayWithObject:sort1]];
                 
                 for(int i=0;i<_questionAll.count;i++){
-                    NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
+                //    NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
                     NSString *nameId=[NSString stringWithFormat:@"%@",_questionAll[i][@"isAdmin"]];
                     NSString *timeA=[NSString stringWithFormat:@"%@",_questionAll[i][@"time"]];
                     NSString *contentA=[NSString stringWithFormat:@"%@",_questionAll[i][@"message"]];
@@ -451,8 +430,12 @@
                     //                                NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
                     NSString *questionPIC=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
                     NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
-                    
-                    [_nameArray addObject:nameU];
+                    if ([nameId isEqualToString:@"1"]) {
+                           [_nameArray addObject:_questionAll[i][@"accountName"]];
+                    }else{
+                        [_nameArray addObject:questionDic[@"jobId"]];
+                    }
+                 
                     [_nameID addObject:nameId];
                     [_timeArray addObject:timeA];
                     [_contentArray addObject:contentA];
@@ -509,17 +492,19 @@
     _allDict=[NSMutableDictionary dictionary];
     [_allDict setObject:[_textView text] forKey:@"message"];
     [_allDict setObject:_qusetionId forKey:@"questionId"];
-    [_allDict setObject:_serverUrl forKey:@"serverUrl"];
-     [_allDict setObject:_accountNameString forKey:@"accountName"];
+  //  [_allDict setObject:_serverUrl forKey:@"serverUrl"];
+   //  [_allDict setObject:_accountNameString forKey:@"accountName"];
     
     
     
     [self showProgressView];
-    [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:_allDict paramarsSite:@"/api/v1/serviceQuestion/question/reply" dataImageDict:dataImageDict sucessBlock:^(id content) {
-        NSLog(@"/api/v1/serviceQuestion/question/reply==%@", content);
+    [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:_allDict paramarsSite:@"/api/v2/question/worker/reply" dataImageDict:dataImageDict sucessBlock:^(id content) {
+      
         [self hideProgressView];
-        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        if (content1 != [NSNull null]) {
+        
+        if (content != [NSNull null]) {
+            id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+              NSLog(@"/api/v1/serviceQuestion/question/reply==%@", content1);
             if ([content1[@"result"] integerValue] == 1) {
                 _textView.text=@"";
                 if (_imageViewAll) {
@@ -668,7 +653,7 @@
     [cell.contentView setBackgroundColor: [UIColor whiteColor] ];
     
     NSString *WebString;
-    if ([_nameID[indexPath.row] isEqualToString:@"1"]) {
+    if ([_nameID[indexPath.row] isEqualToString:@"0"]) {
         cell.image.image = IMAGE(@"kefu_iconOSS.png");
         cell.nameLabel.textColor = COLOR(102, 102, 102, 1);
         WebString=self.contentArray[indexPath.row];

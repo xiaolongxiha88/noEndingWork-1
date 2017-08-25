@@ -14,6 +14,6 @@
 @property(nonatomic,strong)NSString *qusetionType;
 @property(nonatomic,strong)NSMutableArray *questionPicArray;
 @property(nonatomic,strong)NSString *qusetionContent;
-@property(nonatomic,strong)NSString *serverUrl;
+//@property(nonatomic,strong)NSString *serverUrl;
 
 @end

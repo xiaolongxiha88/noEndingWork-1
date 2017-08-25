@@ -44,7 +44,7 @@ float Time=30.f;
     AFHTTPRequestOperationManager * manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     manager.requestSerializer.timeoutInterval=Time;
-    if ([site isEqualToString:@"/api/v1/login/userLogin"]) {
+    if ([site isEqualToString:@"/api/v2/login"]) {
         manager.requestSerializer.timeoutInterval=10.f;
     }
     
@@ -326,7 +326,7 @@ float Time=30.f;
     
     if (!(reUsername==nil || reUsername==NULL||([reUsername isEqual:@""] ))){
         
-        [BaseRequest requestWithMethod:OSS_HEAD_URL_Demo paramars:@{@"userName":reUsername, @"serverUrl":searchDeviceAddress, @"userPassword":[self MD5:rePassword]} paramarsSite:@"/api/v1/login/userResetLogin" sucessBlock:^(id content) {
+        [BaseRequest requestWithMethod:OSS_HEAD_URL_Demo paramars:@{@"userName":reUsername, @"serverUrl":searchDeviceAddress, @"password":[self MD5:rePassword]} paramarsSite:@"/api/v2/login" sucessBlock:^(id content) {
             
             NSLog(@"/api/v1/login/userResetLogin:%@",content);
             if (content) {

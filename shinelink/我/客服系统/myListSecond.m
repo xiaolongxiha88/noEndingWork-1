@@ -322,7 +322,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
             
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:jsonObj];
             if ([firstDic[@"result"] intValue]==1) {
-                NSDictionary *QuestionDic=[NSDictionary dictionaryWithDictionary:firstDic[@"obj"][@"question"]];
+                NSDictionary *QuestionDic=[NSDictionary dictionaryWithDictionary:firstDic[@"obj"][@"datas"][@"question"]];
                 _titleString=QuestionDic[@"title"];
                 _SnString=[NSString stringWithFormat:@"%@",QuestionDic[@"questionDevice"]];
                 _QuestionTypeString=[NSString stringWithFormat:@"%@",QuestionDic[@"questionType"]];
@@ -345,12 +345,14 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
                 _ContentString=[NSString stringWithFormat:@"%@",QuestionDic[@"content"]];
                 
                 
-                _questionAll=[NSMutableArray arrayWithArray:QuestionDic[@"replyList"]];
+                _questionAll=[NSMutableArray arrayWithArray:firstDic[@"obj"][@"datas"][@"replyList"]];
                 // NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES];
                 //   [_questionAll sortUsingDescriptors:[NSArray arrayWithObject:sort1]];
                 
                 for(int i=0;i<_questionAll.count;i++){
-                    NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
+                    
+               
+                  //  NSString *nameU=[NSString stringWithFormat:@"%@",_questionAll[i][@"userName"]];
                     NSString *nameId=[NSString stringWithFormat:@"%@",_questionAll[i][@"isAdmin"]];
                     NSString *timeA=[NSString stringWithFormat:@"%@",_questionAll[i][@"time"]];
                     NSString *contentA=[NSString stringWithFormat:@"%@",_questionAll[i][@"message"]];
@@ -359,7 +361,16 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
                     NSString *questionPIC=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
                     NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
                     
-                    [_nameArray addObject:nameU];
+                    if ([nameId isEqualToString:@"1"]) {
+                        [_nameArray addObject:_questionAll[i][@"accountName"]];
+                    }else{
+                        if ([QuestionDic.allKeys containsObject:@"jobId"]) {
+                            [_nameArray addObject:QuestionDic[@"jobId"]];
+                        }else{
+                            [_nameArray addObject:@"worker"];
+                        }
+                        
+                    }
                     [_nameID addObject:nameId];
                     [_timeArray addObject:timeA];
                     [_contentArray addObject:contentA];
@@ -419,14 +430,18 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     [_allDict setObject:[_textView text] forKey:@"message"];
     [_allDict setObject:_qusetionId forKey:@"questionId"];
     [_allDict setObject:userID forKey:@"userId"];
+        NSString *userName=[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
+        [_allDict setObject:userName forKey:@"userName"];
     
     [self showProgressView];
-    [BaseRequest uplodImageWithMethod:HEAD_URL paramars:_allDict paramarsSite:@"/questionAPI.do?op=replyMessage" dataImageDict:dataImageDict sucessBlock:^(id content) {
-        NSLog(@"addCustomerQuestion==%@", content);
+    [BaseRequest uplodImageWithMethod:OSS_HEAD_URL_Demo paramars:_allDict paramarsSite:@"/api/v2/question/reply" dataImageDict:dataImageDict sucessBlock:^(id content) {
+       
         [self hideProgressView];
-        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        if (content1) {
-            if ([content1[@"success"] integerValue] == 1) {
+        if (content) {
+            id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+           NSLog(@"/api/v2/question/reply==%@", content1);
+              NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            if ([firstDic[@"result"] intValue]==1) {
                 _textView.text=@"";
                 if (_imageViewAll) {
                     [ _imageViewAll removeFromSuperview];
@@ -452,16 +467,19 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
                     _button3=nil;
                 }
                 
-                  [_textView resignFirstResponder];
-             NSNotification * notice = [NSNotification notificationWithName:@"ReLoadttTableView" object:nil userInfo:nil];
+                [_textView resignFirstResponder];
+                NSNotification * notice = [NSNotification notificationWithName:@"ReLoadttTableView" object:nil userInfo:nil];
                 [self keyHiden:notice];
                 [self showAlertViewWithTitle:nil message:root_ME_tianjia_chenggong cancelButtonTitle:root_Yes];
-                   [self netGetAgain];
-          
+                [self netGetAgain];
+                
             }else{
-                [self showAlertViewWithTitle:nil message:root_ME_tianjia_shibai cancelButtonTitle:root_Yes];
-     
+               [self showAlertViewWithTitle:nil message:root_ME_tianjia_shibai cancelButtonTitle:root_Yes];
             }
+            
+        
+          
+            
         }
     } failure:^(NSError *error) {
           [self hideProgressView];
@@ -574,7 +592,7 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
     [cell.contentView setBackgroundColor: [UIColor whiteColor] ];
     
     NSString *WebString;
-    if ([_nameID[indexPath.row] isEqualToString:@"1"]) {
+    if ([_nameID[indexPath.row] isEqualToString:@"0"]) {
           cell.image.image = IMAGE(@"kefu_iconOSS.png");
         cell.nameLabel.textColor = COLOR(102, 102, 102, 1);
         WebString=self.contentArray[indexPath.row];
@@ -852,14 +870,15 @@ CGFloat const kChatInputTextViewHeight = 33.0f;
 
 - (void)closeQuestion1 {
 
- 
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *userID=[ud objectForKey:@"userID"];
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"questionId":_qusetionId} paramarsSite:@"/questionAPI.do?op=solveQuestion" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo paramars:@{@"questionId":_qusetionId,@"userId":userID} paramarsSite:@"/api/v2/question/solve" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"questionAPI.do?op=solveQuestion: %@", content1);
+        NSLog(@"/api/v2/question/solve: %@", content1);
         
         if (content1) {
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];

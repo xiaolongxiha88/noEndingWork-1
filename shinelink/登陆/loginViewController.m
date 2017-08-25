@@ -792,6 +792,10 @@ NSLog(@"体验馆");
                                 
                                 _OssFirst=[[NSUserDefaults standardUserDefaults] objectForKey:@"firstGoToOss"];
                                 
+                                if ([[[NSUserDefaults standardUserDefaults] objectForKey:is_Test] isEqualToString:@"Y"]) {         //测试模块
+                            _OssFirst=@"Y";
+                                }
+                                
                                 if ([_OssFirst isEqualToString:@"Y"]) {
                                     ossFistVC *OSSView=[[ossFistVC alloc]init];
                                     OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
@@ -801,6 +805,7 @@ NSLog(@"体验馆");
                                     
                                     if ([[[NSUserDefaults standardUserDefaults] objectForKey:is_Test] isEqualToString:@"Y"]) {         //测试模块
                                         roleNum=@"1";
+                                        PhoneNum=@"18588241101";
                     [[NSUserDefaults standardUserDefaults] setObject:roleNum forKey:@"roleNum"];
                                     }
                                     

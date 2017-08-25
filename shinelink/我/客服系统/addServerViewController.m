@@ -414,10 +414,10 @@
     [_allDict setObject:[_contentView text] forKey:@"content"];
        [_allDict setObject:userID forKey:@"userId"];
     if ([_phoneOrEmail isEqualToString:@"1"]) {
-        [_allDict setObject:[textF3 text] forKey:@"phoneNum"];
+        [_allDict setObject:[textF3 text] forKey:@"phone"];
         [_allDict setObject:@"" forKey:@"email"];
     }else if ([_phoneOrEmail isEqualToString:@"2"]){
-        [_allDict setObject:@"" forKey:@"phoneNum"];
+        [_allDict setObject:@"" forKey:@"phone"];
         [_allDict setObject:[textF3 text] forKey:@"email"];
     }
   
@@ -426,11 +426,9 @@
     [BaseRequest uplodImageWithMethod:OSS_HEAD_URL_Demo paramars:_allDict paramarsSite:@"/api/v2/question/add" dataImageDict:dataImageDict sucessBlock:^(id content) {
        
         [self hideProgressView];
-        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-         NSLog(@"/api/v2/question/add==%@", content1);
-
-        if (content1) {
-            
+        if (content) {
+            id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+            NSLog(@"/api/v2/question/add==%@", content1);
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             if ([firstDic[@"result"] intValue]==1) {
                 [self showAlertViewWithTitle:nil message:root_ME_tianjia_chenggong cancelButtonTitle:root_Yes];

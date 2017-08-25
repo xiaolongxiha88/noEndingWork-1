@@ -129,7 +129,7 @@
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:jsonObj];
             if ([firstDic[@"result"] intValue]==1) {
                 
-                _allArray=[NSMutableArray arrayWithArray:firstDic[@"obj"]];
+                _allArray=[NSMutableArray arrayWithArray:firstDic[@"obj"][@"datas"]];
                 
                 if(_allArray.count==0){
                     
@@ -338,27 +338,20 @@
 
 
 -(void)delQuestion{
-
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSString *userID=[ud objectForKey:@"userID"];
+    
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"questionId":_delQuestionID} paramarsSite:@"/questionAPI.do?op=deleteQuestion" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo paramars:@{@"questionId":_delQuestionID,@"userId":userID} paramarsSite:@"/api/v2/question/delete" sucessBlock:^(id content) {
         [self hideProgressView];
-        NSLog(@"deleteQuestion=: %@", content);
+  
           id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-         NSLog(@"deleteQuestion=: %@", jsonObj);
-        if([[jsonObj objectForKey:@"success"] integerValue]==1){
-           
-             [self showAlertViewWithTitle:nil message:root_shanchu_chenggong cancelButtonTitle:root_Yes];
+         NSLog(@"/api/v2/question/delete=: %@", jsonObj);
+        NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:jsonObj];
+        if ([firstDic[@"result"] intValue]==1) {
+         [self showAlertViewWithTitle:nil message:root_shanchu_chenggong cancelButtonTitle:root_Yes];
         }else{
-            if ([[jsonObj objectForKey:@"success"] integerValue] ==0) {
-                if ([[jsonObj objectForKey:@"msg"]integerValue]==501) {
-                  [self showAlertViewWithTitle:nil message:root_shanchu_shibai cancelButtonTitle:root_Yes];
-                }else if ([[jsonObj objectForKey:@"msg"]integerValue] ==701) {
-                    [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
-                }
-            }
-
-            
-            
+          [self showAlertViewWithTitle:nil message:root_shanchu_shibai cancelButtonTitle:root_Yes];
         }
         
         [self netquestion];

@@ -216,7 +216,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         if Tag==2001 {
              self.initButton(buttonArray: array2 as NSArray, name1: array2[0] as NSString, name2: "")
                questionOrOrder=2
-             statusInt=0
+             statusInt=10
         }
     
         if questionOrOrder==1 {
@@ -241,7 +241,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         if questionOrOrder==2 {
             if Tag==4000 {
-                statusInt=0
+                statusInt=10
                 lable1.text=array2[0]
             }else if Tag==4001 {
                 statusInt=2
@@ -275,8 +275,12 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         let foot=MJRefreshAutoNormalFooter(refreshingBlock: {
             
             self.pageNum=self.pageNum+1
-            self.initNet0()
             
+            if  self.questionOrOrder==1 {
+                self.initNet0()
+            }else if self.questionOrOrder==2 {
+                self.initNet2()
+            }
             //结束刷新
             self.tableView!.mj_footer.endRefreshing()
         })
@@ -360,7 +364,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             let vc=ossQuetionDetail()
             let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as! Int)
             vc.qusetionId=id as String!
-            vc.serverUrl=self.cellValue6Array.object(at: indexPath.row) as! String
+     //       vc.serverUrl=self.cellValue6Array.object(at: indexPath.row) as! String
             self.navigationController?.pushViewController(vc, animated: true)
         }else  if  questionOrOrder==2 {
             let vc=orderFirst()
@@ -401,6 +405,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
 
     //MARK: - 网络层
     
+    //工单列表
     
      func initNet2(){
     
@@ -409,7 +414,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     netDic=["content":contentString,"status":statusInt,"page":pageNum]
     
     self.showProgressView()
-    BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as Dictionary, paramarsSite: "/api/v1/workOrder/work/list", sucessBlock: {(successBlock)->() in
+    BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as Dictionary, paramarsSite: "/api/v2/order/list", sucessBlock: {(successBlock)->() in
     self.hideProgressView()
     
     let data:Data=successBlock as! Data
@@ -424,27 +429,27 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     if result1==1 {
     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
-    let questionAll=objArray["ticketList"] as! NSArray
+    let questionAll=objArray["datas"] as! NSArray
       
         
     for i in 0..<questionAll.count{
     self.cellValue1Array.add((questionAll[i] as! NSDictionary)["title"] as!NSString)
     self.cellValue2Array.add((questionAll[i] as! NSDictionary)["applicationTime"] as!NSString)
-        var cellValue3Array1:NSString
-        var cellValue3Array2:NSString
-        if (((((questionAll[i] as! NSDictionary)["groupName"] as AnyObject).isEqual(NSNull.init())) == false)) {
-          cellValue3Array1=((questionAll[i] as! NSDictionary)["groupName"] as!NSString)
-        }else{
-        cellValue3Array1=""
-        }
         
+        var cellValue3Array2:NSString
+//        if (((((questionAll[i] as! NSDictionary)["groupName"] as AnyObject).isEqual(NSNull.init())) == false)) {
+//          cellValue3Array1=((questionAll[i] as! NSDictionary)["groupName"] as!NSString)
+//        }else{
+//        cellValue3Array1=""
+//        }
+//        
         if (((((questionAll[i] as! NSDictionary)["address"] as AnyObject).isEqual(NSNull.init())) == false)) {
             cellValue3Array2=((questionAll[i] as! NSDictionary)["address"] as!NSString)
         }else{
             cellValue3Array2=""
         }
         
-        let contentString=NSString(format: "%@:%@", cellValue3Array1, cellValue3Array2)
+        let contentString=NSString(format: "%@", cellValue3Array2)
         self.cellValue3Array.add(contentString)
     self.cellValue4Array.add((questionAll[i] as! NSDictionary)["status"] as! Int)
     self.cellValue5Array.add((questionAll[i] as! NSDictionary)["id"] as! Int)
@@ -494,6 +499,9 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     }
     
     
+    
+    
+//问题列表
     func initNet0(){
         
     contentString=searchBar.text! as NSString
@@ -501,7 +509,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
 netDic=["content":contentString,"status":statusInt,"page":pageNum]
         
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as Dictionary, paramarsSite: "/api/v1/serviceQuestion/question/list", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as Dictionary, paramarsSite: "/api/v2/question/worker/list", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
             let data:Data=successBlock as! Data
@@ -510,21 +518,27 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
             
             if (jsonDate0 != nil){
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
-                print("/api/v1/serviceQuestion/question/list=",jsonDate)
+                print("/api/v2/question/worker/list=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
                 let result1=jsonDate["result"] as! Int
                 
                 if result1==1 {
-     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
-                   let questionAll=objArray["questionList"] as! NSArray
+             let objArray=jsonDate["obj"] as! Dictionary<String, Any>
+                   let questionAll=((objArray["pager"]) as! NSDictionary)["datas"] as! NSArray
                     for i in 0..<questionAll.count{
        self.cellValue1Array.add((questionAll[i] as! NSDictionary)["title"] as!NSString)
                 self.cellValue2Array.add((questionAll[i] as! NSDictionary)["lastTime"] as!NSString)
-                        let replyArray=((questionAll[i] as! NSDictionary)["serviceQuestionReplyBean"]) as! NSArray
+                        let replyArray=((questionAll[i] as! NSDictionary)["replyList"]) as! NSArray
                         if replyArray.count>0{
                             if (((replyArray[0] as AnyObject).isEqual(NSNull.init())) == false) {
                                 let replyDic=replyArray[0] as! Dictionary<String, Any>
-                                let contentString=NSString(format: "%@:%@", (replyDic["userName"])as! NSString, (replyDic["message"])as! NSString)
+                                var name1:NSString
+                                if ((replyDic["isAdmin"]) as! Int)==1{
+                                name1=replyDic["accountName"] as! NSString
+                                }else{
+                                name1=((questionAll[i] as! NSDictionary)["jobId"])as! NSString
+                                }
+                                let contentString=NSString(format: "%@:%@", name1, (replyDic["message"])as! NSString)
                                 self.cellValue3Array.add(contentString)
                             }else{
                             self.cellValue3Array.add((questionAll[i] as! NSDictionary)["content"] as!NSString)
@@ -535,13 +549,13 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
                         
                              self.cellValue4Array.add((questionAll[i] as! NSDictionary)["status"] as! Int)
                           self.cellValue5Array.add((questionAll[i] as! NSDictionary)["id"] as! Int)
-                         self.cellValue6Array.add((questionAll[i] as! NSDictionary)["serverUrl"] as! NSString)
+                     //    self.cellValue6Array.add((questionAll[i] as! NSDictionary)["serverUrl"] as! NSString)
                         
                           self.plantListArray.add((questionAll[i] as! NSDictionary))
                     }
                     
                  
-                    let lableText=NSString(format: "%d/%d", self.plantListArray.count,objArray["total"] as! Int)
+                    let lableText=NSString(format: "%d/%d", self.plantListArray.count,objArray["totalNum"] as! Int)
                     self.lable2.text=lableText as String
                     
                     if self.plantListArray.count==0{

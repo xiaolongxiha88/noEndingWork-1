@@ -44,10 +44,10 @@ class ossFistVC: RootViewController {
         
              self.navigationController?.navigationBar.barTintColor=MainColor
         
-        if roleString=="2" || roleString=="0" || roleString=="1"{
+        if roleString=="3" || roleString=="2" || roleString=="1"{
     
             self.initNet0()
-        }else if roleString=="5"{
+        }else if roleString=="6"{
        
             self.initNet1()
             self.initNet4()
@@ -82,10 +82,10 @@ class ossFistVC: RootViewController {
        self.initUI()
         
    
-        if roleString=="2" || roleString=="0" || roleString=="1"{
+        if roleString=="3" || roleString=="2" || roleString=="1"{
                 self.initUItwo()
         
-        }else if roleString=="5"{
+        }else if roleString=="6"{
               self.initUIThree()
          
             
@@ -773,7 +773,7 @@ class ossFistVC: RootViewController {
             let vc=ossQuetionDetail()
             let id=NSString(format: "%d", infoID)
             vc.qusetionId=id as String!
-            vc.serverUrl=infoAddress! as String
+         //   vc.serverUrl=infoAddress! as String
             self.navigationController?.pushViewController(vc, animated: true)
         }else  if  newInfoType==2 {
             let vc=orderFirst()
@@ -944,7 +944,7 @@ class ossFistVC: RootViewController {
         }
         if Tap.tag==2001 {
             vc.questionOrOrder=2
-            vc.statusInt=0
+            vc.statusInt=10
             vc.firstNum=1
             vc.secondNum=0
         }
@@ -983,13 +983,13 @@ class ossFistVC: RootViewController {
     
     func gotoDevice()  {
         
-        if roleString=="2" || roleString=="0" || roleString=="1"{
+        if roleString=="3" || roleString=="2" || roleString=="1"{
               UserDefaults.standard.set("", forKey: "searchDeviceAddress")
             
             let vc=ossDeviceFirst()
             vc.serverListArray=self.serverListArray
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if roleString=="5"{
+        }else if roleString=="6"{
             UserDefaults.standard.set("", forKey: "searchDeviceAddress")
             
             let vc=IntegratorFirst()
