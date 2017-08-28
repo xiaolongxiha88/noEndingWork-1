@@ -788,7 +788,7 @@ class ossFistVC: RootViewController {
         
  
       self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v1/serviceQuestion/question/service_overview_data", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v2/order/overview", sucessBlock: {(successBlock)->() in
           self.hideProgressView()
             
             let data:Data=successBlock as! Data
@@ -797,7 +797,7 @@ class ossFistVC: RootViewController {
             
             if (jsonDate0 != nil){
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
-                print("/api/v1/search/info=",jsonDate)
+                print("/api/v2/order/overview=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
                 let result1=jsonDate["result"] as! Int
                 
@@ -807,9 +807,9 @@ class ossFistVC: RootViewController {
                     self.orderNumArray=[objDic["waitReceiveNum"] as! Int,objDic["inServiceNum"] as! Int]
                 
     
-                    if (((objDic["ticketSystemBean"]  as AnyObject).isEqual(NSNull.init())) == false){
+                    if (((objDic["workOrder"]  as AnyObject).isEqual(NSNull.init())) == false){
                         
-                        let ticketSystemBeanDic=objDic["ticketSystemBean"] as! NSDictionary
+                        let ticketSystemBeanDic=objDic["workOrder"] as! NSDictionary
                         self.newInfoType=2
                         if ticketSystemBeanDic.count>0{
                             self.infoID=ticketSystemBeanDic["id"] as! Int
@@ -818,13 +818,20 @@ class ossFistVC: RootViewController {
                        
                     }
                     
-                    if (((objDic["replyBean"]  as AnyObject).isEqual(NSNull.init())) == false){
-                        let replyBeanDic=objDic["replyBean"] as! NSDictionary
+                    if (((objDic["questionReply"]  as AnyObject).isEqual(NSNull.init())) == false){
+                        let replyBeanDic=objDic["questionReply"] as! NSDictionary
                         if replyBeanDic.count>0{
                             self.newInfoType=1
                             self.infoID=replyBeanDic["questionId"] as! Int
-                            self.infoAddress=replyBeanDic["serverUrl"] as! NSString
-                            self.infoString=NSString(format: "%@:%@",replyBeanDic["userName"] as! NSString,replyBeanDic["message"] as! NSString )
+                          //  self.infoAddress=replyBeanDic["serverUrl"] as! NSString
+                            let isAdmin=replyBeanDic["isAdmin"] as! Int
+                            if isAdmin==1{
+                                 self.infoString=NSString(format: "%@:%@",replyBeanDic["accountName"] as! NSString,replyBeanDic["message"] as! NSString )
+                            }else{
+                              self.infoString=NSString(format: "%@:%@",replyBeanDic["jobId"] as! NSString,replyBeanDic["message"] as! NSString )
+                            }
+                            
+                          
                         }
                     }
                    
