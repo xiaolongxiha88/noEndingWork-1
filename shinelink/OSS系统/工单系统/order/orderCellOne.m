@@ -326,11 +326,11 @@ static NSString *statusNum = @"2";
        [allDict setObject:remarkAll forKey:@"remarks"];
     
     [self showProgressView];
-   [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v1/workOrder/work/perfect_info" dataImageDict:dataImageDict sucessBlock:^(id content) {
+   [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v2/order/perfect" dataImageDict:dataImageDict sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"/api/v1/workOrder/work/perfect_info: %@", content1);
+        NSLog(@"/api/v2/order/perfect: %@", content1);
         
         if (content1) {
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];

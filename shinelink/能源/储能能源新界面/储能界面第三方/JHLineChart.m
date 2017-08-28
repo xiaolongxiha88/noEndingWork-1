@@ -501,7 +501,7 @@
     UIColor *color = (_valueLineColorArr.count==_drawDataArr.count?(_valueLineColorArr[colorIndex]):([UIColor orangeColor]));
     shapeLayer.strokeColor = color.CGColor;
     shapeLayer.fillColor = [UIColor clearColor].CGColor;
-    shapeLayer.lineWidth = (_animationPathWidth<=0?2:_animationPathWidth);
+    shapeLayer.lineWidth = (_animationPathWidth<=0?1:_animationPathWidth);
     
     //第三，动画
     
@@ -565,7 +565,7 @@
             CGPoint p = [arr[i] CGPointValue];
             UIColor *positionLineColor;
             if (_positionLineColorArr.count == _valueArr.count) {
-                positionLineColor = _positionLineColorArr[m];
+                positionLineColor =COLOR(186, 186, 186, 1);
             }else
                 positionLineColor = [UIColor orangeColor];
 

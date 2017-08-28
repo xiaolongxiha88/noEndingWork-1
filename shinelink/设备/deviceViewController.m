@@ -763,6 +763,8 @@
                     }
                     
                     [_storageTypeDic setValue:content[@"deviceList"][i][@"storageType"] forKey:content[@"deviceList"][i][@"deviceSn"]];
+                }else{
+                    _pcsNetStorageSN=content[@"deviceList"][i][@"deviceSn"];
                 }
                 
                 
@@ -1024,6 +1026,7 @@
     
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":_pcsNetPlantID,@"storageSn":_pcsNetStorageSN} paramarsSite:@"/newStorageAPI.do?op=getSystemStatusData" sucessBlock:^(id content) {
         [self hideProgressView];
+        
          [[NSUserDefaults standardUserDefaults] setObject:_pcsNetPlantID forKey:@"pcsNetPlantID"];
          [[NSUserDefaults standardUserDefaults] setObject:_pcsNetStorageSN forKey:@"pcsNetStorageSN"];
         

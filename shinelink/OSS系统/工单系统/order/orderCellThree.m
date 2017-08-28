@@ -244,11 +244,11 @@
     
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"orderId":_orderID,@"status":_statusString} paramarsSite:@"/api/v1/workOrder/work/perfect_info" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"orderId":_orderID,@"status":_statusString} paramarsSite:@"/api/v2/ order/detail" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"/api/v1/workOrder/work/perfect_info: %@", content1);
+        NSLog(@"/api/v2/ order/detail: %@", content1);
         
         if (content1) {
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
