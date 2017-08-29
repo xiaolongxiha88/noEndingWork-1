@@ -117,12 +117,16 @@
         NSLog(@"getEnergyList: %@", content);
         if (content) {
             NSString *A1=[NSString stringWithFormat:@"%@%@",monthArray[2],content[@"familyEnergy"][@"monthEnergy"]];
+            A1=@"0 kWh";
             NSString *A2=[NSString stringWithFormat:@"%@%@",monthArray[3],content[@"familyDevice"][@"mostEnergy"]];
+               A2=@"0 kWh";
              NSString *A3=[NSString stringWithFormat:@"%@%@",monthArray[0],content[@"photovoltaicEnergy"][@"monthEnergy"]];
              NSString *A4=[NSString stringWithFormat:@"%@%@",monthArray[1],content[@"storageEnergy"][@"monthEnergy"]];
             
             NSString *B1=[NSString stringWithFormat:@"%@%@",dayArray[2],content[@"familyEnergy"][@"todayEnergy"]];
+            B1=@"0 kWh";
             NSString *B2=[NSString stringWithFormat:@"%@%@",dayArray[3],content[@"familyDevice"][@"mostPower"]];
+            B2=@"0 kWh";
             NSString *B3=[NSString stringWithFormat:@"%@%@",dayArray[0],content[@"photovoltaicEnergy"][@"todayEnergy"]];
             NSString *B4=[NSString stringWithFormat:@"%@%@",dayArray[1],content[@"storageEnergy"][@"todayEnergy"]];
             

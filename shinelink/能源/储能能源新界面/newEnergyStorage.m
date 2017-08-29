@@ -56,6 +56,9 @@
 @property (nonatomic, strong) NSMutableArray *toDetaiDataArray;
 @property (nonatomic, strong) NSMutableArray *toDetaiDataArray2;
 @property (nonatomic, strong) NSMutableArray *toDetaiDataArray3;
+@property (nonatomic, strong) NSMutableArray *boolArray;
+@property (nonatomic, strong) NSArray *colorArray;
+@property (nonatomic, strong) NSArray *UncolorArray;
 @end
 
 
@@ -94,6 +97,12 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [self setTitle:root_energy_title];
     }
     
+      _boolArray=[NSMutableArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO], nil];
+    
+    _colorArray=@[COLOR(255, 217, 35, 1),COLOR(54, 193, 118, 1),COLOR(139, 128, 255, 1),COLOR(14, 239, 246, 1)];
+    float A=0.3;
+    _UncolorArray=@[COLOR(255, 217, 35, A),COLOR(54, 193, 118, A),COLOR(139, 128, 255, A),COLOR(14, 239, 246, A)];
+    
 }
 
 
@@ -119,13 +128,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     [self.view addSubview:_scrollView];
     _scrollView.contentSize = CGSizeMake(SCREEN_Width,3100*ScreenProH);
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.colors = @[(__bridge id)COLOR(7, 149, 239, 1).CGColor, (__bridge id)COLOR(2, 201, 222, 1).CGColor];
-    gradientLayer.locations = nil;
-    gradientLayer.startPoint = CGPointMake(0, 0);
-    gradientLayer.endPoint = CGPointMake(1, 1);
-    gradientLayer.frame = CGRectMake(0, 0, SCREEN_Width, 3100*ScreenProH);
-    [_scrollView.layer addSublayer:gradientLayer];
+    _scrollView.backgroundColor=[UIColor whiteColor];
     
    
         _control=[[UIRefreshControl alloc]init];
@@ -156,19 +159,22 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 -(void)initUIOne{
     
-//    _UiOne=[[UIView alloc]initWithFrame:CGRectMake(0, 0*ScreenProH, SCREEN_Width, ScreenProH*1160)];
-//    [_scrollView addSubview:_UiOne];
-    
-//    UILabel *VL0= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 50*ScreenProH, 750*ScreenProH, ScreenProH*60)];
-//    VL0.font=[UIFont systemFontOfSize:45*ScreenProH];
-//    VL0.textAlignment = NSTextAlignmentCenter;
-//    VL0.text=root_energy_title;
-//    VL0.textColor =[UIColor whiteColor];
-//    [_scrollView addSubview:VL0];
+    UIView *V0=[[UIView alloc]initWithFrame:CGRectMake(0, 0*ScreenProH, SCREEN_Width, 480*ScreenProH-viewAA)];
+    [_scrollView addSubview:V0];
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[(__bridge id)COLOR(0, 156, 255, 1).CGColor, (__bridge id)COLOR(11, 182, 255, 1).CGColor];
+    gradientLayer.locations = nil;
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(1, 1);
+    gradientLayer.frame = CGRectMake(0, 0, V0.frame.size.width, V0.frame.size.height);
+    [V0.layer addSublayer:gradientLayer];
     
     UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 143*ScreenProH-viewAA, SCREEN_Width, ScreenProH*60)];
-    V1.backgroundColor=COLOR(4, 55, 85, 0.1);
     [_scrollView addSubview:V1];
+    
+    UIView *V11=[[UIView alloc]initWithFrame:CGRectMake(30*ScreenProW, 143*ScreenProH-viewAA+ScreenProH*60, SCREEN_Width-60*ScreenProW, ScreenProH*1)];
+    V11.backgroundColor=COLOR(255, 255, 255, 0.8);
+    [_scrollView addSubview:V11];
     
     UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(40*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
     [VM1 setImage:[UIImage imageNamed:@"energyinfo_icon.png"]];
@@ -188,7 +194,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     NSString *N1=root_PCS_danwei; NSString *N2=root_dangri; NSString *N3=root_leiji;
     NSString *N=[NSString stringWithFormat:@"%@:kWh  %@/%@",N1,N2,N3];
     VL2.text=N;
-    VL2.textColor =COLOR(186, 216, 244, 1);
+    VL2.textColor =COLOR(255, 255, 255, 0.95);
     [V1 addSubview:VL2];
 
     _uiview1=[[UIView alloc]initWithFrame:CGRectMake(0, 205*ScreenProH-viewAA, SCREEN_Width, ScreenProH*290)];
@@ -205,7 +211,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=lableName[i];
-        VL1.textColor =COLOR(255, 255, 255, 0.7);
+        VL1.textColor =COLOR(255, 255, 255, 0.95);
         [_uiview1 addSubview:VL1];
     }
     for (int i=0; i<2; i++) {
@@ -228,7 +234,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
            VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=lableName2[i];
-        VL1.textColor =COLOR(255, 255, 255, 0.7);
+        VL1.textColor =COLOR(255, 255, 255, 0.95);
         [_uiview1 addSubview:VL1];
     }
     for (int i=0; i<2; i++) {
@@ -243,10 +249,33 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 }
 
 
+-(void)getCharNum:(UITapGestureRecognizer*)tap{
+    int Num=(int)tap.view.tag-3000;
+    UIButton *button=[tap.view viewWithTag:Num+4000];
+    
+    BOOL isbool=[_boolArray[Num] boolValue];
+    isbool=!isbool;
+    [_boolArray replaceObjectAtIndex:Num withObject:[NSNumber numberWithBool:isbool]];
+    if (isbool) {
+        button.backgroundColor=_colorArray[Num];
+    }else{
+        button.backgroundColor=_UncolorArray[Num];
+    }
+    
+    [self initUILineChart];
+    
+    
+}
+
 -(void)initUITwo{
+ 
+    
     UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 480*ScreenProH-viewAA, SCREEN_Width, ScreenProH*60)];
-    V1.backgroundColor=COLOR(4, 55, 85, 0.1);
     [_scrollView addSubview:V1];
+    
+    UIView *V11=[[UIView alloc]initWithFrame:CGRectMake(30*ScreenProW, 480*ScreenProH-viewAA+ScreenProH*60, SCREEN_Width-60*ScreenProW, ScreenProH*1)];
+    V11.backgroundColor=COLOR(222, 222, 222, 1);
+    [_scrollView addSubview:V11];
     
     UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(40*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
     [VM1 setImage:[UIImage imageNamed:@"energyuse_icon.png"]];
@@ -256,11 +285,11 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL1.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL1.textAlignment = NSTextAlignmentLeft;
     VL1.text=root_nengyuan_chanhao;
-    VL1.textColor =[UIColor whiteColor];
+    VL1.textColor =COLOR(51, 51, 51, 1);
     [V1 addSubview:VL1];
     
     UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(660*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
-    [VM2 setImage:[UIImage imageNamed:@"zhushi11.png"]];
+    [VM2 setImage:[UIImage imageNamed:@"note.png"]];
     VM2.userInteractionEnabled=YES;
     UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail)];
     [VM2 addGestureRecognizer:demo1];
@@ -268,9 +297,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     
     UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(225*ScreenProW, 550*ScreenProH-viewAA, 300*ScreenProW, ScreenProH*60)];
-    V2.layer.borderWidth=1;
+       V2.layer.borderWidth=ScreenProH*1;
     V2.layer.cornerRadius=ScreenProH*60/2.5;
-    V2.layer.borderColor=COLOR(255, 255, 255, 0.7).CGColor;
+    V2.layer.borderColor=COLOR(154, 154, 154, 1).CGColor;
     V2.userInteractionEnabled = YES;
     [_scrollView addSubview:V2];
     
@@ -297,7 +326,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     self.datePickerButton.frame = CGRectMake(30*ScreenProW+30*ScreenProH, 0, CGRectGetWidth(V2.frame) -( 30*ScreenProW+30*ScreenProH)*2, 60*ScreenProH);
     self.currentDay = [_dayFormatter stringFromDate:[NSDate date]];
     [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
-    [self.datePickerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.datePickerButton setTitleColor:COLOR(102, 102, 102, 1) forState:UIControlStateNormal];
     self.datePickerButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.datePickerButton.titleLabel.font = [UIFont boldSystemFontOfSize:28*ScreenProH];
     [self.datePickerButton addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
@@ -306,7 +335,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _typeDic=@{@"1":root_dangri,@"2":root_leiji};
     _selectButton=[[UIButton alloc]initWithFrame:CGRectMake(580*ScreenProW, 560*ScreenProH, 150*ScreenProW, 40*ScreenProH)];
     [_selectButton setTitle:_typeDic[@"1"] forState:0];
-    _selectButton.titleLabel.font=[UIFont boldSystemFontOfSize:28*ScreenProH];
+    _selectButton.titleLabel.font=[UIFont boldSystemFontOfSize:26*ScreenProH];
     [_selectButton addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
     _selectButton.backgroundColor = [UIColor clearColor];
   //  [_scrollView addSubview:_selectButton];
@@ -322,7 +351,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL2.textAlignment = NSTextAlignmentLeft;
     NSString *N=@"W";
     VL2.text=N;
-    VL2.textColor =COLOR(255, 255, 255, 0.8);
+    VL2.textColor =COLOR(51, 51, 51, 1);
     [_scrollView addSubview:VL2];
     
     _type=@"0";
@@ -391,28 +420,41 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _uiview2=[[UIView alloc]initWithFrame:CGRectMake(0*ScreenProW, 1160*ScreenProH-viewAA, 750*ScreenProW, ScreenProH*540)];
     [_scrollView addSubview:_uiview2];
     
-    NSArray *colorArray=@[COLOR(255, 217, 35, 1),COLOR(32, 219, 118, 1),COLOR(104, 247, 252, 1),COLOR(55, 110, 251, 1)];
     NSArray *nameArray=@[root_guangfu_chanchu_1,root_nengyuan_chanch_1,root_yongdian_xiaohao,root_yongdian_xiaohao_1];
     
     for (int i=0; i<4; i++) {
         UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(5*ScreenProW+185*ScreenProW*i, 1160*ScreenProH-HH, 180*ScreenProW, ScreenProH*55)];
         V1.userInteractionEnabled = YES;
+        V1.tag=3000+i;
+        UITapGestureRecognizer * Tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getCharNum:)];
+        [V1 addGestureRecognizer:Tap];
         [_uiview2 addSubview:V1];
         
-       UIButton *button1= [UIButton buttonWithType:UIButtonTypeCustom];
+        UIView *button1= [[UIView alloc]init];
         button1.frame= CGRectMake(40*ScreenProW, 0*ScreenProH, 100*ScreenProW, ScreenProH*20);
-        button1.backgroundColor=colorArray[i];
+        BOOL isbool=[_boolArray[i] boolValue];
+        if (isbool) {
+            button1.backgroundColor=_colorArray[i];
+        }else{
+            button1.backgroundColor=_UncolorArray[i];
+            
+        }
+        
+        button1.userInteractionEnabled=YES;
+        button1.tag=4000+i;
         [V1 addSubview:button1];
-       // [button1 addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
-
+        // [button1 addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
+        
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 25*ScreenProH, 180*ScreenProW, ScreenProH*30)];
         VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
         VL1.adjustsFontSizeToFitWidth=YES;
+        VL1.userInteractionEnabled=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=nameArray[i];
-        VL1.textColor =COLOR(255, 255, 255, 0.8);
+        VL1.textColor =COLOR(102, 102, 102, 1);
         [V1 addSubview:VL1];
     }
+    
   
     UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 1245*ScreenProH-HH, 375*ScreenProW, ScreenProH*40)];
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
@@ -421,7 +463,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     NSString *V2N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"epvToday"] floatValue]];
     NSString *V2LableName=[NSString stringWithFormat:@"%@:%@",V2N1,V2N2];
     VL2.text=V2LableName;
-    VL2.textColor =[UIColor whiteColor];
+    VL2.textColor =COLOR(102, 102, 102, 1);
     [_uiview2 addSubview:VL2];
     
     UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(375*ScreenProW, 1245*ScreenProH-HH, 375*ScreenProW, ScreenProH*40)];
@@ -430,14 +472,14 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     NSString *V3N1=root_zong_yongdian; NSString *V3N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"useEnergyToday"] floatValue]];
     NSString *V3LableName=[NSString stringWithFormat:@"%@:%@",V3N1,V3N2];
     VL3.text=V3LableName;
-    VL3.textColor =[UIColor whiteColor];
+    VL3.textColor =COLOR(102, 102, 102, 1);
     [_uiview2 addSubview:VL3];
     
     UILabel *VL4= [[UILabel alloc] initWithFrame:CGRectMake(680*ScreenProW, 1280*ScreenProH-HH, 60*ScreenProW, ScreenProH*40)];
     VL4.font=[UIFont systemFontOfSize:25*ScreenProH];
     VL4.textAlignment = NSTextAlignmentRight;
     VL4.text=@"kWh";
-    VL4.textColor =COLOR(255, 255, 255, 0.8);
+    VL4.textColor =COLOR(51, 51, 51, 1);
     [_uiview2 addSubview:VL4];
     
     NSString *A1=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"epvGridToday"] floatValue]];
@@ -491,7 +533,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL1.textAlignment = NSTextAlignmentRight;
     NSString *A=[NSString stringWithFormat:@"%@:",root_guangfu_chanchu];
     VL1.text=A;
-    VL1.textColor =COLOR(255, 255, 255, 1);
+    VL1.textColor =COLOR(102, 102, 102, 1);
     [_uiview2 addSubview:VL1];
     
     for (int i=0; i<3; i++) {
@@ -508,7 +550,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=nameArray00[i];
-        VL1.textColor =COLOR(255, 255, 255, 0.8);
+        VL1.textColor =COLOR(102, 102, 102, 1);
         [LV123 addSubview:VL1];
         
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:22*ScreenProH] forKey:NSFontAttributeName];
@@ -533,7 +575,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL100.textAlignment = NSTextAlignmentRight;
     NSString *B=[NSString stringWithFormat:@"%@:",root_zong_yongdian];
     VL100.text=B;
-    VL100.textColor =COLOR(255, 255, 255, 1);
+    VL100.textColor =COLOR(102, 102, 102, 1);
     [_uiview2 addSubview:VL100];
     
     for (int i=0; i<3; i++) {
@@ -550,7 +592,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
            VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=nameArray100[i];
-        VL1.textColor =COLOR(255, 255, 255, 0.8);
+        VL1.textColor =COLOR(102, 102, 102, 1);
         [LV1 addSubview:VL1];
         
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:22*ScreenProH] forKey:NSFontAttributeName];
@@ -578,8 +620,11 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 -(void)initUiThree{
     UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 1730*ScreenProH-viewAA+viewB, SCREEN_Width, ScreenProH*60)];
-    V1.backgroundColor=COLOR(4, 55, 85, 0.1);
     [_scrollView addSubview:V1];
+    
+    UIView *V11=[[UIView alloc]initWithFrame:CGRectMake(30*ScreenProW, 1730*ScreenProH-viewAA+viewB+ScreenProH*60, SCREEN_Width-60*ScreenProW, ScreenProH*1)];
+    V11.backgroundColor=COLOR(222, 222, 222, 1);
+    [_scrollView addSubview:V11];
     
     UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(40*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
     [VM1 setImage:[UIImage imageNamed:@"sp_icon_e.png"]];
@@ -589,11 +634,11 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL1.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL1.textAlignment = NSTextAlignmentLeft;
     VL1.text=root_chuneng_nengyuan;
-    VL1.textColor =[UIColor whiteColor];
+    VL1.textColor =COLOR(51, 51, 51, 1);;
     [V1 addSubview:VL1];
     
     UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(660*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
-    [VM2 setImage:[UIImage imageNamed:@"zhushi11.png"]];
+    [VM2 setImage:[UIImage imageNamed:@"note.png"]];
     VM2.userInteractionEnabled=YES;
     UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail2)];
     [VM2 addGestureRecognizer:demo1];
@@ -603,7 +648,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL2.textAlignment = NSTextAlignmentLeft;
     VL2.text=@"%";
-    VL2.textColor =COLOR(255, 255, 255, 0.8);
+    VL2.textColor =COLOR(51, 51, 51, 1);
     [_scrollView addSubview:VL2];
     
     if (_dataFiveDic.count>0) {
@@ -636,23 +681,38 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         NSRange range = NSMakeRange(0, obj1.length);
         return [obj1 compare:obj2 options:comparisonOptions range:range];
     };
-     NSMutableArray *xArray = [NSMutableArray arrayWithArray:[_dataTwoDic.allKeys sortedArrayUsingComparator:sort]];
-   NSMutableArray *yArray = [NSMutableArray array];
+    NSMutableArray *xArray = [NSMutableArray arrayWithArray:[_dataTwoDic.allKeys sortedArrayUsingComparator:sort]];
+    NSMutableArray *yArray = [NSMutableArray array];
     for (NSString *key in xArray) {
         [yArray addObject:_dataTwoDic[key]];
     }
     
+    NSMutableArray *yArray1 = [NSMutableArray array];
+    NSMutableArray *xArray1 = [NSMutableArray array];
+    for (int i=0; i<xArray.count-2; i++) {
+        if (i%3==0) {
+            float y1=([[yArray[i] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+1] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+2] objectForKey:@"pacToUser"] floatValue])/3;
+            float y2=([[yArray[i] objectForKey:@"ppv"] floatValue]+[[yArray[i+1] objectForKey:@"ppv"] floatValue]+[[yArray[i+2] objectForKey:@"ppv"] floatValue])/3;
+            float y3=([[yArray[i] objectForKey:@"sysOut"] floatValue]+[[yArray[i+1] objectForKey:@"sysOut"] floatValue]+[[yArray[i+2] objectForKey:@"sysOut"] floatValue])/3;
+            float y4=([[yArray[i] objectForKey:@"userLoad"] floatValue]+[[yArray[i+1] objectForKey:@"userLoad"] floatValue]+[[yArray[i+2] objectForKey:@"userLoad"] floatValue])/3;
+            NSDictionary *y0=@{@"pacToUser":[NSNumber numberWithFloat:y1],@"ppv":[NSNumber numberWithFloat:y2],@"sysOut":[NSNumber numberWithFloat:y3],@"userLoad":[NSNumber numberWithFloat:y4]};
+            [xArray1 addObject:xArray[i]];
+            [yArray1 addObject:y0];
+        }
+    }
+    xArray=[NSMutableArray arrayWithArray:xArray1];
+    yArray=[NSMutableArray arrayWithArray:yArray1];
     
     NSMutableArray*Y1=[NSMutableArray array];
     NSMutableArray*Y2=[NSMutableArray array];
     NSMutableArray*Y3=[NSMutableArray array];
     NSMutableArray*Y4=[NSMutableArray array];
-   
+    
     if (yArray.count>0) {
-      
+        
         for (int i=0; i<yArray.count; i++) {
             if ([[yArray[i] objectForKey:@"pacToUser"] floatValue]>=0) {
-                  [Y4 addObject:[yArray[i] objectForKey:@"pacToUser"]];
+                [Y4 addObject:[yArray[i] objectForKey:@"pacToUser"]];
             }else{
                 [Y4 addObject:@"0"];
             }
@@ -671,106 +731,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             }else{
                 [Y3 addObject:@"0"];
             }
-          
+            
         }
     }
-    
     _toDetaiDataArray=[NSMutableArray arrayWithObjects:xArray, Y1,Y2,Y3,Y4,nil];
-    
-    NSMutableArray *tempXArr = [NSMutableArray array];
-    if (xArray.count > 0) {
-        NSString *flag = [[NSMutableString stringWithString:xArray[0]] substringWithRange:NSMakeRange(1, 1)];
-        if ([flag isEqualToString:@":"]) {
-            //从偶数统计
-            for (int i = 1; i <= xArray.count; i++) {
-                if (i % 2 == 0) {
-                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
-                //    NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
-                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
-                } else {
-                  //  NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
-                    [tempXArr addObject:@""];
-                }
-            }
-        } else {
-            //从奇数统计
-            for (int i = 1; i <= xArray.count; i++) {
-                if (i % 2 != 0) {
-                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
-                    //NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
-                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
-                } else {
-           //         NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
-                    [tempXArr addObject:@""];
-                }
-            }
-        }
-    }
-    
-   
-    NSSet *set = [NSSet setWithArray:tempXArr];
-    tempXArr=[NSMutableArray arrayWithArray:[set allObjects]];
-    tempXArr= [NSMutableArray arrayWithArray:[tempXArr sortedArrayUsingComparator:sort]];
-    NSString *AAA=[tempXArr objectAtIndex:0];
-    if (AAA==nil) {
-        [tempXArr removeObjectAtIndex:0];
-    }
-    if ([AAA isEqualToString:@""]) {
-        [tempXArr removeObjectAtIndex:0];
-    }
-    if (AAA==NULL) {
-        [tempXArr removeObjectAtIndex:0];
-    }
-    
-    if (_lineChart) {
-        [_lineChart removeFromSuperview];
-        _lineChart=nil;
-    }
-    
-    _lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 620*ScreenProH-viewAA, 730*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
-    _lineChart.xlableNameArray=[NSArray arrayWithArray:tempXArr];
-      _lineChart.xLineDataArr =xArray;
-   _lineChart.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 10*ScreenProW);
-    
-    _lineChart.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
-    
-    _lineChart.valueArr = @[Y1,Y2,Y3,Y4];
-    _lineChart.showYLevelLine = YES;
-    _lineChart.showYLine = NO;
-    _lineChart.showValueLeadingLine = YES;
-    _lineChart.xDescTextFontSize=20*ScreenProH;
-   _lineChart.yDescTextFontSize=20*ScreenProH;
-    _lineChart.lineWidth=2*ScreenProH;
-    _lineChart.backgroundColor = [UIColor clearColor];
-    _lineChart.hasPoint=NO;
- //   lineChart.showValueLeadingLine=YES;
-    _lineChart.valueLineColorArr =@[COLOR(255, 217, 35, 1),COLOR(32, 219, 118, 1),COLOR(104, 247, 252, 1),COLOR(55, 110, 251, 1)];
-   // _lineChart.pointColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
-    _lineChart.xAndYLineColor = COLOR(255, 255, 255, 0.9);
-    _lineChart.xAndYNumberColor = COLOR(255, 255, 255, 0.8);
-    _lineChart.positionLineColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
-    _lineChart.contentFill = NO;
-    _lineChart.pathCurve = YES;
-    //_lineChart.contentFillColorArr = @[COLOR(255, 217, 35, 0.5),COLOR(32, 219, 118, 0.5),COLOR(104, 247, 252, 0.5),COLOR(14, 222, 228, 0.5)];
-    [_scrollView addSubview:_lineChart];
-    [_lineChart showAnimation];
-
-}
-
--(void)initUILineChart2{
-    
-    NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch|NSNumericSearch|NSWidthInsensitiveSearch|NSForcedOrderingSearch;
-    NSComparator sort = ^(NSString *obj1, NSString *obj2){
-        NSRange range = NSMakeRange(0, obj1.length);
-        return [obj1 compare:obj2 options:comparisonOptions range:range];
-    };
-    NSMutableArray *xArray = [NSMutableArray arrayWithArray:[_dataFiveDic.allKeys sortedArrayUsingComparator:sort]];
-    NSMutableArray *yArray = [NSMutableArray array];
-    for (NSString *key in xArray) {
-        [yArray addObject:_dataFiveDic[key]];
-    }
-    
-     _toDetaiDataArray2=[NSMutableArray arrayWithObjects:xArray,yArray, nil];
     
     NSMutableArray *tempXArr = [NSMutableArray array];
     if (xArray.count > 0) {
@@ -802,7 +766,123 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         }
     }
     
+    
+    NSSet *set = [NSSet setWithArray:tempXArr];
+    tempXArr=[NSMutableArray arrayWithArray:[set allObjects]];
+    tempXArr= [NSMutableArray arrayWithArray:[tempXArr sortedArrayUsingComparator:sort]];
+    NSString *AAA=[tempXArr objectAtIndex:0];
+    if (AAA==nil) {
+        [tempXArr removeObjectAtIndex:0];
+    }
+    if ([AAA isEqualToString:@""]) {
+        [tempXArr removeObjectAtIndex:0];
+    }
+    if (AAA==NULL) {
+        [tempXArr removeObjectAtIndex:0];
+    }
+    
+    
+    NSArray *valueArray0=@[Y1,Y2,Y3,Y4];
+    NSArray *valueLineColorArray0=@[COLOR(255, 217, 35, 1),COLOR(54, 193, 118, 1),COLOR(139, 128, 255, 1),COLOR(14, 239, 246, 1)];
+    float A=0.5;
+    NSArray *contentFillColorArray0=@[COLOR(255, 217, 35, A),COLOR(54, 193, 118, A),COLOR(139, 128, 255, A),COLOR(14, 239, 246, 1)];
+    
+    NSMutableArray *valueArray=[NSMutableArray new];
+    NSMutableArray *valueLineColorArray=[NSMutableArray new];
+    NSMutableArray *contentFillColorArray=[NSMutableArray new];
+    NSMutableArray *positionLineColorArray=[NSMutableArray new];
+    for (int i=0; i<_boolArray.count; i++) {
+        BOOL value=[_boolArray[i] boolValue];
+        if (value) {
+            [valueArray addObject:valueArray0[i]];
+            [valueLineColorArray addObject:valueLineColorArray0[i]];
+            [contentFillColorArray addObject:contentFillColorArray0[i]];
+            [positionLineColorArray addObject:[UIColor clearColor]];
+        }
+    }
+    
+    
+    if (_lineChart) {
+        [_lineChart removeFromSuperview];
+        _lineChart=nil;
+    }
+    
+    _lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 620*ScreenProH-viewAA, 740*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
+    _lineChart.xlableNameArray=[NSArray arrayWithArray:tempXArr];
+    _lineChart.xLineDataArr =xArray;
+    _lineChart.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 0*ScreenProW);
+    
+    _lineChart.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
+    
+    _lineChart.valueArr = valueArray;
+    _lineChart.showYLevelLine = YES;
+    _lineChart.showYLine = YES;
+    //   _lineChart.showValueLeadingLine = YES;
+    _lineChart.xDescTextFontSize=20*ScreenProH;
+    _lineChart.yDescTextFontSize=20*ScreenProH;
+    _lineChart.lineWidth=2*ScreenProH;
+    _lineChart.backgroundColor = [UIColor clearColor];
+    _lineChart.hasPoint=NO;
+    
+    _lineChart.valueLineColorArr =valueLineColorArray;
+    // _lineChart.pointColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
+    _lineChart.xAndYLineColor = COLOR(153, 153, 153, 1);
+    _lineChart.xAndYNumberColor =COLOR(102, 102, 102, 1);
+    _lineChart.positionLineColorArr = positionLineColorArray;
+    _lineChart.contentFill = YES;
+    _lineChart.pathCurve = NO;
+    _lineChart.contentFillColorArr = contentFillColorArray;
+    [_scrollView addSubview:_lineChart];
+    [_lineChart showAnimation];
+    
+}
 
+-(void)initUILineChart2{
+    
+    NSStringCompareOptions comparisonOptions = NSCaseInsensitiveSearch|NSNumericSearch|NSWidthInsensitiveSearch|NSForcedOrderingSearch;
+    NSComparator sort = ^(NSString *obj1, NSString *obj2){
+        NSRange range = NSMakeRange(0, obj1.length);
+        return [obj1 compare:obj2 options:comparisonOptions range:range];
+    };
+    NSMutableArray *xArray = [NSMutableArray arrayWithArray:[_dataFiveDic.allKeys sortedArrayUsingComparator:sort]];
+    NSMutableArray *yArray = [NSMutableArray array];
+    for (NSString *key in xArray) {
+        [yArray addObject:_dataFiveDic[key]];
+    }
+    
+    _toDetaiDataArray2=[NSMutableArray arrayWithObjects:xArray,yArray, nil];
+    
+    NSMutableArray *tempXArr = [NSMutableArray array];
+    if (xArray.count > 0) {
+        NSString *flag = [[NSMutableString stringWithString:xArray[0]] substringWithRange:NSMakeRange(1, 1)];
+        if ([flag isEqualToString:@":"]) {
+            //从偶数统计
+            for (int i = 1; i <= xArray.count; i++) {
+                if (i % 2 == 0) {
+                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
+                    //    NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
+                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
+                } else {
+                    //  NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
+                    [tempXArr addObject:@""];
+                }
+            }
+        } else {
+            //从奇数统计
+            for (int i = 1; i <= xArray.count; i++) {
+                if (i % 2 != 0) {
+                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
+                    //NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
+                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
+                } else {
+                    //         NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
+                    [tempXArr addObject:@""];
+                }
+            }
+        }
+    }
+    
+    
     NSSet *set = [NSSet setWithArray:tempXArr];
     tempXArr=[NSMutableArray arrayWithArray:[set allObjects]];
     tempXArr= [NSMutableArray arrayWithArray:[tempXArr sortedArrayUsingComparator:sort]];
@@ -821,39 +901,42 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         _lineChart2=nil;
     }
     
-    _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-viewAA+viewB, 730*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
+  // _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-viewAA+viewB, 730*ScreenProW, 530*ScreenProH)
+    
+ _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-viewAA+viewB, 730*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
+                  
     _lineChart2.xlableNameArray=[NSArray arrayWithArray:tempXArr];
     _lineChart2.xLineDataArr =xArray;
     _lineChart2.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 10*ScreenProW);
     
     _lineChart2.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
-    
+    _lineChart2.isOnlyOne=YES;
     _lineChart2.valueArr = @[yArray];
     _lineChart2.showYLevelLine = YES;
-    _lineChart2.showYLine = NO;
+    _lineChart2.showYLine = YES;
     _lineChart2.showValueLeadingLine = YES;
     _lineChart2.xDescTextFontSize=20*ScreenProH;
     _lineChart2.yDescTextFontSize=20*ScreenProH;
-    _lineChart2.lineWidth=2*ScreenProH;
+    _lineChart2.lineWidth=1*ScreenProH;
     _lineChart2.backgroundColor = [UIColor clearColor];
     _lineChart2.hasPoint=NO;
     //   lineChart.showValueLeadingLine=YES;
-    _lineChart2.valueLineColorArr =@[COLOR(48, 233, 255, 0.5)];
-   // _lineChart2.pointColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
-    _lineChart2.xAndYLineColor = COLOR(255, 255, 255, 0.9);
-    _lineChart2.xAndYNumberColor = COLOR(255, 255, 255, 0.8);
+    _lineChart2.valueLineColorArr =@[COLOR(89, 225, 151, 1)];
+    // _lineChart2.pointColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
+    _lineChart2.xAndYLineColor = COLOR(153, 153, 153, 1);
+    _lineChart2.xAndYNumberColor =COLOR(102, 102, 102, 1);
     _lineChart2.positionLineColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
     _lineChart2.contentFill = YES;
     _lineChart2.pathCurve = YES;
-    _lineChart2.contentFillColorArr = @[COLOR(48, 233, 255, 0.5)];
+    _lineChart2.contentFillColorArr = @[COLOR(89, 225, 151, 0.6)];
     [_scrollView addSubview:_lineChart2];
     [_lineChart2 showAnimation];
     
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2350*ScreenProH-viewAA+viewB, 730*ScreenProW, 30*ScreenProH)];
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2350*ScreenProH+viewB-viewAA, 730*ScreenProW, 30*ScreenProH)];
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL2.textAlignment = NSTextAlignmentCenter;
     VL2.text=root_shishi_SOC;
-    VL2.textColor =COLOR(255, 255, 255, 1);
+    VL2.textColor =COLOR(102, 102, 102, 1);
     [_scrollView addSubview:VL2];
     
 }

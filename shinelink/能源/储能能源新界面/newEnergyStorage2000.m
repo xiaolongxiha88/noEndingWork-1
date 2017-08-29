@@ -245,7 +245,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [V1 addSubview:VM2];
     
     UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(225*ScreenProW, 550*ScreenProH-view1H-viewAA, 300*ScreenProW, ScreenProH*60)];
-    V2.layer.borderWidth=1;
+    V2.layer.borderWidth=ScreenProH*1;
     V2.layer.cornerRadius=ScreenProH*60/2.5;
     V2.layer.borderColor=COLOR(154, 154, 154, 1).CGColor;
     V2.userInteractionEnabled = YES;
@@ -276,7 +276,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
     [self.datePickerButton setTitleColor:COLOR(102, 102, 102, 1) forState:UIControlStateNormal];
     self.datePickerButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.datePickerButton.titleLabel.font = [UIFont boldSystemFontOfSize:28*ScreenProH];
+    self.datePickerButton.titleLabel.font = [UIFont boldSystemFontOfSize:26*ScreenProH];
     [self.datePickerButton addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
     [V2 addSubview:self.datePickerButton];
     
@@ -777,6 +777,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         _lineChart2=nil;
     }
     
+    //    _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-viewAA+viewB, 730*ScreenProW, 530*ScreenProH)
+                       
     _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-view2H-viewAA, 730*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
     _lineChart2.xlableNameArray=[NSArray arrayWithArray:tempXArr];
     _lineChart2.xLineDataArr =xArray;

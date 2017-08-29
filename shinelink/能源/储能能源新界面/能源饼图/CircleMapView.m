@@ -207,9 +207,9 @@
         CGContextSetFillColorWithColor(ctx , color.CGColor);
         CGContextStrokePath(ctx);
         //指引线上面的数字
-        [[NSString stringWithFormat:@"%@",_dataArray[n][@"number"]] drawAtPoint:CGPointMake(numberStartX, numberStartY) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20*ScreenProH],NSForegroundColorAttributeName:COLOR(255, 255, 255, 1)}];
+        [[NSString stringWithFormat:@"%@",_dataArray[n][@"number"]] drawAtPoint:CGPointMake(numberStartX, numberStartY) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20*ScreenProH],NSForegroundColorAttributeName:COLOR(102, 102, 102, 1)}];
         //指引线下面的text
-         [[NSString stringWithFormat:@"%@",_dataArray[n][@"name"]] drawAtPoint:CGPointMake(textStartX, textStartY) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20*ScreenProH],NSForegroundColorAttributeName:COLOR(255, 255, 255, 1)}];
+         [[NSString stringWithFormat:@"%@",_dataArray[n][@"name"]] drawAtPoint:CGPointMake(textStartX, textStartY) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:20*ScreenProH],NSForegroundColorAttributeName:COLOR(102, 102, 102, 1)}];
         
         
 //        NSMutableParagraphStyle * paragraph = [[NSMutableParagraphStyle alloc]init];

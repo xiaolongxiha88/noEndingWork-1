@@ -47,7 +47,7 @@ class ossFistVC: RootViewController {
         if roleString=="3" || roleString=="2" || roleString=="1"{
     
             self.initNet0()
-        }else if roleString=="6"{
+        }else if roleString=="6"  || roleString=="14"{
        
             self.initNet1()
             self.initNet4()
@@ -70,9 +70,10 @@ class ossFistVC: RootViewController {
    self.navigationController?.setNavigationBarHidden(false, animated: false)
 
 
-        self.initLeftItem()
+     
            roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString!
         
+           self.initLeftItem()
         serverNumArray=[0,0]
         orderNumArray=[0,0]
         infoString=""
@@ -85,7 +86,7 @@ class ossFistVC: RootViewController {
         if roleString=="3" || roleString=="2" || roleString=="1"{
                 self.initUItwo()
         
-        }else if roleString=="6"{
+        }else if roleString=="6" || roleString=="14"{
               self.initUIThree()
          
             
@@ -99,15 +100,23 @@ class ossFistVC: RootViewController {
     func initLeftItem(){
         let item0Name="退出账户"
           let item1Name="工具"
+        let numArray:NSArray
+        
         let item0=DTKDropdownItem.init(title: item0Name, iconName: "Quick", callBack:{ (dropMenuCallBack)->() in
        self.initAlertView()
             
         } )
-        let item1=DTKDropdownItem.init(title: item1Name, iconName: "Check", callBack:{ (dropMenuCallBack)->() in
-            let vc=ossTool()
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-        } )
+        
+        if roleString=="3" || roleString=="2" || roleString=="1"{
+            let item1=DTKDropdownItem.init(title: item1Name, iconName: "Check", callBack:{ (dropMenuCallBack)->() in
+                let vc=ossTool()
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            } )
+    numArray=[item0!,item1!]
+        }else{
+         numArray=[item0!]
+        }
         
         let attributes1:NSDictionary = NSDictionary(object:UIFont.systemFont(ofSize: 14*HEIGHT_SIZE),
                                                     forKey: NSFontAttributeName as NSCopying)
@@ -116,7 +125,9 @@ class ossFistVC: RootViewController {
                let H2=self.navigationController?.navigationBar.frame.size.height;
                 let bH=16*HEIGHT_SIZE
         
-        let menuView=DTKDropdownMenuView.init(type:dropDownTypeLeftItem , frame: CGRect(x: 0*NOW_SIZE, y: (H2!-bH)/2, width: bH, height: bH), dropdownItems: [item0!,item1!], icon:"more2@2x.png")!
+        
+
+        let menuView=DTKDropdownMenuView.init(type:dropDownTypeLeftItem , frame: CGRect(x: 0*NOW_SIZE, y: (H2!-bH)/2, width: bH, height: bH), dropdownItems: numArray as! [Any], icon:"more2@2x.png")!
         menuView.dropWidth = size1.width+10*NOW_SIZE
         menuView.cellHeight = 30*HEIGHT_SIZE
         menuView.titleFont = UIFont.systemFont(ofSize:14*HEIGHT_SIZE)
@@ -996,7 +1007,7 @@ class ossFistVC: RootViewController {
             let vc=ossDeviceFirst()
             vc.serverListArray=self.serverListArray
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if roleString=="6"{
+        }else if roleString=="6"  || roleString=="14"{
             UserDefaults.standard.set("", forKey: "searchDeviceAddress")
             
             let vc=IntegratorFirst()
