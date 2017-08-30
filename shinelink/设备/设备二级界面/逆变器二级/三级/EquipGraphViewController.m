@@ -67,6 +67,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 @property (nonatomic, strong) UILabel *upAlert;
 @property (nonatomic, strong) UIImageView *upImage;
 @property (nonatomic, strong)UIImageView *selectViewBg;
+@property(nonatomic,strong)NSString *unitLaleName;
 
 @end
 
@@ -444,6 +445,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 
                   [_scrollView addSubview:_upImage];
                    [_scrollView addSubview:_upAlert];
+                
+                if ([_StorageTypeNum isEqualToString:@"1"]) {
+                    self.line2View.unitLaleName=_unitLaleName;
+                }
                 [self.line2View refreshLineChartViewWithDataDict:_dayDict];
             }
             
@@ -1228,22 +1233,41 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 [_editGraph removeFromSuperview];
                 NSString *string=[NSString stringWithFormat:@"%d",i+1];
                 [_selectButton setTitle:_dict[string] forState:0];
-                _type=string;
-                [self requestDayDatasWithDayString:self.currentDay];
-                if ([_dict[string] isEqualToString:root_INPUT_VOLTAGE]||
-                    [_dict[string] isEqualToString:root_PV1_VOLTAGE]||
-                    [_dict[string] isEqualToString:root_PV2_VOLTAGE]) {
-                    _line2View.unitLabel.text=root_Voltage;
-                }else if([_dict[string] isEqualToString:root_INPUT_CURRENT]||
-                         [_dict[string] isEqualToString:root_PV1_ELEC_CURRENT]||
-                         [_dict[string] isEqualToString:root_PV2_ELEC_CURRENT]){
-                    _line2View.unitLabel.text=root_Electron_flow;
-                }else if([_dict[string] isEqualToString:root_dianchi]||
-                         [_dict[string] isEqualToString:root_dianchi]||
-                         [_dict[string] isEqualToString:root_dianchi]){
-                    _line2View.unitLabel.text=root_dianchi;
+           
+                if ([_StorageTypeNum isEqualToString:@"1"]) {
+                    int typeNum=[string intValue];
+                    if (typeNum==1 || typeNum==2 || typeNum==7) {
+                         _unitLaleName=@"W";
+                    }else if (typeNum==3 || typeNum==4 || typeNum==6 || typeNum==8 || typeNum==9) {
+                        _unitLaleName=@"V";
+                    }else if (typeNum==5) {
+                       _unitLaleName=@"%";
+                    }else if (typeNum==10 || typeNum==11 || typeNum==12 || typeNum==13) {
+                        _unitLaleName=@"kWh";
+                    }
+                    
+                    _type=[self getPCS5000type:string];
                 }else{
-                    _line2View.unitLabel.text=root_Powre;
+                     _type=string;
+                }
+                
+                [self requestDayDatasWithDayString:self.currentDay];
+                if (![_StorageTypeNum isEqualToString:@"1"]) {
+                    if ([_dict[string] isEqualToString:root_INPUT_VOLTAGE]||
+                        [_dict[string] isEqualToString:root_PV1_VOLTAGE]||
+                        [_dict[string] isEqualToString:root_PV2_VOLTAGE]) {
+                        _line2View.unitLabel.text=root_Voltage;
+                    }else if([_dict[string] isEqualToString:root_INPUT_CURRENT]||
+                             [_dict[string] isEqualToString:root_PV1_ELEC_CURRENT]||
+                             [_dict[string] isEqualToString:root_PV2_ELEC_CURRENT]){
+                        _line2View.unitLabel.text=root_Electron_flow;
+                    }else if([_dict[string] isEqualToString:root_dianchi]||
+                             [_dict[string] isEqualToString:root_dianchi]||
+                             [_dict[string] isEqualToString:root_dianchi]){
+                        _line2View.unitLabel.text=root_dianchi;
+                    }else{
+                        _line2View.unitLabel.text=root_Powre;
+                    }
                 }
 
             }
@@ -1282,6 +1306,42 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
 }
 
+
+
+
+-(NSString*)getPCS5000type:(NSString*)typeString{
+    NSString* NUM;
+    if ([typeString isEqualToString:@"1"]) {
+        NUM=@"8";
+    }else if ([typeString isEqualToString:@"2"]) {
+        NUM=@"10";
+    }else if ([typeString isEqualToString:@"3"]) {
+        NUM=@"3";
+    }else if ([typeString isEqualToString:@"4"]) {
+        NUM=@"9";
+    }else if ([typeString isEqualToString:@"5"]) {
+        NUM=@"7";
+    }else if ([typeString isEqualToString:@"6"]) {
+        NUM=@"11";
+    }else if ([typeString isEqualToString:@"7"]) {
+        NUM=@"12";
+    }else if ([typeString isEqualToString:@"8"]) {
+        NUM=@"13";
+    }else if ([typeString isEqualToString:@"9"]) {
+        NUM=@"14";
+    }else if ([typeString isEqualToString:@"10"]) {
+        NUM=@"15";
+    }else if ([typeString isEqualToString:@"11"]) {
+        NUM=@"16";
+    }else if ([typeString isEqualToString:@"12"]) {
+        NUM=@"17";
+    }else if ([typeString isEqualToString:@"13"]) {
+        NUM=@"18";
+    }
+    
+    
+    return NUM;
+}
 
 -(CABasicAnimation *)opacityForever_Animation:(float)time{
     

@@ -100,6 +100,9 @@
         self.moneyTitleLabel.text = NSLocalizedString(@"Daily income", @"Daily income");
         self.energyTitleLabel.text = root_Today_Energy;
         self.unitLabel.text = root_Powre;
+        if ((_unitLaleName!=nil) || ![_unitLaleName isEqualToString:@""]) {
+            self.unitLabel.text = _unitLaleName;
+        }
     } else if (type == 2) {
         self.moneyTitleLabel.text = root_Earnings;
         self.energyTitleLabel.text = root_Month_energy;

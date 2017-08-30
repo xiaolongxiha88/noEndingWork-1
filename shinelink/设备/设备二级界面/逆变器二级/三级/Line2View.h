@@ -14,6 +14,8 @@
 @property (nonatomic, strong) UILabel *unitLabel;
 @property (nonatomic, strong) UILabel *energyTitleLabel;
 @property (nonatomic, strong) NSString *frameType;
+@property(nonatomic,strong)NSString *unitLaleName;
+
 
 @property (assign, nonatomic) BOOL isStorage;//间距数量
 

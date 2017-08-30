@@ -41,7 +41,7 @@
         VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=nameArray[i];
-        VL1.textColor =[UIColor greenColor];
+        VL1.textColor =COLOR(163, 255, 188, 1);
         [self.view addSubview:VL1];
     }
     
@@ -88,7 +88,7 @@
         VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=nameArray[i];
-        VL1.textColor =[UIColor greenColor];
+        VL1.textColor =COLOR(163, 255, 188, 1);
         [self.view addSubview:VL1];
     }
     

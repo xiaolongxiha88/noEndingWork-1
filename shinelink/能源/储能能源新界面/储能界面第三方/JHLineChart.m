@@ -565,7 +565,7 @@
             CGPoint p = [arr[i] CGPointValue];
             UIColor *positionLineColor;
             if (_positionLineColorArr.count == _valueArr.count) {
-                positionLineColor =COLOR(186, 186, 186, 1);
+                positionLineColor =COLOR(153, 153, 153, 1);
             }else
                 positionLineColor = [UIColor orangeColor];
 

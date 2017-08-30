@@ -141,7 +141,7 @@
         _maxHeight = max;
     }
     
-    _maxHeight += 4;
+    //_maxHeight += 4;
     _perHeight = (CGRectGetHeight(self.frame) - 30 - _originSize.y)/_maxHeight;
     
     
@@ -174,7 +174,7 @@
         _maxHeight = max;
     }
     
-    _maxHeight += 4;
+   // _maxHeight += 4;
     _perHeight = (CGRectGetHeight(self.frame)-_originSize.y)/_valueArr.count;
     
     
@@ -204,7 +204,7 @@
         
         if (self.isShowYLine) {
             [bezier moveToPoint:CGPointMake(self.originSize.x, CGRectGetHeight(self.frame) - self.originSize.y)];
-             [bezier addLineToPoint:P_M(self.originSize.x, 20)];
+             [bezier addLineToPoint:P_M(self.originSize.x, 0)];
         }
         
         [bezier moveToPoint:CGPointMake(self.originSize.x, CGRectGetHeight(self.frame) - self.originSize.y)];
@@ -239,9 +239,9 @@
         
         /*        设置虚线辅助线         */
         UIBezierPath *second = [UIBezierPath bezierPath];
-        for (NSInteger i = 0; i<5; i++) {
-            NSInteger pace = (_maxHeight) / 5;
-            CGFloat height = _perHeight * (i+1)*pace;
+        for (NSInteger i = 0; i<_valueArr.count; i++) {
+            NSInteger pace = (_maxHeight) / _valueArr.count;
+            CGFloat height = _perHeight * (i+1);
             [second moveToPoint:P_M(_originSize.x, CGRectGetHeight(self.frame) - _originSize.y -height)];
             [second addLineToPoint:P_M(_maxWidth, CGRectGetHeight(self.frame) - _originSize.y - height)];
             
@@ -265,6 +265,7 @@
             
             textLayer.foregroundColor = (_drawTextColorForX_Y==nil?COLOR(255, 255, 255, 0.8).CGColor:_drawTextColorForX_Y.CGColor);
             [_BGScrollView.layer addSublayer:textLayer];
+            
             [self.layerArr addObject:textLayer];
 
         }
@@ -273,7 +274,7 @@
         
         shapeLayer.path = second.CGPath;
         
-        shapeLayer.strokeColor = (_dashColor==nil?(COLOR(255, 255, 255, 0.6).CGColor):_dashColor.CGColor);
+        shapeLayer.strokeColor = (_dashColor==nil?(COLOR(186, 186, 186, 1).CGColor):_dashColor.CGColor);
         
         shapeLayer.lineWidth = 0.5;
         

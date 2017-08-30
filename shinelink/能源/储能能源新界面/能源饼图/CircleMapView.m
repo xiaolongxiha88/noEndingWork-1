@@ -99,13 +99,13 @@
     CGContextAddArc(ctx, point.x, point.y, _circleRadius,  angle_start, angle_end, 0);
     CGContextFillPath(ctx);
     // 弧度的中心角度
-    CGFloat h = (angle_end + angle_start) / 2.0;
+    // CGFloat h = (angle_end + angle_start) / 2.0;
     //小圆的中心点
-    CGFloat xx = self.frame.size.width / 2 + (_circleRadius + 5) * cos(h);
-    CGFloat yy = self.frame.size.height / 2 + (_circleRadius + 5) * sin(h);
+//    CGFloat xx = self.frame.size.width / 2 + (_circleRadius + 5) * cos(h);
+//    CGFloat yy = self.frame.size.height / 2 + (_circleRadius + 5) * sin(h);
     
     //画线
-    [self addLineAndnumber:color andCGContextRef:ctx andX:xx andY:yy andInt:n angele:h];
+//    [self addLineAndnumber:color andCGContextRef:ctx andX:xx andY:yy andInt:n angele:h];
 }
 /**
  * @color 颜色

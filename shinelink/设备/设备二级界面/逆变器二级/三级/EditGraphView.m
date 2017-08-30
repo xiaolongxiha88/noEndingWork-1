@@ -32,12 +32,15 @@
             addButton.frame = CGRectMake(0, i*50*HEIGHT_SIZE, CGRectGetWidth(bgImageView.frame), 50*HEIGHT_SIZE);
             
             NSString *str=@"str";
-            
             if ([[dictionary[string] class] isEqual:[root_Yes class]] || [[dictionary[string] class] isEqual:[str class]] || [[NSString stringWithFormat:@"%@",[dictionary[string] class]] isEqualToString:@"__NSCFString"]) {
                 [addButton setTitle:dictionary[string] forState:UIControlStateNormal];
             }else{
                 [addButton setTitle:dictionary[string][1] forState:UIControlStateNormal];
             }
+            
+           // NSString *titleName=dictionary[string];
+         //   [addButton setTitle:titleName forState:UIControlStateNormal];
+            
             addButton.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
             addButton.titleLabel.adjustsFontSizeToFitWidth=YES;
             [addButton setTitleColor:MainColor forState:UIControlStateNormal];

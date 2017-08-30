@@ -403,7 +403,7 @@ class IntegratorFirst: RootViewController {
         agentCodeArray=["0","1"]
         agentCompanyArray=["所有代理商","没有代理商"]
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v1/customer/agent_list", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v2/customer/agent_list", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
             let data:Data=successBlock as! Data
@@ -448,7 +448,7 @@ class IntegratorFirst: RootViewController {
         netDic=["deviceType":deviceType,"accessStatus":accessStatus,"agentCode":agentCodeString,"plantName":plantName,"userName":userName,"datalogSn":datalogSnString,"deviceSn":deviceString]
         
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/customer/device_num", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v2/customer/device_num", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
             let data:Data=successBlock as! Data

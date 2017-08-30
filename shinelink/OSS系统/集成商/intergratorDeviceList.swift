@@ -82,7 +82,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
           let DicAll=self.netAllDic as Dictionary
         
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:DicAll, paramarsSite: "/api/v1/customer/device_list", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:DicAll, paramarsSite: "/api/v2/customer/device_list", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
             let data:Data=successBlock as! Data

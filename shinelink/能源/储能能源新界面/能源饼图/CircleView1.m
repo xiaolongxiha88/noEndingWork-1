@@ -70,7 +70,7 @@
 //添加圆形比例图
 -(void)addCirclView:(NSMutableArray *)arr{
     if (!circleView1) {
-        circleView1 = [[CircleMapView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, PIE_HEIGHT) andWithDataArray:arr andWithCircleRadius:Radius];
+        circleView1 = [[CircleMapView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height) andWithDataArray:arr andWithCircleRadius:self.frame.size.height/2];
         circleView1.backgroundColor = [UIColor clearColor];
         circleView1.dataArray = self.dataArray;
     }

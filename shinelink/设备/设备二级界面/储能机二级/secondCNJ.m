@@ -150,9 +150,19 @@
 }
 
 -(void)goThree{
+    if (![_typeNum isEqualToString:@"1"]) {
+        [self goThreeSP];
+    }else{
+        [self goThreeSPF5000];
+    }
+    
+}
+
+
+-(void)goThreeSP{
     EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
     equipGraph.deviceType=@"S";
-       equipGraph.SnID=_deviceSN;
+    equipGraph.SnID=_deviceSN;
     equipGraph.StorageTypeNum=_typeNum;
     equipGraph.dictInfo=@{@"equipId":_deviceSN,
                           @"daySite":@"/newStorageAPI.do?op=getDayLineStorage",
@@ -164,6 +174,27 @@
     equipGraph.dictYear=@{@"1":root_YEAR_BATTERY_CHARGE, @"2":root_YEAR_CHARGED, @"3":root_YEAR_DISCHARGED};
     equipGraph.dictAll=@{@"1":root_TOTAL_BATTERY_CHARGE, @"2":root_TOTAL_CHARGED, @"3":root_TOTAL_DISCHARGED};
     [self.navigationController pushViewController:equipGraph animated:YES];
+
+}
+
+
+-(void)goThreeSPF5000{
+    EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
+    equipGraph.deviceType=@"S";
+    equipGraph.SnID=_deviceSN;
+    equipGraph.StorageTypeNum=_typeNum;
+    equipGraph.dictInfo=@{@"equipId":_deviceSN,
+                          @"daySite":@"/newStorageAPI.do?op=getDayLineStorage",
+                          @"monthSite":@"/newStorageAPI.do?op=getMonthLineStorage",
+                          @"yearSite":@"/newStorageAPI.do?op=getYearLineStorage",
+                          @"allSite":@"/newStorageAPI.do?op=getTotalLineStorage"};
+    equipGraph.dict=@{@"1": root_5000Chart_157, @"2":root_5000Chart_158, @"3":root_5000Chart_159, @"4":root_5000Chart_160, @"5":root_5000Chart_161, @"6":root_5000Chart_162,@"7":root_5000Chart_163,@"8":root_5000Chart_164,@"9":root_5000Chart_165,@"10": root_5000Chart_166,@"11": root_5000Chart_167,@"12": root_5000Chart_168,@"13": root_5000Chart_169};
+    equipGraph.dictMonth=@{@"1":root_MONTH_BATTERY_CHARGE, @"2":root_MONTHLY_CHARGED, @"3":root_MONTHLY_DISCHARGED};
+    equipGraph.dictYear=@{@"1":root_YEAR_BATTERY_CHARGE, @"2":root_YEAR_CHARGED, @"3":root_YEAR_DISCHARGED};
+    equipGraph.dictAll=@{@"1":root_5000Chart_170, @"2":root_5000Chart_172, @"3":root_5000Chart_173};
+    [self.navigationController pushViewController:equipGraph animated:YES];
+    
+    
     
 }
 

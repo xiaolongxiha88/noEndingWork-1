@@ -761,5 +761,24 @@
 #define  root_5000Control_155  NSLocalizedString(@"155铅酸电池", nil)
 #define  root_5000Control_156  NSLocalizedString(@"156自定义铅酸电池", nil)
 
+#define  root_5000Chart_157  NSLocalizedString(@"157PV1功率", nil)
+#define  root_5000Chart_158  NSLocalizedString(@"158PV2功率", nil)
+#define  root_5000Chart_159  NSLocalizedString(@"159PV1电压", nil)
+#define  root_5000Chart_160  NSLocalizedString(@"160PV2电压", nil)
+#define  root_5000Chart_161  NSLocalizedString(@"161电池的SOC", nil)
+#define  root_5000Chart_162  NSLocalizedString(@"162电池的电压", nil)
+#define  root_5000Chart_163  NSLocalizedString(@"163负载的功率", nil)
+#define  root_5000Chart_164  NSLocalizedString(@"164负载的电压", nil)
+#define  root_5000Chart_165  NSLocalizedString(@"165市电电压", nil)
+#define  root_5000Chart_166  NSLocalizedString(@"166Pv当天充电量", nil)
+#define  root_5000Chart_167  NSLocalizedString(@"167AC当天充电量", nil)
+#define  root_5000Chart_168  NSLocalizedString(@"168电池当天充电量", nil)
+#define  root_5000Chart_169  NSLocalizedString(@"169电池当天放电量", nil)
+#define  root_5000Chart_170  NSLocalizedString(@"170Pv的总充电量", nil)
+#define  root_5000Chart_171  NSLocalizedString(@"171AC的总充电量", nil)
+#define  root_5000Chart_172  NSLocalizedString(@"172电池总的充电量", nil)
+#define  root_5000Chart_173  NSLocalizedString(@"173电池总的放电量", nil)
+
+
 
 #endif /* languageNew_h */

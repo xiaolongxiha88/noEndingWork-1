@@ -22,6 +22,7 @@
 @property (nonatomic, strong)  NSMutableArray *pv22;
 @property (nonatomic, strong)  NSMutableArray *pv31;
 @property (nonatomic, strong)  NSMutableArray *pv32;
+@property (nonatomic, strong)  NSArray *SPF5000Array;
 
 @property (nonatomic, strong)  NSString *Version;
 @end
@@ -68,36 +69,15 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
         if (content) {
           
             
-               NSString *C1=[NSString stringWithFormat:@"%@",content[@"vpv"]];
-               NSString *C2=[NSString stringWithFormat:@"%@",content[@"vbat"]];
-               NSString *C3=[NSString stringWithFormat:@"%@",content[@"vGuid"]];
-            
-               NSString *D1=[NSString stringWithFormat:@"%@",content[@"ipv"]];
-               NSString *D2=[NSString stringWithFormat:@"%@",content[@"ibat"]];
-               NSString *D3=[NSString stringWithFormat:@"%@",content[@"iGuid"]];
-            
-               NSString *E1=[NSString stringWithFormat:@"%@",content[@"ppv"]];
-               NSString *E2=[NSString stringWithFormat:@"%@",content[@"pbat"]];
-               NSString *E3=[NSString stringWithFormat:@"%@",content[@"pGuid"]];
-            
-            [_pv12 addObject:C1];
-             [_pv12 addObject:C2];
-             [_pv12 addObject:C3];
-            
-                [_pv22 addObject:D1];
-                 [_pv22 addObject:D2];
-                 [_pv22 addObject:D3];
-            
-             [_pv32 addObject:E1];
-             [_pv32 addObject:E2];
-             [_pv32 addObject:E3];
             
            
              [self initUI];
+            
+            
             if ([_typeNum isEqualToString:@"1"]) {
-                [self initUIThree];
+                [self getPCS5000data:content];
             }else{
-              [self initUITwo];
+                [self getSPdata:content];
             }
             
           
@@ -110,6 +90,59 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
 
 
 }
+
+-(void)getPCS5000data:(NSDictionary*)content{
+    
+//      NSArray *nameArray=@[@"Vb/Cb",@"Vpv",@"Ic_pv",@"Ppv",@"Ac_In",@"Ac_Out",@"PL",@"Per_Load",@"Epv_d",@"Epv_a",@"Ec_day",@"Ec_all",@"Ed_day",@"Ed_all"];
+    
+    _SPF5000Array=@[[NSString stringWithFormat:@"%@V/%@%%",content[@"vbat"],content[@"capacity"]],
+                    [NSString stringWithFormat:@"%@V/%@V",content[@"vpv1"],content[@"vpv2"]],
+                      [NSString stringWithFormat:@"%@A/%@A",content[@"iChargePV1"],content[@"iChargePV2"]],
+                      [NSString stringWithFormat:@"%@W/%@W",content[@"pCharge1"],content[@"pCharge2"]],
+                     [NSString stringWithFormat:@"%@V/%@Hz",content[@"vGrid"],content[@"freqGrid"]],
+                    [NSString stringWithFormat:@"%@V/%@Hz",content[@"outPutVolt"],content[@"freqOutPut"]],
+                    [NSString stringWithFormat:@"%@W",content[@"outPutPower"]],
+                    [NSString stringWithFormat:@"%@%%",content[@"loadPercent"]],
+                    [NSString stringWithFormat:@"%@kWh",content[@"epvToday"]],
+                      [NSString stringWithFormat:@"%@kWh",content[@"epvTotal"]],
+                     [NSString stringWithFormat:@"%@kWh",content[@"eBatChargeToday"]],
+                       [NSString stringWithFormat:@"%@kWh",content[@"eBatChargeTotal"]],
+                     [NSString stringWithFormat:@"%@kWh",content[@"eBatDisChargeToday"]],
+                      [NSString stringWithFormat:@"%@kWh",content[@"eBatDisChargeTotal"]]
+                    ];
+    
+  [self initUIThree];
+}
+
+-(void)getSPdata:(NSDictionary*)content{
+    NSString *C1=[NSString stringWithFormat:@"%@",content[@"vpv"]];
+    NSString *C2=[NSString stringWithFormat:@"%@",content[@"vbat"]];
+    NSString *C3=[NSString stringWithFormat:@"%@",content[@"vGuid"]];
+    
+    NSString *D1=[NSString stringWithFormat:@"%@",content[@"ipv"]];
+    NSString *D2=[NSString stringWithFormat:@"%@",content[@"ibat"]];
+    NSString *D3=[NSString stringWithFormat:@"%@",content[@"iGuid"]];
+    
+    NSString *E1=[NSString stringWithFormat:@"%@",content[@"ppv"]];
+    NSString *E2=[NSString stringWithFormat:@"%@",content[@"pbat"]];
+    NSString *E3=[NSString stringWithFormat:@"%@",content[@"pGuid"]];
+    
+    [_pv12 addObject:C1];
+    [_pv12 addObject:C2];
+    [_pv12 addObject:C3];
+    
+    [_pv22 addObject:D1];
+    [_pv22 addObject:D2];
+    [_pv22 addObject:D3];
+    
+    [_pv32 addObject:E1];
+    [_pv32 addObject:E2];
+    [_pv32 addObject:E3];
+
+           [self initUITwo];
+}
+
+
 
 -(void)initdata{
 
@@ -237,7 +270,7 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
 -(void)initUIThree{
  _scrollView.contentSize = CGSizeMake(SCREEN_Width,750*NOW_SIZE);
     
-    NSArray *nameArray=@[@"Vb/Cb",@"Vpv",@"Ic_pv",@"Ppv",@"Ac_In",@"Ac_Out",@"Ichr_all",@"PL",@"Per_Load",@"Epv_d",@"Epv_a",@"Ec_day",@"Ec_all",@"Ed_day",@"Ed_all"];
+    NSArray *nameArray=@[@"Vb/Cb",@"Vpv",@"Ic_pv",@"Ppv",@"Ac_In",@"Ac_Out",@"PL",@"Per_Load",@"Epv_d",@"Epv_a",@"Ec_day",@"Ec_all",@"Ed_day",@"Ed_all"];
     
     float size3=50*HEIGHT_SIZE; float H1=10*HEIGHT_SIZE;
     for (int i=0; i<nameArray.count; i++) {
@@ -250,7 +283,7 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
         [_scrollView addSubview:nameLable];
         
         UILabel *valueLable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE+SCREEN_Width/2*W, 270*HEIGHT_SIZE+size3*K-H1, SCREEN_Width/2,20*HEIGHT_SIZE )];
-        valueLable.text=@"500";
+        valueLable.text=_SPF5000Array[i];
         valueLable.textAlignment=NSTextAlignmentCenter;
         valueLable.textColor=COLOR(102, 102, 102, 1);
         valueLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];

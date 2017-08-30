@@ -740,3 +740,21 @@
 "155铅酸电池"="Lead-acid batteries";
 "156自定义铅酸电池"="Custom lead-acid batteries";
 
+"157PV1功率"="Ppv1";
+"158PV2功率"="Ppv2";
+"159PV1电压"="Vpv1";
+"160PV2电压"="Vpv2";
+"161电池的SOC"="Capacity";
+"162电池的电压"="vBattery";
+"163负载的功率"="OutPutPower";
+"164负载的电压"="OutPutVolt";
+"165市电电压"="vGrid";
+"166Pv当天充电量"="EpvToday";
+"167AC当天充电量"="EacChargeToday";
+"168电池当天充电量"="E_bat_today";
+"169电池当天放电量"="eBatDisChargeToday";
+"170Pv的总充电量"="EpvTotal";
+"171AC的总充电量"="EacChargeTotal";
+"172电池总的充电量"="E_bat_today";
+"173电池总的放电量"="eBatDisChargeTotal ";
+
