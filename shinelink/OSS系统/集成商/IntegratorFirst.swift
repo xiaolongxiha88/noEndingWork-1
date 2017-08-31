@@ -419,8 +419,8 @@ class IntegratorFirst: RootViewController {
                 if result1==1 {
                      let objArray=jsonDate["obj"] as! NSArray
                     for i in 0..<objArray.count{
-                        self.agentCodeArray.add((objArray[i] as! NSDictionary)["agentCode"] as! NSString)
-                        self.agentCompanyArray.add((objArray[i] as! NSDictionary)["agentCompany"] as! NSString)
+                        self.agentCodeArray.add((objArray[i] as! NSDictionary)["agentCode"] as? NSString ?? "" )
+                        self.agentCompanyArray.add((objArray[i] as! NSDictionary)["agentCompany"] as? NSString ?? "")
                         
                     }
                     
@@ -457,7 +457,7 @@ class IntegratorFirst: RootViewController {
             
             if (jsonDate0 != nil){
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
-                print("/api/v1/customer/device_num=",jsonDate)
+                print("/api/v2/customer/device_num=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
                 let result1=jsonDate["result"] as! Int
                 

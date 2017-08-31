@@ -565,19 +565,22 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
         NSMutableArray *yArray1 = [NSMutableArray array];
        NSMutableArray *xArray1 = [NSMutableArray array];
-    for (int i=0; i<xArray.count-2; i++) {
-        if (i%3==0) {
-               float y1=([[yArray[i] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+1] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+2] objectForKey:@"pacToUser"] floatValue])/3;
-               float y2=([[yArray[i] objectForKey:@"ppv"] floatValue]+[[yArray[i+1] objectForKey:@"ppv"] floatValue]+[[yArray[i+2] objectForKey:@"ppv"] floatValue])/3;
-               float y3=([[yArray[i] objectForKey:@"sysOut"] floatValue]+[[yArray[i+1] objectForKey:@"sysOut"] floatValue]+[[yArray[i+2] objectForKey:@"sysOut"] floatValue])/3;
-               float y4=([[yArray[i] objectForKey:@"userLoad"] floatValue]+[[yArray[i+1] objectForKey:@"userLoad"] floatValue]+[[yArray[i+2] objectForKey:@"userLoad"] floatValue])/3;
-            NSDictionary *y0=@{@"pacToUser":[NSNumber numberWithFloat:y1],@"ppv":[NSNumber numberWithFloat:y2],@"sysOut":[NSNumber numberWithFloat:y3],@"userLoad":[NSNumber numberWithFloat:y4]};
-            [xArray1 addObject:xArray[i]];
-             [yArray1 addObject:y0];
+    
+    if (xArray.count>2) {
+        for (int i=0; i<xArray.count-2; i++) {
+            if (i%3==0) {
+                float y1=([[yArray[i] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+1] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+2] objectForKey:@"pacToUser"] floatValue])/3;
+                float y2=([[yArray[i] objectForKey:@"ppv"] floatValue]+[[yArray[i+1] objectForKey:@"ppv"] floatValue]+[[yArray[i+2] objectForKey:@"ppv"] floatValue])/3;
+                float y3=([[yArray[i] objectForKey:@"sysOut"] floatValue]+[[yArray[i+1] objectForKey:@"sysOut"] floatValue]+[[yArray[i+2] objectForKey:@"sysOut"] floatValue])/3;
+                float y4=([[yArray[i] objectForKey:@"userLoad"] floatValue]+[[yArray[i+1] objectForKey:@"userLoad"] floatValue]+[[yArray[i+2] objectForKey:@"userLoad"] floatValue])/3;
+                NSDictionary *y0=@{@"pacToUser":[NSNumber numberWithFloat:y1],@"ppv":[NSNumber numberWithFloat:y2],@"sysOut":[NSNumber numberWithFloat:y3],@"userLoad":[NSNumber numberWithFloat:y4]};
+                [xArray1 addObject:xArray[i]];
+                [yArray1 addObject:y0];
+            }
         }
+        xArray=[NSMutableArray arrayWithArray:xArray1];
+        yArray=[NSMutableArray arrayWithArray:yArray1];
     }
-    xArray=[NSMutableArray arrayWithArray:xArray1];
-    yArray=[NSMutableArray arrayWithArray:yArray1];
     
     NSMutableArray*Y1=[NSMutableArray array];
     NSMutableArray*Y2=[NSMutableArray array];

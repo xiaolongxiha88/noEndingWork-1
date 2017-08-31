@@ -77,7 +77,7 @@
 @property (nonatomic, strong) NSString *pcsNetPlantID;
 @property (nonatomic, strong) NSString *pcsNetStorageSN;
 @property (nonatomic, strong) NSMutableDictionary *pcsDataDic;
-@property (nonatomic, assign) int storageType;
+@property (nonatomic, assign) int storageType;      //0:SP2000,1:SP3000,2:SPF5000
 
 @property (nonatomic) BOOL isPvType;
 
@@ -1040,15 +1040,13 @@
                 
                 if (jsonObj[@"obj"]==nil || jsonObj[@"obj"]==NULL||([jsonObj[@"obj"] isEqual:@""] )) {
                 }else{
-                    NSString *deviceType=[NSString stringWithFormat:@"%@",jsonObj[@"obj"][@"deviceType"]];
-                        [[NSUserDefaults standardUserDefaults] setObject:deviceType forKey:@"PcsDeviceType"];
-                    
-                  
+                  //  NSString *deviceType=[NSString stringWithFormat:@"%@",jsonObj[@"obj"][@"deviceType"]];
+
                     _pcsDataDic=[NSMutableDictionary dictionaryWithDictionary:jsonObj[@"obj"]];
    
                 }
                 
-               
+                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:_storageType] forKey:@"PcsDeviceType"];
                 
                 if (_storageType!=2) {
                     storageHead *StorageV=[[storageHead alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];

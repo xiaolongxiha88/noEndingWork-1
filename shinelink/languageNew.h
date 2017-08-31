@@ -779,6 +779,12 @@
 #define  root_5000Chart_172  NSLocalizedString(@"172电池总的充电量", nil)
 #define  root_5000Chart_173  NSLocalizedString(@"173电池总的放电量", nil)
 
+#define  root_5000Chart_174  NSLocalizedString(@"174充电量", nil)
+
+#define  root_5000Chart_175  NSLocalizedString(@"175光伏储能", nil)
+#define  root_5000Chart_176  NSLocalizedString(@"176电网储能", nil)
+#define  root_5000Chart_177  NSLocalizedString(@"177电池放电", nil)
+#define  root_5000Chart_178  NSLocalizedString(@"178AC旁路放电", nil)
 
 
 #endif /* languageNew_h */

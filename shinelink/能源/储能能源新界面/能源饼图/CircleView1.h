@@ -13,6 +13,7 @@
 @property (nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic , copy) NSString *str;
 @property(nonatomic , copy) NSDictionary *allDic;
+@property(nonatomic , copy) NSString *isSPF5000;
 
 -(instancetype)initWithFrame:(CGRect)frame andUrlStr:(NSString *)str andAllDic:(NSDictionary*)dic;
 @end

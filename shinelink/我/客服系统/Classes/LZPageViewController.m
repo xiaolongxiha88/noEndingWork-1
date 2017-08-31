@@ -13,6 +13,8 @@
 #import "RKAlertView.h"
 #import "newEnergyStorage.h"
 #import "newEnergyStorage2000.h"
+#import "newEnergySPF5000.h"
+
 
 @interface LZPageViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,LZPageContentViewDelegate>
 @property (nonatomic, assign) CGFloat pageBarHeight;
@@ -78,7 +80,7 @@ static NSString *mainCell = @"mainCellmainCell";
         self.title = root_energy_title;
         NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
         NSString *isNew=[ud objectForKey:@"isNewEnergy"];
-            NSString *deviceType=[ud objectForKey:@"PcsDeviceType"];
+            NSString *deviceType=[[ud objectForKey:@"PcsDeviceType"] stringValue];
         
         
         if ([isNew isEqualToString:@"Y"]) {
@@ -88,10 +90,14 @@ static NSString *mainCell = @"mainCellmainCell";
              [self.navigationController pushViewController:findVc animated:YES];
             //    [self presentViewController:findVc animated:NO completion:nil];
               
-            }else{
+            }else if ([deviceType isEqualToString:@"1"]) {
                //     self.title = @"";
                 newEnergyStorage *findVc=[[newEnergyStorage alloc]init];
           [self.navigationController pushViewController:findVc animated:YES];
+            }else if ([deviceType isEqualToString:@"2"]) {
+                //     self.title = @"";
+                newEnergySPF5000 *findVc=[[newEnergySPF5000 alloc]init];
+                [self.navigationController pushViewController:findVc animated:YES];
             }
 
         }

@@ -436,7 +436,7 @@ class ossFistVC: RootViewController {
      let   netDic1=["deviceType":deviceType,"accessStatus":1,"agentCode":0,"plantName":"","userName":"","datalogSn":"","deviceSn":""] as [String : Any]
         
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic1 as [AnyHashable : Any]!, paramarsSite: "/api/v1/customer/device_num", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic1 as [AnyHashable : Any]!, paramarsSite: "/api/v2/customer/device_num", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
             let data:Data=successBlock as! Data
@@ -445,7 +445,7 @@ class ossFistVC: RootViewController {
             
             if (jsonDate0 != nil){
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
-                print("/api/v1/customer/device_num=",jsonDate)
+                print("/api/v2/customer/device_num=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
                 let result1=jsonDate["result"] as! Int
                 

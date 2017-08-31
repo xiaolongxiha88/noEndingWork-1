@@ -69,17 +69,17 @@ class deviceControlView: RootViewController {
             var serverUrl=""
        
             if paramBean.count>0 {
-                version=paramBean["firmwareVersionBuild"] as! String
-                serverUrl=paramBean["serverUrl"] as! String
+                version=paramBean["firmwareVersionBuild"] as! String? ?? ""
+                serverUrl=paramBean["serverUrl"] as! String? ?? ""
             }
-            lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["deviceType"]as! NSString,valueDic["userName"]as! NSString,status,valueDic["clientUrl"]as! NSString,version,serverUrl,valueDic["lastUpdateTimeText"] as! NSString,snCode as NSString? ?? ""]
+            lableValueArray=[valueDic["serialNum"]as! String? ?? "",valueDic["alias"] as! String? ?? "",valueDic["deviceType"]as! String? ?? "",valueDic["userName"]as! String? ?? "",status,valueDic["clientUrl"]as! String? ?? "",version,serverUrl,valueDic["lastUpdateTimeText"] as! String? ?? "",snCode ?? ""]
         }else if typeNum=="1"{
             let nominalString=NSString(format: "%.f", valueDic["nominalPower"]as! Float)
               let powerString=NSString(format: "%.f", valueDic["power"]as! Float)
               let etodayString=NSString(format: "%.f", valueDic["eToday"]as! Float)
               let eTotallString=NSString(format: "%.f", valueDic["eTotal"]as! Float)
         lableNameArray=["序列号","别名","所属采集器","连接状态","额定功率(W)","当前功率(W)","今日发电(kWh)","累计发电量(kWh)","逆变器型号","最后更新时间"]
-               lableValueArray=[valueDic["serialNum"]as! NSString,valueDic["alias"]as! NSString,valueDic["dataLogSn"]as! NSString,status,nominalString,powerString,etodayString,eTotallString,valueDic["modelText"]as! NSString,valueDic["lastUpdateTimeText"] as! NSString]
+               lableValueArray=[valueDic["serialNum"]as! String? ?? "",valueDic["alias"]as! String? ?? "",valueDic["dataLogSn"]as! String? ?? "",status,nominalString,powerString,etodayString,eTotallString,valueDic["modelText"]as! String? ?? "",valueDic["lastUpdateTimeText"] as! String? ?? ""]
             
         }else if typeNum=="2"{
             var type=""

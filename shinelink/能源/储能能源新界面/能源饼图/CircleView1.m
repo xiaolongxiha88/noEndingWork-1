@@ -32,41 +32,88 @@
     return self;
 }
 -(NSMutableArray *)dataArray{
+    if ([_isSPF5000 isEqualToString:@"1"]) {
+        [self getSPF5000];
+    }else{
+        [self isSP];
+    }
+    
+    return _dataArray;
+}
+
+-(void)getSPF5000{
     if ([_str isEqualToString:@"1"]) {
         if (_dataArray == nil) {
-            NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvGridToday"] floatValue]];
-            NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvStorageToday"] floatValue]];
-                NSString *A3=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvUserToday"] floatValue]];
+            NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"eCharge"] floatValue]];
+            NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"eAcCharge"] floatValue]];
+           
+            float D1=[A1 floatValue];   float D2=[A2 floatValue];
+            float B1=(D1/(D1+D2))*100;
+            float B2=(D2/(D1+D2))*100;
+       
+            
+            //            B1=30; B2=30; B3=30;
+            //            A1=@"200";
+            _dataArray = [[NSMutableArray alloc]initWithArray:@[
+                                                                @{@"number":A1,@"color":@"36c176",@"name":[NSString stringWithFormat:@"%.1f%%",B1]},
+                                                                @{@"number":A2,@"color":@"8b80ff",@"name":[NSString stringWithFormat:@"%.1f%%",B2]}
+                                                                ]];
+            
+        }
+        
+    }else{
+        NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"eDisCharge"] floatValue]];
+        NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"eAcDisCharge"] floatValue]];
+    
+        float D1=[A1 floatValue];   float D2=[A2 floatValue];
+        float B1=(D1/(D1+D2))*100;
+        float B2=(D2/(D1+D2))*100;
+       
+        _dataArray = [[NSMutableArray alloc]initWithArray:@[
+                                                            @{@"number":A1,@"color":@"ffd923",@"name":[NSString stringWithFormat:@"%.1f%%",B1]},
+                                                            @{@"number":A2,@"color":@"0eeff6",@"name":[NSString stringWithFormat:@"%.1f%%",B2]},
+                                                            ]];
+    }
+    
+}
+
+
+-(void)isSP{
+    if ([_str isEqualToString:@"1"]) {
+        if (_dataArray == nil) {
+            NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvStorageToday"] floatValue]];
+            NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvUserToday"] floatValue]];
+            NSString *A3=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useGridToday"] floatValue]];
             float D1=[A1 floatValue];   float D2=[A2 floatValue];   float D3=[A3 floatValue];
             float B1=(D1/(D1+D2+D3))*100;
             float B2=(D2/(D1+D2+D3))*100;
             float B3=(D3/(D1+D2+D3))*100;
-
-//            B1=30; B2=30; B3=30;
-//            A1=@"200";
+            
+            //            B1=30; B2=30; B3=30;
+            //            A1=@"200";
             _dataArray = [[NSMutableArray alloc]initWithArray:@[
-                                                                @{@"number":A1,@"color":@"376efb",@"name":[NSString stringWithFormat:@"%.1f%%",B1]},
-                                                                @{@"number":A2,@"color":@"20db76",@"name":[NSString stringWithFormat:@"%.1f%%",B2]},
-                                                                @{@"number":A3,@"color":@"81fafe",@"name":[NSString stringWithFormat:@"%.1f%%",B3]}]];
+                                                                @{@"number":A1,@"color":@"36c176",@"name":[NSString stringWithFormat:@"%.1f%%",B1]},
+                                                                @{@"number":A2,@"color":@"8b80ff",@"name":[NSString stringWithFormat:@"%.1f%%",B2]},
+                                                                @{@"number":A3,@"color":@"0eeff6",@"name":[NSString stringWithFormat:@"%.1f%%",B3]}]];
             
         }
-
+        
     }else{
-        NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useGridToday"] floatValue]];
-        NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useStorageToday"] floatValue]];
-        NSString *A3=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useUserToday"] floatValue]];
+        NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"epvStorageToday"] floatValue]];
+        NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useUserToday"] floatValue]];
+        NSString *A3=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"useGridToday"] floatValue]];
         float D1=[A1 floatValue];   float D2=[A2 floatValue];   float D3=[A3 floatValue];
         float B1=(D1/(D1+D2+D3))*100;
         float B2=(D2/(D1+D2+D3))*100;
         float B3=(D3/(D1+D2+D3))*100;
         _dataArray = [[NSMutableArray alloc]initWithArray:@[
-                                                            @{@"number":A1,@"color":@"376efb",@"name":[NSString stringWithFormat:@"%.1f%%",B1]},
-                                                            @{@"number":A2,@"color":@"20db76",@"name":[NSString stringWithFormat:@"%.1f%%",B2]},
-                                                            @{@"number":A3,@"color":@"ffd923",@"name":[NSString stringWithFormat:@"%.1f%%",B3]}]];
+                                                            @{@"number":A1,@"color":@"36c176",@"name":[NSString stringWithFormat:@"%.1f%%",B1]},
+                                                            @{@"number":A2,@"color":@"ffd923",@"name":[NSString stringWithFormat:@"%.1f%%",B2]},
+                                                            @{@"number":A3,@"color":@"0eeff6",@"name":[NSString stringWithFormat:@"%.1f%%",B3]}]];
     }
-    
-    return _dataArray;
+
 }
+
 //添加圆形比例图
 -(void)addCirclView:(NSMutableArray *)arr{
     if (!circleView1) {
