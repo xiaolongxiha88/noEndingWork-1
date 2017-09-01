@@ -313,17 +313,22 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [V2 addSubview:self.datePickerButton];
     
     _typeDic=@{@"1":root_dangri,@"2":root_leiji};
-    _selectButton=[[UIButton alloc]initWithFrame:CGRectMake(580*ScreenProW, 560*ScreenProH+SPF5000H, 150*ScreenProW, 40*ScreenProH)];
+    _selectButton=[[UIButton alloc]initWithFrame:CGRectMake(580*ScreenProW, 550*ScreenProH-viewAA+SPF5000H, 125*ScreenProW, 60*ScreenProH)];
     [_selectButton setTitle:_typeDic[@"1"] forState:0];
+//    _selectButton.layer.borderWidth=ScreenProH*1;
+//    _selectButton.layer.cornerRadius=ScreenProH*60/2.5;
+//    _selectButton.layer.borderColor=COLOR(154, 154, 154, 1).CGColor;
+    _selectButton.titleLabel.textAlignment = NSTextAlignmentRight;
+      [_selectButton setTitleColor:COLOR(102, 102, 102, 1) forState:UIControlStateNormal];
     _selectButton.titleLabel.font=[UIFont boldSystemFontOfSize:26*ScreenProH];
     [_selectButton addTarget:self action:@selector(buttonPressed) forControlEvents:UIControlEventTouchUpInside];
     _selectButton.backgroundColor = [UIColor clearColor];
-    //  [_scrollView addSubview:_selectButton];
+     [_scrollView addSubview:_selectButton];
     
     
-    UIImageView *selectView = [[UIImageView alloc] initWithFrame:CGRectMake(150*ScreenProW-25*ScreenProH, 11*ScreenProH, 20*ScreenProH, 18*ScreenProH)];
-    selectView.image = IMAGE(@"triangular2.png");
-    [self.selectButton addSubview:selectView];
+    UIImageView *selectView = [[UIImageView alloc] initWithFrame:CGRectMake(580*ScreenProW+127*ScreenProW, 550*ScreenProH-viewAA+SPF5000H+20*ScreenProH, 20*ScreenProH, 20*ScreenProH)];
+    selectView.image = IMAGE(@"drop_down.png");
+    [_scrollView addSubview:selectView];
     
     
     UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProW, 600*ScreenProH-viewAA+SPF5000H, 100*ScreenProW, 40*ScreenProH)];
@@ -442,7 +447,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL2.textAlignment = NSTextAlignmentCenter;
     NSString *V2N1=root_chongDian;
     NSString *V2N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eChargeTotal"] floatValue]];
-    NSString *V2LableName=[NSString stringWithFormat:@"%@:%@",V2N1,V2N2];
+    NSString *V2LableName=[NSString stringWithFormat:@"A%@:%@",V2N1,V2N2];
     VL2.text=V2LableName;
     VL2.textColor =COLOR(102, 102, 102, 1);
     [_uiview2 addSubview:VL2];
@@ -451,7 +456,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL3.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL3.textAlignment = NSTextAlignmentCenter;
     NSString *V3N1=root_fangDian; NSString *V3N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eDisChargeTotal"] floatValue]];
-    NSString *V3LableName=[NSString stringWithFormat:@"%@:%@",V3N1,V3N2];
+    NSString *V3LableName=[NSString stringWithFormat:@"B%@:%@",V3N1,V3N2];
     VL3.text=V3LableName;
     VL3.textColor =COLOR(102, 102, 102, 1);
     [_uiview2 addSubview:VL3];
@@ -474,13 +479,15 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     float circleW=80*ScreenProH;
     float circleH=10*ScreenProH;
     float circleB=375*ScreenProH-circleW;
+    float circleH0=1275*ScreenProH-HH+circleH;
     if(([A1 isEqualToString:@"0.0"])&&([A2 isEqualToString:@"0.0"])){
-        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(37*ScreenProW, 1292*ScreenProH-HH+37*ScreenProH, 300*ScreenProH, 300*ScreenProH)];
+        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(0*ScreenProW+circleW/2, circleH0, circleB, circleB)];
         [VM1 setImage:[UIImage imageNamed:@"data_null.png"]];
         [_uiview2 addSubview:VM1];
         
     }else{
-        CircleView1 *circleView1= [[CircleView1 alloc]initWithFrame:CGRectMake(0*ScreenProW+circleW/2, 1292*ScreenProH-HH+circleH, circleB, circleB) andUrlStr:@"1" andAllDic:_dataTwoNetAllDic];
+        [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"isSPF5000Circle"];
+        CircleView1 *circleView1= [[CircleView1 alloc]initWithFrame:CGRectMake(0*ScreenProW+circleW/2, circleH0, circleB, circleB) andUrlStr:@"1" andAllDic:_dataTwoNetAllDic];
         circleView1.isSPF5000=@"1";
         //  circleView1.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
         [_uiview2 addSubview:circleView1];
@@ -488,11 +495,11 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     
     if(([A4 isEqualToString:@"0.0"])&&([A5 isEqualToString:@"0.0"])){
-        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(375*ScreenProW+37*ScreenProW, 1292*ScreenProH-HH+37*ScreenProH, 300*ScreenProH, 300*ScreenProH)];
+        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(375*ScreenProW+circleW/2, circleH0, circleB, circleB)];
         [VM1 setImage:[UIImage imageNamed:@"data_null.png"]];
         [_uiview2 addSubview:VM1];
     }else{
-        CircleView1 *circleView2= [[CircleView1 alloc]initWithFrame:CGRectMake(375*ScreenProW+circleW/2, 1292*ScreenProH-HH+circleH, circleB, circleB) andUrlStr:@"2" andAllDic:_dataTwoNetAllDic];
+        CircleView1 *circleView2= [[CircleView1 alloc]initWithFrame:CGRectMake(375*ScreenProW+circleW/2, circleH0, circleB, circleB) andUrlStr:@"2" andAllDic:_dataTwoNetAllDic];
             circleView2.isSPF5000=@"1";
         //  circleView2.allDic=[NSDictionary dictionaryWithDictionary:_dataTwoNetAllDic];
         [_uiview2 addSubview:circleView2];
@@ -512,33 +519,35 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     float vH1=20*ScreenProH;
     NSArray *nameArray00=@[ root_5000Chart_175, root_5000Chart_176];
     NSArray *IMAGEnameArray00=@[@"storageS.png",@"loadS.png"];
+    
+    float nameW=25*ScreenProW;
     UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+30*ScreenProH-vH, 210*ScreenProW, ScreenProH*25)];
     if ([currentLanguage hasPrefix:@"zh-Hans"]) {
-        VL1.frame=CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+30*ScreenProH-vH, 130*ScreenProW, ScreenProH*25);
+        VL1.frame=CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+30*ScreenProH-vH, nameW, ScreenProH*25);
     }else{
-        VL1.frame=CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+30*ScreenProH-vH, 210*ScreenProW, ScreenProH*25);
+        VL1.frame=CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+30*ScreenProH-vH, nameW, ScreenProH*25);
     }
     VL1.font=[UIFont systemFontOfSize:23*ScreenProH];
     VL1.textAlignment = NSTextAlignmentRight;
-    NSString *A=[NSString stringWithFormat:@"%@:",root_guangfu_chanchu];
+    NSString *A=@"A:";
     VL1.text=A;
     VL1.textColor =COLOR(102, 102, 102, 1);
     [_uiview2 addSubview:VL1];
     
     
     for (int i=0; i<nameArray00.count; i++) {
-        UIView *LV123=[[UIView alloc]initWithFrame:CGRectMake(45*ScreenProW+180*ScreenProW+180*ScreenProW*i, 1670*ScreenProH-HH+30*ScreenProH-vH, 180*ScreenProW, ScreenProH*25)];
+        UIView *LV123=[[UIView alloc]initWithFrame:CGRectMake(45*ScreenProW+180*ScreenProW+180*ScreenProW*i, 1680*ScreenProH-HH+30*ScreenProH-vH, 180*ScreenProW, ScreenProH*25)];
         
-        UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(45*ScreenProW+180*ScreenProW+180*ScreenProW*i, 1670*ScreenProH-HH+30*ScreenProH-vH, 180*ScreenProW, ScreenProH*25)];
+        UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(45*ScreenProW+180*ScreenProW+180*ScreenProW*i, 1680*ScreenProH-HH+30*ScreenProH-vH, 180*ScreenProW, ScreenProH*25)];
         float W;
         if ([currentLanguage hasPrefix:@"zh-Hans"]) {
-            W=(SCREEN_Width-45*ScreenProW-100*ScreenProW)/2;
-            LV123.frame=CGRectMake(45*ScreenProW+100*ScreenProW+W*i, 1670*ScreenProH-HH+30*ScreenProH-vH, W, ScreenProH*25);
-            VL2.frame=CGRectMake(45*ScreenProW+100*ScreenProW+W*i, 1670*ScreenProH-HH+30*ScreenProH-vH+vH0, W, ScreenProH*25);
+            W=(SCREEN_Width-nameW-10*ScreenProW)/2;
+            LV123.frame=CGRectMake(nameW+10*ScreenProW+W*i, 1670*ScreenProH-HH+30*ScreenProH-vH, W, ScreenProH*25);
+            VL2.frame=CGRectMake(nameW+10*ScreenProW+W*i, 1670*ScreenProH-HH+30*ScreenProH-vH+vH0, W, ScreenProH*25);
         }else{
-            W=(SCREEN_Width-45*ScreenProW-180*ScreenProW)/2;
-            LV123.frame=CGRectMake(45*ScreenProW+180*ScreenProW+W*i, 1670*ScreenProH-HH+33*ScreenProH-vH, W, ScreenProH*25);
-            VL2.frame=CGRectMake(45*ScreenProW+180*ScreenProW+W*i, 1670*ScreenProH-HH+33*ScreenProH-vH+vH0, W, ScreenProH*25);
+            W=(SCREEN_Width-nameW-10*ScreenProW)/2;
+            LV123.frame=CGRectMake(nameW+10*ScreenProW+W*i, 1670*ScreenProH-HH+30*ScreenProH-vH, W, ScreenProH*25);
+            VL2.frame=CGRectMake(nameW+10*ScreenProW+W*i, 1670*ScreenProH-HH+30*ScreenProH-vH+vH0, W, ScreenProH*25);
         }
         [_uiview2 addSubview:LV123];
         
@@ -574,14 +583,14 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     NSArray *IMAGEnameArray100=@[@"solarS.png",@"gridS.png"];
     UILabel *VL100= [[UILabel alloc] initWithFrame:CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+62*ScreenProH-vH1, 210*ScreenProW, ScreenProH*25)];
     if ([currentLanguage hasPrefix:@"zh-Hans"]) {
-        VL100.frame=CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+62*ScreenProH-vH1, 130*ScreenProW, ScreenProH*25);
+        VL100.frame=CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+62*ScreenProH-vH1, nameW, ScreenProH*25);
     }else{
-        VL100.frame=CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+62*ScreenProH-vH1, 210*ScreenProW, ScreenProH*25);
+        VL100.frame=CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+62*ScreenProH-vH1, nameW, ScreenProH*25);
     }
     VL100.font=[UIFont systemFontOfSize:23*ScreenProH];
     VL100.adjustsFontSizeToFitWidth=YES;
     VL100.textAlignment = NSTextAlignmentRight;
-    NSString *B=[NSString stringWithFormat:@"%@:",root_zong_yongdian];
+    NSString *B=@"B:";
     VL100.text=B;
     VL100.textColor =COLOR(102, 102, 102, 1);
     [_uiview2 addSubview:VL100];
@@ -598,13 +607,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [_uiview2 addSubview:VL2];
         
         if ([currentLanguage hasPrefix:@"zh-Hans"]) {
-            W=(SCREEN_Width-45*ScreenProW-100*ScreenProW)/2;
-            LV1.frame=CGRectMake(45*ScreenProW+100*ScreenProW+W*i, 1670*ScreenProH-HH+62*ScreenProH-vH1, W, ScreenProH*25);
-            VL2.frame=CGRectMake(45*ScreenProW+100*ScreenProW+W*i, 1670*ScreenProH-HH+62*ScreenProH-vH1+vH0, W, ScreenProH*25);
+            W=(SCREEN_Width-nameW-10*ScreenProW)/2;
+            LV1.frame=CGRectMake(nameW+10*ScreenProW+W*i, 1670*ScreenProH-HH+62*ScreenProH-vH1, W, ScreenProH*25);
+            VL2.frame=CGRectMake(nameW+10*ScreenProW+W*i, 1670*ScreenProH-HH+62*ScreenProH-vH1+vH0, W, ScreenProH*25);
         }else{
-            W=(SCREEN_Width-45*ScreenProW-180*ScreenProW)/2;
-            LV1.frame=CGRectMake(45*ScreenProW+180*ScreenProW+W*i, 1670*ScreenProH-HH+65*ScreenProH-vH1, W, ScreenProH*25);
-            VL2.frame=CGRectMake(45*ScreenProW+180*ScreenProW+W*i, 1670*ScreenProH-HH+65*ScreenProH-vH1+vH0, W, ScreenProH*25);
+            W=(SCREEN_Width-nameW-10*ScreenProW)/2;
+            LV1.frame=CGRectMake(nameW+10*ScreenProW+W*i, 1670*ScreenProH-HH+62*ScreenProH-vH1, W, ScreenProH*25);
+            VL2.frame=CGRectMake(nameW+10*ScreenProW+W*i, 1670*ScreenProH-HH+62*ScreenProH-vH1+vH0, W, ScreenProH*25);
         }
         [_uiview2 addSubview:LV1];
         

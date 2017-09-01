@@ -785,6 +785,11 @@
 #define  root_5000Chart_176  NSLocalizedString(@"176电网储能", nil)
 #define  root_5000Chart_177  NSLocalizedString(@"177电池放电", nil)
 #define  root_5000Chart_178  NSLocalizedString(@"178AC旁路放电", nil)
+#define  root_5000Chart_179  NSLocalizedString(@"179请选择采集器类型", nil)
+
+
+
+
 
 
 #endif /* languageNew_h */

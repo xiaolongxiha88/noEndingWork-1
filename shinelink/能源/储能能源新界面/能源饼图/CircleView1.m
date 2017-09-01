@@ -32,7 +32,9 @@
     return self;
 }
 -(NSMutableArray *)dataArray{
-    if ([_isSPF5000 isEqualToString:@"1"]) {
+  //  isSPF5000Circle
+    NSString *isSPF5000Circle=[[NSUserDefaults standardUserDefaults] objectForKey:@"isSPF5000Circle"];
+    if ([isSPF5000Circle isEqualToString:@"1"]) {
         [self getSPF5000];
     }else{
         [self isSP];

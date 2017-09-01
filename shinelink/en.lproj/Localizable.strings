@@ -762,3 +762,7 @@
 "176电网储能"="Grid storage";
 "177电池放电"="Battery discharge";
 "178AC旁路放电"="AC bypass discharge";
+"179请选择采集器类型"="Please select the datalogger type";
+
+
+

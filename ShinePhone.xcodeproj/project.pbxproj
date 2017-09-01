@@ -384,6 +384,7 @@
 		33724D9D1CFE85FB005F3965 /* pic_service.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9C1CFE85FB005F3965 /* pic_service.png */; };
 		33724D9F1CFE89BE005F3965 /* touxiang.png in Resources */ = {isa = PBXBuildFile; fileRef = 33724D9E1CFE89BE005F3965 /* touxiang.png */; };
 		337284D11EF769390004FAB9 /* changUserInfoTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 337284D01EF769390004FAB9 /* changUserInfoTwo.swift */; };
+		33731C391F58F73800F77707 /* drop_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 33731C381F58F73800F77707 /* drop_down.png */; };
 		337392AC1E30BD290078A847 /* btn_cha.png in Resources */ = {isa = PBXBuildFile; fileRef = 337392AB1E30BD290078A847 /* btn_cha.png */; };
 		33742B3C1ED51BFF0015F2EA /* datalogerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33742B3B1ED51BFF0015F2EA /* datalogerControlView.swift */; };
 		33742B3E1ED558EA0015F2EA /* datalogerControlTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33742B3D1ED558EA0015F2EA /* datalogerControlTwo.swift */; };
@@ -1326,6 +1327,7 @@
 		33724D9C1CFE85FB005F3965 /* pic_service.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pic_service.png; path = "../发现/pic_service.png"; sourceTree = "<group>"; };
 		33724D9E1CFE89BE005F3965 /* touxiang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = touxiang.png; path = "../我/touxiang.png"; sourceTree = "<group>"; };
 		337284D01EF769390004FAB9 /* changUserInfoTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = changUserInfoTwo.swift; sourceTree = "<group>"; };
+		33731C381F58F73800F77707 /* drop_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = drop_down.png; sourceTree = "<group>"; };
 		337392AB1E30BD290078A847 /* btn_cha.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_cha.png; sourceTree = "<group>"; };
 		33742B3B1ED51BFF0015F2EA /* datalogerControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = datalogerControlView.swift; sourceTree = "<group>"; };
 		33742B3D1ED558EA0015F2EA /* datalogerControlTwo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = datalogerControlTwo.swift; sourceTree = "<group>"; };
@@ -3402,6 +3404,7 @@
 		3381ECEF1CBCA59900DCF0D2 /* 能源图片 */ = {
 			isa = PBXGroup;
 			children = (
+				33731C381F58F73800F77707 /* drop_down.png */,
 				33252FD41F57BAB10054BBC7 /* data_null.png */,
 				337A70FA1E9B820600FE5F3C /* solarS.png */,
 				33252FCC1F57B71E0054BBC7 /* loadS.png */,
@@ -4536,6 +4539,7 @@
 				3370791D1D8FD80300D7DA98 /* question.png in Resources */,
 				336E04021EC9ADAC0034BC86 /* icon_search.png in Resources */,
 				3370EBBB1F417EE500F37149 /* 参数.png in Resources */,
+				33731C391F58F73800F77707 /* drop_down.png in Resources */,
 				3330F4E11F15B1E20076C237 /* search_icon_nor.png in Resources */,
 				3383F1341C9FF7370075E834 /* connected@2x.png in Resources */,
 				334AED5A1CA37577007E39F3 /* 质保查询.png in Resources */,

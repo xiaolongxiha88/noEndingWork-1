@@ -92,7 +92,7 @@
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
-    self.title = root_peizhi_shinewifi_E;
+    self.title = [NSString stringWithFormat:@"%@ShineWiFi-S",root_set];
     self.view.backgroundColor=MainColor;
     
     self._condition = [[NSCondition alloc]init];
