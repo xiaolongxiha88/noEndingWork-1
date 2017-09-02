@@ -29,8 +29,9 @@ let SCREEN_Width=UIScreen.main.bounds.width
 let SCREEN_Height=UIScreen.main.bounds.height
 
 let HEAD_URL=UserInfo.default().server
-let OSS_HEAD_URL=UserInfo.default().osSserver
 
+//let OSS_HEAD_URL=UserInfo.default().osSserver
+let OSS_HEAD_URL="http://oss1.growatt.com:8080"
 
  let root_rf_sn=NSLocalizedString("RF序列号", comment: "default")
  let root_datalog_sn=NSLocalizedString("datalog sn", comment: "default")

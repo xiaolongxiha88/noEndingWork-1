@@ -334,6 +334,8 @@
                     [self showAlertViewWithTitle:nil message:root_meiyou_quanxian cancelButtonTitle:root_Yes];
                 }else if ([content1[@"result"] integerValue] ==22) {
                     [self showAlertViewWithTitle:nil message:root_CNJ_fuwuqi_cuowu cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==10) {
+                    [self showAlertViewWithTitle:nil message:content1[@"msg"] cancelButtonTitle:root_Yes];
                 }
                 [self.navigationController popViewControllerAnimated:YES];
             }else{

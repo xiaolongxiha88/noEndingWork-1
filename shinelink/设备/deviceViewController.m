@@ -523,10 +523,9 @@
     
     DTKDropdownMenuView *menuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0,item1,item2] icon:@"add@2x.png"];
     
-    menuView.dropWidth = 150.f;
+    menuView.dropWidth = 200.f;
     menuView.titleFont = [UIFont systemFontOfSize:18.f];
     menuView.textColor = ColorWithRGB(102.f, 102.f, 102.f);
-    menuView.textFont = [UIFont systemFontOfSize:13.f];
     menuView.cellSeparatorColor = ColorWithRGB(229.f, 229.f, 229.f);
     menuView.textFont = [UIFont systemFontOfSize:14.f];
     menuView.animationDuration = 0.2f;

@@ -380,10 +380,25 @@ class deviceControlView: RootViewController {
             }
             
             if typeNum=="2" {
-                let goView=controlCNJTable()
-                goView.controlType="2"
-                goView.cnjSn=valueDic["serialNum"]as! String
-                self.navigationController?.pushViewController(goView, animated: true)
+                let storageType=valueDic["deviceType"] as! Int? ?? 1
+                
+                if storageType==0 || storageType==1{
+                    let goView=controlCNJTable()
+                    goView.controlType="2"
+                    goView.typeNum="0"
+                    goView.cnjSn=valueDic["serialNum"]as! String
+                    self.navigationController?.pushViewController(goView, animated: true)
+                }else if storageType==2{
+                    let goView=controlCNJTable()
+                    goView.controlType="2"
+                       goView.typeNum="1"
+                    goView.cnjSn=valueDic["serialNum"]as! String
+                    self.navigationController?.pushViewController(goView, animated: true)
+               
+                }else{
+                self.showToastView(withTitle: "储能机类型错误")
+                }
+               
             }
 
             

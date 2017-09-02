@@ -94,7 +94,7 @@
     
     //////////测试区域
     //上线检查
-     [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:is_Test];
+     [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:is_Test];
     
     NSString *testDemo=@"O";
     if ([testDemo isEqualToString:@"OK"]) {
@@ -765,7 +765,7 @@ NSLog(@"体验馆");
                                     NSString *server2=@"http://";
                                     NSString *serverAdress=[NSString stringWithFormat:@"%@%@",server2,server1];
                                     
-                                   serverAdress=OSS_HEAD_URL_Demo;
+                                   //serverAdress=OSS_HEAD_URL_Demo;
                                     
                                     [[UserInfo defaultUserInfo] setOSSserver:serverAdress];
                                 }
