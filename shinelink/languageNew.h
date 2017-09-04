@@ -787,8 +787,10 @@
 #define  root_5000Chart_178  NSLocalizedString(@"178AC旁路放电", nil)
 #define  root_5000Chart_179  NSLocalizedString(@"179请选择采集器类型", nil)
 
-
-
+#define  root_Device_head_180  NSLocalizedString(@"180当前功率", nil)
+#define  root_Device_head_181  NSLocalizedString(@"181装机容量", nil)
+#define  root_Device_head_182  NSLocalizedString(@"182今日收益", nil)
+#define  root_Device_head_183  NSLocalizedString(@"183累计收益", nil)
 
 
 

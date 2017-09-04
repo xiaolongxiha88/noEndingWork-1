@@ -231,15 +231,30 @@
     if (_type==0 || _type==1 || _type==4 || _type==5 || _type==6 || _type==7 || _type==8 || _type==9 || _type==10 || _type==14) {
         int A=(int)_choiceNum;
         NSString *param1String=[NSString stringWithFormat:@"%d",A];
-        _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":@"",@"param3":@"",@"param4":@""};
+        if ([_controlType isEqualToString:@"2"]) {
+            _netDic=@{@"storageSn":_CnjSN,@"paramId":typeName,@"param_1":param1String,@"param_2":@"",@"param_3":@"",@"param_4":@""};
+        }else{
+          _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":@"",@"param3":@"",@"param4":@""};
+        }
+       
     }
     
     if (_type==2 || _type==3 ||  _type==11  || _type==12 ){
-    _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":[_textField text],@"param2":[_textField1 text],@"param3":@"",@"param4":@""};
+        if ([_controlType isEqualToString:@"2"]) {
+        _netDic=@{@"storageSn":_CnjSN,@"paramId":typeName,@"param_1":[_textField text],@"param_2":[_textField1 text],@"param_3":@"",@"param_4":@""};
+        }else{
+            _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":[_textField text],@"param2":[_textField1 text],@"param3":@"",@"param4":@""};
+        }
+   
     }
     
     if (_type==13){
-    _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":_currentDay,@"param2":@"",@"param3":@"",@"param4":@""};
+        if ([_controlType isEqualToString:@"2"]) {
+                _netDic=@{@"storageSn":_CnjSN,@"paramId":typeName,@"param_1":_currentDay,@"param_2":@"",@"param_3":@"",@"param_4":@""};
+        }else{
+                _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":_currentDay,@"param2":@"",@"param3":@"",@"param4":@""};
+        }
+
     }
     
     if ([_controlType isEqualToString:@"2"]) {

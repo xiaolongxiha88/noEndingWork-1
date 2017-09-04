@@ -32,6 +32,8 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
         let rightItem=UIBarButtonItem.init(title: root_xiugai_yonghu_xinxi, style: .plain, target: self, action:#selector(changeUserInfo) )
         self.navigationItem.rightBarButtonItem=rightItem
 
+        self.navigationItem.backBarButtonItem?.title="";
+          self.title="电站列表"
         
     self.initNet0()
     }

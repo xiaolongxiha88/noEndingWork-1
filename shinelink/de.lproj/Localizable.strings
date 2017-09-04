@@ -446,8 +446,8 @@
 
 "Revenue"="Tagesertrag";
 //"todayPV"="Tagesproduktion";
-"todayPV"="Energie heute";
-"PpvN"="Leistung PV";
+"todayPV"="Energie";
+"PpvN"="Power";
 
 "体验馆"="Demo";
 "浏览用户禁止操作"="Nicht zugelassen für Browser Anwender";

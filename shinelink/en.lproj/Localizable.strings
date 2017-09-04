@@ -445,8 +445,8 @@
 "Pgrid"="Pgrid";
 
 "Revenue"="Revenue";
-"todayPV"="E-today PV";
-"PpvN"="Ppv";
+"todayPV"="Energy";
+"PpvN"="Power";
 
 "体验馆"="Demo";
 "浏览用户禁止操作"="Not allowed for browse user";
@@ -763,6 +763,9 @@
 "177电池放电"="Battery discharge";
 "178AC旁路放电"="AC bypass discharge";
 "179请选择采集器类型"="Please select the datalogger type";
-
+"180当前功率"="Current";
+"181装机容量"="Capacity";
+"182今日收益"="Today";
+"183累计收益"="Lifetime";
 
 

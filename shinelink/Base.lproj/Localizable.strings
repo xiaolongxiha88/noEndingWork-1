@@ -445,8 +445,8 @@
 "Pgrid"="Pgrid";
 
 "Revenue"="Revenue";
-"todayPV"="E-today PV";
-"PpvN"="Ppv";
+"todayPV"="Energy";
+"PpvN"="Power";
 
 "体验馆"="Demo";
 "浏览用户禁止操作"="Not allowed for browse user";

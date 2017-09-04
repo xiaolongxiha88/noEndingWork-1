@@ -775,93 +775,9 @@
       
         
         if ([_typeArr containsObject:@"storage"]) {
-            _head13=root_Ppv;
-            _head23=root_Puser;
-             _head33=root_Pgrid;
-            NSString *head111=[NSString stringWithFormat:@"%@",content[@"storageTodayPpv"]];
-            _head11=head111;
-            
-           // _head11=@"8888888";
-            _head12=@"W";
-            
-            NSString *head222=[NSString stringWithFormat:@"%@",content[@"storagePuser"]];
-           // NSArray *headB=[head222 componentsSeparatedByString:@"_"];
-            _head21=head222;
-            _head22=@"W";
-            
-            NSString *head333=[NSString stringWithFormat:@"%@",content[@"storagePgrid"]];
-          //  NSArray *headC=[head333 componentsSeparatedByString:@"_"];
-            _head31=head333;
-            _head32=@"W";
-            
-            if ( [_head11 intValue]>1000 &&[_head11 intValue]<1000000) {
-                float KW=(float)[_head11 intValue]/1000;
-                _head12=@"kW";
-                _head11=[NSString stringWithFormat:@"%.1f",KW];
-            }else if([_head11 intValue]>1000000){
-                float MW=(float)[_head11 intValue]/1000000;
-                _head12=@"MW";
-                _head11=[NSString stringWithFormat:@"%.1f",MW];
-            }
-            
-            if ( [_head21 intValue]>1000 &&[_head21 intValue]<1000000) {
-                float KW=(float)[_head21 intValue]/1000;
-                _head22=@"kW";
-                _head21=[NSString stringWithFormat:@"%.1f",KW];
-            }else if([_head21 intValue]>1000000){
-                float MW=(float)[_head21 intValue]/1000000;
-                _head22=@"MW";
-                _head21=[NSString stringWithFormat:@"%.1f",MW];
-            }
-            
-            if ( [_head31 intValue]>1000 &&[_head31 intValue]<1000000) {
-                float KW=(float)[_head31 intValue]/1000;
-                _head32=@"kW";
-                _head31=[NSString stringWithFormat:@"%.1f",KW];
-            }else if([_head31 intValue]>1000000){
-                float MW=(float)[_head31 intValue]/1000000;
-                _head32=@"MW";
-                _head31=[NSString stringWithFormat:@"%.1f",MW];
-            }
             
         }else if ([_typeArr containsObject:@"inverter"]){
-            _head13=root_Revenue;
-            //_head23=@"E-today PV";
-            _head33=root_todayPV;
-              _head23=root_PpvN;
-            
-            NSString *head111=[NSString stringWithFormat:@"%@",content[@"plantMoneyText"]];
-            NSArray *headA=[head111 componentsSeparatedByString:@"/"];
-            _head11=[headA objectAtIndex:0];
-            _head12=[headA objectAtIndex:1];
-            
-            NSString *head222=[NSString stringWithFormat:@"%@",content[@"invTodayPpv"]];
-            //NSArray *headB=[head222 componentsSeparatedByString:@"_"];
-            _head21=head222;
-             _head22=@"W";
-            
-            NSString *head333=[NSString stringWithFormat:@"%@",content[@"todayEnergy"]];
-           // NSArray *headC=[head333 componentsSeparatedByString:@"_"];
-            _head31=head333;
-            //_head31=@"8888";
-                _head32=@"kWh";
-            
-            if ( [_head21 intValue]>1000 &&[_head21 intValue]<1000000) {
-                float KW=(float)[_head21 intValue]/1000;
-                _head22=@"kW";
-                _head21=[NSString stringWithFormat:@"%.1f",KW];
-            }else if([_head21 intValue]>1000000){
-                float MW=(float)[_head21 intValue]/1000000;
-                _head22=@"MW";
-                _head21=[NSString stringWithFormat:@"%.1f",MW];
-            }
-            
-            if ( [_head31 intValue]>1000) {
-                float KW=(float)[_head31 intValue]/1000;
-                _head32=@"MWh";
-                _head31=[NSString stringWithFormat:@"%.1f",KW];
-            }
-           
+            [self getPVheadData:content];
         }
         
         
@@ -1261,30 +1177,27 @@
 
 -(void)getPvHead{
     float marchWidth=0*NOW_SIZE;
-    float marchHeigh=18*HEIGHT_SIZE;
-    float  headLableH=30*HEIGHT_SIZE;
+    float marchHeigh=10*HEIGHT_SIZE;
+    float  headLableH=20*HEIGHT_SIZE;
     float  headLableColorH=4*HEIGHT_SIZE;
     float  headLableColorW=30*NOW_SIZE;
-    float headLableValueH=50*HEIGHT_SIZE;
+    float headLableValueH=20*HEIGHT_SIZE;
     float headImageH=40*HEIGHT_SIZE;
     float unitWidth=(Kwidth)/3;
-    float gapH=10*HEIGHT_SIZE;
-    NSArray *headNameArray=[NSArray arrayWithObjects: root_PpvN,root_Revenue,root_todayPV,nil];
-    NSMutableArray *headValueArray=[NSMutableArray arrayWithObjects: _head21,_head11,_head31,nil];
-    NSMutableArray *headValue1Array=[NSMutableArray arrayWithObjects: _head22,_head12,_head32,nil];
-    if (headValueArray.count==0) {
-        [headValueArray addObject:@"0"]; [headValueArray addObject:@"0"]; [headValueArray addObject:@"0"];
-        [headValue1Array addObject:@""]; [headValue1Array addObject:@""]; [headValue1Array addObject:@""];
-    }
+    float gapH=5*HEIGHT_SIZE;
+    float gapH2=5*HEIGHT_SIZE;
+   
     NSArray *headColorArray=[NSArray arrayWithObjects: COLOR(89, 220, 255, 1),COLOR(179, 218, 138, 1),COLOR(78, 224, 180, 1),nil];
-    NSArray *headImageNameArray11=[NSArray arrayWithObjects: @"deviceHead1.png",@"deviceHead2.png",@"deviceHead33.png",nil];
+    NSArray *headImageNameArray11=[NSArray arrayWithObjects: @"deviceHead1.png",@"deviceHead33.png",@"deviceHead2.png",nil];
+    NSArray *timeArray=@[root_Device_head_180,root_Device_head_181,root_Device_head_182,root_Device_head_183,root_Device_head_182,root_Device_head_183];
     
-    for (int i=0; i<headValueArray.count; i++) {
+    
+    for (int i=0; i<_pvHeadNameArray.count; i++) {
         UILabel *Lable12=[[UILabel alloc]initWithFrame:CGRectMake(marchWidth+unitWidth*i, marchHeigh, unitWidth,headLableH )];
-        Lable12.text=headNameArray[i];
+        Lable12.text=_pvHeadNameArray[i];
         Lable12.textAlignment=NSTextAlignmentCenter;
         Lable12.textColor=[UIColor whiteColor];
-        Lable12.font = [UIFont systemFontOfSize:15*HEIGHT_SIZE];
+        Lable12.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         Lable12.adjustsFontSizeToFitWidth=YES;
         [_headerView addSubview:Lable12];
         
@@ -1292,36 +1205,52 @@
         headLableView1.backgroundColor=headColorArray[i];
         [_headerView addSubview:headLableView1];
         
+        UILabel *LableName1=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+gapH2, unitWidth,headLableValueH)];
+        LableName1.text=timeArray[0+2*i];
+        LableName1.textAlignment=NSTextAlignmentCenter;
+        LableName1.textColor=[UIColor whiteColor];
+        LableName1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        [_headerView addSubview:LableName1];
+        
     
-        UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2, unitWidth,headLableValueH)];
-        Lable1.text=headValueArray[i];
-        NSArray *lableName=[NSArray arrayWithObject:headValueArray[i]];
+        UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableValueH+gapH2, unitWidth,headLableValueH)];
+        NSString *lableText=[NSString stringWithFormat:@"%@/%@",_pvHeadDataArray[0+2*i],_pvHeadDataUnitArray[0+2*i]];
+        Lable1.text=lableText;
+        NSArray *lableName=[NSArray arrayWithObject:lableText];
         Lable1.userInteractionEnabled=YES;
        objc_setAssociatedObject(Lable1, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
-        //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
         tapGestureRecognizer.cancelsTouchesInView = NO;
-        //将触摸事件添加到当前view
         [Lable1 addGestureRecognizer:tapGestureRecognizer];
         Lable1.textAlignment=NSTextAlignmentCenter;
         Lable1.textColor=[UIColor whiteColor];
-        Lable1.font = [UIFont systemFontOfSize:26*HEIGHT_SIZE];
+        Lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_headerView addSubview:Lable1];
-        //        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:30*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        //        CGSize size = [headValueArray[i] boundingRectWithSize:CGSizeMake(MAXFLOAT, headLableValueH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-        // [Lable1 sizeToFit];
-        
-        
-        UILabel *Lable1L=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableValueH-15*HEIGHT_SIZE, unitWidth,headLableValueH*0.5)];
-        Lable1L.text=headValue1Array[i];
+ 
+        UILabel *LableName2=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableValueH*2+gapH2*2, unitWidth,headLableValueH)];
+        LableName2.text=timeArray[1+2*i];
+        LableName2.textAlignment=NSTextAlignmentCenter;
+        LableName2.textColor=[UIColor whiteColor];
+        LableName2.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        [_headerView addSubview:LableName2];
+
+        UILabel *Lable1L=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableValueH*3+gapH2*2, unitWidth,headLableValueH)];
+          NSString *lableText2=[NSString stringWithFormat:@"%@/%@",_pvHeadDataArray[1+2*i],_pvHeadDataUnitArray[1+2*i]];
+        Lable1L.text=lableText2;
+        NSArray *lableName2=[NSArray arrayWithObject:lableText2];
+        Lable1L.userInteractionEnabled=YES;
+        objc_setAssociatedObject(Lable1L, "firstObject", lableName2, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        UITapGestureRecognizer *tapGestureRecognizer2= [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+        tapGestureRecognizer2.cancelsTouchesInView = NO;
+        [Lable1L addGestureRecognizer:tapGestureRecognizer2];
         Lable1L.textAlignment=NSTextAlignmentCenter;
         Lable1L.textColor=[UIColor whiteColor];
         Lable1L.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_headerView addSubview:Lable1L];
         
         
-        float headImageH0=CGRectGetMaxY(Lable1.frame);
-        float  headImageHgab=20*HEIGHT_SIZE;
+        float headImageH0=CGRectGetMaxY(Lable1L.frame);
+        float  headImageHgab=10*HEIGHT_SIZE;
         if (i==0) {
             _headImage1= [[UIImageView alloc] initWithFrame:CGRectMake(marchWidth+(unitWidth-headImageH)/2+unitWidth*i, headImageH0+headImageHgab, headImageH,headImageH)];
             _headImage1.image = [UIImage imageNamed:headImageNameArray11[i]];
@@ -1972,6 +1901,77 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
 
 }
 
+
+
+-(void)getPVheadData:(NSDictionary*)content{
+    _pvHeadDataArray=[NSMutableArray new];
+    _pvHeadDataUnitArray=[NSMutableArray new];
+    
+    _pvHeadNameArray=[NSMutableArray arrayWithObjects:root_PpvN,root_todayPV,root_Revenue,nil];
+   
+    NSArray *energyHArray=@[content[@"todayEnergy"],content[@"totalEnergy"]];
+      NSArray *powerHArray=@[content[@"invTodayPpv"],content[@"nominalPower"]];
+    
+    for (int i=0; i<powerHArray.count; i++) {
+        [self getNewPvDataW:[NSString stringWithFormat:@"%@",powerHArray[i]]];
+    }
+    
+    for (int i=0; i<energyHArray.count; i++) {
+        [self getNewPvDataWh:[NSString stringWithFormat:@"%@",energyHArray[i]]];
+    }
+    
+    NSArray *moneyArray=@[content[@"plantMoneyText"],content[@"totalMoneyText"]];
+    NSString *moneyUnit=@"";
+    for (int i=0; i<moneyArray.count; i++) {
+        NSString *headMoney=[NSString stringWithFormat:@"%@",moneyArray[i]];
+        if ([headMoney containsString:@"/"]) {
+            NSArray *headA=[headMoney componentsSeparatedByString:@"/"];
+            [_pvHeadDataArray addObject:[headA objectAtIndex:0]];
+            [_pvHeadDataUnitArray addObject:[headA objectAtIndex:1]];
+            moneyUnit=[headA objectAtIndex:1];
+        }else{
+            [_pvHeadDataArray addObject:moneyArray[i]];
+            [_pvHeadDataUnitArray addObject:moneyUnit];
+        }
+    }
+   
+  
+
+ 
+    
+}
+
+
+
+
+-(void)getNewPvDataW:(NSString*)data{
+    
+    if ( [data intValue]>1000 &&[data intValue]<1000000) {
+        float KW=(float)[data intValue]/1000;
+        [_pvHeadDataUnitArray addObject:@"kW"];
+        [_pvHeadDataArray addObject:[NSString stringWithFormat:@"%.1f/",KW]];
+    }else if([data intValue]>1000000){
+        float MW=(float)[data intValue]/1000000;
+        [_pvHeadDataUnitArray addObject:@"MW"];
+        [_pvHeadDataArray addObject:[NSString stringWithFormat:@"%.1f/",MW]];
+    }else{
+        [_pvHeadDataUnitArray addObject:@"W"];
+        [_pvHeadDataArray addObject:data];
+    }
+}
+
+
+-(void)getNewPvDataWh:(NSString*)data{
+    if ( [data intValue]>1000) {
+        float KW=(float)[data intValue]/1000;
+          [_pvHeadDataUnitArray addObject:@"MWh"];
+        [_pvHeadDataArray addObject:[NSString stringWithFormat:@"%.1f/",KW]];
+    }else{
+        [_pvHeadDataUnitArray addObject:@"kWh"];
+        [_pvHeadDataArray addObject:data];
+    }
+    
+}
 
 
 -(void)viewDidDisappear:(BOOL)animated{

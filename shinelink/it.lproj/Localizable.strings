@@ -446,9 +446,9 @@
 
 "Revenue"="Rendita";
 //"todayPV"="E-Fotovoltaica di oggi";
-"todayPV"="Energia di oggi";
+"todayPV"="Energia";
 
-"PpvN"="Ppv";
+"PpvN"="Power";
 
 "体验馆"="Demo";
 "浏览用户禁止操作"="Non consentito per uso come browser";
