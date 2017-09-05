@@ -463,7 +463,7 @@
 
 -(void)initData{
   
-    _storageType=0;
+    _storageType=-1;
     _DemoPicName2=[[NSMutableArray alloc]initWithObjects:@"storagecn.png", @"powercn.png", @"pvcn.png",@"charge-cn.png",nil];
      _DemoPicName22=[[NSMutableArray alloc]initWithObjects:@"storageen.png", @"poweren.png", @"pven.png",@"charge-en.png",nil];
     
@@ -1949,11 +1949,11 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
     if ( [data intValue]>1000 &&[data intValue]<1000000) {
         float KW=(float)[data intValue]/1000;
         [_pvHeadDataUnitArray addObject:@"kW"];
-        [_pvHeadDataArray addObject:[NSString stringWithFormat:@"%.1f/",KW]];
+        [_pvHeadDataArray addObject:[NSString stringWithFormat:@"%.1f",KW]];
     }else if([data intValue]>1000000){
         float MW=(float)[data intValue]/1000000;
         [_pvHeadDataUnitArray addObject:@"MW"];
-        [_pvHeadDataArray addObject:[NSString stringWithFormat:@"%.1f/",MW]];
+        [_pvHeadDataArray addObject:[NSString stringWithFormat:@"%.1f",MW]];
     }else{
         [_pvHeadDataUnitArray addObject:@"W"];
         [_pvHeadDataArray addObject:data];
@@ -1965,7 +1965,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
     if ( [data intValue]>1000) {
         float KW=(float)[data intValue]/1000;
           [_pvHeadDataUnitArray addObject:@"MWh"];
-        [_pvHeadDataArray addObject:[NSString stringWithFormat:@"%.1f/",KW]];
+        [_pvHeadDataArray addObject:[NSString stringWithFormat:@"%.1f",KW]];
     }else{
         [_pvHeadDataUnitArray addObject:@"kWh"];
         [_pvHeadDataArray addObject:data];

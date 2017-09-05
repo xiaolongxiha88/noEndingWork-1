@@ -55,12 +55,12 @@
 #define HEAD_URL_Demo_CN  @"http://server-cn.growatt.com"
 #define HEAD_URL  [UserInfo defaultUserInfo].server
 #define OSS_HEAD_URL_Demo  @"http://oss1.growatt.com:8080"
-//#define OSS_HEAD_URL  [UserInfo defaultUserInfo].OSSserver
+#define OSS_HEAD_URL  [UserInfo defaultUserInfo].OSSserver
 
 
 
 //#define HEAD_URL  @"http://47.88.0.98:8080/ShineServer_2016"
-#define OSS_HEAD_URL  @"http://oss1.growatt.com:8080"
+//#define OSS_HEAD_URL  @"http://oss1.growatt.com:8080"
 
 //demo for server
 
