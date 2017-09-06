@@ -55,7 +55,7 @@
 
         
         UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(0, 10*HEIGHT_SIZE+22*HEIGHT_SIZE*4, SCREEN_Width, 10*HEIGHT_SIZE)];
-        [view1 setBackgroundColor:colorGary];
+        [view1 setBackgroundColor:COLOR(242, 242, 242, 1)];
         [self.contentView addSubview:view1];
     }
     
@@ -63,9 +63,7 @@
 }
 
 
-- (void)awakeFromNib {
-    // Initialization code
-}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

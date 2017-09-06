@@ -204,7 +204,7 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
     Lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:Lable2];
         
-        UIView *line=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,70*HEIGHT_SIZE+SIZE1*i, 300*NOW_SIZE, 1*HEIGHT_SIZE)];
+        UIView *line=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,70*HEIGHT_SIZE+SIZE1*i, 300*NOW_SIZE, LineWidth)];
         line.backgroundColor=[UIColor whiteColor];
         [_scrollView addSubview:line];
     }
@@ -257,7 +257,7 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
         pv31.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:pv31];
         
-        UIView *line2=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 285*HEIGHT_SIZE+size3*K, 300*NOW_SIZE,1*HEIGHT_SIZE )];
+        UIView *line2=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 285*HEIGHT_SIZE+size3*K, 300*NOW_SIZE,LineWidth )];
         line2.backgroundColor=COLOR(212, 212, 212, 1);
         [_scrollView addSubview:line2];
         
@@ -289,11 +289,11 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
         valueLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:valueLable];
         
-        UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 294.5*HEIGHT_SIZE-size3-H1, 300*NOW_SIZE,1*HEIGHT_SIZE )];
+        UIView *line1=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 294.5*HEIGHT_SIZE-size3-H1, 300*NOW_SIZE,LineWidth )];
         line1.backgroundColor=COLOR(212, 212, 212, 1);
         [_scrollView addSubview:line1];
         
-        UIView *line2=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 294.5*HEIGHT_SIZE+size3*K-H1, 300*NOW_SIZE,1*HEIGHT_SIZE )];
+        UIView *line2=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 294.5*HEIGHT_SIZE+size3*K-H1, 300*NOW_SIZE,LineWidth)];
         line2.backgroundColor=COLOR(212, 212, 212, 1);
         [_scrollView addSubview:line2];
         

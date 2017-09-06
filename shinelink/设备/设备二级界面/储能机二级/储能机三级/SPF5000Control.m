@@ -94,7 +94,7 @@
             Button.backgroundColor=[UIColor clearColor];
         }
         
-        Button.layer.borderWidth=1*HEIGHT_SIZE;
+        Button.layer.borderWidth=LineWidth;
         Button.layer.borderColor=COLOR(81, 188, 254, 1).CGColor;
         Button.tag=2000+i;
         Button.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];

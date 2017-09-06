@@ -195,7 +195,7 @@
     self.ipName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [_scrollView addSubview:_ipName];
     
-    UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*4+lableHeigh-7*HEIGHT_SIZE, 180*NOW_SIZE,1*HEIGHT_SIZE )];
+    UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*4+lableHeigh-7*HEIGHT_SIZE, 180*NOW_SIZE,LineWidth )];
     view1.backgroundColor=[UIColor lightTextColor];
     [_scrollView addSubview:view1];
     
@@ -217,7 +217,7 @@
     self.pswd.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [_scrollView addSubview:_pswd];
     
-    UIView *view2=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE, 180*NOW_SIZE,1*HEIGHT_SIZE )];
+    UIView *view2=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE, 180*NOW_SIZE,LineWidth )];
     view2.backgroundColor=[UIColor lightTextColor];
     [_scrollView addSubview:view2];
     

@@ -37,7 +37,7 @@ class deviceListCell: UITableViewCell {
             let lable0=array as!UILabel
             
             if index==0{
-                lable0.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
+                lable0.textColor=MainColor
                 lable0.textAlignment=NSTextAlignment.center
                 lable0.font=UIFont.systemFont(ofSize: 10*HEIGHT_SIZE)
           lable0.frame=CGRect(x: 0*NOW_SIZE, y: 2*HEIGHT_SIZE, width:SCREEN_Width, height: 20*HEIGHT_SIZE)

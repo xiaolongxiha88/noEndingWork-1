@@ -278,7 +278,7 @@
         if ([_frameType isEqualToString:@"1"]) {
         NSDictionary *_plotThemeAttributes = @{
                                                kPlotFillColorKey : COLOR(89, 225, 151, 0.6),
-                                               kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",1*HEIGHT_SIZE],
+                                               kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",LineWidth],
                                                kPlotStrokeColorKey : COLOR(89, 225, 151, 1),
                                                kPlotPointFillColorKey : COLOR(89, 225, 151, 0.6),
                                                kPlotPointValueFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE]
@@ -287,7 +287,7 @@
           }else{
               NSDictionary *_plotThemeAttributes = @{
                                                      kPlotFillColorKey : COLOR(89, 225, 151, 0.6),
-                                                     kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",1*HEIGHT_SIZE],
+                                                     kPlotStrokeWidthKey : [NSString stringWithFormat:@"%.1f",LineWidth],
                                                      kPlotStrokeColorKey : COLOR(89, 225, 151, 1),
                                                      kPlotPointFillColorKey : COLOR(89, 225, 151, 0.6),
                                                      kPlotPointValueFontKey : [UIFont fontWithName:@"TrebuchetMS" size:10*HEIGHT_SIZE]

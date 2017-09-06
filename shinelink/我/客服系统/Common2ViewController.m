@@ -68,7 +68,7 @@
 //    PV1Lable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
 //    [_scrollView addSubview:PV1Lable];
     
-    UIView *image1=[[UIImageView alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 42*HEIGHT_SIZE, 310*NOW_SIZE,1*HEIGHT_SIZE )];
+    UIView *image1=[[UIImageView alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 42*HEIGHT_SIZE, 310*NOW_SIZE,LineWidth )];
     image1.backgroundColor=mainColor;
     [_scrollView addSubview:image1];
     

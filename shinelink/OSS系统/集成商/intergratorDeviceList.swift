@@ -146,6 +146,8 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                     }
                     
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    
+                          self.getNoDataView()
                 }
                 
             }
@@ -154,6 +156,30 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
             self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
         })
+        
+    }
+    
+    
+    func getNoDataView(){
+        let view0=UIView()
+        view0.frame=CGRect(x: 0*NOW_SIZE, y: 120*HEIGHT_SIZE, width: SCREEN_Width, height: 120*HEIGHT_SIZE)
+        view0.backgroundColor=UIColor.clear
+        self.view.addSubview(view0)
+        
+        let H=50*HEIGHT_SIZE
+        let image0=UIImageView()
+        image0.frame=CGRect(x: (SCREEN_Width-H)/2, y: 10*HEIGHT_SIZE, width: H, height: H)
+        image0.image=UIImage.init(named: "data_icon.png")
+        view0.addSubview(image0)
+        
+        let lable0=UILabel()
+        lable0.frame=CGRect(x: 0*NOW_SIZE, y: 10*HEIGHT_SIZE+H+10*HEIGHT_SIZE, width: SCREEN_Width, height: 30*HEIGHT_SIZE)
+        lable0.textColor=COLOR(_R: 187, _G: 187, _B: 187, _A: 1)
+        lable0.textAlignment=NSTextAlignment.center
+        lable0.text="暂无数据"
+        lable0.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
+        view0.addSubview(lable0)
+        
         
     }
     

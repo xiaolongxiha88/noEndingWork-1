@@ -185,7 +185,7 @@ static void *context = NULL;
     self.ipName.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:_ipName];
     
-    UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*4+lableHeigh-7*HEIGHT_SIZE, 180*NOW_SIZE,1*HEIGHT_SIZE )];
+    UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*4+lableHeigh-7*HEIGHT_SIZE, 180*NOW_SIZE,LineWidth )];
     view1.backgroundColor=[UIColor lightTextColor];
     [_scrollView addSubview:view1];
     
@@ -207,7 +207,7 @@ static void *context = NULL;
     self.pswd.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:_pswd];
     
-    UIView *view2=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE, 180*NOW_SIZE,1*HEIGHT_SIZE )];
+    UIView *view2=[[UIView alloc]initWithFrame:CGRectMake(105*NOW_SIZE, sizeH1+twoHeigh*5+lableHeigh*2-7*HEIGHT_SIZE, 180*NOW_SIZE,LineWidth )];
     view2.backgroundColor=[UIColor lightTextColor];
     [_scrollView addSubview:view2];
     
@@ -605,7 +605,7 @@ static void *context = NULL;
     const char *s_authmode = [authMode cStringUsingEncoding:NSASCIIStringEncoding];
     int authmode = atoi(s_authmode);
     const char *password = [pswd cStringUsingEncoding:NSASCIIStringEncoding];
-  //  unsigned char target[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
+ unsigned char target[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
     
     NSLog(@"OnSend: ssid = %s, authmode = %d, password = %s", ssid, authmode, password);
     if (context)
@@ -614,7 +614,7 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销1  2
- //      elianStop(context);
+//       elianStop(context);
 //        elianDestroy(context);
         
         
@@ -624,7 +624,7 @@ static void *context = NULL;
     
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销2  1
-// context = elianNew(NULL, 0, target, flag);
+ //context = elianNew(NULL, 0, target, flag);
     
     
     if (context == NULL)

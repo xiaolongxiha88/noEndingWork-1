@@ -11,4 +11,6 @@
 @interface DemoDeviceViewController : RootViewController
 @property (nonatomic, strong) NSString *picName;
 @property (nonatomic, strong) NSString *picName2;
+@property (nonatomic, strong) NSString *leftName;
+@property (nonatomic, strong) NSString *rightName;
 @end

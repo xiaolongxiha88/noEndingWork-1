@@ -181,7 +181,7 @@
     _title1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [_scrollView2 addSubview:_title1];
     
-    UIView *line3=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,10*HEIGHT_SIZE+30*HEIGHT_SIZE, 300*NOW_SIZE,1*HEIGHT_SIZE )];
+    UIView *line3=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,10*HEIGHT_SIZE+30*HEIGHT_SIZE, 300*NOW_SIZE,LineWidth)];
     line3.backgroundColor=[UIColor grayColor];
     [_scrollView2 addSubview:line3];
     

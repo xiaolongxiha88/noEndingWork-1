@@ -24,7 +24,7 @@
 
 #define NavigationbarHeight  self.navigationController.navigationBar.frame.size.height
 
-
+#define LineWidth  [UIScreen mainScreen].bounds.size.height*0.5/560
 
 #define MainColor COLOR(0, 156, 255, 1)
 //#define MainColor COLOR(17, 183, 243, 1)
@@ -33,7 +33,7 @@
 //#define mainColor [UIColor colorWithRed:130/255.0f green:200/255.0f blue:250/255.0f alpha:1]
 
 #define SCREEN_Width [UIScreen mainScreen].bounds.size.width
-#define colorGary COLOR(212, 212, 212, 1)
+#define colorGary COLOR(221, 221, 221, 1)
 #define SCREEN_Height [UIScreen mainScreen].bounds.size.height
 #define kiPhone6 ([UIScreen mainScreen].bounds.size.width==375)
 #define frameMake(a,b,c,d) CGRectMake(a*NOW_SIZE,b*NOW_SIZE,c*NOW_SIZE,d*NOW_SIZE)

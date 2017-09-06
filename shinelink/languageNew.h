@@ -792,6 +792,7 @@
 #define  root_Device_head_182  NSLocalizedString(@"182今日收益", nil)
 #define  root_Device_head_183  NSLocalizedString(@"183累计收益", nil)
 
-
+#define  root_Device_head_184  NSLocalizedString(@"184日充电量", nil)
+#define  root_Device_head_185  NSLocalizedString(@"185总充电量", nil)
 
 #endif /* languageNew_h */

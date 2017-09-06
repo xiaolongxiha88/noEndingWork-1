@@ -15,9 +15,7 @@
 
 @implementation findTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
-}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -45,21 +43,24 @@
         [self.imageDetail setImage:[UIImage imageNamed:@"frag4.png"]];
         [self.contentView addSubview:_imageDetail];
         
+        UIView *V0=[[UIView alloc] initWithFrame:CGRectMake(0, 55*HEIGHT_SIZE-LineWidth, SCREEN_Width, LineWidth)];
+        V0.backgroundColor=colorGary;
+        [self.contentView addSubview:V0];
         
     }
 
     return self;
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-    CGContextFillRect(context, rect);
-    
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:0xE2/255.0f green:0xE2/255.0f blue:0xE2/255.0f alpha:1].CGColor);
-    CGContextStrokeRect(context, CGRectMake(0, rect.size.height - 1, rect.size.width, 1));
-}
+//- (void)drawRect:(CGRect)rect
+//{
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    
+//    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
+//    CGContextFillRect(context, rect);
+//    
+//    CGContextSetStrokeColorWithColor(context, COLOR(221, 221, 221, 1).CGColor);
+//    CGContextStrokeRect(context, CGRectMake(0, rect.size.height - LineWidth, rect.size.width, LineWidth*01));
+//}
 
 @end

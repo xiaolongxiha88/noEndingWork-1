@@ -195,13 +195,13 @@
             
         }
         
-        UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, lableH+Nsize*i, SCREEN_Width-20*NOW_SIZE, 1*HEIGHT_SIZE)];
+        UIView *lineV=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, lableH+Nsize*i, SCREEN_Width-20*NOW_SIZE, LineWidth)];
         lineV.backgroundColor=COLOR(222, 222, 222, 1);
         [_scrollView addSubview:lineV];
         
     }
     
-    UIView *lineV3=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, lableH+Nsize*4-10*HEIGHT_SIZE, SCREEN_Width-20*NOW_SIZE, 1*HEIGHT_SIZE)];
+    UIView *lineV3=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, lableH+Nsize*4-10*HEIGHT_SIZE, SCREEN_Width-20*NOW_SIZE, LineWidth)];
     lineV3.backgroundColor=COLOR(222, 222, 222, 1);
     [_scrollView addSubview:lineV3];
     
@@ -216,7 +216,7 @@
     self.contentView.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [_scrollView addSubview:_contentView];
     
-    UIView *lineV4=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, Nsize*5+100*HEIGHT_SIZE , SCREEN_Width-20*NOW_SIZE, 1*HEIGHT_SIZE)];
+    UIView *lineV4=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, Nsize*5+100*HEIGHT_SIZE , SCREEN_Width-20*NOW_SIZE, LineWidth)];
     lineV4.backgroundColor=COLOR(222, 222, 222, 1);
     [_scrollView addSubview:lineV4];
     

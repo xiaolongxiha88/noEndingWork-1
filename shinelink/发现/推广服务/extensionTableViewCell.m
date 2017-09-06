@@ -39,7 +39,7 @@
         [self.contentView addSubview:_CellName];
         
         
-        UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(0, 50*HEIGHT_SIZE-2*HEIGHT_SIZE, SCREEN_Width, 1*HEIGHT_SIZE)];
+        UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(0, 50*HEIGHT_SIZE-2*HEIGHT_SIZE, SCREEN_Width,LineWidth)];
         [view1 setBackgroundColor:colorGary];
         [self.contentView addSubview:view1];
         

@@ -143,7 +143,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
    _netEnable=@"0";
-
+_pcsNetStorageSN=@"";
+    
     _isPvType=NO;
     
   [self.navigationController.navigationBar setTranslucent:YES];
@@ -467,8 +468,8 @@
     _DemoPicName2=[[NSMutableArray alloc]initWithObjects:@"storagecn.png", @"powercn.png", @"pvcn.png",@"charge-cn.png",nil];
      _DemoPicName22=[[NSMutableArray alloc]initWithObjects:@"storageen.png", @"poweren.png", @"pven.png",@"charge-en.png",nil];
     
-    _DemoPicName=[[NSMutableArray alloc]initWithObjects:@"storagebgcn.png", @"pvbgcn.png", @"pvbgcn.png",@"demobgcn.png",nil];
-     _DemoPicName11=[[NSMutableArray alloc]initWithObjects:@"storagebgen.png", @"pvbgen.png", @"pvbgen.png",@"demobgen.png",nil];
+    _DemoPicName=[[NSMutableArray alloc]initWithObjects:@"storagecn.png", @"powercn.png", @"pvcn.png",@"charge-cn.png",nil];
+     _DemoPicName11=[[NSMutableArray alloc]initWithObjects:@"storageen.png", @"poweren.png", @"pven.png",@"charge-en.png",nil];
     
     _typeArr=[NSMutableArray array];
     nameArray=[NSMutableArray array];
@@ -772,13 +773,16 @@
            
         }
         
-      
+        if (_dataArr.count==0) {
+             [self getPVheadData:content];
+        }
         
         if ([_typeArr containsObject:@"storage"]) {
             
         }else if ([_typeArr containsObject:@"inverter"]){
             [self getPVheadData:content];
         }
+        
         
         
         //创建Head
@@ -938,6 +942,8 @@
 
 -(void)getPCSnet{
 
+  
+    
     
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":_pcsNetPlantID,@"storageSn":_pcsNetStorageSN} paramarsSite:@"/newStorageAPI.do?op=getSystemStatusData" sucessBlock:^(id content) {
         [self hideProgressView];
@@ -1607,7 +1613,8 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
            
             DemoDeviceViewController *sd=[[DemoDeviceViewController alloc ]init];
             sd.hidesBottomBarWhenPushed=YES;
-           
+           sd.leftName=root_NBQ_ri_dianliang;
+           sd.rightName=root_NBQ_zong_dianliang;
            if ([_languageValue isEqualToString:@"0"]) {
                sd.picName=_DemoPicName[2];
                sd.picName2=_DemoPicName2[2];
@@ -1622,7 +1629,9 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         else if([demoDevice.type  isEqualToString:@"storage"]){
             DemoDeviceViewController *sd=[[DemoDeviceViewController alloc ]init];
             sd.hidesBottomBarWhenPushed=YES;
-      
+            sd.leftName=root_ri_fangdianliang;
+            sd.rightName=root_zong_fangdianliang;
+            
             if ([_languageValue isEqualToString:@"0"]) {
                 sd.picName=_DemoPicName[0];
                 sd.picName2=_DemoPicName2[0];
@@ -1639,7 +1648,8 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         else if([demoDevice.type  isEqualToString:@"charge"]){
             DemoDeviceViewController *sd=[[DemoDeviceViewController alloc ]init];
             sd.hidesBottomBarWhenPushed=YES;
- 
+            sd.leftName=root_Device_head_184;
+            sd.rightName=root_Device_head_185;
             
             if ([_languageValue isEqualToString:@"0"]) {
                 sd.picName=_DemoPicName[3];
@@ -1656,7 +1666,8 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         else if([demoDevice.type  isEqualToString:@"powerRegulator"]){
             DemoDeviceViewController *sd=[[DemoDeviceViewController alloc ]init];
             sd.hidesBottomBarWhenPushed=YES;
-    
+            sd.leftName=root_NBQ_ri_dianliang;
+            sd.rightName=root_NBQ_zong_dianliang;
             
             if ([_languageValue isEqualToString:@"0"]) {
                 sd.picName=_DemoPicName[1];
@@ -1909,33 +1920,38 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
     
     _pvHeadNameArray=[NSMutableArray arrayWithObjects:root_PpvN,root_todayPV,root_Revenue,nil];
    
-    NSArray *energyHArray=@[content[@"todayEnergy"],content[@"totalEnergy"]];
-      NSArray *powerHArray=@[content[@"invTodayPpv"],content[@"nominalPower"]];
-    
-    for (int i=0; i<powerHArray.count; i++) {
-        [self getNewPvDataW:[NSString stringWithFormat:@"%@",powerHArray[i]]];
-    }
-    
-    for (int i=0; i<energyHArray.count; i++) {
-        [self getNewPvDataWh:[NSString stringWithFormat:@"%@",energyHArray[i]]];
-    }
-    
-    NSArray *moneyArray=@[content[@"plantMoneyText"],content[@"totalMoneyText"]];
-    NSString *moneyUnit=@"";
-    for (int i=0; i<moneyArray.count; i++) {
-        NSString *headMoney=[NSString stringWithFormat:@"%@",moneyArray[i]];
-        if ([headMoney containsString:@"/"]) {
-            NSArray *headA=[headMoney componentsSeparatedByString:@"/"];
-            [_pvHeadDataArray addObject:[headA objectAtIndex:0]];
-            [_pvHeadDataUnitArray addObject:[headA objectAtIndex:1]];
-            moneyUnit=[headA objectAtIndex:1];
-        }else{
-            [_pvHeadDataArray addObject:moneyArray[i]];
-            [_pvHeadDataUnitArray addObject:moneyUnit];
+    if ([content.allKeys containsObject:@"todayEnergy"]) {
+        NSArray *energyHArray=@[content[@"todayEnergy"],content[@"totalEnergy"]];
+        NSArray *powerHArray=@[content[@"invTodayPpv"],content[@"nominalPower"]];
+        
+        for (int i=0; i<powerHArray.count; i++) {
+            [self getNewPvDataW:[NSString stringWithFormat:@"%@",powerHArray[i]]];
         }
+        
+        for (int i=0; i<energyHArray.count; i++) {
+            [self getNewPvDataWh:[NSString stringWithFormat:@"%@",energyHArray[i]]];
+        }
+        
+        NSArray *moneyArray=@[content[@"plantMoneyText"],content[@"totalMoneyText"]];
+        NSString *moneyUnit=@"";
+        for (int i=0; i<moneyArray.count; i++) {
+            NSString *headMoney=[NSString stringWithFormat:@"%@",moneyArray[i]];
+            if ([headMoney containsString:@"/"]) {
+                NSArray *headA=[headMoney componentsSeparatedByString:@"/"];
+                [_pvHeadDataArray addObject:[headA objectAtIndex:0]];
+                [_pvHeadDataUnitArray addObject:[headA objectAtIndex:1]];
+                moneyUnit=[headA objectAtIndex:1];
+            }else{
+                [_pvHeadDataArray addObject:moneyArray[i]];
+                [_pvHeadDataUnitArray addObject:moneyUnit];
+            }
+        }
+        
+    }else{
+        _pvHeadDataArray=[NSMutableArray arrayWithObjects:@"0", @"0",@"0",@"0",@"0",@"0",nil];
+        _pvHeadDataUnitArray=[NSMutableArray arrayWithObjects:@"", @"", @"", @"", @"", @"", nil];
+    
     }
-   
-  
 
  
     

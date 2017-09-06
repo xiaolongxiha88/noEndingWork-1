@@ -110,9 +110,49 @@
 
 -(void)addProcess{
     UIView *processView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, 200*HEIGHT_SIZE)];
-    UIImage *bgImage = [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForAuxiliaryExecutable:_picName]];
-    processView.layer.contents = (id)bgImage.CGImage;
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.colors = @[(__bridge id)COLOR(0, 156, 255, 1).CGColor, (__bridge id)COLOR(11, 182, 255, 1).CGColor];
+    gradientLayer.locations = nil;
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(1, 1);
+    gradientLayer.frame = CGRectMake(0, 0, processView.frame.size.width, processView.frame.size.height);
+    [processView.layer addSublayer:gradientLayer];
     [self.scrollView addSubview:processView];
+    
+    
+    UILabel *dayData=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 190*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+    dayData.text=@"50kWh";
+    dayData.userInteractionEnabled=YES;
+    dayData.textAlignment=NSTextAlignmentCenter;
+    dayData.textColor=[UIColor whiteColor];;
+    dayData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    [self.scrollView addSubview:dayData];
+    UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+    leftState.text=_leftName;
+    leftState.textAlignment=NSTextAlignmentCenter;
+    leftState.textColor=[UIColor whiteColor];
+    leftState.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    leftState.adjustsFontSizeToFitWidth=YES;
+    [self.scrollView addSubview:leftState];
+    
+    
+    UILabel *totalData=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-95*NOW_SIZE, 190*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+    totalData.text=@"500kWh";
+    totalData.userInteractionEnabled=YES;
+    totalData.textAlignment=NSTextAlignmentCenter;
+    totalData.textColor=[UIColor whiteColor];
+    totalData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    [self.scrollView addSubview:totalData];
+    UILabel *rightState=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-95*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+    rightState.text=_rightName;
+    rightState.textAlignment=NSTextAlignmentCenter;
+    rightState.textColor=[UIColor whiteColor];
+    rightState.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    rightState.adjustsFontSizeToFitWidth=YES;
+    rightState.adjustsFontSizeToFitWidth=YES;
+    
+    [self.scrollView addSubview:rightState];
+    
     
     float imageSize=150*HEIGHT_SIZE;
    UIImageView *coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_Width-imageSize)/2, (200*HEIGHT_SIZE-imageSize)/2, imageSize, imageSize)];

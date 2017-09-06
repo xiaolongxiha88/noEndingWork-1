@@ -77,7 +77,7 @@
     [self addSubview:_bottomView];
     //导航视图
     _navigationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenWidth, navigationViewHeight)];
-    _navigationView.backgroundColor = [UIColor lightGrayColor];
+    _navigationView.backgroundColor = COLOR(242, 242, 242, 1);
     [_bottomView addSubview:_navigationView];
     //这里添加空手势不然点击navigationView也会隐藏,
     UITapGestureRecognizer *tapNavigationView = [[UITapGestureRecognizer alloc]initWithTarget:self action:nil];
@@ -89,6 +89,7 @@
         [button setTitle:buttonTitleArray[i] forState:UIControlStateNormal];
         button.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
         button.titleLabel.textAlignment=NSTextAlignmentCenter;
+        button.tintColor=MainColor;
         [_navigationView addSubview:button];
         
         button.tag = i;

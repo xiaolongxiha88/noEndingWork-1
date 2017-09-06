@@ -30,7 +30,7 @@
     
     float gifH=130*HEIGHT_SIZE;   float gifwidth=100*HEIGHT_SIZE;
     for (int i=0; i<4; i++) {
-        UIView *line=[[UIView alloc]initWithFrame:CGRectMake(15*NOW_SIZE,10*HEIGHT_SIZE+gifH*i,290*NOW_SIZE, 1*HEIGHT_SIZE)];
+        UIView *line=[[UIView alloc]initWithFrame:CGRectMake(15*NOW_SIZE,10*HEIGHT_SIZE+gifH*i,290*NOW_SIZE, LineWidth)];
         line.backgroundColor=COLOR(255, 255, 255, 0.5);
         [self.view addSubview:line];
     }

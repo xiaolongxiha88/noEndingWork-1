@@ -278,7 +278,7 @@
     [self.scrollView addSubview:processView];
     
     if (![_typeNum isEqualToString:@"1"]) {
-        UILabel *leftName=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE, 190*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+        UILabel *leftName=[[UILabel alloc]initWithFrame:CGRectMake(14*NOW_SIZE, 195*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
         leftName.text=_dayDischarge;
         leftName.userInteractionEnabled=YES;
         UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
@@ -288,9 +288,9 @@
         leftName.textColor=valueColor;
         leftName.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
         [self.scrollView addSubview:leftName];
-        UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(2*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
+        UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(2*NOW_SIZE, 215*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
         if ([_languageValue isEqualToString:@"0"]) {
-            leftState.frame=CGRectMake(14*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE );
+            leftState.frame=CGRectMake(14*NOW_SIZE, 215*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE );
         }
         leftState.text=root_ri_fangdianliang;
         leftState.textAlignment=NSTextAlignmentLeft;
@@ -313,7 +313,7 @@
         
         UILabel *rightState=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-116*NOW_SIZE, 215*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE )];
         if ([_languageValue isEqualToString:@"0"]) {
-            rightState.frame=CGRectMake(kScreenWidth-128*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE );
+            rightState.frame=CGRectMake(kScreenWidth-128*NOW_SIZE, 215*HEIGHT_SIZE-SizeH, 114*NOW_SIZE,20*HEIGHT_SIZE );
         }
         rightState.text=root_zong_fangdianliang;
         rightState.textAlignment=NSTextAlignmentRight;

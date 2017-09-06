@@ -232,7 +232,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     for (int i=0; i<_valueName.count+1; i++) {
     
-        UIView *line=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 80*HEIGHT_SIZE+size1*i, 300*NOW_SIZE, 1*HEIGHT_SIZE)];
+        UIView *line=[[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 80*HEIGHT_SIZE+size1*i, 300*NOW_SIZE, LineWidth)];
        line.backgroundColor=COLOR(140, 221, 249, 1);
         [_colorBackView addSubview:line];
         

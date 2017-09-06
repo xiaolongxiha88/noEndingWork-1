@@ -176,12 +176,12 @@
     
     
     
-    double imageSize=120*HEIGHT_SIZE;
+    double imageSize=90*HEIGHT_SIZE;
     
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     NSData *pic=[ud objectForKey:@"userPic"];
     
-   UIImageView *userImage= [[UIImageView alloc] initWithFrame:CGRectMake((Kwidth-imageSize)/2, 25*HEIGHT_SIZE, imageSize, imageSize)];
+   UIImageView *userImage= [[UIImageView alloc] initWithFrame:CGRectMake((Kwidth-imageSize)/2, (200*HEIGHT_SIZE-imageSize)/2-10*HEIGHT_SIZE, imageSize, imageSize)];
     //  [userImage setImage:[UIImage imageNamed:@"1.jpg"]];
     userImage.layer.masksToBounds=YES;
     userImage.layer.cornerRadius=imageSize/2.0;
@@ -203,7 +203,7 @@
     
     NSUserDefaults *ud1=[NSUserDefaults standardUserDefaults];
     NSString *reUsername=[ud1 objectForKey:@"userName"];
-    UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake((Kwidth-200*NOW_SIZE)/2, 150*HEIGHT_SIZE, 200*NOW_SIZE, 20*HEIGHT_SIZE)];
+    UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake((Kwidth-200*NOW_SIZE)/2, 150*HEIGHT_SIZE-5*HEIGHT_SIZE, 200*NOW_SIZE, 20*HEIGHT_SIZE)];
     PV2Lable.text=reUsername;
     PV2Lable.textAlignment=NSTextAlignmentCenter;
     PV2Lable.textColor=[UIColor whiteColor];

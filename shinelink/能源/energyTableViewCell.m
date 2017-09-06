@@ -80,7 +80,9 @@
         [self.contentView addSubview:_electricValue];
         
         
-        
+        UIView *V0=[[UIView alloc] initWithFrame:CGRectMake(0, 65*HEIGHT_SIZE-LineWidth, SCREEN_Width, LineWidth)];
+        V0.backgroundColor=colorGary;
+        [self.contentView addSubview:V0];
         
         
         
@@ -89,16 +91,7 @@
     return self;
 }
 
-- (void)drawRect:(CGRect)rect
-{
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextSetFillColorWithColor(context, [UIColor whiteColor].CGColor);
-    CGContextFillRect(context, rect);
-    
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:0xE2/255.0f green:0xE2/255.0f blue:0xE2/255.0f alpha:1].CGColor);
-    CGContextStrokeRect(context, CGRectMake(0, rect.size.height - 1, rect.size.width, 1));
-}
+
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

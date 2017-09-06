@@ -142,7 +142,7 @@
     
            
     _datePickerButton=[[UIButton alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2,115*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
-           _datePickerButton.layer.borderWidth=1*HEIGHT_SIZE;
+           _datePickerButton.layer.borderWidth=LineWidth;
            _datePickerButton.layer.cornerRadius=5;
            _datePickerButton.layer.borderColor=[UIColor whiteColor].CGColor;
     [_datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
@@ -220,7 +220,7 @@
     self.currentTime1 = [_time1Formatter stringFromDate:[NSDate date]];
     
     _time1=[[UIButton alloc]initWithFrame:CGRectMake(20*NOW_SIZE, 85*HEIGHT_SIZE+10*HEIGHT_SIZE+25*HEIGHT_SIZE, 120*NOW_SIZE,30*HEIGHT_SIZE )];
-        _time1.layer.borderWidth=1*HEIGHT_SIZE;
+        _time1.layer.borderWidth=LineWidth;
         _time1.layer.cornerRadius=5;
         _time1.layer.borderColor=[UIColor whiteColor].CGColor;
     [_time1 setTitle:self.currentTime1 forState:UIControlStateNormal];
@@ -232,7 +232,7 @@
     [_scrollView addSubview:_time1];
     
     _time2=[[UIButton alloc]initWithFrame:CGRectMake(180*NOW_SIZE, 85*HEIGHT_SIZE+10*HEIGHT_SIZE+25*HEIGHT_SIZE, 120*NOW_SIZE,30*HEIGHT_SIZE )];
-        _time2.layer.borderWidth=1*HEIGHT_SIZE;
+        _time2.layer.borderWidth=LineWidth;
         _time2.layer.cornerRadius=5;
         _time2.layer.borderColor=[UIColor whiteColor].CGColor;
     [_time2 setTitle:self.currentTime1 forState:UIControlStateNormal];
@@ -276,7 +276,7 @@
 //    [_scrollView addSubview:line3];
     
    _textField = [[UITextField alloc] initWithFrame:CGRectMake(200*NOW_SIZE,75*HEIGHT_SIZE+10*HEIGHT_SIZE+Size1, 100*NOW_SIZE,30*HEIGHT_SIZE )];
-         _textField.layer.borderWidth=1*HEIGHT_SIZE;
+         _textField.layer.borderWidth=LineWidth;
          _textField.layer.cornerRadius=5;
          _textField.layer.borderColor=[UIColor whiteColor].CGColor;
     _textField.textColor = [UIColor whiteColor];
@@ -309,7 +309,7 @@
          
     
     _textField1 = [[UITextField alloc] initWithFrame:CGRectMake(200*NOW_SIZE,75*HEIGHT_SIZE+10*HEIGHT_SIZE+Size1*2, 100*NOW_SIZE,30*HEIGHT_SIZE )];
-         _textField1.layer.borderWidth=1*HEIGHT_SIZE;
+         _textField1.layer.borderWidth=LineWidth;
          _textField1.layer.cornerRadius=5;
          _textField1.layer.borderColor=[UIColor whiteColor].CGColor;
     _textField1.textColor = [UIColor whiteColor];
@@ -362,7 +362,7 @@
         
         
         _textField2 = [[UITextField alloc] initWithFrame:CGRectMake(90*NOW_SIZE, 110*HEIGHT_SIZE+10*HEIGHT_SIZE, 140*NOW_SIZE, 30*HEIGHT_SIZE)];
-        _textField2.layer.borderWidth=1*HEIGHT_SIZE;
+        _textField2.layer.borderWidth=LineWidth;
         _textField2.layer.cornerRadius=5;
         _textField2.layer.borderColor=[UIColor whiteColor].CGColor;
         _textField2.textColor = [UIColor whiteColor];

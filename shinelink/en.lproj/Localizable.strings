@@ -755,8 +755,8 @@
 "169电池当天放电量"="eBatDisChargeToday";
 "170Pv的总充电量"="EpvTotal";
 "171AC的总充电量"="EacChargeTotal";
-"172电池总的充电量"="E_bat_today";
-"173电池总的放电量"="eBatDisChargeTotal ";
+"172电池总的充电量"="eBatChargeTotal";
+"173电池总的放电量"="eBatDisChargeTotal";
 "174充电量"="Total charge";
 "175光伏储能"="Solar storage";
 "176电网储能"="Grid storage";
@@ -768,4 +768,5 @@
 "182今日收益"="Today";
 "183累计收益"="Lifetime";
 
-
+"184日充电量"="Daily charge";
+"185总充电量"="Total charge";

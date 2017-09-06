@@ -203,7 +203,7 @@
 
     [self.scrollView addSubview:processView];
     
-    UILabel *dayData=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 180*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+    UILabel *dayData=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 190*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
     dayData.text=_dayPower;
     dayData.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
@@ -213,7 +213,7 @@
     dayData.textColor=valueColor;
     dayData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [self.scrollView addSubview:dayData];
-    UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 200*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+    UILabel *leftState=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
     leftState.text=root_NBQ_ri_dianliang;
     leftState.textAlignment=NSTextAlignmentCenter;
     leftState.textColor=[UIColor whiteColor];
@@ -241,7 +241,7 @@
      centState.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:centState];
     
-    UILabel *totalData=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-95*NOW_SIZE, 180*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+    UILabel *totalData=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-95*NOW_SIZE, 190*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
     totalData.text=_totalPower;
       totalData.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
@@ -251,7 +251,7 @@
     totalData.textColor=valueColor;
     totalData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
     [self.scrollView addSubview:totalData];
-    UILabel *rightState=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-95*NOW_SIZE, 200*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
+    UILabel *rightState=[[UILabel alloc]initWithFrame:CGRectMake(kScreenWidth-95*NOW_SIZE, 210*HEIGHT_SIZE-SizeH, 90*NOW_SIZE,20*HEIGHT_SIZE )];
     rightState.text=root_NBQ_zong_dianliang;
     rightState.textAlignment=NSTextAlignmentCenter;
     rightState.textColor=[UIColor whiteColor];
