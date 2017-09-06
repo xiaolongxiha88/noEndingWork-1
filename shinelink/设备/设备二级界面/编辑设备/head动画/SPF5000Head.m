@@ -38,12 +38,12 @@
     
     
     NSString *vBat=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"vBat"] floatValue]];
-    NSString *vpv=[NSString stringWithFormat:@"%.1f/%.1f",[[_pcsDataDic objectForKey:@"vpv1"] floatValue],[[_pcsDataDic objectForKey:@"vpv2"] floatValue]];
-    NSString *iChargePV=[NSString stringWithFormat:@"%.1f/%.1f",[[_pcsDataDic objectForKey:@"iChargePV1"] floatValue],[[_pcsDataDic objectForKey:@"iChargePV2"] floatValue]];
-     NSString *iChargePV0=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"iChargePV"] floatValue]];
-      NSString *acIn=[NSString stringWithFormat:@"%.1fV/%.1fHZ",[[_pcsDataDic objectForKey:@"vGrid"] floatValue],[[_pcsDataDic objectForKey:@"freqGrid"] floatValue]];
-    NSString *acOut=[NSString stringWithFormat:@"%.1fV/%.1fHZ",[[_pcsDataDic objectForKey:@"outPutVolt"] floatValue],[[_pcsDataDic objectForKey:@"freqOutPut"] floatValue]];
-     NSString *loadPercent=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"loadPercent"] floatValue]];
+    NSString *vpv=[NSString stringWithFormat:@"%.1f/%.1f",[[_pcsDataDic objectForKey:@"vPv1"] floatValue],[[_pcsDataDic objectForKey:@"vPv2"] floatValue]];
+    NSString *iChargePV=[NSString stringWithFormat:@"%.1f/%.1f",[[_pcsDataDic objectForKey:@"iPv1"] floatValue],[[_pcsDataDic objectForKey:@"iPv2"] floatValue]];
+     NSString *iChargePV0=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"iTotal"] floatValue]];
+      NSString *acIn=[NSString stringWithFormat:@"%.1fV/%.1fHZ",[[_pcsDataDic objectForKey:@"vAcInput"] floatValue],[[_pcsDataDic objectForKey:@"fAcInput"] floatValue]];
+    NSString *acOut=[NSString stringWithFormat:@"%.1fV/%.1fHZ",[[_pcsDataDic objectForKey:@"vAcOutput"] floatValue],[[_pcsDataDic objectForKey:@"fAcOutput"] floatValue]];
+     NSString *loadPercent=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"loadPrecent"] floatValue]];
     
     
     

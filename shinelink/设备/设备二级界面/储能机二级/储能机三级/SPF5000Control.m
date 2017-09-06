@@ -239,13 +239,24 @@
        
     }
     
-    if (_type==2 || _type==3 ||  _type==11  || _type==12 ){
+    if (_type==2 || _type==3 ){
+    
         if ([_controlType isEqualToString:@"2"]) {
         _netDic=@{@"storageSn":_CnjSN,@"paramId":typeName,@"param_1":[_textField text],@"param_2":[_textField1 text],@"param_3":@"",@"param_4":@""};
         }else{
             _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":[_textField text],@"param2":[_textField1 text],@"param3":@"",@"param4":@""};
         }
    
+    }
+    
+    if ( _type==11 || _type==12 ){
+        
+        if ([_controlType isEqualToString:@"2"]) {
+            _netDic=@{@"storageSn":_CnjSN,@"paramId":typeName,@"param_1":[_textField text],@"param_2":@"",@"param_3":@"",@"param_4":@""};
+        }else{
+            _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":[_textField text],@"param2":@"",@"param3":@"",@"param4":@""};
+        }
+        
     }
     
     if (_type==13){
@@ -438,7 +449,7 @@
                          @"storage_spf5000_overlad_restart",
                           @"storage_spf5000_overtemp_restart",
                           @"storage_spf5000_buzzer",
-                          @" ",
+                          @"storage_spf5000_max_charge_current",
                           @"storage_spf5000_batter_low_voltage",
                           @"storage_spf5000_system_time",
                           @"storage_spf5000_battery_type",
