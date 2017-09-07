@@ -186,7 +186,7 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E9%87%87%E9%9B%86%E5%99%A8/ChangeCellectViewController.m"
-                  timestampString = "526379332.722522"
+                  timestampString = "526458261.329812"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "154"
@@ -201,7 +201,7 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E9%87%87%E9%9B%86%E5%99%A8/ChangeCellectViewController.m"
-                  timestampString = "526379332.724619"
+                  timestampString = "526458261.333587"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "154"
@@ -330,7 +330,7 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E8%AE%BE%E5%A4%87%E4%BA%8C%E7%BA%A7%E7%95%8C%E9%9D%A2/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%BA%8C%E7%BA%A7/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%B8%89%E7%BA%A7/ControlCNJ.m"
-                  timestampString = "526379332.744722"
+                  timestampString = "526458261.354159"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "512"
@@ -345,7 +345,7 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E8%AE%BE%E5%A4%87%E4%BA%8C%E7%BA%A7%E7%95%8C%E9%9D%A2/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%BA%8C%E7%BA%A7/%E5%82%A8%E8%83%BD%E6%9C%BA%E4%B8%89%E7%BA%A7/ControlCNJ.m"
-                  timestampString = "526379332.746687"
+                  timestampString = "526458261.355934"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "512"
@@ -448,6 +448,22 @@
             startingLineNumber = "368"
             endingLineNumber = "368"
             landmarkName = "-goFinishNetOSS"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "shinelink/&#x6211;/&#x5ba2;&#x670d;&#x7cfb;&#x7edf;/addServerViewController.m"
+            timestampString = "526440796.067733"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "-getNetForSn"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

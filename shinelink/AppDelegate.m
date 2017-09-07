@@ -381,6 +381,9 @@
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     NSString *reUsername=[ud objectForKey:@"userName"];
     NSString *rePassword=[ud objectForKey:@"userPassword"];
+    if ([reUsername isEqualToString:@""] || [rePassword isEqualToString:@""]) {
+        return;
+    }
     
     NSString *LoginType=@"First";
     LoginType=[[NSUserDefaults standardUserDefaults] objectForKey:@"LoginType"];

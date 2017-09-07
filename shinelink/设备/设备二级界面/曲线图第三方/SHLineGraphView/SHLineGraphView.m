@@ -275,9 +275,10 @@
     
     DirectriLableH=20*HEIGHT_SIZE;
     
-    xyLableValue=[[UILabel alloc]initWithFrame:CGRectMake(140*NOW_SIZE, 0*HEIGHT_SIZE, 160*NOW_SIZE, DirectriLableH)];
+    xyLableValue=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, 0*HEIGHT_SIZE, 160*NOW_SIZE, DirectriLableH)];
     xyLableValue.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     xyLableValue.textColor = COLOR(86, 103, 232, 1);
+    xyLableValue.adjustsFontSizeToFitWidth=YES;
     [xyLableValue setTextAlignment:NSTextAlignmentCenter];
     [_scrollView addSubview:xyLableValue];
     
@@ -668,7 +669,7 @@
         [_scrollView bringSubviewToFront:xDirectrix];
         
         float yDirectrixY=(SHPlotValue.xPoints[dirInt]).y;
-        yDirectriy.frame = CGRectMake(_offX,  yDirectrixY,PLOT_WIDTH, 1*NOW_SIZE);
+        yDirectriy.frame = CGRectMake(_offX,  yDirectrixY,_scrollView.contentSize.width, 1*NOW_SIZE);
         yDirectriy.hidden = NO;
         [_scrollView bringSubviewToFront: yDirectriy];
         

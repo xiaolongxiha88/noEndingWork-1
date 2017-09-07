@@ -326,8 +326,14 @@
 
     }else{
         NSArray *lableNameArray=@[root_ri_fangdianliang,root_zong_fangdianliang,root_jinri_shouyi,root_zong_shouyi];
+        NSArray *lableValueArray=[NSArray new];
+        if ([_allDict.allKeys containsObject:@"storageDetailBean"]) {
+             lableValueArray=@[_allDict[@"storageDetailBean"][@"eDischargeTodayText"],_allDict[@"storageDetailBean"][@"eDischargeTotalText"],_allDict[@"todayRevenue"],_allDict[@"totalRevenue"]];
+        }else{
+            lableValueArray=@[@"",@"",@"",@""];
+        }
         
-          NSArray *lableValueArray=@[_allDict[@"storageDetailBean"][@"eDischargeTodayText"],_allDict[@"storageDetailBean"][@"eDischargeTotalText"],_allDict[@"todayRevenue"],_allDict[@"totalRevenue"]];
+        
         float lableW=SCREEN_Width/4;
         for (int i=0; i<lableValueArray.count; i++) {
             UILabel *valueLable=[[UILabel alloc]initWithFrame:CGRectMake(0+lableW*i, 190*HEIGHT_SIZE-SizeH, lableW,20*HEIGHT_SIZE )];

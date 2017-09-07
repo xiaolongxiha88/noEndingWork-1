@@ -60,6 +60,7 @@
     [self getNetForSn];
 }
 
+
 -(void)getNetForSn{
 
     _SNArray=[NSMutableArray new];
@@ -68,7 +69,7 @@
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     NSString *plantId=[ud objectForKey:@"plantID"];
     //[self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":plantId,@"pageNum":@"1", @"pageSize":@"40"} paramarsSite:@"/newQualityAPI.do?op=getQualityInformation" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":plantId,@"pageNum":@"1", @"pageSize":@"20"} paramarsSite:@"/newQualityAPI.do?op=getQualityInformation" sucessBlock:^(id content) {
         [self hideProgressView];
         
         if (content) {
@@ -157,6 +158,7 @@
             [_scrollView addSubview:textF];
             
             if(i==2){
+             
                 textF.frame=CGRectMake(12*NOW_SIZE+nameSize.width, 0*HEIGHT_SIZE+Nsize*i, SCREEN_Width-22*NOW_SIZE-nameSize.width-55*NOW_SIZE,lableH );
                 UILabel *L2=[[UILabel alloc]initWithFrame:CGRectMake(textF.frame.origin.x+textF.frame.size.width, 0*HEIGHT_SIZE+Nsize*i, 55*NOW_SIZE,lableH )];
                 L2.text=root_WO_dianji_huoqu;
@@ -167,7 +169,10 @@
                 [L2 addGestureRecognizer:labelTap2];
                 L2.textColor=COLOR(51, 51, 51, 1);
                 L2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-                [_scrollView addSubview:L2];
+        
+                if (_SNArray.count>0) {
+                            [_scrollView addSubview:L2];
+                }
             }
             
             if(i==3){
