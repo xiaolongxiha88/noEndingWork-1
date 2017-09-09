@@ -145,14 +145,26 @@ static void *context = NULL;
  
     [self.view addSubview:_scrollView];
     
-    NSArray *noticeName=@[root_lianjie_luyouqi,root_wifi_tishi_2,root_wifi_tishi_3];
+    NSArray *noticeName=@[root_lianjie_luyouqi,root_wifi_tishi_2];
+    
+    UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 18*HEIGHT_SIZE, 30*NOW_SIZE,20*HEIGHT_SIZE)];
+        noticeLable.text=@"*";
+    noticeLable.textAlignment=NSTextAlignmentRight;
+    noticeLable.textColor=[UIColor whiteColor];
+    noticeLable.numberOfLines=0;
+    noticeLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    [_scrollView addSubview:noticeLable];
     
     for (int i=0; i<noticeName.count; i++) {
         CGRect fcRect = [noticeName[i] boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12 *HEIGHT_SIZE]} context:nil];
         
-        UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE+_noticeH, 300*NOW_SIZE,fcRect.size.height)];
-        noticeLable.text=[NSString stringWithFormat:@"%d.%@",i+1,noticeName[i]];
-        noticeLable.textAlignment=NSTextAlignmentCenter;
+        UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(40*NOW_SIZE, 20*HEIGHT_SIZE+_noticeH, 240*NOW_SIZE,fcRect.size.height)];
+        if (i==0) {
+                  noticeLable.text=[NSString stringWithFormat:@"%@",noticeName[i]];
+        }else{
+        noticeLable.text=[NSString stringWithFormat:@"%@",noticeName[i]];
+        }
+        noticeLable.textAlignment=NSTextAlignmentLeft;
         noticeLable.textColor=[UIColor whiteColor];
         noticeLable.numberOfLines=0;
         noticeLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];

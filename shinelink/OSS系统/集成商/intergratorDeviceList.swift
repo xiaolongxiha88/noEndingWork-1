@@ -159,6 +159,16 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                         
                     }
                     
+                    if self.plantListArray.count==0{
+                        if self.pageNum==1{
+                            if (self.tableView != nil){
+                                self.tableView.removeFromSuperview()
+                                self.tableView=nil
+                            }
+                        }
+                           self.getNoDataView()
+                    }
+                
                     
                 }else{
                     
