@@ -27,6 +27,8 @@ class deviceControlView: RootViewController {
     
      var netType:Int?
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         if (viewAll != nil) {
            viewAll.removeFromSuperview()
@@ -170,13 +172,14 @@ class deviceControlView: RootViewController {
     }
     
     
+    
     func initNet1(){
         
         valueAllDic=[:]
 
         netDic=["deviceSn":deviceSnString,"deviceType":deviceTypeString]
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/customer/device_info", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v2/customer/device_info", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
             let data:Data=successBlock as! Data
@@ -185,7 +188,7 @@ class deviceControlView: RootViewController {
             
             if (jsonDate0 != nil){
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
-                print("/api/v1/device/info",jsonDate)
+                print("/api/v2/customer/device_info",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
                 let result1=jsonDate["result"] as! Int
                 

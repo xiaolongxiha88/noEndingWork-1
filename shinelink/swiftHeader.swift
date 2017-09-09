@@ -92,7 +92,7 @@ let  root_chulizhong = NSLocalizedString("74处理中", comment: "default")
 let  root_yichuli = NSLocalizedString("75已处理", comment: "default")
 let  root_daigengjin = NSLocalizedString("76待跟进", comment: "default")
 
-
+let  root_zanwu_shuju = NSLocalizedString("暂无数据", comment: "default")
 
 //"请输入搜索类型"
 

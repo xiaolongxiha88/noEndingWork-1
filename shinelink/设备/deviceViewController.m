@@ -1760,6 +1760,9 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             }else if ([getDevice.statueData isEqualToString:@"6"]){
                 cell.stateValue.text =root_duanKai ;
                 cell.stateValue.textColor=COLOR(163, 163, 163, 1);
+            }else{
+                cell.stateValue.text =root_Device_head_186 ;
+                cell.stateValue.textColor=COLOR(121, 230, 129, 1);
             }
             
             

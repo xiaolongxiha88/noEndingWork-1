@@ -809,7 +809,7 @@ NSLog(@"体验馆");
                     [[NSUserDefaults standardUserDefaults] setObject:roleNum forKey:@"roleNum"];
                                     }
                                     
-                                    if ([roleNum isEqualToString:@"5"]) {
+                                    if ([roleNum isEqualToString:@"6"] || [roleNum isEqualToString:@"14"]) {
                                         ossFistVC *OSSView=[[ossFistVC alloc]init];
                                         OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
                                         [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];

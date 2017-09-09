@@ -49,8 +49,8 @@ class ossFistVC: RootViewController {
             self.initNet0()
         }else if roleString=="6"  || roleString=="14"{
        
-            self.initNet1()
-            self.initNet4()
+       self.initNet1()
+        self.initNet4()
         }
         
     }
@@ -868,9 +868,10 @@ class ossFistVC: RootViewController {
             }
             
         }, failure: {(error) in
-              self.initUItwo2()
-              self.hideProgressView()
+            self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
+              self.initUItwo2()
+            
         })
         
     }
@@ -878,6 +879,7 @@ class ossFistVC: RootViewController {
     
    
     func initNet1(){
+        
         
              integratorValueArray=[0,0,0,0];
      self.showProgressView()
@@ -895,13 +897,24 @@ class ossFistVC: RootViewController {
                 let result1=jsonDate["result"] as! Int
                 
                 if result1==1 {
+          
                     let objDic=jsonDate["obj"] as! NSDictionary
+ 
+                    let array0=objDic.allKeys as NSArray
+                        if  array0.contains("todayEnergy"){
+ self.integratorValueArray=[objDic["todayEnergy"] as? NSString ?? "",objDic["totalEnergy"] as? NSString ?? "",objDic["totalInvNum"] as? NSString ?? "",objDic["totalPower"] as? NSString ?? ""]
+                            
+                        }
+
+                 
+               
+                     self.initUIThree3()
                     
-                    if objDic.count>0{
-                        self.integratorValueArray=[objDic["todayEnergy"] as? String ?? "",objDic["totalEnergy"] as? String ?? "",objDic["totalInvNum"] as? String ?? "",objDic["totalPower"] as? String ?? ""];
-                    
-                                 self.initUIThree3()
-                    }
+//                    if objDic.count>0{
+//                        self.integratorValueArray=[objDic["todayEnergy"] as? String ?? "",objDic["totalEnergy"] as? String ?? "",objDic["totalInvNum"] as? String ?? "",objDic["totalPower"] as? String ?? ""];
+//                    
+//
+//                    }
                     
        
                     
@@ -913,9 +926,9 @@ class ossFistVC: RootViewController {
             }
             
         }, failure: {(error) in
-            self.initUIThree3()
-         self.hideProgressView()
+            self.hideProgressView()
             self.showToastView(withTitle: root_Networking)
+            self.initUIThree3()
         })
         
     }

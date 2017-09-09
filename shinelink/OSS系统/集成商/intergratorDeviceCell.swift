@@ -42,7 +42,7 @@ class intergratorDeviceCell: UITableViewCell {
                 lable0.font=UIFont.systemFont(ofSize: 12*HEIGHT_SIZE)
                 lable0.frame=CGRect(x: 0*NOW_SIZE, y: 2*HEIGHT_SIZE, width:SCREEN_Width, height: 20*HEIGHT_SIZE)
             }else{
-            let cellNameArray=["","所属用户","所属电站","所属代理商","状态"];
+            let cellNameArray=["","所属用户","所属电站","所属采集器","状态"];
                 
              let lable1=UILabel()
                 lable1.textColor=MainColor

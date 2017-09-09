@@ -16,4 +16,6 @@
 
 @property (nonatomic, strong) NSString *typeNum;
 
+@property (nonatomic, strong) NSString *actAndapparentString;
+
 @end

@@ -148,8 +148,13 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
 
     
     _dateN1=[[NSMutableArray alloc]initWithObjects:root_xuleihao, root_xinghao, root_gujian_banben,nil];
-    
-    _dateY1=[[NSMutableArray alloc]initWithObjects:root_duankou, root_CNJ_eDing_gonglv, root_moshi,nil];
+  
+    if ([_typeNum isEqualToString:@"1"]) {
+    _dateY1=[[NSMutableArray alloc]initWithObjects:root_duankou, root_Device_head_187, root_moshi,nil];
+    }else{
+        _dateY1=[[NSMutableArray alloc]initWithObjects:root_duankou, root_CNJ_eDing_gonglv, root_moshi,nil];
+    }
+
     
     _dateName=[[NSMutableArray alloc]initWithObjects:@"Volt(V)", @"Current(A)", @"Watt(W)",nil];
     _pv=[[NSMutableArray alloc]initWithObjects:@"PV", @"Bat", @"Grid",nil];
@@ -181,6 +186,7 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
            PVLable.adjustsFontSizeToFitWidth=YES;
     PVLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:PVLable];
+        
     UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 40*HEIGHT_SIZE+SIZE1*i, 160*NOW_SIZE,20*HEIGHT_SIZE )];
     Lable1.text=_dateN2[i];
     Lable1.textAlignment=NSTextAlignmentCenter;
@@ -198,6 +204,11 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
     [_scrollView addSubview:PV2Lable];
     UILabel *Lable2=[[UILabel alloc]initWithFrame:CGRectMake(160*NOW_SIZE, 40*HEIGHT_SIZE+SIZE1*i, 160*NOW_SIZE,20*HEIGHT_SIZE )];
     Lable2.text=_dateY2[i];
+        if ([_typeNum isEqualToString:@"1"]) {
+            if (i==1) {
+                Lable2.text=_actAndapparentString;
+            }
+        }
     Lable2.textAlignment=NSTextAlignmentCenter;
     Lable2.textColor=[UIColor whiteColor];
            Lable2.adjustsFontSizeToFitWidth=YES;

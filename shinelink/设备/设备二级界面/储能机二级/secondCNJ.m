@@ -146,6 +146,9 @@
     PC.normalPower=_normalPower2;
     PC.storageType=_storageType;
     PC.typeNum=_typeNum;
+    if ([_typeNum isEqualToString:@"1"]) {
+        PC.actAndapparentString=[NSString stringWithFormat:@"%@/%@",_allDict[@"activePower"],_allDict[@"apparentPower"]];
+    }
     [self.navigationController pushViewController:PC animated:NO];
 }
 

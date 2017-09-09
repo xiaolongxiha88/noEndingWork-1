@@ -794,5 +794,8 @@
 
 #define  root_Device_head_184  NSLocalizedString(@"184日充电量", nil)
 #define  root_Device_head_185  NSLocalizedString(@"185总充电量", nil)
+#define  root_Device_head_186  NSLocalizedString(@"186在线", nil)
+#define  root_Device_head_187 NSLocalizedString(@"187视在功率", nil)
+#define  root_Device_head_188 NSLocalizedString(@"188暂无数据", nil)
 
 #endif /* languageNew_h */

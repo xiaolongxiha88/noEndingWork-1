@@ -353,8 +353,8 @@ class IntegratorFirst: RootViewController {
        
         
         if A==4000 {
-             let nameArray=["已接入设备","全部设备","未接入设备"]
-              let valueArray=[1,0,2]
+             let nameArray=["已接入设备","未接入设备"]
+              let valueArray=[1,2]
             ZJBLStoreShopTypeAlert.show(withTitle: "选择设备类型", titles: nameArray as NSArray as! [NSString], selectIndex: {
                 (selectIndex)in
                 self.accessStatus=valueArray[selectIndex] as Int
@@ -419,8 +419,8 @@ class IntegratorFirst: RootViewController {
                 if result1==1 {
                      let objArray=jsonDate["obj"] as! NSArray
                     for i in 0..<objArray.count{
-                        self.agentCodeArray.add((objArray[i] as! NSDictionary)["agentCode"] as? NSString ?? "" )
-                        self.agentCompanyArray.add((objArray[i] as! NSDictionary)["agentCompany"] as? NSString ?? "")
+                        self.agentCodeArray.add((objArray[i] as! NSDictionary)["code"] as? NSString ?? "" )
+                        self.agentCompanyArray.add((objArray[i] as! NSDictionary)["company"] as? NSString ?? "")
                         
                     }
                     

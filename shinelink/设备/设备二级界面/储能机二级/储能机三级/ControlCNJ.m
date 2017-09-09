@@ -596,9 +596,9 @@
                     
                 }else if ([content1[@"result"] integerValue] ==2) {
                     [self showAlertViewWithTitle:nil message:root_CNJ_fuwuqi_cuowu cancelButtonTitle:root_Yes];
-                }else if ([content1[@"result"] integerValue] ==3) {
-                    [self showAlertViewWithTitle:nil message:root_CNJ_xuliehao_kong cancelButtonTitle:root_Yes];
                 }else if ([content1[@"result"] integerValue] ==4) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_xuliehao_kong cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==3) {
                     [self showAlertViewWithTitle:nil message:root_CNJ_buzaixian cancelButtonTitle:root_Yes];
                 }else if ([content1[@"result"] integerValue] ==5) {
                     [self showAlertViewWithTitle:nil message:root_CNJ_caijiqi_buzai cancelButtonTitle:root_Yes];

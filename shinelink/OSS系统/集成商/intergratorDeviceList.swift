@@ -27,10 +27,15 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-  self.pageNum=1
-    self.initNet1()
+
     }
 
+    
+    override func viewWillAppear(_ animated: Bool) {
+
+        self.pageNum=1
+        self.initNet1()
+    }
     
     func initTableView(){
         
@@ -81,6 +86,9 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
         netAllDic.setValue( self.deviceStatusType, forKey: "deviceStatus")
           let DicAll=self.netAllDic as Dictionary
         
+        let accessStatusNum=self.netAllDic["accessStatus"] as! Int
+        
+        
         self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:DicAll, paramarsSite: "/api/v2/customer/device_list", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
@@ -91,7 +99,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
             
             if (jsonDate0 != nil){
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
-                print("//api/v1/customer/device_list=",jsonDate)
+                print("/api/v2/customer/device_list=",jsonDate)
      
                 let result1=jsonDate["result"] as! Int
                var plantAll:NSArray=[]
@@ -103,28 +111,44 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                     } else if self.deviceType==1{
                         plantAll=objArray["storageList"] as! NSArray
                     }
+                    if accessStatusNum==1{
                         for i in 0..<plantAll.count{
-                            self.cellValue0Array.add((plantAll[i] as! NSDictionary)["alias"] as!NSString)
-                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["userName"] as!NSString)
-                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["plantName"] as!NSString)
-                            self.cellValue3Array.add((plantAll[i] as! NSDictionary)["agentName"] as!NSString)
+                            self.cellValue0Array.add((plantAll[i] as! NSDictionary)["alias"] as? NSString ??  "")
+                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["userName"] as? NSString ??  "")
+                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["plantName"] as? NSString ??  "")
+                            self.cellValue3Array.add((plantAll[i] as! NSDictionary)["datalog_sn"] as? NSString ??  "")
                             if ((plantAll[i] as! NSDictionary)["status"] ) is NSString{
                                 let A=(plantAll[i] as! NSDictionary)["status"] as! NSString
                                 if A=="" {
-                                   self.cellValue4Array.add(10)
+                                    self.cellValue4Array.add(10)
                                 }else{
-                                 self.cellValue4Array.add(A.integerValue)
+                                    self.cellValue4Array.add(A.integerValue)
                                 }
-                             
+                                
                             }else{
                                 self.cellValue4Array.add((plantAll[i] as! NSDictionary)["status"] as? Int ?? 10)
                             }
-                          
+                            
                             self.cellValue5Array.add((plantAll[i] as! NSDictionary)["seriaNum"] as!NSString)
                             self.plantListArray.add(plantAll[i])
                             
                         }
+                    
+                    }
+                    
 
+                    if accessStatusNum==2{
+                        for i in 0..<plantAll.count{
+                            self.cellValue0Array.add((plantAll[i] as! NSDictionary)["deviceSn"] as!NSString)
+                            self.cellValue1Array.add(root_zanwu_shuju as NSString)
+                            self.cellValue2Array.add(root_zanwu_shuju as NSString)
+                            self.cellValue3Array.add(root_zanwu_shuju as NSString)
+                            self.cellValue4Array.add(10)
+                               self.cellValue5Array.add((plantAll[i] as! NSDictionary)["deviceSn"] as!NSString)
+                           self.plantListArray.add(plantAll[i])
+                        }
+                    }
+                    
                     if self.plantListArray.count>0{
                         
                         if (self.tableView == nil){
@@ -289,14 +313,22 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let CELL=cellValue5Array[indexPath.row] as! NSString
+          let accessStatusNum=self.netAllDic["accessStatus"] as! Int
         
-        let goView=deviceControlView()
-        goView.netType=1
-        goView.deviceTypeString=NSString(format: "%d", deviceType+1)
-        goView.deviceSnString=CELL
-        
-        self.navigationController?.pushViewController(goView, animated: true)
+        if accessStatusNum==1{
+            let CELL=cellValue5Array[indexPath.row] as! NSString
+            
+            let goView=deviceControlView()
+            goView.netType=1
+            goView.deviceTypeString=NSString(format: "%d", deviceType+1)
+            goView.deviceSnString=CELL
+            
+            self.navigationController?.pushViewController(goView, animated: true)
+        }
+
+        if accessStatusNum==2{
+        self.showToastView(withTitle: "暂无设备详情数据")
+        }
         
         tableView.deselectRow(at: indexPath, animated: true)
         
