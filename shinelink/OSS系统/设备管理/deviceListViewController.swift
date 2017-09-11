@@ -205,10 +205,11 @@ deviceTypeString="1"
                             self.tableView.removeFromSuperview()
                             self.tableView=nil
                         }
+                            self.getNoDataView()
                     }
 
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
-                    self.getNoDataView()
+                
                 }
                 
             }

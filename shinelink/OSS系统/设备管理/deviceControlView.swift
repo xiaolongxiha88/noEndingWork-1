@@ -194,28 +194,48 @@ class deviceControlView: RootViewController {
                 
                 if result1==1 {
                     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
-                    
-                    var plantAll:NSArray=[]
-                    
-                    if self.deviceTypeString=="0"{
-                        plantAll=objArray["datalogList"] as! NSArray
-                        self.dataloggerTypeString=(plantAll[0]as! NSDictionary)["deviceTypeIndicate"] as! Int
+               
+      
+                        var plantAll:NSArray=[]
                         
-                    }
-                    if self.deviceTypeString=="1"{
-                        plantAll=objArray["invList"] as! NSArray
-                    }
-                    if self.deviceTypeString=="2"{
-                        plantAll=objArray["storageList"] as! NSArray
-                    }
-                    
-                    self.valueDic=plantAll[0] as! NSDictionary
-                    
-                    if self.valueDic.count>0{
-                        self.initData()
-                    }
-                    
-                    
+                        if self.deviceTypeString=="0"{
+                            if objArray.keys.contains("datalogList"){
+                                plantAll=objArray["datalogList"] as! NSArray
+                                self.dataloggerTypeString=(plantAll[0]as! NSDictionary)["deviceTypeIndicate"] as! Int
+                            }else{
+                            return
+                            }
+                         
+                            
+                        }
+                        if self.deviceTypeString=="1"{
+                            if objArray.keys.contains("invList"){
+                               plantAll=objArray["invList"] as! NSArray
+                            }else{
+                                       self.showToastView(withTitle: "暂无设备详情数据")
+                                return
+                            }
+                         
+                        }
+                        if self.deviceTypeString=="2"{
+                            if objArray.keys.contains("storageList"){
+                             plantAll=objArray["storageList"] as! NSArray
+                            }else{
+                                       self.showToastView(withTitle: "暂无设备详情数据")
+                                return
+                            }
+                           
+                        }
+                        
+                        self.valueDic=plantAll[0] as! NSDictionary
+                        
+                        if self.valueDic.count>0{
+                            self.initData()
+                        }
+                  
+                  
+               
+
                 }else{
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
                 }

@@ -165,8 +165,9 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                                 self.tableView.removeFromSuperview()
                                 self.tableView=nil
                             }
+                                  self.getNoDataView()
                         }
-                           self.getNoDataView()
+                     
                     }
                 
                     
@@ -177,11 +178,12 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                             self.tableView.removeFromSuperview()
                             self.tableView=nil
                         }
+                           self.getNoDataView()
                     }
                     
                     self.showToastView(withTitle: jsonDate["msg"] as! String!)
                     
-                          self.getNoDataView()
+                    
                 }
                 
             }

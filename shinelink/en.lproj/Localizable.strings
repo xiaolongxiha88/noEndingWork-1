@@ -686,7 +686,7 @@
 "106wifi信号强度提示"="The current Wifi signal is weak, please configure in a Wifi signal strong place.";
 "107wifi连接路由器"="The datalogger is already connected to the router and is being connected to the server...";
 
-"108wifi提示2"="Reset the WiFi datalogger. Please press the KEY button on the datalogger for more than 3 seconds until the LED light is long bright.";
+"108wifi提示2"="For a configured ShineWiFi, if the router or router password has been replaced, the ShineWiFi needs to be reset before configuration. (Please press the KEY button on the datalogger for more than 3 seconds until the LED light is long bright.)";
 "109wifi提示3"="Please enter the router name and password，then click the 'Set' button";
 
 

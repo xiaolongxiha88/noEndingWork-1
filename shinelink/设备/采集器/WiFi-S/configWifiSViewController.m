@@ -92,7 +92,7 @@
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
-    self.title = [NSString stringWithFormat:@"%@ShineWiFi-S",root_set];
+    self.title = [NSString stringWithFormat:@"%@ ShineWiFi-S",root_set];
     self.view.backgroundColor=MainColor;
     
     self._condition = [[NSCondition alloc]init];
@@ -153,18 +153,31 @@
     [self.view addSubview:_scrollView];
     
     
-    NSArray *noticeName=@[root_lianjie_luyouqi,root_wifi_tishi_2,root_wifi_tishi_3];
+    NSArray *noticeName=@[root_lianjie_luyouqi,root_wifi_tishi_2];
+    
+    UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 20*HEIGHT_SIZE, 30*NOW_SIZE,20*HEIGHT_SIZE)];
+    noticeLable.text=@"*";
+    noticeLable.textAlignment=NSTextAlignmentRight;
+    noticeLable.textColor=[UIColor whiteColor];
+    noticeLable.numberOfLines=0;
+    noticeLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    [_scrollView addSubview:noticeLable];
     
     for (int i=0; i<noticeName.count; i++) {
-        CGRect fcRect = [noticeName[i] boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12 *HEIGHT_SIZE]} context:nil];
+        float W=260*NOW_SIZE;
+        CGRect fcRect = [noticeName[i] boundingRectWithSize:CGSizeMake(W, 2000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12 *HEIGHT_SIZE]} context:nil];
         
-        UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 10*HEIGHT_SIZE+_noticeH, 300*NOW_SIZE,fcRect.size.height)];
+        UILabel *noticeLable=[[UILabel alloc]initWithFrame:CGRectMake(40*NOW_SIZE, 20*HEIGHT_SIZE+_noticeH, W,fcRect.size.height)];
         noticeLable.text=[NSString stringWithFormat:@"%d.%@",i+1,noticeName[i]];
-        noticeLable.textAlignment=NSTextAlignmentCenter;
+        noticeLable.textAlignment=NSTextAlignmentLeft;
         noticeLable.textColor=[UIColor whiteColor];
         noticeLable.numberOfLines=0;
         noticeLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_scrollView addSubview:noticeLable];
+        
+        UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(40*NOW_SIZE, 20*HEIGHT_SIZE+_noticeH+fcRect.size.height+5*HEIGHT_SIZE, W,LineWidth)];
+        lineView.backgroundColor=COLOR(255, 255, 255, 0.6);
+        [_scrollView addSubview:lineView];
         
         _noticeH=fcRect.size.height+_noticeH+10*HEIGHT_SIZE;
     }
@@ -174,7 +187,7 @@
     
     float lableHeigh=40*HEIGHT_SIZE;
     float twoHeigh=5*HEIGHT_SIZE;
-      float sizeH1=_noticeH;
+  float sizeH1=_noticeH+10*HEIGHT_SIZE;
   
     
     UILabel *wifiName=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, sizeH1+twoHeigh*4, 100*NOW_SIZE,lableHeigh )];
