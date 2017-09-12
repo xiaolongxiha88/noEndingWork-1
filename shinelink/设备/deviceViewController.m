@@ -1188,12 +1188,14 @@ _pcsNetStorageSN=@"";
     float  headLableColorH=4*HEIGHT_SIZE;
     float  headLableColorW=30*NOW_SIZE;
     float headLableValueH=20*HEIGHT_SIZE;
+     float headLableNameH=12*HEIGHT_SIZE;
     float headImageH=40*HEIGHT_SIZE;
     float unitWidth=(Kwidth)/3;
     float gapH=5*HEIGHT_SIZE;
     float gapH2=5*HEIGHT_SIZE;
+    
    
-    NSArray *headColorArray=[NSArray arrayWithObjects: COLOR(89, 220, 255, 1),COLOR(179, 218, 138, 1),COLOR(78, 224, 180, 1),nil];
+    NSArray *headColorArray=[NSArray arrayWithObjects: COLOR(89, 220, 255, 1),COLOR(78, 224, 180, 1),COLOR(179, 218, 138, 1),nil];
     NSArray *headImageNameArray11=[NSArray arrayWithObjects: @"deviceHead1.png",@"deviceHead33.png",@"deviceHead2.png",nil];
     NSArray *timeArray=@[root_Device_head_180,root_Device_head_181,root_Device_head_182,root_Device_head_183,root_Device_head_182,root_Device_head_183];
     
@@ -1211,17 +1213,24 @@ _pcsNetStorageSN=@"";
         headLableView1.backgroundColor=headColorArray[i];
         [_headerView addSubview:headLableView1];
         
-        UILabel *LableName1=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+gapH2, unitWidth,headLableValueH)];
+        UILabel *LableName1=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+gapH*2, unitWidth,headLableNameH)];
         LableName1.text=timeArray[0+2*i];
         LableName1.textAlignment=NSTextAlignmentCenter;
-        LableName1.textColor=[UIColor whiteColor];
+        LableName1.textColor=COLOR(255, 255, 255, 0.8);
         LableName1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         [_headerView addSubview:LableName1];
         
     
-        UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableValueH+gapH2, unitWidth,headLableValueH)];
-        NSString *lableText=[NSString stringWithFormat:@"%@/%@",_pvHeadDataArray[0+2*i],_pvHeadDataUnitArray[0+2*i]];
-        Lable1.text=lableText;
+        UILabel *Lable1=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableNameH+gapH*2, unitWidth,headLableValueH)];
+              NSString *lableText=[NSString stringWithFormat:@"%@%@",_pvHeadDataArray[0+2*i],_pvHeadDataUnitArray[0+2*i]];
+        NSMutableAttributedString *attrString0 = [[NSMutableAttributedString alloc] initWithString:lableText];
+        NSUInteger length = [lableText length];
+        UIFont *baseFont = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
+        [attrString0 addAttribute:NSFontAttributeName value:baseFont range:NSMakeRange(0, length)];
+        UIFont *baseFont1 = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        [attrString0 addAttribute:NSFontAttributeName value:baseFont1 range:[lableText rangeOfString:_pvHeadDataUnitArray[0+2*i]]];
+        Lable1.attributedText=attrString0;
+        //Lable1.text=lableText;
         NSArray *lableName=[NSArray arrayWithObject:lableText];
         Lable1.userInteractionEnabled=YES;
        objc_setAssociatedObject(Lable1, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -1230,19 +1239,29 @@ _pcsNetStorageSN=@"";
         [Lable1 addGestureRecognizer:tapGestureRecognizer];
         Lable1.textAlignment=NSTextAlignmentCenter;
         Lable1.textColor=[UIColor whiteColor];
-        Lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        Lable1.adjustsFontSizeToFitWidth=YES;
+       // Lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_headerView addSubview:Lable1];
  
-        UILabel *LableName2=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableValueH*2+gapH2*2, unitWidth,headLableValueH)];
+        UILabel *LableName2=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableValueH*2+gapH2*5, unitWidth,headLableNameH)];
         LableName2.text=timeArray[1+2*i];
         LableName2.textAlignment=NSTextAlignmentCenter;
-        LableName2.textColor=[UIColor whiteColor];
+        LableName2.textColor=COLOR(255, 255, 255, 0.8);
         LableName2.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         [_headerView addSubview:LableName2];
 
-        UILabel *Lable1L=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableValueH*3+gapH2*2, unitWidth,headLableValueH)];
-          NSString *lableText2=[NSString stringWithFormat:@"%@/%@",_pvHeadDataArray[1+2*i],_pvHeadDataUnitArray[1+2*i]];
-        Lable1L.text=lableText2;
+        UILabel *Lable1L=[[UILabel alloc]initWithFrame:CGRectMake(unitWidth*i, marchHeigh+headLableH+gapH*2+headLableValueH*2+headLableNameH+gapH2*5, unitWidth,headLableValueH)];
+          NSString *lableText2=[NSString stringWithFormat:@"%@%@",_pvHeadDataArray[1+2*i],_pvHeadDataUnitArray[1+2*i]];
+          //Lable1L.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+         NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:lableText2];
+        NSUInteger length2 = [lableText2 length];
+        UIFont *baseFont2 = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
+        [attrString addAttribute:NSFontAttributeName value:baseFont2 range:NSMakeRange(0, length2)];
+          UIFont *baseFont12 = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+         [attrString addAttribute:NSFontAttributeName value:baseFont12 range:[lableText2 rangeOfString:_pvHeadDataUnitArray[1+2*i]]];
+        Lable1L.attributedText=attrString;
+         Lable1L.adjustsFontSizeToFitWidth=YES;
+    //    Lable1L.text=lableText2;
         NSArray *lableName2=[NSArray arrayWithObject:lableText2];
         Lable1L.userInteractionEnabled=YES;
         objc_setAssociatedObject(Lable1L, "firstObject", lableName2, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -1251,7 +1270,7 @@ _pcsNetStorageSN=@"";
         [Lable1L addGestureRecognizer:tapGestureRecognizer2];
         Lable1L.textAlignment=NSTextAlignmentCenter;
         Lable1L.textColor=[UIColor whiteColor];
-        Lable1L.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+      
         [_headerView addSubview:Lable1L];
         
         
