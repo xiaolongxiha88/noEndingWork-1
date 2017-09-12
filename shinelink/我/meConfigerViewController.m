@@ -42,9 +42,19 @@
     //self.navigationItem.title = @"配置设备";
 }
 
-
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    [_cellectId resignFirstResponder];
+}
 
 -(void)initUI{
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    //将触摸事件添加到当前view
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+    
     float H=60*HEIGHT_SIZE;
     
     UIView *V0=[[UIView alloc]initWithFrame:CGRectMake(0, 10*HEIGHT_SIZE, SCREEN_Width, HEIGHT_SIZE*230+H)];

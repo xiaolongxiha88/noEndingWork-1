@@ -354,7 +354,13 @@
             nameLable.text=lableNameArray[i];
             nameLable.textAlignment=NSTextAlignmentCenter;
             nameLable.textColor=[UIColor whiteColor];
-            nameLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+          //  nameLable.adjustsFontSizeToFitWidth=YES;
+            if ([_languageValue isEqualToString:@"0"]) {
+                   nameLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            }else{
+              nameLable.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
+            }
+     
             [self.scrollView addSubview:nameLable];
         }
         

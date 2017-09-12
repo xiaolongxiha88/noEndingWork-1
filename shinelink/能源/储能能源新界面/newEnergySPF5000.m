@@ -124,7 +124,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     [self.view addSubview:_scrollView];
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,3200*ScreenProH);
+    _scrollView.contentSize = CGSizeMake(SCREEN_Width,3400*ScreenProH);
     _scrollView.backgroundColor=[UIColor whiteColor];
     
     
@@ -213,6 +213,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         VL1.font=[UIFont systemFontOfSize:30*ScreenProH];
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=lableName[i];
+        VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textColor =COLOR(255, 255, 255, 1);
         [_uiview1 addSubview:VL1];
     }
@@ -447,7 +448,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL2.textAlignment = NSTextAlignmentCenter;
     NSString *V2N1=root_chongDian;
     NSString *V2N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eChargeTotal"] floatValue]];
-    NSString *V2LableName=[NSString stringWithFormat:@"A%@:%@",V2N1,V2N2];
+    NSString *V2LableName=[NSString stringWithFormat:@"A-%@:%@",V2N1,V2N2];
     VL2.text=V2LableName;
     VL2.textColor =COLOR(102, 102, 102, 1);
     [_uiview2 addSubview:VL2];
@@ -456,7 +457,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL3.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL3.textAlignment = NSTextAlignmentCenter;
     NSString *V3N1=root_fangDian; NSString *V3N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eDisChargeTotal"] floatValue]];
-    NSString *V3LableName=[NSString stringWithFormat:@"B%@:%@",V3N1,V3N2];
+    NSString *V3LableName=[NSString stringWithFormat:@"B-%@:%@",V3N1,V3N2];
     VL3.text=V3LableName;
     VL3.textColor =COLOR(102, 102, 102, 1);
     [_uiview2 addSubview:VL3];

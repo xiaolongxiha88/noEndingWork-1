@@ -240,7 +240,11 @@
         /*        设置虚线辅助线         */
         UIBezierPath *second = [UIBezierPath bezierPath];
         for (NSInteger i = 0; i<_valueArr.count; i++) {
-            NSInteger pace = (_maxHeight) / _valueArr.count;
+              NSInteger pace = (_maxHeight) / _valueArr.count;
+            if (pace==0) {
+                pace=1;
+            }
+          
             CGFloat height = _perHeight * (i+1);
             [second moveToPoint:P_M(_originSize.x, CGRectGetHeight(self.frame) - _originSize.y -height)];
             [second addLineToPoint:P_M(_maxWidth, CGRectGetHeight(self.frame) - _originSize.y - height)];
@@ -250,7 +254,7 @@
             CATextLayer *textLayer = [CATextLayer layer];
             
             textLayer.contentsScale = [UIScreen mainScreen].scale;
-            NSString *text =[NSString stringWithFormat:@"%ld",(i + 1) * pace];
+            NSString *text =[NSString stringWithFormat:@"%d",(i + 1) * pace];
             CGFloat be = [self sizeOfStringWithMaxSize:XORYLINEMAXSIZE textFont:self.yDescTextFontSize aimString:text].width;
             textLayer.frame = CGRectMake(self.originSize.x - be - 3, CGRectGetHeight(self.frame) - _originSize.y -height - 5, be, 15);
             
@@ -322,7 +326,7 @@
             
             CGSize size = [_xShowInfoText[i] boundingRectWithSize:CGSizeMake(wid, MAXFLOAT) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingTruncatesLastVisibleLine attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:self.xDescTextFontSize]} context:nil].size;
             
-            textLayer.frame = CGRectMake( i * (count * _columnWidth + _typeSpace) + _typeSpace + _originSize.x, CGRectGetHeight(self.frame) - _originSize.y+5,wid, size.height);
+            textLayer.frame = CGRectMake( i * (count * _columnWidth + _typeSpace) + _typeSpace + _originSize.x, CGRectGetHeight(self.frame) - _originSize.y+2*HEIGHT_SIZE,wid, size.height);
             textLayer.string = _xShowInfoText[i];
             textLayer.contentsScale = [UIScreen mainScreen].scale;
             UIFont *font = [UIFont systemFontOfSize:self.xDescTextFontSize];
