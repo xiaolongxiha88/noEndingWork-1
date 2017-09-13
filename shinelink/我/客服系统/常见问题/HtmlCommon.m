@@ -285,7 +285,6 @@ self.view.backgroundColor = [UIColor whiteColor];
     
 //    //创建关闭按钮
 //    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//     [closeBtn setImage:[UIImage imageNamed:@"btn_cha.png"] forState:UIControlStateNormal];
 //   // closeBtn.backgroundColor = [UIColor redColor];
 //    [closeBtn addTarget:self action:@selector(removeBigImage) forControlEvents:UIControlEventTouchUpInside];
 //    [closeBtn setFrame:CGRectMake(borderView.frame.origin.x+borderView.frame.size.width-30*NOW_SIZE, borderView.frame.origin.y-25*HEIGHT_SIZE, 30*HEIGHT_SIZE, 30*HEIGHT_SIZE)];

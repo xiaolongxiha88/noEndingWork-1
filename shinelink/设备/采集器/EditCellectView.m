@@ -16,7 +16,7 @@
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         cancelButton.frame = CGRectMake(frame.size.width - 64, 44*HEIGHT_SIZE, 44*NOW_SIZE, 44*HEIGHT_SIZE);
         cancelButton.imageEdgeInsets = UIEdgeInsetsMake(7*NOW_SIZE, 7*HEIGHT_SIZE, 7*NOW_SIZE, 7*HEIGHT_SIZE);
-        [cancelButton setImage:IMAGE(@"btn_cha.png") forState:UIControlStateNormal];
+        [cancelButton setImage:IMAGE(@"buttonCancle.png") forState:UIControlStateNormal];
         cancelButton.tag = 1050;
         [cancelButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:cancelButton];
