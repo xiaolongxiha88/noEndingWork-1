@@ -48,6 +48,7 @@
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
     [_textField resignFirstResponder];
     [_textField2 resignFirstResponder];
+        [_textField3 resignFirstResponder];
 }
 
 -(void)getInfo{
@@ -349,11 +350,11 @@ _getServerAddressNum=0;
                             }else if ([content[@"msg"] isEqual:@"503"]){
                                 
                                 [self showAlertViewWithTitle:root_zhuce_shibai message:root_yongHu_yi_shiYong cancelButtonTitle:root_Yes];
-                                [self.navigationController popViewControllerAnimated:NO];
-                            }else if ([content[@"msg"] isEqual:@"604"]){
+                               
+                            }else if ([content[@"msg"] isEqual:@"507"]){
                                 
                                 [self showAlertViewWithTitle:root_zhuce_shibai message:root_dailishang_cuowu cancelButtonTitle:root_Yes];
-                                [self.navigationController popViewControllerAnimated:NO];
+                               
                             }else if ([content[@"msg"] isEqual:@"605"]){
                                 
                                 [self showAlertViewWithTitle:root_zhuce_shibai message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];

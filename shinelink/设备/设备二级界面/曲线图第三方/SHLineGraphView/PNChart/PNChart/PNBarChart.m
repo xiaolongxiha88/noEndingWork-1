@@ -420,7 +420,7 @@
             xDirectrix.hidden = NO;
             [self bringSubviewToFront:xDirectrix];
             
-            yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
+            yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin, 1*NOW_SIZE);
             yDirectriy.hidden = NO;
             [self bringSubviewToFront: yDirectriy];
             
@@ -454,7 +454,7 @@
         if (maxY>0) {
             float xDirY2=self.frame.size.height - _chartMargin*2- kXLabelHeight;
             float lableGetY=xDirY2*(maxY-xDirY1)/maxY;
-            yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin*2, 1*NOW_SIZE);
+            yDirectriy.frame = CGRectMake(_chartMargin,  _chartMargin+lableGetY,self.frame.size.width - _chartMargin, 1*NOW_SIZE);
             yDirectriy.hidden = NO;
             [self bringSubviewToFront: yDirectriy];
             

@@ -430,7 +430,7 @@
                     //                                NSString *imageNameA=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
                     NSString *questionPIC=[NSString stringWithFormat:@"%@",_questionAll[i][@"attachment"]];
                     NSArray *PIC = [questionPIC componentsSeparatedByString:@"_"];
-                    if ([nameId isEqualToString:@"1"]) {
+                    if ([nameId isEqualToString:@"0"]) {
                            [_nameArray addObject:_questionAll[i][@"accountName"]];
                     }else{
                         [_nameArray addObject:questionDic[@"jobId"]];
@@ -653,7 +653,7 @@
     [cell.contentView setBackgroundColor: [UIColor whiteColor] ];
     
     NSString *WebString;
-    if ([_nameID[indexPath.row] isEqualToString:@"0"]) {
+    if ([_nameID[indexPath.row] isEqualToString:@"1"]) {
         cell.image.image = IMAGE(@"kefu_iconOSS.png");
         cell.nameLabel.textColor = COLOR(102, 102, 102, 1);
         WebString=self.contentArray[indexPath.row];
