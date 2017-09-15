@@ -444,6 +444,7 @@ class ossFistVC: RootViewController {
             let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
             
             if (jsonDate0 != nil){
+                  self.hideProgressView()
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v2/customer/device_num=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
@@ -798,15 +799,16 @@ class ossFistVC: RootViewController {
     func initNet0(){
         
  
-      self.showProgressView()
+          self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v2/order/overview", sucessBlock: {(successBlock)->() in
-          self.hideProgressView()
-            
+      
+                self.hideProgressView()
             let data:Data=successBlock as! Data
             
             let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
             
             if (jsonDate0 != nil){
+                   self.hideProgressView()
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v2/order/overview=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
@@ -891,6 +893,8 @@ class ossFistVC: RootViewController {
             let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
             
             if (jsonDate0 != nil){
+                  self.hideProgressView()
+                
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v2/customer/customer_overview_data=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
@@ -1033,6 +1037,9 @@ class ossFistVC: RootViewController {
         
     }
     
+    
+    
+
     
     
     override func didReceiveMemoryWarning() {

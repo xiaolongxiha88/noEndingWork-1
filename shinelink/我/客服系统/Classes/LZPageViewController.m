@@ -80,8 +80,11 @@ static NSString *mainCell = @"mainCellmainCell";
         self.title = root_energy_title;
         NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
         NSString *isNew=[ud objectForKey:@"isNewEnergy"];
-            NSString *deviceType=[[ud objectForKey:@"PcsDeviceType"] stringValue];
         
+      
+         //   NSString *deviceType=[[ud objectForKey:@"PcsDeviceType"] stringValue];
+        
+        NSString *deviceType=[NSString stringWithFormat:@"%@",[ud objectForKey:@"PcsDeviceType"]];
         
         if ([isNew isEqualToString:@"Y"]) {
             if ([deviceType isEqualToString:@"0"]) {

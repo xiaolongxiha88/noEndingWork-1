@@ -84,10 +84,7 @@
     arrayName=@[root_WO_zhiliao_guanli,root_WO_xitong_shezhi,root_gongju,root_WO_xiaoxi_zhongxin,root_WO_guanyu];
     arrayImage=@[@"ziliao.png",@"系统设置.png",@"toolx_icon.png",@"message.png",@"关于.png"];
     
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    
+
     _scrollView2=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _scrollView2.scrollEnabled=YES;
     
@@ -100,8 +97,7 @@
     //创建tableView的方法
     [self _createTableView];
     
-    //创建tableView的头视图
-    [self _createHeaderView];
+ 
     
 }
 
@@ -154,12 +150,16 @@
     _indenty = @"indenty";
     //注册单元格类型
     [_tableView registerClass:[meTableViewCell class] forCellReuseIdentifier:_indenty];
+    
+    //创建tableView的头视图
+    [self _createHeaderView];
 }
 
 - (void)_createHeaderView {
     
     if (_tableView.tableHeaderView) {
         [_tableView.tableHeaderView removeFromSuperview];
+        _tableView.tableHeaderView=nil;
     }
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,Kwidth,200*HEIGHT_SIZE)];
@@ -202,7 +202,8 @@
      [userImage addGestureRecognizer:longPressGesture];
     
     NSUserDefaults *ud1=[NSUserDefaults standardUserDefaults];
-    NSString *reUsername=[ud1 objectForKey:@"userName"];
+    //NSString *reUsername=[ud1 objectForKey:@"userName"];
+      NSString *reUsername=[NSString stringWithFormat:@"%@",[ud1 objectForKey:@"userName"]];
     UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake((Kwidth-200*NOW_SIZE)/2, 150*HEIGHT_SIZE-5*HEIGHT_SIZE, 200*NOW_SIZE, 20*HEIGHT_SIZE)];
     PV2Lable.text=reUsername;
     PV2Lable.textAlignment=NSTextAlignmentCenter;

@@ -30,7 +30,7 @@
     _imageView.clipsToBounds=YES;
     [self.view addSubview:_imageView];
     [self requestData];
-    [self initUI];
+  
 }
 
 
@@ -38,9 +38,11 @@
     [self showProgressView];
     [BaseRequest requestImageWithMethodByGet:HEAD_URL paramars:@{@"id":[UserInfo defaultUserInfo].plantID} paramarsSite:@"/newPlantAPI.do?op=getImg" sucessBlock:^(id content) {
         [self hideProgressView];
+          [self initUI];
         _imageView.image=content;
     } failure:^(NSError *error) {
         [self hideProgressView];
+          [self initUI];
         [self showToastViewWithTitle:root_Networking];
         
     }];

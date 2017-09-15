@@ -80,11 +80,16 @@
 - (void)showProgressView {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
 }
 
 - (void)hideProgressView {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
+
+
+
+
 
 - (NSString *)MD5:(NSString *)str {
     const char *cStr = [str UTF8String];

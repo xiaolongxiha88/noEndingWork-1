@@ -464,7 +464,7 @@ _pcsNetStorageSN=@"";
 
 -(void)initData{
   
-    _storageType=-1;
+   
     _DemoPicName2=[[NSMutableArray alloc]initWithObjects:@"storagecn.png", @"powercn.png", @"pvcn.png",@"charge-cn.png",nil];
      _DemoPicName22=[[NSMutableArray alloc]initWithObjects:@"storageen.png", @"poweren.png", @"pven.png",@"charge-en.png",nil];
     
@@ -652,7 +652,8 @@ _pcsNetStorageSN=@"";
 -(void)netRequest{
     
     _storageTypeDic=[NSMutableDictionary new];
-  
+   _storageType=-1;
+    
     if (_isPvType) {
          [self getAnimation:_headImage1];
          [self getAnimation:_headImage2];
