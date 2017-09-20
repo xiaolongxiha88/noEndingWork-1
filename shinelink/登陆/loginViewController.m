@@ -790,6 +790,8 @@ NSLog(@"体验馆");
                                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]] forKey:@"roleNum"];
                                 
                                 
+                                
+                                
                                 _OssFirst=[[NSUserDefaults standardUserDefaults] objectForKey:@"firstGoToOss"];
                                 
                                 if ([[[NSUserDefaults standardUserDefaults] objectForKey:is_Test] isEqualToString:@"Y"]) {         //测试模块
@@ -803,13 +805,18 @@ NSLog(@"体验馆");
                                 }else{
                                     NSString *roleNum=[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]];
                                     
-                                    if ([[[NSUserDefaults standardUserDefaults] objectForKey:is_Test] isEqualToString:@"Y"]) {         //测试模块
-                                        roleNum=@"1";
-                                        PhoneNum=@"18588241101";
-                    [[NSUserDefaults standardUserDefaults] setObject:roleNum forKey:@"roleNum"];
-                                    }
-                                    
-                                    if ([roleNum isEqualToString:@"6"] || [roleNum isEqualToString:@"14"]) {
+          
+                                    if ([roleNum isEqualToString:@"6"] || [roleNum isEqualToString:@"14"] || [roleNum isEqualToString:@"7"] || [roleNum isEqualToString:@"15"]) {
+                                        if ([roleNum isEqualToString:@"7"] || [roleNum isEqualToString:@"15"]) {
+                                            NSDictionary *useDic=[NSDictionary dictionaryWithDictionary:objDic[@"user"]];
+                                            if ([useDic.allKeys containsObject:@"code"]) {
+                                                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"code"]] forKey:@"agentCodeId"];
+                                            }else{
+                                                [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"agentCodeId"];
+                                            }
+                                        }
+                                        
+                                        
                                         ossFistVC *OSSView=[[ossFistVC alloc]init];
                                         OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
                                         [[NSUserDefaults standardUserDefaults] setObject:@"O" forKey:@"LoginType"];

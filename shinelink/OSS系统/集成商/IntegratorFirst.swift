@@ -24,11 +24,14 @@ class IntegratorFirst: RootViewController {
       var agentCodeString:NSString!
      var plantName:NSString!
     var userName:NSString!
+      var codeName:NSString!
        var datalogSnString:NSString!
        var agentCompanyArray:NSMutableArray!
+     var accountNameArray:NSMutableArray!
+    
         var agentCodeArray:NSMutableArray!
      var firstNum:Int!
-    
+      var roleString:NSString!
     
     
     override func viewDidLoad() {
@@ -43,16 +46,26 @@ class IntegratorFirst: RootViewController {
         userName = ""
         datalogSnString = ""
         deviceString = ""
-  
+  codeName=""
 
         
         let tap=UITapGestureRecognizer(target: self, action: #selector(keyboardHide(tap:)))
         tap.cancelsTouchesInView=false
         self.view.addGestureRecognizer(tap)
         
-      self.initUI()
+    
+        
+         roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString!
+         codeName=UserDefaults.standard.object(forKey: "agentCodeId") as! NSString!
+        
+        if roleString=="6" || roleString=="14"{
+        self.initNet0()
+        }else if roleString=="7" || roleString=="15"{
+          self.initNet01()
+        }
+        
+        self.initUI()
         self.initNet1()
-         self.initNet0()
         
     }
     
@@ -94,7 +107,12 @@ class IntegratorFirst: RootViewController {
             if i==0 {
                 Lable1.text="已接入设备"
             }else if i==1{
-               Lable1.text="所有代理商"
+                if roleString=="6" || roleString=="14"{
+                    Lable1.text="所有代理商"
+                }else if roleString=="7" || roleString=="15"{
+                    Lable1.text="所有电站"
+                }
+             
             }
             Lable1.tag=4000+i
             Lable1.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
@@ -134,6 +152,14 @@ class IntegratorFirst: RootViewController {
                 field0.placeholder=nameArray[i+2*K]
                 field0.textAlignment=NSTextAlignment.center
                 field0.tag=5000+K*2+i
+                if roleString=="7" || roleString=="15"{
+                    if i==0 && K==0{
+                        field0.text=codeName as String?
+                        field0.isUserInteractionEnabled=false
+                    }
+                }
+             
+                
                 field0.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
                 field0.tintColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
                 field0.setValue(COLOR(_R: 154, _G: 154, _B: 154, _A: 1), forKeyPath: "_placeholderLabel.textColor")
@@ -367,10 +393,33 @@ class IntegratorFirst: RootViewController {
         }
         
         if A==4001 {
-
-            ZJBLStoreShopTypeAlert.show(withTitle: "选择代理商", titles: agentCompanyArray as NSArray as! [NSString], selectIndex: {
+            var titleName:String=""
+            if roleString=="6" || roleString=="14"{
+               titleName="选择代理商"
+            }else if roleString=="7" || roleString=="15"{
+                titleName="选择电站"
+            }
+            ZJBLStoreShopTypeAlert.show(withTitle: titleName, titles: agentCompanyArray as NSArray as! [NSString], selectIndex: {
                 (selectIndex)in
+   
+                if self.roleString=="7" || self.roleString=="15"{
+                    let name=self.agentCompanyArray[selectIndex] as! NSString
+                    if selectIndex != 0{
+                        let substringArry =  name.components(separatedBy: ":");
+                        //    (self.view0.viewWithTag(5000) as! UITextField).text=substringArry[0] as String
+                        (self.view0.viewWithTag(5001) as! UITextField).text = substringArry[0] as String
+                        self.plantName=substringArry[1] as NSString
+                        self.userName=substringArry[0] as NSString
+                    }else{
+                        self.plantName=""
+                        self.userName=""
+                    }
+               
+                }else{
                 self.agentCodeString=self.agentCodeArray[selectIndex] as! NSString
+                }
+                
+             
                 print("选择11了"+String(describing: selectIndex))
             }, selectValue: {
                 (selectValue)in
@@ -439,12 +488,60 @@ class IntegratorFirst: RootViewController {
     }
     
     
-    func initNet1(){
+    func initNet01(){
         
+        agentCodeArray=[""]
+        agentCompanyArray=["所有电站"]
+        self.showProgressView()
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v2/customer/plant_list", sucessBlock: {(successBlock)->() in
+            self.hideProgressView()
+            
+            let data:Data=successBlock as! Data
+            
+            let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
+            
+            if (jsonDate0 != nil){
+                let jsonDate=jsonDate0 as! Dictionary<String, Any>
+                print("/api/v2/customer/plant_list=",jsonDate)
+                // let result:NSString=NSString(format:"%s",jsonDate["result"] )
+                let result1=jsonDate["result"] as! Int
+                
+                if result1==1 {
+                    let objArray=jsonDate["obj"] as! NSArray
+                    for i in 0..<objArray.count{
+                        self.agentCodeArray.add((objArray[i] as! NSDictionary)["plantName"] as? NSString ?? "" )
+                        
+                        let name=NSString.init(format: "%@:%@", ((objArray[i] as! NSDictionary)["accountName"] as? NSString ?? ""),((objArray[i] as! NSDictionary)["plantName"] as? NSString ?? ""))
+                        self.agentCompanyArray.add(name)
+                        
+                    }
+                    
+                    
+                }else{
+                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                }
+                
+            }
+            
+        }, failure: {(error) in
+            self.hideProgressView()
+            self.showToastView(withTitle: root_Networking)
+        })
+        
+    }
+    
+    func initNet1(){
+        if self.roleString=="7" || self.roleString=="15"{
+        agentCodeString=""
+            datalogSnString = (view0.viewWithTag(5002) as! UITextField).text as NSString!
+            deviceString = (view0.viewWithTag(5003) as! UITextField).text as NSString!
+        }else{
             plantName = (view0.viewWithTag(5000) as! UITextField).text as NSString!
-          userName = (view0.viewWithTag(5001) as! UITextField).text as NSString!
-          datalogSnString = (view0.viewWithTag(5002) as! UITextField).text as NSString!
-          deviceString = (view0.viewWithTag(5003) as! UITextField).text as NSString!
+            userName = (view0.viewWithTag(5001) as! UITextField).text as NSString!
+            datalogSnString = (view0.viewWithTag(5002) as! UITextField).text as NSString!
+            deviceString = (view0.viewWithTag(5003) as! UITextField).text as NSString!
+        }
+        
         netDic=["deviceType":deviceType,"accessStatus":accessStatus,"agentCode":agentCodeString,"plantName":plantName,"userName":userName,"datalogSn":datalogSnString,"deviceSn":deviceString]
         
         self.showProgressView()

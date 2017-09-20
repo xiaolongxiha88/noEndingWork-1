@@ -47,7 +47,7 @@ class ossFistVC: RootViewController {
         if roleString=="3" || roleString=="2" || roleString=="1"{
     
             self.initNet0()
-        }else if roleString=="6"  || roleString=="14"{
+        }else if roleString=="6"  || roleString=="14" || roleString=="7" || roleString=="15"{
        
        self.initNet1()
         self.initNet4()
@@ -86,7 +86,7 @@ class ossFistVC: RootViewController {
         if roleString=="3" || roleString=="2" || roleString=="1"{
                 self.initUItwo()
         
-        }else if roleString=="6" || roleString=="14"{
+        }else if roleString=="6" || roleString=="14" || roleString=="7" || roleString=="15"{
               self.initUIThree()
          
             
@@ -1024,7 +1024,7 @@ class ossFistVC: RootViewController {
             let vc=ossDeviceFirst()
             vc.serverListArray=self.serverListArray
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if roleString=="6"  || roleString=="14"{
+        }else if roleString=="6"  || roleString=="14" || roleString=="7" || roleString=="15"{
             UserDefaults.standard.set("", forKey: "searchDeviceAddress")
             
             let vc=IntegratorFirst()
