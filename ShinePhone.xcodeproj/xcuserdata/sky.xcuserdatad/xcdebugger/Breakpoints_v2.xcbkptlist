@@ -170,12 +170,12 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E9%87%87%E9%9B%86%E5%99%A8/ChangeCellectViewController.m"
-                  timestampString = "527598960.473145"
+                  timestampString = "527998210.38312"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "154"
                   endingLineNumber = "154"
-                  offsetFromSymbolStart = "899">
+                  offsetFromSymbolStart = "936">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -185,12 +185,12 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E9%87%87%E9%9B%86%E5%99%A8/ChangeCellectViewController.m"
-                  timestampString = "527598960.474906"
+                  timestampString = "527998210.384864"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "154"
                   endingLineNumber = "154"
-                  offsetFromSymbolStart = "19">
+                  offsetFromSymbolStart = "24">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -288,22 +288,6 @@
             startingLineNumber = "174"
             endingLineNumber = "174"
             landmarkName = "-netquestion"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x8bbe;&#x5907;/&#x8bbe;&#x5907;&#x4e8c;&#x7ea7;&#x754c;&#x9762;/&#x50a8;&#x80fd;&#x673a;&#x4e8c;&#x7ea7;/&#x50a8;&#x80fd;&#x673a;&#x4e09;&#x7ea7;/SPF5000Control.m"
-            timestampString = "526379332.446516"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "368"
-            endingLineNumber = "368"
-            landmarkName = "-goFinishNetOSS"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
