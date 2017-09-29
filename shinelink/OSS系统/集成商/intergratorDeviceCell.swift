@@ -6,6 +6,7 @@
 //  Copyright © 2017年 sky. All rights reserved.
 //
 
+
 import UIKit
 
 class intergratorDeviceCell: UITableViewCell {

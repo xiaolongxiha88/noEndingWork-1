@@ -27,6 +27,9 @@
 #import "meViewController.h"
 #import "storageHead.h"
 #import "SPF5000Head.h"
+#import "UINavigationBar+for11.h"
+
+
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 #define  AnimationTime 5
@@ -82,6 +85,9 @@
 @property (nonatomic) BOOL isPvType;
 
 @property (nonatomic, strong) NSMutableDictionary *storageTypeDic;
+
+@property (nonatomic, strong) DTKDropdownMenuView *rightMenuView;
+@property (nonatomic, strong) DTKDropdownMenuView *titleMenuView;
 
 @end
 
@@ -147,13 +153,17 @@ _pcsNetStorageSN=@"";
     
     _isPvType=NO;
     
+   
   [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:MainColor];
- 
-     //self.view=nil;
+   // [self.navigationController.navigationBar changBarFor11];
+
+    
     if (!_tableView) {
-        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd  target:self action:@selector(selectRightAction)];
-        self.navigationItem.rightBarButtonItem = rightButton;
+        
+  
+        
+        
         _manager=[CoreDataManager sharedCoreDataManager];
         _managerArray=[NSMutableArray array];
         _managerNowArray=[NSMutableArray array];
@@ -161,14 +171,16 @@ _pcsNetStorageSN=@"";
         
         //    if([self respondsToSelector:@selector(setAutomaticallyAdjustsScrollViewInsets:)]){
         //self.automaticallyAdjustsScrollViewInsets = YES;
+        
         NSString *coreEnable=[UserInfo defaultUserInfo].coreDataEnable;
         if ([coreEnable isEqualToString:@"1"]){
             [self initCoredata];
+            
         }
         
         
         [self initData];
-        [self addTitleMenu];
+     [self addTitleMenu];
         [self addRightItem];
         //创建tableView的方法
         [self _createTableView];
@@ -522,24 +534,41 @@ _pcsNetStorageSN=@"";
         
     }];
     
-    DTKDropdownMenuView *menuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0,item1,item2] icon:@"add@2x.png"];
+   _rightMenuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0,item1,item2] icon:@"add@2x.png"];
+//  menuView.intrinsicContentSize=CGSizeMake(44.f, 44.f);
+   // menuView.translatesAutoresizingMaskIntoConstraints=true;
+    _rightMenuView.dropWidth = 200.f;
+    _rightMenuView.titleFont = [UIFont systemFontOfSize:18.f];
+    _rightMenuView.textColor = ColorWithRGB(102.f, 102.f, 102.f);
+    _rightMenuView.cellSeparatorColor = ColorWithRGB(229.f, 229.f, 229.f);
+    _rightMenuView.textFont = [UIFont systemFontOfSize:14.f];
+    _rightMenuView.animationDuration = 0.2f;
+   // _rightMenuView.userInteractionEnabled=YES;
     
-    menuView.dropWidth = 200.f;
-    menuView.titleFont = [UIFont systemFontOfSize:18.f];
-    menuView.textColor = ColorWithRGB(102.f, 102.f, 102.f);
-    menuView.cellSeparatorColor = ColorWithRGB(229.f, 229.f, 229.f);
-    menuView.textFont = [UIFont systemFontOfSize:14.f];
-    menuView.animationDuration = 0.2f;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:menuView];
+
+    
+    if (deviceSystemVersion>=11.0) {
+        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd  target:self.rightMenuView action:@selector(pullTheTableView)];
+        self.navigationItem.rightBarButtonItem = rightButton;
+    }else{
+     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightMenuView];
+    }
+ 
+
 }
-    
+
+
+
+
+
+
 - (void)addTitleMenu
 {
     NSMutableArray *DTK=[NSMutableArray array];
     for(int i=0;i<_stationID.count;i++)
     {
-        
-        NSString *DTKtitle=[[NSString alloc]initWithFormat:_stationName[i]];
+         NSString *DTKtitle=[NSString stringWithFormat:@"%@",_stationName[i]];
+       // NSString *DTKtitle=[[NSString alloc]initWithFormat:_stationName[i]];
     DTKDropdownItem *DTKname= [DTKDropdownItem itemWithTitle:DTKtitle callBack:^(NSUInteger index, id info) {
         NSLog(@"电站%lu",(unsigned long)index);
         [ [UserInfo defaultUserInfo]setPlantID:_stationID[index]];
@@ -554,16 +583,18 @@ _pcsNetStorageSN=@"";
          [DTK addObject:DTKname];
     }
   
-    DTKDropdownMenuView *menuView = [DTKDropdownMenuView dropdownMenuViewForNavbarTitleViewWithFrame:CGRectMake(0, 0, 200*HEIGHT_SIZE, 44*NOW_SIZE) dropdownItems:DTK];
-    menuView.currentNav = self.navigationController;
-    menuView.dropWidth = 150.f;
-    menuView.titleColor=[UIColor whiteColor];
-    menuView.titleFont = [UIFont systemFontOfSize:18.f];
-    menuView.textColor =MainColor;
-    menuView.textFont = [UIFont systemFontOfSize:13.f];
-    menuView.cellSeparatorColor =COLOR(231, 231, 231, 1);
-    menuView.textFont = [UIFont systemFontOfSize:14.f];
-    menuView.animationDuration = 0.2f;
+    _titleMenuView = [DTKDropdownMenuView dropdownMenuViewForNavbarTitleViewWithFrame:CGRectMake(0, 0, 200*HEIGHT_SIZE, 44*HEIGHT_SIZE) dropdownItems:DTK];
+    //  menuView.intrinsicContentSize=CGSizeMake(200*HEIGHT_SIZE, 44*HEIGHT_SIZE);
+ //menuView.translatesAutoresizingMaskIntoConstraints=true;
+    _titleMenuView.currentNav = self.navigationController;
+    _titleMenuView.dropWidth = 150.f;
+    _titleMenuView.titleColor=[UIColor whiteColor];
+    _titleMenuView.titleFont = [UIFont systemFontOfSize:18.f];
+    _titleMenuView.textColor =MainColor;
+    _titleMenuView.textFont = [UIFont systemFontOfSize:13.f];
+    _titleMenuView.cellSeparatorColor =COLOR(231, 231, 231, 1);
+    _titleMenuView.textFont = [UIFont systemFontOfSize:14.f];
+    _titleMenuView.animationDuration = 0.2f;
     NSString *sel=[[NSUserDefaults standardUserDefaults]objectForKey:@"plantNum"];
       NSInteger selected= [sel integerValue];
     if (sel==nil || sel==NULL||[sel isEqual:@""])
@@ -574,8 +605,15 @@ _pcsNetStorageSN=@"";
     if (selected>=_stationID.count) {
         selected= 0;
     }
-    menuView.selectedIndex = selected;
-    self.navigationItem.titleView = menuView;
+    _titleMenuView.selectedIndex = selected;
+    
+    _titleMenuView.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tapGesture111 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pullTheTableViewTitle)];
+    [_titleMenuView addGestureRecognizer:tapGesture111];
+    self.navigationItem.titleView.userInteractionEnabled=YES;
+   self.navigationItem.titleView = _titleMenuView;
+    
+    
     NSString *plantid1=[[NSString alloc]initWithString:_stationID[selected]];
     [ [UserInfo defaultUserInfo]setPlantID:plantid1];
     _stationIdOne=[NSString stringWithString:plantid1];
@@ -597,6 +635,14 @@ _pcsNetStorageSN=@"";
          [self initDemoData];
         }
 }
+
+
+-(void)pullTheTableViewTitle{
+    [_titleMenuView pullTheTableView];
+    
+}
+
+
 
 -(void)initCoredata{
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
@@ -809,7 +855,7 @@ _pcsNetStorageSN=@"";
         NSMutableArray *SN=[NSMutableArray array];
         for (NSManagedObject *obj in fetchResult)
         {
-            GetDevice *get=obj;
+            GetDevice *get=(GetDevice*)obj;
             
             if ([SNArray containsObject:get.deviceSN]) {
                    [SN addObject:get.deviceSN];
@@ -1018,10 +1064,10 @@ _pcsNetStorageSN=@"";
     _control=[[UIRefreshControl alloc]init];
     [_control addTarget:self action:@selector(refreshStateChange:) forControlEvents:UIControlEventValueChanged];
     
-    [_tableView addSubview:_control];
+     [_tableView addSubview:_control];
     
     //2.马上进入刷新状态，并不会触发UIControlEventValueChanged事件
-    [_control beginRefreshing];
+   // [_control beginRefreshing];
     
     // 3.加载数据
     //[self refreshStateChange:_control];

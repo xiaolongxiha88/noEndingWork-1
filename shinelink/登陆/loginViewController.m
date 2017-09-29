@@ -794,9 +794,7 @@ NSLog(@"体验馆");
                                 
                                 _OssFirst=[[NSUserDefaults standardUserDefaults] objectForKey:@"firstGoToOss"];
                                 
-                                if ([[[NSUserDefaults standardUserDefaults] objectForKey:is_Test] isEqualToString:@"Y"]) {         //测试模块
-                            _OssFirst=@"Y";
-                                }
+                           
                                 
                                 if ([_OssFirst isEqualToString:@"Y"]) {
                                     ossFistVC *OSSView=[[ossFistVC alloc]init];

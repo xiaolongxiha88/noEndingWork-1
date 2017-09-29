@@ -103,6 +103,7 @@ UITableViewDataSource
 + (instancetype)dropdownMenuViewWithType:(DTKDropDownType)dropDownType frame:(CGRect)frame dropdownItems:(NSArray *)dropdownItems icon:(NSString *)icon
 {
     DTKDropdownMenuView *menuView = [[DTKDropdownMenuView alloc]initWithFrame:frame];
+    menuView.layer.frame=frame;
     menuView.dropDownType = dropDownType;
     [menuView updateMainConstraints];
     menuView.items = dropdownItems;
@@ -124,6 +125,9 @@ UITableViewDataSource
     }
     return self;
 }
+
+
+
 
 /**
  *  界面点击事件监测
@@ -219,7 +223,12 @@ UITableViewDataSource
         if (self.dropDownType == dropDownTypeTitle) {
             make.centerX.equalTo(self.mas_centerX);
         }else{
-            make.centerX.equalTo(menuWeakSelf.titleButton.mas_centerX);
+            if (deviceSystemVersion>=11.0) {
+                
+            }else{
+                 make.centerX.equalTo(menuWeakSelf.titleButton.mas_centerX);
+            }
+       
         }
     }];
     
@@ -259,6 +268,12 @@ UITableViewDataSource
     self.wrapperView.hidden = YES;
 }
 
+
+//- (CGSize)intrinsicContentSize {
+//    return UILayoutFittingExpandedSize;
+//}
+
+
 - (void)showMenu
 {
     [self addWindowsSubviewsConstraints];
@@ -287,6 +302,7 @@ UITableViewDataSource
                          menuWeakSelf.backgroundView.alpha = self.backgroundAlpha;
                          menuWeakSelf.titleButton.enabled = YES;
                      } completion:nil];
+    
 }
 - (void)hideMenu
 {
@@ -399,6 +415,11 @@ UITableViewDataSource
 - (void)handleTapOnTitleButton:(DTKDropdownButton *)button
 {
     self.isMenuShow = !self.isMenuShow;
+}
+
+-(void)pullTheTableView{
+    
+        self.isMenuShow = !self.isMenuShow;
 }
 
 #pragma mark - setter

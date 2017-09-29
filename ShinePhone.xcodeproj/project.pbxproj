@@ -50,6 +50,7 @@
 		3333D2B41EF8BBB700E6182A /* pic_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3333D2B31EF8BBB700E6182A /* pic_icon.png */; };
 		33340F7B1D6D71EE00909BBF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33340F7A1D6D71EE00909BBF /* WebKit.framework */; };
 		33340F7F1D6EC36800909BBF /* loading1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33340F7E1D6EC36800909BBF /* loading1.png */; };
+		333907841F7E1DB000C05F5D /* UINavigationBar+for11.m in Sources */ = {isa = PBXBuildFile; fileRef = 333907831F7E1DB000C05F5D /* UINavigationBar+for11.m */; };
 		3343F3AA1C803DC9009F69BC /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3A91C803DC9009F69BC /* BaseRequest.m */; };
 		3343F3BF1C80403C009F69BC /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3AD1C80403C009F69BC /* AFHTTPRequestOperation.m */; };
 		3343F3C01C80403C009F69BC /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3AF1C80403C009F69BC /* AFHTTPRequestOperationManager.m */; };
@@ -778,6 +779,8 @@
 		3333D2B31EF8BBB700E6182A /* pic_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic_icon.png; sourceTree = "<group>"; };
 		33340F7A1D6D71EE00909BBF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		33340F7E1D6EC36800909BBF /* loading1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading1.png; sourceTree = "<group>"; };
+		333907821F7E1DB000C05F5D /* UINavigationBar+for11.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+for11.h"; sourceTree = "<group>"; };
+		333907831F7E1DB000C05F5D /* UINavigationBar+for11.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+for11.m"; sourceTree = "<group>"; };
 		3343F3A81C803DC9009F69BC /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
 		3343F3A91C803DC9009F69BC /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
 		3343F3AC1C80403C009F69BC /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -1940,6 +1943,8 @@
 			children = (
 				3370EBD01F4574F900F37149 /* 别名设置 */,
 				3370EBCC1F4573E500F37149 /* head动画 */,
+				333907821F7E1DB000C05F5D /* UINavigationBar+for11.h */,
+				333907831F7E1DB000C05F5D /* UINavigationBar+for11.m */,
 			);
 			name = "编辑设备";
 			path = "设备二级界面/编辑设备";
@@ -4878,6 +4883,7 @@
 				33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */,
 				3367CB511C86806700EF460C /* View+MASAdditions.m in Sources */,
 				337079441D911F5800D7DA98 /* questionView.m in Sources */,
+				333907841F7E1DB000C05F5D /* UINavigationBar+for11.m in Sources */,
 				33860FF01EEA75C5004150FD /* UIView+MJExtension.m in Sources */,
 				33530F1E1CC87B5000378EB2 /* ManagementController.m in Sources */,
 				332283A91DFAA03B00C546B4 /* swiftHeader.swift in Sources */,

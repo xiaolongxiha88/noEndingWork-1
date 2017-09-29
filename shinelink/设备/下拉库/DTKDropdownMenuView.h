@@ -21,6 +21,8 @@ typedef enum : NSUInteger {
 + (instancetype)dropdownMenuViewWithType:(DTKDropDownType)dropDownType frame:(CGRect)frame dropdownItems:(NSArray *)dropdownItems icon:(NSString *)icon;
 + (instancetype)dropdownMenuViewForNavbarTitleViewWithFrame:(CGRect )frame dropdownItems:(NSArray *)dropdownItems;
 
+-(void)pullTheTableView;
+
 /// 当前Nav导航栏  
 @property(weak ,nonatomic) UINavigationController *currentNav;
 
@@ -54,6 +56,7 @@ typedef enum : NSUInteger {
 @property (assign, nonatomic) CGFloat backgroundAlpha;
 
 
+@property(nonatomic, assign) CGSize intrinsicContentSize;
 
 @end
 
