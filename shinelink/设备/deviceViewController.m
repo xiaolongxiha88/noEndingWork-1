@@ -27,7 +27,7 @@
 #import "meViewController.h"
 #import "storageHead.h"
 #import "SPF5000Head.h"
-#import "UINavigationBar+for11.h"
+#import "KTDropdownMenuView.h"
 
 
 
@@ -543,6 +543,7 @@ _pcsNetStorageSN=@"";
     _rightMenuView.cellSeparatorColor = ColorWithRGB(229.f, 229.f, 229.f);
     _rightMenuView.textFont = [UIFont systemFontOfSize:14.f];
     _rightMenuView.animationDuration = 0.2f;
+    
    // _rightMenuView.userInteractionEnabled=YES;
     
 
@@ -550,6 +551,7 @@ _pcsNetStorageSN=@"";
     if (deviceSystemVersion>=11.0) {
         UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd  target:self.rightMenuView action:@selector(pullTheTableView)];
         self.navigationItem.rightBarButtonItem = rightButton;
+    
     }else{
      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightMenuView];
     }
@@ -564,37 +566,7 @@ _pcsNetStorageSN=@"";
 
 - (void)addTitleMenu
 {
-    NSMutableArray *DTK=[NSMutableArray array];
-    for(int i=0;i<_stationID.count;i++)
-    {
-         NSString *DTKtitle=[NSString stringWithFormat:@"%@",_stationName[i]];
-       // NSString *DTKtitle=[[NSString alloc]initWithFormat:_stationName[i]];
-    DTKDropdownItem *DTKname= [DTKDropdownItem itemWithTitle:DTKtitle callBack:^(NSUInteger index, id info) {
-        NSLog(@"电站%lu",(unsigned long)index);
-        [ [UserInfo defaultUserInfo]setPlantID:_stationID[index]];
-        [ [UserInfo defaultUserInfo]setPlantNum:[NSString stringWithFormat:@"%lu",(unsigned long)index]];
-        [_plantId setObject:_stationID[index] forKey:@"plantId"];
-        _stationIdOne=_stationID[index];
-        
-        _isPvType=NO;
-        [self refreshData];
-        
-    }];
-         [DTK addObject:DTKname];
-    }
   
-    _titleMenuView = [DTKDropdownMenuView dropdownMenuViewForNavbarTitleViewWithFrame:CGRectMake(0, 0, 200*HEIGHT_SIZE, 44*HEIGHT_SIZE) dropdownItems:DTK];
-    //  menuView.intrinsicContentSize=CGSizeMake(200*HEIGHT_SIZE, 44*HEIGHT_SIZE);
- //menuView.translatesAutoresizingMaskIntoConstraints=true;
-    _titleMenuView.currentNav = self.navigationController;
-    _titleMenuView.dropWidth = 150.f;
-    _titleMenuView.titleColor=[UIColor whiteColor];
-    _titleMenuView.titleFont = [UIFont systemFontOfSize:18.f];
-    _titleMenuView.textColor =MainColor;
-    _titleMenuView.textFont = [UIFont systemFontOfSize:13.f];
-    _titleMenuView.cellSeparatorColor =COLOR(231, 231, 231, 1);
-    _titleMenuView.textFont = [UIFont systemFontOfSize:14.f];
-    _titleMenuView.animationDuration = 0.2f;
     NSString *sel=[[NSUserDefaults standardUserDefaults]objectForKey:@"plantNum"];
       NSInteger selected= [sel integerValue];
     if (sel==nil || sel==NULL||[sel isEqual:@""])
@@ -605,13 +577,72 @@ _pcsNetStorageSN=@"";
     if (selected>=_stationID.count) {
         selected= 0;
     }
-    _titleMenuView.selectedIndex = selected;
+  
     
-    _titleMenuView.userInteractionEnabled=YES;
-    UITapGestureRecognizer *tapGesture111 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pullTheTableViewTitle)];
-    [_titleMenuView addGestureRecognizer:tapGesture111];
-    self.navigationItem.titleView.userInteractionEnabled=YES;
-   self.navigationItem.titleView = _titleMenuView;
+    if (deviceSystemVersion>=11.0) {
+
+        KTDropdownMenuView *menuView = [[KTDropdownMenuView alloc] initWithFrame:CGRectMake(0, 0,100, 44) titles:_stationName];
+        
+        menuView.selectedAtIndex = ^(int index)
+        {
+            NSLog(@"selected title:%@", _stationName[index]);
+            [ [UserInfo defaultUserInfo]setPlantID:_stationID[index]];
+            [ [UserInfo defaultUserInfo]setPlantNum:[NSString stringWithFormat:@"%lu",(unsigned long)index]];
+            [_plantId setObject:_stationID[index] forKey:@"plantId"];
+            _stationIdOne=_stationID[index];
+            
+            _isPvType=NO;
+            [self refreshData];
+        };
+        menuView.width = 150.f;
+         menuView.cellSeparatorColor =COLOR(231, 231, 231, 1);
+        menuView.cellColor=MainColor;
+        //  menuView.textColor =MainColor;
+          menuView.textFont = [UIFont systemFontOfSize:17.f];
+        menuView.cellHeight=40*HEIGHT_SIZE;
+            menuView.animationDuration = 0.2f;
+         menuView.selectedIndex = selected;
+        
+        self.navigationItem.titleView = menuView;
+        
+    }else{
+        
+        NSMutableArray *DTK=[NSMutableArray array];
+        for(int i=0;i<_stationID.count;i++)
+        {
+            NSString *DTKtitle=[NSString stringWithFormat:@"%@",_stationName[i]];
+            // NSString *DTKtitle=[[NSString alloc]initWithFormat:_stationName[i]];
+            DTKDropdownItem *DTKname= [DTKDropdownItem itemWithTitle:DTKtitle callBack:^(NSUInteger index, id info) {
+                NSLog(@"电站%lu",(unsigned long)index);
+                [ [UserInfo defaultUserInfo]setPlantID:_stationID[index]];
+                [ [UserInfo defaultUserInfo]setPlantNum:[NSString stringWithFormat:@"%lu",(unsigned long)index]];
+                [_plantId setObject:_stationID[index] forKey:@"plantId"];
+                _stationIdOne=_stationID[index];
+                
+                _isPvType=NO;
+                [self refreshData];
+                
+            }];
+            [DTK addObject:DTKname];
+        }
+        
+        _titleMenuView = [DTKDropdownMenuView dropdownMenuViewForNavbarTitleViewWithFrame:CGRectMake(0, 0, 200*NOW_SIZE, UI_NAVIGATION_BAR_HEIGHT) dropdownItems:DTK];
+        //  menuView.intrinsicContentSize=CGSizeMake(200*HEIGHT_SIZE, 44*HEIGHT_SIZE);
+        //menuView.translatesAutoresizingMaskIntoConstraints=true;
+      _titleMenuView.currentNav = self.navigationController;
+        _titleMenuView.dropWidth = 150.f;
+        _titleMenuView.titleColor=[UIColor whiteColor];
+        _titleMenuView.titleFont = [UIFont systemFontOfSize:17.f];
+        _titleMenuView.textColor =MainColor;
+        _titleMenuView.textFont = [UIFont systemFontOfSize:13.f];
+        _titleMenuView.cellSeparatorColor =COLOR(231, 231, 231, 1);
+        _titleMenuView.textFont = [UIFont systemFontOfSize:14.f];
+        _titleMenuView.animationDuration = 0.2f;
+          _titleMenuView.selectedIndex = selected;
+
+         self.navigationItem.titleView = _titleMenuView;
+    }
+    
     
     
     NSString *plantid1=[[NSString alloc]initWithString:_stationID[selected]];
@@ -634,13 +665,10 @@ _pcsNetStorageSN=@"";
     else{
          [self initDemoData];
         }
-}
-
-
--(void)pullTheTableViewTitle{
-    [_titleMenuView pullTheTableView];
     
 }
+
+
 
 
 

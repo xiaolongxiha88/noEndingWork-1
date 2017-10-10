@@ -36,6 +36,8 @@ class ossFistVC: RootViewController {
     
     var  lable3:UILabel!
     
+    var  menuView:DTKDropdownMenuView!
+    
     var heigh0=96*NOW_SIZE
     
      var lineH=0.6*HEIGHT_SIZE
@@ -127,7 +129,7 @@ class ossFistVC: RootViewController {
         
         
 
-        let menuView=DTKDropdownMenuView.init(type:dropDownTypeLeftItem , frame: CGRect(x: 0*NOW_SIZE, y: (H2!-bH)/2, width: bH, height: bH), dropdownItems: numArray as! [Any], icon:"more2@2x.png")!
+         menuView=DTKDropdownMenuView.init(type:dropDownTypeLeftItem , frame: CGRect(x: 0*NOW_SIZE, y: (H2!-bH)/2, width: bH, height: bH), dropdownItems: numArray as! [Any], icon:"more2@2x.png")!
         menuView.dropWidth = size1.width+10*NOW_SIZE
         menuView.cellHeight = 30*HEIGHT_SIZE
         menuView.titleFont = UIFont.systemFont(ofSize:14*HEIGHT_SIZE)
@@ -135,14 +137,32 @@ class ossFistVC: RootViewController {
         menuView.cellSeparatorColor =  COLOR(_R: 229, _G: 229, _B: 229, _A: 1);
         menuView.textFont = UIFont.systemFont(ofSize:14*HEIGHT_SIZE)
         menuView.animationDuration = 0.2;
+       self.navigationItem.leftBarButtonItem?.width=bH
+        
+      
+    
+        if (UIDevice.current.systemVersion as NSString).floatValue>=11.0{
+          //  let leftItem=UIBarButtonItem.init(barButtonSystemItem: .bookmarks, target: self.menuView, action: #selector(self.menuView.pullTheTableView))
+            
+             let leftItem=UIBarButtonItem.init(image: UIImage.init(named: "more2@2x.png"), style: .plain, target: self.menuView, action: #selector(self.menuView.pullTheTableView))
+            self.navigationItem.leftBarButtonItem=leftItem
+            
+        }else{
+            let leftItem=UIBarButtonItem.init(customView: menuView)
+            self.navigationItem.leftBarButtonItem=leftItem
+            
+        }
    
-        let leftItem=UIBarButtonItem.init(customView: menuView)
-             self.navigationItem.leftBarButtonItem=leftItem
-        self.navigationItem.leftBarButtonItem?.width=bH
-   
+//        if (deviceSystemVersion>=11.0) {
+//            UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd  target:self.rightMenuView action:@selector(pullTheTableView)];
+//            self.navigationItem.rightBarButtonItem = rightButton;
+//        }else{
+//            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightMenuView];
+//        }
 
     }
     
+
     
     func initAlertView(){
         let alertController = UIAlertController(title: "是否退出账户?", message: nil, preferredStyle:.alert)

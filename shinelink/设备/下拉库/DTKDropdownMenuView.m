@@ -105,11 +105,12 @@ UITableViewDataSource
     DTKDropdownMenuView *menuView = [[DTKDropdownMenuView alloc]initWithFrame:frame];
     menuView.layer.frame=frame;
     menuView.dropDownType = dropDownType;
-    [menuView updateMainConstraints];
+   [menuView updateMainConstraints];
     menuView.items = dropdownItems;
     menuView.isMenuShow = NO;
     menuView.selectedIndex = 0;
     menuView.icon = icon;
+    menuView.userInteractionEnabled=YES;
     return menuView;
 }
 
@@ -121,7 +122,12 @@ UITableViewDataSource
 {
     self = [super initWithFrame:frame];
     if (self) {
-        //        [self updateMainConstraints];
+   //    [self updateMainConstraints];
+//        [self addSubview:self.titleButton];
+//        [self addSubview:self.arrowImageView];
+//        [self.wrapperView addSubview:self.backgroundView];
+//        [self.wrapperView addSubview:self.tableView];
+        
     }
     return self;
 }
@@ -175,6 +181,7 @@ UITableViewDataSource
     if (self.dropDownType == dropDownTypeTitle) {
         [self.titleButton mas_updateConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self);
+
         }];
     }else{
         [self.titleButton mas_updateConstraints:^(MASConstraintMaker *make) {
