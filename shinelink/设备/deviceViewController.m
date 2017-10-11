@@ -88,7 +88,7 @@
 
 @property (nonatomic, strong) DTKDropdownMenuView *rightMenuView;
 @property (nonatomic, strong) DTKDropdownMenuView *titleMenuView;
-
+@property (nonatomic, strong) KTDropdownMenuView *menuView;
 @end
 
 @implementation deviceViewController
@@ -137,7 +137,7 @@
   //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(netRequest) name:@"changeName" object:nil];
     
     if ([_netEnable isEqualToString:@"1"]) {
-          [self netRequest];
+          [self addTitleMenu];
     }else{
      _netEnable=@"1";
     }
@@ -580,10 +580,13 @@ _pcsNetStorageSN=@"";
   
     
     if (deviceSystemVersion>=11.0) {
-
-        KTDropdownMenuView *menuView = [[KTDropdownMenuView alloc] initWithFrame:CGRectMake(0, 0,100, 44) titles:_stationName];
+        if (_menuView) {
+            [_menuView removeFromSuperview];
+            _menuView=nil;
+        }
+        _menuView = [[KTDropdownMenuView alloc] initWithFrame:CGRectMake(0, 0,100, 44) titles:_stationName];
         
-        menuView.selectedAtIndex = ^(int index)
+        _menuView.selectedAtIndex = ^(int index)
         {
             NSLog(@"selected title:%@", _stationName[index]);
             [ [UserInfo defaultUserInfo]setPlantID:_stationID[index]];
@@ -594,19 +597,22 @@ _pcsNetStorageSN=@"";
             _isPvType=NO;
             [self refreshData];
         };
-        menuView.width = 150.f;
-         menuView.cellSeparatorColor =COLOR(231, 231, 231, 1);
-        menuView.cellColor=MainColor;
+        _menuView.width = 150.f;
+         _menuView.cellSeparatorColor =COLOR(231, 231, 231, 1);
+        _menuView.cellColor=MainColor;
         //  menuView.textColor =MainColor;
-          menuView.textFont = [UIFont systemFontOfSize:17.f];
-        menuView.cellHeight=40*HEIGHT_SIZE;
-            menuView.animationDuration = 0.2f;
-         menuView.selectedIndex = selected;
+          _menuView.textFont = [UIFont systemFontOfSize:17.f];
+        _menuView.cellHeight=40*HEIGHT_SIZE;
+            _menuView.animationDuration = 0.2f;
+         _menuView.selectedIndex = selected;
         
-        self.navigationItem.titleView = menuView;
+        self.navigationItem.titleView = _menuView;
         
     }else{
-        
+        if (_titleMenuView) {
+            [_titleMenuView removeFromSuperview];
+            _titleMenuView=nil;
+        }
         NSMutableArray *DTK=[NSMutableArray array];
         for(int i=0;i<_stationID.count;i++)
         {

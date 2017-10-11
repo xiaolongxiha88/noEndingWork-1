@@ -108,29 +108,29 @@ static CGFloat DDPMAX_TABLEVIEW_HEIGHT(){
     }
 }
 
-- (void)dealloc
-{
-    [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
-}
-
-#pragma mark -- KVO --
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    // 遇到这些情况就直接返回
-    if (!self.userInteractionEnabled || !self.isMenuShow)
-        return;
-    
-    // 这个就算看不见也需要处理
-    if ([keyPath isEqualToString:@"contentOffset"])
-    {
-        CGPoint newOffset = [[change valueForKey:@"new"] CGPointValue];
-        if (newOffset.y > kKTDropdownMenuViewAutoHideHeight)
-        {
-            self.isMenuShow = !self.isMenuShow;
-        }
-    }
-}
+//- (void)dealloc
+//{
+//    [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
+//}
+//
+//#pragma mark -- KVO --
+//
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+//{
+//    // 遇到这些情况就直接返回
+//    if (!self.userInteractionEnabled || !self.isMenuShow)
+//        return;
+//    
+//    // 这个就算看不见也需要处理
+//    if ([keyPath isEqualToString:@"contentOffset"])
+//    {
+//        CGPoint newOffset = [[change valueForKey:@"new"] CGPointValue];
+//        if (newOffset.y > kKTDropdownMenuViewAutoHideHeight)
+//        {
+//            self.isMenuShow = !self.isMenuShow;
+//        }
+//    }
+//}
 
 #pragma mark -- UITableViewDataSource --
 
