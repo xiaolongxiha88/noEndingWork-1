@@ -316,7 +316,7 @@
     [_scrollerView setContentOffset:CGPointMake(Kwidth*pageName, 0) animated:YES];
     _pageControl.currentPage = pageName;
     
-    if (pageName == (_imageArray.count-1)) {
+    if (pageName == (_pageControl.numberOfPages-1)) {
         pageName = -1;
     }
     
