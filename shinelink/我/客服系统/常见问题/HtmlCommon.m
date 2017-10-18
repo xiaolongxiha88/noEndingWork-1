@@ -99,8 +99,11 @@ self.view.backgroundColor = [UIColor whiteColor];
     
     
 //_HtmlContent=[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"view" ofType:@"html"] encoding:NSUTF8StringEncoding error:NULL];
+//    _HtmlContent=@"http://chat.growatt.com/ChatRoom/chatPhone/custom";
+//    NSURL *URL=[NSURL URLWithString:_HtmlContent];
+//    [self.webView loadHTMLString:nil baseURL:URL];
     
- [self.webView loadHTMLString:_HtmlContent baseURL:nil];
+[self.webView loadHTMLString:_HtmlContent baseURL:nil];
     
     
  if ([serviceBool isEqualToString:@"1"]) {

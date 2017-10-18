@@ -77,7 +77,8 @@ if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
     [self.contentView addSubview:_stateValue];
     
     self.power = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+10*NOW_SIZE, 40*HEIGHT_SIZE, labelWidth1, labelHeight)];
-    self.power.text = root_gongLv;
+    self.power.text =[NSString stringWithFormat:@"%@:",root_gongLv];
+    //self.power.text = root_gongLv;
     self.power.font=[UIFont systemFontOfSize:fontSize];
     _power.adjustsFontSizeToFitWidth=YES;
     self.power.textAlignment = NSTextAlignmentRight;

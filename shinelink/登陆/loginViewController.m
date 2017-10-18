@@ -33,7 +33,7 @@
 #import "OssMessageViewController.h"
 
 //测试头
-#import "configWifiSViewController.h"
+#import "useToWifiView1.h"
 
 
 @interface loginViewController ()<UINavigationControllerDelegate,UITextFieldDelegate>
@@ -96,9 +96,9 @@
     //上线检查
      [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:is_Test];
     
-    NSString *testDemo=@"O";
+    NSString *testDemo=@"OK";
     if ([testDemo isEqualToString:@"OK"]) {
-        configWifiSViewController *testView=[[configWifiSViewController alloc]init];
+        useToWifiView1 *testView=[[useToWifiView1 alloc]init];
         [self.navigationController pushViewController:testView animated:NO];
     }else{
         [self getLoginType];

@@ -107,7 +107,7 @@
 "充电 "="Charging";
 "放电 "="Discharging";
 "详情 "="Details";
-"功率:"="Power:";
+"功率:"="Power";
 
 "请输入设备别名"="Please input device isaue";
 "修改别名"="Change device isaue";
@@ -339,7 +339,7 @@
 "电视机"="TV";
 "洗衣机"="Washing machine";
 "热水器"="Water heater";
-"发电量"="Energy yield";
+"发电量"="Energy";
 "放电量"="Energy discharged";
 "最大值"="Max value";
 "平均值"="Average value";
@@ -772,3 +772,5 @@
 "185总充电量"="Total charge";
 "186在线"="Online";
 "187视在功率"="Active/apparent power";
+"189额定功率"="Normal power";
+"190警告"="Warning";

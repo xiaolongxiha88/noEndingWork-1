@@ -798,4 +798,8 @@
 #define  root_Device_head_187 NSLocalizedString(@"187视在功率", nil)
 #define  root_Device_head_188 NSLocalizedString(@"188暂无数据", nil)
 
+#define  root_usbTowifi_189 NSLocalizedString(@"189额定功率", nil)
+#define  root_usbTowifi_190 NSLocalizedString(@"190警告", nil)
+
+
 #endif /* languageNew_h */
