@@ -7,8 +7,13 @@
 //
 
 #import "useToWifiView1.h"
+#import "useToWifiCell1.h"
+#import "usbModleOne.h"
 
-@interface useToWifiView1 ()
+
+static NSString *cellOne = @"cellOne";
+
+@interface useToWifiView1 ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIView *firstView;
 @property(nonatomic,strong)UIView *secondView;
 @property(nonatomic,strong)UIView *thirdView;
@@ -21,11 +26,15 @@
 @property(nonatomic,strong)NSMutableArray *fourDataArray;
 
 @property(nonatomic,assign) float firstH;
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NSArray *tableNameArray;
 
 
 @end
 
-@implementation useToWifiView1
+@implementation useToWifiView1{
+    NSArray<usbModleOne*> *_modelList;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,12 +48,11 @@
 
 
 -(void)initUI{
-    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
-    _scrollView.scrollEnabled=YES;
-    [self.view addSubview:_scrollView];
+ 
     
     
     [self initFirstUI];
+    [self initThirdUI];
 }
 
 
@@ -53,7 +61,7 @@
     float W2=(H2-imageH)/2;  float lableH=30*HEIGHT_SIZE;float lableW=60*NOW_SIZE;
     _firstView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, _firstH)];
     _firstView.backgroundColor=[UIColor clearColor];
-    [_scrollView addSubview:_firstView];
+    [self.view addSubview:_firstView];
     NSArray *picName=@[@"max_ele.png",@"max_power.png",@"max_worning.png"];
     NSArray *colorArray=@[COLOR(88, 196, 95, 1),COLOR(0, 156, 255, 1),COLOR(221, 120, 120, 1)];
     NSArray *nameArray=@[root_energy_fadianliang,root_gongLv,root_cuoWu];
@@ -120,7 +128,7 @@
     float view1H= CGRectGetMaxY(_firstView.frame);
     _secondView=[[UIView alloc]initWithFrame:CGRectMake(W1, view1H+10*HEIGHT_SIZE, W0, H)];
     _secondView.backgroundColor=[UIColor clearColor];
-    [_scrollView addSubview:_secondView];
+    [self.view addSubview:_secondView];
     
     
     UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(1*NOW_SIZE, 3*HEIGHT_SIZE, 3*NOW_SIZE, 14*HEIGHT_SIZE)];
@@ -159,6 +167,104 @@
     
     
 }
+
+
+-(void)initThirdUI{
+    _tableNameArray=@[@"PV电压/电流/电量",@"PV串电压/电流",@"AC电压/电流",@"PID电压/电流"];
+    float view1H= CGRectGetMaxY(_secondView.frame);
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0,view1H+10*HEIGHT_SIZE, SCREEN_Width, SCREEN_Height)];
+    _scrollView.scrollEnabled=YES;
+    [self.view addSubview:_scrollView];
+    
+    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(1*NOW_SIZE, 3*HEIGHT_SIZE, 3*NOW_SIZE, 14*HEIGHT_SIZE)];
+    V1.backgroundColor=MainColor;
+    [_secondView addSubview:V1];
+    
+    float lableH1=20*HEIGHT_SIZE;
+    UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(7*NOW_SIZE, 0,200*NOW_SIZE,lableH1)];
+    lable5.textColor =COLOR(51, 51, 51, 1);
+    lable5.textAlignment=NSTextAlignmentLeft;
+    lable5.text=@"设备信息";
+    lable5.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [_secondView addSubview:lable5];
+    
+       NSMutableArray<usbModleOne *> *arrM = [NSMutableArray arrayWithCapacity:_tableNameArray.count];
+    for (int i=0; i<_tableNameArray; i++) {
+        usbModleOne *model = [[usbModleOne alloc] initWithDict]; 
+        [arrM addObject:model];
+    }
+    _modelList = arrM.copy;
+    
+    
+    if (!_tableView) {
+        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height)];
+        _tableView.contentSize=CGSizeMake(SCREEN_Width, 2000*HEIGHT_SIZE);
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+ 
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        
+        [self.tableView registerClass:[useToWifiCell1 class] forCellReuseIdentifier:cellOne];
+
+        [self.view addSubview:_tableView];
+        
+    }
+    
+}
+
+
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _tableNameArray.count;
+}
+
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+       useToWifiCell1 *cell = [tableView dequeueReusableCellWithIdentifier:cellOne forIndexPath:indexPath];
+        cell.cellTypy=(int)indexPath.row;
+    usbModleOne *model = _modelList[indexPath.row];
+    cell.model = model;
+    [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
+        NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
+        [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
+           return cell;
+    
+}
+
+
+
+
+
+// MARK: - 返回cell高度的代理方法
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    usbModleOne *model = _modelList[indexPath.row];
+    
+    if (model.isShowMoreText){
+        
+             return [useToWifiCell1 moreHeight:(int)indexPath.row];
+        
+    }else{
+        
+            return [useToWifiCell1 defaultHeight];
+    }
+    
+}
+
+
+
+
+
 
 
 

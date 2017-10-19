@@ -413,6 +413,8 @@
 		3376B3DD1F973EEE0069F820 /* MAXdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3DA1F973EED0069F820 /* MAXdown.png */; };
 		3376B3DE1F973EEE0069F820 /* MAXup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3DB1F973EED0069F820 /* MAXup.png */; };
 		3376B3DF1F973EEE0069F820 /* MAXright.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3DC1F973EEE0069F820 /* MAXright.png */; };
+		3376B3E21F9839C70069F820 /* useToWifiCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376B3E11F9839C70069F820 /* useToWifiCell1.m */; };
+		3376B3E51F983D130069F820 /* usbModleOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376B3E41F983D130069F820 /* usbModleOne.m */; };
 		3377156A1D8E6CCC002EEEDF /* AddDeviceViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */; };
 		3377156C1D8E6E04002EEEDF /* liblibelian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AF3CEF1D8E67210007D6C2 /* liblibelian.a */; };
 		33771D521E8369B000786FCE /* zhushi11.png in Resources */ = {isa = PBXBuildFile; fileRef = 33771D511E8369B000786FCE /* zhushi11.png */; };
@@ -1367,6 +1369,10 @@
 		3376B3DA1F973EED0069F820 /* MAXdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAXdown.png; sourceTree = "<group>"; };
 		3376B3DB1F973EED0069F820 /* MAXup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAXup.png; sourceTree = "<group>"; };
 		3376B3DC1F973EEE0069F820 /* MAXright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAXright.png; sourceTree = "<group>"; };
+		3376B3E01F9839C70069F820 /* useToWifiCell1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = useToWifiCell1.h; path = "shinelink/本地调试/useToWifiCell1.h"; sourceTree = SOURCE_ROOT; };
+		3376B3E11F9839C70069F820 /* useToWifiCell1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = useToWifiCell1.m; path = "shinelink/本地调试/useToWifiCell1.m"; sourceTree = SOURCE_ROOT; };
+		3376B3E31F983D130069F820 /* usbModleOne.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbModleOne.h; sourceTree = "<group>"; };
+		3376B3E41F983D130069F820 /* usbModleOne.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbModleOne.m; sourceTree = "<group>"; };
 		337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddDeviceViewController.h; path = ../WifConnect/num2/AddDeviceViewController.h; sourceTree = "<group>"; };
 		337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AddDeviceViewController.mm; path = ../WifConnect/num2/AddDeviceViewController.mm; sourceTree = "<group>"; };
 		3377156B1D8E6D28002EEEDF /* elian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = elian.h; path = OtherThing/cloudServices/elian.h; sourceTree = "<group>"; };
@@ -3155,6 +3161,10 @@
 				3376B3CD1F973E0B0069F820 /* 本地调试图片 */,
 				3376B3CA1F9726720069F820 /* useToWifiView1.h */,
 				3376B3CB1F9726720069F820 /* useToWifiView1.m */,
+				3376B3E01F9839C70069F820 /* useToWifiCell1.h */,
+				3376B3E11F9839C70069F820 /* useToWifiCell1.m */,
+				3376B3E31F983D130069F820 /* usbModleOne.h */,
+				3376B3E41F983D130069F820 /* usbModleOne.m */,
 			);
 			path = "本地调试";
 			sourceTree = "<group>";
@@ -4798,6 +4808,7 @@
 				33AF3D211D8E67210007D6C2 /* NSTimer+EasyTimeline.m in Sources */,
 				338614AF1F26E59B000F515E /* newLine.m in Sources */,
 				337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */,
+				3376B3E51F983D130069F820 /* usbModleOne.m in Sources */,
 				338614D51F2839A9000F515E /* ESP_ByteUtil.m in Sources */,
 				3377156A1D8E6CCC002EEEDF /* AddDeviceViewController.mm in Sources */,
 				338122261D864B3700C7704B /* AvCachTableViewCell.m in Sources */,
@@ -4954,6 +4965,7 @@
 				33530F1E1CC87B5000378EB2 /* ManagementController.m in Sources */,
 				332283A91DFAA03B00C546B4 /* swiftHeader.swift in Sources */,
 				3343F3C41C80403C009F69BC /* AFURLConnectionOperation.m in Sources */,
+				3376B3E21F9839C70069F820 /* useToWifiCell1.m in Sources */,
 				3355F26B1C746BF5006DDE5A /* aboutTableViewCell.m in Sources */,
 				335D69B71D77BA4D00894D90 /* README.md in Sources */,
 				33860FE51EEA75C5004150FD /* MJRefreshBackGifFooter.m in Sources */,
