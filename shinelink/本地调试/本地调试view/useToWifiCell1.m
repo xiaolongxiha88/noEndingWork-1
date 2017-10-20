@@ -30,6 +30,10 @@
     
     self.contentView.backgroundColor=[UIColor whiteColor];
     
+    if (_titleView) {
+        [_titleView removeFromSuperview];
+        _titleView=nil;
+    }
     _titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width,titleLabelH1)];
     _titleView.backgroundColor =COLOR(247, 247, 247, 1);
     _titleView.userInteractionEnabled = YES;
@@ -40,32 +44,40 @@
   
     _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0, 200*NOW_SIZE, titleLabelH1)];
     _titleLabel.textColor = MainColor;
+    _titleLabel.text=_titleString;
     _titleLabel.textAlignment=NSTextAlignmentLeft;
     _titleLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_titleView addSubview:_titleLabel];
     
-    float buttonViewW=50*NOW_SIZE;
+    float buttonViewW=20*NOW_SIZE;float buttonW=10*NOW_SIZE;
     UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_Width-buttonViewW, 0, buttonViewW,titleLabelH1)];
     buttonView.backgroundColor =[UIColor clearColor];
     buttonView.userInteractionEnabled = YES;
     [_titleView addSubview:buttonView];
     
-    float buttonW=12*NOW_SIZE;    float buttonH=8*HEIGHT_SIZE;
-    if (!_moreTextBtn) {
+       float buttonH=6*HEIGHT_SIZE;
+  
         _moreTextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _moreTextBtn.selected=NO;
         [_moreTextBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        _moreTextBtn.frame = CGRectMake((buttonViewW-buttonW)/2, (titleLabelH1-buttonH)/2, buttonW, buttonH);
+        _moreTextBtn.frame = CGRectMake(0, (titleLabelH1-buttonH)/2, buttonW, buttonH);
         [buttonView addSubview:_moreTextBtn];
         [_moreTextBtn addTarget:self action:@selector(showMoreText) forControlEvents:UIControlEventTouchUpInside];
+  
+    
+    if (self.model.isShowMoreText){
+        if (_scrollView) {
+            [_scrollView removeFromSuperview];
+            _scrollView=nil;
+        }
+           [self initUITwo];
     }
-    
-    
-    [self initUITwo];
+ 
     
     
     
 }
+
 
 
 -(void)initUITwo{
@@ -74,73 +86,102 @@
     float H;NSArray* nameArray;NSArray* vallNameArray;
     
     if (_cellTypy==0) {
-         nameArray=@[@"电压(V)",@"电流(A)",@"电量(kWh)"];
+         nameArray=@[@"电压",@"电流",@"电量"];
         H=lableH1+lableH2*2+lableH3;
     }else{
-           nameArray=@[@"电压(V)",@"电流(A)"];
+           nameArray=@[@"电压",@"电流"];
         H=lableH1+lableH2*2;
     }
     
-    if ((_cellTypy==0)||(_cellTypy==2)) {
+    if ((_cellTypy==0)||(_cellTypy==3)) {
         vallNameArray=@[@"PV1",@"PV2",@"PV3",@"PV4",@"PV5",@"PV6",@"PV7",@"PV8"];
-    }else if(_cellTypy==1){
+    }else if(_cellTypy==2){
         vallNameArray=@[@"AC1",@"AC2",@"AC3",@"R",@"S",@"T"];
         
-    }else if(_cellTypy==3){
+    }else if(_cellTypy==1){
         vallNameArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16"];
         
     }
     
-    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, viewW1, SCREEN_Width, H)];
-    _scrollView.scrollEnabled=YES;
-    [self.contentView addSubview:_scrollView];
+
     
     float w1=50*NOW_SIZE;
-    float w2=40*NOW_SIZE;
+    float w2=50*NOW_SIZE;
         float W00=w1+10*NOW_SIZE+w2*vallNameArray.count;
+    
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(w1+10*NOW_SIZE, viewW1, SCREEN_Width, H)];
+    _scrollView.scrollEnabled=YES;
+    [self.contentView addSubview:_scrollView];
     _scrollView.contentSize=CGSizeMake(W00, H);
     
+    
+    if (_nameView) {
+        [_nameView removeFromSuperview];
+        _nameView=nil;
+    }
+    _nameView = [[UIView alloc]initWithFrame:CGRectMake(0, viewW1, w1,H)];
+    _nameView.backgroundColor =[UIColor clearColor];
+    [self.contentView addSubview:_nameView];
+    
+    UIView *lineView0 = [[UIView alloc]initWithFrame:CGRectMake(0, lableH1, W00,LineWidth)];
+    lineView0.backgroundColor =COLOR(222, 222, 222, 1);
+    [_nameView addSubview:lineView0];
+    
     for (int i=0; i<nameArray.count; i++) {
-        UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE,viewW1+lableH1+lableH2*i, w1, lableH2)];
+        UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE,lableH1+lableH2*i, w1, lableH2)];
         lable1.text=nameArray[i];
         lable1.textColor = MainColor;
         lable1.textAlignment=NSTextAlignmentLeft;
-        lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        [self.contentView addSubview:lable1];
-        
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, viewW1+lableH1+lableH2*(i+1), W00,1*HEIGHT_SIZE)];
+        lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_nameView addSubview:lable1];
+
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, lableH1+lableH2*(i+1), W00,1*HEIGHT_SIZE)];
         lineView.backgroundColor =COLOR(222, 222, 222, 1);
-        [self.contentView addSubview:lineView];
+        [_nameView addSubview:lineView];
         
         if (i==2) {
-            lable1.frame=CGRectMake(5*NOW_SIZE,viewW1+lableH1+lableH2*i, w1, lableH3);
-            lineView.frame=CGRectMake(0, viewW1+lableH1+lableH2*2+lableH3, W00,1*HEIGHT_SIZE);
+            lable1.frame=CGRectMake(5*NOW_SIZE,lableH1+lableH2*i, w1, lableH3);
+            lineView.frame=CGRectMake(0, lableH1+lableH2*2+lableH3, W00,LineWidth);
         }
     }
     
    
     for (int i=0; i<vallNameArray.count; i++) {
-        UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(60*NOW_SIZE+w2*i,viewW1+lableH1, w2, lableH2)];
+        UILabel *lable0 = [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0, w2, lableH1)];
+        lable0.textColor = COLOR(153, 153, 153, 1);
+        lable0.text=vallNameArray[i];
+        lable0.textAlignment=NSTextAlignmentCenter;
+        lable0.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_scrollView addSubview:lable0];
+        
+        UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1, w2, lableH2)];
         lable1.textColor = COLOR(102, 102, 102, 1);
         lable1.text=@"0";
         lable1.textAlignment=NSTextAlignmentCenter;
-        lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        [self.contentView addSubview:lable1];
+        lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_scrollView addSubview:lable1];
         
-        UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(60*NOW_SIZE+w2*i,viewW1+lableH1+lableH2, w2, lableH2)];
+        UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1+lableH2, w2, lableH2)];
         lable2.textColor = COLOR(102, 102, 102, 1);
         lable2.text=@"0";
         lable2.textAlignment=NSTextAlignmentCenter;
-        lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        [self.contentView addSubview:lable2];
+        lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_scrollView addSubview:lable2];
         
         if(_cellTypy==0){
-            UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(60*NOW_SIZE+w2*i,viewW1+lableH1+lableH2*2, w2, lableH3)];
-            lable2.textColor = COLOR(102, 102, 102, 1);
-            lable2.text=@"0";
-            lable2.textAlignment=NSTextAlignmentCenter;
-            lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-            [self.contentView addSubview:lable2];
+            UILabel *lable3= [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1+lableH2*2, w2, lableH3/2)];
+            lable3.textColor = COLOR(102, 102, 102, 1);
+            lable3.text=@"0";
+            lable3.textAlignment=NSTextAlignmentCenter;
+            lable3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [_scrollView addSubview:lable3];
+            
+            UILabel *lable4= [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1+lableH2*2+lableH3/2, w2, lableH3/2)];
+            lable4.textColor = COLOR(102, 102, 102, 1);
+            lable4.text=@"0";
+            lable4.textAlignment=NSTextAlignmentCenter;
+            lable4.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [_scrollView addSubview:lable4];
             
         }
     }
@@ -169,25 +210,24 @@
     
    
     
-    if (!_scrollView) {
+  
         [self initUI];
-    }
+    
     
     
 
     
     
-    
+
     if (self.model.isShowMoreText){ // 展开状态
-        // 计算文本高度
-   
-        
-        [_moreTextBtn setImage:IMAGE(@"oss_more_up.png") forState:UIControlStateNormal];
+  
+        [_moreTextBtn setImage:IMAGE(@"MAXup.png") forState:UIControlStateNormal];
         
     }else{ // 收缩状态
      
-        
-        [_moreTextBtn setImage:IMAGE(@"oss_more_down.png") forState:UIControlStateNormal];
+        [_scrollView removeFromSuperview];
+        [_nameView removeFromSuperview];
+        [_moreTextBtn setImage:IMAGE(@"MAXdown.png") forState:UIControlStateNormal];
     }
 }
 

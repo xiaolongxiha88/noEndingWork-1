@@ -9,9 +9,11 @@
 #import "useToWifiView1.h"
 #import "useToWifiCell1.h"
 #import "usbModleOne.h"
-
+#import "usbToWifiCell2.h"
+#import "usbToWifiDataControl.h"
 
 static NSString *cellOne = @"cellOne";
+static NSString *cellTwo = @"cellTwo";
 
 @interface useToWifiView1 ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UIView *firstView;
@@ -28,7 +30,8 @@ static NSString *cellOne = @"cellOne";
 @property(nonatomic,assign) float firstH;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *tableNameArray;
-
+@property(nonatomic,strong)usbToWifiDataControl*usbControl;
+@property(nonatomic,strong)NSDictionary*allDic;
 
 @end
 
@@ -42,14 +45,27 @@ static NSString *cellOne = @"cellOne";
     
     _firstH=170*HEIGHT_SIZE;
     
+    _usbControl=[[usbToWifiDataControl alloc]init];
+    
     [self initUI];
+    [self getData];
 }
 
+-(void)getData{
 
+    [_usbControl getDataAll:1 receiveDataBlock:^(NSDictionary*receiveData){
+        
+        _allDic=[NSDictionary dictionaryWithDictionary:receiveData];
+    }];
+    
+}
 
 -(void)initUI{
  
-    
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0,0, SCREEN_Width, SCREEN_Height)];
+    _scrollView.scrollEnabled=YES;
+    _scrollView.contentSize=CGSizeMake(SCREEN_Width, 1500*HEIGHT_SIZE);
+    [self.view addSubview:_scrollView];
     
     [self initFirstUI];
     [self initThirdUI];
@@ -61,7 +77,7 @@ static NSString *cellOne = @"cellOne";
     float W2=(H2-imageH)/2;  float lableH=30*HEIGHT_SIZE;float lableW=60*NOW_SIZE;
     _firstView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, _firstH)];
     _firstView.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:_firstView];
+    [_scrollView addSubview:_firstView];
     NSArray *picName=@[@"max_ele.png",@"max_power.png",@"max_worning.png"];
     NSArray *colorArray=@[COLOR(88, 196, 95, 1),COLOR(0, 156, 255, 1),COLOR(221, 120, 120, 1)];
     NSArray *nameArray=@[root_energy_fadianliang,root_gongLv,root_cuoWu];
@@ -128,7 +144,7 @@ static NSString *cellOne = @"cellOne";
     float view1H= CGRectGetMaxY(_firstView.frame);
     _secondView=[[UIView alloc]initWithFrame:CGRectMake(W1, view1H+10*HEIGHT_SIZE, W0, H)];
     _secondView.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:_secondView];
+    [_scrollView addSubview:_secondView];
     
     
     UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(1*NOW_SIZE, 3*HEIGHT_SIZE, 3*NOW_SIZE, 14*HEIGHT_SIZE)];
@@ -172,24 +188,30 @@ static NSString *cellOne = @"cellOne";
 -(void)initThirdUI{
     _tableNameArray=@[@"PV电压/电流/电量",@"PV串电压/电流",@"AC电压/电流",@"PID电压/电流"];
     float view1H= CGRectGetMaxY(_secondView.frame);
-    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0,view1H+10*HEIGHT_SIZE, SCREEN_Width, SCREEN_Height)];
-    _scrollView.scrollEnabled=YES;
-    [self.view addSubview:_scrollView];
     
-    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(1*NOW_SIZE, 3*HEIGHT_SIZE, 3*NOW_SIZE, 14*HEIGHT_SIZE)];
+    
+    
+    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(6*NOW_SIZE, view1H+10*HEIGHT_SIZE+3*HEIGHT_SIZE, 3*NOW_SIZE, 14*HEIGHT_SIZE)];
     V1.backgroundColor=MainColor;
-    [_secondView addSubview:V1];
+    [_scrollView addSubview:V1];
     
     float lableH1=20*HEIGHT_SIZE;
-    UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(7*NOW_SIZE, 0,200*NOW_SIZE,lableH1)];
+    UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(12*NOW_SIZE, view1H+10*HEIGHT_SIZE,200*NOW_SIZE,lableH1)];
     lable5.textColor =COLOR(51, 51, 51, 1);
     lable5.textAlignment=NSTextAlignmentLeft;
     lable5.text=@"设备信息";
     lable5.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [_secondView addSubview:lable5];
+    [_scrollView addSubview:lable5];
+    
+    UILabel *lable6 = [[UILabel alloc]initWithFrame:CGRectMake(210*NOW_SIZE, view1H+12*HEIGHT_SIZE,100*NOW_SIZE,lableH1)];
+    lable6.textColor =MainColor;
+    lable6.textAlignment=NSTextAlignmentRight;
+    lable6.text=@"单位:V/A/kWh";
+    lable6.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    [_scrollView addSubview:lable6];
     
        NSMutableArray<usbModleOne *> *arrM = [NSMutableArray arrayWithCapacity:_tableNameArray.count];
-    for (int i=0; i<_tableNameArray; i++) {
+    for (int i=0; i<_tableNameArray.count; i++) {
         usbModleOne *model = [[usbModleOne alloc] initWithDict]; 
         [arrM addObject:model];
     }
@@ -197,8 +219,8 @@ static NSString *cellOne = @"cellOne";
     
     
     if (!_tableView) {
-        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height)];
-        _tableView.contentSize=CGSizeMake(SCREEN_Width, 2000*HEIGHT_SIZE);
+        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, view1H+10*HEIGHT_SIZE+28*HEIGHT_SIZE, SCREEN_Width,SCREEN_Height+500*HEIGHT_SIZE)];
+        _tableView.contentSize=CGSizeMake(SCREEN_Width, 2500*HEIGHT_SIZE);
         _tableView.delegate = self;
         _tableView.dataSource = self;
  
@@ -206,8 +228,9 @@ static NSString *cellOne = @"cellOne";
         self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
         
         [self.tableView registerClass:[useToWifiCell1 class] forCellReuseIdentifier:cellOne];
+             [self.tableView registerClass:[usbToWifiCell2 class] forCellReuseIdentifier:cellTwo];
 
-        [self.view addSubview:_tableView];
+        [_scrollView addSubview:_tableView];
         
     }
     
@@ -221,43 +244,72 @@ static NSString *cellOne = @"cellOne";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _tableNameArray.count;
+    
+    return 5;
 }
 
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-       useToWifiCell1 *cell = [tableView dequeueReusableCellWithIdentifier:cellOne forIndexPath:indexPath];
-        cell.cellTypy=(int)indexPath.row;
-    usbModleOne *model = _modelList[indexPath.row];
-    cell.model = model;
-    [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
-        NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
-        [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }];
-           return cell;
+    int K=(int)indexPath.row;
+    
+    if (K!=4) {
+        useToWifiCell1 *cell = [tableView dequeueReusableCellWithIdentifier:cellOne forIndexPath:indexPath];
+        if (!cell) {
+            cell=[[useToWifiCell1 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellOne];
+        }
+        cell.cellTypy=K;
+        usbModleOne *model = _modelList[K];
+        cell.model = model;
+        cell.titleString=_tableNameArray[K];
+        [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
+            NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
+            [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
+        return cell;
+    }else{
+        usbToWifiCell2 *cell = [tableView dequeueReusableCellWithIdentifier:cellTwo forIndexPath:indexPath];
+        if (!cell) {
+            cell=[[usbToWifiCell2 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellTwo];
+        }
+    
+        return cell;
+  
+    }
+ 
     
 }
 
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+}
 
 
 // MARK: - 返回cell高度的代理方法
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    usbModleOne *model = _modelList[indexPath.row];
-    
-    if (model.isShowMoreText){
+    if (indexPath.row!=4) {
+        usbModleOne *model = _modelList[indexPath.row];
         
-             return [useToWifiCell1 moreHeight:(int)indexPath.row];
+        if (model.isShowMoreText){
+            
+            return [useToWifiCell1 moreHeight:(int)indexPath.row];
+            
+        }else{
+            
+            return [useToWifiCell1 defaultHeight];
+        }
         
     }else{
         
-            return [useToWifiCell1 defaultHeight];
+          return [usbToWifiCell2 moreHeight:(int)indexPath.row];
     }
+
+    
+    
     
 }
 

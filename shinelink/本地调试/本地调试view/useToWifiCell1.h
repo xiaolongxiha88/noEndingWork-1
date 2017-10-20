@@ -16,6 +16,9 @@
 @property(nonatomic,strong) UIView *titleView;
 @property(nonatomic,strong) UILabel *titleLabel;
 @property(nonatomic,strong) UIButton *moreTextBtn;
+@property(nonatomic,strong) NSString *titleString;
+@property(nonatomic,strong) UIView *nameView;
+
 @property(nonatomic,assign) int cellTypy;
 
 @property(nonatomic, copy) void(^showMoreBlock)(UITableViewCell *currentCell);
