@@ -24,6 +24,16 @@
 @property (nonatomic, assign) BOOL isReceive;
 @property (nonatomic, strong) NSData *CmdData;
 
+@property (nonatomic, assign) BOOL isOne;
+@property (nonatomic, assign) BOOL isTwo;
+@property (nonatomic, assign) BOOL isThree;
+@property (nonatomic, assign) int cmdType;
+@property (nonatomic, strong)NSDictionary*cmdDic;
+@property (nonatomic, strong)NSArray *cmdArray;
+
+@property (nonatomic, strong)NSMutableDictionary*AllDataDic;
+
+
 @end
 
 @implementation wifiToPvOne
@@ -33,15 +43,32 @@
 
 -(void)checkIsReceiveData{
     if (!_isReceive) {
- 
         NSLog(@"DisConnetion");
         [_socket disconnect];
-        
-          [self getDataUI:nil];
+       [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
     }
     
     
 }
+
+-(void)goToTcpType:(int)type{
+    
+    _cmdType=type;
+    _AllDataDic=[NSMutableDictionary new];
+    
+    if (_cmdType==1) {
+            _cmdDic=@{@"one":@[@"3",@"0",@"125"],@"two":@[@"4",@"0",@"125"],@"three":@[@"4",@"125",@"125"]};
+        _isOne=NO;   _isTwo=NO;   _isThree=NO;
+        _cmdArray=[NSArray arrayWithArray:[_cmdDic objectForKey:@"one"]];
+        
+        [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+    }
+    
+    
+    
+}
+
+
 
 -(void)goToGetData:(NSString*)cmdType RegAdd:(NSString*)regAdd Length:(NSString*)length{
       NSLog(@"开始发送");
@@ -50,13 +77,10 @@
       [self setupConnection];
     }
    
-    
-    
-    
-    
     _isReceive=NO;
+
     
-//    [self performSelector:@selector(checkIsReceiveData)  withObject:nil afterDelay:3.0];
+ //    [self performSelector:@selector(checkIsReceiveData)  withObject:nil afterDelay:2.0];
     
     NSData *data=[_getData CmdData:cmdType RegAdd:regAdd Length:length modbusBlock:^(NSData* modbusData){
        
@@ -64,7 +88,7 @@
 
     _CmdData=[NSData dataWithData:data];
     
-//    [self sendCMD:data];
+   [self sendCMD:data];
     
     
 }
@@ -76,10 +100,7 @@
            [self getConnection];
     }
  
-    
     NSString *string =[self convertDataToHexStr:data];
-    
-    
     
     NSDate*datenow = [NSDate date];
     long Tag=[datenow timeIntervalSince1970];
@@ -139,7 +160,7 @@
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"onSocket:%p didConnectToHost:%@ port:%hu", sock, host, port);
     
-    [self sendCMD:_CmdData];
+  //  [self sendCMD:_CmdData];
     
     //[delegate networkConnected];
  //   [self listenData:1];
@@ -163,15 +184,111 @@
     NSString *string =[self convertDataToHexStr:data];
     NSLog(@"receive datas=%ld::%@",tag,string);
     _isReceive=YES;
-
-   [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveData"object:data];
     
-  //  receiveDataTwoBlock(data1);
+    [self checkWhichNumData:data];
     
-   //     [self getDataUI:data];
-        
+//   [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveData"object:data];
+    
 
 }
+
+
+
+-(void)checkWhichNumData:(NSData*)data{
+    if (!_isOne) {
+        BOOL tureData= [self checkData:data];
+        if (tureData) {
+            _isOne=tureData;
+            _cmdArray=[NSArray arrayWithArray:[_cmdDic objectForKey:@"two"]];
+        }
+          [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+    }else{
+        if (!_isTwo) {
+            BOOL tureData= [self checkData:data];
+            if (tureData) {
+                _isTwo=tureData;
+                _cmdArray=[NSArray arrayWithArray:[_cmdDic objectForKey:@"three"]];
+            }
+                   [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+        }else{
+            if (!_isThree) {
+                BOOL tureData= [self checkData:data];
+                if (tureData) {
+                    _isThree=tureData;
+                    
+         
+                }else{
+                       [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+                }
+             
+            }
+            
+        }
+        
+    }
+    
+    
+    
+}
+
+
+-(void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag {
+    NSLog(@"Reading data length of %lu",(unsigned long)partialLength);
+}
+
+//发起一个读取的请求，当收到数据时后面的didReadData才能被回调
+-(void)listenData:(long)Tag {
+   
+    [_socket readDataWithTimeout:-1 tag:Tag];
+}
+
+
+-(BOOL)checkData:(NSData*)data{
+    BOOL  isRightData=YES;
+    
+    NSData *dataAll=[NSData dataWithData:data];
+      Byte *ByteAll=(Byte*)[dataAll bytes];
+    
+    int lengthAll0=(int)[dataAll length];
+    int lengthAll=(ByteAll[4]<<8)+ByteAll[5];
+    
+    if ((lengthAll0-6)==lengthAll) {
+        NSData *data1=[data subdataWithRange:NSMakeRange(20, data.length-20)];
+        Byte *Bytedata1=(Byte*)[data1 bytes];
+        int length0=(int)[data1 length];
+        int length1=Bytedata1[2];
+        if ((length0-5)==length1) {
+            isRightData=YES;
+               NSData *data00=[data1 subdataWithRange:NSMakeRange(3, data1.length-5)];
+            [self upDataToDic:data00];
+        }else{
+                isRightData=NO;
+        }
+    }else{
+        isRightData=NO;
+    }
+    
+    return isRightData;
+}
+
+
+-(void)upDataToDic:(NSData*)data{
+    
+    if (!_isOne) {
+         [_AllDataDic setValue:data forKey:@"one"];
+    }else{
+        if (!_isTwo) {
+            [_AllDataDic setValue:data forKey:@"two"];
+        }else{
+               [_AllDataDic setValue:data forKey:@"three"];
+                   [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveData"object:_AllDataDic];
+        }
+        
+    }
+   
+    
+}
+
 
 - (NSString *)convertDataToHexStr:(NSData *)data {
     if (!data || [data length] == 0) {
@@ -185,97 +302,18 @@
             NSString *hexStr = [NSString stringWithFormat:@"%x", (dataBytes[i]) & 0xff];
             
             if ([hexStr length] == 2) {
-              //  [string appendString:hexStr];
-                   [string appendFormat:@"%@#", hexStr];
+                //  [string appendString:hexStr];
+                [string appendFormat:@"%@#", hexStr];
             } else {
                 [string appendFormat:@"0%@#", hexStr];
             }
-         
+            
         }
         
     }];
     
     return string;
 }
-
-
--(void)getDataUI:(NSData*)data{
-   [_goButton setTitle:@"Start" forState:UIControlStateNormal];
-     [_goButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    if (_dataView) {
-        [_dataView removeFromSuperview];
-        _dataView=nil;
-    }
-
-    NSData *data1=[data subdataWithRange:NSMakeRange(20, data.length-20)];
-    [_recieveAllData appendData:data1];
-    
-    float W=20*HEIGHT_SIZE;
-    unsigned long k=[_recieveAllData length];
-        _dataView=[[UIView alloc]initWithFrame:CGRectMake(0, 220*HEIGHT_SIZE, SCREEN_Width, 230*HEIGHT_SIZE+W*(k))];
-    _dataView.backgroundColor=[UIColor clearColor];
-    [_scrollView addSubview:_dataView];
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,260*HEIGHT_SIZE+W*(k));
-    
-    NSArray *nameArray=@[@"发送数据",@"收到数据"];
-    for (int i=0; i<nameArray.count; i++) {
-        UILabel *cmdLable=[[UILabel alloc]initWithFrame:CGRectMake(0+SCREEN_Width/2*i,  5*HEIGHT_SIZE, SCREEN_Width/2,W )];
-        cmdLable.text=nameArray[i];
-        cmdLable.textAlignment=NSTextAlignmentCenter;
-        cmdLable.textColor=[UIColor whiteColor];
-        cmdLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-        cmdLable.adjustsFontSizeToFitWidth=YES;
-        [_dataView addSubview:cmdLable];
-    }
-    
-    
-
-    
-       Byte *tcp1Byte=(Byte*)[_recieveAllData bytes];
-    
-    for (int i=0; i<_recieveAllData.length; i++) {
-        UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width/2,  25*HEIGHT_SIZE+W*(i), SCREEN_Width/2,W )];
-        PVData.text=[NSString stringWithFormat:@"%d--%x", i,(tcp1Byte[i]) & 0xff];
-        PVData.textAlignment=NSTextAlignmentCenter;
-        PVData.textColor=[UIColor whiteColor];
-        PVData.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-        PVData.adjustsFontSizeToFitWidth=YES;
-        [_dataView addSubview:PVData];
-        
-   
-    }
-    
-    
-    Byte *modbusByte=(Byte*)[_modbusData bytes];
-    for (int i=0; i<_modbusData.length; i++) {
-        UILabel *cmdLable=[[UILabel alloc]initWithFrame:CGRectMake(0,  25*HEIGHT_SIZE+W*(i), SCREEN_Width/2,W )];
-        cmdLable.text=[NSString stringWithFormat:@"%x", (modbusByte[i]) & 0xff];
-        cmdLable.textAlignment=NSTextAlignmentCenter;
-        cmdLable.textColor=[UIColor whiteColor];
-        cmdLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-        cmdLable.adjustsFontSizeToFitWidth=YES;
-        [_dataView addSubview:cmdLable];
-    }
-    
-       [self listenData:_cmdTag];
-    
-}
-
-
--(void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag {
-    NSLog(@"Reading data length of %lu",(unsigned long)partialLength);
-}
-
-//发起一个读取的请求，当收到数据时后面的didReadData才能被回调
--(void)listenData:(long)Tag {
-    //    NSString* sp = @"\n";
-    //    NSData* sp_data = [sp dataUsingEncoding:NSUTF8StringEncoding];
-    // [_socket readDataToData:[GCDAsyncSocket ZeroData] withTimeout:-1 tag:1];
-    
-    [_socket readDataWithTimeout:-1 tag:Tag];
-}
-
-
 
 
 - (void)didReceiveMemoryWarning {

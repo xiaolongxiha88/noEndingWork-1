@@ -31,7 +31,7 @@
       [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData:) name: @"TcpReceiveData" object:nil];
     
     
-    [_ControlOne goToGetData:@"3" RegAdd:@"0" Length:@"10"];
+    [_ControlOne goToTcpType:1];
     
   
 }
@@ -39,8 +39,10 @@
 
 -(void)receiveFirstData:(NSNotification*) notification{
     
-    NSData *receiveData=[notification object];
-    NSLog(@"receive datas=%@",receiveData);
+    _receiveDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
+  
+    
+    NSLog(@"receive datas=%@",_receiveDic);
 }
 
 -(void)receiveData:(receiveDataBlock)receiveDataBlock{

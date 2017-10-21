@@ -680,7 +680,6 @@
 		33FAD8E51F99C78F0030EEC3 /* wifiToPvOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FAD8E41F99C78E0030EEC3 /* wifiToPvOne.m */; };
 		33FAD8E81F99C7AC0030EEC3 /* wifiToPvDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FAD8E71F99C7AC0030EEC3 /* wifiToPvDataModel.m */; };
 		33FAD8EB1F99CA0C0030EEC3 /* usbToWifiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FAD8EA1F99CA0C0030EEC3 /* usbToWifiDataControl.m */; };
-		33FAD8EE1F9A00840030EEC3 /* TEST11111.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FAD8ED1F9A00840030EEC3 /* TEST11111.m */; };
 		33FEFCD21C7D8A9500324374 /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33FEFCCF1C7D8A9500324374 /* Address.plist */; };
 		33FEFCD31C7D8A9500324374 /* AddressPickView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FEFCD11C7D8A9500324374 /* AddressPickView.m */; };
 		33FEFCD61C7D8E8300324374 /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FEFCD51C7D8E8300324374 /* UIViewExt.m */; };
@@ -1787,8 +1786,6 @@
 		33FAD8E71F99C7AC0030EEC3 /* wifiToPvDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wifiToPvDataModel.m; sourceTree = "<group>"; };
 		33FAD8E91F99CA0C0030EEC3 /* usbToWifiDataControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiDataControl.h; sourceTree = "<group>"; };
 		33FAD8EA1F99CA0C0030EEC3 /* usbToWifiDataControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiDataControl.m; sourceTree = "<group>"; };
-		33FAD8EC1F9A00840030EEC3 /* TEST11111.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TEST11111.h; sourceTree = "<group>"; };
-		33FAD8ED1F9A00840030EEC3 /* TEST11111.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TEST11111.m; sourceTree = "<group>"; };
 		33FEFCCF1C7D8A9500324374 /* Address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Address.plist; path = ../Address.plist; sourceTree = "<group>"; };
 		33FEFCD01C7D8A9500324374 /* AddressPickView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddressPickView.h; path = ../AddressPickView.h; sourceTree = "<group>"; };
 		33FEFCD11C7D8A9500324374 /* AddressPickView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressPickView.m; path = ../AddressPickView.m; sourceTree = "<group>"; };
@@ -4233,8 +4230,6 @@
 				33FAD8E41F99C78E0030EEC3 /* wifiToPvOne.m */,
 				33FAD8E61F99C7AC0030EEC3 /* wifiToPvDataModel.h */,
 				33FAD8E71F99C7AC0030EEC3 /* wifiToPvDataModel.m */,
-				33FAD8EC1F9A00840030EEC3 /* TEST11111.h */,
-				33FAD8ED1F9A00840030EEC3 /* TEST11111.m */,
 			);
 			path = "本地调试data";
 			sourceTree = "<group>";
@@ -5081,7 +5076,6 @@
 				335456D11C8588D500275478 /* emailViewController.m in Sources */,
 				335B89601EF51DAC00EE82D4 /* changUserInfo.swift in Sources */,
 				33860FE11EEA75C5004150FD /* MJRefreshHeader.m in Sources */,
-				33FAD8EE1F9A00840030EEC3 /* TEST11111.m in Sources */,
 				336E04001EC9586C0034BC86 /* ossDeviceFirst.swift in Sources */,
 				33530F211CC8824500378EB2 /* changManeger.m in Sources */,
 				3350891B1C73112000D7AA03 /* EditStationMenuView.m in Sources */,

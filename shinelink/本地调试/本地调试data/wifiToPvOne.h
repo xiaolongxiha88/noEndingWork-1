@@ -14,5 +14,7 @@ typedef void(^receiveDataTwoBlock)(NSData*);
 
 -(void)goToGetData:(NSString*)cmdType RegAdd:(NSString*)regAdd Length:(NSString*)length;
 
+-(void)goToTcpType:(int)type;
+
 
 @end

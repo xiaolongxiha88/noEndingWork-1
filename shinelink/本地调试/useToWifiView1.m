@@ -41,6 +41,12 @@ static NSString *cellTwo = @"cellTwo";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setTranslucent:YES];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(getData)];
+    self.navigationItem.rightBarButtonItem=rightItem;
+    
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
     _firstH=170*HEIGHT_SIZE;
