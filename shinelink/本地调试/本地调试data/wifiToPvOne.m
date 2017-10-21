@@ -28,6 +28,7 @@
 @property (nonatomic, assign) BOOL isTwo;
 @property (nonatomic, assign) BOOL isThree;
 @property (nonatomic, assign) int cmdType;
+@property (nonatomic, assign) int cmdCount;
 @property (nonatomic, strong)NSDictionary*cmdDic;
 @property (nonatomic, strong)NSArray *cmdArray;
 
@@ -41,21 +42,13 @@
 
 
 
--(void)checkIsReceiveData{
-    if (!_isReceive) {
-        NSLog(@"DisConnetion");
-        [_socket disconnect];
-       [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
-    }
-    
-    
-}
+
 
 -(void)goToTcpType:(int)type{
     
     _cmdType=type;
     _AllDataDic=[NSMutableDictionary new];
-    
+    _cmdCount=0;
     if (_cmdType==1) {
             _cmdDic=@{@"one":@[@"3",@"0",@"125"],@"two":@[@"4",@"0",@"125"],@"three":@[@"4",@"125",@"125"]};
         _isOne=NO;   _isTwo=NO;   _isThree=NO;
@@ -79,9 +72,6 @@
    
     _isReceive=NO;
 
-    
- //    [self performSelector:@selector(checkIsReceiveData)  withObject:nil afterDelay:2.0];
-    
     NSData *data=[_getData CmdData:cmdType RegAdd:regAdd Length:length modbusBlock:^(NSData* modbusData){
        
     }];
@@ -141,7 +131,7 @@
 
 //断开连接
 -(void)disConnect {
-    //   needConnect = NO;
+  
     [_socket disconnect];
 }
 
@@ -160,10 +150,6 @@
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"onSocket:%p didConnectToHost:%@ port:%hu", sock, host, port);
     
-  //  [self sendCMD:_CmdData];
-    
-    //[delegate networkConnected];
- //   [self listenData:1];
     
 }
 
@@ -174,22 +160,28 @@
     NSLog(@"DisConnetion");
     [_socket disconnect];
     
+    if (!_isReceive) {
+        _cmdCount++;
+        if (_cmdCount>3) {
+            //提示正确连接WiFi
+        }else{
+              [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+        }
+      
+    }
     
 }
 
 //读到数据后的回调代理
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
  
-
+    _cmdCount=0;
     NSString *string =[self convertDataToHexStr:data];
     NSLog(@"receive datas=%ld::%@",tag,string);
     _isReceive=YES;
     
     [self checkWhichNumData:data];
     
-//   [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveData"object:data];
-    
-
 }
 
 
@@ -239,7 +231,7 @@
 //发起一个读取的请求，当收到数据时后面的didReadData才能被回调
 -(void)listenData:(long)Tag {
    
-    [_socket readDataWithTimeout:-1 tag:Tag];
+    [_socket readDataWithTimeout:1.5 tag:Tag];
 }
 
 

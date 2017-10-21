@@ -42,7 +42,7 @@
     _receiveDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
   
     
-    NSLog(@"receive datas=%@",_receiveDic);
+    NSLog(@"receive TCP AllData=%@",_receiveDic);
 }
 
 -(void)receiveData:(receiveDataBlock)receiveDataBlock{
