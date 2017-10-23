@@ -51,11 +51,11 @@
  #define Demo_password  @"123456"
 
 
-//#define HEAD_URL_Demo  @"http://server.growatt.com"
-//#define HEAD_URL_Demo_CN  @"http://server-cn.growatt.com"
-//#define HEAD_URL  [UserInfo defaultUserInfo].server
-//#define OSS_HEAD_URL_Demo  @"http://oss1.growatt.com"
-//#define OSS_HEAD_URL  [UserInfo defaultUserInfo].OSSserver
+#define HEAD_URL_Demo  @"http://server.growatt.com"
+#define HEAD_URL_Demo_CN  @"http://server-cn.growatt.com"
+#define HEAD_URL  [UserInfo defaultUserInfo].server
+#define OSS_HEAD_URL_Demo  @"http://oss1.growatt.com"
+#define OSS_HEAD_URL  [UserInfo defaultUserInfo].OSSserver
 
 
 
@@ -67,11 +67,11 @@
 
 #define is_Test @"isTest"
 
-#define HEAD_URL   @"http://192.168.3.117:8080/ShineServer_2016"
-#define HEAD_URL_Demo  @"http://192.168.3.117:8080/ShineServer_2016"
-#define HEAD_URL_Demo_CN  @"http://192.168.3.117:8080/ShineServer_2016"
-#define OSS_HEAD_URL_Demo  @"http://192.168.3.117:8080/ShineOSS"
-#define OSS_HEAD_URL @"http://192.168.3.117:8080/ShineOSS"
+//#define HEAD_URL   @"http://192.168.3.117:8080/ShineServer_2016"
+//#define HEAD_URL_Demo  @"http://192.168.3.117:8080/ShineServer_2016"
+//#define HEAD_URL_Demo_CN  @"http://192.168.3.117:8080/ShineServer_2016"
+//#define OSS_HEAD_URL_Demo  @"http://192.168.3.117:8080/ShineOSS"
+//#define OSS_HEAD_URL @"http://192.168.3.117:8080/ShineOSS"
 
 
 
@@ -87,6 +87,14 @@
 #define UI_STATUS_BAR_HEIGHT            20
 #define deviceSystemVersion [[[UIDevice currentDevice] systemVersion] floatValue]
 
+
+#define ScreenWidth [[UIScreen mainScreen] bounds].size.width
+#define ScreenHeight [[UIScreen mainScreen] bounds].size.height
+#define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define Is_Iphone_X (Is_Iphone && ScreenHeight == 812.0)
+#define NaviHeight Is_Iphone_X ? 88 : 64
+#define TabbarHeight Is_Iphone_X ? 83 : 49
+#define BottomHeight Is_Iphone_X ? 34 : 0
 
 
 #endif /* Header_h */

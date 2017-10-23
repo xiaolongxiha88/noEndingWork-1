@@ -79,6 +79,8 @@
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"id":_stationId, @"currentPage":page} paramarsSite:@"/newDatalogAPI.do?op=datalogList" sucessBlock:^(id content) {
         [self hideProgressView];
        
+            [_tableView.mj_footer endRefreshing];
+        
         NSArray *noDataArray=[NSArray arrayWithArray:content];
         if (noDataArray.count==0) {
       //       _tableView.mj_footer.hidden=YES;
@@ -107,12 +109,18 @@
                 _AlertView=nil;
             }
         }
-        
-        if (_tableView) {
-            [_tableView reloadData];
+        NSArray *receiveDataArray=[NSArray arrayWithArray:content];
+        if (receiveDataArray.count>0) {
+            if (_tableView) {
+                [_tableView reloadData];
+            }else{
+                [self initUI];
+            }
         }else{
-            [self initUI];
+               [self showToastViewWithTitle:root_Device_head_188];
+         
         }
+       
     } failure:^(NSError *error) {
         [self hideProgressView];
         
@@ -123,39 +131,21 @@
 -(void)initUI{
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height - 114) style:UITableViewStyleGrouped];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.backgroundColor = [UIColor clearColor];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:_tableView];
+    if (!_tableView) {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height - 114) style:UITableViewStyleGrouped];
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        self.tableView.backgroundColor = [UIColor clearColor];
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [self.view addSubview:_tableView];
+    }
+
     
  
-  //  __unsafe_unretained StationCellectViewController *myself = self;
-//        [myself.tableView addLegendFooterWithRefreshingBlock:^{
-//          
-//           // addLegendFooterWithRefreshingBlock
-//            myself->_page++;
-//            [myself requestData];
-//           
-//            [myself->_tableView.mj_footer endRefreshing];
-//            
-//            
-//        }];
     
            if (_arrayData.count>1) {
         
-              
-               
-//        self.tableView.mj_footer=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//                           _page++;
-//                        [self requestData];
-//            
-//                        [_tableView.mj_footer endRefreshing];
-//            
-//       
-//        }];
-               
+         
                MJRefreshAutoNormalFooter *foot=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
                    _page++;
                    [self requestData];

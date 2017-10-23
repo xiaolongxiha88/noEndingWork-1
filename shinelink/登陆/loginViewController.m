@@ -99,7 +99,7 @@
     //上线检查
      [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:is_Test];
     
-    NSString *testDemo=@"OK";
+    NSString *testDemo=@"O";
     if ([testDemo isEqualToString:@"OK"]) {
         useToWifiView1 *testView=[[useToWifiView1 alloc]init];
         [self.navigationController pushViewController:testView animated:NO];
@@ -1075,7 +1075,7 @@ NSLog(@"体验馆");
         [Vc4.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
                                                 MainColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
         
-        //Vc1.tabBarController.tabBar.tintColor = MainColor;
+     
         
         NSArray *controllers=[NSArray arrayWithObjects:Vc1,Vc2,Vc3,Vc4,nil];
         _tabbar=[[UITabBarController alloc]init];

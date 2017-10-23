@@ -28,7 +28,7 @@
 #import "storageHead.h"
 #import "SPF5000Head.h"
 #import "KTDropdownMenuView.h"
-
+#import "Masonry.h"
 
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
@@ -158,12 +158,13 @@ _pcsNetStorageSN=@"";
     [self.navigationController.navigationBar setBarTintColor:MainColor];
    // [self.navigationController.navigationBar changBarFor11];
 
+    CGRect navigationBarRect=self.navigationController.navigationBar.frame;
+    self.navigationController.navigationBar.frame=CGRectMake(navigationBarRect.origin.x, navigationBarRect.origin.y, navigationBarRect.size.width, UI_NAVIGATION_BAR_HEIGHT);
+
     
     if (!_tableView) {
         
-  
-        
-        
+ 
         _manager=[CoreDataManager sharedCoreDataManager];
         _managerArray=[NSMutableArray array];
         _managerNowArray=[NSMutableArray array];

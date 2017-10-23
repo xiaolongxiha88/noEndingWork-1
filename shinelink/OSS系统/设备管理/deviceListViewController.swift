@@ -189,10 +189,15 @@ deviceTypeString="1"
                     
                     if self.plantListArray.count>0{
                         
-                        if (self.tableView == nil){
-                            self.initTableView()
+                        if plantAll.count==0{
+                            self.showToastView(withTitle:"暂无数据")
                         }else{
-                            self.tableView.reloadData()
+                            if (self.tableView == nil){
+                                self.initTableView()
+                            }else{
+                                self.tableView.reloadData()
+                            }
+                            
                         }
 
                     }

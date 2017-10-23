@@ -468,12 +468,17 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     }
     
     if self.plantListArray.count>0{
-    
-    if (self.tableView == nil){
-    self.initTableView()
-    }else{
-    self.tableView.reloadData()
-    }
+        if questionAll.count==0{
+            
+            self.showToastView(withTitle:"暂无数据")
+        }else{
+            if (self.tableView == nil){
+                self.initTableView()
+            }else{
+                self.tableView.reloadData()
+            }
+        }
+   
     
     }
     
@@ -566,12 +571,17 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
                     }
                     
                     if self.plantListArray.count>0{
-                        
-                        if (self.tableView == nil){
-                            self.initTableView()
+                        if questionAll.count==0{
+                            
+                              self.showToastView(withTitle:"暂无数据")
                         }else{
-                            self.tableView.reloadData()
+                            if (self.tableView == nil){
+                                self.initTableView()
+                            }else{
+                                self.tableView.reloadData()
+                            }
                         }
+                        
                         
                     }
 

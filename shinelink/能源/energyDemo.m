@@ -7,6 +7,8 @@
 //
 
 #import "energyDemo.h"
+#import "energyDemoCell.h"
+
 
 @interface energyDemo ()
 @property(nonatomic,strong)NSMutableArray *dataArray;
@@ -17,8 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-       self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    self.tableView.separatorColor=[UIColor whiteColor];
+//       self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+//    self.tableView.separatorColor=[UIColor whiteColor];
+    
    self.dataArray =[NSMutableArray arrayWithObjects:root_energy_tiaodu_youxian,root_energy_liandong_shezhi,root_energy_dianjia_shezhi,root_energy_dongzuo_shineng,root_energy_kongzhi_youxian,root_energy_lingonglv_shineng,nil];
      self.ImageArray =[NSMutableArray arrayWithObjects:@"智能调整优先设置.png",@"智能联动设置切图.png",@"形状17.png",@"峰谷段动作使能切图.png",@"priority.png",@"enabler.png",nil];
 }
@@ -30,42 +33,34 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return _dataArray.count;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
- return 1;
+    return 55*HEIGHT_SIZE;
+    
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" ];
-    if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    energyDemoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"indenty"];
+    //   cell.textLabel.text = [NSString stringWithFormat:@"Cell:%ld",indexPath.row];
+    if (!cell) {
+        cell=[[energyDemoCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"indenty"];
     }
-     cell.textLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-    cell.textLabel.adjustsFontSizeToFitWidth=YES;
-    cell.textLabel.text=_dataArray[indexPath.section];
-    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-    cell.imageView.image = [UIImage imageNamed:_ImageArray[indexPath.section]];
-    //cell.imageView.frame=CGRectMake(5*NOW_SIZE, 5*NOW_SIZE, 40*NOW_SIZE, 40*NOW_SIZE);
+    
+    [cell.imageLog setImage:[UIImage imageNamed: self.ImageArray [indexPath.row]]];
+    cell.tableName.text = _dataArray[indexPath.row];
     
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return 50*HEIGHT_SIZE;
-    
-}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 10*HEIGHT_SIZE;
-}
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
       [tableView deselectRowAtIndexPath:indexPath animated:YES];

@@ -707,10 +707,15 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                             self.view3.removeFromSuperview()
                             self.view3=nil
                         }
-                        if (self.tableView == nil){
-                            self.initTableView()
+                        
+                        if plantAll.count==0{
+                            self.showToastView(withTitle:"暂无数据")
                         }else{
-                            self.tableView.reloadData()
+                            if (self.tableView == nil){
+                                self.initTableView()
+                            }else{
+                                self.tableView.reloadData()
+                            }
                         }
 
                     }
@@ -819,11 +824,16 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                             self.view3.removeFromSuperview()
                             self.view3=nil
                         }
-                        if (self.tableView == nil){
-                            self.initTableView()
+                        if plantAll.count==0{
+                              self.showToastView(withTitle:"暂无数据")
                         }else{
-                            self.tableView.reloadData()
+                            if (self.tableView == nil){
+                                self.initTableView()
+                            }else{
+                                self.tableView.reloadData()
+                            }
                         }
+                  
                         
                     }
                     
