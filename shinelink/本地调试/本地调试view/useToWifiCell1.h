@@ -19,6 +19,11 @@
 @property(nonatomic,strong) NSString *titleString;
 @property(nonatomic,strong) UIView *nameView;
 
+@property(nonatomic,strong) NSArray *lable1Array;
+@property(nonatomic,strong) NSArray *lable2Array;
+@property(nonatomic,strong) NSArray *lable3Array;
+@property(nonatomic,strong) NSArray *lable4Array;
+
 @property(nonatomic,assign) int cellTypy;
 
 @property(nonatomic, copy) void(^showMoreBlock)(UITableViewCell *currentCell);

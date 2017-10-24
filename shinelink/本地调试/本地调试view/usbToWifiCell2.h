@@ -12,4 +12,6 @@
 + (CGFloat)moreHeight:(int)CellTyoe;
 
 @property(nonatomic,strong) UIView *AllView;
+@property(nonatomic,strong) NSArray *lable1Array;
+
 @end

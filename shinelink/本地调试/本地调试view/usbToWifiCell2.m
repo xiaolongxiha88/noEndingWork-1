@@ -25,7 +25,7 @@
 
 -(void)initUI{
     
-    NSArray *nameArray=@[@"序列号",@"厂商信息",@"额定功率",@"输出功率",@"PV总电量",@"AV总电量",@"固件(外部)版本",@"总工作时长",@"固件(内部)版本",@"逆变器温度",@"Boost温度",@"IPM温度",@"P Bus电压",@"IPF",@"限制的最大输出功率",@"实际输出功率百分比",@"降额模式",@"不匹配的串",@"断开的串",@"电流不平衡的串",@"PID故障码",@"PID状态"];
+    NSArray *nameArray=@[@"序列号",@"厂商信息",@"PV输入功率",@"PV总电量",@"固件(外部)版本",@"固件(内部)版本",@"总工作时长",@"电网频率",@"逆变器温度",@"Boost温度",@"IPM温度",@"IPF",@"P Bus电压",@"N Bus电压",@"限制的最大输出功率",@"实际输出功率百分比",@"降额模式",@"不匹配的串",@"断开的串",@"电流不平衡的串",@"PID故障码",@"PID状态"];
     
     float H0=50*HEIGHT_SIZE;
     float H=H0*nameArray.count+30*HEIGHT_SIZE;
@@ -48,7 +48,7 @@
             UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(0+SCREEN_Width/2*K, 10*HEIGHT_SIZE+H0*i+lableH,SCREEN_Width/2,lableH)];
             lable5.textColor =COLOR(102, 102, 102, 1);
             lable5.textAlignment=NSTextAlignmentCenter;
-            lable5.text=@"0";
+            lable5.text=_lable1Array[T];
             lable5.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_AllView addSubview:lable5];
             

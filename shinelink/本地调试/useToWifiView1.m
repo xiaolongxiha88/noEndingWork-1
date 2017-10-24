@@ -33,6 +33,8 @@ static NSString *cellTwo = @"cellTwo";
 @property(nonatomic,strong)usbToWifiDataControl*usbControl;
 @property(nonatomic,strong)NSDictionary*allDic;
 
+@property(nonatomic,strong)NSArray *tableLableValueArray;
+
 @end
 
 @implementation useToWifiView1{
@@ -44,7 +46,7 @@ static NSString *cellTwo = @"cellTwo";
      [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:MainColor];
-    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(getData)];
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(tcpToGetData)];
     self.navigationItem.rightBarButtonItem=rightItem;
     
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
@@ -52,26 +54,35 @@ static NSString *cellTwo = @"cellTwo";
     _firstH=170*HEIGHT_SIZE;
     
     _usbControl=[[usbToWifiDataControl alloc]init];
+    if (!_scrollView) {
+        _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0,0, SCREEN_Width, SCREEN_Height)];
+        _scrollView.scrollEnabled=YES;
+        _scrollView.contentSize=CGSizeMake(SCREEN_Width, 1500*HEIGHT_SIZE);
+        [self.view addSubview:_scrollView];
+    }
+
     
-    [self initUI];
-    [self getData];
+       [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getData:) name: @"recieveReceiveData" object:nil];
+    
+    [self tcpToGetData];
+
 }
 
--(void)getData{
 
-    [_usbControl getDataAll:1 receiveDataBlock:^(NSDictionary*receiveData){
-        
-        _allDic=[NSDictionary dictionaryWithDictionary:receiveData];
-    }];
+-(void)tcpToGetData{
+    
+    [_usbControl getDataAll:1];
+}
+
+-(void)getData:(NSNotification*) notification{
+
+ _allDic=[NSDictionary dictionaryWithDictionary:[notification object]];
+    [self initUI];
     
 }
 
 -(void)initUI{
- 
-    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0,0, SCREEN_Width, SCREEN_Height)];
-    _scrollView.scrollEnabled=YES;
-    _scrollView.contentSize=CGSizeMake(SCREEN_Width, 1500*HEIGHT_SIZE);
-    [self.view addSubview:_scrollView];
+    
     
     [self initFirstUI];
     [self initThirdUI];
@@ -81,6 +92,10 @@ static NSString *cellTwo = @"cellTwo";
 -(void)initFirstUI{
     float W1=5*NOW_SIZE;float H1=8*HEIGHT_SIZE;float H2=50*HEIGHT_SIZE;float imageH=30*HEIGHT_SIZE;
     float W2=(H2-imageH)/2;  float lableH=30*HEIGHT_SIZE;float lableW=60*NOW_SIZE;
+    if (_firstView) {
+        [_firstView removeFromSuperview];
+        _firstView=nil;
+    }
     _firstView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, _firstH)];
     _firstView.backgroundColor=[UIColor clearColor];
     [_scrollView addSubview:_firstView];
@@ -88,7 +103,8 @@ static NSString *cellTwo = @"cellTwo";
     NSArray *colorArray=@[COLOR(88, 196, 95, 1),COLOR(0, 156, 255, 1),COLOR(221, 120, 120, 1)];
     NSArray *nameArray=@[root_energy_fadianliang,root_gongLv,root_cuoWu];
     NSArray *dataNameArray=@[root_Device_head_182,root_Device_head_183,root_dangqian_gonglv,root_usbTowifi_189,root_cuoWu,root_usbTowifi_190];
-    _firstViewDataArray=[NSMutableArray arrayWithArray:@[@"1",@"2",@"3",@"4",@"5",@"6"]];
+ 
+    _firstViewDataArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"oneView"]];
    
     
      float W0=SCREEN_Width-2*W1;
@@ -124,7 +140,8 @@ static NSString *cellTwo = @"cellTwo";
             lable4.textAlignment=NSTextAlignmentCenter;
             int T=2*i+K;
             lable4.text=_firstViewDataArray[T];
-            lable4.font = [UIFont systemFontOfSize:20*HEIGHT_SIZE];
+            lable4.adjustsFontSizeToFitWidth=YES;
+            lable4.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
             [view1 addSubview:lable4];
             
             UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(titleLabel3X+lable4W*K, 32*HEIGHT_SIZE,lable4W,lableH3)];
@@ -148,6 +165,11 @@ static NSString *cellTwo = @"cellTwo";
     float W1=5*NOW_SIZE; float W0=SCREEN_Width-2*W1;
     float H=110*HEIGHT_SIZE;
     float view1H= CGRectGetMaxY(_firstView.frame);
+    
+    if (_secondView) {
+        [_secondView removeFromSuperview];
+        _secondView=nil;
+    }
     _secondView=[[UIView alloc]initWithFrame:CGRectMake(W1, view1H+10*HEIGHT_SIZE, W0, H)];
     _secondView.backgroundColor=[UIColor clearColor];
     [_scrollView addSubview:_secondView];
@@ -223,6 +245,12 @@ static NSString *cellTwo = @"cellTwo";
     }
     _modelList = arrM.copy;
     
+    if (_tableView) {
+        [_tableView removeFromSuperview];
+        _tableView=nil;
+    }
+    
+    _tableLableValueArray=[_allDic objectForKey:@"twoView2"];
     
     if (!_tableView) {
         _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, view1H+10*HEIGHT_SIZE+28*HEIGHT_SIZE, SCREEN_Width,SCREEN_Height+500*HEIGHT_SIZE)];
@@ -265,6 +293,13 @@ static NSString *cellTwo = @"cellTwo";
         if (!cell) {
             cell=[[useToWifiCell1 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellOne];
         }
+        NSArray *dataAllArray=[NSArray arrayWithArray:_tableLableValueArray[indexPath.row]];
+        cell.lable1Array=[NSArray arrayWithArray:dataAllArray[0]];
+            cell.lable2Array=[NSArray arrayWithArray:dataAllArray[1]];
+        if (K==0) {
+            cell.lable3Array=[NSArray arrayWithArray:dataAllArray[2]];
+            cell.lable4Array=[NSArray arrayWithArray:dataAllArray[3]];
+        }
         cell.cellTypy=K;
         usbModleOne *model = _modelList[K];
         cell.model = model;
@@ -276,6 +311,7 @@ static NSString *cellTwo = @"cellTwo";
         return cell;
     }else{
         usbToWifiCell2 *cell = [tableView dequeueReusableCellWithIdentifier:cellTwo forIndexPath:indexPath];
+        cell.lable1Array=[NSArray arrayWithArray:[_allDic objectForKey:@"twoView3"]];
         if (!cell) {
             cell=[[usbToWifiCell2 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellTwo];
         }

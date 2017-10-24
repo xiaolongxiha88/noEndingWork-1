@@ -12,6 +12,6 @@
 
 typedef void(^receiveDataBlock)(NSDictionary*);
 
--(void)getDataAll:(int)type receiveDataBlock:(receiveDataBlock)receiveDataBlock;
+-(void)getDataAll:(int)type;
 
 @end
