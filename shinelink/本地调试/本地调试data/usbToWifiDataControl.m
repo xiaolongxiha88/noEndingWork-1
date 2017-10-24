@@ -40,10 +40,50 @@
 -(void)receiveFirstData:(NSNotification*) notification{
     
     _receiveDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
-  
-    
+
     NSLog(@"receive TCP AllData=%@",_receiveDic);
+    
+    NSData *dataValue=[_receiveDic objectForKey:@"one"];
+    [self getFirstViewValue:dataValue];
 }
+
+-(void)getFirstViewValue:(NSData*)data{
+    int value8=[self changeOneRegister:data registerNum:8];
+    int value6_7=[self changeTwoRegister:data registerNum:6];
+    NSString *versionString=[self changeToASCII:data beginRegister:34 length:8];
+    NSLog(@"receive versionStringa=%@",versionString);
+    
+    
+}
+
+
+//获取一个寄存器值
+-(int)changeOneRegister:(NSData*)data registerNum:(int)registerNum{
+     Byte *dataArray=(Byte*)[data bytes];
+        int registerValue=(dataArray[2*registerNum]<<8)+dataArray[2*registerNum+1];
+    
+    return registerValue;
+}
+
+//获取高低寄存器值
+-(int)changeTwoRegister:(NSData*)data registerNum:(int)registerNum{
+    Byte *dataArray=(Byte*)[data bytes];
+         int registerValue=(dataArray[2*registerNum]<<24)+(dataArray[2*registerNum+1]<<16)+(dataArray[2*registerNum+2]<<8)+dataArray[2*registerNum+3];
+
+    return registerValue;
+}
+
+
+//获取字符串寄存器值
+-(NSString*)changeToASCII:(NSData*)data beginRegister:(int)beginRegister length:(int)length{
+    NSString*getString;
+
+      NSData *data1=[data subdataWithRange:NSMakeRange(beginRegister*2, length*2)];
+    getString=[[NSString alloc]initWithData:data1 encoding:NSASCIIStringEncoding];
+    
+    return getString;
+}
+
 
 -(void)receiveData:(receiveDataBlock)receiveDataBlock{
     

@@ -153,7 +153,7 @@ _pcsNetStorageSN=@"";
     
     _isPvType=NO;
     
-   
+  
   [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:MainColor];
    // [self.navigationController.navigationBar changBarFor11];
