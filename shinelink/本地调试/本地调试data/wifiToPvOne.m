@@ -121,7 +121,7 @@
         [alertView show];
         
     } else {
-        err = nil;
+         NSLog(@"Connection tcp ok");
     }
     //  needConnect = YES;
     return err;

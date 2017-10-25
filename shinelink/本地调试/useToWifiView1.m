@@ -11,6 +11,7 @@
 #import "usbModleOne.h"
 #import "usbToWifiCell2.h"
 #import "usbToWifiDataControl.h"
+#import "usbToWifiControlOne.h"
 
 static NSString *cellOne = @"cellOne";
 static NSString *cellTwo = @"cellTwo";
@@ -249,16 +250,19 @@ static NSString *cellTwo = @"cellTwo";
     V2.backgroundColor=[UIColor whiteColor];
     [_secondView addSubview:V2];
     
-       NSArray *picName=@[@"max_set.png",@"max_parameter.png",@"max_product.png"];
-     NSArray *nameArray=@[@"设置配置",@"参数设置",@"产品设置"];
+       NSArray *picName=@[@"max_set.png",@"max_parameter.png"];
+     NSArray *nameArray=@[@"设置配置",@"参数设置"];
     
     float imageH=30*HEIGHT_SIZE;float V2H1=15*HEIGHT_SIZE;
     for (int i=0; i<picName.count; i++) {
-        UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake((W0/3-imageH)/2+W0/3*i,V2H1, imageH,imageH)];
+        UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake((W0/2-imageH)/2+W0/2*i,V2H1, imageH,imageH)];
+        image3.userInteractionEnabled=YES;
         image3.image=IMAGE(picName[i]);
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView)];
+        [image3 addGestureRecognizer:tapGestureRecognizer];
         [V2 addSubview:image3];
         
-        UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(0+W0/3*i, V2H1+imageH+5*HEIGHT_SIZE,W0/3,lableH1)];
+        UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(0+W0/2*i, V2H1+imageH+5*HEIGHT_SIZE,W0/2,lableH1)];
         lable5.textColor =COLOR(102, 102, 102, 1);
         lable5.textAlignment=NSTextAlignmentCenter;
         lable5.text=nameArray[i];
@@ -269,6 +273,10 @@ static NSString *cellTwo = @"cellTwo";
     
 }
 
+-(void)goToControlView{
+    usbToWifiControlOne *testView=[[usbToWifiControlOne alloc]init];
+    [self.navigationController pushViewController:testView animated:YES];
+}
 
 -(void)initThirdUI{
     _tableNameArray=@[@"PV电压/电流/电量",@"PV串电压/电流",@"AC电压/电流",@"PID电压/电流"];
@@ -411,9 +419,7 @@ static NSString *cellTwo = @"cellTwo";
           return [usbToWifiCell2 moreHeight:(int)indexPath.row];
     }
 
-    
-    
-    
+
 }
 
 

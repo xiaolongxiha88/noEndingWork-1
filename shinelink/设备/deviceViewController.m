@@ -1091,7 +1091,7 @@ _pcsNetStorageSN=@"";
 #pragma mark 创建tableView的方法
 - (void)_createTableView {
     //float a=self.tabBarController.tabBar.frame.size.height;
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-NavigationbarHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-self.tabBarController.tabBar.frame.size.height-UI_NAVIGATION_BAR_HEIGHT-UI_STATUS_BAR_HEIGHT) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

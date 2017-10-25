@@ -30,9 +30,10 @@
     if (!_ControlOne) {
         _ControlOne=[[wifiToPvOne alloc]init];
          _receiveDic=[NSMutableDictionary new];
+          [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData:) name: @"TcpReceiveData" object:nil];
     }
     
-      [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData:) name: @"TcpReceiveData" object:nil];
+    
     
     
     [_ControlOne goToTcpType:type];
