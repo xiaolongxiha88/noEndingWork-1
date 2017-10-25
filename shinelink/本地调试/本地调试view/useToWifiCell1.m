@@ -156,14 +156,24 @@
         
         UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1, w2, lableH2)];
         lable1.textColor = COLOR(102, 102, 102, 1);
-        lable1.text=_lable1Array[i];
+        if (_lable1Array.count>0) {
+            lable1.text=_lable1Array[i];
+        }else{
+            lable1.text=@"";
+        }
+     
         lable1.textAlignment=NSTextAlignmentCenter;
         lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_scrollView addSubview:lable1];
         
         UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1+lableH2, w2, lableH2)];
         lable2.textColor = COLOR(102, 102, 102, 1);
-        lable2.text=_lable2Array[i];
+     
+        if (_lable2Array.count>0) {
+              lable2.text=_lable2Array[i];
+        }else{
+            lable2.text=@"";
+        }
         lable2.textAlignment=NSTextAlignmentCenter;
         lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_scrollView addSubview:lable2];
@@ -171,14 +181,24 @@
         if(_cellTypy==0){
             UILabel *lable3= [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1+lableH2*2, w2, lableH3/2)];
             lable3.textColor = COLOR(102, 102, 102, 1);
-            lable3.text=_lable3Array[i];
+          //  lable3.text=_lable3Array[i];
+            if (_lable3Array.count>0) {
+                lable3.text=_lable3Array[i];
+            }else{
+                lable3.text=@"";
+            }
             lable3.textAlignment=NSTextAlignmentCenter;
             lable3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:lable3];
             
             UILabel *lable4= [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1+lableH2*2+lableH3/2, w2, lableH3/2)];
             lable4.textColor = COLOR(102, 102, 102, 1);
-            lable4.text=_lable4Array[i];
+           // lable4.text=_lable4Array[i];
+            if (_lable4Array.count>0) {
+                lable4.text=_lable4Array[i];
+            }else{
+                lable4.text=@"";
+            }
             lable4.textAlignment=NSTextAlignmentCenter;
             lable4.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:lable4];

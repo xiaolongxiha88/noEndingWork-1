@@ -173,7 +173,7 @@
 
 
 -(void)getThreeViewValue{
- 
+    int OneCMDregisterNum=125;
     
      NSString *SnString=[self changeToASCII:_data03 beginRegister:23 length:5];
     NSString *companyString=[self changeToASCII:_data03 beginRegister:34 length:8];
@@ -214,17 +214,18 @@
     
     float deratingMode=[self changeOneRegister:_data04_1 registerNum:104];
     NSString *deratingMode1=[NSString stringWithFormat:@"%.f",deratingMode];
-    float unMatch=[self changeOneRegister:_data04_1 registerNum:174];
+    float unMatch=[self changeOneRegister:_data04_2 registerNum:174-OneCMDregisterNum];
     NSString *unMatch1=[NSString stringWithFormat:@"%.f",unMatch];
     
-    float disconnectString=[self changeOneRegister:_data04_1 registerNum:176];
+    float disconnectString=[self changeOneRegister:_data04_2 registerNum:176-OneCMDregisterNum];
     NSString *disconnectString1=[NSString stringWithFormat:@"%.f",disconnectString];
-    float unbanlanceString=[self changeOneRegister:_data04_1 registerNum:175];
+    float unbanlanceString=[self changeOneRegister:_data04_2 registerNum:175-OneCMDregisterNum];
     NSString *unbanlanceString1=[NSString stringWithFormat:@"%.f",unbanlanceString];
     
-    float pidFault=[self changeOneRegister:_data04_1 registerNum:177];
+    float pidFault=[self changeOneRegister:_data04_2 registerNum:177-OneCMDregisterNum];
     NSString *pidFault1=[NSString stringWithFormat:@"%.f",pidFault];
-    float pidStatus=[self changeOneRegister:_data04_1 registerNum:141];
+    
+    float pidStatus=[self changeOneRegister:_data04_2 registerNum:141-OneCMDregisterNum];
     NSString *pidStatus1=[NSString stringWithFormat:@"%.f",pidStatus];
     
      NSArray *ViewArray5=@[

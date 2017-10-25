@@ -67,7 +67,6 @@
       NSLog(@"开始发送");
     if (!_getData) {
          _getData=[[wifiToPvDataModel alloc]init];
-      [self setupConnection];
     }
    
     _isReceive=NO;
@@ -117,6 +116,10 @@
     NSLog(@"IP: %@, port:%i",hostAddress,hostPort);
     if (![_socket connectToHost:hostAddress  onPort:hostPort error:&err]) {
         NSLog(@"Connection error : %@",err);
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi模块通信失败,请检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
+        alertView.tag = 1001;
+        [alertView show];
+        
     } else {
         err = nil;
     }
@@ -305,6 +308,28 @@
     }];
     
     return string;
+}
+
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex) {
+        if (alertView.tag == 1001) {
+            if (deviceSystemVersion>10) {
+                NSURL *url = [NSURL URLWithString:@"App-Prefs:root=WIFI"];
+                if ([[UIApplication sharedApplication]canOpenURL:url]) {
+                    [[UIApplication sharedApplication]openURL:url];
+                }
+            }else{
+                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+            }
+           
+        }
+        
+
+    }
+    
 }
 
 

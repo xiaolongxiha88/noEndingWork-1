@@ -34,6 +34,7 @@ static NSString *cellTwo = @"cellTwo";
 @property(nonatomic,strong)NSDictionary*allDic;
 
 @property(nonatomic,strong)NSArray *tableLableValueArray;
+@property(nonatomic,assign) BOOL isWiFi;
 
 @end
 
@@ -64,25 +65,76 @@ static NSString *cellTwo = @"cellTwo";
     
        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getData:) name: @"recieveReceiveData" object:nil];
     
-    [self tcpToGetData];
-
+     _firstViewDataArray=[NSMutableArray new];
+      _tableLableValueArray=[NSMutableArray new];
+    _thirdDataArray=[NSMutableArray new];
+    
+    [self checkIsWifi];
+    if (_isWiFi) {
+        [self tcpToGetData];
+   
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未连接WiFi模块" message:@"请跳转连接WiFi" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];
+        alertView.tag = 1001;
+        [alertView show];
+        
+    }
+        [self initUI];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+
+  
+}
+
+-(void)checkIsWifi{
+    UIApplication *app = [UIApplication sharedApplication];
+    NSArray *children = [[[app valueForKeyPath:@"statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+      int netType = 0;
+    //获得到网络返回码
+    for (id child in children) {
+        if ([child isKindOfClass:NSClassFromString(@"UIStatusBarDataNetworkItemView")]) {
+               netType = [[child valueForKeyPath:@"dataNetworkType"] intValue];
+            // 1，2，3，5 分别对应的网络状态是2G、3G、4G及WIFI。(需要判断当前网络类型写个switch 判断就OK)
+        }
+    }
+    
+    if (netType==5) {
+        _isWiFi=YES;
+    }else{
+        _isWiFi=NO;
+    }
+    
+}
 
 -(void)tcpToGetData{
+        [self checkIsWifi];
     
-    [_usbControl getDataAll:1];
+    if (_isWiFi) {
+ [_usbControl getDataAll:1];
+        
+    }else{
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未连接WiFi模块" message:@"请跳转连接WiFi" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];
+        alertView.tag = 1001;
+        [alertView show];
+    }
+   
+    
 }
 
 -(void)getData:(NSNotification*) notification{
 
  _allDic=[NSDictionary dictionaryWithDictionary:[notification object]];
+        _firstViewDataArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"oneView"]];
+     _tableLableValueArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"twoView2"]];
+   _thirdDataArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"twoView3"]];
+    
     [self initUI];
     
 }
 
 -(void)initUI{
-    
+   
     
     [self initFirstUI];
     [self initThirdUI];
@@ -104,7 +156,7 @@ static NSString *cellTwo = @"cellTwo";
     NSArray *nameArray=@[root_energy_fadianliang,root_gongLv,root_cuoWu];
     NSArray *dataNameArray=@[root_Device_head_182,root_Device_head_183,root_dangqian_gonglv,root_usbTowifi_189,root_cuoWu,root_usbTowifi_190];
  
-    _firstViewDataArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"oneView"]];
+
    
     
      float W0=SCREEN_Width-2*W1;
@@ -139,7 +191,12 @@ static NSString *cellTwo = @"cellTwo";
             lable4.textColor = colorArray[i];
             lable4.textAlignment=NSTextAlignmentCenter;
             int T=2*i+K;
-            lable4.text=_firstViewDataArray[T];
+            if (_firstViewDataArray.count>0) {
+                 lable4.text=_firstViewDataArray[T];
+            }else{
+                         lable4.text=@"";
+            }
+           
             lable4.adjustsFontSizeToFitWidth=YES;
             lable4.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
             [view1 addSubview:lable4];
@@ -250,10 +307,10 @@ static NSString *cellTwo = @"cellTwo";
         _tableView=nil;
     }
     
-    _tableLableValueArray=[_allDic objectForKey:@"twoView2"];
+  
     
     if (!_tableView) {
-        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, view1H+10*HEIGHT_SIZE+28*HEIGHT_SIZE, SCREEN_Width,SCREEN_Height+500*HEIGHT_SIZE)];
+        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, view1H+10*HEIGHT_SIZE+28*HEIGHT_SIZE, SCREEN_Width,SCREEN_Height+600*HEIGHT_SIZE)];
         _tableView.contentSize=CGSizeMake(SCREEN_Width, 2500*HEIGHT_SIZE);
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -293,13 +350,17 @@ static NSString *cellTwo = @"cellTwo";
         if (!cell) {
             cell=[[useToWifiCell1 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellOne];
         }
-        NSArray *dataAllArray=[NSArray arrayWithArray:_tableLableValueArray[indexPath.row]];
-        cell.lable1Array=[NSArray arrayWithArray:dataAllArray[0]];
+        
+        if (_tableLableValueArray.count>0) {
+            NSArray *dataAllArray=[NSArray arrayWithArray:_tableLableValueArray[indexPath.row]];
+            cell.lable1Array=[NSArray arrayWithArray:dataAllArray[0]];
             cell.lable2Array=[NSArray arrayWithArray:dataAllArray[1]];
-        if (K==0) {
-            cell.lable3Array=[NSArray arrayWithArray:dataAllArray[2]];
-            cell.lable4Array=[NSArray arrayWithArray:dataAllArray[3]];
+            if (K==0) {
+                cell.lable3Array=[NSArray arrayWithArray:dataAllArray[2]];
+                cell.lable4Array=[NSArray arrayWithArray:dataAllArray[3]];
+            }
         }
+  
         cell.cellTypy=K;
         usbModleOne *model = _modelList[K];
         cell.model = model;
@@ -311,7 +372,7 @@ static NSString *cellTwo = @"cellTwo";
         return cell;
     }else{
         usbToWifiCell2 *cell = [tableView dequeueReusableCellWithIdentifier:cellTwo forIndexPath:indexPath];
-        cell.lable1Array=[NSArray arrayWithArray:[_allDic objectForKey:@"twoView3"]];
+        cell.lable1Array=_thirdDataArray;
         if (!cell) {
             cell=[[usbToWifiCell2 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellTwo];
         }
@@ -359,7 +420,24 @@ static NSString *cellTwo = @"cellTwo";
 
 
 
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex) {
+        if (alertView.tag == 1001) {
+            if (deviceSystemVersion>10) {
+                NSURL *url = [NSURL URLWithString:@"App-Prefs:root=WIFI"];
+                if ([[UIApplication sharedApplication]canOpenURL:url]) {
+                    [[UIApplication sharedApplication]openURL:url];
+                }
+            }else{
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+            }
+            
+        }
+        
+    }
+    
+}
 
 
 

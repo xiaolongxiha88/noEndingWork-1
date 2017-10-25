@@ -48,7 +48,12 @@
             UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(0+SCREEN_Width/2*K, 10*HEIGHT_SIZE+H0*i+lableH,SCREEN_Width/2,lableH)];
             lable5.textColor =COLOR(102, 102, 102, 1);
             lable5.textAlignment=NSTextAlignmentCenter;
-            lable5.text=_lable1Array[T];
+            if (_lable1Array.count>0) {
+                  lable5.text=_lable1Array[T];
+            }else{
+                  lable5.text=@"";
+            }
+         
             lable5.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_AllView addSubview:lable5];
             
