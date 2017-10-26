@@ -257,20 +257,26 @@ static NSString *cellTwo = @"cellTwo";
      NSArray *nameArray=@[@"设置配置",@"参数设置"];
     
     float imageH=30*HEIGHT_SIZE;float V2H1=15*HEIGHT_SIZE;
+    float WW=ScreenWidth/picName.count;
     for (int i=0; i<picName.count; i++) {
-        UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake((W0/2-imageH)/2+W0/2*i,V2H1, imageH,imageH)];
+        UIView *VV=[[UIView alloc]initWithFrame:CGRectMake(0+WW*i, 0, WW, H2)];
+        VV.backgroundColor=[UIColor clearColor];
+        VV.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView)];
+        [VV addGestureRecognizer:tapGestureRecognizer];
+        [V2 addSubview:VV];
+        
+        UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake((WW-imageH)/2,V2H1, imageH,imageH)];
         image3.userInteractionEnabled=YES;
         image3.image=IMAGE(picName[i]);
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView)];
-        [image3 addGestureRecognizer:tapGestureRecognizer];
-        [V2 addSubview:image3];
+        [VV addSubview:image3];
         
-        UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(0+W0/2*i, V2H1+imageH+5*HEIGHT_SIZE,W0/2,lableH1)];
+        UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(0, V2H1+imageH+5*HEIGHT_SIZE,WW,lableH1)];
         lable5.textColor =COLOR(102, 102, 102, 1);
         lable5.textAlignment=NSTextAlignmentCenter;
         lable5.text=nameArray[i];
         lable5.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        [V2 addSubview:lable5];
+        [VV addSubview:lable5];
     }
     
     

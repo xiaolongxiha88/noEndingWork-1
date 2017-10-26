@@ -32,7 +32,7 @@ static NSString *cellOne = @"cell1";
 
 -(void)initUI{
     _nameArray=@[@"开关逆变器(0)",@"安规功能使能(1)",@"PF CMD记忆使能(2)",@"有功功率百分比(3)",@"无功功率百分比(4)",@"功率因数(5)",@"PV电压(8)",@"选择通信波特率(22)",@"设置PF模式(89)",@"过频降额起点(91)",@"频率-负载限制率(92)",@"Q(v)无功延时(107)",@"过频降额延时(108)",@"Q(v)曲线Q最大值(109)",@"Island使能(230)",@"风扇检查(231)",@"电网N线使能(232)",@"N至GND监测功能使能(235)",@"非标准电网电压范围使能(236)",@"指定的规格设置使能(237)",@"MPPT使能(238)",@"电源启动/重启斜率(20/21)",@"Q(v)切出/切入高压(93/94)",@"Q(v)切出/切入低压(95/96)",@"Q(v)切出/切入功率(97/98)",@"无功曲线切入/切出电压(99/100)",@"检查固件1/2(233/234)",@"PF调整值(101~106)",@"PF限制负载百分比点1~4(110/112/114/116)",@"PF限制功率因数1~4(111/113/115/117)"];
-    _name2Array=@[@[@"电源启动斜率(20)",@"电源重启斜率(21)"],@[@"Q(v)切出高压(93)",@"Q(v)切入高压(94)"],@[@"Q(v)切出低压(95)",@"Q(v)切入低压(96)"],@[@"Q(v)切入功率(97)",@"Q(v)切出功率(98)"],@[@"无功曲线切入电压(99)",@"无功曲线切出电压(100)"],@[@"检查固件1(233)",@"检查固件2(234)"]];
+   
     
     
     NSMutableArray<usbModleOne *> *arrM = [NSMutableArray arrayWithCapacity:_nameArray.count];
@@ -44,7 +44,7 @@ static NSString *cellOne = @"cell1";
     
     if (!_tableView) {
         _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0,ScreenWidth,SCREEN_Height-UI_NAVIGATION_BAR_HEIGHT-UI_STATUS_BAR_HEIGHT)];
-        _tableView.contentSize=CGSizeMake(SCREEN_Width, 2500*HEIGHT_SIZE);
+        _tableView.contentSize=CGSizeMake(SCREEN_Width, 50000*HEIGHT_SIZE);
         _tableView.delegate = self;
         _tableView.dataSource = self;
         
@@ -77,6 +77,8 @@ static NSString *cellOne = @"cell1";
         TYPT=1;
     }else  if (indexPath.row>20 && indexPath.row<27) {
         TYPT=2;
+    }else{
+          TYPT=(int)indexPath.row;
     }
     
     usbToWifiControlCell1 *cell = [tableView dequeueReusableCellWithIdentifier:cellOne forIndexPath:indexPath];
@@ -90,6 +92,7 @@ static NSString *cellOne = @"cell1";
         [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
     cell.CellTypy=TYPT;
+    cell.CellNumber=(int)indexPath.row;
     cell.model = model;
     cell.titleString=_nameArray[indexPath.row];
     return cell;
@@ -98,13 +101,19 @@ static NSString *cellOne = @"cell1";
 
 // MARK: - 返回cell高度的代理方法
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-   
+     int TYPT=0;
+    if (indexPath.row<21) {
+        TYPT=1;
+    }else  if (indexPath.row>20 && indexPath.row<27) {
+        TYPT=2;
+    }else{
+        TYPT=(int)indexPath.row;
+    }
         usbModleOne *model = _modelList[indexPath.row];
         
         if (model.isShowMoreText){
             
-            return [usbToWifiControlCell1 moreHeight:(int)indexPath.row];
+            return [usbToWifiControlCell1 moreHeight:TYPT];
             
         }else{
             
