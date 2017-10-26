@@ -19,6 +19,12 @@
 @property(nonatomic, copy) void(^showMoreBlock)(UITableViewCell *currentCell);
 @property(nonatomic,assign) int CellTypy;
 
+@property(nonatomic,strong)UIView*view1;
+@property(nonatomic,strong)UIView*view2;
+@property(nonatomic,strong)UIView*view3;
+@property(nonatomic,strong)UIButton *goBut;
+@property(nonatomic,strong)UITextField *textField2;
+@property(nonatomic,strong) NSString *readValue;
 
 + (CGFloat)defaultHeight;
 + (CGFloat)moreHeight:(int)CellTyoe;

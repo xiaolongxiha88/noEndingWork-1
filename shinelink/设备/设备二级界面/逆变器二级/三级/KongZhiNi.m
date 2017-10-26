@@ -247,8 +247,6 @@
     if(![_type isEqualToString:@"0"]){
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
     goBut.frame=CGRectMake(60*NOW_SIZE,200*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
-  //  [goBut.layer setMasksToBounds:YES];
-   // [goBut.layer setCornerRadius:25.0];
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [goBut setTitle:root_finish forState:UIControlStateNormal];
           goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];

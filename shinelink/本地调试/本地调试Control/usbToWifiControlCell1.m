@@ -62,12 +62,59 @@
     [buttonView addSubview:_moreTextBtn];
     [_moreTextBtn addTarget:self action:@selector(showMoreText) forControlEvents:UIControlEventTouchUpInside];
     
+    _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [_goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
+    [_goBut setTitle:@"设置" forState:UIControlStateNormal];
+    _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
+        [_goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
     
     
+ 
 }
 
 
 -(void)initTwoUI{
+    if (_view1) {
+        [_view1 removeFromSuperview];
+        _view1=nil;
+    }
+    _view1 = [[UIView alloc]initWithFrame:CGRectMake(0, 40*HEIGHT_SIZE, ScreenWidth,200*HEIGHT_SIZE)];
+    _view1.backgroundColor =[UIColor clearColor];
+    _view1.userInteractionEnabled = YES;
+    [self.contentView addSubview:_view1];
+    
+    UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE, 300*NOW_SIZE,20*HEIGHT_SIZE )];
+    PV2Lable.text=_titleString;
+    PV2Lable.textAlignment=NSTextAlignmentLeft;
+    PV2Lable.textColor=COLOR(102, 102, 102, 1);;
+    PV2Lable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    PV2Lable.adjustsFontSizeToFitWidth=YES;
+    [_view1 addSubview:PV2Lable];
+    
+    _textField2 = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 30*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
+    _textField2.layer.borderWidth=1;
+    _textField2.layer.cornerRadius=5;
+    _textField2.layer.borderColor=COLOR(102, 102, 102, 1).CGColor;
+    _textField2.textColor = COLOR(102, 102, 102, 1);;
+    _textField2.tintColor = COLOR(102, 102, 102, 1);;
+    _textField2.textAlignment=NSTextAlignmentCenter;
+    _textField2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [_view1 addSubview:_textField2];
+    
+    UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 75*HEIGHT_SIZE, 300*NOW_SIZE,20*HEIGHT_SIZE )];
+    PV2Lable1.text=[NSString stringWithFormat:@"(读取值:%@)",_readValue];
+    PV2Lable1.textAlignment=NSTextAlignmentCenter;
+    PV2Lable1.textColor=COLOR(102, 102, 102, 1);
+    PV2Lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    PV2Lable1.adjustsFontSizeToFitWidth=YES;
+    [_view1 addSubview:PV2Lable1];
+    
+    _goBut.frame=CGRectMake(60*NOW_SIZE,115*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    [_view1 addSubview:_goBut];
+}
+
+
+-(void)finishSet{
     
     
 }
@@ -91,7 +138,7 @@
     [self initUI];
     
     if (self.model.isShowMoreText){ // 展开状态
-        
+           [self initTwoUI];
         [_moreTextBtn setImage:IMAGE(@"MAXup.png") forState:UIControlStateNormal];
         
     }else{ // 收缩状态
@@ -109,13 +156,8 @@
 
 
 + (CGFloat)moreHeight:(int)CellTyoe{
-    float H=120*HEIGHT_SIZE;
-    if (CellTyoe==0) {
-        H=100*HEIGHT_SIZE;
-    }else{
-        H=120*HEIGHT_SIZE;
-    }
-       
+    float H=240*HEIGHT_SIZE;
+ 
     return H;
     
 }

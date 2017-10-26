@@ -65,6 +65,7 @@ static NSString *cellTwo = @"cellTwo";
 
     
        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getData:) name: @"recieveReceiveData" object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice) name: @"recieveFailedTcpData" object:nil];
     
      _firstViewDataArray=[NSMutableArray new];
       _tableLableValueArray=[NSMutableArray new];
@@ -112,6 +113,7 @@ static NSString *cellTwo = @"cellTwo";
         [self checkIsWifi];
     
     if (_isWiFi) {
+        [self showProgressView];
  [_usbControl getDataAll:1];
         
     }else{
@@ -124,7 +126,8 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)getData:(NSNotification*) notification{
-
+          [self hideProgressView];
+    
  _allDic=[NSDictionary dictionaryWithDictionary:[notification object]];
         _firstViewDataArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"oneView"]];
      _tableLableValueArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"twoView2"]];
@@ -423,13 +426,18 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 
-
+-(void)receiveFailedNotice{
+    [self hideProgressView];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi模块通信失败,请检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
+    alertView.tag = 1002;
+    [alertView show];
+}
 
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if (buttonIndex) {
-        if (alertView.tag == 1001) {
+        if( (alertView.tag == 1001) || (alertView.tag == 1002)){
             if (deviceSystemVersion>10) {
                 NSURL *url = [NSURL URLWithString:@"App-Prefs:root=WIFI"];
                 if ([[UIApplication sharedApplication]canOpenURL:url]) {

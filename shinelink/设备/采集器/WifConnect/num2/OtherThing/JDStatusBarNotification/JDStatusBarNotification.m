@@ -521,8 +521,8 @@
     return [[self keyWindowRootViewController] shouldAutorotate];
 }
 
-- (NSUInteger)supportedInterfaceOrientations {
-    return [[self keyWindowRootViewController] supportedInterfaceOrientations];
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return (UIInterfaceOrientationPortrait |  UIInterfaceOrientationPortraitUpsideDown);
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {

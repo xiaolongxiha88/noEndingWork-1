@@ -9,7 +9,9 @@
 #import "wifiToPvOne.h"
 #import "GCDAsyncSocket.h"
 #import "wifiToPvDataModel.h"
+#import "MBProgressHUD.h"
 
+static int TCP_TIME=1.5;
 
 @interface wifiToPvOne ()<GCDAsyncSocketDelegate>
 @property (nonatomic, strong) GCDAsyncSocket *socket;
@@ -33,7 +35,7 @@
 @property (nonatomic, strong)NSArray *cmdArray;
 
 @property (nonatomic, strong)NSMutableDictionary*AllDataDic;
-
+@property (nonatomic, assign) BOOL isReceiveAll;
 
 @end
 
@@ -53,15 +55,21 @@
             _cmdDic=@{@"one":@[@"3",@"0",@"125"],@"two":@[@"4",@"0",@"125"],@"three":@[@"4",@"125",@"125"]};
         _isOne=NO;   _isTwo=NO;   _isThree=NO;
         _cmdArray=[NSArray arrayWithArray:[_cmdDic objectForKey:@"one"]];
+        _isReceiveAll=NO;
+        [self performSelector:@selector(checkTcpTimeout) withObject:nil afterDelay:TCP_TIME*3];
         
         [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
     }
     
-    
-    
 }
 
-
+-(void)checkTcpTimeout{
+    if (!_isReceiveAll) {
+        _cmdCount=4;
+        [self disConnect];
+    }
+    
+}
 
 -(void)goToGetData:(NSString*)cmdType RegAdd:(NSString*)regAdd Length:(NSString*)length{
       NSLog(@"开始发送");
@@ -77,17 +85,19 @@
 
     _CmdData=[NSData dataWithData:data];
     
-   [self sendCMD:data];
-    
+ 
+    if (![self isConnected]) {
+        [self getConnection];
+    }else{
+        [self sendCMD:_CmdData];
+    }
     
 }
 
 
 -(void)sendCMD:(NSData*)data {
     
-    if (![self isConnected]) {
-           [self getConnection];
-    }
+
  
     NSString *string =[self convertDataToHexStr:data];
     
@@ -98,7 +108,7 @@
     
     NSLog(@"CMD datas=%ld::%@",_cmdTag,string);
     
-    [_socket writeData:data withTimeout:-1 tag:_cmdTag];
+    [_socket writeData:data withTimeout:TCP_TIME tag:_cmdTag];
     
     [self listenData:_cmdTag];
     
@@ -116,14 +126,14 @@
     NSLog(@"IP: %@, port:%i",hostAddress,hostPort);
     if (![_socket connectToHost:hostAddress  onPort:hostPort error:&err]) {
         NSLog(@"Connection error : %@",err);
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi模块通信失败,请检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
-        alertView.tag = 1001;
-        [alertView show];
-        
+        [self disConnect];
+       [[NSNotificationCenter defaultCenter] postNotificationName:@"recieveFailedTcpData"object:nil];
     } else {
+        
          NSLog(@"Connection tcp ok");
+          [self sendCMD:_CmdData];
     }
-    //  needConnect = YES;
+ 
     return err;
 }
 
@@ -141,7 +151,7 @@
 //取得连接
 -(void)getConnection {
     if (![_socket isConnected]) {
-     //   [self disConnect];
+    
         [self setupConnection];
     }
 }
@@ -152,7 +162,6 @@
 //socket连接成功后的回调代理
 -(void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"onSocket:%p didConnectToHost:%@ port:%hu", sock, host, port);
-    
     
 }
 
@@ -166,7 +175,7 @@
     if (!_isReceive) {
         _cmdCount++;
         if (_cmdCount>3) {
-            //提示正确连接WiFi
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"recieveFailedTcpData"object:nil];
         }else{
               [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
         }
@@ -234,7 +243,7 @@
 //发起一个读取的请求，当收到数据时后面的didReadData才能被回调
 -(void)listenData:(long)Tag {
    
-    [_socket readDataWithTimeout:1.5 tag:Tag];
+    [_socket readDataWithTimeout:TCP_TIME tag:Tag];
 }
 
 
@@ -276,6 +285,7 @@
             [_AllDataDic setValue:data forKey:@"two"];
         }else{
                [_AllDataDic setValue:data forKey:@"three"];
+            _isReceiveAll=YES;
                    [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveData"object:_AllDataDic];
         }
         
@@ -312,25 +322,10 @@
 
 
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    
-    if (buttonIndex) {
-        if (alertView.tag == 1001) {
-            if (deviceSystemVersion>10) {
-                NSURL *url = [NSURL URLWithString:@"App-Prefs:root=WIFI"];
-                if ([[UIApplication sharedApplication]canOpenURL:url]) {
-                    [[UIApplication sharedApplication]openURL:url];
-                }
-            }else{
-                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
-            }
-           
-        }
-        
 
-    }
-    
-}
+
+
+
 
 
 - (void)didReceiveMemoryWarning {
