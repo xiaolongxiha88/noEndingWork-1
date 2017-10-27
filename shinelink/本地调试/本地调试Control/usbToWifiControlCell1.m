@@ -8,6 +8,8 @@
 
 #import "usbToWifiControlCell1.h"
 #import "usbModleOne.h"
+#import "ZJBLStoreShopTypeAlert.h"
+#import "wifiToPvOne.h"
 
 
 @implementation usbToWifiControlCell1
@@ -16,8 +18,8 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        
+             [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
+          [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwoFailed" object:nil];
     }
     return self;
 }
@@ -87,9 +89,24 @@
     _view1.userInteractionEnabled = YES;
     [self.contentView addSubview:_view1];
     
+    
+    UIButton *button0 =  [UIButton buttonWithType:UIButtonTypeCustom];
+     button0.backgroundColor=COLOR(98, 226, 149, 1);
+        button0.frame=CGRectMake(250*NOW_SIZE,5*HEIGHT_SIZE, 60*NOW_SIZE, 20*HEIGHT_SIZE);
+    [button0 setTitle:@"读取" forState:UIControlStateNormal];
+    button0.titleLabel.font=[UIFont systemFontOfSize: 10*HEIGHT_SIZE];
+    [button0 addTarget:self action:@selector(readValueToTcp) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     if (_CellNumber==0 || _CellNumber==2 || _CellNumber==8 || _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20) {
         _textLable=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 25*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         _textLable.text=@"点击选择";
+        _textLable.userInteractionEnabled=YES;
+        _textLable.layer.borderWidth=1;
+        _textLable.layer.cornerRadius=5;
+        _textLable.layer.borderColor=COLOR(102, 102, 102, 1).CGColor;
+        UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice)];
+        [_textLable addGestureRecognizer:tapGestureRecognizer1];
         _textLable.textAlignment=NSTextAlignmentCenter;
         _textLable.textColor=COLOR(102, 102, 102, 1);;
         _textLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -114,6 +131,7 @@
     UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 70*HEIGHT_SIZE, 300*NOW_SIZE,20*HEIGHT_SIZE )];
     PV2Lable1.text=[NSString stringWithFormat:@"(读取值:%@)",_readValue];
     PV2Lable1.textAlignment=NSTextAlignmentCenter;
+    PV2Lable1.tag=3000;
     PV2Lable1.textColor=COLOR(102, 102, 102, 1);
     PV2Lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     PV2Lable1.adjustsFontSizeToFitWidth=YES;
@@ -163,6 +181,7 @@
         PV2Lable1.text=[NSString stringWithFormat:@"(读取值:%@)",_readValue];
         PV2Lable1.textAlignment=NSTextAlignmentCenter;
         PV2Lable1.textColor=COLOR(102, 102, 102, 1);
+        PV2Lable1.tag=3000+i;
         PV2Lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         PV2Lable1.adjustsFontSizeToFitWidth=YES;
         [_view1 addSubview:PV2Lable1];
@@ -226,39 +245,48 @@
         UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 70*HEIGHT_SIZE+H*i, 300*NOW_SIZE,20*HEIGHT_SIZE )];
         PV2Lable1.text=[NSString stringWithFormat:@"(读取值:%@)",_readValue];
         PV2Lable1.textAlignment=NSTextAlignmentCenter;
+        PV2Lable1.tag=3000+i;
         PV2Lable1.textColor=COLOR(102, 102, 102, 1);
         PV2Lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         PV2Lable1.adjustsFontSizeToFitWidth=YES;
         [_view1 addSubview:PV2Lable1];
     }
     
-    
- 
+
 }
 
--(void)keyboardHide:(UITapGestureRecognizer*)tap{
-    if (_CellTypy==1) {
-        if (_textField2) {
-            [_textField2 resignFirstResponder];
-        }
-    }else  if (_CellTypy==2) {
-        for (int i=0; i<2; i++) {
-            UITextField *text=[_view1 viewWithTag:2000+i];
-            [text resignFirstResponder];
-        }
-    }else{
-        for (int i=0; i<_nameArray0.count; i++) {
-            UITextField *text=[_view1 viewWithTag:2000+i];
-            [text resignFirstResponder];
-        }
-        
+
+-(void)showTheChoice{
+    if (_CellNumber==0 || _CellNumber==2 ||  _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19){
+        _choiceArray=@[@"Off(0)",@"On(1)"];
+    }
+    if (_CellNumber==8 ){
+          _choiceArray=@[@"PF=1(0)",@"PF by set(1)",@"Default PF line(2)",@"User PF line(3)",@"UnderExcited(Inda)Reactive Power(4)",@"OverExcited(Capa)Reactive Power(5)",@"Q(v)model(6)"];
+    }
+    if (_CellNumber==20 ){
+        _choiceArray=@[@"0",@"1",@"2"];
     }
     
+    [ZJBLStoreShopTypeAlert showWithTitle:@"选择设置值" titles:_choiceArray selectIndex:^(NSInteger SelectIndexNum){
+        
+        _setValue=[NSString stringWithFormat:@"%ld",SelectIndexNum];
+    } selectValue:^(NSString* valueString){
+        _textLable.text=valueString;
+        
+    } showCloseButton:YES];
+    
 }
+
+
+
+
+
+
 
 
 -(void)finishSet{
-    
+ 
+   
     
 }
 
@@ -266,11 +294,40 @@
 - (void)showMoreText{
     
     self.model.isShowMoreText = !self.model.isShowMoreText;
-    
-    
     if (self.showMoreBlock){
         self.showMoreBlock(self);
     }
+}
+
+
+
+-(void)readValueToTcp{
+    NSArray *cmdValue=@[
+@"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"111"];
+    
+      _setRegister=cmdValue[_CellNumber];
+    
+    if (!_ControlOne) {
+        _ControlOne=[[wifiToPvOne alloc]init];
+    }
+    if (!_changeDataValue) {
+         _changeDataValue=[[usbToWifiDataControl alloc]init];
+    }
+    [_ControlOne goToOneTcp:2 cmdType:@"3" regAdd:_setRegister Length:[NSString stringWithFormat:@"%d",_cmdRegisterNum]];
+    
+}
+
+-(void)receiveFirstData2:(NSNotification*) notification{
+    _receiveCmdTwoData=[NSData dataWithData:[notification object]];
+    
+    NSMutableArray *valueArray=[NSMutableArray new];
+    for (int i=0; i<_cmdRegisterNum; i++) {
+        NSString *value0=[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:_receiveCmdTwoData registerNum:i]];
+        [valueArray addObject:value0];
+    }
+    _readValueArray=[NSArray arrayWithArray:valueArray];
+    
+    [self showLableValue];
 }
 
 
@@ -289,6 +346,16 @@
             [self initFourUI];
         }
         
+        if (_CellNumber<21) {
+            _cmdRegisterNum=1;
+        }else  if (_CellNumber>20 && _CellNumber<27) {
+            _cmdRegisterNum=2;
+        }else if (_CellNumber==28 || _CellNumber==29){
+            _cmdRegisterNum=4;
+        }else if (_CellNumber==27){
+            _cmdRegisterNum=6;
+        }
+        [self readValueToTcp];
         
         [_moreTextBtn setImage:IMAGE(@"MAXup.png") forState:UIControlStateNormal];
         
@@ -331,6 +398,45 @@
     
 }
 
+
+
+-(void)showLableValue{
+    if (_CellTypy==1) {
+     UILabel *lable=[_view1 viewWithTag:3000];
+        lable.text=_readValueArray[0];
+    }else  if (_CellTypy==2) {
+        for (int i=0; i<2; i++) {
+            UILabel *lable=[_view1 viewWithTag:3000+i];
+            lable.text=_readValueArray[i];
+        }
+    }else{
+        for (int i=0; i<_nameArray0.count; i++) {
+            UILabel *lable=[_view1 viewWithTag:3000+i];
+            lable.text=_readValueArray[i];
+        }
+        
+    }
+    
+}
+
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    if (_CellTypy==1) {
+        UITextField *lable=[_view1 viewWithTag:2000];
+        [lable resignFirstResponder];
+    }else  if (_CellTypy==2) {
+        for (int i=0; i<2; i++) {
+            UITextField *lable=[_view1 viewWithTag:2000+i];
+              [lable resignFirstResponder];
+        }
+    }else{
+        for (int i=0; i<_nameArray0.count; i++) {
+            UITextField *lable=[_view1 viewWithTag:2000+i];
+             [lable resignFirstResponder];
+        }
+        
+    }
+    
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

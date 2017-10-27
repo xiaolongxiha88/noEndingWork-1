@@ -36,6 +36,7 @@ static int TCP_TIME=1.5;
 
 @property (nonatomic, strong)NSMutableDictionary*AllDataDic;
 @property (nonatomic, assign) BOOL isReceiveAll;
+@property (nonatomic, strong) NSData *receiveCmdTwoData;
 
 @end
 
@@ -43,7 +44,14 @@ static int TCP_TIME=1.5;
 
 
 
-
+-(void)goToOneTcp:(int)type cmdType:(NSString*)cmdType regAdd:(NSString*)regAdd Length:(NSString*)Length{
+       _cmdCount=0;
+      _cmdType=type;
+    _cmdArray=@[cmdType,regAdd,Length];
+      _isReceiveAll=NO;
+       [self performSelector:@selector(checkTcpTimeout) withObject:nil afterDelay:TCP_TIME*1.5];
+         [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+}
 
 
 -(void)goToTcpType:(int)type{
@@ -79,9 +87,7 @@ static int TCP_TIME=1.5;
    
     _isReceive=NO;
 
-    NSData *data=[_getData CmdData:cmdType RegAdd:regAdd Length:length modbusBlock:^(NSData* modbusData){
-       
-    }];
+    NSData *data=[_getData CmdData:cmdType RegAdd:regAdd Length:length modbusBlock:^(NSData* modbusData){}];
 
     _CmdData=[NSData dataWithData:data];
     
@@ -192,7 +198,19 @@ static int TCP_TIME=1.5;
     NSLog(@"receive datas=%ld::%@",tag,string);
     _isReceive=YES;
     
-    [self checkWhichNumData:data];
+    if (_cmdType==1) {
+         [self checkWhichNumData:data];
+    }else if (_cmdType==2){
+        _isReceiveAll=YES;
+        if ([self checkData:data]) {
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwo"object:nil];
+        }else{
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
+        }
+        
+        
+    }
+   
     
 }
 
@@ -219,8 +237,6 @@ static int TCP_TIME=1.5;
                 BOOL tureData= [self checkData:data];
                 if (tureData) {
                     _isThree=tureData;
-                    
-         
                 }else{
                        [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
                 }
@@ -236,9 +252,7 @@ static int TCP_TIME=1.5;
 }
 
 
--(void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag {
-    NSLog(@"Reading data length of %lu",(unsigned long)partialLength);
-}
+
 
 //发起一个读取的请求，当收到数据时后面的didReadData才能被回调
 -(void)listenData:(long)Tag {
@@ -264,7 +278,12 @@ static int TCP_TIME=1.5;
         if ((length0-5)==length1) {
             isRightData=YES;
                NSData *data00=[data1 subdataWithRange:NSMakeRange(3, data1.length-5)];
-            [self upDataToDic:data00];
+            if (_cmdType==1) {
+                  [self upDataToDic:data00];
+            }else  if (_cmdType==2) {
+                _receiveCmdTwoData=[NSData dataWithData:data00];
+            }
+          
         }else{
                 isRightData=NO;
         }
@@ -325,7 +344,9 @@ static int TCP_TIME=1.5;
 
 
 
-
+-(void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag {
+    NSLog(@"Reading data length of %lu",(unsigned long)partialLength);
+}
 
 
 - (void)didReceiveMemoryWarning {

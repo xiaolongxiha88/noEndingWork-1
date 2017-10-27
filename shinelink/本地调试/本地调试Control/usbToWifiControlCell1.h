@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "wifiToPvOne.h"
+#import "usbToWifiDataControl.h"
+
 @class usbModleOne;
 
 @interface usbToWifiControlCell1 : UITableViewCell
@@ -26,10 +29,24 @@
 @property(nonatomic,strong)UIButton *goBut;
 @property(nonatomic,strong)UITextField *textField2;
 @property(nonatomic,strong)UILabel *textLable;
-@property(nonatomic,strong) NSString *readValue;
+
 @property(nonatomic,strong)NSArray*lableNameArray;
  @property(nonatomic,strong) NSArray* nameArray0;
 
+@property(nonatomic,strong) NSArray* choiceArray;
+@property(nonatomic,strong) NSString* setValue;
+@property(nonatomic,strong) NSString* setRegister;
+@property(nonatomic,strong) NSString* setRegisterLength;
+@property(nonatomic,strong) NSString *readValue;
+@property(nonatomic,strong) NSArray *readValueArray;
+
+@property (nonatomic, strong) NSData *receiveCmdTwoData;
+
+@property(nonatomic,assign) int cmdRegisterNum;
+
+@property(nonatomic,strong)wifiToPvOne*ControlOne;
+
+@property(nonatomic,strong)usbToWifiDataControl*changeDataValue;
 
 + (CGFloat)defaultHeight;
 + (CGFloat)moreHeight:(int)CellTyoe;
