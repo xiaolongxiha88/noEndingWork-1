@@ -19,7 +19,8 @@
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
              [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
-          [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwoFailed" object:nil];
+       //   [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwoFailed" object:nil];
+        _isFirstGoToView=YES;
     }
     return self;
 }
@@ -92,10 +93,11 @@
     
     UIButton *button0 =  [UIButton buttonWithType:UIButtonTypeCustom];
      button0.backgroundColor=COLOR(98, 226, 149, 1);
-        button0.frame=CGRectMake(250*NOW_SIZE,5*HEIGHT_SIZE, 60*NOW_SIZE, 20*HEIGHT_SIZE);
+        button0.frame=CGRectMake(260*NOW_SIZE,0*HEIGHT_SIZE, 50*NOW_SIZE, 25*HEIGHT_SIZE);
     [button0 setTitle:@"读取" forState:UIControlStateNormal];
     button0.titleLabel.font=[UIFont systemFontOfSize: 10*HEIGHT_SIZE];
     [button0 addTarget:self action:@selector(readValueToTcp) forControlEvents:UIControlEventTouchUpInside];
+     [_view1 addSubview:button0];
     
     
     if (_CellNumber==0 || _CellNumber==2 || _CellNumber==8 || _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20) {
@@ -129,7 +131,7 @@
 
     
     UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 70*HEIGHT_SIZE, 300*NOW_SIZE,20*HEIGHT_SIZE )];
-    PV2Lable1.text=[NSString stringWithFormat:@"(读取值:%@)",_readValue];
+    PV2Lable1.text=@"";
     PV2Lable1.textAlignment=NSTextAlignmentCenter;
     PV2Lable1.tag=3000;
     PV2Lable1.textColor=COLOR(102, 102, 102, 1);
@@ -151,6 +153,15 @@
     _view1.backgroundColor =[UIColor clearColor];
     _view1.userInteractionEnabled = YES;
     [self.contentView addSubview:_view1];
+    
+    UIButton *button0 =  [UIButton buttonWithType:UIButtonTypeCustom];
+    button0.backgroundColor=COLOR(98, 226, 149, 1);
+     button0.frame=CGRectMake(260*NOW_SIZE,0*HEIGHT_SIZE, 50*NOW_SIZE, 25*HEIGHT_SIZE);
+    [button0 setTitle:@"读取" forState:UIControlStateNormal];
+    button0.titleLabel.font=[UIFont systemFontOfSize: 10*HEIGHT_SIZE];
+    [button0 addTarget:self action:@selector(readValueToTcp) forControlEvents:UIControlEventTouchUpInside];
+    [_view1 addSubview:button0];
+    
      _lableNameArray=@[@[@"电源启动斜率(20)",@"电源重启斜率(21)"],@[@"Q(v)切出高压(93)",@"Q(v)切入高压(94)"],@[@"Q(v)切出低压(95)",@"Q(v)切入低压(96)"],@[@"Q(v)切入功率(97)",@"Q(v)切出功率(98)"],@[@"无功曲线切入电压(99)",@"无功曲线切出电压(100)"],@[@"检查固件1(233)",@"检查固件2(234)"]];
     NSArray *nameArray=[NSArray arrayWithArray:_lableNameArray[_CellNumber-21]];
     
@@ -178,7 +189,7 @@
         [_view1 addSubview:textField];
         
         UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 70*HEIGHT_SIZE+H*i, 300*NOW_SIZE,20*HEIGHT_SIZE )];
-        PV2Lable1.text=[NSString stringWithFormat:@"(读取值:%@)",_readValue];
+        PV2Lable1.text=nil;
         PV2Lable1.textAlignment=NSTextAlignmentCenter;
         PV2Lable1.textColor=COLOR(102, 102, 102, 1);
         PV2Lable1.tag=3000+i;
@@ -203,7 +214,13 @@
     _view1.userInteractionEnabled = YES;
     [self.contentView addSubview:_view1];
     
-   // self.contentView.frame=CGRectMake(0,0, ScreenWidth,2*ScreenWidth);
+    UIButton *button0 =  [UIButton buttonWithType:UIButtonTypeCustom];
+    button0.backgroundColor=COLOR(98, 226, 149, 1);
+     button0.frame=CGRectMake(260*NOW_SIZE,0*HEIGHT_SIZE, 50*NOW_SIZE, 25*HEIGHT_SIZE);
+    [button0 setTitle:@"读取" forState:UIControlStateNormal];
+    button0.titleLabel.font=[UIFont systemFontOfSize: 10*HEIGHT_SIZE];
+    [button0 addTarget:self action:@selector(readValueToTcp) forControlEvents:UIControlEventTouchUpInside];
+    [_view1 addSubview:button0];
     
     
     NSArray* nameArray=@[@[@"PF调整值1(101)",@"PF调整值2(102)",@"PF调整值3(103)",@"PF调整值4(104)",@"PF调整值5(105)",@"PF调整值6(106)",],@[@"PF限制负载百分比点1(110)",@"PF限制负载百分比点2(112)",@"PF限制负载百分比点3(114)",@"PF限制负载百分比点4(116)"],@[@"PF限制功率因数点1(111)",@"PF限制功率因数点2(113)",@"PF限制功率因数点3(115)",@"PF限制功率因数点4(117)"]];
@@ -243,7 +260,7 @@
         [_view1 addSubview:textField];
         
         UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 70*HEIGHT_SIZE+H*i, 300*NOW_SIZE,20*HEIGHT_SIZE )];
-        PV2Lable1.text=[NSString stringWithFormat:@"(读取值:%@)",_readValue];
+        PV2Lable1.text=@"";
         PV2Lable1.textAlignment=NSTextAlignmentCenter;
         PV2Lable1.tag=3000+i;
         PV2Lable1.textColor=COLOR(102, 102, 102, 1);
@@ -318,7 +335,9 @@
 }
 
 -(void)receiveFirstData2:(NSNotification*) notification{
-    _receiveCmdTwoData=[NSData dataWithData:[notification object]];
+       NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
+    
+    _receiveCmdTwoData=[firstDic objectForKey:@"one"];
     
     NSMutableArray *valueArray=[NSMutableArray new];
     for (int i=0; i<_cmdRegisterNum; i++) {
@@ -338,13 +357,6 @@
     [self initUI];
     
     if (self.model.isShowMoreText){ // 展开状态
-        if (_CellTypy==1) {
-           [self initTwoUI];
-        }else  if (_CellTypy==2) {
-           [self initThreeUI];
-        }else{
-            [self initFourUI];
-        }
         
         if (_CellNumber<21) {
             _cmdRegisterNum=1;
@@ -355,8 +367,17 @@
         }else if (_CellNumber==27){
             _cmdRegisterNum=6;
         }
-        [self readValueToTcp];
         
+   
+        
+        if (_CellTypy==1) {
+           [self initTwoUI];
+        }else  if (_CellTypy==2) {
+           [self initThreeUI];
+        }else{
+            [self initFourUI];
+        }
+         
         [_moreTextBtn setImage:IMAGE(@"MAXup.png") forState:UIControlStateNormal];
         
     }else{ // 收缩状态
@@ -401,21 +422,11 @@
 
 
 -(void)showLableValue{
-    if (_CellTypy==1) {
-     UILabel *lable=[_view1 viewWithTag:3000];
-        lable.text=_readValueArray[0];
-    }else  if (_CellTypy==2) {
-        for (int i=0; i<2; i++) {
+
+        for (int i=0; i<_readValueArray.count; i++) {
             UILabel *lable=[_view1 viewWithTag:3000+i];
-            lable.text=_readValueArray[i];
+             lable.text=[NSString stringWithFormat:@"(读取值:%@)",_readValueArray[i]];
         }
-    }else{
-        for (int i=0; i<_nameArray0.count; i++) {
-            UILabel *lable=[_view1 viewWithTag:3000+i];
-            lable.text=_readValueArray[i];
-        }
-        
-    }
     
 }
 

@@ -9,6 +9,7 @@
 #import "usbToWifiControlOne.h"
 #import "usbToWifiControlCell1.h"
 #import "usbModleOne.h"
+#import "usbToWifiControlTwo.h"
 
 static NSString *cellOne = @"cell1";
 
@@ -47,17 +48,37 @@ static NSString *cellOne = @"cell1";
         _tableView.contentSize=CGSizeMake(SCREEN_Width, 50000*HEIGHT_SIZE);
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-        
-        [self.tableView registerClass:[usbToWifiControlCell1 class] forCellReuseIdentifier:cellOne];
-        
+            self.tableView.separatorColor=COLOR(186, 186, 186, 1);
         [self.view addSubview:_tableView];
         
+        if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+            [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+        }
+        if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+            [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+        }
     }
     
 }
+
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+        
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+        
+    }
+}
+
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -72,36 +93,29 @@ static NSString *cellOne = @"cell1";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    int TYPT=0;
-    if (indexPath.row<21) {
-        TYPT=1;
-    }else  if (indexPath.row>20 && indexPath.row<27) {
-        TYPT=2;
-    }else{
-          TYPT=(int)indexPath.row;
-    }
-    
-    usbToWifiControlCell1 *cell = [tableView dequeueReusableCellWithIdentifier:cellOne forIndexPath:indexPath];
 
-    if (!cell) {
-        cell=[[usbToWifiControlCell1 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellOne];
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" ];
+    if (cell==nil) {
+        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    usbModleOne *model = _modelList[indexPath.row];
-    [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
-        NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
-        [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }];
-    cell.CellTypy=TYPT;
-    cell.CellNumber=(int)indexPath.row;
-    cell.model = model;
-    cell.titleString=_nameArray[indexPath.row];
+    cell.backgroundColor=[UIColor whiteColor];
+    cell.textLabel.text=_nameArray[indexPath.row];
+    cell.textLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
+    cell.tintColor = COLOR(102, 102, 102, 1);
+    cell.textLabel.textColor=COLOR(102, 102, 102, 1);
+    cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+    //cell.accessoryView.backgroundColor=[UIColor whiteColor];
+    
+    
     return cell;
+
 }
 
 
-// MARK: - 返回cell高度的代理方法
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-     int TYPT=0;
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    int TYPT=0;
     if (indexPath.row<21) {
         TYPT=1;
     }else  if (indexPath.row>20 && indexPath.row<27) {
@@ -109,18 +123,19 @@ static NSString *cellOne = @"cell1";
     }else{
         TYPT=(int)indexPath.row;
     }
-        usbModleOne *model = _modelList[indexPath.row];
-        
-        if (model.isShowMoreText){
-            
-            return [usbToWifiControlCell1 moreHeight:TYPT];
-            
-        }else{
-            
-            return [usbToWifiControlCell1 defaultHeight];
-        }
-        
-        
+    
+      usbToWifiControlTwo *go=[[usbToWifiControlTwo alloc]init];
+    go.CellTypy=TYPT;
+    go.CellNumber=(int)indexPath.row;
+    go.titleString=_nameArray[indexPath.row];
+       [self.navigationController pushViewController:go animated:YES];
+    
+}
+
+// MARK: - 返回cell高度的代理方法
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+ 
+            return 40*HEIGHT_SIZE;
 }
 
 

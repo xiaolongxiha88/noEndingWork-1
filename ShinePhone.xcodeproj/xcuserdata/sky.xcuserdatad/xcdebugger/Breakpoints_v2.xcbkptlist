@@ -154,7 +154,7 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E9%87%87%E9%9B%86%E5%99%A8/ChangeCellectViewController.m"
-                  timestampString = "530784506.247842"
+                  timestampString = "530796660.187351"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "154"
@@ -169,7 +169,7 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E9%87%87%E9%9B%86%E5%99%A8/ChangeCellectViewController.m"
-                  timestampString = "530784506.249662"
+                  timestampString = "530796660.189934"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "154"
@@ -330,7 +330,7 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E6%B7%BB%E5%8A%A0%E8%AE%BE%E5%A4%87/addDevice.m"
-                  timestampString = "530784506.270806"
+                  timestampString = "530796660.211334"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "305"
@@ -345,7 +345,7 @@
                   moduleName = "ShinePhone"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sky/Desktop/shinelink(P)/shinelink/shinelink/%E8%AE%BE%E5%A4%87/%E6%B7%BB%E5%8A%A0%E8%AE%BE%E5%A4%87/addDevice.m"
-                  timestampString = "530784506.273405"
+                  timestampString = "530796660.213332"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "305"
@@ -368,54 +368,6 @@
             startingLineNumber = "254"
             endingLineNumber = "254"
             landmarkName = "getServerURL()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x672c;&#x5730;&#x8c03;&#x8bd5;/&#x672c;&#x5730;&#x8c03;&#x8bd5;data/wifiToPvOne.m"
-            timestampString = "530784505.068502"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "-goToOneTcp:cmdType:regAdd:Length:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x672c;&#x5730;&#x8c03;&#x8bd5;/&#x672c;&#x5730;&#x8c03;&#x8bd5;data/wifiToPvOne.m"
-            timestampString = "530784505.068587"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
-            landmarkName = "-socket:didReadData:withTag:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shinelink/&#x672c;&#x5730;&#x8c03;&#x8bd5;/&#x672c;&#x5730;&#x8c03;&#x8bd5;Control/usbToWifiControlCell1.m"
-            timestampString = "530784505.068657"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "-initTwoUI"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

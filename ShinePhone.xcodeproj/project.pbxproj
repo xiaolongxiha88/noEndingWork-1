@@ -599,6 +599,7 @@
 		338E34F91EE655140027EBD5 /* userOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 338E34F81EE655140027EBD5 /* userOSS.png */; };
 		338F0E991E4B06920002B7FE /* downGo.png in Resources */ = {isa = PBXBuildFile; fileRef = 338F0E981E4B06920002B7FE /* downGo.png */; };
 		3392697D1F8C63CA00385A74 /* KTDropdownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3392697B1F8C63CA00385A74 /* KTDropdownMenuView.m */; };
+		3399A8201FA33D7E006F8805 /* usbToWifiControlTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */; };
 		33A4384C1D1ABE86004E9AB6 /* service3.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A4384B1D1ABE86004E9AB6 /* service3.png */; };
 		33ABC2A51DC2E619003B92AC /* extensionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ABC2A41DC2E619003B92AC /* extensionTableViewCell.m */; };
 		33ABC2A71DC2EB69003B92AC /* 增值问题33.png in Resources */ = {isa = PBXBuildFile; fileRef = 33ABC2A61DC2EB69003B92AC /* 增值问题33.png */; };
@@ -1658,6 +1659,8 @@
 		338F0E981E4B06920002B7FE /* downGo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downGo.png; sourceTree = "<group>"; };
 		3392697B1F8C63CA00385A74 /* KTDropdownMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTDropdownMenuView.m; sourceTree = "<group>"; };
 		3392697C1F8C63CA00385A74 /* KTDropdownMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTDropdownMenuView.h; sourceTree = "<group>"; };
+		3399A81E1FA33D7E006F8805 /* usbToWifiControlTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiControlTwo.h; sourceTree = "<group>"; };
+		3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiControlTwo.m; sourceTree = "<group>"; };
 		33A4384B1D1ABE86004E9AB6 /* service3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = service3.png; sourceTree = "<group>"; };
 		33A4384D1D1BB4AE004E9AB6 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		33A4384E1D1BB61F004E9AB6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -3560,6 +3563,8 @@
 			children = (
 				33851DDC1FA08AE300AB758C /* usbToWifiControlOne.h */,
 				33851DDD1FA08AE300AB758C /* usbToWifiControlOne.m */,
+				3399A81E1FA33D7E006F8805 /* usbToWifiControlTwo.h */,
+				3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */,
 				33851DDF1FA08F5800AB758C /* usbToWifiControlCell1.h */,
 				33851DE01FA08F5800AB758C /* usbToWifiControlCell1.m */,
 			);
@@ -5105,6 +5110,7 @@
 				336E04001EC9586C0034BC86 /* ossDeviceFirst.swift in Sources */,
 				33530F211CC8824500378EB2 /* changManeger.m in Sources */,
 				3350891B1C73112000D7AA03 /* EditStationMenuView.m in Sources */,
+				3399A8201FA33D7E006F8805 /* usbToWifiControlTwo.m in Sources */,
 				3381ECFE1CBCCADB00DCF0D2 /* myListSecond.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

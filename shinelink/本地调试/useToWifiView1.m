@@ -73,7 +73,7 @@ static NSString *cellTwo = @"cellTwo";
     
     [self checkIsWifi];
     if (_isWiFi) {
-        [self tcpToGetData];
+      //  [self tcpToGetData];
    
     }else{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未连接WiFi模块" message:@"请跳转连接WiFi" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];

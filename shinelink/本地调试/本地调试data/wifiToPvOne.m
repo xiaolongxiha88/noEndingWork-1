@@ -45,6 +45,8 @@ static int TCP_TIME=1.5;
 
 
 -(void)goToOneTcp:(int)type cmdType:(NSString*)cmdType regAdd:(NSString*)regAdd Length:(NSString*)Length{
+    
+      _AllDataDic=[NSMutableDictionary new];
        _cmdCount=0;
       _cmdType=type;
     _cmdArray=@[cmdType,regAdd,Length];
@@ -55,7 +57,7 @@ static int TCP_TIME=1.5;
 
 
 -(void)goToTcpType:(int)type{
-    
+   
     _cmdType=type;
     _AllDataDic=[NSMutableDictionary new];
     _cmdCount=0;
@@ -178,15 +180,23 @@ static int TCP_TIME=1.5;
     NSLog(@"DisConnetion");
     [_socket disconnect];
     
-    if (!_isReceive) {
-        _cmdCount++;
-        if (_cmdCount>3) {
+    if (_cmdType==1) {
+        if (!_isReceive) {
+            _cmdCount++;
+            if (_cmdCount>3) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"recieveFailedTcpData"object:nil];
-        }else{
-              [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+            }else{
+                [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+            }
+            
         }
-      
+    }else  if (_cmdType==2) {
+        if (!_isReceiveAll) {
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
+        }
+        
     }
+ 
     
 }
 
@@ -202,8 +212,9 @@ static int TCP_TIME=1.5;
          [self checkWhichNumData:data];
     }else if (_cmdType==2){
         _isReceiveAll=YES;
+    
         if ([self checkData:data]) {
-              [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwo"object:nil];
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwo"object:_AllDataDic];
         }else{
               [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
         }
@@ -281,7 +292,8 @@ static int TCP_TIME=1.5;
             if (_cmdType==1) {
                   [self upDataToDic:data00];
             }else  if (_cmdType==2) {
-                _receiveCmdTwoData=[NSData dataWithData:data00];
+                 [_AllDataDic setValue:data00 forKey:@"one"];
+                
             }
           
         }else{
