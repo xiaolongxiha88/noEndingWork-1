@@ -12,6 +12,10 @@
 @interface usbToWifiControlTwo ()
 @property(nonatomic,strong)UIScrollView*view1;
 @property(nonatomic,assign) int cmdTcpType;
+@property(nonatomic,assign) int cmdTcpTimes;
+@property(nonatomic,strong)NSMutableArray*setValueArray;
+@property(nonatomic,strong)NSMutableArray*setRegisterArray;
+
 @end
 
 @implementation usbToWifiControlTwo
@@ -49,7 +53,7 @@
     }else  if (_CellNumber>20 && _CellNumber<27) {
         _cmdRegisterNum=2;
     }else if (_CellNumber==28 || _CellNumber==29){
-        _cmdRegisterNum=4;
+        _cmdRegisterNum=8;
     }else if (_CellNumber==27){
         _cmdRegisterNum=6;
     }
@@ -218,10 +222,65 @@
 
 
 -(void)finishSet{
+    _setValueArray=[NSMutableArray new];
+    _setRegisterArray=[NSMutableArray new];
+    NSArray *cmdValue=@[
+                        @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
     
+    if (_CellNumber<21) {
+        if (_CellNumber==0 || _CellNumber==2 || _CellNumber==8 || _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20) {
+        }else{
+            _setValue=_textField2.text;
+        }
+        if (_setValue==nil || [_setValue isEqualToString:@""]) {
+            [self showToastViewWithTitle:@"请添加设置值"];
+            return;
+        }
+        [_setRegisterArray addObject:cmdValue[_CellNumber]];
+        [_setValueArray addObject:_setValue];
+    }else{
+        BOOL isWrite=NO;
+        for (int i=0; i<_nameArray0.count; i++) {
+            UITextField *textField1=[_view1 viewWithTag:2000+i];
+            if (textField1.text==nil || [textField1.text isEqualToString:@""]) {}else{
+                isWrite=YES;
+            }
+             [_setValueArray addObject:textField1.text];
+        }
+        if (!isWrite) {
+             [self showToastViewWithTitle:@"请添加设置值"];
+        }
+        
+        if (_CellNumber>20 && _CellNumber<27) {
+            NSArray *cmdValue1=@[@[@"20",@"21"],@[@"93",@"94"],@[@"95",@"96"],@[@"97",@"98"],@[@"99",@"100"],@[@"233",@"234"]];
+            _setRegisterArray=[NSMutableArray arrayWithArray:cmdValue1[_CellNumber-21]];
+        }else if (_CellNumber==28 || _CellNumber==29){
+            NSArray *cmdValue1=@[@[@"110",@"112",@"114",@"116"],@[@"111",@"113",@"115",@"117"]];
+            _setRegisterArray=[NSMutableArray arrayWithArray:cmdValue1[_CellNumber-28]];
+        }else if (_CellNumber==27){
+            _setRegisterArray=[NSMutableArray arrayWithArray:@[@"101",@"102",@"103",@"104",@"105",@"106"]];
+        }
+    }
     
     
 }
+
+-(void)setTwo{
+    _cmdTcpTimes=0;
+    _cmdTcpType=2;
+    
+    for (int i=0; i<_setValueArray.count; i++) {
+        NSString*setValueString=_setValueArray[i];
+        if (setValueString==nil || [setValueString isEqualToString:@""]) {
+            [_setRegisterArray removeObjectAtIndex:i];
+               [_setValueArray removeObjectAtIndex:i];
+        }
+    }
+    
+       [_ControlOne goToOneTcp:2 cmdType:@"3" regAdd:_setRegister Length:[NSString stringWithFormat:@"%d",_cmdRegisterNum]];
+    
+}
+
 
 
 -(void)showTheChoice{
@@ -252,7 +311,7 @@
     _cmdTcpType=1;
     
     NSArray *cmdValue=@[
-                        @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"111"];
+                        @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
     
     _setRegister=cmdValue[_CellNumber];
     
@@ -275,7 +334,19 @@
     NSMutableArray *valueArray=[NSMutableArray new];
     for (int i=0; i<_cmdRegisterNum; i++) {
         NSString *value0=[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:_receiveCmdTwoData registerNum:i]];
-        [valueArray addObject:value0];
+        if (_CellNumber==28) {
+            if (i%2==0) {
+                   [valueArray addObject:value0];
+            }
+        }else  if (_CellNumber==29) {
+            if (i%2==1) {
+                [valueArray addObject:value0];
+            }
+
+        }else{
+             [valueArray addObject:value0];
+        }
+       
     }
     _readValueArray=[NSArray arrayWithArray:valueArray];
     
@@ -284,6 +355,7 @@
 
 
 -(void)setFailed{
+    [self hideProgressView];
     if (_cmdTcpType==1) {
         [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
     }
@@ -318,7 +390,10 @@
     
 }
 
-
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

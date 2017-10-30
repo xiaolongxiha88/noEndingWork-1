@@ -135,7 +135,7 @@
         lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_nameView addSubview:lable1];
 
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, lableH1+lableH2*(i+1), W00,1*HEIGHT_SIZE)];
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, lableH1+lableH2*(i+1), W00,LineWidth)];
         lineView.backgroundColor =COLOR(222, 222, 222, 1);
         [_nameView addSubview:lineView];
         
@@ -220,6 +220,7 @@
     if (self.showMoreBlock){
         self.showMoreBlock(self);
     }
+    
 }
 
 
@@ -228,14 +229,8 @@
 {
     [super layoutSubviews];
     
-   
-    
   
         [self initUI];
-    
-    
-    
-
     
     
 

@@ -45,7 +45,10 @@ static int TCP_TIME=1.5;
 
 
 -(void)goToOneTcp:(int)type cmdType:(NSString*)cmdType regAdd:(NSString*)regAdd Length:(NSString*)Length{
-    
+    if (_socket) {
+         _socket=nil;
+    }
+
       _AllDataDic=[NSMutableDictionary new];
        _cmdCount=0;
       _cmdType=type;
@@ -57,7 +60,11 @@ static int TCP_TIME=1.5;
 
 
 -(void)goToTcpType:(int)type{
-   
+    if (_socket) {
+        _socket=nil;
+    }
+    [self disConnect];
+    _socket=nil;
     _cmdType=type;
     _AllDataDic=[NSMutableDictionary new];
     _cmdCount=0;
