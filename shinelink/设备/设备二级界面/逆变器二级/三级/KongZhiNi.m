@@ -164,8 +164,6 @@
 
     self.dayFormatter = [[NSDateFormatter alloc] init];
     [self.dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
- 
-        
   self.currentDay = [_dayFormatter stringFromDate:[NSDate date]];
     
         _commandValue= self.currentDay;
@@ -480,6 +478,7 @@
 //        doneButton.tintColor = [UIColor whiteColor];
         self.toolBar.items = @[spaceButton,flexibleitem,doneButton];
    }
+    
 }
 
 

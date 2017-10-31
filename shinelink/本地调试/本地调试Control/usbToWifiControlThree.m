@@ -15,6 +15,11 @@
 @property(nonatomic,assign) int cmdTcpTimes;
 @property(nonatomic,strong)NSMutableArray*setValueArray;
 @property(nonatomic,strong)NSMutableArray*setRegisterArray;
+@property (nonatomic, strong) UIToolbar *toolBar;
+@property (nonatomic, strong) UIDatePicker *date;
+@property (nonatomic, strong) NSDateFormatter *dayFormatter;
+@property (nonatomic, strong) NSString *currentDay;
+@property (nonatomic, strong) NSArray *timeArray;
 @end
 
 @implementation usbToWifiControlThree
@@ -64,6 +69,9 @@
     }else{
         _cmdRegisterNum=2;
     }
+    if (_CellNumber==6) {
+        _cmdRegisterNum=6;
+    }
     
     if (_CellTypy==1) {
         [self initTwoUI];
@@ -86,15 +94,21 @@
     PV2Lable.adjustsFontSizeToFitWidth=YES;
     [_view1 addSubview:PV2Lable];
     
-    if (_CellNumber==0 || _CellNumber==1 || _CellNumber==6 || _CellNumber==10 || _CellNumber==11 || _CellNumber==12) {
+    if (_CellNumber==0 || _CellNumber==1 || _CellNumber==6  || _CellNumber==11 || _CellNumber==12) {
         _textLable=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         _textLable.text=@"点击选择";
         _textLable.userInteractionEnabled=YES;
         _textLable.layer.borderWidth=1;
         _textLable.layer.cornerRadius=5;
         _textLable.layer.borderColor=COLOR(102, 102, 102, 1).CGColor;
-        UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice)];
-        [_textLable addGestureRecognizer:tapGestureRecognizer1];
+        if (_CellNumber!=6) {
+            UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice)];
+            [_textLable addGestureRecognizer:tapGestureRecognizer1];
+        }else{
+            UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice2)];
+            [_textLable addGestureRecognizer:tapGestureRecognizer2];
+        }
+      
         _textLable.textAlignment=NSTextAlignmentCenter;
         _textLable.textColor=COLOR(102, 102, 102, 1);;
         _textLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -131,16 +145,28 @@
 -(void)initThreeUI{
     NSString *High=@"高";
     NSString *Low=@"低";
-    NSArray *regiserArray=@[@52,@53,@54,@55,@56,@57,@58,@59,@60,@61,@62,@63,@64,@65,@66,@67,@68,@69,@70,@71,@72,@73,@74,@75,@76,@77,@78];
-    
-    _lableNameArray=@[@[@"经度(122)",@"纬度(123)"],@[@"低(52)",@"高(53)"],@[@"高(54)",@"低(55)"],@[@"低(56)",@"高(57)"],@[@"高(58)",@"低(59)"],@[@"低(60)",@"高(61)"],@[@"高(62)",@"低(63)"],];
-    
+    //低高
+    NSArray *regiserArray=@[@52,@53,@54,@55,@56,@57,@58,@59,@60,@61,@62,@63,@64,@65,@66,@67,@68,@69,@70,@71,@72,@73,@74,@75,@76,@77,@78,@79];
+ 
+    if (_CellNumber==14) {
+        _nameArray0=@[High,Low];
+    }
     if (_CellNumber==15) {
         _nameArray0=@[@"经度(122)",@"纬度(123)"];
     }
-    _nameArray0=[NSArray arrayWithArray:_lableNameArray[_CellNumber-21]];
+   
+    int K=0+(_CellNumber-16)*2;
+    NSString *A1=[NSString stringWithFormat:@"%@(%@)",Low,regiserArray[K]];
+    NSString *A2=[NSString stringWithFormat:@"%@(%@)",High,regiserArray[K+1]];
+     NSString *A3=[NSString stringWithFormat:@"%@(%@)",High,regiserArray[K]];
+     NSString *A4=[NSString stringWithFormat:@"%@(%@)",Low,regiserArray[K+1]];
     
-    
+    if (_CellNumber>15) {
+        _nameArray0=@[A1,A2];
+    }
+    if (_CellNumber==17 || _CellNumber==19 || _CellNumber==21) {
+          _nameArray0=@[A3,A4];
+    }
     
     float H=100*HEIGHT_SIZE;
     for (int i=0; i<2; i++) {
@@ -179,68 +205,15 @@
 }
 
 
--(void)initFourUI{
-    
-    NSArray* nameArray=@[@[@"PF调整值1(101)",@"PF调整值2(102)",@"PF调整值3(103)",@"PF调整值4(104)",@"PF调整值5(105)",@"PF调整值6(106)",],@[@"PF限制负载百分比点1(110)",@"PF限制负载百分比点2(112)",@"PF限制负载百分比点3(114)",@"PF限制负载百分比点4(116)"],@[@"PF限制功率因数点1(111)",@"PF限制功率因数点2(113)",@"PF限制功率因数点3(115)",@"PF限制功率因数点4(117)"]];
-    
-    if (_CellNumber==27) {
-        _nameArray0=nameArray[0];
-        _goBut.frame=CGRectMake(60*NOW_SIZE,665*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
-        _view1.contentSize=CGSizeMake(SCREEN_Width,  SCREEN_Height*2);
-    }else if (_CellNumber==28) {
-        _nameArray0=nameArray[1];
-        _goBut.frame=CGRectMake(60*NOW_SIZE,435*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
-    }else if (_CellNumber==29) {
-        _nameArray0=nameArray[2];
-        _goBut.frame=CGRectMake(60*NOW_SIZE,435*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
-        
-    }
-    
-    [_view1 addSubview:_goBut];
-    
-    float H=100*HEIGHT_SIZE;
-    for (int i=0; i<_nameArray0.count; i++) {
-        UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 20*HEIGHT_SIZE+H*i, 300*NOW_SIZE,20*HEIGHT_SIZE )];
-        PV2Lable.text=_nameArray0[i];
-        PV2Lable.textAlignment=NSTextAlignmentLeft;
-        PV2Lable.textColor=COLOR(102, 102, 102, 1);;
-        PV2Lable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        PV2Lable.adjustsFontSizeToFitWidth=YES;
-        [_view1 addSubview:PV2Lable];
-        
-        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 60*HEIGHT_SIZE+H*i, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
-        textField.layer.borderWidth=1;
-        textField.layer.cornerRadius=5;
-        textField.tag=2000+i;
-        textField.layer.borderColor=COLOR(102, 102, 102, 1).CGColor;
-        textField.textColor = COLOR(102, 102, 102, 1);;
-        textField.tintColor = COLOR(102, 102, 102, 1);;
-        textField.textAlignment=NSTextAlignmentCenter;
-        textField.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        [_view1 addSubview:textField];
-        
-        UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 95*HEIGHT_SIZE+H*i, 300*NOW_SIZE,20*HEIGHT_SIZE )];
-        PV2Lable1.text=@"";
-        PV2Lable1.textAlignment=NSTextAlignmentCenter;
-        PV2Lable1.tag=3000+i;
-        PV2Lable1.textColor=COLOR(102, 102, 102, 1);
-        PV2Lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        PV2Lable1.adjustsFontSizeToFitWidth=YES;
-        [_view1 addSubview:PV2Lable1];
-    }
-    
-    
-}
-
 
 -(void)finishSet{
     _setValueArray=[NSMutableArray new];
     _setRegisterArray=[NSMutableArray new];
     NSArray *cmdValue=@[
-                        @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
+                        @"15",@"16",@"17",@"18",@"19",@"30",@"45",@"51",@"80",@"81",@"88",@"201",@"202",@"203",@"28",@"122",@"52",@"54",@"56",@"58",@"60",@"62",@"64",@"66",@"68",@"70",@"72",@"74",@"76",@"78"];
     
-    if (_CellNumber<21) {
-        if (_CellNumber==0 || _CellNumber==2 || _CellNumber==8 || _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20) {
+    if (_CellNumber<14) {
+           if (_CellNumber==0 || _CellNumber==1 || _CellNumber==6  || _CellNumber==11 || _CellNumber==12) {
         }else{
             _setValue=_textField2.text;
         }
@@ -250,6 +223,10 @@
         }
         [_setRegisterArray addObject:cmdValue[_CellNumber]];
         [_setValueArray addObject:_setValue];
+        if (_CellNumber==6) {
+            _setRegisterArray=[NSMutableArray arrayWithArray:@[@45,@46,@47,@48,@49,@50]];
+                _setValueArray=[NSMutableArray arrayWithArray:_timeArray];
+        }
     }else{
         BOOL isWrite=NO;
         for (int i=0; i<_nameArray0.count; i++) {
@@ -263,15 +240,10 @@
             [self showToastViewWithTitle:@"请添加设置值"];
         }
         
-        if (_CellNumber>20 && _CellNumber<27) {
-            NSArray *cmdValue1=@[@[@"20",@"21"],@[@"93",@"94"],@[@"95",@"96"],@[@"97",@"98"],@[@"99",@"100"],@[@"233",@"234"]];
-            _setRegisterArray=[NSMutableArray arrayWithArray:cmdValue1[_CellNumber-21]];
-        }else if (_CellNumber==28 || _CellNumber==29){
-            NSArray *cmdValue1=@[@[@"110",@"112",@"114",@"116"],@[@"111",@"113",@"115",@"117"]];
-            _setRegisterArray=[NSMutableArray arrayWithArray:cmdValue1[_CellNumber-28]];
-        }else if (_CellNumber==27){
-            _setRegisterArray=[NSMutableArray arrayWithArray:@[@"101",@"102",@"103",@"104",@"105",@"106"]];
-        }
+        NSArray *regiserArray=@[@28,@29,@122,@123,@52,@53,@54,@55,@56,@57,@58,@59,@60,@61,@62,@63,@64,@65,@66,@67,@68,@69,@70,@71,@72,@73,@74,@75,@76,@77,@78,@79];
+      int K=0+(_CellNumber-14)*2;
+          _setRegisterArray=[NSMutableArray arrayWithArray:@[regiserArray[K],regiserArray[K+1]]];
+        
     }
     
     [self setTwo];
@@ -295,19 +267,87 @@
     
 }
 
+-(void)showTheChoice2{
+    self.dayFormatter = [[NSDateFormatter alloc] init];
+    [self.dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    self.currentDay = [_dayFormatter stringFromDate:[NSDate date]];
+    
+    _date=[[UIDatePicker alloc]initWithFrame:CGRectMake(0*NOW_SIZE, SCREEN_Height-300*HEIGHT_SIZE, SCREEN_Width, 300*HEIGHT_SIZE)];
+    _date.backgroundColor=[UIColor whiteColor];
+    _date.datePickerMode=UIDatePickerModeDateAndTime;
+    [self.view addSubview:_date];
+    
+    if (self.toolBar) {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.toolBar.alpha = 1;
+            self.toolBar.frame = CGRectMake(0, SCREEN_Height-300*HEIGHT_SIZE-44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+            [self.view addSubview:_toolBar];
+        }];
+    } else {
+        self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SCREEN_Height-300*HEIGHT_SIZE-44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE)];
+        self.toolBar.barStyle = UIBarStyleDefault;
+        self.toolBar.barTintColor = MainColor;
+        [self.view addSubview:self.toolBar];
+        
+        UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(removeToolBar)];
+        
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(completeSelectDate:)];
+        
+        UIBarButtonItem *flexibleitem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:(UIBarButtonSystemItemFlexibleSpace) target:self action:nil];
+        
+        spaceButton.tintColor=[UIColor whiteColor];
+        doneButton.tintColor=[UIColor whiteColor];
+        
+        self.toolBar.items = @[spaceButton,flexibleitem,doneButton];
+    }
+}
 
+-(void)removeToolBar{
+    [self.toolBar removeFromSuperview];
+    [self.date removeFromSuperview];
+    
+}
+
+
+- (void)completeSelectDate:(UIToolbar *)toolBar {
+    self.currentDay = [self.dayFormatter stringFromDate:self.date.date];
+    _textLable.text=_currentDay;
+    
+    [self.toolBar removeFromSuperview];
+    [self.date removeFromSuperview];
+ 
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:self.date.date];
+    
+    NSInteger year=[components year]-2000;
+    NSInteger month=[components month];
+    NSInteger day=[components day];
+ 
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH"];
+    NSString *hour = [dateFormatter stringFromDate:[NSDate date]];
+    [dateFormatter setDateFormat:@"mm"];
+    NSString *min = [dateFormatter stringFromDate:[NSDate date]];
+    [dateFormatter setDateFormat:@"ss"];
+    NSString *sec = [dateFormatter stringFromDate:[NSDate date]];
+    
+    _timeArray=@[[NSString stringWithFormat:@"%ld",year],[NSString stringWithFormat:@"%ld",month],[NSString stringWithFormat:@"%ld",day],hour,min,sec];
+       _setValue=[NSString stringWithFormat:@"%ld",year];
+}
 
 -(void)showTheChoice{
-    if (_CellNumber==0 || _CellNumber==2 ||  _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19){
-        _choiceArray=@[@"Off(0)",@"On(1)"];
+    if (_CellNumber==12){
+        _choiceArray=@[@"On(0)",@"Off(1)"];
     }
-    if (_CellNumber==8 ){
-        _choiceArray=@[@"PF=1(0)",@"PF by set(1)",@"Default PF line(2)",@"User PF line(3)",@"UnderExcited(Inda)Reactive Power(4)",@"OverExcited(Capa)Reactive Power(5)",@"Q(v)model(6)"];
+    if (_CellNumber==11 ){
+        _choiceArray=@[@"Automatic(0)",@"Continual(1)",@"Overnight(2)"];
     }
-    if (_CellNumber==20 ){
-        _choiceArray=@[@"0",@"1",@"2"];
+    if (_CellNumber==0 ){
+        _choiceArray=@[@"0",@"1",@"2",@"3",@"4",@"5"];
     }
-    
+    if (_CellNumber==1){
+        _choiceArray=@[@"Need to select(0)",@"Have selected(1)"];
+    }
     [ZJBLStoreShopTypeAlert showWithTitle:@"选择设置值" titles:_choiceArray selectIndex:^(NSInteger SelectIndexNum){
         
         _setValue=[NSString stringWithFormat:@"%ld",SelectIndexNum];
@@ -325,7 +365,7 @@
     _cmdTcpType=1;
     
     NSArray *cmdValue=@[
-                        @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
+                        @"15",@"16",@"17",@"18",@"19",@"30",@"45",@"51",@"80",@"81",@"88",@"201",@"202",@"203",@"28",@"122",@"52",@"54",@"56",@"58",@"60",@"62",@"64",@"66",@"68",@"70",@"72",@"74",@"76",@"78"];
     
     _setRegister=cmdValue[_CellNumber];
     
@@ -344,19 +384,9 @@
         NSMutableArray *valueArray=[NSMutableArray new];
         for (int i=0; i<_cmdRegisterNum; i++) {
             NSString *value0=[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:_receiveCmdTwoData registerNum:i]];
-            if (_CellNumber==28) {
-                if (i%2==0) {
-                    [valueArray addObject:value0];
-                }
-            }else  if (_CellNumber==29) {
-                if (i%2==1) {
-                    [valueArray addObject:value0];
-                }
-                
-            }else{
+          
                 [valueArray addObject:value0];
-            }
-            
+
         }
         _readValueArray=[NSArray arrayWithArray:valueArray];
         
@@ -366,6 +396,7 @@
         if (_cmdTcpTimes==_setRegisterArray.count) {
             [self showAlertViewWithTitle:@"设置成功" message:nil cancelButtonTitle:root_OK];
         }else{
+            [self showProgressView];
             [_ControlOne goToOneTcp:3 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
             
         }
@@ -391,7 +422,11 @@
     for (int i=0; i<_readValueArray.count; i++) {
         UILabel *lable=[_view1 viewWithTag:3000+i];
         lable.text=[NSString stringWithFormat:@"(读取值:%@)",_readValueArray[i]];
+        if (_CellNumber==6) {
+            lable.text=[NSString stringWithFormat:@"(读取值:%@-%@-%@ %@:%@:%@)",_readValueArray[0],_readValueArray[1],_readValueArray[2],_readValueArray[3],_readValueArray[4],_readValueArray[5]];
+        }
     }
+
     
 }
 
