@@ -262,8 +262,14 @@ static NSString *cellTwo = @"cellTwo";
         UIView *VV=[[UIView alloc]initWithFrame:CGRectMake(0+WW*i, 0, WW, H2)];
         VV.backgroundColor=[UIColor clearColor];
         VV.userInteractionEnabled=YES;
-        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView)];
-        [VV addGestureRecognizer:tapGestureRecognizer];
+        if (i==0) {
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView)];
+            [VV addGestureRecognizer:tapGestureRecognizer];
+        }else{
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView1)];
+            [VV addGestureRecognizer:tapGestureRecognizer];
+        }
+      
         [V2 addSubview:VV];
         
         UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake((WW-imageH)/2,V2H1, imageH,imageH)];
@@ -284,6 +290,12 @@ static NSString *cellTwo = @"cellTwo";
 
 -(void)goToControlView{
     usbToWifiControlOne *testView=[[usbToWifiControlOne alloc]init];
+    testView.controlType=1;
+    [self.navigationController pushViewController:testView animated:YES];
+}
+-(void)goToControlView1{
+    usbToWifiControlOne *testView=[[usbToWifiControlOne alloc]init];
+        testView.controlType=2;
     [self.navigationController pushViewController:testView animated:YES];
 }
 

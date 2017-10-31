@@ -1,24 +1,23 @@
 //
-//  usbToWifiControlTwo.m
+//  usbToWifiControlThree.m
 //  ShinePhone
 //
-//  Created by sky on 2017/10/27.
+//  Created by sky on 2017/10/31.
 //  Copyright © 2017年 sky. All rights reserved.
 //
 
-#import "usbToWifiControlTwo.h"
+#import "usbToWifiControlThree.h"
 #import "ZJBLStoreShopTypeAlert.h"
 
-@interface usbToWifiControlTwo ()
+@interface usbToWifiControlThree ()
 @property(nonatomic,strong)UIScrollView*view1;
 @property(nonatomic,assign) int cmdTcpType;
 @property(nonatomic,assign) int cmdTcpTimes;
 @property(nonatomic,strong)NSMutableArray*setValueArray;
 @property(nonatomic,strong)NSMutableArray*setRegisterArray;
-
 @end
 
-@implementation usbToWifiControlTwo
+@implementation usbToWifiControlThree
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -42,8 +41,8 @@
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
     if (!_view1) {
-                [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
-         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveDataTwoFailed" object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveDataTwoFailed" object:nil];
         
         _view1 = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE, ScreenWidth,SCREEN_Height)];
         _view1.backgroundColor =[UIColor clearColor];
@@ -51,35 +50,29 @@
         _view1.contentSize=CGSizeMake(SCREEN_Width, SCREEN_Height*1.4);
         [self.view addSubview:_view1];
     }
-  
+    
     
     _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
     [_goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [_goBut setTitle:@"设置" forState:UIControlStateNormal];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [_goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
-      [_view1 addSubview:_goBut];
+    [_view1 addSubview:_goBut];
     
-    if (_CellNumber<21) {
+    if (_CellNumber<14) {
         _cmdRegisterNum=1;
-    }else  if (_CellNumber>20 && _CellNumber<27) {
+    }else{
         _cmdRegisterNum=2;
-    }else if (_CellNumber==28 || _CellNumber==29){
-        _cmdRegisterNum=8;
-    }else if (_CellNumber==27){
-        _cmdRegisterNum=6;
     }
     
     if (_CellTypy==1) {
         [self initTwoUI];
     }else  if (_CellTypy==2) {
         [self initThreeUI];
-    }else{
-        [self initFourUI];
     }
     
     
-  
+    
 }
 
 
@@ -93,7 +86,7 @@
     PV2Lable.adjustsFontSizeToFitWidth=YES;
     [_view1 addSubview:PV2Lable];
     
-    if (_CellNumber==0 || _CellNumber==2 || _CellNumber==8 || _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20) {
+    if (_CellNumber==0 || _CellNumber==1 || _CellNumber==6 || _CellNumber==10 || _CellNumber==11 || _CellNumber==12) {
         _textLable=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         _textLable.text=@"点击选择";
         _textLable.userInteractionEnabled=YES;
@@ -131,13 +124,20 @@
     [_view1 addSubview:PV2Lable1];
     
     _goBut.frame=CGRectMake(60*NOW_SIZE,165*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
-  
+    
 }
 
 
 -(void)initThreeUI{
-
-    _lableNameArray=@[@[@"电源启动斜率(20)",@"电源重启斜率(21)"],@[@"Q(v)切出高压(93)",@"Q(v)切入高压(94)"],@[@"Q(v)切出低压(95)",@"Q(v)切入低压(96)"],@[@"Q(v)切入功率(97)",@"Q(v)切出功率(98)"],@[@"无功曲线切入电压(99)",@"无功曲线切出电压(100)"],@[@"检查固件1(233)",@"检查固件2(234)"]];
+    NSString *High=@"高";
+    NSString *Low=@"低";
+    NSArray *regiserArray=@[@52,@53,@54,@55,@56,@57,@58,@59,@60,@61,@62,@63,@64,@65,@66,@67,@68,@69,@70,@71,@72,@73,@74,@75,@76,@77,@78];
+    
+    _lableNameArray=@[@[@"经度(122)",@"纬度(123)"],@[@"低(52)",@"高(53)"],@[@"高(54)",@"低(55)"],@[@"低(56)",@"高(57)"],@[@"高(58)",@"低(59)"],@[@"低(60)",@"高(61)"],@[@"高(62)",@"低(63)"],];
+    
+    if (_CellNumber==15) {
+        _nameArray0=@[@"经度(122)",@"纬度(123)"];
+    }
     _nameArray0=[NSArray arrayWithArray:_lableNameArray[_CellNumber-21]];
     
     
@@ -180,7 +180,7 @@
 
 
 -(void)initFourUI{
-
+    
     NSArray* nameArray=@[@[@"PF调整值1(101)",@"PF调整值2(102)",@"PF调整值3(103)",@"PF调整值4(104)",@"PF调整值5(105)",@"PF调整值6(106)",],@[@"PF限制负载百分比点1(110)",@"PF限制负载百分比点2(112)",@"PF限制负载百分比点3(114)",@"PF限制负载百分比点4(116)"],@[@"PF限制功率因数点1(111)",@"PF限制功率因数点2(113)",@"PF限制功率因数点3(115)",@"PF限制功率因数点4(117)"]];
     
     if (_CellNumber==27) {
@@ -257,10 +257,10 @@
             if (textField1.text==nil || [textField1.text isEqualToString:@""]) {}else{
                 isWrite=YES;
             }
-             [_setValueArray addObject:textField1.text];
+            [_setValueArray addObject:textField1.text];
         }
         if (!isWrite) {
-             [self showToastViewWithTitle:@"请添加设置值"];
+            [self showToastViewWithTitle:@"请添加设置值"];
         }
         
         if (_CellNumber>20 && _CellNumber<27) {
@@ -286,7 +286,7 @@
         NSString*setValueString=_setValueArray[i];
         if (setValueString==nil || [setValueString isEqualToString:@""]) {
             [_setRegisterArray removeObjectAtIndex:i];
-               [_setValueArray removeObjectAtIndex:i];
+            [_setValueArray removeObjectAtIndex:i];
         }
     }
     
@@ -329,8 +329,8 @@
     
     _setRegister=cmdValue[_CellNumber];
     
- [_ControlOne goToOneTcp:2 cmdNum:1 cmdType:@"3" regAdd:_setRegister Length:[NSString stringWithFormat:@"%d",_cmdRegisterNum]];
-   
+    [_ControlOne goToOneTcp:2 cmdNum:1 cmdType:@"3" regAdd:_setRegister Length:[NSString stringWithFormat:@"%d",_cmdRegisterNum]];
+    
     
 }
 
@@ -364,14 +364,14 @@
     }else{
         _cmdTcpTimes++;
         if (_cmdTcpTimes==_setRegisterArray.count) {
-                   [self showAlertViewWithTitle:@"设置成功" message:nil cancelButtonTitle:root_OK];
+            [self showAlertViewWithTitle:@"设置成功" message:nil cancelButtonTitle:root_OK];
         }else{
-                [_ControlOne goToOneTcp:3 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
-               
+            [_ControlOne goToOneTcp:3 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
+            
         }
         
     }
-   
+    
 }
 
 
@@ -382,7 +382,7 @@
     }
     if (_cmdTcpType==2) {
         
-           [self showAlertViewWithTitle:@"设置失败" message:@"请查看设置范围或检查网络连接" cancelButtonTitle:root_OK];
+        [self showAlertViewWithTitle:@"设置失败" message:@"请查看设置范围或检查网络连接" cancelButtonTitle:root_OK];
     }
 }
 
@@ -414,10 +414,6 @@
     
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    
-    
-}
 
 
 - (void)didReceiveMemoryWarning {

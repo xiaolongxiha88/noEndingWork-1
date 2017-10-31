@@ -9,5 +9,5 @@
 #import "RootViewController.h"
 
 @interface usbToWifiControlOne : RootViewController
-
+@property(nonatomic,assign)int controlType;
 @end

@@ -44,27 +44,21 @@ static int TCP_TIME=1.5;
 
 
 
--(void)goToOneTcp:(int)type cmdType:(NSString*)cmdType regAdd:(NSString*)regAdd Length:(NSString*)Length{
-    if (_socket) {
-         _socket=nil;
-    }
+-(void)goToOneTcp:(int)type cmdNum:(int)cmdNum cmdType:(NSString*)cmdType regAdd:(NSString*)regAdd Length:(NSString*)Length{
+
 
       _AllDataDic=[NSMutableDictionary new];
        _cmdCount=0;
       _cmdType=type;
     _cmdArray=@[cmdType,regAdd,Length];
       _isReceiveAll=NO;
-       [self performSelector:@selector(checkTcpTimeout) withObject:nil afterDelay:TCP_TIME*1.5];
+       [self performSelector:@selector(checkTcpTimeout) withObject:nil afterDelay:TCP_TIME*cmdNum];
          [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
 }
 
 
 -(void)goToTcpType:(int)type{
-    if (_socket) {
-        _socket=nil;
-    }
-    [self disConnect];
-    _socket=nil;
+
     _cmdType=type;
     _AllDataDic=[NSMutableDictionary new];
     _cmdCount=0;
@@ -81,11 +75,12 @@ static int TCP_TIME=1.5;
 }
 
 -(void)checkTcpTimeout{
+ 
     if (!_isReceiveAll) {
         _cmdCount=4;
         [self disConnect];
     }
-    
+  
 }
 
 -(void)goToGetData:(NSString*)cmdType RegAdd:(NSString*)regAdd Length:(NSString*)length{
@@ -96,7 +91,10 @@ static int TCP_TIME=1.5;
    
     _isReceive=NO;
 
-    NSData *data=[_getData CmdData:cmdType RegAdd:regAdd Length:length modbusBlock:^(NSData* modbusData){}];
+    NSData *data=[_getData CmdData:cmdType RegAdd:regAdd Length:length modbusBlock:^(NSData* modbusData){
+        
+        _modbusData=[NSData dataWithData:modbusData];
+    }];
 
     _CmdData=[NSData dataWithData:data];
     
@@ -202,6 +200,11 @@ static int TCP_TIME=1.5;
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
         }
         
+    }else  if (_cmdType==3) {
+        if (!_isReceiveAll) {
+               [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
+        }
+     
     }
  
     
@@ -217,7 +220,7 @@ static int TCP_TIME=1.5;
     
     if (_cmdType==1) {
          [self checkWhichNumData:data];
-    }else if (_cmdType==2){
+    }else if ((_cmdType==2)||(_cmdType==3)){
         _isReceiveAll=YES;
     
         if ([self checkData:data]) {
@@ -231,44 +234,6 @@ static int TCP_TIME=1.5;
    
     
 }
-
-
-
--(void)checkWhichNumData:(NSData*)data{
-    if (!_isOne) {
-        BOOL tureData= [self checkData:data];
-        if (tureData) {
-            _isOne=tureData;
-            _cmdArray=[NSArray arrayWithArray:[_cmdDic objectForKey:@"two"]];
-        }
-          [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
-    }else{
-        if (!_isTwo) {
-            BOOL tureData= [self checkData:data];
-            if (tureData) {
-                _isTwo=tureData;
-                _cmdArray=[NSArray arrayWithArray:[_cmdDic objectForKey:@"three"]];
-            }
-                   [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
-        }else{
-            if (!_isThree) {
-                BOOL tureData= [self checkData:data];
-                if (tureData) {
-                    _isThree=tureData;
-                }else{
-                       [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
-                }
-             
-            }
-            
-        }
-        
-    }
-    
-    
-    
-}
-
 
 
 
@@ -293,24 +258,66 @@ static int TCP_TIME=1.5;
         Byte *Bytedata1=(Byte*)[data1 bytes];
         int length0=(int)[data1 length];
         int length1=Bytedata1[2];
-        if ((length0-5)==length1) {
-            isRightData=YES;
-               NSData *data00=[data1 subdataWithRange:NSMakeRange(3, data1.length-5)];
-            if (_cmdType==1) {
-                  [self upDataToDic:data00];
-            }else  if (_cmdType==2) {
-                 [_AllDataDic setValue:data00 forKey:@"one"];
-                
-            }
-          
+        
+        if (_cmdType==3) {
+            return [data1 isEqualToData:_modbusData];
         }else{
+            if ((length0-5)==length1) {
+                isRightData=YES;
+                NSData *data00=[data1 subdataWithRange:NSMakeRange(3, data1.length-5)];
+                if (_cmdType==1) {
+                    [self upDataToDic:data00];
+                }else  if (_cmdType==2) {
+                    [_AllDataDic setValue:data00 forKey:@"one"];
+                }
+                
+            }else{
                 isRightData=NO;
+            }
         }
+   
     }else{
         isRightData=NO;
     }
     
     return isRightData;
+}
+
+
+
+-(void)checkWhichNumData:(NSData*)data{
+    if (!_isOne) {
+        BOOL tureData= [self checkData:data];
+        if (tureData) {
+            _isOne=tureData;
+            _cmdArray=[NSArray arrayWithArray:[_cmdDic objectForKey:@"two"]];
+        }
+        [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+    }else{
+        if (!_isTwo) {
+            BOOL tureData= [self checkData:data];
+            if (tureData) {
+                _isTwo=tureData;
+                _cmdArray=[NSArray arrayWithArray:[_cmdDic objectForKey:@"three"]];
+            }
+            [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+        }else{
+            if (!_isThree) {
+                BOOL tureData= [self checkData:data];
+                if (tureData) {
+                    _isThree=tureData;
+                }else{
+                    [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+                }
+                
+            }
+            
+        }
+        
+    }
+    
+    
+    
 }
 
 

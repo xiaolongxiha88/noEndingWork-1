@@ -515,7 +515,6 @@
 		338418E71DC9783500D679CA /* GFWaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338418E61DC9783500D679CA /* GFWaterView.m */; };
 		33851DDA1F9DED7A00AB758C /* energyDemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33851DD91F9DED7A00AB758C /* energyDemoCell.m */; };
 		33851DDE1FA08AE300AB758C /* usbToWifiControlOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 33851DDD1FA08AE300AB758C /* usbToWifiControlOne.m */; };
-		33851DE11FA08F5800AB758C /* usbToWifiControlCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 33851DE01FA08F5800AB758C /* usbToWifiControlCell1.m */; };
 		3385A3A81F4AB0D7004FF3C7 /* ossTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385A3A71F4AB0D7004FF3C7 /* ossTool.swift */; };
 		33860FDD1EEA75C5004150FD /* MJRefreshAutoFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 33860FB11EEA75C5004150FD /* MJRefreshAutoFooter.m */; };
 		33860FDE1EEA75C5004150FD /* MJRefreshBackFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 33860FB31EEA75C5004150FD /* MJRefreshBackFooter.m */; };
@@ -599,6 +598,7 @@
 		338E34F91EE655140027EBD5 /* userOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 338E34F81EE655140027EBD5 /* userOSS.png */; };
 		338F0E991E4B06920002B7FE /* downGo.png in Resources */ = {isa = PBXBuildFile; fileRef = 338F0E981E4B06920002B7FE /* downGo.png */; };
 		3392697D1F8C63CA00385A74 /* KTDropdownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3392697B1F8C63CA00385A74 /* KTDropdownMenuView.m */; };
+		339844251FA82107006A15AD /* usbToWifiControlThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 339844241FA82107006A15AD /* usbToWifiControlThree.m */; };
 		3399A8201FA33D7E006F8805 /* usbToWifiControlTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */; };
 		33A4384C1D1ABE86004E9AB6 /* service3.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A4384B1D1ABE86004E9AB6 /* service3.png */; };
 		33ABC2A51DC2E619003B92AC /* extensionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ABC2A41DC2E619003B92AC /* extensionTableViewCell.m */; };
@@ -1523,8 +1523,6 @@
 		33851DD91F9DED7A00AB758C /* energyDemoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = energyDemoCell.m; sourceTree = "<group>"; };
 		33851DDC1FA08AE300AB758C /* usbToWifiControlOne.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiControlOne.h; sourceTree = "<group>"; };
 		33851DDD1FA08AE300AB758C /* usbToWifiControlOne.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiControlOne.m; sourceTree = "<group>"; };
-		33851DDF1FA08F5800AB758C /* usbToWifiControlCell1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiControlCell1.h; sourceTree = "<group>"; };
-		33851DE01FA08F5800AB758C /* usbToWifiControlCell1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiControlCell1.m; sourceTree = "<group>"; };
 		3385A3A71F4AB0D7004FF3C7 /* ossTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ossTool.swift; sourceTree = "<group>"; };
 		33860FB01EEA75C5004150FD /* MJRefreshAutoFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshAutoFooter.h; sourceTree = "<group>"; };
 		33860FB11EEA75C5004150FD /* MJRefreshAutoFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshAutoFooter.m; sourceTree = "<group>"; };
@@ -1659,6 +1657,8 @@
 		338F0E981E4B06920002B7FE /* downGo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downGo.png; sourceTree = "<group>"; };
 		3392697B1F8C63CA00385A74 /* KTDropdownMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTDropdownMenuView.m; sourceTree = "<group>"; };
 		3392697C1F8C63CA00385A74 /* KTDropdownMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTDropdownMenuView.h; sourceTree = "<group>"; };
+		339844231FA82107006A15AD /* usbToWifiControlThree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiControlThree.h; sourceTree = "<group>"; };
+		339844241FA82107006A15AD /* usbToWifiControlThree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiControlThree.m; sourceTree = "<group>"; };
 		3399A81E1FA33D7E006F8805 /* usbToWifiControlTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiControlTwo.h; sourceTree = "<group>"; };
 		3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiControlTwo.m; sourceTree = "<group>"; };
 		33A4384B1D1ABE86004E9AB6 /* service3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = service3.png; sourceTree = "<group>"; };
@@ -3565,8 +3565,8 @@
 				33851DDD1FA08AE300AB758C /* usbToWifiControlOne.m */,
 				3399A81E1FA33D7E006F8805 /* usbToWifiControlTwo.h */,
 				3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */,
-				33851DDF1FA08F5800AB758C /* usbToWifiControlCell1.h */,
-				33851DE01FA08F5800AB758C /* usbToWifiControlCell1.m */,
+				339844231FA82107006A15AD /* usbToWifiControlThree.h */,
+				339844241FA82107006A15AD /* usbToWifiControlThree.m */,
 			);
 			path = "本地调试Control";
 			sourceTree = "<group>";
@@ -4779,7 +4779,6 @@
 				336664E11CB75213005573FB /* moreTableViewController.m in Sources */,
 				33EFB6051C979B5F003F336F /* ChangeCellectViewController.m in Sources */,
 				3363DD1E1C7C48F100D740FB /* registerViewController.m in Sources */,
-				33851DE11FA08F5800AB758C /* usbToWifiControlCell1.m in Sources */,
 				335614681CB397220071BAC9 /* LZPageContentView.m in Sources */,
 				336D401C1D6FEA7600ECFA34 /* NSString+PinYin4Cocoa.m in Sources */,
 				336181F61ED048ED008641E9 /* deviceListCell.swift in Sources */,
@@ -4842,6 +4841,7 @@
 				3367CB2E1C86803600EF460C /* DTKDropdownMenuView.m in Sources */,
 				334B8F211C91250300798A69 /* PopoverView.m in Sources */,
 				3343F3DB1C80405D009F69BC /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				339844251FA82107006A15AD /* usbToWifiControlThree.m in Sources */,
 				33860FF21EEABB9D004150FD /* PlantList.swift in Sources */,
 				334B8F4C1C914A6D00798A69 /* PNChartLabel.m in Sources */,
 				33AF3D1D1D8E67210007D6C2 /* EasyTimelineEvent.m in Sources */,
