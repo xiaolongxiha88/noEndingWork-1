@@ -12,6 +12,7 @@
 #import "usbToWifiCell2.h"
 #import "usbToWifiDataControl.h"
 #import "usbToWifiControlOne.h"
+#import "usbToWifiWarnView.h"
 
 static NSString *cellOne = @"cellOne";
 static NSString *cellTwo = @"cellTwo";
@@ -170,6 +171,15 @@ static NSString *cellTwo = @"cellTwo";
         UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(W1, H1+(H1+H2)*i, W0, H2)];
         view1.backgroundColor=[UIColor whiteColor];
         [_firstView addSubview:view1];
+         view1.userInteractionEnabled=YES;
+        if (i==0) {
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView1)];
+            [view1 addGestureRecognizer:tapGestureRecognizer];
+        }
+        if (i==2) {
+            UITapGestureRecognizer *tapGestureRecognizer33 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView2)];
+            [view1 addGestureRecognizer:tapGestureRecognizer33];
+        }
         
         UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(W2,(H2-imageH)/2, imageH,imageH)];
         image2.image=IMAGE(picName[i]);
@@ -188,7 +198,7 @@ static NSString *cellTwo = @"cellTwo";
         image3.image=IMAGE(@"MAXright.png");
         [view1 addSubview:image3];
         }
-        
+      
         float  titleLabel3X=2*W2+imageH+lableW;
         float  lable4W=(W0-image3W-image3W1*2-titleLabel3X)/2;
         float lableH2=20*HEIGHT_SIZE;float lableH3=10*HEIGHT_SIZE;
@@ -300,6 +310,18 @@ static NSString *cellTwo = @"cellTwo";
         testView.controlType=2;
     [self.navigationController pushViewController:testView animated:YES];
 }
+
+-(void)goToControlView2{
+    usbToWifiWarnView *testView=[[usbToWifiWarnView alloc]init];
+    testView.faultCode=_firstViewDataArray[4];
+        testView.warnCode=_firstViewDataArray[5];
+      NSString*faultStateString=[_allDic objectForKey:@"faultStateView"];
+    testView.faultStatueCode=faultStateString;
+    
+    [self.navigationController pushViewController:testView animated:YES];
+}
+
+
 
 -(void)initThirdUI{
     _tableNameArray=@[@"PV电压/电流/电量",@"PV串电压/电流",@"AC电压/电流",@"PID电压/电流"];

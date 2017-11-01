@@ -63,6 +63,9 @@
     NSString *titleString=titleArray[titleState];
      [_receiveDic setObject:titleString forKey:@"titleView"];
     
+        long faultState=(long)[self changeTwoRegister:_data04_1 registerNum:106];
+      [_receiveDic setObject:[NSString stringWithFormat:@"%ld",faultState] forKey:@"faultStateView"];
+    
     float EacToday=[self changeTwoRegister:_data04_1 registerNum:53];
     float EacTotal=[self changeTwoRegister:_data04_1 registerNum:55];
     float EacputPower=[self changeTwoRegister:_data04_1 registerNum:35];
