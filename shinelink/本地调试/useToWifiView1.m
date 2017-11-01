@@ -132,6 +132,8 @@ static NSString *cellTwo = @"cellTwo";
         _firstViewDataArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"oneView"]];
      _tableLableValueArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"twoView2"]];
    _thirdDataArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"twoView3"]];
+    NSString*titleString=[_allDic objectForKey:@"titleView"];
+    self.title=titleString;
     
     [self initUI];
     
@@ -303,26 +305,32 @@ static NSString *cellTwo = @"cellTwo";
     _tableNameArray=@[@"PV电压/电流/电量",@"PV串电压/电流",@"AC电压/电流",@"PID电压/电流"];
     float view1H= CGRectGetMaxY(_secondView.frame);
     
-    
-    
-    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(6*NOW_SIZE, view1H+10*HEIGHT_SIZE+3*HEIGHT_SIZE, 3*NOW_SIZE, 14*HEIGHT_SIZE)];
-    V1.backgroundColor=MainColor;
-    [_scrollView addSubview:V1];
-    
     float lableH1=20*HEIGHT_SIZE;
-    UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(12*NOW_SIZE, view1H+10*HEIGHT_SIZE,200*NOW_SIZE,lableH1)];
-    lable5.textColor =COLOR(51, 51, 51, 1);
-    lable5.textAlignment=NSTextAlignmentLeft;
-    lable5.text=@"设备信息";
-    lable5.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [_scrollView addSubview:lable5];
     
-    UILabel *lable6 = [[UILabel alloc]initWithFrame:CGRectMake(210*NOW_SIZE, view1H+12*HEIGHT_SIZE,100*NOW_SIZE,lableH1)];
-    lable6.textColor =MainColor;
-    lable6.textAlignment=NSTextAlignmentRight;
-    lable6.text=@"单位:V/A/kWh";
-    lable6.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-    [_scrollView addSubview:lable6];
+    if (!_thirdView) {
+        _thirdView=[[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, view1H+10*HEIGHT_SIZE, SCREEN_Width, lableH1)];
+        _thirdView.backgroundColor=[UIColor clearColor];
+        [_scrollView addSubview:_thirdView];
+        
+        UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(6*NOW_SIZE, 3*HEIGHT_SIZE, 3*NOW_SIZE, 14*HEIGHT_SIZE)];
+        V1.backgroundColor=MainColor;
+        [_thirdView addSubview:V1];
+        
+        UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(12*NOW_SIZE, 0*HEIGHT_SIZE,200*NOW_SIZE,lableH1)];
+        lable5.textColor =COLOR(51, 51, 51, 1);
+        lable5.textAlignment=NSTextAlignmentLeft;
+        lable5.text=@"设备信息";
+        lable5.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        [_thirdView addSubview:lable5];
+        
+        UILabel *lable6 = [[UILabel alloc]initWithFrame:CGRectMake(210*NOW_SIZE, 2*HEIGHT_SIZE,100*NOW_SIZE,lableH1)];
+        lable6.textColor =MainColor;
+        lable6.textAlignment=NSTextAlignmentRight;
+        lable6.text=@"单位:V/A/kWh";
+        lable6.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        [_thirdView addSubview:lable6];
+    }
+ 
     
        NSMutableArray<usbModleOne *> *arrM = [NSMutableArray arrayWithCapacity:_tableNameArray.count];
     for (int i=0; i<_tableNameArray.count; i++) {
@@ -474,8 +482,10 @@ static NSString *cellTwo = @"cellTwo";
 
 
 -(void)viewWillDisappear:(BOOL)animated{
-    
-    
+    if (_usbControl) {
+        [_usbControl removeTheTcp];
+    }
+ 
 }
 
 

@@ -58,7 +58,10 @@
 
 -(void)getFirstViewValue{
  
-    
+    int titleState=(int)[self changeOneRegister:_data04_1 registerNum:0];
+    NSArray *titleArray=@[@"Waiting",@"Normal",@"Upgrade",@"Fault"];
+    NSString *titleString=titleArray[titleState];
+     [_receiveDic setObject:titleString forKey:@"titleView"];
     
     float EacToday=[self changeTwoRegister:_data04_1 registerNum:53];
     float EacTotal=[self changeTwoRegister:_data04_1 registerNum:55];
@@ -279,8 +282,13 @@
 }
 
 
--(void)receiveData:(receiveDataBlock)receiveDataBlock{
-    
+
+
+
+-(void)removeTheTcp{
+    if (_ControlOne) {
+        [_ControlOne disConnect];
+    }
     
 }
 

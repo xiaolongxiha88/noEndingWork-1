@@ -450,6 +450,13 @@
 }
 
 
+-(void)viewWillDisappear:(BOOL)animated{
+    if (_ControlOne) {
+        [_ControlOne disConnect];
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

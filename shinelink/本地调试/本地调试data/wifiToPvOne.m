@@ -11,10 +11,10 @@
 #import "wifiToPvDataModel.h"
 #import "MBProgressHUD.h"
 
-static float TCP_TIME=1.5;
+static float TCP_TIME=10.5;
 
 @interface wifiToPvOne ()<GCDAsyncSocketDelegate>
-@property (nonatomic, strong) GCDAsyncSocket *socket;
+
 @property (nonatomic, strong) wifiToPvDataModel *getData;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *dataView;
@@ -45,7 +45,7 @@ static float TCP_TIME=1.5;
 
 
 -(void)goToOneTcp:(int)type cmdNum:(int)cmdNum cmdType:(NSString*)cmdType regAdd:(NSString*)regAdd Length:(NSString*)Length{
-
+ 
 
       _AllDataDic=[NSMutableDictionary new];
        _cmdCount=0;

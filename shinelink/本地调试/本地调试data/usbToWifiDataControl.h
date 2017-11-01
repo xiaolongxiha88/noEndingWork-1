@@ -25,4 +25,6 @@ typedef void(^receiveDataBlock)(NSDictionary*);
 //获取字符串寄存器值
 -(NSString*)changeToASCII:(NSData*)data beginRegister:(int)beginRegister length:(int)length;
 
+-(void)removeTheTcp;
+
 @end

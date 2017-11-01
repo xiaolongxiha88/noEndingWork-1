@@ -93,7 +93,7 @@
     PV2Lable.adjustsFontSizeToFitWidth=YES;
     [_view1 addSubview:PV2Lable];
     
-    if (_CellNumber==0 || _CellNumber==2 || _CellNumber==8 || _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20) {
+    if (_CellNumber==0 || _CellNumber==2 || _CellNumber==7 || _CellNumber==8 || _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20) {
         _textLable=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         _textLable.text=@"点击选择";
         _textLable.userInteractionEnabled=YES;
@@ -240,7 +240,7 @@
                         @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
     
     if (_CellNumber<21) {
-        if (_CellNumber==0 || _CellNumber==2 || _CellNumber==8 || _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20) {
+        if (_CellNumber==0 || _CellNumber==2 || _CellNumber==7 || _CellNumber==8 || _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20) {
         }else{
             _setValue=_textField2.text;
         }
@@ -298,7 +298,7 @@
 
 
 -(void)showTheChoice{
-    if (_CellNumber==0 || _CellNumber==2 ||  _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19){
+    if (_CellNumber==0 || _CellNumber==2 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19){
         _choiceArray=@[@"Off(0)",@"On(1)"];
     }
     if (_CellNumber==8 ){
@@ -307,7 +307,12 @@
     if (_CellNumber==20 ){
         _choiceArray=@[@"0",@"1",@"2"];
     }
-    
+    if (_CellNumber==7 ){
+        _choiceArray=@[@"9600(0)",@"38400(1)",@"115200(2)"];
+    }
+    if (_CellNumber==14 ){
+       _choiceArray=@[@"On(0)",@"Off(1)"];
+    }
     [ZJBLStoreShopTypeAlert showWithTitle:@"选择设置值" titles:_choiceArray selectIndex:^(NSInteger SelectIndexNum){
         
         _setValue=[NSString stringWithFormat:@"%ld",SelectIndexNum];
@@ -415,7 +420,9 @@
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
-    
+    if (_ControlOne) {
+        [_ControlOne disConnect];
+    }
     
 }
 

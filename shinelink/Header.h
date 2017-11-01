@@ -67,11 +67,11 @@
 
 #define is_Test @"isTest"
 
-//#define HEAD_URL   @"http://192.168.3.117:8080/ShineServer_2016"
-//#define HEAD_URL_Demo  @"http://192.168.3.117:8080/ShineServer_2016"
-//#define HEAD_URL_Demo_CN  @"http://192.168.3.117:8080/ShineServer_2016"
-//#define OSS_HEAD_URL_Demo  @"http://192.168.3.117:8080/ShineOSS"
-//#define OSS_HEAD_URL @"http://192.168.3.117:8080/ShineOSS"
+//#define HEAD_URL   @"http://192.168.3.214:8080/ShineServer_2016"
+//#define HEAD_URL_Demo  @"http://192.168.3.214:8080/ShineServer_2016"
+//#define HEAD_URL_Demo_CN  @"http://192.168.3.214:8080/ShineServer_2016"
+//#define OSS_HEAD_URL_Demo  @"http://192.168.3.214:8080/ShineOSS"
+//#define OSS_HEAD_URL @"http://192.168.3.214:8080/ShineOSS"
 
 
 
