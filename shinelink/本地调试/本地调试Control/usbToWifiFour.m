@@ -12,7 +12,9 @@
 
 @interface usbToWifiFour ()
 
+@property(nonatomic,strong)UILabel *lable1;
 @property(nonatomic,strong)NSArray *buttonName;
+@property(nonatomic,strong)NSArray *lableNameArray;
 @property(nonatomic,strong)wifiToPvOne*ControlOne;
 @property(nonatomic,strong) NSString* setRegister;
 @property(nonatomic,strong) NSString* setRegisterLength;
@@ -43,7 +45,8 @@
 
 -(void)initUI{
      float layerW=1;
-    _buttonName=@[@"This day",@"Latest day",@"Latest month",@"Latest year"];
+    _buttonName=@[@"Hour",@"Day",@"Month",@"Year"];
+    _lableNameArray=@[@"当天每小时发电量",@"最近7天发电量",@"最近12个月发电量",@"最近20年发电量",];
     
     for (int i=0; i<_buttonName.count; i++) {
         UIButton *selecteButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -55,7 +58,7 @@
         selecteButton.layer.borderColor=COLOR(108, 199, 255, 1).CGColor;
         [self setButtonColor:selecteButton];
         selecteButton.tag = 1000+i;
-        selecteButton.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
+        selecteButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
         if (i==0) {
               selecteButton.selected = YES;
         }else{
@@ -66,6 +69,18 @@
         [self.view addSubview:selecteButton];
     }
  
+    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0,40*HEIGHT_SIZE, SCREEN_Width, 100*HEIGHT_SIZE)];
+    V1.backgroundColor=MainColor;
+    [self.view addSubview:V1];
+    
+   _lable1=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 40*HEIGHT_SIZE, SCREEN_Width,20*HEIGHT_SIZE )];
+    _lable1.text=_lableNameArray[0];
+    _lable1.textAlignment=NSTextAlignmentCenter;
+    _lable1.textColor=[UIColor whiteColor];
+    _lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    _lable1.adjustsFontSizeToFitWidth=YES;
+    [V1 addSubview:_lable1];
+    
         [self cmdForData:1000];
     
 }
@@ -76,6 +91,7 @@
       UIButton *button=[self.view viewWithTag:1000+i];
          if ((i+1000)==(sender.tag)) {
              button.selected=YES;
+             _lable1.text=_lableNameArray[i];
          }else{
                 button.selected=NO;
          }
@@ -126,7 +142,7 @@
 
 -(void)getBarUI{
     if (!_line2View) {
-        self.line2View = [[Line2View alloc] initWithFrame:CGRectMake(0, 80*HEIGHT_SIZE, SCREEN_Width, 300*HEIGHT_SIZE)];
+        self.line2View = [[Line2View alloc] initWithFrame:CGRectMake(0, 110*HEIGHT_SIZE, SCREEN_Width, 300*HEIGHT_SIZE)];
         self.line2View.flag=@"1";
         self.line2View.frameType=@"2";
         _line2View.barTypeNum=1;
