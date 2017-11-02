@@ -16,7 +16,7 @@
 @property (nonatomic, strong) NSString *frameType;
 @property(nonatomic,strong)NSString *unitLaleName;
 
-
+@property(nonatomic,assign)int barTypeNum;
 @property (assign, nonatomic) BOOL isStorage;//间距数量
 
 - (void)refreshLineChartViewWithDataDict:(NSMutableDictionary *)dataDict;

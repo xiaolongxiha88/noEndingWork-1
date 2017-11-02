@@ -11,7 +11,7 @@
 #import "wifiToPvDataModel.h"
 #import "MBProgressHUD.h"
 
-static float TCP_TIME=10.5;
+static float TCP_TIME=1;
 
 @interface wifiToPvOne ()<GCDAsyncSocketDelegate>
 
@@ -52,7 +52,13 @@ static float TCP_TIME=10.5;
       _cmdType=type;
     _cmdArray=@[cmdType,regAdd,Length];
       _isReceiveAll=NO;
-       [self performSelector:@selector(checkTcpTimeout) withObject:nil afterDelay:TCP_TIME*cmdNum];
+    int CMDTIME;
+    if (_cmdType==3) {
+        CMDTIME=2;
+    }else{
+        CMDTIME=TCP_TIME;
+    }
+       [self performSelector:@selector(checkTcpTimeout) withObject:nil afterDelay:CMDTIME*cmdNum];
          [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
 }
 

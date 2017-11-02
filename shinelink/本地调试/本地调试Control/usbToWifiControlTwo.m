@@ -424,6 +424,9 @@
         [_ControlOne disConnect];
     }
     
+     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwo" object:nil];
+       [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwoFailed" object:nil];
+    
 }
 
 

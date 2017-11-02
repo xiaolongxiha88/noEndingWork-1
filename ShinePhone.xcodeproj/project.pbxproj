@@ -399,6 +399,7 @@
 		33742B421ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 33742B411ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.m */; };
 		33742B481ED6D6BD0015F2EA /* OssMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33742B471ED6D6BD0015F2EA /* OssMessageViewController.m */; };
 		33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */; };
+		337475F21FAB004B00BB1A76 /* usbToWifiFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 337475F11FAB004B00BB1A76 /* usbToWifiFour.m */; };
 		337532EF1D051579009CE66F /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337532EE1D051579009CE66F /* PushConfig.plist */; };
 		337532F31D051C14009CE66F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 337532F21D051C14009CE66F /* libz.tbd */; };
 		337584431D267D12006AC140 /* product.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337584421D267D12006AC140 /* product.jpg */; };
@@ -1363,6 +1364,8 @@
 		33742B471ED6D6BD0015F2EA /* OssMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OssMessageViewController.m; sourceTree = "<group>"; };
 		33744DE21CAE597A0065DC01 /* pvLogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pvLogTableViewCell.h; sourceTree = "<group>"; };
 		33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pvLogTableViewCell.m; sourceTree = "<group>"; };
+		337475F01FAB004B00BB1A76 /* usbToWifiFour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiFour.h; sourceTree = "<group>"; };
+		337475F11FAB004B00BB1A76 /* usbToWifiFour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiFour.m; sourceTree = "<group>"; };
 		337532EE1D051579009CE66F /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		337532F21D051C14009CE66F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		337584421D267D12006AC140 /* product.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = product.jpg; sourceTree = "<group>"; };
@@ -2063,6 +2066,10 @@
 		334B8F171C9124EC00798A69 /* 曲线图第三方 */ = {
 			isa = PBXGroup;
 			children = (
+				3370EBC21F41AB8100F37149 /* upGo.png */,
+				338F0E981E4B06920002B7FE /* downGo.png */,
+				3370EBC41F41ABA700F37149 /* left.png */,
+				3370EBC61F41ABB200F37149 /* right.png */,
 				338234281D9A4982002062AE /* datalog_cn2.png */,
 				338234291D9A4982002062AE /* datalog_en2.png */,
 				334B8F591C914B4E00798A69 /* UICountingLabel */,
@@ -2708,10 +2715,6 @@
 				336664F81CB78517005573FB /* Line2View.m */,
 				337035991E373D2D00AE7CD2 /* datailD2ViewController.h */,
 				3370359A1E373D2D00AE7CD2 /* datailD2ViewController.m */,
-				3370EBC21F41AB8100F37149 /* upGo.png */,
-				338F0E981E4B06920002B7FE /* downGo.png */,
-				3370EBC41F41ABA700F37149 /* left.png */,
-				3370EBC61F41ABB200F37149 /* right.png */,
 			);
 			path = "数据区";
 			sourceTree = "<group>";
@@ -3570,6 +3573,8 @@
 				3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */,
 				339844231FA82107006A15AD /* usbToWifiControlThree.h */,
 				339844241FA82107006A15AD /* usbToWifiControlThree.m */,
+				337475F01FAB004B00BB1A76 /* usbToWifiFour.h */,
+				337475F11FAB004B00BB1A76 /* usbToWifiFour.m */,
 			);
 			path = "本地调试Control";
 			sourceTree = "<group>";
@@ -4777,6 +4782,7 @@
 				334B8F4A1C914A6D00798A69 /* PNBar.m in Sources */,
 				33EA49F51E8DEA0B0044A01A /* newEnergyStorage.m in Sources */,
 				33860FDF1EEA75C5004150FD /* MJRefreshComponent.m in Sources */,
+				337475F21FAB004B00BB1A76 /* usbToWifiFour.m in Sources */,
 				337F9C881C71A6710016FE43 /* AppDelegate.m in Sources */,
 				336D401B1D6FEA7600ECFA34 /* HanyuPinyinOutputFormat.m in Sources */,
 				336F040D1F050F7500DE7CD7 /* orderCellThree.m in Sources */,

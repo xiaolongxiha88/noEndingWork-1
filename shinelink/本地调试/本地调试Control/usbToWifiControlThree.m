@@ -149,24 +149,28 @@
     NSArray *regiserArray=@[@52,@53,@54,@55,@56,@57,@58,@59,@60,@61,@62,@63,@64,@65,@66,@67,@68,@69,@70,@71,@72,@73,@74,@75,@76,@77,@78,@79];
  
     if (_CellNumber==14) {
-        _nameArray0=@[High,Low];
+        _nameArray0=@[[NSString stringWithFormat:@"%@(28)",High],[NSString stringWithFormat:@"%@(29)",Low]];
     }
     if (_CellNumber==15) {
         _nameArray0=@[@"经度(122)",@"纬度(123)"];
     }
    
-    int K=0+(_CellNumber-16)*2;
-    NSString *A1=[NSString stringWithFormat:@"%@(%@)",Low,regiserArray[K]];
-    NSString *A2=[NSString stringWithFormat:@"%@(%@)",High,regiserArray[K+1]];
-     NSString *A3=[NSString stringWithFormat:@"%@(%@)",High,regiserArray[K]];
-     NSString *A4=[NSString stringWithFormat:@"%@(%@)",Low,regiserArray[K+1]];
-    
     if (_CellNumber>15) {
-        _nameArray0=@[A1,A2];
+        int K=0+(_CellNumber-16)*2;
+        NSString *A1=[NSString stringWithFormat:@"%@(%@)",Low,regiserArray[K]];
+        NSString *A2=[NSString stringWithFormat:@"%@(%@)",High,regiserArray[K+1]];
+        NSString *A3=[NSString stringWithFormat:@"%@(%@)",High,regiserArray[K]];
+        NSString *A4=[NSString stringWithFormat:@"%@(%@)",Low,regiserArray[K+1]];
+        if (_CellNumber>15) {
+            _nameArray0=@[A1,A2];
+        }
+        if (_CellNumber==17 || _CellNumber==19 || _CellNumber==21) {
+            _nameArray0=@[A3,A4];
+        }
     }
-    if (_CellNumber==17 || _CellNumber==19 || _CellNumber==21) {
-          _nameArray0=@[A3,A4];
-    }
+
+    
+  
     
     float H=100*HEIGHT_SIZE;
     for (int i=0; i<2; i++) {
@@ -454,7 +458,8 @@
     if (_ControlOne) {
         [_ControlOne disConnect];
     }
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwo" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwoFailed" object:nil];
 }
 
 

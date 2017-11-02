@@ -13,6 +13,7 @@
 #import "usbToWifiDataControl.h"
 #import "usbToWifiControlOne.h"
 #import "usbToWifiWarnView.h"
+#import "usbToWifiFour.h"
 
 static NSString *cellOne = @"cellOne";
 static NSString *cellTwo = @"cellTwo";
@@ -173,7 +174,7 @@ static NSString *cellTwo = @"cellTwo";
         [_firstView addSubview:view1];
          view1.userInteractionEnabled=YES;
         if (i==0) {
-            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView1)];
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView3)];
             [view1 addGestureRecognizer:tapGestureRecognizer];
         }
         if (i==2) {
@@ -312,16 +313,24 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)goToControlView2{
-    usbToWifiWarnView *testView=[[usbToWifiWarnView alloc]init];
-    testView.faultCode=_firstViewDataArray[4];
+    if (_firstViewDataArray.count>0) {
+        usbToWifiWarnView *testView=[[usbToWifiWarnView alloc]init];
+        testView.faultCode=_firstViewDataArray[4];
         testView.warnCode=_firstViewDataArray[5];
-      NSString*faultStateString=[_allDic objectForKey:@"faultStateView"];
-    testView.faultStatueCode=faultStateString;
+        NSString*faultStateString=[_allDic objectForKey:@"faultStateView"];
+        testView.faultStatueCode=faultStateString;
+        
+        [self.navigationController pushViewController:testView animated:YES];
+    }else{
+        [self showToastViewWithTitle:@"请先读取故障信息"];
+    }
     
-    [self.navigationController pushViewController:testView animated:YES];
 }
 
-
+-(void)goToControlView3{
+    usbToWifiFour *testView=[[usbToWifiFour alloc]init];
+    [self.navigationController pushViewController:testView animated:YES];
+}
 
 -(void)initThirdUI{
     _tableNameArray=@[@"PV电压/电流/电量",@"PV串电压/电流",@"AC电压/电流",@"PID电压/电流"];

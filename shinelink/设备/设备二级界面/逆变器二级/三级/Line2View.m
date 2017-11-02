@@ -404,6 +404,10 @@
 - (PNBarChart *)barChartView {
     if (!_barChartView) {
         self.barChartView = [[PNBarChart alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 310*NOW_SIZE, 300*HEIGHT_SIZE)];
+        if (_barTypeNum==1) {
+            _barChartView.frame=CGRectMake(5*NOW_SIZE, 50*HEIGHT_SIZE, 310*NOW_SIZE, 300*HEIGHT_SIZE);
+              self.unitLabel.hidden=YES;
+        }
         self.barChartView.backgroundColor = [UIColor clearColor];
         self.barChartView.barBackgroundColor = [UIColor clearColor];
         [self.barChartView setStrokeColor:COLOR(122, 230, 129, 1)];
