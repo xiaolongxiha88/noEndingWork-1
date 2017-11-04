@@ -100,6 +100,9 @@ static float TCP_TIME=1;
     NSData *data=[_getData CmdData:cmdType RegAdd:regAdd Length:length modbusBlock:^(NSData* modbusData){
         
         _modbusData=[NSData dataWithData:modbusData];
+        if (_cmdType==4) {
+              [_AllDataDic setValue:modbusData forKey:@"modbusData"];
+        }
     }];
 
     _CmdData=[NSData dataWithData:data];
@@ -211,6 +214,11 @@ static float TCP_TIME=1;
                [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
         }
      
+    }else  if (_cmdType==4) {
+        if (!_isReceiveAll) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:_AllDataDic];
+        }
+        
     }
  
     
@@ -226,13 +234,18 @@ static float TCP_TIME=1;
     
     if (_cmdType==1) {
          [self checkWhichNumData:data];
-    }else if ((_cmdType==2)||(_cmdType==3)){
+    }else if ((_cmdType==2)||(_cmdType==3)||(_cmdType==4)){
         _isReceiveAll=YES;
     
         if ([self checkData:data]) {
               [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwo"object:_AllDataDic];
         }else{
-              [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
+            if (_cmdType==4) {
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:_AllDataDic];
+            }else{
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
+            }
+            
         }
         
         
@@ -275,6 +288,9 @@ static float TCP_TIME=1;
                     [self upDataToDic:data00];
                 }else  if (_cmdType==2) {
                     [_AllDataDic setValue:data00 forKey:@"one"];
+                }
+                if (_cmdType==4) {
+                    [_AllDataDic setValue:data1 forKey:@"one"];
                 }
                 
             }else{

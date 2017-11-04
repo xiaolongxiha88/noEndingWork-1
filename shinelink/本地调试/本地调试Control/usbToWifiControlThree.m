@@ -93,7 +93,7 @@
     UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 20*HEIGHT_SIZE, 300*NOW_SIZE,20*HEIGHT_SIZE )];
     PV2Lable.text=_titleString;
     PV2Lable.textAlignment=NSTextAlignmentLeft;
-    PV2Lable.textColor=COLOR(102, 102, 102, 1);;
+    PV2Lable.textColor=COLOR(102, 102, 102, 1);
     PV2Lable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     PV2Lable.adjustsFontSizeToFitWidth=YES;
     [_view1 addSubview:PV2Lable];
@@ -114,7 +114,7 @@
         }
       
         _textLable.textAlignment=NSTextAlignmentCenter;
-        _textLable.textColor=COLOR(102, 102, 102, 1);;
+        _textLable.textColor=COLOR(102, 102, 102, 1);
         _textLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         _textLable.adjustsFontSizeToFitWidth=YES;
         [_view1 addSubview:_textLable];
@@ -123,8 +123,8 @@
         _textField2.layer.borderWidth=1;
         _textField2.layer.cornerRadius=5;
         _textField2.layer.borderColor=COLOR(102, 102, 102, 1).CGColor;
-        _textField2.textColor = COLOR(102, 102, 102, 1);;
-        _textField2.tintColor = COLOR(102, 102, 102, 1);;
+        _textField2.textColor = COLOR(102, 102, 102, 1);
+        _textField2.tintColor = COLOR(102, 102, 102, 1);
         _textField2.textAlignment=NSTextAlignmentCenter;
         _textField2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_view1 addSubview:_textField2];

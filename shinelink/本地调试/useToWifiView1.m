@@ -14,6 +14,8 @@
 #import "usbToWifiControlOne.h"
 #import "usbToWifiWarnView.h"
 #import "usbToWifiFour.h"
+#import "usbToWifiControlFour.h"
+
 
 static NSString *cellOne = @"cellOne";
 static NSString *cellTwo = @"cellTwo";
@@ -279,8 +281,8 @@ static NSString *cellTwo = @"cellTwo";
     V2.backgroundColor=[UIColor whiteColor];
     [_secondView addSubview:V2];
     
-       NSArray *picName=@[@"max_set.png",@"max_parameter.png"];
-     NSArray *nameArray=@[@"设置配置",@"参数设置"];
+       NSArray *picName=@[@"max_set.png",@"max_parameter.png",@"Max_control3.png"];
+     NSArray *nameArray=@[@"设置配置",@"参数设置",@"高级设置"];
     
     float imageH=30*HEIGHT_SIZE;float V2H1=15*HEIGHT_SIZE;
     float WW=ScreenWidth/picName.count;
@@ -291,8 +293,11 @@ static NSString *cellTwo = @"cellTwo";
         if (i==0) {
             UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView)];
             [VV addGestureRecognizer:tapGestureRecognizer];
-        }else{
+        }else if (i==1) {
             UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView1)];
+            [VV addGestureRecognizer:tapGestureRecognizer];
+        }else if (i==2) {
+            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView4)];
             [VV addGestureRecognizer:tapGestureRecognizer];
         }
       
@@ -325,6 +330,12 @@ static NSString *cellTwo = @"cellTwo";
     [self.navigationController pushViewController:testView animated:YES];
 }
 
+-(void)goToControlView3{
+    usbToWifiControlOne *testView=[[usbToWifiControlOne alloc]init];
+    testView.controlType=2;
+    [self.navigationController pushViewController:testView animated:YES];
+}
+
 -(void)goToControlView2{
     if (_firstViewDataArray.count>0) {
         usbToWifiWarnView *testView=[[usbToWifiWarnView alloc]init];
@@ -340,8 +351,8 @@ static NSString *cellTwo = @"cellTwo";
     
 }
 
--(void)goToControlView3{
-    usbToWifiFour *testView=[[usbToWifiFour alloc]init];
+-(void)goToControlView4{
+    usbToWifiControlFour *testView=[[usbToWifiControlFour alloc]init];
     [self.navigationController pushViewController:testView animated:YES];
 }
 

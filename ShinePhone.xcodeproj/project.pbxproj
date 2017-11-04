@@ -400,6 +400,8 @@
 		33742B481ED6D6BD0015F2EA /* OssMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33742B471ED6D6BD0015F2EA /* OssMessageViewController.m */; };
 		33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */; };
 		337475F21FAB004B00BB1A76 /* usbToWifiFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 337475F11FAB004B00BB1A76 /* usbToWifiFour.m */; };
+		337475F61FADB4E700BB1A76 /* Max_control3.png in Resources */ = {isa = PBXBuildFile; fileRef = 337475F51FADB4E700BB1A76 /* Max_control3.png */; };
+		337475F91FADB64900BB1A76 /* usbToWifiControlFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 337475F81FADB64900BB1A76 /* usbToWifiControlFour.m */; };
 		337532EF1D051579009CE66F /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 337532EE1D051579009CE66F /* PushConfig.plist */; };
 		337532F31D051C14009CE66F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 337532F21D051C14009CE66F /* libz.tbd */; };
 		337584431D267D12006AC140 /* product.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337584421D267D12006AC140 /* product.jpg */; };
@@ -1366,6 +1368,9 @@
 		33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pvLogTableViewCell.m; sourceTree = "<group>"; };
 		337475F01FAB004B00BB1A76 /* usbToWifiFour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiFour.h; sourceTree = "<group>"; };
 		337475F11FAB004B00BB1A76 /* usbToWifiFour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiFour.m; sourceTree = "<group>"; };
+		337475F51FADB4E700BB1A76 /* Max_control3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Max_control3.png; sourceTree = "<group>"; };
+		337475F71FADB64900BB1A76 /* usbToWifiControlFour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiControlFour.h; sourceTree = "<group>"; };
+		337475F81FADB64900BB1A76 /* usbToWifiControlFour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiControlFour.m; sourceTree = "<group>"; };
 		337532EE1D051579009CE66F /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		337532F21D051C14009CE66F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		337584421D267D12006AC140 /* product.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = product.jpg; sourceTree = "<group>"; };
@@ -3203,6 +3208,7 @@
 		3376B3CD1F973E0B0069F820 /* 本地调试图片 */ = {
 			isa = PBXGroup;
 			children = (
+				337475F51FADB4E700BB1A76 /* Max_control3.png */,
 				3376B3DA1F973EED0069F820 /* MAXdown.png */,
 				3376B3DC1F973EEE0069F820 /* MAXright.png */,
 				3376B3DB1F973EED0069F820 /* MAXup.png */,
@@ -3573,8 +3579,8 @@
 				3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */,
 				339844231FA82107006A15AD /* usbToWifiControlThree.h */,
 				339844241FA82107006A15AD /* usbToWifiControlThree.m */,
-				337475F01FAB004B00BB1A76 /* usbToWifiFour.h */,
-				337475F11FAB004B00BB1A76 /* usbToWifiFour.m */,
+				337475F71FADB64900BB1A76 /* usbToWifiControlFour.h */,
+				337475F81FADB64900BB1A76 /* usbToWifiControlFour.m */,
 			);
 			path = "本地调试Control";
 			sourceTree = "<group>";
@@ -4247,6 +4253,8 @@
 		33FAD8E11F99C4B50030EEC3 /* 本地调试view */ = {
 			isa = PBXGroup;
 			children = (
+				337475F01FAB004B00BB1A76 /* usbToWifiFour.h */,
+				337475F11FAB004B00BB1A76 /* usbToWifiFour.m */,
 				339844261FA9B43A006A15AD /* usbToWifiWarnView.h */,
 				339844271FA9B43A006A15AD /* usbToWifiWarnView.m */,
 				3376B3E01F9839C70069F820 /* useToWifiCell1.h */,
@@ -4478,6 +4486,7 @@
 				3370EB9F1F41468C00F37149 /* 全面的数据分析_en.png in Resources */,
 				33FEFD7B1C7DB38400324374 /* shebei@2x.png in Resources */,
 				338234271D9A47AC002062AE /* Collectors_en.png in Resources */,
+				337475F61FADB4E700BB1A76 /* Max_control3.png in Resources */,
 				33C3FFFF1D3E33E00016351C /* L6.png in Resources */,
 				3370EBAF1F414C3F00F37149 /* equipmentV@2x.png in Resources */,
 				3370EBB31F414D9A00F37149 /* mine2v@2x.png in Resources */,
@@ -4865,6 +4874,7 @@
 				33EFB66B1C98F9B1003F336F /* ZFAxisLine.m in Sources */,
 				334FF09D1CF53C7C001E6716 /* MainViewController.m in Sources */,
 				3326926B1D794AB00058C5B7 /* AvCell.m in Sources */,
+				337475F91FADB64900BB1A76 /* usbToWifiControlFour.m in Sources */,
 				3389649C1E5E767700A7B1AE /* forgetOneViewController.m in Sources */,
 				3379E4EB1E94BE40000A4198 /* UIColor+Hex.m in Sources */,
 				334B8F541C914A6D00798A69 /* PNPieChartDataItem.m in Sources */,
