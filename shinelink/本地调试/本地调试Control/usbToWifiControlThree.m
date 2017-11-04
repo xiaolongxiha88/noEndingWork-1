@@ -24,6 +24,12 @@
 
 @implementation usbToWifiControlThree
 
+-(void)viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveDataTwoFailed" object:nil];
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"读取" style:UIBarButtonItemStylePlain target:self action:@selector(readValueToTcp)];
@@ -46,9 +52,7 @@
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
     if (!_view1) {
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveDataTwoFailed" object:nil];
-        
+
         _view1 = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE, ScreenWidth,SCREEN_Height)];
         _view1.backgroundColor =[UIColor clearColor];
         _view1.userInteractionEnabled = YES;
@@ -251,6 +255,7 @@
     }
     
     [self setTwo];
+       self.navigationItem.rightBarButtonItem.enabled=NO;
     [self showProgressView];
 }
 
@@ -365,6 +370,7 @@
 
 
 -(void)readValueToTcp{
+       self.navigationItem.rightBarButtonItem.enabled=NO;
     [self showProgressView];
     _cmdTcpType=1;
     
@@ -378,8 +384,15 @@
     
 }
 
--(void)receiveFirstData2:(NSNotification*) notification{
+-(void)removeTheWaitingView{
     [self hideProgressView];
+    self.navigationItem.rightBarButtonItem.enabled=YES;
+}
+
+-(void)receiveFirstData2:(NSNotification*) notification{
+    
+       [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1.5];
+    
     
     if (_cmdTcpType==1) {
         NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
@@ -400,7 +413,10 @@
         if (_cmdTcpTimes==_setRegisterArray.count) {
             [self showAlertViewWithTitle:@"设置成功" message:nil cancelButtonTitle:root_OK];
         }else{
+               self.navigationItem.rightBarButtonItem.enabled=NO;
             [self showProgressView];
+          
+            
             [_ControlOne goToOneTcp:3 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
             
         }
@@ -412,6 +428,8 @@
 
 -(void)setFailed{
     [self hideProgressView];
+        [self removeTheTcp];
+    
     if (_cmdTcpType==1) {
         [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
     }
@@ -453,6 +471,12 @@
     
 }
 
+-(void)removeTheTcp{
+    if (_ControlOne) {
+        [_ControlOne disConnect];
+    }
+    
+}
 
 -(void)viewWillDisappear:(BOOL)animated{
     if (_ControlOne) {

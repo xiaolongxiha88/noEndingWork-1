@@ -45,6 +45,15 @@ static NSString *cellTwo = @"cellTwo";
     NSArray<usbModleOne*> *_modelList;
 }
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getData:) name: @"recieveReceiveData" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice) name: @"recieveFailedTcpData" object:nil];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(removeTheTcp) name: @"StopConfigerUI" object:nil];
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
      [self.navigationController setNavigationBarHidden:NO];
@@ -65,9 +74,6 @@ static NSString *cellTwo = @"cellTwo";
         [self.view addSubview:_scrollView];
     }
 
-    
-       [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getData:) name: @"recieveReceiveData" object:nil];
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice) name: @"recieveFailedTcpData" object:nil];
     
      _firstViewDataArray=[NSMutableArray new];
       _tableLableValueArray=[NSMutableArray new];
@@ -115,6 +121,7 @@ static NSString *cellTwo = @"cellTwo";
         [self checkIsWifi];
     
     if (_isWiFi) {
+        self.navigationItem.rightBarButtonItem.enabled=NO;
         [self showProgressView];
  [_usbControl getDataAll:1];
         
@@ -127,8 +134,14 @@ static NSString *cellTwo = @"cellTwo";
     
 }
 
+-(void)removeTheWaitingView{
+    [self hideProgressView];
+    self.navigationItem.rightBarButtonItem.enabled=YES;
+}
+
 -(void)getData:(NSNotification*) notification{
-          [self hideProgressView];
+    
+   [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:2.5];
     
  _allDic=[NSDictionary dictionaryWithDictionary:[notification object]];
         _firstViewDataArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"oneView"]];
@@ -485,6 +498,9 @@ static NSString *cellTwo = @"cellTwo";
 
 -(void)receiveFailedNotice{
     [self hideProgressView];
+      self.navigationItem.rightBarButtonItem.enabled=YES;
+
+    [self removeTheTcp];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi模块通信失败,请检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
     alertView.tag = 1002;
     [alertView show];
@@ -511,12 +527,21 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 
+-(void)removeTheTcp{
+    if (_usbControl) {
+        [_usbControl removeTheTcp];
+    }
+    
+}
 
 -(void)viewWillDisappear:(BOOL)animated{
     if (_usbControl) {
         [_usbControl removeTheTcp];
     }
- 
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"recieveReceiveData" object:nil];
+      [[NSNotificationCenter defaultCenter] removeObserver:self name:@"recieveFailedTcpData" object:nil];
+   //   [[NSNotificationCenter defaultCenter] removeObserver:self name:@"StopConfigerUI" object:nil];
+    
 }
 
 

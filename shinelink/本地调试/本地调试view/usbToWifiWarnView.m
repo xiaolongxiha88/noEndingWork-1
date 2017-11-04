@@ -94,6 +94,7 @@
         _warnString=@"PV1 or PV2 boost driver broken";
     }
     
+
     long faultStatueLong=[_faultStatueCode integerValue];
     if (faultStatueLong==0x00000002) {
         _faultStateString=@"Communication error";

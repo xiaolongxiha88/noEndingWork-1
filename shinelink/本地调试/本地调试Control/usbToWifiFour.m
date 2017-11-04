@@ -36,12 +36,15 @@
         _changeDataValue=[[usbToWifiDataControl alloc]init];
     }
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveDataTwoFailed" object:nil];
-    
+
     [self initUI];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveDataTwoFailed" object:nil];
+    
+}
 
 -(void)initUI{
      float layerW=1;
@@ -110,6 +113,8 @@
     NSArray*setLenthArray=@[@"48",@"14",@"24",@"40"];
     
     [self showProgressView];
+    
+    
     [_ControlOne goToOneTcp:2 cmdNum:1 cmdType:@"4" regAdd:setRegisterArray[K] Length:setLenthArray[K]];
     
     
@@ -117,11 +122,17 @@
 
 
 
-
+-(void)removeTheWaitingView{
+    [self hideProgressView];
+  
+}
 
 
 -(void)receiveFirstData2:(NSNotification*) notification{
-    [self hideProgressView];
+  
+    
+         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1.5];
+    
     _barDic=[NSMutableDictionary new];
 
         NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];

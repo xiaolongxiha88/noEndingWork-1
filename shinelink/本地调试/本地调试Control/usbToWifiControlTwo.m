@@ -35,6 +35,11 @@
     [self initUI];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveDataTwoFailed" object:nil];
+    
+}
 
 -(void)initUI{
     
@@ -42,8 +47,7 @@
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
     if (!_view1) {
-                [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
-         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveDataTwoFailed" object:nil];
+        
         
         _view1 = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE, ScreenWidth,SCREEN_Height)];
         _view1.backgroundColor =[UIColor clearColor];
@@ -275,6 +279,7 @@
     }
     
     [self setTwo];
+        self.navigationItem.rightBarButtonItem.enabled=NO;
     [self showProgressView];
 }
 
@@ -323,12 +328,18 @@
     
 }
 
-
+-(void)removeTheWaitingView{
+    [self hideProgressView];
+    self.navigationItem.rightBarButtonItem.enabled=YES;
+}
 
 -(void)readValueToTcp{
     [self showProgressView];
-    _cmdTcpType=1;
+      self.navigationItem.rightBarButtonItem.enabled=NO;
     
+    
+    
+    _cmdTcpType=1;
     NSArray *cmdValue=@[
                         @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
     
@@ -340,7 +351,7 @@
 }
 
 -(void)receiveFirstData2:(NSNotification*) notification{
-    [self hideProgressView];
+     [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1.5];
     
     if (_cmdTcpType==1) {
         NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
@@ -371,6 +382,9 @@
         if (_cmdTcpTimes==_setRegisterArray.count) {
                    [self showAlertViewWithTitle:@"设置成功" message:nil cancelButtonTitle:root_OK];
         }else{
+            self.navigationItem.rightBarButtonItem.enabled=NO;
+            [self showProgressView];
+            
                 [_ControlOne goToOneTcp:3 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
                
         }
@@ -382,6 +396,8 @@
 
 -(void)setFailed{
     [self hideProgressView];
+    [self removeTheTcp];
+    
     if (_cmdTcpType==1) {
         [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
     }
@@ -415,6 +431,13 @@
             [lable resignFirstResponder];
         }
         
+    }
+    
+}
+
+-(void)removeTheTcp{
+    if (_ControlOne) {
+        [_ControlOne disConnect];
     }
     
 }
