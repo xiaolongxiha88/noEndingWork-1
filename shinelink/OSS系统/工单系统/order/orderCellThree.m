@@ -244,7 +244,7 @@
     
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"orderId":_orderID,@"status":_statusString} paramarsSite:@"/api/v2/ order/detail" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"orderId":_orderID,@"status":_statusString} paramarsSite:@"/api/v2/order/detail" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];

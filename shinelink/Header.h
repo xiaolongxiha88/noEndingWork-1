@@ -17,10 +17,12 @@
 
 #define ManagerObjectModelFileName @"deviceCore" //数据库名字
 
+
+
 #define IMAGE(_NAME) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForAuxiliaryExecutable:_NAME]]
 #define COLOR(_R,_G,_B,_A) [UIColor colorWithRed:_R / 255.0f green:_G / 255.0f blue:_B / 255.0f alpha:_A]
 #define NOW_SIZE [UIScreen mainScreen].bounds.size.width/320
-#define HEIGHT_SIZE [UIScreen mainScreen].bounds.size.height/560
+
 
 #define NavigationbarHeight  self.navigationController.navigationBar.frame.size.height
 
@@ -96,6 +98,12 @@
 #define TabbarHeight Is_Iphone_X ? 83 : 49
 #define BottomHeight Is_Iphone_X ? 34 : 0
 
+#define HEIGHT_SIZE1  ([UIScreen mainScreen].bounds.size.height/560)
+#define HEIGHT_SIZE2  ([UIScreen mainScreen].bounds.size.height/812)
+
+#define HEIGHT_SIZE (Is_Iphone_X ? HEIGHT_SIZE2 : HEIGHT_SIZE1)
+
+#define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 
 #endif /* Header_h */
 

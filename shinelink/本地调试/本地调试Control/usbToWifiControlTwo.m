@@ -395,7 +395,7 @@
 
 
 -(void)setFailed{
-    [self hideProgressView];
+    [self removeTheWaitingView];
     [self removeTheTcp];
     
     if (_cmdTcpType==1) {

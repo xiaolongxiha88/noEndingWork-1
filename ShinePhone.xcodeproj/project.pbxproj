@@ -443,8 +443,6 @@
 		337C44AF1E78CC9100135304 /* ledred.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AC1E78CC9100135304 /* ledred.gif */; };
 		337C8D991E6545CF0013D650 /* phoneRegister2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C8D981E6545CF0013D650 /* phoneRegister2ViewController.m */; };
 		337C8D9C1E66ACD30013D650 /* GifNewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C8D9B1E66ACD30013D650 /* GifNewViewController.m */; };
-		337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */; };
-		337CB59D1DB4A837002ABB88 /* firstToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337CB59C1DB4A837002ABB88 /* firstToolViewController.m */; };
 		337CB5A11DB608B0002ABB88 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 337CB5A01DB608B0002ABB88 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		337F96101F0B90F800840527 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F960F1F0B90F800840527 /* phone.png */; };
 		337F96181F0CCB2900840527 /* follow-up.png in Resources */ = {isa = PBXBuildFile; fileRef = 337F96171F0CCB2900840527 /* follow-up.png */; };
@@ -560,7 +558,16 @@
 		33875A4F1EB96A7900F7E0E6 /* newEnergyDetailData.m in Sources */ = {isa = PBXBuildFile; fileRef = 33875A4E1EB96A7900F7E0E6 /* newEnergyDetailData.m */; };
 		33875A521EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 33875A511EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m */; };
 		33875A541EBABDE700F7E0E6 /* toolx_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33875A531EBABDE700F7E0E6 /* toolx_icon.png */; };
-		33875A561EBACEEA00F7E0E6 /* wifi_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33875A551EBACEEA00F7E0E6 /* wifi_icon.png */; };
+		3387B8A61FB181E00073FB35 /* firstToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8A21FB181DF0073FB35 /* firstToolViewController.m */; };
+		3387B8A71FB181E00073FB35 /* wifi_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8A31FB181DF0073FB35 /* wifi_icon.png */; };
+		3387B8A81FB181E00073FB35 /* WiFiSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8A51FB181DF0073FB35 /* WiFiSignalViewController.m */; };
+		3387B8AC1FB182500073FB35 /* payMoneyFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8AB1FB182500073FB35 /* payMoneyFirst.m */; };
+		3387B8AE1FB1838D0073FB35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3387B8AD1FB183720073FB35 /* QuartzCore.framework */; };
+		3387B8B01FB183BF0073FB35 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3387B8AF1FB183B80073FB35 /* CoreText.framework */; };
+		3387B8B21FB1842E0073FB35 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3387B8B11FB184270073FB35 /* CoreMotion.framework */; };
+		3387B8B41FB185640073FB35 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8B31FB185640073FB35 /* AlipaySDK.bundle */; };
+		3387B8B61FB1856C0073FB35 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3387B8B51FB1856C0073FB35 /* AlipaySDK.framework */; };
+		3387B8B81FB185D90073FB35 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3387B8B71FB185D90073FB35 /* libc++.tbd */; };
 		338964591E51979800A7B1AE /* device_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338964581E51979800A7B1AE /* device_bg.jpg */; };
 		3389645D1E51B74C00A7B1AE /* yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3389645C1E51B74C00A7B1AE /* yuan.png */; };
 		338964611E52E52700A7B1AE /* phoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338964601E52E52700A7B1AE /* phoneRegisterViewController.m */; };
@@ -1425,10 +1432,6 @@
 		337C8D981E6545CF0013D650 /* phoneRegister2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = phoneRegister2ViewController.m; sourceTree = "<group>"; };
 		337C8D9A1E66ACD30013D650 /* GifNewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GifNewViewController.h; path = ../WifConnect/GifNewViewController.h; sourceTree = "<group>"; };
 		337C8D9B1E66ACD30013D650 /* GifNewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifNewViewController.m; path = ../WifConnect/GifNewViewController.m; sourceTree = "<group>"; };
-		337CB5981DB4A787002ABB88 /* WiFiSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiSignalViewController.h; sourceTree = "<group>"; };
-		337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiSignalViewController.m; sourceTree = "<group>"; };
-		337CB59B1DB4A837002ABB88 /* firstToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = firstToolViewController.h; sourceTree = "<group>"; };
-		337CB59C1DB4A837002ABB88 /* firstToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = firstToolViewController.m; sourceTree = "<group>"; };
 		337CB59E1DB6010C002ABB88 /* ShinePhone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShinePhone.entitlements; sourceTree = "<group>"; };
 		337CB5A01DB608B0002ABB88 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		337F960F1F0B90F800840527 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
@@ -1612,7 +1615,19 @@
 		33875A501EB9B28C00F7E0E6 /* newEnergyDetaiTwo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newEnergyDetaiTwo.h; sourceTree = "<group>"; };
 		33875A511EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newEnergyDetaiTwo.m; sourceTree = "<group>"; };
 		33875A531EBABDE700F7E0E6 /* toolx_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolx_icon.png; sourceTree = "<group>"; };
-		33875A551EBACEEA00F7E0E6 /* wifi_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wifi_icon.png; sourceTree = "<group>"; };
+		3387B8A11FB181DF0073FB35 /* firstToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = firstToolViewController.h; sourceTree = "<group>"; };
+		3387B8A21FB181DF0073FB35 /* firstToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = firstToolViewController.m; sourceTree = "<group>"; };
+		3387B8A31FB181DF0073FB35 /* wifi_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wifi_icon.png; sourceTree = "<group>"; };
+		3387B8A41FB181DF0073FB35 /* WiFiSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiSignalViewController.h; sourceTree = "<group>"; };
+		3387B8A51FB181DF0073FB35 /* WiFiSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiSignalViewController.m; sourceTree = "<group>"; };
+		3387B8AA1FB182500073FB35 /* payMoneyFirst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = payMoneyFirst.h; sourceTree = "<group>"; };
+		3387B8AB1FB182500073FB35 /* payMoneyFirst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = payMoneyFirst.m; sourceTree = "<group>"; };
+		3387B8AD1FB183720073FB35 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3387B8AF1FB183B80073FB35 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3387B8B11FB184270073FB35 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		3387B8B31FB185640073FB35 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
+		3387B8B51FB1856C0073FB35 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
+		3387B8B71FB185D90073FB35 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		338964581E51979800A7B1AE /* device_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = device_bg.jpg; path = ../device_bg.jpg; sourceTree = "<group>"; };
 		3389645C1E51B74C00A7B1AE /* yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yuan.png; path = ../yuan.png; sourceTree = "<group>"; };
 		3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phoneRegisterViewController.h; path = "../注册/手机验证/phoneRegisterViewController.h"; sourceTree = "<group>"; };
@@ -1862,6 +1877,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3387B8B21FB1842E0073FB35 /* CoreMotion.framework in Frameworks */,
+				3387B8B01FB183BF0073FB35 /* CoreText.framework in Frameworks */,
+				3387B8B61FB1856C0073FB35 /* AlipaySDK.framework in Frameworks */,
+				3387B8AE1FB1838D0073FB35 /* QuartzCore.framework in Frameworks */,
 				337CB5A11DB608B0002ABB88 /* UserNotifications.framework in Frameworks */,
 				3377156C1D8E6E04002EEEDF /* liblibelian.a in Frameworks */,
 				335C9D1F1D011F57008C977A /* SystemConfiguration.framework in Frameworks */,
@@ -1876,6 +1895,7 @@
 				335C9D211D011F68008C977A /* CoreGraphics.framework in Frameworks */,
 				335C9D1D1D011F4E008C977A /* CoreTelephony.framework in Frameworks */,
 				335C9D1B1D011F3F008C977A /* CoreFoundation.framework in Frameworks */,
+				3387B8B81FB185D90073FB35 /* libc++.tbd in Frameworks */,
 				335C9D191D011F2E008C977A /* CFNetwork.framework in Frameworks */,
 				335C9D171D0117F3008C977A /* jpush-ios-2.1.7.a in Frameworks */,
 				338CFE681CF554D8006EFD8B /* libstdc++.tbd in Frameworks */,
@@ -2541,6 +2561,8 @@
 		335C9D141D0117F3008C977A /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				3387B8B51FB1856C0073FB35 /* AlipaySDK.framework */,
+				3387B8B31FB185640073FB35 /* AlipaySDK.bundle */,
 				335C9D151D0117F3008C977A /* jpush-ios-2.1.7.a */,
 				335C9D161D0117F3008C977A /* JPUSHService.h */,
 			);
@@ -3280,13 +3302,10 @@
 		337CB5971DB4A746002ABB88 /* 工具箱 */ = {
 			isa = PBXGroup;
 			children = (
-				33875A551EBACEEA00F7E0E6 /* wifi_icon.png */,
+				3387B8A91FB181EA0073FB35 /* 支付 */,
+				3387B8A01FB181DF0073FB35 /* WiFi配置 */,
 				33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */,
 				33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */,
-				337CB5981DB4A787002ABB88 /* WiFiSignalViewController.h */,
-				337CB5991DB4A787002ABB88 /* WiFiSignalViewController.m */,
-				337CB59B1DB4A837002ABB88 /* firstToolViewController.h */,
-				337CB59C1DB4A837002ABB88 /* firstToolViewController.m */,
 			);
 			path = "工具箱";
 			sourceTree = "<group>";
@@ -3294,6 +3313,10 @@
 		337CB59F1DB608B0002ABB88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3387B8B71FB185D90073FB35 /* libc++.tbd */,
+				3387B8B11FB184270073FB35 /* CoreMotion.framework */,
+				3387B8AF1FB183B80073FB35 /* CoreText.framework */,
+				3387B8AD1FB183720073FB35 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -3755,6 +3778,27 @@
 				338614D21F2839A9000F515E /* ESPVersionMacro.h */,
 			);
 			path = "WiFi-s1";
+			sourceTree = "<group>";
+		};
+		3387B8A01FB181DF0073FB35 /* WiFi配置 */ = {
+			isa = PBXGroup;
+			children = (
+				3387B8A11FB181DF0073FB35 /* firstToolViewController.h */,
+				3387B8A21FB181DF0073FB35 /* firstToolViewController.m */,
+				3387B8A31FB181DF0073FB35 /* wifi_icon.png */,
+				3387B8A41FB181DF0073FB35 /* WiFiSignalViewController.h */,
+				3387B8A51FB181DF0073FB35 /* WiFiSignalViewController.m */,
+			);
+			path = "WiFi配置";
+			sourceTree = "<group>";
+		};
+		3387B8A91FB181EA0073FB35 /* 支付 */ = {
+			isa = PBXGroup;
+			children = (
+				3387B8AA1FB182500073FB35 /* payMoneyFirst.h */,
+				3387B8AB1FB182500073FB35 /* payMoneyFirst.m */,
+			);
+			path = "支付";
 			sourceTree = "<group>";
 		};
 		3389645E1E52E4EF00A7B1AE /* 手机验证 */ = {
@@ -4622,6 +4666,7 @@
 				335456C51C853AFD00275478 /* scanLine@2x.png in Resources */,
 				3343F3EB1C805BD2009F69BC /* LICENSE in Resources */,
 				335614A01CB3B8E90071BAC9 /* frame2@2x.png in Resources */,
+				3387B8A71FB181E00073FB35 /* wifi_icon.png in Resources */,
 				337F96101F0B90F800840527 /* phone.png in Resources */,
 				338321CB1EEE35B7004FFC20 /* configure_nor.png in Resources */,
 				33771D521E8369B000786FCE /* zhushi11.png in Resources */,
@@ -4688,9 +4733,9 @@
 				334AED5A1CA37577007E39F3 /* 质保查询.png in Resources */,
 				3330F4E01F15B1E20076C237 /* search_icon_click.png in Resources */,
 				335456C91C853C2F00275478 /* scanscanBg.png in Resources */,
-				33875A561EBACEEA00F7E0E6 /* wifi_icon.png in Resources */,
 				338964771E57E7E600A7B1AE /* icon_bat.png in Resources */,
 				3383F12E1C9FF4190075E834 /* Plug.png in Resources */,
+				3387B8B41FB185640073FB35 /* AlipaySDK.bundle in Resources */,
 				3370EBA91F41496D00F37149 /* 充电桩.png in Resources */,
 				338614AA1F25D6F1000F515E /* intergrator_device.png in Resources */,
 				3355AD991CF6A49400AE6891 /* 333.jpg in Resources */,
@@ -4896,7 +4941,6 @@
 				3379E4ED1E94BE54000A4198 /* CircleMapView.m in Sources */,
 				33AF3D211D8E67210007D6C2 /* NSTimer+EasyTimeline.m in Sources */,
 				338614AF1F26E59B000F515E /* newLine.m in Sources */,
-				337CB59A1DB4A787002ABB88 /* WiFiSignalViewController.m in Sources */,
 				3376B3E51F983D130069F820 /* usbModleOne.m in Sources */,
 				338614D51F2839A9000F515E /* ESP_ByteUtil.m in Sources */,
 				3377156A1D8E6CCC002EEEDF /* AddDeviceViewController.mm in Sources */,
@@ -4957,6 +5001,7 @@
 				334B8F5F1C914B4E00798A69 /* README.md in Sources */,
 				3343F3DF1C80405D009F69BC /* UIProgressView+AFNetworking.m in Sources */,
 				33ABC2A51DC2E619003B92AC /* extensionTableViewCell.m in Sources */,
+				3387B8A61FB181E00073FB35 /* firstToolViewController.m in Sources */,
 				334ED7011C9028BB0095FFBC /* secondViewController.m in Sources */,
 				3376B3CC1F9726720069F820 /* useToWifiView1.m in Sources */,
 				33EA4A0E1E8F790C0044A01A /* JHChart.m in Sources */,
@@ -4977,6 +5022,7 @@
 				33860FDE1EEA75C5004150FD /* MJRefreshBackFooter.m in Sources */,
 				33860FEC1EEA75C5004150FD /* MJRefreshConst.m in Sources */,
 				33EFB6011C979B5F003F336F /* StationCellectViewController.m in Sources */,
+				3387B8AC1FB182500073FB35 /* payMoneyFirst.m in Sources */,
 				338614DE1F2839A9000F515E /* ESPTouchGenerator.m in Sources */,
 				33EFB6701C98F9B1003F336F /* ZFLineChart.m in Sources */,
 				3355F2681C7469AB006DDE5A /* aboutViewController.m in Sources */,
@@ -5048,6 +5094,7 @@
 				33742B481ED6D6BD0015F2EA /* OssMessageViewController.m in Sources */,
 				334B8F521C914A6D00798A69 /* PNLineChartDataItem.m in Sources */,
 				33AF3D251D8E67210007D6C2 /* Toast+UIView.m in Sources */,
+				3387B8A81FB181E00073FB35 /* WiFiSignalViewController.m in Sources */,
 				33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */,
 				3367CB511C86806700EF460C /* View+MASAdditions.m in Sources */,
 				337079441D911F5800D7DA98 /* questionView.m in Sources */,
@@ -5084,7 +5131,6 @@
 				336D401F1D6FEA7600ECFA34 /* PinyinHelper.m in Sources */,
 				336181F41ED031C4008641E9 /* uibuttonView0.swift in Sources */,
 				334AED701CA381D0007E39F3 /* ASValuePopUpView.m in Sources */,
-				337CB59D1DB4A837002ABB88 /* firstToolViewController.m in Sources */,
 				336F1A181D88E46900CD4C2B /* SDWebImageDecoder.m in Sources */,
 				337C8D991E6545CF0013D650 /* phoneRegister2ViewController.m in Sources */,
 				33851DDE1FA08AE300AB758C /* usbToWifiControlOne.m in Sources */,
@@ -5228,6 +5274,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/ShinePhone",
+					"$(PROJECT_DIR)/ShinePhone/openssl",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -5269,6 +5319,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/ShinePhone",
+					"$(PROJECT_DIR)/ShinePhone/openssl",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
@@ -5291,6 +5345,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/shinelink/框架",
+					"$(PROJECT_DIR)/lib",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/shinelink/PrefixHeader.pch";
 				INFOPLIST_FILE = shinelink/Info.plist;
@@ -5325,6 +5380,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/shinelink/框架",
+					"$(PROJECT_DIR)/lib",
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/shinelink/PrefixHeader.pch";
 				INFOPLIST_FILE = shinelink/Info.plist;

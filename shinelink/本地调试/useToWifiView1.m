@@ -143,7 +143,7 @@ static NSString *cellTwo = @"cellTwo";
 
 -(void)getData:(NSNotification*) notification{
     
-   [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:2.5];
+   [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:2];
     
  _allDic=[NSDictionary dictionaryWithDictionary:[notification object]];
         _firstViewDataArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"oneView"]];
@@ -331,8 +331,7 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)goToControlView3{
-    usbToWifiControlOne *testView=[[usbToWifiControlOne alloc]init];
-    testView.controlType=2;
+    usbToWifiFour *testView=[[usbToWifiFour alloc]init];
     [self.navigationController pushViewController:testView animated:YES];
 }
 
