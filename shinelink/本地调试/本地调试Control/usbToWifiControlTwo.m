@@ -46,9 +46,7 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
-    if (!_view1) {
-        
-        
+    if (!_view1) {   
         _view1 = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE, ScreenWidth,SCREEN_Height)];
         _view1.backgroundColor =[UIColor clearColor];
         _view1.userInteractionEnabled = YES;
@@ -92,7 +90,7 @@
     UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 20*HEIGHT_SIZE, 300*NOW_SIZE,20*HEIGHT_SIZE )];
     PV2Lable.text=_titleString;
     PV2Lable.textAlignment=NSTextAlignmentLeft;
-    PV2Lable.textColor=COLOR(102, 102, 102, 1);;
+    PV2Lable.textColor=COLOR(102, 102, 102, 1);
     PV2Lable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     PV2Lable.adjustsFontSizeToFitWidth=YES;
     [_view1 addSubview:PV2Lable];

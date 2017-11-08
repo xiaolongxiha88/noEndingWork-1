@@ -561,13 +561,22 @@
 		3387B8A61FB181E00073FB35 /* firstToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8A21FB181DF0073FB35 /* firstToolViewController.m */; };
 		3387B8A71FB181E00073FB35 /* wifi_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8A31FB181DF0073FB35 /* wifi_icon.png */; };
 		3387B8A81FB181E00073FB35 /* WiFiSignalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8A51FB181DF0073FB35 /* WiFiSignalViewController.m */; };
-		3387B8AC1FB182500073FB35 /* payMoneyFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8AB1FB182500073FB35 /* payMoneyFirst.m */; };
 		3387B8AE1FB1838D0073FB35 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3387B8AD1FB183720073FB35 /* QuartzCore.framework */; };
 		3387B8B01FB183BF0073FB35 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3387B8AF1FB183B80073FB35 /* CoreText.framework */; };
 		3387B8B21FB1842E0073FB35 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3387B8B11FB184270073FB35 /* CoreMotion.framework */; };
 		3387B8B41FB185640073FB35 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8B31FB185640073FB35 /* AlipaySDK.bundle */; };
 		3387B8B61FB1856C0073FB35 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3387B8B51FB1856C0073FB35 /* AlipaySDK.framework */; };
 		3387B8B81FB185D90073FB35 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3387B8B71FB185D90073FB35 /* libc++.tbd */; };
+		3387B8BB1FB295B40073FB35 /* payView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8BA1FB295B40073FB35 /* payView1.m */; };
+		3387B8BD1FB2968B0073FB35 /* payadd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8BC1FB2968B0073FB35 /* payadd.png */; };
+		3387B8BF1FB2D59F0073FB35 /* pay3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8BE1FB2D59F0073FB35 /* pay3.png */; };
+		3387B8C11FB2D6330073FB35 /* pay4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8C01FB2D6330073FB35 /* pay4.png */; };
+		3387B8C51FB2EA1C0073FB35 /* singleSelectTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8C31FB2EA1C0073FB35 /* singleSelectTableViewCell.m */; };
+		3387B8C81FB2F2130073FB35 /* payView2.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8C71FB2F2130073FB35 /* payView2.m */; };
+		3387B8CA1FB308CF0073FB35 /* payadd2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8C91FB308CE0073FB35 /* payadd2.png */; };
+		3387B8CE1FB30B550073FB35 /* Selected_clickPay.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8CC1FB30B550073FB35 /* Selected_clickPay.png */; };
+		3387B8D01FB315090073FB35 /* Selected_norPay.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8CF1FB315090073FB35 /* Selected_norPay.png */; };
+		3387B8D31FB324230073FB35 /* payView22.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8D21FB324230073FB35 /* payView22.m */; };
 		338964591E51979800A7B1AE /* device_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338964581E51979800A7B1AE /* device_bg.jpg */; };
 		3389645D1E51B74C00A7B1AE /* yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3389645C1E51B74C00A7B1AE /* yuan.png */; };
 		338964611E52E52700A7B1AE /* phoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338964601E52E52700A7B1AE /* phoneRegisterViewController.m */; };
@@ -1620,14 +1629,26 @@
 		3387B8A31FB181DF0073FB35 /* wifi_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wifi_icon.png; sourceTree = "<group>"; };
 		3387B8A41FB181DF0073FB35 /* WiFiSignalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WiFiSignalViewController.h; sourceTree = "<group>"; };
 		3387B8A51FB181DF0073FB35 /* WiFiSignalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WiFiSignalViewController.m; sourceTree = "<group>"; };
-		3387B8AA1FB182500073FB35 /* payMoneyFirst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = payMoneyFirst.h; sourceTree = "<group>"; };
-		3387B8AB1FB182500073FB35 /* payMoneyFirst.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = payMoneyFirst.m; sourceTree = "<group>"; };
 		3387B8AD1FB183720073FB35 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3387B8AF1FB183B80073FB35 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		3387B8B11FB184270073FB35 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		3387B8B31FB185640073FB35 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
 		3387B8B51FB1856C0073FB35 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
 		3387B8B71FB185D90073FB35 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		3387B8B91FB295B40073FB35 /* payView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = payView1.h; sourceTree = "<group>"; };
+		3387B8BA1FB295B40073FB35 /* payView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = payView1.m; sourceTree = "<group>"; };
+		3387B8BC1FB2968B0073FB35 /* payadd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = payadd.png; sourceTree = "<group>"; };
+		3387B8BE1FB2D59F0073FB35 /* pay3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pay3.png; sourceTree = "<group>"; };
+		3387B8C01FB2D6330073FB35 /* pay4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pay4.png; sourceTree = "<group>"; };
+		3387B8C31FB2EA1C0073FB35 /* singleSelectTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = singleSelectTableViewCell.m; sourceTree = "<group>"; };
+		3387B8C41FB2EA1C0073FB35 /* singleSelectTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = singleSelectTableViewCell.h; sourceTree = "<group>"; };
+		3387B8C61FB2F2130073FB35 /* payView2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = payView2.h; sourceTree = "<group>"; };
+		3387B8C71FB2F2130073FB35 /* payView2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = payView2.m; sourceTree = "<group>"; };
+		3387B8C91FB308CE0073FB35 /* payadd2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = payadd2.png; sourceTree = "<group>"; };
+		3387B8CC1FB30B550073FB35 /* Selected_clickPay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selected_clickPay.png; sourceTree = "<group>"; };
+		3387B8CF1FB315090073FB35 /* Selected_norPay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selected_norPay.png; sourceTree = "<group>"; };
+		3387B8D11FB324230073FB35 /* payView22.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = payView22.h; sourceTree = "<group>"; };
+		3387B8D21FB324230073FB35 /* payView22.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = payView22.m; sourceTree = "<group>"; };
 		338964581E51979800A7B1AE /* device_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = device_bg.jpg; path = ../device_bg.jpg; sourceTree = "<group>"; };
 		3389645C1E51B74C00A7B1AE /* yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yuan.png; path = ../yuan.png; sourceTree = "<group>"; };
 		3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phoneRegisterViewController.h; path = "../注册/手机验证/phoneRegisterViewController.h"; sourceTree = "<group>"; };
@@ -3795,10 +3816,30 @@
 		3387B8A91FB181EA0073FB35 /* 支付 */ = {
 			isa = PBXGroup;
 			children = (
-				3387B8AA1FB182500073FB35 /* payMoneyFirst.h */,
-				3387B8AB1FB182500073FB35 /* payMoneyFirst.m */,
+				3387B8C21FB2E9FD0073FB35 /* 支付图片 */,
+				3387B8B91FB295B40073FB35 /* payView1.h */,
+				3387B8BA1FB295B40073FB35 /* payView1.m */,
+				3387B8C61FB2F2130073FB35 /* payView2.h */,
+				3387B8C71FB2F2130073FB35 /* payView2.m */,
+				3387B8D11FB324230073FB35 /* payView22.h */,
+				3387B8D21FB324230073FB35 /* payView22.m */,
+				3387B8C41FB2EA1C0073FB35 /* singleSelectTableViewCell.h */,
+				3387B8C31FB2EA1C0073FB35 /* singleSelectTableViewCell.m */,
 			);
 			path = "支付";
+			sourceTree = "<group>";
+		};
+		3387B8C21FB2E9FD0073FB35 /* 支付图片 */ = {
+			isa = PBXGroup;
+			children = (
+				3387B8C91FB308CE0073FB35 /* payadd2.png */,
+				3387B8BC1FB2968B0073FB35 /* payadd.png */,
+				3387B8BE1FB2D59F0073FB35 /* pay3.png */,
+				3387B8C01FB2D6330073FB35 /* pay4.png */,
+				3387B8CC1FB30B550073FB35 /* Selected_clickPay.png */,
+				3387B8CF1FB315090073FB35 /* Selected_norPay.png */,
+			);
+			path = "支付图片";
 			sourceTree = "<group>";
 		};
 		3389645E1E52E4EF00A7B1AE /* 手机验证 */ = {
@@ -4488,6 +4529,7 @@
 				337532EF1D051579009CE66F /* PushConfig.plist in Resources */,
 				33FEFD531C7DB38400324374 /* icon_arrow.png in Resources */,
 				336F04071F04EFB900DE7CD7 /* oss_more_up.png in Resources */,
+				3387B8D01FB315090073FB35 /* Selected_norPay.png in Resources */,
 				336E03FC1EC944B80034BC86 /* device_bg.png in Resources */,
 				33FEFD731C7DB38400324374 /* iconfont-nengyuanlei@2x.png in Resources */,
 				330E3DEF1D0D6D2100DF75AE /* priority.png in Resources */,
@@ -4644,6 +4686,7 @@
 				33EA49EE1E8CAC060044A01A /* 设备页引导3_en.jpg in Resources */,
 				33FEFD761C7DB38400324374 /* iconfont-shouji@2x.png in Resources */,
 				3349A7B81C75BCDB009172C2 /* 账号3.png in Resources */,
+				3387B8C11FB2D6330073FB35 /* pay4.png in Resources */,
 				337F961A1F0CCB8B00840527 /* Untreated1111.png in Resources */,
 				3383F13E1C9FFDA10075E834 /* 光伏收益.png in Resources */,
 				33FEFD5D1C7DB38400324374 /* icon---Name@2x.png in Resources */,
@@ -4681,6 +4724,7 @@
 				3370EBB51F417E6900F37149 /* 控制.png in Resources */,
 				338321CA1EEE35B7004FFC20 /* configure_click .png in Resources */,
 				3381ECF51CBCA61200DCF0D2 /* 智能联动设置切图.png in Resources */,
+				3387B8CE1FB30B550073FB35 /* Selected_clickPay.png in Resources */,
 				33209FD11D2A553E00186893 /* main1.jpg in Resources */,
 				3370EB971F3C78C400F37149 /* LEDold22.gif in Resources */,
 				338990B11CEAB73400A708F8 /* logo3.png in Resources */,
@@ -4771,7 +4815,9 @@
 				33ABC2A71DC2EB69003B92AC /* 增值问题33.png in Resources */,
 				3370EBA21F41468C00F37149 /* 贴心的客户服务_cn.png in Resources */,
 				338234361D9A4AF0002062AE /* Warranty_cn2.png in Resources */,
+				3387B8BF1FB2D59F0073FB35 /* pay3.png in Resources */,
 				337079521D928E0B00D7DA98 /* manual_bg.jpg in Resources */,
+				3387B8CA1FB308CF0073FB35 /* payadd2.png in Resources */,
 				33FEFD571C7DB38400324374 /* icon---Email---Full@2x.png in Resources */,
 				3370EBBD1F41917C00F37149 /* deviceHead2.png in Resources */,
 				3381222D1D864D8400C7704B /* btn1-choose.png in Resources */,
@@ -4789,6 +4835,7 @@
 				33C300031D3E33E00016351C /* L10.png in Resources */,
 				337960771DB0D065009AC610 /* massage_en2.png in Resources */,
 				334770FE1C9A3E35003A6F13 /* equipment@2x.png in Resources */,
+				3387B8BD1FB2968B0073FB35 /* payadd.png in Resources */,
 				33252FCF1F57B72B0054BBC7 /* pvS.png in Resources */,
 				338321C21EEE3370004FFC20 /* edit_click.png in Resources */,
 				337F9C931C71A6710016FE43 /* Assets.xcassets in Resources */,
@@ -4827,6 +4874,7 @@
 				338122291D864BF500C7704B /* AvCachViewController.m in Sources */,
 				336D401D1D6FEA7600ECFA34 /* PinyinFormatter.m in Sources */,
 				33AF3D191D8E67210007D6C2 /* DeviceManageViewController.m in Sources */,
+				3387B8C81FB2F2130073FB35 /* payView2.m in Sources */,
 				33EFB6651C98F9B1003F336F /* NSString+Zirkfied.m in Sources */,
 				338614DB1F2839A9000F515E /* ESPDatumCode.m in Sources */,
 				338D51BF1EE151D9003FE4D2 /* IntegratorFirst.swift in Sources */,
@@ -4880,6 +4928,7 @@
 				335EE8F71F011138005F098A /* ossQuetionDetail.m in Sources */,
 				336F03FF1F04D59B00DE7CD7 /* orderCellOne.m in Sources */,
 				33AF3D281D8E67210007D6C2 /* ProgressHUD.m in Sources */,
+				3387B8BB1FB295B40073FB35 /* payView1.m in Sources */,
 				335456B91C852EB000275478 /* RootViewController.m in Sources */,
 				33EFB66A1C98F9B1003F336F /* ZFBarChart.m in Sources */,
 				336F1A151D88E46900CD4C2B /* NSData+ImageContentType.m in Sources */,
@@ -4956,6 +5005,7 @@
 				3343F3BF1C80403C009F69BC /* AFHTTPRequestOperation.m in Sources */,
 				334FEF841CF45264001E6716 /* LZQStratViewController_25.m in Sources */,
 				334B8F601C914B4E00798A69 /* UICountingLabel.m in Sources */,
+				3387B8D31FB324230073FB35 /* payView22.m in Sources */,
 				3367EB9B1CD0B29000D2EF67 /* StationLocationViewController.m in Sources */,
 				3367CB4C1C86806600EF460C /* MASLayoutConstraint.m in Sources */,
 				335D69ED1D77D54400894D90 /* UIImage+ImageEffects.m in Sources */,
@@ -5022,7 +5072,6 @@
 				33860FDE1EEA75C5004150FD /* MJRefreshBackFooter.m in Sources */,
 				33860FEC1EEA75C5004150FD /* MJRefreshConst.m in Sources */,
 				33EFB6011C979B5F003F336F /* StationCellectViewController.m in Sources */,
-				3387B8AC1FB182500073FB35 /* payMoneyFirst.m in Sources */,
 				338614DE1F2839A9000F515E /* ESPTouchGenerator.m in Sources */,
 				33EFB6701C98F9B1003F336F /* ZFLineChart.m in Sources */,
 				3355F2681C7469AB006DDE5A /* aboutViewController.m in Sources */,
@@ -5072,6 +5121,7 @@
 				334FF0C11CF53C7C001E6716 /* UINavigationController+CustomNavigation.m in Sources */,
 				334FF09A1CF53C7C001E6716 /* deviceRootViewController.m in Sources */,
 				33EFB66E1C98F9B1003F336F /* ZFCirque.m in Sources */,
+				3387B8C51FB2EA1C0073FB35 /* singleSelectTableViewCell.m in Sources */,
 				338A623F1E71567A000E7CE4 /* PopoverViewCell.m in Sources */,
 				334B8F511C914A6D00798A69 /* PNLineChartData.m in Sources */,
 				33EFB6711C98F9B1003F336F /* ZFPieChart.m in Sources */,

@@ -1,13 +1,13 @@
 //
-//  payMoneyFirst.h
+//  payView2.h
 //  ShinePhone
 //
-//  Created by sky on 2017/11/7.
+//  Created by sky on 2017/11/8.
 //  Copyright © 2017年 sky. All rights reserved.
 //
 
 #import "RootViewController.h"
 
-@interface payMoneyFirst : RootViewController
+@interface payView2 : RootViewController
 
 @end

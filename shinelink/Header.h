@@ -25,6 +25,7 @@
 
 
 #define NavigationbarHeight  self.navigationController.navigationBar.frame.size.height
+#define StatusHeight [[UIApplication sharedApplication] statusBarFrame].size.height
 
 #define LineWidth  [UIScreen mainScreen].bounds.size.height*0.5/560
 

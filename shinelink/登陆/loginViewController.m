@@ -34,7 +34,7 @@
 
 //测试头
 #import "useToWifiView1.h"
-#import "payMoneyFirst.h"
+#import "payView1.h"
 
 
 
@@ -99,9 +99,11 @@
     //上线检查
      [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:is_Test];
     
-    NSString *testDemo=@"O";
+    NSString *testDemo=@"OK";
     if ([testDemo isEqualToString:@"OK"]) {
-        payMoneyFirst *testView=[[payMoneyFirst alloc]init];
+   //     useToWifiView1 *testView=[[useToWifiView1 alloc]init];
+        
+         payView1 *testView=[[payView1 alloc]init];
         [self.navigationController pushViewController:testView animated:NO];
     }else{
         [self getLoginType];
