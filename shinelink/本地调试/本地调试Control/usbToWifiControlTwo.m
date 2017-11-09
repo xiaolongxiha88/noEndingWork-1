@@ -114,8 +114,8 @@
         _textField2.layer.borderWidth=1;
         _textField2.layer.cornerRadius=5;
         _textField2.layer.borderColor=COLOR(102, 102, 102, 1).CGColor;
-        _textField2.textColor = COLOR(102, 102, 102, 1);;
-        _textField2.tintColor = COLOR(102, 102, 102, 1);;
+        _textField2.textColor = COLOR(102, 102, 102, 1);
+        _textField2.tintColor = COLOR(102, 102, 102, 1);
         _textField2.textAlignment=NSTextAlignmentCenter;
         _textField2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_view1 addSubview:_textField2];

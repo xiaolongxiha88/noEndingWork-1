@@ -12,8 +12,8 @@
 
 @interface payView22 ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
-@property(nonatomic,strong)NSArray *SnArray;
-@property(nonatomic,strong)NSArray *dateArray;
+@property(nonatomic,strong)NSMutableArray *SnArray;
+@property(nonatomic,strong)NSMutableArray *dateArray;
 @property (nonatomic, strong) NSMutableArray *choiceArray;
 
 @end
@@ -23,12 +23,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
-    _SnArray=@[@"123123123",@"123123123",@"123123123",@"123123123",@"123123123",@"123123123",@"123123123",@"123123123"];
-    _dateArray=@[@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12"];
+    
+    _SnArray=[NSMutableArray arrayWithArray:@[@"123123123",@"123123113",@"121123123",@"223123123",@"143123123",@"123125123",@"123123173",@"123153123"]];
+    _dateArray=[NSMutableArray arrayWithArray:@[@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12"]];
+    
     _choiceArray=[NSMutableArray new];
     for (int i=0; i<_SnArray.count; i++) {
         [_choiceArray addObject:[NSNumber numberWithBool:NO]];
     }
+    
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+    self.navigationItem.rightBarButtonItem=rightItem;
     
     [self initUI];
 }
@@ -46,7 +51,7 @@
     [self.view addSubview:PV2Lable];
     
     if (!_tableView) {
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, H0, ScreenWidth, ScreenHeight-180*HEIGHT_SIZE-NavigationbarHeight-StatusHeight) style:UITableViewStyleGrouped];
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, H0, ScreenWidth, ScreenHeight-NavigationbarHeight-StatusHeight) style:UITableViewStyleGrouped];
         self.tableView.backgroundColor=[UIColor whiteColor];
         if (@available(iOS 11.0, *)) {
             self.tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;//UIScrollView也适用
@@ -115,7 +120,7 @@
         if (choice) {
             [weakCell.selectBtn setImage:[UIImage imageNamed:@"Selected_clickPay.png"] forState:UIControlStateNormal];
             
-            [self.tableView reloadData];
+          //  [self.tableView reloadData];
         }else{
             
             [weakCell.selectBtn setImage:[UIImage imageNamed:@"Selected_norPay.png"] forState:UIControlStateNormal];
@@ -138,6 +143,38 @@
 }
 
 
+-(void)goBack{
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [self addSN];
+}
+
+-(void)addSN{
+    
+    //[[NSUserDefaults standardUserDefaults] setObject:@{} forKey:@"paySN"];
+    
+    NSDictionary *payDic=[[NSUserDefaults standardUserDefaults] objectForKey:@"paySN"];
+    
+    NSMutableDictionary *payDic1=[NSMutableDictionary new];
+    for (int i=0; i<_choiceArray.count; i++) {
+        BOOL isSelect=[_choiceArray[i] boolValue];
+        if (isSelect) {
+             [payDic1 setObject:_dateArray[i] forKey:_SnArray[i]];
+        }
+       
+    }
+    [payDic1 addEntriesFromDictionary:payDic];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:payDic1 forKey:@"paySN"];
+    
+//    NSDictionary *payDic2=[[NSUserDefaults standardUserDefaults] objectForKey:@"paySN"];
+    
+}
 
 
 

@@ -577,6 +577,10 @@
 		3387B8CE1FB30B550073FB35 /* Selected_clickPay.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8CC1FB30B550073FB35 /* Selected_clickPay.png */; };
 		3387B8D01FB315090073FB35 /* Selected_norPay.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8CF1FB315090073FB35 /* Selected_norPay.png */; };
 		3387B8D31FB324230073FB35 /* payView22.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8D21FB324230073FB35 /* payView22.m */; };
+		3387B8D81FB426A40073FB35 /* payView3.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8D71FB426A40073FB35 /* payView3.m */; };
+		3387B8DB1FB438C40073FB35 /* payInvoice.m in Sources */ = {isa = PBXBuildFile; fileRef = 3387B8DA1FB438C40073FB35 /* payInvoice.m */; };
+		3387B8DD1FB43D890073FB35 /* wechat.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8DC1FB43D890073FB35 /* wechat.png */; };
+		3387B8DF1FB43D900073FB35 /* Alipay.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8DE1FB43D900073FB35 /* Alipay.png */; };
 		338964591E51979800A7B1AE /* device_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338964581E51979800A7B1AE /* device_bg.jpg */; };
 		3389645D1E51B74C00A7B1AE /* yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3389645C1E51B74C00A7B1AE /* yuan.png */; };
 		338964611E52E52700A7B1AE /* phoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338964601E52E52700A7B1AE /* phoneRegisterViewController.m */; };
@@ -1649,6 +1653,12 @@
 		3387B8CF1FB315090073FB35 /* Selected_norPay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selected_norPay.png; sourceTree = "<group>"; };
 		3387B8D11FB324230073FB35 /* payView22.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = payView22.h; sourceTree = "<group>"; };
 		3387B8D21FB324230073FB35 /* payView22.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = payView22.m; sourceTree = "<group>"; };
+		3387B8D61FB426A40073FB35 /* payView3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = payView3.h; sourceTree = "<group>"; };
+		3387B8D71FB426A40073FB35 /* payView3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = payView3.m; sourceTree = "<group>"; };
+		3387B8D91FB438C40073FB35 /* payInvoice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = payInvoice.h; path = "shinelink/我/工具箱/支付/payInvoice.h"; sourceTree = SOURCE_ROOT; };
+		3387B8DA1FB438C40073FB35 /* payInvoice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = payInvoice.m; path = "shinelink/我/工具箱/支付/payInvoice.m"; sourceTree = SOURCE_ROOT; };
+		3387B8DC1FB43D890073FB35 /* wechat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wechat.png; sourceTree = "<group>"; };
+		3387B8DE1FB43D900073FB35 /* Alipay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alipay.png; sourceTree = "<group>"; };
 		338964581E51979800A7B1AE /* device_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = device_bg.jpg; path = ../device_bg.jpg; sourceTree = "<group>"; };
 		3389645C1E51B74C00A7B1AE /* yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yuan.png; path = ../yuan.png; sourceTree = "<group>"; };
 		3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phoneRegisterViewController.h; path = "../注册/手机验证/phoneRegisterViewController.h"; sourceTree = "<group>"; };
@@ -3819,6 +3829,10 @@
 				3387B8C21FB2E9FD0073FB35 /* 支付图片 */,
 				3387B8B91FB295B40073FB35 /* payView1.h */,
 				3387B8BA1FB295B40073FB35 /* payView1.m */,
+				3387B8D61FB426A40073FB35 /* payView3.h */,
+				3387B8D71FB426A40073FB35 /* payView3.m */,
+				3387B8D91FB438C40073FB35 /* payInvoice.h */,
+				3387B8DA1FB438C40073FB35 /* payInvoice.m */,
 				3387B8C61FB2F2130073FB35 /* payView2.h */,
 				3387B8C71FB2F2130073FB35 /* payView2.m */,
 				3387B8D11FB324230073FB35 /* payView22.h */,
@@ -3838,6 +3852,8 @@
 				3387B8C01FB2D6330073FB35 /* pay4.png */,
 				3387B8CC1FB30B550073FB35 /* Selected_clickPay.png */,
 				3387B8CF1FB315090073FB35 /* Selected_norPay.png */,
+				3387B8DC1FB43D890073FB35 /* wechat.png */,
+				3387B8DE1FB43D900073FB35 /* Alipay.png */,
 			);
 			path = "支付图片";
 			sourceTree = "<group>";
@@ -4659,6 +4675,7 @@
 				334B8F5E1C914B4E00798A69 /* LICENSE in Resources */,
 				3378D65E1F147AFD00632CBD /* layout.png in Resources */,
 				3370EB9E1F41468C00F37149 /* 全面的数据分析_cn.png in Resources */,
+				3387B8DF1FB43D900073FB35 /* Alipay.png in Resources */,
 				336664F01CB77CD3005573FB /* user-agreement@3x.png in Resources */,
 				335D9C4F1CE32583007535BF /* frame_add.png in Resources */,
 				336664ED1CB77CD3005573FB /* update@2x.png in Resources */,
@@ -4786,6 +4803,7 @@
 				336A10901CBDDBA500E30E83 /* 2triangular.png in Resources */,
 				33FEFD741C7DB38400324374 /* iconfont-nengyuanlei@3x.png in Resources */,
 				33793D161CE583E4000D0F9E /* solar4.png in Resources */,
+				3387B8DD1FB43D890073FB35 /* wechat.png in Resources */,
 				33EA1CBA1EFA7A0D00A39192 /* select_icon.png in Resources */,
 				338321C01EEE3370004FFC20 /* delete_click.png in Resources */,
 				334FF0BA1CF53C7C001E6716 /* btn_check_on.png in Resources */,
@@ -5206,6 +5224,7 @@
 				3383ACE41D7D6DC200C2F4A3 /* MRNavigationLabel.m in Sources */,
 				3356675B1D7E606F00C40129 /* NewPagedFlowView.m in Sources */,
 				3370359B1E373D2D00AE7CD2 /* datailD2ViewController.m in Sources */,
+				3387B8DB1FB438C40073FB35 /* payInvoice.m in Sources */,
 				33EFB6021C979B5F003F336F /* StationCellectTableViewCell.m in Sources */,
 				337C8D9C1E66ACD30013D650 /* GifNewViewController.m in Sources */,
 				33860FE41EEA75C5004150FD /* MJRefreshAutoStateFooter.m in Sources */,
@@ -5228,6 +5247,7 @@
 				336E04001EC9586C0034BC86 /* ossDeviceFirst.swift in Sources */,
 				33530F211CC8824500378EB2 /* changManeger.m in Sources */,
 				3350891B1C73112000D7AA03 /* EditStationMenuView.m in Sources */,
+				3387B8D81FB426A40073FB35 /* payView3.m in Sources */,
 				3399A8201FA33D7E006F8805 /* usbToWifiControlTwo.m in Sources */,
 				3381ECFE1CBCCADB00DCF0D2 /* myListSecond.m in Sources */,
 			);

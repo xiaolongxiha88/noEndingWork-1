@@ -11,7 +11,9 @@
 #import "singleSelectTableViewCell.h"
 #import "payView2.h"
 #import "payView22.h"
+#import "payView3.h"
 
+#define  moneyValue 20;
 @interface payView1 ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView *V1;
 @property(nonatomic,strong)UIView *V22;
@@ -19,9 +21,10 @@
 @property(nonatomic,strong)UILabel *moneyLable;
 @property(nonatomic,strong)UILabel *yearLable;
 @property(nonatomic,assign)NSInteger yearNum;
+@property(nonatomic,assign)NSInteger AllMoney;
 @property (nonatomic, strong) UITableView *tableView;
-@property(nonatomic,strong)NSArray *SnArray;
-@property(nonatomic,strong)NSArray *dateArray;
+@property(nonatomic,strong)NSMutableArray *SnArray;
+@property(nonatomic,strong)NSMutableArray *dateArray;
 @property (nonatomic, strong) NSMutableArray *choiceArray;
 
 @end
@@ -35,9 +38,29 @@
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
     [self initUI];
-    [self initTwo];
+  
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    if (!_tableView) {
+          [self initTwo];
+    }else{
+        _SnArray=[NSMutableArray new];
+        _dateArray=[NSMutableArray new];
+          NSDictionary *payDic=[[NSUserDefaults standardUserDefaults] objectForKey:@"paySN"];
+        for (int i=0; i<payDic.allKeys.count; i++) {
+            [_SnArray addObject:payDic.allKeys[i]];
+              [_dateArray addObject:[payDic objectForKey:payDic.allKeys[i]]];
+        }
+        _choiceArray=[NSMutableArray new];
+        for (int i=0; i<_SnArray.count; i++) {
+            [_choiceArray addObject:[NSNumber numberWithBool:YES]];
+        }
+        [_tableView reloadData];
+        [self getAllMoney];
+    }
+    
+}
 
 -(void)initUI{
     
@@ -63,19 +86,21 @@
     UIButton  * _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
     _goBut.frame=CGRectMake(30*NOW_SIZE,5*HEIGHT_SIZE, buttonW, buttonH);
     [_goBut.layer setMasksToBounds:YES];
-    [_goBut.layer setCornerRadius:buttonH/3];
+    [_goBut.layer setCornerRadius:buttonH/2];
     [_goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [_goBut setTitle:@"添加本账号GPRS" forState:UIControlStateNormal];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
-    [_goBut addTarget:self action:@selector(goToAddSN) forControlEvents:UIControlEventTouchUpInside];
+    [_goBut addTarget:self action:@selector(goToAddSN2) forControlEvents:UIControlEventTouchUpInside];
     [_V22 addSubview:_goBut];
     
     UIButton  * _goBut2 =  [UIButton buttonWithType:UIButtonTypeCustom];
     _goBut2.frame=CGRectMake(175*HEIGHT_SIZE,5*HEIGHT_SIZE, buttonW, buttonH);
     [_goBut2 setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
+    [_goBut2.layer setMasksToBounds:YES];
+    [_goBut2.layer setCornerRadius:buttonH/2];
     [_goBut2 setTitle:@"添加其他账号GPRS" forState:UIControlStateNormal];
     _goBut2.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
-    [_goBut2 addTarget:self action:@selector(goToAddSN2) forControlEvents:UIControlEventTouchUpInside];
+    [_goBut2 addTarget:self action:@selector(goToAddSN) forControlEvents:UIControlEventTouchUpInside];
     [_V22 addSubview:_goBut2];
     
     ////////////////////购买
@@ -87,7 +112,7 @@
     _moneyLable= [[UILabel alloc] initWithFrame:CGRectMake(20*NOW_SIZE, 0*HEIGHT_SIZE, 160*NOW_SIZE, HEIGHT_SIZE*40)];
     _moneyLable.font=[UIFont systemFontOfSize:16*HEIGHT_SIZE];
     _moneyLable.textAlignment = NSTextAlignmentLeft;
-    _moneyLable.text=@"总计:360";
+    _moneyLable.text=@"总计:0";
     _moneyLable.textColor =[UIColor redColor];
     [V2 addSubview:_moneyLable];
     
@@ -168,48 +193,80 @@
     }
       _yearLable.text=[NSString stringWithFormat:@"%ld%@",_yearNum,root_YEAR];
     
+         [self getAllMoney];
+    
 }
 
 
 
 -(void)goToPay{
     
-    NSString *orderString =@"alipay_sdk=alipay-sdk-java-dynamicVersionNo&app_id=2017110409716742&biz_content=%7B%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22out_trade_no%22%3A%22growatt_order_20171107003%22%2C%22product_code%22%3A%22GPRS%E7%BB%AD%E8%B4%B95%E5%B9%B4%22%2C%22subject%22%3A%22App%E6%94%AF%E4%BB%98%E6%B5%8B%E8%AF%95Java%22%2C%22timeout_express%22%3A%2230m%22%2C%22total_amount%22%3A%220.01%22%7D&charset=utf-8&format=json&method=alipay.trade.app.pay&notify_url=http%3A%2F%2F47.91.176.158%2Fcommon%2Fnotify&sign=Vjx95nXWBbIIZnhmdSC49Dyi69D1Rlft4OTKCeFSvjWFsv9je%2FeiH5XuWE5OgJ%2BgP8pumODBDoFeUgFwTI8rfF1xogzAUVYSi2xCVj5e%2Bdv0tXnew5SHjhjrGgOKZhpGfLsrEbmjdqYucEMfo4CHqhW4pCaVQa%2F8vTECqC44ifbMQszSFT0naBKQnQ%2Bx08Jjk6V%2FnwfNpH%2B%2F3INJ5xfQTWEtW4EnhqnzkKTqsSJHCdlj07iWSM2SuzyzEOoAYiVfHTf0m%2FXFyMUX9zGT5zUcBYLAoRNYMq7aTpG5t58hQF97%2FpGx5BsHczvBn1cABV34vvKvKXGspGUTpRmt6Eh2kw%3D%3D&sign_type=RSA2&timestamp=2017-11-07+16%3A08%3A32&version=1.0";
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"invoiceEnable"];
     
-    NSString *appScheme = @"ShinePhoneAlipay";
+    payView3 *testView=[[payView3 alloc]init];
+    testView.AllMoney=_AllMoney;
+    [self.navigationController pushViewController:testView animated:YES];
     
-    // NOTE: 调用支付结果开始支付
-    [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-        
-        NSLog(@"reslut1212 = %@",resultDic);
-    }];
-    
+
+//    
     
     
 }
 
 
-
+-(void)getAllMoney{
+    float allMoney=0;
+     for (int i=0; i<_choiceArray.count; i++) {
+         BOOL isSelect=[_choiceArray[i] boolValue];
+         if (isSelect) {
+             allMoney=allMoney+moneyValue;
+         }
+    }
+    
+    _AllMoney=allMoney*_yearNum;
+    _moneyLable.text=[NSString stringWithFormat:@"%@:%ld",@"总计",_AllMoney];
+    
+}
 
 
 
 -(void)goToAddSN{
-    
+    [self reLoadData];
     payView2 *testView=[[payView2 alloc]init];
     [self.navigationController pushViewController:testView animated:YES];
     
 }
 
 -(void)goToAddSN2{
-    
+    [self reLoadData];
     payView22 *testView=[[payView22 alloc]init];
     [self.navigationController pushViewController:testView animated:YES];
     
 }
 
-- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index{
-    return 1;
+-(void)reLoadData{
+    NSMutableDictionary *payDic1=[NSMutableDictionary new];
+    for (int i=0; i<_SnArray.count; i++) {
+        [payDic1 setObject:_dateArray[i] forKey:_SnArray[i]];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:payDic1 forKey:@"paySN"];
+    
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.1;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 0.1;
+}
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] init];
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] init];
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _SnArray.count;
@@ -219,13 +276,6 @@
     return 50*HEIGHT_SIZE;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 5;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.0000001;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *cellID = @"cellID";
@@ -236,14 +286,15 @@
     
     singleSelectTableViewCell *customCell = [[singleSelectTableViewCell alloc] init];
     customCell.titleLabel.text = _SnArray[indexPath.row];
-
+    customCell.dateLabel.text=[NSString stringWithFormat:@"%@:%@",@"到期时间",_dateArray[indexPath.row]];
+    
     BOOL isChoice=[_choiceArray[indexPath.row] boolValue];
     if (isChoice) {
         customCell.isSelect = YES;
-        [customCell.selectBtn setImage:[UIImage imageNamed:@"selected_btn"] forState:UIControlStateNormal];
+        [customCell.selectBtn setImage:[UIImage imageNamed:@"Selected_clickPay.png"] forState:UIControlStateNormal];
     }else{
         customCell.isSelect = NO;
-        [customCell.selectBtn setImage:[UIImage imageNamed:@"unSelect_btn"] forState:UIControlStateNormal];
+        [customCell.selectBtn setImage:[UIImage imageNamed:@"Selected_norPay.png"] forState:UIControlStateNormal];
     }
     __weak singleSelectTableViewCell *weakCell = customCell;
     [customCell setQhxSelectBlock:^(BOOL choice,NSInteger btnTag){
@@ -251,16 +302,12 @@
         [_choiceArray replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:choice]];
         
         if (choice) {
-            [weakCell.selectBtn setImage:[UIImage imageNamed:@"selected_btn"] forState:UIControlStateNormal];
-            
-            [self.tableView reloadData];
+            [weakCell.selectBtn setImage:[UIImage imageNamed:@"Selected_clickPay.png"] forState:UIControlStateNormal];
         }else{
             
-            [weakCell.selectBtn setImage:[UIImage imageNamed:@"unSelect_btn"] forState:UIControlStateNormal];
-            
-            //    [self.tableView reloadData];
-            
+            [weakCell.selectBtn setImage:[UIImage imageNamed:@"Selected_norPay.png"] forState:UIControlStateNormal];
         }
+        [self getAllMoney];
     }];
     
     cell = customCell;
@@ -276,20 +323,21 @@
 }
 
 
+
+
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
         
-        //更新UI
-        //   [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        
-        
+        [_SnArray removeObjectAtIndex:indexPath.row];
+        [_dateArray removeObjectAtIndex:indexPath.row];
+      [_choiceArray removeObjectAtIndex:indexPath.row];
+        [_tableView reloadData];
+             [self getAllMoney];
     }
     
 }
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

@@ -801,5 +801,6 @@
 #define  root_usbTowifi_189 NSLocalizedString(@"189额定功率", nil)
 #define  root_usbTowifi_190 NSLocalizedString(@"190警告", nil)
 
+#define  root_pay_191 NSLocalizedString(@"191请输入备注信息", nil)
 
 #endif /* languageNew_h */

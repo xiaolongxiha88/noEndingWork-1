@@ -13,8 +13,8 @@
 @property(nonatomic,strong)UIView*view1;
 @property(nonatomic,strong)UITextField *textField2;
 @property (nonatomic, strong) UITableView *tableView;
-@property(nonatomic,strong)NSArray *SnArray;
-@property(nonatomic,strong)NSArray *dateArray;
+@property(nonatomic,strong)NSMutableArray *SnArray;
+@property(nonatomic,strong)NSMutableArray *dateArray;
 @property (nonatomic, strong) NSMutableArray *choiceArray;
 @end
 
@@ -25,12 +25,16 @@
  
   self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
-    _SnArray=@[@"123123123",@"123123123",@"123123123",@"123123123",@"123123123",@"123123123",@"123123123",@"123123123"];
-    _dateArray=@[@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12"];
+    _SnArray=[NSMutableArray arrayWithArray:@[@"123123123",@"123123113",@"121123123",@"223123123",@"143123123",@"123125123",@"123123173",@"123153123"]];
+      _dateArray=[NSMutableArray arrayWithArray:@[@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12"]];
+    
     _choiceArray=[NSMutableArray new];
     for (int i=0; i<_SnArray.count; i++) {
         [_choiceArray addObject:[NSNumber numberWithBool:NO]];
     }
+    
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
+    self.navigationItem.rightBarButtonItem=rightItem;
     
     [self initUI];
     [self initTwo];
@@ -101,8 +105,29 @@
     
 }
 
--(void)addSN{
+-(void)goBack{
     
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    
+    [self addSN];
+}
+
+-(void)addSN{
+      NSDictionary *payDic=[[NSUserDefaults standardUserDefaults] objectForKey:@"paySN"];
+    
+    NSMutableDictionary *payDic1=[NSMutableDictionary new];
+    for (int i=0; i<_SnArray.count; i++) {
+        [payDic1 setObject:_dateArray[i] forKey:_SnArray[i]];
+    }
+    [payDic1 addEntriesFromDictionary:payDic];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:payDic1 forKey:@"paySN"];
+    
+  //   NSDictionary *payDic2=[[NSUserDefaults standardUserDefaults] objectForKey:@"paySN"];
     
 }
 
@@ -145,32 +170,17 @@
     BOOL isChoice=[_choiceArray[indexPath.row] boolValue];
     if (isChoice) {
         customCell.isSelect = YES;
-        [customCell.selectBtn setImage:[UIImage imageNamed:@"Selected_clickPay.png"] forState:UIControlStateNormal];
+     //   [customCell.selectBtn setImage:[UIImage imageNamed:@"Selected_clickPay.png"] forState:UIControlStateNormal];
     }else{
         customCell.isSelect = NO;
-        [customCell.selectBtn setImage:[UIImage imageNamed:@"Selected_norPay.png"] forState:UIControlStateNormal];
+      //  [customCell.selectBtn setImage:[UIImage imageNamed:@"Selected_norPay.png"] forState:UIControlStateNormal];
     }
-    __weak singleSelectTableViewCell *weakCell = customCell;
-    [customCell setQhxSelectBlock:^(BOOL choice,NSInteger btnTag){
-        
-        [_choiceArray replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:choice]];
-        
-        if (choice) {
-            [weakCell.selectBtn setImage:[UIImage imageNamed:@"Selected_clickPay.png"] forState:UIControlStateNormal];
-            
-            [self.tableView reloadData];
-        }else{
-            
-            [weakCell.selectBtn setImage:[UIImage imageNamed:@"Selected_norPay.png"] forState:UIControlStateNormal];
-            
-            //    [self.tableView reloadData];
-            
-        }
-    }];
+ //   __weak singleSelectTableViewCell *weakCell = customCell;
+
+    customCell.selectBtn.userInteractionEnabled=NO;
     
     cell = customCell;
-    
-    
+
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return  cell;
 }
@@ -183,7 +193,16 @@
 
 
 
-
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        
+    [_SnArray removeObjectAtIndex:indexPath.row];
+        [_dateArray removeObjectAtIndex:indexPath.row];
+        [_tableView reloadData];
+    }
+    
+}
 
 
 
