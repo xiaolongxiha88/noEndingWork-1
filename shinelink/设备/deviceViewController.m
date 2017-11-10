@@ -29,7 +29,7 @@
 #import "SPF5000Head.h"
 #import "KTDropdownMenuView.h"
 #import "Masonry.h"
-
+#import "MixHead.h"
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 #define  AnimationTime 5
@@ -81,6 +81,7 @@
 @property (nonatomic, strong) NSString *pcsNetStorageSN;
 @property (nonatomic, strong) NSMutableDictionary *pcsDataDic;
 @property (nonatomic, assign) int storageType;      //0:SP2000,1:SP3000,2:SPF5000
+@property (nonatomic, assign) int deviceType;      //3:MIX
 
 @property (nonatomic) BOOL isPvType;
 
@@ -1058,11 +1059,17 @@ _pcsNetStorageSN=@"";
                     [_headerView addSubview:StorageV];
                     [StorageV initUI];
                 }else{
-                    SPF5000Head *StorageV=[[SPF5000Head alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];
-                    StorageV.pcsDataDic=_pcsDataDic;
-                    StorageV.animationNumber=animationNumber;
-                    [_headerView addSubview:StorageV];
-                    [StorageV initUI];
+                    
+//                    SPF5000Head *StorageV=[[SPF5000Head alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];
+//                    StorageV.pcsDataDic=_pcsDataDic;
+//                    StorageV.animationNumber=animationNumber;
+//                    [_headerView addSubview:StorageV];
+//                    [StorageV initUI];
+                    
+                      MixHead *StorageV=[[MixHead alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];
+                      [_headerView addSubview:StorageV];
+                      [StorageV initUI];
+                    
                 }
                
                 
@@ -1217,6 +1224,12 @@ _pcsNetStorageSN=@"";
 
 - (void)_createHeaderView {
     float headerViewH=200*HEIGHT_SIZE;
+    
+    _deviceType=3;
+    if (_deviceType==3) {
+        headerViewH=260*NOW_SIZE;
+    }
+    
     if (!_headerView) {
           _headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0,Kwidth,headerViewH)];
     }
@@ -1235,6 +1248,7 @@ _pcsNetStorageSN=@"";
     gradientLayer.frame = CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height);
     [imageView.layer addSublayer:gradientLayer];
     [_headerView addSubview:imageView];
+    
     
     //_deviceHeadType=@"1";
     if([_deviceHeadType isEqualToString:@"1"]){
