@@ -595,6 +595,7 @@
 		3387B8FF1FB5A0780073FB35 /* newheadD22.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B8FE1FB5A0780073FB35 /* newheadD22.png */; };
 		3387B9011FB5A0920073FB35 /* newheadD33.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B9001FB5A0920073FB35 /* newheadD33.png */; };
 		3387B9031FB5A09F0073FB35 /* newheadD44.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B9021FB5A09F0073FB35 /* newheadD44.png */; };
+		3387B9051FB6C99E0073FB35 /* newheadnotes.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B9041FB6C99D0073FB35 /* newheadnotes.png */; };
 		338964591E51979800A7B1AE /* device_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338964581E51979800A7B1AE /* device_bg.jpg */; };
 		3389645D1E51B74C00A7B1AE /* yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3389645C1E51B74C00A7B1AE /* yuan.png */; };
 		338964611E52E52700A7B1AE /* phoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338964601E52E52700A7B1AE /* phoneRegisterViewController.m */; };
@@ -1688,6 +1689,7 @@
 		3387B8FE1FB5A0780073FB35 /* newheadD22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadD22.png; sourceTree = "<group>"; };
 		3387B9001FB5A0920073FB35 /* newheadD33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadD33.png; sourceTree = "<group>"; };
 		3387B9021FB5A09F0073FB35 /* newheadD44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadD44.png; sourceTree = "<group>"; };
+		3387B9041FB6C99D0073FB35 /* newheadnotes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadnotes.png; sourceTree = "<group>"; };
 		338964581E51979800A7B1AE /* device_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = device_bg.jpg; path = ../device_bg.jpg; sourceTree = "<group>"; };
 		3389645C1E51B74C00A7B1AE /* yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yuan.png; path = ../yuan.png; sourceTree = "<group>"; };
 		3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phoneRegisterViewController.h; path = "../注册/手机验证/phoneRegisterViewController.h"; sourceTree = "<group>"; };
@@ -3906,6 +3908,7 @@
 				3387B9001FB5A0920073FB35 /* newheadD33.png */,
 				3387B8FA1FB59F500073FB35 /* newheadD3.png */,
 				3387B8FB1FB59F500073FB35 /* newheadD4.png */,
+				3387B9041FB6C99D0073FB35 /* newheadnotes.png */,
 			);
 			path = "设备头部图片";
 			sourceTree = "<group>";
@@ -4667,6 +4670,7 @@
 				33252FC51F53F20A0054BBC7 /* energyuse_icon.png in Resources */,
 				3383F13A1C9FFD3E0075E834 /* 家庭用电设备.png in Resources */,
 				3370FEFF1F5F9DD60089B317 /* data_icon.png in Resources */,
+				3387B9051FB6C99E0073FB35 /* newheadnotes.png in Resources */,
 				33801EBD1D5882D500047232 /* Growatt-2-5k.jpg in Resources */,
 				337F96301F0DE47600840527 /* device_iconI.png in Resources */,
 				337C44AE1E78CC9100135304 /* ledgreen.gif in Resources */,

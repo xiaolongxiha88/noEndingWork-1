@@ -7,6 +7,8 @@
 //
 
 #import "MixHead.h"
+#import <objc/runtime.h>
+#import "PopoverView00.h"
 
 #define kDegreesToRadian(x) (M_PI * (x) / 180.0)
 
@@ -44,12 +46,13 @@
       float LableX1=ScreenWidth/2+imageSize/2+KH1;
     float LableY1=H1+imageSize/2-lableH/2;
      float LableY2=(H0-imageSize)/2+H1+imageSize+KH1;
+      float LableY22=(H0-imageSize)/2+H1-KH1-lableH;
      float LableY3=H2+imageSize/2-lableH/2;
     
     CGRect rectL0=CGRectMake(0*NOW_SIZE, KH1, ScreenWidth, lableH);
      CGRect rectL1=CGRectMake(LableX1, LableY1, lableW, lableH);
       CGRect rectL2=CGRectMake(W0, LableY2, lableW, lableH);
-      CGRect rectL22=CGRectMake(W0, LableY2+lableH, lableW, lableH);
+      CGRect rectL22=CGRectMake(W0, LableY22, lableW, lableH);
      CGRect rectL3=CGRectMake(LableX1, LableY3, lableW, lableH);
       CGRect rectL4=CGRectMake(ScreenWidth-W0-lableW, LableY2, lableW, lableH);
     
@@ -131,10 +134,62 @@
     [viewD41.layer addAnimation:[self getAnimationOne:TIME delayTime:3] forKey:nil];
     
     
-    
+    [self getNoticeUI];
+}
 
+
+-(void)getNoticeUI{
     
+    NSString *value1=@"100";
+    NSString *name11=[NSString stringWithFormat:@"%@:%@V",root_5000xianqing_dianchi_dianya,value1];
+    NSString *name22=[NSString stringWithFormat:@"%@:%@V",root_5000xianqing_PV_dianya,value1];
+    NSString *name33=[NSString stringWithFormat:@"%@:%@A",root_5000xianqing_PV_dianliu,value1];
+    NSString *name44=[NSString stringWithFormat:@"%@:%@A",root_5000xianqing_zongChongdian_dianliu,value1];
     
+    NSString *name55=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_ac_shuru,value1];
+    NSString *name66=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_ac_shuchu,value1];
+    NSString *name77=[NSString stringWithFormat:@"%@:%@W",root_5000xianqing_fuzai_gonglv,value1];
+    NSString *name88=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_fuzai_baifengbi,value1];
+      NSArray *lableName=[NSArray arrayWithObjects:name11,name22,name33,name44,name55,name66,name77,name88,nil];
+    
+    UIView *VV1=[[UIView alloc] initWithFrame:CGRectMake(20*NOW_SIZE,self.frame.size.height-40*NOW_SIZE,40*NOW_SIZE,40*NOW_SIZE)];
+    VV1.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
+    [VV1 addGestureRecognizer:tapGestureRecognizer];
+        objc_setAssociatedObject(VV1, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        [self addSubview:VV1];
+    
+    float imageW=22*NOW_SIZE;
+    UIImageView *image00 = [[UIImageView alloc] initWithFrame:CGRectMake(5*NOW_SIZE,5*NOW_SIZE,imageW,imageW)];
+    image00.image = [UIImage imageNamed:@"newheadnotes.png"];
+    image00.userInteractionEnabled=YES;
+    [VV1 addSubview:image00];
+    
+}
+
+
+#pragma mark - 弹框提示
+-(void)showAnotherView:(id)sender
+{
+    UITapGestureRecognizer *tap = (UITapGestureRecognizer*)sender;
+    UIView *lable = (UIView*) tap.view;
+    NSArray* lableNameArray = objc_getAssociatedObject(lable, "firstObject");
+    
+    PopoverView00 *popoverView = [PopoverView00 popoverView00];
+    [popoverView showToView:lable withActions:[self QQActions:lableNameArray]];
+}
+
+- (NSArray<PopoverAction *> *)QQActions:(NSArray*)lableNameArray {
+    // 发起多人聊天 action
+    NSMutableArray *actionArray=[NSMutableArray new];
+    for (int i=0; i<lableNameArray.count; i++) {
+        PopoverAction *Action = [PopoverAction actionWithImage:nil title:lableNameArray[i] handler:^(PopoverAction *action) {
+#pragma mark - 该Block不会导致内存泄露, Block内代码无需刻意去设置弱引用.
+            
+        }];
+        [actionArray addObject:Action];
+    }
+    return actionArray;
 }
 
 
