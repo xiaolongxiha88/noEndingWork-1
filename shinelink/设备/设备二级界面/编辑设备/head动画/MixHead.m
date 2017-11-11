@@ -21,8 +21,8 @@
 -(void)getUIOne{
     NSArray *imageNameArray=@[@"newheadSolar.png",@"newheadbat.png",@"newheadgrid.png",@"newheadload.png"];
     float  imageSize=64*NOW_SIZE,imageSize1=60*NOW_SIZE,imageSize2=50*NOW_SIZE;
-   float lableH=20*NOW_SIZE,lableW=imageSize*1.4;
-    
+   float lableH=20*NOW_SIZE;
+     float lableW=110*NOW_SIZE;
     float  directionSizeW1=14*NOW_SIZE,directionSizeH1=18*NOW_SIZE,directionSizeW2=12*NOW_SIZE,directionSizeH2=16*NOW_SIZE;
   
     float KH1=2.5*NOW_SIZE;
@@ -32,9 +32,36 @@
     float KH3=(KH2-directionSizeW1)/2;
     
      float H2=(H0-imageSize1)/2+H1+imageSize1+KH2;
+    float W0=10*NOW_SIZE;
     
-    //五个大图
-    CGRect rectW1=CGRectMake(10*NOW_SIZE, (H0-imageSize)/2+H1, imageSize, imageSize);
+    
+    /////////////////////////////////////////////////////////////////////////////////lable区域
+    NSString *Name0=@"市电充电旁路带载";
+    NSArray*lableNameArray=@[[NSString stringWithFormat:@"%@:",@"PV功率"],[NSString stringWithFormat:@"%@:",@"电池百分比"],[NSString stringWithFormat:@"%@:",@"并网功率"],[NSString stringWithFormat:@"%@:",@"用电功率"],[NSString stringWithFormat:@"%@:",@"放电功率"]];
+        NSArray*lableValueArray=@[[NSString stringWithFormat:@"%.1f",234.0],[NSString stringWithFormat:@"%.f",99.0],[NSString stringWithFormat:@"%.1f",234.0],[NSString stringWithFormat:@"%.1f",234.0],[NSString stringWithFormat:@"%.1f",234.0]];
+    NSArray*colorArray=@[COLOR(85, 162, 78, 1),COLOR(85, 162, 78, 1),COLOR(177, 112, 112, 1),COLOR(177, 166, 96, 1),COLOR(85, 162, 78, 1)];
+    
+      float LableX1=ScreenWidth/2+imageSize/2+KH1;
+    float LableY1=H1+imageSize/2-lableH/2;
+     float LableY2=(H0-imageSize)/2+H1+imageSize+KH1;
+     float LableY3=H2+imageSize/2-lableH/2;
+    
+    CGRect rectL0=CGRectMake(0*NOW_SIZE, KH1, ScreenWidth, lableH);
+     CGRect rectL1=CGRectMake(LableX1, LableY1, lableW, lableH);
+      CGRect rectL2=CGRectMake(W0, LableY2, lableW, lableH);
+      CGRect rectL22=CGRectMake(W0, LableY2+lableH, lableW, lableH);
+     CGRect rectL3=CGRectMake(LableX1, LableY3, lableW, lableH);
+      CGRect rectL4=CGRectMake(ScreenWidth-W0-lableW, LableY2, lableW, lableH);
+    
+       [self getLableUI:rectL0 lableName:Name0 lableValue:@"" lableUnit:@"" valueColor:colorArray[0] directorType:3];
+    [self getLableUI:rectL1 lableName:lableNameArray[0] lableValue:lableValueArray[0] lableUnit:@"W" valueColor:colorArray[0] directorType:1];
+       [self getLableUI:rectL2 lableName:lableNameArray[1] lableValue:lableValueArray[1] lableUnit:@"%" valueColor:colorArray[1] directorType:1];
+      [self getLableUI:rectL22 lableName:lableNameArray[4] lableValue:lableValueArray[4] lableUnit:@"W" valueColor:colorArray[4] directorType:1];
+     [self getLableUI:rectL3 lableName:lableNameArray[2] lableValue:lableValueArray[2] lableUnit:@"W" valueColor:colorArray[2] directorType:1];
+     [self getLableUI:rectL4 lableName:lableNameArray[3] lableValue:lableValueArray[3] lableUnit:@"W" valueColor:colorArray[3] directorType:2];
+    
+  /////////////////  //五个大图
+    CGRect rectW1=CGRectMake(W0, (H0-imageSize)/2+H1, imageSize, imageSize);
        CGRect rectW3=CGRectMake(310*NOW_SIZE-imageSize, (H0-imageSize)/2+H1, imageSize, imageSize);
      CGRect rectH1=CGRectMake((ScreenWidth-imageSize)/2, H1, imageSize, imageSize);
         CGRect rectH2=CGRectMake((ScreenWidth-imageSize)/2, H2, imageSize, imageSize);
@@ -53,9 +80,9 @@
     [self getAnimationThree:viewW22];
     
     
-    float KW1=(ScreenWidth-imageSize1)/2-10*NOW_SIZE-imageSize;
+    float KW1=(ScreenWidth-imageSize1)/2-W0-imageSize;
       float KW2=(KW1-directionSizeW1-directionSizeW2)/4;
-      float DX=imageSize+10*NOW_SIZE;
+      float DX=imageSize+W0;
      float DX1=(ScreenWidth-imageSize1)/2+imageSize1;
     float TIME=1;
      //方向图
@@ -105,9 +132,7 @@
     
     
     
-    /////////////////////////////////////////////////////////////////////////////////lable区域
-      CGRect rectL1=CGRectMake(0*NOW_SIZE, 2.5*NOW_SIZE, ScreenWidth, lableH);
-   [self getLableUI:rectL1 lableName:@"市电充电旁路带载" lableValue:@"" lableUnit:@"" valueColor:COLOR(85, 162, 78, 1)];
+
     
     
 }
@@ -165,7 +190,7 @@
     return imageView1;
 }
 
--(void)getLableUI:(CGRect)frameRect lableName:(NSString*)lableName lableValue:(NSString*)lableValue lableUnit:(NSString*)lableUnit  valueColor:(UIColor*)valueColor {
+-(void)getLableUI:(CGRect)frameRect lableName:(NSString*)lableName lableValue:(NSString*)lableValue lableUnit:(NSString*)lableUnit  valueColor:(UIColor*)valueColor directorType:(int)directorType{
     
     UILabel *solorLable=[[UILabel alloc] initWithFrame:frameRect];
       solorLable.textColor=COLOR(136, 136, 136, 1);
@@ -176,9 +201,17 @@
     [attrString addAttribute:NSForegroundColorAttributeName value:valueColor range:NSMakeRange(length0, length1)];
       solorLable.attributedText=attrString;
 
-    solorLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    solorLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
     solorLable.adjustsFontSizeToFitWidth=YES;
-    solorLable.textAlignment = NSTextAlignmentCenter;
+    if (directorType==1) {
+           solorLable.textAlignment = NSTextAlignmentLeft;
+    }else  if (directorType==2) {
+            solorLable.textAlignment = NSTextAlignmentRight;
+    }else{
+            solorLable.textAlignment = NSTextAlignmentCenter;
+         solorLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    }
+
     [self addSubview:solorLable];
     
 }
