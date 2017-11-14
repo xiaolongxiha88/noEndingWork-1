@@ -201,10 +201,21 @@
 
 -(void)goToPay{
     
+    NSMutableArray *snArray0=[NSMutableArray new];
+    for (int i=0; i<_choiceArray.count; i++) {
+        BOOL isSelect=[_choiceArray[i] boolValue];
+        if (isSelect) {
+            [snArray0 addObject:_SnArray[i]];
+        }
+    }
+    
         [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"invoiceEnable"];
     
     payView3 *testView=[[payView3 alloc]init];
     testView.AllMoney=_AllMoney;
+    testView.yearString=[NSString stringWithFormat:@"%ld",_yearNum];
+       testView.moneyString=[NSString stringWithFormat:@"%ld",_AllMoney];
+    testView.snArray=[NSMutableArray arrayWithArray:snArray0];
     [self.navigationController pushViewController:testView animated:YES];
     
 

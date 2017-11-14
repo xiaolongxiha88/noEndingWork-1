@@ -146,11 +146,78 @@
     [_goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [_goBut setTitle:@"支付" forState:UIControlStateNormal];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
-    [_goBut addTarget:self action:@selector(goPay) forControlEvents:UIControlEventTouchUpInside];
+    [_goBut addTarget:self action:@selector(getNetOne) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_goBut];
     
     
 }
+
+
+-(void)getNetOne{
+    NSString *userName= [[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
+      NSArray *payA=[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceArray"];
+    
+    BOOL payB=[[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceEnable"] boolValue];
+    NSString*haveInvoice; NSString*InvoiceName=@"";NSString*invoiceNum=@"";NSString*invoicePhone=@"";NSString*invoiceAddr=@"";NSString*remark=@"";
+    if (payB) {
+        haveInvoice=@"1";InvoiceName=payA[0];invoiceNum=payA[1];invoicePhone=payA[2];invoiceAddr=payA[3];remark=payA[4];
+    }else{
+ haveInvoice=@"0";
+    }
+     NSString*moneyType=@"";
+    
+        UIButton *button=[self.view viewWithTag:2000];
+        UIButton *button1=[self.view viewWithTag:2001];
+    if (button.selected) {
+        moneyType=@"1";
+    }
+    if (button1.selected) {
+        moneyType=@"0";
+    }
+    if ([moneyType isEqualToString:@""]) {
+        [self showToastViewWithTitle:@"请选择支付方式"];
+        return;
+    }
+  NSDictionary *netDic=@{
+                         @"username":userName,
+                         @"datalogSn":_snArray,
+                           @"type":moneyType,
+                            @"year":_yearString,
+                                @"money":_moneyString,
+                             @"haveInvoice":haveInvoice,
+                         @"InvoiceName":InvoiceName,
+                         @"invoiceNum":invoiceNum,
+                         @"invoicePhone":invoicePhone,
+                         @"invoiceAddr":invoiceAddr,
+                           @"remark":remark,
+                         };
+    
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:netDic paramarsSite:@"/api/v2/renew/getPayRequest" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"api/v2/renew/getPayRequest: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            if ([firstDic[@"result"] intValue]==1) {
+                
+            }else{
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
+            }
+            
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+   
+        
+    }];
+    
+}
+
 
 -(void)goPay{
     

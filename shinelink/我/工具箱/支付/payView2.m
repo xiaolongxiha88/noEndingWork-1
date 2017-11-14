@@ -25,8 +25,8 @@
  
   self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
-    _SnArray=[NSMutableArray arrayWithArray:@[@"123123123",@"123123113",@"121123123",@"223123123",@"143123123",@"123125123",@"123123173",@"123153123"]];
-      _dateArray=[NSMutableArray arrayWithArray:@[@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12"]];
+    _SnArray=[NSMutableArray new];
+      _dateArray=[NSMutableArray new];
     
     _choiceArray=[NSMutableArray new];
     for (int i=0; i<_SnArray.count; i++) {
@@ -75,7 +75,7 @@
     [_goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [_goBut setTitle:@"添加" forState:UIControlStateNormal];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
-    [_goBut addTarget:self action:@selector(addSN) forControlEvents:UIControlEventTouchUpInside];
+    [_goBut addTarget:self action:@selector(getNetOne) forControlEvents:UIControlEventTouchUpInside];
     [_view1 addSubview:_goBut];
     
 }
@@ -128,6 +128,53 @@
     [[NSUserDefaults standardUserDefaults] setObject:payDic1 forKey:@"paySN"];
     
   //   NSDictionary *payDic2=[[NSUserDefaults standardUserDefaults] objectForKey:@"paySN"];
+    
+}
+
+
+-(void)getNetOne{
+    NSString *snString= _textField2.text;
+    if ([snString isEqualToString:@""]||(snString==nil)) {
+           [self showToastViewWithTitle:root_caiJiQi];
+        return;
+    }
+    NSString *serverUrl= [[NSUserDefaults standardUserDefaults] objectForKey:@"server"];
+    int serverType=2;
+    if ([serverUrl containsString:@"server-cn"]) {
+        serverType=2;
+    }else if ([serverUrl containsString:@"smten"]) {
+        serverType=3;
+    }else{
+        serverType=1;
+    }
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"datalogSn":snString,@"serverId":[NSNumber numberWithInt:serverType]} paramarsSite:@"/api/v2/renew/datalogSnExist" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"api/v2/renew/datalogSnExist: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            if ([firstDic[@"result"] intValue]==1) {
+                NSArray *allArray=firstDic[@"obj"];
+                for (int i=0; i<allArray.count; i++) {
+                    [_SnArray addObject:allArray[i][@"datalogSn"]];
+                    [_dateArray addObject:allArray[i][@"productDate"]];
+                      [_choiceArray addObject:[NSNumber numberWithBool:NO]];
+                }
+                [_tableView reloadData];
+            }else{
+                   [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
+            }
+            
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+
+        
+    }];
     
 }
 

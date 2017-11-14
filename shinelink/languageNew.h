@@ -803,4 +803,32 @@
 
 #define  root_pay_191 NSLocalizedString(@"191请输入备注信息", nil)
 
+#define  root_MIX_192 NSLocalizedString(@"192第一路PV电压", nil)
+#define  root_MIX_193 NSLocalizedString(@"193第一路PV功率", nil)
+#define  root_MIX_194 NSLocalizedString(@"194第二路PV电压", nil)
+#define  root_MIX_195 NSLocalizedString(@"195第二路PV功率", nil)
+#define  root_MIX_196 NSLocalizedString(@"196电池电压", nil)
+#define  root_MIX_197 NSLocalizedString(@"197电网电压", nil)
+#define  root_MIX_198 NSLocalizedString(@"198电网频率", nil)
+#define  root_MIX_199 NSLocalizedString(@"199EPS电压", nil)
+#define  root_MIX_200 NSLocalizedString(@"200EPS频率", nil)
+
+#define  root_MIX_201 NSLocalizedString(@"201等待模式", nil)
+#define  root_MIX_202 NSLocalizedString(@"202自检模式", nil)
+#define  root_MIX_203 NSLocalizedString(@"203保留模式", nil)
+#define  root_MIX_204 NSLocalizedString(@"204SysFault模式", nil)
+#define  root_MIX_205 NSLocalizedString(@"205Flash模式", nil)
+#define  root_MIX_206 NSLocalizedString(@"206并网工作中", nil)
+#define  root_MIX_207 NSLocalizedString(@"207离网工作中", nil)
+#define  root_MIX_208 NSLocalizedString(@"208负载优先", nil)
+#define  root_MIX_209 NSLocalizedString(@"209电池优先", nil)
+#define  root_MIX_210 NSLocalizedString(@"210电网优先", nil)
+
+#define  root_MIX_211 NSLocalizedString(@"211用电功率", nil)
+#define  root_MIX_212 NSLocalizedString(@"212并网功率", nil)
+
+
+
+
+
 #endif /* languageNew_h */

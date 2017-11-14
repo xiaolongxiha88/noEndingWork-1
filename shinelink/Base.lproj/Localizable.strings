@@ -776,3 +776,26 @@
 "189额定功率"="Normal power";
 "190警告"="Warning";
 "191请输入备注信息"="Please enter the note information";
+
+"192第一路PV电压"="Voltage of PV1";
+"193第一路PV功率"="Power of PV1";
+"194第二路PV电压"="Voltage of PV2";
+"195第二路PV功率"="Power of PV2";
+"196电池电压"="Battery voltage";
+"197电网电压"="Grid voltage";
+"198电网频率"="Grid frequency";
+"199EPS电压"="EPS voltage";
+"200EPS频率"="EPS frequency";
+
+"201等待模式"="Standby";
+"202自检模式"="Self-inspection ";
+"203保留模式"="Retained";
+"204SysFault模式"="SysFault";
+"205Flash模式"="Flash";
+"206并网工作中"="On-grid operating";
+"207离网工作中"="Off-grid operating";
+"208负载优先"="Load first";
+"209电池优先"="Battery first";
+"210电网优先"="Grid first";
+"211用电功率"="Consumption power";
+"212并网功率"="Export power";

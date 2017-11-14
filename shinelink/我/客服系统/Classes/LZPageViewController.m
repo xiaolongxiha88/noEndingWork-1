@@ -14,7 +14,7 @@
 #import "newEnergyStorage.h"
 #import "newEnergyStorage2000.h"
 #import "newEnergySPF5000.h"
-
+#import "newEnergyMix.h"
 
 @interface LZPageViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,LZPageContentViewDelegate>
 @property (nonatomic, assign) CGFloat pageBarHeight;
@@ -100,6 +100,10 @@ static NSString *mainCell = @"mainCellmainCell";
             }else if ([deviceType isEqualToString:@"2"]) {
                 //     self.title = @"";
                 newEnergySPF5000 *findVc=[[newEnergySPF5000 alloc]init];
+                [self.navigationController pushViewController:findVc animated:YES];
+            }else if ([deviceType isEqualToString:@"3"]) {
+                //     self.title = @"";
+                newEnergyMix *findVc=[[newEnergyMix alloc]init];
                 [self.navigationController pushViewController:findVc animated:YES];
             }
 

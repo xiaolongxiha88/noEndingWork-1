@@ -399,6 +399,8 @@
 		33742B421ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 33742B411ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.m */; };
 		33742B481ED6D6BD0015F2EA /* OssMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33742B471ED6D6BD0015F2EA /* OssMessageViewController.m */; };
 		33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */; };
+		337472281FB96C9200AC1420 /* toolOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337472271FB96C9200AC1420 /* toolOneView.m */; };
+		3374722B1FBAF51000AC1420 /* newEnergyMix.m in Sources */ = {isa = PBXBuildFile; fileRef = 3374722A1FBAF51000AC1420 /* newEnergyMix.m */; };
 		337475F21FAB004B00BB1A76 /* usbToWifiFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 337475F11FAB004B00BB1A76 /* usbToWifiFour.m */; };
 		337475F61FADB4E700BB1A76 /* Max_control3.png in Resources */ = {isa = PBXBuildFile; fileRef = 337475F51FADB4E700BB1A76 /* Max_control3.png */; };
 		337475F91FADB64900BB1A76 /* usbToWifiControlFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 337475F81FADB64900BB1A76 /* usbToWifiControlFour.m */; };
@@ -1235,8 +1237,8 @@
 		33692BF01C926B4500698375 /* rili.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rili.png; path = "../设备二级界面/rili.png"; sourceTree = "<group>"; };
 		33692BF21C926B4B00698375 /* shang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shang.png; path = "../设备二级界面/shang.png"; sourceTree = "<group>"; };
 		33692BF41C926B5000698375 /* xia.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = xia.png; path = "../设备二级界面/xia.png"; sourceTree = "<group>"; };
-		33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = meConfigerViewController.h; path = ../meConfigerViewController.h; sourceTree = "<group>"; };
-		33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = meConfigerViewController.m; path = ../meConfigerViewController.m; sourceTree = "<group>"; };
+		33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meConfigerViewController.h; sourceTree = "<group>"; };
+		33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = meConfigerViewController.m; sourceTree = "<group>"; };
 		336A108D1CBDDBA500E30E83 /* triangular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangular.png; sourceTree = "<group>"; };
 		336A108E1CBDDBA500E30E83 /* 2triangular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2triangular.png; sourceTree = "<group>"; };
 		336D3FD41DF80C4600BE8422 /* ShinePhone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ShinePhone-Bridging-Header.h"; path = "设备/采集器/ShinePhone-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -1401,6 +1403,10 @@
 		33742B471ED6D6BD0015F2EA /* OssMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OssMessageViewController.m; sourceTree = "<group>"; };
 		33744DE21CAE597A0065DC01 /* pvLogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pvLogTableViewCell.h; sourceTree = "<group>"; };
 		33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pvLogTableViewCell.m; sourceTree = "<group>"; };
+		337472261FB96C9200AC1420 /* toolOneView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = toolOneView.h; sourceTree = "<group>"; };
+		337472271FB96C9200AC1420 /* toolOneView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = toolOneView.m; sourceTree = "<group>"; };
+		337472291FBAF51000AC1420 /* newEnergyMix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = newEnergyMix.h; sourceTree = "<group>"; };
+		3374722A1FBAF51000AC1420 /* newEnergyMix.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = newEnergyMix.m; sourceTree = "<group>"; };
 		337475F01FAB004B00BB1A76 /* usbToWifiFour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiFour.h; sourceTree = "<group>"; };
 		337475F11FAB004B00BB1A76 /* usbToWifiFour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiFour.m; sourceTree = "<group>"; };
 		337475F51FADB4E700BB1A76 /* Max_control3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Max_control3.png; sourceTree = "<group>"; };
@@ -3369,8 +3375,8 @@
 			children = (
 				3387B8A91FB181EA0073FB35 /* 支付 */,
 				3387B8A01FB181DF0073FB35 /* WiFi配置 */,
-				33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */,
-				33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */,
+				337472261FB96C9200AC1420 /* toolOneView.h */,
+				337472271FB96C9200AC1420 /* toolOneView.m */,
 			);
 			path = "工具箱";
 			sourceTree = "<group>";
@@ -3848,6 +3854,8 @@
 		3387B8A01FB181DF0073FB35 /* WiFi配置 */ = {
 			isa = PBXGroup;
 			children = (
+				33699BB11DACCEAE00C55CFF /* meConfigerViewController.h */,
+				33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */,
 				3387B8A11FB181DF0073FB35 /* firstToolViewController.h */,
 				3387B8A21FB181DF0073FB35 /* firstToolViewController.m */,
 				3387B8A31FB181DF0073FB35 /* wifi_icon.png */,
@@ -4269,6 +4277,8 @@
 				33875A511EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m */,
 				33322B4F1F57F3A100FB89BD /* newEnergySPF5000.h */,
 				33322B501F57F3A100FB89BD /* newEnergySPF5000.m */,
+				337472291FBAF51000AC1420 /* newEnergyMix.h */,
+				3374722A1FBAF51000AC1420 /* newEnergyMix.m */,
 			);
 			path = "储能能源新界面";
 			sourceTree = "<group>";
@@ -5074,6 +5084,7 @@
 				3381ED011CBCD85700DCF0D2 /* myListSecondTableViewCell.m in Sources */,
 				335D69B51D77BA4D00894D90 /* NSString+HCD.m in Sources */,
 				3343F3C61C80403C009F69BC /* AFURLResponseSerialization.m in Sources */,
+				337472281FB96C9200AC1420 /* toolOneView.m in Sources */,
 				3379E4ED1E94BE54000A4198 /* CircleMapView.m in Sources */,
 				33AF3D211D8E67210007D6C2 /* NSTimer+EasyTimeline.m in Sources */,
 				338614AF1F26E59B000F515E /* newLine.m in Sources */,
@@ -5145,6 +5156,7 @@
 				335D69AD1D77BA4D00894D90 /* HcdAudioPlayer.m in Sources */,
 				338A623D1E71567A000E7CE4 /* PopoverAction.m in Sources */,
 				334FF0911CF53C7C001E6716 /* GCDAsyncSocket.m in Sources */,
+				3374722B1FBAF51000AC1420 /* newEnergyMix.m in Sources */,
 				338614AC1F2606A0000F515E /* intergratorDeviceCell.swift in Sources */,
 				3370793D1D910FEC00D7DA98 /* NJKWebViewProgressView.m in Sources */,
 				336F1A1D1D88E46900CD4C2B /* UIButton+WebCache.m in Sources */,

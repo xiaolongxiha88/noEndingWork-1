@@ -14,5 +14,6 @@
 
 @property (nonatomic, assign)  BOOL isBatToRight;
 @property (nonatomic, assign)  BOOL isGridToUp;
+@property (nonatomic, strong) NSDictionary *allDic;
 
 @end

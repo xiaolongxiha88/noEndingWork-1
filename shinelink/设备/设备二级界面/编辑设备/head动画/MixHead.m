@@ -38,8 +38,53 @@
     
     
     /////////////////////////////////////////////////////////////////////////////////lable区域
-    NSString *Name0=@"市电充电旁路带载";
-    NSArray*lableNameArray=@[[NSString stringWithFormat:@"%@:",@"PV功率"],[NSString stringWithFormat:@"%@:",@"电池百分比"],[NSString stringWithFormat:@"%@:",@"并网功率"],[NSString stringWithFormat:@"%@:",@"用电功率"],[NSString stringWithFormat:@"%@:",@"放电功率"]];
+       int L1=[[NSString stringWithFormat:@"%d",(int)[_allDic objectForKey:@"uwSysWorkMode"]] intValue];
+    NSString*L1Name1=@"";
+    NSArray *statueArray=@[root_MIX_201,root_MIX_202,root_MIX_203,root_MIX_204,root_MIX_205,root_MIX_206,root_MIX_207];
+    if (L1<statueArray.count) {
+          L1Name1=statueArray[L1];
+    }
+  
+    
+    int L2=[[NSString stringWithFormat:@"%d",(int)[_allDic objectForKey:@"wBatteryType"] ] intValue];
+    NSString*L1Name2=@"";
+    NSArray *statueArray2=@[root_MIX_208,root_MIX_209,root_MIX_210];
+    if (L1<statueArray2.count) {
+            L1Name2=statueArray2[L2];
+    }
+    NSString *Name0=@"";
+    if ([L1Name2 isEqualToString:@""]) {
+       Name0=[NSString stringWithFormat:@"%@",L1Name1];
+    }else{
+         Name0=[NSString stringWithFormat:@"%@(%@)",L1Name1,L1Name2];
+    }
+  
+    //root_PCS_fangdian_gonglv     root_Charge_Power
+    NSString *valueUp=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"ppv"]] floatValue]];
+       NSString *valueLeft0=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"chargePower"]] floatValue]];
+    
+    NSString *nameLeft=@"";NSString *valueLeft=@"";
+    if ([valueLeft0 floatValue]>0) {
+        nameLeft=root_Charge_Power;
+        valueLeft=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"chargePower"]] floatValue]];
+    }else{
+        nameLeft=root_PCS_fangdian_gonglv;
+        valueLeft=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pdisCharge1"]] floatValue]];
+    }
+    
+    NSString *namedown=@"";NSString *valuedown=@"";
+    if ([valueLeft0 floatValue]>0) {
+        nameLeft=root_Charge_Power;
+        valueLeft=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"chargePower"]] floatValue]];
+    }else{
+        nameLeft=root_PCS_fangdian_gonglv;
+        valueLeft=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pdisCharge1"]] floatValue]];
+    }
+    
+    
+      NSString *valuedown0=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pactouser"]] floatValue]];
+    
+    NSArray*lableNameArray=@[[NSString stringWithFormat:@"%@:",root_PV_POWER],[NSString stringWithFormat:@"%@:",root_PCS_dianchi_baifenbi],[NSString stringWithFormat:@"%@:",root_MIX_212],[NSString stringWithFormat:@"%@:",root_MIX_211],[NSString stringWithFormat:@"%@:",@"放电功率"]];
         NSArray*lableValueArray=@[[NSString stringWithFormat:@"%.1f",234.0],[NSString stringWithFormat:@"%.f",99.0],[NSString stringWithFormat:@"%.1f",234.0],[NSString stringWithFormat:@"%.1f",234.0],[NSString stringWithFormat:@"%.1f",234.0]];
     NSArray*colorArray=@[COLOR(85, 162, 78, 1),COLOR(85, 162, 78, 1),COLOR(177, 112, 112, 1),COLOR(177, 166, 96, 1),COLOR(85, 162, 78, 1)];
     
@@ -140,17 +185,32 @@
 
 -(void)getNoticeUI{
     
-    NSString *value1=@"100";
-    NSString *name11=[NSString stringWithFormat:@"%@:%@V",root_5000xianqing_dianchi_dianya,value1];
-    NSString *name22=[NSString stringWithFormat:@"%@:%@V",root_5000xianqing_PV_dianya,value1];
-    NSString *name33=[NSString stringWithFormat:@"%@:%@A",root_5000xianqing_PV_dianliu,value1];
-    NSString *name44=[NSString stringWithFormat:@"%@:%@A",root_5000xianqing_zongChongdian_dianliu,value1];
+ 
     
-    NSString *name55=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_ac_shuru,value1];
-    NSString *name66=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_ac_shuchu,value1];
-    NSString *name77=[NSString stringWithFormat:@"%@:%@W",root_5000xianqing_fuzai_gonglv,value1];
-    NSString *name88=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_fuzai_baifengbi,value1];
-      NSArray *lableName=[NSArray arrayWithObjects:name11,name22,name33,name44,name55,name66,name77,name88,nil];
+    
+ NSString *mix192=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"vPv1"] floatValue]];
+    NSString *mix193=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"pPv1"] floatValue]];
+    NSString *mix194=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"vPv2"] floatValue]];
+    NSString *mix195=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"pPv2"] floatValue]];
+    
+     NSString *mix196=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"vBat"] floatValue]];
+     NSString *mix197=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"vAc1"] floatValue]];
+     NSString *mix198=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"fAc"] floatValue]];
+     NSString *mix199=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"upsVac1"] floatValue]];
+    NSString *mix200=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"upsFac"] floatValue]];
+  
+    NSString *name11=[NSString stringWithFormat:@"%@:%@V",root_MIX_192,mix192];
+    NSString *name22=[NSString stringWithFormat:@"%@:%@W",root_MIX_193,mix193];
+    NSString *name33=[NSString stringWithFormat:@"%@:%@V",root_MIX_194,mix194];
+    NSString *name44=[NSString stringWithFormat:@"%@:%@W",root_MIX_195,mix195];
+    
+    NSString *name55=[NSString stringWithFormat:@"%@:%@V",root_MIX_196,mix196];
+    NSString *name66=[NSString stringWithFormat:@"%@:%@V",root_MIX_197,mix197];
+    NSString *name77=[NSString stringWithFormat:@"%@:%@Hz",root_MIX_198,mix198];
+    NSString *name88=[NSString stringWithFormat:@"%@:%@V",root_MIX_199,mix199];
+        NSString *name99=[NSString stringWithFormat:@"%@:%@Hz",root_MIX_200,mix200];
+      NSArray *lableName=[NSArray arrayWithObjects:name11,name22,name33,name44,name55,name66,name77,name88,name99,nil];
+    
     
     UIView *VV1=[[UIView alloc] initWithFrame:CGRectMake(20*NOW_SIZE,self.frame.size.height-40*NOW_SIZE,40*NOW_SIZE,40*NOW_SIZE)];
     VV1.userInteractionEnabled=YES;

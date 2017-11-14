@@ -11,4 +11,8 @@
 @interface payView3 : RootViewController
 @property(nonatomic,assign)NSInteger AllMoney;
 
+@property(nonatomic,strong)NSArray *snArray;
+@property(nonatomic,strong)NSString *yearString;
+@property(nonatomic,strong)NSString *moneyString;
+
 @end

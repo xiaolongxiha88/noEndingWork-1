@@ -24,18 +24,11 @@
     [super viewDidLoad];
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
-    _SnArray=[NSMutableArray arrayWithArray:@[@"123123123",@"123123113",@"121123123",@"223123123",@"143123123",@"123125123",@"123123173",@"123153123"]];
-    _dateArray=[NSMutableArray arrayWithArray:@[@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12",@"2013-12-12"]];
-    
-    _choiceArray=[NSMutableArray new];
-    for (int i=0; i<_SnArray.count; i++) {
-        [_choiceArray addObject:[NSNumber numberWithBool:NO]];
-    }
-    
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(goBack)];
     self.navigationItem.rightBarButtonItem=rightItem;
     
-    [self initUI];
+    [self getNetOne];
+  
 }
 
 
@@ -66,6 +59,56 @@
     
 }
 
+
+
+-(void)getNetOne{
+    NSString *userName= [[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
+  NSString *serverUrl= [[NSUserDefaults standardUserDefaults] objectForKey:@"server"];
+    int serverType=2;
+    if ([serverUrl containsString:@"server-cn"]) {
+        serverType=2;
+    }else if ([serverUrl containsString:@"smten"]) {
+        serverType=3;
+    }else if ([serverUrl containsString:@"server.growatt.com"]){
+        serverType=1;
+    }else{
+         serverType=9;
+    }
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"username":userName,@"serverId":[NSNumber numberWithInt:serverType]} paramarsSite:@"/api/v2/renew/getDatalogSnAndProductDate" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"api/v2/renew/getDatalogSnAndProductDate: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            if ([firstDic[@"result"] intValue]==1) {
+                _SnArray=[NSMutableArray new];
+                  _dateArray=[NSMutableArray new];
+                NSArray *allArray=firstDic[@"obj"];
+                for (int i=0; i<allArray.count; i++) {
+                    [_SnArray addObject:allArray[i][@"datalogSn"]];
+                      [_dateArray addObject:allArray[i][@"productDate"]];
+                }
+                _choiceArray=[NSMutableArray new];
+                for (int i=0; i<_SnArray.count; i++) {
+                    [_choiceArray addObject:[NSNumber numberWithBool:NO]];
+                }
+                [self initUI];
+            }else{
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
+            }
+      
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+
+        
+    }];
+    
+}
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

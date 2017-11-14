@@ -20,6 +20,7 @@
 #import "loginViewController.h"
 #import "CoreDataManager.h"
 #import "newEnergyStorage.h"
+#import "toolOneView.h"
 
 //DEMO区域
 #import "GifNewViewController.h"
@@ -328,7 +329,7 @@
     }
    
     if (indexPath.row==2) {
-        meConfigerViewController *rootView = [[meConfigerViewController alloc]init];
+        toolOneView *rootView = [[toolOneView alloc]init];
   rootView.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:rootView animated:YES];
     }

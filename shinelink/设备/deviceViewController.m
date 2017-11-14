@@ -82,6 +82,7 @@
 @property (nonatomic, strong) NSMutableDictionary *pcsDataDic;
 @property (nonatomic, assign) int storageType;      //0:SP2000,1:SP3000,2:SPF5000
 @property (nonatomic, assign) int deviceType;      //3:MIX
+@property (nonatomic, strong) NSString *MixSN;    //头部MIX的SN
 
 @property (nonatomic) BOOL isPvType;
 
@@ -745,7 +746,7 @@ _pcsNetStorageSN=@"";
     }
     
     
-    _deviceHeadType=@"0";
+    _deviceHeadType=@"0";           //0逆变器  1储能机   2MIX
     _pcsNetPlantID=[_plantId objectForKey:@"plantId"];
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:_plantId paramarsSite:@"/newPlantAPI.do?op=getAllDeviceList" sucessBlock:^(id content) {
       
@@ -776,7 +777,7 @@ _pcsNetStorageSN=@"";
             
              [imageStatueArray addObject:@"disconnect@2x.png"];
            
-            if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"inverter"]) {
+            if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"inverter"]) {                                //inverter 设备解析
                
                 
                 
@@ -791,7 +792,7 @@ _pcsNetStorageSN=@"";
                 [_typeArr addObject:content[@"deviceList"][i][@"deviceType"]];
                 [SNArray addObject:content[@"deviceList"][i][@"deviceSn"]];
                 if ([content[@"deviceList"][i][@"deviceAilas"]isEqualToString:@""]) {
-                    [nameArray addObject:content[@"deviceList"][i][@"deviceType"]];
+                    [nameArray addObject:content[@"deviceList"][i][@"deviceSn"]];
                 }else{
                     [nameArray addObject:content[@"deviceList"][i][@"deviceAilas"]];}
                 
@@ -807,32 +808,32 @@ _pcsNetStorageSN=@"";
                     [statueArray addObject:ST];
                 }
 
-            }else if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"storage"]){
+            }else if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"storage"]){                    //storage 设备解析
                 
                  _isPvType=NO;
-               
-                _deviceHeadType=@"1";
+                if ([_deviceHeadType intValue]<1) {
+                      _deviceHeadType=@"1";
+                }
+              
                 [imageArray addObject:@"storage.png"];
-                NSString *PO=[NSString stringWithFormat:@"%@W",content[@"deviceList"][i][@"pCharge"]];
-                [powerArray addObject:PO];
-                NSString *DY=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"capacity"]];
-                [dayArray addObject:DY];
+                [powerArray addObject:[NSString stringWithFormat:@"%@W",content[@"deviceList"][i][@"pCharge"]]];
+                [dayArray addObject:[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"capacity"]]];
                 
                 [_typeArr addObject:content[@"deviceList"][i][@"deviceType"]];
                 [SNArray addObject:content[@"deviceList"][i][@"deviceSn"]];
                 if ([content[@"deviceList"][i][@"deviceAilas"]isEqualToString:@""]) {
-                    [nameArray addObject:content[@"deviceList"][i][@"deviceType"]];
+                    [nameArray addObject:content[@"deviceList"][i][@"deviceSn"]];
                 }else{
-                    [nameArray addObject:content[@"deviceList"][i][@"deviceAilas"]];}
+                    [nameArray addObject:content[@"deviceList"][i][@"deviceAilas"]];
+                }
                 
-                NSString *TO2=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"energy"]];
-                [totalPowerArray addObject:TO2];
+                
+                [totalPowerArray addObject:[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"energy"]]];
                 
                 NSString *ST02=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"lost"]];
                 if ([ST02 isEqualToString:@"1"]) {
                     [statueArray addObject:@"6"];
                 }else{
-                    
                     NSString *ST=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"deviceStatus"]];
                     [statueArray addObject:ST];
                 }
@@ -851,7 +852,34 @@ _pcsNetStorageSN=@"";
                 }
                 
                 
-            }
+            }else if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"mix"]){                  //MIX 设备解析
+                if ([_deviceHeadType intValue]<2) {
+                    _deviceHeadType=@"2";
+                }
+                [imageArray addObject:@"storage.png"];
+                [powerArray addObject:[NSString stringWithFormat:@"%@W",content[@"deviceList"][i][@"power"]]];
+                [dayArray addObject:[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"eToday"]]];
+                
+                [_typeArr addObject:content[@"deviceList"][i][@"deviceType"]];
+                [SNArray addObject:content[@"deviceList"][i][@"deviceSn"]];
+                _MixSN=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"deviceSn"]];
+                if ([content[@"deviceList"][i][@"deviceAilas"]isEqualToString:@""]) {
+                    [nameArray addObject:content[@"deviceList"][i][@"deviceSn"]];
+                }else{
+                    [nameArray addObject:content[@"deviceList"][i][@"deviceAilas"]];
+                }
+                
+                NSString *ST02=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"lost"]];
+                if ([ST02 isEqualToString:@"1"]) {
+                    [statueArray addObject:@"6"];
+                }else{
+                    NSString *ST=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"deviceStatus"]];
+                    [statueArray addObject:ST];
+                }
+                
+                         [totalPowerArray addObject:[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"energy"]]];
+                
+            }   //end
             
            
         }
@@ -1025,9 +1053,6 @@ _pcsNetStorageSN=@"";
 
 -(void)getPCSnet{
 
-  
-    
-    
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":_pcsNetPlantID,@"storageSn":_pcsNetStorageSN} paramarsSite:@"/newStorageAPI.do?op=getSystemStatusData" sucessBlock:^(id content) {
         [self hideProgressView];
         
@@ -1060,16 +1085,13 @@ _pcsNetStorageSN=@"";
                     [StorageV initUI];
                 }else{
                     
-//                    SPF5000Head *StorageV=[[SPF5000Head alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];
-//                    StorageV.pcsDataDic=_pcsDataDic;
-//                    StorageV.animationNumber=animationNumber;
-//                    [_headerView addSubview:StorageV];
-//                    [StorageV initUI];
+                    SPF5000Head *StorageV=[[SPF5000Head alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];
+                    StorageV.pcsDataDic=_pcsDataDic;
+                    StorageV.animationNumber=animationNumber;
+                    [_headerView addSubview:StorageV];
+                    [StorageV initUI];
                     
-                      MixHead *StorageV=[[MixHead alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];
-                      [_headerView addSubview:StorageV];
-                      [StorageV initUI];
-                    
+ 
                 }
                
                 
@@ -1077,6 +1099,53 @@ _pcsNetStorageSN=@"";
             }
             
        
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        
+    }];
+    
+}
+
+
+-(void)getMIXnet{
+    
+     NSString *plantID=[_plantId objectForKey:@"plantId"];
+    
+    _MixSN=@"2017091810";
+           [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":plantID,@"mixId":_MixSN} paramarsSite:@"/newMixApi.do?op=getSystemStatus" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        if (content) {
+
+            id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+
+            NSLog(@"/newMixApi.do?op=getSystemStatus==%@", jsonObj);
+            
+            if ([jsonObj[@"result"] integerValue]==1) {
+                
+                if (jsonObj[@"obj"]==nil || jsonObj[@"obj"]==NULL||([jsonObj[@"obj"] isEqual:@""] )) {
+                }else{
+                  
+                    _pcsDataDic=[NSMutableDictionary dictionaryWithDictionary:jsonObj[@"obj"]];
+                    
+                }
+                
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:3] forKey:@"PcsDeviceType"];
+                
+ 
+                    MixHead *StorageV=[[MixHead alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];
+                StorageV.allDic=[NSDictionary dictionaryWithDictionary:_pcsDataDic];
+                    [_headerView addSubview:StorageV];
+                    [StorageV initUI];
+                
+            }else{
+                
+                    [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",jsonObj[@"msg"]]];
+            }
+            
+            
         }
     } failure:^(NSError *error) {
         [self hideProgressView];
@@ -1128,6 +1197,7 @@ _pcsNetStorageSN=@"";
     
    
 }
+
 
 -(void)getAnimation:(UIImageView*)headImage{
     
@@ -1225,8 +1295,8 @@ _pcsNetStorageSN=@"";
 - (void)_createHeaderView {
     float headerViewH=200*HEIGHT_SIZE;
     
-    _deviceType=3;
-    if (_deviceType==3) {
+   
+    if ([_deviceHeadType intValue]==2) {
         headerViewH=260*NOW_SIZE;
     }
     
@@ -1254,14 +1324,21 @@ _pcsNetStorageSN=@"";
     if([_deviceHeadType isEqualToString:@"1"]){
          animationNumber=0;
           [self getPCSnet];
-              
           [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"isNewEnergy"];
         
-    }else{
+    }else if([_deviceHeadType isEqualToString:@"0"]){
                 [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:@"isNewEnergy"];
         
         [self getPvHead];
+        
+    }else if([_deviceHeadType isEqualToString:@"2"]){
+    
+        [self getMIXnet];
+        [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"isNewEnergy"];
+        
     }
+    
+    
     
 }
 
@@ -1817,7 +1894,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_indenty forIndexPath:indexPath];
- //   cell.textLabel.text = [NSString stringWithFormat:@"Cell:%ld",indexPath.row];
+ 
     if (!cell) {
     cell=[[TableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_indenty];
     }
@@ -1854,6 +1931,9 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         }else if (([getDevice.type isEqualToString:@"storage"])){
             
          cell.electric.text = root_dianChi_baifenBi;
+            if (([getDevice.type isEqualToString:@"mix"])) {
+                        cell.electric.text = root_ri_dianLiang;
+            }
             if ([getDevice.statueData isEqualToString:@"0"]){
                 cell.stateValue.text =root_xianZhi;
                   cell.stateValue.textColor=COLOR(45, 226, 233, 1);
@@ -1889,7 +1969,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
        
      cell.powerValue.text = getDevice.power;
      cell.electricValue.text =getDevice.dayPower;
-       //[cell.stateView setImage:[UIImage imageWithData:getDevice.statueImage] ];
+   
         return cell;
     }
     else{
@@ -2024,11 +2104,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
 
 
 
--(void)changeTabbar{
- 
-  [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"isNewEnergy"];
 
-}
 
 
 
