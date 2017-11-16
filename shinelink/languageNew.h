@@ -826,9 +826,13 @@
 
 #define  root_MIX_211 NSLocalizedString(@"211用电功率", nil)
 #define  root_MIX_212 NSLocalizedString(@"212并网功率", nil)
-
-
-
+#define  root_MIX_213 NSLocalizedString(@"213馈回电网", nil)
+#define  root_MIX_214 NSLocalizedString(@"214电网取电", nil)
+#define  root_MIX_215 NSLocalizedString(@"215来自电池", nil)
+#define  root_MIX_216 NSLocalizedString(@"216自发自用", nil)
+#define  root_MIX_217 NSLocalizedString(@"217馈回电网", nil)
+#define  root_MIX_218 NSLocalizedString(@"218电池能源", nil)
+#define  root_MIX_219 NSLocalizedString(@"219电池充放电信息", nil)
 
 
 #endif /* languageNew_h */

@@ -36,8 +36,10 @@
     NSString *isSPF5000Circle=[[NSUserDefaults standardUserDefaults] objectForKey:@"isSPF5000Circle"];
     if ([isSPF5000Circle isEqualToString:@"1"]) {
         [self getSPF5000];
+    }else if ([isSPF5000Circle isEqualToString:@"2"]){
+            [self getMIX];
     }else{
-        [self isSP];
+              [self isSP];
     }
     
     return _dataArray;
@@ -73,6 +75,41 @@
        
         _dataArray = [[NSMutableArray alloc]initWithArray:@[
                                                             @{@"number":A1,@"color":@"ffd923",@"name":[NSString stringWithFormat:@"%.1f%%",B1]},
+                                                            @{@"number":A2,@"color":@"0eeff6",@"name":[NSString stringWithFormat:@"%.1f%%",B2]},
+                                                            ]];
+    }
+    
+}
+
+
+-(void)getMIX{
+    if ([_str isEqualToString:@"1"]) {
+        if (_dataArray == nil) {
+            NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"eChargeToday1"] floatValue]];
+            NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"eAcCharge"] floatValue]];
+            
+            float D1=[A1 floatValue];   float D2=[A2 floatValue];
+            float B1=(D1/(D1+D2))*100;
+            float B2=(D2/(D1+D2))*100;
+            
+ 
+            _dataArray = [[NSMutableArray alloc]initWithArray:@[
+                                                                @{@"number":A1,@"color":@"36c176",@"name":[NSString stringWithFormat:@"%.1f%%",B1]},
+                                                                @{@"number":A2,@"color":@"8b80ff",@"name":[NSString stringWithFormat:@"%.1f%%",B2]}
+                                                                ]];
+            
+        }
+        
+    }else{
+        NSString *A1=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"eChargeToday2"] floatValue]];
+        NSString *A2=[NSString stringWithFormat:@"%.1f",[[_allDic objectForKey:@"etouser"] floatValue]];
+        
+        float D1=[A1 floatValue];   float D2=[A2 floatValue];
+        float B1=(D1/(D1+D2))*100;
+        float B2=(D2/(D1+D2))*100;
+        
+        _dataArray = [[NSMutableArray alloc]initWithArray:@[
+                                                            @{@"number":A1,@"color":@"36c176",@"name":[NSString stringWithFormat:@"%.1f%%",B1]},
                                                             @{@"number":A2,@"color":@"0eeff6",@"name":[NSString stringWithFormat:@"%.1f%%",B2]},
                                                             ]];
     }

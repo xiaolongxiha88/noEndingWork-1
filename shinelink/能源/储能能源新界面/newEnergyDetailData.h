@@ -10,4 +10,7 @@
 
 @interface newEnergyDetailData : RootViewController
 @property (nonatomic, strong) NSMutableArray *getDetaiDataArray;
+
+@property (nonatomic, strong) NSArray *lableNameArray;
+
 @end

@@ -33,7 +33,9 @@
 
 -(void)initUI{
     NSArray *nameArray=@[root_shijian,root_shishi_SOC];
-    
+    if (_lableNameArray.count>0) {
+        nameArray=[NSArray arrayWithArray:_lableNameArray];
+    }
     for (int i=0; i<2; i++) {
         
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE+150*NOW_SIZE*i, 0*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];

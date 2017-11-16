@@ -801,4 +801,10 @@
 "210电网优先"="Grid first";
 "211用电功率"="Consumption power";
 "212并网功率"="Export power";
-
+"213馈回电网"="Export";
+"214电网取电"="Power grid";
+"215来自电池"="From battery";
+"216自发自用"="Self-consumption";
+"217馈回电网"="Export";
+"218电池能源"="Battery Energy";
+"219电池充放电信息"="Battery charge and discharge";

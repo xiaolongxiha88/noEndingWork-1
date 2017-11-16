@@ -799,3 +799,6 @@
 "210电网优先"="Grid first";
 "211用电功率"="Consumption power";
 "212并网功率"="Export power";
+"213馈回电网"="Export";
+"214电网取电"="Power grid";
+"215来自电池"="From battery";

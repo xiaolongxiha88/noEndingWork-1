@@ -38,15 +38,16 @@
     
     
     /////////////////////////////////////////////////////////////////////////////////lable区域
-       int L1=[[NSString stringWithFormat:@"%d",(int)[_allDic objectForKey:@"uwSysWorkMode"]] intValue];
+    
+    int L1=[[NSString stringWithFormat:@"%d",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"uwSysWorkMode"]] intValue]] intValue];
     NSString*L1Name1=@"";
-    NSArray *statueArray=@[root_MIX_201,root_MIX_202,root_MIX_203,root_MIX_204,root_MIX_205,root_MIX_206,root_MIX_207];
+    NSArray *statueArray=@[root_MIX_201,root_MIX_202,root_MIX_203,root_MIX_204,root_MIX_205,root_MIX_206,root_MIX_206,root_MIX_207,root_MIX_207];
     if (L1<statueArray.count) {
           L1Name1=statueArray[L1];
     }
   
     
-    int L2=[[NSString stringWithFormat:@"%d",(int)[_allDic objectForKey:@"wBatteryType"] ] intValue];
+    int L2=[[NSString stringWithFormat:@"%d",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"wBatteryType"]] intValue]] intValue];
     NSString*L1Name2=@"";
     NSArray *statueArray2=@[root_MIX_208,root_MIX_209,root_MIX_210];
     if (L1<statueArray2.count) {
@@ -61,31 +62,37 @@
   
     //root_PCS_fangdian_gonglv     root_Charge_Power
     NSString *valueUp=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"ppv"]] floatValue]];
+        NSString *valueL2=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"SOC"]] floatValue]];
        NSString *valueLeft0=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"chargePower"]] floatValue]];
     
     NSString *nameLeft=@"";NSString *valueLeft=@"";
     if ([valueLeft0 floatValue]>0) {
         nameLeft=root_Charge_Power;
+            _isBatToRight=NO;
         valueLeft=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"chargePower"]] floatValue]];
     }else{
+        _isBatToRight=YES;
         nameLeft=root_PCS_fangdian_gonglv;
         valueLeft=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pdisCharge1"]] floatValue]];
     }
     
-    NSString *namedown=@"";NSString *valuedown=@"";
-    if ([valueLeft0 floatValue]>0) {
-        nameLeft=root_Charge_Power;
-        valueLeft=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"chargePower"]] floatValue]];
+  NSString *valuedown=@"";
+   NSString *valuedown0=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pactouser"]] floatValue]];
+    if ([valuedown0 floatValue]>0) {
+        _isGridToUp=YES;
+        valuedown=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pactouser"]] floatValue]];
     }else{
-        nameLeft=root_PCS_fangdian_gonglv;
-        valueLeft=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pdisCharge1"]] floatValue]];
+           _isGridToUp=NO;
+        valuedown=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pactogrid"]] floatValue]];
     }
     
+          NSString *valueRight=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pLocalLoad"]] floatValue]];
+   
     
-      NSString *valuedown0=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pactouser"]] floatValue]];
+    NSArray*lableNameArray=@[[NSString stringWithFormat:@"%@:",root_PV_POWER],[NSString stringWithFormat:@"%@:",root_PCS_dianchi_baifenbi],[NSString stringWithFormat:@"%@:",root_MIX_212],[NSString stringWithFormat:@"%@:",root_MIX_211],[NSString stringWithFormat:@"%@:",nameLeft]];
     
-    NSArray*lableNameArray=@[[NSString stringWithFormat:@"%@:",root_PV_POWER],[NSString stringWithFormat:@"%@:",root_PCS_dianchi_baifenbi],[NSString stringWithFormat:@"%@:",root_MIX_212],[NSString stringWithFormat:@"%@:",root_MIX_211],[NSString stringWithFormat:@"%@:",@"放电功率"]];
-        NSArray*lableValueArray=@[[NSString stringWithFormat:@"%.1f",234.0],[NSString stringWithFormat:@"%.f",99.0],[NSString stringWithFormat:@"%.1f",234.0],[NSString stringWithFormat:@"%.1f",234.0],[NSString stringWithFormat:@"%.1f",234.0]];
+        NSArray*lableValueArray=@[valueUp,valueL2,valuedown,valueRight,valueLeft];
+    
     NSArray*colorArray=@[COLOR(85, 162, 78, 1),COLOR(85, 162, 78, 1),COLOR(177, 112, 112, 1),COLOR(177, 166, 96, 1),COLOR(85, 162, 78, 1)];
     
       float LableX1=ScreenWidth/2+imageSize/2+KH1;
@@ -144,39 +151,51 @@
     CGRect rectD41=CGRectMake(DX1+KW2*3+directionSizeW2, (H0-directionSizeH1)/2+H1, directionSizeW1, directionSizeH1);
     
     //上面的流向
-    UIImageView*viewD1=[self getImageTwo:rectD1 imageName:@"newheadD1.png"];
-    [viewD1.layer addAnimation:[self getAnimationOne:TIME delayTime:0.5] forKey:nil];
+    if ([valueUp floatValue]>0) {
+        UIImageView*viewD1=[self getImageTwo:rectD1 imageName:@"newheadD1.png"];
+        [viewD1.layer addAnimation:[self getAnimationOne:TIME delayTime:0.5] forKey:nil];
+    }
+ 
     
        //下面的流向
-    if (_isGridToUp) {
-        UIImageView*viewD2=[self getImageTwo:rectD2 imageName:@"newheadD2.png"];
-        [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:1.5] forKey:nil];
-    }else{
-        UIImageView*viewD2=[self getImageTwo:rectD2 imageName:@"newheadD22.png"];
-        [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:1.5] forKey:nil];
+    if ([valuedown floatValue]>0) {
+        if (_isGridToUp) {
+            UIImageView*viewD2=[self getImageTwo:rectD2 imageName:@"newheadD2.png"];
+            [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:1.5] forKey:nil];
+        }else{
+            UIImageView*viewD2=[self getImageTwo:rectD2 imageName:@"newheadD22.png"];
+            [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:1.5] forKey:nil];
+        }
     }
+  
    
-        //左边的流向
-    if (_isBatToRight) {
-        UIImageView*viewD3=[self getImageTwo:rectD3 imageName:@"newheadD3.png"];
-        [viewD3.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
-        
-        UIImageView*viewD31=[self getImageTwo:rectD31 imageName:@"newheadD4.png"];
-        [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:1] forKey:nil];
-    }else{
-        UIImageView*viewD31=[self getImageTwo:rectD3 imageName:@"newheadD33.png"];
-        [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:1] forKey:nil];
-        
-        UIImageView*viewD3=[self getImageTwo:rectD31 imageName:@"newheadD44.png"];
-        [viewD3.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
+        //左边的流向valueLeft
+    if ([valueLeft floatValue]>0) {
+        if (_isBatToRight) {
+            UIImageView*viewD3=[self getImageTwo:rectD3 imageName:@"newheadD3.png"];
+            [viewD3.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
+            
+            UIImageView*viewD31=[self getImageTwo:rectD31 imageName:@"newheadD4.png"];
+            [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:1] forKey:nil];
+        }else{
+            UIImageView*viewD31=[self getImageTwo:rectD3 imageName:@"newheadD33.png"];
+            [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:1] forKey:nil];
+            
+            UIImageView*viewD3=[self getImageTwo:rectD31 imageName:@"newheadD44.png"];
+            [viewD3.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
+        }
     }
 
+
            //右边的流向
-    UIImageView*viewD4=[self getImageTwo:rectD4 imageName:@"newheadD4.png"];
-    [viewD4.layer addAnimation:[self getAnimationOne:TIME delayTime:2] forKey:nil];
-    
-    UIImageView*viewD41=[self getImageTwo:rectD41 imageName:@"newheadD3.png"];
-    [viewD41.layer addAnimation:[self getAnimationOne:TIME delayTime:3] forKey:nil];
+    if ([valueRight floatValue]>0) {
+        UIImageView*viewD4=[self getImageTwo:rectD4 imageName:@"newheadD4.png"];
+        [viewD4.layer addAnimation:[self getAnimationOne:TIME delayTime:2] forKey:nil];
+        
+        UIImageView*viewD41=[self getImageTwo:rectD41 imageName:@"newheadD3.png"];
+        [viewD41.layer addAnimation:[self getAnimationOne:TIME delayTime:3] forKey:nil];
+    }
+  
     
     
     [self getNoticeUI];
@@ -219,7 +238,7 @@
         objc_setAssociatedObject(VV1, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         [self addSubview:VV1];
     
-    float imageW=22*NOW_SIZE;
+    float imageW=20*NOW_SIZE;
     UIImageView *image00 = [[UIImageView alloc] initWithFrame:CGRectMake(5*NOW_SIZE,5*NOW_SIZE,imageW,imageW)];
     image00.image = [UIImage imageNamed:@"newheadnotes.png"];
     image00.userInteractionEnabled=YES;

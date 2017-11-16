@@ -36,6 +36,9 @@
 -(void)initUI{
 
        NSArray *nameArray=@[root_shijian,root_guangfu_chanchu_1,root_nengyuan_chanch_1,root_yongdian_xiaohao,root_yongdian_xiaohao_1];
+    if (_lableNameArray.count>0) {
+        nameArray=[NSArray arrayWithArray:_lableNameArray];
+    }
     
     for (int i=0; i<5; i++) {
   

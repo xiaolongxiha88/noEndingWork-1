@@ -30,6 +30,8 @@
 #import "KTDropdownMenuView.h"
 #import "Masonry.h"
 #import "MixHead.h"
+#import "MixSecondView.h"
+
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 #define  AnimationTime 5
@@ -856,9 +858,9 @@ _pcsNetStorageSN=@"";
                 if ([_deviceHeadType intValue]<2) {
                     _deviceHeadType=@"2";
                 }
-                [imageArray addObject:@"storage.png"];
+                [imageArray addObject:@"mixPic.png"];
                 [powerArray addObject:[NSString stringWithFormat:@"%@W",content[@"deviceList"][i][@"power"]]];
-                [dayArray addObject:[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"eToday"]]];
+                [dayArray addObject:[NSString stringWithFormat:@"%@kWh",content[@"deviceList"][i][@"eToday"]]];
                 
                 [_typeArr addObject:content[@"deviceList"][i][@"deviceType"]];
                 [SNArray addObject:content[@"deviceList"][i][@"deviceSn"]];
@@ -1112,7 +1114,11 @@ _pcsNetStorageSN=@"";
     
      NSString *plantID=[_plantId objectForKey:@"plantId"];
     
-    _MixSN=@"2017091810";
+  //  _MixSN=@"SPH6000CS1";
+    
+    [[NSUserDefaults standardUserDefaults] setObject:plantID forKey:@"pcsNetPlantID"];
+    [[NSUserDefaults standardUserDefaults] setObject:_MixSN forKey:@"pcsNetStorageSN"];
+    
            [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":plantID,@"mixId":_MixSN} paramarsSite:@"/newMixApi.do?op=getSystemStatus" sucessBlock:^(id content) {
         [self hideProgressView];
@@ -1793,9 +1799,17 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             }
         }
       
-        
         sd.hidesBottomBarWhenPushed=YES;
-        [self.navigationController pushViewController:sd animated:NO];}}
+        [self.navigationController pushViewController:sd animated:NO];
+        
+    }else if([getDevice.type  isEqualToString:@"mix"]){
+        MixSecondView *sd=[[MixSecondView alloc ]init];
+        sd.deviceSN=getDevice.deviceSN;
+        sd.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:sd animated:NO];
+    }
+        
+    }
     else{
          DemoDevice *demoDevice=[_managerArray objectAtIndex:indexPath.row];
         
@@ -1928,7 +1942,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             }
             
                 
-        }else if (([getDevice.type isEqualToString:@"storage"])){
+        }else if (([getDevice.type isEqualToString:@"storage"])||([getDevice.type isEqualToString:@"mix"])){
             
          cell.electric.text = root_dianChi_baifenBi;
             if (([getDevice.type isEqualToString:@"mix"])) {

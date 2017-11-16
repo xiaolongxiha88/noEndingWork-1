@@ -14,6 +14,7 @@
 @property(nonatomic , copy) NSString *str;
 @property(nonatomic , copy) NSDictionary *allDic;
 @property(nonatomic , copy) NSString *isSPF5000;
+@property(nonatomic , assign) BOOL isMIX;
 
 -(instancetype)initWithFrame:(CGRect)frame andUrlStr:(NSString *)str andAllDic:(NSDictionary*)dic;
 @end

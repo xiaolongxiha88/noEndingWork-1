@@ -11,4 +11,7 @@
 @interface newEnergyDetaiTwo : RootViewController
 @property (nonatomic, strong) NSMutableArray *getDetaiDataArray1;
 @property (nonatomic, strong) NSMutableArray *getDetaiDataArray2;
+
+@property (nonatomic, strong) NSArray *lableNameArray;
+
 @end

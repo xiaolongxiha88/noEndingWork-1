@@ -401,6 +401,8 @@
 		33744DE41CAE597A0065DC01 /* pvLogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33744DE31CAE597A0065DC01 /* pvLogTableViewCell.m */; };
 		337472281FB96C9200AC1420 /* toolOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337472271FB96C9200AC1420 /* toolOneView.m */; };
 		3374722B1FBAF51000AC1420 /* newEnergyMix.m in Sources */ = {isa = PBXBuildFile; fileRef = 3374722A1FBAF51000AC1420 /* newEnergyMix.m */; };
+		3374722D1FBD1C5C00AC1420 /* mixPic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3374722C1FBD1C5B00AC1420 /* mixPic.png */; };
+		337472311FBD91E700AC1420 /* MixSecondView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337472301FBD91E700AC1420 /* MixSecondView.m */; };
 		337475F21FAB004B00BB1A76 /* usbToWifiFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 337475F11FAB004B00BB1A76 /* usbToWifiFour.m */; };
 		337475F61FADB4E700BB1A76 /* Max_control3.png in Resources */ = {isa = PBXBuildFile; fileRef = 337475F51FADB4E700BB1A76 /* Max_control3.png */; };
 		337475F91FADB64900BB1A76 /* usbToWifiControlFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 337475F81FADB64900BB1A76 /* usbToWifiControlFour.m */; };
@@ -1407,6 +1409,9 @@
 		337472271FB96C9200AC1420 /* toolOneView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = toolOneView.m; sourceTree = "<group>"; };
 		337472291FBAF51000AC1420 /* newEnergyMix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = newEnergyMix.h; sourceTree = "<group>"; };
 		3374722A1FBAF51000AC1420 /* newEnergyMix.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = newEnergyMix.m; sourceTree = "<group>"; };
+		3374722C1FBD1C5B00AC1420 /* mixPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mixPic.png; sourceTree = "<group>"; };
+		3374722F1FBD91E700AC1420 /* MixSecondView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MixSecondView.h; sourceTree = "<group>"; };
+		337472301FBD91E700AC1420 /* MixSecondView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MixSecondView.m; sourceTree = "<group>"; };
 		337475F01FAB004B00BB1A76 /* usbToWifiFour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiFour.h; sourceTree = "<group>"; };
 		337475F11FAB004B00BB1A76 /* usbToWifiFour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiFour.m; sourceTree = "<group>"; };
 		337475F51FADB4E700BB1A76 /* Max_control3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Max_control3.png; sourceTree = "<group>"; };
@@ -3285,6 +3290,15 @@
 			path = "OSS第三方";
 			sourceTree = "<group>";
 		};
+		3374722E1FBD916300AC1420 /* MIX二级 */ = {
+			isa = PBXGroup;
+			children = (
+				3374722F1FBD91E700AC1420 /* MixSecondView.h */,
+				337472301FBD91E700AC1420 /* MixSecondView.m */,
+			);
+			path = "MIX二级";
+			sourceTree = "<group>";
+		};
 		3376B3C91F97254D0069F820 /* 本地调试 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3903,6 +3917,7 @@
 		3387B8E31FB547C80073FB35 /* 设备头部图片 */ = {
 			isa = PBXGroup;
 			children = (
+				3374722C1FBD1C5B00AC1420 /* mixPic.png */,
 				3387B8F61FB58D5C0073FB35 /* newheadAnimal1.png */,
 				3387B8E51FB547EA0073FB35 /* newheadSolar.png */,
 				3387B8F11FB575990073FB35 /* newheadAnimal2.png */,
@@ -4310,6 +4325,7 @@
 		33EFB6361C97DF62003F336F /* 储能机二级 */ = {
 			isa = PBXGroup;
 			children = (
+				3374722E1FBD916300AC1420 /* MIX二级 */,
 				334E9BE11CACB66600C8271F /* 储能机三级 */,
 				33EFB6381C97E0C8003F336F /* secondCNJ.h */,
 				33EFB6391C97E0C8003F336F /* secondCNJ.m */,
@@ -4572,6 +4588,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3374722D1FBD1C5C00AC1420 /* mixPic.png in Resources */,
 				335456C31C85301200275478 /* 圆角矩形.png in Resources */,
 				335D69B61D77BA4D00894D90 /* LICENSE in Resources */,
 				33FEFD5B1C7DB38400324374 /* icon---Email@3x.png in Resources */,
@@ -5332,6 +5349,7 @@
 				3387B8D81FB426A40073FB35 /* payView3.m in Sources */,
 				3399A8201FA33D7E006F8805 /* usbToWifiControlTwo.m in Sources */,
 				3381ECFE1CBCCADB00DCF0D2 /* myListSecond.m in Sources */,
+				337472311FBD91E700AC1420 /* MixSecondView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
