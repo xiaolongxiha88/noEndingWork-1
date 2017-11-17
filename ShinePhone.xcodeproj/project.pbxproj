@@ -403,6 +403,7 @@
 		3374722B1FBAF51000AC1420 /* newEnergyMix.m in Sources */ = {isa = PBXBuildFile; fileRef = 3374722A1FBAF51000AC1420 /* newEnergyMix.m */; };
 		3374722D1FBD1C5C00AC1420 /* mixPic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3374722C1FBD1C5B00AC1420 /* mixPic.png */; };
 		337472311FBD91E700AC1420 /* MixSecondView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337472301FBD91E700AC1420 /* MixSecondView.m */; };
+		337472341FBE76F200AC1420 /* MixControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 337472331FBE76F200AC1420 /* MixControl.m */; };
 		337475F21FAB004B00BB1A76 /* usbToWifiFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 337475F11FAB004B00BB1A76 /* usbToWifiFour.m */; };
 		337475F61FADB4E700BB1A76 /* Max_control3.png in Resources */ = {isa = PBXBuildFile; fileRef = 337475F51FADB4E700BB1A76 /* Max_control3.png */; };
 		337475F91FADB64900BB1A76 /* usbToWifiControlFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 337475F81FADB64900BB1A76 /* usbToWifiControlFour.m */; };
@@ -1412,6 +1413,8 @@
 		3374722C1FBD1C5B00AC1420 /* mixPic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mixPic.png; sourceTree = "<group>"; };
 		3374722F1FBD91E700AC1420 /* MixSecondView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MixSecondView.h; sourceTree = "<group>"; };
 		337472301FBD91E700AC1420 /* MixSecondView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MixSecondView.m; sourceTree = "<group>"; };
+		337472321FBE76F200AC1420 /* MixControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MixControl.h; sourceTree = "<group>"; };
+		337472331FBE76F200AC1420 /* MixControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MixControl.m; sourceTree = "<group>"; };
 		337475F01FAB004B00BB1A76 /* usbToWifiFour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiFour.h; sourceTree = "<group>"; };
 		337475F11FAB004B00BB1A76 /* usbToWifiFour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiFour.m; sourceTree = "<group>"; };
 		337475F51FADB4E700BB1A76 /* Max_control3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Max_control3.png; sourceTree = "<group>"; };
@@ -3295,6 +3298,8 @@
 			children = (
 				3374722F1FBD91E700AC1420 /* MixSecondView.h */,
 				337472301FBD91E700AC1420 /* MixSecondView.m */,
+				337472321FBE76F200AC1420 /* MixControl.h */,
+				337472331FBE76F200AC1420 /* MixControl.m */,
 			);
 			path = "MIX二级";
 			sourceTree = "<group>";
@@ -5296,6 +5301,7 @@
 				33FEFCD61C7D8E8300324374 /* UIViewExt.m in Sources */,
 				336D401F1D6FEA7600ECFA34 /* PinyinHelper.m in Sources */,
 				336181F41ED031C4008641E9 /* uibuttonView0.swift in Sources */,
+				337472341FBE76F200AC1420 /* MixControl.m in Sources */,
 				334AED701CA381D0007E39F3 /* ASValuePopUpView.m in Sources */,
 				336F1A181D88E46900CD4C2B /* SDWebImageDecoder.m in Sources */,
 				337C8D991E6545CF0013D650 /* phoneRegister2ViewController.m in Sources */,

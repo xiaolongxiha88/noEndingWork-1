@@ -10,6 +10,8 @@
 #import "ControlCNJ.h"
 #import "RKAlertView.h"
 #import "SPF5000Control.h"
+#import "MixControl.h"
+
 
 #define AlertContent @"Growatt"
 
@@ -38,6 +40,8 @@
 
     if([_typeNum isEqualToString:@"1"]){
       self.dataArray =[NSMutableArray arrayWithObjects:root_5000Control_129,root_5000Control_130,root_5000Control_131,root_5000Control_132,root_5000Control_133,root_5000Control_134,root_5000Control_135,root_5000Control_136,root_5000Control_137,root_5000Control_138,root_5000Control_139,root_5000Control_140,root_5000Control_141,root_5000Control_142,root_5000Control_143,nil];
+    }else  if([_typeNum isEqualToString:@"2"]){
+         self.dataArray =[NSMutableArray arrayWithObjects:root_MIX_220,root_MIX_210,root_MIX_209,nil];
     }
     
 
@@ -51,8 +55,12 @@
     [dataFormatter setDateFormat:@"yyyy-MM-dd"];
     NSString *time = [dataFormatter stringFromDate:[NSDate date]];
     
-
-    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"type":@"2",@"stringTime":time} paramarsSite:@"/newLoginAPI.do?op=getSetPass" sucessBlock:^(id content) {
+    NSString *typeString=@"2";
+    if([_typeNum isEqualToString:@"2"]){
+        typeString=@"3";
+    }
+    
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"type":typeString,@"stringTime":time} paramarsSite:@"/newLoginAPI.do?op=getSetPass" sucessBlock:^(id content) {
  
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
      
@@ -141,6 +149,8 @@
     
     if([_typeNum isEqualToString:@"1"]){
         [self goSPF5000:indexPath];
+    }else if([_typeNum isEqualToString:@"2"]){
+        [self goMIX:indexPath];
     }else{
      [self goSP2000And3000:indexPath];
     }
@@ -241,7 +251,44 @@
 }
 
 
-
+-(void)goMIX:(NSIndexPath *)indexPath{
+    MixControl  *go=[[MixControl alloc]init];
+    go.titleString=_dataArray[indexPath.row];
+    go.CnjSN=_CnjSn;
+    go.setType=(int)indexPath.row;
+    
+    if ([_controlType isEqualToString:@"2"]) {
+        go.controlType=_controlType;
+        [self.navigationController pushViewController:go animated:YES];
+    }else{
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+            [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+            return;
+        }else{
+            [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
+                NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
+                NSString *alert1=[alertView textFieldAtIndex:0].text;
+                
+                
+                if ([alert1 isEqualToString:_password]) {
+                    [self.navigationController pushViewController:go animated:YES];
+                }else{
+                    [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
+                        
+                    }];
+                    
+                }
+                
+            } cancelBlock:^{
+                NSLog(@"取消了");
+            }];
+            
+        }
+        
+    }
+    
+    
+}
 
 
 

@@ -833,6 +833,12 @@
 #define  root_MIX_217 NSLocalizedString(@"217馈回电网", nil)
 #define  root_MIX_218 NSLocalizedString(@"218电池能源", nil)
 #define  root_MIX_219 NSLocalizedString(@"219电池充放电信息", nil)
+#define  root_MIX_220 NSLocalizedString(@"220能量优先级", nil)
+#define  root_MIX_221 NSLocalizedString(@"221开关", nil)
+#define  root_MIX_222 NSLocalizedString(@"222时间段", nil)
+#define  root_MIX_223 NSLocalizedString(@"223点击选择", nil)
+#define  root_MIX_224 NSLocalizedString(@"224选择设置值", nil)
+
 
 
 #endif /* languageNew_h */

@@ -808,3 +808,8 @@
 "217馈回电网"="Export";
 "218电池能源"="Battery Energy";
 "219电池充放电信息"="Battery charge and discharge";
+"220能量优先级"="Energy priority";
+"221开关"="On/Off";
+"222时间段"="Time period";
+"223点击选择"="Click to select";
+"224选择设置值"="Select the value";

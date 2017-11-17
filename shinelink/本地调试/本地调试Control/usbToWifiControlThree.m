@@ -100,7 +100,7 @@
     
     if (_CellNumber==0 || _CellNumber==1 || _CellNumber==6  || _CellNumber==11 || _CellNumber==12) {
         _textLable=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
-        _textLable.text=@"点击选择";
+        _textLable.text=root_MIX_223;
         _textLable.userInteractionEnabled=YES;
         _textLable.layer.borderWidth=1;
         _textLable.layer.cornerRadius=5;
