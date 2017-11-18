@@ -838,7 +838,7 @@
 #define  root_MIX_222 NSLocalizedString(@"222时间段", nil)
 #define  root_MIX_223 NSLocalizedString(@"223点击选择", nil)
 #define  root_MIX_224 NSLocalizedString(@"224选择设置值", nil)
-
+#define  root_MIX_225 NSLocalizedString(@"225请选择", nil)
 
 
 #endif /* languageNew_h */

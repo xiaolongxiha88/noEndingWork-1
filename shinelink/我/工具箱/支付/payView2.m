@@ -138,17 +138,13 @@
            [self showToastViewWithTitle:root_caiJiQi];
         return;
     }
-    NSString *serverUrl= [[NSUserDefaults standardUserDefaults] objectForKey:@"server"];
-    int serverType=2;
-    if ([serverUrl containsString:@"server-cn"]) {
-        serverType=2;
-    }else if ([serverUrl containsString:@"smten"]) {
-        serverType=3;
-    }else{
-        serverType=1;
-    }
+    
+    NSString *serverUrl0= [[NSUserDefaults standardUserDefaults] objectForKey:@"server"];
+    serverUrl0=@"http://server-cn.growatt.com";//DEMO
+    NSString * serverUrl = [serverUrl0 substringFromIndex:7];
+    
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"datalogSn":snString,@"serverId":[NSNumber numberWithInt:serverType]} paramarsSite:@"/api/v2/renew/datalogSnExist" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"datalogOldList":snString,@"serverUrl":serverUrl} paramarsSite:@"/api/v2/renew/datalogSnExist" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];

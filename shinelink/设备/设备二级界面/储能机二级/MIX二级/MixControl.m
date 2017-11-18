@@ -193,9 +193,14 @@
         _param5 = [dateFormatter stringFromDate:DATA1];
     }
     if ([_choiceValue1 isEqualToString:@""]) {
-        [self showToastViewWithTitle:@"请选择"];
+        [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_MIX_225,root_MIX_221]];
         return;
     }
+    if ([_choiceValue2 isEqualToString:@""]) {
+        [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_MIX_225,root_MIX_222]];
+        return;
+    }
+
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"serialNum":_CnjSN,@"type":typeName,@"param1":_choiceValue2,@"param2":_param2,@"param3":_param3,@"param4":_param4,@"param5":_param5,@"param6":_choiceValue1} paramarsSite:@"/newTcpsetAPI.do?op=mixSetApi" sucessBlock:^(id content) {
         //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];

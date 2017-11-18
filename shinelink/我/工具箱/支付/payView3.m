@@ -8,10 +8,15 @@
 
 #import "payView3.h"
 #import "payInvoice.h"
+#import "payResultView.h"
+#import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
+
 
 @interface payView3 ()
 @property(nonatomic,strong)UILabel *paperLable1;
 @property(nonatomic,strong)NSArray *InvoiceArray;
+@property(nonatomic,assign)int payType;
 @end
 
 @implementation payView3
@@ -21,6 +26,35 @@
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     _InvoiceArray=[NSArray new];
      [self initUI];
+    
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receivepayResultNotice:) name: @"payResultNotice" object:nil];
+    [WXApi registerApp:@"wx4f0bf741c4f4443d"];
+}
+
+
+-(void)receivepayResultNotice:(NSNotification*) notification{
+    NSString *goString;
+    if (_payType==0) {
+        NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
+        NSString *resultString=[NSString stringWithFormat:@"%@",[firstDic objectForKey:@"resultStatus"]];
+        if ([resultString intValue]==9000) {
+            goString=@"支付成功";
+        }else{
+            goString=[NSString stringWithFormat:@"%@(%d)",@"支付失败",[resultString intValue]];
+        }
+   
+    }
+    payResultView *goView = [[payResultView alloc]init];
+    goView.noticeString=goString;
+    goView.moneyString=_moneyString;
+    [self.navigationController pushViewController:goView animated:YES];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"payResultNotice" object:nil];
+ 
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -169,23 +203,46 @@
         UIButton *button=[self.view viewWithTag:2000];
         UIButton *button1=[self.view viewWithTag:2001];
     if (button.selected) {
-        moneyType=@"1";
+        moneyType=@"1";       //微信
     }
     if (button1.selected) {
-        moneyType=@"0";
+        moneyType=@"0";    //支付宝
     }
     if ([moneyType isEqualToString:@""]) {
         [self showToastViewWithTitle:@"请选择支付方式"];
         return;
     }
+    _payType=[moneyType intValue];
+    
+    NSString *serverUrl0= [[NSUserDefaults standardUserDefaults] objectForKey:@"server"];
+    
+    serverUrl0=@"http://server.growatt.com"; //DEMO
+    _moneyString=@"0.01";//DEMO
+    
+
+    NSMutableString *snString=[NSMutableString new];
+    for (NSString*sn in _snArray) {
+        [snString appendString:sn];
+        [snString appendString:@"_"];
+    }
+    if (_snArray.count>1) {
+        NSRange deleteRange = {[snString length]-1, 1};
+        [snString deleteCharactersInRange:deleteRange];
+    }
+
+
+
+    
+    NSString * serverUrl = [serverUrl0 substringFromIndex:7];
   NSDictionary *netDic=@{
                          @"username":userName,
-                         @"datalogSn":_snArray,
+                         @"datalog":snString,
                            @"type":moneyType,
+                     @"serverUrl":serverUrl,
                             @"year":_yearString,
                                 @"money":_moneyString,
                              @"haveInvoice":haveInvoice,
-                         @"InvoiceName":InvoiceName,
+                         @"invoiceName":InvoiceName,
                          @"invoiceNum":invoiceNum,
                          @"invoicePhone":invoicePhone,
                          @"invoiceAddr":invoiceAddr,
@@ -203,6 +260,11 @@
         if (content1) {
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             if ([firstDic[@"result"] intValue]==1) {
+                if ([moneyType intValue]==0) {
+                    NSString *payString=firstDic[@"obj"];
+                    [self goPayAlipay:payString];
+                }
+                
                 
             }else{
                 [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
@@ -218,19 +280,53 @@
     
 }
 
-
--(void)goPay{
+-(void)goPayWeChar{
+    NSDictionary *dict=[NSDictionary new];
+      NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+    PayReq* req             = [[PayReq alloc] init];
+    req.partnerId           = [dict objectForKey:@"partnerid"];
+    req.prepayId            = [dict objectForKey:@"prepayid"];
+    req.nonceStr            = [dict objectForKey:@"noncestr"];
+    req.timeStamp           = stamp.intValue;
+    req.package             = [dict objectForKey:@"package"];
+    req.sign                = [dict objectForKey:@"sign"];
+    [WXApi sendReq:req];
+    //日志输出
+    NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
     
-    //    NSString *orderString =@"alipay_sdk=alipay-sdk-java-dynamicVersionNo&app_id=2017110409716742&biz_content=%7B%22body%22%3A%22%E6%88%91%E6%98%AF%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%22%2C%22out_trade_no%22%3A%22growatt_order_20171107003%22%2C%22product_code%22%3A%22GPRS%E7%BB%AD%E8%B4%B95%E5%B9%B4%22%2C%22subject%22%3A%22App%E6%94%AF%E4%BB%98%E6%B5%8B%E8%AF%95Java%22%2C%22timeout_express%22%3A%2230m%22%2C%22total_amount%22%3A%220.01%22%7D&charset=utf-8&format=json&method=alipay.trade.app.pay&notify_url=http%3A%2F%2F47.91.176.158%2Fcommon%2Fnotify&sign=Vjx95nXWBbIIZnhmdSC49Dyi69D1Rlft4OTKCeFSvjWFsv9je%2FeiH5XuWE5OgJ%2BgP8pumODBDoFeUgFwTI8rfF1xogzAUVYSi2xCVj5e%2Bdv0tXnew5SHjhjrGgOKZhpGfLsrEbmjdqYucEMfo4CHqhW4pCaVQa%2F8vTECqC44ifbMQszSFT0naBKQnQ%2Bx08Jjk6V%2FnwfNpH%2B%2F3INJ5xfQTWEtW4EnhqnzkKTqsSJHCdlj07iWSM2SuzyzEOoAYiVfHTf0m%2FXFyMUX9zGT5zUcBYLAoRNYMq7aTpG5t58hQF97%2FpGx5BsHczvBn1cABV34vvKvKXGspGUTpRmt6Eh2kw%3D%3D&sign_type=RSA2&timestamp=2017-11-07+16%3A08%3A32&version=1.0";
-    //
-    //    NSString *appScheme = @"ShinePhoneAlipay";
-    //
-    //    // NOTE: 调用支付结果开始支付
-    //    [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-    //
-    //        NSLog(@"reslut1212 = %@",resultDic);
-    //    }];
 }
+
+
+-(void)goPayAlipay:(NSString*)payString{
+    
+
+        NSString *appScheme = @"ShinePhoneAlipay";
+        // NOTE: 调用支付结果开始支付
+        [[AlipaySDK defaultService] payOrder:payString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+    
+            NSLog(@"reslut1212 = %@",resultDic);
+        }];
+    
+}
+
+
+-(void)onResp:(BaseResp*)resp{
+    if ([resp isKindOfClass:[PayResp class]]){
+        PayResp*response=(PayResp*)resp;
+        switch(response.errCode){
+            case WXSuccess:
+               
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                NSLog(@"微信支付成功");
+                break;
+            default:
+              NSLog(@"微信支付成功");
+                break;
+        }
+    }
+}
+
+
 
 - (void)selectPressed:(UIButton *)sender{
     sender.selected=!sender.selected;

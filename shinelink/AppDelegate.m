@@ -225,12 +225,17 @@
     if ([url.host isEqualToString:@"safepay"]) {
         // 支付跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            NSLog(@"resultAlipay = %@",resultDic);
+//            NSString *resultString=[resultDic objectForKey:@"result"];
+//                   NSDictionary *dict = [NSDictionary new];
+//            dict=[NSJSONSerialization JSONObjectWithData:[resultString dataUsingEncoding:NSUTF8StringEncoding]  options:NSJSONReadingMutableLeaves error:nil];
+            
+              [[NSNotificationCenter defaultCenter] postNotificationName:@"payResultNotice"object:resultDic];
         }];
         
         // 授权跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processAuth_V2Result:url standbyCallback:^(NSDictionary *resultDic) {
-            NSLog(@"result = %@",resultDic);
+            NSLog(@"resultAlipay = %@",resultDic);
             // 解析 auth code
             NSString *result = resultDic[@"result"];
             NSString *authCode = nil;

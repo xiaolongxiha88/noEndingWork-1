@@ -49,6 +49,9 @@
     NSLog(@"receive TCP AllData=%@",firstDic);
     
     _receiveDic=[NSMutableDictionary new];
+    _data03=[NSData new];
+    _data04_1=[NSData new];
+    _data04_2=[NSData new];
     _data03=[firstDic objectForKey:@"one"];
     _data04_1=[firstDic objectForKey:@"two"];
      _data04_2=[firstDic objectForKey:@"three"];

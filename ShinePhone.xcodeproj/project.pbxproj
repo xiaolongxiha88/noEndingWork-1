@@ -404,6 +404,10 @@
 		3374722D1FBD1C5C00AC1420 /* mixPic.png in Resources */ = {isa = PBXBuildFile; fileRef = 3374722C1FBD1C5B00AC1420 /* mixPic.png */; };
 		337472311FBD91E700AC1420 /* MixSecondView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337472301FBD91E700AC1420 /* MixSecondView.m */; };
 		337472341FBE76F200AC1420 /* MixControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 337472331FBE76F200AC1420 /* MixControl.m */; };
+		337472381FBFD37300AC1420 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 337472371FBFD37200AC1420 /* libWeChatSDK.a */; };
+		337472411FBFDB9E00AC1420 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 337472401FBFDB9D00AC1420 /* libsqlite3.0.tbd */; };
+		337472441FC0218700AC1420 /* payResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337472431FC0218700AC1420 /* payResultView.m */; };
+		337472471FC0366300AC1420 /* payResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 337472461FC0366300AC1420 /* payResultCell.m */; };
 		337475F21FAB004B00BB1A76 /* usbToWifiFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 337475F11FAB004B00BB1A76 /* usbToWifiFour.m */; };
 		337475F61FADB4E700BB1A76 /* Max_control3.png in Resources */ = {isa = PBXBuildFile; fileRef = 337475F51FADB4E700BB1A76 /* Max_control3.png */; };
 		337475F91FADB64900BB1A76 /* usbToWifiControlFour.m in Sources */ = {isa = PBXBuildFile; fileRef = 337475F81FADB64900BB1A76 /* usbToWifiControlFour.m */; };
@@ -1415,6 +1419,15 @@
 		337472301FBD91E700AC1420 /* MixSecondView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MixSecondView.m; sourceTree = "<group>"; };
 		337472321FBE76F200AC1420 /* MixControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MixControl.h; sourceTree = "<group>"; };
 		337472331FBE76F200AC1420 /* MixControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MixControl.m; sourceTree = "<group>"; };
+		337472371FBFD37200AC1420 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		3374723C1FBFD82900AC1420 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		3374723D1FBFD82A00AC1420 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		3374723E1FBFD82A00AC1420 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		337472401FBFDB9D00AC1420 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		337472421FC0218700AC1420 /* payResultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = payResultView.h; sourceTree = "<group>"; };
+		337472431FC0218700AC1420 /* payResultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = payResultView.m; sourceTree = "<group>"; };
+		337472451FC0366300AC1420 /* payResultCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = payResultCell.h; sourceTree = "<group>"; };
+		337472461FC0366300AC1420 /* payResultCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = payResultCell.m; sourceTree = "<group>"; };
 		337475F01FAB004B00BB1A76 /* usbToWifiFour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiFour.h; sourceTree = "<group>"; };
 		337475F11FAB004B00BB1A76 /* usbToWifiFour.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiFour.m; sourceTree = "<group>"; };
 		337475F51FADB4E700BB1A76 /* Max_control3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Max_control3.png; sourceTree = "<group>"; };
@@ -1972,8 +1985,10 @@
 				335C9D1D1D011F4E008C977A /* CoreTelephony.framework in Frameworks */,
 				335C9D1B1D011F3F008C977A /* CoreFoundation.framework in Frameworks */,
 				3387B8B81FB185D90073FB35 /* libc++.tbd in Frameworks */,
+				337472381FBFD37300AC1420 /* libWeChatSDK.a in Frameworks */,
 				335C9D191D011F2E008C977A /* CFNetwork.framework in Frameworks */,
 				335C9D171D0117F3008C977A /* jpush-ios-2.1.7.a in Frameworks */,
+				337472411FBFDB9E00AC1420 /* libsqlite3.0.tbd in Frameworks */,
 				338CFE681CF554D8006EFD8B /* libstdc++.tbd in Frameworks */,
 				338CFE661CF554C1006EFD8B /* libstdc++.6.0.9.tbd in Frameworks */,
 				3353B19F1CA116FF00577595 /* CoreData.framework in Frameworks */,
@@ -2637,6 +2652,7 @@
 		335C9D141D0117F3008C977A /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				337472371FBFD37200AC1420 /* libWeChatSDK.a */,
 				3387B8B51FB1856C0073FB35 /* AlipaySDK.framework */,
 				3387B8B31FB185640073FB35 /* AlipaySDK.bundle */,
 				335C9D151D0117F3008C977A /* jpush-ios-2.1.7.a */,
@@ -3304,6 +3320,16 @@
 			path = "MIX二级";
 			sourceTree = "<group>";
 		};
+		3374723F1FBFD86D00AC1420 /* 支付APIhead */ = {
+			isa = PBXGroup;
+			children = (
+				3374723D1FBFD82A00AC1420 /* WechatAuthSDK.h */,
+				3374723E1FBFD82A00AC1420 /* WXApi.h */,
+				3374723C1FBFD82900AC1420 /* WXApiObject.h */,
+			);
+			path = "支付APIhead";
+			sourceTree = "<group>";
+		};
 		3376B3C91F97254D0069F820 /* 本地调试 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3403,6 +3429,7 @@
 		337CB59F1DB608B0002ABB88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				337472401FBFDB9D00AC1420 /* libsqlite3.0.tbd */,
 				3387B8B71FB185D90073FB35 /* libc++.tbd */,
 				3387B8B11FB184270073FB35 /* CoreMotion.framework */,
 				3387B8AF1FB183B80073FB35 /* CoreText.framework */,
@@ -3887,6 +3914,7 @@
 		3387B8A91FB181EA0073FB35 /* 支付 */ = {
 			isa = PBXGroup;
 			children = (
+				3374723F1FBFD86D00AC1420 /* 支付APIhead */,
 				3387B8C21FB2E9FD0073FB35 /* 支付图片 */,
 				3387B8B91FB295B40073FB35 /* payView1.h */,
 				3387B8BA1FB295B40073FB35 /* payView1.m */,
@@ -3900,6 +3928,10 @@
 				3387B8D21FB324230073FB35 /* payView22.m */,
 				3387B8C41FB2EA1C0073FB35 /* singleSelectTableViewCell.h */,
 				3387B8C31FB2EA1C0073FB35 /* singleSelectTableViewCell.m */,
+				337472421FC0218700AC1420 /* payResultView.h */,
+				337472431FC0218700AC1420 /* payResultView.m */,
+				337472451FC0366300AC1420 /* payResultCell.h */,
+				337472461FC0366300AC1420 /* payResultCell.m */,
 			);
 			path = "支付";
 			sourceTree = "<group>";
@@ -5123,6 +5155,7 @@
 				3319E08C1D5AFB39006623A9 /* LWLoadingAnimationView.m in Sources */,
 				336D40191D6FEA7600ECFA34 /* ChineseInclude.m in Sources */,
 				3343F3BF1C80403C009F69BC /* AFHTTPRequestOperation.m in Sources */,
+				337472471FC0366300AC1420 /* payResultCell.m in Sources */,
 				334FEF841CF45264001E6716 /* LZQStratViewController_25.m in Sources */,
 				334B8F601C914B4E00798A69 /* UICountingLabel.m in Sources */,
 				3387B8D31FB324230073FB35 /* payView22.m in Sources */,
@@ -5197,6 +5230,7 @@
 				33EFB6701C98F9B1003F336F /* ZFLineChart.m in Sources */,
 				3355F2681C7469AB006DDE5A /* aboutViewController.m in Sources */,
 				3343F3DC1C80405D009F69BC /* UIAlertView+AFNetworking.m in Sources */,
+				337472441FC0218700AC1420 /* payResultView.m in Sources */,
 				337F9CC51C71ABD80016FE43 /* deviceViewController.m in Sources */,
 				335D69B01D77BA4D00894D90 /* HcdLightView.m in Sources */,
 				337079501D9217D700D7DA98 /* manualTableViewCell.m in Sources */,

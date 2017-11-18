@@ -101,9 +101,9 @@
     
     NSString *testDemo=@"O";
     if ([testDemo isEqualToString:@"OK"]) {
-   //  useToWifiView1 *testView=[[useToWifiView1 alloc]init];
+ //useToWifiView1 *testView=[[useToWifiView1 alloc]init];
         
-        payView1 *testView=[[payView1 alloc]init];
+    payView1 *testView=[[payView1 alloc]init];
         [self.navigationController pushViewController:testView animated:NO];
     }else{
         [self getLoginType];

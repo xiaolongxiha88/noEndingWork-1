@@ -187,8 +187,8 @@
          [[NSUserDefaults standardUserDefaults] setObject:textArray forKey:@"invoiceArray"];
     }
 
-    NSArray *payA=[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceArray"];
-    BOOL payB=[[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceEnable"] boolValue];
+ //   NSArray *payA=[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceArray"];
+ //   BOOL payB=[[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceEnable"] boolValue];
     
     [self.navigationController popViewControllerAnimated:YES];
     
