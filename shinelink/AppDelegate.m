@@ -26,11 +26,15 @@
 #import "LZPageViewController.h"
 #import "energyDemo.h"
 #import <AlipaySDK/AlipaySDK.h>
-
+#import "WXApi.h"
+#import "WXApiManager.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) NSString *devicetToken;
 @property (nonatomic, strong) NSMutableDictionary *messegeDic;
+
+//@property (nonatomic, assign) id<WXApiDelegate> WXApiDelegate;
+
 @end
 
 @implementation AppDelegate
@@ -49,6 +53,8 @@
        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
    
+     
+    
     NSUserDefaults *picName1=[NSUserDefaults standardUserDefaults];
     NSString *picName=[picName1 objectForKey:@"firstPic"];
     
@@ -219,9 +225,37 @@
     return YES;
 }
 
+-(void)onResp:(BaseResp*)resp{
+    if ([resp isKindOfClass:[PayResp class]]){
+        PayResp*response=(PayResp*)resp;
+        switch(response.errCode){
+            case WXSuccess:
+                
+                //服务器端查询支付通知或查询API返回的结果再提示成功
+                NSLog(@"微信支付成功");
+                break;
+            default:
+                NSLog(@"微信支付成功");
+                break;
+        }
+    }
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return  [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+}
+
 // NOTE: 9.0以后使用新API接口
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
 {
+    if ([[url absoluteString] containsString:@"wx4f0bf741c4f4443d"]) {
+          [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+        return YES;
+    }
+   
+
+  
+    
     if ([url.host isEqualToString:@"safepay"]) {
         // 支付跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {

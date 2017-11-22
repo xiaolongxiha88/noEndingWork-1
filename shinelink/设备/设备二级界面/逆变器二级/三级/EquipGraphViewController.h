@@ -24,4 +24,6 @@
 
 @property (nonatomic, strong) NSString *StorageTypeNum;
 
+@property (nonatomic, strong) NSString *StorageTypeSecondNum;
+
 @end

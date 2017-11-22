@@ -25,7 +25,19 @@
     self.view.backgroundColor=MainColor;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.separatorColor=[UIColor whiteColor];
+    
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
     self.dataArray =[NSMutableArray arrayWithObjects:@"配置WIFI采集器",@"本地调试工具",@"流量续费",nil];
+    }else{
+     self.dataArray =[NSMutableArray arrayWithObjects:@"配置WIFI采集器",@"本地调试工具",nil];
+    }
+    
+    
+  
+    
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }

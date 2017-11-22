@@ -21,17 +21,34 @@
     if (self) {
         float H=20*HEIGHT_SIZE;
         
-        NSArray *nameArray=@[@"支付结果",@"支付金额",@"支付时间",@"采集器序列号"];
-        for (int i=0; i<nameArray.count; i++) {
-            UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE+H*i, ScreenWidth-20*NOW_SIZE, H)];
-            lable.textColor = COLOR(102, 102, 102, 1);
-            lable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-            lable.textAlignment=NSTextAlignmentLeft;
-            lable.text=nameArray[i];
-            [self.contentView addSubview:lable];
-        }
+        float W=20*NOW_SIZE;
+       
+            _lable1 = [[UILabel alloc] initWithFrame:CGRectMake(W, 0*HEIGHT_SIZE+H*0, ScreenWidth-20*NOW_SIZE, H)];
+            _lable1.textColor = COLOR(102, 102, 102, 1);
+            _lable1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+            _lable1.textAlignment=NSTextAlignmentLeft;
+            [self.contentView addSubview:_lable1];
         
-        UIView *V0 = [[UIView alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 5*HEIGHT_SIZE+H*nameArray.count, ScreenWidth, 5*HEIGHT_SIZE)];
+        _lable2 = [[UILabel alloc] initWithFrame:CGRectMake(W, 0*HEIGHT_SIZE+H*1, ScreenWidth-20*NOW_SIZE, H)];
+        _lable2.textColor = COLOR(102, 102, 102, 1);
+        _lable2.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        _lable2.textAlignment=NSTextAlignmentLeft;
+        [self.contentView addSubview:_lable2];
+        
+        _lable3 = [[UILabel alloc] initWithFrame:CGRectMake(W, 0*HEIGHT_SIZE+H*2, ScreenWidth-20*NOW_SIZE, H)];
+        _lable3.textColor = COLOR(102, 102, 102, 1);
+        _lable3.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        _lable3.textAlignment=NSTextAlignmentLeft;
+        [self.contentView addSubview:_lable3];
+        
+        _lable4= [[UILabel alloc] initWithFrame:CGRectMake(W, 0*HEIGHT_SIZE+H*3, ScreenWidth-20*NOW_SIZE, H)];
+        _lable4.textColor = COLOR(102, 102, 102, 1);
+        _lable4.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        _lable4.textAlignment=NSTextAlignmentLeft;
+        [self.contentView addSubview:_lable4];
+ 
+        
+        UIView *V0 = [[UIView alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 5*HEIGHT_SIZE+H*4, ScreenWidth, 5*HEIGHT_SIZE)];
         V0.backgroundColor=colorGary;
           [self.contentView addSubview:V0];
     }

@@ -41,10 +41,11 @@
     _label.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.view addSubview:_label];
     _label.userInteractionEnabled=YES;
-    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickadress)];
-    [_label addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(pickadress)];
+//    [_label addGestureRecognizer:tap];
     
 }
+
 
 -(void)getAddress{
 

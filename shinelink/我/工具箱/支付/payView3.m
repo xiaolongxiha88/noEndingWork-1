@@ -13,13 +13,18 @@
 #import <AlipaySDK/AlipaySDK.h>
 
 
-@interface payView3 ()
+@interface payView3 ()<WXApiDelegate>
 @property(nonatomic,strong)UILabel *paperLable1;
 @property(nonatomic,strong)NSArray *InvoiceArray;
 @property(nonatomic,assign)int payType;
+@property(nonatomic,strong)NSString *payID;
 @end
 
 @implementation payView3
+
+-(void)viewWillDisappear:(BOOL)animated{
+    //    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"payResultNotice" object:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,35 +32,72 @@
     _InvoiceArray=[NSArray new];
      [self initUI];
     
+       [WXApi registerApp:@"wx4f0bf741c4f4443d"];  //微信注册
+    
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receivepayResultNotice:) name: @"payResultNotice" object:nil];
-    [WXApi registerApp:@"wx4f0bf741c4f4443d"];
+
 }
 
 
 -(void)receivepayResultNotice:(NSNotification*) notification{
-    NSString *goString;
+    NSString *goString; NSString *resultString;
     if (_payType==0) {
         NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
-        NSString *resultString=[NSString stringWithFormat:@"%@",[firstDic objectForKey:@"resultStatus"]];
+      resultString=[NSString stringWithFormat:@"%@",[firstDic objectForKey:@"resultStatus"]];
         if ([resultString intValue]==9000) {
-            goString=@"支付成功";
+            goString=@"支付结果:成功！";
         }else{
             goString=[NSString stringWithFormat:@"%@(%d)",@"支付失败",[resultString intValue]];
         }
    
     }
-    payResultView *goView = [[payResultView alloc]init];
-    goView.noticeString=goString;
-    goView.moneyString=_moneyString;
-    [self.navigationController pushViewController:goView animated:YES];
+    if (_payType==1) {
+        NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
+       goString=[NSString stringWithFormat:@"%@",[firstDic objectForKey:@"result"]];
+        resultString=[NSString stringWithFormat:@"%@",[firstDic objectForKey:@"code"]];
+    }
+  
+    [self getNetResult:resultString noticeString:goString];
+}
+
+
+-(void)getNetResult:(NSString*)codeString noticeString:(NSString*)noticeString{
+    
+
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"growattOrderId":_payID,@"status":codeString} paramarsSite:@"/api/v2/renew/submitPayResult" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v2/renew/submitPayResult: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            if ([firstDic[@"result"] intValue]==1) {
+                
+                payResultView *goView = [[payResultView alloc]init];
+                goView.noticeString=noticeString;
+                goView.isShowAlert=YES;
+                [self.navigationController pushViewController:goView animated:YES];
+               
+            }else{
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
+                    [self showAlertViewWithTitle:@"支付结果" message:noticeString cancelButtonTitle:root_OK];
+            }
+            
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        [self showAlertViewWithTitle:@"支付结果" message:noticeString cancelButtonTitle:root_OK];
+        
+        
+    }];
     
 }
 
--(void)viewWillDisappear:(BOOL)animated{
 
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"payResultNotice" object:nil];
- 
-}
 
 -(void)viewWillAppear:(BOOL)animated{
     if (_paperLable1) {
@@ -260,11 +302,15 @@
         if (content1) {
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             if ([firstDic[@"result"] intValue]==1) {
-                if ([moneyType intValue]==0) {
+                _payID=firstDic[@"msg"];
+                if (_payType==0) {
                     NSString *payString=firstDic[@"obj"];
                     [self goPayAlipay:payString];
                 }
-                
+                if (_payType==1) {
+                   NSDictionary *DIC=firstDic[@"obj"];
+                    [self goPayWeChar:DIC];
+                }
                 
             }else{
                 [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
@@ -280,25 +326,25 @@
     
 }
 
--(void)goPayWeChar{
-    NSDictionary *dict=[NSDictionary new];
-      NSMutableString *stamp  = [dict objectForKey:@"timestamp"];
+-(void)goPayWeChar:(NSDictionary*)dict{
+    //NSDictionary *dict=[NSDictionary new];
+      NSMutableString *stamp  = [dict objectForKey:@"timestrap"];
     PayReq* req             = [[PayReq alloc] init];
     req.partnerId           = [dict objectForKey:@"partnerid"];
     req.prepayId            = [dict objectForKey:@"prepayid"];
     req.nonceStr            = [dict objectForKey:@"noncestr"];
     req.timeStamp           = stamp.intValue;
-    req.package             = [dict objectForKey:@"package"];
+    req.package             = @"Sign=WXPay";
     req.sign                = [dict objectForKey:@"sign"];
     [WXApi sendReq:req];
     //日志输出
-    NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+//    NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
     
 }
 
 
 -(void)goPayAlipay:(NSString*)payString{
-    
+       //    NSArray *resultArr = [payString componentsSeparatedByString:@"&"];
 
         NSString *appScheme = @"ShinePhoneAlipay";
         // NOTE: 调用支付结果开始支付
@@ -310,21 +356,7 @@
 }
 
 
--(void)onResp:(BaseResp*)resp{
-    if ([resp isKindOfClass:[PayResp class]]){
-        PayResp*response=(PayResp*)resp;
-        switch(response.errCode){
-            case WXSuccess:
-               
-                //服务器端查询支付通知或查询API返回的结果再提示成功
-                NSLog(@"微信支付成功");
-                break;
-            default:
-              NSLog(@"微信支付成功");
-                break;
-        }
-    }
-}
+
 
 
 

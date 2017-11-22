@@ -12,6 +12,7 @@
 #import "payView2.h"
 #import "payView22.h"
 #import "payView3.h"
+#import "payResultView.h"
 
 #define  moneyValue 20;
 @interface payView1 ()<UITableViewDelegate,UITableViewDataSource>
@@ -37,8 +38,18 @@
     [self.navigationController.navigationBar setBarTintColor:MainColor];
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"交易历史" style:UIBarButtonItemStylePlain target:self action:@selector(checkResult)];
+    self.navigationItem.rightBarButtonItem=rightItem;
+    
     [self initUI];
   
+}
+
+-(void)checkResult{
+    
+    payResultView *testView=[[payResultView alloc]init];
+    [self.navigationController pushViewController:testView animated:YES];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{

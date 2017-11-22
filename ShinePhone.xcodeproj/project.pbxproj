@@ -447,6 +447,8 @@
 		337A70FB1E9B820600FE5F3C /* solarS.png in Resources */ = {isa = PBXBuildFile; fileRef = 337A70FA1E9B820600FE5F3C /* solarS.png */; };
 		337A70FE1E9C7F0200FE5F3C /* newEnergyStorage2000.m in Sources */ = {isa = PBXBuildFile; fileRef = 337A70FD1E9C7F0200FE5F3C /* newEnergyStorage2000.m */; };
 		337C30541CCDAF3C002B99B7 /* protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C30531CCDAF3C002B99B7 /* protocol.m */; };
+		337C43BA1FC400220000A6F2 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C43B91FC400220000A6F2 /* WXApiManager.m */; };
+		337C43BD1FC4464D0000A6F2 /* resultDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C43BC1FC4464D0000A6F2 /* resultDetailView.m */; };
 		337C44AD1E78CC9100135304 /* ledblue.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AA1E78CC9100135304 /* ledblue.gif */; };
 		337C44AE1E78CC9100135304 /* ledgreen.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AB1E78CC9100135304 /* ledgreen.gif */; };
 		337C44AF1E78CC9100135304 /* ledred.gif in Resources */ = {isa = PBXBuildFile; fileRef = 337C44AC1E78CC9100135304 /* ledred.gif */; };
@@ -1480,6 +1482,10 @@
 		337A70FD1E9C7F0200FE5F3C /* newEnergyStorage2000.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newEnergyStorage2000.m; sourceTree = "<group>"; };
 		337C30521CCDAF3C002B99B7 /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
 		337C30531CCDAF3C002B99B7 /* protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = protocol.m; sourceTree = "<group>"; };
+		337C43B81FC400210000A6F2 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
+		337C43B91FC400220000A6F2 /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
+		337C43BB1FC4464D0000A6F2 /* resultDetailView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = resultDetailView.h; sourceTree = "<group>"; };
+		337C43BC1FC4464D0000A6F2 /* resultDetailView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = resultDetailView.m; sourceTree = "<group>"; };
 		337C44AA1E78CC9100135304 /* ledblue.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = ledblue.gif; path = ../../ledblue.gif; sourceTree = "<group>"; };
 		337C44AB1E78CC9100135304 /* ledgreen.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = ledgreen.gif; path = ../../ledgreen.gif; sourceTree = "<group>"; };
 		337C44AC1E78CC9100135304 /* ledred.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = ledred.gif; path = ../../ledred.gif; sourceTree = "<group>"; };
@@ -3326,6 +3332,8 @@
 				3374723D1FBFD82A00AC1420 /* WechatAuthSDK.h */,
 				3374723E1FBFD82A00AC1420 /* WXApi.h */,
 				3374723C1FBFD82900AC1420 /* WXApiObject.h */,
+				337C43B81FC400210000A6F2 /* WXApiManager.h */,
+				337C43B91FC400220000A6F2 /* WXApiManager.m */,
 			);
 			path = "支付APIhead";
 			sourceTree = "<group>";
@@ -3932,6 +3940,8 @@
 				337472431FC0218700AC1420 /* payResultView.m */,
 				337472451FC0366300AC1420 /* payResultCell.h */,
 				337472461FC0366300AC1420 /* payResultCell.m */,
+				337C43BB1FC4464D0000A6F2 /* resultDetailView.h */,
+				337C43BC1FC4464D0000A6F2 /* resultDetailView.m */,
 			);
 			path = "支付";
 			sourceTree = "<group>";
@@ -5112,6 +5122,7 @@
 				334B8F4C1C914A6D00798A69 /* PNChartLabel.m in Sources */,
 				33AF3D1D1D8E67210007D6C2 /* EasyTimelineEvent.m in Sources */,
 				334771041C9A6219003A6F13 /* aliasViewController.m in Sources */,
+				337C43BA1FC400220000A6F2 /* WXApiManager.m in Sources */,
 				336664E41CB7524C005573FB /* moreCell.m in Sources */,
 				335D2F6B1CC09C3A0019718E /* GetServerViewController.m in Sources */,
 				33EFB66F1C98F9B1003F336F /* ZFLine.m in Sources */,
@@ -5291,6 +5302,7 @@
 				336664F61CB784F6005573FB /* EditGraphView.m in Sources */,
 				3355F26E1C747307006DDE5A /* aboutOneTableViewCell.m in Sources */,
 				33860FE71EEA75C5004150FD /* MJRefreshBackStateFooter.m in Sources */,
+				337C43BD1FC4464D0000A6F2 /* resultDetailView.m in Sources */,
 				3370793C1D910FEC00D7DA98 /* NJKWebViewProgress.m in Sources */,
 				334FF09E1CF53C7C001E6716 /* ModuleInfo.m in Sources */,
 				33EFB6691C98F9B1003F336F /* ZFBar.m in Sources */,

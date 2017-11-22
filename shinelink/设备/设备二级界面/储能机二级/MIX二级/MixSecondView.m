@@ -59,7 +59,7 @@
     
     [self netGetCNJ];
 
-//    [self addGraph];
+      [self addGraph];
     [self addbutton];
     
 }
@@ -70,26 +70,23 @@
         [self hideProgressView];
         NSLog(@"getMixParams: %@", content);
         if (content) {
-            _allDict=[NSDictionary dictionaryWithDictionary:content];
-           
-            _paramsDict=[NSMutableDictionary dictionaryWithDictionary:content[@"mixBean"]];
-            
-            _dayDischarge=[NSString stringWithFormat:@"%@",content[@"mixDetailBean"][@"edischarge1Today"]];
-            _totalDischarge=[NSString stringWithFormat:@"%@",content[@"mixDetailBean"][@"edischarge1Total"]];
-            
-            _status=[NSString stringWithFormat:@"%@",content[@"mixDetailBean"][@"status"]];
-            
-            _capacity=[NSString stringWithFormat:@"%@",content[@"mixDetailBean"][@"soc"]];
-            
-            _normalPower2 =[NSString stringWithFormat:@"%@",content[@"activePower"]];
-            
-            if ([_status isEqualToString:@"1"]) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content];
+            if ([firstDic[@"result"] intValue]==1) {
+                NSDictionary *allDataDic=firstDic[@"obj"];
+                _allDict=[NSDictionary dictionaryWithDictionary:allDataDic];
                 
-                _power=[NSString stringWithFormat:@"%@",content[@"storageDetailBean"][@"pChargeText"]];
-            }else if([_status isEqualToString:@"2"]){
-                _power=[NSString stringWithFormat:@"%@",content[@"storageDetailBean"][@"pDischargeText"]];
+                _paramsDict=[NSMutableDictionary dictionaryWithDictionary:allDataDic[@"mixBean"]];
+                
+                _dayDischarge=[NSString stringWithFormat:@"%@",allDataDic[@"mixDetailBean"][@"edischarge1Today"]];
+                _totalDischarge=[NSString stringWithFormat:@"%@",allDataDic[@"mixDetailBean"][@"edischarge1Total"]];
+                
+                _status=[NSString stringWithFormat:@"%@",allDataDic[@"mixDetailBean"][@"status"]];
+                
+                _capacity=[NSString stringWithFormat:@"%@",allDataDic[@"mixDetailBean"][@"soc"]];
+                
+                _normalPower2 =[NSString stringWithFormat:@"%@",allDataDic[@"apparentPower"]];
             }else{
-                _power=@"";
+                   [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
             }
             
             [self addProcess];
@@ -159,12 +156,8 @@
 }
 
 -(void)goThree{
-    if (![_typeNum isEqualToString:@"1"]) {
-        [self goThreeSP];
-    }else{
-        [self goThreeSPF5000];
-    }
     
+        [self goThreeSP];
 }
 
 
@@ -174,11 +167,11 @@
     equipGraph.SnID=_deviceSN;
     equipGraph.StorageTypeNum=_typeNum;
     equipGraph.dictInfo=@{@"equipId":_deviceSN,
-                          @"daySite":@"/newStorageAPI.do?op=getDayLineStorage",
+                          @"daySite":@"/newMixApi.do?op=getDayLineMix",
                           @"monthSite":@"/newStorageAPI.do?op=getMonthLineStorage",
                           @"yearSite":@"/newStorageAPI.do?op=getYearLineStorage",
                           @"allSite":@"/newStorageAPI.do?op=getTotalLineStorage"};
-    equipGraph.dict=@{@"1":root_CHARGING_POWER, @"2":root_DISCHARGING_POWER, @"3":root_INPUT_VOLTAGE, @"4":root_INPUT_CURRENT, @"5":root_USER_SIDE_POWER, @"6":root_GRID_SIDE_POWER,@"7":root_dianchi};
+    equipGraph.dict=@{@"1":@"PV1电压", @"2":@"PV2电压", @"3":@"PV1功率", @"4":@"PV2功率", @"5":@"充电功率", @"6":@"放电功率",@"7":@"逆变器功率",@"8":@"用户侧功率",@"9":@"电网侧功率",@"10":@"SOC"};
     equipGraph.dictMonth=@{@"1":root_MONTH_BATTERY_CHARGE, @"2":root_MONTHLY_CHARGED, @"3":root_MONTHLY_DISCHARGED};
     equipGraph.dictYear=@{@"1":root_YEAR_BATTERY_CHARGE, @"2":root_YEAR_CHARGED, @"3":root_YEAR_DISCHARGED};
     equipGraph.dictAll=@{@"1":root_TOTAL_BATTERY_CHARGE, @"2":root_TOTAL_CHARGED, @"3":root_TOTAL_DISCHARGED};
@@ -187,25 +180,7 @@
 }
 
 
--(void)goThreeSPF5000{
-    EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
-    equipGraph.deviceType=@"S";
-    equipGraph.SnID=_deviceSN;
-    equipGraph.StorageTypeNum=_typeNum;
-    equipGraph.dictInfo=@{@"equipId":_deviceSN,
-                          @"daySite":@"/newStorageAPI.do?op=getDayLineStorage",
-                          @"monthSite":@"/newStorageAPI.do?op=getMonthLineStorage",
-                          @"yearSite":@"/newStorageAPI.do?op=getYearLineStorage",
-                          @"allSite":@"/newStorageAPI.do?op=getTotalLineStorage"};
-    equipGraph.dict=@{@"1": root_5000Chart_157, @"2":root_5000Chart_158, @"3":root_5000Chart_159, @"4":root_5000Chart_160, @"5":root_5000Chart_161, @"6":root_5000Chart_162,@"7":root_5000Chart_163,@"8":root_5000Chart_164,@"9":root_5000Chart_165,@"10": root_5000Chart_166,@"11": root_5000Chart_167,@"12": root_5000Chart_168,@"13": root_5000Chart_169};
-    equipGraph.dictMonth=@{@"1":root_MONTH_BATTERY_CHARGE, @"2":root_MONTHLY_CHARGED, @"3":root_MONTHLY_DISCHARGED};
-    equipGraph.dictYear=@{@"1":root_YEAR_BATTERY_CHARGE, @"2":root_YEAR_CHARGED, @"3":root_YEAR_DISCHARGED};
-    equipGraph.dictAll=@{@"1":root_5000Chart_170, @"2":root_5000Chart_172, @"3":root_5000Chart_173};
-    [self.navigationController pushViewController:equipGraph animated:YES];
-    
-    
-    
-}
+
 
 -(void)addGraph{
     
@@ -219,17 +194,12 @@
     self.currentDay = [_dayFormatter stringFromDate:[NSDate date]];
     [self showProgressView];
     
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"id":_deviceSN,@"type":@"7", @"date":self.currentDay} paramarsSite:@"/newStorageAPI.do?op=getDayLineStorage" sucessBlock:^(id content) {
-        NSLog(@"day: %@", content);
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"id":_deviceSN,@"type":@"10", @"date":self.currentDay} paramarsSite:@"/newMixApi.do?op=getDayLineMix" sucessBlock:^(id content) {
+        NSLog(@"getDayLineMix: %@", content);
         [self hideProgressView];
         NSMutableDictionary *dayDict0=[NSMutableDictionary new];
         if (content) {
-            if (content[@"invPacData"]) {
-                [dayDict0 addEntriesFromDictionary:[content objectForKey:@"invPacData"]];
-                // NSMutableDictionary *dayDict0=[NSMutableDictionary dictionaryWithDictionary:[content objectForKey:@"invPacData"]];
-            }else{
                 [dayDict0 addEntriesFromDictionary:content];
-            }
             self.dayDict=[NSMutableDictionary new];
             if (dayDict0.count>0) {
                 for (NSString *key in dayDict0) {
@@ -255,12 +225,9 @@
 -(void)addProcess{
     //  _typeNum=@"2";
     UIColor *valueColor;
-    if (![_typeNum isEqualToString:@"2"]) {
+ 
         valueColor=[UIColor whiteColor];
-    }else{
-        valueColor=[UIColor whiteColor];
-        //  valueColor=COLOR(163, 255, 188, 1);
-    }
+ 
     
     
     NSArray *languages = [NSLocale preferredLanguages];
@@ -286,11 +253,13 @@
     [processView.layer addSublayer:gradientLayer];
     [self.scrollView addSubview:processView];
     
-    if (![_typeNum isEqualToString:@"2"]) {
+
         NSArray *lableNameArray=@[root_ri_fangdianliang,root_zong_fangdianliang,root_jinri_shouyi,root_zong_shouyi];
         NSArray *lableValueArray=[NSArray new];
-        if ([_allDict.allKeys containsObject:@"storageDetailBean"]) {
-            lableValueArray=@[_allDict[@"storageDetailBean"][@"eDischargeTodayText"],_allDict[@"storageDetailBean"][@"eDischargeTotalText"],_allDict[@"todayRevenue"],_allDict[@"totalRevenue"]];
+        
+        
+        if ([_allDict.allKeys containsObject:@"mixDetailBean"]) {
+            lableValueArray=@[_allDict[@"mixDetailBean"][@"edischarge1Today"],_allDict[@"mixDetailBean"][@"edischarge1Total"],_allDict[@"todayRevenue"],_allDict[@"totalRevenue"]];
         }else{
             lableValueArray=@[@"",@"",@"",@""];
         }
@@ -299,7 +268,7 @@
         float lableW=SCREEN_Width/4;
         for (int i=0; i<lableValueArray.count; i++) {
             UILabel *valueLable=[[UILabel alloc]initWithFrame:CGRectMake(0+lableW*i, 190*HEIGHT_SIZE-SizeH, lableW,20*HEIGHT_SIZE )];
-            valueLable.text=lableValueArray[i];
+            valueLable.text=[NSString stringWithFormat:@"%@",lableValueArray[i]];
             valueLable.userInteractionEnabled=YES;
             UITapGestureRecognizer *tapGestureRecognizer0 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];
             tapGestureRecognizer0.cancelsTouchesInView = NO;
@@ -323,7 +292,7 @@
             [self.scrollView addSubview:nameLable];
         }
         
-    }
+
     
     
     UILabel *dataName=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 245*HEIGHT_SIZE-SizeH, 180*NOW_SIZE,20*HEIGHT_SIZE )];

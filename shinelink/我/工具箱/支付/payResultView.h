@@ -13,4 +13,8 @@
 @property(nonatomic,strong)NSString *moneyString;
 @property(nonatomic,strong)NSString *noticeString;
 
+@property(nonatomic,assign)BOOL isShowAlert;
+
+-(NSString*)changeResult:(NSString*)result;
+
 @end

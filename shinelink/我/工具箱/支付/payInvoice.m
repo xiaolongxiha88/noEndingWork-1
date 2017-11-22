@@ -11,6 +11,7 @@
 @interface payInvoice ()<UITextViewDelegate>
 @property(nonatomic,strong)UIView *view2;
 @property (nonatomic, strong) UITextView *contentView;
+@property (nonatomic, strong)UIScrollView *scrollView;
 @end
 
 @implementation payInvoice
@@ -23,12 +24,28 @@
     
 }
 
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    for (int i=0; i<4; i++) {
+        UITextField *lable=[_scrollView viewWithTag:3000+i];
+        [lable resignFirstResponder];
+    }
+    [_contentView resignFirstResponder];
+}
 
 -(void)initUI{
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
+    _scrollView.scrollEnabled=YES;
+    _scrollView.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height*1.4);
+    [self.view addSubview:_scrollView];
+    
     float H0=30*HEIGHT_SIZE;
     UIView* _V1=[[UIView alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE, SCREEN_Width, H0)];
     _V1.backgroundColor=[UIColor clearColor];
-    [self.view addSubview:_V1];
+    [_scrollView addSubview:_V1];
     
     UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width-20*NOW_SIZE, H0)];
     VL1.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -45,7 +62,7 @@
     for (int i=0; i<lableNameArray.count; i++) {
         UIView* V5=[[UIView alloc]initWithFrame:CGRectMake(0, H0+H5*i, SCREEN_Width, H5)];
         V5.backgroundColor=[UIColor whiteColor];
-        [self.view addSubview:V5];
+        [_scrollView addSubview:V5];
         
         UILabel *VL5= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width-20*NOW_SIZE, H5)];
         VL5.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -88,7 +105,7 @@
     [_goBut setTitle:@"完成" forState:UIControlStateNormal];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [_goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_goBut];
+    [_scrollView addSubview:_goBut];
     
 }
 
@@ -99,7 +116,7 @@
     _view2=[[UIView alloc]initWithFrame:CGRectMake(0, 130*HEIGHT_SIZE, SCREEN_Width, 250*HEIGHT_SIZE)];
     _view2.backgroundColor=[UIColor clearColor];
     _view2.userInteractionEnabled=YES;
-    [self.view addSubview:_view2];
+    [_scrollView addSubview:_view2];
     
     float H0=30*HEIGHT_SIZE;
 
@@ -167,7 +184,7 @@
 
 -(void)finishSet{
   
-        UIButton *button0=[self.view viewWithTag:2000];
+        UIButton *button0=[_scrollView viewWithTag:2000];
     if (button0.selected) {
          [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:@"invoiceEnable"];
     }else{
@@ -175,7 +192,7 @@
         
         NSMutableArray *textArray=[NSMutableArray new];
          for (int i=0; i<4; i++) {
-            UITextField *textF=[self.view viewWithTag:3000+i];
+            UITextField *textF=[_scrollView viewWithTag:3000+i];
              [textArray addObject:textF.text];
         }
         if ([_contentView.text isEqualToString:root_pay_191]) {
@@ -225,7 +242,7 @@
 
     
     for (int i=0; i<2; i++) {
-        UIButton *button=[self.view viewWithTag:2000+i];
+        UIButton *button=[_scrollView viewWithTag:2000+i];
         if (button.tag==sender.tag) {
             if (button.selected) {
                 [button setImage:[UIImage imageNamed:@"Selected_clickPay.png"] forState:UIControlStateNormal];
