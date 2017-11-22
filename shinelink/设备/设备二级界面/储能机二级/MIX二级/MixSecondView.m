@@ -164,8 +164,10 @@
 -(void)goThreeSP{
     EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
     equipGraph.deviceType=@"S";
+    equipGraph.StorageTypeSecondNum=@"mix";
+    equipGraph.StorageTypeNum=@"1";
     equipGraph.SnID=_deviceSN;
-    equipGraph.StorageTypeNum=_typeNum;
+  //  equipGraph.StorageTypeNum=_typeNum;
     equipGraph.dictInfo=@{@"equipId":_deviceSN,
                           @"daySite":@"/newMixApi.do?op=getDayLineMix",
                           @"monthSite":@"/newStorageAPI.do?op=getMonthLineStorage",
@@ -259,7 +261,7 @@
         
         
         if ([_allDict.allKeys containsObject:@"mixDetailBean"]) {
-            lableValueArray=@[_allDict[@"mixDetailBean"][@"edischarge1Today"],_allDict[@"mixDetailBean"][@"edischarge1Total"],_allDict[@"todayRevenue"],_allDict[@"totalRevenue"]];
+            lableValueArray=@[_allDict[@"edischarge1Todaytext"],_allDict[@"edischarge1Totaltext"],_allDict[@"todayRevenuetext"],_allDict[@"totalRevenuetext"]];
         }else{
             lableValueArray=@[@"",@"",@"",@""];
         }

@@ -151,6 +151,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     if ([_StorageTypeNum isEqualToString:@"1"]) {
           self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 0, SCREEN_Width/2, 40*HEIGHT_SIZE);
     }
+
     [self.dayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
        [self.dayButton setTitle:root_DAY forState:UIControlStateNormal];
     _dayButton.layer.borderWidth=layerW;
@@ -160,7 +161,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
      _dayButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
  self.dayButton.selected = YES;
     [self.dayButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_colorBackView addSubview:self.dayButton];
+    if (![_StorageTypeSecondNum isEqualToString:@"mix"]) {
+           [_colorBackView addSubview:self.dayButton];
+    }
+ 
     
     self.monthButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.monthButton.frame = CGRectMake(1 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
@@ -205,7 +209,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _totalButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.totalButton setTitle:root_TOTAL forState:UIControlStateNormal];
     [self.totalButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [_colorBackView addSubview:self.totalButton];
+    if (![_StorageTypeSecondNum isEqualToString:@"mix"]) {
+           [_colorBackView addSubview:self.totalButton];
+    }
+
     
      [self changButtonColor];
     
@@ -1246,7 +1253,20 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                         _unitLaleName=@"kWh";
                     }
                     
-                    _type=[self getPCS5000type:string];
+                    if (![_StorageTypeSecondNum isEqualToString:@"mix"]) {
+                         _type=[self getPCS5000type:string];
+                    }else{
+                        int typeNum=[string intValue];
+                        if (typeNum==1 || typeNum==2) {
+                            _unitLaleName=@"V";
+                        }else if (typeNum==3 || typeNum==4 || typeNum==5 || typeNum==6 || typeNum==7 || typeNum==8 || typeNum==9) {
+                            _unitLaleName=@"W";
+                        }else if (typeNum==10){
+                             _unitLaleName=@"%";
+                        }
+                        _type=string;
+                    }
+                   
                 }else{
                      _type=string;
                 }
