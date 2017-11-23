@@ -34,10 +34,19 @@
      self.view.backgroundColor=[UIColor whiteColor];
     
       [self initdata];
-    [self netParameter];
+    
+    if ([_typeNum isEqualToString:@"2"]) {
+           [self netMIX];
+    }else{
+            [self netParameter];
+    }
+
     
   
 }
+
+
+
 
 -(void)netParameter{
     _dateN2=[NSMutableArray array];
@@ -68,9 +77,6 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
         NSLog(@"getStorageInfo: %@", content);
         if (content) {
           
-            
-            
-           
              [self initUI];
             
             
@@ -80,8 +86,6 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
                 [self getSPdata:content];
             }
             
-          
-            
         }
     } failure:^(NSError *error) {
         [self hideProgressView];
@@ -89,6 +93,65 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
     }];
 
 
+}
+
+
+
+-(void)netMIX{
+    _dateN2=[NSMutableArray array];
+    _dateY2=[NSMutableArray array];
+    _pv12=[NSMutableArray array];
+    _pv22=[NSMutableArray array];
+    _pv32=[NSMutableArray array];
+    
+    
+    [_dateN2 addObject:_deviceSN];
+    [_dateN2 addObject:[NSString stringWithFormat:@"%@",_params2Dict[@"innerVersion"]]];
+    [_dateN2 addObject:[NSString stringWithFormat:@"%@",_params2Dict[@"fwVersion"]]];
+    
+    [_dateY2 addObject:[NSString stringWithFormat:@"%@",_params2Dict[@"dataLogSn"]]];
+    [_dateY2 addObject:_normalPower];
+    [_dateY2 addObject:[NSString stringWithFormat:@"%@",_params2Dict[@"modelText"]]];
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"mixId":_deviceSN} paramarsSite:@"/newMixApi.do?op=getMixInfo" sucessBlock:^(id content) {
+        [self hideProgressView];
+        NSLog(@"getMixInfo: %@", content);
+        if (content) {
+                     [self initUI];
+            if ([content[@"result"] intValue]==1) {
+                NSDictionary *allDataDic=content[@"obj"];
+                [self getMIXdata:allDataDic];
+            }
+            
+   
+            
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        
+    }];
+    
+    
+}
+
+-(void)getMIXdata:(NSDictionary*)content{
+    
+    //      NSArray *nameArray=@[@"Vb/Cb",@"Vpv",@"Ic_pv",@"Ppv",@"Ac_In",@"Ac_Out",@"PL",@"Per_Load",@"Epv_d",@"Epv_a",@"Ec_day",@"Ec_all",@"Ed_day",@"Ed_all"];
+    
+    _SPF5000Array=@[[NSString stringWithFormat:@"%@V",content[@"vpv1"]],
+                    [NSString stringWithFormat:@"%@V",content[@"vpv2"]],
+                    [NSString stringWithFormat:@"%@V",content[@"vbat"]],
+                    [NSString stringWithFormat:@"%@W",content[@"pCharge1"]],
+                    [NSString stringWithFormat:@"%@kWh",content[@"epvTotal"]],
+                    [NSString stringWithFormat:@"%@kWh",content[@"epvToday"]],
+                    [NSString stringWithFormat:@"%@kWh",content[@"eBatChargeToday"]],
+                    [NSString stringWithFormat:@"%@kWh",content[@"eBatChargeTotal"]],
+                    [NSString stringWithFormat:@"%@kWh",content[@"eBatDisChargeToday"]],
+                    [NSString stringWithFormat:@"%@kWh",content[@"eBatDisChargeTotal"]],
+                    ];
+    
+    [self initUIThree];
 }
 
 -(void)getPCS5000data:(NSDictionary*)content{
@@ -283,6 +346,10 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
     
     NSArray *nameArray=@[@"Vb/Cb",@"Vpv",@"Ic_pv",@"Ppv",@"Ac_In",@"Ac_Out",@"PL",@"Per_Load",@"Epv_d",@"Epv_a",@"Ec_day",@"Ec_all",@"Ed_day",@"Ed_all"];
     
+    if ([_typeNum isEqualToString:@"2"]) {
+        nameArray=@[root_5000Chart_159,root_5000Chart_160,root_5000xianqing_dianchi_dianya,root_MIX_229,root_MIX_230,root_MIX_231,root_MIX_232,root_MIX_233,root_MIX_234,root_MIX_235];
+    }
+    
     float size3=50*HEIGHT_SIZE; float H1=10*HEIGHT_SIZE;
     for (int i=0; i<nameArray.count; i++) {
         int K=i/2; int W=i%2;
@@ -290,12 +357,14 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
         nameLable.text=nameArray[i];
         nameLable.textAlignment=NSTextAlignmentCenter;
         nameLable.textColor=MainColor;
+        nameLable.adjustsFontSizeToFitWidth=YES;
         nameLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:nameLable];
         
         UILabel *valueLable=[[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE+SCREEN_Width/2*W, 270*HEIGHT_SIZE+size3*K-H1, SCREEN_Width/2,20*HEIGHT_SIZE )];
         valueLable.text=_SPF5000Array[i];
         valueLable.textAlignment=NSTextAlignmentCenter;
+        valueLable.adjustsFontSizeToFitWidth=YES;
         valueLable.textColor=COLOR(102, 102, 102, 1);
         valueLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:valueLable];

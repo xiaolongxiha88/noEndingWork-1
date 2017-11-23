@@ -13,5 +13,6 @@
 @property (nonatomic, strong) NSMutableArray *getDetaiDataArray2;
 
 @property (nonatomic, strong) NSArray *lableNameArray;
+@property (nonatomic, strong) NSArray *lableNameArray2;
 
 @end

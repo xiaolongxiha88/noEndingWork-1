@@ -839,6 +839,27 @@
 #define  root_MIX_223 NSLocalizedString(@"223点击选择", nil)
 #define  root_MIX_224 NSLocalizedString(@"224选择设置值", nil)
 #define  root_MIX_225 NSLocalizedString(@"225请选择", nil)
+#define  root_MIX_226 NSLocalizedString(@"226升级中", nil)
+#define  root_MIX_227 NSLocalizedString(@"227放电停止SOC", nil)
+#define  root_MIX_228 NSLocalizedString(@"228充电停止SOC", nil)
+#define  root_MIX_229 NSLocalizedString(@"229电池充电功率", nil)
+#define  root_MIX_230 NSLocalizedString(@"230PV总电量", nil)
+#define  root_MIX_231 NSLocalizedString(@"231PV今日电量", nil)
+#define  root_MIX_232 NSLocalizedString(@"232电池今日充电量", nil)
+#define  root_MIX_233 NSLocalizedString(@"233电池总充电量", nil)
+#define  root_MIX_234 NSLocalizedString(@"234电池今日放电量", nil)
+#define  root_MIX_235 NSLocalizedString(@"235电池总放电量", nil)
+#define  root_MIX_236 NSLocalizedString(@"236逆变器功率", nil)
+#define  root_MIX_237 NSLocalizedString(@"237用户侧功率", nil)
+#define  root_MIX_238 NSLocalizedString(@"238电网侧功率", nil)
+
+#define  root_ME_239 NSLocalizedString(@"239配置WIFI采集器", nil)
+#define  root_ME_240 NSLocalizedString(@"240本地调试工具", nil)
+
+
+
+
+
 
 
 #endif /* languageNew_h */

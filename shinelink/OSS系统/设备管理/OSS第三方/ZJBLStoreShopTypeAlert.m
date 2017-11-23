@@ -92,7 +92,7 @@
     if (!_closeButton) {
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _closeButton.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
-        [_closeButton setTitle:@"关闭" forState:UIControlStateNormal];
+        [_closeButton setTitle:root_cancel forState:UIControlStateNormal];
         [_closeButton setTitleColor:[UIColor colorWithRed:0 green:127/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
         _closeButton.titleLabel.font = [UIFont systemFontOfSize:13*HEIGHT_SIZE];
         [_closeButton addTarget:self action:@selector(closeAction) forControlEvents:UIControlEventTouchUpInside];

@@ -80,7 +80,7 @@
                 _dayDischarge=[NSString stringWithFormat:@"%@",allDataDic[@"mixDetailBean"][@"edischarge1Today"]];
                 _totalDischarge=[NSString stringWithFormat:@"%@",allDataDic[@"mixDetailBean"][@"edischarge1Total"]];
                 
-                _status=[NSString stringWithFormat:@"%@",allDataDic[@"mixDetailBean"][@"status"]];
+                _status=[NSString stringWithFormat:@"%@",allDataDic[@"mixBean"][@"status"]];
                 
                 _capacity=[NSString stringWithFormat:@"%@",allDataDic[@"mixDetailBean"][@"soc"]];
                 
@@ -130,8 +130,8 @@
 -(void)gofour{
     PvLogTableViewController *four=[[PvLogTableViewController alloc]init];
     four.PvSn=_deviceSN;
-    four.address=@"/newStorageAPI.do?op=getStorageAlarm";
-    four.type=@"storageId";
+    four.address=@"/newMixApi.do?op=getMixAlarm";
+    four.type=@"mixId";
     [self.navigationController pushViewController:four animated:NO];
 }
 
@@ -148,10 +148,7 @@
     PC.deviceSN=_deviceSN;
     PC.normalPower=_normalPower2;
     PC.storageType=_storageType;
-    PC.typeNum=_typeNum;
-    if ([_typeNum isEqualToString:@"1"]) {
-        PC.actAndapparentString=[NSString stringWithFormat:@"%@/%@",_allDict[@"activePower"],_allDict[@"apparentPower"]];
-    }
+    PC.typeNum=@"2";
     [self.navigationController pushViewController:PC animated:NO];
 }
 
@@ -173,7 +170,7 @@
                           @"monthSite":@"/newStorageAPI.do?op=getMonthLineStorage",
                           @"yearSite":@"/newStorageAPI.do?op=getYearLineStorage",
                           @"allSite":@"/newStorageAPI.do?op=getTotalLineStorage"};
-    equipGraph.dict=@{@"1":@"PV1电压", @"2":@"PV2电压", @"3":@"PV1功率", @"4":@"PV2功率", @"5":@"充电功率", @"6":@"放电功率",@"7":@"逆变器功率",@"8":@"用户侧功率",@"9":@"电网侧功率",@"10":@"SOC"};
+    equipGraph.dict=@{@"1":root_5000Chart_159, @"2":root_5000Chart_160, @"3":root_5000Chart_157, @"4":root_5000Chart_158, @"5":root_CHARGING_POWER, @"6":root_PCS_fangdian_gonglv,@"7":root_MIX_236,@"8":root_MIX_237,@"9":root_MIX_238,@"10":@"SOC"};
     equipGraph.dictMonth=@{@"1":root_MONTH_BATTERY_CHARGE, @"2":root_MONTHLY_CHARGED, @"3":root_MONTHLY_DISCHARGED};
     equipGraph.dictYear=@{@"1":root_YEAR_BATTERY_CHARGE, @"2":root_YEAR_CHARGED, @"3":root_YEAR_DISCHARGED};
     equipGraph.dictAll=@{@"1":root_TOTAL_BATTERY_CHARGE, @"2":root_TOTAL_CHARGED, @"3":root_TOTAL_DISCHARGED};
@@ -316,28 +313,24 @@
     }
     
     UIColor *backColor=COLOR(14, 138, 243, 1);
+    _waterView.backgroundColor = backColor;//页面背景颜色改背景
+    
     if ([_status isEqualToString:@"0"]) {
-        _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:45/ 255.0f green:226/ 255.0f blue:233/ 255.0f alpha:1];//水波颜色
-        _statusText=root_xianZhi;
+        _statusText=root_dengDai;
     }else if ([_status isEqualToString:@"1"]) {
-        _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:121/ 255.0f green:230/ 255.0f blue:129/ 255.0f alpha:1];//水波颜色
-        _statusText=root_chongDian;
-    }else if ([_status isEqualToString:@"2"]) {
-        _waterView.backgroundColor = backColor;//页面背景颜色改背景
-        _waterView.currentWaterColor = [UIColor colorWithRed:222/ 255.0f green:211/ 255.0f blue:91/ 255.0f alpha:1];//水波颜色
-        _statusText=root_fangDian;
+        _statusText=root_MIX_202;
     }else if ([_status isEqualToString:@"3"]) {
-        _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:105/ 255.0f green:214/ 255.0f blue:249/ 255.0f alpha:1];//水波颜色
         _statusText=root_cuoWu;
     }else if ([_status isEqualToString:@"4"]) {
-        _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:45/ 255.0f green:226/ 255.0f blue:233/ 255.0f alpha:1];//水波颜色
-        _statusText=root_dengDai;
-    }else if ([_status isEqualToString:@"-1"]) {
-        _waterView.backgroundColor = backColor;//页面背景颜色改背景
+        _statusText=root_MIX_226;
+    }else if ([_status isEqualToString:@"5"] || [_status isEqualToString:@"6"] || [_status isEqualToString:@"7"] || [_status isEqualToString:@"8"]) {
+        _waterView.currentWaterColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//水波颜色
+        _statusText=root_zhengChang;
+    }else{
         _waterView.currentWaterColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//水波颜色
         _statusText=root_duanKai;
     }
@@ -347,7 +340,11 @@
     
     float SizeH3=10*HEIGHT_SIZE;
     UILabel *Ca=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3-_pointCenterNum, 100*NOW_SIZE,60*HEIGHT_SIZE )];
+    if (![_capacity containsString:@"%"]) {
+        _capacity=[NSString stringWithFormat:@"%@%%",_capacity];
+    }
     Ca.text=_capacity;
+    Ca.adjustsFontSizeToFitWidth=YES;
     Ca.textAlignment=NSTextAlignmentCenter;
     if ([_status isEqualToString:@"3"]) {
         Ca.textColor=[UIColor redColor];
@@ -357,7 +354,7 @@
     Ca.font = [UIFont systemFontOfSize:30*HEIGHT_SIZE];
     [self.scrollView addSubview:Ca];
     
-    UILabel *Status=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3+55*HEIGHT_SIZE-_pointCenterNum, 100*NOW_SIZE,40*HEIGHT_SIZE )];
+    UILabel *Status=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3+45*HEIGHT_SIZE-_pointCenterNum, 100*NOW_SIZE,30*HEIGHT_SIZE )];
     Status.text=_statusText;
     Status.textAlignment=NSTextAlignmentCenter;
     if ([_status isEqualToString:@"3"]) {
@@ -365,7 +362,7 @@
     }else{
         Status.textColor=[UIColor whiteColor];
     }
-    Status.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    Status.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     Status.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:Status];
     

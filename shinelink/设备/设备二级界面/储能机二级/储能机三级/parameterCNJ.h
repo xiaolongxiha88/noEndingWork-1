@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSMutableDictionary *params2Dict;
 @property (nonatomic, strong) NSString *storageType;
 
-@property (nonatomic, strong) NSString *typeNum;
+@property (nonatomic, strong) NSString *typeNum;   //0、储能机     1、SPF5000   2、Mix
 
 @property (nonatomic, strong) NSString *actAndapparentString;
 

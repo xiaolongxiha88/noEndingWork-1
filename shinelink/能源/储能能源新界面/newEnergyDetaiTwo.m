@@ -83,6 +83,10 @@
 -(void)initUI2{
     NSArray *nameArray=@[root_shijian,root_mianban_dianliang,root_yongdian_xiaohao];
     
+    if (_lableNameArray2.count>0) {
+        nameArray=[NSArray arrayWithArray:_lableNameArray2];
+    }
+    
     for (int i=0; i<3; i++) {
         
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE+100*NOW_SIZE*i, 280*HEIGHT_SIZE, 100*NOW_SIZE, 30*HEIGHT_SIZE)];

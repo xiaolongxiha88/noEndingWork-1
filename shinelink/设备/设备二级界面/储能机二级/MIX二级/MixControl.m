@@ -39,6 +39,7 @@
     self.view.backgroundColor=MainColor;
     _choiceValue1=@"";
     _choiceValue2=@"";
+    _choiceValue3=@"";
 
            [self initUI];
     
@@ -58,9 +59,9 @@
     [self.view addGestureRecognizer:tapGestureRecognizer];
     NSArray*nameArray;
     if (_setType==0) {
-          nameArray=@[root_MIX_221,root_MIX_222,@"放电功率",@"放电停止SOC"];
+          nameArray=@[root_MIX_221,root_MIX_222,root_PCS_fangdian_gonglv,root_MIX_227];
     }else{
-          nameArray=@[root_MIX_221,root_MIX_222,@"AC充电使能",@"充电功率",@"充电停止SOC"];
+          nameArray=@[root_MIX_221,root_MIX_222,root_CHARGING_POWER,root_MIX_228,[NSString stringWithFormat:@"%@%@",root_5000_ac_chongdian,root_MIX_221]];
     }
   
     float H1=40*HEIGHT_SIZE;
@@ -68,6 +69,7 @@
         UILabel *lable1=[[UILabel alloc]initWithFrame:CGRectMake(0, 20*HEIGHT_SIZE+H1*i, 100*NOW_SIZE, 30*HEIGHT_SIZE)];
         lable1.text=[NSString stringWithFormat:@"%@:",nameArray[i]];
         lable1.textAlignment=NSTextAlignmentRight;
+        lable1.adjustsFontSizeToFitWidth=YES;
         lable1.textColor=[UIColor whiteColor];
         lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:lable1];
@@ -101,11 +103,9 @@
     
         [self initTwo];
     
-    if (_setType==0) {
+
           [self initThree];
-    }else  if (_setType==1) {
-     
-    }
+
  
 }
 
@@ -175,7 +175,7 @@
     _fieldOne.layer.borderWidth=1;
     _fieldOne.layer.cornerRadius=5;
     _fieldOne.layer.borderColor=[UIColor whiteColor].CGColor;
-    _fieldOne.textAlignment=NSTextAlignmentLeft;
+    _fieldOne.textAlignment=NSTextAlignmentCenter;
     [_fieldOne setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [_fieldOne setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     _fieldOne.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -187,14 +187,14 @@
     _fieldTwo.layer.borderWidth=1;
     _fieldTwo.layer.cornerRadius=5;
     _fieldTwo.layer.borderColor=[UIColor whiteColor].CGColor;
-    _fieldTwo.textAlignment=NSTextAlignmentLeft;
+    _fieldTwo.textAlignment=NSTextAlignmentCenter;
     [_fieldTwo setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [_fieldTwo setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     _fieldTwo.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:_fieldTwo];
     
     _textLable5=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*4, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
-    _textLable5.text=_currentDay2;
+    _textLable5.text=root_MIX_223;
     _textLable5.userInteractionEnabled=YES;
     _textLable5.layer.borderWidth=1;
     _textLable5.layer.cornerRadius=5;
@@ -224,27 +224,45 @@
     NSArray *nameArray=@[@"mix_ac_charge_time_period",@"mix_ac_discharge_time_period"];
     NSString*typeName=nameArray[_setType];
     NSString *_param2=@"";  NSString *_param3=@""; NSString *_param4=@""; NSString *_param5=@"";
-    if (_setType==1 || _setType==2) {
+    if (_setType==1 || _setType==0) {
         NSDate *DATA=[_dayFormatter dateFromString:_currentDay];
           NSDate *DATA1=[_dayFormatter dateFromString:_currentDay2];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"HH"];
         _param2= [dateFormatter stringFromDate:DATA];
-          _param3= [dateFormatter stringFromDate:DATA1];
+          _param4= [dateFormatter stringFromDate:DATA1];
         [dateFormatter setDateFormat:@"mm"];
-        _param4 = [dateFormatter stringFromDate:DATA];
+        _param3 = [dateFormatter stringFromDate:DATA];
         _param5 = [dateFormatter stringFromDate:DATA1];
     }
     if ([_choiceValue1 isEqualToString:@""]) {
         [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_MIX_225,root_MIX_221]];
         return;
     }
+    if (_setType==1) {
+        if ([_choiceValue3 isEqualToString:@""]) {
+            [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@%@",root_MIX_225,root_5000_ac_chongdian,root_MIX_221]];
+            return;
+        }
+    }
+  
     if ([_choiceValue2 isEqualToString:@""]) {
         [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_MIX_225,root_MIX_222]];
         return;
     }
+    NSString *param1String,*param2String;
+    if ([_fieldOne.text isEqualToString:@""] || _fieldOne.text==nil) {
+        param1String=@"";
+    }else{
+        param1String=_fieldOne.text;
+    }
+    if ([_fieldTwo.text isEqualToString:@""] || _fieldTwo.text==nil) {
+        param2String=@"";
+    }else{
+        param2String=_fieldTwo.text;
+    }
 
-    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"serialNum":_CnjSN,@"type":typeName,@"param1":_choiceValue2,@"param2":_param2,@"param3":_param3,@"param4":_param4,@"param5":_param5,@"param6":_choiceValue1} paramarsSite:@"/newTcpsetAPI.do?op=mixSetApi" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"serialNum":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":param2String,@"param3":_choiceValue2,@"param4":_param2,@"param5":_param3,@"param6":_param4,@"param7":_param5,@"param8":_choiceValue1,@"param9":_choiceValue3} paramarsSite:@"/newTcpsetAPI.do?op=mixSetApi" sucessBlock:^(id content) {
         //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"mixSetApi: %@", content1);
@@ -316,9 +334,10 @@
           choiceArray=@[[NSString stringWithFormat:@"%@1",root_MIX_222],[NSString stringWithFormat:@"%@2",root_MIX_222],[NSString stringWithFormat:@"%@3",root_MIX_222]];
     }
     
-    if (_setType==0) {
-          choiceArray=@[root_MIX_208,root_MIX_209,root_MIX_210];
-    }
+//    if (_setType==0) {
+//          choiceArray=@[root_MIX_208,root_MIX_209,root_MIX_210];
+//    }
+    
     [ZJBLStoreShopTypeAlert showWithTitle:root_MIX_224 titles:choiceArray selectIndex:^(NSInteger SelectIndexNum){
         if (Type==1) {
       _choiceValue1=[NSString stringWithFormat:@"%ld",SelectIndexNum];

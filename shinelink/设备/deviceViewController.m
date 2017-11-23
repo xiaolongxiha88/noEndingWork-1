@@ -873,7 +873,7 @@ _pcsNetStorageSN=@"";
                 
                 NSString *ST02=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"lost"]];
                 if ([ST02 isEqualToString:@"1"]) {
-                    [statueArray addObject:@"6"];
+                    [statueArray addObject:@"10"];
                 }else{
                     NSString *ST=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"deviceStatus"]];
                     [statueArray addObject:ST];
@@ -1936,18 +1936,16 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             }else if ([getDevice.statueData isEqualToString:@"-1"]){
                 cell.stateValue.text =root_duanKai ;
                 cell.stateValue.textColor=COLOR(163, 163, 163, 1);
-            }else if ([getDevice.statueData isEqualToString:@"6"]){
+            }else if ([getDevice.statueData isEqualToString:@"6"]){                  //6 掉线
                 cell.stateValue.text =root_duanKai ;
                 cell.stateValue.textColor=COLOR(163, 163, 163, 1);
             }
             
                 
-        }else if (([getDevice.type isEqualToString:@"storage"])||([getDevice.type isEqualToString:@"mix"])){
+        }else if ([getDevice.type isEqualToString:@"storage"]){
             
          cell.electric.text = root_dianChi_baifenBi;
-            if (([getDevice.type isEqualToString:@"mix"])) {
-                        cell.electric.text = root_ri_dianLiang;
-            }
+    
             if ([getDevice.statueData isEqualToString:@"0"]){
                 cell.stateValue.text =root_xianZhi;
                   cell.stateValue.textColor=COLOR(45, 226, 233, 1);
@@ -1974,10 +1972,36 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
                 cell.stateValue.textColor=COLOR(121, 230, 129, 1);
             }
             
-            
-            
+        }else if ([getDevice.type isEqualToString:@"mix"]){
+                cell.electric.text = root_ri_dianLiang;
+            if ([getDevice.statueData isEqualToString:@"0"]){          //10 掉线
+                cell.stateValue.text =root_dengDai;
+                cell.stateValue.textColor=MainColor;
+            }else if ([getDevice.statueData isEqualToString:@"1"]){
+                cell.stateValue.text =root_MIX_202;
+                cell.stateValue.textColor=COLOR(45, 226, 233, 1);
+            }else if ([getDevice.statueData isEqualToString:@"3"]){
+                cell.stateValue.text =root_cuoWu ;
+                cell.stateValue.textColor=COLOR(255, 86, 82, 1);
+            }else if ([getDevice.statueData isEqualToString:@"4"]){
+                cell.stateValue.text =root_MIX_226 ;
+                cell.stateValue.textColor=COLOR(222, 211, 91, 1);
+            }else if ([getDevice.statueData isEqualToString:@"5"] || [getDevice.statueData isEqualToString:@"6"] || [getDevice.statueData isEqualToString:@"7"] || [getDevice.statueData isEqualToString:@"8"]){
+                cell.stateValue.text =root_zhengChang ;
+                cell.stateValue.textColor=COLOR(121, 230, 129, 1);
+            }else if ([getDevice.statueData isEqualToString:@"10"]){
+                cell.stateValue.text =root_duanKai ;
+                cell.stateValue.textColor=COLOR(163, 163, 163, 1);
+            }else{
+                cell.stateValue.text =root_duanKai ;
+                cell.stateValue.textColor=COLOR(163, 163, 163, 1);
+            }
             
         }
+        
+        
+        
+        
             cell.titleLabel.text = getDevice.name;
         cell.titleLabel.textColor = MainColor;
        

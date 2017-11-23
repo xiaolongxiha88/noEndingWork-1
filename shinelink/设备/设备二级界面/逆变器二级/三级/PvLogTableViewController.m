@@ -51,7 +51,13 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
    
     self.tableView.separatorColor=[UIColor grayColor];
-    [self netLog];
+    
+    if ([_type isEqualToString:@"mixId"]) {    
+        [self netLog2];
+    }else{
+          [self netLog];
+    }
+  
 
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
@@ -112,8 +118,7 @@
                 }
                 
             }
-            
-            
+
             for(int i=0;i<allArray.count;i++){
                 
                 if (_AlertView) {
@@ -127,6 +132,7 @@
                  NSString *LOG=[NSString stringWithFormat:@"%@",content[i][@"eventName"]];
                 NSString *time=[NSString stringWithFormat:@"%@",content[i][@"occurTime"]];
                 NSString *CO=[NSString stringWithFormat:@"%@",content[i][@"eventName"]];
+                
                 [self.SNTextArray addObject:SN];
                 [self.typtTextArray addObject:TY];
                 [self.eventTextArray addObject:EV];
@@ -147,6 +153,85 @@
      
     }];
 
+}
+
+
+-(void)netLog2{
+    self.SNTextArray=[NSMutableArray array];
+    self.typtTextArray=[NSMutableArray array];
+    self.eventTextArray=[NSMutableArray array];
+    self.LogTextArray =[NSMutableArray array];
+    self.contentTextArray=[NSMutableArray array];
+    self.timeTextArray=[NSMutableArray array];
+    
+  //  _PvSn=@"wsk0000001";
+    
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{_type:_PvSn,@"pageNum":@"1", @"pageSize":@"30"} paramarsSite:_address sucessBlock:^(id content) {
+        [self hideProgressView];
+        NSLog(@"getInverterAlarm: %@", content);
+        if (content) {
+            
+             NSMutableArray *allArray=[NSMutableArray new];
+            
+            if ([content[@"result"] intValue]==1) {
+                    allArray=[NSMutableArray arrayWithArray:content[@"obj"]];
+                
+            }
+        
+            
+            
+            if(allArray.count==0){
+                
+                if (!_AlertView) {
+                    if ([_languageValue isEqualToString:@"0"]) {
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                        _AlertView.image=[UIImage imageNamed:@"datalog_cn2.png"];
+                        [self.view addSubview:_AlertView];
+                    }else{
+                        _AlertView=[[UIImageView alloc]initWithFrame:CGRectMake(0.1* SCREEN_Width, 100*HEIGHT_SIZE,0.8* SCREEN_Width, 0.294* SCREEN_Width)];
+                        _AlertView.image=[UIImage imageNamed:@"datalog_en2.png"];
+                        [self.view addSubview:_AlertView];
+                    }
+                }
+                
+            }
+            
+            for(int i=0;i<allArray.count;i++){
+                
+                if (_AlertView) {
+                    [_AlertView removeFromSuperview];
+                    _AlertView=nil;
+                }
+                
+                NSString *SN=[NSString stringWithFormat:@"%@",allArray[i][@"deviceSerialNum"]];
+                NSString *TY=[NSString stringWithFormat:@"%@",allArray[i][@"deviceType"]];
+                NSString *EV=[NSString stringWithFormat:@"%@",allArray[i][@"eventId"]];
+                NSString *LOG=[NSString stringWithFormat:@"%@",allArray[i][@"eventName"]];
+                NSString *time=[NSString stringWithFormat:@"%@",allArray[i][@"occurTime"]];
+                NSString *CO=[NSString stringWithFormat:@"%@",allArray[i][@"eventName"]];
+                
+                [self.SNTextArray addObject:SN];
+                [self.typtTextArray addObject:TY];
+                [self.eventTextArray addObject:EV];
+                [self.LogTextArray addObject:LOG];
+                [self.contentTextArray addObject:CO];
+                [self.timeTextArray addObject:time];
+                
+                if (_SNTextArray.count==allArray.count) {
+                    [self getAFQ];
+                    [self.tableView reloadData];
+                }
+                
+            }
+            
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        
+    }];
+    
 }
 
 
@@ -220,17 +305,17 @@
     if (!cell) {
         cell = [[pvLogTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
-    cell.SNText.text=_SNTextArray[indexPath.row];
-      cell.typtText.text=_typtTextArray[indexPath.row];
-      cell.eventText.text=_eventTextArray[indexPath.row];
-      cell.LogText.text=_LogTextArray[indexPath.row];
+    cell.SNText.text=[NSString stringWithFormat:@"%@%@",root_NBQ_xunliehao,_SNTextArray[indexPath.row]];
+      cell.typtText.text=[NSString stringWithFormat:@"%@%@",root_NBQ_leixing,_typtTextArray[indexPath.row]];
+      cell.eventText.text=[NSString stringWithFormat:@"%@%@",root_NBQ_shijianhao,_eventTextArray[indexPath.row]];
+      cell.LogText.text=[NSString stringWithFormat:@"%@%@",root_NBQ_biaoshi,_LogTextArray[indexPath.row]];
     cell.timeLabel.text=self.timeTextArray[indexPath.row];
     cell.contentLabel.text=self.contentTextArray[indexPath.row];
     cell.content=self.contentTextArray[indexPath.row];
    
     
-    CGRect fcRect = [cell.content boundingRectWithSize:CGSizeMake(300*Width, 1000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18 *Width]} context:nil];
-    cell.contentLabel.frame =CGRectMake(10*Width, 65*Width, 300*Width, fcRect.size.height);
+    CGRect fcRect = [cell.content boundingRectWithSize:CGSizeMake(300*NOW_SIZE, 1000*HEIGHT_SIZE) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12 *HEIGHT_SIZE]} context:nil];
+    cell.contentLabel.frame =CGRectMake(10*NOW_SIZE, 45*HEIGHT_SIZE, 300*NOW_SIZE, fcRect.size.height);
     cell.timeLabel.frame=CGRectMake(SCREEN_WIDTH-210*NOW_SIZE, 105*HEIGHT_SIZE+fcRect.size.height,200*NOW_SIZE, 20*HEIGHT_SIZE );
  cell.selectionStyle = UITableViewCellSelectionStyleNone;
     

@@ -43,7 +43,12 @@
     for (int i=0; i<5; i++) {
   
         UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE+60*NOW_SIZE*i, 5*HEIGHT_SIZE, 60*NOW_SIZE, 40*HEIGHT_SIZE)];
-        VL1.font=[UIFont systemFontOfSize:13*HEIGHT_SIZE];
+        
+        if ([self.languageType isEqualToString:@"0"]) {
+            VL1.font=[UIFont systemFontOfSize:13*HEIGHT_SIZE];
+        }else{
+             VL1.font=[UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        }
         VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentCenter;
         VL1.text=nameArray[i];

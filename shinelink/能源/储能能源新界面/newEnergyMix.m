@@ -650,7 +650,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         newEnergyDetaiTwo *registerRoot=[[newEnergyDetaiTwo alloc]init];
         registerRoot.getDetaiDataArray1=[NSMutableArray arrayWithArray:_toDetaiDataArray2];
         registerRoot.getDetaiDataArray2=[NSMutableArray arrayWithArray:_toDetaiDataArray3];
-        registerRoot.lableNameArray=@[root_chongDian,root_fangDian];
+        registerRoot.lableNameArray2=@[root_riqi,root_chongDian,root_fangDian];
     
         [self.navigationController pushViewController:registerRoot animated:YES];
     }
