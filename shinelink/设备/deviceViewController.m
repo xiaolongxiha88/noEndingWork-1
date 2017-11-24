@@ -1792,6 +1792,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         if (_storageTypeDic.count>0) {
             NSString *type=[NSString stringWithFormat:@"%@",[_storageTypeDic objectForKey:getDevice.deviceSN]];
        
+            //////// typeNum=1:spf5000    2:普通储能机  3.MIX
             if ([type isEqualToString:@"2"]) {
                 sd.typeNum=@"1";
             }else{

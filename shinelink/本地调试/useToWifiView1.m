@@ -356,7 +356,7 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)initThirdUI{
-    _tableNameArray=@[@"PV电压/电流/电量",@"PV串电压/电流",@"AC电压/电流",@"PID电压/电流"];
+    _tableNameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/电流/功率",@"PID电压/电流"];
     float view1H= CGRectGetMaxY(_secondView.frame);
     
     float lableH1=20*HEIGHT_SIZE;
@@ -446,9 +446,9 @@ static NSString *cellTwo = @"cellTwo";
             NSArray *dataAllArray=[NSArray arrayWithArray:_tableLableValueArray[indexPath.row]];
             cell.lable1Array=[NSArray arrayWithArray:dataAllArray[0]];
             cell.lable2Array=[NSArray arrayWithArray:dataAllArray[1]];
-            if (K==0) {
+            if (K==2) {
                 cell.lable3Array=[NSArray arrayWithArray:dataAllArray[2]];
-                cell.lable4Array=[NSArray arrayWithArray:dataAllArray[3]];
+                //cell.lable4Array=[NSArray arrayWithArray:dataAllArray[3]];
             }
         }
   

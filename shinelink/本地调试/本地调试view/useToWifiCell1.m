@@ -85,9 +85,9 @@
         float viewW1=34*HEIGHT_SIZE;
     float H;NSArray* nameArray;NSArray* vallNameArray;
     
-    if (_cellTypy==0) {
-         nameArray=@[@"电压",@"电流",@"电量"];
-        H=lableH1+lableH2*2+lableH3;
+    if (_cellTypy==2) {
+         nameArray=@[@"电压",@"电流",@"功率"];
+        H=lableH1+lableH2*3;
     }else{
            nameArray=@[@"电压",@"电流"];
         H=lableH1+lableH2*2;
@@ -96,7 +96,7 @@
     if ((_cellTypy==0)||(_cellTypy==3)) {
         vallNameArray=@[@"PV1",@"PV2",@"PV3",@"PV4",@"PV5",@"PV6",@"PV7",@"PV8"];
     }else if(_cellTypy==2){
-        vallNameArray=@[@"AC1",@"AC2",@"AC3",@"R",@"S",@"T"];
+        vallNameArray=@[@"R",@"S",@"T"];
         
     }else if(_cellTypy==1){
         vallNameArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16"];
@@ -108,6 +108,10 @@
     float w1=50*NOW_SIZE;
     float w2=50*NOW_SIZE;
         float W00=w1+10*NOW_SIZE+w2*vallNameArray.count;
+    if (W00<ScreenWidth) {
+        W00=ScreenWidth;
+        w2=(ScreenWidth-w1-10*NOW_SIZE)/3;
+    }
     
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(w1+10*NOW_SIZE, viewW1, SCREEN_Width, H)];
     _scrollView.scrollEnabled=YES;
@@ -140,8 +144,8 @@
         [_nameView addSubview:lineView];
         
         if (i==2) {
-            lable1.frame=CGRectMake(5*NOW_SIZE,lableH1+lableH2*i, w1, lableH3);
-            lineView.frame=CGRectMake(0, lableH1+lableH2*2+lableH3, W00,LineWidth);
+            lable1.frame=CGRectMake(5*NOW_SIZE,lableH1+lableH2*i, w1, lableH2);
+            lineView.frame=CGRectMake(0, lableH1+lableH2*2+lableH2, W00,LineWidth);
         }
     }
     
@@ -178,8 +182,8 @@
         lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_scrollView addSubview:lable2];
         
-        if(_cellTypy==0){
-            UILabel *lable3= [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1+lableH2*2, w2, lableH3/2)];
+        if(_cellTypy==2){
+            UILabel *lable3= [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1+lableH2*2, w2, lableH2)];
             lable3.textColor = COLOR(102, 102, 102, 1);
           //  lable3.text=_lable3Array[i];
             if (_lable3Array.count>0) {
@@ -191,17 +195,7 @@
             lable3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:lable3];
             
-            UILabel *lable4= [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1+lableH2*2+lableH3/2, w2, lableH3/2)];
-            lable4.textColor = COLOR(102, 102, 102, 1);
-           // lable4.text=_lable4Array[i];
-            if (_lable4Array.count>0) {
-                lable4.text=_lable4Array[i];
-            }else{
-                lable4.text=@"";
-            }
-            lable4.textAlignment=NSTextAlignmentCenter;
-            lable4.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-            [_scrollView addSubview:lable4];
+
             
         }
     }
@@ -256,8 +250,8 @@
 // MARK: - 获取展开后的高度
 + (CGFloat)moreHeight:(int)CellTyoe{
     float H=120*HEIGHT_SIZE;
-    if (CellTyoe==0) {
-         H=180*HEIGHT_SIZE;
+    if (CellTyoe==2) {
+         H=160*HEIGHT_SIZE;
     }else{
              H=120*HEIGHT_SIZE;
     }

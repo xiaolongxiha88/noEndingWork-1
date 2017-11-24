@@ -107,7 +107,7 @@
         
     }
     
-    NSArray *ViewArray=@[voltArray,currArray,eactTodayArray,eacTotalArray];
+    NSArray *ViewArray=@[voltArray,currArray];
     
     
     
@@ -136,22 +136,24 @@
     ///////////////////////// 2-3
     NSMutableArray *AcVoltArray=[NSMutableArray new];
     NSMutableArray *AcCurrArray=[NSMutableArray new];
+    NSMutableArray *AcPowerArray=[NSMutableArray new];
     
      for (int i=0; i<3; i++) {
-           int K=38+4*i;
-               float volt=[self changeOneRegister:_data04_1 registerNum:K];
-           float curr=[self changeOneRegister:_data04_1 registerNum:K];
-           [AcVoltArray addObject:[NSString stringWithFormat:@"%.1f",volt/10]];
-           [AcCurrArray addObject:[NSString stringWithFormat:@"%.1f",curr/10]];
-    }
-    
-     for (int i=0; i<3; i++) {
-            int K=50+i;
-             float volt=[self changeOneRegister:_data04_1 registerNum:K];
+        
+         int T=50+i;
+         float volt=[self changeOneRegister:_data04_1 registerNum:T];
          [AcVoltArray addObject:[NSString stringWithFormat:@"%.1f",volt/10]];
-         [AcCurrArray addObject:[NSString stringWithFormat:@""]];
+         
+          int K=38+4*i;
+            float curr=[self changeOneRegister:_data04_1 registerNum:K+1];
+           [AcCurrArray addObject:[NSString stringWithFormat:@"%.1f",curr/10]];
+         
+         float Pac=[self changeTwoRegister:_data04_1 registerNum:K+2];
+                  [AcPowerArray addObject:[NSString stringWithFormat:@"%.1f",Pac/10]];
     }
-    NSArray *ViewArray3=@[AcVoltArray,AcCurrArray];
+    
+
+    NSArray *ViewArray3=@[AcVoltArray,AcCurrArray,AcPowerArray];
   
     
     ///////////////////////// 2-4
@@ -203,12 +205,12 @@
     NSString *acHZ1=[NSString stringWithFormat:@"%.fHz",acHZ];
     
        float pvTem=[self changeOneRegister:_data04_1 registerNum:93]/10;
-       NSString *pvTem1=[NSString stringWithFormat:@"%.1fC",pvTem];
+       NSString *pvTem1=[NSString stringWithFormat:@"%.1f℃",pvTem];
    float boostTem=[self changeOneRegister:_data04_1 registerNum:95]/10;
-     NSString *boostTem1=[NSString stringWithFormat:@"%.1fC",boostTem];
+     NSString *boostTem1=[NSString stringWithFormat:@"%.1f℃",boostTem];
     
      float IPMtTem=[self changeOneRegister:_data04_1 registerNum:94]/10;
-         NSString *IPMtTem1=[NSString stringWithFormat:@"%.1fC",IPMtTem];
+         NSString *IPMtTem1=[NSString stringWithFormat:@"%.1f℃",IPMtTem];
     float IPF=[self changeOneRegister:_data04_1 registerNum:100];
     NSString *IPF1=[NSString stringWithFormat:@"%.f",IPF];
     

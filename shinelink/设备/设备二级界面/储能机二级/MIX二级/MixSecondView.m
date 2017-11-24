@@ -55,7 +55,7 @@
     
     [self.view addSubview:_scrollView];
     
-    _typeNum=@"2";
+    _typeNum=@"3";
     
     [self netGetCNJ];
 
@@ -148,7 +148,7 @@
     PC.deviceSN=_deviceSN;
     PC.normalPower=_normalPower2;
     PC.storageType=_storageType;
-    PC.typeNum=@"2";
+    PC.typeNum=@"3";
     [self.navigationController pushViewController:PC animated:NO];
 }
 
@@ -303,7 +303,7 @@
     [self.scrollView addSubview:dataName];
     
     
-    if ([_typeNum isEqualToString:@"2"]) {
+    if ([_typeNum isEqualToString:@"3"]) {
         _pointCenterNum=20*HEIGHT_SIZE;
         _waterView = [[VWWWaterView alloc]initWithFrame:CGRectMake(0, 0*NOW_SIZE, 120*HEIGHT_SIZE, 120*HEIGHT_SIZE)];
         _waterView.center = CGPointMake(CGRectGetMidX( [UIScreen mainScreen].bounds), 100*HEIGHT_SIZE-_pointCenterNum);

@@ -349,6 +349,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
 }
 
+
 -(void)getDetail{
     if (_toDetaiDataArray.count>0) {
         newEnergyDetailData *registerRoot=[[newEnergyDetailData alloc]init];

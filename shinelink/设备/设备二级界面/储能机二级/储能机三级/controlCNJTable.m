@@ -40,7 +40,7 @@
 
     if([_typeNum isEqualToString:@"1"]){
       self.dataArray =[NSMutableArray arrayWithObjects:root_5000Control_129,root_5000Control_130,root_5000Control_131,root_5000Control_132,root_5000Control_133,root_5000Control_134,root_5000Control_135,root_5000Control_136,root_5000Control_137,root_5000Control_138,root_5000Control_139,root_5000Control_140,root_5000Control_141,root_5000Control_142,root_5000Control_143,nil];
-    }else  if([_typeNum isEqualToString:@"2"]){
+    }else  if([_typeNum isEqualToString:@"3"]){
          self.dataArray =[NSMutableArray arrayWithObjects:root_MIX_210,root_MIX_209,nil];
     }
     
@@ -56,7 +56,7 @@
     NSString *time = [dataFormatter stringFromDate:[NSDate date]];
     
     NSString *typeString=@"2";
-    if([_typeNum isEqualToString:@"2"]){
+    if([_typeNum isEqualToString:@"3"]){
         typeString=@"3";
     }
     
@@ -149,7 +149,7 @@
     
     if([_typeNum isEqualToString:@"1"]){
         [self goSPF5000:indexPath];
-    }else if([_typeNum isEqualToString:@"2"]){
+    }else if([_typeNum isEqualToString:@"3"]){
         [self goMIX:indexPath];
     }else{
      [self goSP2000And3000:indexPath];

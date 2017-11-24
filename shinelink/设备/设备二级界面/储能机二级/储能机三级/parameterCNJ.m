@@ -35,7 +35,7 @@
     
       [self initdata];
     
-    if ([_typeNum isEqualToString:@"2"]) {
+    if ([_typeNum isEqualToString:@"3"]) {
            [self netMIX];
     }else{
             [self netParameter];
@@ -346,7 +346,7 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
     
     NSArray *nameArray=@[@"Vb/Cb",@"Vpv",@"Ic_pv",@"Ppv",@"Ac_In",@"Ac_Out",@"PL",@"Per_Load",@"Epv_d",@"Epv_a",@"Ec_day",@"Ec_all",@"Ed_day",@"Ed_all"];
     
-    if ([_typeNum isEqualToString:@"2"]) {
+    if ([_typeNum isEqualToString:@"3"]) {
         nameArray=@[root_5000Chart_159,root_5000Chart_160,root_5000xianqing_dianchi_dianya,root_MIX_229,root_MIX_230,root_MIX_231,root_MIX_232,root_MIX_233,root_MIX_234,root_MIX_235];
     }
     

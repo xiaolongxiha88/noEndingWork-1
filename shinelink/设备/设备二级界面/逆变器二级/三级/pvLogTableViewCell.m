@@ -93,7 +93,7 @@
         _LogText=[[UILabel alloc]initWithFrame:CGRectMake(160*NOW_SIZE+Size1, H, WText,H)];
         _LogText.textAlignment=NSTextAlignmentLeft;
         _LogText.textColor=[UIColor whiteColor];
-         _LogText.adjustsFontSizeToFitWidth=YES;
+        // _LogText.adjustsFontSizeToFitWidth=YES;
         _LogText.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_scrollView addSubview:_LogText];
         

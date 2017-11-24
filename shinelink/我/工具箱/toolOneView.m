@@ -9,6 +9,7 @@
 #import "toolOneView.h"
 #import "meConfigerViewController.h"
 #import "payView1.h"
+#import "useToWifiView1.h"
 
 @interface toolOneView ()
 @property(nonatomic,strong)NSMutableArray *dataArray;
@@ -122,7 +123,9 @@
         [self.navigationController pushViewController:rootView animated:YES];
         
     }else if (indexPath.row==1){
- 
+        useToWifiView1 *rootView = [[useToWifiView1 alloc]init];
+        [self.navigationController pushViewController:rootView animated:YES];
+        
     }else if (indexPath.row==2){
         payView1 *rootView = [[payView1 alloc]init];
         [self.navigationController pushViewController:rootView animated:YES];
