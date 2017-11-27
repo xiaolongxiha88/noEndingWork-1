@@ -65,12 +65,12 @@
     NSString *userName= [[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
   NSString *serverUrl0= [[NSUserDefaults standardUserDefaults] objectForKey:@"server"];
     
-  serverUrl0=@"http://server-cn.growatt.com";//DEMO
+ // serverUrl0=@"http://server-cn.growatt.com";//DEMO
     NSString * serverUrl = [serverUrl0 substringFromIndex:7];
     
 
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"username":userName,@"serverUrl":serverUrl} paramarsSite:@"/api/v2/renew/getDatalogSnAndProductDate" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo_2 paramars:@{@"username":userName,@"serverUrl":serverUrl} paramarsSite:@"/api/v2/renew/getDatalogSnAndProductDate" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];

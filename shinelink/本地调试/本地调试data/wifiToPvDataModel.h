@@ -17,4 +17,6 @@ typedef void(^modbusDataBlock)(NSData*);
 
 -(NSData*)CmdData:(NSString*)cmdType RegAdd:(NSString*)regAdd Length:(NSString*)length modbusBlock:(modbusDataBlock)modbusBlock;
 
+-(NSData*)getCrc16:(NSData*)data ;
+
 @end

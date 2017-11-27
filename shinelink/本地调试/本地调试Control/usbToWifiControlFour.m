@@ -153,6 +153,7 @@
 
 -(void)setFailed:(NSNotification*) notification{
     [self hideProgressView];
+      [_goButton setTitle:@"Start" forState:UIControlStateNormal];
     [self removeTheTcp];
     
       NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];

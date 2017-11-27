@@ -27,7 +27,21 @@ static NSString *cellOne = @"cell1";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if (_controlType==2) {
+        UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"设置Model" style:UIBarButtonItemStylePlain target:self action:@selector(goToSetModel)];
+        self.navigationItem.rightBarButtonItem=rightItem;
+    }
+
+    
     [self initUI];
+}
+
+-(void)goToSetModel{
+    usbToWifiControlThree *go=[[usbToWifiControlThree alloc]init];
+        go.CellTypy=3;
+       go.CellNumber=40;
+//    go.titleString=_nameArray[indexPath.row];
+    [self.navigationController pushViewController:go animated:YES];
 }
 
 

@@ -62,8 +62,14 @@
 -(void)getFirstViewValue{
  
     int titleState=(int)[self changeOneRegister:_data04_1 registerNum:0];
+    NSString *titleString;
     NSArray *titleArray=@[@"Waiting",@"Normal",@"Upgrade",@"Fault"];
-    NSString *titleString=titleArray[titleState];
+    if ((titleState<4)&&(titleState>-1) ) {
+        titleString=titleArray[titleState];
+    }else{
+        titleString=[NSString stringWithFormat:@"状态:%d",titleState];
+    }
+    
      [_receiveDic setObject:titleString forKey:@"titleView"];
     
         long faultState=(long)[self changeTwoRegister:_data04_1 registerNum:106];
@@ -187,58 +193,76 @@
 -(void)getThreeViewValue{
     int OneCMDregisterNum=125;
     
-     NSString *SnString=[self changeToASCII:_data03 beginRegister:23 length:5];
-    NSString *companyString=[self changeToASCII:_data03 beginRegister:34 length:8];
+//        NSArray *nameArray=@[@"序列号",@"厂商信息",@"PV输入功率",@"额定功率",@"固件(外部)版本",@"固件(内部)版本",@"Model号",@"电网频率",@"逆变器温度",@"Boost温度",@"IPM温度",@"IPF",@"P Bus电压",@"N Bus电压",@"并网倒计时",@"实际输出功率百分比",@"PID故障码",@"PID状态"];
+    
+     NSString *SnString=[self changeToASCII:_data03 beginRegister:23 length:5];     //序列号
+    NSString *companyString=[self changeToASCII:_data03 beginRegister:34 length:8];     //厂商信息
     
     
      float pvPower=[self changeTwoRegister:_data04_1 registerNum:1]/10;
-    NSString *pvPower1=[NSString stringWithFormat:@"%.1fW",pvPower];
-     float Epv=[self changeTwoRegister:_data04_1 registerNum:91]/10;
-        NSString *Epv1=[NSString stringWithFormat:@"%.1fkWh",Epv];
+    NSString *pvPower1=[NSString stringWithFormat:@"%.1fW",pvPower];           //PV输入功率
+     float Epv=[self changeTwoRegister:_data03 registerNum:6]/10;
+        NSString *Epv1=[NSString stringWithFormat:@"%.1fW",Epv];                 //额定功率
     
-      NSString *versionOutString=[self changeToASCII:_data03 beginRegister:9 length:6];
-    NSString *versionInString=[self changeToASCII:_data03 beginRegister:82 length:6];
+      NSString *versionOutString=[self changeToASCII:_data03 beginRegister:9 length:6];          //固件(外部)版本
+    NSString *versionInString=[self changeToASCII:_data03 beginRegister:82 length:6];              //固件(内部)版本
     
-      float totalTime=[self changeTwoRegister:_data04_1 registerNum:47]/2;
-    NSString *totalTime1=[NSString stringWithFormat:@"%.1fs",totalTime];
+  
+    NSString *totalTime1=[self getModelString:_data03];          //Model号
+    
     float acHZ=[self changeTwoRegister:_data04_1 registerNum:37]/100;
-    NSString *acHZ1=[NSString stringWithFormat:@"%.fHz",acHZ];
+    NSString *acHZ1=[NSString stringWithFormat:@"%.fHz",acHZ];                    //电网频率
     
        float pvTem=[self changeOneRegister:_data04_1 registerNum:93]/10;
-       NSString *pvTem1=[NSString stringWithFormat:@"%.1f℃",pvTem];
+       NSString *pvTem1=[NSString stringWithFormat:@"%.1f℃",pvTem];                //逆变器温度
    float boostTem=[self changeOneRegister:_data04_1 registerNum:95]/10;
-     NSString *boostTem1=[NSString stringWithFormat:@"%.1f℃",boostTem];
+     NSString *boostTem1=[NSString stringWithFormat:@"%.1f℃",boostTem];          //Boost温度
     
      float IPMtTem=[self changeOneRegister:_data04_1 registerNum:94]/10;
-         NSString *IPMtTem1=[NSString stringWithFormat:@"%.1f℃",IPMtTem];
+         NSString *IPMtTem1=[NSString stringWithFormat:@"%.1f℃",IPMtTem];             //IPM温度
     float IPF=[self changeOneRegister:_data04_1 registerNum:100];
-    NSString *IPF1=[NSString stringWithFormat:@"%.f",IPF];
+    NSString *IPF1=[NSString stringWithFormat:@"%.4f",(10000-IPF)/10000];                          //IPF
     
       float p_bus=[self changeOneRegister:_data04_1 registerNum:98]/10;
-    NSString *p_bus1=[NSString stringWithFormat:@"%.1fV",p_bus];
+    NSString *p_bus1=[NSString stringWithFormat:@"%.1fV",p_bus];                    //P Bus电压
       float n_bus=[self changeOneRegister:_data04_1 registerNum:99]/10;
-        NSString *n_bus1=[NSString stringWithFormat:@"%.1fV",n_bus];
+        NSString *n_bus1=[NSString stringWithFormat:@"%.1fV",n_bus];                  //N Bus电压
     
-    float maxOutPower=[self changeTwoRegister:_data04_1 registerNum:102]/10;
-    NSString *maxOutPower1=[NSString stringWithFormat:@"%.1fW",maxOutPower];
+    float maxOutPower=[self changeTwoRegister:_data04_1 registerNum:114];
+    NSString *maxOutPower1=[NSString stringWithFormat:@"%.fs",maxOutPower];             //并网倒计时
+    
     float reallyPercent=[self changeOneRegister:_data04_1 registerNum:101];
-    NSString *reallyPercent1=[NSString stringWithFormat:@"%.fW",reallyPercent];
+    NSString *reallyPercent1=[NSString stringWithFormat:@"%.fW",reallyPercent];                   //实际输出功率百分比
     
-    float deratingMode=[self changeOneRegister:_data04_1 registerNum:104];
-    NSString *deratingMode1=[NSString stringWithFormat:@"%.f",deratingMode];
-    float unMatch=[self changeOneRegister:_data04_2 registerNum:174-OneCMDregisterNum];
-    NSString *unMatch1=[NSString stringWithFormat:@"%.f",unMatch];
+//    float deratingMode=[self changeOneRegister:_data04_1 registerNum:104];
+//    NSString *deratingMode1=[NSString stringWithFormat:@"%.f",deratingMode];                      //降额模式
     
-    float disconnectString=[self changeOneRegister:_data04_2 registerNum:176-OneCMDregisterNum];
-    NSString *disconnectString1=[NSString stringWithFormat:@"%.f",disconnectString];
-    float unbanlanceString=[self changeOneRegister:_data04_2 registerNum:175-OneCMDregisterNum];
-    NSString *unbanlanceString1=[NSString stringWithFormat:@"%.f",unbanlanceString];
+//    float unMatch=[self changeOneRegister:_data04_2 registerNum:174-OneCMDregisterNum];
+//    NSString *unMatch1=[NSString stringWithFormat:@"%.f",unMatch];                     //不匹配的串
+//
+//    float disconnectString=[self changeOneRegister:_data04_2 registerNum:176-OneCMDregisterNum];
+//    NSString *disconnectString1=[NSString stringWithFormat:@"%.f",disconnectString];                             //断开的串
+//    float unbanlanceString=[self changeOneRegister:_data04_2 registerNum:175-OneCMDregisterNum];
+//    NSString *unbanlanceString1=[NSString stringWithFormat:@"%.f",unbanlanceString];                        //电流不平衡的串
     
     float pidFault=[self changeOneRegister:_data04_2 registerNum:177-OneCMDregisterNum];
-    NSString *pidFault1=[NSString stringWithFormat:@"%.f",pidFault];
+    NSString *pidFault1=[NSString stringWithFormat:@"%.f",pidFault];                            //PID故障码
     
-    float pidStatus=[self changeOneRegister:_data04_2 registerNum:141-OneCMDregisterNum];
-    NSString *pidStatus1=[NSString stringWithFormat:@"%.f",pidStatus];
+    
+    int pidStatus=(int)[self changeOneRegister:_data04_2 registerNum:141-OneCMDregisterNum]; //PID状态
+    NSString *pidStatus1;
+    if (pidStatus==1) {
+        pidStatus1=@"Waiting";
+    }else if (pidStatus==2) {
+        pidStatus1=@"Normal";
+    }else if (pidStatus==2) {
+        pidStatus1=@"Fault";
+    }else{
+        pidStatus1=[NSString stringWithFormat:@"%d",pidStatus];
+    }
+    //=[NSString stringWithFormat:@"%.f",pidStatus];
+    
+    
     
      NSArray *ViewArray5=@[
                            SnString,companyString,
@@ -249,8 +273,6 @@
                            IPMtTem1, IPF1,
                            p_bus1,n_bus1,
                            maxOutPower1,reallyPercent1,
-                           deratingMode1,unMatch1,
-                           disconnectString1,unbanlanceString1,
                            pidFault1,pidStatus1
                            ];
     
@@ -290,7 +312,26 @@
 }
 
 
-
+-(NSString*)getModelString:(NSData*)data{
+        NSString*ModelString;
+    Byte *dataArray=(Byte*)[data bytes];
+    int registerNum=28;
+         int registerValue=(dataArray[2*registerNum]<<24)+(dataArray[2*registerNum+1]<<16)+(dataArray[2*registerNum+2]<<8)+dataArray[2*registerNum+3];
+    
+    NSString* T1=[NSString stringWithFormat:@"%x",(registerValue & 0xf0000000)>>28];
+    NSString* T2=[NSString stringWithFormat:@"%x",(registerValue & 0xf000000)>>24];
+    NSString* T3=[NSString stringWithFormat:@"%x",(registerValue & 0xf00000)>>20];
+        NSString* T4=[NSString stringWithFormat:@"%x",(registerValue & 0xf0000)>>16];
+    NSString* T5=[NSString stringWithFormat:@"%x",(registerValue & 0x00f000)>>12];
+    NSString* T6=[NSString stringWithFormat:@"%x",(registerValue & 0x000f00)>>8];
+        NSString* T7=[NSString stringWithFormat:@"%x",(registerValue & 0x0000f0)>>4];
+     NSString* T8=[NSString stringWithFormat:@"%x",(registerValue & 0x00000f)];
+    
+    
+    ModelString=[NSString stringWithFormat:@"A%@B%@D%@T%@P%@U%@M%@S%@",T1,T2,T3,T4,T5,T6,T7,T8];
+    
+    return ModelString;
+}
 
 
 -(void)removeTheTcp{

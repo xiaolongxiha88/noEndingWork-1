@@ -138,6 +138,7 @@
     Byte crcL=(Byte)0xff&crcWord;
     Byte arraycrc[]={crcL,crcH};
     NSData *datacrc=[[NSData alloc]initWithBytes:arraycrc length:sizeof(arraycrc)];
+    NSLog(@"CRC go");
     return datacrc;
 }
 

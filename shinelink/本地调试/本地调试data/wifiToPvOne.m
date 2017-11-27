@@ -278,30 +278,50 @@ static float TCP_TIME=1;
         int length0=(int)[data1 length];
         int length1=Bytedata1[2];
         
-        if (_cmdType==3) {
-            return [data1 isEqualToData:_modbusData];
-        }else{
-            if ((length0-5)==length1) {
-                isRightData=YES;
-                NSData *data00=[data1 subdataWithRange:NSMakeRange(3, data1.length-5)];
-                if (_cmdType==1) {
-                    [self upDataToDic:data00];
-                }else  if (_cmdType==2) {
-                    [_AllDataDic setValue:data00 forKey:@"one"];
-                }
-                if (_cmdType==4) {
-                    [_AllDataDic setValue:data1 forKey:@"one"];
-                }
+        NSData *data2=[data subdataWithRange:NSMakeRange(20, data.length-22)];
+        NSData *CRC=[self getCrc16:data2];
+        Byte *CRCArray=(Byte*)[CRC bytes];
+        int C1=CRCArray[0];
+        int C2=CRCArray[1];
+        
+        if ((C1==Bytedata1[length0-2])&&(C2==Bytedata1[length0-1])) {
+            if (_cmdType==3) {          //06设置
+                Byte *Bytedata00=(Byte*)[_modbusData bytes];
                 
+                    if ((Bytedata1[1]==6) && (Bytedata1[0]==Bytedata00[0])) {
+                        isRightData=YES;
+                    }else{
+                        isRightData=NO;
+                    }
+                
+                return isRightData;
             }else{
-                isRightData=NO;
+                if ((length0-5)==length1) {
+                    isRightData=YES;
+                    NSData *data00=[data1 subdataWithRange:NSMakeRange(3, data1.length-5)];
+                    if (_cmdType==1) {
+                        [self upDataToDic:data00];
+                    }else  if (_cmdType==2) {
+                        [_AllDataDic setValue:data00 forKey:@"one"];
+                    }
+                    
+                }else{
+                    isRightData=NO;
+                }
             }
+            if (_cmdType==4) {           //高级设置
+                [_AllDataDic setValue:data1 forKey:@"one"];
+                isRightData=YES;
+            }
+            
+        }else{
+            isRightData=NO;
         }
-   
-    }else{
-        isRightData=NO;
-    }
-    
+        }else{
+              isRightData=NO;
+        }
+        
+
     return isRightData;
 }
 
@@ -395,6 +415,37 @@ static float TCP_TIME=1;
 -(void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag {
     NSLog(@"Reading data length of %lu",(unsigned long)partialLength);
 }
+
+
+
+
+
+
+
+
+-(NSData*)getCrc16:(NSData*)data {
+    int crcWord = 0x0000ffff;
+    Byte *dataArray=(Byte*)[data bytes];
+    for (int i=0; i <data.length; i++) {
+        Byte byte=dataArray[i];
+        crcWord ^=(int)byte & 0x000000ff;
+        for (int j=0; j<8; j++) {
+            if ((crcWord & 0x00000001)==1) {
+                crcWord=crcWord>>1;
+                crcWord=crcWord^0x0000A001;
+            }else{
+                crcWord=(crcWord>>1);
+            }
+        }
+    }
+    Byte crcH =(Byte)0xff&(crcWord>>8);
+    Byte crcL=(Byte)0xff&crcWord;
+    Byte arraycrc[]={crcL,crcH};
+    NSData *datacrc=[[NSData alloc]initWithBytes:arraycrc length:sizeof(arraycrc)];
+    NSLog(@"CRC go");
+    return datacrc;
+}
+
 
 
 - (void)didReceiveMemoryWarning {

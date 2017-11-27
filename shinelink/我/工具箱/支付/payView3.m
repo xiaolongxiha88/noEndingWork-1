@@ -258,7 +258,8 @@
     
     NSString *serverUrl0= [[NSUserDefaults standardUserDefaults] objectForKey:@"server"];
     
-    serverUrl0=@"http://server.growatt.com"; //DEMO
+  //  serverUrl0=@"http://server.growatt.com"; //DEMO
+    
     _moneyString=@"0.01";//DEMO
     
 
@@ -293,7 +294,7 @@
     
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:netDic paramarsSite:@"/api/v2/renew/getPayRequest" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo_2 paramars:netDic paramarsSite:@"/api/v2/renew/getPayRequest" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
