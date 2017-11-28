@@ -40,6 +40,7 @@
             UILabel *lable4 = [[UILabel alloc]initWithFrame:CGRectMake(0+SCREEN_Width/2*K, 10*HEIGHT_SIZE+H0*i,SCREEN_Width/2,lableH)];
             lable4.textColor = MainColor;
             lable4.textAlignment=NSTextAlignmentCenter;
+            lable4.adjustsFontSizeToFitWidth=YES;
             int T=2*i+K;
             lable4.text=nameArray[T];
             lable4.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -53,7 +54,7 @@
             }else{
                   lable5.text=@"";
             }
-         
+            lable5.adjustsFontSizeToFitWidth=YES;
             lable5.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_AllView addSubview:lable5];
             

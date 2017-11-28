@@ -45,6 +45,7 @@
     _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0, 200*NOW_SIZE, titleLabelH1)];
     _titleLabel.textColor = MainColor;
     _titleLabel.text=_titleString;
+    _titleLabel.adjustsFontSizeToFitWidth=YES;
     _titleLabel.textAlignment=NSTextAlignmentLeft;
     _titleLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_titleView addSubview:_titleLabel];
@@ -154,6 +155,7 @@
         UILabel *lable0 = [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0, w2, lableH1)];
         lable0.textColor = COLOR(153, 153, 153, 1);
         lable0.text=vallNameArray[i];
+          lable0.adjustsFontSizeToFitWidth=YES;
         lable0.textAlignment=NSTextAlignmentCenter;
         lable0.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_scrollView addSubview:lable0];
@@ -165,7 +167,7 @@
         }else{
             lable1.text=@"";
         }
-     
+        lable1.adjustsFontSizeToFitWidth=YES;
         lable1.textAlignment=NSTextAlignmentCenter;
         lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_scrollView addSubview:lable1];
@@ -191,6 +193,7 @@
             }else{
                 lable3.text=@"";
             }
+              lable3.adjustsFontSizeToFitWidth=YES;
             lable3.textAlignment=NSTextAlignmentCenter;
             lable3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:lable3];

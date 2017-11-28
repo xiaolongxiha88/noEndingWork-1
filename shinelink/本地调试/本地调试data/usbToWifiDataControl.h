@@ -27,4 +27,8 @@ typedef void(^receiveDataBlock)(NSDictionary*);
 
 -(void)removeTheTcp;
 
+@property(nonatomic,assign)NSInteger cmdType;            //1、
+
+
+
 @end

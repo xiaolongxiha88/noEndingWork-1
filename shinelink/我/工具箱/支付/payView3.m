@@ -45,7 +45,7 @@
         NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
       resultString=[NSString stringWithFormat:@"%@",[firstDic objectForKey:@"resultStatus"]];
         if ([resultString intValue]==9000) {
-            goString=@"支付结果:成功！";
+            goString=@"支付成功，等待月底公司统一续费。";
         }else{
             goString=[NSString stringWithFormat:@"%@(%d)",@"支付失败",[resultString intValue]];
         }

@@ -14,6 +14,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *SnArray;
 @property(nonatomic,strong)NSMutableArray *dateArray;
+@property(nonatomic,strong)NSMutableArray *payEnableArray;
 @property (nonatomic, strong) NSMutableArray *choiceArray;
 
 @end
@@ -81,10 +82,22 @@
             if ([firstDic[@"result"] intValue]==1) {
                 _SnArray=[NSMutableArray new];
                   _dateArray=[NSMutableArray new];
+                _payEnableArray=[NSMutableArray new];
                 NSArray *allArray=firstDic[@"obj"];
                 for (int i=0; i<allArray.count; i++) {
+                    NSDictionary *secDic=allArray[i];
                     [_SnArray addObject:allArray[i][@"datalogSn"]];
-                      [_dateArray addObject:allArray[i][@"productDate"]];
+                    if ([secDic.allKeys containsObject:@"productDate"]) {
+                        [_dateArray addObject:allArray[i][@"productDate"]];
+                    }else{
+                        [_dateArray addObject:@""];
+                    }
+                    if ([secDic.allKeys containsObject:@"simRenewFee"]) {
+                           [_payEnableArray addObject:allArray[i][@"simRenewFee"]];
+                    }else{
+                          [_payEnableArray addObject:@"1"];
+                    }
+                    
                 }
                 _choiceArray=[NSMutableArray new];
                 for (int i=0; i<_SnArray.count; i++) {
@@ -151,25 +164,27 @@
         [customCell.selectBtn setImage:[UIImage imageNamed:@"Selected_norPay.png"] forState:UIControlStateNormal];
     }
     __weak singleSelectTableViewCell *weakCell = customCell;
+    
+        NSString*isEnablePay=[NSString stringWithFormat:@"%@",_payEnableArray[indexPath.row]];
+
     [customCell setQhxSelectBlock:^(BOOL choice,NSInteger btnTag){
-        
-        [_choiceArray replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:choice]];
-        
-        if (choice) {
-            [weakCell.selectBtn setImage:[UIImage imageNamed:@"Selected_clickPay.png"] forState:UIControlStateNormal];
+    
+        if ([isEnablePay isEqualToString:@"1"]) {
+            [_choiceArray replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:choice]];
             
-          //  [self.tableView reloadData];
+            if (choice) {
+                [weakCell.selectBtn setImage:[UIImage imageNamed:@"Selected_clickPay.png"] forState:UIControlStateNormal];
+            }else{
+                [weakCell.selectBtn setImage:[UIImage imageNamed:@"Selected_norPay.png"] forState:UIControlStateNormal];
+            }
         }else{
-            
-            [weakCell.selectBtn setImage:[UIImage imageNamed:@"Selected_norPay.png"] forState:UIControlStateNormal];
-            
-            //    [self.tableView reloadData];
-            
+            [self showAlertViewWithTitle:@"该采集器暂未获得续费权限，详情请咨询客服人员。" message:nil cancelButtonTitle:root_OK];
         }
+   
+        
     }];
     
     cell = customCell;
-    
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return  cell;

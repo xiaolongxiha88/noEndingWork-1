@@ -20,6 +20,8 @@ typedef void(^receiveDataTwoBlock)(NSData*);
 
 -(void)goToOneTcp:(int)type cmdNum:(int)cmdNum cmdType:(NSString*)cmdType regAdd:(NSString*)regAdd Length:(NSString*)Length;
 
+-(void)goToTcpNoDelay:(int)type cmdNum:(int)cmdNum cmdType:(NSString*)cmdType regAdd:(NSString*)regAdd Length:(NSString*)Length;
+
 -(void)disConnect;
 
 @end

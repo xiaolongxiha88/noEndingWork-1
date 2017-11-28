@@ -63,6 +63,19 @@ static float TCP_TIME=1;
 }
 
 
+-(void)goToTcpNoDelay:(int)type cmdNum:(int)cmdNum cmdType:(NSString*)cmdType regAdd:(NSString*)regAdd Length:(NSString*)Length{
+    
+    
+    _AllDataDic=[NSMutableDictionary new];
+    _cmdCount=0;
+    _cmdType=type;
+    _cmdArray=@[cmdType,regAdd,Length];
+    _isReceiveAll=NO;
+
+    [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+}
+
+
 -(void)goToTcpType:(int)type{
 
     _cmdType=type;

@@ -145,7 +145,7 @@
                 NSArray *allArray=firstDic[@"obj"];
                 for (int i=0; i<allArray.count; i++) {
                     NSDictionary *dic=allArray[i];
-                    NSString *result=[self changeResult:[dic objectForKey:@"app_trade_status"]];
+                    NSString *result=[self changeResult:[dic objectForKey:@"status"]];
                     [ _resultArray addObject:result];
                         [ _moneyArray addObject:[dic objectForKey:@"money"]];
                       [ _timeArray addObject:[dic objectForKey:@"gmt_create"]];
@@ -171,26 +171,16 @@
 -(NSString*)changeResult:(NSString*)result{
     NSString *ResultString;
     int resultInt=[result intValue];
-    if (resultInt==9000) {
-        ResultString=@"成功";
-    }else if (resultInt==8000 || resultInt==6004) {
-        ResultString=@"正在处理,支付结果未知,请联系客服。";
-    }else if (resultInt==4000) {
+    if (resultInt==1) {
+        ResultString=@"续费成功";
+    }else if (resultInt==2) {
+        ResultString=@"待支付";
+    }else if (resultInt==3 || resultInt==4 ||resultInt==6) {
+        ResultString=@"支付成功，续费中";
+    }else if (resultInt==5) {
         ResultString=@"支付失败";
-    }else if (resultInt==5000) {
-        ResultString=@"重复请求";
-    }else if (resultInt==6001) {
-        ResultString=@"用户中途取消";
-    }else if (resultInt==6002) {
-        ResultString=@"网络连接出错";
-    }else if (resultInt==0) {
-        ResultString=@"成功";
-    }else if (resultInt==-1) {
-        ResultString=@"错误";
-    }else if (resultInt==-2) {
-        ResultString=@"用户取消";
     }else{
-          ResultString=@"其他支付错误";
+        ResultString=result;
     }
      
     return ResultString;

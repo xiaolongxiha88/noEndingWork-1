@@ -41,6 +41,13 @@ static NSString *cellTwo = @"cellTwo";
 @property(nonatomic,strong)NSArray *tableLableValueArray;
 @property(nonatomic,assign) BOOL isWiFi;
 
+@property(nonatomic,assign) BOOL isAutoReflash;
+@property(nonatomic,assign) BOOL isfinishReflash;
+
+@property(nonatomic,assign) NSInteger reflashTime;
+@property(nonatomic,strong)NSTimer *timer;
+
+@property(nonatomic,strong)UIBarButtonItem *rightItem;
 @end
 
 @implementation useToWifiView1{
@@ -53,6 +60,8 @@ static NSString *cellTwo = @"cellTwo";
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice) name: @"recieveFailedTcpData" object:nil];
 //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(removeTheTcp) name: @"StopConfigerUI" object:nil];
     
+    _isAutoReflash=NO;
+    _rightItem.title=@"自动刷新";
 }
 
 
@@ -61,8 +70,8 @@ static NSString *cellTwo = @"cellTwo";
      [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:MainColor];
-    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(tcpToGetData)];
-    self.navigationItem.rightBarButtonItem=rightItem;
+    _rightItem=[[UIBarButtonItem alloc]initWithTitle:@"自动刷新" style:UIBarButtonItemStylePlain target:self action:@selector(tcpToGetData)];
+    self.navigationItem.rightBarButtonItem=_rightItem;
     
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
@@ -83,7 +92,7 @@ static NSString *cellTwo = @"cellTwo";
     
     [self checkIsWifi];
     if (_isWiFi) {
-      //  [self tcpToGetData];
+   
    
     }else{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未连接WiFi模块" message:@"请跳转连接WiFi" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];
@@ -120,21 +129,43 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)tcpToGetData{
-        [self checkIsWifi];
+    _isAutoReflash = !_isAutoReflash;
+      _reflashTime=0;
+    if (_isAutoReflash) {
+         _rightItem.title=@"停止刷新";
     
-    if (_isWiFi) {
-        self.navigationItem.rightBarButtonItem.enabled=NO;
-        [self showProgressView];
- [_usbControl getDataAll:1];
+        [self checkIsWifi];
         
+        if (_isWiFi) {
+            self.navigationItem.rightBarButtonItem.enabled=NO;
+            [self showProgressView];
+            
+            [_usbControl getDataAll:1];
+            
+        }else{
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未连接WiFi模块" message:@"请跳转连接WiFi" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];
+            alertView.tag = 1001;
+            [alertView show];
+        }
     }else{
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未连接WiFi模块" message:@"请跳转连接WiFi" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];
-        alertView.tag = 1001;
-        [alertView show];
+         _rightItem.title=@"自动刷新";
+        if (_timer) {
+            [_timer invalidate];
+        }
+                return;
     }
    
+}
+
+-(void)tcpToGetDataTwo{
+    _reflashTime++;
+    if (_isfinishReflash) {
+        _isfinishReflash=NO;    
+          [_usbControl getDataAll:2];
+    }
     
 }
+
 
 -(void)removeTheWaitingView{
     [self hideProgressView];
@@ -142,8 +173,14 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)getData:(NSNotification*) notification{
+      _isfinishReflash=YES;
+    if (_reflashTime==0) {
+        _timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(tcpToGetDataTwo) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+           [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:2];
+    }
     
-   [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:2];
+
     
  _allDic=[NSDictionary dictionaryWithDictionary:[notification object]];
         _firstViewDataArray=[NSMutableArray arrayWithArray:[_allDic objectForKey:@"oneView"]];
@@ -509,11 +546,14 @@ static NSString *cellTwo = @"cellTwo";
 -(void)receiveFailedNotice{
     [self hideProgressView];
       self.navigationItem.rightBarButtonItem.enabled=YES;
-
+ _isfinishReflash=YES;
     [self removeTheTcp];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi模块通信失败,请检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
-    alertView.tag = 1002;
-    [alertView show];
+    if (_reflashTime==0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi模块通信失败,请检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
+        alertView.tag = 1002;
+        [alertView show];
+    }
+
 }
 
 

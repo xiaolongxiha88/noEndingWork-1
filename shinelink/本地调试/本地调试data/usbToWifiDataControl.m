@@ -26,23 +26,50 @@
 }
 
 
--(void)getDataAll:(int)type{
+-(void)getDataAll:(int)type{        //type=1 获取全部   =2 获取前125个
     if (!_ControlOne) {
         _ControlOne=[[wifiToPvOne alloc]init];
          _receiveDic=[NSMutableDictionary new];
           [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData:) name: @"TcpReceiveData" object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveSecondData:) name: @"TcpReceiveDataTwo" object:nil];
+        
     }
     
     
+    if (type==1) {
+          [_ControlOne goToTcpType:type];
+    }else if (type==2){
+           [_ControlOne goToTcpNoDelay:2 cmdNum:1 cmdType:@"4" regAdd:@"0" Length:@"125"];
+    }
     
-    
-    [_ControlOne goToTcpType:type];
+  
     
   
 }
 
+-(void)receiveSecondData:(NSNotification*)notification{
+    NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
+   
+    _data04_1=[NSData new];
+    _data04_1=[firstDic objectForKey:@"one"];
+    
+    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *oldDic=[ud objectForKey:@"maxSecondData"];
+    if ([oldDic.allKeys containsObject:@"one"]) {
+         _data03=[NSData new];
+          _data03=[firstDic objectForKey:@"one"];
+    }
+    
+    if ([oldDic.allKeys containsObject:@"three"]) {
+        _data04_2=[NSData new];
+        _data04_2=[firstDic objectForKey:@"three"];
+    }
+    
+      [self getFirstViewValue];
+}
 
--(void)receiveFirstData:(NSNotification*) notification{
+
+-(void)receiveFirstData:(NSNotification*)notification{
     
     NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
 
@@ -55,6 +82,8 @@
     _data03=[firstDic objectForKey:@"one"];
     _data04_1=[firstDic objectForKey:@"two"];
      _data04_2=[firstDic objectForKey:@"three"];
+    
+     [[NSUserDefaults standardUserDefaults] setObject:firstDic forKey:@"maxSecondData"];
     
     [self getFirstViewValue];
 }
@@ -191,8 +220,8 @@
 
 
 -(void)getThreeViewValue{
-    int OneCMDregisterNum=125;
     
+    int OneCMDregisterNum=125;
 //        NSArray *nameArray=@[@"序列号",@"厂商信息",@"PV输入功率",@"额定功率",@"固件(外部)版本",@"固件(内部)版本",@"Model号",@"电网频率",@"逆变器温度",@"Boost温度",@"IPM温度",@"IPF",@"P Bus电压",@"N Bus电压",@"并网倒计时",@"实际输出功率百分比",@"PID故障码",@"PID状态"];
     
      NSString *SnString=[self changeToASCII:_data03 beginRegister:23 length:5];     //序列号
@@ -218,7 +247,7 @@
    float boostTem=[self changeOneRegister:_data04_1 registerNum:95]/10;
      NSString *boostTem1=[NSString stringWithFormat:@"%.1f℃",boostTem];          //Boost温度
     
-     float IPMtTem=[self changeOneRegister:_data04_1 registerNum:94]/10;
+     float IPMtTem=[self changeOneRegister:_data04_1 registerNum:96]/10;
          NSString *IPMtTem1=[NSString stringWithFormat:@"%.1f℃",IPMtTem];             //IPM温度
     float IPF=[self changeOneRegister:_data04_1 registerNum:100];
     NSString *IPF1=[NSString stringWithFormat:@"%.4f",(10000-IPF)/10000];                          //IPF
@@ -236,10 +265,8 @@
     
 //    float deratingMode=[self changeOneRegister:_data04_1 registerNum:104];
 //    NSString *deratingMode1=[NSString stringWithFormat:@"%.f",deratingMode];                      //降额模式
-    
 //    float unMatch=[self changeOneRegister:_data04_2 registerNum:174-OneCMDregisterNum];
 //    NSString *unMatch1=[NSString stringWithFormat:@"%.f",unMatch];                     //不匹配的串
-//
 //    float disconnectString=[self changeOneRegister:_data04_2 registerNum:176-OneCMDregisterNum];
 //    NSString *disconnectString1=[NSString stringWithFormat:@"%.f",disconnectString];                             //断开的串
 //    float unbanlanceString=[self changeOneRegister:_data04_2 registerNum:175-OneCMDregisterNum];

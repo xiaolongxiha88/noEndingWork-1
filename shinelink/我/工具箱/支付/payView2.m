@@ -155,10 +155,24 @@
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             if ([firstDic[@"result"] intValue]==1) {
                 NSArray *allArray=firstDic[@"obj"];
+              
                 for (int i=0; i<allArray.count; i++) {
-                    [_SnArray addObject:allArray[i][@"datalogSn"]];
-                    [_dateArray addObject:allArray[i][@"productDate"]];
-                      [_choiceArray addObject:[NSNumber numberWithBool:NO]];
+                        NSDictionary *secDic=allArray[i];
+                    if ([secDic.allKeys containsObject:@"simRenewFee"]) {
+                        NSString *isPay=[NSString stringWithFormat:@"%@",allArray[i][@"simRenewFee"]];
+                        if ([isPay isEqualToString:@"1"]) {
+                            [_SnArray addObject:allArray[i][@"datalogSn"]];
+                            [_dateArray addObject:allArray[i][@"productDate"]];
+                            [_choiceArray addObject:[NSNumber numberWithBool:NO]];
+                        }else{
+                               [self showAlertViewWithTitle:@"该采集器暂未获得续费权限，详情请咨询客服人员。" message:nil cancelButtonTitle:root_OK];
+                        }
+                    }else{
+                        [_SnArray addObject:allArray[i][@"datalogSn"]];
+                        [_dateArray addObject:allArray[i][@"productDate"]];
+                        [_choiceArray addObject:[NSNumber numberWithBool:NO]];
+                    }
+                   
                 }
                 [_tableView reloadData];
             }else{
