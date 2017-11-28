@@ -316,10 +316,23 @@
         }
         [valueArray addObject:lable.text];
     }
-    int value28=(([valueArray[0] intValue] & 0xff)<<12)+(([valueArray[1] intValue] & 0xff)<<8)+(([valueArray[2] intValue] & 0xff)<<4)+([valueArray[3] intValue] & 0xff);
-     int value29=(([valueArray[4] intValue] & 0xffff)<<12)+(([valueArray[5] intValue] & 0xffff)<<8)+(([valueArray[6] intValue] & 0xffff)<<4)+([valueArray[7] intValue] & 0xffff);
     
-     _setValueArray=[NSMutableArray arrayWithArray:@[[NSString stringWithFormat:@"%d",value28],[NSString stringWithFormat:@"%d",value29]]];
+    unsigned long v0 = strtoul([valueArray[0] UTF8String],0,16);
+    unsigned long v1 = strtoul([valueArray[1] UTF8String],0,16);
+    unsigned long v2 = strtoul([valueArray[2] UTF8String],0,16);
+    unsigned long v3 = strtoul([valueArray[3] UTF8String],0,16);
+    unsigned long value28=((v0 & 0xff)<<12)+((v1 & 0xff)<<8)+((v2 & 0xff)<<4)+(v3 & 0xff);
+    
+    unsigned long v4 = strtoul([valueArray[4] UTF8String],0,16);
+    unsigned long v5 = strtoul([valueArray[5] UTF8String],0,16);
+     unsigned long v6 = strtoul([valueArray[6] UTF8String],0,16);
+     unsigned long v7 = strtoul([valueArray[7] UTF8String],0,16);
+     unsigned long value29=((v4 & 0xff)<<12)+((v5 & 0xff)<<8)+((v6 & 0xff)<<4)+(v7 & 0xff);
+
+    
+    
+     _setValueArray=[NSMutableArray arrayWithArray:@[[NSString stringWithFormat:@"%ld",value28],[NSString stringWithFormat:@"%ld",value29]]];
+    
 }
 
 -(void)readModelDate{
@@ -328,14 +341,14 @@
     int registerNum=0;
     int registerValue=(dataArray[2*registerNum]<<24)+(dataArray[2*registerNum+1]<<16)+(dataArray[2*registerNum+2]<<8)+dataArray[2*registerNum+3];
     
-    NSString* T1=[NSString stringWithFormat:@"%x",(registerValue & 0xf0000000)>>28];
-    NSString* T2=[NSString stringWithFormat:@"%x",(registerValue & 0xf000000)>>24];
-    NSString* T3=[NSString stringWithFormat:@"%x",(registerValue & 0xf00000)>>20];
-    NSString* T4=[NSString stringWithFormat:@"%x",(registerValue & 0xf0000)>>16];
-    NSString* T5=[NSString stringWithFormat:@"%x",(registerValue & 0x00f000)>>12];
-    NSString* T6=[NSString stringWithFormat:@"%x",(registerValue & 0x000f00)>>8];
-    NSString* T7=[NSString stringWithFormat:@"%x",(registerValue & 0x0000f0)>>4];
-    NSString* T8=[NSString stringWithFormat:@"%x",(registerValue & 0x00000f)];
+    NSString* T1=[[NSString stringWithFormat:@"%x",(registerValue & 0xf0000000)>>28] uppercaseString];
+    NSString* T2=[[NSString stringWithFormat:@"%x",(registerValue & 0xf000000)>>24] uppercaseString];
+    NSString* T3=[[NSString stringWithFormat:@"%x",(registerValue & 0xf00000)>>20] uppercaseString];
+    NSString* T4=[[NSString stringWithFormat:@"%x",(registerValue & 0xf0000)>>16] uppercaseString];
+    NSString* T5=[[NSString stringWithFormat:@"%x",(registerValue & 0x00f000)>>12] uppercaseString];
+    NSString* T6=[[NSString stringWithFormat:@"%x",(registerValue & 0x000f00)>>8] uppercaseString];
+    NSString* T7=[[NSString stringWithFormat:@"%x",(registerValue & 0x0000f0)>>4] uppercaseString];
+    NSString* T8=[[NSString stringWithFormat:@"%x",(registerValue & 0x00000f)] uppercaseString];
 
     ModelString=[NSString stringWithFormat:@"A%@B%@D%@T%@P%@U%@M%@S%@",T1,T2,T3,T4,T5,T6,T7,T8];
       _readValueArray=@[ModelString];
@@ -482,7 +495,7 @@
 
 -(void)receiveFirstData2:(NSNotification*) notification{
     if (_cmdTcpType==1) {
-         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1.5];
+         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1];
     }else{
         if (_cmdTcpTimes==0) {
             float times=1.2;
