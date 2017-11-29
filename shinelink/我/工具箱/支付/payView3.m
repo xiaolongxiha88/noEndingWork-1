@@ -45,7 +45,7 @@
         NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
       resultString=[NSString stringWithFormat:@"%@",[firstDic objectForKey:@"resultStatus"]];
         if ([resultString intValue]==9000) {
-            goString=@"支付成功，等待月底公司统一续费。";
+            goString=@"支付成功，将于月底统一续费。";
         }else{
             goString=[NSString stringWithFormat:@"%@(%d)",@"支付失败",[resultString intValue]];
         }
@@ -53,8 +53,17 @@
     }
     if (_payType==1) {
         NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
-       goString=[NSString stringWithFormat:@"%@",[firstDic objectForKey:@"result"]];
+      
         resultString=[NSString stringWithFormat:@"%@",[firstDic objectForKey:@"code"]];
+        if ([resultString isEqualToString:@"0"]) {
+                 goString=@"支付成功，将于月底统一续费。";
+        }else if ([resultString isEqualToString:@"-1"]){
+             goString=@"支付错误";
+        }else if ([resultString isEqualToString:@"-2"]){
+            goString=@"取消支付";
+        }else{
+              goString=[NSString stringWithFormat:@"支付失败(%@)",[firstDic objectForKey:@"code"]];
+        }
     }
   
     [self getNetResult:resultString noticeString:goString];

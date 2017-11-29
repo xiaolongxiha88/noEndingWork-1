@@ -29,8 +29,8 @@
     float W1=5*NOW_SIZE; float W0=SCREEN_Width-2*W1;
     float H=150*HEIGHT_SIZE;
     
-    NSArray *valueArray=@[_faultString,_faultStateString,_warnString];
-    NSArray *nameArray=@[[NSString stringWithFormat:@"故障码:%@",_faultCode],[NSString stringWithFormat:@"具体故障:%@",_faultStatueCode],[NSString stringWithFormat:@"警告码:%@",_warnCode]];
+    NSArray *valueArray=@[_faultString,_warnString];
+    NSArray *nameArray=@[[NSString stringWithFormat:@"故障码:%@",_faultCode],[NSString stringWithFormat:@"警告码:%@",_faultStatueCode]];
     
     for (int i=0; i<valueArray.count; i++) {
         UIView *_secondView=[[UIView alloc]initWithFrame:CGRectMake(W1, 5*HEIGHT_SIZE+H*i, W0, H)];
@@ -69,75 +69,64 @@
 -(void)getData{
     int faultInt=[_faultCode intValue];
      int warnInt=[_warnCode intValue];
-    NSArray *nameArray=@[@"Auto Test Failed",@"No AC Connection",@"PV Isolation Low",@"Residual I High",@"Output High DCI",@"PV Voltage High",@"AC V Outrange",@"AC F Outrange",@"Module Hot"];
-    if (faultInt>0&&faultInt<24) {
-        _faultString=[NSString stringWithFormat:@"Error:%d",faultInt+99];
-    }else if (faultInt>23&&faultInt<33) {
-        _faultString=nameArray[faultInt-24];
+ 
+    if (faultInt==101) {
+          _faultString=@"1.STM32 doesn't receive data from control board over 10s  2.28075 OR 28067 doesn't receive data from COM board over 5s  3.SPI Connected 28075 and 28067 if fail over 1s";
+    }else if (faultInt==102) {
+        _faultString=@"冗余采样异常保护，PV采样，正负bus采样，三相AC电压采样，GFCI，ISO采样在 主DSP28075和副DSP28067之间相差太大时报错。";
+    }else if (faultInt==108) {
+         _faultString=@"主SPS供电异常";
+    }else if (faultInt==112) {
+        _faultString=@"AFCI弧判断错误 ";
+    }else if (faultInt==113) {
+        _faultString=@"IGBT驱动错误（驱动电压异常、IGBT短路）";
+    }else if (faultInt==114) {
+        _faultString=@"AFCI模块检测失败";
+    }else if (faultInt==117) {
+        _faultString=@"AC侧继电器异常";
+    }else if (faultInt==119) {
+        _faultString=@"GFCI模块损坏 ";
+    }else if (faultInt==121) {
+        _faultString=@"CPLD芯片检测异常 ";
+    }else if (faultInt==122) {
+        _faultString=@"BUS过压或者欠压";
+    }else if (faultInt==124) {
+        _faultString=@"Grid disconnect or connect unormal";
+    }else if (faultInt==125) {
+        _faultString=@"PV input insulation impedance too low";
+    }else if (faultInt==126) {
+        _faultString=@"Leakage current too high.(protect enable when the GFCI module is normal)";
+    }else if (faultInt==127) {
+        _faultString=@"Output DC current too high ";
+    }else if (faultInt==128) {
+        _faultString=@"PV voltage over 1000V";
+    }else if (faultInt==129) {
+        _faultString=@"Grid voltage is outrange ";
+    }else if (faultInt==130) {
+        _faultString=@"Grid Freq. is outrange";
+    }else{
+         _faultString=[NSString stringWithFormat:@"Error:%d",faultInt];
     }
     
-    if (warnInt==0x0001) {
-        _warnString=@"Fan warning";
-    }else if (warnInt==0x0002) {
-        _warnString=@"String communication abnormal";
-    }else if (warnInt==0x0004) {
-        _warnString=@"StrPID config Warning";
-    }else if (warnInt==0x0010) {
-        _warnString=@"DSP and COM firmware unmatch";
-    }else if (warnInt==0x0040) {
-        _warnString=@"SPD abnormal";
-    }else if (warnInt==0x0080) {
-        _warnString=@"GND and N connect abnormal";
-    }else if (warnInt==0x0100) {
-        _warnString=@"PV1 or PV2 circuit short";
-    }else if (warnInt==0x0200) {
-        _warnString=@"PV1 or PV2 boost driver broken";
-    }
     
-
-    long faultStatueLong=[_faultStatueCode integerValue];
-    if (faultStatueLong==0x00000002) {
-        _faultStateString=@"Communication error";
-    }else if (faultStatueLong==0x00000008) {
-        _faultStateString=@"StrReverse or StrShort fault";
-    }else if (faultStatueLong==0x00000010) {
-        _faultStateString=@"Model Init fault";
-    }else if (faultStatueLong==0x00000020) {
-        _faultStateString=@"Grid Volt Sample diffirent";
-    }else if (faultStatueLong==0x00000040) {
-        _faultStateString=@"ISO Sample diffirent";
-    }else if (faultStatueLong==0x00000080) {
-        _faultStateString=@"GFCI Sample diffirent";
-    }else if (faultStatueLong==0x00001000) {
-        _faultStateString=@"AFCI Fault";
-    }else if (faultStatueLong==0x00004000) {
-        _faultStateString=@"AFCI Module fault";
-    }else if (faultStatueLong==0x00020000) {
-        _faultStateString=@"Relay check fault";
-    }else if (faultStatueLong==0x00200000) {
-        _faultStateString=@"Communication error";
-    }else if (faultStatueLong==0x00400000) {
-        _faultStateString=@"Bus Voltage error";
-    }else if (faultStatueLong==0x00800000) {
-        _faultStateString=@"AutoTest fail";
-    }else if (faultStatueLong==0x01000000) {
-        _faultStateString=@"No Utility";
-    }else if (faultStatueLong==0x02000000) {
-        _faultStateString=@"PV Isolation Low";
-    }else if (faultStatueLong==0x04000000) {
-        _faultStateString=@"Residual I High";
-    }else if (faultStatueLong==0x08000000) {
-        _faultStateString=@"Output High DCI";
-    }else if (faultStatueLong==0x10000000) {
-        _faultStateString=@"PV Voltage high";
-    }else if (faultStatueLong==0x20000000) {
-        _faultStateString=@"AC V Outrange";
-    }else if (faultStatueLong==0x40000000) {
-        _faultStateString=@"AC F Outrange";
-    }else if (faultStatueLong==0x80000000) {
-        _faultStateString=@"TempratureHigh";
+    if (warnInt==100) {
+        _warnString=@"fan fail";
+    }else if (warnInt==106) {
+        _warnString=@"防雷器发生故障";
+    }else if (warnInt==107) {
+        _warnString=@"NE检测异常，N线、地线之间压差过大";
+    }else if (warnInt==108) {
+        _warnString=@"PV1至PV6 短路异常 ";
+    }else if (warnInt==109) {
+        _warnString=@"PV1至PV6 boost驱动异常";
+    }else if (warnInt==110) {
+        _warnString=@"12路组串中有组串出现反接或短路 ";
+    }else if (warnInt==111) {
+        _warnString=@"U盘过流保护 ";
+    }else{
+        _warnString=[NSString stringWithFormat:@"Error:%d",warnInt];
     }
-    
+      
     [self initUI];
     
 }

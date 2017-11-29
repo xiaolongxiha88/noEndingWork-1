@@ -422,7 +422,9 @@
 }
 
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
-   
+    [_fieldOne resignFirstResponder];
+    [_fieldTwo resignFirstResponder];
+ 
 }
 
 

@@ -57,12 +57,12 @@
     NSMutableDictionary *oldDic=[ud objectForKey:@"maxSecondData"];
     if ([oldDic.allKeys containsObject:@"one"]) {
          _data03=[NSData new];
-          _data03=[firstDic objectForKey:@"one"];
+          _data03=[oldDic objectForKey:@"one"];
     }
     
     if ([oldDic.allKeys containsObject:@"three"]) {
         _data04_2=[NSData new];
-        _data04_2=[firstDic objectForKey:@"three"];
+        _data04_2=[oldDic objectForKey:@"three"];
     }
     
       [self getFirstViewValue];
@@ -101,18 +101,18 @@
     
      [_receiveDic setObject:titleString forKey:@"titleView"];
     
-        long faultState=(long)[self changeTwoRegister:_data04_1 registerNum:106];
+        long faultState=(long)[self changeOneRegister:_data04_1 registerNum:112];
       [_receiveDic setObject:[NSString stringWithFormat:@"%ld",faultState] forKey:@"faultStateView"];
     
     float EacToday=[self changeTwoRegister:_data04_1 registerNum:53];
     float EacTotal=[self changeTwoRegister:_data04_1 registerNum:55];
     float EacputPower=[self changeTwoRegister:_data04_1 registerNum:35];
      float NormalPowerValue=[self changeTwoRegister:_data03 registerNum:6];
-      float faultCode=[self changeOneRegister:_data04_1 registerNum:105];
-      float warnCode=[self changeTwoRegister:_data04_1 registerNum:110];
+      float faultCode=[self changeOneRegister:_data04_1 registerNum:105];      //故障
+      float warnCode=[self changeTwoRegister:_data04_1 registerNum:112];       //警告
     
   //  EacToday=20011;warnCode=2777;
-    NSArray *oneViewArray=@[[NSString stringWithFormat:@"%.1fkWh",EacToday/10],[NSString stringWithFormat:@"%.1fkWh",EacTotal/10],[NSString stringWithFormat:@"%.1fW",EacputPower/10],[NSString stringWithFormat:@"%.1fW",NormalPowerValue/10],[NSString stringWithFormat:@"%.f",faultCode],[NSString stringWithFormat:@"%.f",warnCode]];
+    NSArray *oneViewArray=@[[NSString stringWithFormat:@"%.1fkWh",EacToday/10],[NSString stringWithFormat:@"%.1fkWh",EacTotal/10],[NSString stringWithFormat:@"%.1fW",EacputPower/10],[NSString stringWithFormat:@"%.1fW",NormalPowerValue/10],[NSString stringWithFormat:@"%.f",faultCode+99],[NSString stringWithFormat:@"%.f",warnCode+99]];
     
     [_receiveDic setObject:oneViewArray forKey:@"oneView"];
     
@@ -170,6 +170,7 @@
     
     ///////////////////////// 2-3
     NSMutableArray *AcVoltArray=[NSMutableArray new];
+      NSMutableArray *AcHzArray=[NSMutableArray new];
     NSMutableArray *AcCurrArray=[NSMutableArray new];
     NSMutableArray *AcPowerArray=[NSMutableArray new];
     
@@ -183,12 +184,16 @@
             float curr=[self changeOneRegister:_data04_1 registerNum:K+1];
            [AcCurrArray addObject:[NSString stringWithFormat:@"%.1f",curr/10]];
          
+         float acHZ=[self changeTwoRegister:_data04_1 registerNum:37]/100;
+               [AcHzArray addObject:[NSString stringWithFormat:@"%.f",acHZ]];          //电网频率
+         
+         
          float Pac=[self changeTwoRegister:_data04_1 registerNum:K+2];
                   [AcPowerArray addObject:[NSString stringWithFormat:@"%.1f",Pac/10]];
     }
     
 
-    NSArray *ViewArray3=@[AcVoltArray,AcCurrArray,AcPowerArray];
+    NSArray *ViewArray3=@[AcVoltArray,AcHzArray,AcCurrArray,AcPowerArray];
   
     
     ///////////////////////// 2-4
@@ -222,59 +227,40 @@
 -(void)getThreeViewValue{
     
     int OneCMDregisterNum=125;
-//        NSArray *nameArray=@[@"序列号",@"厂商信息",@"PV输入功率",@"额定功率",@"固件(外部)版本",@"固件(内部)版本",@"Model号",@"电网频率",@"逆变器温度",@"Boost温度",@"IPM温度",@"IPF",@"P Bus电压",@"N Bus电压",@"并网倒计时",@"实际输出功率百分比",@"PID故障码",@"PID状态"];
+       NSArray *nameArray=@[@"厂商信息",@"机器型号",@"序列号",@"Model号",@"固件(外部)版本",@"固件(内部)版本",@"并网倒计时",@"功率百分比",@"PF",@"内部环境温度",@"Boost温度",@"INV温度",@"P Bus电压",@"N Bus电压",@"PID故障信息",@"PID状态"];
     
-     NSString *SnString=[self changeToASCII:_data03 beginRegister:23 length:5];     //序列号
+    
     NSString *companyString=[self changeToASCII:_data03 beginRegister:34 length:8];     //厂商信息
+    NSString *PvTypy=@"";  //机器型号
     
+    NSString *SnString=[self changeToASCII:_data03 beginRegister:23 length:5];     //序列号
+       NSString *totalTime1=[self getModelString:_data03];          //Model号
     
-     float pvPower=[self changeTwoRegister:_data04_1 registerNum:1]/10;
-    NSString *pvPower1=[NSString stringWithFormat:@"%.1fW",pvPower];           //PV输入功率
-     float Epv=[self changeTwoRegister:_data03 registerNum:6]/10;
-        NSString *Epv1=[NSString stringWithFormat:@"%.1fW",Epv];                 //额定功率
-    
-      NSString *versionOutString=[self changeToASCII:_data03 beginRegister:9 length:6];          //固件(外部)版本
+    NSString *versionOutString=[self changeToASCII:_data03 beginRegister:9 length:6];          //固件(外部)版本
     NSString *versionInString=[self changeToASCII:_data03 beginRegister:82 length:6];              //固件(内部)版本
-    
-  
-    NSString *totalTime1=[self getModelString:_data03];          //Model号
-    
-    float acHZ=[self changeTwoRegister:_data04_1 registerNum:37]/100;
-    NSString *acHZ1=[NSString stringWithFormat:@"%.fHz",acHZ];                    //电网频率
-    
-       float pvTem=[self changeOneRegister:_data04_1 registerNum:93]/10;
-       NSString *pvTem1=[NSString stringWithFormat:@"%.1f℃",pvTem];                //逆变器温度
-   float boostTem=[self changeOneRegister:_data04_1 registerNum:95]/10;
-     NSString *boostTem1=[NSString stringWithFormat:@"%.1f℃",boostTem];          //Boost温度
-    
-     float IPMtTem=[self changeOneRegister:_data04_1 registerNum:96]/10;
-         NSString *IPMtTem1=[NSString stringWithFormat:@"%.1f℃",IPMtTem];             //IPM温度
-    float IPF=[self changeOneRegister:_data04_1 registerNum:100];
-    NSString *IPF1=[NSString stringWithFormat:@"%.4f",(10000-IPF)/10000];                          //IPF
-    
-      float p_bus=[self changeOneRegister:_data04_1 registerNum:98]/10;
-    NSString *p_bus1=[NSString stringWithFormat:@"%.1fV",p_bus];                    //P Bus电压
-      float n_bus=[self changeOneRegister:_data04_1 registerNum:99]/10;
-        NSString *n_bus1=[NSString stringWithFormat:@"%.1fV",n_bus];                  //N Bus电压
     
     float maxOutPower=[self changeTwoRegister:_data04_1 registerNum:114];
     NSString *maxOutPower1=[NSString stringWithFormat:@"%.fs",maxOutPower];             //并网倒计时
-    
     float reallyPercent=[self changeOneRegister:_data04_1 registerNum:101];
     NSString *reallyPercent1=[NSString stringWithFormat:@"%.fW",reallyPercent];                   //实际输出功率百分比
     
-//    float deratingMode=[self changeOneRegister:_data04_1 registerNum:104];
-//    NSString *deratingMode1=[NSString stringWithFormat:@"%.f",deratingMode];                      //降额模式
-//    float unMatch=[self changeOneRegister:_data04_2 registerNum:174-OneCMDregisterNum];
-//    NSString *unMatch1=[NSString stringWithFormat:@"%.f",unMatch];                     //不匹配的串
-//    float disconnectString=[self changeOneRegister:_data04_2 registerNum:176-OneCMDregisterNum];
-//    NSString *disconnectString1=[NSString stringWithFormat:@"%.f",disconnectString];                             //断开的串
-//    float unbanlanceString=[self changeOneRegister:_data04_2 registerNum:175-OneCMDregisterNum];
-//    NSString *unbanlanceString1=[NSString stringWithFormat:@"%.f",unbanlanceString];                        //电流不平衡的串
+    float IPF=[self changeOneRegister:_data04_1 registerNum:100];
+    NSString *IPF1=[NSString stringWithFormat:@"%.4f",(10000-IPF)/10000];                          //IPF
+    float pvTem=[self changeOneRegister:_data04_1 registerNum:93]/10;
+    NSString *pvTem1=[NSString stringWithFormat:@"%.1f℃",pvTem];                //内部环境温度
+    
+    float boostTem=[self changeOneRegister:_data04_1 registerNum:95]/10;
+    NSString *boostTem1=[NSString stringWithFormat:@"%.1f℃",boostTem];          //Boost温度
+    float IPMtTem=[self changeOneRegister:_data04_1 registerNum:94]/10;
+    NSString *IPMtTem1=[NSString stringWithFormat:@"%.1f℃",IPMtTem];             //INV温度
+    
+    float p_bus=[self changeOneRegister:_data04_1 registerNum:98]/10;
+    NSString *p_bus1=[NSString stringWithFormat:@"%.1fV",p_bus];                    //P Bus电压
+    float n_bus=[self changeOneRegister:_data04_1 registerNum:99]/10;
+    NSString *n_bus1=[NSString stringWithFormat:@"%.1fV",n_bus];                  //N Bus电压
     
     float pidFault=[self changeOneRegister:_data04_2 registerNum:177-OneCMDregisterNum];
     NSString *pidFault1=[NSString stringWithFormat:@"%.f",pidFault];                            //PID故障码
-    
     
     int pidStatus=(int)[self changeOneRegister:_data04_2 registerNum:141-OneCMDregisterNum]; //PID状态
     NSString *pidStatus1;
@@ -287,20 +273,25 @@
     }else{
         pidStatus1=[NSString stringWithFormat:@"%d",pidStatus];
     }
-    //=[NSString stringWithFormat:@"%.f",pidStatus];
     
+//     float pvPower=[self changeTwoRegister:_data04_1 registerNum:1]/10;
+//    NSString *pvPower1=[NSString stringWithFormat:@"%.1fW",pvPower];           //PV输入功率
+//     float Epv=[self changeTwoRegister:_data03 registerNum:6]/10;
+//        NSString *Epv1=[NSString stringWithFormat:@"%.1fW",Epv];                 //额定功率
+
+//    float acHZ=[self changeTwoRegister:_data04_1 registerNum:37]/100;
+//    NSString *acHZ1=[NSString stringWithFormat:@"%.fHz",acHZ];                    //电网频率
     
-    
+
      NSArray *ViewArray5=@[
-                           SnString,companyString,
-                           pvPower1,Epv1,
+                           companyString,PvTypy,
+                           SnString,totalTime1,
                            versionOutString,versionInString,
-                           totalTime1,acHZ1,
-                           pvTem1,boostTem1,
-                           IPMtTem1, IPF1,
-                           p_bus1,n_bus1,
                            maxOutPower1,reallyPercent1,
-                           pidFault1,pidStatus1
+                           IPF1,pvTem1,
+                           boostTem1, IPMtTem1,
+                           p_bus1,n_bus1,
+                           pidFault1,pidStatus1,
                            ];
     
       [_receiveDic setObject:ViewArray5 forKey:@"twoView3"];

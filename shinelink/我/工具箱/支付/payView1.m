@@ -27,6 +27,7 @@
 @property(nonatomic,strong)NSMutableArray *SnArray;
 @property(nonatomic,strong)NSMutableArray *dateArray;
 @property (nonatomic, strong) NSMutableArray *choiceArray;
+@property(nonatomic,assign)NSInteger unitMoney;
 
 @end
 
@@ -41,8 +42,9 @@
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"交易历史" style:UIBarButtonItemStylePlain target:self action:@selector(checkResult)];
     self.navigationItem.rightBarButtonItem=rightItem;
     
+    _unitMoney=moneyValue;
     [self initUI];
-  
+    [self getNetMoney];
 }
 
 -(void)checkResult{
@@ -72,6 +74,31 @@
     }
     
 }
+
+
+-(void)getNetMoney{
+      [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{} paramarsSite:@"/api/v2/renew/getRenewConfig" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v2/renew/submitPayResult: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            if ([firstDic[@"result"] intValue]==1) {
+                
+                _unitMoney=[[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"flowPrice"]] integerValue];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+    }];
+}
+
 
 -(void)initUI{
     
@@ -241,7 +268,7 @@
      for (int i=0; i<_choiceArray.count; i++) {
          BOOL isSelect=[_choiceArray[i] boolValue];
          if (isSelect) {
-             allMoney=allMoney+moneyValue;
+             allMoney=allMoney+_unitMoney;
          }
     }
     

@@ -58,7 +58,8 @@ static NSString *cellTwo = @"cellTwo";
 -(void)viewWillAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getData:) name: @"recieveReceiveData" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice) name: @"recieveFailedTcpData" object:nil];
-//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(removeTheTcp) name: @"StopConfigerUI" object:nil];
+    
+ [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice2) name: @"TcpReceiveDataTwoFailed" object:nil];
     
     _isAutoReflash=NO;
     _rightItem.title=@"自动刷新";
@@ -377,8 +378,8 @@ static NSString *cellTwo = @"cellTwo";
         usbToWifiWarnView *testView=[[usbToWifiWarnView alloc]init];
         testView.faultCode=_firstViewDataArray[4];
         testView.warnCode=_firstViewDataArray[5];
-        NSString*faultStateString=[_allDic objectForKey:@"faultStateView"];
-        testView.faultStatueCode=faultStateString;
+//        NSString*faultStateString=[_allDic objectForKey:@"faultStateView"];
+//        testView.faultStatueCode=faultStateString;
         
         [self.navigationController pushViewController:testView animated:YES];
     }else{
@@ -417,7 +418,7 @@ static NSString *cellTwo = @"cellTwo";
         UILabel *lable6 = [[UILabel alloc]initWithFrame:CGRectMake(210*NOW_SIZE, 2*HEIGHT_SIZE,100*NOW_SIZE,lableH1)];
         lable6.textColor =MainColor;
         lable6.textAlignment=NSTextAlignmentRight;
-        lable6.text=@"单位:V/A/kWh";
+        lable6.text=@"单位:V/A/W/Hz";
         lable6.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         [_thirdView addSubview:lable6];
     }
@@ -485,7 +486,7 @@ static NSString *cellTwo = @"cellTwo";
             cell.lable2Array=[NSArray arrayWithArray:dataAllArray[1]];
             if (K==2) {
                 cell.lable3Array=[NSArray arrayWithArray:dataAllArray[2]];
-                //cell.lable4Array=[NSArray arrayWithArray:dataAllArray[3]];
+                cell.lable4Array=[NSArray arrayWithArray:dataAllArray[3]];
             }
         }
   
@@ -500,7 +501,7 @@ static NSString *cellTwo = @"cellTwo";
         return cell;
     }else{
         usbToWifiCell2 *cell = [tableView dequeueReusableCellWithIdentifier:cellTwo forIndexPath:indexPath];
-        cell.lable1Array=_thirdDataArray;
+        cell.lable1Array=[NSArray arrayWithArray:_thirdDataArray];
         if (!cell) {
             cell=[[usbToWifiCell2 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellTwo];
         }
@@ -542,17 +543,21 @@ static NSString *cellTwo = @"cellTwo";
 
 }
 
+-(void)receiveFailedNotice2{
+    _isfinishReflash=YES;
+    [self removeTheTcp];
+    
+}
 
 -(void)receiveFailedNotice{
     [self hideProgressView];
       self.navigationItem.rightBarButtonItem.enabled=YES;
  _isfinishReflash=YES;
     [self removeTheTcp];
-    if (_reflashTime==0) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi模块通信失败,请检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
         alertView.tag = 1002;
         [alertView show];
-    }
+
 
 }
 
@@ -590,7 +595,11 @@ static NSString *cellTwo = @"cellTwo";
     }
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"recieveReceiveData" object:nil];
       [[NSNotificationCenter defaultCenter] removeObserver:self name:@"recieveFailedTcpData" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwoFailed" object:nil];
    //   [[NSNotificationCenter defaultCenter] removeObserver:self name:@"StopConfigerUI" object:nil];
+    if (_timer) {
+        [_timer invalidate];
+    }
     
 }
 

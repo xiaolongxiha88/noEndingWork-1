@@ -25,7 +25,7 @@
 
 -(void)initUI{
     
-       NSArray *nameArray=@[@"序列号",@"厂商信息",@"PV输入功率",@"额定功率",@"固件(外部)版本",@"固件(内部)版本",@"Model号",@"电网频率",@"逆变器温度",@"Boost温度",@"IPM温度",@"IPF",@"P Bus电压",@"N Bus电压",@"并网倒计时",@"实际输出功率百分比",@"PID故障码",@"PID状态"];
+     NSArray *nameArray=@[@"厂商信息",@"机器型号",@"序列号",@"Model号",@"固件(外部)版本",@"固件(内部)版本",@"并网倒计时",@"功率百分比",@"PF",@"内部环境温度",@"Boost温度",@"INV温度",@"P Bus电压",@"N Bus电压",@"PID故障信息",@"PID状态"];
     
     float H0=50*HEIGHT_SIZE;
     float H=H0*nameArray.count+30*HEIGHT_SIZE;
@@ -50,7 +50,13 @@
             lable5.textColor =COLOR(102, 102, 102, 1);
             lable5.textAlignment=NSTextAlignmentCenter;
             if (_lable1Array.count>0) {
-                  lable5.text=_lable1Array[T];
+                NSString *TEXT=[NSString stringWithFormat:@"%@",_lable1Array[T]];
+                if ([TEXT isEqualToString:@""]) {
+                     lable5.text=@"/";
+                }else{
+                      lable5.text=TEXT;
+                }
+                
             }else{
                   lable5.text=@"";
             }

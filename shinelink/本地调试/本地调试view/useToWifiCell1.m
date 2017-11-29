@@ -82,16 +82,16 @@
 
 
 -(void)initUITwo{
-    float lableH1=20*HEIGHT_SIZE,lableH2=30*HEIGHT_SIZE,lableH3=50*HEIGHT_SIZE;
+    float lableH1=20*HEIGHT_SIZE,lableH2=30*HEIGHT_SIZE;
         float viewW1=34*HEIGHT_SIZE;
     float H;NSArray* nameArray;NSArray* vallNameArray;
     
     if (_cellTypy==2) {
-         nameArray=@[@"电压",@"电流",@"功率"];
-        H=lableH1+lableH2*3;
+         nameArray=@[@"电压",@"频率",@"电流",@"功率"];
+        H=lableH1+lableH2*nameArray.count;
     }else{
            nameArray=@[@"电压",@"电流"];
-        H=lableH1+lableH2*2;
+        H=lableH1+lableH2*nameArray.count;
     }
     
     if ((_cellTypy==0)||(_cellTypy==3)) {
@@ -199,12 +199,22 @@
             [_scrollView addSubview:lable3];
             
 
+            UILabel *lable4= [[UILabel alloc]initWithFrame:CGRectMake(w2*i,0+lableH1+lableH2*3, w2, lableH2)];
+            lable4.textColor = COLOR(102, 102, 102, 1);
+            //  lable3.text=_lable3Array[i];
+            if (_lable4Array.count>0) {
+                lable4.text=_lable4Array[i];
+            }else{
+                lable4.text=@"";
+            }
+            lable4.adjustsFontSizeToFitWidth=YES;
+            lable4.textAlignment=NSTextAlignmentCenter;
+            lable4.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [_scrollView addSubview:lable4];
+            
             
         }
     }
-    
-    
-    
     
 }
 
@@ -254,7 +264,7 @@
 + (CGFloat)moreHeight:(int)CellTyoe{
     float H=120*HEIGHT_SIZE;
     if (CellTyoe==2) {
-         H=160*HEIGHT_SIZE;
+         H=190*HEIGHT_SIZE;
     }else{
              H=120*HEIGHT_SIZE;
     }
