@@ -29,6 +29,13 @@
 @property (nonatomic, assign) int dateType;
 @property (nonatomic, strong)UIScrollView *scrollView;
 
+@property(nonatomic,strong)NSString *timeValue1;
+@property(nonatomic,strong)NSString *timeValue2;
+@property(nonatomic,strong)NSString *timeValue3;
+@property(nonatomic,strong)NSString *timeValue4;
+@property(nonatomic,strong)NSString *timeValue5;
+@property(nonatomic,strong)NSString *timeValue6;
+
 @end
 
 @implementation MixControl
@@ -59,9 +66,11 @@
     [self.view addGestureRecognizer:tapGestureRecognizer];
     NSArray*nameArray;
     if (_setType==0) {
-          nameArray=@[root_MIX_221,root_MIX_222,root_PCS_fangdian_gonglv,root_MIX_227];
+          nameArray=@[root_MIX_221,root_PCS_fangdian_gonglv,root_MIX_227,[NSString stringWithFormat:@"%@1",root_MIX_222],[NSString stringWithFormat:@"%@2",root_MIX_222],[NSString stringWithFormat:@"%@3",root_MIX_222]];
+        
+       // @[[NSString stringWithFormat:@"%@1",root_MIX_222],[NSString stringWithFormat:@"%@2",root_MIX_222],[NSString stringWithFormat:@"%@3",root_MIX_222]]
     }else{
-          nameArray=@[root_MIX_221,root_MIX_222,root_CHARGING_POWER,root_MIX_228,[NSString stringWithFormat:@"%@%@",root_5000_ac_chongdian,root_MIX_221]];
+          nameArray=@[root_MIX_221,root_CHARGING_POWER,root_MIX_228,[NSString stringWithFormat:@"%@%@",root_5000_ac_chongdian,root_MIX_221],[NSString stringWithFormat:@"%@1",root_MIX_222],[NSString stringWithFormat:@"%@2",root_MIX_222],[NSString stringWithFormat:@"%@3",root_MIX_222]];
     }
   
     float H1=40*HEIGHT_SIZE;
@@ -88,18 +97,18 @@
     [_textLable addGestureRecognizer:tapGestureRecognizer1];
     [_scrollView addSubview:_textLable];
     
-    _textLable2=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
-    _textLable2.text=root_MIX_223;
-    _textLable2.userInteractionEnabled=YES;
-    _textLable2.layer.borderWidth=1;
-    _textLable2.layer.cornerRadius=5;
-    _textLable2.layer.borderColor=[UIColor whiteColor].CGColor;
-    _textLable2.textColor=[UIColor whiteColor];
-       _textLable2.textAlignment=NSTextAlignmentCenter;
-    _textLable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice2)];
-    [_textLable2 addGestureRecognizer:tapGestureRecognizer2];
-    [_scrollView addSubview:_textLable2];
+//    _textLable2=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
+//    _textLable2.text=root_MIX_223;
+//    _textLable2.userInteractionEnabled=YES;
+//    _textLable2.layer.borderWidth=1;
+//    _textLable2.layer.cornerRadius=5;
+//    _textLable2.layer.borderColor=[UIColor whiteColor].CGColor;
+//    _textLable2.textColor=[UIColor whiteColor];
+//       _textLable2.textAlignment=NSTextAlignmentCenter;
+//    _textLable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+//    UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice2)];
+//    [_textLable2 addGestureRecognizer:tapGestureRecognizer2];
+//    [_scrollView addSubview:_textLable2];
     
         [self initTwo];
     
@@ -117,47 +126,56 @@
     
     float H=120*HEIGHT_SIZE; float LH=30*HEIGHT_SIZE;
     if (_setType==0) {
-        H=200*HEIGHT_SIZE;
+        H=140*HEIGHT_SIZE;
     }
     if (_setType==1) {
-        H=240*HEIGHT_SIZE;
+        H=180*HEIGHT_SIZE;
     }
-    _textLable3=[[UILabel alloc]initWithFrame:CGRectMake(40*NOW_SIZE, H, 80*NOW_SIZE, LH)];
-    _textLable3.text=_currentDay;
-    _textLable3.userInteractionEnabled=YES;
-    _textLable3.layer.borderWidth=1;
-    _textLable3.layer.cornerRadius=5;
-    _textLable3.textAlignment=NSTextAlignmentCenter;
-    _textLable3.textColor=[UIColor whiteColor];
-    _textLable3.layer.borderColor=[UIColor whiteColor].CGColor;
-    _textLable3.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice3)];
-    [_textLable3 addGestureRecognizer:tapGestureRecognizer1];
-    [_scrollView addSubview:_textLable3];
     
-    UILabel *lable1=[[UILabel alloc]initWithFrame:CGRectMake(150*NOW_SIZE, H, 20*NOW_SIZE, LH)];
-    lable1.text=@"~";
-    lable1.textAlignment=NSTextAlignmentCenter;
-    lable1.textColor=[UIColor whiteColor];
-    lable1.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
-    [_scrollView addSubview:lable1];
+    float H1=40*HEIGHT_SIZE;
     
-    _textLable4=[[UILabel alloc]initWithFrame:CGRectMake(200*NOW_SIZE, H, 80*NOW_SIZE, LH)];
-    _textLable4.text=_currentDay2;
-    _textLable4.userInteractionEnabled=YES;
-    _textLable4.layer.borderWidth=1;
-    _textLable4.layer.cornerRadius=5;
-    _textLable4.layer.borderColor=[UIColor whiteColor].CGColor;
-    _textLable4.textColor=[UIColor whiteColor];
-    _textLable4.textAlignment=NSTextAlignmentCenter;
-    _textLable4.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice4)];
-    [_textLable4 addGestureRecognizer:tapGestureRecognizer2];
-    [_scrollView addSubview:_textLable4];
+
+    for (int i=0; i<3; i++) {
+        UILabel *timeLable1=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, H+H1*i, 80*NOW_SIZE, LH)];
+        timeLable1.text=_currentDay;
+        timeLable1.userInteractionEnabled=YES;
+        timeLable1.layer.borderWidth=1;
+        timeLable1.layer.cornerRadius=5;
+        timeLable1.tag=3000+i;
+        timeLable1.textAlignment=NSTextAlignmentCenter;
+        timeLable1.textColor=[UIColor whiteColor];
+        timeLable1.layer.borderColor=[UIColor whiteColor].CGColor;
+        timeLable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice3:)];
+        [timeLable1 addGestureRecognizer:tapGestureRecognizer1];
+        [_scrollView addSubview:timeLable1];
+        
+        UILabel *lable1=[[UILabel alloc]initWithFrame:CGRectMake(200*NOW_SIZE, H+H1*i, 20*NOW_SIZE, LH)];
+        lable1.text=@"~";
+        lable1.textAlignment=NSTextAlignmentCenter;
+        lable1.textColor=[UIColor whiteColor];
+        lable1.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
+        [_scrollView addSubview:lable1];
+        
+         UILabel *timeLable2=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, H+H1*i, 80*NOW_SIZE, LH)];
+        timeLable2.text=_currentDay2;
+        timeLable2.userInteractionEnabled=YES;
+        timeLable2.layer.borderWidth=1;
+        timeLable2.layer.cornerRadius=5;
+         timeLable2.tag=4000+i;
+        timeLable2.layer.borderColor=[UIColor whiteColor].CGColor;
+        timeLable2.textColor=[UIColor whiteColor];
+        timeLable2.textAlignment=NSTextAlignmentCenter;
+        timeLable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice3:)];
+        [timeLable2 addGestureRecognizer:tapGestureRecognizer2];
+        [_scrollView addSubview:timeLable2];
+    }
+    
     
  
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(60*NOW_SIZE,H+LH+60*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    goBut.frame=CGRectMake(60*NOW_SIZE,H+LH+100*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [goBut setTitle:root_finish forState:UIControlStateNormal];
     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
@@ -169,7 +187,7 @@
 -(void)initThree{
      float H1=40*HEIGHT_SIZE;
     
-    _fieldOne = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*2, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
+    _fieldOne = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*1, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
     _fieldOne.textColor = [UIColor whiteColor];
     _fieldOne.tintColor = [UIColor whiteColor];
     _fieldOne.layer.borderWidth=1;
@@ -181,7 +199,7 @@
     _fieldOne.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:_fieldOne];
     
-    _fieldTwo = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*3, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
+    _fieldTwo = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*2, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
     _fieldTwo.textColor = [UIColor whiteColor];
     _fieldTwo.tintColor = [UIColor whiteColor];
     _fieldTwo.layer.borderWidth=1;
@@ -193,7 +211,7 @@
     _fieldTwo.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:_fieldTwo];
     
-    _textLable5=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*4, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
+    _textLable5=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*3, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
     _textLable5.text=root_MIX_223;
     _textLable5.userInteractionEnabled=YES;
     _textLable5.layer.borderWidth=1;
@@ -317,14 +335,12 @@
 -(void)showTheChoice5{
     [self showTheChoice:3];
 }
--(void)showTheChoice3{
-    _dateType=1;
+-(void)showTheChoice3:(UITapGestureRecognizer*)tag{
+    int Tag=(int)tag.view.tag;
+    _dateType=Tag;
     [self pickDate];
 }
--(void)showTheChoice4{
-    _dateType=2;
-    [self pickDate];
-}
+
 
 -(void)showTheChoice:(int)Type{
     NSArray *choiceArray;
@@ -405,16 +421,27 @@
 
 
 - (void)completeSelectDate:(UIToolbar *)toolBar {
-    if (_dateType==1) {
-            self.currentDay = [self.dayFormatter stringFromDate:self.date.date];
-        _textLable3.text= self.currentDay;
+    UILabel *timeL=[_scrollView viewWithTag:_dateType];
+    timeL.text= [self.dayFormatter stringFromDate:self.date.date];
+    
+    if (_dateType==3001) {
+        _timeValue1=[self.dayFormatter stringFromDate:self.date.date];
     }
-    if (_dateType==2) {
-          self.currentDay2 = [self.dayFormatter stringFromDate:self.date.date];
-         _textLable3.text= self.currentDay2;
+    if (_dateType==3002) {
+           _timeValue3=[self.dayFormatter stringFromDate:self.date.date];
     }
-
-
+    if (_dateType==3003) {
+        _timeValue5=[self.dayFormatter stringFromDate:self.date.date];
+    }
+    if (_dateType==4001) {
+        _timeValue2=[self.dayFormatter stringFromDate:self.date.date];
+    }
+    if (_dateType==4002) {
+        _timeValue4=[self.dayFormatter stringFromDate:self.date.date];
+    }
+    if (_dateType==4003) {
+        _timeValue6=[self.dayFormatter stringFromDate:self.date.date];
+    }
     
     [self.toolBar removeFromSuperview];
     [self.date removeFromSuperview];

@@ -194,7 +194,7 @@
             float curr=[self changeOneRegister:_data04_1 registerNum:K+1];
            [AcCurrArray addObject:[NSString stringWithFormat:@"%.1f",curr/10]];
          
-         float acHZ=[self changeTwoRegister:_data04_1 registerNum:37]/100;
+         float acHZ=[self changeOneRegister:_data04_1 registerNum:37]/100;
                [AcHzArray addObject:[NSString stringWithFormat:@"%.f",acHZ]];          //电网频率
          
          
@@ -256,10 +256,10 @@
     NSString *versionOutString=[self changeToASCII:_data03 beginRegister:9 length:6];          //固件(外部)版本
     NSString *versionInString=[self changeToASCII:_data03 beginRegister:82 length:6];              //固件(内部)版本
     
-    float maxOutPower=[self changeTwoRegister:_data04_1 registerNum:114];
+    float maxOutPower=[self changeOneRegister:_data04_1 registerNum:114];
     NSString *maxOutPower1=[NSString stringWithFormat:@"%.fs",maxOutPower];             //并网倒计时
-    float reallyPercent=[self changeOneRegister:_data04_1 registerNum:101];
-    NSString *reallyPercent1=[NSString stringWithFormat:@"%.fW",reallyPercent];                   //实际输出功率百分比
+    float reallyPercent=[self changeOneRegister:_data04_1 registerNum:113];
+    NSString *reallyPercent1=[NSString stringWithFormat:@"%.f%%",reallyPercent];                   //实际输出功率百分比
     
     float IPF=[self changeOneRegister:_data04_1 registerNum:100];
     NSString *IPF1=[NSString stringWithFormat:@"%.4f",(10000-IPF)/10000];                          //IPF

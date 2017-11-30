@@ -78,7 +78,7 @@
 
 -(void)getNetMoney{
       [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{} paramarsSite:@"/api/v2/renew/getRenewConfig" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo_2 paramars:@{} paramarsSite:@"/api/v2/renew/getRenewConfig" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];

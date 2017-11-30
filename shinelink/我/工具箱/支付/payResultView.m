@@ -179,6 +179,8 @@
         ResultString=@"支付成功，续费中";
     }else if (resultInt==5) {
         ResultString=@"支付失败";
+    }else if (resultInt==7) {
+        ResultString=@"部分续费成功";
     }else{
         ResultString=result;
     }

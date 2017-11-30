@@ -235,82 +235,98 @@ static NSString *cellTwo = @"cellTwo";
 -(void)initFirstUI{
     float W1=5*NOW_SIZE;float H1=8*HEIGHT_SIZE;float H2=50*HEIGHT_SIZE;float imageH=30*HEIGHT_SIZE;
     float W2=(H2-imageH)/2;  float lableH=30*HEIGHT_SIZE;float lableW=60*NOW_SIZE;
-    if (_firstView) {
-        [_firstView removeFromSuperview];
-        _firstView=nil;
-    }
-    _firstView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, _firstH)];
-    _firstView.backgroundColor=[UIColor clearColor];
-    [_scrollView addSubview:_firstView];
-    NSArray *picName=@[@"max_ele.png",@"max_power.png",@"max_worning.png"];
-    NSArray *colorArray=@[COLOR(88, 196, 95, 1),COLOR(0, 156, 255, 1),COLOR(221, 120, 120, 1)];
-    NSArray *nameArray=@[root_energy_fadianliang,root_gongLv,root_cuoWu];
-    NSArray *dataNameArray=@[root_Device_head_182,root_Device_head_183,root_dangqian_gonglv,root_usbTowifi_189,root_cuoWu,root_usbTowifi_190];
- 
-
-   
     
-     float W0=SCREEN_Width-2*W1;
-    for (int i=0; i<picName.count; i++) {
-        UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(W1, H1+(H1+H2)*i, W0, H2)];
-        view1.backgroundColor=[UIColor whiteColor];
-        [_firstView addSubview:view1];
-         view1.userInteractionEnabled=YES;
-        if (i==0) {
-            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView3)];
-            [view1 addGestureRecognizer:tapGestureRecognizer];
-        }
-        if (i==2) {
-            UITapGestureRecognizer *tapGestureRecognizer33 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView2)];
-            [view1 addGestureRecognizer:tapGestureRecognizer33];
-        }
+//    if (_firstView) {
+//        [_firstView removeFromSuperview];
+//        _firstView=nil;
+//    }
+    
+    NSArray *dataNameArray=@[root_Device_head_182,root_Device_head_183,root_dangqian_gonglv,root_usbTowifi_189,root_cuoWu,root_usbTowifi_190];
+    if (!_firstView) {
+        _firstView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, _firstH)];
+        _firstView.backgroundColor=[UIColor clearColor];
+        [_scrollView addSubview:_firstView];
+        NSArray *picName=@[@"max_ele.png",@"max_power.png",@"max_worning.png"];
+        NSArray *colorArray=@[COLOR(88, 196, 95, 1),COLOR(0, 156, 255, 1),COLOR(221, 120, 120, 1)];
+        NSArray *nameArray=@[root_energy_fadianliang,root_gongLv,root_cuoWu];
         
-        UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(W2,(H2-imageH)/2, imageH,imageH)];
-        image2.image=IMAGE(picName[i]);
-        [view1 addSubview:image2];
         
-        UILabel *titleLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(2*W2+imageH, (H2-lableH)/2,lableW,lableH)];
-        titleLabel3.textColor = colorArray[i];
-        titleLabel3.textAlignment=NSTextAlignmentLeft;
-        titleLabel3.text=nameArray[i];
-        titleLabel3.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        [view1 addSubview:titleLabel3];
         
-         float image3W=6*NOW_SIZE;float image3W1=5*NOW_SIZE;float imageH2=10*HEIGHT_SIZE;
-        if((i==0)||(i==2)){
-        UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake(W0-image3W-image3W1,(H2-imageH2)/2, image3W,imageH2)];
-        image3.image=IMAGE(@"MAXright.png");
-        [view1 addSubview:image3];
-        }
-      
-        float  titleLabel3X=2*W2+imageH+lableW;
-        float  lable4W=(W0-image3W-image3W1*2-titleLabel3X)/2;
-        float lableH2=20*HEIGHT_SIZE;float lableH3=10*HEIGHT_SIZE;
-        for (int K=0; K<2; K++) {
-            UILabel *lable4 = [[UILabel alloc]initWithFrame:CGRectMake(titleLabel3X+lable4W*K, 8*HEIGHT_SIZE,lable4W,lableH2)];
-            lable4.textColor = colorArray[i];
-            lable4.textAlignment=NSTextAlignmentCenter;
-            int T=2*i+K;
-            if (_firstViewDataArray.count>0) {
-                 lable4.text=_firstViewDataArray[T];
-            }else{
-                         lable4.text=@"";
+        
+        
+        float W0=SCREEN_Width-2*W1;
+        for (int i=0; i<picName.count; i++) {
+            UIView *view1=[[UIView alloc]initWithFrame:CGRectMake(W1, H1+(H1+H2)*i, W0, H2)];
+            view1.backgroundColor=[UIColor whiteColor];
+            [_firstView addSubview:view1];
+            view1.userInteractionEnabled=YES;
+            if (i==0) {
+                UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView3)];
+                [view1 addGestureRecognizer:tapGestureRecognizer];
             }
-           
-            lable4.adjustsFontSizeToFitWidth=YES;
-            lable4.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-            [view1 addSubview:lable4];
+            if (i==2) {
+                UITapGestureRecognizer *tapGestureRecognizer33 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView2)];
+                [view1 addGestureRecognizer:tapGestureRecognizer33];
+            }
             
-            UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(titleLabel3X+lable4W*K, 32*HEIGHT_SIZE,lable4W,lableH3)];
-            lable5.textColor =COLOR(153, 153, 153, 1);
-            lable5.textAlignment=NSTextAlignmentCenter;
-            lable5.text=dataNameArray[T];
-            lable5.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-            [view1 addSubview:lable5];
+            UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(W2,(H2-imageH)/2, imageH,imageH)];
+            image2.image=IMAGE(picName[i]);
+            [view1 addSubview:image2];
             
+            UILabel *titleLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(2*W2+imageH, (H2-lableH)/2,lableW,lableH)];
+            titleLabel3.textColor = colorArray[i];
+            titleLabel3.textAlignment=NSTextAlignmentLeft;
+            titleLabel3.text=nameArray[i];
+            titleLabel3.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            [view1 addSubview:titleLabel3];
+            
+            float image3W=6*NOW_SIZE;float image3W1=5*NOW_SIZE;float imageH2=10*HEIGHT_SIZE;
+            if((i==0)||(i==2)){
+                UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake(W0-image3W-image3W1,(H2-imageH2)/2, image3W,imageH2)];
+                image3.image=IMAGE(@"MAXright.png");
+                [view1 addSubview:image3];
+            }
+            
+            float  titleLabel3X=2*W2+imageH+lableW;
+            float  lable4W=(W0-image3W-image3W1*2-titleLabel3X)/2;
+            float lableH2=20*HEIGHT_SIZE;float lableH3=10*HEIGHT_SIZE;
+            for (int K=0; K<2; K++) {
+                UILabel *lable4 = [[UILabel alloc]initWithFrame:CGRectMake(titleLabel3X+lable4W*K, 8*HEIGHT_SIZE,lable4W,lableH2)];
+                lable4.textColor = colorArray[i];
+                lable4.textAlignment=NSTextAlignmentCenter;
+                int T=2*i+K;
+                if (_firstViewDataArray.count>0) {
+                    lable4.text=_firstViewDataArray[T];
+                }else{
+                    lable4.text=@"";
+                }
+                lable4.tag=2000+T;
+                lable4.adjustsFontSizeToFitWidth=YES;
+                lable4.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+                [view1 addSubview:lable4];
+                
+                UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(titleLabel3X+lable4W*K, 32*HEIGHT_SIZE,lable4W,lableH3)];
+                lable5.textColor =COLOR(153, 153, 153, 1);
+                lable5.textAlignment=NSTextAlignmentCenter;
+                lable5.text=dataNameArray[T];
+                lable5.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+                [view1 addSubview:lable5];
+                
+            }
+            
+        }
+    }else{
+        for (int i=0; i<dataNameArray.count; i++) {
+             UILabel *lable=[_firstView viewWithTag:2000+i];
+            if (_firstViewDataArray.count>0) {
+                lable.text=_firstViewDataArray[i];
+            }else{
+                lable.text=@"";
+            }
         }
         
     }
+   
     
     [self initSecondUI];
 }
@@ -323,66 +339,70 @@ static NSString *cellTwo = @"cellTwo";
     float H=110*HEIGHT_SIZE;
     float view1H= CGRectGetMaxY(_firstView.frame);
     
-    if (_secondView) {
-        [_secondView removeFromSuperview];
-        _secondView=nil;
-    }
-    _secondView=[[UIView alloc]initWithFrame:CGRectMake(W1, view1H+10*HEIGHT_SIZE, W0, H)];
-    _secondView.backgroundColor=[UIColor clearColor];
-    [_scrollView addSubview:_secondView];
+//    if (_secondView) {
+//        [_secondView removeFromSuperview];
+//        _secondView=nil;
+//    }
     
-    
-    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(1*NOW_SIZE, 3*HEIGHT_SIZE, 3*NOW_SIZE, 14*HEIGHT_SIZE)];
-    V1.backgroundColor=MainColor;
-    [_secondView addSubview:V1];
-    
-    float lableH1=20*HEIGHT_SIZE;
-    UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(7*NOW_SIZE, 0,200*NOW_SIZE,lableH1)];
-    lable5.textColor =COLOR(51, 51, 51, 1);
-    lable5.textAlignment=NSTextAlignmentLeft;
-    lable5.text=@"设备控制";
-    lable5.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [_secondView addSubview:lable5];
-    
-    float H2=80*HEIGHT_SIZE;
-    UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(0, 25*HEIGHT_SIZE, W0, H2)];
-    V2.backgroundColor=[UIColor whiteColor];
-    [_secondView addSubview:V2];
-    
-       NSArray *picName=@[@"max_set.png",@"max_parameter.png",@"Max_control3.png"];
-     NSArray *nameArray=@[@"设置配置",@"参数设置",@"高级设置"];
-    
-    float imageH=30*HEIGHT_SIZE;float V2H1=15*HEIGHT_SIZE;
-    float WW=ScreenWidth/picName.count;
-    for (int i=0; i<picName.count; i++) {
-        UIView *VV=[[UIView alloc]initWithFrame:CGRectMake(0+WW*i, 0, WW, H2)];
-        VV.backgroundColor=[UIColor clearColor];
-        VV.userInteractionEnabled=YES;
-        if (i==0) {
-            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView)];
-            [VV addGestureRecognizer:tapGestureRecognizer];
-        }else if (i==1) {
-            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView1)];
-            [VV addGestureRecognizer:tapGestureRecognizer];
-        }else if (i==2) {
-            UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView4)];
-            [VV addGestureRecognizer:tapGestureRecognizer];
+    if (!_secondView) {
+        _secondView=[[UIView alloc]initWithFrame:CGRectMake(W1, view1H+10*HEIGHT_SIZE, W0, H)];
+        _secondView.backgroundColor=[UIColor clearColor];
+        [_scrollView addSubview:_secondView];
+        
+        
+        UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(1*NOW_SIZE, 3*HEIGHT_SIZE, 3*NOW_SIZE, 14*HEIGHT_SIZE)];
+        V1.backgroundColor=MainColor;
+        [_secondView addSubview:V1];
+        
+        float lableH1=20*HEIGHT_SIZE;
+        UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(7*NOW_SIZE, 0,200*NOW_SIZE,lableH1)];
+        lable5.textColor =COLOR(51, 51, 51, 1);
+        lable5.textAlignment=NSTextAlignmentLeft;
+        lable5.text=@"设备控制";
+        lable5.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        [_secondView addSubview:lable5];
+        
+        float H2=80*HEIGHT_SIZE;
+        UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(0, 25*HEIGHT_SIZE, W0, H2)];
+        V2.backgroundColor=[UIColor whiteColor];
+        [_secondView addSubview:V2];
+        
+        NSArray *picName=@[@"max_set.png",@"max_parameter.png",@"Max_control3.png"];
+        NSArray *nameArray=@[@"设置配置",@"参数设置",@"高级设置"];
+        
+        float imageH=30*HEIGHT_SIZE;float V2H1=15*HEIGHT_SIZE;
+        float WW=ScreenWidth/picName.count;
+        for (int i=0; i<picName.count; i++) {
+            UIView *VV=[[UIView alloc]initWithFrame:CGRectMake(0+WW*i, 0, WW, H2)];
+            VV.backgroundColor=[UIColor clearColor];
+            VV.userInteractionEnabled=YES;
+            if (i==0) {
+                UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView)];
+                [VV addGestureRecognizer:tapGestureRecognizer];
+            }else if (i==1) {
+                UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView1)];
+                [VV addGestureRecognizer:tapGestureRecognizer];
+            }else if (i==2) {
+                UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView4)];
+                [VV addGestureRecognizer:tapGestureRecognizer];
+            }
+            
+            [V2 addSubview:VV];
+            
+            UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake((WW-imageH)/2,V2H1, imageH,imageH)];
+            image3.userInteractionEnabled=YES;
+            image3.image=IMAGE(picName[i]);
+            [VV addSubview:image3];
+            
+            UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(0, V2H1+imageH+5*HEIGHT_SIZE,WW,lableH1)];
+            lable5.textColor =COLOR(102, 102, 102, 1);
+            lable5.textAlignment=NSTextAlignmentCenter;
+            lable5.text=nameArray[i];
+            lable5.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [VV addSubview:lable5];
         }
-      
-        [V2 addSubview:VV];
-        
-        UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake((WW-imageH)/2,V2H1, imageH,imageH)];
-        image3.userInteractionEnabled=YES;
-        image3.image=IMAGE(picName[i]);
-        [VV addSubview:image3];
-        
-        UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(0, V2H1+imageH+5*HEIGHT_SIZE,WW,lableH1)];
-        lable5.textColor =COLOR(102, 102, 102, 1);
-        lable5.textAlignment=NSTextAlignmentCenter;
-        lable5.text=nameArray[i];
-        lable5.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        [VV addSubview:lable5];
     }
+    
     
     
 }
