@@ -16,6 +16,8 @@
 @property(nonatomic,strong)NSData*data03;
 @property(nonatomic,strong)NSData*data04_1;
 @property(nonatomic,strong)NSData*data04_2;
+@property(nonatomic,assign)int cmdTpye;
+@property(nonatomic,strong)NSData*data03_2;
 
 @end
 
@@ -35,35 +37,43 @@
         
     }
     
+    _cmdType=type;
+    _data03_2=[NSData new];
     
     if (type==1) {
           [_ControlOne goToTcpType:type];
     }else if (type==2){
            [_ControlOne goToTcpNoDelay:2 cmdNum:1 cmdType:@"4" regAdd:@"0" Length:@"125"];
+    }else if (type==3){
+        [_ControlOne goToTcpNoDelay:2 cmdNum:1 cmdType:@"3" regAdd:@"125" Length:@"10"];
     }
     
-  
-    
-  
 }
+
+
 
 -(void)receiveSecondData:(NSNotification*)notification{
     NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
    
-    _data04_1=[NSData new];
-    _data04_1=[firstDic objectForKey:@"one"];
-    
-    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *oldDic=[ud objectForKey:@"maxSecondData"];
-    if ([oldDic.allKeys containsObject:@"one"]) {
-         _data03=[NSData new];
-          _data03=[oldDic objectForKey:@"one"];
+    if (_cmdType==2) {
+        _data04_1=[NSData new];
+        _data04_1=[firstDic objectForKey:@"one"];
+    }
+    if (_cmdType==3) {
+        _data03_2=[firstDic objectForKey:@"one"];
     }
     
-    if ([oldDic.allKeys containsObject:@"three"]) {
-        _data04_2=[NSData new];
-        _data04_2=[oldDic objectForKey:@"three"];
-    }
+//    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+//    NSMutableDictionary *oldDic=[ud objectForKey:@"maxSecondData"];
+//    if ([oldDic.allKeys containsObject:@"one"]) {
+//         _data03=[NSData new];
+//          _data03=[oldDic objectForKey:@"one"];
+//    }
+//
+//    if ([oldDic.allKeys containsObject:@"three"]) {
+//        _data04_2=[NSData new];
+//        _data04_2=[oldDic objectForKey:@"three"];
+//    }
     
       [self getFirstViewValue];
 }
@@ -83,7 +93,7 @@
     _data04_1=[firstDic objectForKey:@"two"];
      _data04_2=[firstDic objectForKey:@"three"];
     
-     [[NSUserDefaults standardUserDefaults] setObject:firstDic forKey:@"maxSecondData"];
+   //  [[NSUserDefaults standardUserDefaults] setObject:firstDic forKey:@"maxSecondData"];
     
     [self getFirstViewValue];
 }
@@ -227,11 +237,18 @@
 -(void)getThreeViewValue{
     
     int OneCMDregisterNum=125;
-       NSArray *nameArray=@[@"厂商信息",@"机器型号",@"序列号",@"Model号",@"固件(外部)版本",@"固件(内部)版本",@"并网倒计时",@"功率百分比",@"PF",@"内部环境温度",@"Boost温度",@"INV温度",@"P Bus电压",@"N Bus电压",@"PID故障信息",@"PID状态"];
+    
+//       NSArray *nameArray=@[@"厂商信息",@"机器型号",@"序列号",@"Model号",@"固件(外部)版本",@"固件(内部)版本",@"并网倒计时",@"功率百分比",@"PF",@"内部环境温度",@"Boost温度",@"INV温度",@"P Bus电压",@"N Bus电压",@"PID故障信息",@"PID状态"];
     
     
     NSString *companyString=[self changeToASCII:_data03 beginRegister:34 length:8];     //厂商信息
-    NSString *PvTypy=@"";  //机器型号
+    NSString *PvTypy; //机器型号
+    if (_data03_2.length>8) {
+       PvTypy=[self changeToASCII:_data03_2 beginRegister:0 length:8];
+    }else{
+        PvTypy=@"";
+    }
+  
     
     NSString *SnString=[self changeToASCII:_data03 beginRegister:23 length:5];     //序列号
        NSString *totalTime1=[self getModelString:_data03];          //Model号
@@ -326,7 +343,8 @@
       NSData *data1=[data subdataWithRange:NSMakeRange(beginRegister*2, length*2)];
     getString=[[NSString alloc]initWithData:data1 encoding:NSASCIIStringEncoding];
     
-    return getString;
+    NSString *string11 = [getString stringByReplacingOccurrencesOfString:@"\0" withString:@""];
+    return string11;
 }
 
 

@@ -43,6 +43,7 @@ static NSString *cellTwo = @"cellTwo";
 
 @property(nonatomic,assign) BOOL isAutoReflash;
 @property(nonatomic,assign) BOOL isfinishReflash;
+@property(nonatomic,assign) BOOL isFourData;
 
 @property(nonatomic,assign) NSInteger reflashTime;
 @property(nonatomic,strong)NSTimer *timer;
@@ -90,6 +91,14 @@ static NSString *cellTwo = @"cellTwo";
      _firstViewDataArray=[NSMutableArray new];
       _tableLableValueArray=[NSMutableArray new];
     _thirdDataArray=[NSMutableArray new];
+       _tableNameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/频率/电流/功率",@"PID电压/电流"];
+    NSMutableArray<usbModleOne *> *arrM = [NSMutableArray arrayWithCapacity:_tableNameArray.count];
+    for (int i=0; i<_tableNameArray.count; i++) {
+        usbModleOne *model = [[usbModleOne alloc] initWithDict];
+        [arrM addObject:model];
+    }
+    _modelList = arrM.copy;
+    
     
     [self checkIsWifi];
     if (_isWiFi) {
@@ -130,6 +139,7 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)tcpToGetData{
+    _isFourData=NO;
     _isAutoReflash = !_isAutoReflash;
       _reflashTime=0;
     if (_isAutoReflash) {
@@ -160,11 +170,18 @@ static NSString *cellTwo = @"cellTwo";
 
 -(void)tcpToGetDataTwo{
     _reflashTime++;
-    if (_isfinishReflash) {
-        _isfinishReflash=NO;    
-          [_usbControl getDataAll:2];
-    }
-    
+
+      if (_isfinishReflash) {
+          
+    if (!_isFourData) {
+          _isfinishReflash=NO;
+        [_usbControl getDataAll:3];
+    }else{
+            _isfinishReflash=NO;
+            [_usbControl getDataAll:2];
+          }
+      }
+
 }
 
 
@@ -175,12 +192,25 @@ static NSString *cellTwo = @"cellTwo";
 
 -(void)getData:(NSNotification*) notification{
       _isfinishReflash=YES;
+   
     if (_reflashTime==0) {
-        _timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(tcpToGetDataTwo) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-           [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:2];
+         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:0.1];
+        if (_timer) {
+            _timer=nil;
+            _timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(tcpToGetDataTwo) userInfo:nil repeats:YES];
+            [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+        }else{
+            _timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(tcpToGetDataTwo) userInfo:nil repeats:YES];
+            [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+        }
+ 
     }
     
+    if (_reflashTime>0) {
+        if (!_isFourData) {
+            _isFourData=YES;
+        }
+    }
 
     
  _allDic=[NSDictionary dictionaryWithDictionary:[notification object]];
@@ -394,7 +424,7 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)initThirdUI{
-    _tableNameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/电流/功率",@"PID电压/电流"];
+ 
     float view1H= CGRectGetMaxY(_secondView.frame);
     
     float lableH1=20*HEIGHT_SIZE;
@@ -424,12 +454,7 @@ static NSString *cellTwo = @"cellTwo";
     }
  
     
-       NSMutableArray<usbModleOne *> *arrM = [NSMutableArray arrayWithCapacity:_tableNameArray.count];
-    for (int i=0; i<_tableNameArray.count; i++) {
-        usbModleOne *model = [[usbModleOne alloc] initWithDict]; 
-        [arrM addObject:model];
-    }
-    _modelList = arrM.copy;
+ 
     
     if (_tableView) {
         [_tableView removeFromSuperview];

@@ -54,10 +54,11 @@
         V2.backgroundColor=[UIColor whiteColor];
         [_secondView addSubview:V2];
         
-        UILabel *lable6 = [[UILabel alloc]initWithFrame:CGRectMake(20*NOW_SIZE, 15*HEIGHT_SIZE,W0-40*NOW_SIZE,lableH1)];
+        UILabel *lable6 = [[UILabel alloc]initWithFrame:CGRectMake(20*NOW_SIZE, 5*HEIGHT_SIZE,W0-40*NOW_SIZE,100*HEIGHT_SIZE)];
         lable6.textColor =COLOR(102, 102, 102, 1);
         lable6.textAlignment=NSTextAlignmentLeft;
         lable6.text=valueArray[i];
+        lable6.numberOfLines=0;
         lable6.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [V2 addSubview:lable6];
     }
