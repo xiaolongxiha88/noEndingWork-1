@@ -31,6 +31,10 @@
 #import "forgetOneViewController.h"
 #import "ShinePhone-Swift.h"
 #import "OssMessageViewController.h"
+#import "ZJBLStoreShopTypeAlert.h"
+#import "meConfigerViewController.h"
+#import "useToWifiView1.h"
+#import "usbToWifi00.h"
 
 //测试头
 #import "useToWifiView1.h"
@@ -212,6 +216,16 @@
     logo.image = IMAGE(@"logo2.png");
     [_scrollView addSubview:logo];
     
+    UIView *imageView111=[[UIView alloc]initWithFrame:CGRectMake(280*NOW_SIZE,0*HEIGHT_SIZE, 40*NOW_SIZE,40*HEIGHT_SIZE)];
+    imageView111.userInteractionEnabled=YES;
+    UITapGestureRecognizer *tapGestureRecognizerMore = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToMoreView)];
+    [imageView111 addGestureRecognizer:tapGestureRecognizerMore];
+      [_scrollView addSubview:imageView111];
+    
+    UIImageView *imageMore=[[UIImageView alloc]initWithFrame:CGRectMake(15*NOW_SIZE,10*HEIGHT_SIZE, 5*NOW_SIZE,20*HEIGHT_SIZE)];
+    imageMore.image= IMAGE(@"loginMore.png");
+    [imageView111 addSubview:imageMore];
+    
     if (_userBgImageView) {
         [_userBgImageView removeFromSuperview];
         _userBgImageView=nil;
@@ -364,7 +378,7 @@
     
     if ([_languageValue isEqualToString:@"0"]) {
         UIButton *quickRegister =  [UIButton buttonWithType:UIButtonTypeCustom];
-        quickRegister.frame=CGRectMake(40*NOW_SIZE,315*HEIGHT_SIZE+sizeH+72*HEIGHT_SIZE-H_down, SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE);
+        quickRegister.frame=CGRectMake(40*NOW_SIZE,315*HEIGHT_SIZE+sizeH+72*HEIGHT_SIZE-H_down-10*HEIGHT_SIZE, SCREEN_Width - 80*NOW_SIZE, 35*HEIGHT_SIZE);
         [quickRegister.layer setMasksToBounds:YES];
         [quickRegister.layer setCornerRadius:20.0];
         //UIImage *quickM=IMAGE(@"icon_yijianjianzhan.png");
@@ -376,10 +390,34 @@
         quickRegister.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
         [quickRegister setTitle:root_yijian_jianzhan forState:UIControlStateNormal];
         [quickRegister addTarget:self action:@selector(goQuickRegister) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:quickRegister];
+        [_scrollView addSubview:quickRegister];
     }
     
  
+    
+}
+
+-(void)goToMoreView{
+    NSArray *nameArray=@[root_ME_239,root_ME_240];
+    [ZJBLStoreShopTypeAlert showWithTitle:root_ME_241 titles:nameArray selectIndex:^(NSInteger SelectIndexNum){
+         [self.navigationController setNavigationBarHidden:NO];
+        [self.navigationController.navigationBar setTranslucent:YES];
+        [self.navigationController.navigationBar setBarTintColor:MainColor];
+        if (SelectIndexNum==0) {
+            meConfigerViewController *rootView = [[meConfigerViewController alloc]init];
+            rootView.hidesBottomBarWhenPushed=YES;
+            [self.navigationController pushViewController:rootView animated:YES];
+            
+        }else if (SelectIndexNum==1){
+            usbToWifi00 *rootView = [[usbToWifi00 alloc]init];
+            [self.navigationController pushViewController:rootView animated:YES];
+            
+        }
+        
+    } selectValue:^(NSString* valueString){
+       
+        
+    } showCloseButton:YES];
     
 }
 

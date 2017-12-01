@@ -30,7 +30,7 @@
     float H=150*HEIGHT_SIZE;
     
     NSArray *valueArray=@[_faultString,_warnString];
-    NSArray *nameArray=@[[NSString stringWithFormat:@"故障码:%@",_faultCode],[NSString stringWithFormat:@"警告码:%@",_faultStatueCode]];
+    NSArray *nameArray=@[[NSString stringWithFormat:@"故障码:%@",_faultCode],[NSString stringWithFormat:@"警告码:%@",_warnCode]];
     
     for (int i=0; i<valueArray.count; i++) {
         UIView *_secondView=[[UIView alloc]initWithFrame:CGRectMake(W1, 5*HEIGHT_SIZE+H*i, W0, H)];
@@ -125,7 +125,7 @@
     }else if (warnInt==111) {
         _warnString=@"U盘过流保护 ";
     }else{
-        _warnString=[NSString stringWithFormat:@"Error:%d",warnInt];
+        _warnString=[NSString stringWithFormat:@"Warning:%d",warnInt];
     }
       
     [self initUI];

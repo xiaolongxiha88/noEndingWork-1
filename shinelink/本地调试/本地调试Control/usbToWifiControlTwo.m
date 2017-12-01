@@ -292,6 +292,12 @@
                [_setValueArray removeObjectAtIndex:i];
         }
     }
+    if (_setRegisterArray.count==0 || _setValueArray.count==0) {
+         [self showAlertViewWithTitle:@"设置失败,请重新进入页面进行设置" message:nil cancelButtonTitle:root_OK];
+    }
+    if (_setRegisterArray.count!=_setValueArray.count){
+            [self showAlertViewWithTitle:@"设置失败,请重新进入页面进行设置" message:nil cancelButtonTitle:root_OK];
+    }
     
     [_ControlOne goToOneTcp:3 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
     
@@ -339,7 +345,7 @@
     
     _cmdTcpType=1;
     NSArray *cmdValue=@[
-                        @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
+ @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
     
     _setRegister=cmdValue[_CellNumber];
     
@@ -354,9 +360,14 @@
     if (_cmdTcpType==1) {
         NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
         _receiveCmdTwoData=[firstDic objectForKey:@"one"];
-        
+        NSUInteger Lenth=_receiveCmdTwoData.length;
+        if (Lenth<_cmdRegisterNum*2) {
+             [self showAlertViewWithTitle:@"读取失败" message:nil cancelButtonTitle:root_OK];
+            return;
+        }
         NSMutableArray *valueArray=[NSMutableArray new];
         for (int i=0; i<_cmdRegisterNum; i++) {
+            
             NSString *value0=[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:_receiveCmdTwoData registerNum:i]];
             if (_CellNumber==28) {
                 if (i%2==0) {

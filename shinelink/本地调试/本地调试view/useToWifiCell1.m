@@ -30,48 +30,98 @@
     
     self.contentView.backgroundColor=[UIColor whiteColor];
     
-    if (_titleView) {
-        [_titleView removeFromSuperview];
-        _titleView=nil;
-    }
-    _titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width,titleLabelH1)];
-    _titleView.backgroundColor =COLOR(247, 247, 247, 1);
-    _titleView.userInteractionEnabled = YES;
-    UITapGestureRecognizer * forget2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showMoreText)];
-    [_titleView addGestureRecognizer:forget2];
-    [self.contentView addSubview:_titleView];
+//    if (_titleView) {
+//        [_titleView removeFromSuperview];
+//        _titleView=nil;
+//    }
     
-  
-    _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0, 200*NOW_SIZE, titleLabelH1)];
-    _titleLabel.textColor = MainColor;
-    _titleLabel.text=_titleString;
-    _titleLabel.adjustsFontSizeToFitWidth=YES;
-    _titleLabel.textAlignment=NSTextAlignmentLeft;
-    _titleLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    [_titleView addSubview:_titleLabel];
+    NSArray *nameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/频率/电流/功率",@"PID电压/电流"];
     
-    float buttonViewW=20*NOW_SIZE;float buttonW=10*NOW_SIZE;
-    UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_Width-buttonViewW, 0, buttonViewW,titleLabelH1)];
-    buttonView.backgroundColor =[UIColor clearColor];
-    buttonView.userInteractionEnabled = YES;
-    [_titleView addSubview:buttonView];
-    
-       float buttonH=6*HEIGHT_SIZE;
-  
+    if (!_titleView) {
+        _titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width,titleLabelH1)];
+        _titleView.backgroundColor =COLOR(247, 247, 247, 1);
+        _titleView.userInteractionEnabled = YES;
+        UITapGestureRecognizer * forget2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showMoreText)];
+        [_titleView addGestureRecognizer:forget2];
+        [self.contentView addSubview:_titleView];
+        
+        
+        _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0, 200*NOW_SIZE, titleLabelH1)];
+        _titleLabel.textColor = MainColor;
+        _titleLabel.text=nameArray[_indexRow];
+        _titleLabel.adjustsFontSizeToFitWidth=YES;
+        _titleLabel.textAlignment=NSTextAlignmentLeft;
+        _titleLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        [_titleView addSubview:_titleLabel];
+        
+        float buttonViewW=20*NOW_SIZE;float buttonW=10*NOW_SIZE;
+        UIView *buttonView = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_Width-buttonViewW, 0, buttonViewW,titleLabelH1)];
+        buttonView.backgroundColor =[UIColor clearColor];
+        buttonView.userInteractionEnabled = YES;
+        [_titleView addSubview:buttonView];
+        
+        float buttonH=6*HEIGHT_SIZE;
+        
         _moreTextBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _moreTextBtn.selected=NO;
         [_moreTextBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         _moreTextBtn.frame = CGRectMake(0, (titleLabelH1-buttonH)/2, buttonW, buttonH);
         [buttonView addSubview:_moreTextBtn];
         [_moreTextBtn addTarget:self action:@selector(showMoreText) forControlEvents:UIControlEventTouchUpInside];
+    }else{
+        _titleLabel.text=nameArray[_indexRow];
+    }
+ 
   
     
+    
+    
     if (self.model.isShowMoreText){
-        if (_scrollView) {
-            [_scrollView removeFromSuperview];
-            _scrollView=nil;
+        if (!_scrollView) {
+        [self initUITwo];
+        }else{
+          
+            for (int i=0; i<_lable1Array.count; i++) {
+              UILabel *lable=[_scrollView viewWithTag:5000+i];
+                if (_lable1Array.count>0) {
+                    lable.text=_lable1Array[i];
+                }else{
+                    lable.text=@"/";
+                }
+            }
+            for (int i=0; i<_lable2Array.count; i++) {
+                UILabel *lable1=[_scrollView viewWithTag:5100+i];
+                if (_lable2Array.count>0) {
+                    lable1.text=_lable2Array[i];
+                }else{
+                    lable1.text=@"/";
+                }
+            }
+    
+
+            if(_cellTypy==2){
+                for (int i=0; i<_lable3Array.count; i++) {
+                    UILabel *lable2=[_scrollView viewWithTag:5200+i];
+                    if (_lable3Array.count>0) {
+                        lable2.text=_lable3Array[i];
+                    }else{
+                        lable2.text=@"/";
+                    }
+                }
+                for (int i=0; i<_lable4Array.count; i++) {
+                      UILabel *lable3=[_scrollView viewWithTag:5300+i];
+                    if (_lable4Array.count>0) {
+                        lable3.text=_lable4Array[i];
+                    }else{
+                        lable3.text=@"/";
+                    }
+                }
+            }
+         
+            
+            
         }
-           [self initUITwo];
+        
     }
  
     
@@ -137,6 +187,7 @@
         lable1.text=nameArray[i];
         lable1.textColor = MainColor;
         lable1.textAlignment=NSTextAlignmentLeft;
+     
         lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_nameView addSubview:lable1];
 
@@ -167,6 +218,7 @@
         }else{
             lable1.text=@"";
         }
+           lable1.tag=5000+i;
         lable1.adjustsFontSizeToFitWidth=YES;
         lable1.textAlignment=NSTextAlignmentCenter;
         lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -180,6 +232,7 @@
         }else{
             lable2.text=@"";
         }
+          lable2.tag=5100+i;
         lable2.textAlignment=NSTextAlignmentCenter;
         lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_scrollView addSubview:lable2];
@@ -193,6 +246,7 @@
             }else{
                 lable3.text=@"";
             }
+             lable3.tag=5200+i;
               lable3.adjustsFontSizeToFitWidth=YES;
             lable3.textAlignment=NSTextAlignmentCenter;
             lable3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -207,6 +261,7 @@
             }else{
                 lable4.text=@"";
             }
+             lable4.tag=5300+i;
             lable4.adjustsFontSizeToFitWidth=YES;
             lable4.textAlignment=NSTextAlignmentCenter;
             lable4.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -223,6 +278,12 @@
     
     self.model.isShowMoreText = !self.model.isShowMoreText;
     
+    if (!self.model.isShowMoreText) {
+        if (_scrollView) {
+            [_scrollView removeFromSuperview];
+            _scrollView=nil;
+        }
+    }
     
     if (self.showMoreBlock){
         self.showMoreBlock(self);

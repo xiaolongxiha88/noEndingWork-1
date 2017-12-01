@@ -25,6 +25,7 @@
 @property(nonatomic,strong) NSArray *lable4Array;
 
 @property(nonatomic,assign) int cellTypy;
+@property(nonatomic,assign) NSInteger indexRow;
 
 @property(nonatomic, copy) void(^showMoreBlock)(UITableViewCell *currentCell);
 

@@ -670,6 +670,8 @@
 		33AF3D271D8E67210007D6C2 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 33AF3D121D8E67210007D6C2 /* ProgressHUD.bundle */; };
 		33AF3D281D8E67210007D6C2 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF3D141D8E67210007D6C2 /* ProgressHUD.m */; };
 		33AF3D291D8E67210007D6C2 /* UdpCheckUtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF3D161D8E67210007D6C2 /* UdpCheckUtl.m */; };
+		33B445BD1FD1695E000B18AA /* loginMore.png in Resources */ = {isa = PBXBuildFile; fileRef = 33B445BC1FD1695E000B18AA /* loginMore.png */; };
+		33B445C31FD1731C000B18AA /* usbToWifi00.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B445C21FD1731C000B18AA /* usbToWifi00.m */; };
 		33C300001D3E33E00016351C /* L7.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF51D3E33E00016351C /* L7.png */; };
 		33C300011D3E33E00016351C /* L8.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF61D3E33E00016351C /* L8.png */; };
 		33C300021D3E33E00016351C /* L9.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF71D3E33E00016351C /* L9.png */; };
@@ -1825,6 +1827,9 @@
 		33AF3D141D8E67210007D6C2 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		33AF3D151D8E67210007D6C2 /* UdpCheckUtl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpCheckUtl.h; sourceTree = "<group>"; };
 		33AF3D161D8E67210007D6C2 /* UdpCheckUtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UdpCheckUtl.m; sourceTree = "<group>"; };
+		33B445BC1FD1695E000B18AA /* loginMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginMore.png; sourceTree = "<group>"; };
+		33B445C11FD1731C000B18AA /* usbToWifi00.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifi00.h; sourceTree = "<group>"; };
+		33B445C21FD1731C000B18AA /* usbToWifi00.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifi00.m; sourceTree = "<group>"; };
 		33C3FFEF1D3E33E00016351C /* L1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L1.png; sourceTree = "<group>"; };
 		33C3FFF01D3E33E00016351C /* L2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L2.png; sourceTree = "<group>"; };
 		33C3FFF11D3E33E00016351C /* L3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L3.png; sourceTree = "<group>"; };
@@ -3347,6 +3352,8 @@
 				3376B3CD1F973E0B0069F820 /* 本地调试图片 */,
 				3376B3CA1F9726720069F820 /* useToWifiView1.h */,
 				3376B3CB1F9726720069F820 /* useToWifiView1.m */,
+				33B445C11FD1731C000B18AA /* usbToWifi00.h */,
+				33B445C21FD1731C000B18AA /* usbToWifi00.m */,
 			);
 			path = "本地调试";
 			sourceTree = "<group>";
@@ -3599,6 +3606,7 @@
 		337F9D6E1C71B1020016FE43 /* 图片 */ = {
 			isa = PBXGroup;
 			children = (
+				33B445BC1FD1695E000B18AA /* loginMore.png */,
 				335456C21C85301200275478 /* 圆角矩形.png */,
 				335456C01C852FF600275478 /* 圆角矩形空心.png */,
 				335456C61C853B4900275478 /* btn_cha11.png */,
@@ -4661,6 +4669,7 @@
 				334771001C9A3E57003A6F13 /* mine@2x.png in Resources */,
 				337079491D913D9600D7DA98 /* question_icon.png in Resources */,
 				3370EBBF1F41918400F37149 /* deviceHead1.png in Resources */,
+				33B445BD1FD1695E000B18AA /* loginMore.png in Resources */,
 				337F96201F0CCDBE00840527 /* firstGo.png in Resources */,
 				338321C31EEE3370004FFC20 /* edit_nor.png in Resources */,
 				33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */,
@@ -5323,6 +5332,7 @@
 				3355F26B1C746BF5006DDE5A /* aboutTableViewCell.m in Sources */,
 				335D69B71D77BA4D00894D90 /* README.md in Sources */,
 				33860FE51EEA75C5004150FD /* MJRefreshBackGifFooter.m in Sources */,
+				33B445C31FD1731C000B18AA /* usbToWifi00.m in Sources */,
 				33860FE21EEA75C5004150FD /* MJRefreshAutoGifFooter.m in Sources */,
 				33AF3D1A1D8E67210007D6C2 /* ACPButton.m in Sources */,
 				3367EBA41CD0C11800D2EF67 /* productViewController.m in Sources */,

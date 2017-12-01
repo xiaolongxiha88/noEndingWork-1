@@ -72,6 +72,12 @@ static NSString *cellTwo = @"cellTwo";
      [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:MainColor];
+    
+    if (_isShowScanResult==1) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"WiFi名称为:%@",_SN] message:@"是否跳转连接WiFi?" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];
+        alertView.tag = 1003;
+        [alertView show];
+    }
     _rightItem=[[UIBarButtonItem alloc]initWithTitle:@"自动刷新" style:UIBarButtonItemStylePlain target:self action:@selector(tcpToGetData)];
     self.navigationItem.rightBarButtonItem=_rightItem;
     
@@ -476,10 +482,10 @@ static NSString *cellTwo = @"cellTwo";
     
  
     
-    if (_tableView) {
-        [_tableView removeFromSuperview];
-        _tableView=nil;
-    }
+//    if (_tableView) {
+//        [_tableView removeFromSuperview];
+//        _tableView=nil;
+//    }
     
   
     
@@ -497,6 +503,8 @@ static NSString *cellTwo = @"cellTwo";
 
         [_scrollView addSubview:_tableView];
         
+    }else{
+        [_tableView reloadData];
     }
     
 }
@@ -534,14 +542,15 @@ static NSString *cellTwo = @"cellTwo";
                 cell.lable4Array=[NSArray arrayWithArray:dataAllArray[3]];
             }
         }
-  
+        cell.indexRow=indexPath.row;
         cell.cellTypy=K;
         usbModleOne *model = _modelList[K];
         cell.model = model;
         cell.titleString=_tableNameArray[K];
         [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
-            NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
-            [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
+//            [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [_tableView reloadData];
         }];
         return cell;
     }else{
@@ -610,7 +619,7 @@ static NSString *cellTwo = @"cellTwo";
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
     if (buttonIndex) {
-        if( (alertView.tag == 1001) || (alertView.tag == 1002)){
+        if( (alertView.tag == 1001) || (alertView.tag == 1002) || (alertView.tag == 1003)){
             if (deviceSystemVersion>10) {
                 NSURL *url = [NSURL URLWithString:@"App-Prefs:root=WIFI"];
                 if ([[UIApplication sharedApplication]canOpenURL:url]) {
@@ -641,6 +650,10 @@ static NSString *cellTwo = @"cellTwo";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"recieveReceiveData" object:nil];
       [[NSNotificationCenter defaultCenter] removeObserver:self name:@"recieveFailedTcpData" object:nil];
         [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwoFailed" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveData" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwo" object:nil];
+    
+
    //   [[NSNotificationCenter defaultCenter] removeObserver:self name:@"StopConfigerUI" object:nil];
     if (_timer) {
         [_timer invalidate];

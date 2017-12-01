@@ -16,6 +16,10 @@
 @property (nonatomic, strong) NSData *modbusData;
 @property (nonatomic, strong) NSData *recieveData;
 
+@property (nonatomic, strong) NSString *text1String;
+@property (nonatomic, strong) NSString *text2String;
+@property (nonatomic, strong) NSString *text3String;
+@property (nonatomic, strong) NSMutableArray *showDataArray;
 @end
 
 @implementation usbToWifiControlFour
@@ -126,14 +130,14 @@
     }
     
     UITextField *text1=[_scrollView viewWithTag:2000];
-    NSString *text1String=text1.text;
+    _text1String=text1.text;
     UITextField *text2=[_scrollView viewWithTag:2001];
-    NSString *text2String=text2.text;
+    _text2String=text2.text;
     UITextField *text3=[_scrollView viewWithTag:2002];
-    NSString *text3String=text3.text;
+    _text3String=text3.text;
     
     [self showProgressView];
-     [_ControlOne goToOneTcp:4 cmdNum:1 cmdType:text1String regAdd:text2String Length:text3String];
+     [_ControlOne goToOneTcp:4 cmdNum:1 cmdType:_text1String regAdd:_text2String Length:_text3String];
     
 }
 
@@ -148,7 +152,8 @@
     _recieveAllData=[firstDic objectForKey:@"one"];
     _modbusData=[firstDic objectForKey:@"modbusData"];
         [_goButton setTitle:@"Start" forState:UIControlStateNormal];
-    [self getDataUI:_modbusData];
+    
+    [self checkTheResult];
 }
 
 -(void)setFailed:(NSNotification*) notification{
@@ -162,6 +167,40 @@
         [self showAlertViewWithTitle:@"操作失败" message:@"请查看设置范围或检查网络连接" cancelButtonTitle:root_OK];
  
 }
+
+
+-(void)checkTheResult{
+    _showDataArray=[NSMutableArray new];
+    if (([_text1String intValue]==3) || ([_text1String intValue]==4)) {
+        NSData *data00=[_recieveAllData subdataWithRange:NSMakeRange(3, _recieveAllData.length-5)];
+        int Lenth=[_text3String intValue];
+        for (int i=0; i<Lenth; i++) {
+            Byte *dataArray=(Byte*)[data00 bytes];
+            int registerValue=(dataArray[2*i]<<8)+dataArray[2*i+1];
+            [_showDataArray addObject:[NSString stringWithFormat:@"%d",registerValue]];
+        }
+        
+    }
+    
+    if ([_text1String intValue]==6){
+         Byte *Bytedata00=(Byte*)[_modbusData bytes];
+            Byte *Bytedata1=(Byte*)[_recieveAllData bytes];
+        for (int i=0; i<_recieveAllData.length; i++) {
+            [_showDataArray addObject:[NSString stringWithFormat:@"%x",(Bytedata1[i]) & 0xff]];
+        }
+        if ((Bytedata1[1]==6) && (Bytedata1[0]==Bytedata00[0])) {
+            [self showAlertViewWithTitle:@"设置成功" message:nil cancelButtonTitle:root_OK];
+        }else{
+            [self showAlertViewWithTitle:@"设置失败" message:nil cancelButtonTitle:root_OK];
+        }
+    }
+    
+    [self getDataUI:_modbusData];
+    
+}
+
+
+
 
 -(void)getDataUI:(NSData*)data{
 
@@ -194,12 +233,29 @@
     
     
     
-    Byte *tcp1Byte=(Byte*)[_recieveAllData bytes];
+   // Byte *tcp1Byte=(Byte*)[_recieveAllData bytes];
+    float W11=70*NOW_SIZE,W22=88*NOW_SIZE;
+    for (int i=0; i<_showDataArray.count; i++) {
+        if ([_text1String intValue]!=6){
+            UILabel *PVData0=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width/2,  25*HEIGHT_SIZE+W*(i), W11,W )];
+            PVData0.text=[NSString stringWithFormat:@"%d:",[_text2String intValue]+i];
+            PVData0.textAlignment=NSTextAlignmentRight;
+            PVData0.textColor=COLOR(102, 102, 102, 1);
+            PVData0.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+            PVData0.adjustsFontSizeToFitWidth=YES;
+            [_dataView addSubview:PVData0];
+        }
     
-    for (int i=0; i<_recieveAllData.length; i++) {
-        UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width/2,  25*HEIGHT_SIZE+W*(i), SCREEN_Width/2,W )];
-        PVData.text=[NSString stringWithFormat:@"%d--%x", i,(tcp1Byte[i]) & 0xff];
-        PVData.textAlignment=NSTextAlignmentCenter;
+        
+        UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_Width/2+W11+2*NOW_SIZE,  25*HEIGHT_SIZE+W*(i), W22,W )];
+        if ([_text1String intValue]!=6){
+            PVData.frame=CGRectMake(SCREEN_Width/2+W11+2*NOW_SIZE,  25*HEIGHT_SIZE+W*(i), W22,W );
+              PVData.textAlignment=NSTextAlignmentLeft;
+        }else{
+              PVData.frame=CGRectMake(SCREEN_Width/2,  25*HEIGHT_SIZE+W*(i), SCREEN_Width/2,W );
+               PVData.textAlignment=NSTextAlignmentCenter;
+        }
+        PVData.text=_showDataArray[i];
         PVData.textColor=COLOR(102, 102, 102, 1);
         PVData.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         PVData.adjustsFontSizeToFitWidth=YES;

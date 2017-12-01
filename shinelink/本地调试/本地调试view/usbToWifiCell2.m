@@ -49,6 +49,7 @@
             UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(0+SCREEN_Width/2*K, 10*HEIGHT_SIZE+H0*i+lableH,SCREEN_Width/2,lableH)];
             lable5.textColor =COLOR(102, 102, 102, 1);
             lable5.textAlignment=NSTextAlignmentCenter;
+            lable5.tag=6000+T;
             if (_lable1Array.count>0) {
                 NSString *TEXT=[NSString stringWithFormat:@"%@",_lable1Array[T]];
                 if ([TEXT isEqualToString:@""]) {
@@ -76,6 +77,16 @@
     
     if (!_AllView) {
            [self initUI];
+    }else{
+            for (int i=0; i<_lable1Array.count; i++) {
+        UILabel *lable=[_AllView viewWithTag:6000+i];
+        if (_lable1Array.count>0) {
+            lable.text=_lable1Array[i];
+        }else{
+            lable.text=@"";
+        }
+        
+        }
     }
  
     

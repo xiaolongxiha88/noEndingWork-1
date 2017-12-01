@@ -728,6 +728,41 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     NSMutableArray *yArray1 = [NSMutableArray array];
     NSMutableArray *xArray1 = [NSMutableArray array];
     
+    
+    NSMutableArray*Y5=[NSMutableArray array];
+    NSMutableArray*Y6=[NSMutableArray array];
+    NSMutableArray*Y7=[NSMutableArray array];
+    NSMutableArray*Y8=[NSMutableArray array];
+    
+    if (yArray.count>0) {
+        
+        for (int i=0; i<yArray.count; i++) {
+            if ([[yArray[i] objectForKey:@"pacToUser"] floatValue]>=0) {
+                [Y8 addObject:[yArray[i] objectForKey:@"pacToUser"]];
+            }else{
+                [Y8 addObject:@"0"];
+            }
+            if ([[yArray[i] objectForKey:@"ppv"] floatValue]>=0) {
+                [Y5 addObject:[yArray[i] objectForKey:@"ppv"]];
+            }else{
+                [Y5 addObject:@"0"];
+            }
+            if ([[yArray[i] objectForKey:@"sysOut"] floatValue]>=0) {
+                [Y6 addObject:[yArray[i] objectForKey:@"sysOut"]];
+            }else{
+                [Y6 addObject:@"0"];
+            }
+            if ([[yArray[i] objectForKey:@"userLoad"] floatValue]>=0) {
+                [Y7 addObject:[yArray[i] objectForKey:@"userLoad"]];
+            }else{
+                [Y7 addObject:@"0"];
+            }
+            
+        }
+    }
+    _toDetaiDataArray=[NSMutableArray arrayWithObjects:xArray, Y5,Y6,Y7,Y8,nil];
+    
+    
     if (xArray.count>2) {
         for (int i=0; i<xArray.count-2; i++) {
             if (i%3==0) {
@@ -776,7 +811,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             
         }
     }
-    _toDetaiDataArray=[NSMutableArray arrayWithObjects:xArray, Y1,Y2,Y3,Y4,nil];
+  //  _toDetaiDataArray=[NSMutableArray arrayWithObjects:xArray, Y1,Y2,Y3,Y4,nil];
     
     NSMutableArray *tempXArr = [NSMutableArray array];
     if (xArray.count > 0) {

@@ -855,7 +855,7 @@
 
 #define  root_ME_239 NSLocalizedString(@"239配置WIFI采集器", nil)
 #define  root_ME_240 NSLocalizedString(@"240本地调试工具", nil)
-
+#define  root_ME_241 NSLocalizedString(@"241工具箱", nil)
 
 
 

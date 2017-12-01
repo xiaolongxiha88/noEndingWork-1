@@ -323,6 +323,7 @@ static float TCP_TIME=1;
                 }
             }
             if (_cmdType==4) {           //高级设置
+               //  NSData *data00=[data1 subdataWithRange:NSMakeRange(3, data1.length-5)];
                 [_AllDataDic setValue:data1 forKey:@"one"];
                 isRightData=YES;
             }

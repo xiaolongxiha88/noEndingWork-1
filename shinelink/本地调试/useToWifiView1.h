@@ -10,4 +10,7 @@
 
 @interface useToWifiView1 : RootViewController
 
+@property(nonatomic,assign) int isShowScanResult;
+@property(nonatomic,strong) NSString* SN;
+
 @end
