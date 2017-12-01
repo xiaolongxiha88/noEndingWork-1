@@ -81,7 +81,13 @@
             for (int i=0; i<_lable1Array.count; i++) {
         UILabel *lable=[_AllView viewWithTag:6000+i];
         if (_lable1Array.count>0) {
-            lable.text=_lable1Array[i];
+            NSString *TEXT=[NSString stringWithFormat:@"%@",_lable1Array[i]];
+            if ([TEXT isEqualToString:@""]) {
+                lable.text=@"/";
+            }else{
+                lable.text=TEXT;
+            }
+           // lable.text=_lable1Array[i];
         }else{
             lable.text=@"";
         }

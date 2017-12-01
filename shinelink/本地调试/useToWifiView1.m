@@ -149,6 +149,7 @@ static NSString *cellTwo = @"cellTwo";
     _isAutoReflash = !_isAutoReflash;
       _reflashTime=0;
     if (_isAutoReflash) {
+        
          _rightItem.title=@"停止刷新";
     
         [self checkIsWifi];
@@ -192,6 +193,12 @@ static NSString *cellTwo = @"cellTwo";
 
 
 -(void)removeTheWaitingView{
+    [self hideProgressView];
+    self.navigationItem.rightBarButtonItem.enabled=YES;
+}
+
+-(void)removeTheWaitingAndTcp{
+    [self removeTheTcp];
     [self hideProgressView];
     self.navigationItem.rightBarButtonItem.enabled=YES;
 }
@@ -598,6 +605,8 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)receiveFailedNotice2{
+    [self hideProgressView];
+    self.navigationItem.rightBarButtonItem.enabled=YES;
     _isfinishReflash=YES;
     [self removeTheTcp];
     

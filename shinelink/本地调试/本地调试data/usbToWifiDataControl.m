@@ -38,7 +38,7 @@
     }
     
     _cmdType=type;
-    _data03_2=[NSData new];
+
     
     if (type==1) {
           [_ControlOne goToTcpType:type];
@@ -60,6 +60,7 @@
         _data04_1=[firstDic objectForKey:@"one"];
     }
     if (_cmdType==3) {
+            _data03_2=[NSData new];
         _data03_2=[firstDic objectForKey:@"one"];
     }
     
