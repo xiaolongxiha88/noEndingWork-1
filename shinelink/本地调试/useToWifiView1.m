@@ -81,6 +81,9 @@ static NSString *cellTwo = @"cellTwo";
     _rightItem=[[UIBarButtonItem alloc]initWithTitle:@"自动刷新" style:UIBarButtonItemStylePlain target:self action:@selector(tcpToGetData)];
     self.navigationItem.rightBarButtonItem=_rightItem;
     
+   UIBarButtonItem *leftItem=[[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(goBackPop)];
+    self.navigationItem.leftBarButtonItem=leftItem;
+    
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
     _firstH=170*HEIGHT_SIZE;
@@ -97,7 +100,7 @@ static NSString *cellTwo = @"cellTwo";
      _firstViewDataArray=[NSMutableArray new];
       _tableLableValueArray=[NSMutableArray new];
     _thirdDataArray=[NSMutableArray new];
-       _tableNameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/频率/电流/功率",@"PID电压/电流"];
+       _tableNameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/频率/电流/功率",@"PID电压/电流",@"关于本机"];
     NSMutableArray<usbModleOne *> *arrM = [NSMutableArray arrayWithCapacity:_tableNameArray.count];
     for (int i=0; i<_tableNameArray.count; i++) {
         usbModleOne *model = [[usbModleOne alloc] initWithDict];
@@ -119,10 +122,11 @@ static NSString *cellTwo = @"cellTwo";
         [self initUI];
 }
 
--(void)viewDidAppear:(BOOL)animated{
 
-  
+-(void)goBackPop{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 
 -(void)checkIsWifi{
     UIApplication *app = [UIApplication sharedApplication];
@@ -148,15 +152,17 @@ static NSString *cellTwo = @"cellTwo";
     _isFourData=NO;
     _isAutoReflash = !_isAutoReflash;
       _reflashTime=0;
+    
     if (_isAutoReflash) {
         
          _rightItem.title=@"停止刷新";
     
-        [self checkIsWifi];
+        [self checkIsWifi];//检查是不是Wifi
         
         if (_isWiFi) {
             self.navigationItem.rightBarButtonItem.enabled=NO;
             [self showProgressView];
+            [self removeTheTcp];
             
             [_usbControl getDataAll:1];
             
@@ -166,9 +172,11 @@ static NSString *cellTwo = @"cellTwo";
             [alertView show];
         }
     }else{
+          [self removeTheTcp];
          _rightItem.title=@"自动刷新";
         if (_timer) {
             [_timer invalidate];
+            _timer=nil;
         }
                 return;
     }
@@ -209,13 +217,11 @@ static NSString *cellTwo = @"cellTwo";
     if (_reflashTime==0) {
          [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:0.1];
         if (_timer) {
-            _timer=nil;
-            _timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(tcpToGetDataTwo) userInfo:nil repeats:YES];
-            [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-        }else{
-            _timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(tcpToGetDataTwo) userInfo:nil repeats:YES];
-            [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+             _timer=nil;
         }
+            _timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(tcpToGetDataTwo) userInfo:nil repeats:YES];
+            [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+ 
  
     }
     
@@ -566,7 +572,12 @@ static NSString *cellTwo = @"cellTwo";
         if (!cell) {
             cell=[[usbToWifiCell2 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellTwo];
         }
-    
+        usbModleOne *model = _modelList[K];
+        cell.model = model;
+        [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
+            [_tableView reloadData];
+        }];
+        
         return cell;
   
     }
@@ -584,9 +595,9 @@ static NSString *cellTwo = @"cellTwo";
 // MARK: - 返回cell高度的代理方法
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+       usbModleOne *model = _modelList[indexPath.row];
     if (indexPath.row!=4) {
-        usbModleOne *model = _modelList[indexPath.row];
-        
+     
         if (model.isShowMoreText){
             
             return [useToWifiCell1 moreHeight:(int)indexPath.row];
@@ -597,8 +608,15 @@ static NSString *cellTwo = @"cellTwo";
         }
         
     }else{
-        
-          return [usbToWifiCell2 moreHeight:(int)indexPath.row];
+        if (model.isShowMoreText){
+            
+            return [usbToWifiCell2 moreHeight:(int)indexPath.row];
+            
+        }else{
+            
+            return [usbToWifiCell2 defaultHeight];
+        }
+  
     }
 
 
@@ -664,8 +682,10 @@ static NSString *cellTwo = @"cellTwo";
     
 
    //   [[NSNotificationCenter defaultCenter] removeObserver:self name:@"StopConfigerUI" object:nil];
+    
     if (_timer) {
         [_timer invalidate];
+        _timer=nil;
     }
     
 }

@@ -42,7 +42,7 @@
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"交易历史" style:UIBarButtonItemStylePlain target:self action:@selector(checkResult)];
     self.navigationItem.rightBarButtonItem=rightItem;
     
-    _unitMoney=moneyValue;
+    _unitMoney=0;
     [self initUI];
     [self getNetMoney];
 }
@@ -89,6 +89,8 @@
             if ([firstDic[@"result"] intValue]==1) {
                 
                 _unitMoney=[[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"flowPrice"]] integerValue];
+                
+            }else{
                 
             }
         }

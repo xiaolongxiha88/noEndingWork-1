@@ -26,7 +26,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed:) name: @"TcpReceiveDataTwoFailed" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed:) name: @"TcpReceiveDataFourFailed" object:nil];
     
 }
 

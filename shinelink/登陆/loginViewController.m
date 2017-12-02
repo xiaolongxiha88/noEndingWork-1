@@ -222,7 +222,7 @@
     [imageView111 addGestureRecognizer:tapGestureRecognizerMore];
       [_scrollView addSubview:imageView111];
     
-    UIImageView *imageMore=[[UIImageView alloc]initWithFrame:CGRectMake(15*NOW_SIZE,10*HEIGHT_SIZE, 5*NOW_SIZE,20*HEIGHT_SIZE)];
+    UIImageView *imageMore=[[UIImageView alloc]initWithFrame:CGRectMake(20*NOW_SIZE,10*HEIGHT_SIZE, 4*NOW_SIZE,18*HEIGHT_SIZE)];
     imageMore.image= IMAGE(@"loginMore.png");
     [imageView111 addSubview:imageMore];
     

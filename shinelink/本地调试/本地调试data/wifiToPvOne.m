@@ -54,7 +54,7 @@ static float TCP_TIME=1;
       _isReceiveAll=NO;
     int CMDTIME;
     if (_cmdType==3) {
-        CMDTIME=2;
+        CMDTIME=1.5;
     }else{
         CMDTIME=TCP_TIME;
     }
@@ -229,7 +229,7 @@ static float TCP_TIME=1;
      
     }else  if (_cmdType==4) {
         if (!_isReceiveAll) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:_AllDataDic];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFourFailed"object:_AllDataDic];
         }
         
     }
@@ -254,7 +254,7 @@ static float TCP_TIME=1;
               [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwo"object:_AllDataDic];
         }else{
             if (_cmdType==4) {
-                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:_AllDataDic];
+                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFourFailed"object:_AllDataDic];
             }else{
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
             }
