@@ -35,7 +35,7 @@
 //        _titleView=nil;
 //    }
     
-    NSArray *nameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/频率/电流/功率",@"PID电压/电流"];
+    NSArray *nameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/电流/功率/频率",@"PID电压/电流"];
     
     if (!_titleView) {
         _titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width,titleLabelH1)];
@@ -137,20 +137,26 @@
     float H;NSArray* nameArray;NSArray* vallNameArray;
     
     if (_cellTypy==2) {
-         nameArray=@[@"电压",@"频率",@"电流",@"功率"];
+         nameArray=@[@"电压(V)",@"电流(A)",@"功率(W)",@"频率(Hz)"];
         H=lableH1+lableH2*nameArray.count;
     }else{
-           nameArray=@[@"电压",@"电流"];
+           nameArray=@[@"电压(V)",@"电流(A)"];
+        if (_cellTypy==3) {
+              nameArray=@[@"电压(V)",@"电流(mA)"];
+        }
         H=lableH1+lableH2*nameArray.count;
     }
     
-    if ((_cellTypy==0)||(_cellTypy==3)) {
+    if (_cellTypy==0) {
         vallNameArray=@[@"PV1",@"PV2",@"PV3",@"PV4",@"PV5",@"PV6",@"PV7",@"PV8"];
     }else if(_cellTypy==2){
         vallNameArray=@[@"R",@"S",@"T"];
         
     }else if(_cellTypy==1){
-        vallNameArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14",@"15",@"16"];
+        vallNameArray=@[@"Str1",@"Str2",@"Str3",@"Str4",@"Str5",@"Str6",@"Str7",@"Str8",@"Str9",@"Str10",@"Str11",@"Str12",@"Str13",@"Str14",@"Str15",@"Str16"];
+        
+    }else if(_cellTypy==3){
+          vallNameArray=@[@"PID1",@"PID2",@"PID3",@"PID4",@"PID5",@"PID6",@"PID7",@"PID8"];
         
     }
     
@@ -187,7 +193,7 @@
         lable1.text=nameArray[i];
         lable1.textColor = MainColor;
         lable1.textAlignment=NSTextAlignmentLeft;
-     
+        lable1.adjustsFontSizeToFitWidth=YES;
         lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_nameView addSubview:lable1];
 

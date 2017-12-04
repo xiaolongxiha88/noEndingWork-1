@@ -100,7 +100,7 @@ static NSString *cellTwo = @"cellTwo";
      _firstViewDataArray=[NSMutableArray new];
       _tableLableValueArray=[NSMutableArray new];
     _thirdDataArray=[NSMutableArray new];
-       _tableNameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/频率/电流/功率",@"PID电压/电流",@"关于本机"];
+       _tableNameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/频率/电流/功率",@"PID电压/电流",@"内部参数",@"关于本机"];
     NSMutableArray<usbModleOne *> *arrM = [NSMutableArray arrayWithCapacity:_tableNameArray.count];
     for (int i=0; i<_tableNameArray.count; i++) {
         usbModleOne *model = [[usbModleOne alloc] initWithDict];
@@ -219,7 +219,7 @@ static NSString *cellTwo = @"cellTwo";
         if (_timer) {
              _timer=nil;
         }
-            _timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(tcpToGetDataTwo) userInfo:nil repeats:YES];
+            _timer = [NSTimer timerWithTimeInterval:3.0 target:self selector:@selector(tcpToGetDataTwo) userInfo:nil repeats:YES];
             [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
  
  
@@ -484,23 +484,16 @@ static NSString *cellTwo = @"cellTwo";
         lable5.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_thirdView addSubview:lable5];
         
-        UILabel *lable6 = [[UILabel alloc]initWithFrame:CGRectMake(210*NOW_SIZE, 2*HEIGHT_SIZE,100*NOW_SIZE,lableH1)];
-        lable6.textColor =MainColor;
-        lable6.textAlignment=NSTextAlignmentRight;
-        lable6.text=@"单位:V/A/W/Hz";
-        lable6.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-        [_thirdView addSubview:lable6];
+//        UILabel *lable6 = [[UILabel alloc]initWithFrame:CGRectMake(210*NOW_SIZE, 2*HEIGHT_SIZE,100*NOW_SIZE,lableH1)];
+//        lable6.textColor =MainColor;
+//        lable6.textAlignment=NSTextAlignmentRight;
+//        lable6.text=@"单位:V/A/W/Hz";
+//        lable6.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+//        [_thirdView addSubview:lable6];
+        
     }
  
-    
- 
-    
-//    if (_tableView) {
-//        [_tableView removeFromSuperview];
-//        _tableView=nil;
-//    }
-    
-  
+
     
     if (!_tableView) {
         _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, view1H+10*HEIGHT_SIZE+28*HEIGHT_SIZE, SCREEN_Width,SCREEN_Height+600*HEIGHT_SIZE)];
@@ -531,7 +524,7 @@ static NSString *cellTwo = @"cellTwo";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 5;
+    return _tableNameArray.count;
 }
 
 
@@ -540,7 +533,7 @@ static NSString *cellTwo = @"cellTwo";
     
     int K=(int)indexPath.row;
     
-    if (K!=4) {
+    if (K<4) {
         useToWifiCell1 *cell = [tableView dequeueReusableCellWithIdentifier:cellOne forIndexPath:indexPath];
         if (!cell) {
             cell=[[useToWifiCell1 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellOne];
@@ -567,11 +560,26 @@ static NSString *cellTwo = @"cellTwo";
         }];
         return cell;
     }else{
+        NSMutableArray *dataNewArray=[NSMutableArray new];
+        for (int i=0; i<_thirdDataArray.count; i++) {
+            if (K==4) {
+                if (i>5) {
+                      [dataNewArray addObject:_thirdDataArray[i]];
+                }
+            }
+            if (K==5) {
+                if (i<6) {
+                    [dataNewArray addObject:_thirdDataArray[i]];
+                }
+            }
+        }
+        
         usbToWifiCell2 *cell = [tableView dequeueReusableCellWithIdentifier:cellTwo forIndexPath:indexPath];
-        cell.lable1Array=[NSArray arrayWithArray:_thirdDataArray];
+        cell.lable1Array=[NSArray arrayWithArray:dataNewArray];
         if (!cell) {
             cell=[[usbToWifiCell2 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellTwo];
         }
+        cell.indexRow=K;
         usbModleOne *model = _modelList[K];
         cell.model = model;
         [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
@@ -596,7 +604,7 @@ static NSString *cellTwo = @"cellTwo";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
        usbModleOne *model = _modelList[indexPath.row];
-    if (indexPath.row!=4) {
+    if (indexPath.row<4) {
      
         if (model.isShowMoreText){
             

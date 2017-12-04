@@ -72,21 +72,19 @@
      int warnInt=[_warnCode intValue];
  
     if (faultInt==101) {
-          _faultString=@"1.STM32 doesn't receive data from control board over 10s  2.28075 OR 28067 doesn't receive data from COM board over 5s  3.SPI Connected 28075 and 28067 if fail over 1s";
+          _faultString=@"通信故障";
     }else if (faultInt==102) {
-        _faultString=@"冗余采样异常保护，PV采样，正负bus采样，三相AC电压采样，GFCI，ISO采样在 主DSP28075和副DSP28067之间相差太大时报错。";
+        _faultString=@"冗余采样异常保护";
     }else if (faultInt==108) {
          _faultString=@"主SPS供电异常";
     }else if (faultInt==112) {
-        _faultString=@"AFCI弧判断错误 ";
+        _faultString=@"AFCI拉弧故障 ";
     }else if (faultInt==113) {
-        _faultString=@"IGBT驱动错误（驱动电压异常、IGBT短路）";
+        _faultString=@"IGBT驱动错误";
     }else if (faultInt==114) {
         _faultString=@"AFCI模块检测失败";
     }else if (faultInt==117) {
         _faultString=@"AC侧继电器异常";
-    }else if (faultInt==119) {
-        _faultString=@"GFCI模块损坏 ";
     }else if (faultInt==121) {
         _faultString=@"CPLD芯片检测异常 ";
     }else if (faultInt==122) {
@@ -105,13 +103,17 @@
         _faultString=@"Grid voltage is outrange ";
     }else if (faultInt==130) {
         _faultString=@"Grid Freq. is outrange";
+    }else if (faultInt==99) {
+        _faultString=@"无故障信息 ";
     }else{
          _faultString=[NSString stringWithFormat:@"Error:%d",faultInt];
     }
     
     
     if (warnInt==100) {
-        _warnString=@"fan fail";
+        _warnString=@"风扇异常";
+    }else if (warnInt==104) {
+        _warnString=@"DSP与M3版本不一致";
     }else if (warnInt==106) {
         _warnString=@"防雷器发生故障";
     }else if (warnInt==107) {
@@ -119,11 +121,13 @@
     }else if (warnInt==108) {
         _warnString=@"PV1至PV6 短路异常 ";
     }else if (warnInt==109) {
-        _warnString=@"PV1至PV6 boost驱动异常";
+        _warnString=@"直流升压驱动异常";
     }else if (warnInt==110) {
-        _warnString=@"12路组串中有组串出现反接或短路 ";
+        _warnString=@"组串异常 ";
     }else if (warnInt==111) {
         _warnString=@"U盘过流保护 ";
+    }else if (warnInt==99) {
+        _warnString=@"无警告信息 ";
     }else{
         _warnString=[NSString stringWithFormat:@"Warning:%d",warnInt];
     }

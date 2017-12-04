@@ -37,7 +37,12 @@
         
         _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0, 200*NOW_SIZE, titleLabelH1)];
         _titleLabel.textColor = MainColor;
-        _titleLabel.text=@"关于本机";
+        if (_indexRow==4) {
+               _titleLabel.text=@"内部参数";
+        }else{
+               _titleLabel.text=@"关于本机";
+        }
+     
         _titleLabel.adjustsFontSizeToFitWidth=YES;
         _titleLabel.textAlignment=NSTextAlignmentLeft;
         _titleLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -79,8 +84,13 @@ self.model.isShowMoreText = !self.model.isShowMoreText;
 }
 
 -(void)initUI{
-    
-     NSArray *nameArray=@[@"厂商信息",@"机器型号",@"序列号",@"Model号",@"固件(外部)版本",@"固件(内部)版本",@"并网倒计时",@"功率百分比",@"PF",@"内部环境温度",@"Boost温度",@"INV温度",@"P Bus电压",@"N Bus电压",@"PID故障信息",@"PID状态"];
+    NSArray *nameArray;
+    if (_indexRow==4) {
+     nameArray=@[@"并网倒计时",@"功率百分比",@"PF",@"内部环境温度",@"Boost温度",@"INV温度",@"+Bus",@"-Bus",@"PID故障信息",@"PID状态"];
+    }else{
+        nameArray=@[@"厂商信息",@"机器型号",@"序列号",@"Model号",@"固件(外部)版本",@"固件(内部)版本"];
+    }
+
     
     float H0=50*HEIGHT_SIZE;
     float H=H0*nameArray.count+30*HEIGHT_SIZE;
@@ -168,8 +178,11 @@ self.model.isShowMoreText = !self.model.isShowMoreText;
 
 // MARK: - 获取展开后的高度
 + (CGFloat)moreHeight:(int)CellTyoe{
-    float H=600*HEIGHT_SIZE;
-
+    float H=300*HEIGHT_SIZE;
+    if (CellTyoe==5) {
+          H=260*HEIGHT_SIZE;
+    }
+    
     return H;
     
 }

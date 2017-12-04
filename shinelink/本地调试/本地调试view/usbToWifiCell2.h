@@ -22,7 +22,7 @@
 @property(nonatomic,strong) UIView *titleView;
 @property(nonatomic,strong) UILabel *titleLabel;
 @property(nonatomic,strong) UIButton *moreTextBtn;
-
+@property(nonatomic,assign) NSInteger indexRow;
 
 @property(nonatomic, copy) void(^showMoreBlock)(UITableViewCell *currentCell);
 

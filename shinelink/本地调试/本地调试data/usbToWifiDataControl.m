@@ -19,6 +19,8 @@
 @property(nonatomic,assign)int cmdTpye;
 @property(nonatomic,strong)NSData*data03_2;
 
+@property(nonatomic,assign)BOOL isFirstAutoData;
+
 @end
 
 @implementation usbToWifiDataControl
@@ -43,6 +45,7 @@
     if (type==1) {
           [_ControlOne goToTcpType:type];
     }else if (type==2){
+        _isFirstAutoData=YES;
            [_ControlOne goToTcpNoDelay:2 cmdNum:1 cmdType:@"4" regAdd:@"0" Length:@"125"];
     }else if (type==3){
         [_ControlOne goToTcpNoDelay:2 cmdNum:1 cmdType:@"3" regAdd:@"125" Length:@"10"];
@@ -56,27 +59,32 @@
     NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
    
     if (_cmdType==2) {
-        _data04_1=[NSData new];
-        _data04_1=[firstDic objectForKey:@"one"];
+        if (_isFirstAutoData) {
+            _data04_1=[NSData new];
+            _data04_1=[firstDic objectForKey:@"one"];
+            _isFirstAutoData=NO;
+            [_ControlOne goToTcpNoDelay:2 cmdNum:1 cmdType:@"4" regAdd:@"125" Length:@"125"];
+        }else{
+            _data04_2=[NSData new];
+            _data04_2=[firstDic objectForKey:@"one"];
+            _isFirstAutoData=YES;
+                  [self getFirstViewValue];
+        }
+   
     }
+    
     if (_cmdType==3) {
             _data03_2=[NSData new];
         _data03_2=[firstDic objectForKey:@"one"];
+          [self getFirstViewValue];
     }
+    
+    
+    
     
 //    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
 //    NSMutableDictionary *oldDic=[ud objectForKey:@"maxSecondData"];
-//    if ([oldDic.allKeys containsObject:@"one"]) {
-//         _data03=[NSData new];
-//          _data03=[oldDic objectForKey:@"one"];
-//    }
-//
-//    if ([oldDic.allKeys containsObject:@"three"]) {
-//        _data04_2=[NSData new];
-//        _data04_2=[oldDic objectForKey:@"three"];
-//    }
-    
-      [self getFirstViewValue];
+
 }
 
 
@@ -204,7 +212,7 @@
     }
     
 
-    NSArray *ViewArray3=@[AcVoltArray,AcHzArray,AcCurrArray,AcPowerArray];
+    NSArray *ViewArray3=@[AcVoltArray,AcCurrArray,AcPowerArray,AcHzArray];
   
     
     ///////////////////////// 2-4

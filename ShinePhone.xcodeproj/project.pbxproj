@@ -415,6 +415,7 @@
 		337532F31D051C14009CE66F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 337532F21D051C14009CE66F /* libz.tbd */; };
 		337584431D267D12006AC140 /* product.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337584421D267D12006AC140 /* product.jpg */; };
 		337584451D267E2A006AC140 /* product2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337584441D267E2A006AC140 /* product2.jpg */; };
+		3376A6DB1FD52B580043FC53 /* usbToWifiWarnList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6DA1FD52B570043FC53 /* usbToWifiWarnList.m */; };
 		3376B3CC1F9726720069F820 /* useToWifiView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376B3CB1F9726720069F820 /* useToWifiView1.m */; };
 		3376B3CF1F973ED00069F820 /* max_ele.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3CE1F973ED00069F820 /* max_ele.png */; };
 		3376B3D51F973EE00069F820 /* max_parameter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3D01F973EDF0069F820 /* max_parameter.png */; };
@@ -1441,6 +1442,8 @@
 		337532F21D051C14009CE66F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		337584421D267D12006AC140 /* product.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = product.jpg; sourceTree = "<group>"; };
 		337584441D267E2A006AC140 /* product2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = product2.jpg; sourceTree = "<group>"; };
+		3376A6D91FD52B570043FC53 /* usbToWifiWarnList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiWarnList.h; sourceTree = "<group>"; };
+		3376A6DA1FD52B570043FC53 /* usbToWifiWarnList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiWarnList.m; sourceTree = "<group>"; };
 		3376B3CA1F9726720069F820 /* useToWifiView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = useToWifiView1.h; sourceTree = "<group>"; };
 		3376B3CB1F9726720069F820 /* useToWifiView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = useToWifiView1.m; sourceTree = "<group>"; };
 		3376B3CE1F973ED00069F820 /* max_ele.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_ele.png; sourceTree = "<group>"; };
@@ -4494,6 +4497,8 @@
 				337475F11FAB004B00BB1A76 /* usbToWifiFour.m */,
 				339844261FA9B43A006A15AD /* usbToWifiWarnView.h */,
 				339844271FA9B43A006A15AD /* usbToWifiWarnView.m */,
+				3376A6D91FD52B570043FC53 /* usbToWifiWarnList.h */,
+				3376A6DA1FD52B570043FC53 /* usbToWifiWarnList.m */,
 				3376B3E01F9839C70069F820 /* useToWifiCell1.h */,
 				3376B3E11F9839C70069F820 /* useToWifiCell1.m */,
 				33FAD8DE1F99996F0030EEC3 /* usbToWifiCell2.h */,
@@ -5129,6 +5134,7 @@
 				339844251FA82107006A15AD /* usbToWifiControlThree.m in Sources */,
 				33860FF21EEABB9D004150FD /* PlantList.swift in Sources */,
 				334B8F4C1C914A6D00798A69 /* PNChartLabel.m in Sources */,
+				3376A6DB1FD52B580043FC53 /* usbToWifiWarnList.m in Sources */,
 				33AF3D1D1D8E67210007D6C2 /* EasyTimelineEvent.m in Sources */,
 				334771041C9A6219003A6F13 /* aliasViewController.m in Sources */,
 				337C43BA1FC400220000A6F2 /* WXApiManager.m in Sources */,
