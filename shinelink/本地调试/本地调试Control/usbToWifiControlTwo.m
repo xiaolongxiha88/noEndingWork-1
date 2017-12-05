@@ -82,8 +82,7 @@
         [self initFourUI];
     }
     
-    
-  
+ 
 }
 
 
@@ -110,7 +109,12 @@
         _textLable.textColor=COLOR(102, 102, 102, 1);;
         _textLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         _textLable.adjustsFontSizeToFitWidth=YES;
-        [_view1 addSubview:_textLable];
+        if (_CellNumber==9) {
+            _setValue=@"0";
+        }else{
+              [_view1 addSubview:_textLable];
+        }
+      
     }else{
         _textField2 = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         _textField2.layer.borderWidth=1;

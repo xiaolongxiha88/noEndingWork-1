@@ -416,6 +416,7 @@
 		337584431D267D12006AC140 /* product.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337584421D267D12006AC140 /* product.jpg */; };
 		337584451D267E2A006AC140 /* product2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337584441D267E2A006AC140 /* product2.jpg */; };
 		3376A6DB1FD52B580043FC53 /* usbToWifiWarnList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6DA1FD52B570043FC53 /* usbToWifiWarnList.m */; };
+		3376A6DE1FD6AEF60043FC53 /* usbToWifiWarnListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6DD1FD6AEF60043FC53 /* usbToWifiWarnListCell.m */; };
 		3376B3CC1F9726720069F820 /* useToWifiView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376B3CB1F9726720069F820 /* useToWifiView1.m */; };
 		3376B3CF1F973ED00069F820 /* max_ele.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3CE1F973ED00069F820 /* max_ele.png */; };
 		3376B3D51F973EE00069F820 /* max_parameter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3D01F973EDF0069F820 /* max_parameter.png */; };
@@ -1444,6 +1445,8 @@
 		337584441D267E2A006AC140 /* product2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = product2.jpg; sourceTree = "<group>"; };
 		3376A6D91FD52B570043FC53 /* usbToWifiWarnList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiWarnList.h; sourceTree = "<group>"; };
 		3376A6DA1FD52B570043FC53 /* usbToWifiWarnList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiWarnList.m; sourceTree = "<group>"; };
+		3376A6DC1FD6AEF60043FC53 /* usbToWifiWarnListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiWarnListCell.h; sourceTree = "<group>"; };
+		3376A6DD1FD6AEF60043FC53 /* usbToWifiWarnListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiWarnListCell.m; sourceTree = "<group>"; };
 		3376B3CA1F9726720069F820 /* useToWifiView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = useToWifiView1.h; sourceTree = "<group>"; };
 		3376B3CB1F9726720069F820 /* useToWifiView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = useToWifiView1.m; sourceTree = "<group>"; };
 		3376B3CE1F973ED00069F820 /* max_ele.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_ele.png; sourceTree = "<group>"; };
@@ -4499,6 +4502,8 @@
 				339844271FA9B43A006A15AD /* usbToWifiWarnView.m */,
 				3376A6D91FD52B570043FC53 /* usbToWifiWarnList.h */,
 				3376A6DA1FD52B570043FC53 /* usbToWifiWarnList.m */,
+				3376A6DC1FD6AEF60043FC53 /* usbToWifiWarnListCell.h */,
+				3376A6DD1FD6AEF60043FC53 /* usbToWifiWarnListCell.m */,
 				3376B3E01F9839C70069F820 /* useToWifiCell1.h */,
 				3376B3E11F9839C70069F820 /* useToWifiCell1.m */,
 				33FAD8DE1F99996F0030EEC3 /* usbToWifiCell2.h */,
@@ -5101,6 +5106,7 @@
 				3381ECEE1CBCA3ED00DCF0D2 /* energyDemo.m in Sources */,
 				33FEFCD31C7D8A9500324374 /* AddressPickView.m in Sources */,
 				335EE8F71F011138005F098A /* ossQuetionDetail.m in Sources */,
+				3376A6DE1FD6AEF60043FC53 /* usbToWifiWarnListCell.m in Sources */,
 				336F03FF1F04D59B00DE7CD7 /* orderCellOne.m in Sources */,
 				33AF3D281D8E67210007D6C2 /* ProgressHUD.m in Sources */,
 				3387B8BB1FB295B40073FB35 /* payView1.m in Sources */,

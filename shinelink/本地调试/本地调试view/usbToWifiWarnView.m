@@ -7,12 +7,15 @@
 //
 
 #import "usbToWifiWarnView.h"
+#import "wifiToPvOne.h"
+#import "usbToWifiWarnList.h"
 
 @interface usbToWifiWarnView ()
 
 @property(nonatomic,strong)NSString *faultString;
 @property(nonatomic,strong)NSString *faultStateString;
 @property(nonatomic,strong)NSString *warnString;
+@property(nonatomic,strong)wifiToPvOne*ControlOne;
 
 @end
 
@@ -23,6 +26,83 @@
    self.view.backgroundColor=COLOR(242, 242, 242, 1);
     _faultString=@""; _faultStateString=@""; _warnString=@"";
     [self getData];
+    
+    if (!_ControlOne) {
+        _ControlOne=[[wifiToPvOne alloc]init];
+    }
+    
+    [self getTimeData];
+    
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"历史故障" style:UIBarButtonItemStylePlain target:self action:@selector(goToHistory)];
+    self.navigationItem.rightBarButtonItem=rightItem;
+}
+
+-(void)goToHistory{
+    usbToWifiWarnList *testView=[[usbToWifiWarnList alloc]init];
+    [self.navigationController pushViewController:testView animated:YES];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveDataTwoFailed" object:nil];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    if (_ControlOne) {
+        [_ControlOne disConnect];
+    }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwo" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwoFailed" object:nil];
+    
+}
+
+-(void)receiveFirstData2:(NSNotification*) notification{
+    NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
+    NSData *receiveData=[firstDic objectForKey:@"one"];
+    Byte *dataArray=(Byte*)[receiveData bytes];
+    int monthInt=dataArray[1];
+    int dayInt=dataArray[2];
+    int hourInt=dataArray[3];
+      int minInt=dataArray[4];
+    
+    NSString*timeString=[NSString stringWithFormat:@"%d-%d %d:%d",monthInt,dayInt,hourInt,minInt];
+    
+    UIView *V1=[self.view viewWithTag:2000];
+    float lableH1=20*HEIGHT_SIZE;
+    UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(210*NOW_SIZE, 0,100*NOW_SIZE,lableH1)];
+    lable5.textColor =COLOR(51, 51, 51, 1);
+    lable5.textAlignment=NSTextAlignmentRight;
+    lable5.text=timeString;
+    lable5.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    [V1 addSubview:lable5];
+}
+
+-(void)setFailed{
+
+    [self removeTheTcp];
+    
+     [self performSelector:@selector(getDataAgain) withObject:nil afterDelay:2];
+    
+ 
+}
+
+-(void)getDataAgain{
+         [_ControlOne goToOneTcp:2 cmdNum:1 cmdType:@"4" regAdd:@"501" Length:@"10"];
+}
+
+-(void)removeTheTcp{
+    if (_ControlOne) {
+        [_ControlOne disConnect];
+    }
+    
+}
+
+-(void)getTimeData{
+     [self removeTheTcp];
+    
+     [_ControlOne goToOneTcp:2 cmdNum:1 cmdType:@"4" regAdd:@"501" Length:@"10"];
 }
 
 -(void)initUI{
@@ -33,8 +113,9 @@
     NSArray *nameArray=@[[NSString stringWithFormat:@"故障码:%@",_faultCode],[NSString stringWithFormat:@"警告码:%@",_warnCode]];
     
     for (int i=0; i<valueArray.count; i++) {
-        UIView *_secondView=[[UIView alloc]initWithFrame:CGRectMake(W1, 5*HEIGHT_SIZE+H*i, W0, H)];
+        UIView* _secondView=[[UIView alloc]initWithFrame:CGRectMake(W1, 5*HEIGHT_SIZE+H*i, W0, H)];
         _secondView.backgroundColor=[UIColor clearColor];
+        _secondView.tag=2000+i;
         [self.view addSubview:_secondView];
         
         
