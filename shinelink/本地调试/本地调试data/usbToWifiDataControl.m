@@ -130,7 +130,7 @@
       float faultCode=[self changeOneRegister:_data04_1 registerNum:105];      //故障
       float warnCode=[self changeTwoRegister:_data04_1 registerNum:112];       //警告
     
-  //  EacToday=20011;warnCode=2777;
+  
     NSArray *oneViewArray=@[[NSString stringWithFormat:@"%.1fkWh",EacToday/10],[NSString stringWithFormat:@"%.1fkWh",EacTotal/10],[NSString stringWithFormat:@"%.1fW",EacputPower/10],[NSString stringWithFormat:@"%.1fW",NormalPowerValue/10],[NSString stringWithFormat:@"%.f",faultCode+99],[NSString stringWithFormat:@"%.f",warnCode+99]];
     
     [_receiveDic setObject:oneViewArray forKey:@"oneView"];

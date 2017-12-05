@@ -88,21 +88,21 @@
     }else if (faultInt==121) {
         _faultString=@"CPLD芯片检测异常 ";
     }else if (faultInt==122) {
-        _faultString=@"BUS过压或者欠压";
+        _faultString=@"BUS电压异常";
     }else if (faultInt==124) {
-        _faultString=@"Grid disconnect or connect unormal";
+        _faultString=@"无电网连接";
     }else if (faultInt==125) {
-        _faultString=@"PV input insulation impedance too low";
+        _faultString=@"PV绝缘阻抗低";
     }else if (faultInt==126) {
-        _faultString=@"Leakage current too high.(protect enable when the GFCI module is normal)";
+        _faultString=@"漏电流过高";
     }else if (faultInt==127) {
-        _faultString=@"Output DC current too high ";
+        _faultString=@"输出电流直流分量过高";
     }else if (faultInt==128) {
-        _faultString=@"PV voltage over 1000V";
+        _faultString=@"PV电压过高";
     }else if (faultInt==129) {
-        _faultString=@"Grid voltage is outrange ";
+        _faultString=@"电网过欠压保护 ";
     }else if (faultInt==130) {
-        _faultString=@"Grid Freq. is outrange";
+        _faultString=@"电网过欠频保护";
     }else if (faultInt==99) {
         _faultString=@"无故障信息 ";
     }else{

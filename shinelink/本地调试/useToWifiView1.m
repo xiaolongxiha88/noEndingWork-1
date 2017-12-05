@@ -255,11 +255,7 @@ static NSString *cellTwo = @"cellTwo";
     float W1=5*NOW_SIZE;float H1=8*HEIGHT_SIZE;float H2=50*HEIGHT_SIZE;float imageH=30*HEIGHT_SIZE;
     float W2=(H2-imageH)/2;  float lableH=30*HEIGHT_SIZE;float lableW=60*NOW_SIZE;
     
-//    if (_firstView) {
-//        [_firstView removeFromSuperview];
-//        _firstView=nil;
-//    }
-    
+
     NSArray *dataNameArray=@[root_Device_head_182,root_Device_head_183,root_dangqian_gonglv,root_usbTowifi_189,root_cuoWu,root_usbTowifi_190];
     if (!_firstView) {
         _firstView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, _firstH)];
@@ -268,8 +264,6 @@ static NSString *cellTwo = @"cellTwo";
         NSArray *picName=@[@"max_ele.png",@"max_power.png",@"max_worning.png"];
         NSArray *colorArray=@[COLOR(88, 196, 95, 1),COLOR(0, 156, 255, 1),COLOR(221, 120, 120, 1)];
         NSArray *nameArray=@[root_energy_fadianliang,root_gongLv,root_cuoWu];
-        
-        
         
         
         
@@ -316,6 +310,7 @@ static NSString *cellTwo = @"cellTwo";
                 int T=2*i+K;
                 if (_firstViewDataArray.count>0) {
                     lable4.text=_firstViewDataArray[T];
+
                 }else{
                     lable4.text=@"";
                 }
@@ -339,6 +334,12 @@ static NSString *cellTwo = @"cellTwo";
              UILabel *lable=[_firstView viewWithTag:2000+i];
             if (_firstViewDataArray.count>0) {
                 lable.text=_firstViewDataArray[i];
+                if (lable.tag==2004 || lable.tag==2005) {
+                    if ([_firstViewDataArray[i] intValue]==99) {
+                        lable.text=@"无";
+                    }
+                }
+                
             }else{
                 lable.text=@"";
             }

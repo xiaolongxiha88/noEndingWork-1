@@ -21,7 +21,9 @@
 @property(nonatomic,assign) int CellTypy;
 @property(nonatomic,assign) int CellNumber;
 
-
+@property(nonatomic,assign) int OneSetInt;
+@property(nonatomic,assign) int twoSetBeginInt;
+@property(nonatomic,assign) int  twoSetOverInt;
 
 @property(nonatomic,strong)UIButton *goBut;
 @property(nonatomic,strong)UITextField *textField2;

@@ -6,6 +6,8 @@
 //  Copyright © 2017年 sky. All rights reserved.
 //
 
+
+
 #import "usbToWifiControlTwo.h"
 #import "ZJBLStoreShopTypeAlert.h"
 
@@ -62,13 +64,13 @@
     [_goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
       [_view1 addSubview:_goBut];
     
-    if (_CellNumber<21) {
+    if (_CellNumber<_OneSetInt) {
         _cmdRegisterNum=1;
-    }else  if (_CellNumber>20 && _CellNumber<27) {
+    }else  if (_CellNumber>_twoSetBeginInt && _CellNumber<_twoSetOverInt) {
         _cmdRegisterNum=2;
-    }else if (_CellNumber==28 || _CellNumber==29){
+    }else if (_CellNumber==30 || _CellNumber==29){
         _cmdRegisterNum=8;
-    }else if (_CellNumber==27){
+    }else if (_CellNumber==28){
         _cmdRegisterNum=6;
     }
     
@@ -95,7 +97,7 @@
     PV2Lable.adjustsFontSizeToFitWidth=YES;
     [_view1 addSubview:PV2Lable];
     
-    if (_CellNumber==0 || _CellNumber==2 || _CellNumber==7 || _CellNumber==8 || _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20) {
+    if (_CellNumber==0  || _CellNumber==8 || _CellNumber==9 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20 || _CellNumber==21) {
         _textLable=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         _textLable.text=root_MIX_223;
         _textLable.userInteractionEnabled=YES;
@@ -113,12 +115,14 @@
         _textField2 = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         _textField2.layer.borderWidth=1;
         _textField2.layer.cornerRadius=5;
+        _textField2.tag=2000;
         _textField2.layer.borderColor=COLOR(102, 102, 102, 1).CGColor;
         _textField2.textColor = COLOR(102, 102, 102, 1);
         _textField2.tintColor = COLOR(102, 102, 102, 1);
         _textField2.textAlignment=NSTextAlignmentCenter;
         _textField2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_view1 addSubview:_textField2];
+        
         
     }
     
@@ -132,7 +136,33 @@
     PV2Lable1.adjustsFontSizeToFitWidth=YES;
     [_view1 addSubview:PV2Lable1];
     
-    _goBut.frame=CGRectMake(60*NOW_SIZE,165*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    
+    if (_CellNumber==2 || _CellNumber==3 || _CellNumber==4 || _CellNumber==5 || _CellNumber==6 ) {
+        UILabel *PV2Lable2=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 120*HEIGHT_SIZE, 300*NOW_SIZE,20*HEIGHT_SIZE )];
+        PV2Lable2.text=@"记忆使能";
+        PV2Lable2.textAlignment=NSTextAlignmentLeft;
+        PV2Lable2.textColor=COLOR(102, 102, 102, 1);
+        PV2Lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        PV2Lable2.adjustsFontSizeToFitWidth=YES;
+        [_view1 addSubview:PV2Lable2];
+        
+        _textLable=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 150*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
+        _textLable.text=@"记忆";
+        _setValue=@"1";
+        _textLable.userInteractionEnabled=YES;
+        _textLable.layer.borderWidth=1;
+        _textLable.layer.cornerRadius=5;
+        _textLable.layer.borderColor=COLOR(102, 102, 102, 1).CGColor;
+        UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice)];
+        [_textLable addGestureRecognizer:tapGestureRecognizer1];
+        _textLable.textAlignment=NSTextAlignmentCenter;
+        _textLable.textColor=COLOR(102, 102, 102, 1);;
+        _textLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        _textLable.adjustsFontSizeToFitWidth=YES;
+        [_view1 addSubview:_textLable];
+    }
+    
+    _goBut.frame=CGRectMake(60*NOW_SIZE,220*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
   
 }
 
@@ -140,7 +170,7 @@
 -(void)initThreeUI{
 
     _lableNameArray=@[@[@"电源启动斜率(20)",@"电源重启斜率(21)"],@[@"Q(v)切出高压(93)",@"Q(v)切入高压(94)"],@[@"Q(v)切出低压(95)",@"Q(v)切入低压(96)"],@[@"Q(v)切入功率(97)",@"Q(v)切出功率(98)"],@[@"无功曲线切入电压(99)",@"无功曲线切出电压(100)"],@[@"检查固件1(233)",@"检查固件2(234)"]];
-    _nameArray0=[NSArray arrayWithArray:_lableNameArray[_CellNumber-21]];
+    _nameArray0=[NSArray arrayWithArray:_lableNameArray[_CellNumber-_OneSetInt]];
     
     
     
@@ -185,14 +215,14 @@
 
     NSArray* nameArray=@[@[@"PF调整值1(101)",@"PF调整值2(102)",@"PF调整值3(103)",@"PF调整值4(104)",@"PF调整值5(105)",@"PF调整值6(106)",],@[@"PF限制负载百分比点1(110)",@"PF限制负载百分比点2(112)",@"PF限制负载百分比点3(114)",@"PF限制负载百分比点4(116)"],@[@"PF限制功率因数点1(111)",@"PF限制功率因数点2(113)",@"PF限制功率因数点3(115)",@"PF限制功率因数点4(117)"]];
     
-    if (_CellNumber==27) {
+    if (_CellNumber==28) {
         _nameArray0=nameArray[0];
         _goBut.frame=CGRectMake(60*NOW_SIZE,665*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
         _view1.contentSize=CGSizeMake(SCREEN_Width,  SCREEN_Height*2);
-    }else if (_CellNumber==28) {
+    }else if (_CellNumber==29) {
         _nameArray0=nameArray[1];
         _goBut.frame=CGRectMake(60*NOW_SIZE,435*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
-    }else if (_CellNumber==29) {
+    }else if (_CellNumber==30) {
         _nameArray0=nameArray[2];
         _goBut.frame=CGRectMake(60*NOW_SIZE,435*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
         
@@ -239,19 +269,55 @@
     _setValueArray=[NSMutableArray new];
     _setRegisterArray=[NSMutableArray new];
     NSArray *cmdValue=@[
-                        @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
+                        @"0",@"1",@"3",@"4",@"4",@"5",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
     
-    if (_CellNumber<21) {
-        if (_CellNumber==0 || _CellNumber==2 || _CellNumber==7 || _CellNumber==8 || _CellNumber==14 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20) {
+    if (_CellNumber<_OneSetInt) {
+        if (_CellNumber==2 || _CellNumber==3 || _CellNumber==4 || _CellNumber==5 || _CellNumber==6 ) {
+            if (_textField2.text==nil || [_textField2.text isEqualToString:@""]) {
+                [self showToastViewWithTitle:@"请添加设置值"];
+                return;
+            }
+                 [_setRegisterArray addObject:@"2"];                //记忆使能
+              [_setValueArray addObject:_setValue];
+            
+            [_setRegisterArray addObject:cmdValue[_CellNumber]];   //设置值
+            if (_CellNumber==5 || _CellNumber==6 ) {
+                float value1=[_textField2.text floatValue]*10000+10000;
+                   [_setValueArray addObject:[NSString stringWithFormat:@"%.f",value1]];
+            }else{
+                     [_setValueArray addObject:_textField2.text];
+            }
+         
+            
+            if ( _CellNumber==3 || _CellNumber==4 || _CellNumber==5 || _CellNumber==6 ) {             //PF模式
+                  [_setRegisterArray addObject:@"89"];
+                if (_CellNumber==3) {
+                    [_setValueArray addObject:@"5"];
+                }
+                if (_CellNumber==4) {
+                    [_setValueArray addObject:@"4"];
+                }
+                if (_CellNumber==5 || _CellNumber==6) {
+                    [_setValueArray addObject:@"1"];
+                }
+            }
+            
+            
+         
+            
         }else{
-            _setValue=_textField2.text;
+            if (_CellNumber==0 || _CellNumber==2 || _CellNumber==8 || _CellNumber==9 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20 || _CellNumber==21) {
+            }else{
+                _setValue=_textField2.text;
+            }
+            if (_setValue==nil || [_setValue isEqualToString:@""]) {
+                [self showToastViewWithTitle:@"请添加设置值"];
+                return;
+            }
+            [_setRegisterArray addObject:cmdValue[_CellNumber]];
+            [_setValueArray addObject:_setValue];
         }
-        if (_setValue==nil || [_setValue isEqualToString:@""]) {
-            [self showToastViewWithTitle:@"请添加设置值"];
-            return;
-        }
-        [_setRegisterArray addObject:cmdValue[_CellNumber]];
-        [_setValueArray addObject:_setValue];
+       
     }else{
         BOOL isWrite=NO;
         for (int i=0; i<_nameArray0.count; i++) {
@@ -265,15 +331,20 @@
              [self showToastViewWithTitle:@"请添加设置值"];
         }
         
-        if (_CellNumber>20 && _CellNumber<27) {
+        if (_CellNumber>_twoSetBeginInt && _CellNumber<_twoSetOverInt) {
             NSArray *cmdValue1=@[@[@"20",@"21"],@[@"93",@"94"],@[@"95",@"96"],@[@"97",@"98"],@[@"99",@"100"],@[@"233",@"234"]];
-            _setRegisterArray=[NSMutableArray arrayWithArray:cmdValue1[_CellNumber-21]];
-        }else if (_CellNumber==28 || _CellNumber==29){
+            _setRegisterArray=[NSMutableArray arrayWithArray:cmdValue1[_CellNumber-_OneSetInt]];
+        }else if (_CellNumber==29 || _CellNumber==30){
             NSArray *cmdValue1=@[@[@"110",@"112",@"114",@"116"],@[@"111",@"113",@"115",@"117"]];
-            _setRegisterArray=[NSMutableArray arrayWithArray:cmdValue1[_CellNumber-28]];
-        }else if (_CellNumber==27){
+            _setRegisterArray=[NSMutableArray arrayWithArray:cmdValue1[_CellNumber-29]];
+        }else if (_CellNumber==28){
             _setRegisterArray=[NSMutableArray arrayWithArray:@[@"101",@"102",@"103",@"104",@"105",@"106"]];
         }
+    }
+    
+    if (_CellNumber==7 || _CellNumber==27) {
+        [self showAlertViewWithTitle:@"暂不允许设置" message:nil cancelButtonTitle:root_OK];
+        return;
     }
     
     [self setTwo];
@@ -307,20 +378,23 @@
 
 
 -(void)showTheChoice{
-    if (_CellNumber==0 || _CellNumber==2 || _CellNumber==15 || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19){
+    if (_CellNumber==0  || _CellNumber==16 || _CellNumber==17 || _CellNumber==18 || _CellNumber==19 || _CellNumber==20){
         _choiceArray=@[@"Off(0)",@"On(1)"];
     }
-    if (_CellNumber==8 ){
+    if (_CellNumber==9 ){
         _choiceArray=@[@"PF=1(0)",@"PF by set(1)",@"Default PF line(2)",@"User PF line(3)",@"UnderExcited(Inda)Reactive Power(4)",@"OverExcited(Capa)Reactive Power(5)",@"Q(v)model(6)"];
     }
-    if (_CellNumber==20 ){
+    if (_CellNumber==21 ){
         _choiceArray=@[@"0",@"1",@"2"];
     }
-    if (_CellNumber==7 ){
+    if (_CellNumber==8 ){
         _choiceArray=@[@"9600(0)",@"38400(1)",@"115200(2)"];
     }
-    if (_CellNumber==14 ){
+    if (_CellNumber==15 ){
        _choiceArray=@[@"On(0)",@"Off(1)"];
+    }
+    if (_CellNumber==2 || _CellNumber==3 || _CellNumber==4 || _CellNumber==5 || _CellNumber==6 ) {
+         _choiceArray=@[@"不记忆(0)",@"记忆(1)"];
     }
     [ZJBLStoreShopTypeAlert showWithTitle:@"选择设置值" titles:_choiceArray selectIndex:^(NSInteger SelectIndexNum){
         
@@ -344,8 +418,12 @@
     
     
     _cmdTcpType=1;
+//    NSArray *cmdValue=@[
+// @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
+    
     NSArray *cmdValue=@[
- @"0",@"1",@"2",@"3",@"4",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
+                        @"0",@"1",@"3",@"4",@"4",@"5",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
+    
     
     _setRegister=cmdValue[_CellNumber];
     
@@ -369,11 +447,18 @@
         for (int i=0; i<_cmdRegisterNum; i++) {
             
             NSString *value0=[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:_receiveCmdTwoData registerNum:i]];
-            if (_CellNumber==28) {
+            
+            if (_CellNumber==5 || _CellNumber==6 ) {
+                float valueInt0=[value0 intValue]-10000;
+                float valueInt=valueInt0/10000;
+                value0=[NSString stringWithFormat:@"%.4f",valueInt];
+            }
+            
+            if (_CellNumber==29) {          //PF限制负载百分比点
                 if (i%2==0) {
                     [valueArray addObject:value0];
                 }
-            }else  if (_CellNumber==29) {
+            }else  if (_CellNumber==30) {                 //PF限制功率因数1~4
                 if (i%2==1) {
                     [valueArray addObject:value0];
                 }

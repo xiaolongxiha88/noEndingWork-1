@@ -73,7 +73,7 @@
     }else{
         _cmdRegisterNum=2;
     }
-    if (_CellNumber==6) {
+    if (_CellNumber==1) {
         _cmdRegisterNum=6;
     }
     
@@ -100,14 +100,14 @@
     PV2Lable.adjustsFontSizeToFitWidth=YES;
     [_view1 addSubview:PV2Lable];
     
-    if (_CellNumber==0 || _CellNumber==1 || _CellNumber==6  || _CellNumber==11 || _CellNumber==12) {
+    if (_CellNumber==5 || _CellNumber==6 || _CellNumber==1  || _CellNumber==11 || _CellNumber==12) {
         _textLable=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         _textLable.text=root_MIX_223;
         _textLable.userInteractionEnabled=YES;
         _textLable.layer.borderWidth=1;
         _textLable.layer.cornerRadius=5;
         _textLable.layer.borderColor=COLOR(102, 102, 102, 1).CGColor;
-        if (_CellNumber!=6) {
+        if (_CellNumber!=1) {
             UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice)];
             [_textLable addGestureRecognizer:tapGestureRecognizer1];
         }else{
@@ -124,6 +124,7 @@
         _textField2 = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         _textField2.layer.borderWidth=1;
         _textField2.layer.cornerRadius=5;
+        _textField2.tag=2000;
         _textField2.layer.borderColor=COLOR(102, 102, 102, 1).CGColor;
         _textField2.textColor = COLOR(102, 102, 102, 1);
         _textField2.tintColor = COLOR(102, 102, 102, 1);
@@ -259,11 +260,14 @@
 -(void)finishSet{
     _setValueArray=[NSMutableArray new];
     _setRegisterArray=[NSMutableArray new];
+//    NSArray *cmdValue=@[
+//                        @"15",@"16",@"17",@"18",@"19",@"30",@"45",@"51",@"80",@"81",@"88",@"201",@"202",@"203",@"28",@"122",@"52",@"54",@"56",@"58",@"60",@"62",@"64",@"66",@"68",@"70",@"72",@"74",@"76",@"78"];
+    
     NSArray *cmdValue=@[
-                        @"15",@"16",@"17",@"18",@"19",@"30",@"45",@"51",@"80",@"81",@"88",@"201",@"202",@"203",@"28",@"122",@"52",@"54",@"56",@"58",@"60",@"62",@"64",@"66",@"68",@"70",@"72",@"74",@"76",@"78"];
+                        @"30",@"45",@"17",@"18",@"19",@"15",@"16",@"51",@"80",@"81",@"88",@"201",@"202",@"203",@"28",@"122",@"52",@"54",@"56",@"58",@"60",@"62",@"64",@"66",@"68",@"70",@"72",@"74",@"76",@"78"];
     if (_CellTypy!=3) {
         if (_CellNumber<14) {
-            if (_CellNumber==0 || _CellNumber==1 || _CellNumber==6  || _CellNumber==11 || _CellNumber==12) {
+            if (_CellNumber==5 || _CellNumber==6 || _CellNumber==1  || _CellNumber==11 || _CellNumber==12) {
             }else{
                 _setValue=_textField2.text;
             }
@@ -273,7 +277,7 @@
             }
             [_setRegisterArray addObject:cmdValue[_CellNumber]];
             [_setValueArray addObject:_setValue];
-            if (_CellNumber==6) {
+            if (_CellNumber==1) {
                 _setRegisterArray=[NSMutableArray arrayWithArray:@[@45,@46,@47,@48,@49,@50]];
                 _setValueArray=[NSMutableArray arrayWithArray:_timeArray];
             }
@@ -454,10 +458,10 @@
     if (_CellNumber==11 ){
         _choiceArray=@[@"Automatic(0)",@"Continual(1)",@"Overnight(2)"];
     }
-    if (_CellNumber==0 ){
+    if (_CellNumber==5 ){
         _choiceArray=@[@"0",@"1",@"2",@"3",@"4",@"5"];
     }
-    if (_CellNumber==1){
+    if (_CellNumber==6){
         _choiceArray=@[@"Need to select(0)",@"Have selected(1)"];
     }
     [ZJBLStoreShopTypeAlert showWithTitle:@"选择设置值" titles:_choiceArray selectIndex:^(NSInteger SelectIndexNum){
@@ -477,8 +481,11 @@
     [self showProgressView];
     _cmdTcpType=1;
     
+//    NSArray *cmdValue=@[
+//                        @"15",@"16",@"17",@"18",@"19",@"30",@"45",@"51",@"80",@"81",@"88",@"201",@"202",@"203",@"28",@"122",@"52",@"54",@"56",@"58",@"60",@"62",@"64",@"66",@"68",@"70",@"72",@"74",@"76",@"78"];
+    
     NSArray *cmdValue=@[
-                        @"15",@"16",@"17",@"18",@"19",@"30",@"45",@"51",@"80",@"81",@"88",@"201",@"202",@"203",@"28",@"122",@"52",@"54",@"56",@"58",@"60",@"62",@"64",@"66",@"68",@"70",@"72",@"74",@"76",@"78"];
+                        @"30",@"45",@"17",@"18",@"19",@"15",@"16",@"51",@"80",@"81",@"88",@"201",@"202",@"203",@"28",@"122",@"52",@"54",@"56",@"58",@"60",@"62",@"64",@"66",@"68",@"70",@"72",@"74",@"76",@"78"];
     
     if (_CellTypy!=3) {
           _setRegister=cmdValue[_CellNumber];
@@ -568,7 +575,7 @@
     for (int i=0; i<_readValueArray.count; i++) {
         UILabel *lable=[_view1 viewWithTag:3000+i];
         lable.text=[NSString stringWithFormat:@"(读取值:%@)",_readValueArray[i]];
-        if (_CellNumber==6) {
+        if (_CellNumber==1) {
             lable.text=[NSString stringWithFormat:@"(读取值:%@-%@-%@ %@:%@:%@)",_readValueArray[0],_readValueArray[1],_readValueArray[2],_readValueArray[3],_readValueArray[4],_readValueArray[5]];
         }
     }
