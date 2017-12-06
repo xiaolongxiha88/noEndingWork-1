@@ -15,7 +15,7 @@
 #import "usbToWifiWarnView.h"
 #import "usbToWifiFour.h"
 #import "usbToWifiControlFour.h"
-
+#import "RKAlertView.h"
 
 static NSString *cellOne = @"cellOne";
 static NSString *cellTwo = @"cellTwo";
@@ -395,6 +395,7 @@ static NSString *cellTwo = @"cellTwo";
         for (int i=0; i<picName.count; i++) {
             UIView *VV=[[UIView alloc]initWithFrame:CGRectMake(0+WW*i, 0, WW, H2)];
             VV.backgroundColor=[UIColor clearColor];
+            VV.tag=3000+i;
             VV.userInteractionEnabled=YES;
             if (i==0) {
                 UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView)];
@@ -427,7 +428,43 @@ static NSString *cellTwo = @"cellTwo";
     
 }
 
+-(void)goToControlView00:(UITapGestureRecognizer*)Tap{
+    NSInteger Type=Tap.view.tag;
+        NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+        NSString *isOpenPassword=[ud objectForKey:@"theToolPasswordOpen"];
+     NSString *thePasswordString=[ud objectForKey:@"theToolPassword"];
+    
+    if ([isOpenPassword isEqualToString:@"1"]) {
+        [self goToControlView01:Type];
+    }else{
+        
+        [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
+            NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
+            NSString *alert1=[alertView textFieldAtIndex:0].text;
+            
+            if ([alert1 isEqualToString:thePasswordString]) {
+               [self goToControlView01:Type];
+            }else{
+           
+                
+            }
+            
+        } cancelBlock:^{
+            NSLog(@"取消了");
+        }];
+    }
+    
+ 
+}
+
+-(void)goToControlView01:(NSInteger)TYPY{
+    
+    
+}
+
 -(void)goToControlView{
+
+    
     usbToWifiControlOne *testView=[[usbToWifiControlOne alloc]init];
     testView.controlType=1;
     [self.navigationController pushViewController:testView animated:YES];

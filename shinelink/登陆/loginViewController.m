@@ -103,7 +103,7 @@
     //上线检查
      [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:is_Test];
     
-    NSString *testDemo=@"OK";
+    NSString *testDemo=@"O";
     if ([testDemo isEqualToString:@"OK"]) {
  useToWifiView1 *testView=[[useToWifiView1 alloc]init];
         

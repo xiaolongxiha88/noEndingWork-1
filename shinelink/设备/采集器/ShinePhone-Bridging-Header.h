@@ -28,3 +28,5 @@
 #import "configWifiSViewController.h"
 
 #import "SPF5000Control.h"
+#import "ossGetPassWordView.h"
+#import "ossToolListView.h"

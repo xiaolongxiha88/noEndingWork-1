@@ -426,7 +426,10 @@
             
             NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
             NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
-            NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_riqi,xLableValue,root_shuzhi,xDirY0];
+            if (_xLableName==nil || [_xLableName isEqualToString:@""]) {
+                _xLableName=root_riqi;
+            }
+            NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",_xLableName,xLableValue,root_shuzhi,xDirY0];
             xyLableValue.text=xyLableText;
         }
         
@@ -460,7 +463,10 @@
             
             NSString *xDirY0=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",_yValues[i]] floatValue]];
             NSString*xLableValue=[NSString stringWithFormat:@"%@",_xValues[i]];
-            NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",root_riqi,xLableValue,root_shuzhi,xDirY0];
+            if (_xLableName==nil || [_xLableName isEqualToString:@""]) {
+                _xLableName=root_riqi;
+            }
+            NSString* xyLableText=[NSString stringWithFormat:@"%@:%@  %@:%@",_xLableName,xLableValue,root_shuzhi,xDirY0];
             xyLableValue.text=xyLableText;
         }
         

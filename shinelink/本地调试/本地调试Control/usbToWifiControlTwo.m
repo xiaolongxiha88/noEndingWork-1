@@ -286,7 +286,13 @@
             
             [_setRegisterArray addObject:cmdValue[_CellNumber]];   //设置值
             if (_CellNumber==5 || _CellNumber==6 ) {
-                float value1=[_textField2.text floatValue]*10000+10000;
+                float value1=0;
+                if (_CellNumber==5) {
+                       value1=[_textField2.text floatValue]*10000+10000;
+                }
+                if (_CellNumber==6) {
+                    value1=10000-[_textField2.text floatValue]*10000;
+                }
                    [_setValueArray addObject:[NSString stringWithFormat:@"%.f",value1]];
             }else{
                      [_setValueArray addObject:_textField2.text];

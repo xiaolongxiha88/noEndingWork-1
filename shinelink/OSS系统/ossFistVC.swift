@@ -102,6 +102,7 @@ class ossFistVC: RootViewController {
     func initLeftItem(){
         let item0Name="退出账户"
           let item1Name="工具"
+        
         let numArray:NSArray
         
         let item0=DTKDropdownItem.init(title: item0Name, iconName: "Quick", callBack:{ (dropMenuCallBack)->() in
@@ -109,17 +110,21 @@ class ossFistVC: RootViewController {
             
         } )
         
-        if roleString=="3" || roleString=="2" || roleString=="1"{
-            let item1=DTKDropdownItem.init(title: item1Name, iconName: "Check", callBack:{ (dropMenuCallBack)->() in
-                let vc=ossTool()
-                self.navigationController?.pushViewController(vc, animated: true)
-                
-            } )
-    numArray=[item0!,item1!]
-        }else{
-         numArray=[item0!]
-        }
+
+        let item1=DTKDropdownItem.init(title: item1Name, iconName: "Check", callBack:{ (dropMenuCallBack)->() in
+            let vc=ossToolListView()
+            if self.roleString=="3" || self.roleString=="2" || self.roleString=="1"{
+                vc.typeNum=1
+            }else{
+                vc.typeNum=2
+            }
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        } )
         
+       
+        
+            numArray=[item0!,item1!]
         let attributes1:NSDictionary = NSDictionary(object:UIFont.systemFont(ofSize: 14*HEIGHT_SIZE),
                                                     forKey: NSFontAttributeName as NSCopying)
         let size1=item0Name.boundingRect(with: CGSize(width: CGFloat(MAXFLOAT), height: 30*HEIGHT_SIZE), options: NSStringDrawingOptions.usesLineFragmentOrigin, attributes: attributes1 as? [String : AnyObject], context: nil)

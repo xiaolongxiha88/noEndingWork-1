@@ -417,6 +417,9 @@
 		337584451D267E2A006AC140 /* product2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 337584441D267E2A006AC140 /* product2.jpg */; };
 		3376A6DB1FD52B580043FC53 /* usbToWifiWarnList.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6DA1FD52B570043FC53 /* usbToWifiWarnList.m */; };
 		3376A6DE1FD6AEF60043FC53 /* usbToWifiWarnListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6DD1FD6AEF60043FC53 /* usbToWifiWarnListCell.m */; };
+		3376A6E11FD783240043FC53 /* LineViewForUsb.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6E01FD783240043FC53 /* LineViewForUsb.m */; };
+		3376A6E41FD7DCA70043FC53 /* ossGetPassWordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6E31FD7DCA70043FC53 /* ossGetPassWordView.m */; };
+		3376A6E71FD7E3180043FC53 /* ossToolListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6E61FD7E3180043FC53 /* ossToolListView.m */; };
 		3376B3CC1F9726720069F820 /* useToWifiView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376B3CB1F9726720069F820 /* useToWifiView1.m */; };
 		3376B3CF1F973ED00069F820 /* max_ele.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3CE1F973ED00069F820 /* max_ele.png */; };
 		3376B3D51F973EE00069F820 /* max_parameter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3D01F973EDF0069F820 /* max_parameter.png */; };
@@ -1447,6 +1450,12 @@
 		3376A6DA1FD52B570043FC53 /* usbToWifiWarnList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiWarnList.m; sourceTree = "<group>"; };
 		3376A6DC1FD6AEF60043FC53 /* usbToWifiWarnListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiWarnListCell.h; sourceTree = "<group>"; };
 		3376A6DD1FD6AEF60043FC53 /* usbToWifiWarnListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiWarnListCell.m; sourceTree = "<group>"; };
+		3376A6DF1FD783240043FC53 /* LineViewForUsb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineViewForUsb.h; sourceTree = "<group>"; };
+		3376A6E01FD783240043FC53 /* LineViewForUsb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LineViewForUsb.m; sourceTree = "<group>"; };
+		3376A6E21FD7DCA70043FC53 /* ossGetPassWordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossGetPassWordView.h; sourceTree = "<group>"; };
+		3376A6E31FD7DCA70043FC53 /* ossGetPassWordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossGetPassWordView.m; sourceTree = "<group>"; };
+		3376A6E51FD7E3180043FC53 /* ossToolListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossToolListView.h; sourceTree = "<group>"; };
+		3376A6E61FD7E3180043FC53 /* ossToolListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossToolListView.m; sourceTree = "<group>"; };
 		3376B3CA1F9726720069F820 /* useToWifiView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = useToWifiView1.h; sourceTree = "<group>"; };
 		3376B3CB1F9726720069F820 /* useToWifiView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = useToWifiView1.m; sourceTree = "<group>"; };
 		3376B3CE1F973ED00069F820 /* max_ele.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_ele.png; sourceTree = "<group>"; };
@@ -3750,6 +3759,10 @@
 		3385A3A61F4AB0AB004FF3C7 /* oss工具 */ = {
 			isa = PBXGroup;
 			children = (
+				3376A6E51FD7E3180043FC53 /* ossToolListView.h */,
+				3376A6E61FD7E3180043FC53 /* ossToolListView.m */,
+				3376A6E21FD7DCA70043FC53 /* ossGetPassWordView.h */,
+				3376A6E31FD7DCA70043FC53 /* ossGetPassWordView.m */,
 				3385A3A71F4AB0D7004FF3C7 /* ossTool.swift */,
 			);
 			path = "oss工具";
@@ -4498,6 +4511,8 @@
 			children = (
 				337475F01FAB004B00BB1A76 /* usbToWifiFour.h */,
 				337475F11FAB004B00BB1A76 /* usbToWifiFour.m */,
+				3376A6DF1FD783240043FC53 /* LineViewForUsb.h */,
+				3376A6E01FD783240043FC53 /* LineViewForUsb.m */,
 				339844261FA9B43A006A15AD /* usbToWifiWarnView.h */,
 				339844271FA9B43A006A15AD /* usbToWifiWarnView.m */,
 				3376A6D91FD52B570043FC53 /* usbToWifiWarnList.h */,
@@ -5186,6 +5201,7 @@
 				336E03F51EC9411B0034BC86 /* ossFistVC.swift in Sources */,
 				3319E08C1D5AFB39006623A9 /* LWLoadingAnimationView.m in Sources */,
 				336D40191D6FEA7600ECFA34 /* ChineseInclude.m in Sources */,
+				3376A6E71FD7E3180043FC53 /* ossToolListView.m in Sources */,
 				3343F3BF1C80403C009F69BC /* AFHTTPRequestOperation.m in Sources */,
 				337472471FC0366300AC1420 /* payResultCell.m in Sources */,
 				334FEF841CF45264001E6716 /* LZQStratViewController_25.m in Sources */,
@@ -5290,6 +5306,7 @@
 				335456B61C852E6200275478 /* AddCellectViewController.m in Sources */,
 				334B8F531C914A6D00798A69 /* PNPieChart.m in Sources */,
 				336664F91CB78517005573FB /* Line2View.m in Sources */,
+				3376A6E11FD783240043FC53 /* LineViewForUsb.m in Sources */,
 				338418E71DC9783500D679CA /* GFWaterView.m in Sources */,
 				336F1A191D88E46900CD4C2B /* SDWebImageDownloader.m in Sources */,
 				336F040A1F050D8600DE7CD7 /* orderCellTwo.m in Sources */,
@@ -5327,6 +5344,7 @@
 				3370793C1D910FEC00D7DA98 /* NJKWebViewProgress.m in Sources */,
 				334FF09E1CF53C7C001E6716 /* ModuleInfo.m in Sources */,
 				33EFB6691C98F9B1003F336F /* ZFBar.m in Sources */,
+				3376A6E41FD7DCA70043FC53 /* ossGetPassWordView.m in Sources */,
 				334FF09B1CF53C7C001E6716 /* InfoSend.m in Sources */,
 				336F1A201D88E46900CD4C2B /* UIImage+WebP.m in Sources */,
 				33742B481ED6D6BD0015F2EA /* OssMessageViewController.m in Sources */,

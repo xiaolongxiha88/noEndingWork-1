@@ -8,19 +8,24 @@
 
 #import "usbToWifiFour.h"
 #import "wifiToPvOne.h"
-#import "Line2View.h"
+#import "LineViewForUsb.h"
+#import "JHColumnChart.h"
 
 @interface usbToWifiFour ()
 
 @property(nonatomic,strong)UILabel *lable1;
 @property(nonatomic,strong)NSArray *buttonName;
 @property(nonatomic,strong)NSArray *lableNameArray;
+@property(nonatomic,strong)NSArray *xlableNameArray;
 @property(nonatomic,strong)wifiToPvOne*ControlOne;
 @property(nonatomic,strong) NSString* setRegister;
 @property(nonatomic,strong) NSString* setRegisterLength;
-@property (nonatomic, strong) Line2View *line2View;
+@property (nonatomic, strong) LineViewForUsb *LineViewForUsbView;
 @property(nonatomic,strong)NSMutableDictionary *barDic;
 @property(nonatomic,assign)int cmdType;
+
+@property (nonatomic, strong) UILabel *xUnitLabel;
+@property(nonatomic,assign)BOOL isSendCmdNow;
 
 @end
 
@@ -36,20 +41,23 @@
         _changeDataValue=[[usbToWifiDataControl alloc]init];
     }
     
-
+ _isSendCmdNow=NO;
+    
     [self initUI];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveDataTwoFailed" object:nil];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData5:) name: @"TcpReceiveDataFive" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed5) name: @"TcpReceiveDataFiveFailed" object:nil];
     
 }
 
 -(void)initUI{
      float layerW=1;
     _buttonName=@[@"Hour",@"Day",@"Month",@"Year"];
-    _lableNameArray=@[@"当天每小时发电量",@"最近7天发电量",@"最近12个月发电量",@"最近20年发电量",];
+    _lableNameArray=@[@"最近24小时发电量",@"最近7天发电量",@"最近12个月发电量",@"最近20年发电量"];
+        _xlableNameArray=@[@"(小时)",@"(天)",@"(月)",@"(年)"];
     
     for (int i=0; i<_buttonName.count; i++) {
         UIButton *selecteButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -84,17 +92,27 @@
     _lable1.adjustsFontSizeToFitWidth=YES;
     [V1 addSubview:_lable1];
     
+    _xUnitLabel=[[UILabel alloc]initWithFrame:CGRectMake(200*NOW_SIZE, 445*HEIGHT_SIZE, 100*NOW_SIZE,20*HEIGHT_SIZE )];
+    _xUnitLabel.text=_xlableNameArray[0];
+    _xUnitLabel.textAlignment=NSTextAlignmentRight;
+    _xUnitLabel.textColor=COLOR(102, 102, 102, 1);
+    _xUnitLabel.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    _xUnitLabel.adjustsFontSizeToFitWidth=YES;
+
+    
         [self cmdForData:1000];
     
 }
 
 - (void)buttonDidClicked:(UIButton *)sender {
+      _isSendCmdNow=YES;
     
      for (int i=0; i<_buttonName.count; i++) {
       UIButton *button=[self.view viewWithTag:1000+i];
          if ((i+1000)==(sender.tag)) {
              button.selected=YES;
              _lable1.text=_lableNameArray[i];
+             _xUnitLabel.text=_xlableNameArray[i];
          }else{
                 button.selected=NO;
          }
@@ -114,8 +132,8 @@
     
     [self showProgressView];
     
-    
-    [_ControlOne goToOneTcp:2 cmdNum:1 cmdType:@"4" regAdd:setRegisterArray[K] Length:setLenthArray[K]];
+  
+    [_ControlOne goToOneTcp:5 cmdNum:1 cmdType:@"4" regAdd:setRegisterArray[K] Length:setLenthArray[K]];
     
     
 }
@@ -128,10 +146,12 @@
 }
 
 
--(void)receiveFirstData2:(NSNotification*) notification{
-  
+-(void)receiveFirstData5:(NSNotification*) notification{
+   _isSendCmdNow=NO;
     
-         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1.5];
+        [self.view addSubview:_xUnitLabel];
+    
+         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1];
     
     _barDic=[NSMutableDictionary new];
 
@@ -143,31 +163,48 @@
     for (int i=0; i<lenth/4; i++) {
         int T=0+2*i;
             NSString *numString=[NSString stringWithFormat:@"%d",i+1];
-        [_barDic setObject:[NSString stringWithFormat:@"%d",[_changeDataValue changeTwoRegister:cmdData registerNum:T]] forKey:numString];
+        float value=[_changeDataValue changeTwoRegister:cmdData registerNum:T]/10;
+        [_barDic setObject:[NSString stringWithFormat:@"%.1f",value] forKey:numString];
+        
+    //    [_barDic setObject:[NSString stringWithFormat:@"%d",T] forKey:numString];
     }
 
-    [self getBarUI];
+    if (lenth>0) {
+          [self getBarUI];
+    }
+  
     
 }
 
 
 -(void)getBarUI{
-    if (!_line2View) {
-        self.line2View = [[Line2View alloc] initWithFrame:CGRectMake(0, 110*HEIGHT_SIZE, SCREEN_Width, 300*HEIGHT_SIZE)];
-        self.line2View.flag=@"1";
-        self.line2View.frameType=@"2";
-        _line2View.barTypeNum=1;
-        [self.view addSubview:self.line2View];
+    if (!_LineViewForUsbView) {
+        self.LineViewForUsbView = [[LineViewForUsb alloc] initWithFrame:CGRectMake(0, 110*HEIGHT_SIZE, SCREEN_Width, 300*HEIGHT_SIZE)];
+        self.LineViewForUsbView.barTypeNum=1;
+        self.LineViewForUsbView.unitLaleName=root_Energy;
+        [self.view addSubview:self.LineViewForUsbView];
     }
+
+         [self.LineViewForUsbView refreshBarChartViewWithDataDict:_barDic chartType:_cmdType];
     
     
-         [self.line2View refreshBarChartViewWithDataDict:_barDic chartType:2];
+    
+    
+ 
+    
+    
+    
+    
+    
 }
 
 
--(void)setFailed{
-    [self hideProgressView];
-        [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
+-(void)setFailed5{
+     [self hideProgressView];
+
+                [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
+  
+
    
 }
 
@@ -186,8 +223,10 @@
     if (_ControlOne) {
         [_ControlOne disConnect];
     }
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwo" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwoFailed" object:nil];
+ 
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataFive" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataFiveFailed" object:nil];
 }
 
 
