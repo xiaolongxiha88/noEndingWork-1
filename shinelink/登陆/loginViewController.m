@@ -63,6 +63,8 @@
 @property (nonatomic, strong) NSString *userNameGet;
 @property (nonatomic) int getServerAddressNum;
 
+@property (nonatomic,assign) BOOL isFirstLogin;
+
 @property (nonatomic, strong)UIImageView *userBgImageView;
 @property (nonatomic, strong)UIImageView *pwdBgImageView;
 
@@ -71,20 +73,25 @@
 @implementation loginViewController
 -(void)viewDidAppear:(BOOL)animated{
      animated=NO;
+    
+    // Do any additional setup after loading the view.
+    UIImage *bgImage = IMAGE(@"bg3.jpg");
+    self.view.layer.contents = (id)bgImage.CGImage;
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:17/255.0f green:183/255.0f blue:243/255.0f alpha:0]];
  [self.navigationController setNavigationBarHidden:YES];
+    
+    if (!_isFirstLogin) {
+         [self getLoginType];
+    }
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-     [self.navigationController setNavigationBarHidden:YES];
+   //  [self.navigationController setNavigationBarHidden:YES];
     
-    // Do any additional setup after loading the view.
-    UIImage *bgImage = IMAGE(@"bg3.jpg");
-    self.view.layer.contents = (id)bgImage.CGImage;
-   
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:17/255.0f green:183/255.0f blue:243/255.0f alpha:0]];
+ 
     
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages objectAtIndex:0];
@@ -96,25 +103,28 @@
     }else{
         _languageValue=@"2";
     }
-   [self.navigationController setNavigationBarHidden:YES];
+
 
     
-    //////////测试区域  
+    //////////测试区域
     //上线检查
-     [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:is_Test];
+    [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:is_Test];
     
     NSString *testDemo=@"O";
     if ([testDemo isEqualToString:@"OK"]) {
- useToWifiView1 *testView=[[useToWifiView1 alloc]init];
-        
-  //  payView1 *testView=[[payView1 alloc]init];
+        useToWifiView1 *testView=[[useToWifiView1 alloc]init];
+
         [self.navigationController pushViewController:testView animated:NO];
     }else{
+        _isFirstLogin=YES;
         [self getLoginType];
     }
-
+    
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+           _isFirstLogin=NO;
+}
 
 -(void)getLoginType{
 
@@ -222,7 +232,7 @@
     [imageView111 addGestureRecognizer:tapGestureRecognizerMore];
       [_scrollView addSubview:imageView111];
     
-    UIImageView *imageMore=[[UIImageView alloc]initWithFrame:CGRectMake(20*NOW_SIZE,10*HEIGHT_SIZE, 4*NOW_SIZE,18*HEIGHT_SIZE)];
+    UIImageView *imageMore=[[UIImageView alloc]initWithFrame:CGRectMake(20*NOW_SIZE,18*HEIGHT_SIZE, 4*NOW_SIZE,18*HEIGHT_SIZE)];
     imageMore.image= IMAGE(@"loginMore.png");
     [imageView111 addSubview:imageMore];
     
@@ -409,6 +419,7 @@
             [self.navigationController pushViewController:rootView animated:YES];
             
         }else if (SelectIndexNum==1){
+         
             usbToWifi00 *rootView = [[usbToWifi00 alloc]init];
             [self.navigationController pushViewController:rootView animated:YES];
             

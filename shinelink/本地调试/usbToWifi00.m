@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+        [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"theToolPasswordOpenEnable"];
+    
     self.title=@"扫描获取WiFi名称";
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"跳过" style:UIBarButtonItemStylePlain target:self action:@selector(goToUsb)];
     self.navigationItem.rightBarButtonItem=rightItem;

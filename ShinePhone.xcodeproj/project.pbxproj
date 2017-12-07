@@ -420,6 +420,7 @@
 		3376A6E11FD783240043FC53 /* LineViewForUsb.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6E01FD783240043FC53 /* LineViewForUsb.m */; };
 		3376A6E41FD7DCA70043FC53 /* ossGetPassWordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6E31FD7DCA70043FC53 /* ossGetPassWordView.m */; };
 		3376A6E71FD7E3180043FC53 /* ossToolListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6E61FD7E3180043FC53 /* ossToolListView.m */; };
+		3376A6EA1FD8D2320043FC53 /* usbToWifiLoginOSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6E91FD8D2320043FC53 /* usbToWifiLoginOSS.m */; };
 		3376B3CC1F9726720069F820 /* useToWifiView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376B3CB1F9726720069F820 /* useToWifiView1.m */; };
 		3376B3CF1F973ED00069F820 /* max_ele.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3CE1F973ED00069F820 /* max_ele.png */; };
 		3376B3D51F973EE00069F820 /* max_parameter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3D01F973EDF0069F820 /* max_parameter.png */; };
@@ -1456,6 +1457,8 @@
 		3376A6E31FD7DCA70043FC53 /* ossGetPassWordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossGetPassWordView.m; sourceTree = "<group>"; };
 		3376A6E51FD7E3180043FC53 /* ossToolListView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossToolListView.h; sourceTree = "<group>"; };
 		3376A6E61FD7E3180043FC53 /* ossToolListView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossToolListView.m; sourceTree = "<group>"; };
+		3376A6E81FD8D2320043FC53 /* usbToWifiLoginOSS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiLoginOSS.h; sourceTree = "<group>"; };
+		3376A6E91FD8D2320043FC53 /* usbToWifiLoginOSS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiLoginOSS.m; sourceTree = "<group>"; };
 		3376B3CA1F9726720069F820 /* useToWifiView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = useToWifiView1.h; sourceTree = "<group>"; };
 		3376B3CB1F9726720069F820 /* useToWifiView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = useToWifiView1.m; sourceTree = "<group>"; };
 		3376B3CE1F973ED00069F820 /* max_ele.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_ele.png; sourceTree = "<group>"; };
@@ -4525,6 +4528,8 @@
 				33FAD8DF1F99996F0030EEC3 /* usbToWifiCell2.m */,
 				3376B3E31F983D130069F820 /* usbModleOne.h */,
 				3376B3E41F983D130069F820 /* usbModleOne.m */,
+				3376A6E81FD8D2320043FC53 /* usbToWifiLoginOSS.h */,
+				3376A6E91FD8D2320043FC53 /* usbToWifiLoginOSS.m */,
 			);
 			path = "本地调试view";
 			sourceTree = "<group>";
@@ -5107,6 +5112,7 @@
 				335881311CB66E460068EFAD /* qualityCell.m in Sources */,
 				335047201C9BA6F600BF8683 /* EGOCache.m in Sources */,
 				338A528E1F28961F000611F3 /* configWifiSViewController.m in Sources */,
+				3376A6EA1FD8D2320043FC53 /* usbToWifiLoginOSS.m in Sources */,
 				336F1A1E1D88E46900CD4C2B /* UIImage+GIF.m in Sources */,
 				33801EB31D58274D00047232 /* addStationViewController.m in Sources */,
 				33742B421ED6859C0015F2EA /* ZJBLStoreShopTypeAlert.m in Sources */,

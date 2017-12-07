@@ -16,6 +16,7 @@
 #import "usbToWifiFour.h"
 #import "usbToWifiControlFour.h"
 #import "RKAlertView.h"
+#import "usbToWifiLoginOSS.h"
 
 static NSString *cellOne = @"cellOne";
 static NSString *cellTwo = @"cellTwo";
@@ -367,6 +368,7 @@ static NSString *cellTwo = @"cellTwo";
     if (!_secondView) {
         _secondView=[[UIView alloc]initWithFrame:CGRectMake(W1, view1H+10*HEIGHT_SIZE, W0, H)];
         _secondView.backgroundColor=[UIColor clearColor];
+        _secondView.userInteractionEnabled=YES;
         [_scrollView addSubview:_secondView];
         
         
@@ -375,12 +377,23 @@ static NSString *cellTwo = @"cellTwo";
         [_secondView addSubview:V1];
         
         float lableH1=20*HEIGHT_SIZE;
-        UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(7*NOW_SIZE, 0,200*NOW_SIZE,lableH1)];
+        UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(7*NOW_SIZE, 0,150*NOW_SIZE,lableH1)];
         lable5.textColor =COLOR(51, 51, 51, 1);
         lable5.textAlignment=NSTextAlignmentLeft;
         lable5.text=@"设备控制";
         lable5.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_secondView addSubview:lable5];
+        
+        UILabel *lable6 = [[UILabel alloc]initWithFrame:CGRectMake(205*NOW_SIZE, 0,100*NOW_SIZE,lableH1)];
+        lable6.textColor =MainColor;
+        lable6.textAlignment=NSTextAlignmentRight;
+        lable6.userInteractionEnabled=YES;
+        lable6.adjustsFontSizeToFitWidth=YES;
+        UITapGestureRecognizer *tapGestureRecognizer6 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToOssLogin)];
+        [lable6 addGestureRecognizer:tapGestureRecognizer6];
+        lable6.text=@"重置密码";
+        lable6.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_secondView addSubview:lable6];
         
         float H2=80*HEIGHT_SIZE;
         UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(0, 25*HEIGHT_SIZE, W0, H2)];
@@ -397,17 +410,8 @@ static NSString *cellTwo = @"cellTwo";
             VV.backgroundColor=[UIColor clearColor];
             VV.tag=3000+i;
             VV.userInteractionEnabled=YES;
-            if (i==0) {
-                UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView)];
+                UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView00:)];
                 [VV addGestureRecognizer:tapGestureRecognizer];
-            }else if (i==1) {
-                UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView1)];
-                [VV addGestureRecognizer:tapGestureRecognizer];
-            }else if (i==2) {
-                UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToControlView4)];
-                [VV addGestureRecognizer:tapGestureRecognizer];
-            }
-            
             [V2 addSubview:VV];
             
             UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake((WW-imageH)/2,V2H1, imageH,imageH)];
@@ -431,12 +435,19 @@ static NSString *cellTwo = @"cellTwo";
 -(void)goToControlView00:(UITapGestureRecognizer*)Tap{
     NSInteger Type=Tap.view.tag;
         NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-        NSString *isOpenPassword=[ud objectForKey:@"theToolPasswordOpen"];
+        NSString *isOpenPassword=[ud objectForKey:@"theToolPasswordOpenEnable"];
      NSString *thePasswordString=[ud objectForKey:@"theToolPassword"];
     
     if ([isOpenPassword isEqualToString:@"1"]) {
         [self goToControlView01:Type];
     }else{
+        if ([thePasswordString isEqualToString:@""] || thePasswordString==nil) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未获取控制密码" message:@"请登录OSS系统获取密码" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"登录", nil];
+            alertView.tag = 1004;
+            [alertView show];
+            
+            return ;
+        }
         
         [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
             NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
@@ -444,9 +455,9 @@ static NSString *cellTwo = @"cellTwo";
             
             if ([alert1 isEqualToString:thePasswordString]) {
                [self goToControlView01:Type];
+                  [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"theToolPasswordOpenEnable"];
             }else{
-           
-                
+                    [self showAlertViewWithTitle:@"密码错误,请验证密码或重置密码。" message:nil cancelButtonTitle:root_OK];
             }
             
         } cancelBlock:^{
@@ -459,6 +470,13 @@ static NSString *cellTwo = @"cellTwo";
 
 -(void)goToControlView01:(NSInteger)TYPY{
     
+    if (TYPY==3000) {
+        [self goToControlView];
+    }else if (TYPY==3001) {
+         [self goToControlView1];
+    }else if (TYPY==3002) {
+        [self goToControlView4];
+    }
     
 }
 
@@ -477,6 +495,11 @@ static NSString *cellTwo = @"cellTwo";
 
 -(void)goToControlView3{
     usbToWifiFour *testView=[[usbToWifiFour alloc]init];
+    [self.navigationController pushViewController:testView animated:YES];
+}
+
+-(void)goToOssLogin{
+    usbToWifiLoginOSS *testView=[[usbToWifiLoginOSS alloc]init];
     [self.navigationController pushViewController:testView animated:YES];
 }
 
@@ -702,6 +725,10 @@ static NSString *cellTwo = @"cellTwo";
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
             }
             
+        }
+        
+        if(alertView.tag == 1004){
+            [self goToOssLogin];
         }
         
     }
