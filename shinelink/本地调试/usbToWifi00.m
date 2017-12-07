@@ -11,10 +11,17 @@
 #import "useToWifiView1.h"
 
 @interface usbToWifi00 ()<SHBQRViewDelegate>
-
+@property(nonatomic,assign) BOOL isFirstLogin;
 @end
 
 @implementation usbToWifi00
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    if (!_isFirstLogin) {
+        [self.navigationController popViewControllerAnimated:NO];
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,7 +32,13 @@
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"跳过" style:UIBarButtonItemStylePlain target:self action:@selector(goToUsb)];
     self.navigationItem.rightBarButtonItem=rightItem;
     
+    _isFirstLogin=YES;
+    
     [self ScanQR];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    _isFirstLogin=NO;
 }
 
 -(void)goToUsb{

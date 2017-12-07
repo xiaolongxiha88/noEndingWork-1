@@ -100,6 +100,8 @@ typedef NSString *(^PNYLabelFormatter)(CGFloat yLabelValue);
 
 @property (nonatomic,strong) NSString* xLableName;
 
+@property (nonatomic,assign) NSInteger xyLableFont;     
+
 @property (nonatomic, weak) id<PNChartDelegate> delegate;
 
 @end

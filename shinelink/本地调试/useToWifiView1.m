@@ -60,7 +60,6 @@ static NSString *cellTwo = @"cellTwo";
 -(void)viewWillAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getData:) name: @"recieveReceiveData" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice) name: @"recieveFailedTcpData" object:nil];
-    
  [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice2) name: @"TcpReceiveDataTwoFailed" object:nil];
     
     _isAutoReflash=NO;
@@ -79,8 +78,11 @@ static NSString *cellTwo = @"cellTwo";
         alertView.tag = 1003;
         [alertView show];
     }
-    _rightItem=[[UIBarButtonItem alloc]initWithTitle:@"自动刷新" style:UIBarButtonItemStylePlain target:self action:@selector(tcpToGetData)];
-    self.navigationItem.rightBarButtonItem=_rightItem;
+    if (!_rightItem) {
+        _rightItem=[[UIBarButtonItem alloc]initWithTitle:@"自动刷新" style:UIBarButtonItemStylePlain target:self action:@selector(tcpToGetData)];
+        self.navigationItem.rightBarButtonItem=_rightItem;
+    }
+  
     
    UIBarButtonItem *leftItem=[[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(goBackPop)];
     self.navigationItem.leftBarButtonItem=leftItem;
@@ -125,7 +127,7 @@ static NSString *cellTwo = @"cellTwo";
 
 
 -(void)goBackPop{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+ [self.navigationController popViewControllerAnimated:NO];
 }
 
 

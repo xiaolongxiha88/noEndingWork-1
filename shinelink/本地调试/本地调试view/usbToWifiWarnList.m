@@ -81,8 +81,8 @@
              _valueArray=[NSMutableArray new];
         _isfirstData=NO;
         [self changeData:receiveData];
-          [self performSelector:@selector(goToGetTwoData) withObject:nil afterDelay:1.5];
-    
+          [self performSelector:@selector(goToGetTwoData) withObject:nil afterDelay:2];
+      [self getTableView];
     }else{
         [self hideProgressView];
         _rightItem.enabled=YES;

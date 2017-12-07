@@ -541,7 +541,7 @@
     NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
     NSInteger year=[components year];
     NSInteger month=[components month];
-    
+    month=4;
    
      if (_barType==2) {           //Month
          NSMutableArray *xNewArray=[NSMutableArray new];
@@ -552,17 +552,31 @@
          }
         
          for (NSInteger i=month; i>0; i--) {
-             [xNewArray addObject:[NSString stringWithFormat:@"%ld",i]];
+             NSString *yearString0=[NSString stringWithFormat:@"%ld",year];
+            // NSString *yearString=[yearString0 substringWithRange:NSMakeRange(2, 2)];
+             [xNewArray addObject:[NSString stringWithFormat:@"%@-%ld",yearString0,i]];
              [yNewArray addObject:[newDic objectForKey:[NSString stringWithFormat:@"%ld",i]]];
          }
          
          for (NSInteger i=12; i>month; i--) {
-             [xNewArray addObject:[NSString stringWithFormat:@"%ld",i]];
+             NSString *yearString0=[NSString stringWithFormat:@"%ld",year-1];
+           //  NSString *yearString=[yearString0 substringWithRange:NSMakeRange(2, 2)];
+         
+               [xNewArray addObject:[NSString stringWithFormat:@"%@-%ld",yearString0,i]];
              [yNewArray addObject:[newDic objectForKey:[NSString stringWithFormat:@"%ld",i]]];
          }
          
          _xArray=[NSArray arrayWithArray:xNewArray];
             _valuesArray=[NSMutableArray arrayWithArray:yNewArray];
+         
+         for (int i=0; i<_xArray.count; i++) {
+             if ((i % 2) == 0) {
+                 [tempArr addObject:_xArray[i]];
+             } else {
+                 [tempArr addObject:@""];
+             }
+         }
+         self.barChartView.xyLableFont=8*HEIGHT_SIZE;
      }
     
     if (_barType==3) {           //Year
@@ -581,10 +595,10 @@
             }
         }
         
-        self.barChartView.labelFont=[UIFont systemFontOfSize:6*HEIGHT_SIZE];
+              self.barChartView.xyLableFont=8*HEIGHT_SIZE;
     }
     
-    if (_xArray.count>12) {
+    if (_xArray.count>7) {
         [self.barChartView setXLabels:tempArr];
     }else{
         [self.barChartView setXLabels:_xArray];

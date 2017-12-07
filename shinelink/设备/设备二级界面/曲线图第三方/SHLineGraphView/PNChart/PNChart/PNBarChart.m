@@ -67,6 +67,7 @@
     _showChartBorder     = NO;
     _yChartLabelWidth    = 18;
     _rotateForXAxisText  = false;
+    _xyLableFont=10*HEIGHT_SIZE;
     
     xDirectrix = [[UIView alloc] initWithFrame:CGRectZero];
     xDirectrix.hidden = YES;
@@ -127,7 +128,7 @@
                                                                                   yLabelSectionHeight * (numCount-1-index) + _chartMargin - kYLabelHeight/2.0,
                                                                                   _yChartLabelWidth,
                                                                                   kYLabelHeight)];
-            label.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+            label.font = [UIFont systemFontOfSize:_xyLableFont];
             label.textColor = _labelTextColor;
             [label setTextAlignment:NSTextAlignmentRight];
             label.adjustsFontSizeToFitWidth=YES;
@@ -176,9 +177,9 @@
             if (labelAddCount == _xLabelSkip) {
                 NSString *labelText = [_xLabels[index] description];
                 PNChartLabel * label = [[PNChartLabel alloc] initWithFrame:CGRectMake(0, 0, _xLabelWidth, kXLabelHeight)];
-                    label.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-                if (_xLabels.count>12) {
-                    label.frame=CGRectMake(0, 0, _xLabelWidth*1.5, kXLabelHeight);
+                    label.font = [UIFont systemFontOfSize:_xyLableFont];
+                if (_xLabels.count>11) {
+                    label.frame=CGRectMake(0, 0, _xLabelWidth*2, kXLabelHeight);
                 }else{
                    label.frame=CGRectMake(0, 0, _xLabelWidth, kXLabelHeight);
                 }

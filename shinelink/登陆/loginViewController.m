@@ -74,10 +74,7 @@
 -(void)viewDidAppear:(BOOL)animated{
      animated=NO;
     
-    // Do any additional setup after loading the view.
-    UIImage *bgImage = IMAGE(@"bg3.jpg");
-    self.view.layer.contents = (id)bgImage.CGImage;
-    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:17/255.0f green:183/255.0f blue:243/255.0f alpha:0]];
+
  [self.navigationController setNavigationBarHidden:YES];
     
     if (!_isFirstLogin) {
@@ -91,7 +88,10 @@
     
    //  [self.navigationController setNavigationBarHidden:YES];
     
- 
+    // Do any additional setup after loading the view.
+    UIImage *bgImage = IMAGE(@"bg3.jpg");
+    self.view.layer.contents = (id)bgImage.CGImage;
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor colorWithRed:17/255.0f green:183/255.0f blue:243/255.0f alpha:0]];
     
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages objectAtIndex:0];
@@ -843,12 +843,7 @@ NSLog(@"体验馆");
                                 
                                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]] forKey:@"roleNum"];
                                 
-                                
-                                
-                                
                                 _OssFirst=[[NSUserDefaults standardUserDefaults] objectForKey:@"firstGoToOss"];
-                                
-                           
                                 
                                 if ([_OssFirst isEqualToString:@"Y"]) {
                                     ossFistVC *OSSView=[[ossFistVC alloc]init];
@@ -911,6 +906,9 @@ NSLog(@"体验馆");
                         [self addSubViews];
                     }
                 }else{
+                    if (!_scrollView) {
+                        [self addSubViews];
+                    }
                     _getServerAddressNum=0;
                     [self netServerInit];
                 }
@@ -921,16 +919,23 @@ NSLog(@"体验馆");
             
             
         }else{
+                 [self hideProgressView];
+            if (!_scrollView) {
+                [self addSubViews];
+            }
             _getServerAddressNum=0;
             [self netServerInit];
-            [self hideProgressView];
+       
         }
         
     } failure:^(NSError *error) {
-  
+            [self hideProgressView];
+        if (!_scrollView) {
+            [self addSubViews];
+        }
         _getServerAddressNum=0;
         [self netServerInit];
-          [self hideProgressView];
+      
    
         
     }];
@@ -971,6 +976,7 @@ NSLog(@"体验馆");
     }
     
      NSString *userName=_loginUserName;
+    
        [self showProgressView];
      [BaseRequest requestWithMethodResponseStringResult:serverInitAddress paramars:@{@"userName":userName} paramarsSite:@"/newLoginAPI.do?op=getServerUrlByName" sucessBlock:^(id content) {
          
