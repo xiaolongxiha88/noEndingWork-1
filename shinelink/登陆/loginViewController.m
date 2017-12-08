@@ -35,6 +35,7 @@
 #import "meConfigerViewController.h"
 #import "useToWifiView1.h"
 #import "usbToWifi00.h"
+#import "MMScanViewController.h"
 
 //测试头
 #import "useToWifiView1.h"
@@ -420,8 +421,25 @@
             
         }else if (SelectIndexNum==1){
          
-            usbToWifi00 *rootView = [[usbToWifi00 alloc]init];
-            [self.navigationController pushViewController:rootView animated:YES];
+            MMScanViewController *scanVc = [[MMScanViewController alloc] initWithQrType:MMScanTypeAll onFinish:^(NSString *result, NSError *error) {
+                if (error) {
+                    NSLog(@"error: %@",error);
+                } else {
+
+                    useToWifiView1 *rootView = [[useToWifiView1 alloc]init];
+
+                    [self.navigationController pushViewController:rootView animated:NO];
+
+                    NSLog(@"扫描结果：%@",result);
+
+                }
+            }];
+            [self.navigationController pushViewController:scanVc animated:YES];
+            
+            
+//           usbToWifi00 *rootView = [[usbToWifi00 alloc]init];
+//           //   useToWifiView1 *rootView=[[useToWifiView1 alloc]init];
+//            [self.navigationController pushViewController:rootView animated:YES];
             
         }
         

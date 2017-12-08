@@ -16,7 +16,7 @@
 @end
 
 @implementation SHBQRView {
-    AVCaptureSession *_session;
+   
     
     UIImageView     *_scanView;
     UIImageView     *_lineView;
@@ -199,6 +199,7 @@
     if (metadataObjects.count > 0) {
         AVMetadataMachineReadableCodeObject *metadataObject = [metadataObjects firstObject];
         if ([_delegate respondsToSelector:@selector(qrView:ScanResult:)]) {
+         
             [_delegate qrView:self ScanResult:metadataObject.stringValue];
         }
     }

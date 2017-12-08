@@ -72,6 +72,7 @@ static NSString *cellTwo = @"cellTwo";
      [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:MainColor];
+    [self.navigationController.navigationBar setBackgroundColor:MainColor];
     
     if (_isShowScanResult==1) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"WiFi名称为:%@",_SN] message:@"是否跳转连接WiFi?" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];

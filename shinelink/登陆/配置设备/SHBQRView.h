@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
+
 @class SHBQRView;
 
 @protocol SHBQRViewDelegate <NSObject>
@@ -17,6 +19,8 @@
 @end
 
 @interface SHBQRView : UIView
+
+@property (nonatomic, strong)  AVCaptureSession *session;
 
 @property (nonatomic, assign) id<SHBQRViewDelegate> delegate;
 

@@ -9,9 +9,12 @@
 #import "usbToWifi00.h"
 #import "SHBQRView.h"
 #import "useToWifiView1.h"
+#import "MMScanViewController.h"
 
 @interface usbToWifi00 ()<SHBQRViewDelegate>
 @property(nonatomic,assign) BOOL isFirstLogin;
+@property(nonatomic,strong)SHBQRView *qrView;
+
 @end
 
 @implementation usbToWifi00
@@ -35,33 +38,47 @@
     _isFirstLogin=YES;
     
     [self ScanQR];
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
+    [_qrView stopScan];
+    [_qrView removeFromSuperview];
+    _qrView.delegate =nil;
+    _qrView.session=nil;
+    self.view=nil;
+    _qrView=nil;
     _isFirstLogin=NO;
 }
 
 -(void)goToUsb{
     useToWifiView1 *rootView = [[useToWifiView1 alloc]init];
-    [self.navigationController pushViewController:rootView animated:YES];
+ //   [self.navigationController presentViewController:rootView animated:YES completion:nil];
+    
+     [self.navigationController pushViewController:rootView animated:YES];
 }
 
 -(void)ScanQR{
+  
+    if (!_qrView) {
+        _qrView = [[SHBQRView alloc] initWithFrame:self.view.bounds];
+        _qrView.delegate = self;
+        [self.view addSubview:_qrView];
+    }
+
     
-    SHBQRView *qrView = [[SHBQRView alloc] initWithFrame:self.view.bounds];
-    qrView.delegate = self;
-    [self.view addSubview:qrView];
 }
 
 
 - (void)qrView:(SHBQRView *)view ScanResult:(NSString *)result {
-    [view stopScan];
+    [_qrView stopScan];
     
     useToWifiView1 *rootView = [[useToWifiView1 alloc]init];
     rootView.isShowScanResult=1;
     rootView.SN=result;
     [self.navigationController pushViewController:rootView animated:YES];
 }
+
 
 
 

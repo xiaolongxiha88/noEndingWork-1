@@ -691,6 +691,11 @@
 		33C3FFFF1D3E33E00016351C /* L6.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF41D3E33E00016351C /* L6.png */; };
 		33C5E2261D49A89F00A0DB00 /* 三角形.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C5E2251D49A89F00A0DB00 /* 三角形.png */; };
 		33C5E2291D4AFB1C00A0DB00 /* moreBigImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C5E2281D4AFB1C00A0DB00 /* moreBigImage.m */; };
+		33E369581FDA70D6001D947D /* MMScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E369541FDA70D6001D947D /* MMScanView.m */; };
+		33E369591FDA70D6001D947D /* MMScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E369561FDA70D6001D947D /* MMScanViewController.m */; };
+		33E3695A1FDA70D6001D947D /* resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 33E369571FDA70D6001D947D /* resource.bundle */; };
+		33E369611FDAC23E001D947D /* shouDianTong1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E3695F1FDAC23E001D947D /* shouDianTong1.png */; };
+		33E369621FDAC23E001D947D /* shouDianTong2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E369601FDAC23E001D947D /* shouDianTong2.png */; };
 		33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */; };
 		33E42E0B1DC9CDB60024FFBB /* peizhi_btn_click_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */; };
 		33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */; };
@@ -1862,6 +1867,13 @@
 		33C5E2251D49A89F00A0DB00 /* 三角形.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "三角形.png"; sourceTree = "<group>"; };
 		33C5E2271D4AFB1C00A0DB00 /* moreBigImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = moreBigImage.h; sourceTree = "<group>"; };
 		33C5E2281D4AFB1C00A0DB00 /* moreBigImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = moreBigImage.m; sourceTree = "<group>"; };
+		33E369531FDA70D6001D947D /* MMScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMScanView.h; sourceTree = "<group>"; };
+		33E369541FDA70D6001D947D /* MMScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMScanView.m; sourceTree = "<group>"; };
+		33E369551FDA70D6001D947D /* MMScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMScanViewController.h; sourceTree = "<group>"; };
+		33E369561FDA70D6001D947D /* MMScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMScanViewController.m; sourceTree = "<group>"; };
+		33E369571FDA70D6001D947D /* resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = resource.bundle; sourceTree = "<group>"; };
+		33E3695F1FDAC23E001D947D /* shouDianTong1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouDianTong1.png; sourceTree = "<group>"; };
+		33E369601FDAC23E001D947D /* shouDianTong2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouDianTong2.png; sourceTree = "<group>"; };
 		33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click.png; path = ../../peizhi_btn_click.png; sourceTree = "<group>"; };
 		33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click_2.png; path = ../../peizhi_btn_click_2.png; sourceTree = "<group>"; };
 		33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_2.png; path = ../../peizhi_btn_2.png; sourceTree = "<group>"; };
@@ -2492,6 +2504,7 @@
 		335456B31C852E3600275478 /* 配置设备 */ = {
 			isa = PBXGroup;
 			children = (
+				33E369511FDA709F001D947D /* 新扫描二维码 */,
 				335456C41C853AFD00275478 /* scanLine@2x.png */,
 				335456C81C853C2F00275478 /* scanscanBg.png */,
 				335456B41C852E6200275478 /* AddCellectViewController.h */,
@@ -4354,6 +4367,28 @@
 			path = "手势";
 			sourceTree = "<group>";
 		};
+		33E369511FDA709F001D947D /* 新扫描二维码 */ = {
+			isa = PBXGroup;
+			children = (
+				33E369521FDA70D6001D947D /* MMScanner */,
+			);
+			path = "新扫描二维码";
+			sourceTree = "<group>";
+		};
+		33E369521FDA70D6001D947D /* MMScanner */ = {
+			isa = PBXGroup;
+			children = (
+				33E369531FDA70D6001D947D /* MMScanView.h */,
+				33E369541FDA70D6001D947D /* MMScanView.m */,
+				33E369551FDA70D6001D947D /* MMScanViewController.h */,
+				33E369561FDA70D6001D947D /* MMScanViewController.m */,
+				33E3695F1FDAC23E001D947D /* shouDianTong1.png */,
+				33E369601FDAC23E001D947D /* shouDianTong2.png */,
+				33E369571FDA70D6001D947D /* resource.bundle */,
+			);
+			path = MMScanner;
+			sourceTree = "<group>";
+		};
 		33EA49F21E8DE9AE0044A01A /* 储能能源新界面 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4880,6 +4915,7 @@
 				3349A7B81C75BCDB009172C2 /* 账号3.png in Resources */,
 				3387B8C11FB2D6330073FB35 /* pay4.png in Resources */,
 				337F961A1F0CCB8B00840527 /* Untreated1111.png in Resources */,
+				33E369611FDAC23E001D947D /* shouDianTong1.png in Resources */,
 				3383F13E1C9FFDA10075E834 /* 光伏收益.png in Resources */,
 				33FEFD5D1C7DB38400324374 /* icon---Name@2x.png in Resources */,
 				335456C11C852FF600275478 /* 圆角矩形空心.png in Resources */,
@@ -4943,6 +4979,7 @@
 				334FF0B71CF53C7C001E6716 /* about.png in Resources */,
 				33E42E0F1DC9CE050024FFBB /* peizhi_btn.png in Resources */,
 				337584431D267D12006AC140 /* product.jpg in Resources */,
+				33E369621FDAC23E001D947D /* shouDianTong2.png in Resources */,
 				334F3AD61D9B9FA4001D7F75 /* shinewifi.png in Resources */,
 				3370EBC91F42A24000F37149 /* bg3.jpg in Resources */,
 				33860FEB1EEA75C5004150FD /* MJRefresh.bundle in Resources */,
@@ -5024,6 +5061,7 @@
 				3376B3D91F973EE00069F820 /* max_power.png in Resources */,
 				3389648F1E5D678800A7B1AE /* icon_yijianjianzhan.png in Resources */,
 				3363DD241C7C610A00D740FB /* 语言.png in Resources */,
+				33E3695A1FDA70D6001D947D /* resource.bundle in Resources */,
 				33FEFD581C7DB38400324374 /* icon---Email---Full@3x.png in Resources */,
 				33775AF31D2E404D0070742E /* 客户.png in Resources */,
 				333300381F10B50700754C6F /* search_first.png in Resources */,
@@ -5105,6 +5143,7 @@
 				334E9BF51CAD2B8900C8271F /* PvLogTableViewController.m in Sources */,
 				3381ECE81CBC906600DCF0D2 /* Line3View.m in Sources */,
 				3343F3DA1C80405D009F69BC /* AFNetworkActivityIndicatorManager.m in Sources */,
+				33E369591FDA70D6001D947D /* MMScanViewController.m in Sources */,
 				33652A2B1CEC1190004EBAE5 /* ExtensionTwoViewController.m in Sources */,
 				3349BB381C7ED28100E6E34B /* UserInfo.m in Sources */,
 				33EFB6671C98F9B1003F336F /* UIView+Zirkfied.m in Sources */,
@@ -5433,6 +5472,7 @@
 				3367EB9E1CD0B2A700D2EF67 /* StationEarningsViewController.m in Sources */,
 				33860FEE1EEA75C5004150FD /* UIScrollView+MJExtension.m in Sources */,
 				338990B51CEB1F9D00A708F8 /* DemoDeviceViewController.m in Sources */,
+				33E369581FDA70D6001D947D /* MMScanView.m in Sources */,
 				334B8F221C91250300798A69 /* SHLineGraphView.m in Sources */,
 				3326926E1D79728F0058C5B7 /* AVfirstView.m in Sources */,
 				335456D41C8588E200275478 /* SNViewController.m in Sources */,
