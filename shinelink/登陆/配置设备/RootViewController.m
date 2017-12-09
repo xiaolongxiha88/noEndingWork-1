@@ -145,7 +145,7 @@
     NSString *B1= [NSString stringWithFormat: @"%ld", (long)B];
     int C=sum*sum;
     NSString *text = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x",C]];
-    int length = [text length];
+    NSInteger length = [text length];
     NSString *resultTemp;
     NSString *resultTemp3;
     NSString *resultTemp1=[text substringWithRange:NSMakeRange(0, 2)];

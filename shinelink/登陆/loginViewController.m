@@ -25,7 +25,7 @@
 #import "AddressPickView.h"
 #import "JPUSHService.h"
 #import "phoneRegisterViewController.h"
-#import "quickRegisterViewController.h"
+
 #import "AVfirstView.h"
 #import "topAvViewController.h"
 #import "forgetOneViewController.h"
@@ -34,7 +34,7 @@
 #import "ZJBLStoreShopTypeAlert.h"
 #import "meConfigerViewController.h"
 #import "useToWifiView1.h"
-#import "usbToWifi00.h"
+#import "quickRegister2ViewController.h"
 #import "MMScanViewController.h"
 
 //测试头
@@ -412,7 +412,6 @@
     NSArray *nameArray=@[root_ME_239,root_ME_240];
     [ZJBLStoreShopTypeAlert showWithTitle:root_ME_241 titles:nameArray selectIndex:^(NSInteger SelectIndexNum){
          [self.navigationController setNavigationBarHidden:NO];
-        [self.navigationController.navigationBar setTranslucent:YES];
         [self.navigationController.navigationBar setBarTintColor:MainColor];
         if (SelectIndexNum==0) {
             meConfigerViewController *rootView = [[meConfigerViewController alloc]init];
@@ -427,13 +426,16 @@
                 } else {
 
                     useToWifiView1 *rootView = [[useToWifiView1 alloc]init];
-
+                    rootView.isShowScanResult=1;
+                    rootView.SN=result;
                     [self.navigationController pushViewController:rootView animated:NO];
 
                     NSLog(@"扫描结果：%@",result);
 
                 }
             }];
+            scanVc.titleString=root_scan_242;
+            scanVc.scanBarType=1;
             [self.navigationController pushViewController:scanVc animated:YES];
             
             
@@ -451,8 +453,35 @@
 }
 
 -(void)goQuickRegister{
-    quickRegisterViewController *registerRoot=[[quickRegisterViewController alloc]init];
-    [self.navigationController pushViewController:registerRoot animated:YES];
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
+    
+    MMScanViewController *scanVc = [[MMScanViewController alloc] initWithQrType:MMScanTypeAll onFinish:^(NSString *result, NSError *error) {
+        if (error) {
+            NSLog(@"error: %@",error);
+        } else {
+            if (result.length!=10) {
+                // [self showToastViewWithTitle:@"请扫描正确的采集器序列号"];
+                [self showAlertViewWithTitle:nil message:root_caiJiQi_zhengque cancelButtonTitle:root_Yes];
+                
+            }else{
+                 
+                quickRegister2ViewController *registerRoot=[[quickRegister2ViewController alloc]init];
+                registerRoot.SnCode=result;
+                registerRoot.SnCheck=[self getValidCode:result];
+                [self.navigationController pushViewController:registerRoot animated:YES];
+            }
+            
+            NSLog(@"扫描结果：%@",result);
+        }
+    }];
+    scanVc.titleString=root_saomiao_sn;
+    scanVc.scanBarType=2;
+    [self.navigationController pushViewController:scanVc animated:YES];
+    
+    
+//    quickRegisterViewController *registerRoot=[[quickRegisterViewController alloc]init];
+//    [self.navigationController pushViewController:registerRoot animated:YES];
 }
 
 -(UIImage *)changeAlphaOfImageWith:(CGFloat)alpha withImage:(UIImage*)image
@@ -870,17 +899,23 @@ NSLog(@"体验馆");
                                 }else{
                                     NSString *roleNum=[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]];
                                     
-          
-                                    if ([roleNum isEqualToString:@"6"] || [roleNum isEqualToString:@"14"] || [roleNum isEqualToString:@"7"] || [roleNum isEqualToString:@"15"]) {
+                                    if ([roleNum isEqualToString:@"1"] || [roleNum isEqualToString:@"2"] || [roleNum isEqualToString:@"3"] ) {
+                                        OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
+                                        OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
+                                        OSSView.phoneNum=PhoneNum;
+                                        OSSView.OssName=_loginUserName;
+                                        OSSView.OssPassword=_loginUserPassword;
+                                        [self.navigationController pushViewController:OSSView animated:NO];
+
+                                    }else{
                                         if ([roleNum isEqualToString:@"7"] || [roleNum isEqualToString:@"15"]) {
                                             NSDictionary *useDic=[NSDictionary dictionaryWithDictionary:objDic[@"user"]];
                                             if ([useDic.allKeys containsObject:@"code"]) {
-                                                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"code"]] forKey:@"agentCodeId"];
+                                                [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"code"]] forKey:@"agentCodeId"];
                                             }else{
                                                 [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"agentCodeId"];
                                             }
                                         }
-                                        
                                         
                                         ossFistVC *OSSView=[[ossFistVC alloc]init];
                                         OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
@@ -890,14 +925,10 @@ NSLog(@"体验馆");
                                         [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"firstGoToOss"];
                                         
                                         [self.navigationController pushViewController:OSSView animated:NO];
-                                    }else{
-                                        OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
-                                        OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
-                                        OSSView.phoneNum=PhoneNum;
-                                        OSSView.OssName=_loginUserName;
-                                        OSSView.OssPassword=_loginUserPassword;
-                                        [self.navigationController pushViewController:OSSView animated:NO];
+                                        
                                     }
+                                    
+                               
                           
                                 }
                                 

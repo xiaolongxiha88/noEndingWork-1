@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong)NSString* titleString;
 
+@property (nonatomic, assign)NSInteger scanBarType;     //1 需要bar   0 不需要
 /**
  初始化二维码扫描控制器
 

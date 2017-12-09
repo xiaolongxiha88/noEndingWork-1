@@ -12,8 +12,9 @@
 #import "MainViewController.h"
 #import "AddDeviceViewController.h"
 #import "configWifiSViewController.h"
+#import "MMScanViewController.h"
 
-@interface addDevice ()<SHBQRViewDelegate>
+@interface addDevice ()
 @property(nonatomic,strong)UITextField *cellectId;
 @property(nonatomic,strong)UITextField *cellectNo;
 
@@ -127,16 +128,25 @@
 
 
 -(void)ScanQR{
-    // TempViewController *temp = [[TempViewController alloc] init];
-    // [self.navigationController pushViewController:temp animated:true];
+    MMScanViewController *scanVc = [[MMScanViewController alloc] initWithQrType:MMScanTypeAll onFinish:^(NSString *result, NSError *error) {
+        if (error) {
+            NSLog(@"error: %@",error);
+        } else {
+            [self ScanGoToNet:result];
+            NSLog(@"扫描结果：%@",result);
+        }
+    }];
+    scanVc.titleString=root_saomiao_sn;
+    scanVc.scanBarType=0;
+    [self.navigationController pushViewController:scanVc animated:YES];
     
-    SHBQRView *qrView = [[SHBQRView alloc] initWithFrame:self.view.bounds];
-    qrView.delegate = self;
-    [self.view addSubview:qrView];
+//    SHBQRView *qrView = [[SHBQRView alloc] initWithFrame:self.view.bounds];
+//    qrView.delegate = self;
+//    [self.view addSubview:qrView];
 }
 
-- (void)qrView:(SHBQRView *)view ScanResult:(NSString *)result {
-    [view stopScan];
+- (void)ScanGoToNet:(NSString *)result {
+
     
     _cellectNo.text=[self getValidCode:result];
     NSLog(@"_cellectNo.text=%@",_cellectNo.text);
@@ -237,47 +247,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(NSString*)getValidCode:(NSString*)serialNum{
-    if (serialNum==NULL||serialNum==nil) {
-        return @"";
-    }
-    NSData *testData = [serialNum dataUsingEncoding: NSUTF8StringEncoding];
-    int sum=0;
-    
-    Byte *snBytes=(Byte*)[testData bytes];
-    
-    for(int i=0;i<[testData length];i++)
-    {
-        sum+=snBytes[i];
-    }
-    NSInteger B=sum%8;
-    NSString *B1= [NSString stringWithFormat: @"%ld", B];
-    int C=sum*sum;
-    
-    NSString *text = [NSString stringWithFormat:@"%@",[[NSString alloc] initWithFormat:@"%1x",C]];
-    int length = [text length];
-    NSString *resultTemp;
-    NSString *resultTemp3;
-    NSString *resultTemp1=[text substringWithRange:NSMakeRange(0, 2)];
-    NSString *resultTemp2=[text substringWithRange:NSMakeRange(length - 2, 2)];
-    
-    resultTemp3= [resultTemp1 stringByAppendingString:resultTemp2];
-    resultTemp=[resultTemp3 stringByAppendingString:B1];
-    
-    NSString *result = @"";
-    
-    char *charArray = [resultTemp cStringUsingEncoding:NSASCIIStringEncoding];
-    for (int i=0; i<[resultTemp length]; i++) {
-        if (charArray[i]==0x30||charArray[i]==0x4F||charArray[i]==0x4F) {
-            charArray[i]++;
-        }
-        result=[result stringByAppendingFormat:@"%c",charArray[i]];
-    }
-    
-    
-    return [result uppercaseString];
-    
-}
+
 
 
 

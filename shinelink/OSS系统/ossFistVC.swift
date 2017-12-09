@@ -90,8 +90,9 @@ class ossFistVC: RootViewController {
         
         }else if roleString=="6" || roleString=="14" || roleString=="7" || roleString=="15"{
               self.initUIThree()
-         
-            
+             
+        }else{
+            self.initUIAlert()
         }
 
         
@@ -326,6 +327,17 @@ class ossFistVC: RootViewController {
     }
     
     
+    func initUIAlert(){
+        let Lable3=UILabel()
+        Lable3.frame=CGRect(x: 60*NOW_SIZE, y: 150*HEIGHT_SIZE, width: 200*NOW_SIZE, height: 80*HEIGHT_SIZE)
+        Lable3.text="该类型账号暂未开放对应功能模块"
+        Lable3.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
+        Lable3.font=UIFont.systemFont(ofSize: 30*HEIGHT_SIZE)
+        Lable3.adjustsFontSizeToFitWidth=true
+        Lable3.textAlignment=NSTextAlignment.center
+        self.view.addSubview(Lable3)
+        
+    }
     
     func initUIFour(){
 

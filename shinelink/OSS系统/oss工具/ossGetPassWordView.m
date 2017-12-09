@@ -7,7 +7,9 @@
 //
 
 #import "ossGetPassWordView.h"
-#import "usbToWifi00.h"
+
+#import "MMScanViewController.h"
+#import "useToWifiView1.h"
 
 @interface ossGetPassWordView ()
 @property(nonatomic,strong)UIButton *goBut;
@@ -26,13 +28,31 @@
 }
 
 -(void)goToTool{
-    usbToWifi00 *go=[[usbToWifi00 alloc]init];
-    [self.navigationController pushViewController:go animated:YES];
+    MMScanViewController *scanVc = [[MMScanViewController alloc] initWithQrType:MMScanTypeAll onFinish:^(NSString *result, NSError *error) {
+        if (error) {
+            NSLog(@"error: %@",error);
+        } else {
+            
+            useToWifiView1 *rootView = [[useToWifiView1 alloc]init];
+            rootView.isShowScanResult=1;
+            rootView.SN=result;
+            [self.navigationController pushViewController:rootView animated:NO];
+            
+            NSLog(@"扫描结果：%@",result);
+            
+        }
+    }];
+    scanVc.titleString=root_scan_242;
+    scanVc.scanBarType=1;
+    [self.navigationController pushViewController:scanVc animated:YES];
+    
+//    usbToWifi00 *go=[[usbToWifi00 alloc]init];
+//    [self.navigationController pushViewController:go animated:YES];
 }
 
 -(void)initUI{
     
-    UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 20*HEIGHT_SIZE, 300*NOW_SIZE,20*HEIGHT_SIZE )];
+    UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 50*HEIGHT_SIZE, 300*NOW_SIZE,20*HEIGHT_SIZE )];
     PV2Lable.text=@"设置本地调试工具密码";
     PV2Lable.textAlignment=NSTextAlignmentLeft;
     PV2Lable.textColor=COLOR(102, 102, 102, 1);
@@ -41,7 +61,7 @@
     [self.view addSubview:PV2Lable];
     
     
-    _textField2 = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
+    _textField2 = [[UITextField alloc] initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 80*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
     _textField2.layer.borderWidth=1;
     _textField2.layer.cornerRadius=5;
     _textField2.tag=2000;

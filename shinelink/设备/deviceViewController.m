@@ -507,6 +507,7 @@ _pcsNetStorageSN=@"";
 
 #pragma mark - navigationItem
 -(void)selectRightAction{
+    self.hidesBottomBarWhenPushed=YES;
     addDevice *add=[[addDevice alloc]init];
     add.stationId=_stationIdOne;
     [self.navigationController pushViewController:add animated:YES];

@@ -10,7 +10,9 @@
 #import "meConfigerViewController.h"
 #import "payView1.h"
 #import "useToWifiView1.h"
-#import "usbToWifi00.h"
+
+#import "MMScanViewController.h"
+#import "useToWifiView1.h"
 
 @interface toolOneView ()
 @property(nonatomic,strong)NSMutableArray *dataArray;
@@ -124,8 +126,26 @@
         [self.navigationController pushViewController:rootView animated:YES];
         
     }else if (indexPath.row==1){
-        usbToWifi00 *rootView = [[usbToWifi00 alloc]init];
-        [self.navigationController pushViewController:rootView animated:YES];
+        MMScanViewController *scanVc = [[MMScanViewController alloc] initWithQrType:MMScanTypeAll onFinish:^(NSString *result, NSError *error) {
+            if (error) {
+                NSLog(@"error: %@",error);
+            } else {
+                
+                useToWifiView1 *rootView = [[useToWifiView1 alloc]init];
+                rootView.isShowScanResult=1;
+                rootView.SN=result;
+                [self.navigationController pushViewController:rootView animated:NO];
+                
+                NSLog(@"扫描结果：%@",result);
+                
+            }
+        }];
+        scanVc.titleString=root_scan_242;
+        scanVc.scanBarType=1;
+        [self.navigationController pushViewController:scanVc animated:YES];
+        
+//        usbToWifi00 *rootView = [[usbToWifi00 alloc]init];
+//        [self.navigationController pushViewController:rootView animated:YES];
         
     }else if (indexPath.row==2){
         payView1 *rootView = [[payView1 alloc]init];

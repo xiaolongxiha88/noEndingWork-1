@@ -11,7 +11,7 @@
 #import <Photos/PHPhotoLibrary.h>
 #import <AVFoundation/AVFoundation.h>
 #import "useToWifiView1.h"
-
+#import "quickRegister2ViewController.h"
 
 @interface MMScanViewController ()<UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVCaptureMetadataOutputObjectsDelegate, UIGestureRecognizerDelegate>
 
@@ -69,7 +69,7 @@
      _isFirstLogin=YES;
     
     [self initScanDevide];
-    [self drawTitle];
+   // [self drawTitle];      扫描框提示语
     [self drawScanView];
     [self initScanType];
     [self setNavItem:self.scanType];
@@ -79,9 +79,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (!_isFirstLogin) {
-        [self.navigationController popViewControllerAnimated:NO];
+    if (_scanBarType==1) {
+        if (!_isFirstLogin) {
+            [self.navigationController popViewControllerAnimated:NO];
+        }
     }
+  
     //开始捕获
     if (self.session) [self.session startRunning];
 }
@@ -246,7 +249,7 @@
         return;
     }
     
-    self.toolsView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame)-100,
+    self.toolsView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame)-140,
                                                                    CGRectGetWidth(self.view.frame), 64)];
     _toolsView.backgroundColor = [UIColor clearColor];
     
@@ -261,8 +264,8 @@
   
     [_scanTypeQrBtn setTitleColor:[UIColor colorWithRed:0.165 green:0.663 blue:0.886 alpha:1.00] forState:UIControlStateSelected];
     [_scanTypeQrBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_scanTypeQrBtn setImage:IMAGE(@"shouDianTong2.png") forState:UIControlStateNormal];
-    [_scanTypeQrBtn setImage:IMAGE(@"shouDianTong1.png") forState:UIControlStateSelected];
+    [_scanTypeQrBtn setImage:IMAGE(@"shouDianTong1.png") forState:UIControlStateNormal];
+    [_scanTypeQrBtn setImage:IMAGE(@"shouDianTong2.png") forState:UIControlStateSelected];
     [_scanTypeQrBtn setSelected:NO];
     //  [_scanTypeQrBtn setTitle:@"二维码" forState:UIControlStateNormal];
   //  _scanTypeQrBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
@@ -282,18 +285,28 @@
         [self.navigationItem setRightBarButtonItem:nil];
     } else {
     //    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:UIBarButtonItemStylePlain target:self action:@selector(openPhoto)];
-         UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"跳过" style:UIBarButtonItemStylePlain target:self action:@selector(goToUsbTool)];
-        [self.navigationItem setRightBarButtonItem:rightItem];
+        if (_scanBarType==1) {
+            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"跳过" style:UIBarButtonItemStylePlain target:self action:@selector(goToUsbTool)];
+            [self.navigationItem setRightBarButtonItem:rightItem];
+        }
+      
+        if (_scanBarType==2) {
+            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:root_tiaoguo style:UIBarButtonItemStylePlain target:self action:@selector(goToUsbTool2)];
+            [self.navigationItem setRightBarButtonItem:rightItem];
+        }
+        
     }
 }
 
 -(void)goToUsbTool{
-    
     useToWifiView1 *rootView = [[useToWifiView1 alloc]init];
     [self.navigationController pushViewController:rootView animated:YES];
-    
 }
 
+-(void)goToUsbTool2{
+    quickRegister2ViewController *rootView = [[quickRegister2ViewController alloc]init];
+    [self.navigationController pushViewController:rootView animated:YES];
+}
 
 #pragma mark -底部功能项事件
 //修改扫码类型 【二维码  || 条形码】

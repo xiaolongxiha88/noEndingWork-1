@@ -623,7 +623,6 @@
 		3389647A1E57E7E600A7B1AE /* icon_load.png in Resources */ = {isa = PBXBuildFile; fileRef = 338964741E57E7E600A7B1AE /* icon_load.png */; };
 		3389647B1E57E7E600A7B1AE /* icon_solor.png in Resources */ = {isa = PBXBuildFile; fileRef = 338964751E57E7E600A7B1AE /* icon_solor.png */; };
 		3389647C1E57E7E600A7B1AE /* icon_sp.png in Resources */ = {isa = PBXBuildFile; fileRef = 338964761E57E7E600A7B1AE /* icon_sp.png */; };
-		338964881E5BDE5200A7B1AE /* quickRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338964871E5BDE5200A7B1AE /* quickRegisterViewController.m */; };
 		3389648B1E5C1D2000A7B1AE /* quickRegister2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3389648A1E5C1D2000A7B1AE /* quickRegister2ViewController.m */; };
 		3389648D1E5C3BBD00A7B1AE /* englishCountryJson.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3389648C1E5C3BBD00A7B1AE /* englishCountryJson.txt */; };
 		3389648F1E5D678800A7B1AE /* icon_yijianjianzhan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3389648E1E5D678800A7B1AE /* icon_yijianjianzhan.png */; };
@@ -677,7 +676,6 @@
 		33AF3D281D8E67210007D6C2 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF3D141D8E67210007D6C2 /* ProgressHUD.m */; };
 		33AF3D291D8E67210007D6C2 /* UdpCheckUtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF3D161D8E67210007D6C2 /* UdpCheckUtl.m */; };
 		33B445BD1FD1695E000B18AA /* loginMore.png in Resources */ = {isa = PBXBuildFile; fileRef = 33B445BC1FD1695E000B18AA /* loginMore.png */; };
-		33B445C31FD1731C000B18AA /* usbToWifi00.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B445C21FD1731C000B18AA /* usbToWifi00.m */; };
 		33C300001D3E33E00016351C /* L7.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF51D3E33E00016351C /* L7.png */; };
 		33C300011D3E33E00016351C /* L8.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF61D3E33E00016351C /* L8.png */; };
 		33C300021D3E33E00016351C /* L9.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF71D3E33E00016351C /* L9.png */; };
@@ -1760,8 +1758,6 @@
 		338964741E57E7E600A7B1AE /* icon_load.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_load.png; path = ../icon_load.png; sourceTree = "<group>"; };
 		338964751E57E7E600A7B1AE /* icon_solor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_solor.png; path = ../icon_solor.png; sourceTree = "<group>"; };
 		338964761E57E7E600A7B1AE /* icon_sp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_sp.png; path = ../icon_sp.png; sourceTree = "<group>"; };
-		338964861E5BDE5200A7B1AE /* quickRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quickRegisterViewController.h; sourceTree = "<group>"; };
-		338964871E5BDE5200A7B1AE /* quickRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = quickRegisterViewController.m; sourceTree = "<group>"; };
 		338964891E5C1D2000A7B1AE /* quickRegister2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = quickRegister2ViewController.h; sourceTree = "<group>"; };
 		3389648A1E5C1D2000A7B1AE /* quickRegister2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = quickRegister2ViewController.m; sourceTree = "<group>"; };
 		3389648C1E5C3BBD00A7B1AE /* englishCountryJson.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = englishCountryJson.txt; path = ../../englishCountryJson.txt; sourceTree = "<group>"; };
@@ -1851,8 +1847,6 @@
 		33AF3D151D8E67210007D6C2 /* UdpCheckUtl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpCheckUtl.h; sourceTree = "<group>"; };
 		33AF3D161D8E67210007D6C2 /* UdpCheckUtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UdpCheckUtl.m; sourceTree = "<group>"; };
 		33B445BC1FD1695E000B18AA /* loginMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginMore.png; sourceTree = "<group>"; };
-		33B445C11FD1731C000B18AA /* usbToWifi00.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifi00.h; sourceTree = "<group>"; };
-		33B445C21FD1731C000B18AA /* usbToWifi00.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifi00.m; sourceTree = "<group>"; };
 		33C3FFEF1D3E33E00016351C /* L1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L1.png; sourceTree = "<group>"; };
 		33C3FFF01D3E33E00016351C /* L2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L2.png; sourceTree = "<group>"; };
 		33C3FFF11D3E33E00016351C /* L3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L3.png; sourceTree = "<group>"; };
@@ -3383,8 +3377,6 @@
 				3376B3CD1F973E0B0069F820 /* 本地调试图片 */,
 				3376B3CA1F9726720069F820 /* useToWifiView1.h */,
 				3376B3CB1F9726720069F820 /* useToWifiView1.m */,
-				33B445C11FD1731C000B18AA /* usbToWifi00.h */,
-				33B445C21FD1731C000B18AA /* usbToWifi00.m */,
 			);
 			path = "本地调试";
 			sourceTree = "<group>";
@@ -4038,8 +4030,6 @@
 		338964851E5BDD7A00A7B1AE /* 快速注册 */ = {
 			isa = PBXGroup;
 			children = (
-				338964861E5BDE5200A7B1AE /* quickRegisterViewController.h */,
-				338964871E5BDE5200A7B1AE /* quickRegisterViewController.m */,
 				338964891E5C1D2000A7B1AE /* quickRegister2ViewController.h */,
 				3389648A1E5C1D2000A7B1AE /* quickRegister2ViewController.m */,
 				3389648C1E5C3BBD00A7B1AE /* englishCountryJson.txt */,
@@ -5407,11 +5397,9 @@
 				3355F26B1C746BF5006DDE5A /* aboutTableViewCell.m in Sources */,
 				335D69B71D77BA4D00894D90 /* README.md in Sources */,
 				33860FE51EEA75C5004150FD /* MJRefreshBackGifFooter.m in Sources */,
-				33B445C31FD1731C000B18AA /* usbToWifi00.m in Sources */,
 				33860FE21EEA75C5004150FD /* MJRefreshAutoGifFooter.m in Sources */,
 				33AF3D1A1D8E67210007D6C2 /* ACPButton.m in Sources */,
 				3367EBA41CD0C11800D2EF67 /* productViewController.m in Sources */,
-				338964881E5BDE5200A7B1AE /* quickRegisterViewController.m in Sources */,
 				33875A4F1EB96A7900F7E0E6 /* newEnergyDetailData.m in Sources */,
 				33AF3D1E1D8E67210007D6C2 /* JDStatusBarNotification.m in Sources */,
 				335D69B21D77BA4D00894D90 /* HcdPlayerView.m in Sources */,

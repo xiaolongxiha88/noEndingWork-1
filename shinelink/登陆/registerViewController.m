@@ -237,7 +237,7 @@
      self.automaticallyAdjustsScrollViewInsets = NO;
     _backScroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height+60*NOW_SIZE)];
     _backScroll.scrollEnabled=YES;
-       _backScroll.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height+160*NOW_SIZE);
+       _backScroll.contentSize = CGSizeMake(SCREEN_Width,SCREEN_Height+200*NOW_SIZE);
     [self.view addSubview:_backScroll];
     
     _addressLable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,10*HEIGHT_SIZE, 300*NOW_SIZE, 20*HEIGHT_SIZE)];
@@ -410,7 +410,7 @@
 
 -(void)PresentGo{
     NSArray *array=[[NSArray alloc]initWithObjects:root_Enter_your_username,root_Enter_your_pwd,root_chongFu_shuRu_miMa,root_Enter_email,root_Enter_phone_number,root_shuRu_daiLiShangBianHao,nil];
-    for (int i=0; i<array.count-1; i++) {
+    for (int i=0; i<array.count-2; i++) {
         if ([[_textFieldMutableArray[i] text] isEqual:@""]) {
             [self showToastViewWithTitle:array[i]];
             return;
