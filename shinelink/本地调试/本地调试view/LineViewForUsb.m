@@ -414,7 +414,7 @@
     if (!_barChartView) {
         self.barChartView = [[PNBarChart alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 310*NOW_SIZE, 300*HEIGHT_SIZE)];
         if (_barTypeNum==1) {
-            _barChartView.frame=CGRectMake(5*NOW_SIZE, 60*HEIGHT_SIZE, 310*NOW_SIZE, 300*HEIGHT_SIZE);
+            _barChartView.frame=CGRectMake(5*NOW_SIZE, 40*HEIGHT_SIZE, 310*NOW_SIZE, 300*HEIGHT_SIZE);
             self.unitLabel.hidden=NO;
         }
 
@@ -524,50 +524,80 @@
    
       NSMutableArray *tempArr = [NSMutableArray array];
     
-    if (_barType==0) {           //Hour
-        self.barChartView.xLableName=@"时间";
-        
-        for (NSString *str in _xArray) {
-            if ([str integerValue] % 2 == 0) {
-                [tempArr addObject:str];
-            } else {
-                [tempArr addObject:@""];
-            }
-        }
-  
-    }
+
 
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
     NSInteger year=[components year];
     NSInteger month=[components month];
-    month=4;
+    //month=4;
+    NSInteger time1970=[[NSDate date] timeIntervalSince1970];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    if (_barType==0) {           //Hour
+        NSMutableArray *xNewArray=[NSMutableArray new];
+        for (int i=0; i<_xArray.count; i++) {
+            NSInteger timeUnit=60*60;
+            NSInteger newTime=time1970-timeUnit*i;
+            NSDate *newData = [NSDate dateWithTimeIntervalSince1970:newTime];
+            [formatter setDateFormat:@"dd/HH"];
+            NSString *newTimeString = [formatter stringFromDate:newData];
+            [xNewArray addObject:newTimeString];
+        }
+        
+        _xArray=[NSArray arrayWithArray:xNewArray];
+        
+        for (int i=0; i<_xArray.count; i++) {
+            if ((i % 3) == 0) {
+                [tempArr addObject:_xArray[i]];
+            } else {
+                [tempArr addObject:@""];
+            }
+        }
+          self.barChartView.xyLableFont=8*HEIGHT_SIZE;
+    }
    
+    if (_barType==1) {           //Hour
+        NSMutableArray *xNewArray=[NSMutableArray new];
+        for (int i=0; i<_xArray.count; i++) {
+            NSInteger timeUnit=24*60*60;
+            NSInteger newTime=time1970-timeUnit*i;
+            NSDate *newData = [NSDate dateWithTimeIntervalSince1970:newTime];
+            [formatter setDateFormat:@"MM-dd"];
+            NSString *newTimeString = [formatter stringFromDate:newData];
+            [xNewArray addObject:newTimeString];
+        }
+        
+          _xArray=[NSArray arrayWithArray:xNewArray];
+          self.barChartView.xyLableFont=8*HEIGHT_SIZE;
+    }
+    
      if (_barType==2) {           //Month
          NSMutableArray *xNewArray=[NSMutableArray new];
          NSMutableArray *yNewArray=[NSMutableArray new];
+         
          NSMutableDictionary *newDic=[NSMutableDictionary new];
          for (int i=0; i<_xArray.count; i++) {
              [newDic setObject:_valuesArray[i] forKey:_xArray[i]];
          }
-        
+
          for (NSInteger i=month; i>0; i--) {
              NSString *yearString0=[NSString stringWithFormat:@"%ld",year];
             // NSString *yearString=[yearString0 substringWithRange:NSMakeRange(2, 2)];
              [xNewArray addObject:[NSString stringWithFormat:@"%@-%ld",yearString0,i]];
              [yNewArray addObject:[newDic objectForKey:[NSString stringWithFormat:@"%ld",i]]];
          }
-         
+
          for (NSInteger i=12; i>month; i--) {
              NSString *yearString0=[NSString stringWithFormat:@"%ld",year-1];
            //  NSString *yearString=[yearString0 substringWithRange:NSMakeRange(2, 2)];
-         
+
                [xNewArray addObject:[NSString stringWithFormat:@"%@-%ld",yearString0,i]];
              [yNewArray addObject:[newDic objectForKey:[NSString stringWithFormat:@"%ld",i]]];
          }
+          _valuesArray=[NSMutableArray arrayWithArray:yNewArray];
          
          _xArray=[NSArray arrayWithArray:xNewArray];
-            _valuesArray=[NSMutableArray arrayWithArray:yNewArray];
          
          for (int i=0; i<_xArray.count; i++) {
              if ((i % 2) == 0) {

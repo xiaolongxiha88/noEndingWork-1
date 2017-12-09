@@ -57,7 +57,7 @@
      float layerW=1;
     _buttonName=@[@"Hour",@"Day",@"Month",@"Year"];
     _lableNameArray=@[@"最近24小时发电量",@"最近7天发电量",@"最近12个月发电量",@"最近20年发电量"];
-        _xlableNameArray=@[@"(小时)",@"(天)",@"(月)",@"(年)"];
+        _xlableNameArray=@[@"(日/时)",@"(月-日)",@"(年-月)",@"(年)"];
     
     for (int i=0; i<_buttonName.count; i++) {
         UIButton *selecteButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -92,7 +92,7 @@
     _lable1.adjustsFontSizeToFitWidth=YES;
     [V1 addSubview:_lable1];
     
-    _xUnitLabel=[[UILabel alloc]initWithFrame:CGRectMake(200*NOW_SIZE, 445*HEIGHT_SIZE, 100*NOW_SIZE,20*HEIGHT_SIZE )];
+    _xUnitLabel=[[UILabel alloc]initWithFrame:CGRectMake(200*NOW_SIZE, 435*HEIGHT_SIZE, 100*NOW_SIZE,20*HEIGHT_SIZE )];
     _xUnitLabel.text=_xlableNameArray[0];
     _xUnitLabel.textAlignment=NSTextAlignmentRight;
     _xUnitLabel.textColor=COLOR(102, 102, 102, 1);

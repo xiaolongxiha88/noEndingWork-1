@@ -138,6 +138,7 @@
     }];
     scanVc.titleString=root_saomiao_sn;
     scanVc.scanBarType=0;
+    self.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:scanVc animated:YES];
     
 //    SHBQRView *qrView = [[SHBQRView alloc] initWithFrame:self.view.bounds];
