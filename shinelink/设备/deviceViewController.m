@@ -31,7 +31,7 @@
 #import "Masonry.h"
 #import "MixHead.h"
 #import "MixSecondView.h"
-
+#import "MaxSecondViewController.h"
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 #define  AnimationTime 5
@@ -782,7 +782,17 @@ _pcsNetStorageSN=@"";
            
             if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"inverter"]) {                                //inverter 设备解析
                
-                
+                NSDictionary *deviceDic=content[@"deviceList"][i];
+                if ([deviceDic.allKeys containsObject:@"invType"]) {                   //invType=0逆变器  1 max
+                     NSString *invType=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"invType"]];
+                    if ([invType integerValue]==1) {
+                          [_typeArr addObject:@"MAX"];
+                    }else{
+                          [_typeArr addObject:content[@"deviceList"][i][@"deviceType"]];
+                    }
+                }else{
+                      [_typeArr addObject:content[@"deviceList"][i][@"deviceType"]];
+                }
                 
                 NSString *picTypeSN=content[@"deviceList"][i][@"deviceSn"];
                   [imageArray addObject:[self getPvPic:picTypeSN]];
@@ -792,7 +802,7 @@ _pcsNetStorageSN=@"";
                 NSString *DY=[NSString stringWithFormat:@"%@kWh",content[@"deviceList"][i][@"eToday"]];
                 [dayArray addObject:DY];
                 
-                [_typeArr addObject:content[@"deviceList"][i][@"deviceType"]];
+              
                 [SNArray addObject:content[@"deviceList"][i][@"deviceSn"]];
                 if ([content[@"deviceList"][i][@"deviceAilas"]isEqualToString:@""]) {
                     [nameArray addObject:content[@"deviceList"][i][@"deviceSn"]];
@@ -893,7 +903,7 @@ _pcsNetStorageSN=@"";
         
         if ([_typeArr containsObject:@"storage"]) {
             
-        }else if ([_typeArr containsObject:@"inverter"]){
+        }else if ([_typeArr containsObject:@"inverter"] || [_typeArr containsObject:@"MAX"]){
             [self getPVheadData:content];
         }
         
@@ -901,7 +911,7 @@ _pcsNetStorageSN=@"";
         
         //创建Head
         if (_headerView) {
-          //  [_headerView removeFromSuperview];
+          [_headerView removeFromSuperview];
             _headerView=nil;
             
         }
@@ -1562,23 +1572,19 @@ _pcsNetStorageSN=@"";
         }else if ([getDevice.type isEqualToString:@"storage"]){
         alias.deviceSnKey=@"storageId";
          alias.netType=@"/newStorageAPI.do?op=updateStorageInfo";
+        }else if ([getDevice.type isEqualToString:@"mix"]){
+            alias.deviceSnKey=@"mixId";
+            alias.netType=@"/newMixApi.do?op=updateMixInfoAPI";
+        }else if ([getDevice.type isEqualToString:@"MAX"]){
+            alias.deviceSnKey=@"maxId";
+            alias.netType=@"/newInverterAPI.do?op=updateMaxInfo";
         }
+        
         [self.navigationController pushViewController:alias animated:YES];
     }
     if (row==2) {
         [_editCellect removeFromSuperview];
-        _dataDic=[NSMutableDictionary dictionaryWithObject:@"" forKey:@"alias"];
-        if ([getDevice.type isEqualToString:@"inverter"]) {
-               [_dataDic setObject:getDevice.deviceSN forKey:@"inverterId"];
-            _netType=@"/newInverterAPI.do?op=updateInvInfo";
-            
-        }else if ([getDevice.type isEqualToString:@"storage"]){
-             [_dataDic setObject:getDevice.deviceSN forKey:@"storageId"];
-     
-           _netType=@"/newStorageAPI.do?op=updateStorageInfo";
-        }
-        [_dataDic setObject:SNArray[_indexPath.row] forKey:@"inverterId"];
-        
+
         [self addPicture];
     }
     if (row==3) {
@@ -1614,8 +1620,16 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         
     }else if ([getDevice.type isEqualToString:@"storage"]){
         [dict setObject:getDevice.deviceSN forKey:@"storageId"];
-        
         netType=@"/newStorageAPI.do?op=deleteStorage";
+        
+    }else if ([getDevice.type isEqualToString:@"mix"]){
+        [dict setObject:getDevice.deviceSN forKey:@"mixId"];
+        netType=@"/newMixApi.do?op=deleteMixAPI";
+        
+    }else if ([getDevice.type isEqualToString:@"MAX"]){
+        [dict setObject:getDevice.deviceSN forKey:@"maxId"];
+        netType=@"/newInverterAPI.do?op=deletemax";
+        
     }
     
  //   [dict setObject:get.deviceSN forKey:@"inverterId"];
@@ -1697,40 +1711,41 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
     NSMutableDictionary *dataImageDict = [NSMutableDictionary dictionary];
     [dataImageDict setObject:imageData forKey:@"image"];
    
+    GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
+    [getDevice setValue:imageData forKey:@"nowImage"];
+    NSError *error;
+    BOOL isSaveSuccess = [[CoreDataManager sharedCoreDataManager].managedObjContext save:&error];
+    if (!isSaveSuccess) {
+        NSLog(@"Error: %@,%@",error,[error userInfo]);
+    }else
+    {
+        NSLog(@"Save successFull");
+    }
+    [self.tableView reloadData];
     
-    [BaseRequest uplodImageWithMethod:HEAD_URL paramars:_dataDic paramarsSite:_netType dataImageDict:dataImageDict sucessBlock:^(id content) {
-      
-        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-          NSLog(@"updateInvInfo: %@", content1);
-        if (content1) {
-            if ([content1[@"success"] integerValue] == 0) {
-                if ([content1[@"msg"] integerValue] ==501) {
-                    [self showAlertViewWithTitle:nil message:root_xitong_cuoWu cancelButtonTitle:root_Yes];
-                }else if ([content1[@"msg"] integerValue] ==701) {
-                    [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
-                }
-            }else{
-                
-                [self showAlertViewWithTitle:nil message:root_xiuGai_chengGong cancelButtonTitle:root_Yes];
-            
-                GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
-                [getDevice setValue:imageData forKey:@"nowImage"];
-                NSError *error;
-                BOOL isSaveSuccess = [[CoreDataManager sharedCoreDataManager].managedObjContext save:&error];
-                if (!isSaveSuccess) {
-                    NSLog(@"Error: %@,%@",error,[error userInfo]);
-                }else
-                {
-                    NSLog(@"Save successFull");
-                }
-                [self.tableView reloadData];
-                
-            }
-        }
-    } failure:^(NSError *error) {
-           [self hideProgressView];
-        [self showToastViewWithTitle:root_Networking];
-    }];
+//    [BaseRequest uplodImageWithMethod:HEAD_URL paramars:_dataDic paramarsSite:_netType dataImageDict:dataImageDict sucessBlock:^(id content) {
+//
+//        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+//          NSLog(@"updateInvInfo: %@", content1);
+//        if (content1) {
+//            if ([content1[@"success"] integerValue] == 0) {
+//                if ([content1[@"msg"] integerValue] ==501) {
+//                    [self showAlertViewWithTitle:nil message:root_xitong_cuoWu cancelButtonTitle:root_Yes];
+//                }else if ([content1[@"msg"] integerValue] ==701) {
+//                    [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
+//                }
+//            }else{
+//
+//                [self showAlertViewWithTitle:nil message:root_xiuGai_chengGong cancelButtonTitle:root_Yes];
+//
+//            }
+//        }
+//    } failure:^(NSError *error) {
+//           [self hideProgressView];
+//        [self showToastViewWithTitle:root_Networking];
+//    }];
+    
+    
 }
 
 #pragma mark tableView的协议方法
@@ -1807,6 +1822,15 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
     }else if([getDevice.type  isEqualToString:@"mix"]){
         MixSecondView *sd=[[MixSecondView alloc ]init];
         sd.deviceSN=getDevice.deviceSN;
+        sd.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:sd animated:NO];
+    }else if([getDevice.type  isEqualToString:@"MAX"]){
+      
+        MaxSecondViewController *sd=[[MaxSecondViewController alloc ]init];
+        sd.dayData=getDevice.dayPower;
+        sd.totalData=getDevice.totalPower;
+        sd.powerData=getDevice.power;
+        sd.SnData=getDevice.deviceSN;
         sd.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:sd animated:NO];
     }
@@ -1921,7 +1945,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
         }else{
             [cell.coverImageView  setImage:[UIImage imageWithData:getDevice.demoImage]];}
       
-        if ([getDevice.type isEqualToString:@"inverter"]) {
+        if ([getDevice.type isEqualToString:@"inverter"] || [getDevice.type isEqualToString:@"MAX"]) {
             cell.electric.text = root_ri_dianLiang;
             if ([getDevice.statueData isEqualToString:@"1"]){
                 cell.stateValue.text =root_dengDai ;

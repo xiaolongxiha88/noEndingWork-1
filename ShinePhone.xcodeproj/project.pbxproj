@@ -694,6 +694,9 @@
 		33E3695A1FDA70D6001D947D /* resource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 33E369571FDA70D6001D947D /* resource.bundle */; };
 		33E369611FDAC23E001D947D /* shouDianTong1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E3695F1FDAC23E001D947D /* shouDianTong1.png */; };
 		33E369621FDAC23E001D947D /* shouDianTong2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E369601FDAC23E001D947D /* shouDianTong2.png */; };
+		33E369661FDBC8F1001D947D /* MaxSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E369651FDBC8F1001D947D /* MaxSecondViewController.m */; };
+		33E369691FDBE217001D947D /* MaxControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E369681FDBE217001D947D /* MaxControl.m */; };
+		33E3696C1FDBEAAB001D947D /* MaxParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3696B1FDBEAAB001D947D /* MaxParameter.m */; };
 		33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */; };
 		33E42E0B1DC9CDB60024FFBB /* peizhi_btn_click_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */; };
 		33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */; };
@@ -1868,6 +1871,12 @@
 		33E369571FDA70D6001D947D /* resource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = resource.bundle; sourceTree = "<group>"; };
 		33E3695F1FDAC23E001D947D /* shouDianTong1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouDianTong1.png; sourceTree = "<group>"; };
 		33E369601FDAC23E001D947D /* shouDianTong2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shouDianTong2.png; sourceTree = "<group>"; };
+		33E369641FDBC8F1001D947D /* MaxSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaxSecondViewController.h; sourceTree = "<group>"; };
+		33E369651FDBC8F1001D947D /* MaxSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MaxSecondViewController.m; sourceTree = "<group>"; };
+		33E369671FDBE217001D947D /* MaxControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaxControl.h; sourceTree = "<group>"; };
+		33E369681FDBE217001D947D /* MaxControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MaxControl.m; sourceTree = "<group>"; };
+		33E3696A1FDBEAAB001D947D /* MaxParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaxParameter.h; sourceTree = "<group>"; };
+		33E3696B1FDBEAAB001D947D /* MaxParameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MaxParameter.m; sourceTree = "<group>"; };
 		33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click.png; path = ../../peizhi_btn_click.png; sourceTree = "<group>"; };
 		33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click_2.png; path = ../../peizhi_btn_click_2.png; sourceTree = "<group>"; };
 		33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_2.png; path = ../../peizhi_btn_2.png; sourceTree = "<group>"; };
@@ -4379,6 +4388,19 @@
 			path = MMScanner;
 			sourceTree = "<group>";
 		};
+		33E369631FDBC8B0001D947D /* MAX类型 */ = {
+			isa = PBXGroup;
+			children = (
+				33E369641FDBC8F1001D947D /* MaxSecondViewController.h */,
+				33E369651FDBC8F1001D947D /* MaxSecondViewController.m */,
+				33E369671FDBE217001D947D /* MaxControl.h */,
+				33E369681FDBE217001D947D /* MaxControl.m */,
+				33E3696A1FDBEAAB001D947D /* MaxParameter.h */,
+				33E3696B1FDBEAAB001D947D /* MaxParameter.m */,
+			);
+			path = "MAX类型";
+			sourceTree = "<group>";
+		};
 		33EA49F21E8DE9AE0044A01A /* 储能能源新界面 */ = {
 			isa = PBXGroup;
 			children = (
@@ -4440,6 +4462,7 @@
 		33EFB6371C97E04D003F336F /* 逆变器二级 */ = {
 			isa = PBXGroup;
 			children = (
+				33E369631FDBC8B0001D947D /* MAX类型 */,
 				334AED671CA37F77007E39F3 /* 三级 */,
 				334ED6FF1C9028BB0095FFBC /* secondViewController.h */,
 				334ED7001C9028BB0095FFBC /* secondViewController.m */,
@@ -5102,6 +5125,7 @@
 				338122291D864BF500C7704B /* AvCachViewController.m in Sources */,
 				336D401D1D6FEA7600ECFA34 /* PinyinFormatter.m in Sources */,
 				33AF3D191D8E67210007D6C2 /* DeviceManageViewController.m in Sources */,
+				33E369661FDBC8F1001D947D /* MaxSecondViewController.m in Sources */,
 				3387B8C81FB2F2130073FB35 /* payView2.m in Sources */,
 				33EFB6651C98F9B1003F336F /* NSString+Zirkfied.m in Sources */,
 				338614DB1F2839A9000F515E /* ESPDatumCode.m in Sources */,
@@ -5294,6 +5318,7 @@
 				335D69AD1D77BA4D00894D90 /* HcdAudioPlayer.m in Sources */,
 				338A623D1E71567A000E7CE4 /* PopoverAction.m in Sources */,
 				334FF0911CF53C7C001E6716 /* GCDAsyncSocket.m in Sources */,
+				33E3696C1FDBEAAB001D947D /* MaxParameter.m in Sources */,
 				3374722B1FBAF51000AC1420 /* newEnergyMix.m in Sources */,
 				338614AC1F2606A0000F515E /* intergratorDeviceCell.swift in Sources */,
 				3370793D1D910FEC00D7DA98 /* NJKWebViewProgressView.m in Sources */,
@@ -5425,6 +5450,7 @@
 				336F1A181D88E46900CD4C2B /* SDWebImageDecoder.m in Sources */,
 				337C8D991E6545CF0013D650 /* phoneRegister2ViewController.m in Sources */,
 				33851DDE1FA08AE300AB758C /* usbToWifiControlOne.m in Sources */,
+				33E369691FDBE217001D947D /* MaxControl.m in Sources */,
 				3343F3DD1C80405D009F69BC /* UIButton+AFNetworking.m in Sources */,
 				3387B8E21FB5376E0073FB35 /* MixHead.m in Sources */,
 				335D69E71D77BD0500894D90 /* AVViewController.m in Sources */,

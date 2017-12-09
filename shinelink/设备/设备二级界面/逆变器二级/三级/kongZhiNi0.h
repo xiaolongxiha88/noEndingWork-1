@@ -12,4 +12,6 @@
 @property (nonatomic, strong) NSString *PvSn;
 @property (nonatomic, strong) NSString *controlType;     //OSS是2
 @property(nonatomic,strong)NSMutableArray *dataArray;
+@property (nonatomic, strong) NSString *invType;     // 1是MAX
+
 @end

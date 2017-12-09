@@ -9,6 +9,7 @@
 #import "kongZhiNi0.h"
 #import "KongZhiNi.h"
 #import "RKAlertView.h"
+#import "MaxControl.h"
 
 #define AlertContent @"Growatt"
 
@@ -30,11 +31,15 @@
     
        [self getPassword];
     
+    
       self.dataArray =[NSMutableArray arrayWithObjects:root_NBQ_kaiguan,root_NBQ_youxiao_gonglv,root_NBQ_wuxiao_gonglv,root_NBQ_PF,root_NBQ_shijian,root_NBQ_shidian_dianya,root_shezhi_shidian_dianya_xiaxian,nil];
     if ([_controlType isEqualToString:@"2"]) {
         [_dataArray addObject:@"高级设置"];
     }
     
+    if ([_invType isEqualToString:@"1"]) {
+         self.dataArray =[NSMutableArray arrayWithObjects:root_NBQ_kaiguan,nil];
+    }
     
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -113,48 +118,74 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    KongZhiNi *go=[[KongZhiNi alloc]init];
-     go.PvSn=_PvSn;
-     go.type=[NSString stringWithFormat:@"%ld",(long)indexPath.row];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+        return;
+    }
     
-     // [self.navigationController pushViewController:go animated:YES]; //DEMO
-    
-    if ([_controlType isEqualToString:@"2"]) {
-        go.controlType=_controlType;
-         [self.navigationController pushViewController:go animated:YES];
-    }else{
+    if ([_invType isEqualToString:@"1"]) {
+        MaxControl *go=[[MaxControl alloc]init];
+        go.PvSn=_PvSn;
+        go.type=[NSString stringWithFormat:@"%ld",(long)indexPath.row];
         
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
-            [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
-            return;
-        }else{
+        [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
+            NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
+            NSString *alert1=[alertView textFieldAtIndex:0].text;
             
-            if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==2)||(indexPath.row==3)||(indexPath.row==5)) {
-                
-                [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
-                    NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
-                    NSString *alert1=[alertView textFieldAtIndex:0].text;
+            if ([alert1 isEqualToString:_password]) {
+                [self.navigationController pushViewController:go animated:YES];
+            }else{
+                [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
                     
-                    if ([alert1 isEqualToString:_password]) {
-                        [self.navigationController pushViewController:go animated:YES];
-                    }else{
-                        [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
-                            
-                        }];
-                        
-                    }
-                    
-                } cancelBlock:^{
-                    NSLog(@"取消了");
                 }];
                 
-            }else if ((indexPath.row==4)||(indexPath.row==5)||(indexPath.row==6)){
-                
-                [self.navigationController pushViewController:go animated:YES];
             }
+            
+        } cancelBlock:^{
+            NSLog(@"取消了");
+        }];
+    }else{
+        KongZhiNi *go=[[KongZhiNi alloc]init];
+        go.PvSn=_PvSn;
+        go.type=[NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        
+        // [self.navigationController pushViewController:go animated:YES]; //DEMO
+        
+        if ([_controlType isEqualToString:@"2"]) {
+            go.controlType=_controlType;
+            [self.navigationController pushViewController:go animated:YES];
+        }else{
+            
+        
+                
+                if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==2)||(indexPath.row==3)||(indexPath.row==5)) {
+                    
+                    [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
+                        NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
+                        NSString *alert1=[alertView textFieldAtIndex:0].text;
+                        
+                        if ([alert1 isEqualToString:_password]) {
+                            [self.navigationController pushViewController:go animated:YES];
+                        }else{
+                            [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
+                                
+                            }];
+                            
+                        }
+                        
+                    } cancelBlock:^{
+                        NSLog(@"取消了");
+                    }];
+                    
+                }else if ((indexPath.row==4)||(indexPath.row==5)||(indexPath.row==6)){
+                    
+                    [self.navigationController pushViewController:go animated:YES];
+                }
+                
             
         }
     }
+  
     
 
 
