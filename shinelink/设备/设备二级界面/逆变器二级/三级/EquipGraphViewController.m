@@ -149,6 +149,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     self.dayButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
     if ([_StorageTypeNum isEqualToString:@"1"]) {
+        
           self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 0, SCREEN_Width/2, 40*HEIGHT_SIZE);
     }
 
@@ -161,9 +162,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
      _dayButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
  self.dayButton.selected = YES;
     [self.dayButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    if (![_StorageTypeSecondNum isEqualToString:@"mix"]) {
+
            [_colorBackView addSubview:self.dayButton];
-    }
+    
  
     
     self.monthButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -209,9 +210,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _totalButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.totalButton setTitle:root_TOTAL forState:UIControlStateNormal];
     [self.totalButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    if (![_StorageTypeSecondNum isEqualToString:@"mix"]) {
+
            [_colorBackView addSubview:self.totalButton];
-    }
+
 
     
      [self changButtonColor];
@@ -276,6 +277,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }else{
   dicGo=@{@"id":_dictInfo[@"equipId"],@"type":@"1", @"date":self.currentDay} ;
     }
+    if ([_StorageTypeNum isEqualToString:@"4"] ) {
+          dicGo=@{@"mixId":_dictInfo[@"equipId"],@"type":@"1", @"date":self.currentDay} ;
+    }
+    
   [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:_dictInfo[@"daySite"] sucessBlock:^(id content) {
         [self hideProgressView];
         NSLog(@"dayDate:%@",content);
@@ -417,7 +422,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }else{
         dicGo=@{@"id":_dictInfo[@"equipId"],@"type":_type, @"date":self.currentDay} ;
     }
-    
+    if ([_StorageTypeNum isEqualToString:@"4"] ) {
+        dicGo=@{@"mixId":_dictInfo[@"equipId"],@"type":_type, @"date":self.currentDay} ;
+    }
         [self showProgressView];
         [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:_dictInfo[@"daySite"] sucessBlock:^(id content) {
              NSLog(@"day: %@", content);
@@ -453,7 +460,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                   [_scrollView addSubview:_upImage];
                    [_scrollView addSubview:_upAlert];
                 
-                if ([_StorageTypeNum isEqualToString:@"1"]) {
+                if ([_StorageTypeNum isEqualToString:@"1"] || (_inverterTypeNum==1) || [_StorageTypeNum isEqualToString:@"4"]) {
                     self.line2View.unitLaleName=_unitLaleName;
                 }
                 [self.line2View refreshLineChartViewWithDataDict:_dayDict];
@@ -472,6 +479,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         dicGo=@{@"plantId":_dictInfo[@"equipId"],@"date":monthString} ;
     }else{
         dicGo=@{@"id":_dictInfo[@"equipId"],@"type":_type, @"date":monthString} ;
+    }
+    if ([_StorageTypeNum isEqualToString:@"4"] ) {
+        dicGo=@{@"mixId":_dictInfo[@"equipId"],@"type":_type, @"date":monthString} ;
     }
         [self showProgressView];
         [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:_dictInfo[@"monthSite"] sucessBlock:^(id content) {
@@ -513,6 +523,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }else{
         dicGo=@{@"id":_dictInfo[@"equipId"],@"type":_type, @"date":yearString} ;
     }
+    if ([_StorageTypeNum isEqualToString:@"4"] ) {
+        dicGo=@{@"mixId":_dictInfo[@"equipId"],@"type":_type, @"date":yearString} ;
+    }
         [self showProgressView];
         [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:_dictInfo[@"yearSite"] sucessBlock:^(id content) {
             NSLog(@"year: %@", content);
@@ -537,6 +550,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         dicGo=@{@"plantId":_dictInfo[@"equipId"]} ;
     }else{
         dicGo=@{@"id":_dictInfo[@"equipId"],@"type":_type,} ;
+    }
+    if ([_StorageTypeNum isEqualToString:@"4"] ) {
+        dicGo=@{@"mixId":_dictInfo[@"equipId"],@"type":_type} ;
     }
         [self showProgressView];
         [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:_dictInfo[@"allSite"] sucessBlock:^(id content) {
@@ -1226,7 +1242,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 }
 
 
-
+//参数选择器
 #pragma mark - EditCellectViewDelegate
 - (void)menuDidSelectAtRow:(NSInteger)row {
     if (row==0) {
@@ -1253,41 +1269,58 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                         _unitLaleName=@"kWh";
                     }
                     
-                    if (![_StorageTypeSecondNum isEqualToString:@"mix"]) {
                          _type=[self getPCS5000type:string];
-                    }else{
-                        int typeNum=[string intValue];
-                        if (typeNum==1 || typeNum==2) {
-                            _unitLaleName=@"V";
-                        }else if (typeNum==3 || typeNum==4 || typeNum==5 || typeNum==6 || typeNum==7 || typeNum==8 || typeNum==9) {
-                            _unitLaleName=@"W";
-                        }else if (typeNum==10){
-                             _unitLaleName=@"%";
-                        }
-                        _type=string;
-                    }
-                   
+
                 }else{
                      _type=string;
                 }
                 
-                [self requestDayDatasWithDayString:self.currentDay];
-                if (![_StorageTypeNum isEqualToString:@"1"]) {
-                    if ([_dict[string] isEqualToString:root_INPUT_VOLTAGE]||
-                        [_dict[string] isEqualToString:root_PV1_VOLTAGE]||
-                        [_dict[string] isEqualToString:root_PV2_VOLTAGE]) {
-                        _line2View.unitLabel.text=root_Voltage;
-                    }else if([_dict[string] isEqualToString:root_INPUT_CURRENT]||
-                             [_dict[string] isEqualToString:root_PV1_ELEC_CURRENT]||
-                             [_dict[string] isEqualToString:root_PV2_ELEC_CURRENT]){
-                        _line2View.unitLabel.text=root_Electron_flow;
-                    }else if([_dict[string] isEqualToString:root_dianchi]||
-                             [_dict[string] isEqualToString:root_dianchi]||
-                             [_dict[string] isEqualToString:root_dianchi]){
-                        _line2View.unitLabel.text=root_dianchi;
-                    }else{
-                        _line2View.unitLabel.text=root_Powre;
+                if ([_StorageTypeNum isEqualToString:@"4"]) {     //MIX
+                    int typeNum=[string intValue];
+                    if (typeNum==1 || typeNum==2) {
+                        _unitLaleName=@"V";
+                    }else if (typeNum==3 || typeNum==4 || typeNum==5 || typeNum==6 || typeNum==7 || typeNum==8 || typeNum==9) {
+                        _unitLaleName=@"W";
+                    }else if (typeNum==10){
+                        _unitLaleName=@"%";
                     }
+                    _type=string;
+                }
+                
+                if (_inverterTypeNum==1) {        //Max
+                      int typeNum=[string intValue];
+                    if (typeNum==1 || typeNum==2 || typeNum==3 || typeNum==4 || typeNum==5) {
+                        _unitLaleName=@"W";
+                    }else if (typeNum==6 || typeNum==8 || typeNum==10 || typeNum==12 || typeNum==14 || typeNum==16 || typeNum==18 || typeNum==20) {
+                        _unitLaleName=@"V";
+                    }else if (typeNum==7 || typeNum==9 || typeNum==11 || typeNum==13 || typeNum==15 || typeNum==17 || typeNum==19 || typeNum==21) {
+                        _unitLaleName=@"A";
+                    }
+                    
+                     _type=[self getMAXtype:string];
+                }
+                
+                [self requestDayDatasWithDayString:self.currentDay];
+                
+                if ([_StorageTypeNum isEqualToString:@"1"] || [_StorageTypeNum isEqualToString:@"2"] || [_StorageTypeNum isEqualToString:@"3"]) {           //储能机类型
+                    if (![_StorageTypeNum isEqualToString:@"1"]) {
+                        if ([_dict[string] isEqualToString:root_INPUT_VOLTAGE]||
+                            [_dict[string] isEqualToString:root_PV1_VOLTAGE]||
+                            [_dict[string] isEqualToString:root_PV2_VOLTAGE]) {
+                            _line2View.unitLabel.text=root_Voltage;
+                        }else if([_dict[string] isEqualToString:root_INPUT_CURRENT]||
+                                 [_dict[string] isEqualToString:root_PV1_ELEC_CURRENT]||
+                                 [_dict[string] isEqualToString:root_PV2_ELEC_CURRENT]){
+                            _line2View.unitLabel.text=root_Electron_flow;
+                        }else if([_dict[string] isEqualToString:root_dianchi]||
+                                 [_dict[string] isEqualToString:root_dianchi]||
+                                 [_dict[string] isEqualToString:root_dianchi]){
+                            _line2View.unitLabel.text=root_dianchi;
+                        }else{
+                            _line2View.unitLabel.text=root_Powre;
+                        }
+                    }
+
                 }
 
             }
@@ -1362,6 +1395,58 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     return NUM;
 }
+
+
+-(NSString*)getMAXtype:(NSString*)typeString{
+    NSString* NUM;
+    if ([typeString isEqualToString:@"1"]) {
+        NUM=@"1";
+    }else if ([typeString isEqualToString:@"2"]) {
+        NUM=@"9";
+    }else if ([typeString isEqualToString:@"3"]) {
+        NUM=@"6";
+    }else if ([typeString isEqualToString:@"4"]) {
+        NUM=@"7";
+    }else if ([typeString isEqualToString:@"5"]) {
+        NUM=@"8";
+    }else if ([typeString isEqualToString:@"6"]) {
+        NUM=@"2";
+    }else if ([typeString isEqualToString:@"7"]) {
+        NUM=@"3";
+    }else if ([typeString isEqualToString:@"8"]) {
+        NUM=@"4";
+    }else if ([typeString isEqualToString:@"9"]) {
+        NUM=@"5";
+    }else if ([typeString isEqualToString:@"10"]) {
+        NUM=@"10";
+    }else if ([typeString isEqualToString:@"11"]) {
+        NUM=@"16";
+    }else if ([typeString isEqualToString:@"12"]) {
+        NUM=@"11";
+    }else if ([typeString isEqualToString:@"13"]) {
+        NUM=@"17";
+    }else if ([typeString isEqualToString:@"14"]) {
+        NUM=@"12";
+    }else if ([typeString isEqualToString:@"15"]) {
+        NUM=@"18";
+    }else if ([typeString isEqualToString:@"16"]) {
+        NUM=@"13";
+    }else if ([typeString isEqualToString:@"17"]) {
+        NUM=@"19";
+    }else if ([typeString isEqualToString:@"18"]) {
+        NUM=@"14";
+    }else if ([typeString isEqualToString:@"19"]) {
+        NUM=@"20";
+    }else if ([typeString isEqualToString:@"20"]) {
+        NUM=@"15";
+    }else if ([typeString isEqualToString:@"21"]) {
+        NUM=@"21";
+    }
+    
+    
+    return NUM;
+}
+
 
 -(CABasicAnimation *)opacityForever_Animation:(float)time{
     

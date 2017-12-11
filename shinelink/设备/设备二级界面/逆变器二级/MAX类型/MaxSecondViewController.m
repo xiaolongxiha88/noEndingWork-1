@@ -115,12 +115,13 @@
     EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
     equipGraph.SnID=_SnData;
     equipGraph.deviceType=@"I";
+    equipGraph.inverterTypeNum=1;
     equipGraph.dictInfo=@{@"equipId":_SnData,
                           @"daySite":@"/newInverterAPI.do?op=getInverterData_max",
                           @"monthSite":@"/newInverterAPI.do?op=getMaxMonthPac",
                           @"yearSite":@"/newInverterAPI.do?op=getMaxYearPac",
                           @"allSite":@"/newInverterAPI.do?op=getMaxTotalPac"};
-    equipGraph.dict=@{@"1":root_PV_POWER,@"9":root_shuchu_gonglv,  @"2":root_PV1_VOLTAGE, @"3":root_PV1_ELEC_CURRENT, @"4":root_PV2_VOLTAGE, @"5":root_PV2_ELEC_CURRENT, @"6":root_R_PHASE_POWER, @"7":root_S_PHASE_POWER, @"8":root_T_PHASE_POWER};
+    equipGraph.dict=@{@"1":root_PV_POWER,@"2":root_shuchu_gonglv, @"3":root_R_PHASE_POWER, @"4":root_S_PHASE_POWER, @"5":root_T_PHASE_POWER,@"6":[NSString stringWithFormat:@"PV1%@",root_device_244], @"7":[NSString stringWithFormat:@"PV1%@",root_device_243], @"8":[NSString stringWithFormat:@"PV2%@",root_device_244], @"9":[NSString stringWithFormat:@"PV2%@",root_device_243], @"10":[NSString stringWithFormat:@"PV3%@",root_device_244], @"11":[NSString stringWithFormat:@"PV3%@",root_device_243], @"12":[NSString stringWithFormat:@"PV4%@",root_device_244], @"13":[NSString stringWithFormat:@"PV4%@",root_device_243], @"14":[NSString stringWithFormat:@"PV5%@",root_device_244], @"15":[NSString stringWithFormat:@"PV5%@",root_device_243], @"16":[NSString stringWithFormat:@"PV6%@",root_device_244], @"17":[NSString stringWithFormat:@"PV6%@",root_device_243], @"18":[NSString stringWithFormat:@"PV7%@",root_device_244], @"19":[NSString stringWithFormat:@"PV7%@",root_device_243], @"20":[NSString stringWithFormat:@"PV8%@",root_device_244], @"21":[NSString stringWithFormat:@"PV8%@",root_device_243]};
     [self.navigationController pushViewController:equipGraph animated:YES];
     
 }

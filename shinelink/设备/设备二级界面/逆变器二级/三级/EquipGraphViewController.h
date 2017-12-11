@@ -22,7 +22,9 @@
 @property (nonatomic, strong) NSDictionary *dictYear;
 @property (nonatomic, strong) NSDictionary *dictAll;
 
-@property (nonatomic, strong) NSString *StorageTypeNum;
+@property (nonatomic, strong) NSString *StorageTypeNum;        //4 MIX    //////// typeNum=1:spf5000    2:普通储能机  
+
+@property (nonatomic, assign) NSInteger inverterTypeNum;      //1 MAX
 
 @property (nonatomic, strong) NSString *StorageTypeSecondNum;
 

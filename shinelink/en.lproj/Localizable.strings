@@ -818,8 +818,8 @@
 "227放电停止SOC"="Discharge stopped SOC";
 "228充电停止SOC"="Charge stopped SOC";
 "229电池充电功率"="Battery charge power";
-"230PV总电量"="EpvToday";
-"231PV今日电量"="EpvTotal";
+"230PV总电量"="EpvTotal";
+"231PV今日电量"="EpvToday";
 "232电池今日充电量"="eBatChargeToday";
 "233电池总充电量"="eBatChargeTotal";
 "234电池今日放电量"="eBatDischargeToday";
@@ -831,3 +831,8 @@
 "240本地调试工具"="Local debugging tools";
 "241工具箱"="Toolbox";
 "242扫描获取WiFi名称"="Scan for WiFi name";
+"243电流"="current";
+"244电压"="voltage";
+"245AC功率"="AC power";
+
+

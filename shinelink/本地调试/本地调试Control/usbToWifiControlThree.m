@@ -166,13 +166,13 @@
         int K=0+(_CellNumber-16)*2;
         NSString *A1=[NSString stringWithFormat:@"%@(%@)",Low,regiserArray[K]];
         NSString *A2=[NSString stringWithFormat:@"%@(%@)",High,regiserArray[K+1]];
-        NSString *A3=[NSString stringWithFormat:@"%@(%@)",High,regiserArray[K]];
-        NSString *A4=[NSString stringWithFormat:@"%@(%@)",Low,regiserArray[K+1]];
+//        NSString *A3=[NSString stringWithFormat:@"%@(%@)",High,regiserArray[K]];
+//        NSString *A4=[NSString stringWithFormat:@"%@(%@)",Low,regiserArray[K+1]];
         if (_CellNumber>15) {
             _nameArray0=@[A1,A2];
         }
         if (_CellNumber==17 || _CellNumber==19 || _CellNumber==21) {
-            _nameArray0=@[A3,A4];
+            _nameArray0=@[A1,A2];
         }
     }
 

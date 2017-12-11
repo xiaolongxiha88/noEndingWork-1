@@ -162,14 +162,14 @@
     EquipGraphViewController *equipGraph=[[EquipGraphViewController alloc]init];
     equipGraph.deviceType=@"S";
     equipGraph.StorageTypeSecondNum=@"mix";
-    equipGraph.StorageTypeNum=@"1";
+    equipGraph.StorageTypeNum=@"4";
     equipGraph.SnID=_deviceSN;
   //  equipGraph.StorageTypeNum=_typeNum;
     equipGraph.dictInfo=@{@"equipId":_deviceSN,
                           @"daySite":@"/newMixApi.do?op=getDayLineMix",
-                          @"monthSite":@"/newStorageAPI.do?op=getMonthLineStorage",
-                          @"yearSite":@"/newStorageAPI.do?op=getYearLineStorage",
-                          @"allSite":@"/newStorageAPI.do?op=getTotalLineStorage"};
+                          @"monthSite":@"/newMixApi.do?op=getMixMonthPac",
+                          @"yearSite":@"/newMixApi.do?op=getMixYearPac",
+                          @"allSite":@"/newMixApi.do?op=getMixTotalPac"};
     equipGraph.dict=@{@"1":root_5000Chart_159, @"2":root_5000Chart_160, @"3":root_5000Chart_157, @"4":root_5000Chart_158, @"5":root_CHARGING_POWER, @"6":root_PCS_fangdian_gonglv,@"7":root_MIX_236,@"8":root_MIX_237,@"9":root_MIX_238,@"10":@"SOC"};
     equipGraph.dictMonth=@{@"1":root_MONTH_BATTERY_CHARGE, @"2":root_MONTHLY_CHARGED, @"3":root_MONTHLY_DISCHARGED};
     equipGraph.dictYear=@{@"1":root_YEAR_BATTERY_CHARGE, @"2":root_YEAR_CHARGED, @"3":root_YEAR_DISCHARGED};
@@ -193,7 +193,7 @@
     self.currentDay = [_dayFormatter stringFromDate:[NSDate date]];
     [self showProgressView];
     
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"id":_deviceSN,@"type":@"10", @"date":self.currentDay} paramarsSite:@"/newMixApi.do?op=getDayLineMix" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"mixId":_deviceSN,@"type":@"10", @"date":self.currentDay} paramarsSite:@"/newMixApi.do?op=getDayLineMix" sucessBlock:^(id content) {
         NSLog(@"getDayLineMix: %@", content);
         [self hideProgressView];
         NSMutableDictionary *dayDict0=[NSMutableDictionary new];

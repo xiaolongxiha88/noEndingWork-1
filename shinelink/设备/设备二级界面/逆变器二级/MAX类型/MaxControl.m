@@ -104,7 +104,7 @@
 
 -(void)finishSet{
     
-    NSDictionary *netDic=@{@"serialNum":_PvSn,@"type":_paramId,@"param1":_commandValue,@"param2":@"",@"param3":@"",@"param4":@""};
+    NSDictionary *netDic=@{@"serialNum":_PvSn,@"paramId":_paramId,@"param1":_commandValue,@"param2":@"",@"param3":@"",@"param4":@""};
     
     [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:netDic paramarsSite:@"/newTcpsetAPI.do?op=maxSetApi" sucessBlock:^(id content) {

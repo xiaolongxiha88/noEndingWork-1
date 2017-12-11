@@ -870,8 +870,8 @@ _pcsNetStorageSN=@"";
                     _deviceHeadType=@"2";
                 }
                 [imageArray addObject:@"mixPic.png"];
-                [powerArray addObject:[NSString stringWithFormat:@"%@W",content[@"deviceList"][i][@"power"]]];
-                [dayArray addObject:[NSString stringWithFormat:@"%@kWh",content[@"deviceList"][i][@"eToday"]]];
+                [powerArray addObject:[NSString stringWithFormat:@"%@W",content[@"deviceList"][i][@"pCharge"]]];
+                [dayArray addObject:[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"capacity"]]];
                 
                 [_typeArr addObject:content[@"deviceList"][i][@"deviceType"]];
                 [SNArray addObject:content[@"deviceList"][i][@"deviceSn"]];
@@ -1999,7 +1999,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             }
             
         }else if ([getDevice.type isEqualToString:@"mix"]){
-                cell.electric.text = root_ri_dianLiang;
+                cell.electric.text = root_dianChi_baifenBi;
             if ([getDevice.statueData isEqualToString:@"0"]){          //10 掉线
                 cell.stateValue.text =root_dengDai;
                 cell.stateValue.textColor=MainColor;
@@ -2024,8 +2024,6 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             }
             
         }
-        
-        
         
         
             cell.titleLabel.text = getDevice.name;

@@ -76,6 +76,9 @@
 }
 
 -(void)netParameter2{
+       NSArray *value1Array=@[@"vpv1",@"vpv2",@"vpv3",@"vpv4",@"vpv5",@"vpv6",@"vpv7",@"vpv8",@"vacr",@"vacs",@"vact"];
+        NSArray *value2Array=@[@"ipv1",@"ipv2",@"ipv3",@"ipv4",@"ipv5",@"ipv6",@"ipv7",@"ipv8",@"iacr",@"iacs",@"iact"];
+         NSArray *value3Array=@[@"ppv1",@"ppv2",@"ppv3",@"ppv4",@"ppv5",@"ppv6",@"ppv7",@"ppv8",@"pacr",@"pacs",@"pact"];
     
     [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"inverterId":_PvSn} paramarsSite:@"/newInverterAPI.do?op=getInverterDetailData_max" sucessBlock:^(id content) {
         [self hideProgressView];
@@ -83,7 +86,7 @@
         if (content) {
             NSDictionary *netDic=[NSDictionary dictionaryWithDictionary:content];
             
-            NSArray *value1Array=@[@"vpv1",@"vpv2",@"vpv3",@"vpv4",@"vpv5",@"vpv6",@"vpv7",@"vpv8",@"vacr",@"vacs",@"vact"];
+         
             for (int i=0; i<value1Array.count; i++) {
                 if ([netDic.allKeys containsObject:value1Array[i]]) {
                     NSString*keyString=value1Array[i];
@@ -93,47 +96,44 @@
                 }
             }
             
-            [_pv12 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"vpv1"]] floatValue]]];
-            [_pv12 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"vpv2"]] floatValue]]];
-            [_pv12 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"vacr"]] floatValue]]];
-            [_pv12 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"vacs"]] floatValue]]];
-            [_pv12 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"vact"]] floatValue]]];
+        
+            for (int i=0; i<value2Array.count; i++) {
+                if ([netDic.allKeys containsObject:value2Array[i]]) {
+                    NSString*keyString=value2Array[i];
+                    [_pv22 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",netDic[keyString]] floatValue]]];
+                }else{
+                    [_pv22 addObject:@"0"];
+                }
+            }
             
-            [_pv22 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"ipv1"]] floatValue]]];
-            [_pv22 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"ipv2"]] floatValue]]];
-            [_pv22 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"iacr"]] floatValue]]];
-            [_pv22 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"iacs"]] floatValue]]];
-            [_pv22 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"iact"]] floatValue]]];
-            
-            [_pv32 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"ppv1"]] floatValue]]];
-            [_pv32 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"ppv2"]] floatValue]]];
-            [_pv32 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"pacr"]] floatValue]]];
-            [_pv32 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"pacs"]] floatValue]]];
-            [_pv32 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",content[@"pact"]] floatValue]]];
-            
+       
+            for (int i=0; i<value3Array.count; i++) {
+                if ([netDic.allKeys containsObject:value3Array[i]]) {
+                    NSString*keyString=value3Array[i];
+                    [_pv32 addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",netDic[keyString]] floatValue]]];
+                }else{
+                    [_pv32 addObject:@"0"];
+                }
+            }
  
+
             [self initUI];
         }
     } failure:^(NSError *error) {
         
+        for (int i=0; i<value1Array.count; i++) {
+                [_pv12 addObject:@"0"];
+        }
         
-        [_pv12 addObject:@"0"];
-        [_pv12 addObject:@"0"];
-        [_pv12 addObject:@"0"];
-        [_pv12 addObject:@"0"];
-        [_pv12 addObject:@"0"];
         
-        [_pv22 addObject:@"0"];
-        [_pv22 addObject:@"0"];
-        [_pv22 addObject:@"0"];
-        [_pv22 addObject:@"0"];
-        [_pv22 addObject:@"0"];
+        for (int i=0; i<value2Array.count; i++) {
+                [_pv22 addObject:@"0"];
+        }
         
-        [_pv32 addObject:@"0"];
-        [_pv32 addObject:@"0"];
-        [_pv32 addObject:@"0"];
-        [_pv32 addObject:@"0"];
-        [_pv32 addObject:@"0"];
+        
+        for (int i=0; i<value3Array.count; i++) {
+                [_pv32 addObject:@"0"];
+        }
         
         
         [self initUI];
@@ -159,19 +159,15 @@
     _dateY1=[[NSMutableArray alloc]initWithObjects:root_duankou, root_CNJ_eDing_gonglv, root_moshi,nil];
     
     _dateName=[[NSMutableArray alloc]initWithObjects:@"Volt(V)", @"Current(A)", @"Watt(W)",nil];
-    _pv=[[NSMutableArray alloc]initWithObjects:@"PV1", @"PV2",@"AC1",@"AC2",@"AC3",nil];
-    // _pv11=[[NSMutableArray alloc]initWithObjects:@"VPV1(V)", @"VPV2(V)",nil];
-    
-    //  _pv21=[[NSMutableArray alloc]initWithObjects:@"IPV1(A)", @"IPV2(A)",nil];
-    
-    //   _pv31=[[NSMutableArray alloc]initWithObjects:@"WPV1(W)", @"WPV2(W)",nil];
+    _pv=[[NSMutableArray alloc]initWithObjects:@"PV1", @"PV2",@"PV3",@"PV4",@"PV5",@"PV6",@"PV7",@"PV8",@"AC1",@"AC2",@"AC3",nil];
+ 
     
 }
 
 -(void)initUI{
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0*NOW_SIZE, SCREEN_Width, SCREEN_Height)];
     _scrollView.scrollEnabled=YES;
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,650*NOW_SIZE);
+    _scrollView.contentSize = CGSizeMake(SCREEN_Width,900*NOW_SIZE);
     [self.view addSubview:_scrollView];
     
     UIView *headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 210*HEIGHT_SIZE)];
@@ -237,7 +233,7 @@
         pv.text=_pv[K];
         pv.textAlignment=NSTextAlignmentLeft;
         pv.textColor=[UIColor blackColor];
-        pv.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        pv.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:pv];
         
         //        UILabel *pv1=[[UILabel alloc]initWithFrame:CGRectMake(Size2+0*Size3, 330*NOW_SIZE+size3*K-70*NOW_SIZE, Size3,15*NOW_SIZE )];

@@ -125,7 +125,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         
-        self.unitLabel = [[UILabel alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 120*HEIGHT_SIZE, 100*NOW_SIZE, 30*HEIGHT_SIZE)];
+        self.unitLabel = [[UILabel alloc] initWithFrame:CGRectMake(15*NOW_SIZE, 120*HEIGHT_SIZE, 100*NOW_SIZE, 30*HEIGHT_SIZE)];
         self.unitLabel.font = [UIFont boldSystemFontOfSize:10*HEIGHT_SIZE];
         self.unitLabel.textColor = COLOR(102, 102, 102, 1);
         [self addSubview:self.unitLabel];

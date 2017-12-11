@@ -858,7 +858,9 @@
 #define  root_ME_241 NSLocalizedString(@"241工具箱", nil)
 #define  root_scan_242 NSLocalizedString(@"242扫描获取WiFi名称", nil)
 
-
+#define  root_device_243 NSLocalizedString(@"243电流", nil)
+#define  root_device_244 NSLocalizedString(@"244电压", nil)
+#define  root_device_245 NSLocalizedString(@"245AC功率", nil)
 
 
 

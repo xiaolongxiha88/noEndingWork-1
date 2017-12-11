@@ -22,6 +22,8 @@
         
         UIScrollView *bgImageView = [[UIScrollView alloc] initWithFrame:CGRectMake(50*NOW_SIZE, 150*HEIGHT_SIZE, 220*NOW_SIZE, 200*HEIGHT_SIZE)];
         bgImageView.backgroundColor=[UIColor whiteColor];
+        bgImageView.layer.borderWidth=1;
+        bgImageView.layer.borderColor=MainColor.CGColor;
         bgImageView.layer.cornerRadius=5;
         [self addSubview:bgImageView];
         bgImageView.contentSize=CGSizeMake(220*NOW_SIZE, 50*dictionary.count*HEIGHT_SIZE);
@@ -48,6 +50,11 @@
             addButton.tag = 1051+i;
             [addButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
             [bgImageView addSubview:addButton];
+            
+            UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, i*50*HEIGHT_SIZE+50*HEIGHT_SIZE-LineWidth, CGRectGetWidth(bgImageView.frame), LineWidth)];
+            lineView.backgroundColor=colorGary;
+              [bgImageView addSubview:lineView];
+            
         }
     }
     return self;
