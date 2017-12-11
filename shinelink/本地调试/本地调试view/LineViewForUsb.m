@@ -557,7 +557,7 @@
           self.barChartView.xyLableFont=8*HEIGHT_SIZE;
     }
    
-    if (_barType==1) {           //Hour
+    if (_barType==1) {           //Day
         NSMutableArray *xNewArray=[NSMutableArray new];
         for (int i=0; i<_xArray.count; i++) {
             NSInteger timeUnit=24*60*60;
@@ -585,6 +585,7 @@
              NSString *yearString0=[NSString stringWithFormat:@"%ld",year];
             // NSString *yearString=[yearString0 substringWithRange:NSMakeRange(2, 2)];
              [xNewArray addObject:[NSString stringWithFormat:@"%@-%ld",yearString0,i]];
+             
              [yNewArray addObject:[newDic objectForKey:[NSString stringWithFormat:@"%ld",i]]];
          }
 
@@ -595,7 +596,7 @@
                [xNewArray addObject:[NSString stringWithFormat:@"%@-%ld",yearString0,i]];
              [yNewArray addObject:[newDic objectForKey:[NSString stringWithFormat:@"%ld",i]]];
          }
-          _valuesArray=[NSMutableArray arrayWithArray:yNewArray];
+         // _valuesArray=[NSMutableArray arrayWithArray:yNewArray];
          
          _xArray=[NSArray arrayWithArray:xNewArray];
          
