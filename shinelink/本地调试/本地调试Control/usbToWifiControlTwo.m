@@ -17,6 +17,7 @@
 @property(nonatomic,assign) int cmdTcpTimes;
 @property(nonatomic,strong)NSMutableArray*setValueArray;
 @property(nonatomic,strong)NSMutableArray*setRegisterArray;
+@property(nonatomic,assign)BOOL isFirstReadOK;
 
 @end
 
@@ -332,13 +333,16 @@
         BOOL isWrite=NO;
         for (int i=0; i<_nameArray0.count; i++) {
             UITextField *textField1=[_view1 viewWithTag:2000+i];
-            if (textField1.text==nil || [textField1.text isEqualToString:@""]) {}else{
+            if (textField1.text==nil || [textField1.text isEqualToString:@""]) {
+                
+            }else{
                 isWrite=YES;
             }
              [_setValueArray addObject:textField1.text];
         }
         if (!isWrite) {
              [self showToastViewWithTitle:@"请添加设置值"];
+            return;
         }
         
         if (_CellNumber>_twoSetBeginInt && _CellNumber<_twoSetOverInt) {
@@ -366,11 +370,13 @@
     _cmdTcpTimes=0;
     _cmdTcpType=2;
     
+  //  NSInteger forNum=_setValueArray.count;
     for (int i=0; i<_setValueArray.count; i++) {
         NSString*setValueString=_setValueArray[i];
         if (setValueString==nil || [setValueString isEqualToString:@""]) {
             [_setRegisterArray removeObjectAtIndex:i];
                [_setValueArray removeObjectAtIndex:i];
+            i--;
         }
     }
     if (_setRegisterArray.count==0 || _setValueArray.count==0) {
@@ -434,7 +440,7 @@
     NSArray *cmdValue=@[
                         @"0",@"1",@"3",@"4",@"4",@"5",@"5",@"8",@"22",@"89",@"91",@"92",@"107",@"108",@"109",@"230",@"231",@"232",@"235",@"236",@"237",@"238",@"20",@"93",@"95",@"97",@"99",@"233",@"101",@"110",@"110"];
     
-    
+    _isFirstReadOK=NO;
     _setRegister=cmdValue[_CellNumber];
     
  [_ControlOne goToOneTcp:2 cmdNum:1 cmdType:@"3" regAdd:_setRegister Length:[NSString stringWithFormat:@"%d",_cmdRegisterNum]];
@@ -443,9 +449,10 @@
 }
 
 -(void)receiveFirstData2:(NSNotification*) notification{
-     [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1.5];
+     [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1];
     
     if (_cmdTcpType==1) {
+         _isFirstReadOK=YES;
         NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
         _receiveCmdTwoData=[firstDic objectForKey:@"one"];
         NSUInteger Lenth=_receiveCmdTwoData.length;
@@ -503,7 +510,10 @@
     [self removeTheTcp];
     
     if (_cmdTcpType==1) {
-        [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
+        if (!_isFirstReadOK) {
+                [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
+        }
+    
     }
     if (_cmdTcpType==2) {
         

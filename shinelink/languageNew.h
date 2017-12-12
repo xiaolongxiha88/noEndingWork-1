@@ -862,6 +862,21 @@
 #define  root_device_244 NSLocalizedString(@"244电压", nil)
 #define  root_device_245 NSLocalizedString(@"245AC功率", nil)
 
+#define  root_device_246 NSLocalizedString(@"246命令参数错误", nil)
+#define  root_device_247 NSLocalizedString(@"247有功功率错误", nil)
+#define  root_device_248 NSLocalizedString(@"248功率因数错误", nil)
+#define  root_device_249 NSLocalizedString(@"249设置是否存储PF命令", nil)
+#define  root_device_250 NSLocalizedString(@"250设置市电电压上限", nil)
+#define  root_device_251 NSLocalizedString(@"251设置市电电压下限", nil)
+#define  root_device_252 NSLocalizedString(@"252离网使能", nil)
+#define  root_device_253 NSLocalizedString(@"253离网频率", nil)
+#define  root_device_254 NSLocalizedString(@"254离网电压", nil)
+
+
+
+
+
+
 
 
 #endif /* languageNew_h */

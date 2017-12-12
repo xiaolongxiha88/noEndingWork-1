@@ -41,7 +41,7 @@
     if([_typeNum isEqualToString:@"1"]){
       self.dataArray =[NSMutableArray arrayWithObjects:root_5000Control_129,root_5000Control_130,root_5000Control_131,root_5000Control_132,root_5000Control_133,root_5000Control_134,root_5000Control_135,root_5000Control_136,root_5000Control_137,root_5000Control_138,root_5000Control_139,root_5000Control_140,root_5000Control_141,root_5000Control_142,root_5000Control_143,nil];
     }else  if([_typeNum isEqualToString:@"3"]){
-         self.dataArray =[NSMutableArray arrayWithObjects:root_MIX_210,root_MIX_209,nil];
+         self.dataArray =[NSMutableArray arrayWithObjects:root_MIX_210,root_MIX_209,root_NBQ_kaiguan,root_device_249,root_NBQ_youxiao_gonglv,root_NBQ_wuxiao_gonglv,root_NBQ_PF,root_NBQ_shijian,root_device_250,root_device_251,root_device_252,root_device_253,root_device_254,nil];
     }
     
 
@@ -256,6 +256,7 @@
     go.titleString=_dataArray[indexPath.row];
     go.CnjSN=_CnjSn;
     go.setType=(int)indexPath.row;
+    
     
     if ([_controlType isEqualToString:@"2"]) {
         go.controlType=_controlType;

@@ -15,4 +15,6 @@
 @property (nonatomic, strong) NSArray *choiceNumArray;
 @property (nonatomic, strong) NSString *titleString;
 
+
+
 @end

@@ -159,10 +159,10 @@
     NSData *cmdData=[firstDic objectForKey:@"one"];
     
 
-    int lenth=(int)[cmdData length];
-    for (int i=0; i<lenth/4; i++) {
-        int T=0+2*i;
-            NSString *numString=[NSString stringWithFormat:@"%d",i+1];
+    NSInteger lenth=[cmdData length];
+    for (NSInteger i=0; i<lenth/4; i++) {
+        int T=(int)(0+2*i);
+            NSString *numString=[NSString stringWithFormat:@"%ld",i+1];
         float value=[_changeDataValue changeTwoRegister:cmdData registerNum:T]/10;
      [_barDic setObject:[NSString stringWithFormat:@"%.1f",value] forKey:numString];
         

@@ -20,6 +20,7 @@
 @property (nonatomic, strong) NSDateFormatter *dayFormatter;
 @property (nonatomic, strong) NSString *currentDay;
 @property (nonatomic, strong) NSArray *timeArray;
+@property(nonatomic,assign)BOOL isFirstReadOK;
 @end
 
 @implementation usbToWifiControlThree
@@ -292,6 +293,7 @@
             }
             if (!isWrite) {
                 [self showToastViewWithTitle:@"请添加设置值"];
+                  return;
             }
             
             NSArray *regiserArray=@[@28,@29,@122,@123,@52,@53,@54,@55,@56,@57,@58,@59,@60,@61,@62,@63,@64,@65,@66,@67,@68,@69,@70,@71,@72,@73,@74,@75,@76,@77,@78,@79];
@@ -368,6 +370,7 @@
         if (setValueString==nil || [setValueString isEqualToString:@""]) {
             [_setRegisterArray removeObjectAtIndex:i];
             [_setValueArray removeObjectAtIndex:i];
+            i--;
         }
     }
     if (_setRegisterArray.count==0 || _setValueArray.count==0) {
@@ -494,7 +497,7 @@
         _cmdRegisterNum=2;
     }
   
-    
+    _isFirstReadOK=NO;
     [_ControlOne goToOneTcp:2 cmdNum:1 cmdType:@"3" regAdd:_setRegister Length:[NSString stringWithFormat:@"%d",_cmdRegisterNum]];
     
     
@@ -507,7 +510,7 @@
 
 -(void)receiveFirstData2:(NSNotification*) notification{
     if (_cmdTcpType==1) {
-         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1];
+         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:0.1];
     }else{
         if (_cmdTcpTimes==0) {
             float times=1.2;
@@ -519,6 +522,7 @@
     }
 
     if (_cmdTcpType==1) {
+        _isFirstReadOK=YES;
         NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
         _receiveCmdTwoData=[firstDic objectForKey:@"one"];
         NSUInteger Lenth=_receiveCmdTwoData.length;
@@ -562,7 +566,10 @@
         [self removeTheTcp];
     
     if (_cmdTcpType==1) {
-        [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
+        if (!_isFirstReadOK) {
+            [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
+        }
+        
     }
     if (_cmdTcpType==2) {
         

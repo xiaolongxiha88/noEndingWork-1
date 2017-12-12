@@ -834,5 +834,12 @@
 "243电流"="current";
 "244电压"="voltage";
 "245AC功率"="AC power";
-
-
+"246命令参数错误"="Command parameter error";
+"247有功功率错误"="Active power rate should be a number in [0, 100].";
+"248功率因数错误"="Power Factor rate should be a number in (-0.8 ~ -1/0.8 ~ 1)";
+"249设置是否存储PF命令"="Set save PF command";
+"250设置市电电压上限"="Set grid voltage high";
+"251设置市电电压下限"="Set grid voltage low";
+"252离网使能"="Set EPS On/Off";
+"253离网频率"="Set EPS frequency ";
+"254离网电压"="Set EPS voltage";

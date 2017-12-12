@@ -80,6 +80,7 @@
     [super viewWillAppear:animated];
     
     if (_scanBarType==1) {
+             [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"theToolPasswordOpenEnable"];
         if (!_isFirstLogin) {
             [self.navigationController popViewControllerAnimated:NO];
         }
