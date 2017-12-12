@@ -43,7 +43,7 @@ static float TCP_TIME=1;
 @implementation wifiToPvOne
 
 
-
+//type 6 controTwo   7 读取设置值
 -(void)goToOneTcp:(int)type cmdNum:(int)cmdNum cmdType:(NSString*)cmdType regAdd:(NSString*)regAdd Length:(NSString*)Length{
  
 
@@ -53,7 +53,7 @@ static float TCP_TIME=1;
     _cmdArray=@[cmdType,regAdd,Length];
       _isReceiveAll=NO;
     int CMDTIME;
-    if (_cmdType==3) {
+    if (_cmdType==3 || _cmdType==6) {
         CMDTIME=1.5;
     }else{
         CMDTIME=TCP_TIME;
@@ -237,6 +237,11 @@ static float TCP_TIME=1;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFiveFailed"object:nil];
         }
         
+    }else  if (_cmdType==6 || _cmdType==7) {
+        if (!_isReceiveAll) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveWifiConrolTwoFailed"object:nil];
+        }
+        
     }
  
     
@@ -252,12 +257,14 @@ static float TCP_TIME=1;
     
     if (_cmdType==1) {
          [self checkWhichNumData:data];
-    }else if ((_cmdType==2)||(_cmdType==3)||(_cmdType==4)||(_cmdType==5)){
+    }else if ((_cmdType==2)||(_cmdType==3)||(_cmdType==4)||(_cmdType==5)||(_cmdType==6)||(_cmdType==7)){
         _isReceiveAll=YES;
     
         if ([self checkData:data]) {
             if (_cmdType==5) {
                   [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFive"object:_AllDataDic];
+            }else if (_cmdType==6 || _cmdType==7) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveWifiConrolTwo"object:_AllDataDic];
             }else{
                    [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwo"object:_AllDataDic];
             }
@@ -267,6 +274,8 @@ static float TCP_TIME=1;
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFourFailed"object:_AllDataDic];
             }else if (_cmdType==5) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFiveFailed"object:nil];
+            }else if (_cmdType==6 || _cmdType==7) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveWifiConrolTwoFailed"object:nil];
             }else{
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
             }
@@ -310,7 +319,7 @@ static float TCP_TIME=1;
         int C2=CRCArray[1];
         
         if ((C1==Bytedata1[length0-2])&&(C2==Bytedata1[length0-1])) {
-            if (_cmdType==3) {          //06设置
+            if (_cmdType==3 || _cmdType==6) {          //06设置
                 Byte *Bytedata00=(Byte*)[_modbusData bytes];
                 
                     if ((Bytedata1[1]==6) && (Bytedata1[0]==Bytedata00[0])) {
@@ -326,7 +335,7 @@ static float TCP_TIME=1;
                     NSData *data00=[data1 subdataWithRange:NSMakeRange(3, data1.length-5)];
                     if (_cmdType==1) {
                         [self upDataToDic:data00];
-                    }else  if ((_cmdType==2) || (_cmdType==5)) {
+                    }else  if ((_cmdType==2) || (_cmdType==5) || (_cmdType==7)) {
                         [_AllDataDic setValue:data00 forKey:@"one"];
                     }
                     

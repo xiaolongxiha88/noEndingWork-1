@@ -39,8 +39,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveDataTwo" object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveDataTwoFailed" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData2:) name: @"TcpReceiveWifiConrolTwo" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveWifiConrolTwoFailed" object:nil];
     
 }
 
@@ -62,7 +62,7 @@
     [_goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [_goBut setTitle:@"设置" forState:UIControlStateNormal];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
-    [_goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
+    [_goBut addTarget:self action:@selector(finishSetTwo) forControlEvents:UIControlEventTouchUpInside];
       [_view1 addSubview:_goBut];
     
     if (_CellNumber<_OneSetInt) {
@@ -270,7 +270,7 @@
 }
 
 
--(void)finishSet{
+-(void)finishSetTwo{
     _setValueArray=[NSMutableArray new];
     _setRegisterArray=[NSMutableArray new];
     NSArray *cmdValue=@[
@@ -386,7 +386,7 @@
             [self showAlertViewWithTitle:@"设置失败,请重新进入页面进行设置" message:nil cancelButtonTitle:root_OK];
     }
     
-    [_ControlOne goToOneTcp:3 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
+    [_ControlOne goToOneTcp:6 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
     
     
 }
@@ -443,7 +443,7 @@
     _isFirstReadOK=NO;
     _setRegister=cmdValue[_CellNumber];
     
- [_ControlOne goToOneTcp:2 cmdNum:1 cmdType:@"3" regAdd:_setRegister Length:[NSString stringWithFormat:@"%d",_cmdRegisterNum]];
+ [_ControlOne goToOneTcp:7 cmdNum:1 cmdType:@"3" regAdd:_setRegister Length:[NSString stringWithFormat:@"%d",_cmdRegisterNum]];
    
     
 }
@@ -496,7 +496,7 @@
             self.navigationItem.rightBarButtonItem.enabled=NO;
             [self showProgressView];
             
-                [_ControlOne goToOneTcp:3 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
+                [_ControlOne goToOneTcp:6 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
                
         }
         
@@ -561,8 +561,8 @@
         [_ControlOne disConnect];
     }
     
-     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwo" object:nil];
-       [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveDataTwoFailed" object:nil];
+     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveWifiConrolTwo" object:nil];
+       [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveWifiConrolTwoFailed" object:nil];
     
 }
 
