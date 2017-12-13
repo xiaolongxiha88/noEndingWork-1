@@ -23,6 +23,7 @@
 -(void)getUIOne{
     NSInteger allStatue=0;           //0正常状态     1离线状态    2故障
     NSString*allStatueString=[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"lost"]];
+  
      int L1=[[NSString stringWithFormat:@"%d",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"uwSysWorkMode"]] intValue]] intValue];
     if ([allStatueString containsString:@"lost"]) {
         allStatue=1;
@@ -31,9 +32,9 @@
               allStatue=2;
         }
     }
-    
+   
     NSArray *imageNameArray=@[@"newheadSolar.png",@"newheadbat.png",@"newheadgrid.png",@"newheadload.png"];
-    float  imageSize=64*NOW_SIZE,imageSize1=60*NOW_SIZE,imageSize2=50*NOW_SIZE;
+    float  imageSize=64*NOW_SIZE,imageSize1=60*NOW_SIZE,imageSize2=45*NOW_SIZE;
    float lableH=20*NOW_SIZE;
      float lableW=110*NOW_SIZE;
     float  directionSizeW1=14*NOW_SIZE,directionSizeH1=18*NOW_SIZE,directionSizeW2=12*NOW_SIZE,directionSizeH2=16*NOW_SIZE;
@@ -120,7 +121,7 @@
       CGRect rectL4=CGRectMake(ScreenWidth-W0-lableW, LableY2, lableW, lableH);
     
     if (allStatue==1) {
-          [self getLableUI:rectL0 lableName:root_CNJ_buzaixian lableValue:@"" lableUnit:@"" valueColor:COLOR(85, 162, 78, 1) directorType:3];
+          [self getLableUI:rectL0 lableName:root_CNJ_buzaixian lableValue:@"" lableUnit:@"" valueColor:COLOR(136, 136, 136, 1) directorType:3];
     }else if (allStatue==2) {
         [self getLableUI:rectL0 lableName:Name0 lableValue:@"" lableUnit:@"" valueColor:COLOR(177, 112, 112, 1) directorType:3];
     }else{
@@ -150,7 +151,7 @@
     CGRect rectM2=CGRectMake((ScreenWidth-imageSize2)/2, (H0-imageSize2)/2+H1, imageSize2, imageSize2);
     
     [self getImageUI:rectW1 imageName:imageNameArray[1]];
-      [self getImageUI:rectM1 imageName:@"newheadAnimal21.png"];
+
       [self getImageUI:rectW3 imageName:imageNameArray[3]];
          [self getImageUI:rectH1 imageName:imageNameArray[0]];
     
@@ -159,14 +160,27 @@
     }else{
            [self getImageUI:rectH2 imageName:@"newheadgrid2.png"];
     }
-   
+    
+     //中间动画
+    UIImageView*viewW22;
+    if (allStatue==2) {
+        [self getImageUI:rectM1 imageName:@"newheadAnimal41.png"];
+       viewW22=[self getImageTwo:rectM2 imageName:@"newheadAnimal42.png"];
+    }else if (allStatue==1) {
+        [self getImageUI:rectM1 imageName:@"newheadAnimal31.png"];
+        viewW22=[self getImageTwo:rectM2 imageName:@"newheadAnimal32.png"];
+    }else{
+        [self getImageUI:rectM1 imageName:@"newheadAnimal21.png"];
+        viewW22=[self getImageTwo:rectM2 imageName:@"newheadAnimal22.png"];
+    }
+
+    
+    [self getAnimationThree:viewW22];
+    
+    
     
     if (allStatue!=1) {
-        //中间动画
-        UIImageView*viewW22=[self getImageTwo:rectM2 imageName:@"newheadAnimal22.png"];
-        [self getAnimationThree:viewW22];
-        
-        
+      
         float KW1=(ScreenWidth-imageSize1)/2-W0-imageSize;
         float KW2=(KW1-directionSizeW1-directionSizeW2)/4;
         float DX=imageSize+W0;
@@ -361,7 +375,11 @@
 -(void)getLableUI:(CGRect)frameRect lableName:(NSString*)lableName lableValue:(NSString*)lableValue lableUnit:(NSString*)lableUnit  valueColor:(UIColor*)valueColor directorType:(int)directorType{
     
     UILabel *solorLable=[[UILabel alloc] initWithFrame:frameRect];
+  
       solorLable.textColor=COLOR(136, 136, 136, 1);
+    if (directorType==3) {
+        solorLable.textColor=valueColor;
+    }
     NSUInteger length0 = [lableName length];
      NSUInteger length1 = [lableValue length];
     NSString *allName=[NSString stringWithFormat:@"%@%@%@",lableName,lableValue,lableUnit];

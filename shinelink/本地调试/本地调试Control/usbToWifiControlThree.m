@@ -381,7 +381,7 @@
     if (_setRegisterArray.count!=_setValueArray.count){
         [self showAlertViewWithTitle:@"设置失败,请重新进入页面进行设置" message:nil cancelButtonTitle:root_OK];
     }
-    [_ControlOne goToOneTcp:3 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
+    [_ControlOne goToOneTcp:6 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
     
     
 }
@@ -500,7 +500,7 @@
     }
   
     _isFirstReadOK=NO;
-    [_ControlOne goToOneTcp:2 cmdNum:1 cmdType:@"3" regAdd:_setRegister Length:[NSString stringWithFormat:@"%d",_cmdRegisterNum]];
+    [_ControlOne goToOneTcp:7 cmdNum:1 cmdType:@"3" regAdd:_setRegister Length:[NSString stringWithFormat:@"%d",_cmdRegisterNum]];
     
     
 }
@@ -554,7 +554,7 @@
             [self showProgressView];
           
             
-            [_ControlOne goToOneTcp:3 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
+            [_ControlOne goToOneTcp:6 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
             
         }
         

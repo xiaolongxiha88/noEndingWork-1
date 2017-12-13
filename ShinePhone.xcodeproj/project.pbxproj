@@ -289,7 +289,11 @@
 		336A10901CBDDBA500E30E83 /* 2triangular.png in Resources */ = {isa = PBXBuildFile; fileRef = 336A108E1CBDDBA500E30E83 /* 2triangular.png */; };
 		336B51051FE10DD90094CD6E /* newheadgrid2.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51041FE10DD80094CD6E /* newheadgrid2.png */; };
 		336B51071FE11B380094CD6E /* newheadAnimal21.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51061FE11B380094CD6E /* newheadAnimal21.png */; };
-		336B51091FE11B440094CD6E /* newheadAnimal22.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51081FE11B430094CD6E /* newheadAnimal22.png */; };
+		336B510F1FE142BA0094CD6E /* newheadAnimal22.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B510E1FE142BA0094CD6E /* newheadAnimal22.png */; };
+		336B51111FE146A30094CD6E /* newheadAnimal31.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51101FE146A20094CD6E /* newheadAnimal31.png */; };
+		336B51131FE146B80094CD6E /* newheadAnimal32.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51121FE146B80094CD6E /* newheadAnimal32.png */; };
+		336B51151FE146D50094CD6E /* newheadAnimal41.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51141FE146D40094CD6E /* newheadAnimal41.png */; };
+		336B51171FE146E90094CD6E /* newheadAnimal42.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51161FE146E80094CD6E /* newheadAnimal42.png */; };
 		336D3FD61DF80C4700BE8422 /* RfStickSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */; };
 		336D3FFE1D6FE76100ECFA34 /* AnotherSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D3FFD1D6FE76100ECFA34 /* AnotherSearchViewController.m */; };
 		336D40171D6FEA7600ECFA34 /* HCSortString.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D40021D6FEA7600ECFA34 /* HCSortString.m */; };
@@ -1269,7 +1273,11 @@
 		336A108E1CBDDBA500E30E83 /* 2triangular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2triangular.png; sourceTree = "<group>"; };
 		336B51041FE10DD80094CD6E /* newheadgrid2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadgrid2.png; sourceTree = "<group>"; };
 		336B51061FE11B380094CD6E /* newheadAnimal21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal21.png; sourceTree = "<group>"; };
-		336B51081FE11B430094CD6E /* newheadAnimal22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal22.png; sourceTree = "<group>"; };
+		336B510E1FE142BA0094CD6E /* newheadAnimal22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal22.png; sourceTree = "<group>"; };
+		336B51101FE146A20094CD6E /* newheadAnimal31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal31.png; sourceTree = "<group>"; };
+		336B51121FE146B80094CD6E /* newheadAnimal32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal32.png; sourceTree = "<group>"; };
+		336B51141FE146D40094CD6E /* newheadAnimal41.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal41.png; sourceTree = "<group>"; };
+		336B51161FE146E80094CD6E /* newheadAnimal42.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal42.png; sourceTree = "<group>"; };
 		336D3FD41DF80C4600BE8422 /* ShinePhone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ShinePhone-Bridging-Header.h"; path = "设备/采集器/ShinePhone-Bridging-Header.h"; sourceTree = "<group>"; };
 		336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RfStickSwift.swift; path = ../RfStickSwift.swift; sourceTree = "<group>"; };
 		336D3FFC1D6FE76100ECFA34 /* AnotherSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherSearchViewController.h; sourceTree = "<group>"; };
@@ -4015,9 +4023,13 @@
 			isa = PBXGroup;
 			children = (
 				3374722C1FBD1C5B00AC1420 /* mixPic.png */,
+				336B51161FE146E80094CD6E /* newheadAnimal42.png */,
+				336B51141FE146D40094CD6E /* newheadAnimal41.png */,
+				336B51121FE146B80094CD6E /* newheadAnimal32.png */,
+				336B51101FE146A20094CD6E /* newheadAnimal31.png */,
+				336B510E1FE142BA0094CD6E /* newheadAnimal22.png */,
 				336B51061FE11B380094CD6E /* newheadAnimal21.png */,
 				3387B8F61FB58D5C0073FB35 /* newheadAnimal1.png */,
-				336B51081FE11B430094CD6E /* newheadAnimal22.png */,
 				3387B8E51FB547EA0073FB35 /* newheadSolar.png */,
 				3387B8F11FB575990073FB35 /* newheadAnimal2.png */,
 				3387B8EA1FB547F90073FB35 /* newheadbat.png */,
@@ -4879,7 +4891,7 @@
 				3370EBC71F41ABB200F37149 /* right.png in Resources */,
 				33EA49EB1E8CAC060044A01A /* 设备页引导1.jpg in Resources */,
 				334AED621CA37649007E39F3 /* 系统设置.png in Resources */,
-				336B51091FE11B440094CD6E /* newheadAnimal22.png in Resources */,
+				336B510F1FE142BA0094CD6E /* newheadAnimal22.png in Resources */,
 				332692681D780F410058C5B7 /* backAV.png in Resources */,
 				333300361F10B4D300754C6F /* online_server_icon.png in Resources */,
 				3387B8FF1FB5A0780073FB35 /* newheadD22.png in Resources */,
@@ -4931,6 +4943,7 @@
 				3370EB951F3C78B900F37149 /* LEDold2.gif in Resources */,
 				33FEFD561C7DB38400324374 /* icon_press@3x.png in Resources */,
 				3330F4D91F14B8330076C237 /* work_order_icon.png in Resources */,
+				336B51171FE146E90094CD6E /* newheadAnimal42.png in Resources */,
 				3333003C1F1312B900754C6F /* head_bg_oss_first.png in Resources */,
 				338964591E51979800A7B1AE /* device_bg.jpg in Resources */,
 				3370FF0A1F5FC8DC0089B317 /* charge-cn.png in Resources */,
@@ -4972,6 +4985,7 @@
 				338E34F11EE55C290027EBD5 /* cancel_icon111.png in Resources */,
 				3383F1311C9FF4210075E834 /* PowerRegulator.png in Resources */,
 				33FEFD5E1C7DB38400324374 /* icon---Name@3x.png in Resources */,
+				336B51131FE146B80094CD6E /* newheadAnimal32.png in Resources */,
 				335456C71C853B4900275478 /* btn_cha11.png in Resources */,
 				336664E81CB77CC2005573FB /* service@3x.png in Resources */,
 				33252FD51F57BAB10054BBC7 /* data_null.png in Resources */,
@@ -5053,6 +5067,7 @@
 				3389647C1E57E7E600A7B1AE /* icon_sp.png in Resources */,
 				3383F13C1C9FFD540075E834 /* 光伏电量.png in Resources */,
 				3370FF061F5FC8A70089B317 /* powercn.png in Resources */,
+				336B51151FE146D50094CD6E /* newheadAnimal41.png in Resources */,
 				33340F7F1D6EC36800909BBF /* loading1.png in Resources */,
 				335614961CB3A6A30071BAC9 /* add@2x.png in Resources */,
 				334AED5E1CA37596007E39F3 /* 更多.png in Resources */,
@@ -5089,6 +5104,7 @@
 				33E3695A1FDA70D6001D947D /* resource.bundle in Resources */,
 				33FEFD581C7DB38400324374 /* icon---Email---Full@3x.png in Resources */,
 				33775AF31D2E404D0070742E /* 客户.png in Resources */,
+				336B51111FE146A30094CD6E /* newheadAnimal31.png in Resources */,
 				333300381F10B50700754C6F /* search_first.png in Resources */,
 				3381ECF71CBCA62700DCF0D2 /* 峰谷段动作使能切图.png in Resources */,
 				3370EBAD1F414C1E00F37149 /* energy2@2x.png in Resources */,
