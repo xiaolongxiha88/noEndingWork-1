@@ -871,12 +871,14 @@
 #define  root_device_252 NSLocalizedString(@"252离网使能", nil)
 #define  root_device_253 NSLocalizedString(@"253离网频率", nil)
 #define  root_device_254 NSLocalizedString(@"254离网电压", nil)
+#define  root_device_255 NSLocalizedString(@"255请输入", nil)
+#define  root_device_256 NSLocalizedString(@"256容性", nil)
+#define  root_device_257 NSLocalizedString(@"257请选择设置值", nil)
+#define  root_device_258 NSLocalizedString(@"258请同时设置起始和结束时间", nil)
+#define  root_device_259 NSLocalizedString(@"259感性", nil)
 
-
-
-
-
-
-
+#define  root_device_260 NSLocalizedString(@"260光伏功率", nil)
+#define  root_device_261 NSLocalizedString(@"261取电功率", nil)
+#define  root_device_262 NSLocalizedString(@"262馈电功率", nil)
 
 #endif /* languageNew_h */

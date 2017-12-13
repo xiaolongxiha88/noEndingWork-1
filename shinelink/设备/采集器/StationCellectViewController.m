@@ -210,9 +210,10 @@
         
         _SetName=_arrayData[_indexPath.row][@"device_type"];
         NSString *demoName1=@"ShineWIFI";           //新wifi
-        NSString *demoName2=@"ShineLan";            //旧wifi
+        NSString *demoName2=@"ShineLanIsNotWifi";            //旧wifi
         NSString *demoName3=@"ShineWifiBox";          //旧wifi
         NSString *demoName5=@"ShineLanBox";
+        NSString *demoName6=@"ShineLan";
           NSString *demoName4=@"ShineWIFI-S";          //wifi-S
         
        //_SetName=@"ShineWIFI-S";
@@ -221,6 +222,8 @@
         BOOL result2 = [_SetName compare:demoName2 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
         BOOL result3 = [_SetName compare:demoName3 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
           BOOL result5 = [_SetName compare:demoName5 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+         BOOL result6 = [_SetName compare:demoName6 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
+        
           BOOL result4 = [_SetName compare:demoName4 options:NSCaseInsensitiveSearch | NSNumericSearch]==NSOrderedSame;
         
         if (result1) {
@@ -241,7 +244,7 @@
             rootView.SnString=_arrayData[_indexPath.row][@"datalog_sn"];
             rootView.hidesBottomBarWhenPushed=YES;
             [self.navigationController pushViewController:rootView animated:YES];
-        }else if(result5){
+        }else if(result5 || result6){
             
             RfStickSwift *rootView=[[RfStickSwift alloc]init];
              [self.navigationController pushViewController:rootView animated:YES];

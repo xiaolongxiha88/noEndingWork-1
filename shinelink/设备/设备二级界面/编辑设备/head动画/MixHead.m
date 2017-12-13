@@ -21,6 +21,17 @@
 }
 
 -(void)getUIOne{
+    NSInteger allStatue=0;           //0正常状态     1离线状态    2故障
+    NSString*allStatueString=[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"lost"]];
+     int L1=[[NSString stringWithFormat:@"%d",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"uwSysWorkMode"]] intValue]] intValue];
+    if ([allStatueString containsString:@"lost"]) {
+        allStatue=1;
+    }else{
+        if (L1==3) {
+              allStatue=2;
+        }
+    }
+    
     NSArray *imageNameArray=@[@"newheadSolar.png",@"newheadbat.png",@"newheadgrid.png",@"newheadload.png"];
     float  imageSize=64*NOW_SIZE,imageSize1=60*NOW_SIZE,imageSize2=50*NOW_SIZE;
    float lableH=20*NOW_SIZE;
@@ -39,7 +50,7 @@
     
     /////////////////////////////////////////////////////////////////////////////////lable区域
     
-    int L1=[[NSString stringWithFormat:@"%d",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"uwSysWorkMode"]] intValue]] intValue];
+   
     NSString*L1Name1=@"";
     NSArray *statueArray=@[root_MIX_201,root_MIX_202,root_MIX_203,root_MIX_204,root_MIX_205,root_MIX_206,root_MIX_206,root_MIX_207,root_MIX_207];
     if (L1<statueArray.count) {
@@ -47,10 +58,10 @@
     }
   
     
-    int L2=[[NSString stringWithFormat:@"%d",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"wBatteryType"]] intValue]] intValue];
+    int L2=[[NSString stringWithFormat:@"%d",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"priorityChoose"]] intValue]] intValue];
     NSString*L1Name2=@"";
     NSArray *statueArray2=@[root_MIX_208,root_MIX_209,root_MIX_210];
-    if (L1<statueArray2.count) {
+    if (L2<statueArray2.count) {
             L1Name2=statueArray2[L2];
     }
     NSString *Name0=@"";
@@ -89,7 +100,7 @@
           NSString *valueRight=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pLocalLoad"]] floatValue]];
    
     
-    NSArray*lableNameArray=@[[NSString stringWithFormat:@"%@:",root_PV_POWER],[NSString stringWithFormat:@"%@:",root_PCS_dianchi_baifenbi],[NSString stringWithFormat:@"%@:",root_MIX_212],[NSString stringWithFormat:@"%@:",root_MIX_211],[NSString stringWithFormat:@"%@:",nameLeft]];
+    NSArray*lableNameArray=@[[NSString stringWithFormat:@"%@:",root_device_260],[NSString stringWithFormat:@"%@:",root_PCS_dianchi_baifenbi],[NSString stringWithFormat:@"%@:",root_MIX_212],[NSString stringWithFormat:@"%@:",root_MIX_211],[NSString stringWithFormat:@"%@:",nameLeft]];
     
         NSArray*lableValueArray=@[valueUp,valueL2,valuedown,valueRight,valueLeft];
     
@@ -108,11 +119,25 @@
      CGRect rectL3=CGRectMake(LableX1, LableY3, lableW, lableH);
       CGRect rectL4=CGRectMake(ScreenWidth-W0-lableW, LableY2, lableW, lableH);
     
-       [self getLableUI:rectL0 lableName:Name0 lableValue:@"" lableUnit:@"" valueColor:colorArray[0] directorType:3];
+    if (allStatue==1) {
+          [self getLableUI:rectL0 lableName:root_CNJ_buzaixian lableValue:@"" lableUnit:@"" valueColor:COLOR(85, 162, 78, 1) directorType:3];
+    }else if (allStatue==2) {
+        [self getLableUI:rectL0 lableName:Name0 lableValue:@"" lableUnit:@"" valueColor:COLOR(177, 112, 112, 1) directorType:3];
+    }else{
+           [self getLableUI:rectL0 lableName:Name0 lableValue:@"" lableUnit:@"" valueColor:COLOR(85, 162, 78, 1) directorType:3];
+    }
+    
+    
     [self getLableUI:rectL1 lableName:lableNameArray[0] lableValue:lableValueArray[0] lableUnit:@"W" valueColor:colorArray[0] directorType:1];
        [self getLableUI:rectL2 lableName:lableNameArray[1] lableValue:lableValueArray[1] lableUnit:@"%" valueColor:colorArray[1] directorType:1];
       [self getLableUI:rectL22 lableName:lableNameArray[4] lableValue:lableValueArray[4] lableUnit:@"W" valueColor:colorArray[4] directorType:1];
-     [self getLableUI:rectL3 lableName:lableNameArray[2] lableValue:lableValueArray[2] lableUnit:@"W" valueColor:colorArray[2] directorType:1];
+    
+    if (_isGridToUp) {
+      [self getLableUI:rectL3 lableName:root_device_261 lableValue:lableValueArray[2] lableUnit:@"W" valueColor:colorArray[2] directorType:1];
+    }else{
+      [self getLableUI:rectL3 lableName:root_device_262 lableValue:lableValueArray[2] lableUnit:@"W" valueColor:COLOR(85, 162, 78, 1) directorType:1];
+    }
+   
      [self getLableUI:rectL4 lableName:lableNameArray[3] lableValue:lableValueArray[3] lableUnit:@"W" valueColor:colorArray[3] directorType:2];
     
   /////////////////  //五个大图
@@ -125,77 +150,86 @@
     CGRect rectM2=CGRectMake((ScreenWidth-imageSize2)/2, (H0-imageSize2)/2+H1, imageSize2, imageSize2);
     
     [self getImageUI:rectW1 imageName:imageNameArray[1]];
-      [self getImageUI:rectM1 imageName:@"newheadAnimal2.png"];
+      [self getImageUI:rectM1 imageName:@"newheadAnimal21.png"];
       [self getImageUI:rectW3 imageName:imageNameArray[3]];
          [self getImageUI:rectH1 imageName:imageNameArray[0]];
-      [self getImageUI:rectH2 imageName:imageNameArray[2]];
     
-    //中间动画
-     UIImageView*viewW22=[self getImageTwo:rectM2 imageName:@"newheadAnimal1.png"];
-    [self getAnimationThree:viewW22];
-    
-    
-    float KW1=(ScreenWidth-imageSize1)/2-W0-imageSize;
-      float KW2=(KW1-directionSizeW1-directionSizeW2)/4;
-      float DX=imageSize+W0;
-     float DX1=(ScreenWidth-imageSize1)/2+imageSize1;
-    float TIME=1;
-     //方向图
-    CGRect rectD1=CGRectMake((ScreenWidth-directionSizeH1)/2, H1+imageSize+KH3, directionSizeH1, directionSizeW1);
-     CGRect rectD2=CGRectMake((ScreenWidth-directionSizeH1)/2, (H0-imageSize1)/2+H1+imageSize1+KH3, directionSizeH1, directionSizeW1);
-    
-     CGRect rectD3=CGRectMake(DX+KW2, (H0-directionSizeH1)/2+H1, directionSizeW1, directionSizeH1);
-        CGRect rectD31=CGRectMake(DX+KW2*3+directionSizeW1, (H0-directionSizeH2)/2+H1, directionSizeW2, directionSizeH2);
-    
-    CGRect rectD4=CGRectMake(DX1+KW2, (H0-directionSizeH2)/2+H1, directionSizeW2, directionSizeH2);
-    CGRect rectD41=CGRectMake(DX1+KW2*3+directionSizeW2, (H0-directionSizeH1)/2+H1, directionSizeW1, directionSizeH1);
-    
-    //上面的流向
-    if ([valueUp floatValue]>0) {
-        UIImageView*viewD1=[self getImageTwo:rectD1 imageName:@"newheadD1.png"];
-        [viewD1.layer addAnimation:[self getAnimationOne:TIME delayTime:0.5] forKey:nil];
+    if (_isGridToUp) {
+           [self getImageUI:rectH2 imageName:@"newheadgrid.png"];
+    }else{
+           [self getImageUI:rectH2 imageName:@"newheadgrid2.png"];
     }
- 
-    
-       //下面的流向
-    if ([valuedown floatValue]>0) {
-        if (_isGridToUp) {
-            UIImageView*viewD2=[self getImageTwo:rectD2 imageName:@"newheadD2.png"];
-            [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:1.5] forKey:nil];
-        }else{
-            UIImageView*viewD2=[self getImageTwo:rectD2 imageName:@"newheadD22.png"];
-            [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:1.5] forKey:nil];
-        }
-    }
-  
    
-        //左边的流向valueLeft
-    if ([valueLeft floatValue]>0) {
-        if (_isBatToRight) {
-            UIImageView*viewD3=[self getImageTwo:rectD3 imageName:@"newheadD3.png"];
-            [viewD3.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
-            
-            UIImageView*viewD31=[self getImageTwo:rectD31 imageName:@"newheadD4.png"];
-            [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:1] forKey:nil];
-        }else{
-            UIImageView*viewD31=[self getImageTwo:rectD3 imageName:@"newheadD33.png"];
-            [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:1] forKey:nil];
-            
-            UIImageView*viewD3=[self getImageTwo:rectD31 imageName:@"newheadD44.png"];
-            [viewD3.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
-        }
-    }
-
-
-           //右边的流向
-    if ([valueRight floatValue]>0) {
-        UIImageView*viewD4=[self getImageTwo:rectD4 imageName:@"newheadD4.png"];
-        [viewD4.layer addAnimation:[self getAnimationOne:TIME delayTime:2] forKey:nil];
+    
+    if (allStatue!=1) {
+        //中间动画
+        UIImageView*viewW22=[self getImageTwo:rectM2 imageName:@"newheadAnimal22.png"];
+        [self getAnimationThree:viewW22];
         
-        UIImageView*viewD41=[self getImageTwo:rectD41 imageName:@"newheadD3.png"];
-        [viewD41.layer addAnimation:[self getAnimationOne:TIME delayTime:3] forKey:nil];
+        
+        float KW1=(ScreenWidth-imageSize1)/2-W0-imageSize;
+        float KW2=(KW1-directionSizeW1-directionSizeW2)/4;
+        float DX=imageSize+W0;
+        float DX1=(ScreenWidth-imageSize1)/2+imageSize1;
+        float TIME=1;
+        //方向图
+        CGRect rectD1=CGRectMake((ScreenWidth-directionSizeH1)/2, H1+imageSize+KH3, directionSizeH1, directionSizeW1);
+        CGRect rectD2=CGRectMake((ScreenWidth-directionSizeH1)/2, (H0-imageSize1)/2+H1+imageSize1+KH3, directionSizeH1, directionSizeW1);
+        
+        CGRect rectD3=CGRectMake(DX+KW2, (H0-directionSizeH1)/2+H1, directionSizeW1, directionSizeH1);
+        CGRect rectD31=CGRectMake(DX+KW2*3+directionSizeW1, (H0-directionSizeH2)/2+H1, directionSizeW2, directionSizeH2);
+        
+        CGRect rectD4=CGRectMake(DX1+KW2, (H0-directionSizeH2)/2+H1, directionSizeW2, directionSizeH2);
+        CGRect rectD41=CGRectMake(DX1+KW2*3+directionSizeW2, (H0-directionSizeH1)/2+H1, directionSizeW1, directionSizeH1);
+        
+        //上面的流向
+        if ([valueUp floatValue]>0) {
+            UIImageView*viewD1=[self getImageTwo:rectD1 imageName:@"newheadD1.png"];
+            [viewD1.layer addAnimation:[self getAnimationOne:TIME delayTime:0.5] forKey:nil];
+        }
+        
+        
+        //下面的流向
+        if ([valuedown floatValue]>0) {
+            if (_isGridToUp) {
+                UIImageView*viewD2=[self getImageTwo:rectD2 imageName:@"newheadD2.png"];
+                [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:1.5] forKey:nil];
+            }else{
+                UIImageView*viewD2=[self getImageTwo:rectD2 imageName:@"newheadD1.png"];
+                [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:1.5] forKey:nil];
+            }
+        }
+        
+        
+        //左边的流向valueLeft
+        if ([valueLeft floatValue]>0) {
+            if (_isBatToRight) {
+                UIImageView*viewD3=[self getImageTwo:rectD3 imageName:@"newheadD3.png"];
+                [viewD3.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
+                
+                UIImageView*viewD31=[self getImageTwo:rectD31 imageName:@"newheadD4.png"];
+                [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:1] forKey:nil];
+            }else{
+                UIImageView*viewD31=[self getImageTwo:rectD3 imageName:@"newheadD33.png"];
+                [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:1] forKey:nil];
+                
+                UIImageView*viewD3=[self getImageTwo:rectD31 imageName:@"newheadD44.png"];
+                [viewD3.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
+            }
+        }
+        
+        
+        //右边的流向
+        if ([valueRight floatValue]>0) {
+            UIImageView*viewD4=[self getImageTwo:rectD4 imageName:@"newheadD4.png"];
+            [viewD4.layer addAnimation:[self getAnimationOne:TIME delayTime:2] forKey:nil];
+            
+            UIImageView*viewD41=[self getImageTwo:rectD41 imageName:@"newheadD3.png"];
+            [viewD41.layer addAnimation:[self getAnimationOne:TIME delayTime:3] forKey:nil];
+        }
+        
     }
-  
+   
     
     
     [self getNoticeUI];

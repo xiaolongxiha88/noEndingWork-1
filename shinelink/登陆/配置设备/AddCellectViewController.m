@@ -384,7 +384,7 @@
 
     
     NSString *demoName1=@"ShineWIFI";           //新wifi
-    NSString *demoName2=@"ShineLan";            //旧wifi
+    NSString *demoName2=@"ShineLanIsNotWifi";            //旧wifi
     NSString *demoName3=@"ShineWifiBox";          //旧wifi
      NSString *demoName4=@"ShineWIFI-S";          //wifi-S
     

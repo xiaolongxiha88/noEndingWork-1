@@ -92,7 +92,7 @@
         _textLable.text=root_MIX_223;
         if (_setType==5) {
             _textLable.frame=CGRectMake(70*NOW_SIZE, 100*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE);
-            _textLable.text=@"容性";
+            _textLable.text=root_device_256;
             _choiceValue1=@"over";
         }
         _textLable.userInteractionEnabled=YES;
@@ -310,7 +310,7 @@
     
      if (_setType==2 || _setType==3 || _setType==7 || _setType==10 || _setType==11 || _setType==12) {
          if ([_choiceValue1 isEqualToString:@""] || _choiceValue1==nil) {
-             [self showToastViewWithTitle:@"请选择设置值"];
+             [self showToastViewWithTitle:root_device_257];
              return;
          }
          _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":_choiceValue1};
@@ -319,7 +319,7 @@
     if (_setType==4 || _setType==6  || _setType==8 || _setType==9) {
         _choiceValue1=_fieldOne.text;
         if ([_choiceValue1 isEqualToString:@""] || _choiceValue1==nil) {
-            [self showToastViewWithTitle:@"请输入设置值"];
+            [self showToastViewWithTitle:root_device_257];
             return;
         }
         _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":_choiceValue1};
@@ -328,7 +328,7 @@
     if (_setType==5) {
         NSString *value2=_fieldOne.text;
         if ([value2 isEqualToString:@""] || value2==nil) {
-            [self showToastViewWithTitle:@"请输入设置值"];
+            [self showToastViewWithTitle:root_device_257];
             return;
         }
            _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":value2,@"param2":_choiceValue1};
@@ -359,7 +359,7 @@
                       [timeValueArrayTwo addObject:@""];
                       [timeValueArrayTwo addObject:@""];
                 }else{
-                    [self showToastViewWithTitle:@"请同时设置起始和结束时间"];
+                    [self showToastViewWithTitle:root_device_258];
                     return;
                 }
                 
@@ -379,19 +379,32 @@
         }
     }
   
-
+    
     NSString *param1String,*param2String;
-    if ([_fieldOne.text isEqualToString:@""] || _fieldOne.text==nil) {
-        param1String=@"";
-    }else{
-        param1String=_fieldOne.text;
+    if (_setType==0 || _setType==1){
+        if ([_fieldOne.text isEqualToString:@""] || _fieldOne.text==nil) {
+            if (_setType==0) {
+                 [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_device_255,root_PCS_fangdian_gonglv]];
+            }else{
+                          [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_device_255,root_CHARGING_POWER]];
+            }
+           
+            return;
+        }else{
+            param1String=_fieldOne.text;
+        }
+        if ([_fieldTwo.text isEqualToString:@""] || _fieldTwo.text==nil) {
+            if (_setType==0) {
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_device_255,root_MIX_227]];
+            }else{
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_device_255,root_MIX_228]];
+            }
+          return;
+        }else{
+            param2String=_fieldTwo.text;
+        }
+        
     }
-    if ([_fieldTwo.text isEqualToString:@""] || _fieldTwo.text==nil) {
-        param2String=@"";
-    }else{
-        param2String=_fieldTwo.text;
-    }
-
 
     if (_setType==0) { _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":param2String,@"param3":_choiceValue1,@"param4":timeValueArrayTwo[0],@"param5":timeValueArrayTwo[1],@"param6":timeValueArrayTwo[2],@"param7":timeValueArrayTwo[3],@"param8":timeValueArrayTwo[4],@"param9":timeValueArrayTwo[5],@"param10":timeValueArrayTwo[6],@"param11":timeValueArrayTwo[7],@"param12":timeValueArrayTwo[8],@"param13":timeValueArrayTwo[9],@"param14":timeValueArrayTwo[10],@"param15":timeValueArrayTwo[11]};
     }
@@ -455,16 +468,16 @@
     if (_setType==2 || _setType==3 || _setType==5 || _setType==10 || _setType==11 || _setType==12) {}
     
         if (_setType==2) {
-            choiceArray=@[@"关机",@"开机"];
+            choiceArray=@[root_CNJ_guanji,root_CNJ_kaiji];
         }
     if (_setType==3) {
-        choiceArray=@[@"关闭",@"开启"];
+        choiceArray=@[root_guan,root_kai];
     }
     if (_setType==5) {
-        choiceArray=@[@"容性",@"感性"];
+        choiceArray=@[root_device_256,root_device_259];
     }
     if (_setType==10) {
-        choiceArray=@[@"禁止",@"使能"];
+        choiceArray=@[root_jinzhi,root_shineng];
     }
     if (_setType==11) {
         choiceArray=@[@"50Hz",@"60Hz"];

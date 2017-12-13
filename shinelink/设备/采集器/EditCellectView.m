@@ -59,7 +59,7 @@
         
         UIButton *deviceSet = [UIButton buttonWithType:UIButtonTypeCustom];
         deviceSet.frame = CGRectMake(0, 3* CGRectGetHeight(bgImageView.frame)/4, CGRectGetWidth(bgImageView.frame), CGRectGetHeight(bgImageView.frame)/3);
-        if ([_dataloggerType isEqualToString:@"ShineLanBox"]) {
+        if ([_dataloggerType isEqualToString:@"ShineLanBox"] || [_dataloggerType isEqualToString:@"ShineLan"]) {
              [deviceSet setTitle:@"RfStick" forState:UIControlStateNormal];
              deviceSet.tag = 1055;
         }else{

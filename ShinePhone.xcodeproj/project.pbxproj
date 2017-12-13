@@ -287,6 +287,9 @@
 		33699BB31DACCEAE00C55CFF /* meConfigerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */; };
 		336A108F1CBDDBA500E30E83 /* triangular.png in Resources */ = {isa = PBXBuildFile; fileRef = 336A108D1CBDDBA500E30E83 /* triangular.png */; };
 		336A10901CBDDBA500E30E83 /* 2triangular.png in Resources */ = {isa = PBXBuildFile; fileRef = 336A108E1CBDDBA500E30E83 /* 2triangular.png */; };
+		336B51051FE10DD90094CD6E /* newheadgrid2.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51041FE10DD80094CD6E /* newheadgrid2.png */; };
+		336B51071FE11B380094CD6E /* newheadAnimal21.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51061FE11B380094CD6E /* newheadAnimal21.png */; };
+		336B51091FE11B440094CD6E /* newheadAnimal22.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51081FE11B430094CD6E /* newheadAnimal22.png */; };
 		336D3FD61DF80C4700BE8422 /* RfStickSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */; };
 		336D3FFE1D6FE76100ECFA34 /* AnotherSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D3FFD1D6FE76100ECFA34 /* AnotherSearchViewController.m */; };
 		336D40171D6FEA7600ECFA34 /* HCSortString.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D40021D6FEA7600ECFA34 /* HCSortString.m */; };
@@ -1264,6 +1267,9 @@
 		33699BB21DACCEAE00C55CFF /* meConfigerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = meConfigerViewController.m; sourceTree = "<group>"; };
 		336A108D1CBDDBA500E30E83 /* triangular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = triangular.png; sourceTree = "<group>"; };
 		336A108E1CBDDBA500E30E83 /* 2triangular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2triangular.png; sourceTree = "<group>"; };
+		336B51041FE10DD80094CD6E /* newheadgrid2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadgrid2.png; sourceTree = "<group>"; };
+		336B51061FE11B380094CD6E /* newheadAnimal21.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal21.png; sourceTree = "<group>"; };
+		336B51081FE11B430094CD6E /* newheadAnimal22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal22.png; sourceTree = "<group>"; };
 		336D3FD41DF80C4600BE8422 /* ShinePhone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ShinePhone-Bridging-Header.h"; path = "设备/采集器/ShinePhone-Bridging-Header.h"; sourceTree = "<group>"; };
 		336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RfStickSwift.swift; path = ../RfStickSwift.swift; sourceTree = "<group>"; };
 		336D3FFC1D6FE76100ECFA34 /* AnotherSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherSearchViewController.h; sourceTree = "<group>"; };
@@ -4009,11 +4015,14 @@
 			isa = PBXGroup;
 			children = (
 				3374722C1FBD1C5B00AC1420 /* mixPic.png */,
+				336B51061FE11B380094CD6E /* newheadAnimal21.png */,
 				3387B8F61FB58D5C0073FB35 /* newheadAnimal1.png */,
+				336B51081FE11B430094CD6E /* newheadAnimal22.png */,
 				3387B8E51FB547EA0073FB35 /* newheadSolar.png */,
 				3387B8F11FB575990073FB35 /* newheadAnimal2.png */,
 				3387B8EA1FB547F90073FB35 /* newheadbat.png */,
 				3387B8EB1FB547F90073FB35 /* newheadgrid.png */,
+				336B51041FE10DD80094CD6E /* newheadgrid2.png */,
 				3387B8EC1FB547F90073FB35 /* newheadload.png */,
 				3387B8F41FB57BC80073FB35 /* newheadD1.png */,
 				3387B8F81FB59ECB0073FB35 /* newheadD2.png */,
@@ -4870,6 +4879,7 @@
 				3370EBC71F41ABB200F37149 /* right.png in Resources */,
 				33EA49EB1E8CAC060044A01A /* 设备页引导1.jpg in Resources */,
 				334AED621CA37649007E39F3 /* 系统设置.png in Resources */,
+				336B51091FE11B440094CD6E /* newheadAnimal22.png in Resources */,
 				332692681D780F410058C5B7 /* backAV.png in Resources */,
 				333300361F10B4D300754C6F /* online_server_icon.png in Resources */,
 				3387B8FF1FB5A0780073FB35 /* newheadD22.png in Resources */,
@@ -4913,6 +4923,7 @@
 				334FF0BD1CF53C7C001E6716 /* module-bg.png in Resources */,
 				33FEFD6F1C7DB38400324374 /* iconfont-klmlianxifangshi@2x.png in Resources */,
 				335D69AE1D77BA4D00894D90 /* hcdCachePlayer.bundle in Resources */,
+				336B51051FE10DD90094CD6E /* newheadgrid2.png in Resources */,
 				33724D9F1CFE89BE005F3965 /* touxiang.png in Resources */,
 				333300341F10B4BB00754C6F /* device_search_icon.png in Resources */,
 				3376B3D51F973EE00069F820 /* max_parameter.png in Resources */,
@@ -4955,6 +4966,7 @@
 				3387B8A71FB181E00073FB35 /* wifi_icon.png in Resources */,
 				337F96101F0B90F800840527 /* phone.png in Resources */,
 				338321CB1EEE35B7004FFC20 /* configure_nor.png in Resources */,
+				336B51071FE11B380094CD6E /* newheadAnimal21.png in Resources */,
 				33771D521E8369B000786FCE /* zhushi11.png in Resources */,
 				338321C11EEE3370004FFC20 /* delete_nor.png in Resources */,
 				338E34F11EE55C290027EBD5 /* cancel_icon111.png in Resources */,
