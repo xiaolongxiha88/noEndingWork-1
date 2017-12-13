@@ -74,7 +74,7 @@
     
 
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"growattOrderId":_payID,@"status":codeString} paramarsSite:@"/api/v2/renew/submitPayResult" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo_2 paramars:@{@"growattOrderId":_payID,@"status":codeString} paramarsSite:@"/api/v2/renew/submitPayResult" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];

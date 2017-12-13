@@ -200,6 +200,8 @@ static float TCP_TIME=1;
     
 }
 
+
+//添加通知点1
 //socket连接断开后的回调代理
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
   
@@ -242,11 +244,17 @@ static float TCP_TIME=1;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveWifiConrolTwoFailed"object:nil];
         }
         
+    }else  if (_cmdType==8) {
+        if (!_isReceiveAll) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataForViewOneFailed"object:nil];
+        }
+        
     }
  
     
 }
 
+//添加通知点2
 //读到数据后的回调代理
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
  
@@ -257,7 +265,7 @@ static float TCP_TIME=1;
     
     if (_cmdType==1) {
          [self checkWhichNumData:data];
-    }else if ((_cmdType==2)||(_cmdType==3)||(_cmdType==4)||(_cmdType==5)||(_cmdType==6)||(_cmdType==7)){
+    }else{
         _isReceiveAll=YES;
     
         if ([self checkData:data]) {
@@ -265,6 +273,8 @@ static float TCP_TIME=1;
                   [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFive"object:_AllDataDic];
             }else if (_cmdType==6 || _cmdType==7) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveWifiConrolTwo"object:_AllDataDic];
+            }else if (_cmdType==8) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataForViewOne"object:_AllDataDic];
             }else{
                    [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwo"object:_AllDataDic];
             }
@@ -276,6 +286,8 @@ static float TCP_TIME=1;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFiveFailed"object:nil];
             }else if (_cmdType==6 || _cmdType==7) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveWifiConrolTwoFailed"object:nil];
+            }else if (_cmdType==8) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataForViewOneFailed"object:nil];
             }else{
                  [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
             }
@@ -297,6 +309,8 @@ static float TCP_TIME=1;
 }
 
 
+
+//添加通知点3
 -(BOOL)checkData:(NSData*)data{
     BOOL  isRightData=YES;
     
@@ -335,7 +349,7 @@ static float TCP_TIME=1;
                     NSData *data00=[data1 subdataWithRange:NSMakeRange(3, data1.length-5)];
                     if (_cmdType==1) {
                         [self upDataToDic:data00];
-                    }else  if ((_cmdType==2) || (_cmdType==5) || (_cmdType==7)) {
+                    }else  if ((_cmdType==2) || (_cmdType==5) || (_cmdType==7) || (_cmdType==8)) {
                         [_AllDataDic setValue:data00 forKey:@"one"];
                     }
                     

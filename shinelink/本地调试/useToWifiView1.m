@@ -60,7 +60,7 @@ static NSString *cellTwo = @"cellTwo";
 -(void)viewWillAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getData:) name: @"recieveReceiveData" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice) name: @"recieveFailedTcpData" object:nil];
- [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice2) name: @"TcpReceiveDataTwoFailed" object:nil];
+ [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice2) name: @"TcpReceiveDataForViewOneFailed" object:nil];
     
     _isAutoReflash=NO;
     _rightItem.title=@"自动刷新";

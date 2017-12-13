@@ -35,7 +35,7 @@
         _ControlOne=[[wifiToPvOne alloc]init];
          _receiveDic=[NSMutableDictionary new];
           [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFirstData:) name: @"TcpReceiveData" object:nil];
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveSecondData:) name: @"TcpReceiveDataTwo" object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveSecondData:) name: @"TcpReceiveDataForViewOne" object:nil];
         
     }
     
@@ -46,9 +46,9 @@
           [_ControlOne goToTcpType:type];
     }else if (type==2){
         _isFirstAutoData=YES;
-           [_ControlOne goToTcpNoDelay:2 cmdNum:1 cmdType:@"4" regAdd:@"0" Length:@"125"];
+           [_ControlOne goToTcpNoDelay:8 cmdNum:1 cmdType:@"4" regAdd:@"0" Length:@"125"];
     }else if (type==3){
-        [_ControlOne goToTcpNoDelay:2 cmdNum:1 cmdType:@"3" regAdd:@"125" Length:@"10"];
+        [_ControlOne goToTcpNoDelay:8 cmdNum:1 cmdType:@"3" regAdd:@"125" Length:@"10"];
     }
     
 }
@@ -63,7 +63,7 @@
             _data04_1=[NSData new];
             _data04_1=[firstDic objectForKey:@"one"];
             _isFirstAutoData=NO;
-            [_ControlOne goToTcpNoDelay:2 cmdNum:1 cmdType:@"4" regAdd:@"125" Length:@"125"];
+            [_ControlOne goToTcpNoDelay:8 cmdNum:1 cmdType:@"4" regAdd:@"125" Length:@"125"];
         }else{
             _data04_2=[NSData new];
             _data04_2=[firstDic objectForKey:@"one"];

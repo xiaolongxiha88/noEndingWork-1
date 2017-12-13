@@ -31,8 +31,8 @@
     [self.view addSubview:_scrollView];
     
     
-    NSArray *nameArray=@[@"订单号",@"支付结果",@"支付金额",@"支付时间",@"采集器序列号",@"续费年限",@"续费账号",@"发票抬头",@"企业税号",@"联系电话",@"详细地址",@"备注"];
-    NSArray*valueArray=@[@"growattOrderId",@"app_trade_status",@"money",@"gmt_create",@"datalogSn",@"year",@"username",@"invoiceName",@"invoiceNum",@"invoicePhone",@"invoiceAddr",@"remark"];
+    NSArray *nameArray=@[@"订单号",@"支付结果",@"支付金额",@"支付时间",@"采集器序列号",@"暂未续费成功序列号",@"续费年限",@"续费账号",@"发票抬头",@"企业税号",@"联系电话",@"详细地址",@"备注"];
+    NSArray*valueArray=@[@"growattOrderId",@"status",@"money",@"gmt_create",@"datalogSn",@"failureDatalog",@"year",@"username",@"invoiceName",@"invoiceNum",@"invoicePhone",@"invoiceAddr",@"remark"];
     
     float H0=30*HEIGHT_SIZE, W0=300*NOW_SIZE;
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
@@ -40,10 +40,15 @@
     
     float allH=0;
     for (int i=0; i<nameArray.count; i++) {
-        NSString *name1=[_allDic objectForKey:valueArray[i]];
-        if (i==1) {
-            name1=[self changeResult:name1];
-        }
+        NSString *name1;
+        NSString *valueString=valueArray[i];
+        if ([_allDic.allKeys containsObject:valueString]) {
+               name1=[_allDic objectForKey:valueArray[i]];
+        }else{
+            name1=@"";
+            }
+        
+
         NSString*nameString=[NSString stringWithFormat:@"%@:%@",nameArray[i],name1];
         CGSize size = [nameString boundingRectWithSize:CGSizeMake(W0, H0) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         float H=H0;
@@ -57,6 +62,9 @@
         lable0.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         lable0.textAlignment=NSTextAlignmentLeft;
         lable0.text=nameString;
+        if (i==1) {
+            lable0.text=_statusString;
+        }
         [_scrollView addSubview:lable0];
         
           UIView *View0 = [[UIView alloc] initWithFrame:CGRectMake((SCREEN_Width-W0)/2, 0*HEIGHT_SIZE+allH+H-LineWidth, W0, LineWidth)];

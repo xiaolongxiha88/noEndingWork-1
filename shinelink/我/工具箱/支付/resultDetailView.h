@@ -11,5 +11,6 @@
 @interface resultDetailView : RootViewController
 
 @property (nonatomic, strong)NSDictionary *allDic;
+@property (nonatomic, strong)NSString *statusString;
 
 @end

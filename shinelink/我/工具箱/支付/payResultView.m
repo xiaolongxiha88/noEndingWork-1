@@ -103,6 +103,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
  
     resultDetailView *goView=[[resultDetailView alloc]init];
+    goView.statusString=_resultArray[indexPath.row];
     goView.allDic=[NSDictionary dictionaryWithDictionary:_AllArray[indexPath.row]];
     [self.navigationController pushViewController:goView animated:YES];
     
