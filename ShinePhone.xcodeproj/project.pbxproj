@@ -294,6 +294,8 @@
 		336B51131FE146B80094CD6E /* newheadAnimal32.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51121FE146B80094CD6E /* newheadAnimal32.png */; };
 		336B51151FE146D50094CD6E /* newheadAnimal41.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51141FE146D40094CD6E /* newheadAnimal41.png */; };
 		336B51171FE146E90094CD6E /* newheadAnimal42.png in Resources */ = {isa = PBXBuildFile; fileRef = 336B51161FE146E80094CD6E /* newheadAnimal42.png */; };
+		336B511A1FE225A40094CD6E /* MCBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 336B51181FE225A40094CD6E /* MCBarChartView.m */; };
+		336B511D1FE225D60094CD6E /* MCChartInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 336B511C1FE225D60094CD6E /* MCChartInformationView.m */; };
 		336D3FD61DF80C4700BE8422 /* RfStickSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */; };
 		336D3FFE1D6FE76100ECFA34 /* AnotherSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D3FFD1D6FE76100ECFA34 /* AnotherSearchViewController.m */; };
 		336D40171D6FEA7600ECFA34 /* HCSortString.m in Sources */ = {isa = PBXBuildFile; fileRef = 336D40021D6FEA7600ECFA34 /* HCSortString.m */; };
@@ -1278,6 +1280,10 @@
 		336B51121FE146B80094CD6E /* newheadAnimal32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal32.png; sourceTree = "<group>"; };
 		336B51141FE146D40094CD6E /* newheadAnimal41.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal41.png; sourceTree = "<group>"; };
 		336B51161FE146E80094CD6E /* newheadAnimal42.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadAnimal42.png; sourceTree = "<group>"; };
+		336B51181FE225A40094CD6E /* MCBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBarChartView.m; sourceTree = "<group>"; };
+		336B51191FE225A40094CD6E /* MCBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBarChartView.h; sourceTree = "<group>"; };
+		336B511B1FE225D50094CD6E /* MCChartInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCChartInformationView.h; sourceTree = "<group>"; };
+		336B511C1FE225D60094CD6E /* MCChartInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCChartInformationView.m; sourceTree = "<group>"; };
 		336D3FD41DF80C4600BE8422 /* ShinePhone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ShinePhone-Bridging-Header.h"; path = "设备/采集器/ShinePhone-Bridging-Header.h"; sourceTree = "<group>"; };
 		336D3FD51DF80C4700BE8422 /* RfStickSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RfStickSwift.swift; path = ../RfStickSwift.swift; sourceTree = "<group>"; };
 		336D3FFC1D6FE76100ECFA34 /* AnotherSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnotherSearchViewController.h; sourceTree = "<group>"; };
@@ -4452,6 +4458,10 @@
 				33EA4A0D1E8F790C0044A01A /* JHChart.m */,
 				3379E4F41E960C1C000A4198 /* JHColumnChart.h */,
 				3379E4F51E960C1C000A4198 /* JHColumnChart.m */,
+				336B51191FE225A40094CD6E /* MCBarChartView.h */,
+				336B51181FE225A40094CD6E /* MCBarChartView.m */,
+				336B511B1FE225D50094CD6E /* MCChartInformationView.h */,
+				336B511C1FE225D60094CD6E /* MCChartInformationView.m */,
 			);
 			path = "储能界面第三方";
 			sourceTree = "<group>";
@@ -5174,6 +5184,7 @@
 				3363DD1E1C7C48F100D740FB /* registerViewController.m in Sources */,
 				335614681CB397220071BAC9 /* LZPageContentView.m in Sources */,
 				336D401C1D6FEA7600ECFA34 /* NSString+PinYin4Cocoa.m in Sources */,
+				336B511D1FE225D60094CD6E /* MCChartInformationView.m in Sources */,
 				336181F61ED048ED008641E9 /* deviceListCell.swift in Sources */,
 				3343F3E11C80405D009F69BC /* UIWebView+AFNetworking.m in Sources */,
 				3343F3C01C80403C009F69BC /* AFHTTPRequestOperationManager.m in Sources */,
@@ -5240,6 +5251,7 @@
 				334B8F211C91250300798A69 /* PopoverView.m in Sources */,
 				3343F3DB1C80405D009F69BC /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				339844251FA82107006A15AD /* usbToWifiControlThree.m in Sources */,
+				336B511A1FE225A40094CD6E /* MCBarChartView.m in Sources */,
 				33860FF21EEABB9D004150FD /* PlantList.swift in Sources */,
 				334B8F4C1C914A6D00798A69 /* PNChartLabel.m in Sources */,
 				3376A6DB1FD52B580043FC53 /* usbToWifiWarnList.m in Sources */,

@@ -24,6 +24,7 @@
     NSInteger allStatue=0;           //0正常状态     1离线状态    2故障
     NSString*allStatueString=[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"lost"]];
   
+    
      int L1=[[NSString stringWithFormat:@"%d",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"uwSysWorkMode"]] intValue]] intValue];
     if ([allStatueString containsString:@"lost"]) {
         allStatue=1;

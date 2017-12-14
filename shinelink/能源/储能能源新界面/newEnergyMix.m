@@ -14,13 +14,15 @@
 #import "EditGraphView.h"
 #import "newEnergyDetailData.h"
 #import "newEnergyDetaiTwo.h"
+#import "MCBarChartView.h"
+
 
 #define viewB  ScreenProH*50
 #define viewAA  ScreenProH*100
 #define SPF5000H  ScreenProH*80
 #define ScreenProW  HEIGHT_SIZE/2.38
 #define ScreenProH  NOW_SIZE/2.34
-@interface newEnergyMix ()<EditGraphViewDelegate,UIScrollViewDelegate,UIPickerViewDelegate>
+@interface newEnergyMix ()<EditGraphViewDelegate,UIScrollViewDelegate,UIPickerViewDelegate,MCBarChartViewDataSource, MCBarChartViewDelegate,UIPickerViewDelegate, UIPickerViewDataSource>
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSString *pcsNetPlantID;
 @property (nonatomic, strong) NSString *pcsNetStorageSN;
@@ -58,6 +60,28 @@
 @property (nonatomic, strong) NSMutableArray *boolArray;
 @property (nonatomic, strong) NSArray *colorArray;
 @property (nonatomic, strong) NSArray *UncolorArray;
+
+@property (strong, nonatomic) NSArray *Xtitles2;
+@property (strong, nonatomic) NSMutableArray *dataSource2;
+@property (strong, nonatomic) MCBarChartView *barChartView2;
+@property (strong, nonatomic)UILabel* unitLable;
+
+
+@property (nonatomic, strong) NSDateFormatter *monthFormatter;
+@property (nonatomic, strong) NSDateFormatter *yearFormatter;
+@property (nonatomic, strong) NSDateFormatter *onlyMonthFormatter;
+
+@property (nonatomic, strong) NSMutableArray *yearsArr;
+@property (nonatomic, strong) NSMutableArray *monthArr;
+@property (nonatomic, strong) NSMutableArray *barColorArray;
+
+@property (nonatomic, strong) UIPickerView *monthPicker;
+@property (nonatomic, strong) UIPickerView *yearPicker;
+@property (nonatomic, strong) NSString *currentMonth;
+@property (nonatomic, strong) NSString *currentYear;
+@property (nonatomic, strong)UIView *buttonBackView;
+@property (nonatomic, strong)UIView *threeView;
+
 @end
 
 static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
@@ -70,6 +94,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     //  [self prefersStatusBarHidden];
     //    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
     self.tabBarController.tabBar.hidden = NO;
+    
+        [self initData];
     
     NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     NSString *isNew=[ud objectForKey:@"isNewEnergy"];
@@ -246,7 +272,12 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         button.backgroundColor=_UncolorArray[Num];
     }
     
-    [self initUILineChart];
+    if ([_type isEqualToString:@"0"]) {
+            [self initUILineChart];
+    }else{
+        [self initBarChart];
+    }
+
     
     
 }
@@ -280,12 +311,12 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [V1 addSubview:VM2];
     
     
-    UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(225*ScreenProW, 550*ScreenProH-viewAA+SPF5000H, 300*ScreenProW, ScreenProH*60)];
-    V2.layer.borderWidth=ScreenProH*1;
-    V2.layer.cornerRadius=ScreenProH*60/2.5;
-    V2.layer.borderColor=COLOR(154, 154, 154, 1).CGColor;
-    V2.userInteractionEnabled = YES;
-    [_scrollView addSubview:V2];
+    _buttonBackView=[[UIView alloc]initWithFrame:CGRectMake(225*ScreenProW, 550*ScreenProH-viewAA+SPF5000H, 300*ScreenProW, ScreenProH*60)];
+    _buttonBackView.layer.borderWidth=ScreenProH*1;
+    _buttonBackView.layer.cornerRadius=ScreenProH*60/2.5;
+    _buttonBackView.layer.borderColor=COLOR(154, 154, 154, 1).CGColor;
+    _buttonBackView.userInteractionEnabled = YES;
+    [_scrollView addSubview:_buttonBackView];
     
     self.lastButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.lastButton.frame = CGRectMake(15*ScreenProW, 12.5*ScreenProH, 30*ScreenProH, 35*ScreenProH);
@@ -293,30 +324,40 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     //self.lastButton.imageEdgeInsets = UIEdgeInsetsMake(7*NOW_SIZE, 7*HEIGHT_SIZE, 7*NOW_SIZE, 7*HEIGHT_SIZE);
     self.lastButton.tag = 1004;
     [self.lastButton addTarget:self action:@selector(lastDate:) forControlEvents:UIControlEventTouchUpInside];
-    [V2 addSubview:self.lastButton];
+    [_buttonBackView addSubview:self.lastButton];
     
     self.nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.nextButton.frame = CGRectMake(CGRectGetWidth(V2.frame) - 15*ScreenProW-30*ScreenProH, 12.5*ScreenProH, 30*ScreenProH, 35*ScreenProH);
+    self.nextButton.frame = CGRectMake(CGRectGetWidth(_buttonBackView.frame) - 15*ScreenProW-30*ScreenProH, 12.5*ScreenProH, 30*ScreenProH, 35*ScreenProH);
     [self.nextButton setImage:IMAGE(@"date_right_icon.png") forState:UIControlStateNormal];
     //self.nextButton.imageEdgeInsets = UIEdgeInsetsMake(7*NOW_SIZE, 7*HEIGHT_SIZE, 7*NOW_SIZE, 7*HEIGHT_SIZE);
     self.nextButton.tag = 1005;
     [self.nextButton addTarget:self action:@selector(nextDate:) forControlEvents:UIControlEventTouchUpInside];
-    [V2 addSubview:self.nextButton];
+    [_buttonBackView addSubview:self.nextButton];
     
     self.dayFormatter = [[NSDateFormatter alloc] init];
     [self.dayFormatter setDateFormat:@"yyyy-MM-dd"];
+    self.monthFormatter = [[NSDateFormatter alloc] init];
+    [self.monthFormatter setDateFormat:@"yyyy-MM"];
+    self.yearFormatter = [[NSDateFormatter alloc] init];
+    [self.yearFormatter setDateFormat:@"yyyy"];
+    self.onlyMonthFormatter = [[NSDateFormatter alloc] init];
+    [self.onlyMonthFormatter setDateFormat:@"MM"];
+    self.currentDay = [_dayFormatter stringFromDate:[NSDate date]];
+    self.currentMonth = [_monthFormatter stringFromDate:[NSDate date]];
+    self.currentYear = [_yearFormatter stringFromDate:[NSDate date]];
+    
     
     self.datePickerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.datePickerButton.frame = CGRectMake(30*ScreenProW+30*ScreenProH, 0, CGRectGetWidth(V2.frame) -( 30*ScreenProW+30*ScreenProH)*2, 60*ScreenProH);
+    self.datePickerButton.frame = CGRectMake(30*ScreenProW+30*ScreenProH, 0, CGRectGetWidth(_buttonBackView.frame) -( 30*ScreenProW+30*ScreenProH)*2, 60*ScreenProH);
     self.currentDay = [_dayFormatter stringFromDate:[NSDate date]];
     [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
     [self.datePickerButton setTitleColor:COLOR(102, 102, 102, 1) forState:UIControlStateNormal];
     self.datePickerButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.datePickerButton.titleLabel.font = [UIFont boldSystemFontOfSize:28*ScreenProH];
     [self.datePickerButton addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
-    [V2 addSubview:self.datePickerButton];
+    [_buttonBackView addSubview:self.datePickerButton];
     
-    _typeDic=@{@"1":root_dangri,@"2":root_leiji};
+    _typeDic=@{@"1":root_DAY,@"2":root_MONTH,@"3":root_YEAR,@"4":root_TOTAL};
     _selectButton=[[UIButton alloc]initWithFrame:CGRectMake(580*ScreenProW, 550*ScreenProH-viewAA+SPF5000H, 125*ScreenProW, 60*ScreenProH)];
     [_selectButton setTitle:_typeDic[@"1"] forState:0];
     //    _selectButton.layer.borderWidth=ScreenProH*1;
@@ -335,13 +376,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_scrollView addSubview:selectView];
     
     
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProW, 600*ScreenProH-viewAA+SPF5000H, 100*ScreenProW, 40*ScreenProH)];
-    VL2.font=[UIFont systemFontOfSize:25*ScreenProH];
-    VL2.textAlignment = NSTextAlignmentLeft;
+    _unitLable= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProW, 600*ScreenProH-viewAA+SPF5000H, 100*ScreenProW, 40*ScreenProH)];
+    _unitLable.font=[UIFont systemFontOfSize:25*ScreenProH];
+    _unitLable.textAlignment = NSTextAlignmentLeft;
     NSString *N=@"W";
-    VL2.text=N;
-    VL2.textColor =COLOR(51, 51, 51, 1);
-    [_scrollView addSubview:VL2];
+    _unitLable.text=N;
+    _unitLable.textColor =COLOR(51, 51, 51, 1);
+    [_scrollView addSubview:_unitLable];
     
     _type=@"0";
     [self getNetTwo:_currentDay];
@@ -353,9 +394,16 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 -(void)getDetail{
     if (_toDetaiDataArray.count>0) {
         newEnergyDetailData *registerRoot=[[newEnergyDetailData alloc]init];
-        registerRoot.lableNameArray=@[root_shijian,root_guangfu_chanchu_1,root_yongdian_xiaohao,root_MIX_214,root_MIX_215];
+        if ([_type isEqualToString:@"0"]) {
+                  registerRoot.lableNameArray=@[root_shijian,root_guangfu_chanchu_1,root_yongdian_xiaohao,root_MIX_214,root_MIX_215];
+        }else{
+             registerRoot.lableNameArray=@[root_riqi,root_guangfu_chanchu_1,root_yongdian_xiaohao,root_MIX_214,root_MIX_215];
+        }
+  
         registerRoot.getDetaiDataArray=[NSMutableArray arrayWithArray:_toDetaiDataArray];
         [self.navigationController pushViewController:registerRoot animated:YES];
+    }else{
+        [self showToastViewWithTitle:root_Device_head_188];
     }
     
     
@@ -384,7 +432,16 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [_editGraph removeFromSuperview];
         NSString *string=[NSString stringWithFormat:@"%d",1];
         [_selectButton setTitle:_typeDic[string] forState:0];
-        _type=[NSString stringWithFormat:@"%d",0];;
+        _type=[NSString stringWithFormat:@"%d",0];
+        _unitLable.text=@"W";
+        [UIView animateWithDuration:0.3f animations:^{
+            self.buttonBackView.alpha =1;
+        }];
+        if (!self.currentDay) {
+            self.currentDay = [_dayFormatter stringFromDate:[NSDate date]];
+        }
+        [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
+        
         [self getNetTwo:_currentDay];
     }
     
@@ -393,7 +450,50 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         NSString *string=[NSString stringWithFormat:@"%d",2];
         [_selectButton setTitle:_typeDic[string] forState:0];
         _type=[NSString stringWithFormat:@"%d",1];
-        [self getNetTwo:_currentDay];
+         _unitLable.text=@"kWh";
+        [UIView animateWithDuration:0.3f animations:^{
+            self.buttonBackView.alpha =1;
+        }];
+        if (!self.currentMonth) {
+            self.currentMonth = [_monthFormatter stringFromDate:[NSDate date]];
+        }
+        [self.datePickerButton setTitle:self.currentMonth forState:UIControlStateNormal];
+        
+        [self getNetTwo:_currentMonth];
+    }
+    
+    if (row==3) {
+        [_editGraph removeFromSuperview];
+        NSString *string=[NSString stringWithFormat:@"%d",3];
+        [_selectButton setTitle:_typeDic[string] forState:0];
+        _type=[NSString stringWithFormat:@"%d",2];
+          _unitLable.text=@"kWh";
+        [UIView animateWithDuration:0.3f animations:^{
+            self.buttonBackView.alpha =1;
+        }];
+        if (!self.currentYear) {
+            self.currentYear = [_yearFormatter stringFromDate:[NSDate date]];
+        }
+        [self.datePickerButton setTitle:self.currentYear forState:UIControlStateNormal];
+        
+        [self getNetTwo:_currentYear];
+    }
+    
+    if (row==4) {
+        [_editGraph removeFromSuperview];
+        NSString *string=[NSString stringWithFormat:@"%d",4];
+        [_selectButton setTitle:_typeDic[string] forState:0];
+        _type=[NSString stringWithFormat:@"%d",3];
+          _unitLable.text=@"kWh";
+        [UIView animateWithDuration:0.3f animations:^{
+            self.buttonBackView.alpha =0;
+        }];
+        if (!self.currentYear) {
+            self.currentYear = [_yearFormatter stringFromDate:[NSDate date]];
+        }
+        [self.datePickerButton setTitle:self.currentYear forState:UIControlStateNormal];
+        
+        [self getNetTwo:_currentYear];
     }
     
 }
@@ -452,7 +552,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL2.textAlignment = NSTextAlignmentCenter;
     NSString *V2N1=root_guangfu_chanchu_1;
-    NSString *V2N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eChargeTotal"] floatValue]];
+    NSString *V2N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eCharge"] floatValue]];
     NSString *V2LableName=[NSString stringWithFormat:@"A-%@:%@",V2N1,V2N2];
     VL2.text=V2LableName;
     VL2.textColor =COLOR(102, 102, 102, 1);
@@ -462,7 +562,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL3.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL3.textAlignment = NSTextAlignmentCenter;
     NSString *V3N1=root_yongdian_xiaohao;
-    NSString *V3N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eDisChargeTotal"] floatValue]];
+    NSString *V3N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"elocalLoad"] floatValue]];
     NSString *V3LableName=[NSString stringWithFormat:@"B-%@:%@",V3N1,V3N2];
     VL3.text=V3LableName;
     VL3.textColor =COLOR(102, 102, 102, 1);
@@ -659,37 +759,42 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 }
 
 -(void)initUiThree{
-    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 1730*ScreenProH-viewAA+viewB+SPF5000H, SCREEN_Width, ScreenProH*60)];
-    [_scrollView addSubview:V1];
+    if (!_threeView) {
+        _threeView=[[UIView alloc]initWithFrame:CGRectMake(0, 1730*ScreenProH-viewAA+viewB+SPF5000H, SCREEN_Width, ScreenProH*60)];
+        [_scrollView addSubview:_threeView];
+        UIView *V11=[[UIView alloc]initWithFrame:CGRectMake(30*ScreenProW, 1730*ScreenProH-viewAA+viewB+ScreenProH*60+SPF5000H, SCREEN_Width-60*ScreenProW, ScreenProH*1)];
+        V11.backgroundColor=COLOR(222, 222, 222, 1);
+        [_scrollView addSubview:V11];
+        
+        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(40*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
+        [VM1 setImage:[UIImage imageNamed:@"sp_icon_e.png"]];
+        [_threeView addSubview:VM1];
+        
+        UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(90*ScreenProW, 0*ScreenProH, 300*ScreenProH, ScreenProH*60)];
+        VL1.font=[UIFont systemFontOfSize:28*ScreenProH];
+        VL1.textAlignment = NSTextAlignmentLeft;
+        VL1.text=root_MIX_218;
+        VL1.textColor =COLOR(51, 51, 51, 1);;
+        [_threeView addSubview:VL1];
+        
+        UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(660*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
+        [VM2 setImage:[UIImage imageNamed:@"note.png"]];
+        VM2.userInteractionEnabled=YES;
+        UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail2)];
+        [VM2 addGestureRecognizer:demo1];
+        [_threeView addSubview:VM2];
+        
+        UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(43*ScreenProW, 1800*ScreenProH-viewAA+viewB+SPF5000H, SCREEN_Width, ScreenProH*30)];
+        VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
+        VL2.textAlignment = NSTextAlignmentLeft;
+        VL2.text=@"%";
+        VL2.textColor =COLOR(51, 51, 51, 1);
+        [_scrollView addSubview:VL2];
+        
+    }
+   
     
-    UIView *V11=[[UIView alloc]initWithFrame:CGRectMake(30*ScreenProW, 1730*ScreenProH-viewAA+viewB+ScreenProH*60+SPF5000H, SCREEN_Width-60*ScreenProW, ScreenProH*1)];
-    V11.backgroundColor=COLOR(222, 222, 222, 1);
-    [_scrollView addSubview:V11];
-    
-    UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(40*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
-    [VM1 setImage:[UIImage imageNamed:@"sp_icon_e.png"]];
-    [V1 addSubview:VM1];
-    
-    UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(90*ScreenProW, 0*ScreenProH, 300*ScreenProH, ScreenProH*60)];
-    VL1.font=[UIFont systemFontOfSize:28*ScreenProH];
-    VL1.textAlignment = NSTextAlignmentLeft;
-    VL1.text=root_MIX_218;
-    VL1.textColor =COLOR(51, 51, 51, 1);;
-    [V1 addSubview:VL1];
-    
-    UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(660*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
-    [VM2 setImage:[UIImage imageNamed:@"note.png"]];
-    VM2.userInteractionEnabled=YES;
-    UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail2)];
-    [VM2 addGestureRecognizer:demo1];
-    [V1 addSubview:VM2];
-    
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(43*ScreenProW, 1800*ScreenProH-viewAA+viewB+SPF5000H, SCREEN_Width, ScreenProH*30)];
-    VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
-    VL2.textAlignment = NSTextAlignmentLeft;
-    VL2.text=@"%";
-    VL2.textColor =COLOR(51, 51, 51, 1);
-    [_scrollView addSubview:VL2];
+   
     
     if (_dataFiveDic.count>0) {
         [self initUILineChart2];
@@ -765,7 +870,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     _toDetaiDataArray=[NSMutableArray arrayWithObjects:xArray, Y5,Y6,Y7,Y8,nil];
     
-    
+  
     
     if (xArray.count>2) {
         for (int i=0; i<xArray.count-2; i++) {
@@ -865,6 +970,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     NSArray *valueArray0=@[Y1,Y2,Y3,Y4];
     NSArray *valueLineColorArray0=@[COLOR(255, 217, 35, 1),COLOR(54, 193, 118, 1),COLOR(139, 128, 255, 1),COLOR(14, 239, 246, 1)];
+      //ppv   sysOut   pacToUser  userLoad
     float A=0.5;
     NSArray *contentFillColorArray0=@[COLOR(255, 217, 35, A),COLOR(54, 193, 118, A),COLOR(139, 128, 255, A),COLOR(14, 239, 246, 1)];
     
@@ -886,6 +992,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     if (_lineChart) {
         [_lineChart removeFromSuperview];
         _lineChart=nil;
+    }
+    if (_barChartView2) {
+        [_barChartView2 removeFromSuperview];
+        _barChartView2=nil;
     }
     
     _lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 620*ScreenProH-viewAA+SPF5000H, 740*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
@@ -1224,6 +1334,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 -(void)getNetTwo:(NSString*)time{
     
+//    time=@"2017-12";
+//    _type=@"1";
     [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:@{@"plantId":_pcsNetPlantID,@"mixId":_pcsNetStorageSN,@"date":time,@"type":_type} paramarsSite:@"/newMixApi.do?op=getEnergyProdAndCons" sucessBlock:^(id content) {
         [self hideProgressView];
@@ -1242,20 +1354,34 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 
                 if (jsonObj[@"obj"]==nil || jsonObj[@"obj"]==NULL||([jsonObj[@"obj"] isEqual:@""] )) {
                 }else{
-                    _dataTwoDic=[NSDictionary dictionaryWithDictionary:jsonObj[@"obj"][@"chartData"]];
-                    _dataTwoNetAllDic=[NSDictionary dictionaryWithDictionary:jsonObj[@"obj"]];
-                    
+                     _dataTwoNetAllDic=[NSDictionary dictionaryWithDictionary:jsonObj[@"obj"]];
+                        _dataTwoDic=[NSDictionary dictionaryWithDictionary:jsonObj[@"obj"][@"chartData"]];
+                
                     [self getUITwoLable];
                     
                 }
-                if (_dataTwoDic.count>0) {
-                    [self initUILineChart];
-                }else{
-                    NSDictionary *A=@{@"pacToUser":@"0",@"ppv":@"0",@"sysOut":@"0",@"userLoad":@"0"};
-                    _dataTwoDic=[NSDictionary dictionaryWithObject:A forKey:@"0:00"];
-                    [self initUILineChart];
-                }
+          
+                _toDetaiDataArray=[NSMutableArray array];
                 
+                if (_dataTwoDic.count==0) {
+                    if (_lineChart) {
+                        [_lineChart removeFromSuperview];
+                        _lineChart=nil;
+                    }
+                    if (_barChartView2) {
+                        [_barChartView2 removeFromSuperview];
+                        _barChartView2=nil;
+                    }
+                    return ;
+                }
+           
+                
+                if ([_type isEqualToString:@"0"]) {
+                    
+            [self initUILineChart];
+                }else{
+                    [self initBarChart];
+                }
                 
             }
             
@@ -1267,6 +1393,212 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }];
     
 }
+
+
+-(void)initBarChart{
+    NSArray *pacToUserArray=[NSArray arrayWithArray:[_dataTwoDic objectForKey:@"pacToUser"]];
+    NSArray *ppvArray=[NSArray arrayWithArray:[_dataTwoDic objectForKey:@"ppv"]];
+    NSArray *sysOutArray=[NSArray arrayWithArray:[_dataTwoDic objectForKey:@"sysOut"]];
+     NSArray *userLoadArray=[NSArray arrayWithArray:[_dataTwoDic objectForKey:@"userLoad"]];
+    
+    NSNumber *maxyAxisValue1 = [pacToUserArray valueForKeyPath:@"@max.floatValue"];
+       NSNumber *maxyAxisValue2 = [ppvArray valueForKeyPath:@"@max.floatValue"];
+       NSNumber *maxyAxisValue3 = [sysOutArray valueForKeyPath:@"@max.floatValue"];
+       NSNumber *maxyAxisValue4 = [userLoadArray valueForKeyPath:@"@max.floatValue"];
+    NSArray *maxArray=@[maxyAxisValue1,maxyAxisValue2,maxyAxisValue3,maxyAxisValue4];
+      NSNumber *maxyAxisValue = [maxArray valueForKeyPath:@"@max.floatValue"];
+    
+    if ([maxyAxisValue integerValue]==0) {
+            maxyAxisValue=[NSNumber numberWithInt:100];
+    }else{
+        float getY0=[maxyAxisValue floatValue]/6;
+        int getY1=ceil(getY0);
+        if ((0<getY1)&&(getY1<10)) {
+            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+        }else if ((10<getY1)&&(getY1<100)) {
+            getY1=ceil(getY0/5)*5;
+            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+        }else if ((100<getY1)&&(getY1<1000)) {
+            getY1=ceil(getY0/50)*50;
+            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+        }else if ((1000<getY1)&&(getY1<10000)) {
+            getY1=ceil(getY0/500)*500;
+            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+        }else if ((10000<getY1)&&(getY1<100000)) {
+            getY1=ceil(getY0/5000)*5000;
+            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+        }
+    }
+
+    //ppv   sysOut   pacToUser  userLoad
+    NSMutableArray *allArrayY=[NSMutableArray array];
+       NSMutableArray *allArrayX=[NSMutableArray array];
+  BOOL boolValue0=[_boolArray[0] boolValue];  BOOL boolValue1=[_boolArray[1] boolValue];
+    BOOL boolValue2=[_boolArray[2] boolValue];  BOOL boolValue3=[_boolArray[3] boolValue];
+        for (int i=0; i<ppvArray.count; i++) {
+            NSMutableArray *newArray=[NSMutableArray array];
+            if (boolValue0) {
+                if (ppvArray.count>i) {
+                    [newArray addObject:ppvArray[i]];
+                }else{
+                    [newArray addObject:@"0"];
+                }
+            }
+            if (boolValue1) {
+                if (sysOutArray.count>i) {
+                    [newArray addObject:sysOutArray[i]];
+                }else{
+                    [newArray addObject:@"0"];
+                }
+            }
+            if (boolValue2) {
+                if (pacToUserArray.count>i) {
+                    [newArray addObject:pacToUserArray[i]];
+                }else{
+                    [newArray addObject:@"0"];
+                }
+            }
+            if (boolValue3) {
+                if (userLoadArray.count>i) {
+                    [newArray addObject:userLoadArray[i]];
+                }else{
+                    [newArray addObject:@"0"];
+                }
+            }
+            
+            
+        
+                   [allArrayY addObject:newArray];
+                if ([_type isEqualToString:@"1"] || [_type isEqualToString:@"2"]) {
+                    [allArrayX addObject:[NSString stringWithFormat:@"%d",i+1]];
+                }
+                if ([_type isEqualToString:@"3"] ) {
+                    NSString *yearS= [_yearFormatter stringFromDate:[NSDate date]];
+                    NSInteger Num=ppvArray.count;
+                    [allArrayX addObject:[NSString stringWithFormat:@"%ld",[yearS integerValue]-Num+1+i]];
+                }
+          
+        }
+    
+
+
+    
+ _toDetaiDataArray=[NSMutableArray arrayWithObjects:allArrayX, ppvArray,sysOutArray,pacToUserArray,userLoadArray,nil];
+    
+    
+NSArray *valueLineColorArray000=@[COLOR(255, 217, 35, 1),COLOR(54, 193, 118, 1),COLOR(139, 128, 255, 1),COLOR(14, 239, 246, 1)];
+    //ppv   sysOut   pacToUser  userLoad
+
+    _barColorArray=[NSMutableArray array];
+    for (int i=0; i<_boolArray.count; i++) {
+        BOOL value=[_boolArray[i] boolValue];
+        if (value) {
+            [_barColorArray addObject:valueLineColorArray000[i]];
+        }
+    }
+    
+    if (!boolValue0 && !boolValue1 && !boolValue2  && !boolValue3) {
+        if (_barChartView2) {
+            [_barChartView2 removeFromSuperview];
+            _barChartView2=nil;
+        }
+        return;
+    }
+    
+    
+    if (_lineChart) {
+        [_lineChart removeFromSuperview];
+        _lineChart=nil;
+    }
+    _Xtitles2=[NSArray arrayWithArray:allArrayX];
+    _dataSource2=[NSMutableArray arrayWithArray:allArrayY];
+
+    
+    if (!_barChartView2) {
+        _barChartView2 = [[MCBarChartView alloc] initWithFrame:CGRectMake(0, 620*ScreenProH-viewAA+SPF5000H, [UIScreen mainScreen].bounds.size.width,  530*ScreenProH)];
+        _barChartView2.tag = 222;
+        _barChartView2.dataSource = self;
+        _barChartView2.delegate = self;
+          [_scrollView addSubview:_barChartView2];
+    }
+
+    _barChartView2.maxValue = maxyAxisValue;
+    _barChartView2.unitOfYAxis = @"";
+    _barChartView2.colorOfXAxis =COLOR(153, 153, 153, 1);
+    _barChartView2.colorOfXText = COLOR(102, 102, 102, 1);
+    _barChartView2.colorOfYAxis = COLOR(153, 153, 153, 1);
+    _barChartView2.colorOfYText = COLOR(102, 102, 102, 1);
+  
+    
+    [_barChartView2 reloadDataWithAnimate:YES];
+    
+    
+    
+}
+
+
+- (NSInteger)numberOfSectionsInBarChartView:(MCBarChartView *)barChartView {
+
+        return [_dataSource2 count];
+ 
+    
+}
+
+
+- (NSInteger)barChartView:(MCBarChartView *)barChartView numberOfBarsInSection:(NSInteger)section {
+    if (barChartView.tag == 111) {
+        return 1;
+    } else {
+        return [_dataSource2[section] count];
+    }
+}
+
+- (id)barChartView:(MCBarChartView *)barChartView valueOfBarInSection:(NSInteger)section index:(NSInteger)index {
+
+        return _dataSource2[section][index];
+  
+}
+
+//NSArray *valueLineColorArray0=@[COLOR(255, 217, 35, 1),COLOR(54, 193, 118, 1),COLOR(139, 128, 255, 1),COLOR(14, 239, 246, 1)];
+//ppv   sysOut   pacToUser  userLoad
+
+- (UIColor *)barChartView:(MCBarChartView *)barChartView colorOfBarInSection:(NSInteger)section index:(NSInteger)index {
+  
+    if (_barColorArray.count>index) {
+        return _barColorArray[index];
+    }else{
+        return COLOR(255, 217, 35, 1);
+    }
+    
+    
+   
+}
+
+- (NSString *)barChartView:(MCBarChartView *)barChartView titleOfBarInSection:(NSInteger)section {
+    return _Xtitles2[section];
+}
+
+
+
+- (CGFloat)barWidthInBarChartView:(MCBarChartView *)barChartView {
+    NSInteger Num= _barColorArray.count;
+    float W0=10*NOW_SIZE;
+    if ([_type isEqualToString:@"3"]) {
+        W0=30*NOW_SIZE;
+    }
+    float W=W0/Num;
+
+           return W;
+
+}
+
+- (CGFloat)paddingForSectionInBarChartView:(MCBarChartView *)barChartView {
+
+        return 12;
+ 
+}
+
+
 
 -(void)getNetThree{
     // NSString *time=@"2017-03-28";
@@ -1303,116 +1635,6 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 
 
-//- (BOOL)prefersStatusBarHidden
-//{
-//    NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
-//    NSString *isNew=[ud objectForKey:@"isNewEnergy"];
-//    if ([isNew isEqualToString:@"N"]) {
-//        return NO;//隐藏为YES，显示为NO
-//    }else{
-//        return  YES;
-//    }
-//
-//}
-
-- (void)pickDate {
-    self.lastButton.enabled = NO;
-    self.nextButton.enabled = NO;
-    
-    
-    //选择日
-    NSDate *currentDayDate = [self.dayFormatter dateFromString:self.currentDay];
-    
-    if (!self.dayPicker) {
-        self.dayPicker = [[UIDatePicker alloc] init];
-        self.dayPicker.backgroundColor = [UIColor whiteColor];
-        self.dayPicker.datePickerMode = UIDatePickerModeDate;
-        self.dayPicker.date = currentDayDate;
-        self.dayPicker.frame = CGRectMake(0, 40*HEIGHT_SIZE + 0*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
-        [self.view addSubview:self.dayPicker];
-    } else {
-        [UIView animateWithDuration:0.3f animations:^{
-            self.dayPicker.date = currentDayDate;
-            self.dayPicker.alpha = 1;
-            self.dayPicker.frame = CGRectMake(0, 40*HEIGHT_SIZE + 0*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
-            [self.view addSubview:self.dayPicker];
-        }];
-    }
-    
-    self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 40*HEIGHT_SIZE + 0*HEIGHT_SIZE + 216*HEIGHT_SIZE+190*HEIGHT_SIZE, SCREEN_Width, 30*HEIGHT_SIZE)];
-    self.toolBar.barStyle = UIBarStyleDefault;
-    self.toolBar.barTintColor = MainColor;
-    [self.view addSubview:self.toolBar];
-    UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:root_finish style:UIBarButtonItemStyleDone target:self action:@selector(completeSelectDate:)];
-    [doneButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:14*HEIGHT_SIZE],NSFontAttributeName, nil] forState:UIControlStateNormal];
-    doneButton.tintColor = [UIColor whiteColor];
-    self.toolBar.items = @[spaceButton, doneButton];
-    
-}
-
-
-
-- (void)completeSelectDate:(UIToolbar *)toolBar {
-    self.lastButton.enabled = YES;
-    self.nextButton.enabled = YES;
-    
-    if (self.dayPicker) {
-        self.currentDay = [self.dayFormatter stringFromDate:self.dayPicker.date];
-        [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
-        [self getNetTwo:_currentDay];
-        [UIView animateWithDuration:0.3f animations:^{
-            self.dayPicker.alpha = 0;
-            self.toolBar.alpha = 0;
-            self.dayPicker.frame = CGRectMake(0, (-216 - 64 - 40-190)*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
-            self.toolBar.frame = CGRectMake(0,( -216 - 64 - 40-190)*HEIGHT_SIZE - 44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
-        } completion:^(BOOL finished) {
-            [self.dayPicker removeFromSuperview];
-            [self.toolBar removeFromSuperview];
-        }];
-        
-    }
-    
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (self.dayPicker) {
-        [UIView animateWithDuration:0.3f animations:^{
-            self.dayPicker.alpha = 0;
-            self.toolBar.alpha = 0;
-            self.dayPicker.frame = CGRectMake(0, (-216 - 64 - 40-190)*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
-            self.toolBar.frame = CGRectMake(0, (-216 - 64 - 40-190)*HEIGHT_SIZE - 44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
-        } completion:^(BOOL finished) {
-            [self.dayPicker removeFromSuperview];
-            [self.toolBar removeFromSuperview];
-            self.lastButton.enabled = YES;
-            self.nextButton.enabled = YES;
-        }];
-    }
-}
-
-
-- (void)lastDate:(UIButton *)sender {
-    
-    NSDate *currentDayDate = [self.dayFormatter dateFromString:self.currentDay];
-    NSDate *yesterday = [currentDayDate dateByAddingTimeInterval: -secondsPerDay];
-    self.currentDay = [self.dayFormatter stringFromDate:yesterday];
-    [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
-    [self getNetTwo:_currentDay];
-    [self getNetThree];
-}
-
-- (void)nextDate:(UIButton *)sender {
-    
-    NSDate *currentDayDate = [self.dayFormatter dateFromString:self.currentDay];
-    NSDate *tomorrow = [currentDayDate dateByAddingTimeInterval: secondsPerDay];
-    self.currentDay = [self.dayFormatter stringFromDate:tomorrow];
-    [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
-    
-    [self getNetTwo:_currentDay];
-    [self getNetThree];
-}
-
 
 
 -(NSArray*)getCircleNum:(NSString*)A1 A2:(NSString*)A2{
@@ -1432,6 +1654,469 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 }
 
 
+- (void)initData {
+    self.yearsArr = [NSMutableArray array];
+    for (int i = 1900; i<2100; i++) {
+        [self.yearsArr addObject:[NSString stringWithFormat:@"%d", i]];
+    }
+    
+    self.monthArr = [NSMutableArray array];
+    for (int i = 1; i<13; i++) {
+        [self.monthArr addObject:[NSString stringWithFormat:@"%02d", i]];
+    }
+}
+
+#pragma mark - 上一个时间  下一个时间  按钮事件
+//上一个时间
+- (void)lastDate:(UIButton *)sender {
+    //日
+    if ([_type isEqualToString:@"0"]) {
+        NSDate *currentDayDate = [self.dayFormatter dateFromString:self.currentDay];
+        NSDate *yesterday = [currentDayDate dateByAddingTimeInterval: -secondsPerDay];
+        
+        self.currentDay = [self.dayFormatter stringFromDate:yesterday];
+        [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
+    
+        [self getNetTwo:_currentDay];
+          [self getNetThree];
+    }
+    
+    //月
+    if ([_type isEqualToString:@"1"]) {
+        NSDate *currentYearDate = [self.monthFormatter dateFromString:self.currentMonth];
+        NSString *currentYearStr = [self.yearFormatter stringFromDate:currentYearDate];
+        NSString *currentMonthStr = [self.onlyMonthFormatter stringFromDate:currentYearDate];
+        
+        
+        for (int i = 0; i<self.yearsArr.count; i++) {
+            if ([_yearsArr[i] integerValue] == [currentYearStr integerValue]) {
+                
+                for (int j = 0; j<self.monthArr.count; j++) {
+                    if ([_monthArr[j] integerValue] == [currentMonthStr integerValue]) {
+                        if (i > 0 && j > 0) {
+                            self.currentMonth = [NSString stringWithFormat:@"%@-%@", _yearsArr[i], _monthArr[j-1]];
+                            [self.datePickerButton setTitle:self.currentMonth forState:UIControlStateNormal];
+                        
+                             [self getNetTwo:self.currentMonth ];
+                        }
+                        
+                        if (i > 0 && j == 0) {
+                            self.currentMonth = [NSString stringWithFormat:@"%@-%@", _yearsArr[i-1], _monthArr[_monthArr.count - 1]];
+                            [self.datePickerButton setTitle:self.currentMonth forState:UIControlStateNormal];
+                            [self getNetTwo:self.currentMonth ];
+                        }
+                        
+                        break;
+                    }
+                }
+                
+                break;
+            }
+        }
+        
+        
+        
+    }
+    
+    //年
+    if ([_type isEqualToString:@"2"]) {
+        for (int i = 0; i<self.yearsArr.count; i++) {
+            if ([_yearsArr[i] integerValue] == [self.currentYear integerValue]) {
+                if (i > 0) {
+                    self.currentYear = _yearsArr[i-1];
+                    [self.datePickerButton setTitle:self.currentYear forState:UIControlStateNormal];
+                    [self getNetTwo:self.currentYear ];
+                }
+                break;
+            }
+        }
+    }
+}
+
+//下一个时间
+- (void)nextDate:(UIButton *)sender {
+    //日
+    if ([_type isEqualToString:@"0"]) {
+        NSDate *currentDayDate = [self.dayFormatter dateFromString:self.currentDay];
+        NSDate *tomorrow = [currentDayDate dateByAddingTimeInterval: secondsPerDay];
+        
+        NSDate *nowDate= [NSDate date];
+        NSComparisonResult result = [tomorrow compare:nowDate];
+        
+        if (result == NSOrderedDescending) {
+            
+            [self showToastViewWithTitle:root_wufa_chakan_weilai_shuju];
+            return;
+        }else{
+            self.currentDay = [self.dayFormatter stringFromDate:tomorrow];
+            [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
+            [self getNetTwo:_currentDay];
+            [self getNetThree];
+        }
+        
+    }
+    
+    
+    //月
+    if ([_type isEqualToString:@"1"]) {
+        NSDate *currentYearDate = [self.monthFormatter dateFromString:self.currentMonth];
+        NSString *currentYearStr = [self.yearFormatter stringFromDate:currentYearDate];
+        NSString *currentMonthStr = [self.onlyMonthFormatter stringFromDate:currentYearDate];
+        
+        NSDate *nowDate= [NSDate date];
+        
+        for (int i = 0; i<self.yearsArr.count; i++) {
+            if ([_yearsArr[i] integerValue] == [currentYearStr integerValue]) {
+                
+                for (int j = 0; j<self.monthArr.count; j++) {
+                    if ([_monthArr[j] integerValue] == [currentMonthStr integerValue]) {
+                        if (i < _yearsArr.count && j < _monthArr.count-1) {
+                            NSString *monthDate=[NSString stringWithFormat:@"%@-%@", _yearsArr[i], _monthArr[j+1]];
+                            NSDate *monthDate1 = [self.monthFormatter dateFromString:monthDate];
+                            NSComparisonResult result = [monthDate1 compare:nowDate];
+                            
+                            if (result == NSOrderedDescending) {
+                                
+                                [self showToastViewWithTitle:root_wufa_chakan_weilai_shuju];
+                                return;
+                            }else{
+                                self.currentMonth = [NSString stringWithFormat:@"%@-%@", _yearsArr[i], _monthArr[j+1]];
+                                [self.datePickerButton setTitle:self.currentMonth forState:UIControlStateNormal];
+                                     [self getNetTwo:self.currentMonth ];
+                            }
+                            
+                            
+                        }
+                        
+                        if (i < _yearsArr.count && j == _monthArr.count-1) {
+                            NSString *monthDate= [NSString stringWithFormat:@"%@-%@", _yearsArr[i+1], _monthArr[0]];
+                            NSDate *monthDate1 = [self.monthFormatter dateFromString:monthDate];
+                            NSComparisonResult result = [monthDate1 compare:nowDate];
+                            
+                            if (result == NSOrderedDescending) {
+                                
+                                [self showToastViewWithTitle:root_wufa_chakan_weilai_shuju];
+                                return;
+                            }else{
+                                self.currentMonth = [NSString stringWithFormat:@"%@-%@", _yearsArr[i+1], _monthArr[0]];
+                                [self.datePickerButton setTitle:self.currentMonth forState:UIControlStateNormal];
+                                     [self getNetTwo:self.currentMonth ];
+                            }
+                            
+                            //                            self.currentMonth = [NSString stringWithFormat:@"%@-%@", _yearsArr[i+1], _monthArr[0]];
+                            //                            [self.datePickerButton setTitle:self.currentMonth forState:UIControlStateNormal];
+                            //                            [self.monthDict removeAllObjects];
+                            //                            [self requestMonthDatasWithMonthString:self.currentMonth];
+                        }
+                        
+                        break;
+                    }
+                }
+                
+                break;
+            }
+        }
+        
+        
+    }
+    
+    //年
+    if ([_type isEqualToString:@"2"]) {
+        for (int i = 0; i<self.yearsArr.count; i++) {
+            if ([_yearsArr[i] integerValue] == [self.currentYear integerValue]) {
+                if (i < _yearsArr.count) {
+                    NSDate *nowDate= [NSDate date];
+                    NSString *yearDate=_yearsArr[i+1];
+                    NSDate *monthDate1 = [self.yearFormatter dateFromString:yearDate];
+                    NSComparisonResult result = [monthDate1 compare:nowDate];
+                    
+                    if (result == NSOrderedDescending) {
+                        
+                        [self showToastViewWithTitle:root_wufa_chakan_weilai_shuju];
+                        return;
+                    }else{
+                        self.currentYear = _yearsArr[i+1];
+                        [self.datePickerButton setTitle:self.currentYear forState:UIControlStateNormal];
+                        [self getNetTwo:self.currentYear ];
+                    }
+                }
+                break;
+            }
+        }
+    }
+}
+
+
+
+#pragma mark - datePickerButton点击事件 选择时间
+- (void)pickDate {
+    self.lastButton.enabled = NO;
+    self.nextButton.enabled = NO;
+    
+    if ([_type isEqualToString:@"0"]) {
+        //选择日
+        NSDate *currentDayDate = [self.dayFormatter dateFromString:self.currentDay];
+        
+        if (!self.dayPicker) {
+            self.dayPicker = [[UIDatePicker alloc] init];
+            self.dayPicker.backgroundColor = [UIColor whiteColor];
+            self.dayPicker.datePickerMode = UIDatePickerModeDate;
+            self.dayPicker.date = currentDayDate;
+            self.dayPicker.frame = CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+            [self.view addSubview:self.dayPicker];
+        } else {
+            [UIView animateWithDuration:0.3f animations:^{
+                self.dayPicker.date = currentDayDate;
+                self.dayPicker.alpha = 1;
+                self.dayPicker.frame = CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+                [self.view addSubview:self.dayPicker];
+            }];
+        }
+    }
+    
+    if ([_type isEqualToString:@"1"]) {
+        //选择月
+        NSDate *currentMonthDate = [self.monthFormatter dateFromString:self.currentMonth];
+        NSString *currentYearStr = [self.yearFormatter stringFromDate:currentMonthDate];
+        NSString *currentMonthStr = [self.onlyMonthFormatter stringFromDate:currentMonthDate];
+        
+        if (!self.monthPicker) {
+            self.monthPicker = [[UIPickerView alloc] init];
+            self.monthPicker.backgroundColor = [UIColor whiteColor];
+            self.monthPicker.delegate = self;
+            self.monthPicker.dataSource = self;
+            self.monthPicker.frame = CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+            [self.view addSubview:self.monthPicker];
+            
+            for (int i = 0; i<self.yearsArr.count; i++) {
+                if ([_yearsArr[i] integerValue] == [currentYearStr integerValue]) {
+                    [self.monthPicker selectRow:i inComponent:0 animated:NO];
+                    break;
+                }
+            }
+            for (int i = 0; i<self.monthArr.count; i++) {
+                if ([_monthArr[i] integerValue] == [currentMonthStr integerValue]) {
+                    [self.monthPicker selectRow:i inComponent:1 animated:NO];
+                    break;
+                }
+            }
+        } else {
+            [UIView animateWithDuration:0.3f animations:^{
+                for (int i = 0; i<self.yearsArr.count; i++) {
+                    if ([_yearsArr[i] integerValue] == [currentYearStr integerValue]) {
+                        [self.monthPicker selectRow:i inComponent:0 animated:NO];
+                        break;
+                    }
+                }
+                for (int i = 0; i<self.monthArr.count; i++) {
+                    if ([_monthArr[i] integerValue] == [currentMonthStr integerValue]) {
+                        [self.monthPicker selectRow:i inComponent:1 animated:NO];
+                        break;
+                    }
+                }
+                self.monthPicker.alpha = 1;
+                self.monthPicker.frame = CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+                [self.view addSubview:self.monthPicker];
+            }];
+        }
+    }
+    
+    if ([_type isEqualToString:@"2"]) {
+        //选择年
+        if (!self.yearPicker) {
+            self.yearPicker = [[UIPickerView alloc] init];
+            self.yearPicker.backgroundColor = [UIColor whiteColor];
+            self.yearPicker.delegate = self;
+            self.yearPicker.dataSource = self;
+            self.yearPicker.frame = CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+            [self.view addSubview:self.yearPicker];
+            
+            for (int i = 0; i<self.yearsArr.count; i++) {
+                if ([_yearsArr[i] integerValue] == [self.currentYear integerValue]) {
+                    [self.yearPicker selectRow:i inComponent:0 animated:NO];
+                    break;
+                }
+            }
+        } else {
+            [UIView animateWithDuration:0.3f animations:^{
+                for (int i = 0; i<self.yearsArr.count; i++) {
+                    if ([_yearsArr[i] integerValue] == [self.currentYear integerValue]) {
+                        [self.yearPicker selectRow:i inComponent:0 animated:NO];
+                        break;
+                    }
+                }
+                self.yearPicker.alpha = 1;
+                self.yearPicker.frame = CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+                [self.view addSubview:self.yearPicker];
+            }];
+        }
+    }
+    
+    if (![_type isEqualToString:@"3"]) {
+        if (self.toolBar) {
+            [UIView animateWithDuration:0.3f animations:^{
+                self.toolBar.alpha = 1;
+                self.toolBar.frame = CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE + 216*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+                [self.view addSubview:_toolBar];
+            }];
+        } else {
+            self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 70*HEIGHT_SIZE + 0*HEIGHT_SIZE + 216*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE)];
+            self.toolBar.barStyle = UIBarStyleDefault;
+            self.toolBar.barTintColor = MainColor;
+            [self.view addSubview:self.toolBar];
+            
+            UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+            
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:root_finish style:UIBarButtonItemStyleDone target:self action:@selector(completeSelectDate:)];
+            [doneButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:14*HEIGHT_SIZE],NSFontAttributeName, nil] forState:UIControlStateNormal];
+            doneButton.tintColor = [UIColor whiteColor];
+            self.toolBar.items = @[spaceButton, doneButton];
+        }
+    }
+}
+
+#pragma mark 完成选择时间
+- (void)completeSelectDate:(UIToolbar *)toolBar {
+    self.lastButton.enabled = YES;
+    self.nextButton.enabled = YES;
+    
+    if ([_type isEqualToString:@"0"]) {
+        if (self.dayPicker) {
+            self.currentDay = [self.dayFormatter stringFromDate:self.dayPicker.date];
+            [self.datePickerButton setTitle:self.currentDay forState:UIControlStateNormal];
+            
+            [self getNetTwo:_currentDay];
+            [self getNetThree];
+            
+            [UIView animateWithDuration:0.3f animations:^{
+                self.dayPicker.alpha = 0;
+                self.toolBar.alpha = 0;
+                self.dayPicker.frame = CGRectMake(0, (-216 - 64 - 70)*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+                self.toolBar.frame = CGRectMake(0,( -216 - 64 - 70)*HEIGHT_SIZE - 44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+            } completion:^(BOOL finished) {
+                [self.dayPicker removeFromSuperview];
+                [self.toolBar removeFromSuperview];
+            }];
+            
+        }
+    }
+    
+    if ([_type isEqualToString:@"1"]) {
+        if (self.monthPicker) {
+            NSInteger rowYear = [_monthPicker selectedRowInComponent:0];
+            NSInteger rowMonth = [_monthPicker selectedRowInComponent:1];
+            self.currentMonth = [NSString stringWithFormat:@"%@-%@", _yearsArr[rowYear], _monthArr[rowMonth]];
+            [self.datePickerButton setTitle:self.currentMonth forState:UIControlStateNormal];
+            
+              [self getNetTwo:self.currentMonth];
+          
+            
+            [UIView animateWithDuration:0.3f animations:^{
+                self.dayPicker.alpha = 0;
+                self.toolBar.alpha = 0;
+                self.monthPicker.frame = CGRectMake(0, (-216 - 64 - 70)*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+                self.toolBar.frame = CGRectMake(0, (-216 - 64 - 70)*HEIGHT_SIZE- 44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+            } completion:^(BOOL finished) {
+                [self.monthPicker removeFromSuperview];
+                [self.toolBar removeFromSuperview];
+            }];
+        }
+    }
+    
+    if ([_type isEqualToString:@"2"]) {
+        if (self.yearPicker) {
+            NSInteger rowYear = [_yearPicker selectedRowInComponent:0];
+            self.currentYear = [NSString stringWithFormat:@"%@", _yearsArr[rowYear]];
+            [self.datePickerButton setTitle:self.currentYear forState:UIControlStateNormal];
+            
+                [self getNetTwo:self.currentYear];
+          
+            
+            [UIView animateWithDuration:0.3f animations:^{
+                self.dayPicker.alpha = 0;
+                self.toolBar.alpha = 0;
+                self.yearPicker.frame = CGRectMake(0, (-216 - 64 - 70)*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+                self.toolBar.frame = CGRectMake(0, (-216 - 64 - 70)*HEIGHT_SIZE - 44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+            } completion:^(BOOL finished) {
+                [self.yearPicker removeFromSuperview];
+                [self.toolBar removeFromSuperview];
+            }];
+        }
+    }
+}
+
+#pragma mark - 取消选择时间
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (self.dayPicker) {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.dayPicker.alpha = 0;
+            self.toolBar.alpha = 0;
+            self.dayPicker.frame = CGRectMake(0, (-216 - 64 - 70)*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+            self.toolBar.frame = CGRectMake(0, (-216 - 64 - 70)*HEIGHT_SIZE - 44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+        } completion:^(BOOL finished) {
+            [self.dayPicker removeFromSuperview];
+            [self.toolBar removeFromSuperview];
+            self.lastButton.enabled = YES;
+            self.nextButton.enabled = YES;
+        }];
+    }
+    
+    if (self.monthPicker) {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.monthPicker.alpha = 0;
+            self.toolBar.alpha = 0;
+            self.monthPicker.frame = CGRectMake(0, (-216 - 64 - 70)*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+            self.toolBar.frame = CGRectMake(0, (-216 - 64 - 70)*HEIGHT_SIZE - 44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+        } completion:^(BOOL finished) {
+            [self.monthPicker removeFromSuperview];
+            [self.toolBar removeFromSuperview];
+            self.lastButton.enabled = YES;
+            self.nextButton.enabled = YES;
+        }];
+    }
+    
+    if (self.yearPicker) {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.yearPicker.alpha = 0;
+            self.toolBar.alpha = 0;
+            self.yearPicker.frame = CGRectMake(0, (-216 - 64 - 70)*HEIGHT_SIZE, SCREEN_Width, 216*HEIGHT_SIZE);
+            self.toolBar.frame = CGRectMake(0, (-216 - 64 - 70)*HEIGHT_SIZE - 44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+        } completion:^(BOOL finished) {
+            [self.yearPicker removeFromSuperview];
+            [self.toolBar removeFromSuperview];
+            self.lastButton.enabled = YES;
+            self.nextButton.enabled = YES;
+        }];
+    }
+}
+
+#pragma mark - UIPickerViewDataSource & UIPickerViewDelegate
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    if (pickerView == _monthPicker) {
+        return 2;
+    }
+    return 1;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if (pickerView == _monthPicker) {
+        if (component == 0) {
+            return _yearsArr.count;
+        }
+        return _monthArr.count;
+    }
+    return _yearsArr.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    if (pickerView == _monthPicker) {
+        if (component == 0) {
+            return [NSString stringWithFormat:@"%@", _yearsArr[row]];
+        }
+        return [NSString stringWithFormat:@"%@", _monthArr[row]];
+    }
+    return [NSString stringWithFormat:@"%@", _yearsArr[row]];
+}
 
 
 
