@@ -242,7 +242,7 @@
         NSLog(@"testtest: %@", content);
         id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         if ([jsonObj[@"success"]  integerValue]==1) {
-            [self showAlertViewWithTitle:nil message:NSLocalizedString(@"Successfully modified", @"Successfully modified") cancelButtonTitle:root_Yes];
+            [self showAlertViewWithTitle:nil message:root_Successfully_modified cancelButtonTitle:root_Yes];
             [self.navigationController popViewControllerAnimated:YES];
         }else{
             if ([[jsonObj objectForKey:@"success"] integerValue] ==0) {
@@ -250,7 +250,7 @@
                     [self showAlertViewWithTitle:nil message:root_zhanghu_meiyou_quanxian cancelButtonTitle:root_Yes];
                 }
             }
-            [self showAlertViewWithTitle:nil message:NSLocalizedString(@"Modification fails", @"Modification fails") cancelButtonTitle:root_Yes];
+            [self showAlertViewWithTitle:nil message:root_Modification_fails cancelButtonTitle:root_Yes];
         }
     } failure:^(NSError *error) {
         [self hideProgressView];

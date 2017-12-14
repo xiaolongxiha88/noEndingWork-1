@@ -807,6 +807,11 @@ static NSString *statusNum = @"3";
 
 -(void)finishSet{
     
+
+//    [self showToastViewWithTitle:@"手机工单功能升级中，暂不能完成工单"];
+//    return;
+    
+    
     NSString *locationString=((UILabel*)[_scrollView viewWithTag:2000]).text;
     NSString *timeString=((UILabel*)[_scrollView viewWithTag:2001]).text;
     

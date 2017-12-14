@@ -57,7 +57,7 @@ static SNLocationManager * _manager = nil;
     
     
     CLAuthorizationStatus type = [CLLocationManager authorizationStatus];
-    if (![CLLocationManager locationServicesEnabled] || type == kCLAuthorizationStatusDenied){
+    if (![CLLocationManager locationServicesEnabled] || type == kCLAuthorizationStatusDenied || type == kCLAuthorizationStatusNotDetermined || type == kCLAuthorizationStatusRestricted){
     
         
         _Alert1 = [[UIAlertView alloc] initWithTitle:root_wei_kaiqi_dingwei message:root_tiaozhuan_jiemian_shezhi delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK,nil];

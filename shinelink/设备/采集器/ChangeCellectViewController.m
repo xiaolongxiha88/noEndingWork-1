@@ -155,9 +155,9 @@
         [self hideProgressView];
         id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         if ([[jsonObj objectForKey:@"success"] integerValue] ==0) {
-            [self showAlertViewWithTitle:nil message:NSLocalizedString(@"Modification fails", @"Modification fails") cancelButtonTitle:root_Yes];
+            [self showAlertViewWithTitle:nil message:root_Modification_fails cancelButtonTitle:root_Yes];
         }else{
-            [self showAlertViewWithTitle:nil message:NSLocalizedString(@"Successfully modified", @"Successfully modified") cancelButtonTitle:root_Yes];
+            [self showAlertViewWithTitle:nil message:root_Successfully_modified cancelButtonTitle:root_Yes];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
     } failure:^(NSError *error) {

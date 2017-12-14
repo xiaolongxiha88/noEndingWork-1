@@ -143,10 +143,10 @@
         [BaseRequest uplodImageWithMethod:HEAD_URL paramars:@{@"id":[UserInfo defaultUserInfo].plantID} paramarsSite:@"/newPlantAPI.do?op=updateImg" dataImageDict:dataImageDict sucessBlock:^(id content) {
             NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
             if ([res rangeOfString:@"true"].location == NSNotFound) {
-                [self showToastViewWithTitle:NSLocalizedString(@"Successfully fails", @"Successfully fails")];
+                [self showToastViewWithTitle:root_Modification_fails];
                
             } else {
-                [self showToastViewWithTitle:NSLocalizedString(@"Modification modified", @"Modification modified")];
+                [self showToastViewWithTitle:root_Successfully_modified];
                  [self.navigationController popViewControllerAnimated:YES];
             }
         } failure:^(NSError *error) {

@@ -265,7 +265,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         tableView=UITableView()
         let H1=112*HEIGHT_SIZE
-        tableView.frame=CGRect(x: 0, y: H1, width: SCREEN_Width, height: SCREEN_Height-H1)
+        tableView.frame=CGRect(x: 0, y: H1, width: SCREEN_Width, height: SCREEN_Height-H1-20)
         tableView.delegate=self
         tableView.dataSource=self
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none

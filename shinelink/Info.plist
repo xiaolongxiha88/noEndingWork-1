@@ -70,12 +70,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>ShinePhone of Growatt</string>
 	<key>NSCameraUsageDescription</key>
 	<string>ShinePhone of Growatt</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string></string>
+	<string>ShinePhone of Growatt</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>ShinePhone of Growatt</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>ShinePhone of Growatt</string>
 	<key>UIBackgroundModes</key>
