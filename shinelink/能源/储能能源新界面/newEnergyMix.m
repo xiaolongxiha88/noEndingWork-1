@@ -1041,7 +1041,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         if ([_dataFiveDic[key] isKindOfClass:[NSDictionary class]]) {
                NSDictionary *valueDic=[NSDictionary dictionaryWithDictionary:_dataFiveDic[key]];
             if ([valueDic.allKeys containsObject:@"soc"]) {
-                 [yArray addObject:[valueDic objectForKey:@"soc"]];
+                float socValue=[[NSString stringWithFormat:@"%@",[valueDic objectForKey:@"soc"]] floatValue];
+                if (socValue<=100) {
+                     [yArray addObject:[valueDic objectForKey:@"soc"]];
+                }else{
+                    [yArray addObject:@"100"];
+                }
+                
             }
         }else{
               [yArray addObject:_dataFiveDic[key]];

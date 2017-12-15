@@ -35,7 +35,7 @@
     NSArray*valueArray=@[@"growattOrderId",@"status",@"money",@"gmt_create",@"datalogSn",@"failureDatalog",@"year",@"username",@"invoiceName",@"invoiceNum",@"invoicePhone",@"invoiceAddr",@"remark"];
     
     float H0=30*HEIGHT_SIZE, W0=300*NOW_SIZE;
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+ 
    
     
     float allH=0;
@@ -48,19 +48,25 @@
             name1=@"";
             }
         
+   NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        NSString*nameString;
 
-        NSString*nameString=[NSString stringWithFormat:@"%@:%@",nameArray[i],name1];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(W0, H0) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-        float H=H0;
-        if (size.height>H0 && size.height<2*H0) {
-            H=2*H0;
-        }else  if (size.height>2*H0 && size.height<3*H0) {
-            H=3*H0;
+      nameString=[NSString stringWithFormat:@"%@:%@",nameArray[i],name1];
+
+        CGSize size = [nameString boundingRectWithSize:CGSizeMake(W0, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+       float H=size.height;
+        if (H<H0) {
+            H=H0;
+        }
+
+        if (i==4 || i==5) {
+            H=H+H0/2;
         }
         UILabel *lable0 = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width-W0)/2, 0*HEIGHT_SIZE+allH, W0, H)];
         lable0.textColor = COLOR(102, 102, 102, 1);
         lable0.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         lable0.textAlignment=NSTextAlignmentLeft;
+        lable0.numberOfLines=0;
         lable0.text=nameString;
         if (i==1) {
             lable0.text=_statusString;
@@ -74,7 +80,7 @@
           allH=allH+H;
     }
     
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,allH+100*HEIGHT_SIZE);
+    _scrollView.contentSize = CGSizeMake(SCREEN_Width,allH+200*HEIGHT_SIZE);
 }
 
 

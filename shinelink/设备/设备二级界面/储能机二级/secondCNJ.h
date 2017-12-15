@@ -11,5 +11,5 @@
 @interface secondCNJ : RootViewController
 @property (nonatomic, strong) NSString *deviceSN;
 
-@property (nonatomic, strong) NSString *typeNum;
+@property (nonatomic, strong) NSString *typeNum;        //typeNum=1:spf5000    2:普通储能机  3.MIX
 @end
