@@ -851,3 +851,5 @@
 "260光伏功率"="Solar power";
 "261取电功率"="Power from grid";
 "262馈电功率"="Power to grid";
+"263电网取电"="Import";
+"264来自"="From";

@@ -135,9 +135,9 @@
       [self getLableUI:rectL22 lableName:lableNameArray[4] lableValue:lableValueArray[4] lableUnit:@"W" valueColor:colorArray[4] directorType:1];
     
     if (_isGridToUp) {
-      [self getLableUI:rectL3 lableName:root_device_261 lableValue:lableValueArray[2] lableUnit:@"W" valueColor:colorArray[2] directorType:1];
+      [self getLableUI:rectL3 lableName:[NSString stringWithFormat:@"%@:",root_device_261] lableValue:lableValueArray[2] lableUnit:@"W" valueColor:colorArray[2] directorType:1];
     }else{
-      [self getLableUI:rectL3 lableName:root_device_262 lableValue:lableValueArray[2] lableUnit:@"W" valueColor:COLOR(85, 162, 78, 1) directorType:1];
+      [self getLableUI:rectL3 lableName:[NSString stringWithFormat:@"%@:",root_device_262] lableValue:lableValueArray[2] lableUnit:@"W" valueColor:COLOR(85, 162, 78, 1) directorType:1];
     }
    
      [self getLableUI:rectL4 lableName:lableNameArray[3] lableValue:lableValueArray[3] lableUnit:@"W" valueColor:colorArray[3] directorType:2];

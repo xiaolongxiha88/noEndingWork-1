@@ -22,6 +22,12 @@
 #define SPF5000H  ScreenProH*80
 #define ScreenProW  HEIGHT_SIZE/2.38
 #define ScreenProH  NOW_SIZE/2.34
+
+#define mixPVcolor COLOR(85, 162, 78, 1)
+#define mixYongDianXiaoHaocolor COLOR(82, 164, 179, 1)
+#define mixDianWangQuDiancolor COLOR(175, 105, 105, 1)
+#define mixLaiZiDianChicolor COLOR(89, 135, 212, 1)
+
 @interface newEnergyMix ()<EditGraphViewDelegate,UIScrollViewDelegate,UIPickerViewDelegate,MCBarChartViewDataSource, MCBarChartViewDelegate,UIPickerViewDelegate, UIPickerViewDataSource>
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSString *pcsNetPlantID;
@@ -123,9 +129,14 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     _boolArray=[NSMutableArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO], nil];
     
-    _colorArray=@[COLOR(255, 217, 35, 1),COLOR(54, 193, 118, 1),COLOR(139, 128, 255, 1),COLOR(14, 239, 246, 1)];
+#define mixPVcolor COLOR(85, 162, 78, 1)
+#define mixYongDianXiaoHaocolor COLOR(82, 164, 179, 1)
+#define mixDianWangQuDiancolor COLOR(175, 105, 105, 1)
+#define mixLaiZiDianChicolor COLOR(89, 135, 212, 1)
+    
+    _colorArray=@[mixPVcolor,mixYongDianXiaoHaocolor,mixDianWangQuDiancolor,mixLaiZiDianChicolor]
     float A=0.3;
-    _UncolorArray=@[COLOR(255, 217, 35, A),COLOR(54, 193, 118, A),COLOR(139, 128, 255, A),COLOR(14, 239, 246, A)];
+    _UncolorArray=@[COLOR(85, 162, 78, A),COLOR(82, 164, 179, A),COLOR(175, 105, 105, A),COLOR(89, 135, 212, A)];
     
 }
 
@@ -547,6 +558,184 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     
     
+    [self initUiTwo2Two];
+}
+
+-(void)initUiTwo2Two{
+     float HH=1160*ScreenProH;    float lableH=40*ScreenProH;   float Hk=10*ScreenProH;
+    
+    UIView *V11=[[UIView alloc]initWithFrame:CGRectMake(30*ScreenProW, 1245*ScreenProH-HH-ScreenProH*10, SCREEN_Width-60*ScreenProW, ScreenProH*1)];
+    V11.backgroundColor=COLOR(222, 222, 222, 1);
+    [_uiview2 addSubview:V11];
+    
+    
+    float VL3W=100*ScreenProW;
+    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth-VL3W-30*ScreenProW, 1245*ScreenProH-HH, VL3W, lableH)];
+    VL3.font=[UIFont systemFontOfSize:30*ScreenProH];
+    VL3.textAlignment = NSTextAlignmentRight;
+    VL3.text=@"kWh";
+    VL3.textColor =COLOR(51, 51, 51, 1);
+    [_uiview2 addSubview:VL3];
+    
+    NSString *A1=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eChargeToday1"] floatValue]];
+    NSString *A2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eAcCharge"] floatValue]];
+    
+    NSString *A4=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eChargeToday2"] floatValue]];
+    NSString *A5=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"etouser"] floatValue]];
+    
+    BOOL isEmpty1=NO;  BOOL isEmpty2=NO;
+    if(([A1 isEqualToString:@"0.0"])&&([A2 isEqualToString:@"0.0"])){
+        isEmpty1=YES;
+    }
+    if(([A4 isEqualToString:@"0.0"])&&([A5 isEqualToString:@"0.0"])){
+         isEmpty2=YES;
+    }
+    NSArray *isEmptyArray=@[[NSNumber numberWithBool:isEmpty1],[NSNumber numberWithBool:isEmpty2]];
+    
+    float D1=[A1 floatValue];   float D2=[A2 floatValue];
+    float A1L=(D1/(D1+D2));
+
+       float D4=[A4 floatValue];   float D5=[A5 floatValue];
+      float A2L=(D4/(D4+D5));
+    
+
+    
+    NSArray *data1=[self getCircleNum:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"eChargeToday1"]] A2:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"eAcCharge"]] ];
+    
+    NSArray *data2=[self getCircleNum:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"eChargeToday2"]] A2:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"etouser"]] ];
+    
+    NSArray *laftValueData=@[data1[0],data2[0]];
+        NSArray *rightValueData=@[data1[1],data2[1]];
+    
+     NSArray *colorArray=@[mixPVcolor,mixDianWangQuDiancolor];
+      NSArray *colorArray0=@[mixPVcolor,mixYongDianXiaoHaocolor];
+    
+    NSString *V2N1=root_guangfu_chanchu_1;
+    NSString *V2N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eCharge"] floatValue]];
+    NSString *V2LableName=[NSString stringWithFormat:@"%@:%@",V2N1,V2N2];
+    
+    NSString *V3N1=root_yongdian_xiaohao;
+    NSString *V3N2=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"elocalLoad"] floatValue]];
+    NSString *V3LableName=[NSString stringWithFormat:@"%@:%@",V3N1,V3N2];
+    
+    NSArray*titleArray=@[V2LableName,V3LableName];
+      NSArray*titleColorArray=@[mixPVcolor,mixYongDianXiaoHaocolor];
+       NSArray*rightNameArray=@[root_MIX_217,root_Energy_263];
+    
+    NSString *C1=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"echarge1"] floatValue]];
+    NSString *C0=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"eChargeToday2"] floatValue]];
+    float CD1=[C1 floatValue];     float CD0=[C0 floatValue];   float CD2=CD0-CD1;
+    float CC1=(CD1/CD0)*100;   float CC2=(CD2/CD0)*100;
+    NSString *C2=[NSString stringWithFormat:@"%.1f",CD2];
+    NSString *leftValue2Name=[NSString stringWithFormat:@"%@:(%@:%@+%@:%@)",root_Energy_264,root_guangfu_chanchu_1,[NSString stringWithFormat:@"%@/%.f%%",C1,CC1],root_PCS_dianyuan,[NSString stringWithFormat:@"%@/%.f%%",C2,CC2]];
+    
+    
+    float Hk0=240*ScreenProH;
+    for (int i=0; i<isEmptyArray.count; i++) {
+        BOOL isEmpty0=[isEmptyArray[i] boolValue];
+        
+        UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 1245*ScreenProH-HH+Hk0*i, ScreenWidth, lableH)];
+        VL2.font=[UIFont systemFontOfSize:30*ScreenProH];
+        VL2.textAlignment = NSTextAlignmentCenter;
+        VL2.text=titleArray[i];
+        VL2.textColor =titleColorArray[i];
+        [_uiview2 addSubview:VL2];
+
+        
+        float Wk=40*ScreenProW; float K1=10*ScreenProH;  float viewH=70*ScreenProH;
+        UIView *viewAll= [[UIView alloc] initWithFrame:CGRectMake(Wk, 1245*ScreenProH-HH+lableH+Hk+Hk0*i, ScreenWidth-2*Wk, viewH)];
+        viewAll.layer.borderWidth=2*ScreenProH;
+        viewAll.layer.cornerRadius=8*ScreenProH;
+        UIColor *color1=colorArray0[i];
+        viewAll.layer.borderColor=color1.CGColor;
+        viewAll.backgroundColor=[UIColor clearColor];
+        [_uiview2 addSubview:viewAll];
+        
+        float W00=ScreenWidth-2*Wk-2*K1;
+        float percentValue=A1L;
+        if (i==1) {
+            percentValue=A2L;
+        }
+        float Wkx=6*ScreenProH;
+        if (isEmpty0) {
+            UIView *viewLeft= [[UIView alloc] initWithFrame:CGRectMake(Wk+K1, 1245*ScreenProH-HH+lableH+Hk+K1+Hk0*i, W00, viewH-2*K1)];
+            viewLeft.backgroundColor=COLOR(242, 242, 242, 1);
+            [_uiview2 addSubview:viewLeft];
+        }else{
+          
+            UIView *viewLeft= [[UIView alloc] initWithFrame:CGRectMake(Wk+K1, 1245*ScreenProH-HH+lableH+Hk+K1+Hk0*i, W00*percentValue, viewH-2*K1)];
+            viewLeft.backgroundColor=mixYongDianXiaoHaocolor;
+            [_uiview2 addSubview:viewLeft];
+            
+            UIView *viewRight= [[UIView alloc] initWithFrame:CGRectMake(Wk+K1+W00*percentValue, 1245*ScreenProH-HH+lableH+Hk+K1+Hk0*i, W00-(W00*percentValue), viewH-2*K1)];
+            viewRight.backgroundColor=colorArray[i];
+            [_uiview2 addSubview:viewRight];
+       
+            if (percentValue>0.5) {
+                viewLeft.frame=CGRectMake(Wk+K1, 1245*ScreenProH-HH+lableH+Hk+K1+Hk0*i, W00*percentValue-Wkx, viewH-2*K1);
+                 viewRight.frame=CGRectMake(Wk+K1+W00*percentValue, 1245*ScreenProH-HH+lableH+Hk+K1+Hk0*i, W00-(W00*percentValue), viewH-2*K1);
+            }else{
+                viewLeft.frame=CGRectMake(Wk+K1, 1245*ScreenProH-HH+lableH+Hk+K1+Hk0*i, W00*percentValue, viewH-2*K1);
+                viewRight.frame=CGRectMake(Wk+K1+W00*percentValue+Wkx, 1245*ScreenProH-HH+lableH+Hk+K1+Hk0*i, W00-(W00*percentValue)-Wkx, viewH-2*K1);
+            }
+        }
+            float lableH2=40*ScreenProH;
+            UILabel *leftName= [[UILabel alloc] initWithFrame:CGRectMake(Wk, 1245*ScreenProH-HH+lableH+Hk+Hk0*i+viewH, ScreenWidth/2-Wk, lableH2)];
+            leftName.font=[UIFont systemFontOfSize:25*ScreenProH];
+            leftName.textAlignment = NSTextAlignmentLeft;
+            leftName.text=root_MIX_216;
+            leftName.textColor =mixYongDianXiaoHaocolor;
+            [_uiview2 addSubview:leftName];
+            
+            UILabel *leftValue= [[UILabel alloc] initWithFrame:CGRectMake(Wk, 1245*ScreenProH-HH+lableH+Hk+Hk0*i+viewH+lableH2, ScreenWidth/2-Wk, lableH2)];
+            leftValue.font=[UIFont systemFontOfSize:25*ScreenProH];
+            leftValue.textAlignment = NSTextAlignmentLeft;
+            leftValue.text=laftValueData[i];
+            leftValue.textColor =mixYongDianXiaoHaocolor;
+            [_uiview2 addSubview:leftValue];
+            
+      
+            UILabel *rightName= [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth/2, 1245*ScreenProH-HH+lableH+Hk+Hk0*i+viewH, ScreenWidth/2-Wk, lableH2)];
+            rightName.font=[UIFont systemFontOfSize:25*ScreenProH];
+            rightName.textAlignment = NSTextAlignmentRight;
+            rightName.text=rightNameArray[i];
+            rightName.textColor =colorArray[i];
+            [_uiview2 addSubview:rightName];
+            
+            UILabel *rightValue= [[UILabel alloc] initWithFrame:CGRectMake(ScreenWidth/2, 1245*ScreenProH-HH+lableH+Hk+Hk0*i+viewH+lableH2, ScreenWidth/2-Wk, lableH2)];
+            rightValue.font=[UIFont systemFontOfSize:25*ScreenProH];
+            rightValue.textAlignment = NSTextAlignmentRight;
+            rightValue.text=rightValueData[i];
+            rightValue.textColor =colorArray[i];
+            [_uiview2 addSubview:rightValue];
+            
+            if (i==1) {
+                UILabel *leftValue2= [[UILabel alloc] initWithFrame:CGRectMake(Wk, 1245*ScreenProH-HH+lableH+Hk+Hk0*i+viewH+lableH2+lableH2, ScreenWidth-Wk*2, lableH2)];
+                leftValue2.font=[UIFont systemFontOfSize:25*ScreenProH];
+                leftValue2.textAlignment = NSTextAlignmentLeft;
+                leftValue2.text=leftValue2Name;
+                leftValue2.textColor =mixYongDianXiaoHaocolor;
+                [_uiview2 addSubview:leftValue2];
+                
+                UIView *V22=[[UIView alloc]initWithFrame:CGRectMake(30*ScreenProW, 1245*ScreenProH-HH+lableH+Hk+Hk0*i+viewH+lableH2*4-10*ScreenProH, SCREEN_Width-60*ScreenProW, ScreenProH*1)];
+                V22.backgroundColor=COLOR(222, 222, 222, 1);
+                [_uiview2 addSubview:V22];
+            }
+        
+    }
+    
+    
+
+    
+
+    
+ 
+    
+    
+}
+
+-(void)initUiTwo2{
+        float HH=1160*ScreenProH;
     //////////////////圆饼
     UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 1245*ScreenProH-HH, 375*ScreenProW, ScreenProH*40)];
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
@@ -613,8 +802,6 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     
     
-    
-    
     NSArray *languages = [NSLocale preferredLanguages];
     NSString *currentLanguage = [languages objectAtIndex:0];
     
@@ -625,7 +812,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     float vH=70*ScreenProH;  float vH0=35*ScreenProH;
     float vH1=20*ScreenProH;
     NSArray *nameArray00=@[ root_MIX_216, root_MIX_217];
-   
+    
     NSArray *IMAGEnameArray00=@[@"storageS.png",@"loadS.png"];
     
     float nameW=25*ScreenProW;
@@ -688,8 +875,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_uiview2 addSubview:V11];
     
     NSArray *nameArray100=@[root_MIX_216,root_MIX_214];
-  
-      NSArray *IMAGEnameArray100=@[@"storageS.png",@"gridS.png"];
+    
+    NSArray *IMAGEnameArray100=@[@"storageS.png",@"gridS.png"];
     UILabel *VL100= [[UILabel alloc] initWithFrame:CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+62*ScreenProH-vH1, 210*ScreenProW, ScreenProH*25)];
     if ([currentLanguage hasPrefix:@"zh-Hans"]) {
         VL100.frame=CGRectMake(5*ScreenProW, 1670*ScreenProH-HH+62*ScreenProH-vH1, nameW, ScreenProH*25);
@@ -741,9 +928,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [VM1 setImage:[UIImage imageNamed:IMAGEnameArray100[i]]];
         [LV1 addSubview:VM1];
     }
-    
-    
 }
+
+
 
 -(void)getDetail2{
     
@@ -1369,16 +1556,24 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
           
                 _toDetaiDataArray=[NSMutableArray array];
                 
+           
                 if (_dataTwoDic.count==0) {
-                    if (_lineChart) {
-                        [_lineChart removeFromSuperview];
-                        _lineChart=nil;
+                    if ([_type isEqualToString:@"0"]) {
+                        NSDictionary *A=@{@"pacToUser":@"0",@"ppv":@"0",@"sysOut":@"0",@"userLoad":@"0"};
+                        _dataTwoDic=[NSDictionary dictionaryWithObject:A forKey:@"0:00"];
+                        [self initUILineChart];
+                    }else{
+                        if (_lineChart) {
+                            [_lineChart removeFromSuperview];
+                            _lineChart=nil;
+                        }
+                        if (_barChartView2) {
+                            [_barChartView2 removeFromSuperview];
+                            _barChartView2=nil;
+                        }
+                        return ;
                     }
-                    if (_barChartView2) {
-                        [_barChartView2 removeFromSuperview];
-                        _barChartView2=nil;
-                    }
-                    return ;
+              
                 }
            
                 
