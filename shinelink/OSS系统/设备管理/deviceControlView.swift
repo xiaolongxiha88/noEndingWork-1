@@ -64,24 +64,24 @@ class deviceControlView: RootViewController {
             status="离线"}else{status="在线"}
         
         if typeNum=="0"{
-           let snCode=self.getValidCode(valueDic["serialNum"] as! String)
+           let snCode=self.getValidCode(valueDic["serialNum"] as? String ?? "")
          lableNameArray=["序列号","别名","设备类型","用户名","连接状态","IP及端口号","固件版本","服务器地址","更新时间","校验码"]
                 let paramBean=valueDic["paramBean"] as! Dictionary<String, Any>
             var version=""
             var serverUrl=""
        
             if paramBean.count>0 {
-                version=paramBean["firmwareVersionBuild"] as! String? ?? ""
-                serverUrl=paramBean["serverUrl"] as! String? ?? ""
+                version=paramBean["firmwareVersionBuild"] as? String ?? ""
+                serverUrl=paramBean["serverUrl"] as? String ?? ""
             }
-            lableValueArray=[valueDic["serialNum"]as! String? ?? "",valueDic["alias"] as! String? ?? "",valueDic["deviceType"]as! String? ?? "",valueDic["userName"]as! String? ?? "",status,valueDic["clientUrl"]as! String? ?? "",version,serverUrl,valueDic["lastUpdateTimeText"] as! String? ?? "",snCode ?? ""]
+            lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"] as? NSString ?? "",valueDic["deviceType"]as? NSString ?? "",valueDic["userName"]as? NSString ?? "",status,valueDic["clientUrl"]as? NSString ?? "",version,serverUrl,valueDic["lastUpdateTimeText"] as? NSString ?? "",snCode ?? ""]
         }else if typeNum=="1"{
             let nominalString=NSString(format: "%.f", valueDic["nominalPower"]as! Float)
               let powerString=NSString(format: "%.f", valueDic["power"]as! Float)
               let etodayString=NSString(format: "%.f", valueDic["eToday"]as! Float)
               let eTotallString=NSString(format: "%.f", valueDic["eTotal"]as! Float)
         lableNameArray=["序列号","别名","所属采集器","连接状态","额定功率(W)","当前功率(W)","今日发电(kWh)","累计发电量(kWh)","逆变器型号","最后更新时间"]
-               lableValueArray=[valueDic["serialNum"]as! String? ?? "",valueDic["alias"]as! String? ?? "",valueDic["dataLogSn"]as! String? ?? "",status,nominalString,powerString,etodayString,eTotallString,valueDic["modelText"]as! String? ?? "",valueDic["lastUpdateTimeText"] as! String? ?? ""]
+               lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"]as? NSString ?? "",valueDic["dataLogSn"]as? NSString ?? "",status,nominalString,powerString,etodayString,eTotallString,valueDic["modelText"]as? NSString ?? "",valueDic["lastUpdateTimeText"] as? NSString ?? ""]
             
         }else if typeNum=="2"{
             var type=""

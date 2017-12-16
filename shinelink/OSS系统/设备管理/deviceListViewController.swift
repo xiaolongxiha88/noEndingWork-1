@@ -137,11 +137,11 @@ deviceTypeString="1"
                     if self.deviceTypeString=="0"{
                         plantAll=objArray["datalogList"] as! NSArray
                         for i in 0..<plantAll.count{
-                            self.cellValue0Array.add((plantAll[i] as! NSDictionary)["alias"] as!NSString)
-                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as!NSString)
+                            self.cellValue0Array.add((plantAll[i] as! NSDictionary)["alias"] as? NSString ?? "")
+                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as? NSString ?? "")
                             self.cellValue2Array.add((plantAll[i] as! NSDictionary)["lost"] as!Bool)
-                            self.cellValue3Array.add((plantAll[i] as! NSDictionary)["clientUrl"] as!NSString)
-                            self.cellValue4Array.add((plantAll[i] as! NSDictionary)["deviceType"] as!NSString)
+                            self.cellValue3Array.add((plantAll[i] as! NSDictionary)["clientUrl"] as? NSString ?? "")
+                            self.cellValue4Array.add((plantAll[i] as! NSDictionary)["deviceType"] as? NSString ?? "")
                             self.plantListArray.add(plantAll[i])
                         }
                     }
@@ -149,18 +149,18 @@ deviceTypeString="1"
                     if self.deviceTypeString=="1"{
                         plantAll=objArray["invList"] as! NSArray
                         for i in 0..<plantAll.count{
-                            self.cellValue0Array.add((plantAll[i] as! NSDictionary)["alias"] as!NSString)
-                             self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as!NSString)
+                            self.cellValue0Array.add((plantAll[i] as! NSDictionary)["alias"] as? NSString ?? "")
+                             self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as? NSString ?? "")
                             if ((plantAll[i] as! NSDictionary)["status"] ) is NSString{
-                                let A=(plantAll[i] as! NSDictionary)["status"] as! NSString
+                                let A=(plantAll[i] as! NSDictionary)["status"] as? NSString ?? ""
                                 self.cellValue2Array.add(A.integerValue)
                             }else{
                                self.cellValue2Array.add((plantAll[i] as! NSDictionary)["status"] as? Int ?? 10)
                             }
                             
                                // self.cellValue2Array.add((plantAll[i] as! NSDictionary)["status"] as? Int ?? 0)
-                               self.cellValue3Array.add((plantAll[i] as! NSDictionary)["dataLogSn"] as!NSString)
-                            self.cellValue4Array.add((plantAll[i] as! NSDictionary)["modelText"] as!NSString)
+                               self.cellValue3Array.add((plantAll[i] as! NSDictionary)["dataLogSn"] as? NSString ?? "")
+                            self.cellValue4Array.add((plantAll[i] as! NSDictionary)["modelText"] as? NSString ?? "")
                             self.plantListArray.add(plantAll[i])
                         }
                     }
@@ -168,10 +168,10 @@ deviceTypeString="1"
                     if self.deviceTypeString=="2"{
                         plantAll=objArray["storageList"] as! NSArray
                         for i in 0..<plantAll.count{
-                            self.cellValue0Array.add((plantAll[i] as! NSDictionary)["alias"] as!NSString)
-                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as!NSString)
+                            self.cellValue0Array.add((plantAll[i] as! NSDictionary)["alias"] as? NSString ?? "")
+                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as? NSString ?? "")
                             self.cellValue2Array.add((plantAll[i] as! NSDictionary)["status"] as? Int ?? 7)
-                            self.cellValue3Array.add((plantAll[i] as! NSDictionary)["dataLogSn"] as!NSString)
+                            self.cellValue3Array.add((plantAll[i] as! NSDictionary)["dataLogSn"] as? NSString ?? "")
                             let Type=(plantAll[i] as! NSDictionary)["deviceType"] as!Int
                             var typeString:NSString=""
                             if Type==0{

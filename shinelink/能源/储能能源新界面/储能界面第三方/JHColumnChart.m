@@ -332,7 +332,6 @@
             UIFont *font = [UIFont systemFontOfSize:self.xDescTextFontSize];
             
 
-            
             textLayer.fontSize = font.pointSize;
             
             textLayer.foregroundColor = _drawTextColorForX_Y.CGColor;

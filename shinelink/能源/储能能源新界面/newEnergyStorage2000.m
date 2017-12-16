@@ -158,7 +158,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL1.textColor =[UIColor whiteColor];
     [V1 addSubview:VL1];
     
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(400*ScreenProW, 0*ScreenProH, 320*ScreenProH, ScreenProH*60)];
+      float VL2w=ScreenWidth-400*ScreenProW-40*ScreenProW;
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(400*ScreenProW, 0*ScreenProH, VL2w, ScreenProH*60)];
     VL2.font=[UIFont systemFontOfSize:20*ScreenProH];
     VL2.textAlignment = NSTextAlignmentRight;
     NSString *N1=root_PCS_danwei; NSString *N2=root_dangri; NSString *N3=root_leiji;
@@ -237,14 +238,16 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL1.textColor =COLOR(51, 51, 51, 1);
     [V1 addSubview:VL1];
     
-    UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(660*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
+            float VM2w=ScreenWidth-35*ScreenProH-40*ScreenProW;
+    UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(VM2w, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
     [VM2 setImage:[UIImage imageNamed:@"note.png"]];
     VM2.userInteractionEnabled=YES;
     UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail)];
     [VM2 addGestureRecognizer:demo1];
     [V1 addSubview:VM2];
     
-    UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(225*ScreenProW, 550*ScreenProH-view1H-viewAA, 300*ScreenProW, ScreenProH*60)];
+         float buttonBackx=(ScreenWidth-300*ScreenProW)/2;
+    UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(buttonBackx, 550*ScreenProH-view1H-viewAA, 300*ScreenProW, ScreenProH*60)];
     V2.layer.borderWidth=ScreenProH*1;
     V2.layer.cornerRadius=ScreenProH*60/2.5;
     V2.layer.borderColor=COLOR(154, 154, 154, 1).CGColor;
@@ -277,6 +280,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [self.datePickerButton setTitleColor:COLOR(102, 102, 102, 1) forState:UIControlStateNormal];
     self.datePickerButton.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.datePickerButton.titleLabel.font = [UIFont boldSystemFontOfSize:26*ScreenProH];
+    self.datePickerButton.titleLabel.adjustsFontSizeToFitWidth=YES;
     [self.datePickerButton addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
     [V2 addSubview:self.datePickerButton];
     
@@ -387,16 +391,20 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
     NSArray *nameArray=@[root_guangfu_chanchu_1,root_nengyuan_chanch_1,root_yongdian_xiaohao,root_yongdian_xiaohao_1];
     
+    float W00=(ScreenWidth-10*ScreenProW)/4;
+    float W01=(ScreenWidth-10*ScreenProW)/4-5*ScreenProW;
+    
     for (int i=0; i<4; i++) {
-        UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(5*ScreenProW+185*ScreenProW*i, 1160*ScreenProH-HH, 180*ScreenProW, ScreenProH*55)];
+        UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(5*ScreenProW+W00*i, 1160*ScreenProH-HH, W01, ScreenProH*55)];
         V1.userInteractionEnabled = YES;
         V1.tag=3000+i;
         UITapGestureRecognizer * Tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getCharNum:)];
         [V1 addGestureRecognizer:Tap];
         [_uiview2 addSubview:V1];
         
+          float W02=40*ScreenProW;
         UIView *button1= [[UIView alloc]init];
-        button1.frame= CGRectMake(40*ScreenProW, 0*ScreenProH, 100*ScreenProW, ScreenProH*20);
+        button1.frame= CGRectMake(W02, 0*ScreenProH, W01-2*W02, ScreenProH*20);
             BOOL isbool=[_boolArray[i] boolValue];
         if (isbool) {
              button1.backgroundColor=_colorArray[i];
@@ -410,7 +418,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [V1 addSubview:button1];
         // [button1 addTarget:self action:@selector(pickDate) forControlEvents:UIControlEventTouchUpInside];
         
-        UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 25*ScreenProH, 180*ScreenProW, ScreenProH*30)];
+        UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(0*ScreenProW, 25*ScreenProH, W01, ScreenProH*30)];
         VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
            VL1.adjustsFontSizeToFitWidth=YES;
          VL1.userInteractionEnabled=YES;
@@ -510,7 +518,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL1.textColor =COLOR(51, 51, 51, 1);
     [V1 addSubview:VL1];
     
-    UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(660*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
+       float VM2w=ScreenWidth-35*ScreenProH-40*ScreenProW;
+    UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(VM2w, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
     [VM2 setImage:[UIImage imageNamed:@"note.png"]];
     VM2.userInteractionEnabled=YES;
     UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail2)];
@@ -721,7 +730,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         _lineChart=nil;
     }
     
-    _lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 620*ScreenProH-view1H-viewAA, 740*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
+    _lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 620*ScreenProH-view1H-viewAA,ScreenWidth-10*ScreenProW*3, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
     _lineChart.xlableNameArray=[NSArray arrayWithArray:tempXArr];
     _lineChart.xLineDataArr =xArray;
     _lineChart.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 0*ScreenProW);
@@ -817,7 +826,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     //    _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-viewAA+viewB, 730*ScreenProW, 530*ScreenProH)
                        
-    _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-view2H-viewAA, 730*ScreenProW, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
+    _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-view2H-viewAA, ScreenWidth-10*ScreenProW*3, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
     _lineChart2.xlableNameArray=[NSArray arrayWithArray:tempXArr];
     _lineChart2.xLineDataArr =xArray;
     _lineChart2.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 10*ScreenProW);
@@ -845,7 +854,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_scrollView addSubview:_lineChart2];
     [_lineChart2 showAnimation];
     
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2350*ScreenProH-view2H-viewAA, 730*ScreenProW, 30*ScreenProH)];
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2350*ScreenProH-view2H-viewAA, ScreenWidth-10*ScreenProW*2, 30*ScreenProH)];
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL2.textAlignment = NSTextAlignmentCenter;
     VL2.text=root_shishi_SOC;
@@ -933,20 +942,23 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_scrollView addSubview:_uiviewThree];
     
     //   JHColumnChart *column = [[JHColumnChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 2500*ScreenProH-HH, 730*ScreenProW, 530*ScreenProH)];
-    JHColumnChart *column = [[JHColumnChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 2400*ScreenProH-HH+40*ScreenProH, 730*ScreenProW, 530*ScreenProH)];
+    JHColumnChart *column = [[JHColumnChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 2400*ScreenProH-HH+40*ScreenProH, ScreenWidth-20*ScreenProW, 530*ScreenProH)];
     column.valueArr = valueArr00;
     
     // column.valueArr =[NSArray arrayWithObjects:A1, nil];
     
+    float columnW=30*ScreenProW;  float FontSizeF=columnW/1.5;
+    float W1= (ScreenWidth-20*ScreenProW-65*ScreenProW-10*ScreenProW)/7;
+    float SpaceW=W1-columnW*2;
     /*       This point represents the distance from the lower left corner of the origin.         */
     column.originSize = CGPointMake(65*ScreenProW, 30*ScreenProH);
     /*    The first column of the distance from the starting point     */
     column.drawFromOriginX = 10*ScreenProW;
-    column.typeSpace = 30*ScreenProW;
+    column.typeSpace = SpaceW;
     column.isShowYLine = YES;
-    column.columnWidth = 30*ScreenProW;
-    column.xDescTextFontSize=20*ScreenProH;
-    column.yDescTextFontSize=20*ScreenProH;
+    column.columnWidth = columnW;
+    column.xDescTextFontSize=FontSizeF;
+    column.yDescTextFontSize=FontSizeF;
     /*        Column backgroundColor         */
     column.bgVewBackgoundColor = [UIColor clearColor];
     /*        X, Y axis font color         */
@@ -964,7 +976,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_uiviewThree addSubview:column];
     
        //UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 3050*ScreenProH-HH, 730*ScreenProW, 40*ScreenProH)];
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2950*ScreenProH-HH+40*ScreenProH, 730*ScreenProW, 40*ScreenProH)];
+    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2950*ScreenProH-HH+40*ScreenProH, ScreenWidth-10*ScreenProW*2, 40*ScreenProH)];
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL2.textAlignment = NSTextAlignmentCenter;
     VL2.text=root_chuneng_congfang_xinxi;
@@ -972,7 +984,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_uiviewThree addSubview:VL2];
     
   //  UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2440*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
-    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2440*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
+    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2435*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
     VL3.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL3.textAlignment = NSTextAlignmentLeft;
     VL3.text=@"kWh";
@@ -981,9 +993,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     NSArray *nameArray1=@[root_mianban_dianliang,root_yongdian_xiaohao];
     NSArray *IMAGEnameArray1=@[COLOR(18, 237, 7, 1),COLOR(254, 238, 62, 1)];
+      float W00=(ScreenWidth-345*ScreenProW)/2;
     for (int i=0; i<2; i++) {
          // UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(335*ScreenProW+100*i, 2440*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
-        UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(375*ScreenProW+100*i, 2440*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
+        UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(375*ScreenProW+W00*i, 2440*ScreenProH-HH, W00, 30*ScreenProH)];
         [_uiviewThree addSubview:LV1];
         
     //    UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(0*ScreenProW, 6*ScreenProH, 18*ScreenProH, ScreenProH*18)];
@@ -992,7 +1005,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [LV1 addSubview:VM1];
         
        //    UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProH, 3*ScreenProH, 200*ScreenProW-30*ScreenProH, ScreenProH*25)];
-        UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProH, 3*ScreenProH, 200*ScreenProW-30*ScreenProH, ScreenProH*25)];
+        UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProH, 3*ScreenProH, W00-30*ScreenProH, ScreenProH*25)];
         VL1.font=[UIFont systemFontOfSize:22*ScreenProH];
         VL1.adjustsFontSizeToFitWidth=YES;
         VL1.textAlignment = NSTextAlignmentLeft;
