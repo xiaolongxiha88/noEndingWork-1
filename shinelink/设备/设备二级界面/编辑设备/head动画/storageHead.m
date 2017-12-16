@@ -232,7 +232,7 @@
     
    // float H0=7*HEIGHT_SIZE,
    float W1=15*NOW_SIZE,H1=35*HEIGHT_SIZE,imageSize=45*HEIGHT_SIZE,H2=90*HEIGHT_SIZE,W2=82*NOW_SIZE;
-    float imageH1=H1+imageSize/2;  float imageH12=7*HEIGHT_SIZE,imageW12=12*HEIGHT_SIZE;float WW2=5*NOW_SIZE;
+    float imageH1=H1+imageSize/2;  float imageH12=7*HEIGHT_SIZE,imageW12=12*HEIGHT_SIZE;
     
     //上—1-0
     CGPoint pointStart=CGPointMake(W1+imageSize, imageH1);
@@ -250,7 +250,7 @@
     CGPoint pointStart2=CGPointMake(W1+W2+imageSize, imageH1+imageH12);
     CGPoint pointtEnd2=CGPointMake(W1+2*W2-imageW12, imageH1+imageH12);
     CGPoint pointtEnd21=CGPointMake(W1+2*W2-imageW12, imageH1+imageH12+33*HEIGHT_SIZE);
-    CGPoint pointtEnd22=CGPointMake(W1+3*W2-imageW12-WW2-1.5*NOW_SIZE, imageH1+imageH12+33*HEIGHT_SIZE);
+    CGPoint pointtEnd22=CGPointMake(W1+2.5*W2+imageSize/2, imageH1+imageH12+33*HEIGHT_SIZE);
     //上—3
     CGPoint pointStart3=CGPointMake(W1+2*W2+imageSize, imageH1);
     CGPoint pointtEnd3=CGPointMake(W1+3*W2, imageH1);
@@ -260,8 +260,8 @@
     CGPoint pointtEndW1=CGPointMake(W1+W2+imageSize/2, imageH1+H2-imageSize/2);
     
     //下—2
-    CGPoint pointtStartW2=CGPointMake(W1+2*W2+1.5*imageSize-WW2, imageH1);
-    CGPoint pointtEndW2=CGPointMake(W1+2*W2+1.5*imageSize-WW2, imageH1+H2-imageSize/2);
+    CGPoint pointtStartW2=CGPointMake(W1+2.5*W2+imageSize/2, imageH1);
+    CGPoint pointtEndW2=CGPointMake(W1+2.5*W2+imageSize/2, imageH1+H2-imageSize/2);
     
     
     NSArray *startArray=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointtStartW1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointStart2], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtStartW2], nil];
@@ -276,61 +276,66 @@
         }
     }
     
-    float TIME=8;
-    //路径一
-    NSArray *startArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointtStartW2],nil];
     
-    NSArray *endArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd1], [NSValue valueWithCGPoint:pointtStartW2],[NSValue valueWithCGPoint:pointtEndW2],nil];
-    
-    [self getHeadAnimation:startArray0 second:endArray0 three:TIME];
-    
-    ////////////////////////////////
-    NSArray *startArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointtStartW2],nil];
-    
-    NSArray *endArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd1], [NSValue valueWithCGPoint:pointtStartW2],[NSValue valueWithCGPoint:pointtEndW2],nil];
-    
-    [self getHeadAnimation:startArray01 second:endArray01 three:TIME];
-    
-    float pacToUser=[[_pcsDataDic objectForKey:@"pacToUser"] floatValue];
-    float pacToGrid=[[_pcsDataDic objectForKey:@"pacToGrid"] floatValue];
-    int status=[[_pcsDataDic objectForKey:@"status"] intValue];
-    
-    // status=2;
-    if (pacToGrid>0) {
-        //路径二
-        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart3], nil];
-        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3], nil];
-        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.27];
-    }
-    
-    if( (pacToUser>0)&&(status==1)) {
-        //路径三
-        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3],[NSValue valueWithCGPoint:pointtStartW2],  [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd2],nil];
-        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW2], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointStart2],nil];
+    if (!_isStorageLost) {
+        float TIME=8;
+        //路径一
+        NSArray *startArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointtStartW2],nil];
         
-        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*1.4];
-    }
-    
-    if (pacToUser>0) {
-        NSArray *startArray022=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3],[NSValue valueWithCGPoint:pointtStartW2],  [NSValue valueWithCGPoint:pointtEnd22], nil];
-        NSArray *endArray022=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW2], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEndW2], nil];
+        NSArray *endArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd1], [NSValue valueWithCGPoint:pointtStartW2],[NSValue valueWithCGPoint:pointtEndW2],nil];
         
-        [self getHeadAnimation:startArray022 second:endArray022 three:TIME*0.46];
+        [self getHeadAnimation:startArray0 second:endArray0 three:TIME];
         
+        ////////////////////////////////
+        NSArray *startArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart1], [NSValue valueWithCGPoint:pointStart3], [NSValue valueWithCGPoint:pointtStartW2],nil];
+        
+        NSArray *endArray01=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd],[NSValue valueWithCGPoint:pointtEnd1], [NSValue valueWithCGPoint:pointtStartW2],[NSValue valueWithCGPoint:pointtEndW2],nil];
+        
+        [self getHeadAnimation:startArray01 second:endArray01 three:TIME];
+        
+        float pacToUser=[[_pcsDataDic objectForKey:@"pacToUser"] floatValue];
+        float pacToGrid=[[_pcsDataDic objectForKey:@"pacToGrid"] floatValue];
+        int status=[[_pcsDataDic objectForKey:@"status"] intValue];
+        
+        // status=2;
+        if (pacToGrid>0) {
+            //路径二
+            NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart3], nil];
+            NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3], nil];
+            [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.27];
+        }
+        
+        if( (pacToUser>0)&&(status==1)) {
+            //路径三
+            NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3],[NSValue valueWithCGPoint:pointtStartW2],  [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd2],nil];
+            NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW2], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEnd21], [NSValue valueWithCGPoint:pointtEnd2], [NSValue valueWithCGPoint:pointStart2],nil];
+            
+            [self getHeadAnimation:startArray02 second:endArray02 three:TIME*1.4];
+        }
+        
+        if (pacToUser>0) {
+            NSArray *startArray022=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEnd3],[NSValue valueWithCGPoint:pointtStartW2],  [NSValue valueWithCGPoint:pointtEnd22], nil];
+            NSArray *endArray022=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW2], [NSValue valueWithCGPoint:pointtEnd22], [NSValue valueWithCGPoint:pointtEndW2], nil];
+            
+            [self getHeadAnimation:startArray022 second:endArray022 three:TIME*0.46];
+            
+        }
+        
+        
+        
+        if (status==1) {
+            NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW1], nil];
+            NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEndW1], nil];
+            [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.33];
+        }
+        if (status==2) {
+            NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEndW1], nil];
+            NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW1], nil];
+            [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.33];
+        }
     }
     
     
-    
-    if (status==1) {
-        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW1], nil];
-        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEndW1], nil];
-        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.33];
-    }
-    if (status==2) {
-        NSArray *startArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtEndW1], nil];
-        NSArray *endArray02=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointtStartW1], nil];
-        [self getHeadAnimation:startArray02 second:endArray02 three:TIME*0.33];
-    }
     
 }
 

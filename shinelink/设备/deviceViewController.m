@@ -83,6 +83,7 @@
 @property (nonatomic, strong) NSString *pcsNetStorageSN;
 @property (nonatomic, strong) NSMutableDictionary *pcsDataDic;
 @property (nonatomic, assign) int storageType;      //0:SP2000,1:SP3000,2:SPF5000
+@property (nonatomic) BOOL isStorageAllLost;
 @property (nonatomic, assign) int deviceType;      //3:MIX
 @property (nonatomic, strong) NSString *MixSN;    //头部MIX的SN
 
@@ -769,7 +770,7 @@ _pcsNetStorageSN=@"";
         powerArray=[NSMutableArray array];
         SNArray=[NSMutableArray array];
         imageStatueArray=[NSMutableArray array];
-        
+        _isStorageAllLost=YES;
     
     
         
@@ -819,6 +820,7 @@ _pcsNetStorageSN=@"";
                     
                     NSString *ST=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"deviceStatus"]];
                     [statueArray addObject:ST];
+                       _isStorageAllLost=NO;
                 }
 
             }else if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"storage"]){                    //storage 设备解析
@@ -849,6 +851,7 @@ _pcsNetStorageSN=@"";
                 }else{
                     NSString *ST=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"deviceStatus"]];
                     [statueArray addObject:ST];
+                      _isStorageAllLost=NO;
                 }
 
                 NSDictionary *deviceDic=content[@"deviceList"][i];
@@ -888,6 +891,7 @@ _pcsNetStorageSN=@"";
                 }else{
                     NSString *ST=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"deviceStatus"]];
                     [statueArray addObject:ST];
+                      _isStorageAllLost=NO;
                 }
                 
                          [totalPowerArray addObject:[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"energy"]]];
@@ -1093,6 +1097,7 @@ _pcsNetStorageSN=@"";
                 if (_storageType!=2) {
                     storageHead *StorageV=[[storageHead alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];
                     StorageV.pcsDataDic=_pcsDataDic;
+                    StorageV.isStorageLost=_isStorageAllLost;
                     StorageV.animationNumber=animationNumber;
                     [_headerView addSubview:StorageV];
                     [StorageV initUI];
@@ -1100,6 +1105,7 @@ _pcsNetStorageSN=@"";
                     
                     SPF5000Head *StorageV=[[SPF5000Head alloc]initWithFrame:CGRectMake(0, 0, _headerView.frame.size.width, _headerView.frame.size.height)];
                     StorageV.pcsDataDic=_pcsDataDic;
+                      StorageV.isStorageLost=_isStorageAllLost;
                     StorageV.animationNumber=animationNumber;
                     [_headerView addSubview:StorageV];
                     [StorageV initUI];

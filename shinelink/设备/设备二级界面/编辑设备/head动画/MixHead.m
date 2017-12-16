@@ -37,7 +37,7 @@
     NSArray *imageNameArray=@[@"newheadSolar.png",@"newheadbat.png",@"newheadgrid.png",@"newheadload.png"];
     float  imageSize=64*NOW_SIZE,imageSize1=60*NOW_SIZE,imageSize2=45*NOW_SIZE;
    float lableH=20*NOW_SIZE;
-     float lableW=110*NOW_SIZE;
+     float lableW=120*NOW_SIZE;
     float  directionSizeW1=14*NOW_SIZE,directionSizeH1=18*NOW_SIZE,directionSizeW2=12*NOW_SIZE,directionSizeH2=16*NOW_SIZE;
   
     float KH1=2.5*NOW_SIZE;
@@ -106,7 +106,7 @@
     
         NSArray*lableValueArray=@[valueUp,valueL2,valuedown,valueRight,valueLeft];
     
-    NSArray*colorArray=@[COLOR(85, 162, 78, 1),COLOR(85, 162, 78, 1),COLOR(177, 112, 112, 1),COLOR(177, 166, 96, 1),COLOR(85, 162, 78, 1)];
+    NSArray*colorArray=@[COLOR(85, 162, 78, 1),COLOR(85, 162, 78, 1),COLOR(177, 112, 112, 1),COLOR(82, 164, 179, 1),COLOR(85, 162, 78, 1)];
     
       float LableX1=ScreenWidth/2+imageSize/2+KH1;
     float LableY1=H1+imageSize/2-lableH/2;
@@ -375,6 +375,15 @@
 
 -(void)getLableUI:(CGRect)frameRect lableName:(NSString*)lableName lableValue:(NSString*)lableValue lableUnit:(NSString*)lableUnit  valueColor:(UIColor*)valueColor directorType:(int)directorType{
     
+    NSArray *languages = [NSLocale preferredLanguages];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    float FontFloat;
+    if ([currentLanguage hasPrefix:@"zh-Hans"]) {
+        FontFloat=10*HEIGHT_SIZE;
+    }else{
+           FontFloat=9*HEIGHT_SIZE;
+    }
+        
     UILabel *solorLable=[[UILabel alloc] initWithFrame:frameRect];
   
       solorLable.textColor=COLOR(136, 136, 136, 1);
@@ -388,7 +397,7 @@
     [attrString addAttribute:NSForegroundColorAttributeName value:valueColor range:NSMakeRange(length0, length1)];
       solorLable.attributedText=attrString;
 
-    solorLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    solorLable.font = [UIFont systemFontOfSize:FontFloat];
     solorLable.adjustsFontSizeToFitWidth=YES;
     if (directorType==1) {
            solorLable.textAlignment = NSTextAlignmentLeft;

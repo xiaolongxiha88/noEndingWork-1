@@ -69,6 +69,9 @@ static void *context = NULL;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
+    
     _isNewWIFI=@"noValue";
     
     if (![_OssType isEqualToString:@"1"]) {

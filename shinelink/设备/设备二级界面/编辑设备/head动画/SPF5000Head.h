@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSMutableDictionary *pcsDataDic;
 
 @property (nonatomic, assign)  NSInteger animationNumber;
-
+ @property (nonatomic, assign)  BOOL isStorageLost;
 
 -(void)initUI;
 

@@ -129,12 +129,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     _boolArray=[NSMutableArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO], nil];
     
-#define mixPVcolor COLOR(85, 162, 78, 1)
-#define mixYongDianXiaoHaocolor COLOR(82, 164, 179, 1)
-#define mixDianWangQuDiancolor COLOR(175, 105, 105, 1)
-#define mixLaiZiDianChicolor COLOR(89, 135, 212, 1)
+
     
-    _colorArray=@[mixPVcolor,mixYongDianXiaoHaocolor,mixDianWangQuDiancolor,mixLaiZiDianChicolor]
+    _colorArray=@[mixPVcolor,mixYongDianXiaoHaocolor,mixDianWangQuDiancolor,mixLaiZiDianChicolor];
     float A=0.3;
     _UncolorArray=@[COLOR(85, 162, 78, A),COLOR(82, 164, 179, A),COLOR(175, 105, 105, A),COLOR(89, 135, 212, A)];
     
@@ -627,7 +624,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     float CD1=[C1 floatValue];     float CD0=[C0 floatValue];   float CD2=CD0-CD1;
     float CC1=(CD1/CD0)*100;   float CC2=(CD2/CD0)*100;
     NSString *C2=[NSString stringWithFormat:@"%.1f",CD2];
-    NSString *leftValue2Name=[NSString stringWithFormat:@"%@:(%@:%@+%@:%@)",root_Energy_264,root_guangfu_chanchu_1,[NSString stringWithFormat:@"%@/%.f%%",C1,CC1],root_PCS_dianyuan,[NSString stringWithFormat:@"%@/%.f%%",C2,CC2]];
+    NSString *leftValue2Name=[NSString stringWithFormat:@"%@:(%@:%@+%@:%@)",root_Energy_264,root_guangfu_chanchu_1,[NSString stringWithFormat:@"%@/%.f%%",C2,CC2],root_PCS_dianyuan,[NSString stringWithFormat:@"%@/%.f%%",C1,CC1]];
     
     
     float Hk0=240*ScreenProH;
@@ -1154,12 +1151,13 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [tempXArr removeObjectAtIndex:0];
     }
     
+   
     
     NSArray *valueArray0=@[Y1,Y2,Y3,Y4];
-    NSArray *valueLineColorArray0=@[COLOR(255, 217, 35, 1),COLOR(54, 193, 118, 1),COLOR(139, 128, 255, 1),COLOR(14, 239, 246, 1)];
+    NSArray *valueLineColorArray0=@[mixPVcolor,mixYongDianXiaoHaocolor,mixDianWangQuDiancolor,mixLaiZiDianChicolor];
       //ppv   sysOut   pacToUser  userLoad
     float A=0.5;
-    NSArray *contentFillColorArray0=@[COLOR(255, 217, 35, A),COLOR(54, 193, 118, A),COLOR(139, 128, 255, A),COLOR(14, 239, 246, 1)];
+    NSArray *contentFillColorArray0=@[COLOR(85, 162, 78, A),COLOR(82, 164, 179, A),COLOR(175, 105, 105, A),COLOR(89, 135, 212, A)];
     
     NSMutableArray *valueArray=[NSMutableArray new];
     NSMutableArray *valueLineColorArray=[NSMutableArray new];
@@ -1687,7 +1685,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
  _toDetaiDataArray=[NSMutableArray arrayWithObjects:allArrayX, ppvArray,sysOutArray,pacToUserArray,userLoadArray,nil];
     
     
-NSArray *valueLineColorArray000=@[COLOR(255, 217, 35, 1),COLOR(54, 193, 118, 1),COLOR(139, 128, 255, 1),COLOR(14, 239, 246, 1)];
+NSArray *valueLineColorArray000=@[mixPVcolor,mixYongDianXiaoHaocolor,mixDianWangQuDiancolor,mixLaiZiDianChicolor];
     //ppv   sysOut   pacToUser  userLoad
 
     _barColorArray=[NSMutableArray array];

@@ -33,6 +33,10 @@
 //    UIImage *bgImage = IMAGE(@"bg.png");
 //    self.view.layer.contents = (id)bgImage.CGImage;
     self.view.backgroundColor=MainColor;
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
+    
     self.title=@"一键注册";
     _dataDic=[NSMutableDictionary new];
     _userEnable=@"ok";

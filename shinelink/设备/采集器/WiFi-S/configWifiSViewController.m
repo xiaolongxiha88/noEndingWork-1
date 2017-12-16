@@ -83,14 +83,27 @@
         _timeLable.text=@"";
     }
     
+ 
+    
+}
+
+-(void)goBackToFirst{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController.navigationBar setBarTintColor:MainColor];
   
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_back style:UIBarButtonItemStylePlain target:self action:@selector(goBackToFirst)];
+    self.navigationItem.rightBarButtonItem=rightItem;
     
     self.title = [NSString stringWithFormat:@"%@ ShineWiFi-S",root_set];
     self.view.backgroundColor=MainColor;

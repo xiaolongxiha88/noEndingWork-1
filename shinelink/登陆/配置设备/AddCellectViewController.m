@@ -167,6 +167,7 @@
         [self hideProgressView];
         if (content) {
             if ([content[@"success"] integerValue] == 0) {
+                      [self showProgressView];
                 [BaseRequest requestWithMethod:HEAD_URL paramars:_dataDic paramarsSite:@"/newRegisterAPI.do?op=creatAccount" sucessBlock:^(id content) {
                     NSLog(@"creatAccount: %@", content);
                     [self hideProgressView];

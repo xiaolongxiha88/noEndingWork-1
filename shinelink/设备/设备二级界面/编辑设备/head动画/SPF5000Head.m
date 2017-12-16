@@ -268,6 +268,8 @@
         }
     }
     
+    
+ 
     float TIME=8; float TIME2=5;
     //路径一 光伏到电池
     NSArray *startArray0=[NSArray arrayWithObjects:[NSValue valueWithCGPoint:pointStart],[NSValue valueWithCGPoint:pointStart2], nil];
@@ -292,18 +294,23 @@
 
        int PcsStatue=[[_pcsDataDic objectForKey:@"status"] floatValue];
     
-    if (PcsStatue==5 || PcsStatue==7 || PcsStatue==8 || PcsStatue==9 || PcsStatue==12) {
-        [self getHeadAnimation:startArray0 second:endArray0 three:TIME2];          //路径一 光伏到电池
+    if (!_isStorageLost) {
+        
+        if (PcsStatue==5 || PcsStatue==7 || PcsStatue==8 || PcsStatue==9 || PcsStatue==12) {
+            [self getHeadAnimation:startArray0 second:endArray0 three:TIME2];          //路径一 光伏到电池
+        }
+        if (PcsStatue==6 || PcsStatue==7 || PcsStatue==8 || PcsStatue==10) {
+            [self getHeadAnimation:startArray01 second:endArray01 three:TIME2];         /////路径二 电网到电池
+        }
+        if (PcsStatue==8 || PcsStatue==9 || PcsStatue==10 || PcsStatue==11) {
+            [self getHeadAnimation:startArray03 second:endArray03 three:TIME];         /////路径三 电网到负载
+        }
+        if (PcsStatue==2 || PcsStatue==12) {
+            [self getHeadAnimation:startArray04 second:endArray04 three:TIME2];           /////路径四 电池到负载
+        }
     }
-    if (PcsStatue==6 || PcsStatue==7 || PcsStatue==8 || PcsStatue==10) {
-      [self getHeadAnimation:startArray01 second:endArray01 three:TIME2];         /////路径二 电网到电池
-    }
-    if (PcsStatue==8 || PcsStatue==9 || PcsStatue==10 || PcsStatue==11) {
-        [self getHeadAnimation:startArray03 second:endArray03 three:TIME];         /////路径三 电网到负载
-    }
-    if (PcsStatue==2 || PcsStatue==12) {
-        [self getHeadAnimation:startArray04 second:endArray04 three:TIME2];           /////路径四 电池到负载
-    }
+    
+
     
 }
 
