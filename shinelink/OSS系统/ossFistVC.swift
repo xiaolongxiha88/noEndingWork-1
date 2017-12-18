@@ -849,7 +849,7 @@ class ossFistVC: RootViewController {
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v2/order/overview=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                     let objDic=jsonDate["obj"] as! NSDictionary

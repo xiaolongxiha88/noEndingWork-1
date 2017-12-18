@@ -475,7 +475,7 @@ class IntegratorFirst: RootViewController {
                     
                     
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }

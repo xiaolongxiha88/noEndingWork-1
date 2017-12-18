@@ -99,6 +99,7 @@ static void *context = NULL;
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
     NSString *ssid = [delegate getWifiName];
 
+
     
     if(ssid!=nil&&ssid.length>0 )
     {
@@ -109,14 +110,22 @@ static void *context = NULL;
         return;
     }
     
-     [self getSignalStrength];
+         [self getSignalStrength];
   
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onGotDeviceByScan:) name:kOnGotDeviceByScan object:nil];
 }
 
 - (void)getSignalStrength{
     UIApplication *app = [UIApplication sharedApplication];
-    NSArray *subviews = [[[app valueForKey:@"statusBar"] valueForKey:@"foregroundView"] subviews];
+  //  NSArray *subviews = [[[app valueForKey:@"statusBar"] valueForKey:@"foregroundView"] subviews];
+    
+    NSArray *subviews;
+    if ([[app valueForKeyPath:@"_statusBar"] isKindOfClass:NSClassFromString(@"UIStatusBar_Modern")]) {
+        subviews = [[[[app valueForKeyPath:@"_statusBar"] valueForKeyPath:@"_statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+    } else {
+        subviews = [[[app valueForKeyPath:@"_statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+    }
+    
     NSString *dataNetworkItemView = nil;
     
     for (id subview in subviews) {
@@ -630,8 +639,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销1  2
-//       elianStop(context);
-//        elianDestroy(context);
+       elianStop(context);
+        elianDestroy(context);
         
         
         
@@ -640,7 +649,7 @@ static void *context = NULL;
     
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销2  1
-// context = elianNew(NULL, 0, target, flag);
+ context = elianNew(NULL, 0, target, flag);
     
     
     if (context == NULL)
@@ -654,10 +663,10 @@ static void *context = NULL;
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销3  4
     
-//    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
-//    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
-//    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
-//    elianStart(context);
+    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
+    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
+    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
+    elianStart(context);
 
     
 }
@@ -717,8 +726,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销4  2
-//    elianStop(context);
-//     elianDestroy(context);
+    elianStop(context);
+     elianDestroy(context);
         
         
     }
@@ -742,8 +751,8 @@ static void *context = NULL;
            
           //////// ////////////////// ////////////////////////////////
          //////////////////////   ////////////////////////////注销5  2
-//            elianStop(context);
-//           elianDestroy(context);
+            elianStop(context);
+           elianDestroy(context);
             
             
             context = NULL;

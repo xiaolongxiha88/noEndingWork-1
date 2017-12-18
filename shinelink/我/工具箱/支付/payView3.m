@@ -235,6 +235,16 @@
     [self.view addSubview:_goBut];
     
     
+    UILabel *alertLable= [[UILabel alloc] initWithFrame:CGRectMake(15*NOW_SIZE, 440*HEIGHT_SIZE, SCREEN_Width-30*NOW_SIZE, 30*HEIGHT_SIZE)];
+    alertLable.font=[UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    alertLable.textAlignment = NSTextAlignmentCenter;
+    alertLable.numberOfLines=0;
+    alertLable.text=@"温馨提示:本业务为运营商代理续费业务,如运营商取消套餐,本公司将不予退款.";
+    alertLable.textColor =COLOR(186, 186, 186, 1);
+    [self.view addSubview:alertLable];
+    
+    
+    
 }
 
 
@@ -269,7 +279,7 @@
     
   //  serverUrl0=@"http://server.growatt.com"; //DEMO
     
-    _moneyString=@"0.01";//DEMO
+    //_moneyString=@"0.01";//DEMO
     
 
     NSMutableString *snString=[NSMutableString new];

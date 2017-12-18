@@ -767,7 +767,6 @@
 "181装机容量"="Capacity";
 "182今日收益"="Today";
 "183累计收益"="Lifetime";
-
 "184日充电量"="Daily charge";
 "185总充电量"="Total charge";
 "186在线"="Online";
@@ -776,6 +775,8 @@
 "189额定功率"="Normal power";
 "190警告"="Warning";
 "191请输入备注信息"="Please enter the note information";
+
+
 
 "192第一路PV电压"="Voltage of PV1";
 "193第一路PV功率"="Power of PV1";
@@ -794,6 +795,7 @@
 "205Flash模式"="Flash";
 "206并网工作中"="On-grid operating";
 "207离网工作中"="Off-grid operating";
+
 "208负载优先"="Load first";
 "209电池优先"="Battery first";
 "210电网优先"="Grid first";
@@ -802,3 +804,53 @@
 "213馈回电网"="Export";
 "214电网取电"="Power grid";
 "215来自电池"="From battery";
+"216自发自用"="Self-consumption";
+"217馈回电网"="Export";
+"218电池能源"="Battery Energy";
+"219电池充放电信息"="Battery charge and discharge";
+"220能量优先级"="Energy priority";
+"221开关"="On/Off";
+"222时间段"="Time period";
+"223点击选择"="Click to select";
+"224选择设置值"="Select the value";
+"225请选择"="Please select";
+"226升级中"="Upgrade";
+"227放电停止SOC"="Discharge stopped SOC";
+"228充电停止SOC"="Charge stopped SOC";
+"229电池充电功率"="Battery charge power";
+"230PV总电量"="EpvTotal";
+"231PV今日电量"="EpvToday";
+"232电池今日充电量"="eBatChargeToday";
+"233电池总充电量"="eBatChargeTotal";
+"234电池今日放电量"="eBatDischargeToday";
+"235电池总放电量"="eBatDischargeTotal";
+"236逆变器功率"="Inverter power";
+"237用户侧功率"="Power from grid";
+"238电网侧功率"="Power export to grid";
+"239配置WIFI采集器"="Configure WiFi datalogger";
+"240本地调试工具"="Local debugging tools";
+"241工具箱"="Toolbox";
+"242扫描获取WiFi名称"="Scan for WiFi name";
+"243电流"="current";
+"244电压"="voltage";
+"245AC功率"="AC power";
+"246命令参数错误"="Command parameter error";
+"247有功功率错误"="Active power rate should be a number in [0, 100].";
+"248功率因数错误"="Power Factor rate should be a number in (-0.8 ~ -1/0.8 ~ 1)";
+"249设置是否存储PF命令"="Set save PF command";
+"250设置市电电压上限"="Set grid voltage high";
+"251设置市电电压下限"="Set grid voltage low";
+"252离网使能"="Set EPS On/Off";
+"253离网频率"="Set EPS frequency ";
+"254离网电压"="Set EPS voltage";
+"255请输入"="Please input";
+"256容性"="Over";
+"257请选择设置值"="Please select the setting value";
+"258请同时设置起始和结束时间"="Please set the start and end time together";
+"259感性"="Under";
+"260光伏功率"="Solar power";
+"261取电功率"="Power from grid";
+"262馈电功率"="Power to grid";
+"263电网取电"="Import";
+"264来自"="From";
+

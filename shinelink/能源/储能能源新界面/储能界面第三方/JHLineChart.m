@@ -463,8 +463,13 @@
             
               if (i==0) {
                   if (_contentFill) {
-                      [secondPath moveToPoint:P_M(p.x, self.chartOrigin.y)];
-                      [secondPath addLineToPoint:p];
+                      if ((isnan(p.x))||(isnan(self.chartOrigin.y))) {
+                      }else{
+                          [secondPath moveToPoint:P_M(p.x, self.chartOrigin.y)];
+                          [secondPath addLineToPoint:p];
+                      }
+                      
+                    
                   }
                   [firstPath moveToPoint:p];
 //                   [secondPath moveToPoint:p];

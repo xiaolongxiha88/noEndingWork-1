@@ -1139,7 +1139,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL2.textColor =COLOR(102, 102, 102, 1);
     [_uiviewThree addSubview:VL2];
     
-    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2435*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
+    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2435*ScreenProH-HH-20*ScreenProH, 100*ScreenProW, 30*ScreenProH)];
     // UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2440*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
     VL3.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL3.textAlignment = NSTextAlignmentLeft;
@@ -1243,6 +1243,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 if (_dataTwoDic.count>0) {
                     [self initUILineChart];
                 }else{
+                    if (deviceSystemVersion<9) {
+                        return ;
+                    }
                     NSDictionary *A=@{@"pacToUser":@"0",@"ppv":@"0",@"sysOut":@"0",@"userLoad":@"0"};
                     _dataTwoDic=[NSDictionary dictionaryWithObject:A forKey:@"0:00"];
                     [self initUILineChart];

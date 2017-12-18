@@ -118,7 +118,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                             self.cellValue2Array.add((plantAll[i] as! NSDictionary)["plantName"] as? NSString ??  "")
                             self.cellValue3Array.add((plantAll[i] as! NSDictionary)["datalog_sn"] as? NSString ??  "")
                             if ((plantAll[i] as! NSDictionary)["status"] ) is NSString{
-                                let A=(plantAll[i] as! NSDictionary)["status"] as! NSString
+                                let A=(plantAll[i] as! NSDictionary)["status"] as? NSString ?? ""
                                 if A=="" {
                                     self.cellValue4Array.add(10)
                                 }else{
@@ -129,7 +129,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                                 self.cellValue4Array.add((plantAll[i] as! NSDictionary)["status"] as? Int ?? 10)
                             }
                             
-                            self.cellValue5Array.add((plantAll[i] as! NSDictionary)["seriaNum"] as!NSString)
+                            self.cellValue5Array.add((plantAll[i] as! NSDictionary)["seriaNum"] as? NSString ?? "")
                             self.plantListArray.add(plantAll[i])
                             
                         }
@@ -139,12 +139,12 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
 
                     if accessStatusNum==2{
                         for i in 0..<plantAll.count{
-                            self.cellValue0Array.add((plantAll[i] as! NSDictionary)["deviceSn"] as!NSString)
+                            self.cellValue0Array.add((plantAll[i] as! NSDictionary)["deviceSn"] as? NSString ?? "")
                             self.cellValue1Array.add(root_zanwu_shuju as NSString)
                             self.cellValue2Array.add(root_zanwu_shuju as NSString)
                             self.cellValue3Array.add(root_zanwu_shuju as NSString)
                             self.cellValue4Array.add(10)
-                               self.cellValue5Array.add((plantAll[i] as! NSDictionary)["deviceSn"] as!NSString)
+                               self.cellValue5Array.add((plantAll[i] as! NSDictionary)["deviceSn"] as? NSString ?? "")
                            self.plantListArray.add(plantAll[i])
                         }
                     }

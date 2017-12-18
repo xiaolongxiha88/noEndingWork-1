@@ -54,7 +54,7 @@ static float TCP_TIME=1;
       _isReceiveAll=NO;
     int CMDTIME;
     if (_cmdType==3 || _cmdType==6) {
-        CMDTIME=1.5;
+        CMDTIME=2;
     }else{
         CMDTIME=TCP_TIME;
     }

@@ -73,11 +73,17 @@
     for (int i=0; i<imageNameArray.count; i++) {
         UIButton *firstB=[[UIButton alloc]initWithFrame:CGRectMake(W+buttonAndW*i, 490*HEIGHT_SIZE-SizeH-SizeH2+3*HEIGHT_SIZE, buttonSize,buttonSize )];
         [firstB setImage:[UIImage imageNamed:imageNameArray[i]] forState:UIControlStateNormal];
+        if (iPhoneX) {
+            firstB.frame=CGRectMake(W+buttonAndW*i, 490*HEIGHT_SIZE-SizeH-SizeH2+3*HEIGHT_SIZE+iphonexH, buttonSize,buttonSize );
+        }
         SEL aSelector = NSSelectorFromString(selNameArray[i]);
         [firstB addTarget:self action:aSelector forControlEvents:UIControlEventTouchUpInside];
         [self.scrollView addSubview:firstB];
         UILabel *firstL=[[UILabel alloc]initWithFrame:CGRectMake(W/2+buttonAndW*i, 540*HEIGHT_SIZE-SizeH-SizeH2, buttonSize+W,20*HEIGHT_SIZE )];
         firstL.text=lableNameArray[i];
+        if (iPhoneX) {
+            firstL.frame=CGRectMake(W/2+buttonAndW*i, 540*HEIGHT_SIZE-SizeH-SizeH2+iphonexH, buttonSize+W,20*HEIGHT_SIZE );
+        }
         firstL.textAlignment=NSTextAlignmentCenter;
         firstL.textColor=fontColor;
         firstL.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];

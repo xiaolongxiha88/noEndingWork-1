@@ -163,6 +163,9 @@
         
         if ([_frameType isEqualToString:@"1"]) {
              self.lineChartView = [[SHLineGraphView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE, 320*NOW_SIZE, 220*HEIGHT_SIZE)];
+            if (iPhoneX) {
+                self.lineChartView.frame=CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE, 320*NOW_SIZE, 220*HEIGHT_SIZE+iphonexH);
+            }
             NSDictionary *_themeAttributes = @{
                                                kXAxisLabelColorKey : fontColor,
                                                kXAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
@@ -175,6 +178,9 @@
             self.lineChartView.themeAttributes = _themeAttributes;
         }else {
         self.lineChartView = [[SHLineGraphView alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 320*NOW_SIZE, 250*HEIGHT_SIZE)];
+            if (iPhoneX) {
+                self.lineChartView.frame=CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 320*NOW_SIZE, 250*HEIGHT_SIZE+iphonexH);
+            }
         NSDictionary *_themeAttributes = @{
                                            kXAxisLabelColorKey :fontColor,
                                            kXAxisLabelFontKey : [UIFont systemFontOfSize:fontW],
@@ -404,10 +410,17 @@
 - (PNBarChart *)barChartView {
     if (!_barChartView) {
         self.barChartView = [[PNBarChart alloc] initWithFrame:CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 310*NOW_SIZE, 300*HEIGHT_SIZE)];
+        if (iPhoneX) {
+            _barChartView.frame=CGRectMake(5*NOW_SIZE, 135*HEIGHT_SIZE, 310*NOW_SIZE, 300*HEIGHT_SIZE+iphonexH);
+        }
         if (_barTypeNum==1) {
             _barChartView.frame=CGRectMake(5*NOW_SIZE, 50*HEIGHT_SIZE, 310*NOW_SIZE, 300*HEIGHT_SIZE);
+            if (iPhoneX) {
+                _barChartView.frame=CGRectMake(5*NOW_SIZE, 50*HEIGHT_SIZE, 310*NOW_SIZE, 300*HEIGHT_SIZE+iphonexH);
+            }
               self.unitLabel.hidden=YES;
         }
+     
         self.barChartView.backgroundColor = [UIColor clearColor];
         self.barChartView.barBackgroundColor = [UIColor clearColor];
         [self.barChartView setStrokeColor:COLOR(122, 230, 129, 1)];

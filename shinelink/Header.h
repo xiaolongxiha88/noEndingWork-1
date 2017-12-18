@@ -110,7 +110,10 @@
 #define HEIGHT_SIZE1  ([UIScreen mainScreen].bounds.size.height/560)
 #define HEIGHT_SIZE2  ([UIScreen mainScreen].bounds.size.height/812)
 
+//#define HEIGHT_SIZE  ([UIScreen mainScreen].bounds.size.height/560)
 #define HEIGHT_SIZE (Is_Iphone_X ? HEIGHT_SIZE2 : HEIGHT_SIZE1)
+#define iphonexH 200*HEIGHT_SIZE
+
 
 #define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) : NO)
 

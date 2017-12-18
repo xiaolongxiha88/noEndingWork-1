@@ -137,9 +137,12 @@
 
 - (void)addBtn{
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(SCR_W * 2 + 60*NOW_SIZE,SCR_H - 120*HEIGHT_SIZE, 200*NOW_SIZE, 35*HEIGHT_SIZE);
-    //    [goBut.layer setMasksToBounds:YES];
-    //    [goBut.layer setCornerRadius:25.0];
+ 
+    if (Is_Iphone_X) {
+           goBut.frame=CGRectMake(ScreenWidth * 2 + 60*NOW_SIZE,SCR_H - 150*HEIGHT_SIZE, 200*NOW_SIZE, 35*HEIGHT_SIZE);
+    }else{
+               goBut.frame=CGRectMake(ScreenWidth * 2 + 60*NOW_SIZE,SCR_H - 120*HEIGHT_SIZE, 200*NOW_SIZE, 35*HEIGHT_SIZE);
+    }
     [goBut setBackgroundImage:IMAGE(@"btn1.png") forState:UIControlStateNormal];
     goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [goBut setTitleColor:MainColor forState:UIControlStateNormal];

@@ -522,7 +522,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     
     float HH=1160*ScreenProH;
-    _uiview2=[[UIView alloc]initWithFrame:CGRectMake(0*ScreenProW, 1160*ScreenProH-viewAA+SPF5000H, 750*ScreenProW, ScreenProH*540)];
+    _uiview2=[[UIView alloc]initWithFrame:CGRectMake(0*ScreenProW, 1160*ScreenProH-viewAA+SPF5000H, ScreenWidth, ScreenProH*540)];
     [_scrollView addSubview:_uiview2];
     
     NSArray *nameArray=@[root_guangfu_chanchu_1,root_yongdian_xiaohao,root_MIX_214,root_MIX_215];
@@ -600,11 +600,15 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     float D1=[A1 floatValue];   float D2=[A2 floatValue];
     float A1L=(D1/(D1+D2));
+      float A11=(D1/(D1+D2))*100;   float A12=(D2/(D1+D2))*100;
 
+    
        float D4=[A4 floatValue];   float D5=[A5 floatValue];
       float A2L=(D4/(D4+D5));
+     float B11=(D4/(D4+D5))*100;   float B12=(D5/(D4+D5))*100;
     
-
+    NSArray *leftPercentArray=@[[NSString stringWithFormat:@"%.1f%%",A11],[NSString stringWithFormat:@"%.1f%%",B11]];
+    NSArray *rightPercentArray=@[[NSString stringWithFormat:@"%.1f%%",A12],[NSString stringWithFormat:@"%.1f%%",B12]];
     
     NSArray *data1=[self getCircleNum:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"eChargeToday1"]] A2:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"eAcCharge"]] ];
     
@@ -673,9 +677,25 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             viewLeft.backgroundColor=mixYongDianXiaoHaocolor;
             [_uiview2 addSubview:viewLeft];
             
+            UILabel *leftPecnt= [[UILabel alloc] initWithFrame:CGRectMake(Wk+K1+8*ScreenProH, 1245*ScreenProH-HH+lableH+Hk+K1+Hk0*i, W00*0.4, viewH-2*K1)];
+            leftPecnt.font=[UIFont systemFontOfSize:25*ScreenProH];
+            leftPecnt.textAlignment = NSTextAlignmentLeft;
+            leftPecnt.text=leftPercentArray[i];
+            leftPecnt.adjustsFontSizeToFitWidth=YES;
+            leftPecnt.textColor =[UIColor whiteColor];
+            [_uiview2 addSubview:leftPecnt];
+            
             UIView *viewRight= [[UIView alloc] initWithFrame:CGRectMake(Wk+K1+W00*percentValue, 1245*ScreenProH-HH+lableH+Hk+K1+Hk0*i, W00-(W00*percentValue), viewH-2*K1)];
             viewRight.backgroundColor=colorArray[i];
             [_uiview2 addSubview:viewRight];
+            
+            UILabel *rightPercentLable= [[UILabel alloc] initWithFrame:CGRectMake(Wk+K1+W00-W00*0.4-8*ScreenProH, 1245*ScreenProH-HH+lableH+Hk+K1+Hk0*i, W00*0.4, viewH-2*K1)];
+            rightPercentLable.font=[UIFont systemFontOfSize:25*ScreenProH];
+            rightPercentLable.textAlignment = NSTextAlignmentRight;
+            rightPercentLable.text=rightPercentArray[i];
+             rightPercentLable.adjustsFontSizeToFitWidth=YES;
+            rightPercentLable.textColor =[UIColor whiteColor];
+            [_uiview2 addSubview:rightPercentLable];
        
             if (percentValue>0.5) {
                 viewLeft.frame=CGRectMake(Wk+K1, 1245*ScreenProH-HH+lableH+Hk+K1+Hk0*i, W00*percentValue-Wkx, viewH-2*K1);
@@ -1039,8 +1059,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     if (yArray.count>0) {
         
         for (int i=0; i<yArray.count; i++) {
-            if ([[yArray[i] objectForKey:@"pacToUser"] floatValue]>=0) {
-                [Y7 addObject:[yArray[i] objectForKey:@"pacToUser"]];
+            if ([[yArray[i] objectForKey:@"userLoad"] floatValue]>=0) {
+                [Y7 addObject:[yArray[i] objectForKey:@"userLoad"]];
             }else{
                 [Y7 addObject:@"0"];
             }
@@ -1054,8 +1074,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             }else{
                 [Y6 addObject:@"0"];
             }
-            if ([[yArray[i] objectForKey:@"userLoad"] floatValue]>=0) {
-                [Y8 addObject:[yArray[i] objectForKey:@"userLoad"]];
+            if ([[yArray[i] objectForKey:@"pacToUser"] floatValue]>=0) {
+                [Y8 addObject:[yArray[i] objectForKey:@"pacToUser"]];
             }else{
                 [Y8 addObject:@"0"];
             }
@@ -1091,8 +1111,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     if (yArray.count>0) {
         
         for (int i=0; i<yArray.count; i++) {
-            if ([[yArray[i] objectForKey:@"pacToUser"] floatValue]>=0) {
-                [Y3 addObject:[yArray[i] objectForKey:@"pacToUser"]];
+            if ([[yArray[i] objectForKey:@"userLoad"] floatValue]>=0) {
+                [Y3 addObject:[yArray[i] objectForKey:@"userLoad"]];
             }else{
                 [Y3 addObject:@"0"];
             }
@@ -1106,8 +1126,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             }else{
                 [Y2 addObject:@"0"];
             }
-            if ([[yArray[i] objectForKey:@"userLoad"] floatValue]>=0) {
-                [Y4 addObject:[yArray[i] objectForKey:@"userLoad"]];
+            if ([[yArray[i] objectForKey:@"pacToUser"] floatValue]>=0) {
+                [Y4 addObject:[yArray[i] objectForKey:@"pacToUser"]];
             }else{
                 [Y4 addObject:@"0"];
             }
@@ -1462,7 +1482,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL2.textColor =COLOR(102, 102, 102, 1);
     [_uiviewThree addSubview:VL2];
     
-    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2440*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
+    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2440*ScreenProH-HH-20*ScreenProH, 100*ScreenProW, 30*ScreenProH)];
     // UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2440*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
     VL3.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL3.textAlignment = NSTextAlignmentLeft;
@@ -1571,6 +1591,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
            
                 if (_dataTwoDic.count==0) {
                     if ([_type isEqualToString:@"0"]) {
+                        if (deviceSystemVersion<9) {
+                            return ;
+                        }
                         NSDictionary *A=@{@"pacToUser":@"0",@"ppv":@"0",@"sysOut":@"0",@"userLoad":@"0"};
                         _dataTwoDic=[NSDictionary dictionaryWithObject:A forKey:@"0:00"];
                         [self initUILineChart];

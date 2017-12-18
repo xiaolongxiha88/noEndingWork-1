@@ -112,15 +112,21 @@ static NSString *cellTwo = @"cellTwo";
     }
     _modelList = arrM.copy;
     
-    
-    [self checkIsWifi];
+    if (_isShowScanResult!=1) {
+         [self checkIsWifi];
+    }
+   
     if (_isWiFi) {
    
    
     }else{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未连接WiFi模块" message:@"请跳转连接WiFi" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];
         alertView.tag = 1001;
-        [alertView show];
+        
+        if (_isShowScanResult!=1) {
+                 [alertView show];
+        }
+   
         
     }
         [self initUI];
@@ -134,7 +140,17 @@ static NSString *cellTwo = @"cellTwo";
 
 -(void)checkIsWifi{
     UIApplication *app = [UIApplication sharedApplication];
-    NSArray *children = [[[app valueForKeyPath:@"statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+    
+//    NSArray *children = [[[app valueForKeyPath:@"statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+
+    // 不能用 [[self deviceVersion] isEqualToString:@"iPhone X"] 来判断，因为模拟器不会返回 iPhone X
+        NSArray *children;
+    if ([[app valueForKeyPath:@"_statusBar"] isKindOfClass:NSClassFromString(@"UIStatusBar_Modern")]) {
+      children = [[[[app valueForKeyPath:@"_statusBar"] valueForKeyPath:@"_statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+    } else {
+      children = [[[app valueForKeyPath:@"_statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+    }
+    
       int netType = 0;
     //获得到网络返回码
     for (id child in children) {

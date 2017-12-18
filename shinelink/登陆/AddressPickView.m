@@ -127,6 +127,9 @@
     [UIView animateWithDuration:0.3 animations:^{
        
         _bottomView.top = kScreenHeight-navigationViewHeight-pickViewViewHeight;
+        if (deviceSystemVersion<9) {
+             _bottomView.top = kScreenHeight-navigationViewHeight-pickViewViewHeight+UI_NAVIGATION_BAR_HEIGHT;
+        }
         self.backgroundColor = windowColor;
     } completion:^(BOOL finished) {
 

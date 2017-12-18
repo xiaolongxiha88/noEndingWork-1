@@ -307,6 +307,15 @@ float Time=25.f;
     NSString *rePassword=[ud objectForKey:@"OssPassword"];
     NSString *searchDeviceAddress=[ud objectForKey:@"searchDeviceAddress"];
     
+    if (searchDeviceAddress==nil) {
+        searchDeviceAddress=@"";
+    }
+    if (reUsername==nil) {
+        reUsername=@"";
+    }
+    if (rePassword==nil) {
+        rePassword=@"";
+    }
 //    int loginOssTimeNum=(int)[[NSUserDefaults standardUserDefaults] objectForKey:@"loginOssTime"];
     
    [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"loginOssEnable"];

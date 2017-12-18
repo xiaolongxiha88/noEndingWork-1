@@ -20,6 +20,8 @@
 #define SizeH 45*HEIGHT_SIZE
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 
+//#define iphonexH 200*HEIGHT_SIZE
+
 @interface secondViewController ()
 // 进度增长步长
 @property (nonatomic, assign) CGFloat step;
@@ -71,11 +73,17 @@
     
     for (int i=0; i<imageNameArray.count; i++) {
         UIButton *firstB=[[UIButton alloc]initWithFrame:CGRectMake(W+buttonAndW*i, 490*HEIGHT_SIZE-SizeH-SizeH2+3*HEIGHT_SIZE, buttonSize,buttonSize )];
+        if (iPhoneX) {
+            firstB.frame=CGRectMake(W+buttonAndW*i, 490*HEIGHT_SIZE-SizeH-SizeH2+3*HEIGHT_SIZE+iphonexH, buttonSize,buttonSize );
+        }
         [firstB setImage:[UIImage imageNamed:imageNameArray[i]] forState:UIControlStateNormal];
         SEL aSelector = NSSelectorFromString(selNameArray[i]);
         [firstB addTarget:self action:aSelector forControlEvents:UIControlEventTouchUpInside];
         [self.scrollView addSubview:firstB];
         UILabel *firstL=[[UILabel alloc]initWithFrame:CGRectMake(W/2+buttonAndW*i, 540*HEIGHT_SIZE-SizeH-SizeH2, buttonSize+W,20*HEIGHT_SIZE )];
+        if (iPhoneX) {
+            firstL.frame=CGRectMake(W/2+buttonAndW*i, 540*HEIGHT_SIZE-SizeH-SizeH2+iphonexH, buttonSize+W,20*HEIGHT_SIZE );
+        }
         firstL.text=lableNameArray[i];
         firstL.textAlignment=NSTextAlignmentCenter;
         firstL.textColor=fontColor;
@@ -124,6 +132,9 @@
 }
 -(void)addGraph{
     _line2View = [[Line2View alloc] initWithFrame:CGRectMake(0, 265*HEIGHT_SIZE-SizeH-5*HEIGHT_SIZE, SCREEN_Width,270*HEIGHT_SIZE )];
+    if (iPhoneX) {
+        _line2View.frame=CGRectMake(0, 265*HEIGHT_SIZE-SizeH-5*HEIGHT_SIZE, SCREEN_Width,270*HEIGHT_SIZE+iphonexH );
+    }
     self.line2View.flag=@"1";
     self.line2View.frameType=@"1";
     [self.scrollView addSubview:self.line2View];
