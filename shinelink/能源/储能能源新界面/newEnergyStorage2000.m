@@ -385,7 +385,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     
     float HH=1160*ScreenProH;
-    _uiview2=[[UIView alloc]initWithFrame:CGRectMake(0*ScreenProW, 1160*ScreenProH-view1H-viewAA, 750*ScreenProW, ScreenProH*140)];
+    _uiview2=[[UIView alloc]initWithFrame:CGRectMake(0*ScreenProW, 1160*ScreenProH-view1H-viewAA, ScreenWidth, ScreenProH*140)];
     [_scrollView addSubview:_uiview2];
     
 
