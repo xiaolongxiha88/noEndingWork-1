@@ -40,8 +40,18 @@
     [self initTwo];
 }
 
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+
+        [_textField2 resignFirstResponder];
+
+
+}
+
 
 -(void)initUI{
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
     
     float H0=30*HEIGHT_SIZE;
     UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0*HEIGHT_SIZE, 300*NOW_SIZE,H0)];

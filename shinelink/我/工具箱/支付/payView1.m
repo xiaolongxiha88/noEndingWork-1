@@ -134,7 +134,7 @@
     [_V22 addSubview:_goBut];
     
     UIButton  * _goBut2 =  [UIButton buttonWithType:UIButtonTypeCustom];
-    _goBut2.frame=CGRectMake(175*HEIGHT_SIZE,5*HEIGHT_SIZE, buttonW, buttonH);
+    _goBut2.frame=CGRectMake(175*NOW_SIZE,5*HEIGHT_SIZE, buttonW, buttonH);
     [_goBut2 setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [_goBut2.layer setMasksToBounds:YES];
     [_goBut2.layer setCornerRadius:buttonH/2];

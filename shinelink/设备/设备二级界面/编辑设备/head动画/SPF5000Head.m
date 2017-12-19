@@ -21,7 +21,12 @@
 -(NSString*)statueString:(int)statue{
     NSString *statueString;
     NSArray *statueArray=@[root_xianZhi,root_chongDian,root_fangDian,root_cuoWu,root_dengDai,root_5000_pv_chongdian,root_5000_ac_chongdian,root_5000_lianhe_chongdian,root_5000_lianhechong_acfang,root_5000_pvchong_acfang,root_5000_acchong_acfang,root_5000_ac_fang,root_5000_pvchong_dianchifang];
-        statueString=statueArray[statue];
+    if ((statue>=0) && (statue<13)) {
+           statueString=statueArray[statue];
+    }else{
+        statueString=@"";
+    }
+    
     
     return statueString;
 }
