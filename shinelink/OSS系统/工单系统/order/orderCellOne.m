@@ -104,7 +104,7 @@ static NSString *statusNum = @"2";
         NSString *dataString = [_dayFormatter stringFromDate:[NSDate date]];
         _goTimeString=dataString;
         
-        NSArray *lableNameArray=[NSArray arrayWithObjects:@"所属区域:",@"申请时间:",@"要求到达时间:", @"预约上门时间:", @"详细地址:", @"备注:",@"添加备注:", nil];
+        NSArray *lableNameArray=[NSArray arrayWithObjects:@"公司名称:",@"申请时间:",@"要求到达时间:", @"预约上门时间:", @"详细地址:", @"备注:",@"添加备注:", nil];
         NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"groupName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], dataString, nil];
         
         float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;

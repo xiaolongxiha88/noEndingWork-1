@@ -11,6 +11,7 @@
 #import "MBProgressHUD.h"
 #import "ZJBLStoreShopTypeAlert.h"
 #import "SNLocationManager.h"
+#import "orderSetView.h"
 
 static NSString *statusNum = @"3";
 
@@ -107,14 +108,62 @@ static NSString *statusNum = @"3";
     NSString *dataString = [_dayFormatter stringFromDate:[NSDate date]];
     _goTimeString=dataString;
     
+    
     NSArray *lableNameArray=[NSArray arrayWithObjects:@"定位:",@"工单完成时间:",@"完成状态:",@"设备类型:", @"设备序列号:", @"上传照片:",@"报告单", nil];
     NSArray *lableNameArray2=[NSArray arrayWithObjects:@"",@"",@"", @"", @"", nil];
     
     float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;
+     float numH2=35*NOW_SIZE;
+    
+     UIView *V00 = [[UIView alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE,SCREEN_Width, numH)];
+    V00.userInteractionEnabled=YES;
+    UITapGestureRecognizer * forget00=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToSet)];
+    [V00 addGestureRecognizer:forget00];
+       [_scrollView addSubview:V00];
+    
+    UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(firstW, 2*HEIGHT_SIZE,lable1W, lableH)];
+    lable1.textColor = COLOR(154, 154, 154, 1);
+    lable1.text=@"*";
+    lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    if ([_statusString isEqualToString:statusNum]) {
+            lable1.textColor = [UIColor redColor];
+            [V00 addSubview:lable1];
+    }
+    
+    
+    NSString *lableNameString1=@"填写工单表格";
+    NSMutableDictionary *dic1 = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+    CGSize size0 = [lableNameString1 boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic1 context:nil].size;
+    UILabel *lable02 = [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, 0,size0.width, lableH)];    
+    if ([_statusString isEqualToString:statusNum]) {
+        lable02.textColor =COLOR(51, 51, 51, 1);
+    }else{
+        lable02.textColor = COLOR(154, 154, 154, 1);
+    }
+    lable02.text=lableNameString1;
+    lable02.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    lable02.textAlignment=NSTextAlignmentLeft;
+    if ([_statusString isEqualToString:statusNum]) {
+        [_scrollView addSubview:lable02];
+    }
+    
+    UIImageView *image00=[[UIImageView alloc]initWithFrame:CGRectMake(firstW+lable1W+size0.width+lable1W, 7*HEIGHT_SIZE, 15*HEIGHT_SIZE,16*HEIGHT_SIZE )];
+    image00.image = IMAGE(@"presentation.png");
+    [V00 addSubview:image00];
+    
+    UIImageView *image01=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_Width-(1*firstW)-20*HEIGHT_SIZE, 5*HEIGHT_SIZE, 20*HEIGHT_SIZE,20*HEIGHT_SIZE )];
+    image01.image = IMAGE(@"more22.png");
+    [V00 addSubview:image01];
+
+    UIView *V01 = [[UIView alloc]initWithFrame:CGRectMake(firstW,numH, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+    V01.backgroundColor = COLOR(222, 222, 222, 1);
+        [V00 addSubview:V01];
+    
+    
     for (int i=0; i<lableNameArray.count; i++) {
         
      
-            UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(firstW, 2*HEIGHT_SIZE+numH*i,lable1W, lableH)];
+            UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(firstW, 2*HEIGHT_SIZE+numH*i+numH2,lable1W, lableH)];
             lable1.textColor = COLOR(154, 154, 154, 1);
         lable1.text=@"*";
         lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
@@ -128,7 +177,7 @@ static NSString *statusNum = @"3";
         float lineW=SCREEN_Width-(2*firstW);  float image2W=6*NOW_SIZE;
         
         if ((i==3)||(i==1)||(i==2)) {
-            UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(firstW+lineW-image2W, 8*HEIGHT_SIZE+numH*i, image2W,14*HEIGHT_SIZE )];
+            UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(firstW+lineW-image2W, 8*HEIGHT_SIZE+numH*i+numH2, image2W,14*HEIGHT_SIZE )];
             if ([_statusString isEqualToString:statusNum]) {
                  image2.userInteractionEnabled=YES;
             }
@@ -155,7 +204,7 @@ static NSString *statusNum = @"3";
         NSString*lable2Name=lableNameArray[i];
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
         CGSize size = [lable2Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-        UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, 0+numH*i,size.width, lableH)];
+        UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, 0+numH*i+numH2,size.width, lableH)];
        
         if ([_statusString isEqualToString:statusNum]) {
                 lable2.textColor =COLOR(51, 51, 51, 1);
@@ -184,7 +233,7 @@ static NSString *statusNum = @"3";
         
         if (i==0) {
     
-            UILabel *lable4 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i,SCREEN_Width-(1*firstW)-lable3W, lableH)];
+            UILabel *lable4 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i+numH2,SCREEN_Width-(1*firstW)-lable3W, lableH)];
             lable4.textColor =COLOR(51, 51, 51, 1);
             lable4.textAlignment=NSTextAlignmentRight;
             lable4.tag=2010;
@@ -197,7 +246,7 @@ static NSString *statusNum = @"3";
             }
             NSString *lable4Name=@"点击获取";
              CGSize size1 = [lable4Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-            lable4.frame=CGRectMake(SCREEN_Width-firstW-size1.width, 0+numH*i, size1.width, lableH);
+            lable4.frame=CGRectMake(SCREEN_Width-firstW-size1.width, 0+numH*i+numH2, size1.width, lableH);
             lable4.text=lable4Name;
             lable4.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
             if ([_statusString isEqualToString:statusNum]) {
@@ -208,7 +257,7 @@ static NSString *statusNum = @"3";
         }
         
         if ((i==0)||(i==1)||(i==2)||(i==3)) {
-            UILabel *lable3 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i,SCREEN_Width-(1*firstW)-lable3W, lableH)];
+            UILabel *lable3 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i+numH2,SCREEN_Width-(1*firstW)-lable3W, lableH)];
          
             if ([_statusString isEqualToString:statusNum]) {
                     lable3.textColor =COLOR(51, 51, 51, 1);
@@ -236,7 +285,7 @@ static NSString *statusNum = @"3";
         }
         
         if ((i==0)||(i==1)||(i==2)||(i==3)||(i==4)) {
-            UIView *View4 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*(i+1)-1*HEIGHT_SIZE, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+            UIView *View4 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*(i+1)-1*HEIGHT_SIZE+numH2, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
             View4.backgroundColor = COLOR(222, 222, 222, 1);
             [_scrollView addSubview:View4];
         }
@@ -245,7 +294,7 @@ static NSString *statusNum = @"3";
         float textW1=SCREEN_Width-firstW-(SCREEN_Width-(2*firstW));
         float textW=SCREEN_Width-textfieldW-textW1;
         if (i==4) {
-            _textfield = [[UITextField alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i,textW, lableH)];
+            _textfield = [[UITextField alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i+numH2,textW, lableH)];
             
             [_textfield setValue:COLOR(154, 154, 154, 1) forKeyPath:@"_placeholderLabel.textColor"];
             [_textfield setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
@@ -267,7 +316,7 @@ static NSString *statusNum = @"3";
     }
     
     float allH=40*HEIGHT_SIZE;
-    UIView *VI = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_Width-firstW-allH, numH*6-5*HEIGHT_SIZE, allH,allH )];
+    UIView *VI = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_Width-firstW-allH, numH*6-5*HEIGHT_SIZE+numH2, allH,allH )];
     VI.backgroundColor =[UIColor clearColor];
     VI.userInteractionEnabled = YES;
     VI.tag=5000;
@@ -289,7 +338,7 @@ static NSString *statusNum = @"3";
     float imageH=40*HEIGHT_SIZE; float imageH2=40*HEIGHT_SIZE;
      float ViewH=imageH+10*HEIGHT_SIZE;
     if (!_imageViewAll) {
-        _imageViewAll = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*7+40*HEIGHT_SIZE-imageH2, SCREEN_Width-(2*firstW)+10*NOW_SIZE,ViewH)];
+        _imageViewAll = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*7+40*HEIGHT_SIZE-imageH2+numH2, SCREEN_Width-(2*firstW)+10*NOW_SIZE,ViewH)];
         _imageViewAll.backgroundColor =COLOR(242, 242, 242, 1);
         _imageViewAll.userInteractionEnabled = YES;
         if ([_statusString isEqualToString:statusNum]) {
@@ -299,7 +348,7 @@ static NSString *statusNum = @"3";
     }
     
     
-    UILabel *lable6= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*7+60*HEIGHT_SIZE,100*NOW_SIZE, lableH)];
+    UILabel *lable6= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*7+60*HEIGHT_SIZE+numH2,100*NOW_SIZE, lableH)];
     if ([_statusString isEqualToString:statusNum]) {
         lable6.textColor =COLOR(51, 51, 51, 1);
     }else{
@@ -312,7 +361,7 @@ static NSString *statusNum = @"3";
     }
     
     
-    UIView *V2 = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_Width-firstW-allH, numH*7+60*HEIGHT_SIZE-5*HEIGHT_SIZE, allH,allH )];
+    UIView *V2 = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_Width-firstW-allH, numH*7+60*HEIGHT_SIZE-5*HEIGHT_SIZE+numH2, allH,allH )];
     V2.backgroundColor =[UIColor clearColor];
     V2.userInteractionEnabled = YES;
     V2.tag=5001;
@@ -329,7 +378,7 @@ static NSString *statusNum = @"3";
     [V2 addSubview:image5];
     
     if (!_imageViewAll2) {
-        _imageViewAll2 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+100*HEIGHT_SIZE-imageH2, SCREEN_Width-(2*firstW)+10*NOW_SIZE,ViewH)];
+        _imageViewAll2 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+100*HEIGHT_SIZE-imageH2+numH2, SCREEN_Width-(2*firstW)+10*NOW_SIZE,ViewH)];
         _imageViewAll2.backgroundColor =COLOR(242, 242, 242, 1);
         _imageViewAll2.userInteractionEnabled = YES;
         if ([_statusString isEqualToString:statusNum]) {
@@ -342,7 +391,7 @@ static NSString *statusNum = @"3";
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
   CGSize size3 = [lable7Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     
-    UILabel *lable7= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*8+120*HEIGHT_SIZE,size3.width, lableH)];
+    UILabel *lable7= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*8+120*HEIGHT_SIZE+numH2,size3.width, lableH)];
         lable7.textColor =COLOR(51, 51, 51, 1);
     lable7.text=lable7Name;
     lable7.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -359,14 +408,14 @@ static NSString *statusNum = @"3";
     }
 
     if ([_statusString isEqualToString:statusNum]) {
-        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+120*HEIGHT_SIZE+2*HEIGHT_SIZE, SCREEN_Width-(2*firstW)-lable1W-size3.width,remarkLabelH)];
+        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+120*HEIGHT_SIZE+2*HEIGHT_SIZE+numH2, SCREEN_Width-(2*firstW)-lable1W-size3.width,remarkLabelH)];
         lableR.textColor = COLOR(154, 154, 154, 1);
         lableR.text=_remarkString;
         lableR.numberOfLines=0;
         lableR.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:lableR];
         
-        UIView* lineR = [[UIView alloc]initWithFrame:CGRectMake(firstW,  numH*8+120*HEIGHT_SIZE+5*HEIGHT_SIZE-1*HEIGHT_SIZE+remarkLabelH, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+        UIView* lineR = [[UIView alloc]initWithFrame:CGRectMake(firstW,  numH*8+120*HEIGHT_SIZE+5*HEIGHT_SIZE-1*HEIGHT_SIZE+remarkLabelH+numH2, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
         lineR.backgroundColor = COLOR(222, 222, 222, 1);
         [_scrollView addSubview:lineR];
     }
@@ -382,7 +431,7 @@ static NSString *statusNum = @"3";
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
         CGSize size3 = [lable8Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
-        UILabel *lable8= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*8+125*HEIGHT_SIZE+remarkLabelH,size3.width, lableH)];
+        UILabel *lable8= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*8+125*HEIGHT_SIZE+remarkLabelH+numH2,size3.width, lableH)];
         lable8.textColor =COLOR(51, 51, 51, 1);
         lable8.text=lable8Name;
         lable8.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -390,14 +439,14 @@ static NSString *statusNum = @"3";
             [_scrollView addSubview:lable8];
         }
         
-            _textfield2 = [[UITextView alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+125*HEIGHT_SIZE+remarkLabelH, SCREEN_Width-(2*firstW)-lable1W-size3.width,lableH)];
+            _textfield2 = [[UITextView alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+125*HEIGHT_SIZE+remarkLabelH+numH2, SCREEN_Width-(2*firstW)-lable1W-size3.width,lableH)];
             _textfield2.textColor=COLOR(51, 51, 51, 1);
             _textfield2.tintColor = COLOR(51, 51, 51, 1);
             _textfield2.delegate=self;
             _textfield2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
             [_scrollView addSubview:_textfield2];
         
-        _View5 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+125*HEIGHT_SIZE+lableH+remarkLabelH, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+        _View5 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+125*HEIGHT_SIZE+lableH+remarkLabelH+numH2, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
         _View5.backgroundColor = COLOR(222, 222, 222, 1);
         if ([_statusString isEqualToString:statusNum]) {
             [_scrollView addSubview:_View5];
@@ -407,7 +456,7 @@ static NSString *statusNum = @"3";
     
     
    _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    _goBut.frame=CGRectMake(60*NOW_SIZE,_textfield2.frame.origin.y+100*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    _goBut.frame=CGRectMake(60*NOW_SIZE,_textfield2.frame.origin.y+100*HEIGHT_SIZE+numH2, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
     [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
     [_goBut setTitle:@"完成" forState:UIControlStateNormal];
@@ -423,6 +472,14 @@ static NSString *statusNum = @"3";
     
 }
 
+
+-(void)goToSet{
+    
+    if (_goToSetBlock) {
+        self.goToSetBlock();
+    }
+
+}
 
 -(void)controlPhoto:(UITapGestureRecognizer*)Tap{
     if (Tap.view.tag==5000) {
@@ -743,7 +800,9 @@ static NSString *statusNum = @"3";
 }
 
 -(void)fetchLocation{
+ 
     [[SNLocationManager shareLocationManager] startUpdatingLocationWithSuccess:^(CLLocation *location, CLPlacemark *placemark) {
+ 
         _longitude=[NSString stringWithFormat:@"%.2f", location.coordinate.longitude];
         _latitude=[NSString stringWithFormat:@"%.2f", location.coordinate.latitude];
         _city=placemark.locality;
@@ -762,7 +821,7 @@ static NSString *statusNum = @"3";
         lable.frame=CGRectMake(X1, Y1, w, H);
         
     } andFailure:^(CLRegion *region, NSError *error) {
-        
+
     }];
     
 }

@@ -12,6 +12,8 @@
 #import "orderCellThree.h"
 #import "Model.h"
 #import "ShinePhone-Swift.h"
+#import "orderSetView.h"
+
 
 static NSString *cellOne = @"cellOne";
 static NSString *cellTwo = @"cellTwo";
@@ -183,7 +185,7 @@ static NSString *cellThree = @"cellThree";
     titleLabel2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_headView addSubview:titleLabel2];
     
-    NSArray *headName=[NSArray arrayWithObjects:@"姓名",@"类型", nil];
+    NSArray *headName=[NSArray arrayWithObjects:@"所属地区",@"类型", nil];
     NSArray *serviceType=[NSArray arrayWithObjects:@"",@"现场维修",@"安装调试", @"培训",@"巡检",nil];
     int k=[_allValueDic[@"serviceType"] intValue];
     NSString *kName=serviceType[k];
@@ -324,6 +326,11 @@ static NSString *cellThree = @"cellThree";
             NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
             [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         }];
+        cell.goToSetBlock = ^(){
+            orderSetView *testView=[[orderSetView alloc]init];
+            [self.navigationController pushViewController:testView animated:YES];
+         
+        };
         return cell;
     }else if (indexPath.row==2) {
         orderCellThree *cell = [tableView dequeueReusableCellWithIdentifier:cellThree forIndexPath:indexPath];
@@ -338,6 +345,7 @@ static NSString *cellThree = @"cellThree";
             NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
             [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         }];
+    
         return cell;
     }else{
     

@@ -442,7 +442,8 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
 //        }else{
 //        cellValue3Array1=""
 //        }
-//        
+//
+        ///改用公司名称
         if (((((questionAll[i] as! NSDictionary)["address"] as AnyObject).isEqual(NSNull.init())) == false)) {
             cellValue3Array2=((questionAll[i] as! NSDictionary)["address"] as!NSString)
         }else{

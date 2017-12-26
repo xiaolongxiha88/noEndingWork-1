@@ -249,6 +249,8 @@ _pcsNetStorageSN=@"";
     
 }
 
+
+
 -(void)getNewAd{
     
 
