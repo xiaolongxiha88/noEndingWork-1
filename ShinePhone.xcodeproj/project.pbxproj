@@ -622,9 +622,9 @@
 		3387B9011FB5A0920073FB35 /* newheadD33.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B9001FB5A0920073FB35 /* newheadD33.png */; };
 		3387B9031FB5A09F0073FB35 /* newheadD44.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B9021FB5A09F0073FB35 /* newheadD44.png */; };
 		3387B9051FB6C99E0073FB35 /* newheadnotes.png in Resources */ = {isa = PBXBuildFile; fileRef = 3387B9041FB6C99D0073FB35 /* newheadnotes.png */; };
-		33884DAA1FF225740089E689 /* more22.png in Resources */ = {isa = PBXBuildFile; fileRef = 33884DA91FF225730089E689 /* more22.png */; };
 		33884DAC1FF225BC0089E689 /* presentation.png in Resources */ = {isa = PBXBuildFile; fileRef = 33884DAB1FF225BC0089E689 /* presentation.png */; };
 		33884DAF1FF248C70089E689 /* orderSetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33884DAE1FF248C70089E689 /* orderSetView.m */; };
+		33884DB11FF32D970089E689 /* more22.png in Resources */ = {isa = PBXBuildFile; fileRef = 33884DB01FF32D960089E689 /* more22.png */; };
 		338964591E51979800A7B1AE /* device_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 338964581E51979800A7B1AE /* device_bg.jpg */; };
 		3389645D1E51B74C00A7B1AE /* yuan.png in Resources */ = {isa = PBXBuildFile; fileRef = 3389645C1E51B74C00A7B1AE /* yuan.png */; };
 		338964611E52E52700A7B1AE /* phoneRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338964601E52E52700A7B1AE /* phoneRegisterViewController.m */; };
@@ -1772,10 +1772,10 @@
 		3387B9001FB5A0920073FB35 /* newheadD33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadD33.png; sourceTree = "<group>"; };
 		3387B9021FB5A09F0073FB35 /* newheadD44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadD44.png; sourceTree = "<group>"; };
 		3387B9041FB6C99D0073FB35 /* newheadnotes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadnotes.png; sourceTree = "<group>"; };
-		33884DA91FF225730089E689 /* more22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more22.png; sourceTree = "<group>"; };
 		33884DAB1FF225BC0089E689 /* presentation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = presentation.png; sourceTree = "<group>"; };
 		33884DAD1FF248C70089E689 /* orderSetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = orderSetView.h; sourceTree = "<group>"; };
 		33884DAE1FF248C70089E689 /* orderSetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = orderSetView.m; sourceTree = "<group>"; };
+		33884DB01FF32D960089E689 /* more22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more22.png; sourceTree = "<group>"; };
 		338964581E51979800A7B1AE /* device_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = device_bg.jpg; path = ../device_bg.jpg; sourceTree = "<group>"; };
 		3389645C1E51B74C00A7B1AE /* yuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yuan.png; path = ../yuan.png; sourceTree = "<group>"; };
 		3389645F1E52E52700A7B1AE /* phoneRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = phoneRegisterViewController.h; path = "../注册/手机验证/phoneRegisterViewController.h"; sourceTree = "<group>"; };
@@ -3189,8 +3189,8 @@
 		336F04151F06207300DE7CD7 /* order图片 */ = {
 			isa = PBXGroup;
 			children = (
+				33884DB01FF32D960089E689 /* more22.png */,
 				33884DAB1FF225BC0089E689 /* presentation.png */,
-				33884DA91FF225730089E689 /* more22.png */,
 				3330F4F01F177B920076C237 /* more2@2x.png */,
 				3330F4EC1F16173B0076C237 /* processingOss.png */,
 				3330F4DE1F15B1E20076C237 /* search_icon_click.png */,
@@ -4964,7 +4964,6 @@
 				3370EB951F3C78B900F37149 /* LEDold2.gif in Resources */,
 				33FEFD561C7DB38400324374 /* icon_press@3x.png in Resources */,
 				3330F4D91F14B8330076C237 /* work_order_icon.png in Resources */,
-				33884DAA1FF225740089E689 /* more22.png in Resources */,
 				336B51171FE146E90094CD6E /* newheadAnimal42.png in Resources */,
 				3333003C1F1312B900754C6F /* head_bg_oss_first.png in Resources */,
 				338964591E51979800A7B1AE /* device_bg.jpg in Resources */,
@@ -5065,6 +5064,7 @@
 				3387B8EE1FB547FA0073FB35 /* newheadgrid.png in Resources */,
 				3387B8F91FB59ECC0073FB35 /* newheadD2.png in Resources */,
 				3370791D1D8FD80300D7DA98 /* question.png in Resources */,
+				33884DB11FF32D970089E689 /* more22.png in Resources */,
 				336E04021EC9ADAC0034BC86 /* icon_search.png in Resources */,
 				3370EBBB1F417EE500F37149 /* 参数.png in Resources */,
 				33731C391F58F73800F77707 /* drop_down.png in Resources */,
