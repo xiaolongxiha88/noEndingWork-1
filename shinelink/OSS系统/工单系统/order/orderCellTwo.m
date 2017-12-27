@@ -109,7 +109,7 @@ static NSString *statusNum = @"3";
     _goTimeString=dataString;
     
     
-    NSArray *lableNameArray=[NSArray arrayWithObjects:@"定位:",@"工单完成时间:",@"完成状态:",@"设备类型:", @"设备序列号:", @"上传照片:",@"报告单", nil];
+    NSArray *lableNameArray=[NSArray arrayWithObjects:@"定位:",@"工单完成时间:",@"完成状态:",@"设备类型:", @"设备序列号:", @"上传照片:",@"服务细节(现场图片等等)", nil];
     NSArray *lableNameArray2=[NSArray arrayWithObjects:@"",@"",@"", @"", @"", nil];
     
     float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;
@@ -168,7 +168,7 @@ static NSString *statusNum = @"3";
         lable1.text=@"*";
         lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
             if ([_statusString isEqualToString:statusNum]) {
-                if ((i==0)||(i==1)||(i==2)||(i==6)) {
+                if ((i==0)||(i==1)||(i==2)) {
                     lable1.textColor = [UIColor redColor];
                               [_scrollView addSubview:lable1];
                 }
@@ -357,7 +357,7 @@ static NSString *statusNum = @"3";
     lable6.text=@"现场图片";
     lable6.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     if ([_statusString isEqualToString:statusNum]) {
-        [_scrollView addSubview:lable6];
+      //  [_scrollView addSubview:lable6];
     }
     
     
@@ -368,7 +368,7 @@ static NSString *statusNum = @"3";
     UITapGestureRecognizer * forget3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(controlPhoto:)];
     [V2 addGestureRecognizer:forget3];
     if ([_statusString isEqualToString:statusNum]) {
-       [_scrollView addSubview:V2];
+     //  [_scrollView addSubview:V2];
     }
  
     
@@ -382,7 +382,7 @@ static NSString *statusNum = @"3";
         _imageViewAll2.backgroundColor =COLOR(242, 242, 242, 1);
         _imageViewAll2.userInteractionEnabled = YES;
         if ([_statusString isEqualToString:statusNum]) {
-          [_scrollView addSubview:_imageViewAll2];
+     //     [_scrollView addSubview:_imageViewAll2];
         }
       
     }
@@ -391,7 +391,8 @@ static NSString *statusNum = @"3";
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
   CGSize size3 = [lable7Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     
-    UILabel *lable7= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*8+120*HEIGHT_SIZE+numH2,size3.width, lableH)];
+    float H7=90*HEIGHT_SIZE;
+    UILabel *lable7= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*8+120*HEIGHT_SIZE+numH2-H7,size3.width, lableH)];
         lable7.textColor =COLOR(51, 51, 51, 1);
     lable7.text=lable7Name;
     lable7.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -408,14 +409,14 @@ static NSString *statusNum = @"3";
     }
 
     if ([_statusString isEqualToString:statusNum]) {
-        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+120*HEIGHT_SIZE+2*HEIGHT_SIZE+numH2, SCREEN_Width-(2*firstW)-lable1W-size3.width,remarkLabelH)];
+        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+120*HEIGHT_SIZE+2*HEIGHT_SIZE+numH2-H7, SCREEN_Width-(2*firstW)-lable1W-size3.width,remarkLabelH)];
         lableR.textColor = COLOR(154, 154, 154, 1);
         lableR.text=_remarkString;
         lableR.numberOfLines=0;
         lableR.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:lableR];
         
-        UIView* lineR = [[UIView alloc]initWithFrame:CGRectMake(firstW,  numH*8+120*HEIGHT_SIZE+5*HEIGHT_SIZE-1*HEIGHT_SIZE+remarkLabelH+numH2, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+        UIView* lineR = [[UIView alloc]initWithFrame:CGRectMake(firstW,  numH*8+120*HEIGHT_SIZE+5*HEIGHT_SIZE-1*HEIGHT_SIZE+remarkLabelH+numH2-H7, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
         lineR.backgroundColor = COLOR(222, 222, 222, 1);
         [_scrollView addSubview:lineR];
     }
@@ -431,7 +432,7 @@ static NSString *statusNum = @"3";
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
         CGSize size3 = [lable8Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
-        UILabel *lable8= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*8+125*HEIGHT_SIZE+remarkLabelH+numH2,size3.width, lableH)];
+        UILabel *lable8= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*8+125*HEIGHT_SIZE+remarkLabelH+numH2-H7,size3.width, lableH)];
         lable8.textColor =COLOR(51, 51, 51, 1);
         lable8.text=lable8Name;
         lable8.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -439,14 +440,14 @@ static NSString *statusNum = @"3";
             [_scrollView addSubview:lable8];
         }
         
-            _textfield2 = [[UITextView alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+125*HEIGHT_SIZE+remarkLabelH+numH2, SCREEN_Width-(2*firstW)-lable1W-size3.width,lableH)];
+            _textfield2 = [[UITextView alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+125*HEIGHT_SIZE+remarkLabelH+numH2-H7, SCREEN_Width-(2*firstW)-lable1W-size3.width,lableH)];
             _textfield2.textColor=COLOR(51, 51, 51, 1);
             _textfield2.tintColor = COLOR(51, 51, 51, 1);
             _textfield2.delegate=self;
             _textfield2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
             [_scrollView addSubview:_textfield2];
         
-        _View5 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+125*HEIGHT_SIZE+lableH+remarkLabelH+numH2, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
+        _View5 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+125*HEIGHT_SIZE+lableH+remarkLabelH+numH2-H7, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
         _View5.backgroundColor = COLOR(222, 222, 222, 1);
         if ([_statusString isEqualToString:statusNum]) {
             [_scrollView addSubview:_View5];
@@ -1121,7 +1122,7 @@ static NSString *statusNum = @"3";
 // MARK: - 获取展开后的高度
 + (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status remarkH:(CGFloat) remarkH{
     
-    float H=620*HEIGHT_SIZE+remarkH-20*HEIGHT_SIZE+140*HEIGHT_SIZE;
+    float H=620*HEIGHT_SIZE+remarkH-20*HEIGHT_SIZE+60*HEIGHT_SIZE;
     if (![status isEqualToString:@"3"]) {
         H=270*HEIGHT_SIZE;
     }

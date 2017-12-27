@@ -136,8 +136,8 @@ static NSString *cellThree = @"cellThree";
 
     
     if (!_tableView) {
-        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height-H1-H2)];
-        _tableView.contentSize=CGSizeMake(SCREEN_Width, 2000*HEIGHT_SIZE);
+        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height-NaviHeight-UI_STATUS_BAR_HEIGHT)];
+        _tableView.contentSize=CGSizeMake(SCREEN_Width, 2200*HEIGHT_SIZE);
         _tableView.delegate = self;
         _tableView.dataSource = self;
          _tableView.tableHeaderView=_headView;
@@ -165,7 +165,7 @@ static NSString *cellThree = @"cellThree";
 //    _headView = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0*HEIGHT_SIZE, SCREEN_Width,100*HEIGHT_SIZE )];
 //    _headView.backgroundColor =[UIColor clearColor];
 //    [self.view addSubview:_headView];
-    
+
     float titleLabelH1=30*HEIGHT_SIZE; float firstW1=10*HEIGHT_SIZE;
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(firstW1, 0, SCREEN_Width-(2*firstW1), titleLabelH1)];
     titleLabel.textColor = [UIColor blackColor];
