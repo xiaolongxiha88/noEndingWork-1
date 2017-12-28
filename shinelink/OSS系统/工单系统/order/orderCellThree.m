@@ -78,7 +78,7 @@
     _scrollView.scrollEnabled=YES;
     [self.contentView addSubview:_scrollView];
     
-    _View3 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+ImageW1/2, 0, 0.3*NOW_SIZE,34*HEIGHT_SIZE)];
+    _View3 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+ImageW1/2, 0, 0.3*NOW_SIZE,38*HEIGHT_SIZE)];
   
     if ([_statusString isEqualToString:@"4"]) {
         _View3.backgroundColor =COLOR(255, 204, 0, 1);
@@ -87,82 +87,38 @@
     }
     [self.contentView addSubview:_View3];
     
-//    self.dayFormatter = [[NSDateFormatter alloc] init];
-//    [self.dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    NSString *dataString = [_dayFormatter stringFromDate:[NSDate date]];
     
-    NSArray *lableNameArray=[NSArray arrayWithObjects:@"申请时间:",@"接收时间:", @"预约时间:",@"完成时间:",@"完成状态:",@"报告单:", @"现场图片:",  @"备注:", nil];
-//    NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], dataString, nil];
+    NSArray *lableNameArray=[NSArray arrayWithObjects:@"完成情况",@"完成时间", @"回访时间",@"回访人",@"基本信息是否有误",@"满意度打分", @"电话是否接通",  @"是否按约定时间到达现场",@"是否签字确认",@"客户评价",@"回访备注",  nil];
+    
+  NSArray *lableValueArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"completion"]],[NSString stringWithFormat:@"%@",_allValueDic[@"completeTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"visitTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"returnVisit"]], [NSString stringWithFormat:@"%@",_allValueDic[@"basicInformation"]],[NSString stringWithFormat:@"%@",_allValueDic[@"satisfaction"]],[NSString stringWithFormat:@"%@",_allValueDic[@"phoneIswitched"]],[NSString stringWithFormat:@"%@",_allValueDic[@"agreedTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"signToConfirm"]],[NSString stringWithFormat:@"%@",_allValueDic[@"recommended"]],[NSString stringWithFormat:@"%@",_allValueDic[@"returnNote"]],nil];
     
     float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;
+    long forNum=lableNameArray.count-1;
     for (int i=0; i<lableNameArray.count; i++) {
         
-        if (i!=5) {
-            UILabel *lable1 = [[UILabel alloc]initWithFrame:CGRectMake(firstW, 2*HEIGHT_SIZE+numH*i,lable1W, lableH)];
-            lable1.textColor = COLOR(154, 154, 154, 1);
-            if ((i==3)||(i==4)) {
-                lable1.textColor = [UIColor redColor];
-            }
-            lable1.text=@"*";
-            lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
-            //   [_scrollView addSubview:lable1];
-        }
-        
-        
-        NSString*lable2Name=lableNameArray[i];
+
+        NSString*lable2Name=[NSString stringWithFormat:@"%@:",lableNameArray[i]];
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
         CGSize size = [lable2Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, 0+numH*i,size.width, lableH)];
         lable2.textColor = COLOR(154, 154, 154, 1);
 
-        lable2.text=lableNameArray[i];
+        lable2.text=lable2Name;
         lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:lable2];
         
-        float ImageW2=15*HEIGHT_SIZE;
-        if ((i==1)||(i==2)||(i==3)) {
-            
-            UIImageView *image00 = [[UIImageView alloc]initWithFrame:CGRectMake(firstW+lable1W+size.width, (lableH-ImageW2)/2+numH*i,ImageW2, ImageW2)];
-            image00.image=IMAGE(@"workoader_date1.png");
-            if (i==3) {
-                image00.image=IMAGE(@"workoader_date2.png");
-            }
-            //   [_scrollView addSubview:image00];
-        }
-        
         float lable3W=firstW+lable1W+size.width+10*NOW_SIZE;
-        if ((i==0)||(i==1)||(i==2)||(i==3)||(i==4)) {
+        if (i!=forNum) {
             UILabel *lable3 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i,SCREEN_Width-(1*firstW)-lable3W, lableH)];
             lable3.textColor = COLOR(154, 154, 154, 1);
-          //  lable3.text=lableNameArray2[i];
+           lable3.text=lableValueArray2[i];
             lable3.tag=2000+i;
             lable3.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
             [_scrollView addSubview:lable3];
         }
         
-        float imageW=25*HEIGHT_SIZE;
-        if (_picArray.count>1) {
-            UIImageView *image4=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_Width-firstW-imageW, 5*HEIGHT_SIZE+numH*5, imageW, imageW)];
-            image4.userInteractionEnabled = YES;
-            image4.tag=2200;
-            UITapGestureRecognizer * forget3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto:)];
-            [image4 addGestureRecognizer:forget3];
-            image4.image = IMAGE(@"pic_icon.png");
-            [_scrollView addSubview:image4];
-        }
-
         
-        if (_picArray1.count>1) {
-            float imageW=25*HEIGHT_SIZE;
-            UIImageView *image5=[[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_Width-firstW-imageW, 5*HEIGHT_SIZE+numH*6, imageW, imageW)];
-            image5.userInteractionEnabled = YES;
-            image5.tag=2100;
-            UITapGestureRecognizer * forget4=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto:)];
-            [image5 addGestureRecognizer:forget4];
-            image5.image = IMAGE(@"pic_icon.png");
-            [_scrollView addSubview:image5];
-        }
-        if ((i==0)||(i==1)||(i==2)||(i==3)||(i==4)||(i==5)||(i==6)) {
+        if (i!=forNum) {
             UIView *View4 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*(i+1)-1*HEIGHT_SIZE, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
             View4.backgroundColor = COLOR(222, 222, 222, 1);
             
@@ -174,16 +130,37 @@
         float textW=SCREEN_Width-textfieldW-textW1;
 
         
-       
-        CGSize size1= [_remarkString boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        NSString *longName1=[NSString stringWithFormat:@"%@",_allValueDic[@"recommended"]];
+          NSString *longName2=[NSString stringWithFormat:@"%@",_allValueDic[@"returnNote"]];
+        
+        CGSize size1= [longName1 boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+          CGSize size2= [longName2 boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        
         float remarkLabelH;
         if (lableH>(size1.height+10*HEIGHT_SIZE)) {
             remarkLabelH=lableH;
         }else{
             remarkLabelH=size1.height+10*HEIGHT_SIZE;
         }
-        if (i==7) {
-            _remarkLabel = [[UILabel alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i,textW,remarkLabelH)];
+        
+        float remarkLabelH2;
+        if (lableH>(size2.height+10*HEIGHT_SIZE)) {
+            remarkLabelH2=lableH;
+        }else{
+            remarkLabelH2=size2.height+10*HEIGHT_SIZE;
+        }
+        
+        if (i==forNum-1) {
+            _sayGoodLabel = [[UILabel alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i,textW,remarkLabelH)];
+            _sayGoodLabel.textColor = COLOR(154, 154, 154, 1);
+            _sayGoodLabel.text=_remarkString;
+            _sayGoodLabel.numberOfLines=0;
+            _sayGoodLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            [_scrollView addSubview:_sayGoodLabel];
+        }
+        
+        if (i==forNum) {
+            _remarkLabel = [[UILabel alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i+remarkLabelH,textW,remarkLabelH2)];
     _remarkLabel.textColor = COLOR(154, 154, 154, 1);
             _remarkLabel.text=_remarkString;
             _remarkLabel.numberOfLines=0;
@@ -342,24 +319,25 @@
     }
 
     
-    UILabel *L0=[_scrollView viewWithTag:2000];
-    L0.text=_allValueDic[@"applicationTime"];
     
-    UILabel *L1=[_scrollView viewWithTag:2001];
-    L1.text=_allValueDic[@"receiveTime"];
-    
-    UILabel *L2=[_scrollView viewWithTag:2002];
-    L2.text=_allValueDic[@"appointment"];
-    
-    UILabel *L3=[_scrollView viewWithTag:2003];
-    L3.text=_allValueDic[@"completeTime"];
-    
-    UILabel *L4=[_scrollView viewWithTag:2004];
-    if ([_allValueDic[@"completeState"] intValue]==1) {
-        L4.text=@"待观察";
-    }else if ([_allValueDic[@"completeState"] intValue]==2) {
-        L4.text=@"已完成";
-    }
+//    UILabel *L0=[_scrollView viewWithTag:2000];
+//    L0.text=_allValueDic[@"applicationTime"];
+//
+//    UILabel *L1=[_scrollView viewWithTag:2001];
+//    L1.text=_allValueDic[@"receiveTime"];
+//
+//    UILabel *L2=[_scrollView viewWithTag:2002];
+//    L2.text=_allValueDic[@"appointment"];
+//
+//    UILabel *L3=[_scrollView viewWithTag:2003];
+//    L3.text=_allValueDic[@"completeTime"];
+//
+//    UILabel *L4=[_scrollView viewWithTag:2004];
+//    if ([_allValueDic[@"completeState"] intValue]==1) {
+//        L4.text=@"待观察";
+//    }else if ([_allValueDic[@"completeState"] intValue]==2) {
+//        L4.text=@"已完成";
+//    }
     
     _titleLabel.text = self.model.title;
     
@@ -384,14 +362,14 @@
 // MARK: - 获取默认高度
 + (CGFloat)defaultHeight{
     
-    return 30*HEIGHT_SIZE;
+    return 38*HEIGHT_SIZE;
 }
 
 // MARK: - 获取展开后的高度
 + (CGFloat)moreHeight:(CGFloat) navigationH{
     
     
-    float H=7*35*HEIGHT_SIZE+navigationH+80*HEIGHT_SIZE;
+    float H=10*35*HEIGHT_SIZE+navigationH+80*HEIGHT_SIZE;
     
     return H;
     

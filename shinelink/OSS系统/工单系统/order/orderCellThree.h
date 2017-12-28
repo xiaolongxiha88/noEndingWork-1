@@ -19,6 +19,7 @@
 @property(nonatomic,strong) UILabel *titleLabel;
 @property(nonatomic,strong) UIImageView *titleImage;
 @property(nonatomic,strong) UILabel *remarkLabel;
+@property(nonatomic,strong) UILabel *sayGoodLabel;
 
 @property(nonatomic,strong) UILabel *contentLabel;
 @property(nonatomic,strong) UIButton *moreTextBtn;

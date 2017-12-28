@@ -385,7 +385,7 @@
 // MARK: - 获取默认高度
 + (CGFloat)defaultHeight{
     
-    return 30*HEIGHT_SIZE;
+    return 38*HEIGHT_SIZE;
 }
 
 // MARK: - 获取展开后的高度

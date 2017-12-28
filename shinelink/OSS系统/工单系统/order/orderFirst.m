@@ -89,7 +89,7 @@ static NSString *cellFour = @"cellFour";
   
  
     NSMutableArray<Model *> *arrM = [NSMutableArray arrayWithCapacity:_titleArray.count];
-    for (int i=0; i<3; i++) {
+    for (int i=0; i<_titleArray.count; i++) {
         Model *model = [[Model alloc] initWithDict:_titleArray[i]];
         if ([_statusString isEqualToString:@"2"]) {
             if (i==0) {
@@ -109,7 +109,14 @@ static NSString *cellFour = @"cellFour";
             }else{
                 model.isShowMoreText=NO;
             }
+        }else if ([_statusString isEqualToString:@"5"]){
+            if (i==3) {
+                model.isShowMoreText=YES;
+            }else{
+                model.isShowMoreText=NO;
+            }
         }
+        
         [arrM addObject:model];
     }
     _modelList = arrM.copy;
@@ -341,13 +348,11 @@ static NSString *cellFour = @"cellFour";
         };
         return cell;
     }else if (indexPath.row==2) {
-        orderCell03 *cell = [tableView dequeueReusableCellWithIdentifier:cellFour forIndexPath:indexPath];
+        orderCellThree *cell = [tableView dequeueReusableCellWithIdentifier:cellThree forIndexPath:indexPath];
         Model *model = _modelList[indexPath.row];
         cell.model = model;
         cell.orderID=_orderID;
         cell.statusString=_statusString;
-        cell.picArray=[NSArray arrayWithArray:_picArray];
-        cell.picArray1=[NSArray arrayWithArray:_picArray1];
         cell.allValueDic=[NSDictionary dictionaryWithDictionary:_allValueDic];
         [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
             NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
@@ -356,7 +361,7 @@ static NSString *cellFour = @"cellFour";
         
         return cell;
     }else if (indexPath.row==3) {
-        orderCellThree *cell = [tableView dequeueReusableCellWithIdentifier:cellThree forIndexPath:indexPath];
+        orderCell03 *cell = [tableView dequeueReusableCellWithIdentifier:cellFour forIndexPath:indexPath];  
         Model *model = _modelList[indexPath.row];
         cell.model = model;
         cell.orderID=_orderID;
@@ -387,6 +392,9 @@ static NSString *cellFour = @"cellFour";
     
      float firstW=25*NOW_SIZE; CGFloat H=H1+H2;
     NSString*remarkH=_allValueDic[@"remarks"];
+    if (indexPath.row==3){
+        remarkH=_allValueDic[@"recommended"];
+    }
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
     CGSize size = [remarkH boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
        float remarkLabelH;float lableH=30*HEIGHT_SIZE;
@@ -408,8 +416,9 @@ static NSString *cellFour = @"cellFour";
              return [orderCellThree moreHeight:remarkLabelH];
               
         }else if (indexPath.row==3){
-            
-            
+              NSString*remarkH2=_allValueDic[@"returnNote"];
+              CGSize size2 = [remarkH2 boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            remarkLabelH=remarkLabelH+size2.height;
             return [orderCellThree moreHeight:remarkLabelH];
             
         }else{

@@ -125,7 +125,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         buttonView1.initUI()
          self.view.addSubview(buttonView1)
         
-        if questionOrOrder==1 {
+        if questionOrOrder==1 {                //问题
             var name="全部问题"
             if secondNum==0 {
                 name="全部问题"
@@ -135,16 +135,19 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                 name="待处理"
             }
               self.initButton(buttonArray: ["全部问题","待处理","待跟进","处理中","已处理"], name1: name as NSString, name2: "0/0")
-        }else  if questionOrOrder==2 {
+            
+        }else  if questionOrOrder==2 {           //工单
             var name="全部工单"
             if secondNum==0 {
                 name="全部工单"
-            }else  if secondNum==2 {
-                name="服务中"
             }else  if secondNum==1 {
                 name="待接收"
+            }else  if secondNum==2 {
+                name="服务中"
+            }else  if secondNum==3 {
+                name="待回访"
             }
-            self.initButton(buttonArray: ["全部工单","待接收","服务中","已完成"], name1: name as NSString, name2: "0/0")
+            self.initButton(buttonArray: ["全部工单","待接收","服务中","待回访","已完成"], name1: name as NSString, name2: "0/0")
         }
       
         
@@ -207,7 +210,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         let  dic=info.userInfo as Any as!NSDictionary
         let Tag=dic.object(forKey: "tag") as! Int
         let array1=["全部问题","待处理","待跟进","处理中","已处理"]
-        let array2=["全部工单","待接收","服务中","已完成"]
+        let array2=["全部工单","待接收","服务中","待回访","已完成"]
         if Tag==2000 {
                self.initButton(buttonArray: array1 as NSArray, name1: array1[0] as NSString, name2: "")
             questionOrOrder=1
@@ -252,6 +255,9 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             }else if Tag==4003 {
                 statusInt=4
                   lable1.text=array2[3]
+            }else if Tag==4004 {
+                statusInt=5
+                lable1.text=array2[4]
             }
             self.initNet1()
         }
@@ -327,13 +333,16 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         }else if  questionOrOrder==2 {
             if cellValue4Array[indexPath.row] as! Int==2 {
-                cell.coverImageView.backgroundColor=COLOR(_R: 227, _G: 74, _B: 33, _A: 1)
+                cell.coverImageView.backgroundColor=COLOR(_R: 212, _G: 100, _B: 74, _A: 1)
                 cell.imageLabel.text="待接收"
             }else if cellValue4Array[indexPath.row] as! Int==3 {
-                cell.coverImageView.backgroundColor=COLOR(_R: 94, _G: 195, _B: 53, _A: 1)
+                cell.coverImageView.backgroundColor=COLOR(_R: 41, _G: 182, _B: 34, _A: 1)
                 cell.imageLabel.text="服务中"
             }else if cellValue4Array[indexPath.row] as! Int==4 {
-                cell.coverImageView.backgroundColor=COLOR(_R: 157, _G: 157, _B: 157, _A: 1);
+                cell.coverImageView.backgroundColor=COLOR(_R: 117, _G: 192, _B: 197, _A: 1);
+                cell.imageLabel.text="待回访"
+            }else if cellValue4Array[indexPath.row] as! Int==5 {
+                cell.coverImageView.backgroundColor=COLOR(_R: 153, _G: 153, _B: 153, _A: 1);
                 cell.imageLabel.text="已完成"
             }
             
@@ -414,7 +423,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     netDic=["content":contentString,"status":statusInt,"page":pageNum]
     
     self.showProgressView()
-    BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as Dictionary, paramarsSite: "/api/v2/order/list", sucessBlock: {(successBlock)->() in
+    BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as Dictionary, paramarsSite: "/api/v2/order/newlist", sucessBlock: {(successBlock)->() in
     self.hideProgressView()
     
     let data:Data=successBlock as! Data
@@ -423,7 +432,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     if (jsonDate0 != nil){
     let jsonDate=jsonDate0 as! Dictionary<String, Any>
-    print("/api/v1/serviceQuestion/question/list=",jsonDate)
+    print("/api/v2/order/newlist=",jsonDate)
     // let result:NSString=NSString(format:"%s",jsonDate["result"] )
     let result1=jsonDate["result"] as! Int
     
@@ -444,8 +453,8 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
 //        }
 //
         ///改用公司名称
-        if (((((questionAll[i] as! NSDictionary)["address"] as AnyObject).isEqual(NSNull.init())) == false)) {
-            cellValue3Array2=((questionAll[i] as! NSDictionary)["address"] as!NSString)
+        if (((((questionAll[i] as! NSDictionary)["customerName"] as AnyObject).isEqual(NSNull.init())) == false)) {
+            cellValue3Array2=((questionAll[i] as! NSDictionary)["customerName"] as!NSString)
         }else{
             cellValue3Array2=""
         }
