@@ -1,15 +1,15 @@
 //
-//  orderCellThree.h
+//  orderCell03.h
 //  ShinePhone
 //
-//  Created by sky on 2017/6/29.
+//  Created by sky on 2017/12/28.
 //  Copyright © 2017年 sky. All rights reserved.
 //
-
-#import <UIKit/UIKit.h>
 @class Model;
 
-@interface orderCellThree : UITableViewCell
+#import <UIKit/UIKit.h>
+
+@interface orderCell03 : UITableViewCell
 
 @property(nonatomic,strong) UIView *titleView;
 @property(nonatomic,strong)UIView *View3;

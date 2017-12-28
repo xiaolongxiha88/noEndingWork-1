@@ -1,23 +1,24 @@
 //
-//  orderCellThree.m
+//  orderCell03.m
 //  ShinePhone
 //
-//  Created by sky on 2017/6/29.
+//  Created by sky on 2017/12/28.
 //  Copyright © 2017年 sky. All rights reserved.
 //
 
-#import "orderCellThree.h"
+#import "orderCell03.h"
 #import "Model.h"
 #import "MBProgressHUD.h"
 #import "GetServerViewController.h"
 
-@implementation orderCellThree
+
+@implementation orderCell03
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-  
+        
         
     }
     return self;
@@ -40,9 +41,9 @@
     if ([_statusString isEqualToString:@"4"]) {
         _titleImage.image=IMAGE(@"yuan_2.png");
     }else{
-     _titleImage.image=IMAGE(@"yuan_1.png");
+        _titleImage.image=IMAGE(@"yuan_1.png");
     }
-   
+    
     [_titleView addSubview:_titleImage];
     
     float titleLabelH1=30*HEIGHT_SIZE;
@@ -79,20 +80,20 @@
     [self.contentView addSubview:_scrollView];
     
     _View3 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+ImageW1/2, 0, 0.3*NOW_SIZE,34*HEIGHT_SIZE)];
-  
+    
     if ([_statusString isEqualToString:@"4"]) {
         _View3.backgroundColor =COLOR(255, 204, 0, 1);
     }else{
-      _View3.backgroundColor =COLOR(102, 102, 102, 1);
+        _View3.backgroundColor =COLOR(102, 102, 102, 1);
     }
     [self.contentView addSubview:_View3];
     
-//    self.dayFormatter = [[NSDateFormatter alloc] init];
-//    [self.dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    NSString *dataString = [_dayFormatter stringFromDate:[NSDate date]];
+    //    self.dayFormatter = [[NSDateFormatter alloc] init];
+    //    [self.dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    //    NSString *dataString = [_dayFormatter stringFromDate:[NSDate date]];
     
     NSArray *lableNameArray=[NSArray arrayWithObjects:@"申请时间:",@"接收时间:", @"预约时间:",@"完成时间:",@"完成状态:",@"报告单:", @"现场图片:",  @"备注:", nil];
-//    NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], dataString, nil];
+    //    NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], dataString, nil];
     
     float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;
     for (int i=0; i<lableNameArray.count; i++) {
@@ -114,7 +115,7 @@
         CGSize size = [lable2Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, 0+numH*i,size.width, lableH)];
         lable2.textColor = COLOR(154, 154, 154, 1);
-
+        
         lable2.text=lableNameArray[i];
         lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:lable2];
@@ -134,7 +135,7 @@
         if ((i==0)||(i==1)||(i==2)||(i==3)||(i==4)) {
             UILabel *lable3 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i,SCREEN_Width-(1*firstW)-lable3W, lableH)];
             lable3.textColor = COLOR(154, 154, 154, 1);
-          //  lable3.text=lableNameArray2[i];
+            //  lable3.text=lableNameArray2[i];
             lable3.tag=2000+i;
             lable3.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
             [_scrollView addSubview:lable3];
@@ -150,7 +151,7 @@
             image4.image = IMAGE(@"pic_icon.png");
             [_scrollView addSubview:image4];
         }
-
+        
         
         if (_picArray1.count>1) {
             float imageW=25*HEIGHT_SIZE;
@@ -172,9 +173,9 @@
         float textfieldW=firstW+lable1W+size.width+5*NOW_SIZE;
         float textW1=SCREEN_Width-firstW-(SCREEN_Width-(2*firstW));
         float textW=SCREEN_Width-textfieldW-textW1;
-
         
-       
+        
+        
         CGSize size1= [_remarkString boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         float remarkLabelH;
         if (lableH>(size1.height+10*HEIGHT_SIZE)) {
@@ -184,7 +185,7 @@
         }
         if (i==7) {
             _remarkLabel = [[UILabel alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i,textW,remarkLabelH)];
-    _remarkLabel.textColor = COLOR(154, 154, 154, 1);
+            _remarkLabel.textColor = COLOR(154, 154, 154, 1);
             _remarkLabel.text=_remarkString;
             _remarkLabel.numberOfLines=0;
             _remarkLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -194,23 +195,23 @@
     }
     
     
-
+    
 }
 
 
 -(void)GetPhoto:(UITapGestureRecognizer*)Tap{
-        UIViewController *Controller = (UIViewController *)[self findViewController:self.contentView];
+    UIViewController *Controller = (UIViewController *)[self findViewController:self.contentView];
     
     GetServerViewController *get=[[GetServerViewController alloc]init];
     
     int T=(int)Tap.view.tag;
     if (T==2200) {
-         get.picArray=[NSMutableArray arrayWithArray:_picArray];
+        get.picArray=[NSMutableArray arrayWithArray:_picArray];
     }else{
-       get.picArray=[NSMutableArray arrayWithArray:_picArray1];
+        get.picArray=[NSMutableArray arrayWithArray:_picArray1];
     }
-
-   
+    
+    
     get.TypeNum=@"2";
     
     [Controller.navigationController pushViewController:get animated:NO];
@@ -262,10 +263,10 @@
             }
         }
     } failure:^(NSError *error) {
-            [self hideProgressView];
+        [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];
         
-    
+        
     }];
     
 }
@@ -340,7 +341,7 @@
     if (!_scrollView) {
         [self initUI];
     }
-
+    
     
     UILabel *L0=[_scrollView viewWithTag:2000];
     L0.text=_allValueDic[@"applicationTime"];
@@ -448,9 +449,6 @@
     [self.date removeFromSuperview];
     
 }
-
-
-
 
 
 

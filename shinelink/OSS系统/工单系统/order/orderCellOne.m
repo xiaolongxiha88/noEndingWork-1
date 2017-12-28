@@ -30,7 +30,7 @@ static NSString *statusNum = @"2";
 }
 
 -(void)initUI{
-
+  
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.contentView addGestureRecognizer:tapGestureRecognizer];

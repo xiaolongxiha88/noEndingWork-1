@@ -13,12 +13,12 @@
 #import "Model.h"
 #import "ShinePhone-Swift.h"
 #import "orderSetView.h"
-
+#import "orderCell03.h"
 
 static NSString *cellOne = @"cellOne";
 static NSString *cellTwo = @"cellTwo";
 static NSString *cellThree = @"cellThree";
-
+static NSString *cellFour = @"cellFour";
 
 @interface orderFirst ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate,UIActionSheetDelegate>{
     float H2;
@@ -72,11 +72,15 @@ static NSString *cellThree = @"cellThree";
     _statusString=[NSString stringWithFormat:@"%@",_allValueDic[@"status"]];
     
     if ([_statusString isEqualToString:@"2"]) {
-    _titleArray=[NSArray arrayWithObjects:@"待接收",@"服务中",@"已完成", nil];
-    }else{
-    _titleArray=[NSArray arrayWithObjects:@"已接收",@"服务中",@"已完成", nil];
+    _titleArray=[NSArray arrayWithObjects:@"待接收",@"服务中",@"待回访",@"待完成", nil];
+    }else if ([_statusString isEqualToString:@"3"]) {
+        _titleArray=[NSArray arrayWithObjects:@"已接收",@"服务中",@"待回访",@"待完成", nil];
+    }else if ([_statusString isEqualToString:@"4"]) {
+        _titleArray=[NSArray arrayWithObjects:@"已接收",@"已服务",@"待回访",@"待完成", nil];
+    }else if ([_statusString isEqualToString:@"5"]) {
+        _titleArray=[NSArray arrayWithObjects:@"已接收",@"已服务",@"已回访",@"已完成", nil];
     }
-    if ([_statusString isEqualToString:@"4"]) {
+    if ([_statusString isEqualToString:@"5"]) {
         NSString *questionPIC=[NSString stringWithFormat:@"%@",_allValueDic[@"fieldService"]];
         _picArray = [questionPIC componentsSeparatedByString:@"_"];
         NSString *questionPIC1=[NSString stringWithFormat:@"%@",_allValueDic[@"otherServices"]];
@@ -136,8 +140,8 @@ static NSString *cellThree = @"cellThree";
 
     
     if (!_tableView) {
-        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height-NaviHeight-UI_STATUS_BAR_HEIGHT)];
-        _tableView.contentSize=CGSizeMake(SCREEN_Width, 2200*HEIGHT_SIZE);
+        _tableView =[[UITableView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 0, SCREEN_Width,SCREEN_Height-(NaviHeight))];
+        _tableView.contentSize=CGSizeMake(SCREEN_Width, 2400*HEIGHT_SIZE);
         _tableView.delegate = self;
         _tableView.dataSource = self;
          _tableView.tableHeaderView=_headView;
@@ -147,6 +151,7 @@ static NSString *cellThree = @"cellThree";
             [self.tableView registerClass:[orderCellOne class] forCellReuseIdentifier:cellOne];
           [self.tableView registerClass:[orderCellTwo class] forCellReuseIdentifier:cellTwo];
          [self.tableView registerClass:[orderCellThree class] forCellReuseIdentifier:cellThree];
+          [self.tableView registerClass:[orderCell03 class] forCellReuseIdentifier:cellFour];
         [self.view addSubview:_tableView];
     }
     
@@ -188,7 +193,10 @@ static NSString *cellThree = @"cellThree";
     NSArray *headName=[NSArray arrayWithObjects:@"所属地区",@"类型", nil];
     NSArray *serviceType=[NSArray arrayWithObjects:@"",@"现场维修",@"安装调试", @"培训",@"巡检",nil];
     int k=[_allValueDic[@"serviceType"] intValue];
-    NSString *kName=serviceType[k];
+    NSString *kName;
+    if (k<serviceType.count) {
+            kName=serviceType[k];
+    }
     NSArray *headValue=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],kName, nil];
     for (int i=0; i<headName.count; i++) {
         UILabel *titleLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1+(headW/2)*i, titleLabelH1+titleLabelH2,headW/2, titleLabelH2)];
@@ -333,6 +341,21 @@ static NSString *cellThree = @"cellThree";
         };
         return cell;
     }else if (indexPath.row==2) {
+        orderCell03 *cell = [tableView dequeueReusableCellWithIdentifier:cellFour forIndexPath:indexPath];
+        Model *model = _modelList[indexPath.row];
+        cell.model = model;
+        cell.orderID=_orderID;
+        cell.statusString=_statusString;
+        cell.picArray=[NSArray arrayWithArray:_picArray];
+        cell.picArray1=[NSArray arrayWithArray:_picArray1];
+        cell.allValueDic=[NSDictionary dictionaryWithDictionary:_allValueDic];
+        [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
+            NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
+            [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }];
+        
+        return cell;
+    }else if (indexPath.row==3) {
         orderCellThree *cell = [tableView dequeueReusableCellWithIdentifier:cellThree forIndexPath:indexPath];
         Model *model = _modelList[indexPath.row];
         cell.model = model;
@@ -384,6 +407,11 @@ static NSString *cellThree = @"cellThree";
             
              return [orderCellThree moreHeight:remarkLabelH];
               
+        }else if (indexPath.row==3){
+            
+            
+            return [orderCellThree moreHeight:remarkLabelH];
+            
         }else{
             return 1*HEIGHT_SIZE;
         }
@@ -395,12 +423,16 @@ static NSString *cellThree = @"cellThree";
           return [orderCellTwo defaultHeight];
         }else if (indexPath.row==2){
           return [orderCellThree defaultHeight];
+        }else if (indexPath.row==3){
+            return [orderCellThree defaultHeight];
         }else{
             return 1*HEIGHT_SIZE;
         }
     }
     
 }
+
+
 
 
 

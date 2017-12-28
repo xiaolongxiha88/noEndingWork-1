@@ -457,7 +457,7 @@ static NSString *statusNum = @"3";
     
     
    _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    _goBut.frame=CGRectMake(60*NOW_SIZE,_textfield2.frame.origin.y+100*HEIGHT_SIZE+numH2, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    _goBut.frame=CGRectMake(60*NOW_SIZE,_textfield2.frame.origin.y+20*HEIGHT_SIZE+numH2, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
     [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
     [_goBut setTitle:@"完成" forState:UIControlStateNormal];
@@ -892,19 +892,19 @@ static NSString *statusNum = @"3";
     
 
     
-    NSMutableArray *picAll2=[NSMutableArray arrayWithArray:_picArray2];
-    [picAll2 removeObject:@"del"];
-    
-    for (int i=0; i<picAll2.count; i++) {
-        NSString *imageName=[NSString stringWithFormat:@"image%d",i+6];
-        NSData *imageData = UIImageJPEGRepresentation(picAll2[i], 0.5);
-        [dataImageDict setObject:imageData forKey:imageName];
-    }
-    
-    if (_picArray.count==0) {
-        [self showToastViewWithTitle:@"请上传报告单图片"];
-        return;
-    }
+//    NSMutableArray *picAll2=[NSMutableArray arrayWithArray:_picArray2];
+//    [picAll2 removeObject:@"del"];
+//
+//    for (int i=0; i<picAll2.count; i++) {
+//        NSString *imageName=[NSString stringWithFormat:@"image%d",i+6];
+//        NSData *imageData = UIImageJPEGRepresentation(picAll2[i], 0.5);
+//        [dataImageDict setObject:imageData forKey:imageName];
+//    }
+//
+//    if (_picArray.count==0) {
+//        [self showToastViewWithTitle:@"请上传报告单图片"];
+//        return;
+//    }
     
     if ([locationString isEqual:@""]) {
         [self showToastViewWithTitle:@"请点击获取位置信息"];
@@ -1016,7 +1016,7 @@ static NSString *statusNum = @"3";
         
         _textfield2.frame=CGRectMake(x,y , W, height);
         
-        
+         _goBut.frame=CGRectMake(60*NOW_SIZE,_textfield2.frame.origin.y+20*HEIGHT_SIZE+height, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     }];
 }
 
@@ -1122,7 +1122,7 @@ static NSString *statusNum = @"3";
 // MARK: - 获取展开后的高度
 + (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status remarkH:(CGFloat) remarkH{
     
-    float H=620*HEIGHT_SIZE+remarkH-20*HEIGHT_SIZE+60*HEIGHT_SIZE;
+    float H=620*HEIGHT_SIZE+remarkH-20*HEIGHT_SIZE+20*HEIGHT_SIZE;
     if (![status isEqualToString:@"3"]) {
         H=270*HEIGHT_SIZE;
     }

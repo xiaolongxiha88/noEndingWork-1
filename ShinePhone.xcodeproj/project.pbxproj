@@ -20,6 +20,7 @@
 		331B37D61F073A3400755335 /* workorder_button_icon_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 331B37D41F073A3400755335 /* workorder_button_icon_nor.png */; };
 		33209FD11D2A553E00186893 /* main1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33209FD01D2A553E00186893 /* main1.jpg */; };
 		332283A91DFAA03B00C546B4 /* swiftHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332283A81DFAA03B00C546B4 /* swiftHeader.swift */; };
+		33230C9A1FF49218005EF7E8 /* orderCell03.m in Sources */ = {isa = PBXBuildFile; fileRef = 33230C991FF49218005EF7E8 /* orderCell03.m */; };
 		33238B491CBF816400E82B86 /* 外框@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33238B481CBF816400E82B86 /* 外框@3x.png */; };
 		33252FC11F4D4F320054BBC7 /* SPF5000Control.m in Sources */ = {isa = PBXBuildFile; fileRef = 33252FC01F4D4F320054BBC7 /* SPF5000Control.m */; };
 		33252FC31F53F1F40054BBC7 /* sp_icon_e.png in Resources */ = {isa = PBXBuildFile; fileRef = 33252FC21F53F1F40054BBC7 /* sp_icon_e.png */; };
@@ -841,6 +842,8 @@
 		331B37D41F073A3400755335 /* workorder_button_icon_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = workorder_button_icon_nor.png; sourceTree = "<group>"; };
 		33209FD01D2A553E00186893 /* main1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = main1.jpg; path = AsyncSocket/main1.jpg; sourceTree = "<group>"; };
 		332283A81DFAA03B00C546B4 /* swiftHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = swiftHeader.swift; sourceTree = "<group>"; };
+		33230C981FF49218005EF7E8 /* orderCell03.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = orderCell03.h; sourceTree = "<group>"; };
+		33230C991FF49218005EF7E8 /* orderCell03.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = orderCell03.m; sourceTree = "<group>"; };
 		33238B481CBF816400E82B86 /* 外框@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "外框@3x.png"; path = "../../我/客服系统/我的问题/外框@3x.png"; sourceTree = "<group>"; };
 		33252FBF1F4D4F320054BBC7 /* SPF5000Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPF5000Control.h; sourceTree = "<group>"; };
 		33252FC01F4D4F320054BBC7 /* SPF5000Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPF5000Control.m; sourceTree = "<group>"; };
@@ -3179,6 +3182,8 @@
 				336F04091F050D8600DE7CD7 /* orderCellTwo.m */,
 				336F040B1F050F7500DE7CD7 /* orderCellThree.h */,
 				336F040C1F050F7500DE7CD7 /* orderCellThree.m */,
+				33230C981FF49218005EF7E8 /* orderCell03.h */,
+				33230C991FF49218005EF7E8 /* orderCell03.m */,
 				33884DAD1FF248C70089E689 /* orderSetView.h */,
 				33884DAE1FF248C70089E689 /* orderSetView.m */,
 				336F04151F06207300DE7CD7 /* order图片 */,
@@ -5377,6 +5382,7 @@
 				3370793D1D910FEC00D7DA98 /* NJKWebViewProgressView.m in Sources */,
 				336F1A1D1D88E46900CD4C2B /* UIButton+WebCache.m in Sources */,
 				33528FF01C83E41D00D07889 /* listViewController.m in Sources */,
+				33230C9A1FF49218005EF7E8 /* orderCell03.m in Sources */,
 				335BF1F01D1008D5008EEE99 /* messgeSecondViewController.m in Sources */,
 				335D69B31D77BA4D00894D90 /* HcdTimeSheetView.m in Sources */,
 				3343F3EC1C805BD2009F69BC /* MBProgressHUD.m in Sources */,
