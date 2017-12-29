@@ -50,7 +50,7 @@
         _lableNameArray=@[@"项目名称",@"产品型号",@"产品SN号",@"本年巡检次数",@" 产品数量",@"客户公司名称",@"联系人员",@"联系电话",@"服务人员",@"日期"];
       
     }else   if (_setType==5) {
- 
+   _titleName=@"其他";
         _lableKeyArray=@[@"other_projectName",@"other_model",@"other_quantity"];
         _lableKeyArray2=@[@"other_description",@"other_completion"];
         _lableNameArray=@[@"项目名称",@"产品型号",@"产品数量"];
@@ -63,6 +63,7 @@
 -(void)initUI{
     UIColor *lableColor=COLOR(102, 102, 102, 1);
     
+    self.title=_titleName;
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, SCREEN_Height)];
     _scrollView.scrollEnabled=YES;
     [self.view addSubview:_scrollView];
@@ -135,6 +136,7 @@
 }
 
 -(void)finishSet{
+    _setValueDic=[NSMutableDictionary new];
     for (int i=0; i<_lableNameArray.count; i++) {
         UITextField *text1=[_scrollView viewWithTag:2000+i];
         if (text1.text==nil || [text1.text isEqualToString:@""]) {
@@ -142,10 +144,23 @@
             [self showToastViewWithTitle:alert];
             return;
         }else{
-            
+            [_setValueDic setObject:text1.text forKey:_lableKeyArray[i]];
         }
     }
     
+    for (int i=0; i<_lableNameArray2.count; i++) {
+        UITextView *text2=[_scrollView viewWithTag:3000+i];
+        if (text2.text==nil || [text2.text isEqualToString:@""]) {
+            NSString *alert=[NSString stringWithFormat:@"请填写“%@”",_lableNameArray2[i]];
+            [self showToastViewWithTitle:alert];
+            return;
+        }else{
+            [_setValueDic setObject:text2.text forKey:_lableKeyArray2[i]];
+        }
+    }
+    
+    self.getSetValue(_setValueDic);
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 

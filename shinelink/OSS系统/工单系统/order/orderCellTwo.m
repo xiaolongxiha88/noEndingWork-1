@@ -927,6 +927,9 @@ static NSString *statusNum = @"3";
     
     
     NSMutableDictionary *allDict=[NSMutableDictionary dictionary];
+    
+    NSString *setValue=[self convertToJsonData:_setValueDic];
+       [allDict setObject:setValue forKey:@"serviceReport"];
     [allDict setObject:_orderID forKey:@"orderId"];
     [allDict setObject:_statusString forKey:@"status"];
     [allDict setObject:locationString forKey:@"location"];
@@ -939,7 +942,7 @@ static NSString *statusNum = @"3";
       [allDict setObject:remarkAll forKey:@"remarks"];
     
     [self showProgressView];
-    [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v2/order/perfect" dataImageDict:dataImageDict sucessBlock:^(id content) {
+    [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v2/order/newperfect" dataImageDict:dataImageDict sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
@@ -1187,6 +1190,44 @@ static NSString *statusNum = @"3";
     
 }
 
+
+-(NSString *)convertToJsonData:(NSDictionary *)dict
+
+{
+    
+    NSError *error;
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+    
+    NSString *jsonString;
+    
+    if (!jsonData) {
+        
+        NSLog(@"%@",error);
+        
+    }else{
+        
+        jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+    }
+    
+    NSMutableString *mutStr = [NSMutableString stringWithString:jsonString];
+    
+    NSRange range = {0,jsonString.length};
+    
+    //去掉字符串中的空格
+    
+    [mutStr replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:range];
+    
+    NSRange range2 = {0,mutStr.length};
+    
+    //去掉字符串中的换行符
+    
+    [mutStr replaceOccurrencesOfString:@"\n" withString:@"" options:NSLiteralSearch range:range2];
+    
+    return mutStr;
+    
+}
 
 
 
