@@ -190,7 +190,7 @@
                             }else if ([content[@"msg"] isEqual:@"605"]){
                                 
                                 [self showAlertViewWithTitle:root_zhuce_shibai message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
-                            }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]||[content[@"msg"] isEqual:@"608"]||[content[@"msg"] isEqual:@"609"]||[content[@"msg"] isEqual:@"602"]||[content[@"msg"] isEqual:@"502"]||[content[@"msg"] isEqual:@"603"]){
+                            }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]||[content[@"msg"] isEqual:@"608"]||[content[@"msg"] isEqual:@"609"]||[content[@"msg"] isEqual:@"602"]||[content[@"msg"] isEqual:@"502"]||[content[@"msg"] isEqual:@"603"]||[content[@"msg"] isEqual:@"701"]){
                                 
                                 NSString *failName=[NSString stringWithFormat:@"%@(%@)",root_zhuce_shibai,content[@"msg"]];
                                 if ([[_dataDic objectForKey:@"regCountry"] isEqualToString:@"China"]) {
@@ -202,7 +202,7 @@
                                 
                                 [BaseRequest getAppError:failName useName:[_dataDic objectForKey:@"regUserName"]];
                                 
-                            }else if ([content[@"msg"] isEqual:@"701"]){
+                            }else if ([content[@"msg"] isEqual:@"702"]){
                                 
                                 [self showAlertViewWithTitle:root_zhuce_shibai message:root_caijiqi_cuowu_tishi cancelButtonTitle:root_Yes];
                             }else{
@@ -313,7 +313,7 @@
                          }else if ([content[@"msg"] isEqual:@"605"]){
                              
                              [self showAlertViewWithTitle:root_zhuce_shibai message:root_xuliehao_yijing_cunzai cancelButtonTitle:root_Yes];
-                         }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]||[content[@"msg"] isEqual:@"608"]||[content[@"msg"] isEqual:@"609"]||[content[@"msg"] isEqual:@"602"]||[content[@"msg"] isEqual:@"502"]||[content[@"msg"] isEqual:@"603"]){
+                         }else if ([content[@"msg"] isEqual:@"606"]||[content[@"msg"] isEqual:@"607"]||[content[@"msg"] isEqual:@"608"]||[content[@"msg"] isEqual:@"609"]||[content[@"msg"] isEqual:@"602"]||[content[@"msg"] isEqual:@"502"]||[content[@"msg"] isEqual:@"603"]||[content[@"msg"] isEqual:@"701"]){
                              
                              NSString *failName=[NSString stringWithFormat:@"%@(%@)",root_zhuce_shibai,content[@"msg"]];
                              if ([[_dataDic objectForKey:@"regCountry"] isEqualToString:@"China"]) {
@@ -325,7 +325,7 @@
                              
                              [BaseRequest getAppError:failName useName:[_dataDic objectForKey:@"regUserName"]];
                              
-                         }else if ([content[@"msg"] isEqual:@"701"]){
+                         }else if ([content[@"msg"] isEqual:@"702"]){
                              
                              [self showAlertViewWithTitle:root_zhuce_shibai message:root_caijiqi_cuowu_tishi cancelButtonTitle:root_Yes];
                          }else{
