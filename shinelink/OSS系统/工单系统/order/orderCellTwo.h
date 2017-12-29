@@ -55,6 +55,7 @@
 @property(nonatomic, copy) void(^showMoreBlock)(UITableViewCell *currentCell);
 
 @property (nonatomic, copy) void(^goToSetBlock)();
+@property(nonatomic,strong)NSDictionary *setValueDic;
 
 @property (nonatomic, strong) UIImageView *image1;
 @property (nonatomic, strong) UIImageView *image2;

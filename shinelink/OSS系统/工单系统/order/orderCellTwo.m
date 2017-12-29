@@ -132,7 +132,7 @@ static NSString *statusNum = @"3";
     
     
     NSString *lableNameString1=@"填写工单表格";
-    NSMutableDictionary *dic1 = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+    NSMutableDictionary *dic1 = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
     CGSize size0 = [lableNameString1 boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic1 context:nil].size;
     UILabel *lable02 = [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, 0,size0.width, lableH)];    
     if ([_statusString isEqualToString:statusNum]) {
@@ -141,7 +141,7 @@ static NSString *statusNum = @"3";
         lable02.textColor = COLOR(154, 154, 154, 1);
     }
     lable02.text=lableNameString1;
-    lable02.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    lable02.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     lable02.textAlignment=NSTextAlignmentLeft;
     if ([_statusString isEqualToString:statusNum]) {
         [_scrollView addSubview:lable02];
@@ -177,7 +177,7 @@ static NSString *statusNum = @"3";
         float lineW=SCREEN_Width-(2*firstW);  float image2W=6*NOW_SIZE;
         
         if ((i==3)||(i==1)||(i==2)) {
-            UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(firstW+lineW-image2W, 8*HEIGHT_SIZE+numH*i+numH2, image2W,14*HEIGHT_SIZE )];
+            UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(firstW+lineW-image2W, 8*HEIGHT_SIZE+numH*i+numH2, image2W,12*HEIGHT_SIZE )];
             if ([_statusString isEqualToString:statusNum]) {
                  image2.userInteractionEnabled=YES;
             }
@@ -202,7 +202,7 @@ static NSString *statusNum = @"3";
         
         
         NSString*lable2Name=lableNameArray[i];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
         CGSize size = [lable2Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, 0+numH*i+numH2,size.width, lableH)];
        
@@ -213,7 +213,7 @@ static NSString *statusNum = @"3";
         }
       
         lable2.text=lableNameArray[i];
-        lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         if (i==6) {
                lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         }
@@ -248,7 +248,7 @@ static NSString *statusNum = @"3";
              CGSize size1 = [lable4Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
             lable4.frame=CGRectMake(SCREEN_Width-firstW-size1.width, 0+numH*i+numH2, size1.width, lableH);
             lable4.text=lable4Name;
-            lable4.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            lable4.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             if ([_statusString isEqualToString:statusNum]) {
                [_scrollView addSubview:lable4];
             }
@@ -280,7 +280,7 @@ static NSString *statusNum = @"3";
             
             lable3.tag=2000+i;
             lable3.text=lableNameArray2[i];
-            lable3.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            lable3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:lable3];
         }
         
@@ -298,7 +298,7 @@ static NSString *statusNum = @"3";
             
             [_textfield setValue:COLOR(154, 154, 154, 1) forKeyPath:@"_placeholderLabel.textColor"];
             [_textfield setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
-            _textfield.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            _textfield.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:_textfield];
             
             if ([_statusString isEqualToString:statusNum]) {
@@ -388,14 +388,14 @@ static NSString *statusNum = @"3";
     }
     
     NSString *lable7Name=@"备注:";
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
   CGSize size3 = [lable7Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     
     float H7=90*HEIGHT_SIZE;
     UILabel *lable7= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*8+120*HEIGHT_SIZE+numH2-H7,size3.width, lableH)];
         lable7.textColor =COLOR(51, 51, 51, 1);
     lable7.text=lable7Name;
-    lable7.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    lable7.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     if ([_statusString isEqualToString:statusNum]) {
         [_scrollView addSubview:lable7];
     }
@@ -413,7 +413,7 @@ static NSString *statusNum = @"3";
         lableR.textColor = COLOR(154, 154, 154, 1);
         lableR.text=_remarkString;
         lableR.numberOfLines=0;
-        lableR.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        lableR.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_scrollView addSubview:lableR];
         
         UIView* lineR = [[UIView alloc]initWithFrame:CGRectMake(firstW,  numH*8+120*HEIGHT_SIZE+5*HEIGHT_SIZE-1*HEIGHT_SIZE+remarkLabelH+numH2-H7, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
@@ -429,13 +429,13 @@ static NSString *statusNum = @"3";
     if ([_statusString isEqualToString:statusNum]) {
      
         NSString *lable8Name=@"添加备注:";
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
         CGSize size3 = [lable8Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
         UILabel *lable8= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, numH*8+125*HEIGHT_SIZE+remarkLabelH+numH2-H7,size3.width, lableH)];
         lable8.textColor =COLOR(51, 51, 51, 1);
         lable8.text=lable8Name;
-        lable8.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        lable8.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         if ([_statusString isEqualToString:statusNum]) {
             [_scrollView addSubview:lable8];
         }
@@ -444,7 +444,7 @@ static NSString *statusNum = @"3";
             _textfield2.textColor=COLOR(51, 51, 51, 1);
             _textfield2.tintColor = COLOR(51, 51, 51, 1);
             _textfield2.delegate=self;
-            _textfield2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            _textfield2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:_textfield2];
         
         _View5 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*8+125*HEIGHT_SIZE+lableH+remarkLabelH+numH2-H7, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
@@ -461,7 +461,7 @@ static NSString *statusNum = @"3";
     [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
     [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
     [_goBut setTitle:@"完成" forState:UIControlStateNormal];
-    _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
+    _goBut.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
     [_goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
     
     if ([_statusString isEqualToString:statusNum]) {

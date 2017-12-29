@@ -198,13 +198,23 @@ static NSString *cellFour = @"cellFour";
     [_headView addSubview:titleLabel2];
     
     NSArray *headName=[NSArray arrayWithObjects:@"所属地区",@"类型", nil];
-    NSArray *serviceType=[NSArray arrayWithObjects:@"",@"现场维修",@"安装调试", @"培训",@"巡检",nil];
-    int k=[_allValueDic[@"serviceType"] intValue];
+    NSArray *serviceType=[NSArray arrayWithObjects:@"",@"现场维修",@"安装调试", @"培训",@"巡检",@"其他",nil];
+    int k=[[NSString stringWithFormat:@"%@",_allValueDic[@"serviceType"]] intValue];
     NSString *kName;
     if (k<serviceType.count) {
             kName=serviceType[k];
     }
-    NSArray *headValue=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],kName, nil];
+    
+       int groupNameInt=[[NSString stringWithFormat:@"%@",_allValueDic[@"groupId"]] intValue];
+        NSArray *intAdrressType=[NSArray arrayWithObjects:@"",@"中国",@"欧洲", @"亚洲",@"泰国",@"美洲",@"非洲",@"澳洲",@"英国",nil];
+
+       NSString *INTAdrress;
+    if (groupNameInt<serviceType.count) {
+        INTAdrress=intAdrressType[groupNameInt];
+    }else{
+        INTAdrress=@"其他";
+    }
+    NSArray *headValue=[NSArray arrayWithObjects:INTAdrress,kName, nil];
     for (int i=0; i<headName.count; i++) {
         UILabel *titleLabel3 = [[UILabel alloc]initWithFrame:CGRectMake(firstW1+(headW/2)*i, titleLabelH1+titleLabelH2,headW/2, titleLabelH2)];
         titleLabel3.textColor = COLOR(102, 102, 102, 1);
@@ -255,7 +265,7 @@ static NSString *cellFour = @"cellFour";
            [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"/api/v2/ order/detail: %@", content1);
+        NSLog(@"/api/v2/order/detail: %@", content1);
       
         if (content1) {
                NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
@@ -341,11 +351,16 @@ static NSString *cellFour = @"cellFour";
             NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];
             [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         }];
-        cell.goToSetBlock = ^(){
-            orderSetView *testView=[[orderSetView alloc]init];
-            [self.navigationController pushViewController:testView animated:YES];
-         
+         orderSetView *testView=[[orderSetView alloc]init];
+        testView.getSetValue = ^(NSDictionary *setDic){
+            cell.setValueDic=[NSDictionary dictionaryWithDictionary:setDic];
         };
+        cell.goToSetBlock = ^(){
+         
+            testView.setType=[[NSString stringWithFormat:@"%@",_allValueDic[@"serviceType"]] intValue];
+            [self.navigationController pushViewController:testView animated:YES];
+        };
+        
         return cell;
     }else if (indexPath.row==2) {
         orderCellThree *cell = [tableView dequeueReusableCellWithIdentifier:cellThree forIndexPath:indexPath];

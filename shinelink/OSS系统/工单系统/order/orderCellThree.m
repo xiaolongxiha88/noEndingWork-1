@@ -98,13 +98,13 @@
         
 
         NSString*lable2Name=[NSString stringWithFormat:@"%@:",lableNameArray[i]];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
         CGSize size = [lable2Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, 0+numH*i,size.width, lableH)];
         lable2.textColor = COLOR(154, 154, 154, 1);
 
         lable2.text=lable2Name;
-        lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_scrollView addSubview:lable2];
         
         float lable3W=firstW+lable1W+size.width+10*NOW_SIZE;
@@ -113,7 +113,7 @@
             lable3.textColor = COLOR(154, 154, 154, 1);
            lable3.text=lableValueArray2[i];
             lable3.tag=2000+i;
-            lable3.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            lable3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:lable3];
         }
         
@@ -155,7 +155,7 @@
             _sayGoodLabel.textColor = COLOR(154, 154, 154, 1);
             _sayGoodLabel.text=_remarkString;
             _sayGoodLabel.numberOfLines=0;
-            _sayGoodLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            _sayGoodLabel.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:_sayGoodLabel];
         }
         
@@ -164,7 +164,7 @@
     _remarkLabel.textColor = COLOR(154, 154, 154, 1);
             _remarkLabel.text=_remarkString;
             _remarkLabel.numberOfLines=0;
-            _remarkLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            _remarkLabel.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:_remarkLabel];
         }
         

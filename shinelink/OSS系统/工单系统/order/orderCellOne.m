@@ -105,7 +105,7 @@ static NSString *statusNum = @"2";
         _goTimeString=dataString;
         
         NSArray *lableNameArray=[NSArray arrayWithObjects:@"公司名称:",@"申请时间:",@"要求到达时间:", @"预约上门时间:", @"详细地址:", @"备注:",@"添加备注:", nil];
-        NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"groupName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], dataString, nil];
+        NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], dataString, nil];
         
         float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;
         for (int i=0; i<lableNameArray.count; i++) {
@@ -126,7 +126,7 @@ static NSString *statusNum = @"2";
             
             
             NSString*lable2Name=lableNameArray[i];
-            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
             CGSize size = [lable2Name boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW), MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
             UILabel *lable2 = [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W, 0+numH*i,size.width, lableH)];
             lable2.textColor = COLOR(154, 154, 154, 1);
@@ -137,7 +137,7 @@ static NSString *statusNum = @"2";
             }
             
             lable2.text=lableNameArray[i];
-            lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             if ([_statusString isEqualToString:statusNum]) {
                 if (i!=6) {
                    [_scrollView addSubview:lable2];
@@ -153,7 +153,7 @@ static NSString *statusNum = @"2";
             float ImageW2=15*HEIGHT_SIZE;
             if ((i==1)||(i==2)||(i==3)) {
                 
-                UIImageView *image00 = [[UIImageView alloc]initWithFrame:CGRectMake(firstW+lable1W+size.width, (lableH-ImageW2)/2+numH*i,ImageW2, ImageW2)];
+                UIImageView *image00 = [[UIImageView alloc]initWithFrame:CGRectMake(firstW+lable1W+size.width+2*NOW_SIZE, (lableH-ImageW2)/2+numH*i,ImageW2, ImageW2)];
                 image00.image=IMAGE(@"workoader_date1.png");
                 if ([_statusString isEqualToString:statusNum]) {
                     if (i==3) {
@@ -167,6 +167,9 @@ static NSString *statusNum = @"2";
             float lable3W=firstW+lable1W+size.width+ImageW2+5*NOW_SIZE;
             if ((i==0)||(i==1)||(i==2)||(i==3)) {
                 UILabel *lable3 = [[UILabel alloc]initWithFrame:CGRectMake(lable3W, 0+numH*i,SCREEN_Width-(1*firstW)-lable3W, lableH)];
+                if (i==0) {
+                    lable3.frame=CGRectMake(lable3W-ImageW2, 0+numH*i,SCREEN_Width-(1*firstW)-lable3W, lableH);
+                }
                 lable3.textColor = COLOR(154, 154, 154, 1);
                 if ([_statusString isEqualToString:statusNum]) {
                     if (i==3) {
@@ -179,7 +182,8 @@ static NSString *statusNum = @"2";
                 
                 lable3.tag=2000+i;
                 lable3.text=lableNameArray2[i];
-                lable3.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+                lable3.adjustsFontSizeToFitWidth=YES;
+                lable3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
                 [_scrollView addSubview:lable3];
             }
             
@@ -210,7 +214,7 @@ static NSString *statusNum = @"2";
                     lableR.textColor = COLOR(154, 154, 154, 1);
                     lableR.text=_remarkString;
                     lableR.numberOfLines=0;
-                    lableR.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+                    lableR.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
                     [_scrollView addSubview:lableR];
                     
                     UIView* lineR = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*(5)+5*HEIGHT_SIZE-1*HEIGHT_SIZE+remarkLabelH, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
@@ -225,7 +229,7 @@ static NSString *statusNum = @"2";
                 UILabel *lableR2= [[UILabel alloc]initWithFrame:CGRectMake(firstW+lable1W,5*HEIGHT_SIZE+numH*5+remarkLabelH,size.width, lableH)];
                 lableR2.textColor = COLOR(51, 51, 51, 1);
                 lableR2.text=lableNameArray[i];
-                lableR2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+                lableR2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
                 if ([_statusString isEqualToString:statusNum]) {
                     [_scrollView addSubview:lableR2];
                 }
@@ -236,7 +240,7 @@ static NSString *statusNum = @"2";
                         _textfield2.textColor=COLOR(51, 51, 51, 1);
                         _textfield2.tintColor = COLOR(51, 51, 51, 1);
                         _textfield2.delegate=self;
-                        _textfield2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+                        _textfield2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
                         [_scrollView addSubview:_textfield2];
                     }
                     
@@ -258,7 +262,7 @@ static NSString *statusNum = @"2";
 
                 [_textfield setValue:COLOR(154, 154, 154, 1) forKeyPath:@"_placeholderLabel.textColor"];
                 [_textfield setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
-                _textfield.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+                _textfield.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
                 [_scrollView addSubview:_textfield];
                 
                 if ([_statusString isEqualToString:statusNum]) {
@@ -285,7 +289,7 @@ static NSString *statusNum = @"2";
         [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
         [_goBut setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
         [_goBut setTitle:@"接收" forState:UIControlStateNormal];
-        _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
+        _goBut.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
         [_goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
         
         if ([_statusString isEqualToString:statusNum]) {
@@ -326,11 +330,11 @@ static NSString *statusNum = @"2";
        [allDict setObject:remarkAll forKey:@"remarks"];
     
     [self showProgressView];
-   [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v2/order/perfect" dataImageDict:dataImageDict sucessBlock:^(id content) {
+   [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v2/order/newperfect" dataImageDict:dataImageDict sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"/api/v2/order/perfect: %@", content1);
+        NSLog(@"/api/v2/order/newperfect: %@", content1);
         
         if (content1) {
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
@@ -434,7 +438,7 @@ static NSString *statusNum = @"2";
     
     _titleLabel.text = self.model.title;
     
-         NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"groupName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], nil];
+         NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], nil];
     
     UILabel *L1=[_scrollView viewWithTag:2000];
     L1.text=lableNameArray2[0];

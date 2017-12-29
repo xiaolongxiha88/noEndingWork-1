@@ -10,4 +10,8 @@
 
 @interface orderSetView : RootViewController
 
+@property (nonatomic, copy) void(^getSetValue)(NSDictionary*setValueDic);
+
+@property (nonatomic, assign) int setType;
+
 @end
