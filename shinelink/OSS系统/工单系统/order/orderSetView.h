@@ -13,5 +13,8 @@
 @property (nonatomic, copy) void(^getSetValue)(NSDictionary*setValueDic);
 
 @property (nonatomic, assign) int setType;
+@property (nonatomic, strong) NSMutableDictionary *setValueDic;
+
+@property (nonatomic, strong)NSString* statusString;
 
 @end

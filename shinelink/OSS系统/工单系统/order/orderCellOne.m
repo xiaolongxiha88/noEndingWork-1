@@ -91,11 +91,12 @@ static NSString *statusNum = @"2";
         [self.contentView addSubview:_scrollView];
         
         _View3 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+ImageW1/2, viewW1/2, 0.3*NOW_SIZE,38*HEIGHT_SIZE-viewW1/2)];
-    if ([_statusString isEqualToString:statusNum]) {
-    _View3.backgroundColor =COLOR(102, 102, 102, 1);
-    }else{
+//    if ([_statusString isEqualToString:statusNum]) {
+//    _View3.backgroundColor =COLOR(102, 102, 102, 1);
+//    }else{
+    
     _View3.backgroundColor =COLOR(255, 204, 0, 1);
-    }
+    
     
         [self.contentView addSubview:_View3];
         
@@ -203,10 +204,10 @@ static NSString *statusNum = @"2";
             
             CGSize size1= [_remarkString boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
-            if (lableH>(size1.height+10*HEIGHT_SIZE)) {
+            if (lableH>(size1.height+20*HEIGHT_SIZE)) {
                 remarkLabelH=lableH;
             }else{
-                remarkLabelH=size1.height+10*HEIGHT_SIZE;
+                remarkLabelH=size1.height+20*HEIGHT_SIZE;
             }
             if (i==5) {
                 if ([_statusString isEqualToString:statusNum]) {

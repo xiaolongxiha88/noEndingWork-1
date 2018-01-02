@@ -38,7 +38,7 @@
     
     float ImageW1=26*HEIGHT_SIZE;  float firstW1=5*HEIGHT_SIZE;
     _titleImage = [[UIImageView alloc]initWithFrame:CGRectMake(firstW1, (viewW1-ImageW1)/2, ImageW1, ImageW1)];
-    if ([_statusString isEqualToString:@"4"]) {
+    if ([_statusString isEqualToString:@"5"]) {
         _titleImage.image=IMAGE(@"yuan_2.png");
     }else{
         _titleImage.image=IMAGE(@"yuan_1.png");
@@ -81,7 +81,7 @@
     
     _View3 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+ImageW1/2, 0, 0.3*NOW_SIZE,34*HEIGHT_SIZE)];
     
-    if ([_statusString isEqualToString:@"4"]) {
+    if ([_statusString isEqualToString:@"5"]) {
         _View3.backgroundColor =COLOR(255, 204, 0, 1);
     }else{
         _View3.backgroundColor =COLOR(102, 102, 102, 1);
@@ -92,7 +92,7 @@
     //    [self.dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     //    NSString *dataString = [_dayFormatter stringFromDate:[NSDate date]];
     
-    NSArray *lableNameArray=[NSArray arrayWithObjects:@"申请时间:",@"接收时间:", @"预约时间:",@"完成时间:",@"完成状态:",@"报告单:", @"现场图片:",  @"备注:", nil];
+    NSArray *lableNameArray=[NSArray arrayWithObjects:@"申请时间:",@"接收时间:", @"预约时间:",@"完成时间:",@"完成状态:", @"图片:",  @"备注:", nil];
     //    NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"customerName"]],[NSString stringWithFormat:@"%@",_allValueDic[@"applicationTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"doorTime"]], dataString, nil];
     
     float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;
@@ -178,10 +178,10 @@
         
         CGSize size1= [_remarkString boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         float remarkLabelH;
-        if (lableH>(size1.height+10*HEIGHT_SIZE)) {
+        if (lableH>(size1.height+20*HEIGHT_SIZE)) {
             remarkLabelH=lableH;
         }else{
-            remarkLabelH=size1.height+10*HEIGHT_SIZE;
+            remarkLabelH=size1.height+20*HEIGHT_SIZE;
         }
         if (i==7) {
             _remarkLabel = [[UILabel alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i,textW,remarkLabelH)];
@@ -342,6 +342,11 @@
         [self initUI];
     }
     
+    if ([_statusString isEqualToString:@"5"]) {
+        _titleImage.image=IMAGE(@"yuan_2.png");
+    }else{
+        _titleImage.image=IMAGE(@"yuan_1.png");
+    }
     
     UILabel *L0=[_scrollView viewWithTag:2000];
     L0.text=_allValueDic[@"applicationTime"];

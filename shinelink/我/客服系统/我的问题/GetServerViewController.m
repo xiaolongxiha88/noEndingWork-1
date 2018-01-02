@@ -76,8 +76,10 @@
             
             if (data!= nil) {
                 result = [UIImage imageWithData:data];
-                
-                [_imageArray addObject:result];
+                if (result!=nil) {
+                        [_imageArray addObject:result];
+                }
+            
                
                 
                 if (_imageArray.count==(_picArray.count-1)) {

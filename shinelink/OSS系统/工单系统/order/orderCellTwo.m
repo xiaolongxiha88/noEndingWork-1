@@ -52,11 +52,11 @@ static NSString *statusNum = @"3";
     float ImageW1=26*HEIGHT_SIZE;  float firstW1=5*HEIGHT_SIZE;
     _titleImage = [[UIImageView alloc]initWithFrame:CGRectMake(firstW1, (viewW1-ImageW1)/2, ImageW1, ImageW1)];
     
-    if ([_statusString isEqualToString:statusNum] || [_statusString isEqualToString:@"2"]) {
-        _titleImage.image=IMAGE(@"yuan_1.png");
-    }else{
-        _titleImage.image=IMAGE(@"yuan_2.png");
-    }
+//    if ([_statusString isEqualToString:statusNum] || [_statusString isEqualToString:@"2"]) {
+//        _titleImage.image=IMAGE(@"yuan_1.png");
+//    }else{
+//        _titleImage.image=IMAGE(@"yuan_2.png");
+//    }
     
     [_titleView addSubview:_titleImage];
     
@@ -95,7 +95,7 @@ static NSString *statusNum = @"3";
     
     _View3 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+ImageW1/2, 0, 0.3*NOW_SIZE,38*HEIGHT_SIZE)];
 
-    if ([_statusString isEqualToString:@"4"]) {
+    if ([_statusString isEqualToString:@"3"] || [_statusString isEqualToString:@"4"] || [_statusString isEqualToString:@"5"]) {
          _View3.backgroundColor =COLOR(255, 204, 0, 1);
     }else{
       _View3.backgroundColor =COLOR(102, 102, 102, 1);
@@ -143,9 +143,8 @@ static NSString *statusNum = @"3";
     lable02.text=lableNameString1;
     lable02.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     lable02.textAlignment=NSTextAlignmentLeft;
-    if ([_statusString isEqualToString:statusNum]) {
         [_scrollView addSubview:lable02];
-    }
+    
     
     UIImageView *image00=[[UIImageView alloc]initWithFrame:CGRectMake(firstW+lable1W+size0.width+lable1W, 7*HEIGHT_SIZE, 15*HEIGHT_SIZE,16*HEIGHT_SIZE )];
     image00.image = IMAGE(@"presentation.png");
@@ -402,10 +401,10 @@ static NSString *statusNum = @"3";
     
     CGSize size2= [_remarkString boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW)-size3.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     float remarkLabelH = 0.0;
-    if (lableH>(size2.height+10*HEIGHT_SIZE)) {
+    if (lableH>(size2.height+20*HEIGHT_SIZE)) {
         remarkLabelH=lableH;
     }else{
-        remarkLabelH=size2.height+10*HEIGHT_SIZE;
+        remarkLabelH=size2.height+20*HEIGHT_SIZE;
     }
 
     if ([_statusString isEqualToString:statusNum]) {
@@ -939,20 +938,21 @@ static NSString *statusNum = @"3";
        [allDict setObject:setValue forKey:@"serviceReport"];
     [allDict setObject:_orderID forKey:@"orderId"];
     [allDict setObject:_statusString forKey:@"status"];
-    [allDict setObject:locationString forKey:@"location"];
+ //   [allDict setObject:locationString forKey:@"location"];
     [allDict setObject:timeString forKey:@"completeTime"];
     [allDict setObject:_orderType forKey:@"completeType"];
         [allDict setObject:_deviceType forKey:@"deviceType"];
         [allDict setObject:deviceSnString forKey:@"deviseSerialNumber"];
     
-      [allDict setObject:deviceSnString forKey:@"province"];
-     [allDict setObject:deviceSnString forKey:@"city"];
-       [allDict setObject:deviceSnString forKey:@"longitude"];
-       [allDict setObject:deviceSnString forKey:@"latitude"];
+      [allDict setObject:_province forKey:@"province"];
+     [allDict setObject:_city forKey:@"city"];
+       [allDict setObject:_longitude forKey:@"longitude"];
+       [allDict setObject:_latitude forKey:@"latitude"];
     
        NSString*remarkAll=[NSString stringWithFormat:@"%@%@",_remarkString,_textfield2.text];
       [allDict setObject:remarkAll forKey:@"remarks"];
     
+
     [self showProgressView];
     [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v2/order/newperfect" dataImageDict:dataImageDict sucessBlock:^(id content) {
         [self hideProgressView];
@@ -1067,8 +1067,12 @@ static NSString *statusNum = @"3";
     
     
     _titleLabel.text = self.model.title;
-    
-    NSArray *lableNameArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"location"]],[NSString stringWithFormat:@"%@",_allValueDic[@"completeTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"completeState"]], nil];
+    NSString *locationString=@"";
+    if ( [_statusString isEqualToString:@"4"] || [_statusString isEqualToString:@"5"]) {
+          locationString=[NSString stringWithFormat:@"%@-%@(%@,%@)",_allValueDic[@"province"],_allValueDic[@"city"],_allValueDic[@"longitude"],_allValueDic[@"latitude"]];
+    }
+
+    NSArray *lableNameArray2=[NSArray arrayWithObjects:locationString,[NSString stringWithFormat:@"%@",_allValueDic[@"completeTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"completeState"]], nil];
     
     UILabel *L1=[_scrollView viewWithTag:2000];
     L1.text=lableNameArray2[0];
@@ -1100,7 +1104,7 @@ static NSString *statusNum = @"3";
           L3.text=@"";
     }
     
-    if ([_statusString isEqualToString:@"4"]) {
+    if ([_statusString isEqualToString:@"3"] || [_statusString isEqualToString:@"4"] || [_statusString isEqualToString:@"5"]) {
      _titleImage.image=IMAGE(@"yuan_2.png");
     }else{
          _titleImage.image=IMAGE(@"yuan_1.png");

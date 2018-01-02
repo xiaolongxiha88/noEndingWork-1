@@ -37,11 +37,7 @@
     
     float ImageW1=26*HEIGHT_SIZE;  float firstW1=5*HEIGHT_SIZE;
     _titleImage = [[UIImageView alloc]initWithFrame:CGRectMake(firstW1, (viewW1-ImageW1)/2, ImageW1, ImageW1)];
-    if ([_statusString isEqualToString:@"4"]) {
-        _titleImage.image=IMAGE(@"yuan_2.png");
-    }else{
-     _titleImage.image=IMAGE(@"yuan_1.png");
-    }
+
    
     [_titleView addSubview:_titleImage];
     
@@ -80,7 +76,7 @@
     
     _View3 = [[UIView alloc]initWithFrame:CGRectMake(firstW1+ImageW1/2, 0, 0.3*NOW_SIZE,38*HEIGHT_SIZE)];
   
-    if ([_statusString isEqualToString:@"4"]) {
+    if ([_statusString isEqualToString:@"4"] || [_statusString isEqualToString:@"4"]) {
         _View3.backgroundColor =COLOR(255, 204, 0, 1);
     }else{
       _View3.backgroundColor =COLOR(102, 102, 102, 1);
@@ -89,8 +85,50 @@
     
     
     NSArray *lableNameArray=[NSArray arrayWithObjects:@"完成情况",@"完成时间", @"回访时间",@"回访人",@"基本信息是否有误",@"满意度打分", @"电话是否接通",  @"是否按约定时间到达现场",@"是否签字确认",@"客户评价",@"回访备注",  nil];
+    NSString *value5=@""; NSString *value6=@"";NSString *value7=@"";NSString *value8=@"";NSString *value9=@"";
+    NSInteger INT5=[[NSString stringWithFormat:@"%@",_allValueDic[@"basicInformation"]] integerValue];
+        NSInteger INT6=[[NSString stringWithFormat:@"%@",_allValueDic[@"satisfaction"]] integerValue];
+      NSInteger INT7=[[NSString stringWithFormat:@"%@",_allValueDic[@"phoneIswitched"]] integerValue];
+     NSInteger INT8=[[NSString stringWithFormat:@"%@",_allValueDic[@"agreedTime"]] integerValue];
+      NSInteger INT9=[[NSString stringWithFormat:@"%@",_allValueDic[@"signToConfirm"]] integerValue];
+    if (INT5==1) {
+        value5=@"是";
+    }else{
+         value5=@"否";
+    }
+    if (INT6==10) {
+        value6=[NSString stringWithFormat:@"%@(%ld分)",@"非常满意",INT6];
+    }else if (INT6==8) {
+        value6=[NSString stringWithFormat:@"%@(%ld分)",@"满意",INT6];
+    }else if (INT6==6) {
+        value6=[NSString stringWithFormat:@"%@(%ld分)",@"一般",INT6];
+    }else if (INT6==4) {
+        value6=[NSString stringWithFormat:@"%@(%ld分)",@"不满意",INT6];
+    }else if (INT6==2) {
+        value6=[NSString stringWithFormat:@"%@(%ld分)",@"很不满意",INT6];
+    }
     
-  NSArray *lableValueArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"completion"]],[NSString stringWithFormat:@"%@",_allValueDic[@"completeTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"visitTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"returnVisit"]], [NSString stringWithFormat:@"%@",_allValueDic[@"basicInformation"]],[NSString stringWithFormat:@"%@",_allValueDic[@"satisfaction"]],[NSString stringWithFormat:@"%@",_allValueDic[@"phoneIswitched"]],[NSString stringWithFormat:@"%@",_allValueDic[@"agreedTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"signToConfirm"]],[NSString stringWithFormat:@"%@",_allValueDic[@"recommended"]],[NSString stringWithFormat:@"%@",_allValueDic[@"returnNote"]],nil];
+    if (INT7==0) {
+        value7=@"已接通";
+    }else  if (INT7==1) {
+        value7=@"无人接听";
+    }else  if (INT7==2) {
+        value7=@"无法接通";
+    }
+    
+    if (INT8==1) {
+        value8=@"是";
+    }else{
+        value8=@"否";
+    }
+    
+    if (INT9==1) {
+        value9=@"是";
+    }else{
+        value9=@"否";
+    }
+    
+  NSArray *lableValueArray2=[NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",_allValueDic[@"completion"]],[NSString stringWithFormat:@"%@",_allValueDic[@"completeTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"visitTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"returnVisit"]], value5,value6,value7,value8,value9,[NSString stringWithFormat:@"%@",_allValueDic[@"recommended"]],[NSString stringWithFormat:@"%@",_allValueDic[@"returnNote"]],nil];
     
     float lable1W=10*NOW_SIZE;  float lableH=30*HEIGHT_SIZE;    float numH=35*NOW_SIZE;  float firstW=25*NOW_SIZE;
     long forNum=lableNameArray.count-1;
@@ -114,7 +152,10 @@
            lable3.text=lableValueArray2[i];
             lable3.tag=2000+i;
             lable3.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-            [_scrollView addSubview:lable3];
+           if ([_statusString isEqualToString:@"5"]) {
+                [_scrollView addSubview:lable3];
+            }
+           
         }
         
         
@@ -130,30 +171,30 @@
         float textW=SCREEN_Width-textfieldW-textW1;
 
         
-        NSString *longName1=[NSString stringWithFormat:@"%@",_allValueDic[@"recommended"]];
+        NSString *longName1=[NSString stringWithFormat:@"%@",_allValueDic[@"satisfactoryReason"]];
           NSString *longName2=[NSString stringWithFormat:@"%@",_allValueDic[@"returnNote"]];
         
         CGSize size1= [longName1 boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
           CGSize size2= [longName2 boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
         float remarkLabelH;
-        if (lableH>(size1.height+10*HEIGHT_SIZE)) {
+        if (lableH>(size1.height+20*HEIGHT_SIZE)) {
             remarkLabelH=lableH;
         }else{
-            remarkLabelH=size1.height+10*HEIGHT_SIZE;
+            remarkLabelH=size1.height+20*HEIGHT_SIZE;
         }
         
         float remarkLabelH2;
-        if (lableH>(size2.height+10*HEIGHT_SIZE)) {
+        if (lableH>(size2.height+20*HEIGHT_SIZE)) {
             remarkLabelH2=lableH;
         }else{
-            remarkLabelH2=size2.height+10*HEIGHT_SIZE;
+            remarkLabelH2=size2.height+20*HEIGHT_SIZE;
         }
         
         if (i==forNum-1) {
             _sayGoodLabel = [[UILabel alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i,textW,remarkLabelH)];
             _sayGoodLabel.textColor = COLOR(154, 154, 154, 1);
-            _sayGoodLabel.text=_remarkString;
+            _sayGoodLabel.text=longName1;
             _sayGoodLabel.numberOfLines=0;
             _sayGoodLabel.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:_sayGoodLabel];
@@ -162,7 +203,7 @@
         if (i==forNum) {
             _remarkLabel = [[UILabel alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i+remarkLabelH,textW,remarkLabelH2)];
     _remarkLabel.textColor = COLOR(154, 154, 154, 1);
-            _remarkLabel.text=_remarkString;
+            _remarkLabel.text=longName2;
             _remarkLabel.numberOfLines=0;
             _remarkLabel.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:_remarkLabel];
@@ -318,26 +359,13 @@
         [self initUI];
     }
 
+    if ([_statusString isEqualToString:@"4"] || [_statusString isEqualToString:@"5"]) {
+        _titleImage.image=IMAGE(@"yuan_2.png");
+    }else{
+        _titleImage.image=IMAGE(@"yuan_1.png");
+    }
     
-    
-//    UILabel *L0=[_scrollView viewWithTag:2000];
-//    L0.text=_allValueDic[@"applicationTime"];
-//
-//    UILabel *L1=[_scrollView viewWithTag:2001];
-//    L1.text=_allValueDic[@"receiveTime"];
-//
-//    UILabel *L2=[_scrollView viewWithTag:2002];
-//    L2.text=_allValueDic[@"appointment"];
-//
-//    UILabel *L3=[_scrollView viewWithTag:2003];
-//    L3.text=_allValueDic[@"completeTime"];
-//
-//    UILabel *L4=[_scrollView viewWithTag:2004];
-//    if ([_allValueDic[@"completeState"] intValue]==1) {
-//        L4.text=@"待观察";
-//    }else if ([_allValueDic[@"completeState"] intValue]==2) {
-//        L4.text=@"已完成";
-//    }
+
     
     _titleLabel.text = self.model.title;
     
@@ -346,7 +374,7 @@
         float y=_scrollView.frame.origin.y;
         _scrollView.frame=CGRectMake(0, y, SCREEN_Width, SCREEN_Height);
         
-        float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-40*HEIGHT_SIZE;
+        float H=SCREEN_Height-(38*HEIGHT_SIZE*2)-20*HEIGHT_SIZE;
         float Vx=_View3.frame.origin.x; float Vy=_View3.frame.origin.y;
         _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,H);
         

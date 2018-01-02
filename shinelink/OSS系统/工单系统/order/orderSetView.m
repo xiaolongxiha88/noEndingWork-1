@@ -14,8 +14,10 @@
 @property (nonatomic, strong) NSArray *lableKeyArray;
 @property (nonatomic, strong) NSArray *lableNameArray2;
 @property (nonatomic, strong) NSArray *lableKeyArray2;
+@property (nonatomic, strong) NSMutableArray *lableValueArray1;
+@property (nonatomic, strong) NSMutableArray *lableValueArray2;
 @property (nonatomic, strong) NSString *titleName;
-@property (nonatomic, strong) NSMutableDictionary *setValueDic;
+
 @end
 
 @implementation orderSetView
@@ -57,6 +59,17 @@
         _lableNameArray2=@[@"现场情况描述",@"完成情况"];
     }
     
+    _lableValueArray1=[NSMutableArray new];
+     _lableValueArray2=[NSMutableArray new];
+    if (_setValueDic.allKeys.count>0) {
+        for (int i=0; i<_lableKeyArray.count; i++) {
+            [_lableValueArray1 addObject:[NSString stringWithFormat:@"%@",[_setValueDic objectForKey:_lableKeyArray[i]]]];
+        }
+        for (int i=0; i<_lableKeyArray2.count; i++) {
+            [_lableValueArray2 addObject:[NSString stringWithFormat:@"%@",[_setValueDic objectForKey:_lableKeyArray2[i]]]];
+        }
+    }
+    
         [self initUI];
 }
 
@@ -91,10 +104,19 @@
         lableTextfield.textColor = lableColor;
         lableTextfield.tintColor =lableColor;
         lableTextfield.tag=2000+i;
+       
        // lableTextfield.placeholder = @"请输入相关资料";
         [lableTextfield setValue:COLOR(154, 154, 154, 1) forKeyPath:@"_placeholderLabel.textColor"];
         [lableTextfield setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
         lableTextfield.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        if (![_statusString isEqualToString:@"3"]){
+            if (_lableValueArray1.count>i) {
+                 lableTextfield.text =_lableValueArray1[i];
+            }
+            lableTextfield.userInteractionEnabled=NO;
+             lableTextfield.adjustsFontSizeToFitWidth=YES;
+        }
+        
         [_scrollView addSubview:lableTextfield];
     }
    
@@ -117,6 +139,12 @@
         textValue.layer.borderColor= COLOR(222, 222, 222, 1).CGColor;
         textValue.tag=3000+i;
         textValue.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        if (![_statusString isEqualToString:@"3"]){
+            if (_lableValueArray2.count>i) {
+                textValue.text =_lableValueArray2[i];
+            }
+         //   textValue.userInteractionEnabled=NO;
+        }
         [_scrollView addSubview:textValue];
         
     }
@@ -129,7 +157,10 @@
     [_goBut setTitle:@"完成" forState:UIControlStateNormal];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [_goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
-    [_scrollView addSubview:_goBut];
+    if ([_statusString isEqualToString:@"3"]){
+            [_scrollView addSubview:_goBut];
+    }
+
     
     _scrollView.contentSize=CGSizeMake(SCREEN_Width, H3+140*HEIGHT_SIZE);
     

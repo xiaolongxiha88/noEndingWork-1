@@ -80,7 +80,7 @@ static NSString *cellFour = @"cellFour";
     }else if ([_statusString isEqualToString:@"5"]) {
         _titleArray=[NSArray arrayWithObjects:@"已接收",@"已服务",@"已回访",@"已完成", nil];
     }
-    if ([_statusString isEqualToString:@"5"]) {
+    if ([_statusString isEqualToString:@"4"] || [_statusString isEqualToString:@"5"]) {
         NSString *questionPIC=[NSString stringWithFormat:@"%@",_allValueDic[@"fieldService"]];
         _picArray = [questionPIC componentsSeparatedByString:@"_"];
         NSString *questionPIC1=[NSString stringWithFormat:@"%@",_allValueDic[@"otherServices"]];
@@ -358,6 +358,12 @@ static NSString *cellFour = @"cellFour";
         cell.goToSetBlock = ^(){
          
             testView.setType=[[NSString stringWithFormat:@"%@",_allValueDic[@"serviceType"]] intValue];
+            if (![_statusString isEqualToString:@"3"]){
+                NSString *serviceReportString=_allValueDic[@"serviceReport"];
+                NSDictionary *setDic=[self dictionaryWithJsonString:serviceReportString];
+                testView.setValueDic=[NSMutableDictionary dictionaryWithDictionary:setDic];
+            }
+            testView.statusString=_statusString;
             [self.navigationController pushViewController:testView animated:YES];
         };
         
@@ -458,7 +464,24 @@ static NSString *cellFour = @"cellFour";
 
 
 
-
+-(NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString
+{
+    if (jsonString == nil) {
+        return nil;
+    }
+    
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err)
+    {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
 
 
 - (void)didReceiveMemoryWarning {
