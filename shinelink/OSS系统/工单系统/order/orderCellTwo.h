@@ -39,6 +39,7 @@
 @property(nonatomic,strong)NSString *latitude;//纬度
 @property(nonatomic,strong)NSString *longitude;
 @property(nonatomic,strong)NSString *city;
+@property(nonatomic,strong)NSString *province;
 @property(nonatomic,strong)NSString *country;
 @property(nonatomic,strong)NSString *countryGet;
 @property (nonatomic, strong) UIImagePickerController *cameraImagePicker;

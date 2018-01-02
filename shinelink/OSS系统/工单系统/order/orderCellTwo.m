@@ -807,6 +807,8 @@ static NSString *statusNum = @"3";
         _longitude=[NSString stringWithFormat:@"%.2f", location.coordinate.longitude];
         _latitude=[NSString stringWithFormat:@"%.2f", location.coordinate.latitude];
         _city=placemark.locality;
+        _province = placemark.administrativeArea;
+        
         _countryGet=placemark.country;
         
         NSString *lableText=[NSString stringWithFormat:@"%@(%@,%@)",_city,_longitude,_latitude];
@@ -906,6 +908,11 @@ static NSString *statusNum = @"3";
 //        return;
 //    }
     
+    if (_setValueDic.allKeys.count==0) {
+        [self showToastViewWithTitle:@"请填写工单表格"];
+        return;
+    }
+    
     if ([locationString isEqual:@""]) {
         [self showToastViewWithTitle:@"请点击获取位置信息"];
         return;
@@ -937,6 +944,11 @@ static NSString *statusNum = @"3";
     [allDict setObject:_orderType forKey:@"completeType"];
         [allDict setObject:_deviceType forKey:@"deviceType"];
         [allDict setObject:deviceSnString forKey:@"deviseSerialNumber"];
+    
+      [allDict setObject:deviceSnString forKey:@"province"];
+     [allDict setObject:deviceSnString forKey:@"city"];
+       [allDict setObject:deviceSnString forKey:@"longitude"];
+       [allDict setObject:deviceSnString forKey:@"latitude"];
     
        NSString*remarkAll=[NSString stringWithFormat:@"%@%@",_remarkString,_textfield2.text];
       [allDict setObject:remarkAll forKey:@"remarks"];
@@ -1043,6 +1055,11 @@ static NSString *statusNum = @"3";
     
      _remarkString=_allValueDic[@"remarks"];
     _deviceType=@"";
+    
+    _longitude=@"";
+    _latitude=@"";
+    _city=@"";
+    _province =@"";
     
     if (!_scrollView) { 
         [self initUI];
