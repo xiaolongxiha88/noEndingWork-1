@@ -462,6 +462,8 @@
             [[NSUserDefaults standardUserDefaults] setObject:_OssName forKey:@"OssName"];
             [[NSUserDefaults standardUserDefaults] setObject:_OssPassword forKey:@"OssPassword"];
             
+              [[NSUserDefaults standardUserDefaults] setObject:_OssName forKey:@"OssGetPhoneName"];
+            
             [[NSUserDefaults standardUserDefaults] setObject:@"Y" forKey:@"firstGoToOss"];
           
             

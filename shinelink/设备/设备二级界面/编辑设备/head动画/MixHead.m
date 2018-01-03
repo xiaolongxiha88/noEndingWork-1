@@ -80,12 +80,12 @@
     
     NSString *nameLeft=@"";NSString *valueLeft=@"";
     if ([valueLeft0 floatValue]>0) {
-        nameLeft=root_Charge_Power;
+        nameLeft=root_device_265;
             _isBatToRight=NO;
         valueLeft=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"chargePower"]] floatValue]];
     }else{
         _isBatToRight=YES;
-        nameLeft=root_PCS_fangdian_gonglv;
+        nameLeft=root_device_266;
         valueLeft=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pdisCharge1"]] floatValue]];
     }
     

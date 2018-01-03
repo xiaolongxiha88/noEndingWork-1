@@ -799,10 +799,10 @@
 "208负载优先"="Load first";
 "209电池优先"="Battery first";
 "210电网优先"="Grid first";
-"211用电功率"="Consumption power";
+"211用电功率"="Consumption";
 "212并网功率"="Export power";
 "213馈回电网"="Export";
-"214电网取电"="Power grid";
+"214电网取电"="Import";
 "215来自电池"="From battery";
 "216自发自用"="Self-consumption";
 "217馈回电网"="Export";
@@ -848,9 +848,10 @@
 "257请选择设置值"="Please select the setting value";
 "258请同时设置起始和结束时间"="Please set the start and end time together";
 "259感性"="Under";
-"260光伏功率"="Solar power";
-"261取电功率"="Power from grid";
-"262馈电功率"="Power to grid";
+"260光伏功率"="Solar";
+"261取电功率"="Import";
+"262馈电功率"="Export";
 "263电网取电"="Import";
 "264来自"="From";
-
+"265充电功率"="Charge";
+"266放电功率"="Discharge";

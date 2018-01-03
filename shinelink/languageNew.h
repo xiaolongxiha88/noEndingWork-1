@@ -884,4 +884,8 @@
 #define  root_Energy_263 NSLocalizedString(@"263电网取电", nil)
 #define  root_Energy_264 NSLocalizedString(@"264来自", nil)
 
+#define  root_device_265 NSLocalizedString(@"265充电功率", nil)
+#define  root_device_266 NSLocalizedString(@"266放电功率", nil)
+
+
 #endif /* languageNew_h */

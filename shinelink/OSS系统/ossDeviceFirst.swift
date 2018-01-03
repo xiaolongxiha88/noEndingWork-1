@@ -209,10 +209,6 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     }
     
     
-
-    
-    
-    
     
     func getServerURL(){
         let nameArray:NSMutableArray=[]

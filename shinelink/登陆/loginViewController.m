@@ -900,12 +900,20 @@ NSLog(@"体验馆");
                                     NSString *roleNum=[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]];
                                     
                                     if ([roleNum isEqualToString:@"1"] || [roleNum isEqualToString:@"2"] || [roleNum isEqualToString:@"3"] ) {
-                                        OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
-                                        OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
-                                        OSSView.phoneNum=PhoneNum;
-                                        OSSView.OssName=_loginUserName;
-                                        OSSView.OssPassword=_loginUserPassword;
-                                        [self.navigationController pushViewController:OSSView animated:NO];
+
+                                         NSString *OssGetPhoneName=[[NSUserDefaults standardUserDefaults] objectForKey:@"OssGetPhoneName"];
+                                        if (![_loginUserName isEqualToString:OssGetPhoneName]) {
+                                            OssMessageViewController *OSSView=[[OssMessageViewController alloc]init];
+                                            OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
+                                            OSSView.phoneNum=PhoneNum;
+                                            OSSView.OssName=_loginUserName;
+                                            OSSView.OssPassword=_loginUserPassword;
+                                            [self.navigationController pushViewController:OSSView animated:NO];
+                                        }else{
+                                            ossFistVC *OSSView=[[ossFistVC alloc]init];
+                                            OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
+                                            [self.navigationController pushViewController:OSSView animated:NO];
+                                        }
 
                                     }else{
                                         if ([roleNum isEqualToString:@"7"] || [roleNum isEqualToString:@"15"]) {
