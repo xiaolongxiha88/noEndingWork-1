@@ -163,7 +163,7 @@
             image5.image = IMAGE(@"pic_icon.png");
             [_scrollView addSubview:image5];
         }
-        if ((i==0)||(i==1)||(i==2)||(i==3)||(i==4)||(i==5)||(i==6)) {
+        if ((i==0)||(i==1)||(i==2)||(i==3)||(i==4)||(i==5)) {
             UIView *View4 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*(i+1)-1*HEIGHT_SIZE, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];
             View4.backgroundColor = COLOR(222, 222, 222, 1);
             
@@ -183,10 +183,10 @@
         }else{
             remarkLabelH=size1.height+20*HEIGHT_SIZE;
         }
-        if (i==7) {
+        if (i==6) {
             _remarkLabel = [[UILabel alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i,textW,remarkLabelH)];
             _remarkLabel.textColor = COLOR(154, 154, 154, 1);
-            _remarkLabel.text=_remarkString;
+         
             _remarkLabel.numberOfLines=0;
             _remarkLabel.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [_scrollView addSubview:_remarkLabel];
@@ -369,13 +369,16 @@
     
     _titleLabel.text = self.model.title;
     
+       _remarkLabel.text=[NSString stringWithFormat:@"%@",_allValueDic[@"remarks"]];
+    
+         float Vx=_View3.frame.origin.x; float Vy=_View3.frame.origin.y;
     if (self.model.isShowMoreText){ // 展开状态
         // 计算文本高度
         float y=_scrollView.frame.origin.y;
         _scrollView.frame=CGRectMake(0, y, SCREEN_Width, SCREEN_Height);
         
         float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-40*HEIGHT_SIZE;
-        float Vx=_View3.frame.origin.x; float Vy=_View3.frame.origin.y;
+   
         _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,H);
         
         [_moreTextBtn setImage:IMAGE(@"oss_more_up.png") forState:UIControlStateNormal];
@@ -383,6 +386,8 @@
         float y=_scrollView.frame.origin.y;
         _scrollView.frame=CGRectMake(0, y, SCREEN_Width, 0);
         
+            _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,34*HEIGHT_SIZE);
+   
         [_moreTextBtn setImage:IMAGE(@"oss_more_down.png") forState:UIControlStateNormal];
     }
 }

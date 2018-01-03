@@ -472,7 +472,7 @@ static NSString *statusNum = @"2";
      L4.text=[NSString stringWithFormat:@"%@",_allValueDic[@"appointment"]];
         _textfield.text=[NSString stringWithFormat:@"%@",_allValueDic[@"address"]];
     }
-    
+           float Vx=_View3.frame.origin.x; float Vy=_View3.frame.origin.y;
        if (self.model.isShowMoreText){ // 展开状态
         // 计算文本高度
            float y=_scrollView.frame.origin.y;
@@ -480,7 +480,7 @@ static NSString *statusNum = @"2";
      _scrollView.frame=CGRectMake(0, y, SCREEN_Width, buttonY+160*HEIGHT_SIZE);
            
  //           float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-70*HEIGHT_SIZE;
-           float Vx=_View3.frame.origin.x; float Vy=_View3.frame.origin.y;
+    
                 _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,buttonY+160*HEIGHT_SIZE);
            
         [_moreTextBtn setImage:IMAGE(@"oss_more_up.png") forState:UIControlStateNormal];
@@ -488,7 +488,8 @@ static NSString *statusNum = @"2";
     }else{ // 收缩状态
              float y=_scrollView.frame.origin.y;
    _scrollView.frame=CGRectMake(0, y, SCREEN_Width, 0);
-        
+          float viewW1=34*HEIGHT_SIZE;
+            _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,38*HEIGHT_SIZE-viewW1/2);
         [_moreTextBtn setImage:IMAGE(@"oss_more_down.png") forState:UIControlStateNormal];
     }
 }

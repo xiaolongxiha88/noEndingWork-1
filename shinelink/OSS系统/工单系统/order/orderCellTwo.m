@@ -1124,6 +1124,8 @@ static NSString *statusNum = @"3";
         _textfield.text=[NSString stringWithFormat:@"%@",_allValueDic[@"deviseSerialNumber"]];
     }
     
+            float Vx=_View3.frame.origin.x; float Vy=_View3.frame.origin.y;
+    
     if (self.model.isShowMoreText){ // 展开状态
         // 计算文本高度
         float y=_scrollView.frame.origin.y;
@@ -1131,7 +1133,7 @@ static NSString *statusNum = @"3";
            float buttonY=_goBut.frame.origin.y;
         
       //  float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-40*HEIGHT_SIZE;
-        float Vx=_View3.frame.origin.x; float Vy=_View3.frame.origin.y;
+
         
          _scrollView.frame=CGRectMake(0, y, SCREEN_Width, buttonY+60*HEIGHT_SIZE+140*HEIGHT_SIZE);
         _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,buttonY+170*HEIGHT_SIZE+140*HEIGHT_SIZE);
@@ -1141,7 +1143,7 @@ static NSString *statusNum = @"3";
     }else{ // 收缩状态
         float y=_scrollView.frame.origin.y;
         _scrollView.frame=CGRectMake(0, y, SCREEN_Width, 0);
-        
+              _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,38*HEIGHT_SIZE);
         [_moreTextBtn setImage:IMAGE(@"oss_more_down.png") forState:UIControlStateNormal];
     }
 }

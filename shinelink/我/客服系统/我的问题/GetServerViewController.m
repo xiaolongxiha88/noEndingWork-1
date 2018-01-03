@@ -51,7 +51,7 @@
 //    }
     
      NSString *headURL=@"http://cdn.growatt.com/onlineservice";
-        NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
+      //  NSUserDefaults *ud=[NSUserDefaults standardUserDefaults];
     //    NSString *userID=[ud objectForKey:@"userName"];
     
     [self showProgressView];
