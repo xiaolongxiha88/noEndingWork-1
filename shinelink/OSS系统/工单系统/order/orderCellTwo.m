@@ -401,14 +401,14 @@ static NSString *statusNum = @"3";
     
     CGSize size2= [_remarkString boundingRectWithSize:CGSizeMake(SCREEN_Width-(2*firstW)-size3.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
     float remarkLabelH = 0.0;
-    if (lableH>(size2.height+20*HEIGHT_SIZE)) {
+    if (lableH>(size2.height)) {
         remarkLabelH=lableH;
     }else{
         remarkLabelH=size2.height+20*HEIGHT_SIZE;
     }
 
     if ([_statusString isEqualToString:statusNum]) {
-        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+120*HEIGHT_SIZE+2*HEIGHT_SIZE+numH2-H7, SCREEN_Width-(2*firstW)-lable1W-size3.width,remarkLabelH)];
+        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(firstW+lable1W+size3.width, numH*8+120*HEIGHT_SIZE+numH2-H7, SCREEN_Width-(2*firstW)-lable1W-size3.width,remarkLabelH)];
         lableR.textColor = COLOR(154, 154, 154, 1);
         lableR.text=_remarkString;
         lableR.numberOfLines=0;
@@ -1068,8 +1068,17 @@ static NSString *statusNum = @"3";
     
     _titleLabel.text = self.model.title;
     NSString *locationString=@"";
+    NSString*log1=@"-";
     if ( [_statusString isEqualToString:@"4"] || [_statusString isEqualToString:@"5"]) {
-          locationString=[NSString stringWithFormat:@"%@-%@(%@,%@)",_allValueDic[@"province"],_allValueDic[@"city"],_allValueDic[@"longitude"],_allValueDic[@"latitude"]];
+        if ([_allValueDic[@"province"] isEqualToString:@""] || [_allValueDic[@"city"] isEqualToString:@""]) {
+            log1=@"";
+        }
+        if ([_allValueDic[@"longitude"] isEqualToString:@""] || [_allValueDic[@"latitude"] isEqualToString:@""]){
+             locationString=[NSString stringWithFormat:@"%@%@%@",_allValueDic[@"province"],log1,_allValueDic[@"city"]];
+        }else{
+             locationString=[NSString stringWithFormat:@"%@%@%@(%@,%@)",_allValueDic[@"province"],log1,_allValueDic[@"city"],_allValueDic[@"longitude"],_allValueDic[@"latitude"]];
+        }
+        
     }
 
     NSArray *lableNameArray2=[NSArray arrayWithObjects:locationString,[NSString stringWithFormat:@"%@",_allValueDic[@"completeTime"]],[NSString stringWithFormat:@"%@",_allValueDic[@"completeState"]], nil];

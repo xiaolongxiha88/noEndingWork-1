@@ -178,7 +178,7 @@
         
         CGSize size1= [_remarkString boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         float remarkLabelH;
-        if (lableH>(size1.height+20*HEIGHT_SIZE)) {
+        if (lableH>(size1.height)) {
             remarkLabelH=lableH;
         }else{
             remarkLabelH=size1.height+20*HEIGHT_SIZE;

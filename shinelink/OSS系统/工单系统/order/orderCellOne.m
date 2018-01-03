@@ -49,11 +49,12 @@ static NSString *statusNum = @"2";
         float ImageW1=26*HEIGHT_SIZE;  float firstW1=5*HEIGHT_SIZE;
         _titleImage = [[UIImageView alloc]initWithFrame:CGRectMake(firstW1, (viewW1-ImageW1)/2, ImageW1, ImageW1)];
         
-        if ([_statusString isEqualToString:statusNum]) {
-            _titleImage.image=IMAGE(@"yuan_1.png");
-        }else{
+//        if ([_statusString isEqualToString:statusNum]) {
+//            _titleImage.image=IMAGE(@"yuan_1.png");
+//        }else{
+    
             _titleImage.image=IMAGE(@"yuan_2.png");
-        }
+      
         
         [_titleView addSubview:_titleImage];
         
@@ -204,7 +205,7 @@ static NSString *statusNum = @"2";
             
             CGSize size1= [_remarkString boundingRectWithSize:CGSizeMake(textW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
-            if (lableH>(size1.height+20*HEIGHT_SIZE)) {
+            if (lableH>(size1.height)) {
                 remarkLabelH=lableH;
             }else{
                 remarkLabelH=size1.height+20*HEIGHT_SIZE;
@@ -269,7 +270,13 @@ static NSString *statusNum = @"2";
                 if ([_statusString isEqualToString:statusNum]) {
                     _textfield.textColor = COLOR(51, 51, 51, 1);
                     _textfield.tintColor = COLOR(51, 51, 51, 1);
-                    _textfield.placeholder = @"请输入客户地址";
+                    NSString*addressString=[NSString stringWithFormat:@"%@",_allValueDic[@"address"]];
+                    if (![addressString isEqualToString:@""]) {
+                        _textfield.text=addressString;
+                    }else{
+                         _textfield.placeholder = @"请输入客户地址";
+                    }
+                   
                 }else{
                     _textfield.textColor =  COLOR(154, 154, 154, 1);
                     _textfield.tintColor = COLOR(154, 154, 154, 1);
@@ -453,12 +460,13 @@ static NSString *statusNum = @"2";
     UILabel *L4=[_scrollView viewWithTag:2003];
    
 
-    if ([_statusString isEqualToString:statusNum]) {
-        _titleImage.image=IMAGE(@"yuan_1.png");
-       // _textfield2.text=[NSString stringWithFormat:@"%@",_allValueDic[@"remarks"]];
-    }else{
+//    if ([_statusString isEqualToString:statusNum]) {
+//        _titleImage.image=IMAGE(@"yuan_1.png");
+//
+//    }else{
+    
         _titleImage.image=IMAGE(@"yuan_2.png");
-    }
+ 
     
     if (![_statusString isEqualToString:statusNum]) {
      L4.text=[NSString stringWithFormat:@"%@",_allValueDic[@"appointment"]];
