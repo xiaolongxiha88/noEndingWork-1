@@ -481,7 +481,7 @@ static NSString *statusNum = @"2";
            
  //           float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-70*HEIGHT_SIZE;
     
-                _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,buttonY+160*HEIGHT_SIZE);
+                _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,buttonY+240*HEIGHT_SIZE);
            
         [_moreTextBtn setImage:IMAGE(@"oss_more_up.png") forState:UIControlStateNormal];
            
@@ -503,7 +503,7 @@ static NSString *statusNum = @"2";
 // MARK: - 获取展开后的高度
 + (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status remarkH:(CGFloat) remarkH{
     
-    float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-navigationH+remarkH+100*HEIGHT_SIZE;
+    float H=SCREEN_Height-90*HEIGHT_SIZE-(38*HEIGHT_SIZE*2)-navigationH+remarkH+180*HEIGHT_SIZE;
     if (![status isEqualToString:@"2"]) {
         H=250*HEIGHT_SIZE;
     }

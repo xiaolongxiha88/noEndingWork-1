@@ -74,6 +74,10 @@
 }
 
 -(void)initUI{
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
     UIColor *lableColor=COLOR(102, 102, 102, 1);
     
     self.title=_titleName;
@@ -149,6 +153,7 @@
         
     }
     
+    
     float H3=H2+numH2*_lableNameArray2.count+20*HEIGHT_SIZE;
     UIButton* _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
     _goBut.frame=CGRectMake(60*NOW_SIZE,H3, 200*NOW_SIZE, 40*HEIGHT_SIZE);
@@ -162,8 +167,20 @@
     }
 
     
-    _scrollView.contentSize=CGSizeMake(SCREEN_Width, H3+140*HEIGHT_SIZE);
+    _scrollView.contentSize=CGSizeMake(SCREEN_Width, H3+300*HEIGHT_SIZE);
     
+}
+
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    for (int i=0; i<_lableNameArray.count; i++) {
+        UITextField *text1=[_scrollView viewWithTag:2000+i];
+            [text1 resignFirstResponder];
+    }
+    for (int i=0; i<_lableNameArray2.count; i++) {
+        UITextView *text2=[_scrollView viewWithTag:3000+i];
+          [text2 resignFirstResponder];
+    }
+  
 }
 
 -(void)finishSet{
@@ -171,9 +188,14 @@
     for (int i=0; i<_lableNameArray.count; i++) {
         UITextField *text1=[_scrollView viewWithTag:2000+i];
         if (text1.text==nil || [text1.text isEqualToString:@""]) {
-            NSString *alert=[NSString stringWithFormat:@"请填写“%@”",_lableNameArray[i]];
-            [self showToastViewWithTitle:alert];
-            return;
+            if (_setType==2 && i==1) {
+                  [_setValueDic setObject:@"" forKey:_lableKeyArray[i]];
+            }else{
+                NSString *alert=[NSString stringWithFormat:@"请填写“%@”",_lableNameArray[i]];
+                [self showToastViewWithTitle:alert];
+                return;
+            }
+         
         }else{
             [_setValueDic setObject:text1.text forKey:_lableKeyArray[i]];
         }

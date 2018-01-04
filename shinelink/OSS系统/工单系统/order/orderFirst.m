@@ -200,6 +200,13 @@ static NSString *cellFour = @"cellFour";
     NSArray *headName=[NSArray arrayWithObjects:@"所属地区",@"类型", nil];
     NSArray *serviceType=[NSArray arrayWithObjects:@"",@"现场维修",@"安装调试", @"培训",@"巡检",@"其他",nil];
     int k=[[NSString stringWithFormat:@"%@",_allValueDic[@"serviceType"]] intValue];
+    
+//    NSString *test0=[NSString stringWithFormat:@"%@",_allValueDic[@"serviceType11"]];
+//    NSString *test=_allValueDic[@"serviceType11"];
+//    NSMutableArray *aaa=[NSMutableArray array];
+//    [aaa addObject:test0];
+//        [aaa addObject:test];
+    
     NSString *kName;
     if (k<serviceType.count) {
             kName=serviceType[k];
@@ -271,11 +278,13 @@ static NSString *cellFour = @"cellFour";
                NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             
      if ([firstDic[@"result"] intValue]==1) {
-
-         _allValueDic=[NSDictionary dictionaryWithDictionary:firstDic[@"obj"]];
-         if (_allValueDic.count>3) {
+         if ([firstDic[@"obj"] isKindOfClass:[NSDictionary class]]) {
+             _allValueDic=[NSDictionary dictionaryWithDictionary:firstDic[@"obj"]];
+             if (_allValueDic.count>3) {
                  [self initData];
+             }
          }
+       
      }else{
       [self showToastViewWithTitle:firstDic[@"msg"]];
          [self.navigationController popViewControllerAnimated:YES];
@@ -359,9 +368,9 @@ static NSString *cellFour = @"cellFour";
          
             testView.setType=[[NSString stringWithFormat:@"%@",_allValueDic[@"serviceType"]] intValue];
             if (![_statusString isEqualToString:@"3"]){
-                NSString *serviceReportString=_allValueDic[@"serviceReport"];
-                NSDictionary *setDic=[self dictionaryWithJsonString:serviceReportString];
-                testView.setValueDic=[NSMutableDictionary dictionaryWithDictionary:setDic];
+               // NSString *serviceReportString=_allValueDic[@"serviceReport"];
+               // NSDictionary *setDic=[self dictionaryWithJsonString:serviceReportString];
+                testView.setValueDic=[NSMutableDictionary dictionaryWithDictionary:_allValueDic[@"serviceReport"]];
             }
             testView.statusString=_statusString;
             [self.navigationController pushViewController:testView animated:YES];

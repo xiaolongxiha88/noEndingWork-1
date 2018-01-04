@@ -1157,7 +1157,7 @@ static NSString *statusNum = @"3";
 // MARK: - 获取展开后的高度
 + (CGFloat)moreHeight:(CGFloat) navigationH status:(NSString*)status remarkH:(CGFloat) remarkH{
     
-    float H=620*HEIGHT_SIZE+remarkH-20*HEIGHT_SIZE+20*HEIGHT_SIZE;
+    float H=620*HEIGHT_SIZE+remarkH-20*HEIGHT_SIZE+100*HEIGHT_SIZE;
     if (![status isEqualToString:@"3"]) {
         H=270*HEIGHT_SIZE;
     }

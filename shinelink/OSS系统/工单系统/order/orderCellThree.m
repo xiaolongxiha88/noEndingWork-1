@@ -375,7 +375,7 @@
         float y=_scrollView.frame.origin.y;
         _scrollView.frame=CGRectMake(0, y, SCREEN_Width, SCREEN_Height);
         
-        float H=SCREEN_Height-(38*HEIGHT_SIZE*2)-20*HEIGHT_SIZE+25*HEIGHT_SIZE;
+        float H=SCREEN_Height-38*HEIGHT_SIZE;
   
         _View3.frame = CGRectMake(Vx,Vy, 0.3*NOW_SIZE,H);
         
