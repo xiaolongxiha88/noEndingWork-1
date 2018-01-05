@@ -39,19 +39,28 @@ static NSString *cellFour = @"cellFour";
 
 @property(nonatomic,strong)NSString *statusString;
 
+@property(nonatomic,assign)BOOL isDetailNetNow;
+
 @end
 
 @implementation orderFirst{
     NSArray<Model*> *_modelList;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(regetNet) name:@"regetNet" object:nil];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+      [[NSNotificationCenter defaultCenter] removeObserver:self name:@"regetNet" object:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     H2=self.navigationController.navigationBar.frame.size.height;
     H1=[[UIApplication sharedApplication] statusBarFrame].size.height;
    
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(regetNet) name:@"regetNet" object:nil];
+    
     
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"搜索设备" style:UIBarButtonItemStylePlain target:self action:@selector(goToDevice)];
     self.navigationItem.rightBarButtonItem=rightItem;
@@ -83,8 +92,8 @@ static NSString *cellFour = @"cellFour";
     if ([_statusString isEqualToString:@"4"] || [_statusString isEqualToString:@"5"]) {
         NSString *questionPIC=[NSString stringWithFormat:@"%@",_allValueDic[@"fieldService"]];
         _picArray = [questionPIC componentsSeparatedByString:@"_"];
-        NSString *questionPIC1=[NSString stringWithFormat:@"%@",_allValueDic[@"otherServices"]];
-        _picArray1 = [questionPIC1 componentsSeparatedByString:@"_"];
+//        NSString *questionPIC1=[NSString stringWithFormat:@"%@",_allValueDic[@"otherServices"]];
+//        _picArray1 = [questionPIC1 componentsSeparatedByString:@"_"];
     }
   
  
@@ -266,11 +275,11 @@ static NSString *cellFour = @"cellFour";
 
 -(void)finishSet{
 
-    
+    _isDetailNetNow=YES;
     [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"orderId":_orderID} paramarsSite:@"/api/v2/order/detail" sucessBlock:^(id content) {
            [self hideProgressView];
-        
+        _isDetailNetNow=NO;
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"/api/v2/order/detail: %@", content1);
       
@@ -291,6 +300,7 @@ static NSString *cellFour = @"cellFour";
      }
         }
     } failure:^(NSError *error) {
+         _isDetailNetNow=NO;
         [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];
            [self.navigationController popViewControllerAnimated:YES];
@@ -331,7 +341,9 @@ static NSString *cellFour = @"cellFour";
 }
 
 -(void)regetNet{
-    [self finishSet];
+ 
+            [self finishSet];
+   
 }
 
 
@@ -370,7 +382,11 @@ static NSString *cellFour = @"cellFour";
             if (![_statusString isEqualToString:@"3"]){
                // NSString *serviceReportString=_allValueDic[@"serviceReport"];
                // NSDictionary *setDic=[self dictionaryWithJsonString:serviceReportString];
-                testView.setValueDic=[NSMutableDictionary dictionaryWithDictionary:_allValueDic[@"serviceReport"]];
+                
+                if ([_allValueDic[@"serviceReport"] isKindOfClass:[NSDictionary class]]) {
+                     testView.setValueDic=[NSMutableDictionary dictionaryWithDictionary:_allValueDic[@"serviceReport"]];
+                }
+               
             }
             testView.statusString=_statusString;
             [self.navigationController pushViewController:testView animated:YES];
@@ -397,7 +413,7 @@ static NSString *cellFour = @"cellFour";
         cell.orderID=_orderID;
         cell.statusString=_statusString;
         cell.picArray=[NSArray arrayWithArray:_picArray];
-            cell.picArray1=[NSArray arrayWithArray:_picArray1];
+           // cell.picArray1=[NSArray arrayWithArray:_picArray1];
         cell.allValueDic=[NSDictionary dictionaryWithDictionary:_allValueDic];
         [cell setShowMoreBlock:^(UITableViewCell *currentCell) {
             NSIndexPath *reloadIndexPath = [self.tableView indexPathForCell:currentCell];

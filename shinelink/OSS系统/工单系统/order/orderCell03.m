@@ -161,7 +161,7 @@
             UITapGestureRecognizer * forget4=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(GetPhoto:)];
             [image5 addGestureRecognizer:forget4];
             image5.image = IMAGE(@"pic_icon.png");
-            [_scrollView addSubview:image5];
+          //  [_scrollView addSubview:image5];
         }
         if ((i==0)||(i==1)||(i==2)||(i==3)||(i==4)||(i==5)) {
             UIView *View4 = [[UIView alloc]initWithFrame:CGRectMake(firstW, numH*(i+1)-1*HEIGHT_SIZE, SCREEN_Width-(2*firstW),1*HEIGHT_SIZE)];

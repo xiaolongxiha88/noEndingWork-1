@@ -63,10 +63,16 @@
      _lableValueArray2=[NSMutableArray new];
     if (_setValueDic.allKeys.count>0) {
         for (int i=0; i<_lableKeyArray.count; i++) {
-            [_lableValueArray1 addObject:[NSString stringWithFormat:@"%@",[_setValueDic objectForKey:_lableKeyArray[i]]]];
+            if ([_setValueDic.allKeys containsObject:_lableKeyArray[i]]) {
+                    [_lableValueArray1 addObject:[NSString stringWithFormat:@"%@",[_setValueDic objectForKey:_lableKeyArray[i]]]];
+            }
+        
         }
         for (int i=0; i<_lableKeyArray2.count; i++) {
-            [_lableValueArray2 addObject:[NSString stringWithFormat:@"%@",[_setValueDic objectForKey:_lableKeyArray2[i]]]];
+            if ([_setValueDic.allKeys containsObject:_lableKeyArray2[i]]) {
+                 [_lableValueArray2 addObject:[NSString stringWithFormat:@"%@",[_setValueDic objectForKey:_lableKeyArray2[i]]]];
+            }
+           
         }
     }
     

@@ -201,7 +201,7 @@
         }
         
         if (i==forNum) {
-            _remarkLabel = [[UILabel alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*i+remarkLabelH,textW,remarkLabelH2)];
+            _remarkLabel = [[UILabel alloc] initWithFrame:CGRectMake(textfieldW, 0+numH*(i-1)+remarkLabelH+5*HEIGHT_SIZE,textW,remarkLabelH2)];
     _remarkLabel.textColor = COLOR(154, 154, 154, 1);
             _remarkLabel.text=longName2;
             _remarkLabel.numberOfLines=0;
