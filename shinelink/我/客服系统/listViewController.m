@@ -102,6 +102,10 @@
     }
 }
 
+-(void)netHideProgress{
+       [self hideProgressView];
+}
+
 -(void)netquestion{
 
     
@@ -121,7 +125,8 @@
       [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo paramars:@{@"userId":userID} paramarsSite:@"/api/v2/question/list" sucessBlock:^(id content1) {
         [self hideProgressView];
- 
+  [self performSelector:@selector(netHideProgress) withObject:nil afterDelay:1];
+        
         if(content1){
             id jsonObj = [NSJSONSerialization JSONObjectWithData:content1 options:NSJSONReadingAllowFragments error:nil];
             NSLog(@"/api/v2/question/list:%@",jsonObj);
@@ -235,6 +240,7 @@
         //  NSLog(@"questionList=33");
     } failure:^(NSError *error) {
         [self hideProgressView];
+          [self performSelector:@selector(netHideProgress) withObject:nil afterDelay:1];
         [self showToastViewWithTitle:root_Networking];
     }];
 

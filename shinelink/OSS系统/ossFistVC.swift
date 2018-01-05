@@ -475,6 +475,7 @@ class ossFistVC: RootViewController {
         self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic1 as [AnyHashable : Any]!, paramarsSite: "/api/v2/customer/device_num", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
+             self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
             
             let data:Data=successBlock as! Data
             
@@ -506,6 +507,8 @@ class ossFistVC: RootViewController {
             
         }, failure: {(error) in
             self.hideProgressView()
+             self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
+            
             self.showToastView(withTitle: root_Networking)
         })
         
@@ -840,6 +843,8 @@ class ossFistVC: RootViewController {
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v2/order/overview", sucessBlock: {(successBlock)->() in
       
                 self.hideProgressView()
+             self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
+            
             let data:Data=successBlock as! Data
             
             let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
@@ -908,6 +913,8 @@ class ossFistVC: RootViewController {
             
         }, failure: {(error) in
             self.hideProgressView()
+             self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
+            
             self.showToastView(withTitle: root_Networking)
               self.initUItwo2()
             
@@ -916,6 +923,9 @@ class ossFistVC: RootViewController {
     }
     
     
+    func removeProgress(){
+        self.hideProgressView()
+    }
    
     func initNet1(){
         
@@ -924,6 +934,7 @@ class ossFistVC: RootViewController {
      self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v2/customer/customer_overview_data", sucessBlock: {(successBlock)->() in
         self.hideProgressView()
+             self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
             
             let data:Data=successBlock as! Data
             
@@ -968,6 +979,8 @@ class ossFistVC: RootViewController {
             
         }, failure: {(error) in
             self.hideProgressView()
+             self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
+            
             self.showToastView(withTitle: root_Networking)
             self.initUIThree3()
         })

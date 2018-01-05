@@ -411,7 +411,9 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     }
 
     
-
+    func removeProgress(){
+          self.hideProgressView()
+    }
     //MARK: - 网络层
     
     //工单列表
@@ -423,9 +425,14 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     netDic=["content":contentString,"status":statusInt,"page":pageNum]
     
     self.showProgressView()
+        
+      
+        
     BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as Dictionary, paramarsSite: "/api/v2/order/newlist", sucessBlock: {(successBlock)->() in
+        
     self.hideProgressView()
-    
+      self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
+        
     let data:Data=successBlock as! Data
     
     let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
@@ -446,6 +453,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     self.cellValue2Array.add((questionAll[i] as! NSDictionary)["applicationTime"] as!NSString)
         
         var cellValue3Array2:NSString
+        
 //        if (((((questionAll[i] as! NSDictionary)["groupName"] as AnyObject).isEqual(NSNull.init())) == false)) {
 //          cellValue3Array1=((questionAll[i] as! NSDictionary)["groupName"] as!NSString)
 //        }else{
@@ -508,6 +516,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     
     }, failure: {(error) in
     self.hideProgressView()
+            self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
     self.showToastView(withTitle: root_Networking)
     })
     
@@ -526,6 +535,7 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
         self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as Dictionary, paramarsSite: "/api/v2/question/worker/list", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
+             self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
             
             let data:Data=successBlock as! Data
             
@@ -614,6 +624,8 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
             
         }, failure: {(error) in
              self.hideProgressView()
+             self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
+            
             self.showToastView(withTitle: root_Networking)
         })
         
