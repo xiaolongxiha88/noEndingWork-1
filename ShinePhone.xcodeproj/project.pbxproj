@@ -51,6 +51,8 @@
 		3333D2B41EF8BBB700E6182A /* pic_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3333D2B31EF8BBB700E6182A /* pic_icon.png */; };
 		33340F7B1D6D71EE00909BBF /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33340F7A1D6D71EE00909BBF /* WebKit.framework */; };
 		33340F7F1D6EC36800909BBF /* loading1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33340F7E1D6EC36800909BBF /* loading1.png */; };
+		333D44622010B96400C76FF9 /* oss_power_station.png in Resources */ = {isa = PBXBuildFile; fileRef = 333D44612010B96400C76FF9 /* oss_power_station.png */; };
+		333D44642010B97200C76FF9 /* oss_user_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 333D44632010B97100C76FF9 /* oss_user_list.png */; };
 		3343F3AA1C803DC9009F69BC /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3A91C803DC9009F69BC /* BaseRequest.m */; };
 		3343F3BF1C80403C009F69BC /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3AD1C80403C009F69BC /* AFHTTPRequestOperation.m */; };
 		3343F3C01C80403C009F69BC /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3AF1C80403C009F69BC /* AFHTTPRequestOperationManager.m */; };
@@ -878,6 +880,8 @@
 		3333D2B31EF8BBB700E6182A /* pic_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pic_icon.png; sourceTree = "<group>"; };
 		33340F7A1D6D71EE00909BBF /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		33340F7E1D6EC36800909BBF /* loading1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loading1.png; sourceTree = "<group>"; };
+		333D44612010B96400C76FF9 /* oss_power_station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_power_station.png; sourceTree = "<group>"; };
+		333D44632010B97100C76FF9 /* oss_user_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_user_list.png; sourceTree = "<group>"; };
 		3343F3A81C803DC9009F69BC /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
 		3343F3A91C803DC9009F69BC /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
 		3343F3AC1C80403C009F69BC /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -3115,6 +3119,8 @@
 		336E03F61EC944940034BC86 /* oss图片 */ = {
 			isa = PBXGroup;
 			children = (
+				333D44632010B97100C76FF9 /* oss_user_list.png */,
+				333D44612010B96400C76FF9 /* oss_power_station.png */,
 				3357DDD11F6928720089A679 /* buttonCancle.png */,
 				3370FEFE1F5F9DD60089B317 /* data_icon.png */,
 				338614A91F25D6F1000F515E /* intergrator_device.png */,
@@ -4883,6 +4889,7 @@
 				33801EBD1D5882D500047232 /* Growatt-2-5k.jpg in Resources */,
 				337F96301F0DE47600840527 /* device_iconI.png in Resources */,
 				337C44AE1E78CC9100135304 /* ledgreen.gif in Resources */,
+				333D44642010B97200C76FF9 /* oss_user_list.png in Resources */,
 				337A70FB1E9B820600FE5F3C /* solarS.png in Resources */,
 				3389648D1E5C3BBD00A7B1AE /* englishCountryJson.txt in Resources */,
 				33C3FFFB1D3E33E00016351C /* L2.png in Resources */,
@@ -4914,6 +4921,7 @@
 				33EFB67A1C9931D2003F336F /* 按钮2.png in Resources */,
 				336D40201D6FEA7600ECFA34 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				3381ECF91CBCA63000DCF0D2 /* 控制优先级设置切图.png in Resources */,
+				333D44622010B96400C76FF9 /* oss_power_station.png in Resources */,
 				33FEFD591C7DB38400324374 /* icon---Email.png in Resources */,
 				3370EBC71F41ABB200F37149 /* right.png in Resources */,
 				33EA49EB1E8CAC060044A01A /* 设备页引导1.jpg in Resources */,

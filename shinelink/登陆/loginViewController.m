@@ -105,7 +105,7 @@
         _languageValue=@"2";
     }
 
-
+ 
     
     //////////测试区域
     //上线检查
@@ -880,6 +880,11 @@ NSLog(@"体验馆");
                                 NSString *PhoneNum;
                                 if ([objDic.allKeys containsObject:@"user"]) {
                                     PhoneNum=objDic[@"user"][@"phone"];
+                                }
+                                
+                                if ([objDic.allKeys containsObject:@"permissions"]) {
+                                    NSArray *roleSecondNumArray=[NSArray arrayWithArray:objDic[@"permissions"]];
+                                       [[NSUserDefaults standardUserDefaults] setObject:roleSecondNumArray forKey:@"roleSecondNumArray"];
                                 }
                                 
                                 

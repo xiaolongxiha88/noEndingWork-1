@@ -19,6 +19,8 @@ class ossFistVC: RootViewController {
        var buttonTwo:UIButton!
        var buttonThree:UIButton!
       var messageView:UIView!
+    var scrollView:UIScrollView!
+    
         var serverListArray:NSArray!
     var serverNumArray:NSArray!
     var orderNumArray:NSArray!
@@ -42,6 +44,12 @@ class ossFistVC: RootViewController {
     
      var lineH=0.6*HEIGHT_SIZE
     
+    var questionModelBool=false
+      var orderModelBool=false
+     var deviceModelBool=false
+    var isKeFuBool=false
+     var isDaiLiShangBool=false
+    
     override func viewWillAppear(_ animated: Bool) {
         
              self.navigationController?.navigationBar.barTintColor=MainColor
@@ -52,7 +60,7 @@ class ossFistVC: RootViewController {
         }else if roleString=="6"  || roleString=="14" || roleString=="7" || roleString=="15"{
        
        self.initNet1()
-        self.initNet4()
+   //     self.initNet4()
         }
         
     }
@@ -71,7 +79,7 @@ class ossFistVC: RootViewController {
         
    self.navigationController?.setNavigationBarHidden(false, animated: false)
 
-
+     //[[NSUserDefaults standardUserDefaults] setObject:roleSecondNumArray forKey:@"roleSecondNumArray"];
      
            roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString!
         
@@ -84,17 +92,41 @@ class ossFistVC: RootViewController {
         
        self.initUI()
         
-   
+        let roleSecondNumArray=UserDefaults.standard.object(forKey: "roleSecondNumArray") as? NSArray ?? []
+        
+        if roleSecondNumArray.contains("201") {
+          questionModelBool=true
+        }
+        if roleSecondNumArray.contains("205") {
+            orderModelBool=true
+        }
+        if roleSecondNumArray.contains("4") {
+            deviceModelBool=true
+        }
+        
         if roleString=="3" || roleString=="2" || roleString=="1"{
-                self.initUItwo()
+             questionModelBool=true
+             orderModelBool=true
+             deviceModelBool=true
+            isKeFuBool=true
+            
         
         }else if roleString=="6" || roleString=="14" || roleString=="7" || roleString=="15"{
-              self.initUIThree()
-             
-        }else{
-            self.initUIAlert()
+           
+               isDaiLiShangBool=true
         }
 
+         scrollView=UIScrollView()
+        scrollView.frame=CGRect(x:0*NOW_SIZE, y: 0*HEIGHT_SIZE, width:SCREEN_Width, height: SCREEN_Height)
+        scrollView.backgroundColor=backgroundGrayColor
+        self.view.addSubview(scrollView)
+        
+         self.initUItwo()         //客服、工单、设备搜索
+           self.initUIThree()     //集成商、代理商
+        
+        if !questionModelBool && !orderModelBool && !deviceModelBool && !isKeFuBool && !isDaiLiShangBool{
+             self.initUIAlert()
+        }
         
        
     }
@@ -114,7 +146,7 @@ class ossFistVC: RootViewController {
 
         let item1=DTKDropdownItem.init(title: item1Name, iconName: "Check", callBack:{ (dropMenuCallBack)->() in
             let vc=ossToolListView()
-            if self.roleString=="3" || self.roleString=="2" || self.roleString=="1"{
+            if self.isKeFuBool{
                 vc.typeNum=1
             }else{
                 vc.typeNum=2
@@ -194,53 +226,79 @@ class ossFistVC: RootViewController {
         imageOne=UIImageView()
         self.imageOne.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: heigh0)
          imageOne.image=UIImage(named: "head_bg_oss_first.png")
-        self.view.addSubview(imageOne)
+        scrollView.addSubview(imageOne)
         
     }
     
-    
+    //集成商、代理商
     func initUIThree(){
       
        self.view.backgroundColor=backgroundGrayColor
         
         let lableH=40*HEIGHT_SIZE
+        let imageColor0=self.getImageWithColor(color: backgroundGrayColor, size: CGSize(width: SCREEN_Width, height: lableH))
         let imageColor1=self.getImageWithColor(color: UIColor.white, size: CGSize(width: SCREEN_Width, height: lableH))
-        let imageColor2=self.getImageWithColor(color: COLOR(_R: 222, _G: 222, _B: 222, _A: 1), size: CGSize(width: SCREEN_Width, height: lableH))
+       // let imageColor2=self.getImageWithColor(color: COLOR(_R: 222, _G: 222, _B: 222, _A: 1), size: CGSize(width: SCREEN_Width, height: lableH))
 
-      let view1=UIButton()
-        view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+10*HEIGHT_SIZE, width: SCREEN_Width, height: lableH)
-        view1.setBackgroundImage(imageColor1, for: .normal)
-        view1.setBackgroundImage(imageColor2, for: .highlighted)
-        view1.setBackgroundImage(imageColor2, for: .selected)
-        view1.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
-        self.view.addSubview(view1)
+        let lableArray=["设备管理","用户管理","电站管理"]
+           let imageArray=["device_iconI.png","oss_user_list.png","oss_power_station.png"]
         
-          
+        for i in 0..<lableArray.count {
+            let view1=UIButton()
+            if i==0{
+                view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0, width: SCREEN_Width, height: lableH)
+                view1.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
+            }
+            if i==1{
+                view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+170*HEIGHT_SIZE+lableH, width: SCREEN_Width, height: lableH)
+                view1.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
+            }
+            if i==2{
+                view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+170*HEIGHT_SIZE+lableH+85*HEIGHT_SIZE, width: SCREEN_Width, height: lableH)
+                view1.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
+            }
+            
+            view1.setBackgroundImage(imageColor0, for: .normal)
+            view1.setBackgroundImage(imageColor1, for: .highlighted)
+            view1.setBackgroundImage(imageColor1, for: .selected)
+            view1.tag=4000+i
+            
+            if isDaiLiShangBool{
+                scrollView.addSubview(view1)
+            }
+            
+            
+            let imageH=20*HEIGHT_SIZE
+            let imageV = UIImageView()
+            imageV.frame=CGRect(x: 10*NOW_SIZE, y: (40*HEIGHT_SIZE-imageH)/2, width: imageH, height: imageH)
+            imageV.image=UIImage(named: imageArray[i])
+            view1.addSubview(imageV)
+            
+            let  lable1=UILabel()
+            lable1.frame=CGRect(x: 10*NOW_SIZE+imageH+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 40*HEIGHT_SIZE)
+            lable1.text=lableArray[i]
+            lable1.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
+            lable1.textAlignment=NSTextAlignment.left
+            lable1.font=UIFont.systemFont(ofSize: 18*HEIGHT_SIZE)
+            view1.addSubview(lable1)
+            
+            let imageH2=20*HEIGHT_SIZE
+            let imageV2 = UIImageView()
+            imageV2.frame=CGRect(x: (SCREEN_Width-20*NOW_SIZE)-imageH2, y: (40*HEIGHT_SIZE-imageH2)/2, width: imageH2, height: imageH2)
+            imageV2.image=UIImage(named: "firstGo.png")
+            view1.addSubview(imageV2)
+            
+   
+        }
+     
         
-        let imageH=20*HEIGHT_SIZE
-        let imageV = UIImageView()
-        imageV.frame=CGRect(x: 10*NOW_SIZE, y: (40*HEIGHT_SIZE-imageH)/2, width: imageH, height: imageH)
-        imageV.image=UIImage(named: "device_iconI.png")
-        view1.addSubview(imageV)
-        
-        let  lable1=UILabel()
-        lable1.frame=CGRect(x: 10*NOW_SIZE+imageH+10*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 150*NOW_SIZE, height: 40*HEIGHT_SIZE)
-        lable1.text="设备管理"
-        lable1.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
-        lable1.textAlignment=NSTextAlignment.left
-        lable1.font=UIFont.systemFont(ofSize: 18*HEIGHT_SIZE)
-        view1.addSubview(lable1)
-        
-        let imageH2=20*HEIGHT_SIZE
-        let imageV2 = UIImageView()
-        imageV2.frame=CGRect(x: (SCREEN_Width-20*NOW_SIZE)-imageH2, y: (40*HEIGHT_SIZE-imageH2)/2, width: imageH2, height: imageH2)
-        imageV2.image=UIImage(named: "firstGo.png")
-        view1.addSubview(imageV2)
-
         let imageAll = UIImageView()
-        imageAll.frame=CGRect(x: 2*NOW_SIZE, y:heigh0+55*HEIGHT_SIZE, width: SCREEN_Width-4*NOW_SIZE, height: 170*HEIGHT_SIZE)
+        imageAll.frame=CGRect(x: 2*NOW_SIZE, y:heigh0+lableH, width: SCREEN_Width-4*NOW_SIZE, height: 170*HEIGHT_SIZE)
         imageAll.image=UIImage(named: "intergrator_device.png")
-         self.view.addSubview(imageAll)
+        
+        if isDaiLiShangBool{
+            scrollView.addSubview(imageAll)
+        }
         
         for i in 0...1 {
             for K in 0...1 {
@@ -528,6 +586,9 @@ class ossFistVC: RootViewController {
         return image
     }
     
+    
+    
+    //客服、工单、搜索设备
     func initUItwo(){
      
 
@@ -545,7 +606,10 @@ class ossFistVC: RootViewController {
         view2.setBackgroundImage(imageColor2, for: .highlighted)
         view2.setBackgroundImage(imageColor2, for: .selected)
         view2.addTarget(self, action:#selector(goToNew), for: .touchUpInside)
-        self.view.addSubview(view2)
+        if questionModelBool || orderModelBool || isKeFuBool {
+               self.view.addSubview(view2)
+        }
+     
         
         
             let gifWebH2=20*HEIGHT_SIZE
@@ -595,7 +659,10 @@ class ossFistVC: RootViewController {
         let viewLine1=UIView()
         viewLine1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+view2H, width: SCREEN_Width, height: lineH)
         viewLine1.backgroundColor=COLOR(_R: 222, _G: 222, _B: 222, _A: 1)
-        self.view.addSubview(viewLine1)
+        if questionModelBool || orderModelBool || isKeFuBool {
+            self.view.addSubview(viewLine1)
+        }
+        
         
         
         let AllH=160*HEIGHT_SIZE-45*HEIGHT_SIZE;
@@ -603,7 +670,17 @@ class ossFistVC: RootViewController {
             let viewAll=UIView()
             viewAll.frame=CGRect(x: 0*NOW_SIZE, y: viewLine1.frame.origin.y+(AllH+5*HEIGHT_SIZE)*CGFloat(i), width: SCREEN_Width, height: AllH)
             viewAll.backgroundColor=UIColor.clear
-            self.view.addSubview(viewAll)
+            if i==0 {
+                if questionModelBool || isKeFuBool {
+                    self.view.addSubview(viewAll)
+                }
+            }
+        
+            if i==1 {
+                if orderModelBool || isKeFuBool {
+                    self.view.addSubview(viewAll)
+                }
+            }
             
             
             let view1=UIButton()
@@ -768,7 +845,10 @@ class ossFistVC: RootViewController {
                 deviceView.setBackgroundImage(UIImage(named: "search_icon_click.png"), for: .highlighted)
                  deviceView.setBackgroundImage(UIImage(named: "search_icon_click.png"), for: .selected)
                 deviceView.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
+        if  deviceModelBool || isKeFuBool {
                 self.view.addSubview(deviceView)
+        }
+        
         
         
         
@@ -1068,13 +1148,13 @@ class ossFistVC: RootViewController {
     
     func gotoDevice()  {
         
-        if roleString=="3" || roleString=="2" || roleString=="1"{
+        if self.isKeFuBool{
               UserDefaults.standard.set("", forKey: "searchDeviceAddress")
             
             let vc=ossDeviceFirst()
             vc.serverListArray=self.serverListArray
             self.navigationController?.pushViewController(vc, animated: true)
-        }else if roleString=="6"  || roleString=="14" || roleString=="7" || roleString=="15"{
+        }else if isDaiLiShangBool{
             UserDefaults.standard.set("", forKey: "searchDeviceAddress")
             
             let vc=IntegratorFirst()

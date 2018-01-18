@@ -2186,7 +2186,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
    
     if ([content.allKeys containsObject:@"todayEnergy"]) {
         NSArray *energyHArray=@[content[@"todayEnergy"],content[@"totalEnergy"]];
-        NSArray *powerHArray=@[content[@"invTodayPpv"],content[@"nominalPower"]];
+        NSArray *powerHArray=@[content[@"invTodayPpv"],content[@"nominal_Power"]];
         
         for (int i=0; i<powerHArray.count; i++) {
             [self getNewPvDataW:[NSString stringWithFormat:@"%@",powerHArray[i]]];
