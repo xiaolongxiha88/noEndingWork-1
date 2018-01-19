@@ -884,6 +884,7 @@ NSLog(@"体验馆");
                                 
                                 if ([objDic.allKeys containsObject:@"permissions"]) {
                                     NSArray *roleSecondNumArray=[NSArray arrayWithArray:objDic[@"permissions"]];
+                                //   roleSecondNumArray=@[@"4"];
                                        [[NSUserDefaults standardUserDefaults] setObject:roleSecondNumArray forKey:@"roleSecondNumArray"];
                                 }
                                 
