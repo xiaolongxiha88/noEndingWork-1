@@ -390,7 +390,7 @@ class ossFistVC: RootViewController {
             }
         }
         
-         let lableValueArray2=["10000","10000"]
+      //   let lableValueArray2=["10000","10000"]
         let lableArray2=["用户数","电站数"]
         let imageArray2=["user_list_img.png","power_station_img.png"]
           let colorArray2=[COLOR(_R: 55, _G: 190, _B: 182, _A: 1),COLOR(_R: 122, _G: 150, _B: 221, _A: 1)]
@@ -427,7 +427,8 @@ class ossFistVC: RootViewController {
             lable33.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
             lable33.textAlignment=NSTextAlignment.right
             lable33.adjustsFontSizeToFitWidth=true
-               lable33.text=lableValueArray2[i]
+            //   lable33.text=lableValueArray2[i]
+            lable33.tag=6004+i
             lable33.font=UIFont.systemFont(ofSize: 24*HEIGHT_SIZE)
             imageAll2.addSubview(lable33)
             
@@ -437,9 +438,9 @@ class ossFistVC: RootViewController {
     
     func initUIThree3(){
         
-        for i in 0...3 {
+        for i in 0..<integratorValueArray.count {
             let L1=scrollView.viewWithTag(6000+i) as! UILabel
-            L1.text=self.integratorValueArray[i] as? String
+            L1.text=self.integratorValueArray[i] as? String ?? String.init(format: "%d", self.integratorValueArray[i] as! Int)
         }
    
     
@@ -1121,7 +1122,7 @@ class ossFistVC: RootViewController {
  
                     let array0=objDic.allKeys as NSArray
                         if  array0.contains("todayEnergy"){
- self.integratorValueArray=[objDic["todayEnergy"] as? NSString ?? "",objDic["totalEnergy"] as? NSString ?? "",objDic["totalInvNum"] as? NSString ?? "",objDic["totalPower"] as? NSString ?? ""]
+ self.integratorValueArray=[objDic["todayEnergy"] as? NSString ?? "",objDic["totalEnergy"] as? NSString ?? "",objDic["totalInvNum"] as? NSString ?? "",objDic["totalPower"] as? NSString ?? "",objDic["userNum"] as? NSString ?? objDic["userNum"] as! Int,objDic["plantNum"] as? NSString ?? objDic["plantNum"] as! Int]
                             
                         }
 

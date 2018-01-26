@@ -392,6 +392,7 @@
     }
  
     UIColor *backColor=COLOR(14, 138, 243, 1);
+    _waterView.backgroundColor = backColor;//页面背景颜色改背景
     if ([_status isEqualToString:@"0"]) {
         _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:45/ 255.0f green:226/ 255.0f blue:233/ 255.0f alpha:1];//水波颜色
@@ -416,6 +417,9 @@
         _waterView.backgroundColor = backColor;//页面背景颜色改背景
         _waterView.currentWaterColor = [UIColor colorWithRed:28/ 255.0f green:111/ 255.0f blue:235/ 255.0f alpha:1];//水波颜色
         _statusText=root_duanKai;
+    }else{
+        _waterView.currentWaterColor = [UIColor colorWithRed:121/ 255.0f green:230/ 255.0f blue:129/ 255.0f alpha:1];//水波颜色
+        _statusText=root_Device_head_186;
     }
     float k1=[_capacity floatValue]*0.01;
     _waterView.percentum = k1;//百分比

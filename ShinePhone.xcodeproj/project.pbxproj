@@ -457,6 +457,10 @@
 		33775AEF1D2E3BC00070742E /* 打勾.png in Resources */ = {isa = PBXBuildFile; fileRef = 33775AEE1D2E3BC00070742E /* 打勾.png */; };
 		33775AF11D2E40290070742E /* 客服.png in Resources */ = {isa = PBXBuildFile; fileRef = 33775AF01D2E40290070742E /* 客服.png */; };
 		33775AF31D2E404D0070742E /* 客户.png in Resources */ = {isa = PBXBuildFile; fileRef = 33775AF21D2E404D0070742E /* 客户.png */; };
+		3378006F201B3EEE008E5C00 /* YDChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3378006A201B3EEE008E5C00 /* YDChart.m */; };
+		33780070201B3EEE008E5C00 /* YDLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3378006C201B3EEE008E5C00 /* YDLineChart.m */; };
+		33780071201B3EEE008E5C00 /* YDLineY.m in Sources */ = {isa = PBXBuildFile; fileRef = 3378006E201B3EEE008E5C00 /* YDLineY.m */; };
+		33780074201B3F1F008E5C00 /* JHShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780073201B3F1F008E5C00 /* JHShowController.m */; };
 		3378D65E1F147AFD00632CBD /* layout.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378D65D1F147AFD00632CBD /* layout.png */; };
 		33793D141CE583AD000D0F9E /* storage4.png in Resources */ = {isa = PBXBuildFile; fileRef = 33793D131CE583AD000D0F9E /* storage4.png */; };
 		33793D161CE583E4000D0F9E /* solar4.png in Resources */ = {isa = PBXBuildFile; fileRef = 33793D151CE583E4000D0F9E /* solar4.png */; };
@@ -1526,6 +1530,14 @@
 		33775AEE1D2E3BC00070742E /* 打勾.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "打勾.png"; sourceTree = "<group>"; };
 		33775AF01D2E40290070742E /* 客服.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "客服.png"; sourceTree = "<group>"; };
 		33775AF21D2E404D0070742E /* 客户.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "客户.png"; sourceTree = "<group>"; };
+		33780069201B3EEE008E5C00 /* YDChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDChart.h; sourceTree = "<group>"; };
+		3378006A201B3EEE008E5C00 /* YDChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDChart.m; sourceTree = "<group>"; };
+		3378006B201B3EEE008E5C00 /* YDLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDLineChart.h; sourceTree = "<group>"; };
+		3378006C201B3EEE008E5C00 /* YDLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDLineChart.m; sourceTree = "<group>"; };
+		3378006D201B3EEE008E5C00 /* YDLineY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YDLineY.h; sourceTree = "<group>"; };
+		3378006E201B3EEE008E5C00 /* YDLineY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDLineY.m; sourceTree = "<group>"; };
+		33780072201B3F1F008E5C00 /* JHShowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHShowController.h; sourceTree = "<group>"; };
+		33780073201B3F1F008E5C00 /* JHShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHShowController.m; sourceTree = "<group>"; };
 		3378D65D1F147AFD00632CBD /* layout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = layout.png; sourceTree = "<group>"; };
 		33793D131CE583AD000D0F9E /* storage4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = storage4.png; sourceTree = "<group>"; };
 		33793D151CE583E4000D0F9E /* solar4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = solar4.png; sourceTree = "<group>"; };
@@ -3428,6 +3440,7 @@
 		3376B3C91F97254D0069F820 /* 本地调试 */ = {
 			isa = PBXGroup;
 			children = (
+				33780067201B3EBC008E5C00 /* 一键诊断 */,
 				33851DDB1FA08A8C00AB758C /* 本地调试Control */,
 				33FAD8E21F99C4F10030EEC3 /* 本地调试data */,
 				33FAD8E11F99C4B50030EEC3 /* 本地调试view */,
@@ -3480,6 +3493,29 @@
 				33775AD81D2CD7520070742E /* RKAlertView.m */,
 			);
 			path = RKAlertView;
+			sourceTree = "<group>";
+		};
+		33780067201B3EBC008E5C00 /* 一键诊断 */ = {
+			isa = PBXGroup;
+			children = (
+				33780072201B3F1F008E5C00 /* JHShowController.h */,
+				33780073201B3F1F008E5C00 /* JHShowController.m */,
+				33780068201B3EEE008E5C00 /* YDChart */,
+			);
+			path = "一键诊断";
+			sourceTree = "<group>";
+		};
+		33780068201B3EEE008E5C00 /* YDChart */ = {
+			isa = PBXGroup;
+			children = (
+				33780069201B3EEE008E5C00 /* YDChart.h */,
+				3378006A201B3EEE008E5C00 /* YDChart.m */,
+				3378006B201B3EEE008E5C00 /* YDLineChart.h */,
+				3378006C201B3EEE008E5C00 /* YDLineChart.m */,
+				3378006D201B3EEE008E5C00 /* YDLineY.h */,
+				3378006E201B3EEE008E5C00 /* YDLineY.m */,
+			);
+			path = YDChart;
 			sourceTree = "<group>";
 		};
 		3379E4E41E94BE25000A4198 /* 能源饼图 */ = {
@@ -5427,6 +5463,7 @@
 				3367CB4A1C86806600EF460C /* MASConstraint.m in Sources */,
 				33860FF41EEB8C28004150FD /* plantListCell.swift in Sources */,
 				3343F3E51C805BBF009F69BC /* FXBlurView.m in Sources */,
+				33780071201B3EEE008E5C00 /* YDLineY.m in Sources */,
 				33875A521EB9B28C00F7E0E6 /* newEnergyDetaiTwo.m in Sources */,
 				3367CB4B1C86806600EF460C /* MASConstraintMaker.m in Sources */,
 				337079471D91397800D7DA98 /* QuestionTableViewCell.m in Sources */,
@@ -5478,6 +5515,7 @@
 				337C43BD1FC4464D0000A6F2 /* resultDetailView.m in Sources */,
 				3370793C1D910FEC00D7DA98 /* NJKWebViewProgress.m in Sources */,
 				334FF09E1CF53C7C001E6716 /* ModuleInfo.m in Sources */,
+				33780074201B3F1F008E5C00 /* JHShowController.m in Sources */,
 				33EFB6691C98F9B1003F336F /* ZFBar.m in Sources */,
 				3376A6E41FD7DCA70043FC53 /* ossGetPassWordView.m in Sources */,
 				334FF09B1CF53C7C001E6716 /* InfoSend.m in Sources */,
@@ -5518,6 +5556,7 @@
 				338614D81F2839A9000F515E /* ESP_WifiUtil.m in Sources */,
 				33AF3D201D8E67210007D6C2 /* JDStatusBarView.m in Sources */,
 				33AF3D1F1D8E67210007D6C2 /* JDStatusBarStyle.m in Sources */,
+				33780070201B3EEE008E5C00 /* YDLineChart.m in Sources */,
 				33FEFCD61C7D8E8300324374 /* UIViewExt.m in Sources */,
 				336D401F1D6FEA7600ECFA34 /* PinyinHelper.m in Sources */,
 				336181F41ED031C4008641E9 /* uibuttonView0.swift in Sources */,
@@ -5550,6 +5589,7 @@
 				3383ACE41D7D6DC200C2F4A3 /* MRNavigationLabel.m in Sources */,
 				3356675B1D7E606F00C40129 /* NewPagedFlowView.m in Sources */,
 				3370359B1E373D2D00AE7CD2 /* datailD2ViewController.m in Sources */,
+				3378006F201B3EEE008E5C00 /* YDChart.m in Sources */,
 				3387B8DB1FB438C40073FB35 /* payInvoice.m in Sources */,
 				33EFB6021C979B5F003F336F /* StationCellectTableViewCell.m in Sources */,
 				337C8D9C1E66ACD30013D650 /* GifNewViewController.m in Sources */,

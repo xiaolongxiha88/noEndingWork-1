@@ -817,7 +817,7 @@ _pcsNetStorageSN=@"";
                 
                 NSString *ST0=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"lost"]];
                 if ([ST0 isEqualToString:@"1"]) {
-                    [statueArray addObject:@"6"];
+                    [statueArray addObject:@"20"];
                 }else{
                     
                     NSString *ST=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"deviceStatus"]];
@@ -849,7 +849,7 @@ _pcsNetStorageSN=@"";
                 
                 NSString *ST02=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"lost"]];
                 if ([ST02 isEqualToString:@"1"]) {
-                    [statueArray addObject:@"6"];
+                    [statueArray addObject:@"20"];
                 }else{
                     NSString *ST=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"deviceStatus"]];
                     [statueArray addObject:ST];
@@ -889,7 +889,7 @@ _pcsNetStorageSN=@"";
                 
                 NSString *ST02=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"lost"]];
                 if ([ST02 isEqualToString:@"1"]) {
-                    [statueArray addObject:@"10"];
+                    [statueArray addObject:@"20"];
                 }else{
                     NSString *ST=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"deviceStatus"]];
                     [statueArray addObject:ST];
@@ -1970,7 +1970,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             }else if ([getDevice.statueData isEqualToString:@"-1"]){
                 cell.stateValue.text =root_duanKai ;
                 cell.stateValue.textColor=COLOR(163, 163, 163, 1);
-            }else if ([getDevice.statueData isEqualToString:@"6"]){                  //6 掉线
+            }else if ([getDevice.statueData isEqualToString:@"20"]){                  //6 掉线
                 cell.stateValue.text =root_duanKai ;
                 cell.stateValue.textColor=COLOR(163, 163, 163, 1);
             }
@@ -1998,7 +1998,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             }else if ([getDevice.statueData isEqualToString:@"-1"]){
                 cell.stateValue.text =root_duanKai ;
                 cell.stateValue.textColor=COLOR(163, 163, 163, 1);
-            }else if ([getDevice.statueData isEqualToString:@"6"]){
+            }else if ([getDevice.statueData isEqualToString:@"20"]){
                 cell.stateValue.text =root_duanKai ;
                 cell.stateValue.textColor=COLOR(163, 163, 163, 1);
             }else{
@@ -2008,7 +2008,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             
         }else if ([getDevice.type isEqualToString:@"mix"]){
                 cell.electric.text = root_dianChi_baifenBi;
-            if ([getDevice.statueData isEqualToString:@"0"]){          //10 掉线
+            if ([getDevice.statueData isEqualToString:@"0"]){          //20 掉线
                 cell.stateValue.text =root_dengDai;
                 cell.stateValue.textColor=MainColor;
             }else if ([getDevice.statueData isEqualToString:@"1"]){
@@ -2023,7 +2023,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             }else if ([getDevice.statueData isEqualToString:@"5"] || [getDevice.statueData isEqualToString:@"6"] || [getDevice.statueData isEqualToString:@"7"] || [getDevice.statueData isEqualToString:@"8"]){
                 cell.stateValue.text =root_zhengChang ;
                 cell.stateValue.textColor=COLOR(121, 230, 129, 1);
-            }else if ([getDevice.statueData isEqualToString:@"10"]){
+            }else if ([getDevice.statueData isEqualToString:@"20"]){
                 cell.stateValue.text =root_duanKai ;
                 cell.stateValue.textColor=COLOR(163, 163, 163, 1);
             }else{
@@ -2186,7 +2186,13 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
    
     if ([content.allKeys containsObject:@"todayEnergy"]) {
         NSArray *energyHArray=@[content[@"todayEnergy"],content[@"totalEnergy"]];
-        NSArray *powerHArray=@[content[@"invTodayPpv"],content[@"nominal_Power"]];
+        NSArray *powerHArray;
+        if ([content.allKeys containsObject:@"nominal_Power"]) {
+           powerHArray=@[content[@"invTodayPpv"],content[@"nominal_Power"]];
+        }else{
+              powerHArray=@[content[@"invTodayPpv"],content[@"nominalPower"]];
+        }
+        
         
         for (int i=0; i<powerHArray.count; i++) {
             [self getNewPvDataW:[NSString stringWithFormat:@"%@",powerHArray[i]]];
