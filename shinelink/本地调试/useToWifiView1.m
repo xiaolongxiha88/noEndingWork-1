@@ -17,6 +17,7 @@
 #import "usbToWifiControlFour.h"
 #import "RKAlertView.h"
 #import "usbToWifiLoginOSS.h"
+#import "usbTowifiCheckOne.h"
 
 static NSString *cellOne = @"cellOne";
 static NSString *cellTwo = @"cellTwo";
@@ -419,8 +420,8 @@ static NSString *cellTwo = @"cellTwo";
         V2.backgroundColor=[UIColor whiteColor];
         [_secondView addSubview:V2];
         
-        NSArray *picName=@[@"max_set.png",@"max_parameter.png",@"Max_control3.png"];
-        NSArray *nameArray=@[@"设置配置",@"参数设置",@"高级设置"];
+        NSArray *picName=@[@"max_set.png",@"max_parameter.png",@"max_intelligent _icon.png",@"Max_control3.png"];
+        NSArray *nameArray=@[@"设置配置",@"参数设置",@"智能检测",@"高级设置"];
         
         float imageH=30*HEIGHT_SIZE;float V2H1=15*HEIGHT_SIZE;
         float WW=ScreenWidth/picName.count;
@@ -494,6 +495,8 @@ static NSString *cellTwo = @"cellTwo";
     }else if (TYPY==3001) {
          [self goToControlView1];
     }else if (TYPY==3002) {
+        [self goToControlViewCheck];
+    }else if (TYPY==3003) {
         [self goToControlView4];
     }
     
@@ -514,6 +517,11 @@ static NSString *cellTwo = @"cellTwo";
 
 -(void)goToControlView3{
     usbToWifiFour *testView=[[usbToWifiFour alloc]init];
+    [self.navigationController pushViewController:testView animated:YES];
+}
+
+-(void)goToControlViewCheck{
+    usbTowifiCheckOne *testView=[[usbTowifiCheckOne alloc]init];
     [self.navigationController pushViewController:testView animated:YES];
 }
 

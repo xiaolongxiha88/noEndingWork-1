@@ -461,6 +461,20 @@
 		33780070201B3EEE008E5C00 /* YDLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3378006C201B3EEE008E5C00 /* YDLineChart.m */; };
 		33780071201B3EEE008E5C00 /* YDLineY.m in Sources */ = {isa = PBXBuildFile; fileRef = 3378006E201B3EEE008E5C00 /* YDLineY.m */; };
 		33780074201B3F1F008E5C00 /* JHShowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780073201B3F1F008E5C00 /* JHShowController.m */; };
+		33780076201C1815008E5C00 /* max_ropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 33780075201C1814008E5C00 /* max_ropdown.png */; };
+		33780078201C182A008E5C00 /* max_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 33780077201C182A008E5C00 /* max_arrow.png */; };
+		3378007A201C183E008E5C00 /* max_intelligent _icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33780079201C183E008E5C00 /* max_intelligent _icon.png */; };
+		3378007C201C184E008E5C00 /* max_note.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378007B201C184E008E5C00 /* max_note.png */; };
+		3378007F201C1B5C008E5C00 /* usbTowifiCheckOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 3378007E201C1B5C008E5C00 /* usbTowifiCheckOne.m */; };
+		33780082201C26D3008E5C00 /* checkOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780081201C26D3008E5C00 /* checkOneView.m */; };
+		33780085201C2709008E5C00 /* checkTwoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780084201C2709008E5C00 /* checkTwoView.m */; };
+		33780088201C2720008E5C00 /* checkThreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780087201C2720008E5C00 /* checkThreeView.m */; };
+		3378008B201C2736008E5C00 /* checkFourView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3378008A201C2736008E5C00 /* checkFourView.m */; };
+		3378008D201C2AE3008E5C00 /* max_fault.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378008C201C2AE3008E5C00 /* max_fault.png */; };
+		3378008F201C2AE9008E5C00 /* max_iv_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378008E201C2AE9008E5C00 /* max_iv_graph.png */; };
+		33780092201C2AF0008E5C00 /* max_onekey.png in Resources */ = {isa = PBXBuildFile; fileRef = 33780090201C2AEF008E5C00 /* max_onekey.png */; };
+		33780093201C2AF0008E5C00 /* max_real_time.png in Resources */ = {isa = PBXBuildFile; fileRef = 33780091201C2AF0008E5C00 /* max_real_time.png */; };
+		33780096201C65B3008E5C00 /* CustomProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780094201C65B2008E5C00 /* CustomProgress.m */; };
 		3378D65E1F147AFD00632CBD /* layout.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378D65D1F147AFD00632CBD /* layout.png */; };
 		33793D141CE583AD000D0F9E /* storage4.png in Resources */ = {isa = PBXBuildFile; fileRef = 33793D131CE583AD000D0F9E /* storage4.png */; };
 		33793D161CE583E4000D0F9E /* solar4.png in Resources */ = {isa = PBXBuildFile; fileRef = 33793D151CE583E4000D0F9E /* solar4.png */; };
@@ -1538,6 +1552,26 @@
 		3378006E201B3EEE008E5C00 /* YDLineY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YDLineY.m; sourceTree = "<group>"; };
 		33780072201B3F1F008E5C00 /* JHShowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHShowController.h; sourceTree = "<group>"; };
 		33780073201B3F1F008E5C00 /* JHShowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JHShowController.m; sourceTree = "<group>"; };
+		33780075201C1814008E5C00 /* max_ropdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_ropdown.png; sourceTree = "<group>"; };
+		33780077201C182A008E5C00 /* max_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_arrow.png; sourceTree = "<group>"; };
+		33780079201C183E008E5C00 /* max_intelligent _icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "max_intelligent _icon.png"; sourceTree = "<group>"; };
+		3378007B201C184E008E5C00 /* max_note.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_note.png; sourceTree = "<group>"; };
+		3378007D201C1B5C008E5C00 /* usbTowifiCheckOne.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbTowifiCheckOne.h; sourceTree = "<group>"; };
+		3378007E201C1B5C008E5C00 /* usbTowifiCheckOne.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbTowifiCheckOne.m; sourceTree = "<group>"; };
+		33780080201C26D3008E5C00 /* checkOneView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = checkOneView.h; path = "shinelink/本地调试/一键诊断/checkOneView.h"; sourceTree = SOURCE_ROOT; };
+		33780081201C26D3008E5C00 /* checkOneView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = checkOneView.m; path = "shinelink/本地调试/一键诊断/checkOneView.m"; sourceTree = SOURCE_ROOT; };
+		33780083201C2709008E5C00 /* checkTwoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = checkTwoView.h; sourceTree = "<group>"; };
+		33780084201C2709008E5C00 /* checkTwoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = checkTwoView.m; sourceTree = "<group>"; };
+		33780086201C2720008E5C00 /* checkThreeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = checkThreeView.h; sourceTree = "<group>"; };
+		33780087201C2720008E5C00 /* checkThreeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = checkThreeView.m; sourceTree = "<group>"; };
+		33780089201C2736008E5C00 /* checkFourView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = checkFourView.h; sourceTree = "<group>"; };
+		3378008A201C2736008E5C00 /* checkFourView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = checkFourView.m; sourceTree = "<group>"; };
+		3378008C201C2AE3008E5C00 /* max_fault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_fault.png; sourceTree = "<group>"; };
+		3378008E201C2AE9008E5C00 /* max_iv_graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_iv_graph.png; sourceTree = "<group>"; };
+		33780090201C2AEF008E5C00 /* max_onekey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_onekey.png; sourceTree = "<group>"; };
+		33780091201C2AF0008E5C00 /* max_real_time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_real_time.png; sourceTree = "<group>"; };
+		33780094201C65B2008E5C00 /* CustomProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomProgress.m; sourceTree = "<group>"; };
+		33780095201C65B3008E5C00 /* CustomProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomProgress.h; sourceTree = "<group>"; };
 		3378D65D1F147AFD00632CBD /* layout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = layout.png; sourceTree = "<group>"; };
 		33793D131CE583AD000D0F9E /* storage4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = storage4.png; sourceTree = "<group>"; };
 		33793D151CE583E4000D0F9E /* solar4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = solar4.png; sourceTree = "<group>"; };
@@ -3454,6 +3488,14 @@
 		3376B3CD1F973E0B0069F820 /* 本地调试图片 */ = {
 			isa = PBXGroup;
 			children = (
+				33780090201C2AEF008E5C00 /* max_onekey.png */,
+				33780091201C2AF0008E5C00 /* max_real_time.png */,
+				3378008E201C2AE9008E5C00 /* max_iv_graph.png */,
+				3378008C201C2AE3008E5C00 /* max_fault.png */,
+				3378007B201C184E008E5C00 /* max_note.png */,
+				33780079201C183E008E5C00 /* max_intelligent _icon.png */,
+				33780077201C182A008E5C00 /* max_arrow.png */,
+				33780075201C1814008E5C00 /* max_ropdown.png */,
 				337475F51FADB4E700BB1A76 /* Max_control3.png */,
 				3376B3DA1F973EED0069F820 /* MAXdown.png */,
 				3376B3DC1F973EEE0069F820 /* MAXright.png */,
@@ -3500,7 +3542,17 @@
 			children = (
 				33780072201B3F1F008E5C00 /* JHShowController.h */,
 				33780073201B3F1F008E5C00 /* JHShowController.m */,
+				33780080201C26D3008E5C00 /* checkOneView.h */,
+				33780081201C26D3008E5C00 /* checkOneView.m */,
+				33780083201C2709008E5C00 /* checkTwoView.h */,
+				33780084201C2709008E5C00 /* checkTwoView.m */,
+				33780086201C2720008E5C00 /* checkThreeView.h */,
+				33780087201C2720008E5C00 /* checkThreeView.m */,
+				33780089201C2736008E5C00 /* checkFourView.h */,
+				3378008A201C2736008E5C00 /* checkFourView.m */,
 				33780068201B3EEE008E5C00 /* YDChart */,
+				3378007D201C1B5C008E5C00 /* usbTowifiCheckOne.h */,
+				3378007E201C1B5C008E5C00 /* usbTowifiCheckOne.m */,
 			);
 			path = "一键诊断";
 			sourceTree = "<group>";
@@ -3514,6 +3566,8 @@
 				3378006C201B3EEE008E5C00 /* YDLineChart.m */,
 				3378006D201B3EEE008E5C00 /* YDLineY.h */,
 				3378006E201B3EEE008E5C00 /* YDLineY.m */,
+				33780095201C65B3008E5C00 /* CustomProgress.h */,
+				33780094201C65B2008E5C00 /* CustomProgress.m */,
 			);
 			path = YDChart;
 			sourceTree = "<group>";
@@ -4832,6 +4886,7 @@
 				3357DDD21F6928720089A679 /* buttonCancle.png in Resources */,
 				3330F4F11F177B920076C237 /* more2@2x.png in Resources */,
 				334AED601CA3763D007E39F3 /* 资料管理.png in Resources */,
+				3378007C201C184E008E5C00 /* max_note.png in Resources */,
 				338964981E5D8A6900A7B1AE /* frame_password.png in Resources */,
 				3370EBA31F41468C00F37149 /* 贴心的客户服务_en.png in Resources */,
 				338234371D9A4AF0002062AE /* Warranty_en2.png in Resources */,
@@ -4872,6 +4927,7 @@
 				334B8F631C915A1B00798A69 /* bg.png in Resources */,
 				33AF3D171D8E67210007D6C2 /* addDevice.jpg in Resources */,
 				337F961C1F0CCBCA00840527 /* Follow-up2.png in Resources */,
+				3378008D201C2AE3008E5C00 /* max_fault.png in Resources */,
 				3370FF031F5FC87D0089B317 /* pven.png in Resources */,
 				337F962A1F0DE09800840527 /* inv_iconI.png in Resources */,
 				3370EBA01F41468C00F37149 /* 全新的监控管理_cn.png in Resources */,
@@ -4883,12 +4939,14 @@
 				338E30CE1D93727A002215E4 /* 增值服务1.png in Resources */,
 				33252FD11F57B7330054BBC7 /* storageS.png in Resources */,
 				338321C71EEE3378004FFC20 /* set_nor.png in Resources */,
+				33780092201C2AF0008E5C00 /* max_onekey.png in Resources */,
 				334CB02A1CD847C90061AC0B /* Localizable.strings in Resources */,
 				33252FCB1F53F4C50054BBC7 /* date_right_icon.png in Resources */,
 				338990AF1CEAB61400A708F8 /* mebg.png in Resources */,
 				33252FD31F57B7D00054BBC7 /* gridS.png in Resources */,
 				3355AD9A1CF6A49400AE6891 /* 222.jpg in Resources */,
 				3387B8FC1FB59F500073FB35 /* newheadD3.png in Resources */,
+				33780093201C2AF0008E5C00 /* max_real_time.png in Resources */,
 				3376B3CF1F973ED00069F820 /* max_ele.png in Resources */,
 				337F96271F0DE08300840527 /* e-today_iconI.png in Resources */,
 				334FF0C01CF53C7C001E6716 /* top.png in Resources */,
@@ -4913,6 +4971,7 @@
 				3387B8FD1FB59F500073FB35 /* newheadD4.png in Resources */,
 				336A108F1CBDDBA500E30E83 /* triangular.png in Resources */,
 				33EA1CBC1EFA8E0B00A39192 /* pop_frame.png in Resources */,
+				33780078201C182A008E5C00 /* max_arrow.png in Resources */,
 				3382341B1D98ED8A002062AE /* adCancel.png in Resources */,
 				33FFBD4F1CEC71FA003C56E1 /* name3.jpg in Resources */,
 				3383F1321C9FF4210075E834 /* TemperatureController.png in Resources */,
@@ -4957,6 +5016,7 @@
 				335089231C73179400D7AA03 /* bg_list_popver.png in Resources */,
 				33775ADB1D2E03B40070742E /* 质保.png in Resources */,
 				3370EBC31F41AB8100F37149 /* upGo.png in Resources */,
+				3378008F201C2AE9008E5C00 /* max_iv_graph.png in Resources */,
 				33FEFD7A1C7DB38400324374 /* shebei_press@3x.png in Resources */,
 				33775AEF1D2E3BC00070742E /* 打勾.png in Resources */,
 				334FF0BF1CF53C7C001E6716 /* text_bg.png in Resources */,
@@ -4985,6 +5045,7 @@
 				3382342B1D9A4982002062AE /* datalog_en2.png in Resources */,
 				3382342A1D9A4982002062AE /* datalog_cn2.png in Resources */,
 				330E3DF11D0D6D4B00DF75AE /* 形状17.png in Resources */,
+				3378007A201C183E008E5C00 /* max_intelligent _icon.png in Resources */,
 				3355AD9B1CF6A49400AE6891 /* 111.jpg in Resources */,
 				33238B491CBF816400E82B86 /* 外框@3x.png in Resources */,
 				3355AD981CF6A49400AE6891 /* 444.jpg in Resources */,
@@ -5132,6 +5193,7 @@
 				335456C91C853C2F00275478 /* scanscanBg.png in Resources */,
 				338964771E57E7E600A7B1AE /* icon_bat.png in Resources */,
 				3387B8E81FB547EA0073FB35 /* newheadSolar.png in Resources */,
+				33780076201C1815008E5C00 /* max_ropdown.png in Resources */,
 				3383F12E1C9FF4190075E834 /* Plug.png in Resources */,
 				3387B8B41FB185640073FB35 /* AlipaySDK.bundle in Resources */,
 				3370EBA91F41496D00F37149 /* 充电桩.png in Resources */,
@@ -5242,6 +5304,7 @@
 				33EFB6661C98F9B1003F336F /* UIColor+Zirkfied.m in Sources */,
 				3392697D1F8C63CA00385A74 /* KTDropdownMenuView.m in Sources */,
 				334B8F4A1C914A6D00798A69 /* PNBar.m in Sources */,
+				33780082201C26D3008E5C00 /* checkOneView.m in Sources */,
 				33EA49F51E8DEA0B0044A01A /* newEnergyStorage.m in Sources */,
 				33860FDF1EEA75C5004150FD /* MJRefreshComponent.m in Sources */,
 				337475F21FAB004B00BB1A76 /* usbToWifiFour.m in Sources */,
@@ -5265,6 +5328,7 @@
 				335D69AF1D77BA4D00894D90 /* HcdCacheVideoPlayer.m in Sources */,
 				334E9BF51CAD2B8900C8271F /* PvLogTableViewController.m in Sources */,
 				3381ECE81CBC906600DCF0D2 /* Line3View.m in Sources */,
+				3378008B201C2736008E5C00 /* checkFourView.m in Sources */,
 				3343F3DA1C80405D009F69BC /* AFNetworkActivityIndicatorManager.m in Sources */,
 				33E369591FDA70D6001D947D /* MMScanViewController.m in Sources */,
 				33652A2B1CEC1190004EBAE5 /* ExtensionTwoViewController.m in Sources */,
@@ -5368,6 +5432,7 @@
 				336F1A1A1D88E46900CD4C2B /* SDWebImageDownloaderOperation.m in Sources */,
 				3370EBD31F45874B00F37149 /* SPF5000Head.m in Sources */,
 				336E03F51EC9411B0034BC86 /* ossFistVC.swift in Sources */,
+				33780096201C65B3008E5C00 /* CustomProgress.m in Sources */,
 				3319E08C1D5AFB39006623A9 /* LWLoadingAnimationView.m in Sources */,
 				336D40191D6FEA7600ECFA34 /* ChineseInclude.m in Sources */,
 				3376A6E71FD7E3180043FC53 /* ossToolListView.m in Sources */,
@@ -5458,6 +5523,7 @@
 				3381ED091CBCE94200DCF0D2 /* AnswerViewController.m in Sources */,
 				3385A3A81F4AB0D7004FF3C7 /* ossTool.swift in Sources */,
 				337F9C851C71A6710016FE43 /* main.m in Sources */,
+				33780088201C2720008E5C00 /* checkThreeView.m in Sources */,
 				338614D71F2839A9000F515E /* ESP_NetUtil.m in Sources */,
 				3367CB491C86806600EF460C /* MASCompositeConstraint.m in Sources */,
 				3367CB4A1C86806600EF460C /* MASConstraint.m in Sources */,
@@ -5556,6 +5622,7 @@
 				338614D81F2839A9000F515E /* ESP_WifiUtil.m in Sources */,
 				33AF3D201D8E67210007D6C2 /* JDStatusBarView.m in Sources */,
 				33AF3D1F1D8E67210007D6C2 /* JDStatusBarStyle.m in Sources */,
+				33780085201C2709008E5C00 /* checkTwoView.m in Sources */,
 				33780070201B3EEE008E5C00 /* YDLineChart.m in Sources */,
 				33FEFCD61C7D8E8300324374 /* UIViewExt.m in Sources */,
 				336D401F1D6FEA7600ECFA34 /* PinyinHelper.m in Sources */,
@@ -5581,6 +5648,7 @@
 				334B8F4B1C914A6D00798A69 /* PNBarChart.m in Sources */,
 				338A623E1E71567A000E7CE4 /* PopoverView00.m in Sources */,
 				3367EB951CD0B07600D2EF67 /* stationTableView.m in Sources */,
+				3378007F201C1B5C008E5C00 /* usbTowifiCheckOne.m in Sources */,
 				33860FEF1EEA75C5004150FD /* UIScrollView+MJRefresh.m in Sources */,
 				33528FF61C83E95F00D07889 /* listTableViewCell.m in Sources */,
 				334FF0921CF53C7C001E6716 /* GCDAsyncUdpSocket.m in Sources */,
