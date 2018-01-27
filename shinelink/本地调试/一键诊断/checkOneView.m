@@ -31,6 +31,7 @@
 @property (assign, nonatomic) CGFloat moveDistance;
 @property (assign, nonatomic) int Type;
 @property (strong, nonatomic)UILabel *lable0;
+@property (strong, nonatomic)UILabel *lable01;
 @property (nonatomic) BOOL isReadNow;
 @property (strong, nonatomic)NSArray *vocArray;
 @property (strong, nonatomic)NSArray *colorArray;
@@ -56,11 +57,12 @@
     view0.backgroundColor=[UIColor clearColor];
     [self.view addSubview:view0];
     
-    _lable0 = [[UILabel alloc]initWithFrame:CGRectMake(0, 10*HEIGHT_SIZE,lableW1,lableH)];
-    _lable0.textColor =[UIColor blackColor];
+      float _lable01H=20*HEIGHT_SIZE;
+    _lable0 = [[UILabel alloc]initWithFrame:CGRectMake(0, 20*HEIGHT_SIZE,lableW1,_lable01H)];
+    _lable0.textColor =COLOR(51, 51, 51, 1);
     _lable0.textAlignment=NSTextAlignmentRight;
     _lable0.text=@"(A)";
-    _lable0.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    _lable0.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [self.view addSubview:_lable0];
     
     float buttonW=60*NOW_SIZE;   float buttonH=20*HEIGHT_SIZE;
@@ -109,16 +111,24 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goStopRead:)];
     [custompro addGestureRecognizer:tapGestureRecognizer];
     
-    float view2H=SCREEN_Height-250*HEIGHT_SIZE-lastH-NavigationbarHeight-StatusHeight;
+  
+    _lable01 = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth-lableW1-15*NOW_SIZE, 240*HEIGHT_SIZE,lableW1,_lable01H)];
+    _lable01.textColor =COLOR(51, 51, 51, 1);
+    _lable01.textAlignment=NSTextAlignmentRight;
+    _lable01.text=@"(V)";
+    _lable01.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    [self.view addSubview:_lable01];
+    
+    float view2H=SCREEN_Height-265*HEIGHT_SIZE-lastH-NavigationbarHeight-StatusHeight;
     float everyLalbeH=view2H/8;
-    UIView* view2=[[UIView alloc]initWithFrame:CGRectMake(0,245*HEIGHT_SIZE, SCREEN_Width, view2H)];
+    UIView* view2=[[UIView alloc]initWithFrame:CGRectMake(0,255*HEIGHT_SIZE, SCREEN_Width, view2H)];
     view2.backgroundColor=[UIColor clearColor];
     [self.view addSubview:view2];
     
     NSArray *lableNameArray=@[@"MPPT(Voc,Isc)",@"(Vpv,Ipv)"];
     
     CGSize lable1Size=[self getStringSize:14*HEIGHT_SIZE Wsize:(ScreenWidth/2) Hsize:everyLalbeH stringName:lableNameArray[0]];
-        CGSize lable1Size2=[self getStringSize:14*HEIGHT_SIZE Wsize:(ScreenWidth/2) Hsize:everyLalbeH stringName:lableNameArray[1]];
+  //      CGSize lable1Size2=[self getStringSize:14*HEIGHT_SIZE Wsize:(ScreenWidth/2) Hsize:everyLalbeH stringName:lableNameArray[1]];
     
     for (int i=0; i<lableNameArray.count; i++) {
         UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0+(ScreenWidth/2)*i, 0,ScreenWidth/2,everyLalbeH)];
@@ -170,9 +180,10 @@
         view22.backgroundColor=[UIColor whiteColor];
          [view2 addSubview:view22];
         
-        UILabel *Lable22 = [[UILabel alloc]initWithFrame:CGRectMake((ScreenWidth/2-lable1Size2.width)/2-Wk, 0,ScreenWidth/2-Lable11x,everyLalbeH)];
+      //  UILabel *Lable22 = [[UILabel alloc]initWithFrame:CGRectMake((ScreenWidth/2-lable1Size2.width)/2-Wk, 0,ScreenWidth/2-Lable11x,everyLalbeH)];
+          UILabel *Lable22 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,ScreenWidth/2,everyLalbeH)];
         Lable22.textColor =COLOR(102, 102, 102, 1);
-        Lable22.textAlignment=NSTextAlignmentLeft;
+        Lable22.textAlignment=NSTextAlignmentCenter;
                 Lable22.adjustsFontSizeToFitWidth=YES;
         Lable22.text=@"(--,--)";
             Lable22.tag=7000+i;
