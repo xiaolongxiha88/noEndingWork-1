@@ -449,7 +449,7 @@
 }
 
 -(void)receiveFirstData2:(NSNotification*) notification{
-     [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1];
+     [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:TCP_hide_time];
     
     if (_cmdTcpType==1) {
          _isFirstReadOK=YES;
@@ -507,11 +507,11 @@
 
 -(void)setFailed{
     [self removeTheWaitingView];
-    [self removeTheTcp];
+//    [self removeTheTcp];
     
     if (_cmdTcpType==1) {
         if (!_isFirstReadOK) {
-                [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
+            //    [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
         }
     
     }

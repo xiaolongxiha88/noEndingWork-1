@@ -146,7 +146,7 @@
 }
 
 -(void)receiveFirstData2:(NSNotification*) notification{
-      [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1.5];
+      [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:TCP_hide_time];
     
     NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
     _recieveAllData=[firstDic objectForKey:@"one"];

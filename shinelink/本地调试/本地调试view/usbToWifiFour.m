@@ -151,7 +151,7 @@
     
         [self.view addSubview:_xUnitLabel];
     
-         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:1];
+         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:TCP_hide_time];
     
     _barDic=[NSMutableDictionary new];
 

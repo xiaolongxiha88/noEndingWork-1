@@ -16,7 +16,13 @@
 
 
 -(NSData*)CmdData:(NSString*)cmdType RegAdd:(NSString*)regAdd Length:(NSString*)length modbusBlock:(modbusDataBlock)modbusBlock{
-    NSData*modbusData=[self ModbusCmdData:cmdType RegAdd:regAdd Length:length];
+    NSData*modbusData;
+    if ([cmdType isEqualToString:@"16"]) {
+          modbusData=[self ModbusCmdData10:cmdType RegAdd:regAdd Length:length];
+    }else{
+          modbusData=[self ModbusCmdData:cmdType RegAdd:regAdd Length:length];
+    }
+  
     NSData*tcpData=[self tcpCmdData:modbusData];
     modbusBlock(modbusData);
     return tcpData;
@@ -44,6 +50,45 @@
       target[7]=CRCArray[1];
   
      NSData *cmdData=[[NSData alloc]initWithBytes:target length:sizeof(target)];
+    return cmdData;
+}
+
+-(NSData*)ModbusCmdData10:(NSString*)cmdType RegAdd:(NSString*)regAdd Length:(NSString*)length{
+     NSArray *valueArray = [length componentsSeparatedByString:@"_"];
+      NSInteger LEN=7+(valueArray.count-2)*2+2;
+    uint8_t *target=malloc(sizeof(*target)*LEN);
+
+    
+   
+    
+    unsigned int cmdTypeInt=[cmdType intValue];
+    unsigned int regAddInt=[regAdd intValue];
+    unsigned int lengthInt=[valueArray[0] intValue];
+    unsigned int byteNum=[valueArray[1] intValue];
+     target[0]=(1 & 0x00ff);
+    target[1]=(cmdTypeInt & 0x00ff);
+    target[2]=(regAddInt & 0xff00)>>8;
+    target[3]=(regAddInt & 0x00ff);
+    target[4]=(lengthInt & 0xff00)>>8;
+    target[5]=(lengthInt & 0x00ff);
+     target[6]=(byteNum & 0x00ff);
+    for (int i=0; i<valueArray.count-2; i++) {
+        unsigned int A=[valueArray[2+i] intValue];
+        
+        target[7+2*i]=(A & 0xff00)>>8;
+           target[7+2*i+1]=(A & 0x00ff);
+    }
+  
+    NSInteger LEN1=LEN-2;
+    NSData *targetData=[[NSData alloc] initWithBytes:target length:LEN1];
+    NSData *CRC=[self getCrc16:targetData];
+    Byte *CRCArray=(Byte*)[CRC bytes];
+    NSInteger c1=CRCArray[0];
+      NSInteger c2=CRCArray[1];
+    target[LEN1]=(c1 & 0x00ff);
+    target[LEN1+1]=(c2 & 0x00ff);
+    
+    NSData *cmdData=[[NSData alloc]initWithBytes:target length:LEN];
     return cmdData;
 }
 

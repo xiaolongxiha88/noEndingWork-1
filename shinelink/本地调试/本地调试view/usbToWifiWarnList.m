@@ -41,7 +41,7 @@
 -(void)getDataFirst{
     [self showProgressView];
     _rightItem.enabled=NO;
-        [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:6];
+        [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:5];
     
     _cmdTime=0;
     _isfirstData=YES;

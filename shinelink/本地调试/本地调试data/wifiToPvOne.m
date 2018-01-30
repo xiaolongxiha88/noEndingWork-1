@@ -11,7 +11,7 @@
 #import "wifiToPvDataModel.h"
 #import "MBProgressHUD.h"
 
-static float TCP_TIME=1;
+static float TCP_TIME=0.6;
 
 @interface wifiToPvOne ()<GCDAsyncSocketDelegate>
 
@@ -31,6 +31,7 @@ static float TCP_TIME=1;
 @property (nonatomic, assign) BOOL isThree;
 @property (nonatomic, assign) int cmdType;
 @property (nonatomic, assign) int cmdCount;
+@property (nonatomic, assign) float cmdTime;
 @property (nonatomic, strong)NSDictionary*cmdDic;
 @property (nonatomic, strong)NSArray *cmdArray;
 
@@ -52,13 +53,9 @@ static float TCP_TIME=1;
       _cmdType=type;
     _cmdArray=@[cmdType,regAdd,Length];
       _isReceiveAll=NO;
-    int CMDTIME;
-    if (_cmdType==3 || _cmdType==6) {
-        CMDTIME=2;
-    }else{
-        CMDTIME=TCP_TIME;
-    }
-       [self performSelector:@selector(checkTcpTimeout) withObject:nil afterDelay:CMDTIME*cmdNum];
+ 
+     //  [self performSelector:@selector(checkTcpTimeout) withObject:nil afterDelay:CMDTIME*cmdNum];
+    
          [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
 }
 
@@ -86,7 +83,8 @@ static float TCP_TIME=1;
         _isOne=NO;   _isTwo=NO;   _isThree=NO;
         _cmdArray=[NSArray arrayWithArray:[_cmdDic objectForKey:@"one"]];
         _isReceiveAll=NO;
-        [self performSelector:@selector(checkTcpTimeout) withObject:nil afterDelay:TCP_TIME*3];
+        
+        //[self performSelector:@selector(checkTcpTimeout) withObject:nil afterDelay:TCP_TIME*3];
         
         [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
     }
@@ -132,7 +130,7 @@ static float TCP_TIME=1;
 
 -(void)sendCMD:(NSData*)data {
     
-
+    _cmdTime=_cmdTime+0.1;
  
     NSString *string =[self convertDataToHexStr:data];
     
@@ -154,6 +152,7 @@ static float TCP_TIME=1;
 //建立连接
 -(NSError *)setupConnection {
     if (_socket == nil)
+        _cmdTime=0;
         _socket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
     NSError *err = nil;
     NSString *hostAddress=tcp_IP;
@@ -207,7 +206,14 @@ static float TCP_TIME=1;
   
 
     NSLog(@"DisConnetion");
-    [_socket disconnect];
+ //   [_socket disconnect];
+    
+    [self sendFailedNotice];
+ 
+}
+
+
+-(void)sendFailedNotice{
     
     if (_cmdType==1) {
         if (!_isReceive) {
@@ -221,14 +227,14 @@ static float TCP_TIME=1;
         }
     }else  if (_cmdType==2) {
         if (!_isReceiveAll) {
-                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
         }
         
     }else  if (_cmdType==3) {
         if (!_isReceiveAll) {
-               [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
         }
-     
+        
     }else  if (_cmdType==4) {
         if (!_isReceiveAll) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFourFailed"object:_AllDataDic];
@@ -250,14 +256,18 @@ static float TCP_TIME=1;
         }
         
     }
- 
     
 }
+
 
 //添加通知点2
 //读到数据后的回调代理
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
  
+    if (_cmdTag!=tag) {
+           [self sendFailedNotice];
+        return;
+    }
     _cmdCount=0;
     NSString *string =[self convertDataToHexStr:data];
     NSLog(@"receive datas=%ld::%@",tag,string);

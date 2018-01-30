@@ -512,12 +512,12 @@
 
 -(void)receiveFirstData2:(NSNotification*) notification{
     if (_cmdTcpType==1) {
-         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:0.1];
+         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:TCP_hide_time];
     }else{
         if (_cmdTcpTimes==0) {
-            float times=1.2;
+            float times=TCP_hide_time;
             if (_setRegisterArray.count>0) {
-                times=1.2*_setRegisterArray.count;
+                times=TCP_hide_time*_setRegisterArray.count;
             }
             [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:times];
         }

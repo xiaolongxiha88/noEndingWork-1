@@ -11,6 +11,11 @@
 #import "YDLineChart.h"
 #import "YDLineY.h"
 #import "CustomProgress.h"
+#import "usbToWifiControlTwo.h"
+
+
+
+static float keyOneWaitTime=30.0;
 
 #define k_MainBoundsWidth [UIScreen mainScreen].bounds.size.width
 #define k_MainBoundsHeight [UIScreen mainScreen].bounds.size.height
@@ -35,6 +40,13 @@
 @property (nonatomic) BOOL isReadNow;
 @property (strong, nonatomic)NSArray *vocArray;
 @property (strong, nonatomic)NSArray *colorArray;
+@property(nonatomic,strong)wifiToPvOne*ControlOne;
+
+@property (strong, nonatomic)NSArray *allSendDataArray;
+@property (strong, nonatomic)NSMutableArray *allDataArray;
+@property (assign, nonatomic) int sendDataTime;
+@property (assign, nonatomic) int progressNum;
+@property (strong, nonatomic)NSTimer *timer;
 @end
 
 
@@ -46,8 +58,49 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
+    if (!_ControlOne) {
+        _ControlOne=[[wifiToPvOne alloc]init];
+    }
+    
     [self showFirstQuardrant];
     [self initUI];
+}
+
+
+#pragma mark - 数据交互
+-(void)viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveData:) name: @"TcpReceiveOneKey" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveOneKeyFailed" object:nil];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    if (_ControlOne) {
+        [_ControlOne disConnect];
+    }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveWifiConrolTwo" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveWifiConrolTwoFailed" object:nil];
+    
+}
+
+-(void)receiveData:(NSNotification*) notification{
+    
+}
+-(void)setFailed{
+    
+}
+
+
+-(void)goToReadTcpData{
+    _sendDataTime=0;
+    
+     [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
+
+}
+
+-(void)goToReadFirstData{
+     [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"250" Length:@"1_2_1"];
 }
 
 #pragma mark - UI界面
@@ -214,9 +267,23 @@
 
 }
 
+-(void)goToReadCharData{
+    _progressNum=0;
+    if (!_allSendDataArray) {
+        _allSendDataArray=@[@"0",@"125",@"250",@"375",@"500",@"625",@"750"];
+    }
+    if (!_timer) {
+        _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+    }else{
+        _timer.fireDate=[NSDate distantPast];
+    }
+    
+}
+
 -(void)goStopRead:( UITapGestureRecognizer *)tap{
     _isReadNow = !_isReadNow;
-
+    [self goToReadFirstData];
+    
         if (_isReadNow) {
             custompro.presentlab.text = @"";
        
@@ -228,6 +295,18 @@
         }
 
 }
+
+-(void)updateProgress{
+    _progressNum++;
+    if (_progressNum>=keyOneWaitTime) {
+          _timer.fireDate=[NSDate distantFuture];
+        _progressNum=0;
+        [self goToReadTcpData];
+    }
+    
+}
+
+
 
 -(void)goToGetPercent{
        [custompro setPresent:present];

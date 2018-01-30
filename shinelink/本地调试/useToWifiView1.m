@@ -236,7 +236,7 @@ static NSString *cellTwo = @"cellTwo";
       _isfinishReflash=YES;
    
     if (_reflashTime==0) {
-         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:0.1];
+         [self performSelector:@selector(removeTheWaitingView) withObject:nil afterDelay:TCP_hide_time];
         if (_timer) {
              _timer=nil;
         }

@@ -45,7 +45,7 @@
 #define windowColor  [UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]
 #define KNOTIFICATION_LOGINCHANGE                      @"loginStateChange"
  #define Get_Net_time  25.f
-
+ #define TCP_hide_time  0.2f
 
  #define Head_Url_more  @"http://cdn.growatt.com/publish"
 
