@@ -12,10 +12,10 @@
 #import "YDLineY.h"
 #import "CustomProgress.h"
 #import "usbToWifiControlTwo.h"
+#import "usbToWifiDataControl.h"
 
 
-
-static float keyOneWaitTime=30.0;
+static float keyOneWaitTime=2.0;
 
 #define k_MainBoundsWidth [UIScreen mainScreen].bounds.size.width
 #define k_MainBoundsHeight [UIScreen mainScreen].bounds.size.height
@@ -42,11 +42,16 @@ static float keyOneWaitTime=30.0;
 @property (strong, nonatomic)NSArray *colorArray;
 @property(nonatomic,strong)wifiToPvOne*ControlOne;
 
+@property (nonatomic) BOOL isReadfirstDataOver;
 @property (strong, nonatomic)NSArray *allSendDataArray;
 @property (strong, nonatomic)NSMutableArray *allDataArray;
+@property (strong, nonatomic)NSMutableArray *allDataForCharArray;
 @property (assign, nonatomic) int sendDataTime;
 @property (assign, nonatomic) int progressNum;
 @property (strong, nonatomic)NSTimer *timer;
+
+@property(nonatomic,strong)usbToWifiDataControl*changeDataValue;
+
 @end
 
 
@@ -61,7 +66,9 @@ static float keyOneWaitTime=30.0;
     if (!_ControlOne) {
         _ControlOne=[[wifiToPvOne alloc]init];
     }
-    
+    if (!_changeDataValue) {
+        _changeDataValue=[[usbToWifiDataControl alloc]init];
+    }
     [self showFirstQuardrant];
     [self initUI];
 }
@@ -85,21 +92,66 @@ static float keyOneWaitTime=30.0;
 }
 
 -(void)receiveData:(NSNotification*) notification{
+      NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
+    if (!_isReadfirstDataOver) {
+        _isReadfirstDataOver=YES;
+        [self goToReadCharData];
+    }else{
+           [_allDataArray addObject:firstDic];
+        if (_sendDataTime<_allSendDataArray.count-1) {
+            _sendDataTime++;
+            [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
+        }
+        [self changData];
+    }
     
 }
+
+
+-(void)changData{
+    _allDataForCharArray=[NSMutableArray array];
+    for (int i=0; i<_allDataArray.count; i++) {
+        NSDictionary *dic=[NSDictionary dictionaryWithDictionary:_allDataArray[i]];
+        NSData*data= [dic objectForKey:@"one"];
+        
+        //   Byte *dataArray=(Byte*)[data bytes];
+        NSMutableDictionary *dataDic=[NSMutableDictionary new];
+        NSInteger LENG=(data.length/2-25)/2;
+        for (int K=0; K<LENG;K++) {
+            float V=[_changeDataValue changeOneRegister:data registerNum:2*K]/10;
+            float I=[_changeDataValue changeOneRegister:data registerNum:2*K+1]/10;
+            [dataDic setObject:[NSString stringWithFormat:@"%.1f",I] forKey:[NSString stringWithFormat:@"%.f",V]];
+        }
+        
+        [_allDataForCharArray addObject:dataDic];
+        
+        
+    }
+    if (_allDataForCharArray.count==_allSendDataArray.count) {
+         [self updateUI];
+    }
+   
+    
+}
+
+-(void)updateUI{
+    [self showFirstQuardrant];
+}
+
 -(void)setFailed{
     
 }
 
 
 -(void)goToReadTcpData{
+    _allDataArray=[NSMutableArray array];
     _sendDataTime=0;
-    
-     [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
+     [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
 
 }
 
 -(void)goToReadFirstData{
+    _isReadfirstDataOver=NO;
      [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"250" Length:@"1_2_1"];
 }
 
@@ -351,12 +403,12 @@ static float keyOneWaitTime=30.0;
     _scrollView.bounces = NO;
     [self.view addSubview:_scrollView];
     
-    NSDictionary *dic1=@{@"10":@"23",@"14":@"23",@"16":@"18",@"18":@"56",@"19":@"40",@"21":@"52",@"24":@"33",@"26":@"16",@"30":@"24",@"32":@"35",@"35":@"23",@"37":@"12"};
+//    NSDictionary *dic1=@{@"10":@"23",@"14":@"23",@"16":@"18",@"18":@"56",@"19":@"40",@"21":@"52",@"24":@"33",@"26":@"16",@"30":@"24",@"32":@"35",@"35":@"23",@"37":@"12"};
+//
+//    NSDictionary *dic2=@{@"9":@"23",@"11":@"23",@"15":@"18",@"18":@"56",@"19":@"40",@"23":@"15",@"24":@"33",@"26":@"16",@"30":@"24",@"32":@"35",@"37":@"21",@"45":@"14"};
     
-    NSDictionary *dic2=@{@"9":@"23",@"11":@"23",@"15":@"18",@"18":@"56",@"19":@"40",@"23":@"15",@"24":@"33",@"26":@"16",@"30":@"24",@"32":@"35",@"37":@"21",@"45":@"14"};
     
-    
-    NSArray *allDicArray=@[dic1,dic2];
+    NSArray *allDicArray=[NSArray arrayWithArray:_allDataForCharArray];
     
     NSMutableArray *XLineDataArr0=[NSMutableArray array];
     for (int i=0; i<allDicArray.count; i++) {
@@ -374,12 +426,20 @@ static float keyOneWaitTime=30.0;
     
     
     
-    // NSArray *XLineDataArr=@[@"一月份",@"二月份",@"三月份",@"四月份",@"五月份",@"六月份",@"七月份",@"八月份"];
-    NSArray *YLineDataArr=@[dic1.allValues,dic2.allValues];
+    NSMutableArray *YLineDataArray0=[NSMutableArray array];
+    for (int i=0; i<_allDataForCharArray.count; i++) {
+        NSDictionary *dic=_allDataForCharArray[i];
+        [YLineDataArray0 addObject:dic.allValues];
+    }
+    NSArray *YLineDataArr=[NSArray arrayWithArray:YLineDataArray0];
     
     /*     Create object        */
-    _lineChartYDOne = [[YDLineChart alloc] initWithFrame:CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height) andLineChartType:JHChartLineValueNotForEveryXYD];
-    
+    if (_lineChartYDOne) {
+        [_lineChartYDOne removeFromSuperview];
+        _lineChartYDOne=nil;
+    }
+   
+     _lineChartYDOne = [[YDLineChart alloc] initWithFrame:CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height) andLineChartType:JHChartLineValueNotForEveryXYD];
     _Type=1;
     _lineChartYDOne.MaxX=[[XLineDataArr valueForKeyPath:@"@max.floatValue"] integerValue];
     _lineChartYDOne.xLineDataArr = XLineDataArr;
@@ -389,7 +449,6 @@ static float keyOneWaitTime=30.0;
     _lineChartYDOne.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrantYD;
     _lineChartYDOne.allDicArray=[NSArray arrayWithArray:allDicArray];
     _lineChartYDOne.valueArr = YLineDataArr;
-    _lineChartYDOne.valueBaseRightYLineArray = @[@[@"3",@"1",@"2",@1,@2,@3,@2,@5]];
     _lineChartYDOne.showYLevelLine = YES;
     _lineChartYDOne.showYLine = YES;
     // _lineChartYDOne.yLineDataArr = @[@[@5,@10,@15,@20,@25,@30],@[@1,@2,@3,@4,@5,@6]];
@@ -404,16 +463,21 @@ static float keyOneWaitTime=30.0;
     _lineChartYDOne.showPointDescription = NO;
     _lineChartYDOne.showXDescVertical = YES;
     _lineChartYDOne.xDescMaxWidth = 40;
-    /* Line Chart colors */
-    _lineChartYDOne.valueLineColorArr =@[ [UIColor greenColor], [UIColor orangeColor]];
+    
+    NSMutableArray *charColorArray=[NSMutableArray array];
+    for (int i=0; i<_allDataForCharArray.count; i++) {
+        [charColorArray addObject:_colorArray[i]];
+    }
+    /* Line Chart colors _colorArray*/
+    _lineChartYDOne.valueLineColorArr =[NSArray arrayWithArray:charColorArray];
     /* Colors for every line chart*/
-    _lineChartYDOne.pointColorArr = @[[UIColor orangeColor],[UIColor yellowColor]];
+    _lineChartYDOne.pointColorArr = [NSArray arrayWithArray:charColorArray];
     /* color for XY axis */
     _lineChartYDOne.xAndYLineColor = [UIColor blackColor];
     /* XY axis scale color */
     _lineChartYDOne.xAndYNumberColor = [UIColor darkGrayColor];
     /* Dotted line color of the coordinate point */
-    _lineChartYDOne.positionLineColorArr = @[[UIColor blueColor],[UIColor greenColor]];
+    _lineChartYDOne.positionLineColorArr = [NSArray arrayWithArray:charColorArray];
     /*        Set whether to fill the content, the default is False         */
     _lineChartYDOne.contentFill = NO;
     /*        Set whether the curve path         */
@@ -422,7 +486,7 @@ static float keyOneWaitTime=30.0;
     _lineChartYDOne.animationDuration=0.001;
     _lineChartYD.xDescMaxWidth = 15.0;
     
-    _lineChartYDOne.contentFillColorArr = @[[UIColor colorWithRed:0 green:1 blue:0 alpha:0.468],[UIColor colorWithRed:1 green:0 blue:0 alpha:0.468]];
+    _lineChartYDOne.contentFillColorArr = [NSArray arrayWithArray:charColorArray];
     [_scrollView addSubview:_lineChartYDOne];
     /*       Start animation        */
     [_lineChartYDOne showAnimation];
@@ -436,7 +500,10 @@ static float keyOneWaitTime=30.0;
     
     _scrollView.contentSize =CGSizeMake(_lineChartYDOne.frame.size.width+10, 0);
     
-    
+    if (_YlineChartYDOne) {
+        [_YlineChartYDOne removeFromSuperview];
+        _YlineChartYDOne=nil;
+    }
     _YlineChartYDOne = [[YDLineY alloc] initWithFrame:CGRectMake(0, Yy, Wx, allH) andLineChartType:JHChartLineValueNotForEveryXYDY];
     _YlineChartYDOne.xLineDataArr = XLineDataArr;
     _YlineChartYDOne.contentInsets = UIEdgeInsetsMake(10, Wx, 0, 10);

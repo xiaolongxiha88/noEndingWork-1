@@ -208,7 +208,10 @@ static float TCP_TIME=0.6;
     NSLog(@"DisConnetion");
  //   [_socket disconnect];
     
-    [self sendFailedNotice];
+    if (!_isReceive) {
+            [self sendFailedNotice];
+    }
+
  
 }
 
@@ -216,7 +219,7 @@ static float TCP_TIME=0.6;
 -(void)sendFailedNotice{
     
     if (_cmdType==1) {
-        if (!_isReceive) {
+   
             _cmdCount++;
             if (_cmdCount>3) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"recieveFailedTcpData"object:nil];
@@ -224,37 +227,36 @@ static float TCP_TIME=0.6;
                 [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
             }
             
-        }
+    
     }else  if (_cmdType==2) {
-        if (!_isReceiveAll) {
+      
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
-        }
+     
         
     }else  if (_cmdType==3) {
-        if (!_isReceiveAll) {
+      
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
-        }
+      
         
     }else  if (_cmdType==4) {
-        if (!_isReceiveAll) {
+        
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFourFailed"object:_AllDataDic];
-        }
+     
         
     }else  if (_cmdType==5) {
-        if (!_isReceiveAll) {
+     
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFiveFailed"object:nil];
-        }
+  
         
     }else  if (_cmdType==6 || _cmdType==7) {
-        if (!_isReceiveAll) {
+    
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveWifiConrolTwoFailed"object:nil];
-        }
+     
         
     }else  if (_cmdType==8) {
-        if (!_isReceiveAll) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataForViewOneFailed"object:nil];
-        }
-        
+    }else  if (_cmdType==9 || _cmdType==10) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveOneKeyFailed"object:nil];
     }
     
 }
@@ -285,22 +287,15 @@ static float TCP_TIME=0.6;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveWifiConrolTwo"object:_AllDataDic];
             }else if (_cmdType==8) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataForViewOne"object:_AllDataDic];
+            }else if (_cmdType==9 || _cmdType==10) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveOneKey"object:_AllDataDic];
             }else{
                    [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwo"object:_AllDataDic];
             }
            
         }else{
-            if (_cmdType==4) {
-                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFourFailed"object:_AllDataDic];
-            }else if (_cmdType==5) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataFiveFailed"object:nil];
-            }else if (_cmdType==6 || _cmdType==7) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveWifiConrolTwoFailed"object:nil];
-            }else if (_cmdType==8) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataForViewOneFailed"object:nil];
-            }else{
-                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TcpReceiveDataTwoFailed"object:nil];
-            }
+            
+            [self sendFailedNotice];
             
         }
         
@@ -343,14 +338,24 @@ static float TCP_TIME=0.6;
         int C2=CRCArray[1];
         
         if ((C1==Bytedata1[length0-2])&&(C2==Bytedata1[length0-1])) {
-            if (_cmdType==3 || _cmdType==6) {          //06设置
+            if (_cmdType==3 || _cmdType==6 || _cmdType==9 || _cmdType==10) {          //06设置
                 Byte *Bytedata00=(Byte*)[_modbusData bytes];
-                
-                    if ((Bytedata1[1]==6) && (Bytedata1[0]==Bytedata00[0])) {
-                        isRightData=YES;
-                    }else{
-                        isRightData=NO;
-                    }
+                int typeNum;
+                if (_cmdType==9) {
+                    typeNum=16;
+                }else if (_cmdType==10) {
+                          NSData *data00=[data1 subdataWithRange:NSMakeRange(3, data1.length-5)];
+                    _AllDataDic=[NSMutableDictionary dictionaryWithDictionary:@{@"one":data00}];
+                    
+                    typeNum=20;
+                } else{
+                   typeNum=6;
+                }
+                if ((Bytedata1[1]==typeNum) && (Bytedata1[0]==Bytedata00[0])) {
+                    isRightData=YES;
+                }else{
+                    isRightData=NO;
+                }
                 
                 return isRightData;
             }else{
