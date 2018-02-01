@@ -100,7 +100,15 @@ static float keyOneWaitTime=2.0;
            [_allDataArray addObject:firstDic];
         if (_sendDataTime<_allSendDataArray.count-1) {
             _sendDataTime++;
-            [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
+            
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                     [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
+            });
+            
+            
+       
         }
         [self changData];
     }
@@ -118,8 +126,8 @@ static float keyOneWaitTime=2.0;
         NSMutableDictionary *dataDic=[NSMutableDictionary new];
         NSInteger LENG=(data.length/2-25)/2;
         for (int K=0; K<LENG;K++) {
-            float V=[_changeDataValue changeOneRegister:data registerNum:2*K]/10;
-            float I=[_changeDataValue changeOneRegister:data registerNum:2*K+1]/10;
+            float V=([_changeDataValue changeOneRegister:data registerNum:2*K]/10+i*i*20);
+            float I=([_changeDataValue changeOneRegister:data registerNum:2*K+1]/10+(i*200));
             [dataDic setObject:[NSString stringWithFormat:@"%.1f",I] forKey:[NSString stringWithFormat:@"%.f",V]];
         }
         
@@ -127,8 +135,10 @@ static float keyOneWaitTime=2.0;
         
         
     }
+    
+      [self updateUI];
     if (_allDataForCharArray.count==_allSendDataArray.count) {
-         [self updateUI];
+       
     }
    
     
@@ -159,7 +169,7 @@ static float keyOneWaitTime=2.0;
 -(void)initUI{
     float lableH=30*HEIGHT_SIZE; float lableW1=40*NOW_SIZE;
     UIView* view0=[[UIView alloc]initWithFrame:CGRectMake(0,5*HEIGHT_SIZE, SCREEN_Width, lableH)];
-    view0.backgroundColor=[UIColor clearColor];
+    view0.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:view0];
     
       float _lable01H=20*HEIGHT_SIZE;
@@ -398,15 +408,13 @@ static float keyOneWaitTime=2.0;
     float Wx2=5*NOW_SIZE;
     float sizeFont=8*HEIGHT_SIZE;
     
+    
     _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, Yy, k_MainBoundsWidth-Wx-Wx2, allH)];
-    _scrollView.showsHorizontalScrollIndicator = NO;
-    _scrollView.bounces = NO;
+    _scrollView.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:_scrollView];
     
-//    NSDictionary *dic1=@{@"10":@"23",@"14":@"23",@"16":@"18",@"18":@"56",@"19":@"40",@"21":@"52",@"24":@"33",@"26":@"16",@"30":@"24",@"32":@"35",@"35":@"23",@"37":@"12"};
-//
-//    NSDictionary *dic2=@{@"9":@"23",@"11":@"23",@"15":@"18",@"18":@"56",@"19":@"40",@"23":@"15",@"24":@"33",@"26":@"16",@"30":@"24",@"32":@"35",@"37":@"21",@"45":@"14"};
-    
+
+
     
     NSArray *allDicArray=[NSArray arrayWithArray:_allDataForCharArray];
     
@@ -481,7 +489,7 @@ static float keyOneWaitTime=2.0;
     /*        Set whether to fill the content, the default is False         */
     _lineChartYDOne.contentFill = NO;
     /*        Set whether the curve path         */
-    _lineChartYDOne.pathCurve = YES;
+    _lineChartYDOne.pathCurve = NO;
     /*        Set fill color array         */
     _lineChartYDOne.animationDuration=0.001;
     _lineChartYD.xDescMaxWidth = 15.0;

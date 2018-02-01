@@ -1170,7 +1170,7 @@
     
     UIBezierPath *firstPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, 0, 0)];
     
-    UIBezierPath *secondPath = [UIBezierPath bezierPath];
+ //   UIBezierPath *secondPath = [UIBezierPath bezierPath];
     
     for (NSInteger i = 0; i<dataArr.count; i++) {
         
@@ -1183,8 +1183,8 @@
                 
                 if (_contentFill) {
                     
-                    [secondPath moveToPoint:P_M(p.x, self.chartOrigin.y)];
-                    [secondPath addLineToPoint:p];
+//                    [secondPath moveToPoint:P_M(p.x, self.chartOrigin.y)];
+//                    [secondPath addLineToPoint:p];
                 }
                 
                 [firstPath moveToPoint:p];
@@ -1192,29 +1192,29 @@
                 CGPoint nextP = [dataArr[i-1] CGPointValue];
                 CGPoint control1 = P_M(p.x + (nextP.x - p.x) / 2.0, nextP.y );
                 CGPoint control2 = P_M(p.x + (nextP.x - p.x) / 2.0, p.y);
-                [secondPath addCurveToPoint:p controlPoint1:control1 controlPoint2:control2];
+           //     [secondPath addCurveToPoint:p controlPoint1:control1 controlPoint2:control2];
                 [firstPath addCurveToPoint:p controlPoint1:control1 controlPoint2:control2];
             }
         }else{
             
             if (i==0) {
                 if (_contentFill) {
-                    [secondPath moveToPoint:P_M(p.x, self.chartOrigin.y)];
-                    [secondPath addLineToPoint:p];
+//                    [secondPath moveToPoint:P_M(p.x, self.chartOrigin.y)];
+//                    [secondPath addLineToPoint:p];
                 }
                 [firstPath moveToPoint:p];
                 //                   [secondPath moveToPoint:p];
             }else{
                 [firstPath addLineToPoint:p];
-                [secondPath moveToPoint:p];
-                [secondPath addLineToPoint:p];
+//                [secondPath moveToPoint:p];
+//                [secondPath addLineToPoint:p];
             }
             
         }
         
         if (i==dataArr.count-1) {
             
-            [secondPath addLineToPoint:P_M(p.x, self.chartOrigin.y)];
+   //        [secondPath addLineToPoint:P_M(p.x, self.chartOrigin.y)];
             
         }
     }
@@ -1222,7 +1222,7 @@
     
     
     if (_contentFill) {
-        [secondPath closePath];
+   //     [secondPath closePath];
     }
     
     //第二、UIBezierPath和CAShapeLayer关联
@@ -1257,22 +1257,22 @@
     [self.layer addSublayer:shapeLayer];
     [_layerArr addObject:shapeLayer];
     
-    weakSelf(weakSelf)
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ani.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        CAShapeLayer *shaperLay = [CAShapeLayer layer];
-        shaperLay.frame = weakself.bounds;
-        shaperLay.path = secondPath.CGPath;
-        if (weakself.contentFillColorArr.count == weakself.drawDataArr.count) {
-            
-            shaperLay.fillColor = [weakself.contentFillColorArr[colorIndex] CGColor];
-        }else{
-            shaperLay.fillColor = [UIColor clearColor].CGColor;
-        }
-        
-        [weakself.layer addSublayer:shaperLay];
-        [_layerArr addObject:shaperLay];
-    });
+//    weakSelf(weakSelf)
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ani.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//        CAShapeLayer *shaperLay = [CAShapeLayer layer];
+//        shaperLay.frame = weakself.bounds;
+//     //   shaperLay.path = secondPath.CGPath;
+//        if (weakself.contentFillColorArr.count == weakself.drawDataArr.count) {
+//
+//            shaperLay.fillColor = [weakself.contentFillColorArr[colorIndex] CGColor];
+//        }else{
+//            shaperLay.fillColor = [UIColor clearColor].CGColor;
+//        }
+//
+//        [weakself.layer addSublayer:shaperLay];
+//        [_layerArr addObject:shaperLay];
+//    });
     
     
 }
