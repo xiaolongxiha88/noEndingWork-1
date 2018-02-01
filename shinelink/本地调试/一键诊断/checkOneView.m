@@ -165,6 +165,65 @@ static float keyOneWaitTime=2.0;
      [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"250" Length:@"1_2_1"];
 }
 
+
+-(void)updataTheLableValue:(int)xValue{
+    NSString* xValueString=[NSString stringWithFormat:@"%d",xValue];
+    NSMutableArray *value1Array=[NSMutableArray array];
+       NSMutableArray *value2Array=[NSMutableArray array];
+    for (int i=0; i<_allDataForCharArray.count; i++) {
+        NSDictionary *dic=[NSDictionary dictionaryWithDictionary:_allDataForCharArray[i]];
+           [value1Array addObject:xValueString];
+        
+        if ([dic.allKeys containsObject:xValueString]) {
+            [value2Array addObject:[dic objectForKey:xValueString]];
+        }else{
+            NSArray *allKeyArray0=dic.allKeys;
+            NSSortDescriptor *sortDescripttor1 = [NSSortDescriptor sortDescriptorWithKey:@"intValue" ascending:YES];
+            NSArray *allKeyArray = [allKeyArray0 sortedArrayUsingDescriptors:@[sortDescripttor1]];
+            
+            for (int i=0; i<allKeyArray.count-1; i++) {
+                int A=[[NSString stringWithFormat:@"%@",allKeyArray[i]] intValue];
+                int B=[[NSString stringWithFormat:@"%@",allKeyArray[i+1]] intValue];
+                if ((A<xValue) && ( B>xValue)) {
+                 
+                    CGFloat y1=[[dic objectForKey:[NSString stringWithFormat:@"%d",A]] floatValue];
+                    CGFloat y2=[[dic objectForKey:[NSString stringWithFormat:@"%d",B]] floatValue];
+                    CGFloat yValue=[self getYvalue:xValue X1:A Y1:y1 X2:B Y2:y2];
+                      [value2Array addObject:[NSString stringWithFormat:@"%.f",yValue]];
+                    
+                }else
+            }
+        }
+        
+    }
+    
+    for (int i=0; i<value1Array.count; i++) {
+        UILabel *lable=[self.view viewWithTag:7000+i];
+        lable.text=[NSString stringWithFormat:@"(%@,%@)",value1Array[i],value2Array[i]];
+    }
+    
+    
+}
+
+-(CGFloat)getYvalue:(CGFloat)xValue X1:(CGFloat)x1 Y1:(CGFloat)y1 X2:(CGFloat)x2 Y2:(CGFloat)y2{
+    CGFloat yValue;
+    CGFloat k=[self calculateKWithX1:x1 Y1:y1 X2:x2 Y2:y2];
+    CGFloat b=[self calculateBWithX1:x1 Y1:y1 X2:x2 Y2:y2];
+    yValue=k*xValue+b;
+    return yValue;
+}
+
+-(CGFloat)calculateKWithX1:(CGFloat)x1 Y1:(CGFloat)y1 X2:(CGFloat)x2 Y2:(CGFloat)y2
+{
+    return (y2 - y1) / (x2 - x1);
+}
+
+- (CGFloat)calculateBWithX1:(CGFloat)x1 Y1:(CGFloat)y1 X2:(CGFloat)x2 Y2:(CGFloat)y2
+{
+    return (y1*(x2 - x1) - x1*(y2 - y1)) / (x2 - x1);
+}
+
+
 #pragma mark - UI界面
 -(void)initUI{
     float lableH=30*HEIGHT_SIZE; float lableW1=40*NOW_SIZE;
@@ -499,6 +558,13 @@ static float keyOneWaitTime=2.0;
     /*       Start animation        */
     [_lineChartYDOne showAnimation];
     
+__weak typeof(self) weakSelf = self;
+    _lineChartYDOne.xBlock=^(int xValue){
+        [weakSelf updataTheLableValue:xValue];
+    };
+        
+        
+    
     
     self.pointGap= (_lineChartYDOne.frame.size.width)/(_lineChartYDOne.MaxX-1);
     _lineChartYDOne.pointGap= (_lineChartYDOne.frame.size.width)/(_lineChartYDOne.MaxX-1);
@@ -526,7 +592,7 @@ static float keyOneWaitTime=2.0;
     _YlineChartYDOne.yDescTextFontSize = _lineChartYD.xDescTextFontSize = sizeFont;
     [self.view addSubview:_YlineChartYDOne];
     [_YlineChartYDOne showAnimation];
-    
+ 
     
     // 2. 捏合手势
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGesture:)];

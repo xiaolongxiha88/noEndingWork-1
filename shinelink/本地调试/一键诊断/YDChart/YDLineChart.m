@@ -916,6 +916,9 @@
                     num = [_xLineDataArr objectAtIndex:(nowPoint+1)];
             }
      
+
+         
+            
             NSLog(@"长按X=%@",num);
             CGFloat chartHeight = self.frame.size.height ;
             
@@ -935,13 +938,28 @@
 //            CGContextAddLineToPoint(context, self.frame.size.width, selectPoint.y);
             
             if (_lineChartQuadrantType==JHLineChartQuadrantTypeFirstQuardrantYD) {
-                if ([_xLineDataArr containsObject:[NSString stringWithFormat:@"%d",nowPoint]]) {
+            
+                if (![_xLineDataArr containsObject:[NSString stringWithFormat:@"%d",nowPoint]]) {
+                    
+                    for (int i=0; i<_xLineDataArr.count-1; i++) {
+                        int A=[[NSString stringWithFormat:@"%@",_xLineDataArr[i]] intValue];
+                        int B=[[NSString stringWithFormat:@"%@",_xLineDataArr[i+1]] intValue];
+                        if ((A<nowPoint) && ( B>nowPoint)) {
+                            if ( abs((A-nowPoint))>abs((B-nowPoint))) {
+                                nowPoint=B;
+                            }else{
+                                nowPoint=A;
+                            }
+                            
+                        }
+                    }
+                }
                     // 选中竖线
                     CGContextMoveToPoint(context, selectPoint.x, 0);
                     CGContextAddLineToPoint(context, selectPoint.x, self.frame.size.height);
                     
                     [self drawLine:context startPoint:CGPointMake(selectPoint.x, 0) endPoint:CGPointMake(selectPoint.x, self.frame.size.height) lineColor:[UIColor lightGrayColor] lineWidth:1];
-                }
+              
             }else{
                 // 选中竖线
                 CGContextMoveToPoint(context, selectPoint.x, 0);
@@ -954,6 +972,8 @@
             
             CGContextStrokePath(context);
   
+            _xBlock(nowPoint);
+            
             
             // 交界点
 //            CGRect myOval = {selectPoint.x-2, selectPoint.y-2, 4, 4};
@@ -1257,7 +1277,7 @@
     [self.layer addSublayer:shapeLayer];
     [_layerArr addObject:shapeLayer];
     
-//    weakSelf(weakSelf)
+  //weakSelf(weakSelf)
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ani.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //
 //        CAShapeLayer *shaperLay = [CAShapeLayer layer];

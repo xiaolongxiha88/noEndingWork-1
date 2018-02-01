@@ -12,6 +12,8 @@
 /**
  *  Line chart type, has been abandoned
  */
+typedef void(^sendXvalue) (int xValue);
+
 typedef  NS_ENUM(NSInteger,JHLineChartTypeYD){
 
     JHChartLineEveryValueForEveryXYD=0, /*        Default         */
@@ -57,7 +59,7 @@ typedef NS_ENUM(NSInteger,JHLineChartQuadrantTypeYD){
  */
 @property (nonatomic, strong) NSArray * xLineDataArr;
 
-
+@property (nonatomic, copy) sendXvalue xBlock;
 /**
  *  Y axis scale data of a broken line graph, the proposed use of NSNumber or the number of strings
  */
