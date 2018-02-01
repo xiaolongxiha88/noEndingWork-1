@@ -15,7 +15,10 @@
 #import "usbToWifiDataControl.h"
 
 
-static float keyOneWaitTime=2.0;
+static float keyOneWaitTime=10.0;
+
+ static int unit=72/10.0;
+ static int unit2=28/7;
 
 #define k_MainBoundsWidth [UIScreen mainScreen].bounds.size.width
 #define k_MainBoundsHeight [UIScreen mainScreen].bounds.size.height
@@ -40,6 +43,8 @@ static float keyOneWaitTime=2.0;
 @property (nonatomic) BOOL isReadNow;
 @property (strong, nonatomic)NSArray *vocArray;
 @property (strong, nonatomic)NSArray *colorArray;
+@property (strong, nonatomic)NSMutableArray *valueForLeftLableArray;
+
 @property(nonatomic,strong)wifiToPvOne*ControlOne;
 
 @property (nonatomic) BOOL isReadfirstDataOver;
@@ -181,18 +186,25 @@ static float keyOneWaitTime=2.0;
             NSSortDescriptor *sortDescripttor1 = [NSSortDescriptor sortDescriptorWithKey:@"intValue" ascending:YES];
             NSArray *allKeyArray = [allKeyArray0 sortedArrayUsingDescriptors:@[sortDescripttor1]];
             
-            for (int i=0; i<allKeyArray.count-1; i++) {
-                int A=[[NSString stringWithFormat:@"%@",allKeyArray[i]] intValue];
-                int B=[[NSString stringWithFormat:@"%@",allKeyArray[i+1]] intValue];
-                if ((A<xValue) && ( B>xValue)) {
-                 
-                    CGFloat y1=[[dic objectForKey:[NSString stringWithFormat:@"%d",A]] floatValue];
-                    CGFloat y2=[[dic objectForKey:[NSString stringWithFormat:@"%d",B]] floatValue];
-                    CGFloat yValue=[self getYvalue:xValue X1:A Y1:y1 X2:B Y2:y2];
-                      [value2Array addObject:[NSString stringWithFormat:@"%.f",yValue]];
-                    
-                }else
+           float maxX= [[allKeyArray valueForKeyPath:@"@max.floatValue"] integerValue];
+              float minX= [[allKeyArray valueForKeyPath:@"@min.floatValue"] integerValue];
+            if ((xValue>maxX) || (xValue<minX)) {
+                   [value2Array addObject:[NSString stringWithFormat:@"%.f",0.0]];
+            }else{
+                for (int i=0; i<allKeyArray.count-1; i++) {
+                    int A=[[NSString stringWithFormat:@"%@",allKeyArray[i]] intValue];
+                    int B=[[NSString stringWithFormat:@"%@",allKeyArray[i+1]] intValue];
+                    if ((A<xValue) && ( B>xValue)) {
+                        
+                        CGFloat y1=[[dic objectForKey:[NSString stringWithFormat:@"%d",A]] floatValue];
+                        CGFloat y2=[[dic objectForKey:[NSString stringWithFormat:@"%d",B]] floatValue];
+                        CGFloat yValue=[self getYvalue:xValue X1:A Y1:y1 X2:B Y2:y2];
+                        [value2Array addObject:[NSString stringWithFormat:@"%.f",yValue]];
+                        
+                    }
+                }
             }
+      
         }
         
     }
@@ -202,6 +214,35 @@ static float keyOneWaitTime=2.0;
         lable.text=[NSString stringWithFormat:@"(%@,%@)",value1Array[i],value2Array[i]];
     }
     
+}
+
+-(void)updataLeftMaxValue{
+    
+    present=present+unit2;
+    [custompro setPresent:present];
+    _valueForLeftLableArray=[NSMutableArray array];
+    for (int i=0; i<_allDataForCharArray.count; i++) {
+      NSDictionary *dic=[NSDictionary dictionaryWithDictionary:_allDataForCharArray[i]];
+           float maxY= [[dic.allValues valueForKeyPath:@"@max.floatValue"] floatValue];
+      __block  NSString *maxKey;
+        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            NSString*obj1=obj;
+            float maxyy=[obj1 floatValue];
+            if (maxyy==maxY) {
+                maxKey=key;
+            }
+            
+        }];
+        
+        UILabel *lable=[self.view viewWithTag:6000+i];
+        lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY];
+        
+        [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%f,%.1f)",[maxKey floatValue],maxY]];
+        
+         UIView *view=[self.view viewWithTag:5000+i];
+            view.backgroundColor=_colorArray[i];
+        
+    }
     
 }
 
@@ -336,7 +377,7 @@ static float keyOneWaitTime=2.0;
         [view2 addSubview:button1];
         
         UIView* imageView=[[UIView alloc]initWithFrame:CGRectMake(imageViewx,(everyLalbeH-imageViewH)/2, imageViewH, imageViewH)];
-        imageView.backgroundColor=_colorArray[i];
+        imageView.backgroundColor=COLOR(242, 242, 242, 1);
         imageView.tag=5000+i;
         [button1 addSubview:imageView];
         
@@ -345,7 +386,7 @@ static float keyOneWaitTime=2.0;
         Lable11.textColor =COLOR(102, 102, 102, 1);
         Lable11.textAlignment=NSTextAlignmentLeft;
         Lable11.adjustsFontSizeToFitWidth=YES;
-        Lable11.text=@"(1000,1000)";
+        Lable11.text=@"(--,--)";
         Lable11.tag=6000+i;
         Lable11.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [button1 addSubview:Lable11];
@@ -379,7 +420,7 @@ static float keyOneWaitTime=2.0;
          UILabel* lable =[self.view viewWithTag:6000+tagNum];
     if ( button.selected) {
         view.backgroundColor=_colorArray[tagNum];
-        lable.text=@"(1000,1000)";
+        lable.text=_valueForLeftLableArray[tagNum];
         
     }else{
         view.backgroundColor=COLOR(151, 151, 151, 1);
@@ -403,22 +444,26 @@ static float keyOneWaitTime=2.0;
 
 -(void)goStopRead:( UITapGestureRecognizer *)tap{
     _isReadNow = !_isReadNow;
-    [self goToReadFirstData];
+    
+
     
         if (_isReadNow) {
-            custompro.presentlab.text = @"";
+                [self goToReadFirstData];
+            custompro.presentlab.text = @"取消";
        
         }else{
-            if (present!=0 || present!=100) {
-                         custompro.presentlab.text = @"暂停";
-            }
-   
+         custompro.presentlab.text = @"开始";
+            present=0;
+            
         }
 
 }
 
 -(void)updateProgress{
     _progressNum++;
+
+    present=_progressNum*unit;
+      [custompro setPresent:present];
     if (_progressNum>=keyOneWaitTime) {
           _timer.fireDate=[NSDate distantFuture];
         _progressNum=0;
@@ -430,7 +475,7 @@ static float keyOneWaitTime=2.0;
 
 
 -(void)goToGetPercent{
-       [custompro setPresent:present];
+    
     
     if (present>=100) {
         present=0;
@@ -467,6 +512,7 @@ static float keyOneWaitTime=2.0;
     float Wx2=5*NOW_SIZE;
     float sizeFont=8*HEIGHT_SIZE;
     
+    [self updataLeftMaxValue];
     
     _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, Yy, k_MainBoundsWidth-Wx-Wx2, allH)];
     _scrollView.backgroundColor=[UIColor whiteColor];
