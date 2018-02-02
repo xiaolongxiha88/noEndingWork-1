@@ -27,6 +27,9 @@ static float keyOneWaitTime=10.0;
 {
        CustomProgress *custompro;
         int present;
+    CGSize lable1Size2;
+    float everyLalbeH;
+    float Lable11x;
 }
 @property (strong, nonatomic) YDLineChart *lineChartYD ;
 @property (strong, nonatomic) YDLineChart *lineChartYDOne ;
@@ -47,6 +50,7 @@ static float keyOneWaitTime=10.0;
 
 @property(nonatomic,strong)wifiToPvOne*ControlOne;
 
+@property (nonatomic) BOOL isIVchar;
 @property (nonatomic) BOOL isReadfirstDataOver;
 @property (strong, nonatomic)NSArray *allSendDataArray;
 @property (strong, nonatomic)NSMutableArray *allDataArray;
@@ -54,6 +58,7 @@ static float keyOneWaitTime=10.0;
 @property (assign, nonatomic) int sendDataTime;
 @property (assign, nonatomic) int progressNum;
 @property (strong, nonatomic)NSTimer *timer;
+@property (strong, nonatomic)NSMutableArray *selectBoolArray;
 
 @property(nonatomic,strong)usbToWifiDataControl*changeDataValue;
 
@@ -74,8 +79,10 @@ static float keyOneWaitTime=10.0;
     if (!_changeDataValue) {
         _changeDataValue=[[usbToWifiDataControl alloc]init];
     }
-    [self showFirstQuardrant];
+   
+    _isIVchar=YES;
     [self initUI];
+   
 }
 
 
@@ -133,7 +140,13 @@ static float keyOneWaitTime=10.0;
         for (int K=0; K<LENG;K++) {
             float V=([_changeDataValue changeOneRegister:data registerNum:2*K]/10+i*i*20);
             float I=([_changeDataValue changeOneRegister:data registerNum:2*K+1]/10+(i*200));
-            [dataDic setObject:[NSString stringWithFormat:@"%.1f",I] forKey:[NSString stringWithFormat:@"%.f",V]];
+            float P=V*I;
+            if (_isIVchar) {
+                  [dataDic setObject:[NSString stringWithFormat:@"%.1f",I] forKey:[NSString stringWithFormat:@"%.f",V]];
+            }else{
+                    [dataDic setObject:[NSString stringWithFormat:@"%.1f",P] forKey:[NSString stringWithFormat:@"%.f",V]];
+            }
+          
         }
         
         [_allDataForCharArray addObject:dataDic];
@@ -142,10 +155,7 @@ static float keyOneWaitTime=10.0;
     }
     
       [self updateUI];
-    if (_allDataForCharArray.count==_allSendDataArray.count) {
-       
-    }
-   
+ 
     
 }
 
@@ -166,6 +176,11 @@ static float keyOneWaitTime=10.0;
 }
 
 -(void)goToReadFirstData{
+    _selectBoolArray=[NSMutableArray array];
+    for (int i=0; i<_colorArray.count; i++) {
+        [_selectBoolArray addObject:[NSNumber numberWithBool:YES]];
+    }
+
     _isReadfirstDataOver=NO;
      [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"250" Length:@"1_2_1"];
 }
@@ -208,41 +223,58 @@ static float keyOneWaitTime=10.0;
         }
         
     }
-    
+    float Wk=5*NOW_SIZE;
     for (int i=0; i<value1Array.count; i++) {
-        UILabel *lable=[self.view viewWithTag:7000+i];
-        lable.text=[NSString stringWithFormat:@"(%@,%@)",value1Array[i],value2Array[i]];
+        BOOL isSelect=[_selectBoolArray[i] boolValue];
+        if (isSelect) {
+            UILabel *lable=[self.view viewWithTag:7000+i];
+            lable.text=[NSString stringWithFormat:@"(%@,%@)",value1Array[i],value2Array[i]];
+            lable.frame=CGRectMake((ScreenWidth/2-lable1Size2.width)/2-Wk, 0,ScreenWidth/2-Lable11x,everyLalbeH);
+            lable.textAlignment=NSTextAlignmentLeft;
+        }
+        
+  
     }
     
 }
 
 -(void)updataLeftMaxValue{
     
-    present=present+unit2;
-    [custompro setPresent:present];
-    _valueForLeftLableArray=[NSMutableArray array];
-    for (int i=0; i<_allDataForCharArray.count; i++) {
-      NSDictionary *dic=[NSDictionary dictionaryWithDictionary:_allDataForCharArray[i]];
-           float maxY= [[dic.allValues valueForKeyPath:@"@max.floatValue"] floatValue];
-      __block  NSString *maxKey;
-        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            NSString*obj1=obj;
-            float maxyy=[obj1 floatValue];
-            if (maxyy==maxY) {
-                maxKey=key;
-            }
+    if (present<100) {
+        present=present+unit2;
+        if (_allDataForCharArray.count !=_colorArray.count) {
+            [custompro setPresent:present];
+        }else{
+            present=100;
+            [custompro setPresent:present];
+            custompro.presentlab.text = @"开始";
+        }
+        
+        _valueForLeftLableArray=[NSMutableArray array];
+        for (int i=0; i<_allDataForCharArray.count; i++) {
+            NSDictionary *dic=[NSDictionary dictionaryWithDictionary:_allDataForCharArray[i]];
+            float maxY= [[dic.allValues valueForKeyPath:@"@max.floatValue"] floatValue];
+            __block  NSString *maxKey;
+            [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                NSString*obj1=obj;
+                float maxyy=[obj1 floatValue];
+                if (maxyy==maxY) {
+                    maxKey=key;
+                }
+                
+            }];
             
-        }];
-        
-        UILabel *lable=[self.view viewWithTag:6000+i];
-        lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY];
-        
-        [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%f,%.1f)",[maxKey floatValue],maxY]];
-        
-         UIView *view=[self.view viewWithTag:5000+i];
+            UILabel *lable=[self.view viewWithTag:6000+i];
+            lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY];
+            
+            [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY]];
+            
+            UIView *view=[self.view viewWithTag:5000+i];
             view.backgroundColor=_colorArray[i];
-        
+            
+        }
     }
+
     
 }
 
@@ -335,7 +367,7 @@ static float keyOneWaitTime=10.0;
     [self.view addSubview:_lable01];
     
     float view2H=SCREEN_Height-265*HEIGHT_SIZE-lastH-NavigationbarHeight-StatusHeight;
-    float everyLalbeH=view2H/8;
+     everyLalbeH=view2H/8;
     UIView* view2=[[UIView alloc]initWithFrame:CGRectMake(0,255*HEIGHT_SIZE, SCREEN_Width, view2H)];
     view2.backgroundColor=[UIColor clearColor];
     [self.view addSubview:view2];
@@ -343,7 +375,7 @@ static float keyOneWaitTime=10.0;
     NSArray *lableNameArray=@[@"MPPT(Voc,Isc)",@"(Vpv,Ipv)"];
     
     CGSize lable1Size=[self getStringSize:14*HEIGHT_SIZE Wsize:(ScreenWidth/2) Hsize:everyLalbeH stringName:lableNameArray[0]];
-  //      CGSize lable1Size2=[self getStringSize:14*HEIGHT_SIZE Wsize:(ScreenWidth/2) Hsize:everyLalbeH stringName:lableNameArray[1]];
+      lable1Size2=[self getStringSize:14*HEIGHT_SIZE Wsize:(ScreenWidth/2) Hsize:everyLalbeH stringName:lableNameArray[1]];
     
     for (int i=0; i<lableNameArray.count; i++) {
         UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0+(ScreenWidth/2)*i, 0,ScreenWidth/2,everyLalbeH)];
@@ -381,7 +413,7 @@ static float keyOneWaitTime=10.0;
         imageView.tag=5000+i;
         [button1 addSubview:imageView];
         
-        float Lable11x=imageViewx+imageViewH+Wk*2;
+         Lable11x=imageViewx+imageViewH+Wk*2;
         UILabel *Lable11 = [[UILabel alloc]initWithFrame:CGRectMake(Lable11x, 0,ScreenWidth/2-Lable11x,everyLalbeH)];
         Lable11.textColor =COLOR(102, 102, 102, 1);
         Lable11.textAlignment=NSTextAlignmentLeft;
@@ -410,11 +442,15 @@ static float keyOneWaitTime=10.0;
         
     }
     
+     [self showFirstQuardrant];
+    
 }
 
 -(void)buttonForNum:(UIButton*)button{
     button.selected = !button.selected;
     NSInteger tagNum=button.tag-4000;
+    
+    [_selectBoolArray setObject:[NSNumber numberWithBool:button.selected] atIndexedSubscript:tagNum];
     
         UIView* view =[self.view viewWithTag:5000+tagNum];
          UILabel* lable =[self.view viewWithTag:6000+tagNum];
@@ -427,6 +463,8 @@ static float keyOneWaitTime=10.0;
         lable.text=@"(--,--)";
     }
 
+    [self showFirstQuardrant];
+    
 }
 
 -(void)goToReadCharData{
@@ -445,7 +483,7 @@ static float keyOneWaitTime=10.0;
 -(void)goStopRead:( UITapGestureRecognizer *)tap{
     _isReadNow = !_isReadNow;
     
-
+    
     
         if (_isReadNow) {
                 [self goToReadFirstData];
@@ -474,20 +512,15 @@ static float keyOneWaitTime=10.0;
 
 
 
--(void)goToGetPercent{
-    
-    
-    if (present>=100) {
-        present=0;
-             custompro.presentlab.text = @"开始";
-    }
-}
 
 -(void)buttonDidClicked:(UIButton*)button{
     NSInteger tagNum=button.tag;
 
-    present=present+10;
-    [self goToGetPercent];
+    if (tagNum==3000) {
+        _isIVchar=YES;
+    }else{
+        _isIVchar=NO;
+    }
     
         button.selected=YES;
     button.backgroundColor=MainColor;
@@ -502,6 +535,12 @@ static float keyOneWaitTime=10.0;
             }
         }
   
+    [self changData];
+    
+}
+
+-(void)upDataPVorIVlable{
+    
     
 }
 
@@ -511,17 +550,29 @@ static float keyOneWaitTime=10.0;
     float Wx=30*NOW_SIZE;   float Yy=40*HEIGHT_SIZE; float allH=200*HEIGHT_SIZE;
     float Wx2=5*NOW_SIZE;
     float sizeFont=8*HEIGHT_SIZE;
-    
-    [self updataLeftMaxValue];
+    if (_allDataForCharArray.count>0) {
+            [self updataLeftMaxValue];
+    }
+
     
     _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, Yy, k_MainBoundsWidth-Wx-Wx2, allH)];
     _scrollView.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:_scrollView];
     
 
-
+    NSMutableArray* allDataArray=[NSMutableArray array];
+    NSMutableArray *charColorArray=[NSMutableArray array];
+ 
     
-    NSArray *allDicArray=[NSArray arrayWithArray:_allDataForCharArray];
+    for (int i=0; i<_allDataForCharArray.count; i++) {
+        BOOL isSelect=[_selectBoolArray[i] boolValue];
+        if (isSelect) {
+            [allDataArray addObject:_allDataForCharArray[i]];
+                [charColorArray addObject:_colorArray[i]];
+        }
+    }
+    
+    NSArray *allDicArray=[NSArray arrayWithArray:allDataArray];
     
     NSMutableArray *XLineDataArr0=[NSMutableArray array];
     for (int i=0; i<allDicArray.count; i++) {
@@ -540,8 +591,8 @@ static float keyOneWaitTime=10.0;
     
     
     NSMutableArray *YLineDataArray0=[NSMutableArray array];
-    for (int i=0; i<_allDataForCharArray.count; i++) {
-        NSDictionary *dic=_allDataForCharArray[i];
+    for (int i=0; i<allDataArray.count; i++) {
+        NSDictionary *dic=allDataArray[i];
         [YLineDataArray0 addObject:dic.allValues];
     }
     NSArray *YLineDataArr=[NSArray arrayWithArray:YLineDataArray0];
@@ -577,10 +628,7 @@ static float keyOneWaitTime=10.0;
     _lineChartYDOne.showXDescVertical = YES;
     _lineChartYDOne.xDescMaxWidth = 40;
     
-    NSMutableArray *charColorArray=[NSMutableArray array];
-    for (int i=0; i<_allDataForCharArray.count; i++) {
-        [charColorArray addObject:_colorArray[i]];
-    }
+
     /* Line Chart colors _colorArray*/
     _lineChartYDOne.valueLineColorArr =[NSArray arrayWithArray:charColorArray];
     /* Colors for every line chart*/
@@ -761,10 +809,8 @@ __weak typeof(self) weakSelf = self;
     
     if(longPress.state == UIGestureRecognizerStateEnded)
     {
-        _moveDistance = 0;
-        //恢复scrollView的滑动
-        [((YDLineChart*)recognizerView) setIsLongPress:NO];
-        
+   
+        [self performSelector:@selector(removeLongPress:) withObject:recognizerView afterDelay:3.0];
         
     }
 }
@@ -772,7 +818,21 @@ __weak typeof(self) weakSelf = self;
 
 
 
+-(void)removeLongPress:(UIView*)view{
+    _moveDistance = 0;
+    //恢复scrollView的滑动
+    [((YDLineChart*)view) setIsLongPress:NO];
+    
+    for (int i=0; i<_colorArray.count; i++) {
 
+            UILabel *lable=[self.view viewWithTag:7000+i];
+            lable.text=@"(--,--)";
+            lable.frame=CGRectMake(0, 0,ScreenWidth/2,everyLalbeH);
+            lable.textAlignment=NSTextAlignmentCenter;
+     
+    }
+    
+}
 
 
 
