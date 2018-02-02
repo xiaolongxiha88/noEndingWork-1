@@ -551,7 +551,7 @@
                         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(p.x - contentSize.width / 2.0, p.y, contentSize.width, kXandYSpaceForSuperView)];
                         label.text = [NSString stringWithFormat:@"%ld",i];
                         label.font = [UIFont systemFontOfSize:self.xDescTextFontSize];
-
+                        label.tintColor=_xAndYNumberColor;
                         label.adjustsFontSizeToFitWidth=YES;
                    
                         if (p.x>(_lastLableX+(_xDescMaxWidth*2))) {

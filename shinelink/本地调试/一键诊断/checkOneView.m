@@ -17,6 +17,7 @@
 
 static float keyOneWaitTime=10.0;
 
+static int  firstReadTime=72.0;
  static int unit=72/10.0;
  static int unit2=28/7;
 
@@ -50,11 +51,12 @@ static float keyOneWaitTime=10.0;
 
 @property(nonatomic,strong)wifiToPvOne*ControlOne;
 
+@property (nonatomic) BOOL isReadFirstLongTimeOver;
 @property (nonatomic) BOOL isIVchar;
 @property (nonatomic) BOOL isReadfirstDataOver;
 @property (strong, nonatomic)NSArray *allSendDataArray;
-@property (strong, nonatomic)NSMutableArray *allDataArray;
-@property (strong, nonatomic)NSMutableArray *allDataForCharArray;
+@property (strong, nonatomic)NSMutableArray *allDataArray;    //接收的全部数据
+@property (strong, nonatomic)NSMutableArray *allDataForCharArray;         //转换后的全部数据
 @property (assign, nonatomic) int sendDataTime;
 @property (assign, nonatomic) int progressNum;
 @property (strong, nonatomic)NSTimer *timer;
@@ -80,6 +82,7 @@ static float keyOneWaitTime=10.0;
         _changeDataValue=[[usbToWifiDataControl alloc]init];
     }
    
+    _isReadfirstDataOver=NO;
     _isIVchar=YES;
     [self initUI];
    
@@ -103,10 +106,11 @@ static float keyOneWaitTime=10.0;
     
 }
 
+//读取数据成功
 -(void)receiveData:(NSNotification*) notification{
       NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
     if (!_isReadfirstDataOver) {
-        _isReadfirstDataOver=YES;
+   
         [self goToReadCharData];
     }else{
            [_allDataArray addObject:firstDic];
@@ -123,11 +127,17 @@ static float keyOneWaitTime=10.0;
        
         }
         [self changData];
+        
+        //收完数据啦~~~~~~~~~~~~~~~~~~~~~~~~~~
+        if (_allSendDataArray.count==_allDataArray.count) {
+            _isReadfirstDataOver=NO;
+            _isReadNow=NO;
+        }
     }
     
 }
 
-
+//解析读取的数据
 -(void)changData{
     _allDataForCharArray=[NSMutableArray array];
     for (int i=0; i<_allDataArray.count; i++) {
@@ -159,15 +169,49 @@ static float keyOneWaitTime=10.0;
     
 }
 
+//更新曲线图
 -(void)updateUI{
     [self showFirstQuardrant];
 }
 
+
+//读取失败
 -(void)setFailed{
+    if (!_isReadfirstDataOver) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"数据读取失败,请重试或检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
+        alertView.tag = 1002;
+        [alertView show];
+    }else{
+        [self showAlertViewWithTitle:@"数据读取中断" message:@"请重新读取数据" cancelButtonTitle:root_OK];
+    
+        _timer.fireDate=[NSDate distantFuture];
+    }
+    present=0;
+    [custompro setPresent:present];
+    custompro.presentlab.text = @"开始";
     
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex) {
+        if( (alertView.tag == 1001) || (alertView.tag == 1002) || (alertView.tag == 1003)){
+            if (deviceSystemVersion>10) {
+                NSURL *url = [NSURL URLWithString:@"App-Prefs:root=WIFI"];
+                if ([[UIApplication sharedApplication]canOpenURL:url]) {
+                    [[UIApplication sharedApplication]openURL:url];
+                }
+            }else{
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+            }
+            
+        }
+        
+    }
+    
+}
 
+//开始读取曲线的寄存器
 -(void)goToReadTcpData{
     _allDataArray=[NSMutableArray array];
     _sendDataTime=0;
@@ -175,6 +219,7 @@ static float keyOneWaitTime=10.0;
 
 }
 
+//读取刷新的寄存器
 -(void)goToReadFirstData{
     _selectBoolArray=[NSMutableArray array];
     for (int i=0; i<_colorArray.count; i++) {
@@ -185,7 +230,7 @@ static float keyOneWaitTime=10.0;
      [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"250" Length:@"1_2_1"];
 }
 
-
+//长按后右边的Lable显示值
 -(void)updataTheLableValue:(int)xValue{
     NSString* xValueString=[NSString stringWithFormat:@"%d",xValue];
     NSMutableArray *value1Array=[NSMutableArray array];
@@ -238,45 +283,35 @@ static float keyOneWaitTime=10.0;
     
 }
 
--(void)updataLeftMaxValue{
-    
-    if (present<100) {
-        present=present+unit2;
-        if (_allDataForCharArray.count !=_colorArray.count) {
-            [custompro setPresent:present];
-        }else{
-            present=100;
-            [custompro setPresent:present];
-            custompro.presentlab.text = @"开始";
-        }
-        
-        _valueForLeftLableArray=[NSMutableArray array];
-        for (int i=0; i<_allDataForCharArray.count; i++) {
-            NSDictionary *dic=[NSDictionary dictionaryWithDictionary:_allDataForCharArray[i]];
-            float maxY= [[dic.allValues valueForKeyPath:@"@max.floatValue"] floatValue];
-            __block  NSString *maxKey;
-            [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                NSString*obj1=obj;
-                float maxyy=[obj1 floatValue];
-                if (maxyy==maxY) {
-                    maxKey=key;
-                }
-                
-            }];
-            
-            UILabel *lable=[self.view viewWithTag:6000+i];
-            lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY];
-            
-            [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY]];
-            
-            UIView *view=[self.view viewWithTag:5000+i];
-            view.backgroundColor=_colorArray[i];
-            
-        }
-    }
 
-    
+
+//更新左边Lable的值
+-(void)updataLeftMaxValue2{
+    _valueForLeftLableArray=[NSMutableArray array];
+    for (int i=0; i<_allDataForCharArray.count; i++) {
+        NSDictionary *dic=[NSDictionary dictionaryWithDictionary:_allDataForCharArray[i]];
+        float maxY= [[dic.allValues valueForKeyPath:@"@max.floatValue"] floatValue];
+        __block  NSString *maxKey;
+        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            NSString*obj1=obj;
+            float maxyy=[obj1 floatValue];
+            if (maxyy==maxY) {
+                maxKey=key;
+            }
+            
+        }];
+        
+        UILabel *lable=[self.view viewWithTag:6000+i];
+        lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY];
+        
+        [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY]];
+        
+        UIView *view=[self.view viewWithTag:5000+i];
+        view.backgroundColor=_colorArray[i];
+        
+    }
 }
+
 
 -(CGFloat)getYvalue:(CGFloat)xValue X1:(CGFloat)x1 Y1:(CGFloat)y1 X2:(CGFloat)x2 Y2:(CGFloat)y2{
     CGFloat yValue;
@@ -382,6 +417,7 @@ static float keyOneWaitTime=10.0;
         titleLable.textColor =MainColor;
         titleLable.textAlignment=NSTextAlignmentCenter;
         titleLable.text=lableNameArray[i];
+        titleLable.tag=3100+i;
         titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [view2 addSubview:titleLable];
     }
@@ -446,6 +482,7 @@ static float keyOneWaitTime=10.0;
     
 }
 
+//左边Lable的使能按钮开关
 -(void)buttonForNum:(UIButton*)button{
     button.selected = !button.selected;
     NSInteger tagNum=button.tag-4000;
@@ -467,6 +504,7 @@ static float keyOneWaitTime=10.0;
     
 }
 
+//准备读取曲线数据
 -(void)goToReadCharData{
     _progressNum=0;
     if (!_allSendDataArray) {
@@ -480,29 +518,41 @@ static float keyOneWaitTime=10.0;
     
 }
 
+//开始或取消按钮开关
 -(void)goStopRead:( UITapGestureRecognizer *)tap{
     _isReadNow = !_isReadNow;
     
-    
-    
         if (_isReadNow) {
-                [self goToReadFirstData];
+            if (_isReadfirstDataOver) {
+                present=firstReadTime;
+                _isReadfirstDataOver=YES;
+                [self goToReadTcpData];
+            }else{
+                         [self goToReadFirstData];
+            }
+       
             custompro.presentlab.text = @"取消";
        
         }else{
-         custompro.presentlab.text = @"开始";
+   
             present=0;
+             [custompro setPresent:present];
+                  custompro.presentlab.text = @"开始";
+                _timer.fireDate=[NSDate distantFuture];
             
         }
 
 }
 
+//定时器更新
 -(void)updateProgress{
     _progressNum++;
 
     present=_progressNum*unit;
       [custompro setPresent:present];
+    
     if (_progressNum>=keyOneWaitTime) {
+             _isReadfirstDataOver=YES;
           _timer.fireDate=[NSDate distantFuture];
         _progressNum=0;
         [self goToReadTcpData];
@@ -512,16 +562,24 @@ static float keyOneWaitTime=10.0;
 
 
 
-
+//I-V和P-V切换
 -(void)buttonDidClicked:(UIButton*)button{
     NSInteger tagNum=button.tag;
 
+    UILabel* lable =[self.view viewWithTag:3100];
+    UILabel* lable1 =[self.view viewWithTag:3101];
+    NSArray *lableNameArray;
     if (tagNum==3000) {
         _isIVchar=YES;
+            lableNameArray=@[@"MPPT(Voc,Isc)",@"(Vpv,Ipv)"];
+        _lable0.text=@"(A)";
     }else{
         _isIVchar=NO;
+        _lable0.text=@"(W)";
+            lableNameArray=@[@"MPPT(Vmpp,Impp)",@"(Vpv,Ppv)"];
     }
-    
+    lable.text=lableNameArray[0];
+    lable1.text=lableNameArray[1];
         button.selected=YES;
     button.backgroundColor=MainColor;
     [button setTitleColor:COLOR(242, 242, 242, 1) forState:UIControlStateNormal];
@@ -536,22 +594,31 @@ static float keyOneWaitTime=10.0;
         }
   
     [self changData];
-    
+    [self updataLeftMaxValue2];
 }
 
--(void)upDataPVorIVlable{
-    
-    
-}
+
 
 #pragma mark - 曲线图
 - (void)showFirstQuardrant{
     
     float Wx=30*NOW_SIZE;   float Yy=40*HEIGHT_SIZE; float allH=200*HEIGHT_SIZE;
     float Wx2=5*NOW_SIZE;
-    float sizeFont=8*HEIGHT_SIZE;
+    float sizeFont=7*HEIGHT_SIZE;
     if (_allDataForCharArray.count>0) {
-            [self updataLeftMaxValue];
+        
+        if (present<100) {
+            present=present+unit2;
+            if (_allDataForCharArray.count !=_colorArray.count) {
+                [custompro setPresent:present];
+            }else{
+                present=100;
+                [custompro setPresent:present];
+                custompro.presentlab.text = @"开始";
+            }
+        }
+
+         [self updataLeftMaxValue2];
     }
 
     
@@ -621,7 +688,8 @@ static float keyOneWaitTime=10.0;
     _lineChartYDOne.animationDuration = 2.0;
     _lineChartYDOne.showDoubleYLevelLine = NO;
     _lineChartYDOne.showValueLeadingLine = NO;
-    _lineChartYDOne.yDescTextFontSize = _lineChartYD.xDescTextFontSize = sizeFont;
+    _lineChartYDOne.yDescTextFontSize = sizeFont;
+    _lineChartYDOne.xDescTextFontSize= sizeFont;
     _lineChartYDOne.valueFontSize = 9.0;
     _lineChartYDOne.backgroundColor = [UIColor whiteColor];
     _lineChartYDOne.showPointDescription = NO;
@@ -634,7 +702,7 @@ static float keyOneWaitTime=10.0;
     /* Colors for every line chart*/
     _lineChartYDOne.pointColorArr = [NSArray arrayWithArray:charColorArray];
     /* color for XY axis */
-    _lineChartYDOne.xAndYLineColor = [UIColor blackColor];
+    _lineChartYDOne.xAndYLineColor = [UIColor darkGrayColor];
     /* XY axis scale color */
     _lineChartYDOne.xAndYNumberColor = [UIColor darkGrayColor];
     /* Dotted line color of the coordinate point */
@@ -643,6 +711,7 @@ static float keyOneWaitTime=10.0;
     _lineChartYDOne.contentFill = NO;
     /*        Set whether the curve path         */
     _lineChartYDOne.pathCurve = NO;
+
     /*        Set fill color array         */
     _lineChartYDOne.animationDuration=0.001;
     _lineChartYD.xDescMaxWidth = 15.0;
@@ -679,11 +748,13 @@ __weak typeof(self) weakSelf = self;
     /* X和Y轴的颜色 默认暗黑色 */
     _YlineChartYDOne.xAndYLineColor = [UIColor darkGrayColor];
     _YlineChartYDOne.backgroundColor = [UIColor whiteColor];
+     _YlineChartYDOne.xDescMaxWidth = Wx;
+    _YlineChartYDOne.yDescTextFontSize = sizeFont;
+    _YlineChartYDOne.xDescTextFontSize=sizeFont;
     /* XY轴的刻度颜色 m */
     _YlineChartYDOne.xAndYNumberColor = [UIColor darkGrayColor];
     _YlineChartYDOne.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrantYD;
     _YlineChartYDOne.valueArr = YLineDataArr;
-    _YlineChartYDOne.yDescTextFontSize = _lineChartYD.xDescTextFontSize = sizeFont;
     [self.view addSubview:_YlineChartYDOne];
     [_YlineChartYDOne showAnimation];
  
@@ -782,7 +853,7 @@ __weak typeof(self) weakSelf = self;
 }
 
 
-
+//长按手势
 - (void)event_longPressAction:(UILongPressGestureRecognizer *)longPress {
     
     UIView *recognizerView = longPress.view;

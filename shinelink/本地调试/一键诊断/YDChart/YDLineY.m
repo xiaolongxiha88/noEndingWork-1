@@ -807,7 +807,7 @@
     
     
     [[NSString stringWithFormat:@"%@",text] drawAtPoint:rect withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:fontSize],NSForegroundColorAttributeName:color}];
-    
+
     [color setFill];
     
     CGContextDrawPath(context, kCGPathFill);
