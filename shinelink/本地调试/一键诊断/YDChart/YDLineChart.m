@@ -515,8 +515,9 @@
 }
 
 - (void)setIsLongPress:(BOOL)isLongPress {
-    _isLongPress = isLongPress;
     
+    
+    _isLongPress = isLongPress;
      [self clear];
     [self setNeedsDisplay];
 }

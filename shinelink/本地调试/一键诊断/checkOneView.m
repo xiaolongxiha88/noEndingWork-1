@@ -100,9 +100,12 @@ static int  firstReadTime=72.0;
     if (_ControlOne) {
         [_ControlOne disConnect];
     }
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveWifiConrolTwo" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveWifiConrolTwoFailed" object:nil];
+    if (_timer) {
+          _timer.fireDate=[NSDate distantFuture];
+        _timer=nil;
+    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKey" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKeyFailed" object:nil];
     
 }
 
@@ -184,7 +187,6 @@ static int  firstReadTime=72.0;
     }else{
         [self showAlertViewWithTitle:@"数据读取中断" message:@"请重新读取数据" cancelButtonTitle:root_OK];
     
-        _timer.fireDate=[NSDate distantFuture];
     }
     present=0;
     [custompro setPresent:present];
@@ -310,6 +312,7 @@ static int  firstReadTime=72.0;
         view.backgroundColor=_colorArray[i];
         
     }
+    
 }
 
 
@@ -352,7 +355,7 @@ static int  firstReadTime=72.0;
     button1.frame = CGRectMake(160*NOW_SIZE, (lableH-buttonH)/2, buttonW, buttonH);
     [button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button1 setTitleColor:COLOR(242, 242, 242, 1) forState:UIControlStateHighlighted];
-    button1.layer.borderWidth=0.8*HEIGHT_SIZE;;
+    button1.layer.borderWidth=0.8*HEIGHT_SIZE;
     button1.layer.borderColor=MainColor.CGColor;
    button1.tag = 3000;
     button1.layer.cornerRadius=buttonH/2;
@@ -616,9 +619,11 @@ static int  firstReadTime=72.0;
                 [custompro setPresent:present];
                 custompro.presentlab.text = @"开始";
             }
+            
+               [self updataLeftMaxValue2];
         }
 
-         [self updataLeftMaxValue2];
+      
     }
 
     
