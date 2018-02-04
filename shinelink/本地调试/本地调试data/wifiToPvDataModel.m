@@ -58,9 +58,7 @@
       NSInteger LEN=7+(valueArray.count-2)*2+2;
     uint8_t *target=malloc(sizeof(*target)*LEN);
 
-    
-   
-    
+
     unsigned int cmdTypeInt=[cmdType intValue];
     unsigned int regAddInt=[regAdd intValue];
     unsigned int lengthInt=[valueArray[0] intValue];

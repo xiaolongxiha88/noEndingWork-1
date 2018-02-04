@@ -15,7 +15,7 @@
 #import "usbToWifiDataControl.h"
 #import "ZJBLStoreShopTypeAlert.h"
 #import "RKAlertView.h"
-static float keyOneWaitTime=10.0;
+static float keyOneWaitTime=5.0;
 static int  firstReadTime=72.0;
 static int unit=72/10.0;
 static int unit2=28/4;
@@ -52,10 +52,14 @@ static int unit2=28/4;
 @property (nonatomic) BOOL isIVchar;
 @property (nonatomic) BOOL isReadfirstDataOver;
 @property (strong, nonatomic)NSArray *allSendDataArray;
+@property (strong, nonatomic)NSArray *allSendDataBoolArray;
+
 @property (strong, nonatomic)NSMutableArray *allDataArray;    //接收的全部数据
 @property (strong, nonatomic)NSMutableArray *allDataForCharArray;         //转换后的全部数据
 @property (assign, nonatomic) int sendDataTime;
 @property (assign, nonatomic) int progressNum;
+@property (assign, nonatomic) int progressNumAll;
+
 @property (strong, nonatomic)NSTimer *timer;
 @property (strong, nonatomic)NSMutableArray *selectBoolArray;
 @property (strong, nonatomic)NSString*sendSNString;
@@ -190,7 +194,7 @@ static int unit2=28/4;
     _lable01 = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth-lableW1-15*NOW_SIZE, 220*HEIGHT_SIZE+60*HEIGHT_SIZE,lableW1,15*HEIGHT_SIZE)];
     _lable01.textColor =COLOR(51, 51, 51, 1);
     _lable01.textAlignment=NSTextAlignmentRight;
-    _lable01.text=@"(V)";
+    _lable01.text=@"";
     _lable01.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [self.view addSubview:_lable01];
     
@@ -374,8 +378,11 @@ static int unit2=28/4;
 //准备读取曲线数据
 -(void)goToReadCharData{
     _progressNum=0;
+    _progressNumAll=0;
     if (!_allSendDataArray) {
-        _allSendDataArray=@[@"0",@"125",@"250",@"375",@"500",@"625",@"750"];
+   
+        _allSendDataArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"1750",@"1875",@"2000",@"2125"],@[@"2250",@"2375",@"2500",@"2625",@"2750"],@[@"2875",@"3000",@"3125",@"3250",@"3375"]];
+        
     }
     if (!_timer) {
         _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
@@ -387,6 +394,12 @@ static int unit2=28/4;
 
 //开始或取消按钮开关
 -(void)goStopRead:( UITapGestureRecognizer *)tap{
+    
+    if (_sendSNString==nil || [_sendSNString isEqualToString:@""]) {
+        [self showToastViewWithTitle:@"请选择故障序号"];
+        return;
+    }
+    
     _isReadNow = !_isReadNow;
     
     if (_isReadNow) {
@@ -545,13 +558,14 @@ static int unit2=28/4;
 
 //读取刷新的寄存器
 -(void)goToReadFirstData{
+   
     _selectBoolArray=[NSMutableArray array];
     for (int i=0; i<_colorArray.count; i++) {
         [_selectBoolArray addObject:[NSNumber numberWithBool:YES]];
     }
-    
+    NSString *LENTH=[NSString stringWithFormat:@"1_2_%d",[_sendSNString intValue]];
     _isReadfirstDataOver=NO;
-    [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"250" Length:@"1_2_1"];
+    [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"259" Length:LENTH];
 }
 
 //长按后右边的Lable显示值
