@@ -52,10 +52,17 @@ static int unit2=28/4;
 @property (nonatomic) BOOL isIVchar;
 @property (nonatomic) BOOL isReadfirstDataOver;
 @property (strong, nonatomic)NSArray *allSendDataArray;
+@property (strong, nonatomic)NSArray *allSendDataAllArray;
 @property (strong, nonatomic)NSArray *allSendDataBoolArray;
 
 @property (strong, nonatomic)NSMutableArray *allDataArray;    //接收的全部数据
 @property (strong, nonatomic)NSMutableArray *allDataForCharArray;         //转换后的全部数据
+@property (strong, nonatomic)NSMutableArray *allDataRecieveAllArray;    // 四组全部数据
+@property (strong, nonatomic)NSMutableArray *allDataForCharRecieveAllArray;         //转化后的四组全部数据
+@property (strong, nonatomic)NSMutableArray *CharIdArray;
+@property (strong, nonatomic)NSString *faultTime;
+@property (strong, nonatomic)NSString *faultReasonId;
+
 @property (assign, nonatomic) int sendDataTime;
 @property (assign, nonatomic) int progressNum;
 @property (assign, nonatomic) int progressNumAll;
@@ -69,6 +76,8 @@ static int unit2=28/4;
 @property (strong, nonatomic)UIScrollView *viewAll;
 @property (strong, nonatomic)UIView* view0;
 @property (strong, nonatomic)UIView* view2;
+
+
 @end
 
 @implementation checkTwoView
@@ -379,16 +388,31 @@ static int unit2=28/4;
 -(void)goToReadCharData{
     _progressNum=0;
     _progressNumAll=0;
-    if (!_allSendDataArray) {
-   
-        _allSendDataArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"1750",@"1875",@"2000",@"2125"],@[@"2250",@"2375",@"2500",@"2625",@"2750"],@[@"2875",@"3000",@"3125",@"3250",@"3375"]];
+        _allDataRecieveAllArray=[NSMutableArray array];
+    _CharIdArray=[NSMutableArray array];
+    
+    if (!_allSendDataAllArray) {
+ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"1750",@"1875",@"2000",@"2125"],@[@"2250",@"2375",@"2500",@"2625",@"2750"],@[@"2875",@"3000",@"3125",@"3250",@"3375"]];
+        
+        _allSendDataArray=[NSArray arrayWithArray:_allSendDataAllArray[_progressNumAll]];
         
     }
+    
+
+    
     if (!_timer) {
         _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
     }else{
         _timer.fireDate=[NSDate distantPast];
     }
+    
+}
+
+//开始读取曲线的寄存器
+-(void)goToReadTcpData{
+    _allDataArray=[NSMutableArray array];
+    _sendDataTime=0;
+    [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
     
 }
 
@@ -452,6 +476,8 @@ static int unit2=28/4;
         [self goToReadCharData];
     }else{
         [_allDataArray addObject:firstDic];
+        
+        
         if (_sendDataTime<_allSendDataArray.count-1) {
             _sendDataTime++;
             
@@ -460,17 +486,33 @@ static int unit2=28/4;
                 
                 [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
             });
+
+        }else{
+            _sendDataTime=0;
+            _progressNumAll++;
+            if (_progressNumAll<_allSendDataAllArray.count) {
+                     _allSendDataArray=[NSArray arrayWithArray:_allSendDataAllArray[_progressNumAll]];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    
+                    [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
+                });
+            }
             
+            [_allDataRecieveAllArray addObject:_allDataArray];
+            _allDataArray=[NSMutableArray array];
             
+    
             
+              [self changData];
         }
-        [self changData];
+        
         
         //收完数据啦~~~~~~~~~~~~~~~~~~~~~~~~~~
-        if (_allSendDataArray.count==_allDataArray.count) {
+        if (_allDataRecieveAllArray.count==_allSendDataAllArray.count) {
             _isReadfirstDataOver=NO;
             _isReadNow=NO;
         }
+        
     }
     
 }
@@ -478,23 +520,48 @@ static int unit2=28/4;
 //解析读取的数据
 -(void)changData{
     _allDataForCharArray=[NSMutableArray array];
-    for (int i=0; i<_allDataArray.count; i++) {
-        NSDictionary *dic=[NSDictionary dictionaryWithDictionary:_allDataArray[i]];
-        NSData*data= [dic objectForKey:@"one"];
+    
+    
+    for (int i=0; i<_allDataRecieveAllArray.count; i++) {
+        
+        NSMutableData *data=[NSMutableData new];
+        NSArray *OneAllDicArray=[NSArray arrayWithArray:_allDataRecieveAllArray[i]];
+        for (int i=0; i<OneAllDicArray.count; i++) {
+                   NSDictionary *dic=[NSDictionary dictionaryWithDictionary:OneAllDicArray[i]];
+               NSData*data1= [dic objectForKey:@"one"];
+            [data appendData:data1];
+        }
+        
+        if (_progressNumAll==1) {
+               float time1H=([_changeDataValue changeHighRegister:data registerNum:0]);
+             float time1L=([_changeDataValue changeLowRegister:data registerNum:0]);
+            float time2H=([_changeDataValue changeHighRegister:data registerNum:1]);
+            float time2L=([_changeDataValue changeLowRegister:data registerNum:1]);
+            float time3H=([_changeDataValue changeHighRegister:data registerNum:2]);
+            float time3L=([_changeDataValue changeLowRegister:data registerNum:2]);
+            _faultTime=[NSString stringWithFormat:@"%.f-%.f-%.f %.f:%.f:%.f",time1H,time1L,time2H,time2L,time3H,time3L];
+
+             float faultReason=([_changeDataValue changeOneRegister:data registerNum:4]);
+             _faultReasonId=[NSString stringWithFormat:@"%.f",faultReason];
+        }
+  //    float ID=([_changeDataValue changeOneRegister:data registerNum:3]);
+             float ID=([_changeDataValue changeHighRegister:data registerNum:3]);
+        [_CharIdArray addObject:[NSString stringWithFormat:@"%.f",ID]];
+        
         
         //   Byte *dataArray=(Byte*)[data bytes];
         NSMutableDictionary *dataDic=[NSMutableDictionary new];
-        NSInteger LENG=(data.length/2-25)/2;
-        for (int K=0; K<LENG;K++) {
-            float V=([_changeDataValue changeOneRegister:data registerNum:2*K]/10+i*i*20);
-            float I=([_changeDataValue changeOneRegister:data registerNum:2*K+1]/10+(i*200));
-            float P=V*I;
-            if (_isIVchar) {
-                [dataDic setObject:[NSString stringWithFormat:@"%.1f",I] forKey:[NSString stringWithFormat:@"%.f",V]];
+        NSInteger LENG=data.length/2-120;
+        for (int K=5; K<LENG;K++) {
+            float Value=([_changeDataValue changeOneRegister:data registerNum:2*K]);
+
+            if (Value<32768) {
             }else{
-                [dataDic setObject:[NSString stringWithFormat:@"%.1f",P] forKey:[NSString stringWithFormat:@"%.f",V]];
+                Value=-(65535-Value+1);
             }
             
+                [dataDic setObject:[NSString stringWithFormat:@"%.f",Value] forKey:[NSString stringWithFormat:@"%.d",K-4]];
+
         }
         
         [_allDataForCharArray addObject:dataDic];
@@ -548,13 +615,7 @@ static int unit2=28/4;
     
 }
 
-//开始读取曲线的寄存器
--(void)goToReadTcpData{
-    _allDataArray=[NSMutableArray array];
-    _sendDataTime=0;
-    [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
-    
-}
+
 
 //读取刷新的寄存器
 -(void)goToReadFirstData{
@@ -613,7 +674,7 @@ static int unit2=28/4;
             UILabel *lable=[self.view viewWithTag:7000+i];
             lable.text=[NSString stringWithFormat:@"(%@,%@)",value1Array[i],value2Array[i]];
             lable.frame=CGRectMake((ScreenWidth/2-lable1Size2.width)/2-Wk, 0,ScreenWidth/2-Lable11x,everyLalbeH);
-            lable.textAlignment=NSTextAlignmentLeft;
+            lable.textAlignment=NSTextAlignmentCenter;
         }
         
         
@@ -640,9 +701,9 @@ static int unit2=28/4;
         }];
         
         UILabel *lable=[self.view viewWithTag:6000+i];
-        lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY];
+        lable.text=[NSString stringWithFormat:@"(%.f,%.f)",[maxKey floatValue],maxY];
         
-        [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY]];
+        [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.f)",[maxKey floatValue],maxY]];
         
         UIView *view=[self.view viewWithTag:5000+i];
         view.backgroundColor=_colorArray[i];
@@ -659,28 +720,85 @@ static int unit2=28/4;
     float Wx2=5*NOW_SIZE;
     float sizeFont=7*HEIGHT_SIZE;
     
+    if (_allDataForCharArray.count>0) {
+        
+        if (present<100) {
+            present=present+unit2;
+            if (_allDataForCharArray.count !=_colorArray.count) {
+                [custompro setPresent:present];
+            }else{
+                present=100;
+                [custompro setPresent:present];
+                custompro.presentlab.text = @"开始";
+            }
+            
+            [self updataLeftMaxValue2];
+        }
+        
+        
+    }
+    
+    
     _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, Yy, SCREEN_Width-Wx-Wx2, allH)];
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.bounces = NO;
     [self.view addSubview:_scrollView];
     
-    NSArray *XLineDataArr=@[@"",@"二月份",@"三月份",@"四月份",@"五月份",@"六月份",@"七月份",@"八月份"];
-    NSArray *YLineDataArr=@[@[@"5",@"-220",@"170",@"(-4)",@25,@5,@6,@9],@[@"1",@"-121",@"1",@6,@4,@(-8),@6,@7],@[@"5",@"-14",@"63",@6,@4,@(-8),@12,@17],@[@"13",@"-17",@"8",@63,@4,@(-183),@18,@8]];
+    
+    NSMutableArray* allDataArray=[NSMutableArray array];
+    NSMutableArray *charColorArray=[NSMutableArray array];
+    
+    
+    for (int i=0; i<_allDataForCharArray.count; i++) {
+        BOOL isSelect=[_selectBoolArray[i] boolValue];
+        if (isSelect) {
+            [allDataArray addObject:_allDataForCharArray[i]];
+            [charColorArray addObject:_colorArray[i]];
+        }
+    }
+    
+    NSArray *allDicArray=[NSArray arrayWithArray:allDataArray];
+    
+    NSMutableArray *XLineDataArr0=[NSMutableArray array];
+    for (int i=0; i<allDicArray.count; i++) {
+        NSDictionary *dic=[NSDictionary dictionaryWithDictionary:allDicArray[i]];
+        for (int i=0; i<dic.allKeys.count; i++) {
+            if (![XLineDataArr0 containsObject:dic.allKeys[i]]) {
+                [XLineDataArr0 addObject:dic.allKeys[i]];
+            }
+        }
+    }
+    
+    
+    NSSortDescriptor *sortDescripttor1 = [NSSortDescriptor sortDescriptorWithKey:@"intValue" ascending:YES];
+    NSArray *XLineDataArr = [XLineDataArr0 sortedArrayUsingDescriptors:@[sortDescripttor1]];
+    
+    
+    
+    NSMutableArray *YLineDataArray0=[NSMutableArray array];
+    for (int i=0; i<allDataArray.count; i++) {
+        NSDictionary *dic=allDataArray[i];
+        [YLineDataArray0 addObject:dic.allValues];
+    }
+    NSArray *YLineDataArr=[NSArray arrayWithArray:YLineDataArray0];
+    
+
     
     
     _lineChartYD = [[YDLineChart alloc] initWithFrame:CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height) andLineChartType:JHChartLineValueNotForEveryXYD];
+        _lineChartYD.MaxX=[[XLineDataArr valueForKeyPath:@"@max.floatValue"] integerValue];
     _lineChartYD.xLineDataArr = XLineDataArr;
     _lineChartYD.lineChartQuadrantType = JHLineChartQuadrantTypeFirstAndFouthQuardrantYD;
     _lineChartYD.valueArr = YLineDataArr;
-    _lineChartYD.yDescTextFontSize = _lineChartYD.xDescTextFontSize = 9.0;
-    _lineChartYD.valueFontSize = 9.0;
+    _lineChartYD.xDescTextFontSize = sizeFont;
+    _lineChartYD.valueFontSize = sizeFont;
     /* 值折线的折线颜色 默认暗黑色*/
-    _lineChartYD.valueLineColorArr =@[ [UIColor redColor], [UIColor greenColor], [UIColor greenColor], [UIColor greenColor]];
+    _lineChartYD.valueLineColorArr =[NSArray arrayWithArray:charColorArray];
     _lineChartYD.showPointDescription = NO;
     /* 值点的颜色 默认橘黄色*/
-    _lineChartYD.pointColorArr = @[[UIColor orangeColor],[UIColor yellowColor],[UIColor yellowColor],[UIColor yellowColor]];
+    _lineChartYD.pointColorArr = [NSArray arrayWithArray:charColorArray];
     _lineChartYD.showXDescVertical = YES;
-    _lineChartYD.xDescMaxWidth = 15.0;
+    _lineChartYD.xDescMaxWidth = 40;
     /*        是否展示Y轴分层线条 默认否        */
     _lineChartYD.showYLevelLine = NO;
     _lineChartYD.showValueLeadingLine = NO;
@@ -730,7 +848,8 @@ static int unit2=28/4;
     _YlineChartYD.xAndYNumberColor = [UIColor darkGrayColor];
     _YlineChartYD.lineChartQuadrantType = JHLineChartQuadrantTypeFirstAndFouthQuardrantYD;
     _YlineChartYD.valueArr = YLineDataArr;
-    _YlineChartYD.yDescTextFontSize = _lineChartYD.xDescTextFontSize = 9.0;
+    _YlineChartYD.yDescTextFontSize =sizeFont;
+    _YlineChartYD.xDescTextFontSize = sizeFont;
     [self.view addSubview:_YlineChartYD];
     [_YlineChartYD showAnimation];
     

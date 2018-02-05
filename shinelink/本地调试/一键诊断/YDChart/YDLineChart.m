@@ -49,7 +49,7 @@
         _lineType = lineChartType;
         _lineWidth = 0.5;
         
-        _yLineDataArr  = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7"];
+        _yLineDataArr  = @[@"10",@"20",@"30",@"40",@"50"];
         _xLineDataArr  = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7"];
         _showXDescVertical = NO;
         _xDescriptionAngle = M_PI_2/15;
@@ -254,6 +254,9 @@
             
             NSInteger max = 0;
             NSInteger min = 0;
+//            if (_valueArr.count==0) {
+//                _valueArr=@[@[@"10",@"20",@"30",@"40",@"50"]];
+//            }
             
             for (NSArray *arr in _valueArr) {
                 for (NSString * numer  in arr) {
@@ -276,7 +279,7 @@
                 max = (max/5+1)*5;
             NSMutableArray *arr = [NSMutableArray array];
             NSMutableArray *minArr = [NSMutableArray array];
-            if (max<=5) {
+            if (max>0 && max<=5) {
                 for (NSInteger i = 0; i<5; i++) {
                     
                     [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*1]];
@@ -303,6 +306,9 @@
                 
                 NSInteger Ynum=6;
                 NSInteger count = max / (Ynum-1);
+                if (count==0) {
+                    count=1;
+                }
                 
                 for (NSInteger i = 0; i<Ynum; i++) {
                     [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*count]];
@@ -706,32 +712,38 @@
             }
             
             if (_xLineDataArr.count>0) {
+                //    CGFloat xPace = (_xLength-kXandYSpaceForSuperView)/(_xLineDataArr.count-1);
                 CGFloat xPace = _perXLen;
                 _lableArray=[NSMutableArray array];
-                for (NSInteger i = 0; i<_xLineDataArr.count;i++ ) {
+                _lastLableX=0;
+                
+                for (NSInteger i = 0; i<_MaxX;i++ ) {
                     CGPoint p = P_M(i*xPace+self.chartOrigin.x, self.chartOrigin.y);
                     if (_showXDescVertical) {
-                        CGSize contentSize = [self sizeOfStringWithMaxSize:CGSizeMake(_xDescMaxWidth, CGFLOAT_MAX) textFont:self.xDescTextFontSize aimString:[NSString stringWithFormat:@"%@",_xLineDataArr[i]]];
-                        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(p.x - contentSize.width / 2.0, p.y+2, contentSize.width, contentSize.height)];
-                        label.text = [NSString stringWithFormat:@"%@",_xLineDataArr[i]];
+                        CGSize contentSize = [self sizeOfStringWithMaxSize:CGSizeMake(_xDescMaxWidth, CGFLOAT_MAX) textFont:self.xDescTextFontSize aimString:[NSString stringWithFormat:@"%ld",i]];
+                        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(p.x - contentSize.width / 2.0, p.y, contentSize.width, kXandYSpaceForSuperView)];
+                        label.text = [NSString stringWithFormat:@"%ld",i];
                         label.font = [UIFont systemFontOfSize:self.xDescTextFontSize];
-                        label.numberOfLines = 0;
-                        label.transform = CGAffineTransformRotate(label.transform, _xDescriptionAngle);
-                        [self addSubview:label];
+                        label.tintColor=_xAndYNumberColor;
+                        label.adjustsFontSizeToFitWidth=YES;
                         
-                        [_lableArray addObject:label];
+                        if (p.x>(_lastLableX+(_xDescMaxWidth*1.5))) {
+                            [self addSubview:label];
+                            [_lableArray addObject:label];
+                            _lastLableX=p.x;
+                            //    NSLog(@"x=%ld",i);
+                        }
                         
                     }else{
-                        CGFloat len = [self sizeOfStringWithMaxSize:XORYLINEMAXSIZE textFont:self.xDescTextFontSize aimString:_xLineDataArr[i]].width;
-                        [self drawLineWithContext:context andStarPoint:p andEndPoint:P_M(p.x    , p.y-3) andIsDottedLine:NO andColor:self.xAndYLineColor];
-                        
-                        if (i==0) {
-                            len = -2;
-                        }
+                        CGFloat len = [self sizeOfStringWithMaxSize:CGSizeMake(CGFLOAT_MAX, 30) textFont:self.xDescTextFontSize aimString:_xLineDataArr[i]].width;
+                        [self drawLineWithContext:context andStarPoint:p andEndPoint:P_M(p.x, p.y-3) andIsDottedLine:NO andColor:self.xAndYLineColor];
                         
                         [self drawText:[NSString stringWithFormat:@"%@",_xLineDataArr[i]] andContext:context atPoint:P_M(p.x-len/2, p.y+2) WithColor:_xAndYNumberColor andFontSize:self.xDescTextFontSize];
                     }
                 }
+                
+                
+                
             }
             
             if (_yLineDataArr.count == 2) {

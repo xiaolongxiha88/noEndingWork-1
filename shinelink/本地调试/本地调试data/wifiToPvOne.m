@@ -11,7 +11,7 @@
 #import "wifiToPvDataModel.h"
 #import "MBProgressHUD.h"
 
-static float TCP_TIME=0.6;
+static float TCP_TIME=1;
 
 @interface wifiToPvOne ()<GCDAsyncSocketDelegate>
 

@@ -149,15 +149,18 @@ static int  firstReadTime=72.0;
         
         //   Byte *dataArray=(Byte*)[data bytes];
         NSMutableDictionary *dataDic=[NSMutableDictionary new];
-        NSInteger LENG=(data.length/2-25)/2;
+        NSInteger LENG=(data.length/2-25)/2+1;
         for (int K=0; K<LENG;K++) {
-            float V=([_changeDataValue changeOneRegister:data registerNum:2*K]/10+i*i*20);
-            float I=([_changeDataValue changeOneRegister:data registerNum:2*K+1]/10+(i*200));
+            float V0=[_changeDataValue changeOneRegister:data registerNum:2*K];
+            float I0=[_changeDataValue changeOneRegister:data registerNum:2*K+1];
+            
+            float V=(V0)/10;  //+i*i*20
+            float I=(I0)/10;  //+(i*200)
             float P=V*I;
             if (_isIVchar) {
                   [dataDic setObject:[NSString stringWithFormat:@"%.1f",I] forKey:[NSString stringWithFormat:@"%.f",V]];
             }else{
-                    [dataDic setObject:[NSString stringWithFormat:@"%.1f",P] forKey:[NSString stringWithFormat:@"%.f",V]];
+                    [dataDic setObject:[NSString stringWithFormat:@"%.f",P] forKey:[NSString stringWithFormat:@"%.f",V]];
             }
           
         }
@@ -261,7 +264,12 @@ static int  firstReadTime=72.0;
                         CGFloat y1=[[dic objectForKey:[NSString stringWithFormat:@"%d",A]] floatValue];
                         CGFloat y2=[[dic objectForKey:[NSString stringWithFormat:@"%d",B]] floatValue];
                         CGFloat yValue=[self getYvalue:xValue X1:A Y1:y1 X2:B Y2:y2];
-                        [value2Array addObject:[NSString stringWithFormat:@"%.f",yValue]];
+                        if (_isIVchar) {
+                               [value2Array addObject:[NSString stringWithFormat:@"%.1f",yValue]];
+                        }else{
+                             [value2Array addObject:[NSString stringWithFormat:@"%.f",yValue]];
+                        }
+                     
                         
                     }
                 }
@@ -293,20 +301,28 @@ static int  firstReadTime=72.0;
     for (int i=0; i<_allDataForCharArray.count; i++) {
         NSDictionary *dic=[NSDictionary dictionaryWithDictionary:_allDataForCharArray[i]];
         float maxY= [[dic.allValues valueForKeyPath:@"@max.floatValue"] floatValue];
-        __block  NSString *maxKey;
-        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            NSString*obj1=obj;
-            float maxyy=[obj1 floatValue];
-            if (maxyy==maxY) {
-                maxKey=key;
-            }
-            
-        }];
+           float maxX= [[dic.allKeys valueForKeyPath:@"@max.floatValue"] floatValue];
+        
+//        __block  NSString *maxKey;
+//        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+//            NSString*obj1=obj;
+//            float maxyy=[obj1 floatValue];
+//            if (maxyy==maxY) {
+//                maxKey=key;
+//            }
+//
+//        }];
         
         UILabel *lable=[self.view viewWithTag:6000+i];
-        lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY];
         
-        [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.1f)",[maxKey floatValue],maxY]];
+        if (_isIVchar) {
+             lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",maxX,maxY];
+                    [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.1f)",maxX,maxY]];
+        }else{
+             lable.text=[NSString stringWithFormat:@"(%.f,%.f)",maxX,maxY];
+               [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.f)",maxX,maxY]];
+        }
+
         
         UIView *view=[self.view viewWithTag:5000+i];
         view.backgroundColor=_colorArray[i];
@@ -579,7 +595,7 @@ static int  firstReadTime=72.0;
     }else{
         _isIVchar=NO;
         _lable0.text=@"(W)";
-            lableNameArray=@[@"MPPT(Vmpp,Impp)",@"(Vpv,Ppv)"];
+            lableNameArray=@[@"MPPT(Vmpp,Pmpp)",@"(Vpv,Ppv)"];
     }
     lable.text=lableNameArray[0];
     lable1.text=lableNameArray[1];
@@ -695,7 +711,7 @@ static int  firstReadTime=72.0;
     _lineChartYDOne.showValueLeadingLine = NO;
     _lineChartYDOne.yDescTextFontSize = sizeFont;
     _lineChartYDOne.xDescTextFontSize= sizeFont;
-    _lineChartYDOne.valueFontSize = 9.0;
+    _lineChartYDOne.valueFontSize = sizeFont;
     _lineChartYDOne.backgroundColor = [UIColor whiteColor];
     _lineChartYDOne.showPointDescription = NO;
     _lineChartYDOne.showXDescVertical = YES;

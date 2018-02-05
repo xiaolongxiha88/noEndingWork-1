@@ -327,6 +327,25 @@
 }
 
 
+//获取一个寄存器高8位的值
+-(int)changeHighRegister:(NSData*)data registerNum:(int)registerNum{
+    int registerValue=0;
+    if ((data.length>(2*registerNum+1)) || (data.length==(2*registerNum+1))) {
+        Byte *dataArray=(Byte*)[data bytes];
+        registerValue=dataArray[2*registerNum];
+    }
+    return registerValue;
+}
+
+//获取一个寄存器低8位的值
+-(int)changeLowRegister:(NSData*)data registerNum:(int)registerNum{
+    int registerValue=0;
+    if ((data.length>(2*registerNum+1)) || (data.length==(2*registerNum+1))) {
+        Byte *dataArray=(Byte*)[data bytes];
+        registerValue=dataArray[2*registerNum+1];
+    }
+    return registerValue;
+}
 
 //获取一个寄存器值
 -(int)changeOneRegister:(NSData*)data registerNum:(int)registerNum{

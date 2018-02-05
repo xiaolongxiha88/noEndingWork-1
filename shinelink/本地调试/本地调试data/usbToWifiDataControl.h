@@ -25,6 +25,12 @@ typedef void(^receiveDataBlock)(NSDictionary*);
 //获取字符串寄存器值
 -(NSString*)changeToASCII:(NSData*)data beginRegister:(int)beginRegister length:(int)length;
 
+//获取一个寄存器高8位的值
+-(int)changeHighRegister:(NSData*)data registerNum:(int)registerNum;
+
+//获取一个寄存器低8位的值
+-(int)changeLowRegister:(NSData*)data registerNum:(int)registerNum;
+
 -(void)removeTheTcp;
 
 @property(nonatomic,assign)NSInteger cmdType;            //1、
