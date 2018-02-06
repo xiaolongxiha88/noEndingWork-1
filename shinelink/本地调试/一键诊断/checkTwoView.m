@@ -134,11 +134,18 @@ static int unit2=80/4;
 #pragma mark - UI界面
 -(void)initUI{
  
-    float lableH=30*HEIGHT_SIZE; float lableW1=40*NOW_SIZE;
+    float lableH=30*HEIGHT_SIZE;
+    //float lableW1=40*NOW_SIZE;
     float X0=10*NOW_SIZE;
     _view0=[[UIView alloc]initWithFrame:CGRectMake(0,5*HEIGHT_SIZE, SCREEN_Width, lableH*2)];
     _view0.backgroundColor=[UIColor whiteColor];
-    [_viewAll addSubview:_view0];
+    if (_charType==1) {
+          [_viewAll addSubview:_view0];
+        
+    }else{
+        _valueForLeftLableArray=[NSMutableArray arrayWithArray:@[@"",@"",@"",@""]];
+    }
+  
     
     NSString *lable0String=@"故障序号:";
     CGSize lable0StringSize=[self getStringSize:12*HEIGHT_SIZE Wsize:CGFLOAT_MAX Hsize:lableH stringName:lable0String];
@@ -245,9 +252,16 @@ static int unit2=80/4;
         //        view21.backgroundColor=[UIColor whiteColor];
         //        [view2 addSubview:view21];
         
+            Lable11x=imageViewx+imageViewH+Wk*2;
+        
         [_xNumArray addObject:@"1"];
         UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        button1.frame = CGRectMake(0,everyLalbeH*(i+1),W0, everyLalbeH);
+        if (_charType==1) {
+                button1.frame = CGRectMake(0,everyLalbeH*(i+1),W0, everyLalbeH);
+        }else{
+                    button1.frame = CGRectMake(0,everyLalbeH*(i+1),W0-Lable11x, everyLalbeH);
+        }
+
         [button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button1 setTitleColor:COLOR(242, 242, 242, 1) forState:UIControlStateHighlighted];
         button1.tag = 4000+i;
@@ -263,15 +277,36 @@ static int unit2=80/4;
         imageView.tag=5000+i;
         [button1 addSubview:imageView];
         
-        Lable11x=imageViewx+imageViewH+Wk*2;
-        UILabel *Lable11 = [[UILabel alloc]initWithFrame:CGRectMake(Lable11x, 0,W0-Lable11x,everyLalbeH)];
-        Lable11.textColor =COLOR(102, 102, 102, 1);
-        Lable11.textAlignment=NSTextAlignmentLeft;
-        Lable11.adjustsFontSizeToFitWidth=YES;
-        Lable11.text=@"----";
-        Lable11.tag=6000+i;
-        Lable11.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        [button1 addSubview:Lable11];
+      
+        if (_charType==1) {
+            UILabel *Lable11 = [[UILabel alloc]initWithFrame:CGRectMake(Lable11x, 0,W0-Lable11x,everyLalbeH)];
+            Lable11.textColor =COLOR(102, 102, 102, 1);
+            Lable11.textAlignment=NSTextAlignmentLeft;
+            Lable11.adjustsFontSizeToFitWidth=YES;
+            Lable11.text=@"----";
+            Lable11.tag=6000+i;
+            Lable11.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [button1 addSubview:Lable11];
+        }else{
+            float buttonW1=70*NOW_SIZE;   float buttonH=20*HEIGHT_SIZE;
+            UIButton *button21 = [UIButton buttonWithType:UIButtonTypeCustom];
+            button21.frame = CGRectMake(Lable11x, (everyLalbeH-buttonH)/2+everyLalbeH*(i+1), buttonW1, buttonH);
+            [button21 setTitleColor:titleColor forState:UIControlStateNormal];
+            [button21 setTitleColor:backgroundColor forState:UIControlStateHighlighted];
+            button21.layer.borderWidth=0.8*HEIGHT_SIZE;
+            button21.layer.borderColor=layerColor.CGColor;
+            button21.tag = 6000+i;
+            button21.layer.cornerRadius=buttonH/2;
+            button21.titleLabel.adjustsFontSizeToFitWidth=YES;
+            button21.backgroundColor=backgroundColor;
+            button21.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
+            [button21 setTitle:@"设置ID" forState:UIControlStateNormal];
+            [button21 addTarget:self action:@selector(tapXnum:) forControlEvents:UIControlEventTouchUpInside];
+            [_view2 addSubview:button21];
+        }
+        
+      
+   
         
         ///////////    
         
@@ -283,6 +318,7 @@ static int unit2=80/4;
         button2.layer.borderWidth=0.8*HEIGHT_SIZE;
         button2.layer.borderColor=layerColor.CGColor;
         button2.tag = 3500+i;
+           button2.titleLabel.adjustsFontSizeToFitWidth=YES;
         button2.layer.cornerRadius=buttonH/2;
         button2.backgroundColor=backgroundColor;
         button2.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
@@ -324,16 +360,27 @@ static int unit2=80/4;
 }
 
 -(void)tapXnum:(UIButton*)button{
-   
-    [RKAlertView showAlertPlainTextWithTitle:@"请填写曲线显示的倍数" message:nil cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
+    NSString*titleString;
+    if (button.tag>4000) {
+        titleString=@"请输入故障ID号";
+    }else{
+         titleString=@"请填写曲线显示的倍数";
+    }
+    
+    [RKAlertView showAlertPlainTextWithTitle:titleString message:nil cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
         NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
         NSString *alert1=[alertView textFieldAtIndex:0].text;
-           NSInteger Num=button.tag-3500;
-    
-        [_xNumArray setObject:alert1 atIndexedSubscript:Num];
-          [ button setTitle:alert1 forState:UIControlStateNormal];
         
-        [self changData];
+        if (button.tag>4000) {
+            NSInteger Num=button.tag-6000;
+            [_valueForLeftLableArray setObject:alert1 atIndexedSubscript:Num];
+        }else{
+            NSInteger Num=button.tag-3500;
+            [_xNumArray setObject:alert1 atIndexedSubscript:Num];
+           
+            [self changData];
+        }
+        [ button setTitle:alert1 forState:UIControlStateNormal];
         
     } cancelBlock:^{
         NSLog(@"取消了");
@@ -372,15 +419,29 @@ static int unit2=80/4;
     [_selectBoolArray setObject:[NSNumber numberWithBool:button.selected] atIndexedSubscript:tagNum];
     
     UIView* view =[self.view viewWithTag:5000+tagNum];
-    UILabel* lable =[self.view viewWithTag:6000+tagNum];
-    if ( button.selected) {
-        view.backgroundColor=_colorArray[tagNum];
-        lable.text=_valueForLeftLableArray[tagNum];
-        
+    if (_charType==1) {
+        UILabel* lable =[self.view viewWithTag:6000+tagNum];
+        if ( button.selected) {
+            view.backgroundColor=_colorArray[tagNum];
+            lable.text=_valueForLeftLableArray[tagNum];
+            
+        }else{
+            view.backgroundColor=COLOR(151, 151, 151, 1);
+            lable.text=@"----";
+        }
     }else{
-        view.backgroundColor=COLOR(151, 151, 151, 1);
-        lable.text=@"----";
+        UIButton* button =[self.view viewWithTag:6000+tagNum];
+        if ( button.selected) {
+            view.backgroundColor=_colorArray[tagNum];
+             [ button setTitle:_valueForLeftLableArray[tagNum] forState:UIControlStateNormal];
+
+        }else{
+            view.backgroundColor=COLOR(151, 151, 151, 1);
+                [ button setTitle:@"----" forState:UIControlStateNormal];
+      
+        }
     }
+
     
     [self showFirstAndFourQuardrant];
     
@@ -393,12 +454,20 @@ static int unit2=80/4;
         _allDataRecieveAllArray=[NSMutableArray array];
     _CharIdArray=[NSMutableArray array];
     
-    if (!_allSendDataAllArray) {
- _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"1750",@"1875",@"2000",@"2125"],@[@"2250",@"2375",@"2500",@"2625",@"2750"],@[@"2875",@"3000",@"3125",@"3250",@"3375"]];
-        
-        _allSendDataArray=[NSArray arrayWithArray:_allSendDataAllArray[_progressNumAll]];
-        
-    }
+ 
+        if (!_allSendDataAllArray) {
+            if (_charType==1) {
+                
+_allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"1750",@"1875",@"2000",@"2125"],@[@"2250",@"2375",@"2500",@"2625",@"2750"],@[@"2875",@"3000",@"3125",@"3250",@"3375"]];
+            }else{
+                _allSendDataAllArray=@[@[@"3500",@"3625",@"3750",@"3875",@"4000"],@[@"4125",@"4250",@"4375",@"4500",@"4625"],@[@"4750",@"4875",@"5000",@"5125",@"5250"],@[@"5375",@"5500",@"5625",@"5750",@"5875"]];
+            }
+            
+            _allSendDataArray=[NSArray arrayWithArray:_allSendDataAllArray[_progressNumAll]];
+            
+        }
+  
+
     
 
     
@@ -421,10 +490,24 @@ static int unit2=80/4;
 //开始或取消按钮开关
 -(void)goStopRead:( UITapGestureRecognizer *)tap{
     
-    if (_sendSNString==nil || [_sendSNString isEqualToString:@""]) {
-        [self showToastViewWithTitle:@"请选择故障序号"];
-        return;
+    if (_charType==1) {
+        if (_sendSNString==nil || [_sendSNString isEqualToString:@""]) {
+            [self showToastViewWithTitle:@"请选择故障序号"];
+            return;
+        }
+    }else{
+        for (NSString*ID in _valueForLeftLableArray) {
+            if ([ID isEqualToString:@""]) {
+                [self showToastViewWithTitle:@"请填写ID号"];
+                return;
+            }
+            if ([ID intValue]==0) {
+                [self showToastViewWithTitle:@"请输入正确的ID号"];
+                return;
+            }
+        }
     }
+
     
     _isReadNow = !_isReadNow;
     
@@ -633,9 +716,17 @@ static int unit2=80/4;
     for (int i=0; i<_colorArray.count; i++) {
         [_selectBoolArray addObject:[NSNumber numberWithBool:YES]];
     }
-    NSString *LENTH=[NSString stringWithFormat:@"1_2_%d",[_sendSNString intValue]];
-    _isReadfirstDataOver=NO;
-    [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"259" Length:LENTH];
+    if (_charType==1) {
+        NSString *LENTH=[NSString stringWithFormat:@"1_2_%d",[_sendSNString intValue]];
+        _isReadfirstDataOver=NO;
+        [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"259" Length:LENTH];
+    }else{
+ 
+        NSString *LENTH=[NSString stringWithFormat:@"5_10_%d_%d_%d_%d_%d",[_valueForLeftLableArray[0] intValue],[_valueForLeftLableArray[1] intValue],[_valueForLeftLableArray[2] intValue],[_valueForLeftLableArray[3] intValue],1];
+        _isReadfirstDataOver=NO;
+        [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"260" Length:LENTH];
+    }
+  
 }
 
 //长按后右边的Lable显示值
@@ -694,11 +785,13 @@ static int unit2=80/4;
     _valueForLeftLableArray=[NSMutableArray array];
     for (int i=0; i<_CharIdArray.count; i++) {
         NSString*leftString=_CharIdArray[i];
-        
-        UILabel *lable=[self.view viewWithTag:6000+i];
-        lable.text=[NSString stringWithFormat:@"%@",leftString];
-        
-        [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"%@",leftString]];
+        if (_charType==1) {
+            UILabel *lable=[self.view viewWithTag:6000+i];
+            lable.text=[NSString stringWithFormat:@"%@",leftString];
+                    [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"%@",leftString]];
+        }
+
+
         
         UIView *view=[self.view viewWithTag:5000+i];
         view.backgroundColor=_colorArray[i];
@@ -733,8 +826,12 @@ static int unit2=80/4;
         
     }
     
-    
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, Yy, SCREEN_Width-Wx-Wx2, allH)];
+    if (_charType==1) {
+         _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, Yy, SCREEN_Width-Wx-Wx2, allH)];
+    }else{
+            _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, 0, SCREEN_Width-Wx-Wx2, allH+Yy)];
+    }
+   
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.bounces = NO;
     [self.view addSubview:_scrollView];
@@ -835,8 +932,12 @@ static int unit2=80/4;
     };
     
     
-    
+    if (_charType==1) {
     _YlineChartYD = [[YDLineY alloc] initWithFrame:CGRectMake(0, Yy, Wx, allH) andLineChartType:JHChartLineValueNotForEveryXYDY];
+    }else{
+       _YlineChartYD = [[YDLineY alloc] initWithFrame:CGRectMake(0, 0, Wx, allH+Yy) andLineChartType:JHChartLineValueNotForEveryXYDY];
+    }
+
     _YlineChartYD.xLineDataArr = XLineDataArr;
     _YlineChartYD.contentInsets = UIEdgeInsetsMake(0, 35, 0, 10);
     /* X和Y轴的颜色 默认暗黑色 */

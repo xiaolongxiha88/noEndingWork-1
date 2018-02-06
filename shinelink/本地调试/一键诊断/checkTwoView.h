@@ -10,4 +10,6 @@
 
 @interface checkTwoView : RootViewController
 
+@property (assign, nonatomic) int charType;    //1故障滤波  //2实时滤波
+
 @end
