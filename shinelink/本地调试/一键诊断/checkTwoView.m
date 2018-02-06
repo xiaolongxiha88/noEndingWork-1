@@ -15,10 +15,11 @@
 #import "usbToWifiDataControl.h"
 #import "ZJBLStoreShopTypeAlert.h"
 #import "RKAlertView.h"
+
 static float keyOneWaitTime=5.0;
-static int  firstReadTime=72.0;
-static int unit=72/10.0;
-static int unit2=28/4;
+static int  firstReadTime=20.0;
+static int unit=20/5;
+static int unit2=80/4;
 
 @interface checkTwoView ()
 {
@@ -41,6 +42,7 @@ static int unit2=28/4;
 @property (assign, nonatomic) int Type;
 @property (strong, nonatomic)UILabel *lable0;
 @property (strong, nonatomic)UILabel *lable01;
+@property (strong, nonatomic)UILabel *lableCode;
 @property (nonatomic) BOOL isReadNow;
 @property (strong, nonatomic)NSArray *vocArray;
 @property (strong, nonatomic)NSArray *colorArray;
@@ -169,12 +171,12 @@ static int unit2=28/4;
     
     float lable1W=SCREEN_Width-X0*4-lable0StringSize.width-buttonW-0.5*X0;
         NSString *lable1String=@"故障码:--";
-    UILabel* lable1 = [[UILabel alloc]initWithFrame:CGRectMake(X0*3+lable0StringSize.width+buttonW,0,lable1W,lableH)];
-    lable1.textColor =COLOR(51, 51, 51, 1);
-    lable1.textAlignment=NSTextAlignmentRight;
-    lable1.text=lable1String;
-    lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    [_view0 addSubview:lable1];
+    _lableCode = [[UILabel alloc]initWithFrame:CGRectMake(X0*3+lable0StringSize.width+buttonW,0,lable1W,lableH)];
+    _lableCode.textColor =COLOR(51, 51, 51, 1);
+    _lableCode.textAlignment=NSTextAlignmentRight;
+    _lableCode.text=lable1String;
+    _lableCode.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    [_view0 addSubview:_lableCode];
     
     _lable0 = [[UILabel alloc]initWithFrame:CGRectMake(0,lableH,SCREEN_Width,lableH)];
     _lable0.textColor =MainColor;
@@ -200,8 +202,8 @@ static int unit2=28/4;
     [custompro addGestureRecognizer:tapGestureRecognizer];
     
     
-    _lable01 = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth-lableW1-15*NOW_SIZE, 220*HEIGHT_SIZE+60*HEIGHT_SIZE,lableW1,15*HEIGHT_SIZE)];
-    _lable01.textColor =COLOR(51, 51, 51, 1);
+    _lable01 = [[UILabel alloc]initWithFrame:CGRectMake(ScreenWidth-100*NOW_SIZE-25*NOW_SIZE, 220*HEIGHT_SIZE+60*HEIGHT_SIZE,100*NOW_SIZE,15*HEIGHT_SIZE)];
+    _lable01.textColor =[UIColor redColor];
     _lable01.textAlignment=NSTextAlignmentRight;
     _lable01.text=@"";
     _lable01.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -266,7 +268,7 @@ static int unit2=28/4;
         Lable11.textColor =COLOR(102, 102, 102, 1);
         Lable11.textAlignment=NSTextAlignmentLeft;
         Lable11.adjustsFontSizeToFitWidth=YES;
-        Lable11.text=@"(--,--)";
+        Lable11.text=@"----";
         Lable11.tag=6000+i;
         Lable11.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [button1 addSubview:Lable11];
@@ -284,7 +286,7 @@ static int unit2=28/4;
         button2.layer.cornerRadius=buttonH/2;
         button2.backgroundColor=backgroundColor;
         button2.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
-        [button2 setTitle:@"倍数" forState:UIControlStateNormal];
+        [button2 setTitle:@"1倍" forState:UIControlStateNormal];
         [button2 addTarget:self action:@selector(tapXnum:) forControlEvents:UIControlEventTouchUpInside];
         [_view2 addSubview:button2];
         
@@ -294,7 +296,6 @@ static int unit2=28/4;
         Lable22.textAlignment=NSTextAlignmentRight;
         Lable22.adjustsFontSizeToFitWidth=YES;
         Lable22.text=@"X";
-        Lable22.tag=6000+i;
         Lable22.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_view2 addSubview:Lable22];
         
@@ -308,7 +309,7 @@ static int unit2=28/4;
         Lable33.textColor =COLOR(102, 102, 102, 1);
         Lable33.textAlignment=NSTextAlignmentCenter;
         Lable33.adjustsFontSizeToFitWidth=YES;
-        Lable33.text=@"(--,--)";
+        Lable33.text=@"----";
         Lable33.tag=7000+i;
         Lable33.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [view22 addSubview:Lable33];
@@ -331,7 +332,8 @@ static int unit2=28/4;
     
         [_xNumArray setObject:alert1 atIndexedSubscript:Num];
           [ button setTitle:alert1 forState:UIControlStateNormal];
-
+        
+        [self changData];
         
     } cancelBlock:^{
         NSLog(@"取消了");
@@ -377,7 +379,7 @@ static int unit2=28/4;
         
     }else{
         view.backgroundColor=COLOR(151, 151, 151, 1);
-        lable.text=@"(--,--)";
+        lable.text=@"----";
     }
     
     [self showFirstAndFourQuardrant];
@@ -520,7 +522,7 @@ static int unit2=28/4;
 //解析读取的数据
 -(void)changData{
     _allDataForCharArray=[NSMutableArray array];
-    
+    _CharIdArray=[NSMutableArray array];
     
     for (int i=0; i<_allDataRecieveAllArray.count; i++) {
         
@@ -540,26 +542,33 @@ static int unit2=28/4;
             float time3H=([_changeDataValue changeHighRegister:data registerNum:2]);
             float time3L=([_changeDataValue changeLowRegister:data registerNum:2]);
             _faultTime=[NSString stringWithFormat:@"%.f-%.f-%.f %.f:%.f:%.f",time1H,time1L,time2H,time2L,time3H,time3L];
-
-             float faultReason=([_changeDataValue changeOneRegister:data registerNum:4]);
+          _lable0.text=[NSString stringWithFormat:@"波形触发时间:%@",_faultTime];
+            
+                float faultReason=([_changeDataValue changeHighRegister:data registerNum:3]);
+       
              _faultReasonId=[NSString stringWithFormat:@"%.f",faultReason];
+            _lableCode.text=[NSString stringWithFormat:@"故障码:%@",_faultReasonId];
         }
-  //    float ID=([_changeDataValue changeOneRegister:data registerNum:3]);
-             float ID=([_changeDataValue changeHighRegister:data registerNum:3]);
+        
+        float ID=([_changeDataValue changeOneRegister:data registerNum:4]);
+        
         [_CharIdArray addObject:[NSString stringWithFormat:@"%.f",ID]];
         
+        float muchX=[_xNumArray[i] floatValue];
         
         //   Byte *dataArray=(Byte*)[data bytes];
         NSMutableDictionary *dataDic=[NSMutableDictionary new];
         NSInteger LENG=data.length/2-120;
         for (int K=5; K<LENG;K++) {
-            float Value=([_changeDataValue changeOneRegister:data registerNum:2*K]);
+            float Value=([_changeDataValue changeOneRegister:data registerNum:K]);
 
             if (Value<32768) {
             }else{
                 Value=-(65535-Value+1);
             }
             
+        
+            Value=Value*muchX;
                 [dataDic setObject:[NSString stringWithFormat:@"%.f",Value] forKey:[NSString stringWithFormat:@"%.d",K-4]];
 
         }
@@ -631,6 +640,9 @@ static int unit2=28/4;
 
 //长按后右边的Lable显示值
 -(void)updataTheLableValue:(int)xValue{
+    
+      _lable01.text=[NSString stringWithFormat:@"X=%d",xValue];
+    
     NSString* xValueString=[NSString stringWithFormat:@"%d",xValue];
     NSMutableArray *value1Array=[NSMutableArray array];
     NSMutableArray *value2Array=[NSMutableArray array];
@@ -655,11 +667,6 @@ static int unit2=28/4;
                     int B=[[NSString stringWithFormat:@"%@",allKeyArray[i+1]] intValue];
                     if ((A<xValue) && ( B>xValue)) {
                         
-                        CGFloat y1=[[dic objectForKey:[NSString stringWithFormat:@"%d",A]] floatValue];
-                        CGFloat y2=[[dic objectForKey:[NSString stringWithFormat:@"%d",B]] floatValue];
-                        CGFloat yValue;
-                        [value2Array addObject:[NSString stringWithFormat:@"%.f",yValue]];
-                        
                     }
                 }
             }
@@ -667,14 +674,12 @@ static int unit2=28/4;
         }
         
     }
-    float Wk=5*NOW_SIZE;
-    for (int i=0; i<value1Array.count; i++) {
+
+    for (int i=0; i<value2Array.count; i++) {
         BOOL isSelect=[_selectBoolArray[i] boolValue];
         if (isSelect) {
             UILabel *lable=[self.view viewWithTag:7000+i];
-            lable.text=[NSString stringWithFormat:@"(%@,%@)",value1Array[i],value2Array[i]];
-            lable.frame=CGRectMake((ScreenWidth/2-lable1Size2.width)/2-Wk, 0,ScreenWidth/2-Lable11x,everyLalbeH);
-            lable.textAlignment=NSTextAlignmentCenter;
+            lable.text=[NSString stringWithFormat:@"%@",value2Array[i]];
         }
         
         
@@ -687,23 +692,13 @@ static int unit2=28/4;
 //更新左边Lable的值
 -(void)updataLeftMaxValue2{
     _valueForLeftLableArray=[NSMutableArray array];
-    for (int i=0; i<_allDataForCharArray.count; i++) {
-        NSDictionary *dic=[NSDictionary dictionaryWithDictionary:_allDataForCharArray[i]];
-        float maxY= [[dic.allValues valueForKeyPath:@"@max.floatValue"] floatValue];
-        __block  NSString *maxKey;
-        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            NSString*obj1=obj;
-            float maxyy=[obj1 floatValue];
-            if (maxyy==maxY) {
-                maxKey=key;
-            }
-            
-        }];
+    for (int i=0; i<_CharIdArray.count; i++) {
+        NSString*leftString=_CharIdArray[i];
         
         UILabel *lable=[self.view viewWithTag:6000+i];
-        lable.text=[NSString stringWithFormat:@"(%.f,%.f)",[maxKey floatValue],maxY];
+        lable.text=[NSString stringWithFormat:@"%@",leftString];
         
-        [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.f)",[maxKey floatValue],maxY]];
+        [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"%@",leftString]];
         
         UIView *view=[self.view viewWithTag:5000+i];
         view.backgroundColor=_colorArray[i];
@@ -783,7 +778,10 @@ static int unit2=28/4;
     NSArray *YLineDataArr=[NSArray arrayWithArray:YLineDataArray0];
     
 
-    
+    if (_lineChartYD) {
+        [_lineChartYD removeFromSuperview];
+        _lineChartYD=nil;
+    }
     
     _lineChartYD = [[YDLineChart alloc] initWithFrame:CGRectMake(0, 0, _scrollView.frame.size.width, _scrollView.frame.size.height) andLineChartType:JHChartLineValueNotForEveryXYD];
         _lineChartYD.MaxX=[[XLineDataArr valueForKeyPath:@"@max.floatValue"] integerValue];
@@ -990,10 +988,8 @@ static int unit2=28/4;
     for (int i=0; i<_colorArray.count; i++) {
         
         UILabel *lable=[self.view viewWithTag:7000+i];
-        lable.text=@"(--,--)";
-        lable.frame=CGRectMake(0, 0,ScreenWidth/2,everyLalbeH);
-        lable.textAlignment=NSTextAlignmentCenter;
-        
+        lable.text=@"----";
+        _lable01.text=@"";
     }
     
 }
