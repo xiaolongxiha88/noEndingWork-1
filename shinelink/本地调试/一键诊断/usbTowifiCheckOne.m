@@ -10,7 +10,8 @@
 #import "checkOneView.h"
 #import "checkTwoView.h"
 #import "checkThreeView.h"
-#import "checkFourView.h"
+
+#import "oneKeyAlertView.h"
 
 @interface usbTowifiCheckOne ()
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -97,14 +98,40 @@
           goView.charType=2;
         [self.navigationController pushViewController:goView animated:YES];
     }else  if (Num==2003) {
-        checkFourView *goView=[[checkFourView alloc]init];
-            goView.title=_nameArray[3];
-        [self.navigationController pushViewController:goView animated:YES];
+        [self choiceKeyUnit];
     }
     
 }
 
 
+
+-(void)choiceKeyUnit{
+    NSString *title=@"选择一键诊断模块";
+    NSArray*NameArray=@[@"I-V/P-V曲线",@"电网电压波形",@"电网电压谐波(THDV)",@"电网线路阻抗"];
+    
+    [oneKeyAlertView showWithTitle:title titles:NameArray selectIndex:^(NSInteger selectIndex) {
+        
+    }selectValue:^(NSArray *selectValueArray){
+        
+        BOOL haveSelected=NO;
+        for (NSNumber *boolValue in selectValueArray) {
+            if ([boolValue boolValue]) {
+                haveSelected=YES;
+                break;
+            }
+        }
+        if (haveSelected) {
+            checkThreeView *goView=[[checkThreeView alloc]init];
+            goView.title=_nameArray[2];
+            goView.isSelectModelArray=[NSArray arrayWithArray:selectValueArray];
+            [self.navigationController pushViewController:goView animated:YES];
+        }else{
+            [self showToastViewWithTitle:@"请选择一键诊断模块"];
+        }
+        
+        
+    } showCloseButton:YES ];
+}
 
 
 

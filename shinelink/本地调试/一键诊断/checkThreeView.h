@@ -10,4 +10,6 @@
 
 @interface checkThreeView : RootViewController
 
+@property (nonatomic, strong) NSArray *isSelectModelArray;
+
 @end

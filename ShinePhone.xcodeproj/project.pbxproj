@@ -469,7 +469,6 @@
 		33780082201C26D3008E5C00 /* checkOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780081201C26D3008E5C00 /* checkOneView.m */; };
 		33780085201C2709008E5C00 /* checkTwoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780084201C2709008E5C00 /* checkTwoView.m */; };
 		33780088201C2720008E5C00 /* checkThreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780087201C2720008E5C00 /* checkThreeView.m */; };
-		3378008B201C2736008E5C00 /* checkFourView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3378008A201C2736008E5C00 /* checkFourView.m */; };
 		3378008D201C2AE3008E5C00 /* max_fault.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378008C201C2AE3008E5C00 /* max_fault.png */; };
 		3378008F201C2AE9008E5C00 /* max_iv_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378008E201C2AE9008E5C00 /* max_iv_graph.png */; };
 		33780092201C2AF0008E5C00 /* max_onekey.png in Resources */ = {isa = PBXBuildFile; fileRef = 33780090201C2AEF008E5C00 /* max_onekey.png */; };
@@ -673,6 +672,7 @@
 		338A623D1E71567A000E7CE4 /* PopoverAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A62381E71567A000E7CE4 /* PopoverAction.m */; };
 		338A623E1E71567A000E7CE4 /* PopoverView00.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A623A1E71567A000E7CE4 /* PopoverView00.m */; };
 		338A623F1E71567A000E7CE4 /* PopoverViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A623C1E71567A000E7CE4 /* PopoverViewCell.m */; };
+		338A93C9202A970900A27FEC /* oneKeyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338A93C8202A970900A27FEC /* oneKeyAlertView.m */; };
 		338CFE661CF554C1006EFD8B /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 338CFE651CF554C1006EFD8B /* libstdc++.6.0.9.tbd */; };
 		338CFE681CF554D8006EFD8B /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 338CFE671CF554D8006EFD8B /* libstdc++.tbd */; };
 		338D51BF1EE151D9003FE4D2 /* IntegratorFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338D51BE1EE151D9003FE4D2 /* IntegratorFirst.swift */; };
@@ -1564,8 +1564,6 @@
 		33780084201C2709008E5C00 /* checkTwoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = checkTwoView.m; sourceTree = "<group>"; };
 		33780086201C2720008E5C00 /* checkThreeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = checkThreeView.h; sourceTree = "<group>"; };
 		33780087201C2720008E5C00 /* checkThreeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = checkThreeView.m; sourceTree = "<group>"; };
-		33780089201C2736008E5C00 /* checkFourView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = checkFourView.h; sourceTree = "<group>"; };
-		3378008A201C2736008E5C00 /* checkFourView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = checkFourView.m; sourceTree = "<group>"; };
 		3378008C201C2AE3008E5C00 /* max_fault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_fault.png; sourceTree = "<group>"; };
 		3378008E201C2AE9008E5C00 /* max_iv_graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_iv_graph.png; sourceTree = "<group>"; };
 		33780090201C2AEF008E5C00 /* max_onekey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_onekey.png; sourceTree = "<group>"; };
@@ -1867,6 +1865,8 @@
 		338A623A1E71567A000E7CE4 /* PopoverView00.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverView00.m; sourceTree = "<group>"; };
 		338A623B1E71567A000E7CE4 /* PopoverViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopoverViewCell.h; sourceTree = "<group>"; };
 		338A623C1E71567A000E7CE4 /* PopoverViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopoverViewCell.m; sourceTree = "<group>"; };
+		338A93C7202A970900A27FEC /* oneKeyAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = oneKeyAlertView.h; sourceTree = "<group>"; };
+		338A93C8202A970900A27FEC /* oneKeyAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = oneKeyAlertView.m; sourceTree = "<group>"; };
 		338CFE651CF554C1006EFD8B /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
 		338CFE671CF554D8006EFD8B /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		338D51BE1EE151D9003FE4D2 /* IntegratorFirst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegratorFirst.swift; sourceTree = "<group>"; };
@@ -3548,8 +3548,6 @@
 				33780084201C2709008E5C00 /* checkTwoView.m */,
 				33780086201C2720008E5C00 /* checkThreeView.h */,
 				33780087201C2720008E5C00 /* checkThreeView.m */,
-				33780089201C2736008E5C00 /* checkFourView.h */,
-				3378008A201C2736008E5C00 /* checkFourView.m */,
 				33780068201B3EEE008E5C00 /* YDChart */,
 				3378007D201C1B5C008E5C00 /* usbTowifiCheckOne.h */,
 				3378007E201C1B5C008E5C00 /* usbTowifiCheckOne.m */,
@@ -3568,6 +3566,8 @@
 				3378006E201B3EEE008E5C00 /* YDLineY.m */,
 				33780095201C65B3008E5C00 /* CustomProgress.h */,
 				33780094201C65B2008E5C00 /* CustomProgress.m */,
+				338A93C7202A970900A27FEC /* oneKeyAlertView.h */,
+				338A93C8202A970900A27FEC /* oneKeyAlertView.m */,
 			);
 			path = YDChart;
 			sourceTree = "<group>";
@@ -5328,7 +5328,6 @@
 				335D69AF1D77BA4D00894D90 /* HcdCacheVideoPlayer.m in Sources */,
 				334E9BF51CAD2B8900C8271F /* PvLogTableViewController.m in Sources */,
 				3381ECE81CBC906600DCF0D2 /* Line3View.m in Sources */,
-				3378008B201C2736008E5C00 /* checkFourView.m in Sources */,
 				3343F3DA1C80405D009F69BC /* AFNetworkActivityIndicatorManager.m in Sources */,
 				33E369591FDA70D6001D947D /* MMScanViewController.m in Sources */,
 				33652A2B1CEC1190004EBAE5 /* ExtensionTwoViewController.m in Sources */,
@@ -5361,6 +5360,7 @@
 				33EFB66A1C98F9B1003F336F /* ZFBarChart.m in Sources */,
 				336F1A151D88E46900CD4C2B /* NSData+ImageContentType.m in Sources */,
 				335667571D7E606800C40129 /* PGIndexBannerSubiew.m in Sources */,
+				338A93C9202A970900A27FEC /* oneKeyAlertView.m in Sources */,
 				335317441CA2423D003F106D /* GetDevice.m in Sources */,
 				336F03FC1F0497BB00DE7CD7 /* orderFirst.m in Sources */,
 				3343F3C71C80403C009F69BC /* AFURLSessionManager.m in Sources */,
