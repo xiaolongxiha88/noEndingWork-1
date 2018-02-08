@@ -1806,8 +1806,6 @@ NSArray *valueLineColorArray000=@[mixPVcolor,mixYongDianXiaoHaocolor,mixDianWang
         return COLOR(255, 217, 35, 1);
     }
     
-    
-   
 }
 
 - (NSString *)barChartView:(MCBarChartView *)barChartView titleOfBarInSection:(NSInteger)section {

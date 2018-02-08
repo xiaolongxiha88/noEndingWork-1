@@ -10,9 +10,9 @@
 #import "checkOneView.h"
 #import "checkTwoView.h"
 #import "CustomProgress.h"
+#import "MCBarChartView.h"
 
-
-@interface checkThreeView ()
+@interface checkThreeView ()<MCBarChartViewDataSource, MCBarChartViewDelegate>
 {
   
     int present;
@@ -45,6 +45,11 @@
 @property (nonatomic) int allCmdModleTime;
 @property (strong, nonatomic) UIScrollView *scrollViewAll;
 
+@property (strong, nonatomic) MCBarChartView *barChartView2;
+
+@property (strong, nonatomic)NSArray* barColorArray;
+@property (strong, nonatomic)NSArray*Xtitles2;
+@property (strong, nonatomic) NSMutableArray *barDataSource2;  //bar数据的二维数组
 @end
 
 @implementation checkThreeView
@@ -83,6 +88,8 @@
     }
     
     if (_isThreeViewEnable) {
+         _isThreeViewH=everyLalbeH+300*HEIGHT_SIZE+120*HEIGHT_SIZE;
+        
         [self initThreeView];
         
     }
@@ -219,8 +226,88 @@
 }
 
 -(void)initThreeView{
+
+    
+    
+    if (!_barChartView2) {
+        _barChartView2 = [[MCBarChartView alloc] initWithFrame:CGRectMake(0, lastH+_isOneViewH+_isTwoViewH, ScreenWidth,  _isThreeViewH)];
+        _barChartView2.tag = 222;
+        _barChartView2.dataSource = self;
+        _barChartView2.delegate = self;
+        [_scrollViewAll addSubview:_barChartView2];
+    }
+    
+    //_barChartView2.maxValue = maxyAxisValue;
+    _barChartView2.unitOfYAxis = @"";
+    _barChartView2.colorOfXAxis =COLOR(153, 153, 153, 1);
+    _barChartView2.colorOfXText = COLOR(102, 102, 102, 1);
+    _barChartView2.colorOfYAxis = COLOR(153, 153, 153, 1);
+    _barChartView2.colorOfYText = COLOR(102, 102, 102, 1);
+    
+    
+    [_barChartView2 reloadDataWithAnimate:YES];
     
 }
+
+
+
+- (NSInteger)numberOfSectionsInBarChartView:(MCBarChartView *)barChartView {
+    
+    return [_barDataSource2 count];
+    
+    
+}
+
+
+- (NSInteger)barChartView:(MCBarChartView *)barChartView numberOfBarsInSection:(NSInteger)section {
+    if (barChartView.tag == 111) {
+        return 1;
+    } else {
+        return [_barDataSource2[section] count];
+    }
+}
+
+- (id)barChartView:(MCBarChartView *)barChartView valueOfBarInSection:(NSInteger)section index:(NSInteger)index {
+    
+    return _barDataSource2[section][index];
+    
+}
+
+//NSArray *valueLineColorArray0=@[COLOR(255, 217, 35, 1),COLOR(54, 193, 118, 1),COLOR(139, 128, 255, 1),COLOR(14, 239, 246, 1)];
+//ppv   sysOut   pacToUser  userLoad
+
+- (UIColor *)barChartView:(MCBarChartView *)barChartView colorOfBarInSection:(NSInteger)section index:(NSInteger)index {
+    
+    if (_barColorArray.count>index) {
+        return _barColorArray[index];
+    }else{
+        return COLOR(255, 217, 35, 1);
+    }
+    
+}
+
+- (NSString *)barChartView:(MCBarChartView *)barChartView titleOfBarInSection:(NSInteger)section {
+    return _Xtitles2[section];
+}
+
+
+
+- (CGFloat)barWidthInBarChartView:(MCBarChartView *)barChartView {
+
+    float W=10*NOW_SIZE;
+
+    return W;
+    
+}
+
+- (CGFloat)paddingForSectionInBarChartView:(MCBarChartView *)barChartView {
+    
+    return 12;
+    
+}
+
+
+
 
 -(void)initFourView{
     
