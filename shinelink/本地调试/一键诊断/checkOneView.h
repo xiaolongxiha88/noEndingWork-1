@@ -8,6 +8,14 @@
 
 #import "RootViewController.h"
 
+typedef void (^OneViewOverBlock)(void);
+
 @interface checkOneView : RootViewController
+
+@property (assign, nonatomic) int oneCharType;     //1 I-V曲线检测    2 一键诊断
+
+@property (nonatomic, copy) OneViewOverBlock oneViewOverBlock;
+
+-(void)addNotification;
 
 @end

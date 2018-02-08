@@ -333,8 +333,8 @@
     
     rotationAnimation.duration = 2;
     
-    rotationAnimation.repeatCount = HUGE_VALF;
-    
+    rotationAnimation.repeatCount = MAXFLOAT;
+     rotationAnimation.removedOnCompletion = NO;
     [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
     
 }

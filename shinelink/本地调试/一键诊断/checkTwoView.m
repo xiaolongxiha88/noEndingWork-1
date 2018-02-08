@@ -125,11 +125,32 @@ static int unit2=80/4;
         _timer.fireDate=[NSDate distantFuture];
         _timer=nil;
     }
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKey" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKeyFailed" object:nil];
+    if (_charType==1 || _charType==2) {
+        [self removeTheNotification];
+    }
     
 }
 
+-(void)removeTheNotification{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKey" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKeyFailed" object:nil];
+    
+    if (_charType==3) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"OneKeyOneViewGoToStartRead" object:nil];
+    }
+}
+
+
+-(void)addNotification{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goToStartRead) name: @"OneKeyTwoViewGoToStartRead" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveData:) name: @"TcpReceiveOneKey" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveOneKeyFailed" object:nil];
+}
+
+-(void)goToStartRead{
+    _isReadNow=NO;
+    [self goStopRead:nil];
+}
 
 #pragma mark - UI界面
 -(void)initUI{
@@ -203,7 +224,10 @@ static int unit2=80/4;
     
     custompro.presentlab.textColor = [UIColor whiteColor];
     custompro.presentlab.text = @"开始";
-    [self.view addSubview:custompro];
+    if (_charType !=3) {
+  [self.view addSubview:custompro];
+    }
+
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goStopRead:)];
     [custompro addGestureRecognizer:tapGestureRecognizer];
@@ -223,10 +247,16 @@ static int unit2=80/4;
     _view2.backgroundColor=[UIColor clearColor];
     [_viewAll addSubview:_view2];
     
-    NSArray *lableNameArray=@[@"ID:Number",@"显示倍数",@"波形值"];
+    NSArray *lableNameArray;
+    if (_charType==1 || _charType==2) {
+        lableNameArray=@[@"ID",@"显示倍数",@"波形值"];
+    }
+    if (_charType==3) {
+        lableNameArray=@[@"Phase",@"Rms(V),f(Hz)",@"波形值"];
+    }
     
      W0=SCREEN_Width/lableNameArray.count;
-    CGSize lable1Size=[self getStringSize:14*HEIGHT_SIZE Wsize:CGFLOAT_MAX Hsize:everyLalbeH stringName:lableNameArray[0]];
+//    CGSize lable1Size=[self getStringSize:14*HEIGHT_SIZE Wsize:CGFLOAT_MAX Hsize:everyLalbeH stringName:lableNameArray[0]];
     lable1Size2=[self getStringSize:14*HEIGHT_SIZE Wsize:CGFLOAT_MAX Hsize:everyLalbeH stringName:lableNameArray[2]];
     
     for (int i=0; i<lableNameArray.count; i++) {
@@ -239,27 +269,33 @@ static int unit2=80/4;
         [_view2 addSubview:titleLable];
     }
 
-    _colorArray=@[COLOR(208, 107, 107, 1),COLOR(217, 189, 60, 1),COLOR(85, 207, 85, 1),COLOR(85, 122, 207, 1)];
+    if (_charType==1 || _charType==2) {
+           _colorArray=@[COLOR(208, 107, 107, 1),COLOR(217, 189, 60, 1),COLOR(85, 207, 85, 1),COLOR(85, 122, 207, 1)];
+    }else  if (_charType==3){
+             _colorArray=@[COLOR(208, 107, 107, 1),COLOR(217, 189, 60, 1),COLOR(85, 207, 85, 1)];
+    }
+ 
     
     float imageViewH=10*HEIGHT_SIZE; float Wk=2*NOW_SIZE;
-    float imageViewx=(W0-lable1Size.width)/2-imageViewH-Wk;
+//    float imageViewx=(W0-lable1Size.width)/2-imageViewH-Wk;
+     float imageViewx=15*NOW_SIZE;
     
     _xNumArray=[NSMutableArray array];
     
+    NSArray *oneKeyLeftNameArray=@[@"R",@"S",@"T"];
+    
     for (int i=0; i<_colorArray.count; i++) {
         
-        //        UIView* view21=[[UIView alloc]initWithFrame:CGRectMake(0,everyLalbeH*(i+1), SCREEN_Width/2, everyLalbeH)];
-        //        view21.backgroundColor=[UIColor whiteColor];
-        //        [view2 addSubview:view21];
+
         
             Lable11x=imageViewx+imageViewH+Wk*2;
         
         [_xNumArray addObject:@"1"];
         UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-        if (_charType==1) {
+        if (_charType==1 || _charType==3) {
                 button1.frame = CGRectMake(0,everyLalbeH*(i+1),W0, everyLalbeH);
-        }else{
-                    button1.frame = CGRectMake(0,everyLalbeH*(i+1),W0-Lable11x, everyLalbeH);
+        }else if (_charType==2) {
+          button1.frame = CGRectMake(0,everyLalbeH*(i+1),W0-Lable11x, everyLalbeH);
         }
 
         [button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -278,16 +314,21 @@ static int unit2=80/4;
         [button1 addSubview:imageView];
         
       
-        if (_charType==1) {
+        if (_charType==1 || _charType==3) {
             UILabel *Lable11 = [[UILabel alloc]initWithFrame:CGRectMake(Lable11x, 0,W0-Lable11x,everyLalbeH)];
             Lable11.textColor =COLOR(102, 102, 102, 1);
             Lable11.textAlignment=NSTextAlignmentLeft;
             Lable11.adjustsFontSizeToFitWidth=YES;
-            Lable11.text=@"----";
+            if (_charType==1) {
+                    Lable11.text=@"----";
+            }
+            if (_charType==3) {
+                Lable11.text=oneKeyLeftNameArray[i];
+            }
             Lable11.tag=6000+i;
             Lable11.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [button1 addSubview:Lable11];
-        }else{
+        }else if (_charType==2) {
             float buttonW1=70*NOW_SIZE;   float buttonH=20*HEIGHT_SIZE;
             UIButton *button21 = [UIButton buttonWithType:UIButtonTypeCustom];
             button21.frame = CGRectMake(Lable11x, (everyLalbeH-buttonH)/2+everyLalbeH*(i+1), buttonW1, buttonH);
@@ -324,14 +365,23 @@ static int unit2=80/4;
         button2.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
         [button2 setTitle:@"1倍" forState:UIControlStateNormal];
         [button2 addTarget:self action:@selector(tapXnum:) forControlEvents:UIControlEventTouchUpInside];
-        [_view2 addSubview:button2];
+           if (_charType==1 || _charType==2) {
+                [_view2 addSubview:button2];
+        }
+    
         
         float Lable22W=20*NOW_SIZE;
-        UILabel *Lable22 = [[UILabel alloc]initWithFrame:CGRectMake(W0+(W0-buttonW)/2-Lable22W-2*NOW_SIZE, +everyLalbeH*(i+1),Lable22W,everyLalbeH)];
+        UILabel *Lable22 = [[UILabel alloc]initWithFrame:CGRectMake(W0+(W0-buttonW)/2-Lable22W-2*NOW_SIZE, everyLalbeH*(i+1),Lable22W,everyLalbeH)];
         Lable22.textColor =COLOR(102, 102, 102, 1);
         Lable22.textAlignment=NSTextAlignmentRight;
         Lable22.adjustsFontSizeToFitWidth=YES;
         Lable22.text=@"X";
+        if (_charType==3) {
+            Lable22.frame=CGRectMake(W0, everyLalbeH*(i+1),W0,everyLalbeH);
+                Lable22.textAlignment=NSTextAlignmentCenter;
+                Lable22.text=@"--,--";
+              Lable22.tag = 4500+i;
+        }
         Lable22.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_view2 addSubview:Lable22];
         
@@ -594,6 +644,11 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         
         //收完数据啦~~~~~~~~~~~~~~~~~~~~~~~~~~
         if (_allDataRecieveAllArray.count==_allSendDataAllArray.count) {
+            if (_charType==3) {
+                self.oneViewOverBlock();
+            }
+            [self removeTheNotification];
+            
             _isReadfirstDataOver=NO;
             _isReadNow=NO;
         }

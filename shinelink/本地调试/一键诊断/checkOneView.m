@@ -104,9 +104,30 @@ static int  firstReadTime=72.0;
           _timer.fireDate=[NSDate distantFuture];
         _timer=nil;
     }
+    if (_oneCharType==1) {
+        [self removeTheNotification];
+    }
+
+}
+
+-(void)removeTheNotification{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKey" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKeyFailed" object:nil];
     
+    if (_oneCharType==2) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"OneKeyOneViewGoToStartRead" object:nil];
+    }
+}
+
+-(void)addNotification{
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(goToStartRead) name: @"OneKeyOneViewGoToStartRead" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveData:) name: @"TcpReceiveOneKey" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveOneKeyFailed" object:nil];
+}
+
+-(void)goToStartRead{
+    _isReadNow=NO;
+    [self goStopRead:nil];
 }
 
 //读取数据成功
@@ -133,6 +154,10 @@ static int  firstReadTime=72.0;
         
         //收完数据啦~~~~~~~~~~~~~~~~~~~~~~~~~~
         if (_allSendDataArray.count==_allDataArray.count) {
+            if (_oneCharType==2) {
+                    self.oneViewOverBlock();
+            }
+            [self removeTheNotification];
             _isReadfirstDataOver=NO;
             _isReadNow=NO;
         }
@@ -407,7 +432,10 @@ static int  firstReadTime=72.0;
 
     custompro.presentlab.textColor = [UIColor whiteColor];
     custompro.presentlab.text = @"开始";
-    [self.view addSubview:custompro];
+    if (_oneCharType != 2) {
+            [self.view addSubview:custompro];
+    }
+
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goStopRead:)];
     [custompro addGestureRecognizer:tapGestureRecognizer];

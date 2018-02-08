@@ -85,6 +85,7 @@
     NSInteger Num=tap.view.tag;
     if (Num==2000) {
         checkOneView *goView=[[checkOneView alloc]init];
+        goView.oneCharType=1;
         goView.title=_nameArray[0];
         [self.navigationController pushViewController:goView animated:YES];
     }else  if (Num==2001) {
