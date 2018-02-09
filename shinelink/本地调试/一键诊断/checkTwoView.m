@@ -79,6 +79,8 @@ static int unit2=80/4;
 @property (strong, nonatomic)UIView* view0;
 @property (strong, nonatomic)UIView* view2;
 
+@property (nonatomic) BOOL isChartType3LastCmdOver;
+@property (strong, nonatomic)NSArray* type3LeftLableArray;
 
 @end
 
@@ -149,6 +151,7 @@ static int unit2=80/4;
 
 -(void)goToStartRead{
     _isReadNow=NO;
+    _isChartType3LastCmdOver=NO;
     [self goStopRead:nil];
 }
 
@@ -469,7 +472,7 @@ static int unit2=80/4;
     [_selectBoolArray setObject:[NSNumber numberWithBool:button.selected] atIndexedSubscript:tagNum];
     
     UIView* view =[self.view viewWithTag:5000+tagNum];
-    if (_charType==1) {
+    if (_charType==1 || _charType==3) {
         UILabel* lable =[self.view viewWithTag:6000+tagNum];
         if ( button.selected) {
             view.backgroundColor=_colorArray[tagNum];
@@ -479,7 +482,7 @@ static int unit2=80/4;
             view.backgroundColor=COLOR(151, 151, 151, 1);
             lable.text=@"----";
         }
-    }else{
+    }else if (_charType==2){
         UIButton* button =[self.view viewWithTag:6000+tagNum];
         if ( button.selected) {
             view.backgroundColor=_colorArray[tagNum];
@@ -509,8 +512,10 @@ static int unit2=80/4;
             if (_charType==1) {
                 
 _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"1750",@"1875",@"2000",@"2125"],@[@"2250",@"2375",@"2500",@"2625",@"2750"],@[@"2875",@"3000",@"3125",@"3250",@"3375"]];
-            }else{
+            }else  if (_charType==2){
                 _allSendDataAllArray=@[@[@"3500",@"3625",@"3750",@"3875",@"4000"],@[@"4125",@"4250",@"4375",@"4500",@"4625"],@[@"4750",@"4875",@"5000",@"5125",@"5250"],@[@"5375",@"5500",@"5625",@"5750",@"5875"]];
+            }else  if (_charType==3){
+                _allSendDataAllArray=@[@[@"3500",@"3625",@"3750",@"3875",@"4000"],@[@"4125",@"4250",@"4375",@"4500",@"4625"],@[@"4750",@"4875",@"5000",@"5125",@"5250"]];
             }
             
             _allSendDataArray=[NSArray arrayWithArray:_allSendDataAllArray[_progressNumAll]];
@@ -545,7 +550,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             [self showToastViewWithTitle:@"请选择故障序号"];
             return;
         }
-    }else{
+    }else if (_charType==2){
         for (NSString*ID in _valueForLeftLableArray) {
             if ([ID isEqualToString:@""]) {
                 [self showToastViewWithTitle:@"请填写ID号"];
@@ -590,7 +595,14 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     present=_progressNum*unit;
     [custompro setPresent:present];
     
-    if (_progressNum>=keyOneWaitTime) {
+    int waitingTime=0;
+    if (_charType==1 || _charType==2) {
+        waitingTime=keyOneWaitTime;
+    }
+    if (_charType==3) {
+        waitingTime=1;
+    }
+    if (_progressNum>=waitingTime) {
         _isReadfirstDataOver=YES;
         _timer.fireDate=[NSDate distantFuture];
         _progressNum=0;
@@ -606,6 +618,21 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
 //读取数据成功
 -(void)receiveData:(NSNotification*) notification{
     NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
+    if (_charType==3) {
+        if (_isChartType3LastCmdOver) {
+             NSData*data1= [firstDic objectForKey:@"one"];
+                  float R=([_changeDataValue changeOneRegister:data1 registerNum:36]);
+             float S=([_changeDataValue changeOneRegister:data1 registerNum:37]);
+             float T=([_changeDataValue changeOneRegister:data1 registerNum:38]);
+              float H=([_changeDataValue changeOneRegister:data1 registerNum:39]);
+            _type3LeftLableArray=@[[NSString stringWithFormat:@"%.f",R],[NSString stringWithFormat:@"%.f",S],[NSString stringWithFormat:@"%.f",T],[NSString stringWithFormat:@"%.f",H]];
+            
+            [self updataLeftMaxValue2];
+            [self chartType3Recieve];
+            return;
+        }
+    }
+    
     if (!_isReadfirstDataOver) {
         
         [self goToReadCharData];
@@ -645,16 +672,32 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         //收完数据啦~~~~~~~~~~~~~~~~~~~~~~~~~~
         if (_allDataRecieveAllArray.count==_allSendDataAllArray.count) {
             if (_charType==3) {
-                self.oneViewOverBlock();
+                [self chartType3cmd];
             }
-            [self removeTheNotification];
             
-            _isReadfirstDataOver=NO;
-            _isReadNow=NO;
+            if (_charType==1 || _charType==2) {
+                [self removeTheNotification];
+                _isReadfirstDataOver=NO;
+                _isReadNow=NO;
+            }
+       
         }
         
     }
     
+}
+
+
+-(void)chartType3cmd{
+    _isChartType3LastCmdOver=YES;
+        [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:@"6000" Length:@"50"];
+}
+
+-(void)chartType3Recieve{
+     self.oneViewOverBlock();
+    [self removeTheNotification];
+    _isReadfirstDataOver=NO;
+    _isReadNow=NO;
 }
 
 //解析读取的数据
@@ -775,9 +818,14 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         NSString *LENTH=[NSString stringWithFormat:@"1_2_%d",[_sendSNString intValue]];
         _isReadfirstDataOver=NO;
         [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"259" Length:LENTH];
-    }else{
+    }else if (_charType==2) {
  
         NSString *LENTH=[NSString stringWithFormat:@"5_10_%d_%d_%d_%d_%d",[_valueForLeftLableArray[0] intValue],[_valueForLeftLableArray[1] intValue],[_valueForLeftLableArray[2] intValue],[_valueForLeftLableArray[3] intValue],1];
+        _isReadfirstDataOver=NO;
+        [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"260" Length:LENTH];
+    }else if (_charType==3) {
+        
+        NSString *LENTH=[NSString stringWithFormat:@"5_10_%d_%d_%d_%d_%d",4,5,6,7,1];
         _isReadfirstDataOver=NO;
         [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"260" Length:LENTH];
     }
@@ -846,7 +894,17 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
                     [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"%@",leftString]];
         }
 
-
+        if (_charType==3) {
+            _valueForLeftLableArray=[NSMutableArray arrayWithArray:@[@"R",@"S",@"T"]];
+            if (_type3LeftLableArray.count!=0) {
+                for (int i=0; i<_colorArray.count; i++) {
+                    UILabel *lable=[self.view viewWithTag:4500+i];
+                    lable.text=[NSString stringWithFormat:@"%@,%@",_type3LeftLableArray[i],_type3LeftLableArray[3]];
+                    
+                }
+            }
+          
+        }
         
         UIView *view=[self.view viewWithTag:5000+i];
         view.backgroundColor=_colorArray[i];

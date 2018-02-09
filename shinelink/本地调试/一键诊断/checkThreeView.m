@@ -11,6 +11,8 @@
 #import "checkTwoView.h"
 #import "CustomProgress.h"
 #import "MCBarChartView.h"
+#import "usbToWifiDataControl.h"
+#import "wifiToPvOne.h"
 
 @interface checkThreeView ()<MCBarChartViewDataSource, MCBarChartViewDelegate>
 {
@@ -47,9 +49,16 @@
 
 @property (strong, nonatomic) MCBarChartView *barChartView2;
 
+@property (strong, nonatomic)NSArray* barRightArray;
 @property (strong, nonatomic)NSArray* barColorArray;
 @property (strong, nonatomic)NSArray*Xtitles2;
 @property (strong, nonatomic) NSMutableArray *barDataSource2;  //bar数据的二维数组
+
+@property(nonatomic,strong)wifiToPvOne*ControlOne;
+@property (assign, nonatomic) int cmdTimes;
+@property (assign, nonatomic) int progressNum;
+@property(nonatomic,strong)usbToWifiDataControl*changeDataValue;
+
 @end
 
 @implementation checkThreeView
@@ -154,10 +163,95 @@
            [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyOneViewGoToStartRead"object:nil];
     }
     
+    if (_allCmdModleTime==1) {
+        [_viewTwo addNotification];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyTwoViewGoToStartRead"object:nil];
+    }
+    
+    if (_allCmdModleTime==2) {
+        [self cmdThreeModle];
+    }
+    
     _allCmdModleTime++;
 }
 
+-(void)cmdThreeModle{
+    if (!_ControlOne) {
+        _ControlOne=[[wifiToPvOne alloc]init];
+        
+    }
 
+    
+    _cmdTimes=0;
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveData:) name: @"TcpReceiveOneKey" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveOneKeyFailed" object:nil];
+    
+    NSString *LENTH=[NSString stringWithFormat:@"1_2_%d",1];
+          [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"265" Length:LENTH];
+}
+
+
+//定时器更新
+-(void)updateProgress{
+    _progressNum++;
+    
+
+    
+    int waitingTime=0;
+    if (_cmdTimes==0) {
+        waitingTime=60;
+    }
+    if (_cmdTimes==2) {
+          waitingTime=60;
+    }
+    if (_progressNum>=waitingTime) {
+        if (_cmdTimes==0) {
+            _cmdTimes++;
+              [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:@"6000" Length:@"125"];
+        }
+        
+        
+          _timer.fireDate=[NSDate distantFuture];
+    }
+    
+}
+
+
+
+-(void)receiveData:(NSNotification*) notification{
+    NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
+        NSData*data= [firstDic objectForKey:@"one"];
+    if (_cmdTimes==0) {
+        if (!_timer) {
+            _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+        }else{
+            _timer.fireDate=[NSDate distantPast];
+        }
+    }
+    
+    if (_cmdTimes==1) {
+        _barDataSource2=[NSMutableArray array];
+        for (int i=0; i<3; i++) {
+            int T=1+11*i;
+            NSMutableArray *smallArray=[NSMutableArray array];
+            for (int K=0; K<10; K++) {
+                   float value=([_changeDataValue changeOneRegister:data registerNum:T]);
+                [smallArray addObject:[NSString stringWithFormat:@"%.f",value]];
+            }
+            [_barDataSource2 addObject:smallArray];
+        }
+        
+        _barRightArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:0]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:1]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:2]]];
+    }
+    
+    
+}
+
+-(void)setFailed{
+    
+}
+
+////////////////////I-V/P-V 曲线
 -(void)initOneView{
     if (!_viewOne) {
         UIView* view1=[[UIView alloc]initWithFrame:CGRectMake(0,lastH, SCREEN_Width, everyLalbeH)];
@@ -192,7 +286,7 @@
     
 }
 
-
+////////////////////AC曲线
 -(void)initTwoView{
     if (!_viewTwo) {
         UIView* view1=[[UIView alloc]initWithFrame:CGRectMake(0,lastH+_isOneViewH, SCREEN_Width, everyLalbeH)];
@@ -209,7 +303,7 @@
         _viewTwo=[[checkTwoView alloc]init];
         _viewTwo.charType=3;
         _viewTwo.view.frame=CGRectMake(0,lastH+_isOneViewH+everyLalbeH, SCREEN_Width, _isTwoViewH-everyLalbeH-everyModelKongH*2);
-        [_viewTwo addNotification];
+     
         __weak typeof(self) weakSelf = self;
         _viewTwo.oneViewOverBlock=^{
             [weakSelf goToReadAllChart];
@@ -239,7 +333,7 @@
     
     //_barChartView2.maxValue = maxyAxisValue;
     _barChartView2.unitOfYAxis = @"";
-    _barChartView2.colorOfXAxis =COLOR(153, 153, 153, 1);
+    _barChartView2.colorOfXAxis =COLOR(153, 153, 153, 1);                                                                      
     _barChartView2.colorOfXText = COLOR(102, 102, 102, 1);
     _barChartView2.colorOfYAxis = COLOR(153, 153, 153, 1);
     _barChartView2.colorOfYText = COLOR(102, 102, 102, 1);

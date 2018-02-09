@@ -115,6 +115,9 @@ static int  firstReadTime=72.0;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKeyFailed" object:nil];
     
     if (_oneCharType==2) {
+        if (_ControlOne) {
+            [_ControlOne disConnect];
+        }
         [[NSNotificationCenter defaultCenter] removeObserver:self name:@"OneKeyOneViewGoToStartRead" object:nil];
     }
 }
@@ -598,7 +601,14 @@ static int  firstReadTime=72.0;
     present=_progressNum*unit;
       [custompro setPresent:present];
     
-    if (_progressNum>=keyOneWaitTime) {
+    int waitingTime=0;
+    if (_oneCharType==1) {
+        waitingTime=keyOneWaitTime;
+    }
+    if (_oneCharType==2) {
+        waitingTime=1;
+    }
+    if (_progressNum>=waitingTime) {
              _isReadfirstDataOver=YES;
           _timer.fireDate=[NSDate distantFuture];
         _progressNum=0;
