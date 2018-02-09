@@ -158,22 +158,54 @@
 
 
 -(void)goToReadAllChart{
-    if (_allCmdModleTime==0) {
-                [_viewOne addNotification];
-           [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyOneViewGoToStartRead"object:nil];
-    }
+        _allCmdModleTime++;
     
     if (_allCmdModleTime==1) {
-        [_viewTwo addNotification];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyTwoViewGoToStartRead"object:nil];
+        if (_isOneViewEnable) {
+            [_viewOne addNotification];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyOneViewGoToStartRead"object:nil];
+        }else{
+            [self goToReadAllChartAgain];
+        }
+        
     }
     
     if (_allCmdModleTime==2) {
-        [self cmdThreeModle];
+        if (_isTwoViewEnable) {
+            [_viewTwo addNotification];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyTwoViewGoToStartRead"object:nil];
+        }else{
+            [self goToReadAllChartAgain];
+        }
+     
     }
     
-    _allCmdModleTime++;
+    if (_allCmdModleTime==3) {
+        if (_isThreeViewEnable) {
+               [self cmdThreeModle];
+        }else{
+            [self goToReadAllChartAgain];
+        }
+     
+    }
+    
+    if (_allCmdModleTime==4) {
+        if (_isFourViewEnable) {
+            [self cmdThreodle];
+        }else{
+            [self goToReadAllChartAgain];
+        }
+    }
+
+    if (_allCmdModleTime>4) {
+        _allCmdModleTime=10;
+    }
 }
+
+-(void)goToReadAllChartAgain{
+    [self goToReadAllChart];
+}
+
 
 -(void)cmdThreeModle{
     if (!_ControlOne) {
@@ -199,10 +231,10 @@
     
     int waitingTime=0;
     if (_cmdTimes==0) {
-        waitingTime=60;
+        waitingTime=1;           //等待时间
     }
     if (_cmdTimes==2) {
-          waitingTime=60;
+          waitingTime=1;            //等待时间
     }
     if (_progressNum>=waitingTime) {
         if (_cmdTimes==0) {
@@ -242,6 +274,8 @@
         }
         
         _barRightArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:0]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:1]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:2]]];
+        
+        [self initThreeView];
     }
     
     
