@@ -361,6 +361,11 @@
         titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [view1 addSubview:titleLable];
         
+        if (_viewOne) {
+            [_viewOne.view removeFromSuperview];
+            _viewOne=nil;
+        }
+        
         _viewOne=[[checkOneView alloc]init];
         _viewOne.oneCharType=2;
         _viewOne.view.frame=CGRectMake(0,lastH+everyLalbeH, SCREEN_Width, _isOneViewH-everyLalbeH-everyModelKongH*2);
@@ -396,6 +401,10 @@
         titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [view1 addSubview:titleLable];
         
+        if (_viewTwo) {
+            [_viewTwo.view removeFromSuperview];
+            _viewTwo=nil;
+        }
         _viewTwo=[[checkTwoView alloc]init];
         _viewTwo.charType=3;
         _viewTwo.view.frame=CGRectMake(0,lastH+_isOneViewH+everyLalbeH, SCREEN_Width, _isTwoViewH-everyLalbeH-everyModelKongH*2);
@@ -488,7 +497,7 @@
     
     [_barChartView2 reloadDataWithAnimate:YES];
     
-    if (_barRightArray.count>0) {
+
         if (_view3) {
             [_view3 removeFromSuperview];
             _view3=nil;
@@ -544,7 +553,12 @@
             Lable22.textColor =COLOR(102, 102, 102, 1);
             Lable22.textAlignment=NSTextAlignmentCenter;
             Lable22.adjustsFontSizeToFitWidth=YES;
-            Lable22.text=_barRightArray[i];
+            if (_barRightArray.count>0) {
+                  Lable22.text=_barRightArray[i];
+            }else{
+                Lable22.text=@"--";
+            }
+          
             Lable22.tag=7000+i;
             Lable22.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [view22 addSubview:Lable22];
@@ -555,7 +569,7 @@
         UIView* view0=[[UIView alloc]initWithFrame:CGRectMake(0,lastH+_isOneViewH+_isTwoViewH+_isThreeViewH-everyModelKongH, SCREEN_Width, everyModelKongH)];
         view0.backgroundColor=COLOR(242, 242, 242, 1);
         [_scrollViewAll addSubview:view0];
-    }
+
    
     
     

@@ -138,6 +138,9 @@ static int unit2=80/4;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKeyFailed" object:nil];
     
     if (_charType==3) {
+        if (_ControlOne) {
+            [_ControlOne disConnect];
+        }
         [[NSNotificationCenter defaultCenter] removeObserver:self name:@"OneKeyOneViewGoToStartRead" object:nil];
     }
 }
