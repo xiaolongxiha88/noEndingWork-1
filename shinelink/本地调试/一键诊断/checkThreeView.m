@@ -189,7 +189,7 @@
         }else{
             _allCmdModleTime++;
         }
-     
+        
     }
     
     if (_allCmdModleTime==4) {
@@ -216,7 +216,9 @@
         _ControlOne=[[wifiToPvOne alloc]init];
         
     }
-
+    if (!_changeDataValue) {
+        _changeDataValue=[[usbToWifiDataControl alloc]init];
+    }
     _cmdTimes=0;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveData:) name: @"TcpReceiveOneKey" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveOneKeyFailed" object:nil];
@@ -231,7 +233,9 @@
         _ControlOne=[[wifiToPvOne alloc]init];
         
     }
-    
+    if (!_changeDataValue) {
+        _changeDataValue=[[usbToWifiDataControl alloc]init];
+    }
     
     _cmdTimes=0;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveData:) name: @"TcpReceiveOneKey" object:nil];
@@ -290,17 +294,16 @@
         
         if (_cmdTimes==1) {
             _barDataSource2=[NSMutableArray array];
-            for (int i=0; i<3; i++) {
-                int T=1+11*i;
-                NSMutableArray *smallArray=[NSMutableArray array];
-                for (int K=0; K<10; K++) {
-                    float value=([_changeDataValue changeOneRegister:data registerNum:T]);
-                    [smallArray addObject:[NSString stringWithFormat:@"%.f",value]];
-                }
+            for (int i=0; i<10; i++) {
+                int A=1+i;
+                int B=12+i;
+                int C=23+i;
+                NSArray *smallArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:A]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:B]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:C]]];
+      
                 [_barDataSource2 addObject:smallArray];
             }
             
-            _barRightArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:0]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:1]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:2]]];
+            _barRightArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:0]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:11]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:22]]];
             
             [self initThreeView];
             [self goToReadAllChart];
@@ -404,14 +407,17 @@
 -(void)initThreeView{
 
     if (!_barDataSource2) {
-        _barDataSource2=[NSMutableArray arrayWithArray:@[@[@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0"],@[@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0"],@[@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0"]]];
+        _barDataSource2=[NSMutableArray arrayWithArray:@[@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"]]];
     }
-    NSNumber *maxyAxisValue1 = [_barDataSource2[0] valueForKeyPath:@"@max.floatValue"];
-    NSNumber *maxyAxisValue2 = [_barDataSource2[1] valueForKeyPath:@"@max.floatValue"];
-    NSNumber *maxyAxisValue3 = [_barDataSource2[2] valueForKeyPath:@"@max.floatValue"];
-  
-    NSArray *maxArray=@[maxyAxisValue1,maxyAxisValue2,maxyAxisValue3];
-    NSNumber *maxyAxisValue = [maxArray valueForKeyPath:@"@max.floatValue"];
+       NSNumber *maxyAxisValue = [NSNumber numberWithInt:0];
+    for (NSArray *array in _barDataSource2) {
+            NSNumber *maxyAxisValue1 = [array valueForKeyPath:@"@max.floatValue"];
+        if ([maxyAxisValue1 floatValue]>[maxyAxisValue floatValue]) {
+            maxyAxisValue=maxyAxisValue1;
+        }
+    }
+    
+       _barColorArray=@[COLOR(208, 107, 107, 1),COLOR(217, 189, 60, 1),COLOR(85, 207, 85, 1)];
     
     if (!_barDataSource2) {
         maxyAxisValue=[NSNumber numberWithInt:100];
@@ -443,7 +449,7 @@
     _Xtitles2=@[@"1",@"3",@"5",@"7",@"9",@"11",@"13",@"15",@"17",@"19",];
  
     
-        _barChartView2 = [[MCBarChartView alloc] initWithFrame:CGRectMake(0, lastH+_isOneViewH+_isTwoViewH, ScreenWidth,  _isThreeViewH-140*HEIGHT_SIZE)];
+        _barChartView2 = [[MCBarChartView alloc] initWithFrame:CGRectMake(0, lastH+_isOneViewH+_isTwoViewH, ScreenWidth,  _isThreeViewH-150*HEIGHT_SIZE)];
         _barChartView2.tag = 222;
         _barChartView2.dataSource = self;
         _barChartView2.delegate = self;
@@ -511,7 +517,7 @@
 
 - (CGFloat)barWidthInBarChartView:(MCBarChartView *)barChartView {
 
-    float W=10*NOW_SIZE;
+    float W=4.8*NOW_SIZE;
 
     return W;
     
