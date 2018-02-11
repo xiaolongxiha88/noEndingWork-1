@@ -54,6 +54,8 @@
 @property (strong, nonatomic)NSArray*Xtitles2;
 @property (strong, nonatomic) NSMutableArray *barDataSource2;  //bar数据的二维数组
 
+@property (strong, nonatomic)NSArray*zuKangArray;
+
 @property(nonatomic,strong)wifiToPvOne*ControlOne;
 @property (assign, nonatomic) int cmdTimes;
 @property (assign, nonatomic) int progressNum;
@@ -165,7 +167,7 @@
             [_viewOne addNotification];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyOneViewGoToStartRead"object:nil];
         }else{
-            [self goToReadAllChartAgain];
+            _allCmdModleTime++;
         }
         
     }
@@ -175,25 +177,24 @@
             [_viewTwo addNotification];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyTwoViewGoToStartRead"object:nil];
         }else{
-            [self goToReadAllChartAgain];
+            _allCmdModleTime++;
         }
      
     }
+    
     
     if (_allCmdModleTime==3) {
         if (_isThreeViewEnable) {
                [self cmdThreeModle];
         }else{
-            [self goToReadAllChartAgain];
+            _allCmdModleTime++;
         }
      
     }
     
     if (_allCmdModleTime==4) {
         if (_isFourViewEnable) {
-            [self cmdThreodle];
-        }else{
-            [self goToReadAllChartAgain];
+            [self cmdFourModle];
         }
     }
 
@@ -203,6 +204,9 @@
 }
 
 -(void)goToReadAllChartAgain{
+    if (_allCmdModleTime>4) {
+        _allCmdModleTime=10;
+    }
     [self goToReadAllChart];
 }
 
@@ -213,15 +217,29 @@
         
     }
 
-    
     _cmdTimes=0;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveData:) name: @"TcpReceiveOneKey" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveOneKeyFailed" object:nil];
     
     NSString *LENTH=[NSString stringWithFormat:@"1_2_%d",1];
           [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"265" Length:LENTH];
+    
 }
 
+-(void)cmdFourModle{
+    if (!_ControlOne) {
+        _ControlOne=[[wifiToPvOne alloc]init];
+        
+    }
+    
+    
+    _cmdTimes=0;
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveData:) name: @"TcpReceiveOneKey" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(setFailed) name: @"TcpReceiveOneKeyFailed" object:nil];
+    
+    NSString *LENTH=[NSString stringWithFormat:@"1_2_%d",1];
+    [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"266" Length:LENTH];
+}
 
 //定时器更新
 -(void)updateProgress{
@@ -230,21 +248,28 @@
 
     
     int waitingTime=0;
-    if (_cmdTimes==0) {
+    if (_allCmdModleTime==3) {
         waitingTime=1;           //等待时间
-    }
-    if (_cmdTimes==2) {
-          waitingTime=1;            //等待时间
-    }
-    if (_progressNum>=waitingTime) {
-        if (_cmdTimes==0) {
-            _cmdTimes++;
-              [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:@"6000" Length:@"125"];
+        if (_progressNum>=waitingTime) {
+            if (_cmdTimes==0) {
+                _cmdTimes++;
+                [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:@"6000" Length:@"125"];
+            }
+            _timer.fireDate=[NSDate distantFuture];
         }
-        
-        
-          _timer.fireDate=[NSDate distantFuture];
     }
+    
+    if (_allCmdModleTime==4) {
+          waitingTime=1;            //等待时间
+        if (_progressNum>=waitingTime) {
+            if (_cmdTimes==0) {
+                _cmdTimes++;
+                [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:@"6000" Length:@"125"];
+            }
+            _timer.fireDate=[NSDate distantFuture];
+        }
+    }
+
     
 }
 
@@ -253,29 +278,52 @@
 -(void)receiveData:(NSNotification*) notification{
     NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
         NSData*data= [firstDic objectForKey:@"one"];
-    if (_cmdTimes==0) {
-        if (!_timer) {
-            _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
-        }else{
-            _timer.fireDate=[NSDate distantPast];
+    if (_allCmdModleTime==3) {
+        if (_cmdTimes==0) {
+            _progressNum=0;
+            if (!_timer) {
+                _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+            }else{
+                _timer.fireDate=[NSDate distantPast];
+            }
+        }
+        
+        if (_cmdTimes==1) {
+            _barDataSource2=[NSMutableArray array];
+            for (int i=0; i<3; i++) {
+                int T=1+11*i;
+                NSMutableArray *smallArray=[NSMutableArray array];
+                for (int K=0; K<10; K++) {
+                    float value=([_changeDataValue changeOneRegister:data registerNum:T]);
+                    [smallArray addObject:[NSString stringWithFormat:@"%.f",value]];
+                }
+                [_barDataSource2 addObject:smallArray];
+            }
+            
+            _barRightArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:0]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:1]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:2]]];
+            
+            [self initThreeView];
+            [self goToReadAllChart];
         }
     }
+
     
-    if (_cmdTimes==1) {
-        _barDataSource2=[NSMutableArray array];
-        for (int i=0; i<3; i++) {
-            int T=1+11*i;
-            NSMutableArray *smallArray=[NSMutableArray array];
-            for (int K=0; K<10; K++) {
-                   float value=([_changeDataValue changeOneRegister:data registerNum:T]);
-                [smallArray addObject:[NSString stringWithFormat:@"%.f",value]];
+    if (_allCmdModleTime==4) {
+        if (_cmdTimes==0) {
+               _progressNum=0;
+            if (!_timer) {
+                _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+            }else{
+                _timer.fireDate=[NSDate distantPast];
             }
-            [_barDataSource2 addObject:smallArray];
         }
         
-        _barRightArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:0]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:1]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:2]]];
-        
-        [self initThreeView];
+        if (_cmdTimes==1) {
+
+            _zuKangArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:33]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:34]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:35]]];
+            
+            [self initFourView];
+        }
     }
     
     
@@ -355,17 +403,53 @@
 
 -(void)initThreeView{
 
+    if (!_barDataSource2) {
+        _barDataSource2=[NSMutableArray arrayWithArray:@[@[@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0"],@[@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0"],@[@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0",@"0"]]];
+    }
+    NSNumber *maxyAxisValue1 = [_barDataSource2[0] valueForKeyPath:@"@max.floatValue"];
+    NSNumber *maxyAxisValue2 = [_barDataSource2[1] valueForKeyPath:@"@max.floatValue"];
+    NSNumber *maxyAxisValue3 = [_barDataSource2[2] valueForKeyPath:@"@max.floatValue"];
+  
+    NSArray *maxArray=@[maxyAxisValue1,maxyAxisValue2,maxyAxisValue3];
+    NSNumber *maxyAxisValue = [maxArray valueForKeyPath:@"@max.floatValue"];
     
+    if (!_barDataSource2) {
+        maxyAxisValue=[NSNumber numberWithInt:100];
+    }
+        float getY0=[maxyAxisValue floatValue]/6;
+        int getY1=ceil(getY0);
+        if ((0<getY1)&&(getY1<10)) {
+            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+        }else if ((10<getY1)&&(getY1<100)) {
+            getY1=ceil(getY0/5)*5;
+            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+        }else if ((100<getY1)&&(getY1<1000)) {
+            getY1=ceil(getY0/50)*50;
+            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+        }else if ((1000<getY1)&&(getY1<10000)) {
+            getY1=ceil(getY0/500)*500;
+            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+        }else if ((10000<getY1)&&(getY1<100000)) {
+            getY1=ceil(getY0/5000)*5000;
+            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+        }
+
     
-    if (!_barChartView2) {
-        _barChartView2 = [[MCBarChartView alloc] initWithFrame:CGRectMake(0, lastH+_isOneViewH+_isTwoViewH, ScreenWidth,  _isThreeViewH)];
+    if (_barChartView2) {
+        [_barChartView2 removeFromSuperview];
+        _barChartView2=nil;
+    }
+    
+    _Xtitles2=@[@"1",@"3",@"5",@"7",@"9",@"11",@"13",@"15",@"17",@"19",];
+ 
+    
+        _barChartView2 = [[MCBarChartView alloc] initWithFrame:CGRectMake(0, lastH+_isOneViewH+_isTwoViewH, ScreenWidth,  _isThreeViewH-140*HEIGHT_SIZE)];
         _barChartView2.tag = 222;
         _barChartView2.dataSource = self;
         _barChartView2.delegate = self;
         [_scrollViewAll addSubview:_barChartView2];
-    }
-    
-    //_barChartView2.maxValue = maxyAxisValue;
+
+      _barChartView2.maxValue = maxyAxisValue;
     _barChartView2.unitOfYAxis = @"";
     _barChartView2.colorOfXAxis =COLOR(153, 153, 153, 1);                                                                      
     _barChartView2.colorOfXText = COLOR(102, 102, 102, 1);
@@ -377,6 +461,11 @@
     
 }
 
+
+
+-(void)initFourView{
+    
+}
 
 
 - (NSInteger)numberOfSectionsInBarChartView:(MCBarChartView *)barChartView {
@@ -430,16 +519,14 @@
 
 - (CGFloat)paddingForSectionInBarChartView:(MCBarChartView *)barChartView {
     
-    return 12;
+    return 12*HEIGHT_SIZE;
     
 }
 
 
 
 
--(void)initFourView{
-    
-}
+
 
 
 
