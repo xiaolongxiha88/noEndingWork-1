@@ -1934,6 +1934,7 @@
 		33AF3D151D8E67210007D6C2 /* UdpCheckUtl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UdpCheckUtl.h; sourceTree = "<group>"; };
 		33AF3D161D8E67210007D6C2 /* UdpCheckUtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UdpCheckUtl.m; sourceTree = "<group>"; };
 		33B445BC1FD1695E000B18AA /* loginMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginMore.png; sourceTree = "<group>"; };
+		33C040BC2043B47B00B5A964 /* hu-HU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hu-HU"; path = "hu-HU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		33C3FFEF1D3E33E00016351C /* L1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L1.png; sourceTree = "<group>"; };
 		33C3FFF01D3E33E00016351C /* L2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L2.png; sourceTree = "<group>"; };
 		33C3FFF11D3E33E00016351C /* L3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L3.png; sourceTree = "<group>"; };
@@ -4852,6 +4853,7 @@
 				tr,
 				nl,
 				de,
+				"hu-HU",
 			);
 			mainGroup = 337F9C771C71A6710016FE43;
 			productRefGroup = 337F9C811C71A6710016FE43 /* Products */;
@@ -5735,6 +5737,7 @@
 				33A438521D1BB651004E9AB6 /* tr */,
 				33A438531D1BB658004E9AB6 /* nl */,
 				330A80141EB1D4B800C187FB /* de */,
+				33C040BC2043B47B00B5A964 /* hu-HU */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
