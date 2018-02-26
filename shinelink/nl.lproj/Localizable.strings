@@ -17,7 +17,7 @@
 "忘记密码"="Wachtwoord vergeten";
 "注册"="Registreren";
 "登陆"="Inloggen";
-"温馨提示 "="Opmerking";
+"温馨提示"="Opmerking";
 "请输入用户名 "="Gebruikersnaam invoeren";
 "请输入密码 "="Wachtwoord invoeren";
 
@@ -87,7 +87,6 @@
 "Remove Station" = "Installatie verwijderen";
 "Upload Picture" = "Foto uploaden";
 "Cancel"="Annuleren";
-
 
 
 "系统错误"="Systeemfout";
@@ -160,8 +159,8 @@
 "至"="Naar";
 "开路电压(300~500V):"="Voc (300~500V):";
 "MPP电压:"="Vmpp:";
-
-
+//
+//
 "所属服务器错误"="Serverfout";
 "序列号为空"="Geen serienummer ingevoerd";
 "不在线"="Offline";
@@ -193,7 +192,7 @@
 "总体采集器数量超出限制"="Het maximale aantal dataloggers dat kan worden toegevoegd is bereikt";
 "单个电站采集器数量超出限制"="Het maximale aantal dataloggers dat kan worden toegevoegd per installatie is bereikt";
 "采集器序列号已经存在"="Serienummer datalogger bestaat al";
-"序列号与校验码不匹配"=" Serienummer en verificatiecode horen niet bij elkaar";
+"序列号与校验码不匹配"="Serienummer en verificatiecode horen niet bij elkaar";
 "设备添加成功"="Apparaat succesvol toegevoegd";
 
 "添加采集器"="Datalogger toevoegen";
@@ -235,10 +234,10 @@
 "PV2 VOLTAGE" = "Pv2 Spanning";
 "PV2 ELEC-CURRENT" = "Pv2 Stroom";
 "R-PHASE POWER" = "L1 vermogen";
-"S-PHASE POWER" = "L2 vermogen;
+"S-PHASE POWER" = "L2 vermogen";
 "T-PHASE POWER" = "L3 vermogen";
 "POWER" = "Vermogen";
-"Energy" = "Energie (kWh)";
+"Energy" = "Energie(kWh)";
 
 "CHARGING POWER" = "Laadvermogen";
 "DISCHARGING POWER" = "Ontlaadvermogen";
@@ -247,15 +246,6 @@
 "USER-SIDE POWER" = "Vermogen gebruiker";
 "GRID-SIDE POWER" = "Vermogen net";
 
-//"MONTH BATTERY CHARGE" ="Month Battery Charge";
-//"MONTHLY CHARGED"="Monthly Charged";
-//"MONTHLY DISCHARGED"="Monthly Discharged";
-//"YEAR BATTERY CHARGE"="Year Battery Charge";
-//"YEAR CHARGED"="Year Charged";
-//"YEAR DISCHARGED"="Year Discharged";
-//"TOTAL BATTERY CHARGE"="Total Battery Charge";
-//"TOTAL CHARGED"="Total Charged";
-//"TOTAL DISCHARGED"="Total Discharged";
 
 "MONTH BATTERY CHARGE" ="Maandelijkse PV energie-output";
 "MONTHLY CHARGED"="Maandelijks opgeladen";
@@ -281,7 +271,7 @@
 
 "Enter DatalogSN" = "Serienummer datalogger invoeren";
 "Datalog Valicode" = "Verificatiecode datalogger invoeren";
-"Insert true datalog sn" = "Voer het juiste serienummer in;
+"Insert true datalog sn" = "Voer het juiste serienummer in";
 "Datalog verification code is incorrect" = "Verificatiecode datalogger is onjuist";
 
 "Added Successfully" = "Succesvol toegevoegd";
@@ -855,4 +845,7 @@
 "262馈电功率"="Power to grid";
 "263电网取电"="Import";
 "264来自"="From";
+
+
+
 
