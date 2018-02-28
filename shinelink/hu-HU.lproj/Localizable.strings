@@ -1,0 +1,857 @@
+
+"立即体验"="Próbálja most";
+"下一步"="Következő";
+"完成"="Kész";
+"服务器错误"="Szerver hiba";
+"拍照"="Készítsen fényképet";
+"从相册选取"="Válasszon a fényképek közül";
+"取消"="Mégsem";
+"警告"="Figyelmeztetés";
+"确定"="Igen";
+"删除"="Töröl";
+"扫描结果"="Eredmények átfutása";
+
+
+"Enter your username"="Felhasználónév megadása";
+"Enter your pwd"="Jelszó megadása";
+"忘记密码"="Elfelejtettem a jelszót";
+"注册"="Regisztrálás";
+"登陆"="Bejelentkezés";
+"温馨提示 "="Figyelem";
+"请输入用户名 "="Adja meg a felhasználónevét";
+"请输入密码 "="Adja meg a jelszavát";
+
+
+"国家"="Ország";
+"点击选择国家"="Válasszon országot";
+"请选择国家和城市"="Válasszon országot és vársot";
+"请再次进入页面获取国家列表"="Kérjük lépjen újra az országok listáját tartalmazó lapra";
+
+"用户名"="Felhasználónév";
+"密码"="Jelszó";
+"重复密码"="Ismételje meg a jelszót";
+"重复输入密码"="Ismételje meg a jelszót";
+"电子邮箱"="Email";
+"联系电话"="Telefonszám";
+
+"代理商编号"="Ügynökség";
+"输入代理商编号"="Adja meg az ügynökség";
+"请输入相同的密码"="Kérjük adja meg ugyanazt a jelszót";
+"用户名必须大于3位"="A jelszó 3 vagy több karakterből kell álljon";
+"密码必须大于6位"="A jelszó 6 vagy több karakterből kell álljon";
+"位置"="Elhelyezkedés";
+
+"点击获取城市和经纬度"="Kattintson az elhelyezkedésért";
+"Enter email"="Adja meg az emailjét";
+"Enter phone number"="Adja meg telefonszámát";
+"Networking Timeout"="Hálózati időtúllépés";
+"Yes"="Igen";
+"请输入采集器序列号"="Kérjük adja meg az adatgyűjtő gyári számát";
+"请输入正确采集器序列号"="Kérjük a helyes gyári számot adja meg";
+"请输入采集器校验码"="Adja meg az adatgyűjtő ellenőrzési kódját";
+"请输入正确采集器校验码"="Kérjük a helyes ellenőrzési kódot adja meg";
+"扫描条形码"="Bárkód leolvasás";
+"位置"="Elhelyezkedés";
+
+
+"超出版本限制注册用户数量"="A felhasználók száma meghaladja a határérétéket";
+"服务器错误"="Szerverhiba";
+"注册错误"="Regisztrációs hiba";
+"采集器序列号或校验码错误"="Hibás az adtgyűjtó gyáriszáma vagy az ellneőrzőszáma";
+"代理商编码错误"="Ügynökség";
+"注册成功"="Sikeresen regisztrálva";
+"用户名已被使用"="Regisztrált felhasználónév";
+
+"找回密码"="Helyreállított jelszó";
+"通过用户名"="Elérehtő felhasználónév";
+"通过序列号"="Elérhető gyári szám";
+"请输入正确的用户名"="Kérjük adja meg a helyes felhasználónevet";
+"发送邮件失败"="Sikertelene email küldés";
+"不能找到用户名"="A felhasználónév nem található";
+"配置设备"="Konfigurálja az eszközt";
+"校验码错误"="Ellenőrzőkód hiba";
+
+"设备"="Eszköz";
+"示范电站"="Demo erőmű";
+"逆变器"="Inverter";
+"储能机"="Raktár";
+"充电桩"="EV töltő";
+"功率调节器"="Teljesítményszabályzó";
+"未连接"="Nincs kapcsolatban";
+
+"系统错误"="Rendszerhiba";
+"删除成功"="Sikeresen törölve";
+"采集器列表"="Adatgyűjtő lista";
+
+"Add Plant" = "Adjon hozzá erőművet";
+"Remove Station" = "Távolítson el erőművet";
+"Upload Picture" = "Képfeltöltés";
+"Cancel"="Mégse";
+
+
+
+"系统错误"="Rendszerhiba";
+"修改成功"="Sikerese megváltoztatva";
+"已配置设备"="Eszközeim listája";
+"未配置设备"="Mai energia:";
+"日电量:"="Akkumulátor töltöttség:";
+"电池百分比:"="Akkumulátor százalékban:";
+"编辑"="Szerkesztés";
+"置顶 "="Letűz ";
+
+"等待 "="Várakozik";
+"正常 "="Normális";
+"故障"="Hiba";
+"断开"="Bontott kapcsolat";
+"闲置 "="Készenléti üzemmód";
+"充电 "="Töltés alattt";
+"放电 "="Kibocsátás";
+"详情 "="Részletek";
+"功率:"="Teljesítmény";
+
+"请输入设备别名"="Kérjük adja meg a készülék nevét";
+"修改别名"="Változtassa meg a készülék nevét";
+"修改头像"="Változtassa meg a képet";
+"删除设备"="Törölje az eszközt";
+
+"控制"="Irányítás";
+"参数"="Információ";
+"数据"="Adat";
+"日志"="Események";
+
+
+
+"日电量"="Mai energia";
+"当前功率"="Pillanatnyi teljesítmény";
+"总电量"="Teljes élettartamra megállapított energia";
+"日发电量"="Mai energia";
+"设置有效功率"="Állítsa be az aktív teljesítményt ";
+"设置无功功率"="Állítsa be a reaktív teljesítményt";
+
+"设置PF值"="Állítsa be a teljesítménytényezőt ";
+"设置逆变器时间:"="Állítsa be az inverter időt";
+"是否确定开启逆变器"="Bekapcsolja ezt az invertert?";
+"是否确定关闭逆变器"="Kikapcsolja ezt az invertert?";
+"设置逆变器开关机"="Kapcsolja be/ki az invertert";
+"序列号:"="Gyáriszám:";
+"类型:"="Esemény száma:";
+"事件号:"="Címke:";
+"标识:"="Azonosító:";
+
+"日放电量"="Ma leadott energia";
+"总放电量"="Összes leadott energia";
+"电池百分比(%)"="Akkumulátor (%):";
+"设置储能机开关机"="Kapcsolja be/ki a tárolót";
+"锂电池SOC下限设定"="Li-ion akkumulátor töltöttségi állapotának alsó érték beállítása";
+"设置储能机时间"="Tárolási idő beállítása";
+"强制放电使能"="Eröltetett töltésleadás engedélyezése";
+"强制放电时间段"="Eröltetett töltésleadási idő";
+"设置输入SP的组串电压"="Állítsa be a tárolási sztring feszültségét";
+"开机"="Kapcsolja be";
+"关机"="Kapcsolja ki";
+
+
+"锂电池SOC下限设定"="Li-ion akkumulátor töltöttségi állapotának alsó érték beállítása";
+"设置储能机时间:"="Állítsa be a jelfeldolgozó készülék idejét:";
+"强制放电使能:"="Eröltetett töltésleadás engedélyezése:";
+"开"="Be";
+"关"="Ki";
+"强制放电时间段:"="Eröltetett töltésleadási idő:";
+"至"="Valamihez";
+"开路电压(300~500V):"="Kapocsfeszültség Voc (300~500V):";
+"MPP电压:"="Max. telj. ponti feszültség Vmpp:";
+
+
+"所属服务器错误"="Szerverhiba";
+"序列号为空"="Gyáriszám nulla";
+"不在线"="Kapcsolat nélküli üzemmód";
+"采集器不在线"="Kapcsolat nélküli naplózó üzemmód";
+"参数类型不存在"="Paraméter típus nulla";
+"参数为空"="Paraméter nulla";
+"参数不在范围内"="Paraméter határértéken kívül";
+"时间参数不正确"="Helytelen idő";
+"参数设置成功"="Sikeresen beállított parméterek";
+"是否确定开启储能机"="Erősítse meg a tárolás bekapcsolását";
+"是否确定关闭储能机"="Erősítse meg a tárolás kikapcsolását";
+
+"型号"="Modell";
+"序列号"="Gyáriszám";
+"端口"="Port";
+"别名"="Más néven";
+"额定功率"="Névleges teljesítmény (W)";
+"固件版本"="Firmware verzió";
+"属性"="Jellemző";
+"模式"="Mód";
+"组别"="Csoport szám";
+"设备类型"="Készülék típus";
+"数据更新时间"="Adat frissítési idő";
+
+"添加设备"="Készülék hozzáadása";
+"添加出错"="Készülék hozzáadási hiba";
+"没有权限"="Engedély nélküli";
+"采集器序列号错误"="Hibás naplózó gyári szám";
+"总体采集器数量超出限制"="A naplózó elérte a határértéket";
+"单个电站采集器数量超出限制"="A naplózó elérte a határértéket egy erőműen";
+"采集器序列号已经存在"="Létező naplózó gyári szám";
+"序列号与校验码不匹配"="Nem összeillő gyári szám és ellenőrzőkód ";
+"设备添加成功"="Készülék sikeresen hozzáadva";
+
+"添加采集器"="Naplózó hozzáadása";
+"编辑采集器"="Naplózó szerkesztése";
+"删除采集器"="Naplózó törlése";
+"配置采集器"="Naplózó konfigurálása";
+
+
+"Add"="Hozzáad";
+"aliases"="Névváltozatok";
+"datalog sn"="Esemény gyári száma";
+"group"="Csoport";
+"device type"="Készülék típusa";
+
+"Plant Detail" = "erőmű részletes info";
+"DAY" = "NAP";
+"MONTH" = "HÓNAP";
+"YEAR" = "ÉV";
+"TOTAL" = "ÖSSZESEN";
+"Daily Returns" = "Napi bevétel";
+"Daily Electricity" = "Napi energia";
+"Earnings" = "Havi bevétel";
+"Month energy" = "Havi energia";
+"Earnings" = "Éves bevétel";
+"Year energy" = "Éves energia";
+"Earnings" = "Teljes bevétel";
+"Total energy" = "Teljes energia";
+"Powre" = "Teljesítmény (W)";
+"Plant Overview" = "Áttekintés az erőműről";
+"Device List" = "Készülékek listája";
+"Event List" = "Események listája";
+"Map" = "Térkép";
+"Voltage"="Feszültség (V)";
+"Electron flow"="Áramerősség (A)";
+
+"PV POWER" = "Napelem teljesítmény";
+"PV1 VOLTAGE" = "Napelem1 feszültség";
+"PV1 ELEC-CURRENT" = "Napelem1 áramerősség";
+"PV2 VOLTAGE" = "Napelem2 feszültség";
+"PV2 ELEC-CURRENT" = "Napelem2 áramerősség";
+"R-PHASE POWER" = "L1 teljesítmény";
+"S-PHASE POWER" = "L2 teljesítmény";
+"T-PHASE POWER" = "L3 teljesítmény";
+"POWER" = "Teljesítmény";
+"Energy" = "Energia (kWh)";
+
+"CHARGING POWER" = "Töltési teljesítmény";
+"DISCHARGING POWER" = "Töltésleadási teljesítmény";
+"INPUT VOLTAGE" = "Bemeneti feszültség";
+"INPUT CURRENT" = "Bemeneti áramerősség";
+"USER-SIDE POWER" = "Felhasználó-oldali teljesítmény";
+"GRID-SIDE POWER" = "Hálózati teljesítmény";
+
+//"MONTH BATTERY CHARGE" ="Month Battery Charge";
+//"MONTHLY CHARGED"="Monthly Charged";
+//"MONTHLY DISCHARGED"="Monthly Discharged";
+//"YEAR BATTERY CHARGE"="Year Battery Charge";
+//"YEAR CHARGED"="Year Charged";
+//"YEAR DISCHARGED"="Year Discharged";
+//"TOTAL BATTERY CHARGE"="Total Battery Charge";
+//"TOTAL CHARGED"="Total Charged";
+//"TOTAL DISCHARGED"="Total Discharged";
+
+"MONTH BATTERY CHARGE" ="Havi napelemes energia";
+"MONTHLY CHARGED"="Havi számított díj";
+"MONTHLY DISCHARGED"="Havi leszámítandó díj";
+"YEAR BATTERY CHARGE"="Éves napelemes energia";
+"YEAR CHARGED"="Éves számított díj";
+"YEAR DISCHARGED"="Éves leszámított díj";
+"TOTAL BATTERY CHARGE"="Teljes napelemes energia";
+"TOTAL CHARGED"="Teljes számított energia díj";
+"TOTAL DISCHARGED"="Teljes leszámított energia díj";
+
+
+
+"Add"="Hozzáad";
+"Modified"= "Módosított";
+"Delete" = "Törölje";
+"Aliases can not be empty" = "Üres a névváltozat/felvett név";
+"Successfully modified" = "Sikeresen módosítva";
+"Modification fails" = "Sikertelen módosítás";
+"Successfully deleted" = "Sikeresen tötölve";
+"Delete failed" = "Sikertelen törlés";
+"Added Successfully" = "Sikeresen hozzáadva";
+
+"Enter DatalogSN" = "Adja meg a naplózó gyári számát";
+"Datalog Valicode" = "Adja meg a naplózó ellenőrző kódját";
+"Insert true datalog sn" = "Please input correct SN";
+"Datalog verification code is incorrect" = "Hibás a naplózó ellenőrző kódja";
+
+"Added Successfully" = "Sikeresen hozzáadva";
+"Add Failed" = "Sikertelen hozzáadás";
+"Insert datalog code"="Hibás az esemény ellenőrző kódja";
+
+"Plant List" = "Erőművek listája";
+"Today Energy" = "Napi energia";
+"Total Energy" = "Összes energia";
+"Current Power" = "Pillanatnyi energia";
+"Gains" = "Bevétel";
+"Percentage" = "Töltésállapot";
+"Storage Status" = "Tárolási állapot";
+"Charge Power" = "Töltés teljesítmény";
+"Discharge Power" = "Leadási teljesítmény";
+"Add Plant" = "Erőművek hozzáadása";
+"Remove Station" = "Erőművek törlése";
+"Upload Picture" = "Az erőmű képe";
+"Setting Station Map" = "Az erőmű térképének beállítása";
+"Installation Information" = "Telepítési információk";
+"plant name" = "Erőmű neve";
+"instal date" = "Telepítési dátum";
+"company" = "Cég";
+"power" = "Teljesítmény";
+"Next" = "Következő";
+
+
+"能源"="Energia";
+
+"能源分析"="Energia elemzés";
+"智能能源"="Okos energia";
+"家庭用电量"="Otthoni energiafelhasználás";
+"家庭用电设备"="Otthoni terhelés";
+"光伏电量"="Napenergia";
+"储能电量"="Tárolt energia";
+"月:"="Hónap:";
+"最省电:"="Minimális:";
+"最耗电:"="Maximális:";
+"日:"="Nap:";
+
+"能源调度优先级设置"="Energia ütemezési sorrend";
+"智能联动设置"="Okos interaktív beállítás";
+"峰谷电价设置"="Eltérő tarifa beállítások";
+"峰谷段动作使能"="Eltérő tarifa engedélyezése";
+"控制优先级设置"="Vezérlési priorítások megadása";
+"光伏零功率输出使能"="Napelemes zéró kivitel engedélyezése";
+"温馨提示"="Figyelem";
+"智能能源功能后续开放"="Hamarosan elérhető okos energia funkciók";
+"质保查询功能后续开放"="Hamarosan elérhető garancia ellenőrzési funkció";
+
+"家庭用电占比(Demo)"="Otthoni fogyaztás (Demo)";
+"电冰箱"="Hűtő";
+"微波炉"="Mikrohullámú sütő";
+"空调"="Légkondícionáló ";
+"电视机"="Televízió";
+"洗衣机"="Mosógép";
+"热水器"="Vízmelegítő";
+"发电量"="Energiahozam";
+"放电量"="Energialeadás";
+"最大值"="Maximális érték";
+"平均值"="Átlagos érték";
+
+"服务"="Szolgáltatások";
+"我的问题"="Kérdésem";
+"常见问题"="GYIK";
+"客户服务"="Vevőszolgálat";
+"质保查询"="Garanciaigény";
+"增值业务"="Egyéb szolgáltatások";
+"更多产品"="Több termék";
+
+"提交问题"="Küldje el kérdését";
+"标题:"="Megnevezés:";
+"问题类型:"="Jelleg:";
+"内容:"="Tartalom:";
+"请输入标题"="Kérjük, nevezze meg a problémát";
+"请选择问题类型"="Válasszon a probléma típusok közül";
+"请输入序列号"="Kérjük adja meg a gyári számot";
+"附件:"="Melléklet:";
+"请选择要上传图片"="Válassza ki a feltöltendő képet";
+"请输入内容"="Adja meg a tartalmat";
+"添加成功"="Sikeresen hozzáadva";
+"添加错误"="Sikertelen hozzáadás";
+
+"逆变器故障"="Inverter hiba";
+"储能机故障"="Tároló készülék hiba";
+"监控系统问题"="Felügyeleti rendszer hiba";
+"功能建议"="Javaslatok";
+"问题咨询"="Tanácsadó";
+"其他问题"="Egyéb problémák";
+
+"问题列表"="Kérdések listája";
+"未处理"="Feldolgozatlan";
+"正在处理"="Feldolgozás";
+"已处理"="Feldolgozott";
+"删除列表"="Törölje a listát";
+"回复记录"="Válasz felvétel";
+"回 复"="Válasz";
+"查看图片"="Megtekintheti a képet";
+"概述"="Áttekintés";
+"参数"="Paraméterek";
+"有"="Igen";
+"没有"="Nem";
+"有无质保:"="Garancia alatt áll?";
+"出厂时间:"="Kezdő idő:";
+"到期时间:"="Lejárati idő:";
+"序列号码:"="Gyári szám:";
+
+"我"="Én";
+"资料管理"="Fiókkezelés";
+"电站设置"="A napelemes erőmű konfigurációja";
+"关于"="Továbbiak";
+"用户协议"="Felhasználói szerződés";
+"客服电话"="Fogyasztói forróvonal";
+"检查更新"="Frissítések keresése";
+"最新版本为"="Legfrissebb változat";
+"是否更新"="Frissít vagy nem";
+"您使用的是最新版本"="A jelenlegi a legfrissebb változat";
+
+"暂不"="Frissítsen később";
+"立即更新"="Frissítsen most";
+"请求苹果服务器失败"="Apple szerverhiba";
+"修改密码"="Változtasson jelszót";
+"修改手机号"="Változtasson mobiltelefonszámot";
+"修改邮箱"="Változtasson email címet";
+"修改代理商编号"="Változtasson ügynökszámot";
+"注销账号"="Jelentkezzen ki";
+"输入手机号"="Adja meg telefonszámát";
+"输入邮箱地址"="Adja meg az e-mail címet";
+"输入代理商编号"="Adja meg az ügynökszámát";
+"用户不存在"="A felhasználó nem létezik";
+"安装信息"="Telepítési információ";
+
+"地理信息"="Információ az elhelyezkedésről";
+"资金收益"="Az alapból származó bevétel";
+"电站图片"="A napelemes erőmű képe";
+"不能为空"="Nem lehet üres!";
+"城市"="Város";
+"时区"="Időzóna";
+"经度"="Hosszúsági fok";
+"纬度"="Szélességi kör";
+"点击获取"="Kattintson";
+"节约标准煤"="szénmegtakarítás";
+"CO2减排"="elkerült CO2 kibocsájtás";
+"SO2减排"="elkerült SO2 kibocsájtás";
+"当前版本:"="Jelenlegi változat:";
+
+"示范设备暂时不开放此功能,请安装真实产品使用此功能."="Ez a jellemző csak valós telepítés esetén elérhető";
+"概述"="Áttekintés";
+"服务介绍"="Szolgáltatói bevezető";
+"提供商:"="Szolgáltató:";
+"使用区域:"="Használt terület:";
+"价格:"="Ár:";
+"联系方式:"="Kapcsolat:";
+
+"是否确定删除设备"="Biztos el kívánja távoltani?";
+"删除成功"="Sikeresen törölve";
+"系统错误，删除失败"="Rendszerhiba, sikertelen törlés";
+
+"Ppv"="Napelemes teljesítményfelvétel";
+"Puser"="Felhasználói teljesítményfelvétel";
+"Pgrid"="Hálózati teljesítményfelvétel";
+
+"Revenue"="Bevétel";
+"todayPV"="Mai napelemes energia";
+"PpvN"="Napelemes teljesítményfelvétel";
+
+"体验馆"="Demo";
+"浏览用户禁止操作"="Felhasználó által nem böngészhető";
+"获取服务器地址"="Szerezze be a kiszolgáló címét";
+"日功率走势图"="Daily power chart(W)";
+"消息中心"="Üzenetközpont";
+"清空"="Törlés";
+"是否清空历史数据"=" Törölje az applikáció ikoncímkéinek adatait, számát?";
+"问题内容:"="Tartalom:";
+"清空历史数据"="Törölje az előzmények adatait";
+"清空APP图标标记数量"=" Törölje az applikáció ikoncímkéinek számát";
+
+"配置ShineWifi"="ShineWifi beállítása";
+"ShineWifi提示一"="Kérjük lépjen be a telefonos rendszerbe és csatlakozzon a Wifi eszközhöz.";
+"ShineWifi提示二"="Kérjük adja meg az internet routerének nevét és jelszavát";
+"ShineWifi输入路由器"="A router neve";
+"ShineWifi密码"="jelszó:";
+"ShineWifi输入路由器密码"="A router jelszava:";
+"ShineWifi修改密码"="Változtassa meg a Wi-Fi modul jelszavát:";
+"ShineWifi新密码"="jelszó:";
+"请输入Wifi密码"="Adja meg a wifi jelszavát";
+"查询采集器信息"="Lekérdezésfordító üzenet:";
+"序列号"="Gyári szám:";
+"shinewifi校验码"="Ellenőrzési kód:";
+"扫描设备和设置路由器"="Olvassa le a vonalkódot és állítsa be a routert";
+"ShineWifiE名字"="Név:";
+"Choice"="Választás";
+"配置ShineWifiE"="Állítsa be a ShineWifi-t";
+"配置提示"="Kérjük, ellenőrizze le a készülék állapotát a kék LED segítségével. Ha lassan villog (másodpercenként egyszer), fenáll a kapcsolat; ha gyorsan villog (másodpercenként ötször), az azt jelenti, hogy nem áll fent kapcsolat.";
+
+"编辑"="Szerkesztés";
+"储能放电量"="Leadási teljesítmény (kWh)";
+"新"="Új";
+"推荐"="Forró";
+"配置"="Beállítások";
+"市电电压"="Állítsa be a magasra a hálózati feszültséget";
+"控制提示"="Figyelem! Hozzáférés kizárólag csak szakemberek számára megengedett. A rossz beállítások esetleges rendszerhibát eredményezhetnek. Kérjük adja meg jelszavát.";
+"添加问题提示"="A kiszolgáló rendszer csak kínai és angol nyelven érhető el. ";
+"控制密码"="Kérjük adja meg a helyes jelszót a beállításokhoz.";
+
+"用户协议1"="Hagyja jóvá a a felhasználói megállapodást. ";
+"选择用户协议"="Kérjük pipálja ki a Megállapodást";
+"添加1"="Hozzáadni";
+"连接路由器2"="Kapcsolja a telefonját a routerre melyre a WIFI-E modul fog kapcsolódni.";
+"刷新设备列表"="Az eszköz lista frissítésének érdekében, gördítse le a menüt, hogy  5 perc után megjelenhessenek. ";
+"配置成功"="Sikeres konfiguráció";
+
+"用户名密码错误 "="Felhasználói név vagy jelszó hiba.";
+"用户名密码为空"="S naplózó elérte s határértéket egy telepítésen";
+"示例"="Demo";
+
+"拨打电话"="Telefonálna?";
+"换算单位"="(Konverziós standard 1kWh teljesítmény alapján)";
+"点击图片放大"="Kattintson a kép nagyításáért";
+
+"添加电站成功"="Az erőmű sikeresen hozzáadva";
+"当前用户下电站名重复"=" Lásd balra a direkt kínaiból google fordítást";
+"超出用户限制电站数量"="Az erőművek száma túllépve";
+"国家名出错"="Országnév hiba";
+"添加信息出错"="Hiba történt az üzenet hozzáadásakor";
+
+"还没有解决您的问题"="Egyéb felmerült kérdések?";
+"向客服提问"="Vegye fel a kapcsolatot az ügyfélszolgálattal";
+"原密码 "="Régi jelszó";
+
+"选择国家"="Válasszon orzágot";
+"搜索"="Keresés";
+
+
+"资料中心"="Információs központ";
+
+"视频系统"="Videók";
+"常见问题"="GYIK";
+"手册"="Kézikönyv";
+"公司官网"="Weboldal";
+
+"视频内容"="Growatt ismertetők, berendezések telepítése, stb. ";
+"常见问题内容"="Gyors segítség GYIK";
+"手册内容"="Telepítési kézikönyv, a rendszer használati utasítás és a kapcsolódó műszaki dokumentáció";
+"公司官网内容"="További infomációk a Growattról";
+"缓存"="Gyorsítótár";
+"缓存列表"="Gyorsítótár lista";
+"全选"="Jelölje ki az egészet";
+"确定删除视频"="Törölje a videót?";
+"相关视频"="Kapcsolódó videó";
+
+"视频缓存提示"="Megjegyzés: Lejátszáskor a videó a gyorsítótárba töltődik és a folyamat befejeztével tudja lementeni. ";
+"wifi提示"="Telefon nem kapcsolódik wi-fire, folytatja?";
+"缓存成功"="Sikeres gyorsítótárazás";
+"是否保存视频"="Menti a videót?";
+
+"服务器与所属国家不匹配"="A ShineServer cím és az ország nem egyezik!";
+
+"ShineWiFi配置"="ShineWifi konfiguráció";
+
+"返回"="Back";
+"停止配置"="Konfigurálás leállítása";
+"是否退出当前账户"="Kijelentkezik?";
+"未开启定位服务"="GPS deaktiválva";
+"是否跳转界面进行设置"="Vissza a 'Beállítások'oldalra?";
+
+"wifi页面跳转提示"="Ha a szerver nem ad azonnali választ, a kék LED segítségével győződjön meg a csatlakozás állapotáról.";
+"wifi连接成功"="Csatlakozás rendben.";
+"wifi连接失败"="Sikertelen csatlakozás";
+"wifi看灯"="Kérjük, ellenőrizze a kék LED-et.";
+"wifi提示成功信息"="Ha a LED úgy villog mint ahogy az 'A' képen látható, kérjük menjen az 'Eszközök'oldalra és frissítsen.";
+"wifi提示失败信息"="Ha a LED úgy villog mint ahogy az a 'B' képen látható, tegye a következőket:";
+"wifi提示失败信息1"="1. Ellenőrizze a routere jelerősségét. ";
+"wifi提示失败信息2"="2. Konfigurálja újra a ShineWifi eszközét.";
+"wifi重新配置"="Vissza az újrakonfiguráláshoz";
+
+
+//翻译后
+"1输出功率"="Kimeneti teljesítmény";
+"2服务器错误提示"="Kérjük regisztráljon újra vagy használja a számítógépet, hogy bejelentkezzen szerverünkre 'server.growatt.com' és regisztráljon újra.";
+"3采集器10位提示"="Kérjük adja meg a gyűjtő 10-számjegyű sorozatszámát.";
+"4服务器错误提示2"="Kérjük regisztráljon újra vagy használja a számítógépet, hogy bejelentkezzen szerverünkre 'server.growatt.com' és regisztráljon újra.";
+"5注册失败"="A regisztráció nem sikerült";
+"4时间"="Idő";
+"5数据"="Érték";
+"6日期"="Dátum";
+"RF序列号"="Rfstick gyáriszám:";
+"datalogger checkcode"="Naplózó ellenőrzőkód";
+
+"请输入RFStick序列号"="Bevitel RFStick gyáriszám";
+"7你的账号没有操作权限"="A fiókjának nincs működési engedélye";
+"8上滑查看详细数据"="Gördítsen feljebb, hogy ellenőrizze a részletes adatokat";
+"9下滑查看曲线图"="Gördítsen lefelé, hogy ellenőrizze a táblázatot.";
+"11新wifi看灯提示1"="Mikor a vörös LED villog: A WiFi-E modul és az inverter közötti kommunikáció rendben van, de nincs a számítógépére kötve.";
+"10填入不带国家代码的手机号"="Adja meg a telefonszámot a körzetszám nélkül.";
+"12新wifi看灯提示1原因"="Please check your router signal strength";
+"13新wifi看灯提示2绿灯"="Mikor a zöld LED villog: A WiFi-Emodul, az inverter és a router közti kommunikáció rendben van, nem kapcsolódik megfelelően a ShineSeverre.";
+"14新wifi看灯提示2绿灯原因"="Kérjük ellenőrizze, hogy a router megfelelően csatlakozik-e az Internetre.";
+"15新wifi看灯提示3蓝灯"="Mikor a kék Led villog: a WiFi-Emodul az inverterrel rendben kommunikál az inverterrl, routerrel és a ShineServerrel.";
+"16新wifi看灯提示3蓝灯原因"="A WiFi-E modul rendben működik.";
+"17通过手机号"="Mobiltelefonon keresztül";
+"18扫描采集器序列号"="A naplózó gyáriszámának szkennelése";
+"19手机号不能为空"="A telefonszám helye nem maradhat üresen!";
+"20密码不能为空"="A jelszó nem lehet üres.";
+"21请输入短信验证码"="Adja meg a megerősítő kódot";
+"22验证码错误"="Hibás megerősítő kód";
+"23发送验证码"="Küldje el a megerősítő kódot";
+"24一键建站"="Gyors regisztráció";
+"25跳过"="Ugorja át";
+"26上滑查看详细数据"="Símítson felfelé a képernyőn, hogy ellenőrizze a részletes adatokat";
+"27国际区号错误"="Az ország nemzetközi";
+"28手机号格式错误"="A telefonszám formátum hibás";
+"29短信验证码请求已经失效"="A megerőstő kód lekérése sikertelen ";
+"30发送短信验证码不成功"="SMS ellenőrző kód elküldése sikertelen";
+"31该手机号没有注册用户"="A telefonszámhoz nincs hozzárendelt fiók";
+"32手机号和验证码不匹配"="A telefonszám és az ellenőrző kód nem egyezik.";
+"33修改密码失败"="A jelszó újramegadása sikertelen";
+"34输入不带国家代码的手机号"="Adja meg a telefonszámot országhívó kód nélkül";
+"35通过邮箱"="E-mailen keresztül";
+"36请输入正确的手机校验码"="Kérjük adja meg a helyes ellenőrző kódot";
+"37修改密码成功"="A jelszó módosítása sikeresen megtörtént";
+"38太阳能"="Naplózó ellenőrzőkód";
+"39储能机"="Napenergia";
+"40逆变器"="Inverter";
+"41电网"="Hálózat";
+"42电池"="Akkumulátor";
+"43负载"="Terhelés ";
+"44单位"="Egység";
+"45第一路光伏功率"="Az 'A' tracker teljesítménye";
+"46第二路光伏功率"="A 'B' tracker teljesítménye";
+"47第一路光伏充电功率"="Töltésteljesítmény  az 'A' trackeren ";
+"48第二路光伏充电功率"="Töltésteljesítmény a 'B' trackeren";
+"49电池百分比"="Akkumlátor töltöttség %";
+"50电网充电功率"="AC töltésteljesítmény";
+"51负载功率"="Otthoni terhelési teljesítmény";
+"52输送电网功率"="Hálózatba táplált teljesítmény";
+"53电网输入功率"="Hálózatról nyert teljesítmény";
+"54放电功率"="Leadott teljesítmény";
+"55仅供“一键建站”注册用户使用"="'Mobiltelefonon keresztül' csak 'Gyors regisztrációra'";
+"原密码错误"="A régi jelszó hibás";
+"56手机号格式错误"="Hibás formátumú telefonszám";
+"57输入11位手机号"="Kérjük adjon meg 11 jegyű telefonszámot";
+
+"58能源概览"="Energia áttekintés";
+"59光伏产出"="Napenergia termelés";
+"60能源产出"="Energia tárolási teljesítmény";
+"61电网消耗"="Hálózatról nyert energia";
+"62用电消耗"="Fogyasztás";
+"63当日"="Ma";
+"64累计"="Összes";
+"65能源产耗"="Energia áttekintés";
+"66总用电"="Teljes fogyasztás";
+"67储能能源"="Rendszerállapot";
+"68面板电量"="Napelemes teljesítmény";
+"69储能充放电信息"="Töltési és leadási információk";
+"70实时SOC"="Akkumulátor töltöttségi állapot";
+"591光伏产出"="Napelemes termelés";
+"601能源产出"="Tárolási termelés";
+"621用电消耗"="Fogyasztás";
+"71工具"="Eszközök";
+"72无法查看未来数据"="Az adatok nem lesznek megtekinthetőek a jövőben";
+
+
+//翻译后1
+"73待处理"="Függőben";
+"74处理中"="Feldolgozás alatt";
+"75已处理"="Feldolgozott";
+"76待跟进"="Várakozik";
+
+"77请输入相关问题的详细描述"="Kérjük adja meg a probléma részletes leírását.";
+"78当前服务器地址:"="Jelenlegi szerver cím:";
+"79点击获取服务器地址"="Kattintson a szerver címért";
+"80获取服务器地址不成功"="A szerver cím beszerzése sikertelen";
+"81请输入正确邮箱格式"="Kérjük adja meg a helyes e-mail fiók formátumot";
+"82手机号:"="Telefonszám:";
+"83邮箱:"="E-mail cím:";
+
+"84充电使能"="Töltés engedélyezve";
+"85充电时间段"="Töltési idő";
+"86充电电池SOC设置"="Újratölthető akkumlátor töltöttségi állapot";
+"87设置市电电压下限"="Állítsa be a hálózati feszültség alsó határát";
+"88使能"="Be";
+"89禁止"="Ki";
+"90提交问题"="Küldje el kérdését";
+"91至少输入一种联系方式"="Adjon meg legalább egy elérhetőségi módot";
+"92最多上传3张图片"="Maximális feltöltés 3 kép";
+"93选择联系方式"="Válassza ki az elérhetőségi módot";
+"94您的手机号还未验证"="A tlelefonszáma nem került jóváhagyásra, kérjük hagyja jóvá.";
+"95您的邮箱还未验证"="A email címe nem került jóváhagyásra. Kérjük kattintson a jóváhagyásra";
+"96请验证注册时填写的手机号码"="Kérjük, hagyja jóvá a telefonszámot.";
+"97验证用户手机号码"="Hagyja jóvá a felhasználó email címét";
+"98验证用户邮箱"="Hagyja jóvá a felhasználó email címét";
+"99您注册时填写的手机号是"="A regisztrációhoz használt telefonszáma";
+"100关闭问题"="Zárja le az ügyet";
+"101回复记录"="Rögzített válasz";
+"102是否关闭问题"="Lezárja-e az ügyet?";
+"103操作成功"="Sikeres művelet";
+
+"104请验证您的手机号码"="Kérjük hagyja jóvá a telefonszámát";
+"105请验证您的邮箱地址"="Kérjük hagyja jóvá az email címét";
+
+"106wifi信号强度提示"="A WiFi jel túl gyenge, kérjük győződjön meg róla, hogy a WiFi jel elég erős a megfigyelő modulnak";
+"107wifi连接路由器"="A naplózó már a routerre csatlakozott és éppen csatlakozik a szerverre...";
+
+"108wifi提示2"="Ahhoz hogy a Shine WiFi konfigurálásra kerüljön miután router vagy router jelszócsere történt, a Shine WiFi-t újra kell indítani a konfigurálás előtt. (Kérjük, nyomja meg a KEY gombot a naplózón több mint 3 másodpercre, amíg a vörös LED nem világít hosszan.)";
+"109wifi提示3"="Kérjük adja meg a router nevét és jelszavát, majd kattintson a 'Beállít' gombra.";
+
+
+"111PV充电"="Napelemes töltés";
+"112AC充电"="AC töltés";
+"113联合充电模式"="Kombinálja a töltést";
+"114PV充电和电池带载"="Napelemes  töltés és leadás";
+"115PV充电和市电旁路带载"="Napelemes töltés és hálózati áthidalás";
+"116AC充电和市电旁路带载"="AC töltés és hálóati áthidalás";
+"117联合充电和市电旁路带载"="Kombinálja a töltést és áthidalást";
+"118市电旁路带载"="Akkumláto feszültség";
+
+"119电池电压"="battery voltage";
+"120PV1/PV2电压"="Napelemes1/Napelemes2 feszültség";
+"121PV1/PV2充电电流"="Napelemes1/Napelemes2 tötltési áram";
+"122总充电电流"="Total charge current";
+"123AC输入电压和频率"="AC bementi feszültség/frekvencia";
+"124AC输出电压和频率"="AC kimeneti feszültség/frekvencia";
+"125负载功率"="Fogyasztási teljesítmény";
+"126负载百分比"="Töltöttség %";
+"127今日收益"="Mai profit";
+"128总收益"="Teljes bevétel";
+
+"129AC输出源"="AC kimeneti forrás";
+"130充电源"="Töltési forrás";
+"131市电输出"="Elektromos áram termelés";
+"132市电充电"="Elektromos töltés";
+"133光伏接入模式"="Napelem modell";
+"134AC输入模式"="AC bemeneti modell";
+"135AC输出电压"="AC leadási feszültség";
+"136AC输出频率"="AC ledási frekvencia";
+"137过载重启"="Túlterhelés, újraindítás";
+"138过温重启"="Túlmelegedés, újraindítás";
+"139蜂鸣器"="Berregő";
+"140最大充电电流"="Maximális töltési áram";
+"141电池低压点"="Lemerülő akkumulátor pont";
+"142系统时间"="Rendszeridő";
+"143电池类型"="Akkumulátor típusa";
+
+"144光伏优先"="Napelem prioritás";
+"145光伏和市电"="Napelem és elektromos áram";
+"146仅光伏"="Csak napelem";
+"147电池优先"="Akkumulátor prioritás";
+"148市电优先"="Elektromos áram prioritás";
+"149独立"="Független";
+"150并联"="Párhuzamosan";
+"151重启"="Újraindítás";
+"152不重启"="Nincs újraindítás";
+"153切换到市电"="Váltson elektromos áramra";
+"154锂电池"="Lithium akkumulátor";
+"155铅酸电池"="Ólom-savas akkumulátor";
+"156自定义铅酸电池"="Egyedi ólom-savas akkumulátor";
+
+"157PV1功率"="Napelem1 teljesítmény";
+"158PV2功率"="Napelem2 teljesítmény";
+"159PV1电压"="Napelem1 feszültség";
+"160PV2电压"="Napelem2 feszültség";
+"161电池的SOC"="Kapacitás";
+"162电池的电压"="Akkumulátor feszültség";
+"163负载的功率"="Kimeneti teljesítmény";
+"164负载的电压"="Kimeneti feszültség";
+"165市电电压"="Hálózati feszültség";
+"166Pv当天充电量"="Napi elektromos energia";
+"167AC当天充电量"="Napi AC energia";
+"168电池当天充电量"="Napi akkumulátor energia ";
+"169电池当天放电量"="Napi leadott akkumulátor energia ";
+"170Pv的总充电量"="Összes napelemes energia";
+"171AC的总充电量"="Összes AC töltés";
+"172电池总的充电量"="Összes akkumulátor töltés";
+"173电池总的放电量"="Összes akkumulátor leadott töltés ";
+"174充电量"="Összes töltés";
+"175光伏储能"="Tárolt napenergia";
+"176电网储能"="Tárolt hálózati energia";
+"177电池放电"="Leadott akkumulátor töltés";
+"178AC旁路放电"="AC kisülés áthidaló";
+"179请选择采集器类型"="Kéjük válassza meg a naplózási típust";
+"180当前功率"="Áram";
+"181装机容量"="Kapacitás";
+"182今日收益"="Ma";
+"183累计收益"="Élettartam";
+"184日充电量"="Napi töltés";
+"185总充电量"="Teljes töltés";
+"186在线"="Online";
+"187视在功率"="Aktív/ látszólagos teljesítmény";
+"188暂无数据"="No data";
+"189额定功率"="Normal power";
+"190警告"="Warning";
+"191请输入备注信息"="Please enter the note information";
+
+
+
+"192第一路PV电压"="Voltage of PV1";
+"193第一路PV功率"="Power of PV1";
+"194第二路PV电压"="Voltage of PV2";
+"195第二路PV功率"="Power of PV2";
+"196电池电压"="Battery voltage";
+"197电网电压"="Grid voltage";
+"198电网频率"="Grid frequency";
+"199EPS电压"="EPS voltage";
+"200EPS频率"="EPS frequency";
+
+"201等待模式"="Standby";
+"202自检模式"="Self-inspection ";
+"203保留模式"="Retained";
+"204SysFault模式"="SysFault";
+"205Flash模式"="Flash";
+"206并网工作中"="On-grid operating";
+"207离网工作中"="Off-grid operating";
+
+"208负载优先"="Load first";
+"209电池优先"="Battery first";
+"210电网优先"="Grid first";
+"211用电功率"="Consumption";
+"212并网功率"="Export power";
+"213馈回电网"="Export";
+"214电网取电"="Import";
+"215来自电池"="From battery";
+"216自发自用"="Self-consumption";
+"217馈回电网"="Export";
+"218电池能源"="Battery Energy";
+"219电池充放电信息"="Battery charge and discharge";
+"220能量优先级"="Energy priority";
+"221开关"="On/Off";
+"222时间段"="Time period";
+"223点击选择"="Click to select";
+"224选择设置值"="Select the value";
+"225请选择"="Please select";
+"226升级中"="Upgrade";
+"227放电停止SOC"="Discharge stopped SOC";
+"228充电停止SOC"="Charge stopped SOC";
+"229电池充电功率"="Battery charge power";
+"230PV总电量"="EpvTotal";
+"231PV今日电量"="EpvToday";
+"232电池今日充电量"="eBatChargeToday";
+"233电池总充电量"="eBatChargeTotal";
+"234电池今日放电量"="eBatDischargeToday";
+"235电池总放电量"="eBatDischargeTotal";
+"236逆变器功率"="Inverter power";
+"237用户侧功率"="Power from grid";
+"238电网侧功率"="Power export to grid";
+"239配置WIFI采集器"="Configure WiFi datalogger";
+"240本地调试工具"="Local debugging tools";
+"241工具箱"="Toolbox";
+"242扫描获取WiFi名称"="Scan for WiFi name";
+"243电流"="current";
+"244电压"="voltage";
+"245AC功率"="AC power";
+"246命令参数错误"="Command parameter error";
+"247有功功率错误"="Active power rate should be a number in [0, 100].";
+"248功率因数错误"="Power Factor rate should be a number in (-0.8 ~ -1/0.8 ~ 1)";
+"249设置是否存储PF命令"="Set save PF command";
+"250设置市电电压上限"="Set grid voltage high";
+"251设置市电电压下限"="Set grid voltage low";
+"252离网使能"="Set EPS On/Off";
+"253离网频率"="Set EPS frequency ";
+"254离网电压"="Set EPS voltage";
+"255请输入"="Please input";
+"256容性"="Over";
+"257请选择设置值"="Please select the setting value";
+"258请同时设置起始和结束时间"="Please set the start and end time together";
+"259感性"="Under";
+"260光伏功率"="Solar";
+"261取电功率"="Import";
+"262馈电功率"="Export";
+"263电网取电"="Import";
+"264来自"="From";
+"265充电功率"="Charge";
+"266放电功率"="Discharge";

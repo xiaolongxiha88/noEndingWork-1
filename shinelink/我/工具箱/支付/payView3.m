@@ -293,7 +293,7 @@
     }
 
 
-
+    //_moneyString=@"0.01";
     
     NSString * serverUrl = [serverUrl0 substringFromIndex:7];
   NSDictionary *netDic=@{
