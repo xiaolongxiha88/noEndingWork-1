@@ -771,6 +771,12 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
 
 //读取失败
 -(void)setFailed{
+    
+    if (_charType==3) {
+            [self removeTheNotification];
+            [self showAlertViewWithTitle:@"数据读取失败" message:@"请重试或检查WiFi连接." cancelButtonTitle:root_OK];
+        return;
+    }
     if (!_isReadfirstDataOver) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"数据读取失败,请重试或检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
         alertView.tag = 1002;
@@ -990,7 +996,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     }
     NSArray *YLineDataArr=[NSArray arrayWithArray:YLineDataArray0];
     
-    NSLog(@"TTTTTTTTTTTTTTTTTTTTTTTT");
+  //  NSLog(@"TTTTTTTTTTTTTTTTTTTTTTTT");
     if (_lineChartYD) {
         [_lineChartYD removeFromSuperview];
         _lineChartYD=nil;

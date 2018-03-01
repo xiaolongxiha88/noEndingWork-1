@@ -211,6 +211,13 @@ static int  firstReadTime=72.0;
 
 //读取失败
 -(void)setFailed{
+    
+    if (_oneCharType==2) {
+        [self removeTheNotification];
+        [self showAlertViewWithTitle:@"数据读取失败" message:@"请重试或检查WiFi连接." cancelButtonTitle:root_OK];
+        return;
+    }
+    
     if (!_isReadfirstDataOver) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"数据读取失败,请重试或检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
         alertView.tag = 1002;

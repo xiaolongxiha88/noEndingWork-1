@@ -62,6 +62,9 @@
 @property(nonatomic,strong)usbToWifiDataControl*changeDataValue;
 
 @property (strong, nonatomic)UIView*view3;
+@property (strong, nonatomic)UIView*view4;
+@property (strong, nonatomic)NSArray* fourLableArray;
+
 
 @end
 
@@ -71,7 +74,7 @@
     [super viewDidLoad];
 
 
-    
+    _fourLableArray=@[@"",@"",@""];
     _isOneViewEnable=[_isSelectModelArray[0] boolValue];
     _isTwoViewEnable=[_isSelectModelArray[1] boolValue];
     _isThreeViewEnable=[_isSelectModelArray[2] boolValue];
@@ -108,6 +111,8 @@
     }
     
     if (_isFourViewEnable) {
+        _isFourViewH=150*HEIGHT_SIZE;
+        
         [self initFourView];
         
     }
@@ -217,12 +222,12 @@
     }
 }
 
--(void)goToReadAllChartAgain{
-    if (_allCmdModleTime>4) {
-        _allCmdModleTime=10;
-    }
-    [self goToReadAllChart];
-}
+//-(void)goToReadAllChartAgain{
+//    if (_allCmdModleTime>4) {
+//        _allCmdModleTime=10;
+//    }
+//    [self goToReadAllChart];
+//}
 
 
 -(void)cmdThreeModle{
@@ -291,11 +296,17 @@
     
 }
 
+-(void)setFailed{
+    [self removeTheNotification];
+    [self showAlertViewWithTitle:@"数据读取失败" message:@"请重试或检查WiFi连接." cancelButtonTitle:root_OK];
 
+}
 
 -(void)receiveData:(NSNotification*) notification{
     NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
         NSData*data= [firstDic objectForKey:@"one"];
+    
+    ///电网线路图
     if (_allCmdModleTime==3) {
         if (_cmdTimes==0) {
             _progressNum=0;
@@ -322,10 +333,11 @@
             [self removeTheNotification];
             [self initThreeView];
             [self goToReadAllChart];
+            return;
         }
     }
 
-    
+        ///电网线路阻抗
     if (_allCmdModleTime==4) {
         if (_cmdTimes==0) {
                _progressNum=0;
@@ -338,10 +350,11 @@
         
         if (_cmdTimes==1) {
 
-            _zuKangArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:33]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:34]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:35]]];
+            _fourLableArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:33]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:34]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:35]]];
             
                  [self removeTheNotification];
             [self initFourView];
+               return;
         }
     }
     
@@ -350,14 +363,18 @@
 
 
 -(void)removeTheNotification{
+    if (_ControlOne) {
+        [_ControlOne disConnect];
+    }
+    if (_timer) {
+        _timer.fireDate=[NSDate distantFuture];
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKey" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKeyFailed" object:nil];
     
 }
 
--(void)setFailed{
-    
-}
+
 
 ////////////////////I-V/P-V 曲线
 -(void)initOneView{
@@ -599,6 +616,54 @@
 }
 
 -(void)initFourView{
+    if (_view4) {
+        [_view4 removeFromSuperview];
+        _view4=nil;
+    }
+    _view4=[[UIView alloc]initWithFrame:CGRectMake(0,lastH+_isOneViewH+_isTwoViewH+_isThreeViewH, SCREEN_Width, _isFourViewH)];
+    _view4.backgroundColor=[UIColor clearColor];
+    [_scrollViewAll addSubview:_view4];
+    
+    UIView* view1=[[UIView alloc]initWithFrame:CGRectMake(0,0, SCREEN_Width, everyLalbeH)];
+    view1.backgroundColor=[UIColor whiteColor];
+    [_view4 addSubview:view1];
+    
+    UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0,0, SCREEN_Width, everyLalbeH)];
+    titleLable.textColor =MainColor;
+    titleLable.textAlignment=NSTextAlignmentCenter;
+    titleLable.text=@"电网线路阻抗";
+    titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [view1 addSubview:titleLable];
+    
+    NSArray *nameArray=@[@"R相阻抗",@"S相阻抗",@"T相阻抗"];
+    
+    float H1=40*HEIGHT_SIZE;
+    for (int i=0; i<nameArray.count; i++) {
+        UILabel *titleLable1 = [[UILabel alloc]initWithFrame:CGRectMake(0,everyLalbeH+H1*i, 90*NOW_SIZE, H1)];
+        titleLable1.textColor =COLOR(102, 102, 102, 1);
+        titleLable1.textAlignment=NSTextAlignmentRight;
+        titleLable1.adjustsFontSizeToFitWidth=YES;
+        titleLable1.text=[NSString stringWithFormat:@"%@:",nameArray[i]];
+        titleLable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_view4 addSubview:titleLable1];
+        
+        UILabel *titleLable11 = [[UILabel alloc]initWithFrame:CGRectMake(100*NOW_SIZE,everyLalbeH+5*HEIGHT_SIZE+H1*i, 150*NOW_SIZE, H1-10*HEIGHT_SIZE)];
+        titleLable11.textColor =COLOR(102, 102, 102, 1);
+        titleLable11.backgroundColor=COLOR(242, 242, 242, 1);
+        titleLable11.textAlignment=NSTextAlignmentCenter;
+              titleLable11.adjustsFontSizeToFitWidth=YES;
+        titleLable11.text=_fourLableArray[i];
+        titleLable11.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_view4 addSubview:titleLable11];
+        
+        UILabel *titleLable2 = [[UILabel alloc]initWithFrame:CGRectMake(260*NOW_SIZE,everyLalbeH+H1*i, 40*NOW_SIZE, H1)];
+        titleLable2.textColor =COLOR(102, 102, 102, 1);
+        titleLable2.textAlignment=NSTextAlignmentLeft;
+        titleLable2.text=@"Ω";
+        titleLable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_view4 addSubview:titleLable2];
+    }
+    
     
 }
 
