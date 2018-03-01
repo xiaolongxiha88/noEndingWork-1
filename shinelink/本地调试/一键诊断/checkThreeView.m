@@ -64,7 +64,8 @@
 @property (strong, nonatomic)UIView*view3;
 @property (strong, nonatomic)UIView*view4;
 @property (strong, nonatomic)NSArray* fourLableArray;
-
+@property (assign, nonatomic) int progressTimes;
+@property (assign, nonatomic) int everyProgress;
 
 @end
 
@@ -90,13 +91,17 @@
     
         [self initUI];
     
+    _progressTimes=0;
+    
     if (_isOneViewEnable) {
+        _progressTimes++;
             _isOneViewH=SCREEN_Height-lastH-NavigationbarHeight+everyLalbeH+everyModelKongH*2;
         [self initOneView];
     
     }
     
     if (_isTwoViewEnable) {
+            _progressTimes++;
                     _isTwoViewH=SCREEN_Height-lastH-NavigationbarHeight+everyLalbeH+everyModelKongH*2-20*HEIGHT_SIZE;
         
         [self initTwoView];
@@ -104,6 +109,7 @@
     }
     
     if (_isThreeViewEnable) {
+            _progressTimes++;
          _isThreeViewH=everyLalbeH+270*HEIGHT_SIZE+120*HEIGHT_SIZE;
         
         [self initThreeView];
@@ -111,11 +117,13 @@
     }
     
     if (_isFourViewEnable) {
+            _progressTimes++;
         _isFourViewH=150*HEIGHT_SIZE;
         
         [self initFourView];
         
     }
+    _everyProgress=100/_progressTimes;
     
     _scrollViewAll.contentSize=CGSizeMake(ScreenWidth, _isOneViewH+_isTwoViewH+_isThreeViewH+_isFourViewH+200*HEIGHT_SIZE);
     
@@ -163,10 +171,12 @@
     if (_isReadNow) {
         _allCmdModleTime=0;
         [self goToReadAllChart];
+        
+          [_progressView setPresent:5];
         _progressView.presentlab.text = @"取消";
         
     }else{
-        
+                _allCmdModleTime=10;
         present=0;
         [_progressView setPresent:present];
         _progressView.presentlab.text = @"开始";
@@ -218,8 +228,24 @@
     }
 
     if (_allCmdModleTime>4) {
+          [_progressView setPresent:100];
+           [self performSelector:@selector(updataLable) withObject:nil afterDelay:1.5];
+
         _allCmdModleTime=10;
+        [self removeTheControlOne];
     }
+    
+    if (_allCmdModleTime>1) {
+        present=_everyProgress+present;
+            [_progressView setPresent:present];
+    }
+    
+}
+
+-(void)updataLable{
+        [_progressView setPresent:0];
+    _isReadNow = !_isReadNow;
+    _progressView.presentlab.text = @"开始";
 }
 
 //-(void)goToReadAllChartAgain{
@@ -297,6 +323,9 @@
 }
 
 -(void)setFailed{
+        _isReadNow = !_isReadNow;
+        _progressView.presentlab.text = @"开始";
+    
     [self removeTheNotification];
     [self showAlertViewWithTitle:@"数据读取失败" message:@"请重试或检查WiFi连接." cancelButtonTitle:root_OK];
 
@@ -354,6 +383,7 @@
             
                  [self removeTheNotification];
             [self initFourView];
+            [self goToReadAllChart];
                return;
         }
     }
@@ -361,14 +391,17 @@
     
 }
 
-
--(void)removeTheNotification{
+-(void)removeTheControlOne{
     if (_ControlOne) {
         [_ControlOne disConnect];
     }
     if (_timer) {
         _timer.fireDate=[NSDate distantFuture];
     }
+}
+
+-(void)removeTheNotification{
+
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKey" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TcpReceiveOneKeyFailed" object:nil];
     
