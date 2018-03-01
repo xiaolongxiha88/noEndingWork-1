@@ -7,6 +7,9 @@
 //
 
 #import "RootViewController.h"
+#import "YDChart.h"
+#import "YDLineChart.h"
+#import "YDLineY.h"
 
 typedef void (^OneViewOverBlock)(void);
 
@@ -18,5 +21,12 @@ typedef void (^OneViewOverBlock)(void);
 @property (nonatomic, copy) OneViewOverBlock oneViewOverBlock;
 
 -(void)addNotification;
+
+
+@property (strong, nonatomic) YDLineChart *lineChartYD ;
+@property (strong, nonatomic) YDLineChart *lineChartYDOne ;
+
+@property (strong, nonatomic) YDLineY *YlineChartYD ;
+@property (strong, nonatomic) YDLineY *YlineChartYDOne ;
 
 @end

@@ -61,7 +61,9 @@
 #define OSS_HEAD_URL  [UserInfo defaultUserInfo].OSSserver
 #define OSS_HEAD_URL_Demo_2  @"http://oss.growatt.com"
 
-
+//#define OSS_HEAD_URL_Demo  @"http://47.91.176.158"
+//#define OSS_HEAD_URL  @"http://47.91.176.158"
+//#define OSS_HEAD_URL_Demo_2  @"http://47.91.176.158"
 //demo for server
 
 //#define HEAD_URL   @"http://test.growatt.com"

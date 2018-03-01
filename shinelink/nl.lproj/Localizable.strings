@@ -845,7 +845,8 @@
 "262馈电功率"="Power to grid";
 "263电网取电"="Import";
 "264来自"="From";
-
+"265充电功率"="Charge";
+"266放电功率"="Discharge";
 
 
 

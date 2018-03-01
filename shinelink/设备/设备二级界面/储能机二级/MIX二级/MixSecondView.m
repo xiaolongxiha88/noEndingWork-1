@@ -288,7 +288,7 @@
             nameLable.text=lableNameArray[i];
             nameLable.textAlignment=NSTextAlignmentCenter;
             nameLable.textColor=[UIColor whiteColor];
-            //  nameLable.adjustsFontSizeToFitWidth=YES;
+            nameLable.adjustsFontSizeToFitWidth=YES;
             if ([_languageValue isEqualToString:@"0"]) {
                 nameLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             }else{

@@ -30,11 +30,7 @@ static int unit2=80/4;
     float Lable11x;
     float W0;
 }
-@property (strong, nonatomic) YDLineChart *lineChartYD ;
-@property (strong, nonatomic) YDLineChart *lineChartYDOne ;
 
-@property (strong, nonatomic) YDLineY *YlineChartYD ;
-@property (strong, nonatomic) YDLineY *YlineChartYDOne ;
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (assign, nonatomic) CGFloat pointGap;
 @property (assign, nonatomic) CGFloat firstPointGap;
@@ -942,6 +938,10 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         
     }
     
+    if (_scrollView) {
+        [_scrollView removeFromSuperview];
+        _scrollView=nil;
+    }
     if (_charType==1) {
          _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, Yy, SCREEN_Width-Wx-Wx2, allH)];
     }else{
@@ -990,7 +990,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     }
     NSArray *YLineDataArr=[NSArray arrayWithArray:YLineDataArray0];
     
-
+    NSLog(@"TTTTTTTTTTTTTTTTTTTTTTTT");
     if (_lineChartYD) {
         [_lineChartYD removeFromSuperview];
         _lineChartYD=nil;
@@ -1047,6 +1047,10 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         [weakSelf updataTheLableValue:xValue];
     };
     
+    if (_YlineChartYD) {
+        [_YlineChartYD removeFromSuperview];
+        _YlineChartYD=nil;
+    }
     
     if (_charType==1) {
     _YlineChartYD = [[YDLineY alloc] initWithFrame:CGRectMake(0, Yy, Wx, allH) andLineChartType:JHChartLineValueNotForEveryXYDY];

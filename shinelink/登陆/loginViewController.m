@@ -111,7 +111,7 @@
     //上线检查
     [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:is_Test];
     
-    NSString *testDemo=@"O";
+    NSString *testDemo=@"OK";
     if ([testDemo isEqualToString:@"OK"]) {
         useToWifiView1 *testView=[[useToWifiView1 alloc]init];
 
@@ -321,6 +321,7 @@
     _forgetLable.textAlignment = NSTextAlignmentLeft;
  //   _forgetLable.adjustsFontSizeToFitWidth=YES;
      _forgetLable.userInteractionEnabled=YES;
+    _forgetLable.adjustsFontSizeToFitWidth=YES;
     UITapGestureRecognizer * forget2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(forget2)];
     [_forgetLable addGestureRecognizer:forget2];
     [_scrollView addSubview:_forgetLable];
@@ -342,6 +343,7 @@
    // self.registLable.font =_forgetLable.font;
     _registLable.textAlignment = NSTextAlignmentRight;
    _registLable.userInteractionEnabled=YES;
+       _registLable.adjustsFontSizeToFitWidth=YES;
     UITapGestureRecognizer * forget1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapLable2)];
     [self.registLable addGestureRecognizer:forget1];
     [_scrollView addSubview:_registLable];

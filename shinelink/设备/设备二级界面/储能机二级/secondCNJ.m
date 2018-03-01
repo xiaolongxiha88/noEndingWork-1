@@ -359,6 +359,7 @@
             UILabel *nameLable=[[UILabel alloc]initWithFrame:CGRectMake(0+lableW*i, 210*HEIGHT_SIZE-SizeH, lableW,20*HEIGHT_SIZE )];
             nameLable.text=lableNameArray[i];
             nameLable.textAlignment=NSTextAlignmentCenter;
+                nameLable.adjustsFontSizeToFitWidth=YES;
             nameLable.textColor=[UIColor whiteColor];
           //  nameLable.adjustsFontSizeToFitWidth=YES;
             if ([_languageValue isEqualToString:@"0"]) {

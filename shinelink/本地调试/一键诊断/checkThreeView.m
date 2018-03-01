@@ -117,6 +117,18 @@
 }
 
 
+-(void)viewWillDisappear:(BOOL)animated{
+    if (_ControlOne) {
+        [_ControlOne disConnect];
+    }
+    if (_timer) {
+        _timer.fireDate=[NSDate distantFuture];
+        _timer=nil;
+    }
+ 
+}
+
+
 -(void)initUI{
     _scrollViewAll = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, SCREEN_Height)];
     _scrollViewAll.backgroundColor=[UIColor clearColor];
@@ -389,6 +401,16 @@
 
 ////////////////////AC曲线
 -(void)initTwoView{
+
+    if (_viewTwo) {
+        [_viewTwo.lineChartYD removeFromSuperview];
+        [_viewTwo.YlineChartYD removeFromSuperview];
+        _viewTwo.lineChartYD=nil;
+        _viewTwo.YlineChartYD=nil;
+        [_viewTwo.view removeFromSuperview];
+        _viewTwo=nil;
+    }
+    
     if (!_viewTwo) {
         UIView* view1=[[UIView alloc]initWithFrame:CGRectMake(0,lastH+_isOneViewH, SCREEN_Width, everyLalbeH)];
         view1.backgroundColor=[UIColor whiteColor];
@@ -401,10 +423,6 @@
         titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [view1 addSubview:titleLable];
         
-        if (_viewTwo) {
-            [_viewTwo.view removeFromSuperview];
-            _viewTwo=nil;
-        }
         _viewTwo=[[checkTwoView alloc]init];
         _viewTwo.charType=3;
         _viewTwo.view.frame=CGRectMake(0,lastH+_isOneViewH+everyLalbeH, SCREEN_Width, _isTwoViewH-everyLalbeH-everyModelKongH*2);

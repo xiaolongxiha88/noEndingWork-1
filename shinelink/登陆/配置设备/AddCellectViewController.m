@@ -75,6 +75,8 @@
     _cellectId.textColor = [UIColor whiteColor];
     _cellectId.tintColor = [UIColor whiteColor];
      _cellectId.textAlignment = NSTextAlignmentCenter;
+    _cellectId.adjustsFontSizeToFitWidth=YES;
+    
     [_cellectId setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
     [_cellectId setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     _cellectId.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -90,6 +92,7 @@
     _cellectNo.placeholder = root_jiaoYanMa;
     _cellectNo.textColor = [UIColor whiteColor];
     _cellectNo.tintColor = [UIColor whiteColor];
+     _cellectNo.adjustsFontSizeToFitWidth=YES;
      _cellectNo.textAlignment = NSTextAlignmentCenter;
     [_cellectNo setValue:[UIColor lightTextColor] forKeyPath:@"_placeholderLabel.textColor"];
     [_cellectNo setValue:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
