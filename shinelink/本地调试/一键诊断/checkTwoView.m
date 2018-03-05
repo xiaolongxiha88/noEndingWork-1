@@ -136,8 +136,9 @@ static int unit2=80/4;
     if (_charType==3) {
         if (_ControlOne) {
             [_ControlOne disConnect];
+               _ControlOne=nil;
         }
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"OneKeyOneViewGoToStartRead" object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:@"OneKeyTwoViewGoToStartRead" object:nil];
     }
 }
 
@@ -149,6 +150,9 @@ static int unit2=80/4;
 }
 
 -(void)goToStartRead{
+    if (!_ControlOne) {
+        _ControlOne=[[wifiToPvOne alloc]init];
+    }
     _isReadNow=NO;
     _isChartType3LastCmdOver=NO;
     [self goStopRead:nil];
@@ -535,6 +539,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
 
 //开始读取曲线的寄存器
 -(void)goToReadTcpData{
+    NSLog(@"go to tcp 2 开始");
     _allDataArray=[NSMutableArray array];
     _sendDataTime=0;
     [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
@@ -655,6 +660,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
                      _allSendDataArray=[NSArray arrayWithArray:_allSendDataAllArray[_progressNumAll]];
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     
+                      NSLog(@"go to tcp 2 ------%d",_progressNumAll);
                     [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
                 });
             }
@@ -675,7 +681,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             }
             
             if (_charType==1 || _charType==2) {
-                [self removeTheNotification];
+             //   [self removeTheNotification];
                 _isReadfirstDataOver=NO;
                 _isReadNow=NO;
             }
@@ -693,10 +699,12 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
 }
 
 -(void)chartType3Recieve{
+    
+        [self removeTheNotification];
      self.oneViewOverBlock();
-    [self removeTheNotification];
     _isReadfirstDataOver=NO;
     _isReadNow=NO;
+    
 }
 
 //解析读取的数据
@@ -778,7 +786,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             [self showAlertViewWithTitle:@"数据读取失败" message:@"请重试或检查WiFi连接." cancelButtonTitle:root_OK];
             return;
         }
- 
+
     }
     if (!_isReadfirstDataOver) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"数据读取失败,请重试或检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
@@ -991,13 +999,17 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     NSArray *XLineDataArr = [XLineDataArr0 sortedArrayUsingDescriptors:@[sortDescripttor1]];
     
     
-    
+    NSMutableArray *YLineDataArr=[NSMutableArray array];
     NSMutableArray *YLineDataArray0=[NSMutableArray array];
     for (int i=0; i<allDataArray.count; i++) {
         NSDictionary *dic=allDataArray[i];
-        [YLineDataArray0 addObject:dic.allValues];
+        for (int i=0; i<XLineDataArr.count; i++) {
+            NSString *value=[dic objectForKey:XLineDataArr[i]];
+                 [YLineDataArray0 addObject:value];
+        }
+        [YLineDataArr addObject:YLineDataArray0];
     }
-    NSArray *YLineDataArr=[NSArray arrayWithArray:YLineDataArray0];
+  
     
   //  NSLog(@"TTTTTTTTTTTTTTTTTTTTTTTT");
     if (_lineChartYD) {

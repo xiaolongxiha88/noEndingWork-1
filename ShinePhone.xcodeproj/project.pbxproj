@@ -711,6 +711,8 @@
 		33AF3D281D8E67210007D6C2 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF3D141D8E67210007D6C2 /* ProgressHUD.m */; };
 		33AF3D291D8E67210007D6C2 /* UdpCheckUtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 33AF3D161D8E67210007D6C2 /* UdpCheckUtl.m */; };
 		33B445BD1FD1695E000B18AA /* loginMore.png in Resources */ = {isa = PBXBuildFile; fileRef = 33B445BC1FD1695E000B18AA /* loginMore.png */; };
+		33C040BE204CDB8A00B5A964 /* getMore.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C040BD204CDB8900B5A964 /* getMore.png */; };
+		33C040C1204CDDFC00B5A964 /* checkThreeMoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C040C0204CDDFC00B5A964 /* checkThreeMoreData.m */; };
 		33C300001D3E33E00016351C /* L7.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF51D3E33E00016351C /* L7.png */; };
 		33C300011D3E33E00016351C /* L8.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF61D3E33E00016351C /* L8.png */; };
 		33C300021D3E33E00016351C /* L9.png in Resources */ = {isa = PBXBuildFile; fileRef = 33C3FFF71D3E33E00016351C /* L9.png */; };
@@ -1935,6 +1937,9 @@
 		33AF3D161D8E67210007D6C2 /* UdpCheckUtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UdpCheckUtl.m; sourceTree = "<group>"; };
 		33B445BC1FD1695E000B18AA /* loginMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loginMore.png; sourceTree = "<group>"; };
 		33C040BC2043B47B00B5A964 /* hu-HU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hu-HU"; path = "hu-HU.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		33C040BD204CDB8900B5A964 /* getMore.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = getMore.png; sourceTree = "<group>"; };
+		33C040BF204CDDFC00B5A964 /* checkThreeMoreData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = checkThreeMoreData.h; sourceTree = "<group>"; };
+		33C040C0204CDDFC00B5A964 /* checkThreeMoreData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = checkThreeMoreData.m; sourceTree = "<group>"; };
 		33C3FFEF1D3E33E00016351C /* L1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L1.png; sourceTree = "<group>"; };
 		33C3FFF01D3E33E00016351C /* L2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L2.png; sourceTree = "<group>"; };
 		33C3FFF11D3E33E00016351C /* L3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = L3.png; sourceTree = "<group>"; };
@@ -3489,6 +3494,7 @@
 		3376B3CD1F973E0B0069F820 /* 本地调试图片 */ = {
 			isa = PBXGroup;
 			children = (
+				33C040BD204CDB8900B5A964 /* getMore.png */,
 				33780090201C2AEF008E5C00 /* max_onekey.png */,
 				33780091201C2AF0008E5C00 /* max_real_time.png */,
 				3378008E201C2AE9008E5C00 /* max_iv_graph.png */,
@@ -3549,6 +3555,8 @@
 				33780084201C2709008E5C00 /* checkTwoView.m */,
 				33780086201C2720008E5C00 /* checkThreeView.h */,
 				33780087201C2720008E5C00 /* checkThreeView.m */,
+				33C040BF204CDDFC00B5A964 /* checkThreeMoreData.h */,
+				33C040C0204CDDFC00B5A964 /* checkThreeMoreData.m */,
 				33780068201B3EEE008E5C00 /* YDChart */,
 				3378007D201C1B5C008E5C00 /* usbTowifiCheckOne.h */,
 				3378007E201C1B5C008E5C00 /* usbTowifiCheckOne.m */,
@@ -5113,6 +5121,7 @@
 				3376B3D71F973EE00069F820 /* max_worning.png in Resources */,
 				337F96181F0CCB2900840527 /* follow-up.png in Resources */,
 				334AED731CA384F4007E39F3 /* open@2x.png in Resources */,
+				33C040BE204CDB8A00B5A964 /* getMore.png in Resources */,
 				33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */,
 				335456C51C853AFD00275478 /* scanLine@2x.png in Resources */,
 				3343F3EB1C805BD2009F69BC /* LICENSE in Resources */,
@@ -5405,6 +5414,7 @@
 				3389649C1E5E767700A7B1AE /* forgetOneViewController.m in Sources */,
 				3379E4EB1E94BE40000A4198 /* UIColor+Hex.m in Sources */,
 				334B8F541C914A6D00798A69 /* PNPieChartDataItem.m in Sources */,
+				33C040C1204CDDFC00B5A964 /* checkThreeMoreData.m in Sources */,
 				33FAD8E01F99996F0030EEC3 /* usbToWifiCell2.m in Sources */,
 				33252FC11F4D4F320054BBC7 /* SPF5000Control.m in Sources */,
 				337284D11EF769390004FAB9 /* changUserInfoTwo.swift in Sources */,

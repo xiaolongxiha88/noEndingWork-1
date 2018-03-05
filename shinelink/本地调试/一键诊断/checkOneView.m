@@ -117,6 +117,7 @@ static int  firstReadTime=72.0;
     if (_oneCharType==2) {
         if (_ControlOne) {
             [_ControlOne disConnect];
+            _ControlOne=nil;
         }
         [[NSNotificationCenter defaultCenter] removeObserver:self name:@"OneKeyOneViewGoToStartRead" object:nil];
     }
@@ -129,6 +130,9 @@ static int  firstReadTime=72.0;
 }
 
 -(void)goToStartRead{
+    if (!_ControlOne) {
+        _ControlOne=[[wifiToPvOne alloc]init];
+    }
     _isReadNow=NO;
     [self goStopRead:nil];
 }
@@ -157,10 +161,12 @@ static int  firstReadTime=72.0;
         
         //收完数据啦~~~~~~~~~~~~~~~~~~~~~~~~~~
         if (_allSendDataArray.count==_allDataArray.count) {
-            if (_oneCharType==2) {
-                    self.oneViewOverBlock();
-            }
+  
             [self removeTheNotification];
+            if (_oneCharType==2) {
+                self.oneViewOverBlock();
+            }
+            
             _isReadfirstDataOver=NO;
             _isReadNow=NO;
         }

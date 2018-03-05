@@ -13,6 +13,7 @@
 #import "MCBarChartView.h"
 #import "usbToWifiDataControl.h"
 #import "wifiToPvOne.h"
+#import "checkThreeMoreData.h"
 
 @interface checkThreeView ()<MCBarChartViewDataSource, MCBarChartViewDelegate>
 {
@@ -193,6 +194,7 @@
     
     if (_allCmdModleTime==1) {
         if (_isOneViewEnable) {
+                    NSLog(@"第一模块开始~~~~~~~~~");
             [_viewOne addNotification];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyOneViewGoToStartRead"object:nil];
         }else{
@@ -203,6 +205,8 @@
     
     if (_allCmdModleTime==2) {
         if (_isTwoViewEnable) {
+            NSLog(@"第二模块开始~~~~~~~~~");
+        //    [_scrollViewAll setContentOffset:CGPointMake(0, _isOneViewH) animated:YES];
             [_viewTwo addNotification];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyTwoViewGoToStartRead"object:nil];
         }else{
@@ -214,6 +218,7 @@
     
     if (_allCmdModleTime==3) {
         if (_isThreeViewEnable) {
+               NSLog(@"第三模块开始~~~~~~~~~");
                [self cmdThreeModle];
         }else{
             _allCmdModleTime++;
@@ -223,11 +228,21 @@
     
     if (_allCmdModleTime==4) {
         if (_isFourViewEnable) {
+              NSLog(@"第四模块开始~~~~~~~~~");
             [self cmdFourModle];
         }
     }
 
+    if (_allCmdModleTime>1) {
+        present=_everyProgress+present;
+        if (present>100) {
+            present=100;
+        }
+        [_progressView setPresent:present];
+    }
+    
     if (_allCmdModleTime>4) {
+         present=0;
           [_progressView setPresent:100];
            [self performSelector:@selector(updataLable) withObject:nil afterDelay:1.5];
 
@@ -235,10 +250,7 @@
         [self removeTheControlOne];
     }
     
-    if (_allCmdModleTime>1) {
-        present=_everyProgress+present;
-            [_progressView setPresent:present];
-    }
+
     
 }
 
@@ -324,6 +336,7 @@
 
 -(void)setFailed{
         _isReadNow = !_isReadNow;
+     present=0;
         _progressView.presentlab.text = @"开始";
     
     [self removeTheNotification];
@@ -505,6 +518,20 @@
     titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [view1 addSubview:titleLable];
     
+    float imageW=15*HEIGHT_SIZE;
+    UIView *view11=[[UIView alloc]initWithFrame:CGRectMake(SCREEN_Width-(everyLalbeH+10*NOW_SIZE),0, everyLalbeH, everyLalbeH)];
+    view11.backgroundColor=[UIColor whiteColor];
+    view11.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToGetMoreData3)];
+        [view11 addGestureRecognizer:tapGestureRecognizer];
+    [view1 addSubview:view11];
+    
+    UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake((everyLalbeH-imageW)/2,(everyLalbeH-imageW)/2, imageW, imageW)];
+    image2.image=IMAGE(@"getMore.png");
+    [view11 addSubview:image2];
+    
+    
+    
     
     if (!_barDataSource2) {
         _barDataSource2=[NSMutableArray arrayWithArray:@[@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"]]];
@@ -549,7 +576,7 @@
     _Xtitles2=@[@"1",@"3",@"5",@"7",@"9",@"11",@"13",@"15",@"17",@"19",];
  
     
-        _barChartView2 = [[MCBarChartView alloc] initWithFrame:CGRectMake(0, lastH+_isOneViewH+_isTwoViewH+15*HEIGHT_SIZE, ScreenWidth+everyLalbeH,  _isThreeViewH-120*HEIGHT_SIZE-everyLalbeH)];
+        _barChartView2 = [[MCBarChartView alloc] initWithFrame:CGRectMake(0, lastH+_isOneViewH+_isTwoViewH+30*HEIGHT_SIZE, ScreenWidth+everyLalbeH,  _isThreeViewH-120*HEIGHT_SIZE-everyLalbeH)];
         _barChartView2.tag = 222;
         _barChartView2.dataSource = self;
         _barChartView2.delegate = self;
@@ -638,11 +665,17 @@
         view0.backgroundColor=COLOR(242, 242, 242, 1);
         [_scrollViewAll addSubview:view0];
 
-   
-    
-    
-    
 }
+
+
+-(void)goToGetMoreData3{
+    
+    checkThreeMoreData *registerRoot=[[checkThreeMoreData alloc]init];
+    registerRoot.getDetaiDataArray=[NSMutableArray arrayWithArray:_barDataSource2];
+ 
+    [self.navigationController pushViewController:registerRoot animated:YES];
+}
+
 
 -(void)buttonForNum:(UIButton*)button{
     
