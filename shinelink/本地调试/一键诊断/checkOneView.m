@@ -162,8 +162,9 @@ static int  firstReadTime=72.0;
         //收完数据啦~~~~~~~~~~~~~~~~~~~~~~~~~~
         if (_allSendDataArray.count==_allDataArray.count) {
   
-            [self removeTheNotification];
+    
             if (_oneCharType==2) {
+                        [self removeTheNotification];
                 self.oneViewOverBlock();
             }
             
@@ -848,6 +849,7 @@ __weak typeof(self) weakSelf = self;
 // 捏合手势监听方法
 - (void)pinchGesture:(UIPinchGestureRecognizer *)recognizer
 {
+    float W=10;
     UIView *recognizerView = recognizer.view;
     if (recognizer.state == 3) {
         
@@ -866,8 +868,10 @@ __weak typeof(self) weakSelf = self;
             
             ((YDLineChart*)recognizerView).perXLen=_firstPointGap;
         }
-        
-        ((YDLineChart*)recognizerView).pointGap = self.pointGap;
+        if (  ((YDLineChart*)recognizerView).perXLen<W) {
+                 ((YDLineChart*)recognizerView).pointGap = self.pointGap;
+        }
+   
         
     }else{
         
@@ -883,34 +887,40 @@ __weak typeof(self) weakSelf = self;
             //            NSLog(@"leftMagin = %f",leftMagin);
             
             
-            currentIndex = centerX / self.pointGap;
+
             //            NSLog(@"currentIndex = %f",currentIndex);
             
             
+                  ((YDLineChart*)recognizerView).perXLen=((YDLineChart*)recognizerView).perXLen* recognizer.scale;
             
-            self.pointGap *= recognizer.scale;
-            //            self.pointGap = self.pointGap > _defaultSpace ? _defaultSpace : self.pointGap;
-            //            if (self.pointGap == _defaultSpace) {
-            //
-            //                [SVProgressHUD showErrorWithStatus:@"已经放至最大"];
-            //            }
-            
-            ((YDLineChart*)recognizerView).pointGap = self.pointGap;
-            
-            
-            ((YDLineChart*)recognizerView).perXLen=((YDLineChart*)recognizerView).perXLen* recognizer.scale;
-            
-            if (_Type==1) {
-                recognizerView.frame = CGRectMake(((YDLineChart*)recognizerView).frame.origin.x, ((YDLineChart*)recognizerView).frame.origin.y, (((YDLineChart*)recognizerView).MaxX-1)* ((YDLineChart*)recognizerView).perXLen, ((YDLineChart*)recognizerView).frame.size.height);
+    
+            if (  ((YDLineChart*)recognizerView).perXLen<W) {
+                            currentIndex = centerX / self.pointGap;
+                          ((YDLineChart*)recognizerView).pointGap = self.pointGap;
+                        self.pointGap *= recognizer.scale;
+                
+                if (_Type==1) {
+                    recognizerView.frame = CGRectMake(((YDLineChart*)recognizerView).frame.origin.x, ((YDLineChart*)recognizerView).frame.origin.y, (((YDLineChart*)recognizerView).MaxX-1)* ((YDLineChart*)recognizerView).perXLen, ((YDLineChart*)recognizerView).frame.size.height);
+                }else{
+                    recognizerView.frame = CGRectMake(((YDLineChart*)recognizerView).frame.origin.x, ((YDLineChart*)recognizerView).frame.origin.y, (((YDLineChart*)recognizerView).xLineDataArr.count-1)* ((YDLineChart*)recognizerView).perXLen, ((YDLineChart*)recognizerView).frame.size.height);
+                }
+                
+                
+                self.scrollView.contentOffset = CGPointMake(currentIndex*self.pointGap-leftMagin, 0);
+                //            NSLog(@"contentOffset = %f",self.scrollView.contentOffset.x);
+                
+                recognizer.scale = 1.0;
+                
+                    self.scrollView.contentSize = CGSizeMake(((YDLineChart*)recognizerView).frame.size.width, 0);
+                
             }else{
-                recognizerView.frame = CGRectMake(((YDLineChart*)recognizerView).frame.origin.x, ((YDLineChart*)recognizerView).frame.origin.y, (((YDLineChart*)recognizerView).xLineDataArr.count-1)* ((YDLineChart*)recognizerView).perXLen, ((YDLineChart*)recognizerView).frame.size.height);
+             //  ((YDLineChart*)recognizerView).perXLen=W;
+                [self showToastViewWithTitle:@"已经是最大显示"];
             }
             
+  
             
-            self.scrollView.contentOffset = CGPointMake(currentIndex*self.pointGap-leftMagin, 0);
-            //            NSLog(@"contentOffset = %f",self.scrollView.contentOffset.x);
             
-            recognizer.scale = 1.0;
         }
         
         
@@ -919,7 +929,7 @@ __weak typeof(self) weakSelf = self;
         
     }
     
-    self.scrollView.contentSize = CGSizeMake(((YDLineChart*)recognizerView).frame.size.width, 0);
+
     
     
 }
@@ -940,13 +950,13 @@ __weak typeof(self) weakSelf = self;
         
         //ABS  绝对值
         if (ABS(location.x - _moveDistance) > self.pointGap) {
-            
+            [((YDLineChart*)recognizerView) setIsLongPress:YES];
+            ((YDLineChart*)recognizerView).currentLoc = location;
+            _moveDistance = location.x;
         }//不能长按移动一点点就重新绘图  要让定位的点改变了再重新绘图
         
         
-        [((YDLineChart*)recognizerView) setIsLongPress:YES];
-        ((YDLineChart*)recognizerView).currentLoc = location;
-        _moveDistance = location.x;
+  
         
     }
     

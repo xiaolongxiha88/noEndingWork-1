@@ -171,6 +171,9 @@
             
             NSInteger max = 0;
             NSInteger min = 0;
+            //            if (_valueArr.count==0) {
+            //                _valueArr=@[@[@"10",@"20",@"30",@"40",@"50"]];
+            //            }
             
             for (NSArray *arr in _valueArr) {
                 for (NSString * numer  in arr) {
@@ -193,7 +196,7 @@
                 max = (max/5+1)*5;
             NSMutableArray *arr = [NSMutableArray array];
             NSMutableArray *minArr = [NSMutableArray array];
-            if (max<=5) {
+            if (max>0 && max<=5) {
                 for (NSInteger i = 0; i<5; i++) {
                     
                     [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*1]];
@@ -220,6 +223,9 @@
                 
                 NSInteger Ynum=6;
                 NSInteger count = max / (Ynum-1);
+                if (count==0) {
+                    count=1;
+                }
                 
                 for (NSInteger i = 0; i<Ynum; i++) {
                     [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*count]];

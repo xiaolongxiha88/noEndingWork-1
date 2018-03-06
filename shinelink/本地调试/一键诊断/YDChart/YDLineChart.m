@@ -610,7 +610,6 @@
                         [self drawText:[NSString stringWithFormat:@"%@",rightArray[i]] andContext:context atPoint:P_M(p.x + 3, p.y-hei / 2) WithColor:_xAndYNumberColor andFontSize:self.yDescTextFontSize];
                         
                         
-                        
                     }
                 }
                 
@@ -933,7 +932,7 @@
          
             
             NSLog(@"长按X=%@",num);
-            CGFloat chartHeight = self.frame.size.height ;
+            CGFloat chartHeight = self.frame.size.height;
             
             CGPoint selectPoint = CGPointMake((nowPoint+1)*self.pointGap, chartHeight);
             
@@ -966,6 +965,7 @@
                             
                         }
                     }
+                         selectPoint = CGPointMake((nowPoint+1)*self.pointGap, chartHeight);
                 }
                     // 选中竖线
                     CGContextMoveToPoint(context, selectPoint.x, 0);
@@ -1111,12 +1111,21 @@
         }break;
         case JHLineChartQuadrantTypeFirstAndFouthQuardrantYD:{
          //   float HH=[[_yLineDataArr[0] firstObject] floatValue];
-            _perValue = _perYlen/[[_yLineDataArr[0] firstObject] floatValue];
+//            CGFloat yPace = (_yLength/2 - kXandYSpaceForSuperView)/([_yLineDataArr[0] count]);
+//            _perYlen = yPace;
+//
+//                        CGPoint p = P_M(self.chartOrigin.x, self.chartOrigin.y + (i+1)*yPace);
+            
+            
+            
+            float perYlenY=[[_yLineDataArr[0] firstObject] floatValue];
+            
+            _perValue = _perYlen/perYlenY;
             for (NSArray *valueArr in _valueArr) {
                 NSMutableArray *dataMArr = [NSMutableArray array];
                 for (NSInteger i = _drawPathFromXIndex; i<valueArr.count; i++) {
                     
-                    CGPoint p = P_M(i*_perXLen+self.chartOrigin.x,self.chartOrigin.y - [valueArr[i] floatValue]*_perValue);
+                    CGPoint p = P_M(i*_perXLen+self.chartOrigin.x,self.chartOrigin.y + [valueArr[i] floatValue]*_perValue);
                     NSValue *value = [NSValue valueWithCGPoint:p];
                     [dataMArr addObject:value];
                 }

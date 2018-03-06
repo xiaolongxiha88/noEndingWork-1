@@ -796,6 +796,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         [self showAlertViewWithTitle:@"数据读取中断" message:@"请重新读取数据" cancelButtonTitle:root_OK];
         
     }
+        _isReadNow = !_isReadNow;
     present=0;
     [custompro setPresent:present];
     custompro.presentlab.text = @"开始";
@@ -1109,7 +1110,10 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
 // 捏合手势监听方法
 - (void)pinchGesture:(UIPinchGestureRecognizer *)recognizer
 {
+       float W=10;
     UIView *recognizerView = recognizer.view;
+    
+
     if (recognizer.state == 3) {
         
         if (recognizerView.frame.size.width <= self.scrollView.frame.size.width) { //当缩小到小于屏幕宽时，松开回复屏幕宽度
@@ -1150,28 +1154,30 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             
             
             self.pointGap *= recognizer.scale;
-            //            self.pointGap = self.pointGap > _defaultSpace ? _defaultSpace : self.pointGap;
-            //            if (self.pointGap == _defaultSpace) {
-            //
-            //                [SVProgressHUD showErrorWithStatus:@"已经放至最大"];
-            //            }
+         
             
             ((YDLineChart*)recognizerView).pointGap = self.pointGap;
             
+   
+       ((YDLineChart*)recognizerView).perXLen=((YDLineChart*)recognizerView).perXLen* recognizer.scale;
             
-            ((YDLineChart*)recognizerView).perXLen=((YDLineChart*)recognizerView).perXLen* recognizer.scale;
-            
-            if (_Type==1) {
-                recognizerView.frame = CGRectMake(((YDLineChart*)recognizerView).frame.origin.x, ((YDLineChart*)recognizerView).frame.origin.y, (((YDLineChart*)recognizerView).MaxX-1)* ((YDLineChart*)recognizerView).perXLen, ((YDLineChart*)recognizerView).frame.size.height);
+            if (  ((YDLineChart*)recognizerView).perXLen<W) {
+                if (_Type==1) {
+                    recognizerView.frame = CGRectMake(((YDLineChart*)recognizerView).frame.origin.x, ((YDLineChart*)recognizerView).frame.origin.y, (((YDLineChart*)recognizerView).MaxX-1)* ((YDLineChart*)recognizerView).perXLen, ((YDLineChart*)recognizerView).frame.size.height);
+                }else{
+                    recognizerView.frame = CGRectMake(((YDLineChart*)recognizerView).frame.origin.x, ((YDLineChart*)recognizerView).frame.origin.y, (((YDLineChart*)recognizerView).xLineDataArr.count-1)* ((YDLineChart*)recognizerView).perXLen, ((YDLineChart*)recognizerView).frame.size.height);
+                }
+                
+                
+                self.scrollView.contentOffset = CGPointMake(currentIndex*self.pointGap-leftMagin, 0);
+                //            NSLog(@"contentOffset = %f",self.scrollView.contentOffset.x);
+                
+                recognizer.scale = 1.0;
             }else{
-                recognizerView.frame = CGRectMake(((YDLineChart*)recognizerView).frame.origin.x, ((YDLineChart*)recognizerView).frame.origin.y, (((YDLineChart*)recognizerView).xLineDataArr.count-1)* ((YDLineChart*)recognizerView).perXLen, ((YDLineChart*)recognizerView).frame.size.height);
+                ((YDLineChart*)recognizerView).perXLen=W;
+                [self showToastViewWithTitle:@"已经是最大显示"];
             }
-            
-            
-            self.scrollView.contentOffset = CGPointMake(currentIndex*self.pointGap-leftMagin, 0);
-            //            NSLog(@"contentOffset = %f",self.scrollView.contentOffset.x);
-            
-            recognizer.scale = 1.0;
+  
         }
         
         
