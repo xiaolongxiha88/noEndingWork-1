@@ -13,5 +13,5 @@
 @property(nonatomic, retain)UIImageView *leftimg;
 @property(nonatomic, retain)UILabel *presentlab;
 @property(nonatomic)float maxValue;
--(void)setPresent:(int)present;
+-(void)setPresent:(float)present;
 @end

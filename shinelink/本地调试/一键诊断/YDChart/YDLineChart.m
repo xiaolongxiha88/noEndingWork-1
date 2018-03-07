@@ -9,15 +9,16 @@
 #import "YDLineChart.h"
 #define kXandYSpaceForSuperView 20.0
 
+
 @interface YDLineChart ()<CAAnimationDelegate>
 
-@property (assign, nonatomic)   CGFloat  xLength;
-@property (assign , nonatomic)  CGFloat  yLength;
+@property (assign, nonatomic)   float  xLength;
+@property (assign , nonatomic)  float  yLength;
 
-@property (assign , nonatomic)  CGFloat  perYlen ;
+@property (assign , nonatomic)  float  perYlen ;
 
 
-@property (assign , nonatomic)  CGFloat  perValue ;
+@property (assign , nonatomic)  float  perValue ;
 @property (nonatomic,strong)    NSMutableArray * drawDataArr;
 @property (nonatomic,strong) CAShapeLayer *shapeLayer;
 @property (assign , nonatomic) BOOL  isEndAnimation ;
@@ -26,7 +27,7 @@
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (nonatomic,strong) NSMutableArray * xArrayForFirst;
-@property (assign, nonatomic) CGFloat lastLableX;
+@property (assign, nonatomic) float lastLableX;
 
 @end
 
@@ -305,7 +306,7 @@
             }else{
                 
                 NSInteger Ynum=6;
-                NSInteger count = max / (Ynum-1);
+                NSInteger count = max / (Ynum);
                 if (count==0) {
                     count=1;
                 }
@@ -768,8 +769,8 @@
                 
                 for (NSInteger i = 0; i<bottomArr.count; i++) {
                     CGPoint p = P_M(self.chartOrigin.x, self.chartOrigin.y + (i+1)*yPace);
-                    CGFloat len = [self sizeOfStringWithMaxSize:XORYLINEMAXSIZE textFont:self.yDescTextFontSize aimString:bottomArr[i]].width;
-                    CGFloat hei = [self sizeOfStringWithMaxSize:CGSizeMake(CGFLOAT_MAX, 30) textFont:self.yDescTextFontSize aimString:bottomArr[i]].height;
+                //    CGFloat len = [self sizeOfStringWithMaxSize:XORYLINEMAXSIZE textFont:self.yDescTextFontSize aimString:bottomArr[i]].width;
+              //      CGFloat hei = [self sizeOfStringWithMaxSize:CGSizeMake(CGFLOAT_MAX, 30) textFont:self.yDescTextFontSize aimString:bottomArr[i]].height;
                     
                     if (_showYLevelLine) {
                         [self drawLineWithContext:context andStarPoint:p andEndPoint:P_M(_perXLen*(_xLineDataArr.count-1), p.y) andIsDottedLine:YES andColor:self.xAndYLineColor];
@@ -777,7 +778,7 @@
                         
                         [self drawLineWithContext:context andStarPoint:p andEndPoint:P_M(p.x+3, p.y) andIsDottedLine:NO andColor:self.xAndYLineColor];
                     }
-                    [self drawText:[NSString stringWithFormat:@"%@",bottomArr[i]] andContext:context atPoint:P_M(p.x-len-3, p.y-hei / 2) WithColor:_xAndYNumberColor andFontSize:self.yDescTextFontSize];
+//                    [self drawText:[NSString stringWithFormat:@"%@",bottomArr[i]] andContext:context atPoint:P_M(p.x-len-3, p.y-hei / 2) WithColor:_xAndYNumberColor andFontSize:self.yDescTextFontSize];
                 }
                 
                 
@@ -1115,17 +1116,18 @@
 //            _perYlen = yPace;
 //
 //                        CGPoint p = P_M(self.chartOrigin.x, self.chartOrigin.y + (i+1)*yPace);
-            
-            
+            NSInteger num=([_yLineDataArr[0] count]);
+            _perYlen = (_yLength/2 - kXandYSpaceForSuperView)/num;
             
             float perYlenY=[[_yLineDataArr[0] firstObject] floatValue];
             
             _perValue = _perYlen/perYlenY;
+            float  unitValue = _perYlen/perYlenY;
             for (NSArray *valueArr in _valueArr) {
                 NSMutableArray *dataMArr = [NSMutableArray array];
                 for (NSInteger i = _drawPathFromXIndex; i<valueArr.count; i++) {
-                    
-                    CGPoint p = P_M(i*_perXLen+self.chartOrigin.x,self.chartOrigin.y + [valueArr[i] floatValue]*_perValue);
+                    float v0=[valueArr[i] floatValue];
+                    CGPoint p = P_M(i*_perXLen+self.chartOrigin.x,self.chartOrigin.y- (v0*unitValue));
                     NSValue *value = [NSValue valueWithCGPoint:p];
                     [dataMArr addObject:value];
                 }

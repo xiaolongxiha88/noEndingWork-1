@@ -222,7 +222,7 @@
             }else{
                 
                 NSInteger Ynum=6;
-                NSInteger count = max / (Ynum-1);
+                NSInteger count = max / (Ynum);
                 if (count==0) {
                     count=1;
                 }

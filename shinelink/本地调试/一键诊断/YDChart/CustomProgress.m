@@ -33,9 +33,9 @@
     }
     return self;
 }
--(void)setPresent:(int)present
+-(void)setPresent:(float)present
 {
-    presentlab.text = [NSString stringWithFormat:@"%d％",present];
+    presentlab.text = [NSString stringWithFormat:@"%.1f％",present];
     leftimg.frame = CGRectMake(0, 0, self.frame.size.width/self.maxValue*present, self.frame.size.height);
 }
 /*

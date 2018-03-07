@@ -32,7 +32,7 @@
     _InvoiceArray=[NSArray new];
      [self initUI];
     
-       [WXApi registerApp:@"wx4f0bf741c4f4443d"];  //微信注册
+       [WXApi registerApp:@"wx074a647e87deb0bd"];  //微信注册
     
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receivepayResultNotice:) name: @"payResultNotice" object:nil];
 
@@ -293,7 +293,7 @@
     }
 
 
-    //_moneyString=@"0.01";
+ //_moneyString=@"0.01";
     
     NSString * serverUrl = [serverUrl0 substringFromIndex:7];
   NSDictionary *netDic=@{
@@ -313,7 +313,7 @@
     
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo_2 paramars:netDic paramarsSite:@"/api/v2/renew/getPayRequest" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo_2 paramars:netDic paramarsSite:@"/api/v2/renew/getNewPayRequest" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];

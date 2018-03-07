@@ -24,9 +24,11 @@ typedef void (^OneViewOverBlock)(void);
 
 
 @property (strong, nonatomic) YDLineChart *lineChartYD ;
-@property (strong, nonatomic) YDLineChart *lineChartYDOne ;
+//@property (strong, nonatomic) YDLineChart *lineChartYDOne ;
 
 @property (strong, nonatomic) YDLineY *YlineChartYD ;
-@property (strong, nonatomic) YDLineY *YlineChartYDOne ;
+//@property (strong, nonatomic) YDLineY *YlineChartYDOne ;
+
+@property (assign, nonatomic) float waitingTimeFor3;
 
 @end

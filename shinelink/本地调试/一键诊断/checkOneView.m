@@ -27,7 +27,7 @@ static int  firstReadTime=72.0;
 @interface checkOneView ()
 {
        CustomProgress *custompro;
-        int present;
+        float present;
     CGSize lable1Size2;
     float everyLalbeH;
     float Lable11x;
@@ -616,11 +616,13 @@ static int  firstReadTime=72.0;
       [custompro setPresent:present];
     
     int waitingTime=0;
+    
+    //////等待时间
     if (_oneCharType==1) {
         waitingTime=keyOneWaitTime;
     }
     if (_oneCharType==2) {
-        waitingTime=1;
+        waitingTime=_waitingTimeFor3;
     }
     if (_progressNum>=waitingTime) {
              _isReadfirstDataOver=YES;
@@ -694,10 +696,12 @@ static int  firstReadTime=72.0;
       
     }
 
-    
-    _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, Yy, k_MainBoundsWidth-Wx-Wx2, allH)];
-    _scrollView.backgroundColor=[UIColor whiteColor];
-    [self.view addSubview:_scrollView];
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, Yy, k_MainBoundsWidth-Wx-Wx2, allH)];
+        _scrollView.backgroundColor=[UIColor whiteColor];
+        [self.view addSubview:_scrollView];
+    }
+
     
 
     NSMutableArray* allDataArray=[NSMutableArray array];
@@ -849,7 +853,8 @@ __weak typeof(self) weakSelf = self;
 // 捏合手势监听方法
 - (void)pinchGesture:(UIPinchGestureRecognizer *)recognizer
 {
-    float W=10;
+    
+    float W=_firstPointGap*13;
     UIView *recognizerView = recognizer.view;
     if (recognizer.state == 3) {
         
@@ -868,33 +873,31 @@ __weak typeof(self) weakSelf = self;
             
             ((YDLineChart*)recognizerView).perXLen=_firstPointGap;
         }
-        if (  ((YDLineChart*)recognizerView).perXLen<W) {
-                 ((YDLineChart*)recognizerView).pointGap = self.pointGap;
-        }
+//        if (  ((YDLineChart*)recognizerView).perXLen<W) {
+//                 ((YDLineChart*)recognizerView).pointGap = self.pointGap;
+//        }
    
         
     }else{
         
         CGFloat currentIndex,leftMagin;
         if( recognizer.numberOfTouches == 2 ) {
-            //2.获取捏合中心点 -> 捏合中心点距离scrollviewcontent左侧的距离
-            CGPoint p1 = [recognizer locationOfTouch:0 inView:recognizerView];
-            CGPoint p2 = [recognizer locationOfTouch:1 inView:recognizerView];
-            CGFloat centerX = (p1.x+p2.x)/2;
-            leftMagin = centerX - self.scrollView.contentOffset.x;
+         
             //            NSLog(@"centerX = %f",centerX);
             //            NSLog(@"self.scrollView.contentOffset.x = %f",self.scrollView.contentOffset.x);
             //            NSLog(@"leftMagin = %f",leftMagin);
-            
-            
-
             //            NSLog(@"currentIndex = %f",currentIndex);
+            float oldPerXlen=((YDLineChart*)recognizerView).perXLen;
             
-            
-                  ((YDLineChart*)recognizerView).perXLen=((YDLineChart*)recognizerView).perXLen* recognizer.scale;
-            
-    
+                             ((YDLineChart*)recognizerView).perXLen=((YDLineChart*)recognizerView).perXLen* recognizer.scale;
+
             if (  ((YDLineChart*)recognizerView).perXLen<W) {
+                //2.获取捏合中心点 -> 捏合中心点距离scrollviewcontent左侧的距离
+                CGPoint p1 = [recognizer locationOfTouch:0 inView:recognizerView];
+                CGPoint p2 = [recognizer locationOfTouch:1 inView:recognizerView];
+                CGFloat centerX = (p1.x+p2.x)/2;
+                leftMagin = centerX - self.scrollView.contentOffset.x;
+                
                             currentIndex = centerX / self.pointGap;
                           ((YDLineChart*)recognizerView).pointGap = self.pointGap;
                         self.pointGap *= recognizer.scale;
@@ -914,17 +917,12 @@ __weak typeof(self) weakSelf = self;
                     self.scrollView.contentSize = CGSizeMake(((YDLineChart*)recognizerView).frame.size.width, 0);
                 
             }else{
-             //  ((YDLineChart*)recognizerView).perXLen=W;
+      ((YDLineChart*)recognizerView).perXLen=oldPerXlen;
                 [self showToastViewWithTitle:@"已经是最大显示"];
             }
             
-  
-            
-            
+       
         }
-        
-        
-        
         
         
     }

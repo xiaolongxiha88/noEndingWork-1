@@ -15,10 +15,15 @@
 #import "wifiToPvOne.h"
 #import "checkThreeMoreData.h"
 
+static float waitTime1=10;     //30
+static float waitTime2=10;      //60
+static float waitTime3=10;        //60
+static float waitTime4=10;          //60
+
 @interface checkThreeView ()<MCBarChartViewDataSource, MCBarChartViewDelegate>
 {
   
-    int present;
+    float present;
     CGSize lable1Size2;
     float everyLalbeH;
     float Lable11x;
@@ -67,6 +72,8 @@
 @property (strong, nonatomic)NSArray* fourLableArray;
 @property (assign, nonatomic) int progressTimes;
 @property (assign, nonatomic) int everyProgress;
+
+
 
 @end
 
@@ -173,7 +180,7 @@
         _allCmdModleTime=0;
         [self goToReadAllChart];
         
-          [_progressView setPresent:5];
+          [_progressView setPresent:0];
         _progressView.presentlab.text = @"取消";
         
     }else{
@@ -195,6 +202,12 @@
     if (_allCmdModleTime==1) {
         if (_isOneViewEnable) {
                     NSLog(@"第一模块开始~~~~~~~~~");
+            _progressNum=0;
+            if (!_timer) {
+                _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+            }else{
+                _timer.fireDate=[NSDate distantPast];
+            }
             [_viewOne addNotification];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyOneViewGoToStartRead"object:nil];
         }else{
@@ -204,8 +217,14 @@
     }
     
     if (_allCmdModleTime==2) {
+           _progressNum=0;
         if (_isTwoViewEnable) {
             NSLog(@"第二模块开始~~~~~~~~~");
+            if (!_timer) {
+                _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+            }else{
+                _timer.fireDate=[NSDate distantPast];
+            }
         //    [_scrollViewAll setContentOffset:CGPointMake(0, _isOneViewH) animated:YES];
             [_viewTwo addNotification];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyTwoViewGoToStartRead"object:nil];
@@ -233,13 +252,13 @@
         }
     }
 
-    if (_allCmdModleTime>1) {
-        present=_everyProgress+present;
-        if (present>100) {
-            present=100;
-        }
-        [_progressView setPresent:present];
-    }
+//    if (_allCmdModleTime>1) {
+//        present=_everyProgress+present;
+//        if (present>100) {
+//            present=100;
+//        }
+//        [_progressView setPresent:present];
+//    }
     
     if (_allCmdModleTime>4) {
          present=0;
@@ -305,13 +324,30 @@
 //定时器更新
 -(void)updateProgress{
     _progressNum++;
+    float unitTime=1;
+    if (_allCmdModleTime==1) {
+        float T1=3;
+         unitTime=(_everyProgress)/(waitTime1+T1);
+        if (_progressNum>(waitTime1+T1)) {
+             _timer.fireDate=[NSDate distantFuture];
+                      return;
+        }
+    }
+    
+    if (_allCmdModleTime==2) {
+                float T2=5;
+         unitTime=(_everyProgress)/(waitTime2+T2);
+        if (_progressNum>(waitTime1+T2)) {
+            _timer.fireDate=[NSDate distantFuture];
+            return;
+        }
+    }
     
 
-    
-    int waitingTime=0;
     if (_allCmdModleTime==3) {
-        waitingTime=1;           //等待时间
-        if (_progressNum>=waitingTime) {
+            unitTime=(_everyProgress)/waitTime3;
+             //等待时间
+        if (_progressNum>=waitTime3) {
             if (_cmdTimes==0) {
                 _cmdTimes++;
                 [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:@"6000" Length:@"125"];
@@ -321,8 +357,9 @@
     }
     
     if (_allCmdModleTime==4) {
-          waitingTime=1;            //等待时间
-        if (_progressNum>=waitingTime) {
+               unitTime=(_everyProgress)/waitTime4;
+            //等待时间
+        if (_progressNum>=waitTime4) {
             if (_cmdTimes==0) {
                 _cmdTimes++;
                 [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:@"6000" Length:@"125"];
@@ -331,6 +368,9 @@
         }
     }
 
+    present=present+unitTime;
+    NSString *presentString=[NSString stringWithFormat:@"%.1f",present];
+    [_progressView setPresent:[presentString floatValue]];
     
 }
 
@@ -443,6 +483,7 @@
         
         _viewOne=[[checkOneView alloc]init];
         _viewOne.oneCharType=2;
+        _viewOne.waitingTimeFor3=waitTime1;
         _viewOne.view.frame=CGRectMake(0,lastH+everyLalbeH, SCREEN_Width, _isOneViewH-everyLalbeH-everyModelKongH*2);
 
        __weak typeof(self) weakSelf = self;
@@ -488,6 +529,7 @@
         
         _viewTwo=[[checkTwoView alloc]init];
         _viewTwo.charType=3;
+              _viewTwo.waitingTimeFor3=waitTime2;
         _viewTwo.view.frame=CGRectMake(0,lastH+_isOneViewH+everyLalbeH, SCREEN_Width, _isTwoViewH-everyLalbeH-everyModelKongH*2);
      
         __weak typeof(self) weakSelf = self;

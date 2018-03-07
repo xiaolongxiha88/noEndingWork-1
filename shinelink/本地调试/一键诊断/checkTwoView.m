@@ -24,7 +24,7 @@ static int unit2=80/4;
 @interface checkTwoView ()
 {
     CustomProgress *custompro;
-    int present;
+    float present;
     CGSize lable1Size2;
     float everyLalbeH;
     float Lable11x;
@@ -599,12 +599,13 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     present=_progressNum*unit;
     [custompro setPresent:present];
     
+        //////等待时间
     int waitingTime=0;
     if (_charType==1 || _charType==2) {
         waitingTime=keyOneWaitTime;
     }
     if (_charType==3) {
-        waitingTime=1;
+        waitingTime=_waitingTimeFor3;
     }
     if (_progressNum>=waitingTime) {
         _isReadfirstDataOver=YES;
@@ -1110,12 +1111,12 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
 // 捏合手势监听方法
 - (void)pinchGesture:(UIPinchGestureRecognizer *)recognizer
 {
-       float W=10;
+            float W=_firstPointGap*13;
     UIView *recognizerView = recognizer.view;
     
 
     if (recognizer.state == 3) {
-        
+      
         if (recognizerView.frame.size.width <= self.scrollView.frame.size.width) { //当缩小到小于屏幕宽时，松开回复屏幕宽度
             
             CGFloat scale = self.scrollView.frame.size.width / (recognizerView.frame.size.width);
@@ -1132,36 +1133,32 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             ((YDLineChart*)recognizerView).perXLen=_firstPointGap;
         }
         
-        ((YDLineChart*)recognizerView).pointGap = self.pointGap;
+      //  ((YDLineChart*)recognizerView).pointGap = self.pointGap;
         
     }else{
         
         CGFloat currentIndex,leftMagin;
         if( recognizer.numberOfTouches == 2 ) {
-            //2.获取捏合中心点 -> 捏合中心点距离scrollviewcontent左侧的距离
-            CGPoint p1 = [recognizer locationOfTouch:0 inView:recognizerView];
-            CGPoint p2 = [recognizer locationOfTouch:1 inView:recognizerView];
-            CGFloat centerX = (p1.x+p2.x)/2;
-            leftMagin = centerX - self.scrollView.contentOffset.x;
+            
             //            NSLog(@"centerX = %f",centerX);
             //            NSLog(@"self.scrollView.contentOffset.x = %f",self.scrollView.contentOffset.x);
             //            NSLog(@"leftMagin = %f",leftMagin);
-            
-            
-            currentIndex = centerX / self.pointGap;
             //            NSLog(@"currentIndex = %f",currentIndex);
+            float oldPerXlen=((YDLineChart*)recognizerView).perXLen;
             
-            
-            
-            self.pointGap *= recognizer.scale;
-         
-            
-            ((YDLineChart*)recognizerView).pointGap = self.pointGap;
-            
-   
-       ((YDLineChart*)recognizerView).perXLen=((YDLineChart*)recognizerView).perXLen* recognizer.scale;
+            ((YDLineChart*)recognizerView).perXLen=((YDLineChart*)recognizerView).perXLen* recognizer.scale;
             
             if (  ((YDLineChart*)recognizerView).perXLen<W) {
+                //2.获取捏合中心点 -> 捏合中心点距离scrollviewcontent左侧的距离
+                CGPoint p1 = [recognizer locationOfTouch:0 inView:recognizerView];
+                CGPoint p2 = [recognizer locationOfTouch:1 inView:recognizerView];
+                CGFloat centerX = (p1.x+p2.x)/2;
+                leftMagin = centerX - self.scrollView.contentOffset.x;
+                
+                currentIndex = centerX / self.pointGap;
+                ((YDLineChart*)recognizerView).pointGap = self.pointGap;
+                self.pointGap *= recognizer.scale;
+                
                 if (_Type==1) {
                     recognizerView.frame = CGRectMake(((YDLineChart*)recognizerView).frame.origin.x, ((YDLineChart*)recognizerView).frame.origin.y, (((YDLineChart*)recognizerView).MaxX-1)* ((YDLineChart*)recognizerView).perXLen, ((YDLineChart*)recognizerView).frame.size.height);
                 }else{
@@ -1173,20 +1170,21 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
                 //            NSLog(@"contentOffset = %f",self.scrollView.contentOffset.x);
                 
                 recognizer.scale = 1.0;
+                
+                self.scrollView.contentSize = CGSizeMake(((YDLineChart*)recognizerView).frame.size.width, 0);
+                
             }else{
-                ((YDLineChart*)recognizerView).perXLen=W;
+                ((YDLineChart*)recognizerView).perXLen=oldPerXlen;
                 [self showToastViewWithTitle:@"已经是最大显示"];
             }
-  
+            
+            
         }
-        
-        
-        
         
         
     }
     
-    self.scrollView.contentSize = CGSizeMake(((YDLineChart*)recognizerView).frame.size.width, 0);
+    
     
     
 }
@@ -1207,9 +1205,10 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         
         //ABS  绝对值
         if (ABS(location.x - _moveDistance) > self.pointGap) {
-            [((YDLineChart*)recognizerView) setIsLongPress:YES];
             ((YDLineChart*)recognizerView).currentLoc = location;
             _moveDistance = location.x;
+            [((YDLineChart*)recognizerView) setIsLongPress:YES];
+
         }//不能长按移动一点点就重新绘图  要让定位的点改变了再重新绘图
         
         

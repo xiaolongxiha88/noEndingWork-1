@@ -16,6 +16,8 @@ typedef void (^OneViewOverBlock)(void);
 
 @property (nonatomic, copy) OneViewOverBlock oneViewOverBlock;
 
+@property (assign, nonatomic) float waitingTimeFor3;
+
 -(void)addNotification;
 
 @end
