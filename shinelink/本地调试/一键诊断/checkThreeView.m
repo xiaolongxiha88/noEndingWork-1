@@ -15,10 +15,10 @@
 #import "wifiToPvOne.h"
 #import "checkThreeMoreData.h"
 
-static float waitTime1=10;     //30
-static float waitTime2=10;      //60
-static float waitTime3=10;        //60
-static float waitTime4=10;          //60
+static float waitTime1=30;     //30
+static float waitTime2=30;      //60
+static float waitTime3=30;        //60
+static float waitTime4=60;          //60
 
 @interface checkThreeView ()<MCBarChartViewDataSource, MCBarChartViewDelegate>
 {

@@ -15,10 +15,10 @@
 #import "usbToWifiDataControl.h"
 
 
-static float keyOneWaitTime=10.0;
+static float keyOneWaitTime=35.0;     //add 5second
 
 static int  firstReadTime=72.0;
- static int unit=72/10.0;
+ static int unit=72/35.0;
  static int unit2=28/7;
 
 #define k_MainBoundsWidth [UIScreen mainScreen].bounds.size.width
@@ -613,6 +613,10 @@ static int  firstReadTime=72.0;
     _progressNum++;
 
     present=_progressNum*unit;
+    if (present>100) {
+        present=100;
+    }
+    
       [custompro setPresent:present];
     
     int waitingTime=0;

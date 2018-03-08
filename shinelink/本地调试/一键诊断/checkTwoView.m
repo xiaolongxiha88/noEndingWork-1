@@ -16,10 +16,11 @@
 #import "ZJBLStoreShopTypeAlert.h"
 #import "RKAlertView.h"
 
-static float keyOneWaitTime=5.0;
+static float keyOneWaitTime=8.0;     //add 3second            读波形20秒
+static float keyOneWaitTime2=23.0;      //add 3second         读波形20秒
 static int  firstReadTime=20.0;
-static int unit=20/5;
-static int unit2=80/4;
+
+static float readWaveTime=20;      //读波形时间
 
 @interface checkTwoView ()
 {
@@ -29,6 +30,10 @@ static int unit2=80/4;
     float everyLalbeH;
     float Lable11x;
     float W0;
+    float unit;
+        float unit2;
+
+
 }
 
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -84,7 +89,25 @@ static int unit2=80/4;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+   
+    float  unit1percent;
+        float  unit2percent;
+    if (_charType==1){
+        unit1percent=(keyOneWaitTime /(keyOneWaitTime+readWaveTime))*100;
+        unit2percent=(readWaveTime /(keyOneWaitTime+readWaveTime))*100;
+          unit=unit1percent/keyOneWaitTime;
+          unit2=unit2percent/4;
+    }
+    
+    if (_charType==2){
+        unit1percent=(keyOneWaitTime2 /(keyOneWaitTime2+readWaveTime))*100;
+        unit2percent=(readWaveTime /(keyOneWaitTime2+readWaveTime))*100;
+        unit=unit1percent/keyOneWaitTime2;
+        unit2=unit2percent/4;
+    }
+  
+    
+
     
     if (!_ControlOne) {
         _ControlOne=[[wifiToPvOne alloc]init];
@@ -301,7 +324,7 @@ static int unit2=80/4;
         if (_charType==1 || _charType==3) {
                 button1.frame = CGRectMake(0,everyLalbeH*(i+1),W0, everyLalbeH);
         }else if (_charType==2) {
-          button1.frame = CGRectMake(0,everyLalbeH*(i+1),W0-Lable11x, everyLalbeH);
+          button1.frame = CGRectMake(0,everyLalbeH*(i+1),Lable11x, everyLalbeH);
         }
 
         [button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -597,12 +620,18 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     _progressNum++;
     
     present=_progressNum*unit;
+    if (present>100) {
+        present=100;
+    }
     [custompro setPresent:present];
     
         //////等待时间
     int waitingTime=0;
-    if (_charType==1 || _charType==2) {
+    if (_charType==1) {
         waitingTime=keyOneWaitTime;
+    }
+    if (_charType==2) {
+        waitingTime=keyOneWaitTime2;
     }
     if (_charType==3) {
         waitingTime=_waitingTimeFor3;
@@ -903,7 +932,10 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
 
 //更新左边Lable的值
 -(void)updataLeftMaxValue2{
-    _valueForLeftLableArray=[NSMutableArray array];
+    if (_charType==1 || _charType==3) {
+        _valueForLeftLableArray=[NSMutableArray array];
+    }
+    
     for (int i=0; i<_CharIdArray.count; i++) {
         NSString*leftString=_CharIdArray[i];
         if (_charType==1) {
@@ -1002,9 +1034,10 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     
     
     NSMutableArray *YLineDataArr=[NSMutableArray array];
-    NSMutableArray *YLineDataArray0=[NSMutableArray array];
+
     for (int i=0; i<allDataArray.count; i++) {
         NSDictionary *dic=allDataArray[i];
+            NSMutableArray *YLineDataArray0=[NSMutableArray array];
         for (int i=0; i<XLineDataArr.count; i++) {
             NSString *value=[dic objectForKey:XLineDataArr[i]];
                  [YLineDataArray0 addObject:value];
