@@ -123,7 +123,7 @@
         }
         if (haveSelected) {
             checkThreeView *goView=[[checkThreeView alloc]init];
-            goView.title=_nameArray[2];
+            goView.title=_nameArray[3];
             goView.isSelectModelArray=[NSArray arrayWithArray:selectValueArray];
             [self.navigationController pushViewController:goView animated:YES];
         }else{

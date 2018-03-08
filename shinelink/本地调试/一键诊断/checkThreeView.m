@@ -261,6 +261,7 @@ static float waitTime4=10;          //60
 //    }
     
     if (_allCmdModleTime>4) {
+        self.title=@"一键诊断";
          present=0;
           [_progressView setPresent:100];
            [self performSelector:@selector(updataLable) withObject:nil afterDelay:1.5];
@@ -350,7 +351,7 @@ static float waitTime4=10;          //60
         if (_progressNum>=waitTime3) {
             if (_cmdTimes==0) {
                 _cmdTimes++;
-                [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:@"6000" Length:@"125"];
+                [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:@"6000" Length:@"40"];
             }
             _timer.fireDate=[NSDate distantFuture];
         }
@@ -362,7 +363,7 @@ static float waitTime4=10;          //60
         if (_progressNum>=waitTime4) {
             if (_cmdTimes==0) {
                 _cmdTimes++;
-                [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:@"6000" Length:@"125"];
+                [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:@"6000" Length:@"40"];
             }
             _timer.fireDate=[NSDate distantFuture];
         }
@@ -372,9 +373,12 @@ static float waitTime4=10;          //60
     NSString *presentString=[NSString stringWithFormat:@"%.1f",present];
     [_progressView setPresent:[presentString floatValue]];
     
+    self.title=[NSString stringWithFormat:@"读取数据中...(%@%%)",presentString];
 }
 
 -(void)setFailed{
+        _timer.fireDate=[NSDate distantFuture];
+    
         _isReadNow = !_isReadNow;
      present=0;
         _progressView.presentlab.text = @"开始";
