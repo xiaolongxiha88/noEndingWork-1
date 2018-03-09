@@ -344,16 +344,8 @@ static int  firstReadTime=72.0;
         NSDictionary *dic=[NSDictionary dictionaryWithDictionary:_allDataForCharArray[i]];
         float maxY= [[dic.allValues valueForKeyPath:@"@max.floatValue"] floatValue];
            float maxX= [[dic.allKeys valueForKeyPath:@"@max.floatValue"] floatValue];
-        
-//        __block  NSString *maxKey;
-//        [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-//            NSString*obj1=obj;
-//            float maxyy=[obj1 floatValue];
-//            if (maxyy==maxY) {
-//                maxKey=key;
-//            }
-//
-//        }];
+ 
+
         
         UILabel *lable=[self.view viewWithTag:6000+i];
         
@@ -361,6 +353,16 @@ static int  firstReadTime=72.0;
              lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",maxX,maxY];
                     [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.1f)",maxX,maxY]];
         }else{
+            __block  NSString *maxKey;
+            [dic enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                NSString*obj1=obj;
+                float maxyy=[obj1 floatValue];
+                if (maxyy==maxY) {
+                    maxKey=key;
+                }
+                
+            }];
+            maxX=[maxKey floatValue];
              lable.text=[NSString stringWithFormat:@"(%.f,%.f)",maxX,maxY];
                [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.f)",maxX,maxY]];
         }

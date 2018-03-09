@@ -472,7 +472,7 @@ static float readWaveTime=20;      //读波形时间
 -(void)tapInfo:(UITapGestureRecognizer*)Tap{
   //  NSInteger Num=Tap.view.tag;
     NSMutableArray*NameArray=[NSMutableArray array];
-    for (int i=1; i<31; i++) {
+    for (int i=0; i<60; i++) {
         [NameArray addObject:[NSString stringWithFormat:@"%d",i]];
     }
 
@@ -509,10 +509,10 @@ static float readWaveTime=20;      //读波形时间
             lable.text=@"----";
         }
     }else if (_charType==2){
-        UIButton* button =[self.view viewWithTag:6000+tagNum];
+        UIButton* button1 =[self.view viewWithTag:6000+tagNum];
         if ( button.selected) {
             view.backgroundColor=_colorArray[tagNum];
-             [ button setTitle:_valueForLeftLableArray[tagNum] forState:UIControlStateNormal];
+             [ button1 setTitle:_valueForLeftLableArray[tagNum] forState:UIControlStateNormal];
 
         }else{
             view.backgroundColor=COLOR(151, 151, 151, 1);
@@ -787,7 +787,10 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             
         
             Value=Value*muchX;
-                [dataDic setObject:[NSString stringWithFormat:@"%.f",Value] forKey:[NSString stringWithFormat:@"%.d",K-4]];
+            
+    //         [dataDic setObject:[NSString stringWithFormat:@"%.f",Value+i*1000] forKey:[NSString stringWithFormat:@"%.d",K-4]];
+            
+        [dataDic setObject:[NSString stringWithFormat:@"%.f",Value] forKey:[NSString stringWithFormat:@"%.d",K-4]];
 
         }
         
