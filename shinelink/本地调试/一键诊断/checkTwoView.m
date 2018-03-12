@@ -19,8 +19,11 @@
 static float keyOneWaitTime=8.0;     //add 3second            读波形20秒
 static float keyOneWaitTime2=23.0;      //add 3second         读波形20秒
 static int  firstReadTime=20.0;
-
 static float readWaveTime=20;      //读波形时间
+
+#define   useToWifiCheckTwoRemember @"useToWifiCheckTwoRemember"
+#define   useToWifiCheckTwoRememberTime @"useToWifiCheckTwoRememberTime"
+#define   useToWifiCheckTwoRememberButton @"useToWifiCheckTwoRememberButton"
 
 @interface checkTwoView ()
 {
@@ -44,6 +47,7 @@ static float readWaveTime=20;      //读波形时间
 @property (strong, nonatomic)UILabel *lable0;
 @property (strong, nonatomic)UILabel *lable01;
 @property (strong, nonatomic)UILabel *lableCode;
+@property (strong, nonatomic)UILabel *lableSetTime;
 @property (nonatomic) BOOL isReadNow;
 @property (strong, nonatomic)NSArray *vocArray;
 @property (strong, nonatomic)NSArray *colorArray;
@@ -183,7 +187,16 @@ static float readWaveTime=20;      //读波形时间
 
 #pragma mark - UI界面
 -(void)initUI{
- 
+    if (_charType==2) {
+        float _lable00H=15*HEIGHT_SIZE;
+        _lableSetTime = [[UILabel alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE,SCREEN_Width,_lable00H)];
+        _lableSetTime.textColor =MainColor;
+        _lableSetTime.textAlignment=NSTextAlignmentCenter;
+        _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,@"--:--:--"];
+        _lableSetTime.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        [self.view addSubview:_lableSetTime];
+    }
+    
     float lableH=30*HEIGHT_SIZE;
     //float lableW1=40*NOW_SIZE;
     float X0=10*NOW_SIZE;
@@ -191,7 +204,6 @@ static float readWaveTime=20;      //读波形时间
     _view0.backgroundColor=[UIColor whiteColor];
     if (_charType==1) {
           [_viewAll addSubview:_view0];
-        
     }else{
         _valueForLeftLableArray=[NSMutableArray arrayWithArray:@[@"",@"",@"",@""]];
     }
@@ -313,6 +325,7 @@ static float readWaveTime=20;      //读波形时间
     
     NSArray *oneKeyLeftNameArray=@[@"R",@"S",@"T"];
     
+          _valueForLeftLableArray=[NSMutableArray array];
     for (int i=0; i<_colorArray.count; i++) {
         
 
@@ -358,6 +371,7 @@ static float readWaveTime=20;      //读波形时间
             Lable11.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
             [button1 addSubview:Lable11];
         }else if (_charType==2) {
+                NSArray* buttonArray=[NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoRememberButton]];
             float buttonW1=70*NOW_SIZE;   float buttonH=20*HEIGHT_SIZE;
             UIButton *button21 = [UIButton buttonWithType:UIButtonTypeCustom];
             button21.frame = CGRectMake(Lable11x, (everyLalbeH-buttonH)/2+everyLalbeH*(i+1), buttonW1, buttonH);
@@ -370,7 +384,13 @@ static float readWaveTime=20;      //读波形时间
             button21.titleLabel.adjustsFontSizeToFitWidth=YES;
             button21.backgroundColor=backgroundColor;
             button21.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
-            [button21 setTitle:@"设置ID" forState:UIControlStateNormal];
+            if (buttonArray.count>0) {
+                  [button21 setTitle:buttonArray[i] forState:UIControlStateNormal];
+                [_valueForLeftLableArray addObject:buttonArray[i]];
+            }else{
+               [button21 setTitle:@"设置ID" forState:UIControlStateNormal];
+            }
+  
             [button21 addTarget:self action:@selector(tapXnum:) forControlEvents:UIControlEventTouchUpInside];
             [_view2 addSubview:button21];
         }
@@ -433,8 +453,28 @@ static float readWaveTime=20;      //读波形时间
         
         
     }
-    
-    [self showFirstAndFourQuardrant];
+    if (_charType==2) {
+    NSArray*  allDataArrayOld=[NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoRemember]];
+        NSString *timeLableString=[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoRememberTime];
+        if (([timeLableString isEqualToString:@""]) || (timeLableString==nil)) {
+            _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,@"--:--:--"];
+        }else{
+            _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,timeLableString];
+        }
+        if (allDataArrayOld.count>0) {
+            _allDataRecieveAllArray=[NSMutableArray arrayWithArray:allDataArrayOld];
+            _selectBoolArray=[NSMutableArray array];
+            for (int i=0; i<_colorArray.count; i++) {
+                [_selectBoolArray addObject:[NSNumber numberWithBool:YES]];
+            }
+                 [self changData];
+        }else{
+                   [self showFirstAndFourQuardrant];
+        }
+    }else{
+            [self showFirstAndFourQuardrant];
+    }
+
     
 }
 
@@ -654,11 +694,11 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
     if (_charType==3) {
         if (_isChartType3LastCmdOver) {
-             NSData*data1= [firstDic objectForKey:@"one"];
-                  float R=([_changeDataValue changeOneRegister:data1 registerNum:36]);
-             float S=([_changeDataValue changeOneRegister:data1 registerNum:37]);
-             float T=([_changeDataValue changeOneRegister:data1 registerNum:38]);
-              float H=([_changeDataValue changeOneRegister:data1 registerNum:39]);
+            NSData*data1= [firstDic objectForKey:@"one"];
+            float R=([_changeDataValue changeOneRegister:data1 registerNum:36]);
+            float S=([_changeDataValue changeOneRegister:data1 registerNum:37]);
+            float T=([_changeDataValue changeOneRegister:data1 registerNum:38]);
+            float H=([_changeDataValue changeOneRegister:data1 registerNum:39]);
             _type3LeftLableArray=@[[NSString stringWithFormat:@"%.f",R],[NSString stringWithFormat:@"%.f",S],[NSString stringWithFormat:@"%.f",T],[NSString stringWithFormat:@"%.f",H]];
             
             [self updataLeftMaxValue2];
@@ -709,7 +749,22 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             if (_charType==3) {
                 [self chartType3cmd];
             }
-            
+            if (_charType==2) {
+
+                [[NSUserDefaults standardUserDefaults] setObject:_allDataRecieveAllArray forKey:useToWifiCheckTwoRemember];
+                
+                NSDateFormatter *dayFormatter=[[NSDateFormatter alloc] init];
+                [dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSString *readTime = [dayFormatter stringFromDate:[NSDate date]];
+                [[NSUserDefaults standardUserDefaults] setObject:readTime forKey:useToWifiCheckTwoRememberTime];
+                _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,readTime];
+                NSMutableArray *buttonArray=[NSMutableArray array];
+                for (int i=0; i<_colorArray.count; i++) {
+                            UIButton* button1 =[self.view viewWithTag:6000+i];
+                    [buttonArray addObject:button1.titleLabel.text];
+                }
+                             [[NSUserDefaults standardUserDefaults] setObject:buttonArray forKey:useToWifiCheckTwoRememberButton];
+            }
             if (_charType==1 || _charType==2) {
              //   [self removeTheNotification];
                 _isReadfirstDataOver=NO;
@@ -998,6 +1053,10 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     }
     if (_charType==1) {
          _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, Yy, SCREEN_Width-Wx-Wx2, allH)];
+    }else if (_charType==2) {
+        float H2=20*HEIGHT_SIZE;
+        allH=allH-H2;
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, H2, SCREEN_Width-Wx-Wx2, allH+Yy)];
     }else{
             _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, 0, SCREEN_Width-Wx-Wx2, allH+Yy)];
     }
@@ -1113,6 +1172,10 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     
     if (_charType==1) {
     _YlineChartYD = [[YDLineY alloc] initWithFrame:CGRectMake(0, Yy, Wx, allH) andLineChartType:JHChartLineValueNotForEveryXYDY];
+    }else if (_charType==2) {
+        float H2=20*HEIGHT_SIZE;
+       // _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(Wx, H2, SCREEN_Width-Wx-Wx2, allH)];
+           _YlineChartYD = [[YDLineY alloc] initWithFrame:CGRectMake(0, H2, Wx, allH+Yy) andLineChartType:JHChartLineValueNotForEveryXYDY];
     }else{
        _YlineChartYD = [[YDLineY alloc] initWithFrame:CGRectMake(0, 0, Wx, allH+Yy) andLineChartType:JHChartLineValueNotForEveryXYDY];
     }

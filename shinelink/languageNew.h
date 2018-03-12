@@ -887,5 +887,8 @@
 #define  root_device_265 NSLocalizedString(@"265充电功率", nil)
 #define  root_device_266 NSLocalizedString(@"266放电功率", nil)
 
+#define  root_MAX_267 NSLocalizedString(@"267最后更新时间为", nil)
+
+
 
 #endif /* languageNew_h */

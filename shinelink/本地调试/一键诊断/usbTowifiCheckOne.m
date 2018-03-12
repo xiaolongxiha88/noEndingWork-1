@@ -35,8 +35,8 @@
         [self.view addSubview:_scrollView];
     }
 
-    _nameArray=@[@"I-V曲线检测",@"故障录波检测",@"实时录波检测",@"一键诊断"];
-        NSArray*noteArray=@[@"可远程排查组串发电异常。",@"可远程、快速、精确的进行故障定位，可大幅降低售后运维成本。",@"可实时观察逆变器电压电流质量等。",@"初装上电前一键检测电站环境信息，包括I-V曲线扫描，电网侧电压波形，THDV以及线路阻抗。"];
+    _nameArray=@[@"智能I-V曲线扫描",@"故障录波检测",@"实时录波检测",@"一键诊断"];
+        NSArray*noteArray=@[@"可远程扫描每路I-V曲线或P-V曲线。",@"可远程、快速、精确地进行故障定位。",@"可实时观察逆变器电压电流质量等。",@"一键检测电站环境信息，包括I-V曲线扫描，电网侧电压波形，THDV以及线路阻抗。"];
     NSArray*imageArray=@[@"max_iv_graph.png",@"max_fault.png",@"max_real_time.png",@"max_onekey.png"];
     
    float H0=80*HEIGHT_SIZE;

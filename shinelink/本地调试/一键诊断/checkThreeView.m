@@ -72,7 +72,7 @@ static float waitTime4=60;          //60
 @property (strong, nonatomic)NSArray* fourLableArray;
 @property (assign, nonatomic) int progressTimes;
 @property (assign, nonatomic) int everyProgress;
-
+@property (strong, nonatomic)UILabel *lableSetTime1;
 
 
 @end
@@ -95,11 +95,15 @@ static float waitTime4=60;          //60
     everyModelKongH=10*HEIGHT_SIZE;
     everyLalbeH=30*HEIGHT_SIZE;
     
-    lastH=40*HEIGHT_SIZE;
+    lastH=40*HEIGHT_SIZE+20*HEIGHT_SIZE;
     
         [self initUI];
     
     _progressTimes=0;
+    
+
+
+
     
     if (_isOneViewEnable) {
         _progressTimes++;
@@ -155,9 +159,19 @@ static float waitTime4=60;          //60
     _scrollViewAll.backgroundColor=[UIColor clearColor];
     [self.view addSubview:_scrollViewAll];
     
+    if (!_lableSetTime1) {
+        float _lable00H=15*HEIGHT_SIZE;
+        _lableSetTime1 = [[UILabel alloc]initWithFrame:CGRectMake(0, lastH-20*HEIGHT_SIZE,SCREEN_Width,_lable00H)];
+        _lableSetTime1.textColor =MainColor;
+        _lableSetTime1.textAlignment=NSTextAlignmentCenter;
+        _lableSetTime1.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,@"2018-3-12 6:30:12"];
+        _lableSetTime1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        [_scrollViewAll addSubview:_lableSetTime1];
+    }
+    
     _isReadNow=NO;
     if (!_progressView) {
-        _progressView = [[CustomProgress alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lastH)];
+        _progressView = [[CustomProgress alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, lastH-20*HEIGHT_SIZE)];
         _progressView.maxValue = 100;
         //设置背景色
         _progressView.bgimg.backgroundColor =COLOR(0, 156, 255, 1);

@@ -21,6 +21,9 @@ static int  firstReadTime=72.0;
  static int unit=72/35.0;
  static int unit2=28/7;
 
+#define   useToWifiCheckOneRemember @"useToWifiCheckOneRemember"
+#define   useToWifiCheckOneRememberTime @"useToWifiCheckOneRememberTime"
+
 #define k_MainBoundsWidth [UIScreen mainScreen].bounds.size.width
 #define k_MainBoundsHeight [UIScreen mainScreen].bounds.size.height
 
@@ -42,6 +45,7 @@ static int  firstReadTime=72.0;
 @property (assign, nonatomic) CGFloat firstPointGap;
 @property (assign, nonatomic) CGFloat moveDistance;
 @property (assign, nonatomic) int Type;
+@property (strong, nonatomic)UILabel *lableSetTime;
 @property (strong, nonatomic)UILabel *lable0;
 @property (strong, nonatomic)UILabel *lable01;
 @property (nonatomic) BOOL isReadNow;
@@ -161,7 +165,15 @@ static int  firstReadTime=72.0;
         
         //收完数据啦~~~~~~~~~~~~~~~~~~~~~~~~~~
         if (_allSendDataArray.count==_allDataArray.count) {
-  
+            if (_oneCharType==1) {
+                     [[NSUserDefaults standardUserDefaults] setObject:_allDataArray forKey:useToWifiCheckOneRemember];
+            
+                NSDateFormatter *dayFormatter=[[NSDateFormatter alloc] init];
+           [dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+              NSString *readTime = [dayFormatter stringFromDate:[NSDate date]];
+                  [[NSUserDefaults standardUserDefaults] setObject:readTime forKey:useToWifiCheckOneRememberTime];
+                  _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,readTime];
+            }
     
             if (_oneCharType==2) {
                         [self removeTheNotification];
@@ -397,8 +409,25 @@ static int  firstReadTime=72.0;
 
 #pragma mark - UI界面
 -(void)initUI{
-    float lableH=30*HEIGHT_SIZE; float lableW1=40*NOW_SIZE;
-    UIView* view0=[[UIView alloc]initWithFrame:CGRectMake(0,5*HEIGHT_SIZE, SCREEN_Width, lableH)];
+
+
+    
+  //  float lableH=30*HEIGHT_SIZE;
+    float lableW1=40*NOW_SIZE;
+      float lableH2=20*HEIGHT_SIZE;
+    
+    if (_oneCharType==1) {
+        float _lable00H=15*HEIGHT_SIZE;
+        _lableSetTime = [[UILabel alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE,SCREEN_Width,_lable00H)];
+        _lableSetTime.textColor =MainColor;
+        _lableSetTime.textAlignment=NSTextAlignmentCenter;
+        _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,@"2018-3-12 6:30:12"];
+        _lableSetTime.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        [self.view addSubview:_lableSetTime];
+    }
+
+    
+    UIView* view0=[[UIView alloc]initWithFrame:CGRectMake(0,20*HEIGHT_SIZE, SCREEN_Width, lableH2)];
     view0.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:view0];
     
@@ -412,7 +441,7 @@ static int  firstReadTime=72.0;
     
     float buttonW=60*NOW_SIZE;   float buttonH=20*HEIGHT_SIZE;
    UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    button1.frame = CGRectMake(160*NOW_SIZE, (lableH-buttonH)/2, buttonW, buttonH);
+    button1.frame = CGRectMake(160*NOW_SIZE, (lableH2-buttonH)/2, buttonW, buttonH);
     [button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [button1 setTitleColor:COLOR(242, 242, 242, 1) forState:UIControlStateHighlighted];
     button1.layer.borderWidth=0.8*HEIGHT_SIZE;
@@ -427,7 +456,7 @@ static int  firstReadTime=72.0;
         [view0 addSubview:button1];
     
     UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    button2.frame = CGRectMake(160*NOW_SIZE+buttonW+10*NOW_SIZE, (lableH-buttonH)/2, buttonW, buttonH);
+    button2.frame = CGRectMake(160*NOW_SIZE+buttonW+10*NOW_SIZE, (lableH2-buttonH)/2, buttonW, buttonH);
     [button2 setTitleColor:MainColor forState:UIControlStateNormal];
     [button2 setTitleColor:COLOR(242, 242, 242, 1) forState:UIControlStateHighlighted];
     button2.layer.borderWidth=0.8*HEIGHT_SIZE;
@@ -539,12 +568,30 @@ static int  firstReadTime=72.0;
         Lable22.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [view22 addSubview:Lable22];
         
-
-        
-        
     }
     
-     [self showFirstQuardrant];
+    NSArray *allDataArrayOld=[NSArray array];
+    if (_oneCharType==1) {
+           allDataArrayOld=[NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckOneRemember]];
+        NSString *timeLableString=[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckOneRememberTime];
+        if (([timeLableString isEqualToString:@""]) || (timeLableString==nil)) {
+            _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,@"--:--:--"];
+        }else{
+             _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,timeLableString];
+        }
+    }
+
+    if (allDataArrayOld.count>0) {
+        _allDataArray=[NSMutableArray arrayWithArray:allDataArrayOld];
+        _selectBoolArray=[NSMutableArray array];
+        for (int i=0; i<_colorArray.count; i++) {
+            [_selectBoolArray addObject:[NSNumber numberWithBool:YES]];
+        }
+           [self changData];
+    }else{
+           [self showFirstQuardrant];
+    }
+  
     
 }
 
