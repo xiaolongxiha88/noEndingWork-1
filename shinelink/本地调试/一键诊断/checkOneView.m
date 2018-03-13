@@ -177,7 +177,7 @@ static int  firstReadTime=72.0;
     
             if (_oneCharType==2) {
                         [self removeTheNotification];
-                self.oneViewOverBlock();
+                self.oneViewOverBlock(_allDataArray);
             }
             
             _isReadfirstDataOver=NO;
@@ -580,7 +580,13 @@ static int  firstReadTime=72.0;
              _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,timeLableString];
         }
     }
-
+    if (_oneCharType==2) {
+        NSDictionary *dic=[NSDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"useToWifiCheckThreeRemember"]];
+        if ([dic.allKeys containsObject:@"one"]) {
+              allDataArrayOld=[NSArray arrayWithArray:[dic objectForKey:@"one"]];
+        }
+    }
+    
     if (allDataArrayOld.count>0) {
         _allDataArray=[NSMutableArray arrayWithArray:allDataArrayOld];
         _selectBoolArray=[NSMutableArray array];

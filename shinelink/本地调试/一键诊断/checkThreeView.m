@@ -15,6 +15,9 @@
 #import "wifiToPvOne.h"
 #import "checkThreeMoreData.h"
 
+#define   useToWifiCheckThreeRemember @"useToWifiCheckThreeRemember"
+#define   useToWifiCheckThreeRememberTime @"useToWifiCheckThreeRememberTime"
+
 static float waitTime1=30;     //30
 static float waitTime2=30;      //60
 static float waitTime3=30;        //60
@@ -74,6 +77,8 @@ static float waitTime4=60;          //60
 @property (assign, nonatomic) int everyProgress;
 @property (strong, nonatomic)UILabel *lableSetTime1;
 
+@property (strong, nonatomic)NSMutableArray* readDataForRememberArray;
+@property (strong, nonatomic)NSMutableDictionary* readDataForRememberDic;
 
 @end
 
@@ -214,6 +219,8 @@ static float waitTime4=60;          //60
         _allCmdModleTime++;
     
     if (_allCmdModleTime==1) {
+        _readDataForRememberDic=[NSMutableDictionary new];
+        
         if (_isOneViewEnable) {
                     NSLog(@"第一模块开始~~~~~~~~~");
             _progressNum=0;
@@ -282,6 +289,17 @@ static float waitTime4=60;          //60
 
         _allCmdModleTime=10;
         [self removeTheControlOne];
+        
+
+        
+        [[NSUserDefaults standardUserDefaults] setObject:_readDataForRememberDic forKey:useToWifiCheckThreeRemember];
+        
+        NSDateFormatter *dayFormatter=[[NSDateFormatter alloc] init];
+        [dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *readTime = [dayFormatter stringFromDate:[NSDate date]];
+        [[NSUserDefaults standardUserDefaults] setObject:readTime forKey:useToWifiCheckThreeRememberTime];
+        
+        
     }
     
 
@@ -294,12 +312,6 @@ static float waitTime4=60;          //60
     _progressView.presentlab.text = @"开始";
 }
 
-//-(void)goToReadAllChartAgain{
-//    if (_allCmdModleTime>4) {
-//        _allCmdModleTime=10;
-//    }
-//    [self goToReadAllChart];
-//}
 
 
 -(void)cmdThreeModle{
@@ -430,6 +442,9 @@ static float waitTime4=60;          //60
             
             _barRightArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:0]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:11]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:22]]];
             
+            NSArray*rememberArray=@[_barDataSource2,_barRightArray];
+            [_readDataForRememberDic setObject:rememberArray forKey:@"three"];
+            
             [self removeTheNotification];
             [self initThreeView];
             [self goToReadAllChart];
@@ -452,6 +467,7 @@ static float waitTime4=60;          //60
 
             _fourLableArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:33]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:34]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:35]]];
             
+                   [_readDataForRememberDic setObject:_fourLableArray forKey:@"four"];
                  [self removeTheNotification];
             [self initFourView];
             [self goToReadAllChart];
@@ -505,8 +521,10 @@ static float waitTime4=60;          //60
         _viewOne.view.frame=CGRectMake(0,lastH+everyLalbeH, SCREEN_Width, _isOneViewH-everyLalbeH-everyModelKongH*2);
 
        __weak typeof(self) weakSelf = self;
-        _viewOne.oneViewOverBlock=^{
+        _viewOne.oneViewOverBlock=^(NSArray* dataArray){
+                 [weakSelf.readDataForRememberDic setObject:dataArray forKey:@"one"];
             [weakSelf goToReadAllChart];
+       
         };
         [_scrollViewAll addSubview:_viewOne.view];
         
@@ -551,7 +569,8 @@ static float waitTime4=60;          //60
         _viewTwo.view.frame=CGRectMake(0,lastH+_isOneViewH+everyLalbeH, SCREEN_Width, _isTwoViewH-everyLalbeH-everyModelKongH*2);
      
         __weak typeof(self) weakSelf = self;
-        _viewTwo.oneViewOverBlock=^{
+        _viewTwo.oneViewOverBlock=^(NSArray* dataArray){
+              [weakSelf.readDataForRememberDic setObject:dataArray forKey:@"two"];
             [weakSelf goToReadAllChart];
         };
         [_scrollViewAll addSubview:_viewTwo.view];

@@ -8,7 +8,7 @@
 
 #import "RootViewController.h"
 
-typedef void (^OneViewOverBlock)(void);
+typedef void (^OneViewOverBlock)(NSArray*);
 
 @interface checkOneView : RootViewController
 

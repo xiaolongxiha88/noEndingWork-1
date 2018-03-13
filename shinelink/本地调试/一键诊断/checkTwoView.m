@@ -786,7 +786,10 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
 -(void)chartType3Recieve{
     
         [self removeTheNotification];
-     self.oneViewOverBlock();
+    
+//    _type3LeftLableArray，_allDataRecieveAllArray
+    NSArray *goArray=@[_type3LeftLableArray,_allDataRecieveAllArray];
+     self.oneViewOverBlock(goArray);
     _isReadfirstDataOver=NO;
     _isReadNow=NO;
     

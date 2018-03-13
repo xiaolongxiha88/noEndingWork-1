@@ -11,7 +11,7 @@
 #import "YDLineChart.h"
 #import "YDLineY.h"
 
-typedef void (^OneViewOverBlock)(void);
+typedef void (^OneViewOverBlock)(NSArray*);
 
 @interface checkTwoView : RootViewController
 
