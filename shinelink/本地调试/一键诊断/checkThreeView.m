@@ -169,7 +169,13 @@ static float waitTime4=60;          //60
         _lableSetTime1 = [[UILabel alloc]initWithFrame:CGRectMake(0, lastH-20*HEIGHT_SIZE,SCREEN_Width,_lable00H)];
         _lableSetTime1.textColor =MainColor;
         _lableSetTime1.textAlignment=NSTextAlignmentCenter;
-        _lableSetTime1.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,@"2018-3-12 6:30:12"];
+        NSString *timeLableString=[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckThreeRememberTime];
+        if (([timeLableString isEqualToString:@""]) || (timeLableString==nil)) {
+            _lableSetTime1.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,@"--:--:--"];
+        }else{
+                   _lableSetTime1.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,timeLableString];
+        }
+ 
         _lableSetTime1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         [_scrollViewAll addSubview:_lableSetTime1];
     }
@@ -294,11 +300,12 @@ static float waitTime4=60;          //60
         
         [[NSUserDefaults standardUserDefaults] setObject:_readDataForRememberDic forKey:useToWifiCheckThreeRemember];
         
+        
         NSDateFormatter *dayFormatter=[[NSDateFormatter alloc] init];
         [dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSString *readTime = [dayFormatter stringFromDate:[NSDate date]];
         [[NSUserDefaults standardUserDefaults] setObject:readTime forKey:useToWifiCheckThreeRememberTime];
-        
+            _lableSetTime1.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,readTime];
         
     }
     

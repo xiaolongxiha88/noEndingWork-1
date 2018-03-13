@@ -173,16 +173,38 @@
 }
 
 - (void)initUI {
+
+    
     self.alertView.frame = CGRectMake(50, ([UIScreen mainScreen].bounds.size.height-alertHeight)/2.0, [UIScreen mainScreen].bounds.size.width-100, alertHeight);
     self.titleLabel.frame = CGRectMake(0, 0, _alertView.frame.size.width, buttonHeight);
     float reduceHeight = buttonHeight;
     if (_showCloseButton) {
-        self.closeButton.frame = CGRectMake(0, _alertView.frame.size.height-buttonHeight, _alertView.frame.size.width, buttonHeight);
+        self.closeButton.frame = CGRectMake(_alertView.frame.size.width/2, _alertView.frame.size.height-buttonHeight,_alertView.frame.size.width/2, buttonHeight);
         reduceHeight = buttonHeight*2;
     }
     self.selectTableView.frame = CGRectMake(0, buttonHeight, _alertView.frame.size.width, _alertView.frame.size.height-reduceHeight);
+    
+    UIButton *allButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    allButton.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
+    allButton.frame = CGRectMake(0, _alertView.frame.size.height-buttonHeight, _alertView.frame.size.width/2, buttonHeight);
+    allButton.selected=NO;
+    [allButton setTitle:@"全选" forState:UIControlStateNormal];
+    [allButton setTitleColor:MainColor forState:UIControlStateNormal];
+    allButton.titleLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [allButton addTarget:self action:@selector(choiceAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.alertView addSubview:allButton];
+    
 }
 
+- (void)choiceAction:(UIButton*)button{
+    button.selected = !button.selected;
+    if (button.selected) {
+     _isSelectArray=[NSMutableArray arrayWithArray:@[[NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES]]];
+    }else{
+                _isSelectArray=[NSMutableArray arrayWithArray:@[[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO]]];
+    }
+     [_selectTableView reloadData];
+}
 
 #pragma UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
