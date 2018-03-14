@@ -18,10 +18,15 @@
 #define   useToWifiCheckThreeRemember @"useToWifiCheckThreeRemember"
 #define   useToWifiCheckThreeRememberTime @"useToWifiCheckThreeRememberTime"
 
-static float waitTime1=30;     //30
-static float waitTime2=30;      //60
-static float waitTime3=30;        //60
-static float waitTime4=60;          //60
+static float waitTime1=3;     //30
+static float waitTime2=3;      //60
+static float waitTime3=3;        //60
+static float waitTime4=6;          //60
+
+static int  gotoModel1=2;
+static int  gotoModel2=4;
+static int  gotoModel3=3;
+static int  gotoModel4=1;
 
 @interface checkThreeView ()<MCBarChartViewDataSource, MCBarChartViewDelegate>
 {
@@ -62,6 +67,7 @@ static float waitTime4=60;          //60
 @property (strong, nonatomic)NSArray* barColorArray;
 @property (strong, nonatomic)NSArray*Xtitles2;
 @property (strong, nonatomic) NSMutableArray *barDataSource2;  //bar数据的二维数组
+@property (strong, nonatomic) NSMutableArray *barDataSourceFirst;
 
 @property (strong, nonatomic)NSArray*zuKangArray;
 
@@ -76,6 +82,7 @@ static float waitTime4=60;          //60
 @property (assign, nonatomic) int progressTimes;
 @property (assign, nonatomic) int everyProgress;
 @property (strong, nonatomic)UILabel *lableSetTime1;
+@property (assign, nonatomic) int alertTime;
 
 @property (strong, nonatomic)NSMutableArray* readDataForRememberArray;
 @property (strong, nonatomic)NSMutableDictionary* readDataForRememberDic;
@@ -108,13 +115,14 @@ static float waitTime4=60;          //60
     
 
 
-
+    _alertTime=0;
     
     if (_isOneViewEnable) {
         _progressTimes++;
             _isOneViewH=SCREEN_Height-lastH-NavigationbarHeight+everyLalbeH+everyModelKongH*2+20*HEIGHT_SIZE;
         [self initOneView];
-    
+        
+   _alertTime=_alertTime+2;
     }
     
     if (_isTwoViewEnable) {
@@ -123,6 +131,7 @@ static float waitTime4=60;          //60
         
         [self initTwoView];
 
+           _alertTime=_alertTime+3;
     }
     
     if (_isThreeViewEnable) {
@@ -139,11 +148,12 @@ static float waitTime4=60;          //60
             allDataArrayOld=[NSArray arrayWithArray:allDataArrayOld00[0]];
         }
         if (allDataArrayOld.count>0) {
-            _barDataSource2=[NSMutableArray arrayWithArray:allDataArrayOld];
+            _barDataSourceFirst=[NSMutableArray arrayWithArray:allDataArrayOld];
         }
         
         [self initThreeView];
         
+           _alertTime=_alertTime+5;
     }
     
     if (_isFourViewEnable) {
@@ -159,7 +169,11 @@ static float waitTime4=60;          //60
         
         [self initFourView];
         
+           _alertTime=_alertTime+5;
     }
+    
+    [self showAlertViewWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"1、确保逆变器在运行状态；2、检测过程中会关断逆变器；3、诊断时间预计%d分钟",_alertTime] cancelButtonTitle:root_OK];
+    
     _everyProgress=100/_progressTimes;
     
     _scrollViewAll.contentSize=CGSizeMake(ScreenWidth, _isOneViewH+_isTwoViewH+_isThreeViewH+_isFourViewH+200*HEIGHT_SIZE);
@@ -244,8 +258,21 @@ static float waitTime4=60;          //60
 -(void)goToReadAllChart{
         _allCmdModleTime++;
     
-    if (_allCmdModleTime==1) {
-        _readDataForRememberDic=[NSMutableDictionary new];
+    
+    if (_allCmdModleTime==gotoModel4) {
+             _readDataForRememberDic=[NSMutableDictionary new];
+        
+        if (_isFourViewEnable) {
+            NSLog(@"第四模块开始~~~~~~~~~");
+            [self cmdFourModle];
+        }else{
+            _allCmdModleTime++;
+        }
+        
+    }
+    
+    if (_allCmdModleTime==gotoModel1) {
+   
         
         if (_isOneViewEnable) {
                     NSLog(@"第一模块开始~~~~~~~~~");
@@ -263,7 +290,7 @@ static float waitTime4=60;          //60
         
     }
     
-    if (_allCmdModleTime==2) {
+    if (_allCmdModleTime==gotoModel2) {
            _progressNum=0;
         if (_isTwoViewEnable) {
             NSLog(@"第二模块开始~~~~~~~~~");
@@ -282,7 +309,7 @@ static float waitTime4=60;          //60
     }
     
     
-    if (_allCmdModleTime==3) {
+    if (_allCmdModleTime==gotoModel3) {
         if (_isThreeViewEnable) {
                NSLog(@"第三模块开始~~~~~~~~~");
                [self cmdThreeModle];
@@ -292,14 +319,7 @@ static float waitTime4=60;          //60
         
     }
     
-    if (_allCmdModleTime==4) {
-        if (_isFourViewEnable) {
-              NSLog(@"第四模块开始~~~~~~~~~");
-            [self cmdFourModle];
-        }
-    }else{
-            _allCmdModleTime++;
-    }
+
 
 //    if (_allCmdModleTime>1) {
 //        present=_everyProgress+present;
@@ -381,7 +401,7 @@ static float waitTime4=60;          //60
 -(void)updateProgress{
     _progressNum++;
     float unitTime=1;
-    if (_allCmdModleTime==1) {
+    if (_allCmdModleTime==gotoModel1) {
         float T1=3;
          unitTime=(_everyProgress)/(waitTime1+T1);
         if (_progressNum>(waitTime1+T1)) {
@@ -390,7 +410,7 @@ static float waitTime4=60;          //60
         }
     }
     
-    if (_allCmdModleTime==2) {
+    if (_allCmdModleTime==gotoModel2) {
                 float T2=5;
          unitTime=(_everyProgress)/(waitTime2+T2);
         if (_progressNum>(waitTime1+T2)) {
@@ -400,7 +420,7 @@ static float waitTime4=60;          //60
     }
     
 
-    if (_allCmdModleTime==3) {
+    if (_allCmdModleTime==gotoModel3) {
             unitTime=(_everyProgress)/waitTime3;
              //等待时间
         if (_progressNum>=waitTime3) {
@@ -412,7 +432,7 @@ static float waitTime4=60;          //60
         }
     }
     
-    if (_allCmdModleTime==4) {
+    if (_allCmdModleTime==gotoModel4) {
                unitTime=(_everyProgress)/waitTime4;
             //等待时间
         if (_progressNum>=waitTime4) {
@@ -438,6 +458,8 @@ static float waitTime4=60;          //60
      present=0;
         _progressView.presentlab.text = @"开始";
     
+        [self removeTheControlOne];
+    
     [self removeTheNotification];
   //  [self showAlertViewWithTitle:@"数据读取失败" message:@"请重试或检查WiFi连接." cancelButtonTitle:root_OK];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi模块通信失败,请重新读取或检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
@@ -450,7 +472,7 @@ static float waitTime4=60;          //60
         NSData*data= [firstDic objectForKey:@"one"];
     
     ///电网线路图
-    if (_allCmdModleTime==3) {
+    if (_allCmdModleTime==gotoModel3) {
         if (_cmdTimes==0) {
             _progressNum=0;
             if (!_timer) {
@@ -461,20 +483,26 @@ static float waitTime4=60;          //60
         }
         
         if (_cmdTimes==1) {
-            _barDataSource2=[NSMutableArray array];
+            _barDataSourceFirst=[NSMutableArray array];
             for (int i=0; i<10; i++) {
                 int A=1+i;
                 int B=12+i;
                 int C=23+i;
-                NSArray *smallArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:A]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:B]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:C]]];
+//                NSArray *smallArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:A]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:B]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:C]]];
       
-                [_barDataSource2 addObject:smallArray];
+                      NSArray *smallArray=@[[NSString stringWithFormat:@"%.2f",((float)[_changeDataValue changeOneRegister:data registerNum:A])/100],[NSString stringWithFormat:@"%.2f",((float)[_changeDataValue changeOneRegister:data registerNum:B])/100],[NSString stringWithFormat:@"%.2f",((float)[_changeDataValue changeOneRegister:data registerNum:C])/100]];
+                
+                [_barDataSourceFirst addObject:smallArray];
             }
             
-            _barRightArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:0]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:11]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:22]]];
+//            _barRightArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:0]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:11]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:22]]];
             
-            NSArray*rememberArray=@[_barDataSource2,_barRightArray];
+                  _barRightArray=@[[NSString stringWithFormat:@"%.2f%%",((float)[_changeDataValue changeOneRegister:data registerNum:0])/100],[NSString stringWithFormat:@"%.2f%%",((float)[_changeDataValue changeOneRegister:data registerNum:11])/100],[NSString stringWithFormat:@"%.2f%%",((float)[_changeDataValue changeOneRegister:data registerNum:22])/100]];
+            
+            NSArray*rememberArray=@[_barDataSourceFirst,_barRightArray];
             [_readDataForRememberDic setObject:rememberArray forKey:@"three"];
+            
+                [self removeTheControlOne];
             
             [self removeTheNotification];
             [self initThreeView];
@@ -484,7 +512,7 @@ static float waitTime4=60;          //60
     }
 
         ///电网线路阻抗
-    if (_allCmdModleTime==4) {
+    if (_allCmdModleTime==gotoModel4) {
         if (_cmdTimes==0) {
                _progressNum=0;
             if (!_timer) {
@@ -512,6 +540,7 @@ static float waitTime4=60;          //60
 -(void)removeTheControlOne{
     if (_ControlOne) {
         [_ControlOne disConnect];
+        _ControlOne=nil;
     }
     if (_timer) {
         _timer.fireDate=[NSDate distantFuture];
@@ -643,11 +672,21 @@ static float waitTime4=60;          //60
     [view11 addSubview:image2];
     
     
+    UILabel *unitLable = [[UILabel alloc]initWithFrame:CGRectMake(22*NOW_SIZE,lastH+_isOneViewH+_isTwoViewH+20*HEIGHT_SIZE, 50*NOW_SIZE, everyLalbeH)];
+    unitLable.textColor =COLOR(51, 51, 51, 1);
+    unitLable.textAlignment=NSTextAlignmentLeft;
+    unitLable.text=@"%";
+    unitLable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    [_scrollViewAll addSubview:unitLable];
     
     
-    if (!_barDataSource2) {
-        _barDataSource2=[NSMutableArray arrayWithArray:@[@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"]]];
+    if (!_barDataSourceFirst) {
+        _barDataSourceFirst=[NSMutableArray arrayWithArray:@[@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"],@[@"0",@"0",@"0"]]];
     }
+    
+    _barDataSource2=[NSMutableArray arrayWithArray:_barDataSourceFirst];
+    [_barDataSource2 removeObjectAtIndex:0];
+    
        NSNumber *maxyAxisValue = [NSNumber numberWithInt:0];
     for (NSArray *array in _barDataSource2) {
             NSNumber *maxyAxisValue1 = [array valueForKeyPath:@"@max.floatValue"];
@@ -655,6 +694,8 @@ static float waitTime4=60;          //60
             maxyAxisValue=maxyAxisValue1;
         }
     }
+    
+  
     
        _barColorArray=@[COLOR(208, 107, 107, 1),COLOR(217, 189, 60, 1),COLOR(85, 207, 85, 1)];
     
@@ -685,7 +726,7 @@ static float waitTime4=60;          //60
         _barChartView2=nil;
     }
     
-    _Xtitles2=@[@"1",@"3",@"5",@"7",@"9",@"11",@"13",@"15",@"17",@"19",];
+    _Xtitles2=@[@"3",@"5",@"7",@"9",@"11",@"13",@"15",@"17",@"19",];
  
     
         _barChartView2 = [[MCBarChartView alloc] initWithFrame:CGRectMake(0, lastH+_isOneViewH+_isTwoViewH+30*HEIGHT_SIZE, ScreenWidth+everyLalbeH,  _isThreeViewH-120*HEIGHT_SIZE-everyLalbeH)];
@@ -783,7 +824,7 @@ static float waitTime4=60;          //60
 -(void)goToGetMoreData3{
     
     checkThreeMoreData *registerRoot=[[checkThreeMoreData alloc]init];
-    registerRoot.getDetaiDataArray=[NSMutableArray arrayWithArray:_barDataSource2];
+    registerRoot.getDetaiDataArray=[NSMutableArray arrayWithArray:_barDataSourceFirst];
  
     [self.navigationController pushViewController:registerRoot animated:YES];
 }
@@ -909,7 +950,7 @@ static float waitTime4=60;          //60
 
 - (CGFloat)barWidthInBarChartView:(MCBarChartView *)barChartView {
 
-    float W=4.8*NOW_SIZE;
+    float W=5.2*NOW_SIZE;
 
     return W;
     

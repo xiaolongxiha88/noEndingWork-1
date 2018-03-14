@@ -506,6 +506,7 @@ _pcsNetStorageSN=@"";
     powerArray2=[[NSMutableArray alloc]initWithObjects:@"50KW", @"50KW", @"5000W", @"5000W",  nil];
     dayArray2=[[NSMutableArray alloc]initWithObjects:@"500kWh", @"500kWh", @"50kWh",@"50kWh",nil];
     typeArray2=[[NSMutableArray alloc]initWithObjects:@"inverter", @"storage", @"charge",@"powerRegulator",nil];
+    
 }
 
 #pragma mark - navigationItem
@@ -2171,10 +2172,6 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
         return 65*HEIGHT_SIZE;
     }
-
-
-
-
 
 
 
