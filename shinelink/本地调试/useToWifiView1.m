@@ -719,6 +719,8 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)receiveFailedNotice2{
+    _rightItem.title=@"自动刷新";
+    _isAutoReflash =NO;
     [self hideProgressView];
     self.navigationItem.rightBarButtonItem.enabled=YES;
     _isfinishReflash=YES;
@@ -727,6 +729,9 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)receiveFailedNotice{
+        _rightItem.title=@"自动刷新";
+    _isAutoReflash =NO;
+    
     [self hideProgressView];
       self.navigationItem.rightBarButtonItem.enabled=YES;
  _isfinishReflash=YES;

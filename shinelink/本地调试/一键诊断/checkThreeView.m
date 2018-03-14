@@ -112,7 +112,7 @@ static float waitTime4=60;          //60
     
     if (_isOneViewEnable) {
         _progressTimes++;
-            _isOneViewH=SCREEN_Height-lastH-NavigationbarHeight+everyLalbeH+everyModelKongH*2;
+            _isOneViewH=SCREEN_Height-lastH-NavigationbarHeight+everyLalbeH+everyModelKongH*2+20*HEIGHT_SIZE;
         [self initOneView];
     
     }
@@ -129,6 +129,19 @@ static float waitTime4=60;          //60
             _progressTimes++;
          _isThreeViewH=everyLalbeH+270*HEIGHT_SIZE+120*HEIGHT_SIZE;
         
+             //   NSArray*rememberArray=@[_barDataSource2,_barRightArray];
+        NSArray*  allDataArrayOld00=[NSArray array];
+        NSArray*  allDataArrayOld=[NSArray array];
+        NSDictionary *dic=[NSDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckThreeRemember]];
+        if ([dic.allKeys containsObject:@"three"]) {
+            allDataArrayOld00=[NSArray arrayWithArray:[dic objectForKey:@"three"]];
+            _barRightArray=[NSArray arrayWithArray:allDataArrayOld00[1]];
+            allDataArrayOld=[NSArray arrayWithArray:allDataArrayOld00[0]];
+        }
+        if (allDataArrayOld.count>0) {
+            _barDataSource2=[NSMutableArray arrayWithArray:allDataArrayOld];
+        }
+        
         [self initThreeView];
         
     }
@@ -136,6 +149,13 @@ static float waitTime4=60;          //60
     if (_isFourViewEnable) {
             _progressTimes++;
         _isFourViewH=150*HEIGHT_SIZE;
+        
+
+        NSDictionary *dic=[NSDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckThreeRemember]];
+        if ([dic.allKeys containsObject:@"four"]) {
+            _fourLableArray=[NSArray arrayWithArray:[dic objectForKey:@"four"]];
+
+        }
         
         [self initFourView];
         
@@ -220,7 +240,7 @@ static float waitTime4=60;          //60
 }
 
 
-
+#pragma mark - 读取逻辑处
 -(void)goToReadAllChart{
         _allCmdModleTime++;
     
@@ -277,6 +297,8 @@ static float waitTime4=60;          //60
               NSLog(@"第四模块开始~~~~~~~~~");
             [self cmdFourModle];
         }
+    }else{
+            _allCmdModleTime++;
     }
 
 //    if (_allCmdModleTime>1) {
@@ -417,8 +439,10 @@ static float waitTime4=60;          //60
         _progressView.presentlab.text = @"开始";
     
     [self removeTheNotification];
-    [self showAlertViewWithTitle:@"数据读取失败" message:@"请重试或检查WiFi连接." cancelButtonTitle:root_OK];
-
+  //  [self showAlertViewWithTitle:@"数据读取失败" message:@"请重试或检查WiFi连接." cancelButtonTitle:root_OK];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi模块通信失败,请重新读取或检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
+    alertView.tag = 1001;
+    [alertView show];
 }
 
 -(void)receiveData:(NSNotification*) notification{
@@ -510,12 +534,7 @@ static float waitTime4=60;          //60
         view1.backgroundColor=[UIColor whiteColor];
         [_scrollViewAll addSubview:view1];
         
-        UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0,0, SCREEN_Width, everyLalbeH)];
-        titleLable.textColor =MainColor;
-        titleLable.textAlignment=NSTextAlignmentCenter;
-        titleLable.text=@"I-V/P-V 曲线";
-        titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        [view1 addSubview:titleLable];
+    
         
         if (_viewOne) {
             [_viewOne.view removeFromSuperview];
@@ -525,7 +544,7 @@ static float waitTime4=60;          //60
         _viewOne=[[checkOneView alloc]init];
         _viewOne.oneCharType=2;
         _viewOne.waitingTimeFor3=waitTime1;
-        _viewOne.view.frame=CGRectMake(0,lastH+everyLalbeH, SCREEN_Width, _isOneViewH-everyLalbeH-everyModelKongH*2);
+        _viewOne.view.frame=CGRectMake(0,lastH, SCREEN_Width, _isOneViewH-everyLalbeH-everyModelKongH*2);
 
        __weak typeof(self) weakSelf = self;
         _viewOne.oneViewOverBlock=^(NSArray* dataArray){
@@ -534,6 +553,13 @@ static float waitTime4=60;          //60
        
         };
         [_scrollViewAll addSubview:_viewOne.view];
+        
+        UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0,lastH-8*HEIGHT_SIZE, SCREEN_Width, everyLalbeH)];
+        titleLable.textColor =MainColor;
+        titleLable.textAlignment=NSTextAlignmentCenter;
+        titleLable.text=@"I-V/P-V 曲线";
+        titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        [_scrollViewAll addSubview:titleLable];
         
         UIView* view0=[[UIView alloc]initWithFrame:CGRectMake(0,lastH+_isOneViewH-everyModelKongH, SCREEN_Width, everyModelKongH)];
         view0.backgroundColor=COLOR(242, 242, 242, 1);
@@ -816,6 +842,26 @@ static float waitTime4=60;          //60
         [_view4 addSubview:titleLable2];
     }
     
+    
+}
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex) {
+        if( (alertView.tag == 1001)){
+            if (deviceSystemVersion>10) {
+                NSURL *url = [NSURL URLWithString:@"App-Prefs:root=WIFI"];
+                if ([[UIApplication sharedApplication]canOpenURL:url]) {
+                    [[UIApplication sharedApplication]openURL:url];
+                }
+            }else{
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=WIFI"]];
+            }
+            
+        }
+        
+    }
     
 }
 

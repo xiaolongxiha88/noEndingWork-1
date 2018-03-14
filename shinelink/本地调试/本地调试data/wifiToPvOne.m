@@ -12,6 +12,7 @@
 #import "MBProgressHUD.h"
 
 static float TCP_TIME=1;
+static float TCP_outTime=0.05;
 
 @interface wifiToPvOne ()<GCDAsyncSocketDelegate>
 
@@ -38,6 +39,11 @@ static float TCP_TIME=1;
 @property (nonatomic, strong)NSMutableDictionary*AllDataDic;
 @property (nonatomic, assign) BOOL isReceiveAll;
 @property (nonatomic, strong) NSData *receiveCmdTwoData;
+
+@property (nonatomic, assign) BOOL isReceiveEveryCmdOK;
+@property (nonatomic, assign) float EveryCmdCount;
+
+@property (strong, nonatomic)NSTimer *timerV;
 
 @end
 
@@ -139,15 +145,38 @@ static float TCP_TIME=1;
     _cmdTag=Tag;
     _recieveAllData=[NSMutableData new];
     
-    NSLog(@"CMD datas=%ld::%@",_cmdTag,string);
+
     
-    [_socket writeData:data withTimeout:TCP_TIME tag:_cmdTag];
+
+        if (!_timerV) {
+            _timerV=[NSTimer scheduledTimerWithTimeInterval:TCP_outTime target:self selector:@selector(noticeOutTime) userInfo:nil repeats:YES];
+        }else{
+            _timerV.fireDate=[NSDate distantPast];
+        }
+       _EveryCmdCount=0;
     
-    [self listenData:_cmdTag];
+        
+            NSLog(@"CMD datas=%ld::%@",_cmdTag,string);
+        [_socket writeData:data withTimeout:TCP_TIME tag:_cmdTag];
+        
+        [self listenData:_cmdTag];
+ 
+ 
     
     
 }
 
+
+-(void)noticeOutTime{
+    _EveryCmdCount=_EveryCmdCount+TCP_outTime;
+    if (_EveryCmdCount>(2*TCP_TIME)) {
+              _isReceive=YES;
+            [self sendFailedNotice];
+            _timerV.fireDate=[NSDate distantFuture];
+        _EveryCmdCount=0;
+    }
+    
+}
 
 //建立连接
 -(NSError *)setupConnection {
@@ -204,7 +233,9 @@ static float TCP_TIME=1;
 //socket连接断开后的回调代理
 -(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
   
-
+    _timerV.fireDate=[NSDate distantFuture];
+    _EveryCmdCount=0;
+    
     NSLog(@"DisConnetion");
  //   [_socket disconnect];
     
@@ -221,12 +252,14 @@ static float TCP_TIME=1;
     if (_cmdType==1) {
    
             _cmdCount++;
-            if (_cmdCount>3) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"recieveFailedTcpData"object:nil];
-            }else{
-                [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
-            }
-            
+        
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"recieveFailedTcpData"object:nil];
+        
+//            if (_cmdCount>1) {
+//            }else{
+//                [self goToGetData:_cmdArray[0] RegAdd:_cmdArray[1] Length:_cmdArray[2]];
+//            }
+        
     
     }else  if (_cmdType==2) {
       
@@ -265,7 +298,10 @@ static float TCP_TIME=1;
 //添加通知点2
 //读到数据后的回调代理
 -(void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
- 
+
+                _timerV.fireDate=[NSDate distantFuture];
+        _EveryCmdCount=0;
+
     if (_cmdTag!=tag) {
            [self sendFailedNotice];
         return;
@@ -311,6 +347,7 @@ static float TCP_TIME=1;
 -(void)listenData:(long)Tag {
    
     [_socket readDataWithTimeout:TCP_TIME tag:Tag];
+    
 }
 
 
@@ -476,13 +513,9 @@ static float TCP_TIME=1;
 
 
 
--(void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag {
-    NSLog(@"Reading data length of %lu",(unsigned long)partialLength);
-}
-
-
-
-
+//-(void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag {
+//    NSLog(@"Reading data length of %lu",(unsigned long)partialLength);
+//}
 
 
 

@@ -453,6 +453,32 @@ static float readWaveTime=20;      //读波形时间
         
         
     }
+    
+    
+    if (_charType==1) {
+        NSArray*  allDataArrayOld=[NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoRemember]];
+        NSString *timeLableString=[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoRememberTime];
+        if (([timeLableString isEqualToString:@""]) || (timeLableString==nil)) {
+            _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,@"--:--:--"];
+        }else{
+            _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,timeLableString];
+        }
+        if (allDataArrayOld.count>0) {
+            _allDataRecieveAllArray=[NSMutableArray arrayWithArray:allDataArrayOld];
+            _selectBoolArray=[NSMutableArray array];
+            for (int i=0; i<_colorArray.count; i++) {
+                [_selectBoolArray addObject:[NSNumber numberWithBool:YES]];
+            }
+            [self changData];
+        }else{
+            [self showFirstAndFourQuardrant];
+        }
+    }
+    
+    if (_charType==1) {
+           [self showFirstAndFourQuardrant];
+    }
+    
     if (_charType==2) {
     NSArray*  allDataArrayOld=[NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoRemember]];
         NSString *timeLableString=[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoRememberTime];
@@ -471,10 +497,31 @@ static float readWaveTime=20;      //读波形时间
         }else{
                    [self showFirstAndFourQuardrant];
         }
-    }else{
-            [self showFirstAndFourQuardrant];
     }
 
+    if (_charType==3) {
+        NSArray*  allDataArrayOld00=[NSArray array];
+          NSArray*  allDataArrayOld=[NSArray array];
+        NSDictionary *dic=[NSDictionary dictionaryWithDictionary:[[NSUserDefaults standardUserDefaults] objectForKey:@"useToWifiCheckThreeRemember"]];
+        if ([dic.allKeys containsObject:@"two"]) {
+            allDataArrayOld00=[NSArray arrayWithArray:[dic objectForKey:@"two"]];
+              allDataArrayOld=[NSArray arrayWithArray:allDataArrayOld00[1]];
+            _type3LeftLableArray=[NSArray arrayWithArray:allDataArrayOld00[0]];
+        }
+        
+        if (allDataArrayOld.count>0) {
+            _allDataRecieveAllArray=[NSMutableArray arrayWithArray:allDataArrayOld];
+            _selectBoolArray=[NSMutableArray array];
+            for (int i=0; i<_colorArray.count; i++) {
+                [_selectBoolArray addObject:[NSNumber numberWithBool:YES]];
+            }
+            [self changData];
+        }else{
+            [self showFirstAndFourQuardrant];
+        }
+    }
+    
+    
     
 }
 
