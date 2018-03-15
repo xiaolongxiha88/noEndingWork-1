@@ -454,6 +454,7 @@ static int  gotoModel4=1;
     
         _isReadNow = !_isReadNow;
      present=0;
+    [_progressView setPresent:present];
         _progressView.presentlab.text = @"开始";
     
         [self removeTheControlOne];
@@ -577,6 +578,7 @@ static int  gotoModel4=1;
 
        __weak typeof(self) weakSelf = self;
         _viewOne.oneViewOverBlock=^(NSArray* dataArray){
+            _progressNum=0;
                  [weakSelf.readDataForRememberDic setObject:dataArray forKey:@"one"];
             [weakSelf goToReadAllChart];
        
@@ -632,6 +634,7 @@ static int  gotoModel4=1;
      
         __weak typeof(self) weakSelf = self;
         _viewTwo.oneViewOverBlock=^(NSArray* dataArray){
+            _progressNum=0;
               [weakSelf.readDataForRememberDic setObject:dataArray forKey:@"two"];
             [weakSelf goToReadAllChart];
         };
