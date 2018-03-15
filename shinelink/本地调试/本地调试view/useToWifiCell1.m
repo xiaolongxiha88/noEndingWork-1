@@ -35,7 +35,7 @@
 //        _titleView=nil;
 //    }
     
-    NSArray *nameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/电流/功率/频率",@"PID电压/电流"];
+    NSArray *nameArray=@[root_MAX_272,root_MAX_273,@"AC电压/电流/功率/频率",@"PID电压/电流"];
     
     if (!_titleView) {
         _titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width,titleLabelH1)];

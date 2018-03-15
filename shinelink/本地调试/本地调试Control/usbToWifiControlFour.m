@@ -189,7 +189,7 @@
             [_showDataArray addObject:[NSString stringWithFormat:@"%x",(Bytedata1[i]) & 0xff]];
         }
         if ((Bytedata1[1]==6) && (Bytedata1[0]==Bytedata00[0])) {
-            [self showAlertViewWithTitle:@"设置成功" message:nil cancelButtonTitle:root_OK];
+            [self showAlertViewWithTitle:root_MAX_303 message:nil cancelButtonTitle:root_OK];
         }else{
             [self showAlertViewWithTitle:@"设置失败" message:nil cancelButtonTitle:root_OK];
         }

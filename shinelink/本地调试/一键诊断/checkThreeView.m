@@ -461,7 +461,7 @@ static int  gotoModel4=1;
     
     [self removeTheNotification];
   //  [self showAlertViewWithTitle:@"数据读取失败" message:@"请重试或检查WiFi连接." cancelButtonTitle:root_OK];
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi模块通信失败,请重新读取或检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_MAX_292 message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_MAX_293, nil];
     alertView.tag = 1001;
     [alertView show];
 }

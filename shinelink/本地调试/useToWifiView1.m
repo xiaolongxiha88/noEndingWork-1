@@ -64,7 +64,7 @@ static NSString *cellTwo = @"cellTwo";
  [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receiveFailedNotice2) name: @"TcpReceiveDataForViewOneFailed" object:nil];
     
     _isAutoReflash=NO;
-    _rightItem.title=@"自动刷新";
+    _rightItem.title=root_MAX_268;
 }
 
 
@@ -76,17 +76,17 @@ static NSString *cellTwo = @"cellTwo";
     [self.navigationController.navigationBar setBackgroundColor:MainColor];
     
     if (_isShowScanResult==1) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"WiFi名称为:%@",_SN] message:@"是否跳转连接WiFi?" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@:%@",root_MAX_269,_SN] message:[NSString stringWithFormat:@"%@?",root_MAX_270] delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_MAX_271, nil];
         alertView.tag = 1003;
         [alertView show];
     }
     if (!_rightItem) {
-        _rightItem=[[UIBarButtonItem alloc]initWithTitle:@"自动刷新" style:UIBarButtonItemStylePlain target:self action:@selector(tcpToGetData)];
+        _rightItem=[[UIBarButtonItem alloc]initWithTitle:root_MAX_268 style:UIBarButtonItemStylePlain target:self action:@selector(tcpToGetData)];
         self.navigationItem.rightBarButtonItem=_rightItem;
     }
   
     
-   UIBarButtonItem *leftItem=[[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(goBackPop)];
+   UIBarButtonItem *leftItem=[[UIBarButtonItem alloc]initWithTitle:root_back style:UIBarButtonItemStylePlain target:self action:@selector(goBackPop)];
     self.navigationItem.leftBarButtonItem=leftItem;
     
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
@@ -105,7 +105,7 @@ static NSString *cellTwo = @"cellTwo";
      _firstViewDataArray=[NSMutableArray new];
       _tableLableValueArray=[NSMutableArray new];
     _thirdDataArray=[NSMutableArray new];
-       _tableNameArray=@[@"PV电压/电流",@"组串电压/电流",@"AC电压/频率/电流/功率",@"PID电压/电流",@"内部参数",@"关于本机"];
+       _tableNameArray=@[root_MAX_272,root_MAX_273,root_MAX_274,root_MAX_275,root_MAX_276,root_MAX_277];
     NSMutableArray<usbModleOne *> *arrM = [NSMutableArray arrayWithCapacity:_tableNameArray.count];
     for (int i=0; i<_tableNameArray.count; i++) {
         usbModleOne *model = [[usbModleOne alloc] initWithDict];
@@ -121,7 +121,7 @@ static NSString *cellTwo = @"cellTwo";
    
    
     }else{
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未连接WiFi模块" message:@"请跳转连接WiFi" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_MAX_278 message:root_MAX_279 delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_MAX_271, nil];
         alertView.tag = 1001;
         
         if (_isShowScanResult!=1) {
@@ -176,7 +176,7 @@ static NSString *cellTwo = @"cellTwo";
     
     if (_isAutoReflash) {
         
-         _rightItem.title=@"停止刷新";
+         _rightItem.title=root_MAX_280;
     
         [self checkIsWifi];//检查是不是Wifi
         
@@ -188,13 +188,13 @@ static NSString *cellTwo = @"cellTwo";
             [_usbControl getDataAll:1];
             
         }else{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未连接WiFi模块" message:@"请跳转连接WiFi" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"连接", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_MAX_278 message:root_MAX_279 delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_MAX_271, nil];
             alertView.tag = 1001;
             [alertView show];
         }
     }else{
           [self removeTheTcp];
-         _rightItem.title=@"自动刷新";
+         _rightItem.title=root_MAX_268;
         if (_timer) {
             [_timer invalidate];
             _timer=nil;
@@ -357,7 +357,7 @@ static NSString *cellTwo = @"cellTwo";
                 lable.text=_firstViewDataArray[i];
                 if (lable.tag==2004 || lable.tag==2005) {
                     if ([_firstViewDataArray[i] intValue]==99) {
-                        lable.text=@"无";
+                        lable.text=@"/";
                     }
                 }
                 
@@ -400,7 +400,7 @@ static NSString *cellTwo = @"cellTwo";
         UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(7*NOW_SIZE, 0,150*NOW_SIZE,lableH1)];
         lable5.textColor =COLOR(51, 51, 51, 1);
         lable5.textAlignment=NSTextAlignmentLeft;
-        lable5.text=@"设备控制";
+        lable5.text=root_MAX_281;
         lable5.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_secondView addSubview:lable5];
         
@@ -411,7 +411,7 @@ static NSString *cellTwo = @"cellTwo";
         lable6.adjustsFontSizeToFitWidth=YES;
         UITapGestureRecognizer *tapGestureRecognizer6 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToOssLogin)];
         [lable6 addGestureRecognizer:tapGestureRecognizer6];
-        lable6.text=@"重置密码";
+        lable6.text=root_MAX_282;
         lable6.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_secondView addSubview:lable6];
         
@@ -421,7 +421,7 @@ static NSString *cellTwo = @"cellTwo";
         [_secondView addSubview:V2];
         
         NSArray *picName=@[@"max_set.png",@"max_parameter.png",@"max_intelligent _icon.png",@"Max_control3.png"];
-        NSArray *nameArray=@[@"设置配置",@"参数设置",@"智能检测",@"高级设置"];
+        NSArray *nameArray=@[root_MAX_283,root_MAX_284,root_MAX_285,root_MAX_286];
         
         float imageH=30*HEIGHT_SIZE;float V2H1=15*HEIGHT_SIZE;
         float WW=ScreenWidth/picName.count;
@@ -462,7 +462,7 @@ static NSString *cellTwo = @"cellTwo";
         [self goToControlView01:Type];
     }else{
         if ([thePasswordString isEqualToString:@""] || thePasswordString==nil) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"未获取控制密码" message:@"请登录OSS系统获取密码" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"登录", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_MAX_287 message:root_MAX_288 delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_log_in, nil];
             alertView.tag = 1004;
             [alertView show];
             
@@ -477,7 +477,7 @@ static NSString *cellTwo = @"cellTwo";
                [self goToControlView01:Type];
                   [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"theToolPasswordOpenEnable"];
             }else{
-                    [self showAlertViewWithTitle:@"密码错误,请验证密码或重置密码。" message:nil cancelButtonTitle:root_OK];
+                    [self showAlertViewWithTitle:root_MAX_289 message:nil cancelButtonTitle:root_OK];
             }
             
         } cancelBlock:^{
@@ -540,7 +540,7 @@ static NSString *cellTwo = @"cellTwo";
         
         [self.navigationController pushViewController:testView animated:YES];
     }else{
-        [self showToastViewWithTitle:@"请先读取故障信息"];
+        [self showToastViewWithTitle:root_MAX_290];
     }
     
 }
@@ -568,7 +568,7 @@ static NSString *cellTwo = @"cellTwo";
         UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(12*NOW_SIZE, 0*HEIGHT_SIZE,200*NOW_SIZE,lableH1)];
         lable5.textColor =COLOR(51, 51, 51, 1);
         lable5.textAlignment=NSTextAlignmentLeft;
-        lable5.text=@"设备信息";
+        lable5.text=root_MAX_291;
         lable5.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_thirdView addSubview:lable5];
         
@@ -719,7 +719,7 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)receiveFailedNotice2{
-    _rightItem.title=@"自动刷新";
+    _rightItem.title=root_MAX_268;
     _isAutoReflash =NO;
     [self hideProgressView];
     self.navigationItem.rightBarButtonItem.enabled=YES;
@@ -729,14 +729,14 @@ static NSString *cellTwo = @"cellTwo";
 }
 
 -(void)receiveFailedNotice{
-        _rightItem.title=@"自动刷新";
+        _rightItem.title=root_MAX_268;
     _isAutoReflash =NO;
     
     [self hideProgressView];
       self.navigationItem.rightBarButtonItem.enabled=YES;
  _isfinishReflash=YES;
     [self removeTheTcp];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"WiFi模块通信失败,请检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_MAX_292 message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_MAX_293, nil];
         alertView.tag = 1002;
         [alertView show];
 

@@ -247,8 +247,7 @@
     
     int OneCMDregisterNum=125;
     
-//       NSArray *nameArray=@[@"厂商信息",@"机器型号",@"序列号",@"Model号",@"固件(外部)版本",@"固件(内部)版本",@"并网倒计时",@"功率百分比",@"PF",@"内部环境温度",@"Boost温度",@"INV温度",@"P Bus电压",@"N Bus电压",@"PID故障信息",@"PID状态"];
-    
+  
     
     NSString *companyString=[self changeToASCII:_data03 beginRegister:34 length:8];     //厂商信息
     NSString *PvTypy; //机器型号

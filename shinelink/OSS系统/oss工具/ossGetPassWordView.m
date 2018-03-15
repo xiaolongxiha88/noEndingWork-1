@@ -86,14 +86,14 @@
 
 -(void)finishSet{
     if (_textField2.text==nil || [_textField2.text isEqualToString:@""]) {
-        [self showToastViewWithTitle:@"请添加设置密码"];
+        [self showToastViewWithTitle:root_MAX_301];
         return;
     }
     NSString *password=_textField2.text;
     [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"theToolPassword"];
     
-    NSString *alertString=[NSString stringWithFormat:@"本地调试工具密码为:%@",password];
-    [self showAlertViewWithTitle:@"设置成功" message:alertString cancelButtonTitle:root_OK];
+    NSString *alertString=[NSString stringWithFormat:@"%@:%@",root_MAX_302,password];
+    [self showAlertViewWithTitle:root_MAX_303 message:alertString cancelButtonTitle:root_OK];
     
 }
 

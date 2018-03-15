@@ -238,7 +238,7 @@ static int  firstReadTime=72.0;
     }
     
     if (!_isReadfirstDataOver) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"数据读取失败,请重试或检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_MAX_292 message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_MAX_293, nil];
         alertView.tag = 1002;
         [alertView show];
     }else{

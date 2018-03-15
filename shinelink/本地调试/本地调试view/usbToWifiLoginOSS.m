@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title=@"获取控制密码";
+    self.title=root_MAX_294;
     
     _isFirstAlert=YES;
     [self initUI];
@@ -44,7 +44,7 @@
     }
     
     UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 20*HEIGHT_SIZE, 100*NOW_SIZE,30*HEIGHT_SIZE )];
-    PV2Lable.text=@"OSS账户:";
+    PV2Lable.text=[NSString stringWithFormat:@"%@:",root_MAX_295];
     PV2Lable.textAlignment=NSTextAlignmentRight;
     PV2Lable.textColor=COLOR(102, 102, 102, 1);
     PV2Lable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -63,7 +63,7 @@
     [_scrollView addSubview:_textField];
     
     UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 60*HEIGHT_SIZE, 100*NOW_SIZE,30*HEIGHT_SIZE )];
-    PV2Lable1.text=@"OSS密码:";
+    PV2Lable1.text=[NSString stringWithFormat:@"OSS%@:",root_Mima];
     PV2Lable1.textAlignment=NSTextAlignmentRight;
     PV2Lable1.textColor=COLOR(102, 102, 102, 1);
     PV2Lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -83,7 +83,7 @@
    UIButton* _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
     _goBut.frame=CGRectMake(60*NOW_SIZE,120*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     [_goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
-    [_goBut setTitle:@"登录" forState:UIControlStateNormal];
+    [_goBut setTitle:root_log_in forState:UIControlStateNormal];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [_goBut addTarget:self action:@selector(loginOSS) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:_goBut];
@@ -93,7 +93,7 @@
     
 
     UILabel *PV2Lable=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 180*HEIGHT_SIZE, 100*NOW_SIZE,30*HEIGHT_SIZE )];
-    PV2Lable.text=@"设置密码:";
+    PV2Lable.text=[NSString stringWithFormat:@"%@:",root_MAX_296];
     PV2Lable.textAlignment=NSTextAlignmentRight;
     PV2Lable.textColor=COLOR(102, 102, 102, 1);
     PV2Lable.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -115,7 +115,7 @@
     UIButton* _goBut1 =  [UIButton buttonWithType:UIButtonTypeCustom];
     _goBut1.frame=CGRectMake(60*NOW_SIZE,240*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     [_goBut1 setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
-    [_goBut1 setTitle:@"设置" forState:UIControlStateNormal];
+    [_goBut1 setTitle:root_MAX_297 forState:UIControlStateNormal];
     _goBut1.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [_goBut1 addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:_goBut1];
@@ -124,7 +124,7 @@
 -(void)loginOSS{
     if (_isFirstAlert) {
         _isFirstAlert=NO;
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"请确认手机是否已连接互联网" message:@"是否需要切换网络?" delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"切换", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_MAX_298 message:[NSString stringWithFormat:@"%@?",root_MAX_299] delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_MAX_300, nil];
         alertView.tag = 1005;
         [alertView show];
     }else{
@@ -136,14 +136,14 @@
 
 -(void)finishSet{
     if (_textField3.text==nil || [_textField3.text isEqualToString:@""]) {
-        [self showToastViewWithTitle:@"请添加设置密码"];
+        [self showToastViewWithTitle:root_MAX_301];
         return;
     }
     NSString *password=_textField3.text;
     [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"theToolPassword"];
     
-    NSString *alertString=[NSString stringWithFormat:@"本地调试工具密码为:%@",password];
-    [self showAlertViewWithTitle:@"设置成功" message:alertString cancelButtonTitle:root_OK];
+    NSString *alertString=[NSString stringWithFormat:@"%@:%@",root_MAX_302,password];
+    [self showAlertViewWithTitle:root_MAX_303 message:alertString cancelButtonTitle:root_OK];
     
 }
 
@@ -179,11 +179,11 @@
     NSString* nameString=_textField.text;
      NSString* passwordString=_textField2.text;
     if (nameString==nil || [nameString isEqualToString:@""]) {
-        [self showToastViewWithTitle:@"请输入账号"];
+        [self showToastViewWithTitle:root_Alet_user_messge];
         return;
     }
     if (passwordString==nil || [passwordString isEqualToString:@""]) {
-        [self showToastViewWithTitle:@"请输入密码"];
+        [self showToastViewWithTitle:root_Alet_user_pwd];
         return;
     }
     
@@ -207,7 +207,7 @@
                             }else{                     //OSS账户
                                 
                                    _roleNum=[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]];
-                                     [self showToastViewWithTitle:@"登录成功"];
+                                     [self showToastViewWithTitle:root_MAX_304];
                                 [self initUiTwo];
                             }
                             

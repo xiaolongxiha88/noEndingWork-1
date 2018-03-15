@@ -887,7 +887,64 @@
 #define  root_device_265 NSLocalizedString(@"265充电功率", nil)
 #define  root_device_266 NSLocalizedString(@"266放电功率", nil)
 
+//MAX本地调试
 #define  root_MAX_267 NSLocalizedString(@"267最后更新时间为", nil)
+#define  root_MAX_268 NSLocalizedString(@"268自动刷新", nil)
+#define  root_MAX_269 NSLocalizedString(@"269WiFi名称为", nil)
+
+#define  root_MAX_270 NSLocalizedString(@"270是否跳转连接WiFi", nil)
+#define  root_MAX_271 NSLocalizedString(@"271连接", nil)
+#define  root_MAX_272 NSLocalizedString(@"272PV电压/电流", nil)
+#define  root_MAX_273 NSLocalizedString(@"273组串电压/电流", nil)
+#define  root_MAX_274 NSLocalizedString(@"274AC电压/频率/电流/功率", nil)
+#define  root_MAX_275 NSLocalizedString(@"275PID电压/电流", nil)
+#define  root_MAX_276 NSLocalizedString(@"276内部参数", nil)
+#define  root_MAX_277 NSLocalizedString(@"277关于本机", nil)
+#define  root_MAX_278 NSLocalizedString(@"278未连接WiFi模块", nil)
+#define  root_MAX_279 NSLocalizedString(@"279请跳转连接WiFi", nil)
+#define  root_MAX_280 NSLocalizedString(@"280停止刷新", nil)
+#define  root_MAX_281 NSLocalizedString(@"281设备控制", nil)
+#define  root_MAX_282 NSLocalizedString(@"282重置密码", nil)
+#define  root_MAX_283 NSLocalizedString(@"283设置配置", nil)
+#define  root_MAX_284 NSLocalizedString(@"284参数设置", nil)
+#define  root_MAX_285 NSLocalizedString(@"285智能检测", nil)
+#define  root_MAX_286 NSLocalizedString(@"286高级设置", nil)
+#define  root_MAX_287 NSLocalizedString(@"287未获取控制密码", nil)
+#define  root_MAX_288 NSLocalizedString(@"288请登录OSS系统获取密码", nil)
+#define  root_MAX_289 NSLocalizedString(@"289密码错误,请验证密码或重置密码.", nil)
+#define  root_MAX_290 NSLocalizedString(@"290请先读取故障信息", nil)
+#define  root_MAX_291 NSLocalizedString(@"291设备信息", nil)
+#define  root_MAX_292 NSLocalizedString(@"292数据读取失败,请重试或检查WiFi连接", nil)
+#define  root_MAX_293 NSLocalizedString(@"293检查", nil)
+#define  root_MAX_294 NSLocalizedString(@"294获取控制密码", nil)
+#define  root_MAX_295 NSLocalizedString(@"295OSS账户", nil)
+#define  root_MAX_296 NSLocalizedString(@"296设置密码", nil)
+#define  root_MAX_297 NSLocalizedString(@"297设置", nil)
+#define  root_MAX_298 NSLocalizedString(@"298请确认手机是否已连接互联网", nil)
+#define  root_MAX_299 NSLocalizedString(@"299是否需要切换网络", nil)
+#define  root_MAX_300 NSLocalizedString(@"300切换", nil)
+#define  root_MAX_301 NSLocalizedString(@"301请添加设置密码", nil)
+#define  root_MAX_302 NSLocalizedString(@"302本地调试工具密码为", nil)
+#define  root_MAX_303 NSLocalizedString(@"303设置成功", nil)
+#define  root_MAX_304 NSLocalizedString(@"304登录成功", nil)
+#define  root_MAX_305 NSLocalizedString(@"305并网倒计时", nil)
+#define  root_MAX_306 NSLocalizedString(@"306功率百分比", nil)
+#define  root_MAX_307 NSLocalizedString(@"307内部环境温度", nil)
+#define  root_MAX_307 NSLocalizedString(@"308Boost温度", nil)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

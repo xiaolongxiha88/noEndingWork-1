@@ -588,8 +588,13 @@ static float readWaveTime=20;      //读波形时间
     if (_charType==1 || _charType==3) {
         UILabel* lable =[self.view viewWithTag:6000+tagNum];
         if ( button.selected) {
-            view.backgroundColor=_colorArray[tagNum];
-            lable.text=_valueForLeftLableArray[tagNum];
+            if (_colorArray.count>tagNum) {
+                    view.backgroundColor=_colorArray[tagNum];
+            }
+            if (_valueForLeftLableArray.count>tagNum) {
+                       lable.text=_valueForLeftLableArray[tagNum];
+            }
+     
             
         }else{
             view.backgroundColor=COLOR(151, 151, 151, 1);
@@ -598,8 +603,13 @@ static float readWaveTime=20;      //读波形时间
     }else if (_charType==2){
         UIButton* button1 =[self.view viewWithTag:6000+tagNum];
         if ( button.selected) {
-            view.backgroundColor=_colorArray[tagNum];
-             [ button1 setTitle:_valueForLeftLableArray[tagNum] forState:UIControlStateNormal];
+            if (_colorArray.count>tagNum) {
+                       view.backgroundColor=_colorArray[tagNum];
+            }
+            if (_valueForLeftLableArray.count>tagNum) {
+                   [ button1 setTitle:_valueForLeftLableArray[tagNum] forState:UIControlStateNormal];
+            }
+          
 
         }else{
             view.backgroundColor=COLOR(151, 151, 151, 1);
@@ -674,6 +684,11 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
                 [self showToastViewWithTitle:@"请输入正确的ID号"];
                 return;
             }
+        }
+        
+        if (_valueForLeftLableArray.count<4) {
+            [self showToastViewWithTitle:@"请填写ID号"];
+            return;
         }
     }
 
@@ -927,7 +942,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
 
     }
     if (!_isReadfirstDataOver) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"数据读取失败,请重试或检查WiFi连接." message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:@"检查", nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_MAX_292 message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_MAX_293, nil];
         alertView.tag = 1002;
         [alertView show];
     }else{

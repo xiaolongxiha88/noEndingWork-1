@@ -38,9 +38,9 @@
         _titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 0, 200*NOW_SIZE, titleLabelH1)];
         _titleLabel.textColor = MainColor;
         if (_indexRow==4) {
-               _titleLabel.text=@"内部参数";
+               _titleLabel.text=root_MAX_276;
         }else{
-               _titleLabel.text=@"关于本机";
+               _titleLabel.text=root_MAX_277;
         }
      
         _titleLabel.adjustsFontSizeToFitWidth=YES;
@@ -86,7 +86,7 @@ self.model.isShowMoreText = !self.model.isShowMoreText;
 -(void)initUI{
     NSArray *nameArray;
     if (_indexRow==4) {
-     nameArray=@[@"并网倒计时",@"功率百分比",@"PF",@"内部环境温度",@"Boost温度",@"INV温度",@"+Bus",@"-Bus",@"PID故障信息",@"PID状态"];
+     nameArray=@[root_MAX_305,root_MAX_306,@"PF",root_MAX_307,root_MAX_307,@"INV温度",@"+Bus",@"-Bus",@"PID故障信息",@"PID状态"];
     }else{
         nameArray=@[@"厂商信息",@"机器型号",@"序列号",@"Model号",@"固件(外部)版本",@"固件(内部)版本"];
     }
