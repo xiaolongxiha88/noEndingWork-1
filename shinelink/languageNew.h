@@ -930,19 +930,25 @@
 #define  root_MAX_305 NSLocalizedString(@"305并网倒计时", nil)
 #define  root_MAX_306 NSLocalizedString(@"306功率百分比", nil)
 #define  root_MAX_307 NSLocalizedString(@"307内部环境温度", nil)
-#define  root_MAX_307 NSLocalizedString(@"308Boost温度", nil)
-
-
-
-
-
-
-
-
-
-
-
-
+#define  root_MAX_308 NSLocalizedString(@"308Boost温度", nil)
+#define  root_MAX_309 NSLocalizedString(@"309INV温度", nil)
+#define  root_MAX_310 NSLocalizedString(@"310PID故障信息", nil)
+#define  root_MAX_311 NSLocalizedString(@"311PID状态", nil)
+#define  root_MAX_312 NSLocalizedString(@"312厂商信息", nil)
+#define  root_MAX_313 NSLocalizedString(@"313机器型号", nil)
+#define  root_MAX_314 NSLocalizedString(@"314Model号", nil)
+#define  root_MAX_315 NSLocalizedString(@"315固件(外部)版本", nil)
+#define  root_MAX_316 NSLocalizedString(@"316固件(内部)版本", nil)
+#define  root_MAX_317 NSLocalizedString(@"317AC电压/电流/功率/频率", nil)
+#define  root_MAX_318 NSLocalizedString(@"318电压", nil)    //简写
+#define  root_MAX_319 NSLocalizedString(@"319电流", nil)    //简写
+#define  root_MAX_320 NSLocalizedString(@"320功率", nil)      //简写
+#define  root_MAX_321 NSLocalizedString(@"321频率", nil)      //简写
+#define  root_MAX_322 NSLocalizedString(@"322刷新", nil)
+#define  root_MAX_323 NSLocalizedString(@"323无历史故障", nil)
+#define  root_MAX_324 NSLocalizedString(@"324故障码", nil)
+#define  root_MAX_325 NSLocalizedString(@"325历史故障", nil)
+#define  root_MAX_326 NSLocalizedString(@"326警告码", nil)
 
 
 

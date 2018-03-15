@@ -33,7 +33,7 @@
     
     [self getTimeData];
     
-    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"历史故障" style:UIBarButtonItemStylePlain target:self action:@selector(goToHistory)];
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_MAX_325 style:UIBarButtonItemStylePlain target:self action:@selector(goToHistory)];
     self.navigationItem.rightBarButtonItem=rightItem;
 }
 
@@ -110,7 +110,7 @@
     float H=150*HEIGHT_SIZE;
     
     NSArray *valueArray=@[_faultString,_warnString];
-    NSArray *nameArray=@[[NSString stringWithFormat:@"故障码:%@",_faultCode],[NSString stringWithFormat:@"警告码:%@",_warnCode]];
+    NSArray *nameArray=@[[NSString stringWithFormat:@"%@:%@",root_MAX_324,_faultCode],[NSString stringWithFormat:@"%@:%@",root_MAX_326,_warnCode]];
     
     for (int i=0; i<valueArray.count; i++) {
         UIView* _secondView=[[UIView alloc]initWithFrame:CGRectMake(W1, 5*HEIGHT_SIZE+H*i, W0, H)];

@@ -239,7 +239,7 @@ static float readWaveTime=20;      //读波形时间
     [_view0 addSubview:button1];
     
     float lable1W=SCREEN_Width-X0*4-lable0StringSize.width-buttonW-0.5*X0;
-        NSString *lable1String=@"故障码:--";
+        NSString *lable1String=[NSString stringWithFormat:@"%@:--",root_MAX_324];
     _lableCode = [[UILabel alloc]initWithFrame:CGRectMake(X0*3+lable0StringSize.width+buttonW,0,lable1W,lableH)];
     _lableCode.textColor =COLOR(51, 51, 51, 1);
     _lableCode.textAlignment=NSTextAlignmentRight;
@@ -885,7 +885,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
                 float faultReason=([_changeDataValue changeHighRegister:data registerNum:3]);
        
              _faultReasonId=[NSString stringWithFormat:@"%.f",faultReason];
-            _lableCode.text=[NSString stringWithFormat:@"故障码:%@",_faultReasonId];
+            _lableCode.text=[NSString stringWithFormat:@"%@:%@",root_MAX_324,_faultReasonId];
         }
         
         float ID=([_changeDataValue changeOneRegister:data registerNum:4]);

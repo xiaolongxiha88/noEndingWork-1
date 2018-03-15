@@ -31,7 +31,7 @@
         _ControlOne=[[wifiToPvOne alloc]init];
     }
     
-    _rightItem=[[UIBarButtonItem alloc]initWithTitle:@"刷新" style:UIBarButtonItemStylePlain target:self action:@selector(getDataFirst)];
+    _rightItem=[[UIBarButtonItem alloc]initWithTitle:root_MAX_322 style:UIBarButtonItemStylePlain target:self action:@selector(getDataFirst)];
     self.navigationItem.rightBarButtonItem=_rightItem;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
@@ -119,7 +119,7 @@
         UILabel *alertLable = [[UILabel alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 100*HEIGHT_SIZE,ScreenWidth,30*HEIGHT_SIZE)];
         alertLable.textColor =COLOR(102, 102, 102, 1);
         alertLable.textAlignment=NSTextAlignmentCenter;
-        alertLable.text=@"无历史故障";
+        alertLable.text=root_MAX_323;
         alertLable.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
         [self.view addSubview:alertLable];
     }
@@ -136,7 +136,7 @@
         if (codeInt!=0) {
             NSString *value=[self getData:codeInt];
             [_valueArray addObject:value];
-            [_codeArray addObject:[NSString stringWithFormat:@"故障码:%d",codeInt]];
+            [_codeArray addObject:[NSString stringWithFormat:@"%@:%d",root_MAX_324,codeInt]];
             
             int monthInt=dataArray[3+T];
             int dayInt=dataArray[4+T];

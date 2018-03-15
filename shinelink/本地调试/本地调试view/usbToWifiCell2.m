@@ -86,9 +86,9 @@ self.model.isShowMoreText = !self.model.isShowMoreText;
 -(void)initUI{
     NSArray *nameArray;
     if (_indexRow==4) {
-     nameArray=@[root_MAX_305,root_MAX_306,@"PF",root_MAX_307,root_MAX_307,@"INV温度",@"+Bus",@"-Bus",@"PID故障信息",@"PID状态"];
+     nameArray=@[root_MAX_305,root_MAX_306,@"PF",root_MAX_307,root_MAX_308,root_MAX_309,@"+Bus",@"-Bus",root_MAX_310,root_MAX_311];
     }else{
-        nameArray=@[@"厂商信息",@"机器型号",@"序列号",@"Model号",@"固件(外部)版本",@"固件(内部)版本"];
+        nameArray=@[root_MAX_312,root_MAX_313,root_xuleihao,root_MAX_314,root_MAX_315,root_MAX_316];
     }
 
     

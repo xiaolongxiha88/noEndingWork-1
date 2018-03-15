@@ -35,7 +35,7 @@
 //        _titleView=nil;
 //    }
     
-    NSArray *nameArray=@[root_MAX_272,root_MAX_273,@"AC电压/电流/功率/频率",@"PID电压/电流"];
+    NSArray *nameArray=@[root_MAX_272,root_MAX_273,root_MAX_317,root_MAX_275];
     
     if (!_titleView) {
         _titleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width,titleLabelH1)];
@@ -136,13 +136,15 @@
         float viewW1=34*HEIGHT_SIZE;
     float H;NSArray* nameArray;NSArray* vallNameArray;
     
+    NSString *Vol=[NSString stringWithFormat:@"%@(V)",root_MAX_318];
+    NSString *Cur=[NSString stringWithFormat:@"%@(A)",root_MAX_319];
     if (_cellTypy==2) {
-         nameArray=@[@"电压(V)",@"电流(A)",@"功率(W)",@"频率(Hz)"];
+         nameArray=@[Vol,Cur,[NSString stringWithFormat:@"%@(W)",root_MAX_320],[NSString stringWithFormat:@"%@(Hz)",root_MAX_321]];
         H=lableH1+lableH2*nameArray.count;
     }else{
-           nameArray=@[@"电压(V)",@"电流(A)"];
+           nameArray=@[Vol,Cur];
         if (_cellTypy==3) {
-              nameArray=@[@"电压(V)",@"电流(mA)"];
+              nameArray=@[Vol,[NSString stringWithFormat:@"%@(mA)",root_MAX_319]];
         }
         H=lableH1+lableH2*nameArray.count;
     }
