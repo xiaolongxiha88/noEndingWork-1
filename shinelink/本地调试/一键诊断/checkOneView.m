@@ -496,8 +496,11 @@ static int  firstReadTime=72.0;
     _lable01.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [self.view addSubview:_lable01];
     
+    
+        _colorArray=@[COLOR(208, 107, 107, 1),COLOR(217, 189, 60, 1),COLOR(85, 207, 85, 1),COLOR(85, 122, 207, 1),COLOR(79, 208, 206, 1),COLOR(146, 91, 202, 1),COLOR(161, 177, 55, 1),COLOR(215, 98, 208, 1)];
+    
     float view2H=SCREEN_Height-265*HEIGHT_SIZE-lastH-NavigationbarHeight-StatusHeight;
-     everyLalbeH=view2H/8;
+     everyLalbeH=view2H/(_colorArray.count+1);
     UIView* view2=[[UIView alloc]initWithFrame:CGRectMake(0,255*HEIGHT_SIZE, SCREEN_Width, view2H)];
     view2.backgroundColor=[UIColor clearColor];
     [self.view addSubview:view2];
@@ -516,12 +519,12 @@ static int  firstReadTime=72.0;
         titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [view2 addSubview:titleLable];
     }
-    _vocArray=@[@"100",@"100",@"100",@"100",@"100",@"100",@"100"];
-    _colorArray=@[COLOR(208, 107, 107, 1),COLOR(217, 189, 60, 1),COLOR(85, 207, 85, 1),COLOR(85, 122, 207, 1),COLOR(79, 208, 206, 1),COLOR(146, 91, 202, 1),COLOR(161, 177, 55, 1)];
+
+
     
     float imageViewH=10*HEIGHT_SIZE; float Wk=5*NOW_SIZE;
     float imageViewx=(ScreenWidth/2-lable1Size.width)/2-imageViewH-Wk;
-    for (int i=0; i<_vocArray.count; i++) {
+    for (int i=0; i<_colorArray.count; i++) {
         
 //        UIView* view21=[[UIView alloc]initWithFrame:CGRectMake(0,everyLalbeH*(i+1), SCREEN_Width/2, everyLalbeH)];
 //        view21.backgroundColor=[UIColor whiteColor];
@@ -627,7 +630,7 @@ static int  firstReadTime=72.0;
 -(void)goToReadCharData{
     _progressNum=0;
     if (!_allSendDataArray) {
-        _allSendDataArray=@[@"0",@"125",@"250",@"375",@"500",@"625",@"750"];
+        _allSendDataArray=@[@"0",@"125",@"250",@"375",@"500",@"625",@"750",@"875"];
     }
     if (!_timer) {
         _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
@@ -752,7 +755,11 @@ static int  firstReadTime=72.0;
                [self updataLeftMaxValue2];
         }
 
-      
+    }
+    if ((_allDataForCharArray.count ==_colorArray.count) && (present<50)) {
+        present=0;
+        [custompro setPresent:present];
+        custompro.presentlab.text = @"开始";
     }
 
     if (!_scrollView) {

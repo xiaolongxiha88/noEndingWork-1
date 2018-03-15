@@ -290,24 +290,6 @@ static int  gotoModel4=1;
         
     }
     
-    if (_allCmdModleTime==gotoModel2) {
-           _progressNum=0;
-        if (_isTwoViewEnable) {
-            NSLog(@"第二模块开始~~~~~~~~~");
-            if (!_timer) {
-                _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
-            }else{
-                _timer.fireDate=[NSDate distantPast];
-            }
-        //    [_scrollViewAll setContentOffset:CGPointMake(0, _isOneViewH) animated:YES];
-            [_viewTwo addNotification];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyTwoViewGoToStartRead"object:nil];
-        }else{
-            _allCmdModleTime++;
-        }
-     
-    }
-    
     
     if (_allCmdModleTime==gotoModel3) {
         if (_isThreeViewEnable) {
@@ -319,7 +301,23 @@ static int  gotoModel4=1;
         
     }
     
-
+    if (_allCmdModleTime==gotoModel2) {
+        _progressNum=0;
+        if (_isTwoViewEnable) {
+            NSLog(@"第二模块开始~~~~~~~~~");
+            if (!_timer) {
+                _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
+            }else{
+                _timer.fireDate=[NSDate distantPast];
+            }
+            //    [_scrollViewAll setContentOffset:CGPointMake(0, _isOneViewH) animated:YES];
+            [_viewTwo addNotification];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"OneKeyTwoViewGoToStartRead"object:nil];
+        }else{
+            _allCmdModleTime++;
+        }
+        
+    }
 
 //    if (_allCmdModleTime>1) {
 //        present=_everyProgress+present;
@@ -366,8 +364,8 @@ static int  gotoModel4=1;
 -(void)cmdThreeModle{
     if (!_ControlOne) {
         _ControlOne=[[wifiToPvOne alloc]init];
-        
     }
+    
     if (!_changeDataValue) {
         _changeDataValue=[[usbToWifiDataControl alloc]init];
     }
@@ -411,7 +409,7 @@ static int  gotoModel4=1;
     }
     
     if (_allCmdModleTime==gotoModel2) {
-                float T2=5;
+                float T2=10;
          unitTime=(_everyProgress)/(waitTime2+T2);
         if (_progressNum>(waitTime1+T2)) {
             _timer.fireDate=[NSDate distantFuture];
@@ -527,6 +525,8 @@ static int  gotoModel4=1;
             _fourLableArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:33]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:34]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:35]]];
             
                    [_readDataForRememberDic setObject:_fourLableArray forKey:@"four"];
+            
+                   [self removeTheControlOne];
                  [self removeTheNotification];
             [self initFourView];
             [self goToReadAllChart];
@@ -540,7 +540,7 @@ static int  gotoModel4=1;
 -(void)removeTheControlOne{
     if (_ControlOne) {
         [_ControlOne disConnect];
-        _ControlOne=nil;
+    _ControlOne=nil;
     }
     if (_timer) {
         _timer.fireDate=[NSDate distantFuture];
