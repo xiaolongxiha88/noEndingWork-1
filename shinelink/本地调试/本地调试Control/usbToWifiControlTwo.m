@@ -144,7 +144,7 @@
     
     if (_CellNumber==2 || _CellNumber==3 || _CellNumber==4 || _CellNumber==5 || _CellNumber==6 ) {
         UILabel *PV2Lable2=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 120*HEIGHT_SIZE, 300*NOW_SIZE,20*HEIGHT_SIZE )];
-        PV2Lable2.text=@"记忆使能";
+        PV2Lable2.text=root_MAX_377;
         PV2Lable2.textAlignment=NSTextAlignmentLeft;
         PV2Lable2.textColor=COLOR(102, 102, 102, 1);
         PV2Lable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
@@ -152,7 +152,7 @@
         [_view1 addSubview:PV2Lable2];
         
         _textLable=[[UILabel alloc]initWithFrame:CGRectMake((SCREEN_Width-180*NOW_SIZE)/2, 150*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
-        _textLable.text=@"记忆";
+        _textLable.text=root_MAX_378;
         _setValue=@"1";
         _textLable.userInteractionEnabled=YES;
         _textLable.layer.borderWidth=1;
@@ -174,7 +174,7 @@
 
 -(void)initThreeUI{
 
-    _lableNameArray=@[@[@"电源启动斜率(20)",@"电源重启斜率(21)"],@[@"Q(v)切入高压(93)",@"Q(v)切出高压(94)"],@[@"Q(v)切入低压(95)",@"Q(v)切出低压(96)"],@[@"Q(v)切入功率(97)",@"Q(v)切出功率(98)"],@[@"无功曲线切入电压(99)",@"无功曲线切出电压(100)"],@[@"检查固件1(233)",@"检查固件2(234)"]];
+    _lableNameArray=@[@[[NSString stringWithFormat:@"%@(20)",root_MAX_379],[NSString stringWithFormat:@"%@(21)",root_MAX_380]],@[[NSString stringWithFormat:@"%@(93)",root_MAX_381],[NSString stringWithFormat:@"%@(94)",root_MAX_382]],@[[NSString stringWithFormat:@"%@(95)",root_MAX_383],[NSString stringWithFormat:@"%@(96)",root_MAX_384]],@[[NSString stringWithFormat:@"%@(97)",root_MAX_385],[NSString stringWithFormat:@"%@(98)",root_MAX_386]],@[[NSString stringWithFormat:@"%@(99)",root_MAX_387],[NSString stringWithFormat:@"%@(100)",root_MAX_388]],@[[NSString stringWithFormat:@"%@1(233)",root_MAX_389],[NSString stringWithFormat:@"%@2(234)",root_MAX_389]]];
     _nameArray0=[NSArray arrayWithArray:_lableNameArray[_CellNumber-_OneSetInt]];
     
     
@@ -217,8 +217,8 @@
 
 
 -(void)initFourUI{
-
-    NSArray* nameArray=@[@[@"PF调整值1(101)",@"PF调整值2(102)",@"PF调整值3(103)",@"PF调整值4(104)",@"PF调整值5(105)",@"PF调整值6(106)",],@[@"PF限制负载百分比点1(110)",@"PF限制负载百分比点2(112)",@"PF限制负载百分比点3(114)",@"PF限制负载百分比点4(116)"],@[@"PF限制功率因数点1(111)",@"PF限制功率因数点2(113)",@"PF限制功率因数点3(115)",@"PF限制功率因数点4(117)"]];
+  //    [NSString stringWithFormat:@"%@4(117)",root_MAX_392];
+    NSArray* nameArray=@[@[[NSString stringWithFormat:@"%@1(101)",root_MAX_390],[NSString stringWithFormat:@"%@2(102)",root_MAX_390],[NSString stringWithFormat:@"%@3(103)",root_MAX_390],[NSString stringWithFormat:@"%@4(104)",root_MAX_390],[NSString stringWithFormat:@"%@5(105)",root_MAX_390],[NSString stringWithFormat:@"%@6(106)",root_MAX_390],],@[[NSString stringWithFormat:@"%@1(110)",root_MAX_391],[NSString stringWithFormat:@"%@2(112)",root_MAX_391],[NSString stringWithFormat:@"%@3(114)",root_MAX_391],[NSString stringWithFormat:@"%@4(116)",root_MAX_391]],@[[NSString stringWithFormat:@"%@1(111)",root_MAX_392],[NSString stringWithFormat:@"%@2(113)",root_MAX_392],[NSString stringWithFormat:@"%@3(115)",root_MAX_392],[NSString stringWithFormat:@"%@4(117)",root_MAX_392]]];
     
     if (_CellNumber==28) {
         _nameArray0=nameArray[0];
@@ -279,7 +279,7 @@
     if (_CellNumber<_OneSetInt) {
         if (_CellNumber==2 || _CellNumber==3 || _CellNumber==4 || _CellNumber==5 || _CellNumber==6 ) {
             if (_textField2.text==nil || [_textField2.text isEqualToString:@""]) {
-                [self showToastViewWithTitle:@"请添加设置值"];
+                [self showToastViewWithTitle:root_MAX_375];
                 return;
             }
                  [_setRegisterArray addObject:@"2"];                //记忆使能
@@ -322,7 +322,7 @@
                 _setValue=_textField2.text;
             }
             if (_setValue==nil || [_setValue isEqualToString:@""]) {
-                [self showToastViewWithTitle:@"请添加设置值"];
+                [self showToastViewWithTitle:root_MAX_375];
                 return;
             }
             [_setRegisterArray addObject:cmdValue[_CellNumber]];
@@ -341,7 +341,7 @@
              [_setValueArray addObject:textField1.text];
         }
         if (!isWrite) {
-             [self showToastViewWithTitle:@"请添加设置值"];
+             [self showToastViewWithTitle:root_MAX_375];
             return;
         }
         
@@ -357,7 +357,7 @@
     }
     
     if (_CellNumber==7 || _CellNumber==27) {
-        [self showAlertViewWithTitle:@"暂不允许设置" message:nil cancelButtonTitle:root_OK];
+        [self showAlertViewWithTitle:root_MAX_393 message:nil cancelButtonTitle:root_OK];
         return;
     }
     
@@ -410,9 +410,10 @@
        _choiceArray=@[@"On(0)",@"Off(1)"];
     }
     if (_CellNumber==2 || _CellNumber==3 || _CellNumber==4 || _CellNumber==5 || _CellNumber==6 ) {
-         _choiceArray=@[@"不记忆(0)",@"记忆(1)"];
+         _choiceArray=@[[NSString stringWithFormat:@"%@(0)",root_MAX_394],[NSString stringWithFormat:@"%@(1)",root_MAX_395]];
+        
     }
-    [ZJBLStoreShopTypeAlert showWithTitle:@"选择设置值" titles:_choiceArray selectIndex:^(NSInteger SelectIndexNum){
+    [ZJBLStoreShopTypeAlert showWithTitle:root_MIX_224 titles:_choiceArray selectIndex:^(NSInteger SelectIndexNum){
         
         _setValue=[NSString stringWithFormat:@"%ld",SelectIndexNum];
     } selectValue:^(NSString* valueString){
@@ -457,7 +458,7 @@
         _receiveCmdTwoData=[firstDic objectForKey:@"one"];
         NSUInteger Lenth=_receiveCmdTwoData.length;
         if (Lenth<_cmdRegisterNum*2) {
-             [self showAlertViewWithTitle:@"读取失败" message:nil cancelButtonTitle:root_OK];
+             [self showAlertViewWithTitle:root_MAX_376 message:nil cancelButtonTitle:root_OK];
             return;
         }
         NSMutableArray *valueArray=[NSMutableArray new];

@@ -28,7 +28,7 @@ static NSString *cellOne = @"cell1";
     [super viewDidLoad];
     
     if (_controlType==2) {
-        UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"设置Model" style:UIBarButtonItemStylePlain target:self action:@selector(goToSetModel)];
+        UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_MAX_374 style:UIBarButtonItemStylePlain target:self action:@selector(goToSetModel)];
         self.navigationItem.rightBarButtonItem=rightItem;
     }
 
@@ -46,15 +46,78 @@ static NSString *cellOne = @"cell1";
 
 
 -(void)initUI{
+
+    
     if (_controlType==1) {
-            _nameArray=@[@"开关逆变器(0)",@"安规功能使能(1)",@"有功功率百分比(3)",@"感性载率(4)",@"容性载率(4)",@"容性PF(5)",@"感性PF(5)",@"PV电压(8)",@"选择通信波特率(22)",@"运行PF为1(89)",@"过频降额起点(91)",@"频率-负载限制率(92)",@"Q(v)无功延时(107)",@"过频降额延时(108)",@"Q(v)曲线Q最大值(109)",@"Island使能(230)",@"风扇检查(231)",@"电网N线使能(232)",@"N至GND监测功能使能(235)",@"非标准电网电压范围使能(236)",@"指定的规格设置使能(237)",@"MPPT使能(238)",@"电源启动/重启斜率(20/21)",@"Q(v)切入/切出高压(93/94)",@"Q(v)切入/切出低压(95/96)",@"Q(v)切入/切出功率(97/98)",@"无功曲线切入/切出电压(99/100)",@"检查固件1/2(233/234)",@"PF调整值(101~106)",@"PF限制负载百分比点1~4(110/112/114/116)",@"PF限制功率因数1~4(111/113/115/117)"];
+            _nameArray=@[[NSString stringWithFormat:@"%@(0)",root_MAX_396],
+                         [NSString stringWithFormat:@"%@(1)",root_MAX_397],
+                         [NSString stringWithFormat:@"%@(3)",root_MAX_398],
+                         [NSString stringWithFormat:@"%@(4)",root_MAX_399],
+                         [NSString stringWithFormat:@"%@(4)",root_MAX_400],
+                         [NSString stringWithFormat:@"%@(5)",root_MAX_401],
+                         [NSString stringWithFormat:@"%@(5)",root_MAX_402],
+                         [NSString stringWithFormat:@"%@(8)",root_MAX_403],
+                         [NSString stringWithFormat:@"%@(22)",root_MAX_404],
+                         [NSString stringWithFormat:@"%@(89)",root_MAX_405],
+                         [NSString stringWithFormat:@"%@(91)",root_MAX_406],
+                         [NSString stringWithFormat:@"%@(92)",root_MAX_407],
+                         [NSString stringWithFormat:@"%@(107)",root_MAX_408],
+                         [NSString stringWithFormat:@"%@(108)",root_MAX_409],
+                         [NSString stringWithFormat:@"%@(109)",root_MAX_410],
+                         [NSString stringWithFormat:@"%@(230)",root_MAX_411],
+                         [NSString stringWithFormat:@"%@(231)",root_MAX_412],
+                         [NSString stringWithFormat:@"%@(232)",root_MAX_413],
+                         [NSString stringWithFormat:@"%@(235)",root_MAX_414],
+                         [NSString stringWithFormat:@"%@(236)",root_MAX_415],
+                         [NSString stringWithFormat:@"%@(237)",root_MAX_416],
+                         [NSString stringWithFormat:@"%@(238)",root_MAX_417],
+                         [NSString stringWithFormat:@"%@(20/21)",root_MAX_418],
+                         [NSString stringWithFormat:@"%@(93/94)",root_MAX_419],
+                         [NSString stringWithFormat:@"%@(95/96)",root_MAX_420],
+                         [NSString stringWithFormat:@"%@(97/98)",root_MAX_421],
+                         [NSString stringWithFormat:@"%@(99/100)",root_MAX_422],
+                         [NSString stringWithFormat:@"%@1/2(233/234)",root_MAX_389],
+                           [NSString stringWithFormat:@"%@(101~106)",root_MAX_390],
+                         [NSString stringWithFormat:@"%@1~4(110/112/114/116)",root_MAX_391],
+                         [NSString stringWithFormat:@"%@1~4(111/113/115/117)",root_MAX_392]];
+      
     }
     
 
     
+       // [NSString stringWithFormat:@"%@(64/65)",root_MAX_439]
     
     if (_controlType==2) {
-  _nameArray=@[@"通信地址(30)",@"系统时间(45~50)",@"启动电压(17)",@"启动时间(18)",@"故障恢复后重启延迟时间(19)",@"语言(15)",@"国家(16)",@"系统一周(51)",@"AC电压10分钟保护值(80)",@"PV电压高故障(81)",@"Modbus版本(88)",@"PID工作模式(201)",@"PID开关(202)",@"PID工作电压(203)",@"逆变器模块(28~29)",@"逆变器经纬度(122/123)",@"AC1限制电压低/高(52/53)",@"AC1频率限制低/高(54/55)",@"AC2限制电压低/高(56/57)",@"AC2频率限制低/高(58/59)",@"AC3限制电压低/高(60/61)",@"AC3频率限制低/高(62/63)",@"并网电压限制低/高(64/65)",@"并网频率限制低/高(66/67)",@"AC电压限制时间1低/高(68/69)",@"AC电压限制时间2低/高(70/71)",@"AC频率限制时间1低/高(72/73)",@"AC频率限制时间2低/高(74/75)",@"AC电压限制时间3低/高(76/77)",@"AC频率限制时间3低/高(78/79)"];
+  _nameArray=@[[NSString stringWithFormat:@"%@(30)",root_MAX_423],
+               [NSString stringWithFormat:@"%@(45~50)",root_5000Control_142],
+               [NSString stringWithFormat:@"%@(17)",root_MAX_424],
+               [NSString stringWithFormat:@"%@(18)",root_MAX_425],
+               [NSString stringWithFormat:@"%@(19)",root_MAX_426],
+               [NSString stringWithFormat:@"%@(15)",root_MAX_427],
+               [NSString stringWithFormat:@"%@(16)",root_country],
+               [NSString stringWithFormat:@"%@(51)",root_MAX_428],
+               [NSString stringWithFormat:@"%@(80)",root_MAX_429],
+               [NSString stringWithFormat:@"%@(81)",root_MAX_430],
+               [NSString stringWithFormat:@"%@(88)",root_MAX_431],
+               [NSString stringWithFormat:@"%@(201)",root_MAX_432],
+               [NSString stringWithFormat:@"%@(202)",root_MAX_433],
+               [NSString stringWithFormat:@"%@(203)",root_MAX_434],
+               [NSString stringWithFormat:@"%@(28~29)",root_MAX_435],
+               [NSString stringWithFormat:@"%@(122/123)",root_MAX_436],
+               [NSString stringWithFormat:@"AC1%@(52/53)",root_MAX_437],
+               [NSString stringWithFormat:@"AC1%@(54/55)",root_MAX_438],
+               [NSString stringWithFormat:@"AC2%@(56/57)",root_MAX_437],
+               [NSString stringWithFormat:@"AC2%@(58/59)",root_MAX_438],
+               [NSString stringWithFormat:@"AC3%@(60/61)",root_MAX_437],
+               [NSString stringWithFormat:@"AC3%@(62/63)",root_MAX_438],
+               [NSString stringWithFormat:@"%@(64/65)",root_MAX_439],
+               @"并网频率限制低/高(66/67)",
+               @"AC电压限制时间1低/高(68/69)",
+               @"AC电压限制时间2低/高(70/71)",
+               @"AC频率限制时间1低/高(72/73)",
+               @"AC频率限制时间2低/高(74/75)",
+               @"AC电压限制时间3低/高(76/77)",
+               @"AC频率限制时间3低/高(78/79)"];
     }
    
     

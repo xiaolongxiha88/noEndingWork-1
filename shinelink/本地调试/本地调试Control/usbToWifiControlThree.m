@@ -153,8 +153,8 @@
 
 
 -(void)initThreeUI{
-    NSString *High=@"高";
-    NSString *Low=@"低";
+    NSString *High=root_MAX_372;
+    NSString *Low=root_MAX_373;
     //低高
     NSArray *regiserArray=@[@52,@53,@54,@55,@56,@57,@58,@59,@60,@61,@62,@63,@64,@65,@66,@67,@68,@69,@70,@71,@72,@73,@74,@75,@76,@77,@78,@79];
  
@@ -162,7 +162,8 @@
         _nameArray0=@[[NSString stringWithFormat:@"%@(28)",High],[NSString stringWithFormat:@"%@(29)",Low]];
     }
     if (_CellNumber==15) {
-        _nameArray0=@[@"经度(122)",@"纬度(123)"];
+        _nameArray0=@[[NSString stringWithFormat:@"%@(122)",root_WO_jingdu],[NSString stringWithFormat:@"%@(123)",root_WO_weidu]];
+        
     }
    
     if (_CellNumber>15) {
@@ -220,7 +221,7 @@
 
 
 -(void)initFourUI{
-    self.title=@"设置Model";
+    self.title=root_MAX_374;
     NSArray *nameArray=@[@"A",@"B",@"D",@"T",@"P",@"U",@"M",@"S"];
     float W=ScreenWidth/nameArray.count;
     for (int i=0; i<nameArray.count; i++) {
@@ -275,7 +276,7 @@
                 _setValue=_textField2.text;
             }
             if (_setValue==nil || [_setValue isEqualToString:@""]) {
-                [self showToastViewWithTitle:@"请添加设置值"];
+                [self showToastViewWithTitle:root_MAX_375];
                 return;
             }
             [_setRegisterArray addObject:cmdValue[_CellNumber]];
@@ -294,7 +295,7 @@
                 [_setValueArray addObject:textField1.text];
             }
             if (!isWrite) {
-                [self showToastViewWithTitle:@"请添加设置值"];
+                [self showToastViewWithTitle:root_MAX_375];
                   return;
             }
             
@@ -319,7 +320,7 @@
     for (int i=0; i<8; i++) {
         UITextField *lable=[_view1 viewWithTag:4000+i];
         if (lable.text==nil || [lable.text isEqualToString:@""]) {
-                 [self showToastViewWithTitle:@"请添加设置值"];
+                 [self showToastViewWithTitle:root_MAX_375];
             return;
         }
         [valueArray addObject:lable.text];
@@ -469,7 +470,7 @@
     if (_CellNumber==6){
         _choiceArray=@[@"Need to select(0)",@"Have selected(1)"];
     }
-    [ZJBLStoreShopTypeAlert showWithTitle:@"选择设置值" titles:_choiceArray selectIndex:^(NSInteger SelectIndexNum){
+    [ZJBLStoreShopTypeAlert showWithTitle:root_MIX_224 titles:_choiceArray selectIndex:^(NSInteger SelectIndexNum){
         
         _setValue=[NSString stringWithFormat:@"%ld",SelectIndexNum];
     } selectValue:^(NSString* valueString){
@@ -529,7 +530,7 @@
         _receiveCmdTwoData=[firstDic objectForKey:@"one"];
         NSUInteger Lenth=_receiveCmdTwoData.length;
         if (Lenth<_cmdRegisterNum*2) {
-            [self showAlertViewWithTitle:@"读取失败" message:nil cancelButtonTitle:root_OK];
+            [self showAlertViewWithTitle:root_MAX_376 message:nil cancelButtonTitle:root_OK];
             return;
         }
         NSMutableArray *valueArray=[NSMutableArray new];
