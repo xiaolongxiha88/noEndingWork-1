@@ -172,7 +172,7 @@ static int  gotoModel4=1;
            _alertTime=_alertTime+5;
     }
     
-    [self showAlertViewWithTitle:@"温馨提示" message:[NSString stringWithFormat:@"1、确保逆变器在运行状态；2、检测过程中会关断逆变器；3、诊断时间预计%d分钟",_alertTime] cancelButtonTitle:root_OK];
+    [self showAlertViewWithTitle:root_energy_wenxin_tishi message:[NSString stringWithFormat:@"%@%d%@",root_MAX_458,_alertTime,root_MAX_459] cancelButtonTitle:root_OK];
     
     _everyProgress=100/_progressTimes;
     
@@ -223,7 +223,7 @@ static int  gotoModel4=1;
         _progressView.leftimg.backgroundColor =COLOR(53, 177, 255, 1);
         
         _progressView.presentlab.textColor = [UIColor whiteColor];
-        _progressView.presentlab.text = @"开始";
+        _progressView.presentlab.text = root_MAX_460;
         [_scrollViewAll addSubview:_progressView];
         
         UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goStartRead:)];
@@ -240,13 +240,13 @@ static int  gotoModel4=1;
         [self goToReadAllChart];
         
           [_progressView setPresent:0];
-        _progressView.presentlab.text = @"取消";
+        _progressView.presentlab.text = root_cancel;
         
     }else{
                 _allCmdModleTime=10;
         present=0;
         [_progressView setPresent:present];
-        _progressView.presentlab.text = @"开始";
+        _progressView.presentlab.text = root_MAX_460;
         _timer.fireDate=[NSDate distantFuture];
         
     }
@@ -328,7 +328,7 @@ static int  gotoModel4=1;
 //    }
     
     if (_allCmdModleTime>4) {
-        self.title=@"一键诊断";
+        self.title=root_MAX_448;
          present=0;
           [_progressView setPresent:100];
            [self performSelector:@selector(updataLable) withObject:nil afterDelay:1.5];
@@ -356,7 +356,7 @@ static int  gotoModel4=1;
 -(void)updataLable{
         [_progressView setPresent:0];
     _isReadNow = !_isReadNow;
-    _progressView.presentlab.text = @"开始";
+    _progressView.presentlab.text = root_MAX_460;
 }
 
 
@@ -446,7 +446,7 @@ static int  gotoModel4=1;
     NSString *presentString=[NSString stringWithFormat:@"%.1f",present];
     [_progressView setPresent:[presentString floatValue]];
     
-    self.title=[NSString stringWithFormat:@"读取数据中...(%@%%)",presentString];
+    self.title=[NSString stringWithFormat:@"%@...(%@%%)",root_MAX_461,presentString];
 }
 
 -(void)setFailed{
@@ -455,7 +455,7 @@ static int  gotoModel4=1;
         _isReadNow = !_isReadNow;
      present=0;
     [_progressView setPresent:present];
-        _progressView.presentlab.text = @"开始";
+        _progressView.presentlab.text = root_MAX_460;
     
         [self removeTheControlOne];
     
@@ -588,7 +588,7 @@ static int  gotoModel4=1;
         UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0,lastH-8*HEIGHT_SIZE, SCREEN_Width, everyLalbeH)];
         titleLable.textColor =MainColor;
         titleLable.textAlignment=NSTextAlignmentCenter;
-        titleLable.text=@"I-V/P-V 曲线";
+        titleLable.text=root_MAX_462;
         titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollViewAll addSubview:titleLable];
         
@@ -623,7 +623,7 @@ static int  gotoModel4=1;
         UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0,0, SCREEN_Width, everyLalbeH)];
         titleLable.textColor =MainColor;
         titleLable.textAlignment=NSTextAlignmentCenter;
-        titleLable.text=@"AC曲线";
+        titleLable.text=root_MAX_455;
         titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [view1 addSubview:titleLable];
         
@@ -658,7 +658,7 @@ static int  gotoModel4=1;
     UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0,0, SCREEN_Width, everyLalbeH)];
     titleLable.textColor =MainColor;
     titleLable.textAlignment=NSTextAlignmentCenter;
-    titleLable.text=@"电网线路图(THDV)";
+    titleLable.text=root_MAX_456;
     titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [view1 addSubview:titleLable];
     
@@ -853,11 +853,12 @@ static int  gotoModel4=1;
     UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0,0, SCREEN_Width, everyLalbeH)];
     titleLable.textColor =MainColor;
     titleLable.textAlignment=NSTextAlignmentCenter;
-    titleLable.text=@"电网线路阻抗";
+    titleLable.text=root_MAX_457;
     titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [view1 addSubview:titleLable];
     
-    NSArray *nameArray=@[@"R相阻抗",@"S相阻抗",@"T相阻抗"];
+    
+    NSArray *nameArray=@[[NSString stringWithFormat:@"R%@",root_MAX_463],[NSString stringWithFormat:@"S%@",root_MAX_463],[NSString stringWithFormat:@"T%@",root_MAX_463]];
     
     float H1=40*HEIGHT_SIZE;
     for (int i=0; i<nameArray.count; i++) {

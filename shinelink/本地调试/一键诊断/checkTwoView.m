@@ -209,7 +209,7 @@ static float readWaveTime=20;      //读波形时间
     }
   
     
-    NSString *lable0String=@"故障序号:";
+    NSString *lable0String=[NSString stringWithFormat:@"%@:",root_MAX_464];
     CGSize lable0StringSize=[self getStringSize:12*HEIGHT_SIZE Wsize:CGFLOAT_MAX Hsize:lableH stringName:lable0String];
     
     UILabel* lable0 = [[UILabel alloc]initWithFrame:CGRectMake(X0, 0,lable0StringSize.width,lableH)];
@@ -234,7 +234,7 @@ static float readWaveTime=20;      //读波形时间
     button1.layer.cornerRadius=buttonH/2;
     button1.backgroundColor=backgroundColor;
     button1.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
-    [button1 setTitle:@"点击选择" forState:UIControlStateNormal];
+    [button1 setTitle:root_MIX_223 forState:UIControlStateNormal];
     [button1 addTarget:self action:@selector(tapInfo:) forControlEvents:UIControlEventTouchUpInside];
     [_view0 addSubview:button1];
     
@@ -250,7 +250,7 @@ static float readWaveTime=20;      //读波形时间
     _lable0 = [[UILabel alloc]initWithFrame:CGRectMake(0,lableH,SCREEN_Width,lableH)];
     _lable0.textColor =MainColor;
     _lable0.textAlignment=NSTextAlignmentCenter;
-    _lable0.text=@"波形触发时间:--:--:--";
+    _lable0.text=[NSString stringWithFormat:@"%@:--:--:--",root_MAX_465];
     _lable0.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [_view0 addSubview:_lable0];
     
@@ -264,7 +264,7 @@ static float readWaveTime=20;      //读波形时间
     custompro.leftimg.backgroundColor =COLOR(53, 177, 255, 1);
     
     custompro.presentlab.textColor = [UIColor whiteColor];
-    custompro.presentlab.text = @"开始";
+    custompro.presentlab.text = root_MAX_460;
     if (_charType !=3) {
   [self.view addSubview:custompro];
     }
@@ -290,10 +290,10 @@ static float readWaveTime=20;      //读波形时间
     
     NSArray *lableNameArray;
     if (_charType==1 || _charType==2) {
-        lableNameArray=@[@"ID",@"显示倍数",@"波形值"];
+        lableNameArray=@[@"ID",root_MAX_469,root_MAX_470];
     }
     if (_charType==3) {
-        lableNameArray=@[@"Phase",@"Rms(V),f(Hz)",@"波形值"];
+        lableNameArray=@[@"Phase",@"Rms(V),f(Hz)",root_MAX_470];
     }
     
      W0=SCREEN_Width/lableNameArray.count;
@@ -388,7 +388,7 @@ static float readWaveTime=20;      //读波形时间
                   [button21 setTitle:buttonArray[i] forState:UIControlStateNormal];
                 [_valueForLeftLableArray addObject:buttonArray[i]];
             }else{
-               [button21 setTitle:@"设置ID" forState:UIControlStateNormal];
+               [button21 setTitle:root_MAX_471 forState:UIControlStateNormal];
             }
   
             [button21 addTarget:self action:@selector(tapXnum:) forControlEvents:UIControlEventTouchUpInside];
@@ -412,7 +412,7 @@ static float readWaveTime=20;      //读波形时间
         button2.layer.cornerRadius=buttonH/2;
         button2.backgroundColor=backgroundColor;
         button2.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
-        [button2 setTitle:@"1倍" forState:UIControlStateNormal];
+        [button2 setTitle:@"1" forState:UIControlStateNormal];
         [button2 addTarget:self action:@selector(tapXnum:) forControlEvents:UIControlEventTouchUpInside];
            if (_charType==1 || _charType==2) {
                 [_view2 addSubview:button2];
@@ -528,9 +528,9 @@ static float readWaveTime=20;      //读波形时间
 -(void)tapXnum:(UIButton*)button{
     NSString*titleString;
     if (button.tag>4000) {
-        titleString=@"请输入故障ID号";
+        titleString=root_MAX_472;
     }else{
-         titleString=@"请填写曲线显示的倍数";
+         titleString=root_MAX_473;
     }
     
     [RKAlertView showAlertPlainTextWithTitle:titleString message:nil cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
@@ -563,7 +563,7 @@ static float readWaveTime=20;      //读波形时间
         [NameArray addObject:[NSString stringWithFormat:@"%d",i]];
     }
 
-       NSString* title=@"选择故障序号";
+       NSString* title=root_MAX_474;
 
    
     [ZJBLStoreShopTypeAlert showWithTitle:title titles:NameArray selectIndex:^(NSInteger selectIndex) {
@@ -671,23 +671,23 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     
     if (_charType==1) {
         if (_sendSNString==nil || [_sendSNString isEqualToString:@""]) {
-            [self showToastViewWithTitle:@"请选择故障序号"];
+            [self showToastViewWithTitle:root_MAX_474];
             return;
         }
     }else if (_charType==2){
         for (NSString*ID in _valueForLeftLableArray) {
             if ([ID isEqualToString:@""]) {
-                [self showToastViewWithTitle:@"请填写ID号"];
+                [self showToastViewWithTitle:root_MAX_475];
                 return;
             }
             if ([ID intValue]==0) {
-                [self showToastViewWithTitle:@"请输入正确的ID号"];
+                [self showToastViewWithTitle:root_MAX_476];
                 return;
             }
         }
         
         if (_valueForLeftLableArray.count<4) {
-            [self showToastViewWithTitle:@"请填写ID号"];
+            [self showToastViewWithTitle:root_MAX_475];
             return;
         }
     }
@@ -704,13 +704,13 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             [self goToReadFirstData];
         }
         
-        custompro.presentlab.text = @"取消";
+        custompro.presentlab.text = root_cancel;
         
     }else{
         
         present=0;
         [custompro setPresent:present];
-        custompro.presentlab.text = @"开始";
+        custompro.presentlab.text = root_MAX_460;
         _timer.fireDate=[NSDate distantFuture];
         
     }
@@ -880,7 +880,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             float time3H=([_changeDataValue changeHighRegister:data registerNum:2]);
             float time3L=([_changeDataValue changeLowRegister:data registerNum:2]);
             _faultTime=[NSString stringWithFormat:@"%.f-%.f-%.f %.f:%.f:%.f",time1H,time1L,time2H,time2L,time3H,time3L];
-          _lable0.text=[NSString stringWithFormat:@"波形触发时间:%@",_faultTime];
+          _lable0.text=[NSString stringWithFormat:@"%@:%@",root_MAX_465,_faultTime];
             
                 float faultReason=([_changeDataValue changeHighRegister:data registerNum:3]);
        
@@ -936,7 +936,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
     if (_charType==3) {
         if (!_isChartType3LastCmdOver) {
             [self removeTheNotification];
-            [self showAlertViewWithTitle:@"数据读取失败" message:@"请重试或检查WiFi连接." cancelButtonTitle:root_OK];
+            [self showAlertViewWithTitle:root_MAX_466 message:root_MAX_467 cancelButtonTitle:root_OK];
             return;
         }
 
@@ -946,13 +946,13 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         alertView.tag = 1002;
         [alertView show];
     }else{
-        [self showAlertViewWithTitle:@"数据读取中断" message:@"请重新读取数据" cancelButtonTitle:root_OK];
+        [self showAlertViewWithTitle:root_MAX_466 message:root_MAX_467 cancelButtonTitle:root_OK];
         
     }
         _isReadNow = !_isReadNow;
     present=0;
     [custompro setPresent:present];
-    custompro.presentlab.text = @"开始";
+    custompro.presentlab.text = root_MAX_460;
     
 }
 
@@ -1103,7 +1103,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             }else{
                 present=100;
                 [custompro setPresent:present];
-                custompro.presentlab.text = @"开始";
+                custompro.presentlab.text = root_MAX_460;
             }
             
             [self updataLeftMaxValue2];
@@ -1339,7 +1339,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
                 
             }else{
                 ((YDLineChart*)recognizerView).perXLen=oldPerXlen;
-                [self showToastViewWithTitle:@"已经是最大显示"];
+                [self showToastViewWithTitle:root_MAX_468];
             }
             
             

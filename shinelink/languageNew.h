@@ -1071,6 +1071,53 @@
 #define  root_MAX_438 NSLocalizedString(@"438频率限制低/高", nil)
 
 #define  root_MAX_439 NSLocalizedString(@"439并网电压限制低/高", nil)
+#define  root_MAX_440 NSLocalizedString(@"440并网频率限制低/高", nil)
+#define  root_MAX_441 NSLocalizedString(@"441电压限制时间", nil)
+#define  root_MAX_442 NSLocalizedString(@"442频率限制时间", nil)
+#define  root_MAX_443 NSLocalizedString(@"443该项暂不能设置,请设置Model.", nil)
+#define  root_MAX_444 NSLocalizedString(@"444该项暂不能设置.", nil)
+#define  root_MAX_445 NSLocalizedString(@"445智能I-V曲线扫描", nil)
+#define  root_MAX_446 NSLocalizedString(@"446故障录波检测", nil)
+#define  root_MAX_447 NSLocalizedString(@"447实时录波检测", nil)
+#define  root_MAX_448 NSLocalizedString(@"448一键诊断", nil)
+#define  root_MAX_449 NSLocalizedString(@"449可远程扫描每路MPPT。", nil)
+#define  root_MAX_450 NSLocalizedString(@"450可远程、快速、精确地进行故障定位。", nil)
+#define  root_MAX_451 NSLocalizedString(@"451可实时观察逆变器电压电流质量等。", nil)
+#define  root_MAX_452 NSLocalizedString(@"452一键检测电站环境信息，包括I-V曲线扫描，电网侧电压波形，THDV以及线路阻抗。", nil)
+#define  root_MAX_453 NSLocalizedString(@"453选择一键诊断模块", nil)
+#define  root_MAX_454 NSLocalizedString(@"454I-V/P-V曲线", nil)
+#define  root_MAX_455 NSLocalizedString(@"455电网电压波形", nil)
+#define  root_MAX_456 NSLocalizedString(@"456电网电压谐波(THDV)", nil)
+#define  root_MAX_457 NSLocalizedString(@"457电网线路阻抗", nil)
+#define  root_MAX_458 NSLocalizedString(@"4581、确保逆变器在运行状态；2、检测过程中会关断逆变器；3、诊断时间预计15分钟", nil)
+#define  root_MAX_459 NSLocalizedString(@"459分钟", nil)
+#define  root_MAX_460 NSLocalizedString(@"460开始", nil)
+#define  root_MAX_461 NSLocalizedString(@"461读取数据中", nil)
+#define  root_MAX_462 NSLocalizedString(@"462I-V/P-V 曲线", nil)
+#define  root_MAX_463 NSLocalizedString(@"463相阻抗", nil)  //R S T
+#define  root_MAX_464 NSLocalizedString(@"464故障序号", nil)
+#define  root_MAX_465 NSLocalizedString(@"465波形触发时间", nil)
+#define  root_MAX_466 NSLocalizedString(@"466数据读取失败", nil)
+#define  root_MAX_467 NSLocalizedString(@"467请重试或检查WiFi连接.", nil)
+#define  root_MAX_468 NSLocalizedString(@"468已经是最大显示", nil)
+#define  root_MAX_469 NSLocalizedString(@"469显示倍数", nil)
+#define  root_MAX_470 NSLocalizedString(@"470波形值", nil)
+#define  root_MAX_471 NSLocalizedString(@"471设置ID", nil)
+#define  root_MAX_472 NSLocalizedString(@"472请输入故障ID号", nil)
+#define  root_MAX_473 NSLocalizedString(@"473请填写曲线显示的倍数", nil)
+#define  root_MAX_474 NSLocalizedString(@"474选择故障序号", nil)
+#define  root_MAX_475 NSLocalizedString(@"475请填写ID号", nil)
+#define  root_MAX_476 NSLocalizedString(@"476请输入正确的ID号", nil)
+
+
+
+
+
+
+
+
+
+
 
 
 

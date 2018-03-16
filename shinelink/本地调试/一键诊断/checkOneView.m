@@ -233,7 +233,7 @@ static int  firstReadTime=72.0;
     
     if (_oneCharType==2) {
         [self removeTheNotification];
-        [self showAlertViewWithTitle:@"数据读取失败" message:@"请重试或检查WiFi连接." cancelButtonTitle:root_OK];
+        [self showAlertViewWithTitle:root_MAX_466 message:root_MAX_467 cancelButtonTitle:root_OK];
         return;
     }
     
@@ -242,12 +242,12 @@ static int  firstReadTime=72.0;
         alertView.tag = 1002;
         [alertView show];
     }else{
-        [self showAlertViewWithTitle:@"数据读取中断" message:@"请重新读取数据" cancelButtonTitle:root_OK];
+        [self showAlertViewWithTitle:root_MAX_466 message:root_MAX_467 cancelButtonTitle:root_OK];
     
     }
     present=0;
     [custompro setPresent:present];
-    custompro.presentlab.text = @"开始";
+    custompro.presentlab.text = root_MAX_460;
     
 }
 
@@ -479,7 +479,7 @@ static int  firstReadTime=72.0;
     custompro.leftimg.backgroundColor =COLOR(53, 177, 255, 1);
 
     custompro.presentlab.textColor = [UIColor whiteColor];
-    custompro.presentlab.text = @"开始";
+    custompro.presentlab.text = root_MAX_460;
     if (_oneCharType != 2) {
             [self.view addSubview:custompro];
     }
@@ -653,13 +653,13 @@ static int  firstReadTime=72.0;
                          [self goToReadFirstData];
             }
        
-            custompro.presentlab.text = @"取消";
+            custompro.presentlab.text = root_cancel;
        
         }else{
    
             present=0;
              [custompro setPresent:present];
-                  custompro.presentlab.text = @"开始";
+                  custompro.presentlab.text = root_MAX_460;
                 _timer.fireDate=[NSDate distantFuture];
             
         }
@@ -749,7 +749,7 @@ static int  firstReadTime=72.0;
             }else{
                 present=100;
                 [custompro setPresent:present];
-                custompro.presentlab.text = @"开始";
+                custompro.presentlab.text = root_MAX_460;
             }
             
                [self updataLeftMaxValue2];
@@ -759,7 +759,7 @@ static int  firstReadTime=72.0;
     if ((_allDataForCharArray.count ==_colorArray.count) && (present<50)) {
         present=0;
         [custompro setPresent:present];
-        custompro.presentlab.text = @"开始";
+        custompro.presentlab.text = root_MAX_460;
     }
 
     if (!_scrollView) {
@@ -984,7 +984,7 @@ __weak typeof(self) weakSelf = self;
                 
             }else{
       ((YDLineChart*)recognizerView).perXLen=oldPerXlen;
-                [self showToastViewWithTitle:@"已经是最大显示"];
+                [self showToastViewWithTitle:root_MAX_468];
             }
             
        

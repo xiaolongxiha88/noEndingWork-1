@@ -85,7 +85,7 @@ static NSString *cellOne = @"cell1";
     
 
     
-       // [NSString stringWithFormat:@"%@(64/65)",root_MAX_439]
+       // [NSString stringWithFormat:@"AC%@3%@/%@1(78/79)",root_MAX_442,root_MAX_373,root_MAX_372]
     
     if (_controlType==2) {
   _nameArray=@[[NSString stringWithFormat:@"%@(30)",root_MAX_423],
@@ -111,13 +111,14 @@ static NSString *cellOne = @"cell1";
                [NSString stringWithFormat:@"AC3%@(60/61)",root_MAX_437],
                [NSString stringWithFormat:@"AC3%@(62/63)",root_MAX_438],
                [NSString stringWithFormat:@"%@(64/65)",root_MAX_439],
-               @"并网频率限制低/高(66/67)",
-               @"AC电压限制时间1低/高(68/69)",
-               @"AC电压限制时间2低/高(70/71)",
-               @"AC频率限制时间1低/高(72/73)",
-               @"AC频率限制时间2低/高(74/75)",
-               @"AC电压限制时间3低/高(76/77)",
-               @"AC频率限制时间3低/高(78/79)"];
+               [NSString stringWithFormat:@"%@(66/67)",root_MAX_440],
+               [NSString stringWithFormat:@"AC%@1%@/%@1(68/69)",root_MAX_441,root_MAX_373,root_MAX_372],
+               [NSString stringWithFormat:@"AC%@2%@/%@1(70/71)",root_MAX_441,root_MAX_373,root_MAX_372],
+               [NSString stringWithFormat:@"AC%@1%@/%@1(72/73)",root_MAX_442,root_MAX_373,root_MAX_372],
+               [NSString stringWithFormat:@"AC%@2%@/%@1(74/75)",root_MAX_442,root_MAX_373,root_MAX_372],
+               [NSString stringWithFormat:@"AC%@3%@/%@1(76/77)",root_MAX_441,root_MAX_373,root_MAX_372],
+               [NSString stringWithFormat:@"AC%@3%@/%@1(78/79)",root_MAX_442,root_MAX_373,root_MAX_372]];
+        
     }
    
     
@@ -220,11 +221,11 @@ static NSString *cellOne = @"cell1";
         [self.navigationController pushViewController:go animated:YES];
     }else{
         if (indexPath.row==14) {
-            [self showAlertViewWithTitle:@"该项暂不能设置，请设置Model。" message:nil cancelButtonTitle:root_OK];
+            [self showAlertViewWithTitle:root_MAX_443 message:nil cancelButtonTitle:root_OK];
             return;
         }
         if (indexPath.row==15) {
-            [self showAlertViewWithTitle:@"该项暂不能设置。" message:nil cancelButtonTitle:root_OK];
+            [self showAlertViewWithTitle:root_MAX_444 message:nil cancelButtonTitle:root_OK];
             return;
         }
         if (indexPath.row<14) {

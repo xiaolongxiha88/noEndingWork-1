@@ -35,8 +35,8 @@
         [self.view addSubview:_scrollView];
     }
 
-    _nameArray=@[@"智能I-V曲线扫描",@"故障录波检测",@"实时录波检测",@"一键诊断"];
-        NSArray*noteArray=@[@"可远程扫描每路I-V曲线或P-V曲线。",@"可远程、快速、精确地进行故障定位。",@"可实时观察逆变器电压电流质量等。",@"一键检测电站环境信息，包括I-V曲线扫描，电网侧电压波形，THDV以及线路阻抗。"];
+    _nameArray=@[root_MAX_445,root_MAX_446,root_MAX_447,root_MAX_448];
+        NSArray*noteArray=@[root_MAX_449,root_MAX_450,root_MAX_451,root_MAX_452];
     NSArray*imageArray=@[@"max_iv_graph.png",@"max_fault.png",@"max_real_time.png",@"max_onekey.png"];
     
    float H0=80*HEIGHT_SIZE;
@@ -107,8 +107,8 @@
 
 
 -(void)choiceKeyUnit{
-    NSString *title=@"选择一键诊断模块";
-    NSArray*NameArray=@[@"I-V/P-V曲线",@"电网电压波形",@"电网电压谐波(THDV)",@"电网线路阻抗"];
+    NSString *title=root_MAX_453;
+    NSArray*NameArray=@[root_MAX_454,root_MAX_455,root_MAX_456,root_MAX_457];
     
     [oneKeyAlertView showWithTitle:title titles:NameArray selectIndex:^(NSInteger selectIndex) {
         
@@ -127,7 +127,7 @@
             goView.isSelectModelArray=[NSArray arrayWithArray:selectValueArray];
             [self.navigationController pushViewController:goView animated:YES];
         }else{
-            [self showToastViewWithTitle:@"请选择一键诊断模块"];
+            [self showToastViewWithTitle:root_MAX_453];
         }
         
         

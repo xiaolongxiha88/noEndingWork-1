@@ -34,7 +34,7 @@
 
 -(void)initUI{
     
-    NSArray *nameArray=@[@"时间",@"R",@"S",@"T"];
+    NSArray *nameArray=@[root_shijian,@"R",@"S",@"T"];
 
     float lableW=75*NOW_SIZE;
         float lableH=35*NOW_SIZE;
