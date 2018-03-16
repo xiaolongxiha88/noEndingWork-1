@@ -35,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"读取" style:UIBarButtonItemStylePlain target:self action:@selector(readValueToTcp)];
+    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_MAX_370 style:UIBarButtonItemStylePlain target:self action:@selector(readValueToTcp)];
     self.navigationItem.rightBarButtonItem=rightItem;
     
     if (!_ControlOne) {
@@ -66,7 +66,7 @@
     
     _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
     [_goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
-    [_goBut setTitle:@"设置" forState:UIControlStateNormal];
+    [_goBut setTitle:root_MAX_371 forState:UIControlStateNormal];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [_goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
     [_view1 addSubview:_goBut];
@@ -376,10 +376,10 @@
         }
     }
     if (_setRegisterArray.count==0 || _setValueArray.count==0) {
-        [self showAlertViewWithTitle:@"设置失败,请重新进入页面进行设置" message:nil cancelButtonTitle:root_OK];
+        [self showAlertViewWithTitle:root_MAX_362 message:nil cancelButtonTitle:root_OK];
     }
     if (_setRegisterArray.count!=_setValueArray.count){
-        [self showAlertViewWithTitle:@"设置失败,请重新进入页面进行设置" message:nil cancelButtonTitle:root_OK];
+        [self showAlertViewWithTitle:root_MAX_362 message:nil cancelButtonTitle:root_OK];
     }
     [_ControlOne goToOneTcp:6 cmdNum:(int)_setValueArray.count cmdType:@"6" regAdd:_setRegisterArray[_cmdTcpTimes] Length:_setValueArray[_cmdTcpTimes]];
     
@@ -569,13 +569,13 @@
     
     if (_cmdTcpType==1) {
         if (!_isFirstReadOK) {
-            [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
+            [self showAlertViewWithTitle:root_MAX_367 message:root_MAX_368 cancelButtonTitle:root_OK];
         }
         
     }
     if (_cmdTcpType==2) {
         
-        [self showAlertViewWithTitle:@"设置失败" message:@"请查看设置范围或检查网络连接" cancelButtonTitle:root_OK];
+        [self showAlertViewWithTitle:root_MAX_363 message:root_MAX_364 cancelButtonTitle:root_OK];
     }
 }
 
@@ -583,9 +583,9 @@
     
     for (int i=0; i<_readValueArray.count; i++) {
         UILabel *lable=[_view1 viewWithTag:3000+i];
-        lable.text=[NSString stringWithFormat:@"(读取值:%@)",_readValueArray[i]];
+        lable.text=[NSString stringWithFormat:@"(%@:%@)",root_MAX_369,_readValueArray[i]];
         if (_CellNumber==1) {
-            lable.text=[NSString stringWithFormat:@"(读取值:%@-%@-%@ %@:%@:%@)",_readValueArray[0],_readValueArray[1],_readValueArray[2],_readValueArray[3],_readValueArray[4],_readValueArray[5]];
+            lable.text=[NSString stringWithFormat:@"(%@:%@-%@-%@ %@:%@:%@)",root_MAX_369,_readValueArray[0],_readValueArray[1],_readValueArray[2],_readValueArray[3],_readValueArray[4],_readValueArray[5]];
         }
     }
 

@@ -115,8 +115,8 @@
     for (int i=0; i<3; i++) {
         UITextField *text1=[_scrollView viewWithTag:2000+i];
         if ((text1.text==nil)||([text1.text isEqualToString:@""])) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:@"请填写参数" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleCancel handler:nil]];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:root_MAX_361 preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:root_OK style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:alert animated:YES completion:nil];
             return;
         }
@@ -164,7 +164,7 @@
       NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
     _modbusData=[firstDic objectForKey:@"modbusData"];
     [self getDataUI:_modbusData];
-        [self showAlertViewWithTitle:@"操作失败" message:@"请查看设置范围或检查网络连接" cancelButtonTitle:root_OK];
+        [self showAlertViewWithTitle:nil message:root_MAX_292 cancelButtonTitle:root_OK];
  
 }
 
@@ -191,7 +191,7 @@
         if ((Bytedata1[1]==6) && (Bytedata1[0]==Bytedata00[0])) {
             [self showAlertViewWithTitle:root_MAX_303 message:nil cancelButtonTitle:root_OK];
         }else{
-            [self showAlertViewWithTitle:@"设置失败" message:nil cancelButtonTitle:root_OK];
+            [self showAlertViewWithTitle:root_MAX_363 message:nil cancelButtonTitle:root_OK];
         }
     }
     
@@ -219,7 +219,7 @@
     [_scrollView addSubview:_dataView];
     _scrollView.contentSize = CGSizeMake(SCREEN_Width,300*HEIGHT_SIZE+W*(k));
     
-    NSArray *nameArray=@[@"发送数据",@"收到数据"];
+    NSArray *nameArray=@[root_MAX_365,root_MAX_366];
     for (int i=0; i<nameArray.count; i++) {
         UILabel *cmdLable=[[UILabel alloc]initWithFrame:CGRectMake(0+SCREEN_Width/2*i,  5*HEIGHT_SIZE, SCREEN_Width/2,W )];
         cmdLable.text=nameArray[i];

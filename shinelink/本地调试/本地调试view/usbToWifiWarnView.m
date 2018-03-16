@@ -153,62 +153,62 @@
      int warnInt=[_warnCode intValue];
  
     if (faultInt==101) {
-          _faultString=@"通信故障";
+          _faultString=root_MAX_327;
     }else if (faultInt==102) {
-        _faultString=@"冗余采样异常保护";
+        _faultString=root_MAX_328;
     }else if (faultInt==108) {
-         _faultString=@"主SPS供电异常";
+         _faultString=root_MAX_329;
     }else if (faultInt==112) {
-        _faultString=@"AFCI拉弧故障 ";
+        _faultString=root_MAX_330;
     }else if (faultInt==113) {
-        _faultString=@"IGBT驱动错误";
+        _faultString=root_MAX_331;
     }else if (faultInt==114) {
-        _faultString=@"AFCI模块检测失败";
+        _faultString=root_MAX_332;
     }else if (faultInt==117) {
-        _faultString=@"AC侧继电器异常";
+        _faultString=root_MAX_333;
     }else if (faultInt==121) {
-        _faultString=@"CPLD芯片检测异常 ";
+        _faultString=root_MAX_334;
     }else if (faultInt==122) {
-        _faultString=@"BUS电压异常";
+        _faultString=root_MAX_335;
     }else if (faultInt==124) {
-        _faultString=@"无电网连接";
+        _faultString=root_MAX_336;
     }else if (faultInt==125) {
-        _faultString=@"PV绝缘阻抗低";
+        _faultString=root_MAX_337;
     }else if (faultInt==126) {
-        _faultString=@"漏电流过高";
+        _faultString=root_MAX_338;
     }else if (faultInt==127) {
-        _faultString=@"输出电流直流分量过高";
+        _faultString=root_MAX_339;
     }else if (faultInt==128) {
-        _faultString=@"PV电压过高";
+        _faultString=root_MAX_340;
     }else if (faultInt==129) {
-        _faultString=@"电网过欠压保护 ";
+        _faultString=root_MAX_341;
     }else if (faultInt==130) {
-        _faultString=@"电网过欠频保护";
+        _faultString=root_MAX_342;
     }else if (faultInt==99) {
-        _faultString=@"无故障信息 ";
+        _faultString=root_MAX_351;
     }else{
          _faultString=[NSString stringWithFormat:@"Error:%d",faultInt];
     }
     
     
     if (warnInt==100) {
-        _warnString=@"风扇异常";
+        _warnString=root_MAX_343;
     }else if (warnInt==104) {
-        _warnString=@"DSP与M3版本不一致";
+        _warnString=root_MAX_344;
     }else if (warnInt==106) {
-        _warnString=@"防雷器发生故障";
+        _warnString=root_MAX_345;
     }else if (warnInt==107) {
-        _warnString=@"NE检测异常，N线、地线之间压差过大";
+        _warnString=root_MAX_346;
     }else if (warnInt==108) {
-        _warnString=@"PV1至PV6 短路异常 ";
+        _warnString=root_MAX_347;
     }else if (warnInt==109) {
-        _warnString=@"直流升压驱动异常";
+        _warnString=root_MAX_348;
     }else if (warnInt==110) {
-        _warnString=@"组串异常 ";
+        _warnString=root_MAX_349;
     }else if (warnInt==111) {
-        _warnString=@"U盘过流保护 ";
+        _warnString=root_MAX_350;
     }else if (warnInt==99) {
-        _warnString=@"无警告信息 ";
+        _warnString=root_MAX_352;
     }else{
         _warnString=[NSString stringWithFormat:@"Warning:%d",warnInt];
     }

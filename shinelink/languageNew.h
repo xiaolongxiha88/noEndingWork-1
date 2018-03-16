@@ -950,8 +950,57 @@
 #define  root_MAX_325 NSLocalizedString(@"325历史故障", nil)
 #define  root_MAX_326 NSLocalizedString(@"326警告码", nil)
 
+//故障翻译
+#define  root_MAX_327 NSLocalizedString(@"327通信故障", nil)
+#define  root_MAX_328 NSLocalizedString(@"328冗余采样异常保护", nil)
+#define  root_MAX_329 NSLocalizedString(@"329主SPS供电异常", nil)
+#define  root_MAX_330 NSLocalizedString(@"330AFCI拉弧故障", nil)
+#define  root_MAX_331 NSLocalizedString(@"331IGBT驱动错误", nil)
+#define  root_MAX_332 NSLocalizedString(@"332AFCI模块检测失败", nil)
+#define  root_MAX_333 NSLocalizedString(@"333AC侧继电器异常", nil)
+#define  root_MAX_334 NSLocalizedString(@"334CPLD芯片检测异常", nil)
+#define  root_MAX_335 NSLocalizedString(@"335BUS电压异常", nil)
+#define  root_MAX_336 NSLocalizedString(@"336无电网连接", nil)
+#define  root_MAX_337 NSLocalizedString(@"337PV绝缘阻抗低", nil)
+#define  root_MAX_338 NSLocalizedString(@"338漏电流过高", nil)
+#define  root_MAX_339 NSLocalizedString(@"339输出电流直流分量过高", nil)
+#define  root_MAX_340 NSLocalizedString(@"340PV电压过高", nil)
+#define  root_MAX_341 NSLocalizedString(@"341电网过欠压保护", nil)
+#define  root_MAX_342 NSLocalizedString(@"342电网过欠频保护", nil)
 
+#define  root_MAX_343 NSLocalizedString(@"343风扇异常", nil)
+#define  root_MAX_344 NSLocalizedString(@"344DSP与M3版本不一致", nil)
+#define  root_MAX_345 NSLocalizedString(@"345防雷器发生故障", nil)
+#define  root_MAX_346 NSLocalizedString(@"346NE检测异常，N线、地线之间压差过大", nil)
+#define  root_MAX_347 NSLocalizedString(@"347PV1至PV6 短路异常", nil)
+#define  root_MAX_348 NSLocalizedString(@"348直流升压驱动异常", nil)
+#define  root_MAX_349 NSLocalizedString(@"349组串异常", nil)
+#define  root_MAX_350 NSLocalizedString(@"350U盘过流保护", nil)
 
+#define  root_MAX_351 NSLocalizedString(@"351无故障信息", nil)
+#define  root_MAX_352 NSLocalizedString(@"352无警告信息", nil)
+#define  root_MAX_353 NSLocalizedString(@"353时", nil)
+
+#define  root_MAX_354 NSLocalizedString(@"354最近24小时发电量", nil)
+#define  root_MAX_355 NSLocalizedString(@"355最近7天发电量", nil)
+#define  root_MAX_356 NSLocalizedString(@"356最近12个月发电量", nil)
+#define  root_MAX_357 NSLocalizedString(@"357最近20年发电量", nil)
+
+//单位
+#define  root_MAX_358 NSLocalizedString(@"358日", nil)
+#define  root_MAX_359 NSLocalizedString(@"359月", nil)
+#define  root_MAX_360 NSLocalizedString(@"360年", nil)
+#define  root_MAX_361 NSLocalizedString(@"361请填写参数", nil)
+#define  root_MAX_362 NSLocalizedString(@"362设置失败,请重新进入页面进行设置", nil)
+#define  root_MAX_363 NSLocalizedString(@"363设置失败", nil)
+#define  root_MAX_364 NSLocalizedString(@"364请查看设置范围或检查网络连接", nil)
+#define  root_MAX_365 NSLocalizedString(@"365发送数据", nil)
+#define  root_MAX_366 NSLocalizedString(@"366收到数据", nil)
+#define  root_MAX_367 NSLocalizedString(@"367读取数据失败", nil)
+#define  root_MAX_368 NSLocalizedString(@"368请重试或检查网络连接", nil)
+#define  root_MAX_369 NSLocalizedString(@"369读取值", nil)
+#define  root_MAX_370 NSLocalizedString(@"370读取", nil)
+#define  root_MAX_371 NSLocalizedString(@"371设置", nil)
 
 
 #endif /* languageNew_h */

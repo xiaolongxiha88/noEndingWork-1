@@ -55,9 +55,11 @@
 
 -(void)initUI{
      float layerW=1;
-    _buttonName=@[@"Hour",@"Day",@"Month",@"Year"];
-    _lableNameArray=@[@"最近24小时发电量",@"最近7天发电量",@"最近12个月发电量",@"最近20年发电量"];
-        _xlableNameArray=@[@"(日/时)",@"(月-日)",@"(年-月)",@"(年)"];
+    _buttonName=@[root_MAX_353,root_DAY,root_MONTH,root_YEAR];
+    _lableNameArray=@[root_MAX_354,root_MAX_355,root_MAX_356,root_MAX_357];
+        _xlableNameArray=@[[NSString stringWithFormat:@"(%@/%@)",root_MAX_358,root_MAX_353],[NSString stringWithFormat:@"(%@-%@)",root_MAX_359,root_MAX_358],[NSString stringWithFormat:@"(%@-%@)",root_MAX_360,root_MAX_359],[NSString stringWithFormat:@"(%@)",root_MAX_360]];
+    
+    
     
     for (int i=0; i<_buttonName.count; i++) {
         UIButton *selecteButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -202,7 +204,7 @@
 -(void)setFailed5{
      [self hideProgressView];
 
-                [self showAlertViewWithTitle:@"读取数据失败" message:@"请重试或检查网络连接" cancelButtonTitle:root_OK];
+                [self showAlertViewWithTitle:nil message:root_MAX_292 cancelButtonTitle:root_OK];
   
 
    
