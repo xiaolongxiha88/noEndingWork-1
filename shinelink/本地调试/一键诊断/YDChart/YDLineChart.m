@@ -926,7 +926,11 @@
             if (_lineChartQuadrantType==JHLineChartQuadrantTypeFirstQuardrantYD) {
                  num = [NSNumber numberWithInt:nowPoint];
             }else{
-                    num = [_xLineDataArr objectAtIndex:(nowPoint+1)];
+                        
+                if(_xLineDataArr.count>(nowPoint+1)){
+                        num = [_xLineDataArr objectAtIndex:(nowPoint+1)];
+                }
+                
             }
      
 

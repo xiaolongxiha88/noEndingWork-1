@@ -826,230 +826,224 @@
 "264来自"="来自";
 "265充电功率"="充电功率";
 "266放电功率"="放电功率";
+
+
+//Max本地调试
 "267最后更新时间为"="最后更新时间为";
-
-
 "268自动刷新"="自动刷新";
 "269WiFi名称为"="WiFi名称为";
 "270是否跳转连接WiFi"="是否跳转连接WiFi";
 "271连接"="连接";
 
-"272PV电压/电流"="272PV电压/电流";
-"273组串电压/电流"="273组串电压/电流";
-"274AC电压/频率/电流/功率"="274AC电压/频率/电流/功率";
-"275PID电压/电流"="275PID电压/电流";
-"276内部参数"="276内部参数";
-"277关于本机"="277关于本机";
-"278未连接WiFi模块"="278未连接WiFi模块";
-"279请跳转连接WiFi"="279请跳转连接WiFi";
-"280停止刷新"="280停止刷新";
-"281设备控制"="281设备控制";
-"282重置密码"="282重置密码";
-"283设置配置"="283设置配置";
-"284参数设置"="284参数设置";
-"285智能检测"="285智能检测";
-"286高级设置"="286高级设置";
-"287未获取控制密码"="287未获取控制密码";
-"288请登录OSS系统获取密码"="288请登录OSS系统获取密码";
-"289密码错误,请验证密码或重置密码."="289密码错误,请验证密码或重置密码.";
-"290请先读取故障信息"="290请先读取故障信息";
-"291设备信息"="291设备信息";
-"292数据读取失败,请重试或检查WiFi连接"="292数据读取失败,请重试或检查WiFi连接";
-"293检查"="293检查";
-"294获取控制密码"="294获取控制密码";
-"295OSS账户"="295OSS账户";
-"296设置密码"="296设置密码";
-"297设置"="297设置";
-"298请确认手机是否已连接互联网"="298请确认手机是否已连接互联网";
-"299是否需要切换网络"="299是否需要切换网络";
-"300切换"="300切换";
-"301请添加设置密码"="301请添加设置密码";
-"302本地调试工具密码为"="302本地调试工具密码为";
-"303设置成功"="303设置成功";
-"304登录成功"="304登录成功";
-"305并网倒计时"="305并网倒计时";
-"306功率百分比"="306功率百分比";
-"307内部环境温度"="307内部环境温度";
-"308Boost温度"="308Boost温度";
-"309INV温度"="309INV温度";
-"310PID故障信息"="310PID故障信息";
-"311PID状态"="311PID状态";
-"312厂商信息"="312厂商信息";
-"313机器型号"="313机器型号";
-"314Model号"="314Model号";
-"315固件(外部)版本"="315固件(外部)版本";
-"316固件(内部)版本"="316固件(内部)版本";
-"317AC电压/电流/功率/频率"="317AC电压/电流/功率/频率";
-"318电压"="318电压";
-"319电流"="319电流";
-"320功率"="320功率";
-"321频率"="321频率";
-"322刷新"="322刷新";
-"323无历史故障"="323无历史故障";
-"324故障码"="324故障码";
-"325历史故障"="325历史故障";
-"326警告码"="326警告码";
+"272PV电压/电流"="PV电压/电流";
+"273组串电压/电流"="组串电压/电流";
+"274AC电压/频率/电流/功率"="AC电压/频率/电流/功率";
+"275PID电压/电流"="PID电压/电流";
+"276内部参数"="内部参数";
+"277关于本机"="关于本机";
+"278未连接WiFi模块"="未连接WiFi模块";
+"279请跳转连接WiFi"="请跳转连接WiFi";
+"280停止刷新"="停止刷新";
+"281设备控制"="设备控制";
+"282重置密码"="重置密码";
+"283设置配置"="设置配置";
+"284参数设置"="参数设置";
+"285智能检测"="智能检测";
+"286高级设置"="高级设置";
+"287未获取控制密码"="未获取控制密码";
+"288请登录OSS系统获取密码"="请登录OSS系统获取密码";
+"289密码错误,请验证密码或重置密码."="密码错误,请验证密码或重置密码.";
+"290请先读取故障信息"="请先读取故障信息";
+"291设备信息"="设备信息";
+"292数据读取失败,请重试或检查WiFi连接"="数据读取失败,请重试或检查WiFi连接";
+"293检查"="检查";
+"294获取控制密码"="获取控制密码";
+"295OSS账户"="OSS账户";
+"296设置密码"="设置密码";
+"297设置"="设置";
+"298请确认手机是否已连接互联网"="请确认手机是否已连接互联网";
+"299是否需要切换网络"="是否需要切换网络";
+"300切换"="切换";
+"301请添加设置密码"="请添加设置密码";
+"302本地调试工具密码为"="本地调试工具密码为";
+"303设置成功"="设置成功";
+"304登录成功"="登录成功";
+"305并网倒计时"="并网倒计时";
+"306功率百分比"="功率百分比";
+"307内部环境温度"="内部环境温度";
+"308Boost温度"="Boost温度";
+"309INV温度"="INV温度";
+"310PID故障信息"="PID故障信息";
+"311PID状态"="PID状态";
+"312厂商信息"="厂商信息";
+"313机器型号"="机器型号";
+"314Model号"="Model号";
+"315固件(外部)版本"="固件(外部)版本";
+"316固件(内部)版本"="固件(内部)版本";
+"317AC电压/电流/功率/频率"="AC电压/电流/功率/频率";
+"318电压"="电压";
+"319电流"="电流";
+"320功率"="功率";
+"321频率"="频率";
+"322刷新"="刷新";
+"323无历史故障"="无历史故障";
+"324故障码"="故障码";
+"325历史故障"="历史故障";
+"326警告码"="警告码";
 
 //故障翻译
-"327通信故障"="327通信故障";
-"328冗余采样异常保护"="328冗余采样异常保护";
-"329主SPS供电异常"="329主SPS供电异常";
-"330AFCI拉弧故障"="330AFCI拉弧故障";
-"331IGBT驱动错误"="331IGBT驱动错误";
-"332AFCI模块检测失败"="332AFCI模块检测失败";
-"334CPLD芯片检测异常"="334CPLD芯片检测异常";
-"335BUS电压异常"="335BUS电压异常";
-"336无电网连接"="336无电网连接";
-"337PV绝缘阻抗低"="337PV绝缘阻抗低";
-"338漏电流过高"="338漏电流过高";
-"339输出电流直流分量过高"="339输出电流直流分量过高";
-"340PV电压过高"="340PV电压过高";
-"341电网过欠压保护"="341电网过欠压保护";
-"342电网过欠频保护"="342电网过欠频保护";
+"327通信故障"="通信故障";
+"328冗余采样异常保护"="冗余采样异常保护";
+"329主SPS供电异常"="主SPS供电异常";
+"330AFCI拉弧故障"="AFCI拉弧故障";
+"331IGBT驱动错误"="IGBT驱动错误";
+"332AFCI模块检测失败"="AFCI模块检测失败";
+"334CPLD芯片检测异常"="CPLD芯片检测异常";
+"335BUS电压异常"="BUS电压异常";
+"336无电网连接"="无电网连接";
+"337PV绝缘阻抗低"="PV绝缘阻抗低";
+"338漏电流过高"="漏电流过高";
+"339输出电流直流分量过高"="输出电流直流分量过高";
+"340PV电压过高"="PV电压过高";
+"341电网过欠压保护"="电网过欠压保护";
+"342电网过欠频保护"="电网过欠频保护";
+"343风扇异常"="风扇异常";
+"344DSP与M3版本不一致"="DSP与M3版本不一致";
+"345防雷器发生故障"="防雷器发生故障";
+"346NE检测异常，N线、地线之间压差过大"="NE检测异常，N线、地线之间压差过大";
+"347PV1至PV6 短路异常"="PV1至PV6 短路异常";
+"348直流升压驱动异常"="直流升压驱动异常";
+"349组串异常"="组串异常";
+"350U盘过流保护"="U盘过流保护";
+"351无故障信息"="无故障信息";
+"352无警告信息"="无警告信息";
+"353时"="时";
+"354最近24小时发电量"="最近24小时发电量";
+"355最近7天发电量"="最近7天发电量";
+"356最近12个月发电量"="最近12个月发电量";
+"357最近20年发电量"="最近20年发电量";
+"358日"="日";//单位
+"359月"="月";
+"360年"="年";
+"361请填写参数"="请填写参数";
+"362设置失败,请重新进入页面进行设置"="设置失败,请重新进入页面进行设置";
+"363设置失败"="设置失败";
+"364请查看设置范围或检查网络连接"="请查看设置范围或检查网络连接";
+"365发送数据"="发送数据";
+"366收到数据"="收到数据";
+"367读取数据失败"="读取数据失败";
+"368请重试或检查网络连接"="请重试或检查网络连接";
+"369读取值"="读取值";
+"370读取"="读取";
+"371设置"="设置";
+"372高"="高";
+"373低"="低";
+"374设置Model"="设置Model";
+"375请添加设置值"="请添加设置值";
+"376读取失败"="读取失败";
+"377记忆使能"="记忆使能";
+"378记忆"="记忆";
+"379电源启动斜率"="电源启动斜率";
+"380电源重启斜率"="电源重启斜率";
+"381Q(v)切入高压"="Q(v)切入高压";
+"382Q(v)切出高压"="Q(v)切出高压";
+"383Q(v)切入低压"="Q(v)切入低压";
+"384Q(v)切出低压"="Q(v)切出低压";
+"385Q(v)切入功率"="Q(v)切入功率";
+"386Q(v)切出功率"="Q(v)切出功率";
+"387无功曲线切入电压"="无功曲线切入电压";
+"388无功曲线切出电压"="无功曲线切出电压";
+"389检查固件"="检查固件";
+"390PF调整值"="PF调整值";
+"391PF限制负载百分比点"="PF限制负载百分比点";
+"392PF限制功率因数"="PF限制功率因数";
+"393暂不允许设置"="暂不允许设置";
+"394不记忆"="不记忆";
+"395记忆"="记忆";
+"396开关逆变器"="开关逆变器";
+"397安规功能使能"="安规功能使能";
+"398有功功率百分比"="有功功率百分比";
+"399感性载率"="感性载率";
+"400容性载率"="容性载率";
+"401容性PF"="容性PF";
+"402感性PF"="感性PF";
+"403PV电压"="PV电压";
+"404选择通信波特率"="选择通信波特率";
+"405运行PF为1"="运行PF为1";
+"406过频降额起点"="过频降额起点";
+"407频率-负载限制率"="频率-负载限制率";
+"408Q(v)无功延时"="Q(v)无功延时";
+"409过频降额延时"="过频降额延时";
+"410Q(v)曲线Q最大值"="Q(v)曲线Q最大值";
+"411Island使能"="Island使能";
+"412风扇检查"="风扇检查";
+"413电网N线使能"="电网N线使能";
+"414N至GND监测功能使能"="N至GND监测功能使能";
+"415非标准电网电压范围使能"="非标准电网电压范围使能";
+"416指定的规格设置使能"="指定的规格设置使能";
+"417MPPT使能"="MPPT使能";
+"418电源启动/重启斜率"="电源启动/重启斜率";
+"419Q(v)切入/切出高压"="Q(v)切入/切出高压";
+"420Q(v)切入/切出低压"="Q(v)切入/切出低压";
+"421Q(v)切入/切出功率"="Q(v)切入/切出功率";
+"422无功曲线切入/切出电压"="无功曲线切入/切出电压";
+"423通信地址"="通信地址";
+"424启动电压"="启动电压";
+"425启动时间"="启动时间";
+
+"426故障恢复后重启延迟时间"="故障恢复后重启延迟时间";
+"427语言"="语言";
+"428系统一周"="系统一周";
+"429AC电压10分钟保护值"="AC电压10分钟保护值";
+"430PV电压高故障"="PV电压高故障";
+"431Modbus版本"="Modbus版本";
+"432PID工作模式"="PID工作模式";
+"433PID开关"="PID开关";
+"434PID工作电压"="PID工作电压";
+"435逆变器模块"="逆变器模块";
+"436逆变器经纬度"="逆变器经纬度";
+"437限制电压低/高"="限制电压低/高";
+"438频率限制低/高"="频率限制低/高";
+"439并网电压限制低/高"="并网电压限制低/高";
+"440并网频率限制低/高"="并网频率限制低/高";
+"441电压限制时间"="电压限制时间";
+"442频率限制时间"="频率限制时间";
+"443该项暂不能设置,请设置Model."="该项暂不能设置,请设置Model.";
+"444该项暂不能设置."="该项暂不能设置.";
+"445智能I-V曲线扫描"="智能I-V曲线扫描";
+"446故障录波检测"="故障录波检测";
+"447实时录波检测"="实时录波检测";
+"448一键诊断"="一键诊断";
+"449可远程扫描每路MPPT。"="可远程扫描每路MPPT。";
+"450可远程、快速、精确地进行故障定位。"="可远程、快速、精确地进行故障定位。";
+"451可实时观察逆变器电压电流质量等。"="可实时观察逆变器电压电流质量等。";
+"452一键检测电站环境信息，包括I-V曲线扫描，电网侧电压波形，THDV以及线路阻抗。"="一键检测电站环境信息，包括I-V曲线扫描，电网侧电压波形，THDV以及线路阻抗。";
+"453选择一键诊断模块"="选择一键诊断模块";
+"454I-V/P-V曲线"="I-V/P-V曲线";
+"455电网电压波形"="电网电压波形";
+"456电网电压谐波(THDV)"="电网电压谐波(THDV)";
+"457电网线路阻抗"="电网线路阻抗";
+"4581、确保逆变器在运行状态；2、检测过程中会关断逆变器；3、诊断时间预计15分钟"="1、确保逆变器在运行状态；2、检测过程中会关断逆变器；3、诊断时间预计15分钟";
+"459分钟"="分钟";
+"460开始"="开始";
+"461读取数据中"="读取数据中";
+"462I-V/P-V 曲线"="I-V/P-V 曲线";
+"463相阻抗"="相阻抗";
+"464故障序号"="故障序号";
+"465波形触发时间"="波形触发时间";
+"466数据读取失败"="数据读取失败";
+"467请重试或检查WiFi连接."="请重试或检查WiFi连接.";
+"468已经是最大显示"="已经是最大显示";
+"469显示倍数"="显示倍数";
+"470波形值"="波形值";
+"471设置ID"="设置ID";
+"472请输入故障ID号"="请输入故障ID号";
+"473请填写曲线显示的倍数"="请填写曲线显示的倍数";
+"474选择故障序号"="选择故障序号";
+"475请填写ID号"="请填写ID号";
+"476请输入正确的ID号"="请输入正确的ID号";
 
 
-
-
-#define  root_MAX_343 NSLocalizedString(@"343风扇异常", nil)
-#define  root_MAX_344 NSLocalizedString(@"344DSP与M3版本不一致", nil)
-#define  root_MAX_345 NSLocalizedString(@"345防雷器发生故障", nil)
-#define  root_MAX_346 NSLocalizedString(@"346NE检测异常，N线、地线之间压差过大", nil)
-#define  root_MAX_347 NSLocalizedString(@"347PV1至PV6 短路异常", nil)
-#define  root_MAX_348 NSLocalizedString(@"348直流升压驱动异常", nil)
-#define  root_MAX_349 NSLocalizedString(@"349组串异常", nil)
-#define  root_MAX_350 NSLocalizedString(@"350U盘过流保护", nil)
-
-#define  root_MAX_351 NSLocalizedString(@"351无故障信息", nil)
-#define  root_MAX_352 NSLocalizedString(@"352无警告信息", nil)
-#define  root_MAX_353 NSLocalizedString(@"353时", nil)
-
-#define  root_MAX_354 NSLocalizedString(@"354最近24小时发电量", nil)
-#define  root_MAX_355 NSLocalizedString(@"355最近7天发电量", nil)
-#define  root_MAX_356 NSLocalizedString(@"356最近12个月发电量", nil)
-#define  root_MAX_357 NSLocalizedString(@"357最近20年发电量", nil)
-
-//单位
-#define  root_MAX_358 NSLocalizedString(@"358日", nil)
-#define  root_MAX_359 NSLocalizedString(@"359月", nil)
-#define  root_MAX_360 NSLocalizedString(@"360年", nil)
-#define  root_MAX_361 NSLocalizedString(@"361请填写参数", nil)
-#define  root_MAX_362 NSLocalizedString(@"362设置失败,请重新进入页面进行设置", nil)
-#define  root_MAX_363 NSLocalizedString(@"363设置失败", nil)
-#define  root_MAX_364 NSLocalizedString(@"364请查看设置范围或检查网络连接", nil)
-#define  root_MAX_365 NSLocalizedString(@"365发送数据", nil)
-#define  root_MAX_366 NSLocalizedString(@"366收到数据", nil)
-#define  root_MAX_367 NSLocalizedString(@"367读取数据失败", nil)
-#define  root_MAX_368 NSLocalizedString(@"368请重试或检查网络连接", nil)
-#define  root_MAX_369 NSLocalizedString(@"369读取值", nil)
-#define  root_MAX_370 NSLocalizedString(@"370读取", nil)
-#define  root_MAX_371 NSLocalizedString(@"371设置", nil)
-#define  root_MAX_372 NSLocalizedString(@"372高", nil)
-#define  root_MAX_373 NSLocalizedString(@"373低", nil)
-#define  root_MAX_374 NSLocalizedString(@"374设置Model", nil)
-#define  root_MAX_375 NSLocalizedString(@"375请添加设置值", nil)
-#define  root_MAX_376 NSLocalizedString(@"376读取失败", nil)
-#define  root_MAX_377 NSLocalizedString(@"377记忆使能", nil)
-#define  root_MAX_378 NSLocalizedString(@"378记忆", nil)
-
-#define  root_MAX_379 NSLocalizedString(@"379电源启动斜率", nil)
-#define  root_MAX_380 NSLocalizedString(@"380电源重启斜率", nil)
-#define  root_MAX_381 NSLocalizedString(@"381Q(v)切入高压", nil)
-#define  root_MAX_382 NSLocalizedString(@"382Q(v)切出高压", nil)
-#define  root_MAX_383 NSLocalizedString(@"383Q(v)切入低压", nil)
-#define  root_MAX_384 NSLocalizedString(@"384Q(v)切出低压", nil)
-#define  root_MAX_385 NSLocalizedString(@"385Q(v)切入功率", nil)
-#define  root_MAX_386 NSLocalizedString(@"386Q(v)切出功率", nil)
-#define  root_MAX_387 NSLocalizedString(@"387无功曲线切入电压", nil)
-#define  root_MAX_388 NSLocalizedString(@"388无功曲线切出电压", nil)
-#define  root_MAX_389 NSLocalizedString(@"389检查固件", nil)
-#define  root_MAX_390 NSLocalizedString(@"390PF调整值", nil)
-#define  root_MAX_391 NSLocalizedString(@"391PF限制负载百分比点", nil)
-#define  root_MAX_392 NSLocalizedString(@"392PF限制功率因数", nil)
-#define  root_MAX_393 NSLocalizedString(@"393暂不允许设置", nil)
-#define  root_MAX_394 NSLocalizedString(@"394不记忆", nil)
-#define  root_MAX_395 NSLocalizedString(@"395记忆", nil)
-#define  root_MAX_396 NSLocalizedString(@"396开关逆变器", nil)
-#define  root_MAX_397 NSLocalizedString(@"397安规功能使能", nil)
-#define  root_MAX_398 NSLocalizedString(@"398有功功率百分比", nil)
-#define  root_MAX_399 NSLocalizedString(@"399感性载率", nil)
-#define  root_MAX_400 NSLocalizedString(@"400容性载率", nil)
-#define  root_MAX_401 NSLocalizedString(@"401容性PF", nil)
-#define  root_MAX_402 NSLocalizedString(@"402感性PF", nil)
-#define  root_MAX_403 NSLocalizedString(@"403PV电压", nil)
-#define  root_MAX_404 NSLocalizedString(@"404选择通信波特率", nil)
-#define  root_MAX_405 NSLocalizedString(@"405运行PF为1", nil)
-#define  root_MAX_406 NSLocalizedString(@"406过频降额起点", nil)
-#define  root_MAX_407 NSLocalizedString(@"407频率-负载限制率", nil)
-#define  root_MAX_408 NSLocalizedString(@"408Q(v)无功延时", nil)
-#define  root_MAX_409 NSLocalizedString(@"409过频降额延时", nil)
-#define  root_MAX_410 NSLocalizedString(@"410Q(v)曲线Q最大值", nil)
-#define  root_MAX_411 NSLocalizedString(@"411Island使能", nil)
-#define  root_MAX_412 NSLocalizedString(@"412风扇检查", nil)
-#define  root_MAX_413 NSLocalizedString(@"413电网N线使能", nil)
-#define  root_MAX_414 NSLocalizedString(@"414N至GND监测功能使能", nil)
-#define  root_MAX_415 NSLocalizedString(@"415非标准电网电压范围使能", nil)
-#define  root_MAX_416 NSLocalizedString(@"416指定的规格设置使能", nil)
-#define  root_MAX_417 NSLocalizedString(@"417MPPT使能", nil)
-#define  root_MAX_418 NSLocalizedString(@"418电源启动/重启斜率", nil)
-#define  root_MAX_419 NSLocalizedString(@"419Q(v)切入/切出高压", nil)
-#define  root_MAX_420 NSLocalizedString(@"420Q(v)切入/切出低压", nil)
-#define  root_MAX_421 NSLocalizedString(@"421Q(v)切入/切出功率", nil)
-#define  root_MAX_422 NSLocalizedString(@"422无功曲线切入/切出电压", nil)
-#define  root_MAX_423 NSLocalizedString(@"423通信地址", nil)
-#define  root_MAX_424 NSLocalizedString(@"424启动电压", nil)
-#define  root_MAX_425 NSLocalizedString(@"425启动时间", nil)
-#define  root_MAX_426 NSLocalizedString(@"426故障恢复后重启延迟时间", nil)
-#define  root_MAX_427 NSLocalizedString(@"427语言", nil)
-#define  root_MAX_428 NSLocalizedString(@"428系统一周", nil)
-#define  root_MAX_429 NSLocalizedString(@"429AC电压10分钟保护值", nil)
-#define  root_MAX_430 NSLocalizedString(@"430PV电压高故障", nil)
-#define  root_MAX_431 NSLocalizedString(@"431Modbus版本", nil)
-#define  root_MAX_432 NSLocalizedString(@"432PID工作模式", nil)
-#define  root_MAX_433 NSLocalizedString(@"433PID开关", nil)
-#define  root_MAX_434 NSLocalizedString(@"434PID工作电压", nil)
-#define  root_MAX_435 NSLocalizedString(@"435逆变器模块", nil)
-#define  root_MAX_436 NSLocalizedString(@"436逆变器经纬度", nil)
-#define  root_MAX_437 NSLocalizedString(@"437限制电压低/高", nil)
-#define  root_MAX_438 NSLocalizedString(@"438频率限制低/高", nil)
-
-#define  root_MAX_439 NSLocalizedString(@"439并网电压限制低/高", nil)
-#define  root_MAX_440 NSLocalizedString(@"440并网频率限制低/高", nil)
-#define  root_MAX_441 NSLocalizedString(@"441电压限制时间", nil)
-#define  root_MAX_442 NSLocalizedString(@"442频率限制时间", nil)
-#define  root_MAX_443 NSLocalizedString(@"443该项暂不能设置,请设置Model.", nil)
-#define  root_MAX_444 NSLocalizedString(@"444该项暂不能设置.", nil)
-#define  root_MAX_445 NSLocalizedString(@"445智能I-V曲线扫描", nil)
-#define  root_MAX_446 NSLocalizedString(@"446故障录波检测", nil)
-#define  root_MAX_447 NSLocalizedString(@"447实时录波检测", nil)
-#define  root_MAX_448 NSLocalizedString(@"448一键诊断", nil)
-#define  root_MAX_449 NSLocalizedString(@"449可远程扫描每路MPPT。", nil)
-#define  root_MAX_450 NSLocalizedString(@"450可远程、快速、精确地进行故障定位。", nil)
-#define  root_MAX_451 NSLocalizedString(@"451可实时观察逆变器电压电流质量等。", nil)
-#define  root_MAX_452 NSLocalizedString(@"452一键检测电站环境信息，包括I-V曲线扫描，电网侧电压波形，THDV以及线路阻抗。", nil)
-#define  root_MAX_453 NSLocalizedString(@"453选择一键诊断模块", nil)
-#define  root_MAX_454 NSLocalizedString(@"454I-V/P-V曲线", nil)
-#define  root_MAX_455 NSLocalizedString(@"455电网电压波形", nil)
-#define  root_MAX_456 NSLocalizedString(@"456电网电压谐波(THDV)", nil)
-#define  root_MAX_457 NSLocalizedString(@"457电网线路阻抗", nil)
-#define  root_MAX_458 NSLocalizedString(@"4581、确保逆变器在运行状态；2、检测过程中会关断逆变器；3、诊断时间预计15分钟", nil)
-#define  root_MAX_459 NSLocalizedString(@"459分钟", nil)
-#define  root_MAX_460 NSLocalizedString(@"460开始", nil)
-#define  root_MAX_461 NSLocalizedString(@"461读取数据中", nil)
-#define  root_MAX_462 NSLocalizedString(@"462I-V/P-V 曲线", nil)
-#define  root_MAX_463 NSLocalizedString(@"463相阻抗", nil)  //R S T
-#define  root_MAX_464 NSLocalizedString(@"464故障序号", nil)
-#define  root_MAX_465 NSLocalizedString(@"465波形触发时间", nil)
-#define  root_MAX_466 NSLocalizedString(@"466数据读取失败", nil)
-#define  root_MAX_467 NSLocalizedString(@"467请重试或检查WiFi连接.", nil)
-#define  root_MAX_468 NSLocalizedString(@"468已经是最大显示", nil)
-#define  root_MAX_469 NSLocalizedString(@"469显示倍数", nil)
-#define  root_MAX_470 NSLocalizedString(@"470波形值", nil)
-#define  root_MAX_471 NSLocalizedString(@"471设置ID", nil)
-#define  root_MAX_472 NSLocalizedString(@"472请输入故障ID号", nil)
-#define  root_MAX_473 NSLocalizedString(@"473请填写曲线显示的倍数", nil)
-#define  root_MAX_474 NSLocalizedString(@"474选择故障序号", nil)
-#define  root_MAX_475 NSLocalizedString(@"475请填写ID号", nil)
-#define  root_MAX_476 NSLocalizedString(@"476请输入正确的ID号", nil)
 
 
 
