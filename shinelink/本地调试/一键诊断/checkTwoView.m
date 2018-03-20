@@ -21,6 +21,9 @@ static float keyOneWaitTime2=23.0;      //add 3second         读波形20秒
 static int  firstReadTime=20.0;
 static float readWaveTime=20;      //读波形时间
 
+#define   useToWifiCheckTwoOneRemember @"useToWifiCheckTwoOneRemember"
+#define   useToWifiCheckTwoOneButtonRemember @"useToWifiCheckTwoOneButtonRemember"
+
 #define   useToWifiCheckTwoRemember @"useToWifiCheckTwoRemember"
 #define   useToWifiCheckTwoRememberTime @"useToWifiCheckTwoRememberTime"
 #define   useToWifiCheckTwoRememberButton @"useToWifiCheckTwoRememberButton"
@@ -455,15 +458,14 @@ static float readWaveTime=20;      //读波形时间
     }
     
     
+
+    
     if (_charType==1) {
-        NSArray*  allDataArrayOld=[NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoRemember]];
-        NSString *timeLableString=[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoRememberTime];
-        if (([timeLableString isEqualToString:@""]) || (timeLableString==nil)) {
-            _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,@"--:--:--"];
-        }else{
-            _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,timeLableString];
-        }
+            NSArray*  allDataArrayOld=[NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoOneRemember]];
         if (allDataArrayOld.count>0) {
+            NSString *buttonString=[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoOneButtonRemember];
+            UIButton*button=[_viewAll viewWithTag:3000];
+            [button setTitle:buttonString forState:UIControlStateNormal];
             _allDataRecieveAllArray=[NSMutableArray arrayWithArray:allDataArrayOld];
             _selectBoolArray=[NSMutableArray array];
             for (int i=0; i<_colorArray.count; i++) {
@@ -471,17 +473,16 @@ static float readWaveTime=20;      //读波形时间
             }
             [self changData];
         }else{
-            [self showFirstAndFourQuardrant];
+                  [self showFirstAndFourQuardrant];
         }
-    }
-    
-    if (_charType==1) {
-           [self showFirstAndFourQuardrant];
+        
+     
     }
     
     if (_charType==2) {
     NSArray*  allDataArrayOld=[NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoRemember]];
         NSString *timeLableString=[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoRememberTime];
+    
         if (([timeLableString isEqualToString:@""]) || (timeLableString==nil)) {
             _lableSetTime.text=[NSString stringWithFormat:@"%@:%@",root_MAX_267,@"--:--:--"];
         }else{
@@ -827,6 +828,15 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
                 }
                              [[NSUserDefaults standardUserDefaults] setObject:buttonArray forKey:useToWifiCheckTwoRememberButton];
             }
+            
+            if (_charType==1) {
+                     UIButton*button=[_viewAll viewWithTag:3000];
+                
+                           [[NSUserDefaults standardUserDefaults] setObject:button.titleLabel.text forKey:useToWifiCheckTwoOneButtonRemember];
+                
+                        [[NSUserDefaults standardUserDefaults] setObject:_allDataRecieveAllArray forKey:useToWifiCheckTwoOneRemember];
+            }
+            
             if (_charType==1 || _charType==2) {
              //   [self removeTheNotification];
                 _isReadfirstDataOver=NO;
@@ -872,7 +882,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             [data appendData:data1];
         }
         
-        if (_progressNumAll==1) {
+        if ( i==0) {
                float time1H=([_changeDataValue changeHighRegister:data registerNum:0]);
              float time1L=([_changeDataValue changeLowRegister:data registerNum:0]);
             float time2H=([_changeDataValue changeHighRegister:data registerNum:1]);
@@ -908,9 +918,9 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         
             Value=Value*muchX;
             
-    //         [dataDic setObject:[NSString stringWithFormat:@"%.f",Value+i*1000] forKey:[NSString stringWithFormat:@"%.d",K-4]];
+     //     [dataDic setObject:[NSString stringWithFormat:@"%.f",Value+i*1000] forKey:[NSString stringWithFormat:@"%.d",K-4]];
             
-        [dataDic setObject:[NSString stringWithFormat:@"%.f",Value] forKey:[NSString stringWithFormat:@"%.d",K-4]];
+   [dataDic setObject:[NSString stringWithFormat:@"%.f",Value] forKey:[NSString stringWithFormat:@"%.d",K-4]];
 
         }
         

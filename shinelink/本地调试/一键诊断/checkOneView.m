@@ -357,12 +357,23 @@ static int  firstReadTime=72.0;
         float maxY= [[dic.allValues valueForKeyPath:@"@max.floatValue"] floatValue];
            float maxX= [[dic.allKeys valueForKeyPath:@"@max.floatValue"] floatValue];
  
-
+        BOOL isSelect;
+        if (_selectBoolArray.count>i){
+            isSelect =[_selectBoolArray[i] boolValue];
+        }else{
+            isSelect =NO;
+        }
+      
         
         UILabel *lable=[self.view viewWithTag:6000+i];
         
         if (_isIVchar) {
-             lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",maxX,maxY];
+            if (isSelect) {
+                  lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",maxX,maxY];
+            }else{
+                lable.text=@"(--,--)";
+            }
+           
                     [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.1f)",maxX,maxY]];
         }else{
             __block  NSString *maxKey;
@@ -375,13 +386,23 @@ static int  firstReadTime=72.0;
                 
             }];
             maxX=[maxKey floatValue];
-             lable.text=[NSString stringWithFormat:@"(%.f,%.f)",maxX,maxY];
+            if (isSelect) {
+                lable.text=[NSString stringWithFormat:@"(%.f,%.1f)",maxX,maxY];
+            }else{
+                lable.text=@"(--,--)";
+            }
+            
                [_valueForLeftLableArray addObject:[NSString stringWithFormat:@"(%.f,%.f)",maxX,maxY]];
         }
 
         
         UIView *view=[self.view viewWithTag:5000+i];
-        view.backgroundColor=_colorArray[i];
+        if (isSelect) {
+            view.backgroundColor=_colorArray[i];
+        }else{
+           view.backgroundColor=COLOR(242, 242, 242, 1);
+        }
+     
         
     }
     

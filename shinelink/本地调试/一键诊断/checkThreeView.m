@@ -564,7 +564,12 @@ static int  gotoModel4=1;
         view1.backgroundColor=[UIColor whiteColor];
         [_scrollViewAll addSubview:view1];
         
-    
+        UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0,lastH-8*HEIGHT_SIZE, SCREEN_Width, everyLalbeH)];
+        titleLable.textColor =MainColor;
+        titleLable.textAlignment=NSTextAlignmentCenter;
+        titleLable.text=root_MAX_462;
+        titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        [_scrollViewAll addSubview:titleLable];
         
         if (_viewOne) {
             [_viewOne.view removeFromSuperview];
@@ -585,12 +590,7 @@ static int  gotoModel4=1;
         };
         [_scrollViewAll addSubview:_viewOne.view];
         
-        UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0,lastH-8*HEIGHT_SIZE, SCREEN_Width, everyLalbeH)];
-        titleLable.textColor =MainColor;
-        titleLable.textAlignment=NSTextAlignmentCenter;
-        titleLable.text=root_MAX_462;
-        titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        [_scrollViewAll addSubview:titleLable];
+    
         
         UIView* view0=[[UIView alloc]initWithFrame:CGRectMake(0,lastH+_isOneViewH-everyModelKongH, SCREEN_Width, everyModelKongH)];
         view0.backgroundColor=COLOR(242, 242, 242, 1);
