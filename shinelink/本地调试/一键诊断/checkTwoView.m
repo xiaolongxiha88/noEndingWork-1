@@ -453,17 +453,17 @@ static float readWaveTime=20;      //读波形时间
         [view22 addSubview:Lable33];
         
         
-        
-        
     }
     
     
 
     
+    
     if (_charType==1) {
             NSArray*  allDataArrayOld=[NSArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoOneRemember]];
         if (allDataArrayOld.count>0) {
             NSString *buttonString=[[NSUserDefaults standardUserDefaults] objectForKey:useToWifiCheckTwoOneButtonRemember];
+            _sendSNString=buttonString;
             UIButton*button=[_viewAll viewWithTag:3000];
             [button setTitle:buttonString forState:UIControlStateNormal];
             _allDataRecieveAllArray=[NSMutableArray arrayWithArray:allDataArrayOld];
@@ -624,15 +624,19 @@ static float readWaveTime=20;      //读波形时间
     
 }
 
-//准备读取曲线数据
+//准备读取曲线数据     初始化数据
 -(void)goToReadCharData{
+
+    
     _progressNum=0;
     _progressNumAll=0;
-        _allDataRecieveAllArray=[NSMutableArray array];
+    _allDataRecieveAllArray=[NSMutableArray array];
     _CharIdArray=[NSMutableArray array];
     
- 
-        if (!_allSendDataAllArray) {
+    _allDataArray=[NSMutableArray array];
+    _sendDataTime=0;
+    
+
             if (_charType==1) {
                 
 _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"1750",@"1875",@"2000",@"2125"],@[@"2250",@"2375",@"2500",@"2625",@"2750"],@[@"2875",@"3000",@"3125",@"3250",@"3375"]];
@@ -644,12 +648,8 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             
             _allSendDataArray=[NSArray arrayWithArray:_allSendDataAllArray[_progressNumAll]];
             
-        }
-  
-
     
 
-    
     if (!_timer) {
         _timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
     }else{
@@ -661,14 +661,14 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
 //开始读取曲线的寄存器
 -(void)goToReadTcpData{
     NSLog(@"go to tcp 2 开始");
-    _allDataArray=[NSMutableArray array];
-    _sendDataTime=0;
+
     [_ControlOne goToOneTcp:10 cmdNum:1 cmdType:@"20" regAdd:_allSendDataArray[_sendDataTime] Length:@"125"];
     
 }
 
 //开始或取消按钮开关
 -(void)goStopRead:( UITapGestureRecognizer *)tap{
+
     
     if (_charType==1) {
         if (_sendSNString==nil || [_sendSNString isEqualToString:@""]) {
@@ -700,6 +700,9 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         if (_isReadfirstDataOver) {
             present=firstReadTime;
             _isReadfirstDataOver=YES;
+            
+
+            
             [self goToReadTcpData];
         }else{
             [self goToReadFirstData];
