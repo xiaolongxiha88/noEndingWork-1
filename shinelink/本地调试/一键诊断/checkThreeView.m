@@ -18,10 +18,10 @@
 #define   useToWifiCheckThreeRemember @"useToWifiCheckThreeRemember"
 #define   useToWifiCheckThreeRememberTime @"useToWifiCheckThreeRememberTime"
 
-static float waitTime1=3;     //30
-static float waitTime2=3;      //60
-static float waitTime3=3;        //60
-static float waitTime4=6;          //60
+static float waitTime1=30;     //30
+static float waitTime2=20;      //20
+static float waitTime3=10;        //10
+static float waitTime4=15;          //15
 
 static int  gotoModel1=2;
 static int  gotoModel2=4;
@@ -522,8 +522,11 @@ static int  gotoModel4=1;
         }
         
         if (_cmdTimes==1) {
-
-            _fourLableArray=@[[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:33]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:34]],[NSString stringWithFormat:@"%d",[_changeDataValue changeOneRegister:data registerNum:35]]];
+            float R=(float)[_changeDataValue changeOneRegister:data registerNum:33];
+            float S=(float)[_changeDataValue changeOneRegister:data registerNum:34];
+            float T=(float)[_changeDataValue changeOneRegister:data registerNum:35];
+            
+            _fourLableArray=@[[NSString stringWithFormat:@"%.2f",R/100],[NSString stringWithFormat:@"%.2f",S/100],[NSString stringWithFormat:@"%.2f",T/100]];
             
                    [_readDataForRememberDic setObject:_fourLableArray forKey:@"four"];
             
@@ -564,12 +567,12 @@ static int  gotoModel4=1;
         view1.backgroundColor=[UIColor whiteColor];
         [_scrollViewAll addSubview:view1];
         
-        UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0,lastH-8*HEIGHT_SIZE, SCREEN_Width, everyLalbeH)];
-        titleLable.textColor =MainColor;
-        titleLable.textAlignment=NSTextAlignmentCenter;
-        titleLable.text=root_MAX_462;
-        titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        [_scrollViewAll addSubview:titleLable];
+//        UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(0,lastH-8*HEIGHT_SIZE, SCREEN_Width, everyLalbeH)];
+//        titleLable.textColor =MainColor;
+//        titleLable.textAlignment=NSTextAlignmentCenter;
+//        titleLable.text=root_MAX_462;
+//        titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+//        [_scrollViewAll addSubview:titleLable];
         
         if (_viewOne) {
             [_viewOne.view removeFromSuperview];
@@ -708,7 +711,9 @@ static int  gotoModel4=1;
         float getY0=[maxyAxisValue floatValue]/6;
         int getY1=ceil(getY0);
         if ((0<getY1)&&(getY1<10)) {
-            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+//            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
+            float mo=ceil([maxyAxisValue floatValue]);
+            maxyAxisValue=[NSNumber numberWithFloat:mo];
         }else if ((10<getY1)&&(getY1<100)) {
             getY1=ceil(getY0/5)*5;
             maxyAxisValue=[NSNumber numberWithInt:getY1*6];
@@ -737,7 +742,7 @@ static int  gotoModel4=1;
         _barChartView2.dataSource = self;
         _barChartView2.delegate = self;
         [_scrollViewAll addSubview:_barChartView2];
-
+    _barChartView2.chartType=1;
       _barChartView2.maxValue = maxyAxisValue;
     _barChartView2.unitOfYAxis = @"";
     _barChartView2.colorOfXAxis =COLOR(153, 153, 153, 1);                                                                      

@@ -46,6 +46,7 @@ static int  firstReadTime=72.0;
 @property (assign, nonatomic) CGFloat moveDistance;
 @property (assign, nonatomic) int Type;
 @property (strong, nonatomic)UILabel *lableSetTime;
+    @property (strong, nonatomic)UILabel *lableTitleTime;
 @property (strong, nonatomic)UILabel *lable0;
 @property (strong, nonatomic)UILabel *lable01;
 @property (nonatomic) BOOL isReadNow;
@@ -196,7 +197,7 @@ static int  firstReadTime=72.0;
         
         //   Byte *dataArray=(Byte*)[data bytes];
         NSMutableDictionary *dataDic=[NSMutableDictionary new];
-        NSInteger LENG=(data.length/2-25)/2+1;
+        NSInteger LENG=(data.length/2-25)/2+1;       //读51组
         for (int K=0; K<LENG;K++) {
             float V0=[_changeDataValue changeOneRegister:data registerNum:2*K];
             float I0=[_changeDataValue changeOneRegister:data registerNum:2*K+1];
@@ -447,6 +448,15 @@ static int  firstReadTime=72.0;
         [self.view addSubview:_lableSetTime];
     }
 
+    if (_oneCharType==2) {
+        float _lable00H=15*HEIGHT_SIZE;
+        _lableTitleTime = [[UILabel alloc]initWithFrame:CGRectMake(0, 0*HEIGHT_SIZE,SCREEN_Width,_lable00H)];
+        _lableTitleTime.textColor =MainColor;
+        _lableTitleTime.textAlignment=NSTextAlignmentCenter;
+        _lableTitleTime.text=[NSString stringWithFormat:@"I-V %@",root_MAX_477];
+        _lableTitleTime.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        [self.view addSubview:_lableTitleTime];
+    }
     
     UIView* view0=[[UIView alloc]initWithFrame:CGRectMake(0,20*HEIGHT_SIZE, SCREEN_Width, lableH2)];
     view0.backgroundColor=[UIColor whiteColor];
@@ -728,11 +738,17 @@ static int  firstReadTime=72.0;
     if (tagNum==3000) {
         _isIVchar=YES;
             lableNameArray=@[@"MPPT(Voc,Isc)",@"(Vpv,Ipv)"];
+        if (_oneCharType==2) {
+            _lableTitleTime.text=[NSString stringWithFormat:@"I-V %@",root_MAX_477];
+        }
         _lable0.text=@"(A)";
     }else{
         _isIVchar=NO;
         _lable0.text=@"(W)";
             lableNameArray=@[@"MPPT(Vmpp,Pmpp)",@"(Vpv,Ppv)"];
+        if (_oneCharType==2) {
+            _lableTitleTime.text=[NSString stringWithFormat:@"P-V %@",root_MAX_477];
+        }
     }
     lable.text=lableNameArray[0];
     lable1.text=lableNameArray[1];

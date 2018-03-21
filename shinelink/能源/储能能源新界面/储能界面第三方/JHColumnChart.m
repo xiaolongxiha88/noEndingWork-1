@@ -133,9 +133,12 @@
         }
         
     }
-    if (max<5.0) {
+    
+    if (max<1) {
+        _maxHeight = 1;
+    }else if ((max<5)&&(max>1)) {
         _maxHeight = 5.0;
-    }else if(max<10){
+    }else if((max<10)&&(max>5)){
         _maxHeight = 10;
     }else{
         _maxHeight = max;

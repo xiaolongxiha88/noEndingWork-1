@@ -11,7 +11,7 @@
 #import "wifiToPvDataModel.h"
 #import "MBProgressHUD.h"
 
-static float TCP_TIME=1;
+static float TCP_TIME=1.5;
 static float TCP_outTime=0.05;
 
 @interface wifiToPvOne ()<GCDAsyncSocketDelegate>
@@ -169,7 +169,7 @@ static float TCP_outTime=0.05;
 
 -(void)noticeOutTime{
     _EveryCmdCount=_EveryCmdCount+TCP_outTime;
-    if (_EveryCmdCount>(2*TCP_TIME)) {
+    if (_EveryCmdCount>(3*TCP_TIME)) {
               _isReceive=YES;
             [self sendFailedNotice];
             _timerV.fireDate=[NSDate distantFuture];

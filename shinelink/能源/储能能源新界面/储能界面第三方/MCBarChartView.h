@@ -49,6 +49,8 @@
 @property (nonatomic, strong) id maxValue;
 /// y轴数据标记个数
 @property (nonatomic, assign) NSInteger numberOfYAxis;
+    
+    @property (nonatomic, assign) NSInteger chartType;
 /// y轴数据单位
 @property (nonatomic, copy) NSString *unitOfYAxis;
 /// y轴的颜色

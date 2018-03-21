@@ -1108,8 +1108,8 @@
 #define  root_MAX_474 NSLocalizedString(@"474选择故障序号", nil)
 #define  root_MAX_475 NSLocalizedString(@"475请填写ID号", nil)
 #define  root_MAX_476 NSLocalizedString(@"476请输入正确的ID号", nil)
-
-
+#define  root_MAX_477 NSLocalizedString(@"477曲线", nil)
+#define  root_MAX_478 NSLocalizedString(@"478谐波次数", nil)
 
 
 

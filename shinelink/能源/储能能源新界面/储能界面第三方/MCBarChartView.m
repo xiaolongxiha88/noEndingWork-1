@@ -226,7 +226,12 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
         textLabel.textAlignment = NSTextAlignmentRight;
         textLabel.font = [UIFont systemFontOfSize:8*HEIGHT_SIZE];
         textLabel.numberOfLines = 0;
-        textLabel.text = [NSString stringWithFormat:@"%.0f%@", unitValue * i, _unitOfYAxis];
+        if(_chartType==1){
+              textLabel.text = [NSString stringWithFormat:@"%.1f%@", unitValue * i, _unitOfYAxis];
+        }else{
+              textLabel.text = [NSString stringWithFormat:@"%.0f%@", unitValue * i, _unitOfYAxis];
+        }
+      
         [self addSubview:textLabel];
     }
 }

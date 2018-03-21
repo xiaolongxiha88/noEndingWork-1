@@ -296,7 +296,7 @@ static float readWaveTime=20;      //读波形时间
         lableNameArray=@[@"ID",root_MAX_469,root_MAX_470];
     }
     if (_charType==3) {
-        lableNameArray=@[@"Phase",@"Rms(V),f(Hz)",root_MAX_470];
+        lableNameArray=@[@"Phase",@"Rms(V),f(Hz)",[NSString stringWithFormat:@"%@(V)",root_MAX_470]];
     }
     
      W0=SCREEN_Width/lableNameArray.count;
@@ -765,7 +765,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             float S=([_changeDataValue changeOneRegister:data1 registerNum:37]);
             float T=([_changeDataValue changeOneRegister:data1 registerNum:38]);
             float H=([_changeDataValue changeOneRegister:data1 registerNum:39]);
-            _type3LeftLableArray=@[[NSString stringWithFormat:@"%.f",R],[NSString stringWithFormat:@"%.f",S],[NSString stringWithFormat:@"%.f",T],[NSString stringWithFormat:@"%.f",H]];
+            _type3LeftLableArray=@[[NSString stringWithFormat:@"%.1f",R/10],[NSString stringWithFormat:@"%.1f",S/10],[NSString stringWithFormat:@"%.1f",T/10],[NSString stringWithFormat:@"%.2f",H/100]];
             
             [self updataLeftMaxValue2];
             [self chartType3Recieve];
@@ -918,12 +918,19 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
                 Value=-(65535-Value+1);
             }
             
-        
+            if (_charType==3) {
+                Value=Value/10;
+            }
+            
             Value=Value*muchX;
             
      //     [dataDic setObject:[NSString stringWithFormat:@"%.f",Value+i*1000] forKey:[NSString stringWithFormat:@"%.d",K-4]];
-            
-   [dataDic setObject:[NSString stringWithFormat:@"%.f",Value] forKey:[NSString stringWithFormat:@"%.d",K-4]];
+            if (_charType==3) {
+                   [dataDic setObject:[NSString stringWithFormat:@"%.1f",Value] forKey:[NSString stringWithFormat:@"%.d",K-4]];
+            }else{
+                 [dataDic setObject:[NSString stringWithFormat:@"%.f",Value] forKey:[NSString stringWithFormat:@"%.d",K-4]];
+            }
+
 
         }
         
