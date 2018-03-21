@@ -20,5 +20,7 @@
 @property (nonatomic, strong) UILabel *electric;
 @property (nonatomic, strong) UILabel *electricValue;
 @property (nonatomic, strong) UIImageView *stateView;
-
+    @property (nonatomic, assign) NSInteger deviceType;     //1 逆变器  2储能机
+    
+    
 @end

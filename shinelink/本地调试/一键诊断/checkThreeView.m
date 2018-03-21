@@ -450,12 +450,7 @@ static int  gotoModel4=1;
 }
 
 -(void)setFailed{
-        _timer.fireDate=[NSDate distantFuture];
-    
-        _isReadNow = !_isReadNow;
-     present=0;
-    [_progressView setPresent:present];
-        _progressView.presentlab.text = root_MAX_460;
+    [self setFailedReset];
     
         [self removeTheControlOne];
     
@@ -465,6 +460,15 @@ static int  gotoModel4=1;
     alertView.tag = 1001;
     [alertView show];
 }
+    
+ -(void)setFailedReset{
+     _timer.fireDate=[NSDate distantFuture];
+     
+     _isReadNow = !_isReadNow;
+     present=0;
+     [_progressView setPresent:present];
+     _progressView.presentlab.text = root_MAX_460;
+    }
 
 -(void)receiveData:(NSNotification*) notification{
     NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
@@ -591,6 +595,10 @@ static int  gotoModel4=1;
             [weakSelf goToReadAllChart];
        
         };
+        _viewOne.OneViewReadFailedBlock=^{
+            [weakSelf setFailedReset];
+        };
+        
         [_scrollViewAll addSubview:_viewOne.view];
         
     
@@ -640,6 +648,9 @@ static int  gotoModel4=1;
             _progressNum=0;
               [weakSelf.readDataForRememberDic setObject:dataArray forKey:@"two"];
             [weakSelf goToReadAllChart];
+        };
+        _viewTwo.TwoViewReadFailedBlock=^{
+            [weakSelf setFailedReset];
         };
         [_scrollViewAll addSubview:_viewTwo.view];
         

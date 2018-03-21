@@ -1111,7 +1111,7 @@
 #define  root_MAX_477 NSLocalizedString(@"477曲线", nil)
 #define  root_MAX_478 NSLocalizedString(@"478谐波次数", nil)
 
-
+#define  root_Device_479 NSLocalizedString(@"479获取密码失败，请重新进入页面", nil)
 
 
 

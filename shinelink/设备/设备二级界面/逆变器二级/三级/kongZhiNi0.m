@@ -15,6 +15,8 @@
 
 @interface kongZhiNi0 ()
 @property (nonatomic, strong) NSString *password;
+     @property (nonatomic, assign) BOOL isRememberPassword;
+    
 @end
 
 @implementation kongZhiNi0
@@ -127,23 +129,29 @@
         MaxControl *go=[[MaxControl alloc]init];
         go.PvSn=_PvSn;
         go.type=[NSString stringWithFormat:@"%ld",(long)indexPath.row];
-        
-        [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
-            NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
-            NSString *alert1=[alertView textFieldAtIndex:0].text;
+        if(_isRememberPassword){
             
-            if ([alert1 isEqualToString:_password]) {
-                [self.navigationController pushViewController:go animated:YES];
-            }else{
-                [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
-                    
-                }];
+            [self.navigationController pushViewController:go animated:YES];
+        }else{
+            [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
+                NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
+                NSString *alert1=[alertView textFieldAtIndex:0].text;
                 
-            }
-            
-        } cancelBlock:^{
-            NSLog(@"取消了");
-        }];
+                if ([alert1 isEqualToString:_password]) {
+                        _isRememberPassword=YES;
+                    [self.navigationController pushViewController:go animated:YES];
+                }else{
+                    [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
+                        
+                    }];
+                    
+                }
+                
+            } cancelBlock:^{
+                NSLog(@"取消了");
+            }];
+        }
+
     }else{
         KongZhiNi *go=[[KongZhiNi alloc]init];
         go.PvSn=_PvSn;
@@ -159,23 +167,29 @@
         
                 
                 if ((indexPath.row==0)||(indexPath.row==1)||(indexPath.row==2)||(indexPath.row==3)||(indexPath.row==5)) {
-                    
-                    [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
-                        NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
-                        NSString *alert1=[alertView textFieldAtIndex:0].text;
-                        
-                        if ([alert1 isEqualToString:_password]) {
-                            [self.navigationController pushViewController:go animated:YES];
-                        }else{
-                            [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
-                                
-                            }];
+                    if(_isRememberPassword){
+                   
+                        [self.navigationController pushViewController:go animated:YES];
+                    }else{
+                        [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
+                            NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
+                            NSString *alert1=[alertView textFieldAtIndex:0].text;
                             
-                        }
-                        
-                    } cancelBlock:^{
-                        NSLog(@"取消了");
-                    }];
+                            if ([alert1 isEqualToString:_password]) {
+                                     _isRememberPassword=YES;
+                                [self.navigationController pushViewController:go animated:YES];
+                            }else{
+                                [RKAlertView showNoCancelBtnAlertWithTitle:root_Alet_user message:root_kongzhi_mima confirmTitle:root_OK confrimBlock:^{
+                                    
+                                }];
+                                
+                            }
+                            
+                        } cancelBlock:^{
+                            NSLog(@"取消了");
+                        }];
+                    }
+
                     
                 }else if ((indexPath.row==4)||(indexPath.row==5)||(indexPath.row==6)){
                     
@@ -211,7 +225,7 @@
         
     } failure:^(NSError *error) {
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"没有获取密码，请重新进入页面。" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_Device_479 message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
         [alertView show];
         
     }];

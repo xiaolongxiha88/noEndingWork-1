@@ -33,11 +33,11 @@
 
 -(void)getPCSHeadUI{
     
-    NSString *panelPower=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"panelPower"] floatValue]];
-       NSString *gridPower=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"gridPower"] floatValue]];
-         NSString *loadPower=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"loadPower"] floatValue]];
-         NSString *batPower=[NSString stringWithFormat:@"%.1f",fabsf([[_pcsDataDic objectForKey:@"batPower"] floatValue])];
-        NSString *capacity=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"capacity"] floatValue]];
+    NSString *panelPower=[NSString stringWithFormat:@"%.fW",[[_pcsDataDic objectForKey:@"panelPower"] floatValue]];
+       NSString *gridPower=[NSString stringWithFormat:@"%.fW",[[_pcsDataDic objectForKey:@"gridPower"] floatValue]];
+         NSString *loadPower=[NSString stringWithFormat:@"%.fW",[[_pcsDataDic objectForKey:@"loadPower"] floatValue]];
+         NSString *batPower=[NSString stringWithFormat:@"%.fW",fabsf([[_pcsDataDic objectForKey:@"batPower"] floatValue])];
+        NSString *capacity=[NSString stringWithFormat:@"%.f%%",[[_pcsDataDic objectForKey:@"capacity"] floatValue]];
     int PcsStatue=[[_pcsDataDic objectForKey:@"status"] floatValue];
     NSString *statueString=[self statueString:PcsStatue];
     
@@ -170,8 +170,9 @@
     solorLableB6.textAlignment = NSTextAlignmentCenter;
     solorLableB6.adjustsFontSizeToFitWidth=YES;
    // solorLableB6.center=CGPointMake(35*NOW_SIZE, H1+H2+imageSize+5*HEIGHT_SIZE+lableH/2);
-    [self addSubview:solorLableB6];
-    UIImageView *image00 = [[UIImageView alloc] initWithFrame:CGRectMake(10*NOW_SIZE,H1+H2+imageSize-6*HEIGHT_SIZE,15*NOW_SIZE,15*NOW_SIZE)];
+//    [self addSubview:solorLableB6];
+    
+    UIImageView *image00 = [[UIImageView alloc] initWithFrame:CGRectMake(20*NOW_SIZE,H1+H2+imageSize-0*HEIGHT_SIZE,18*HEIGHT_SIZE,18*HEIGHT_SIZE)];
     image00.image = [UIImage imageNamed:@"zhushi11.png"];
     
   NSString *name11=[NSString stringWithFormat:@"%@:%@V",root_5000xianqing_dianchi_dianya,vBat];
@@ -197,7 +198,7 @@
 //    image00.center=CGPointMake(25*NOW_SIZE, H1+H2+imageSize-5*HEIGHT_SIZE);
     [self addSubview:image00];
     
-    UIView *VV1=[[UIView alloc] initWithFrame:CGRectMake(0*NOW_SIZE,H1+H2+imageSize-28*HEIGHT_SIZE,60*NOW_SIZE,50*NOW_SIZE)];
+    UIView *VV1=[[UIView alloc] initWithFrame:CGRectMake(5*NOW_SIZE,H1+H2+imageSize-23*HEIGHT_SIZE,60*HEIGHT_SIZE,50*HEIGHT_SIZE)];
     VV1.userInteractionEnabled=YES;
     objc_setAssociatedObject(VV1, "firstObject", lableName, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showAnotherView:)];

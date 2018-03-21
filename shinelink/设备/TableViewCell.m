@@ -38,7 +38,7 @@ if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
     self.coverImageView.layer.cornerRadius=imageSize/2.0;
     [self.contentView addSubview:_coverImageView];
     
-    float titleLabelW=120*NOW_SIZE;
+    float titleLabelW=140*NOW_SIZE;
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+10*NOW_SIZE, 0, titleLabelW, 50*HEIGHT_SIZE)];
     self.titleLabel.font=[UIFont systemFontOfSize:16*HEIGHT_SIZE];
     self.titleLabel.adjustsFontSizeToFitWidth=YES;
@@ -50,29 +50,34 @@ if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
     arrowView.image = IMAGE(@"frag4.png");
     [self.contentView addSubview:arrowView];
 
-    float stateValueW=SCREEN_Width-30*NOW_SIZE-_coverImageView.bounds.size.width-140*NOW_SIZE;
-    self.stateValue = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+140*NOW_SIZE-7*NOW_SIZE, 0*NOW_SIZE, stateValueW, 50*HEIGHT_SIZE)];
+    float stateValueW=SCREEN_Width-30*NOW_SIZE-_coverImageView.bounds.size.width-170*NOW_SIZE;
+    self.stateValue = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+150*NOW_SIZE-7*NOW_SIZE, 0*NOW_SIZE, stateValueW, 50*HEIGHT_SIZE)];
     self.stateValue.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
     _stateValue.adjustsFontSizeToFitWidth=YES;
     self.stateValue.textAlignment = NSTextAlignmentLeft;
    self.stateValue.textColor = [UIColor labelColor];
     [self.contentView addSubview:_stateValue];
     
+    
     self.power = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+10*NOW_SIZE, 40*HEIGHT_SIZE, labelWidth1, labelHeight)];
-    self.power.text =[NSString stringWithFormat:@"%@:",root_gongLv];
-   
     self.power.font=[UIFont systemFontOfSize:fontSize];
     _power.adjustsFontSizeToFitWidth=YES;
-    self.power.textAlignment = NSTextAlignmentRight;
+    self.power.textAlignment = NSTextAlignmentLeft;
     self.power.textColor = [UIColor labelColor];
-    [self.contentView addSubview:_power];
+ 
+            [self.contentView addSubview:_power];
+  
+
     
     self.powerValue = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+10*NOW_SIZE+labelWidth, 40*HEIGHT_SIZE, labelWidth+20*NOW_SIZE, labelHeight)];
     self.powerValue.font=[UIFont systemFontOfSize:fontSize];
     self.powerValue.textAlignment = NSTextAlignmentLeft;
         _powerValue.adjustsFontSizeToFitWidth=YES;
     self.powerValue.textColor = [UIColor labelColor];
-    [self.contentView addSubview:_powerValue];
+  
+        [self.contentView addSubview:_powerValue];
+
+
     
     self.electric = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+60*NOW_SIZE+labelWidth1, 40*HEIGHT_SIZE, labelWidth1+70*NOW_SIZE, labelHeight)];
     self.electric.font=[UIFont systemFontOfSize:fontSize];
@@ -80,6 +85,9 @@ if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
     self.electric.textAlignment = NSTextAlignmentRight;
     self.electric.textColor = [UIColor labelColor];
     [self.contentView addSubview:_electric];
+
+    
+    
     
     self.electricValue = [[UILabel alloc] initWithFrame:CGRectMake(_coverImageView.bounds.size.width+130*NOW_SIZE+labelWidth1+labelWidth, 40*HEIGHT_SIZE, labelWidth+30*NOW_SIZE, labelHeight)];
     self.electricValue.font=[UIFont systemFontOfSize:fontSize];
@@ -87,6 +95,9 @@ if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
        _electricValue.adjustsFontSizeToFitWidth=YES;
     self.electricValue.textColor = [UIColor labelColor];
     [self.contentView addSubview:_electricValue];
+
+ 
+ 
     
  
     UIView *V0=[[UIView alloc] initWithFrame:CGRectMake(0, 65*HEIGHT_SIZE-LineWidth, SCREEN_Width, LineWidth)];

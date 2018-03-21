@@ -46,7 +46,7 @@ static int  firstReadTime=72.0;
 @property (assign, nonatomic) CGFloat moveDistance;
 @property (assign, nonatomic) int Type;
 @property (strong, nonatomic)UILabel *lableSetTime;
-    @property (strong, nonatomic)UILabel *lableTitleTime;
+@property (strong, nonatomic)UILabel *lableTitleTime;
 @property (strong, nonatomic)UILabel *lable0;
 @property (strong, nonatomic)UILabel *lable01;
 @property (nonatomic) BOOL isReadNow;
@@ -235,7 +235,10 @@ static int  firstReadTime=72.0;
     if (_oneCharType==2) {
         [self removeTheNotification];
         [self showAlertViewWithTitle:root_MAX_466 message:root_MAX_467 cancelButtonTitle:root_OK];
+              self.OneViewReadFailedBlock();
+        
         return;
+        
     }
     
     if (!_isReadfirstDataOver) {

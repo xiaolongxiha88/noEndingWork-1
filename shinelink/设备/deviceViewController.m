@@ -1956,6 +1956,10 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
       
         if ([getDevice.type isEqualToString:@"inverter"] || [getDevice.type isEqualToString:@"MAX"]) {
             cell.electric.text = root_ri_dianLiang;
+                 cell.power.text =[NSString stringWithFormat:@"%@:",root_gongLv];
+                 cell.powerValue.text = getDevice.power;
+                 cell.electricValue.text =getDevice.dayPower;
+            
             if ([getDevice.statueData isEqualToString:@"1"]){
                 cell.stateValue.text =root_dengDai ;
                 cell.stateValue.textColor=MainColor;
@@ -1976,11 +1980,16 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
                 cell.stateValue.textColor=COLOR(163, 163, 163, 1);
             }
             
+            cell.electric.frame=CGRectMake(55*HEIGHT_SIZE+60*NOW_SIZE+38*NOW_SIZE, 40*HEIGHT_SIZE, 38*NOW_SIZE+70*NOW_SIZE, 20*HEIGHT_SIZE);
+            cell.electricValue.frame=CGRectMake(55*HEIGHT_SIZE+70*NOW_SIZE+60*NOW_SIZE+38*NOW_SIZE+38*NOW_SIZE, 40*HEIGHT_SIZE, 38*NOW_SIZE+60*NOW_SIZE, 20*HEIGHT_SIZE);
                 
         }else if ([getDevice.type isEqualToString:@"storage"]){
             
-         cell.electric.text = root_dianChi_baifenBi;
-    
+            cell.electric.text =[NSString stringWithFormat:@"%@%@",root_dianChi_baifenBi,getDevice.dayPower];
+               cell.power.text =@"";
+            cell.powerValue.text=@"";
+                 cell.electricValue.text =@"";
+            
             if ([getDevice.statueData isEqualToString:@"0"]){
                 cell.stateValue.text =root_xianZhi;
                   cell.stateValue.textColor=COLOR(45, 226, 233, 1);
@@ -2006,9 +2015,12 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
                 cell.stateValue.text =root_Device_head_186 ;
                 cell.stateValue.textColor=COLOR(121, 230, 129, 1);
             }
-            
+
+              cell.electric.frame=CGRectMake(55*HEIGHT_SIZE, 40*HEIGHT_SIZE, 38*NOW_SIZE+70*NOW_SIZE, 20*HEIGHT_SIZE);
+                 cell.electricValue.frame=CGRectMake(55*HEIGHT_SIZE+70*NOW_SIZE+38*NOW_SIZE, 40*HEIGHT_SIZE, 38*NOW_SIZE+60*NOW_SIZE, 20*HEIGHT_SIZE);
         }else if ([getDevice.type isEqualToString:@"mix"]){
                 cell.electric.text = root_dianChi_baifenBi;
+            
             if ([getDevice.statueData isEqualToString:@"0"]){          //20 掉线
                 cell.stateValue.text =root_dengDai;
                 cell.stateValue.textColor=MainColor;
@@ -2038,8 +2050,8 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             cell.titleLabel.text = getDevice.name;
         cell.titleLabel.textColor = MainColor;
        
-     cell.powerValue.text = getDevice.power;
-     cell.electricValue.text =getDevice.dayPower;
+
+
    
         return cell;
     }

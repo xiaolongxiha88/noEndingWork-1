@@ -12,6 +12,7 @@
 #import "YDLineY.h"
 
 typedef void (^OneViewOverBlock)(NSArray*);
+typedef void (^TwoViewReadFailedBlock)();
 
 @interface checkTwoView : RootViewController
 
@@ -20,6 +21,8 @@ typedef void (^OneViewOverBlock)(NSArray*);
 
 @property (nonatomic, copy) OneViewOverBlock oneViewOverBlock;
 
+@property (nonatomic, copy) TwoViewReadFailedBlock TwoViewReadFailedBlock;
+    
 -(void)addNotification;
 
 

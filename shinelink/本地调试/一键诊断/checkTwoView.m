@@ -957,6 +957,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         if (!_isChartType3LastCmdOver) {
             [self removeTheNotification];
             [self showAlertViewWithTitle:root_MAX_466 message:root_MAX_467 cancelButtonTitle:root_OK];
+                   self.TwoViewReadFailedBlock();
             return;
         }
 
