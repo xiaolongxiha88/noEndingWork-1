@@ -36,6 +36,7 @@
             useToWifiView1 *rootView = [[useToWifiView1 alloc]init];
             rootView.isShowScanResult=1;
             rootView.SN=result;
+             rootView.isOSS=YES;
             [self.navigationController pushViewController:rootView animated:NO];
             
             NSLog(@"扫描结果：%@",result);
@@ -44,6 +45,7 @@
     }];
     scanVc.titleString=root_scan_242;
     scanVc.scanBarType=1;
+         scanVc.isOSS=YES;
     [self.navigationController pushViewController:scanVc animated:YES];
     
 //    usbToWifi00 *go=[[usbToWifi00 alloc]init];

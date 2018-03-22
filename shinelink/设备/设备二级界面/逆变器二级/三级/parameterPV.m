@@ -201,13 +201,11 @@
     
     _dateY1=[[NSMutableArray alloc]initWithObjects:root_duankou, root_CNJ_eDing_gonglv, root_moshi,nil];
     
-    _dateName=[[NSMutableArray alloc]initWithObjects:@"Volt(V)", @"Current(A)", @"Watt(W)",nil];
+    
+    _dateName=[[NSMutableArray alloc]initWithObjects:[NSString stringWithFormat:@"%@(V)",root_Inverter_489], [NSString stringWithFormat:@"%@(A)",root_Inverter_490], [NSString stringWithFormat:@"%@(W)",root_Inverter_491],nil];
     _pv=[[NSMutableArray alloc]initWithObjects:@"PV1", @"PV2",@"AC1",@"AC2",@"AC3",nil];
-   // _pv11=[[NSMutableArray alloc]initWithObjects:@"VPV1(V)", @"VPV2(V)",nil];
+  
 
-  //  _pv21=[[NSMutableArray alloc]initWithObjects:@"IPV1(A)", @"IPV2(A)",nil];
-
- //   _pv31=[[NSMutableArray alloc]initWithObjects:@"WPV1(W)", @"WPV2(W)",nil];
   
 }
 

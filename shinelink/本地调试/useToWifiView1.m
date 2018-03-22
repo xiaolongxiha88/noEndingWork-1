@@ -461,28 +461,34 @@ static NSString *cellTwo = @"cellTwo";
     if ([isOpenPassword isEqualToString:@"1"]) {
         [self goToControlView01:Type];
     }else{
-        if ([thePasswordString isEqualToString:@""] || thePasswordString==nil) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_MAX_287 message:root_MAX_288 delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_log_in, nil];
-            alertView.tag = 1004;
-            [alertView show];
-            
-            return ;
-        }
-        
-        [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
-            NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
-            NSString *alert1=[alertView textFieldAtIndex:0].text;
-            
-            if ([alert1 isEqualToString:thePasswordString]) {
-               [self goToControlView01:Type];
-                  [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"theToolPasswordOpenEnable"];
-            }else{
-                    [self showAlertViewWithTitle:root_MAX_289 message:nil cancelButtonTitle:root_OK];
+        if(_isOSS){
+              [self goToControlView01:Type];
+        }else{
+            if ([thePasswordString isEqualToString:@""] || thePasswordString==nil) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_MAX_287 message:root_MAX_288 delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_log_in, nil];
+                alertView.tag = 1004;
+                [alertView show];
+                
+                return ;
             }
             
-        } cancelBlock:^{
-            NSLog(@"取消了");
-        }];
+            [RKAlertView showAlertPlainTextWithTitle:root_Alet_user message:root_kongzhi_Alert cancelTitle:root_cancel confirmTitle:root_OK alertViewStyle:UIAlertViewStylePlainTextInput confrimBlock:^(UIAlertView *alertView) {
+                NSLog(@"确认了输入：%@",[alertView textFieldAtIndex:0].text);
+                NSString *alert1=[alertView textFieldAtIndex:0].text;
+                
+                if ([alert1 isEqualToString:thePasswordString]) {
+                    [self goToControlView01:Type];
+                    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"theToolPasswordOpenEnable"];
+                }else{
+                    [self showAlertViewWithTitle:root_MAX_289 message:nil cancelButtonTitle:root_OK];
+                }
+                
+            } cancelBlock:^{
+                NSLog(@"取消了");
+            }];
+        }
+    
+        
     }
     
  

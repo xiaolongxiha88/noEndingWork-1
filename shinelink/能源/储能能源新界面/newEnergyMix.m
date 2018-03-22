@@ -390,10 +390,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_scrollView addSubview:selectView];
     
     
-    _unitLable= [[UILabel alloc] initWithFrame:CGRectMake(30*ScreenProW, 600*ScreenProH-viewAA+SPF5000H, 100*ScreenProW, 40*ScreenProH)];
+    _unitLable= [[UILabel alloc] initWithFrame:CGRectMake(35*ScreenProW, 600*ScreenProH-viewAA+SPF5000H-5*ScreenProH, 100*ScreenProW, 40*ScreenProH)];
     _unitLable.font=[UIFont systemFontOfSize:25*ScreenProH];
     _unitLable.textAlignment = NSTextAlignmentLeft;
-    NSString *N=@"W";
+    NSString *N=@"kWh";
     _unitLable.text=N;
     _unitLable.textColor =COLOR(51, 51, 51, 1);
     [_scrollView addSubview:_unitLable];
@@ -1482,7 +1482,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VL2.textColor =COLOR(102, 102, 102, 1);
     [_uiviewThree addSubview:VL2];
     
-    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2440*ScreenProH-HH-20*ScreenProH, 100*ScreenProW, 30*ScreenProH)];
+    UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2440*ScreenProH-HH-10*ScreenProH, 100*ScreenProW, 30*ScreenProH)];
     // UILabel *VL3= [[UILabel alloc] initWithFrame:CGRectMake(25*ScreenProW, 2440*ScreenProH-HH, 100*ScreenProW, 30*ScreenProH)];
     VL3.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL3.textAlignment = NSTextAlignmentLeft;

@@ -855,4 +855,19 @@
 "264来自"="From";
 "265充电功率"="Charge";
 "266放电功率"="Discharge";
+
+
 "480离网储能逆变器"="PV Off-grid Inverter";
+"481PV月充电量"="EpvMonth";
+"482AC月充电量"="EacChargeMonth";
+"483电池月充电量"="eBatChargeMonth";
+"484电池月放电量"="eBatDisChargeMonth";
+"485PV年充电量"="PVEpvYear";
+"486AC年充电量"="EacChargeYear";
+"487电池年充电量"="eBatChargeYear";
+"488电池年放电量"="eBatDisChargeYear";
+"489电压"="Volt";
+"490电流"="Current";
+"491功率"="Power";
+
+

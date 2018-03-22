@@ -198,9 +198,9 @@
                           @"yearSite":@"/newStorageAPI.do?op=getYearLineStorage",
                           @"allSite":@"/newStorageAPI.do?op=getTotalLineStorage"};
     equipGraph.dict=@{@"1": root_5000Chart_157, @"2":root_5000Chart_158, @"3":root_5000Chart_159, @"4":root_5000Chart_160, @"5":root_5000Chart_161, @"6":root_5000Chart_162,@"7":root_5000Chart_163,@"8":root_5000Chart_164,@"9":root_5000Chart_165,@"10": root_5000Chart_166,@"11": root_5000Chart_167,@"12": root_5000Chart_168,@"13": root_5000Chart_169};
-    equipGraph.dictMonth=@{@"1":root_MONTH_BATTERY_CHARGE, @"2":root_MONTHLY_CHARGED, @"3":root_MONTHLY_DISCHARGED};
-    equipGraph.dictYear=@{@"1":root_YEAR_BATTERY_CHARGE, @"2":root_YEAR_CHARGED, @"3":root_YEAR_DISCHARGED};
-    equipGraph.dictAll=@{@"1":root_5000Chart_170, @"2":root_5000Chart_172, @"3":root_5000Chart_173};
+    equipGraph.dictMonth=@{@"1":root_5000Chart_481, @"2":root_5000Chart_483, @"3":root_5000Chart_484, @"4":root_5000Chart_482};
+    equipGraph.dictYear=@{@"1":root_5000Chart_485, @"2":root_5000Chart_487, @"3":root_5000Chart_488, @"4":root_5000Chart_486};
+    equipGraph.dictAll=@{@"1":root_5000Chart_170,@"2":root_5000Chart_172, @"3":root_5000Chart_173, @"4":root_5000Chart_171,};
     [self.navigationController pushViewController:equipGraph animated:YES];
     
     

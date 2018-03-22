@@ -12,5 +12,7 @@
 
 @property(nonatomic,assign) int isShowScanResult;
 @property(nonatomic,strong) NSString* SN;
-
+    
+@property(nonatomic,assign) BOOL isOSS;
+    
 @end

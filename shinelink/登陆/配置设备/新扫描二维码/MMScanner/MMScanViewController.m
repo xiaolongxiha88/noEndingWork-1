@@ -301,6 +301,10 @@
 
 -(void)goToUsbTool{
     useToWifiView1 *rootView = [[useToWifiView1 alloc]init];
+    if(_isOSS){
+     rootView.isOSS=YES;
+    }
+
     [self.navigationController pushViewController:rootView animated:YES];
 }
 

@@ -1117,6 +1117,21 @@
 
 
 
+#define  root_5000Chart_481  NSLocalizedString(@"481PV月充电量", nil)
+#define  root_5000Chart_482  NSLocalizedString(@"482AC月充电量", nil)
+#define  root_5000Chart_483  NSLocalizedString(@"483电池月充电量", nil)
+#define  root_5000Chart_484  NSLocalizedString(@"484电池月放电量", nil)
+#define  root_5000Chart_485  NSLocalizedString(@"485PV年充电量", nil)
+#define  root_5000Chart_486  NSLocalizedString(@"486AC年充电量", nil)
+#define  root_5000Chart_487  NSLocalizedString(@"487电池年充电量", nil)
+#define  root_5000Chart_488  NSLocalizedString(@"488电池年放电量", nil)
+#define  root_Inverter_489  NSLocalizedString(@"489电压", nil)
+#define  root_Inverter_490  NSLocalizedString(@"490电流", nil)
+#define  root_Inverter_491  NSLocalizedString(@"491功率", nil)
+
+
+
+
 
 
 
