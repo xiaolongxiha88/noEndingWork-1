@@ -1113,9 +1113,7 @@
 
 #define  root_Device_479 NSLocalizedString(@"479获取密码失败，请重新进入页面", nil)
 
-
-
-
+#define  root_SPF5000_480 NSLocalizedString(@"480离网储能逆变器", nil)
 
 
 

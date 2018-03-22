@@ -1955,10 +1955,10 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
             [cell.coverImageView  setImage:[UIImage imageWithData:getDevice.demoImage]];}
       
         if ([getDevice.type isEqualToString:@"inverter"] || [getDevice.type isEqualToString:@"MAX"]) {
-            cell.electric.text = root_ri_dianLiang;
-                 cell.power.text =[NSString stringWithFormat:@"%@:",root_gongLv];
-                 cell.powerValue.text = getDevice.power;
-                 cell.electricValue.text =getDevice.dayPower;
+            cell.electric.text =[NSString stringWithFormat:@"%@%@",root_ri_dianLiang,getDevice.dayPower];
+            cell.power.text =[NSString stringWithFormat:@"%@:%@",root_gongLv,getDevice.power];
+            cell.electric.frame=CGRectMake(55*HEIGHT_SIZE+10*NOW_SIZE, 40*HEIGHT_SIZE, 130*NOW_SIZE, 20*HEIGHT_SIZE);
+            cell.power.frame=CGRectMake(55*HEIGHT_SIZE+150*NOW_SIZE, 40*HEIGHT_SIZE, 80*NOW_SIZE, 20*HEIGHT_SIZE);
             
             if ([getDevice.statueData isEqualToString:@"1"]){
                 cell.stateValue.text =root_dengDai ;
@@ -1980,15 +1980,13 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
                 cell.stateValue.textColor=COLOR(163, 163, 163, 1);
             }
             
-            cell.electric.frame=CGRectMake(55*HEIGHT_SIZE+60*NOW_SIZE+38*NOW_SIZE, 40*HEIGHT_SIZE, 38*NOW_SIZE+70*NOW_SIZE, 20*HEIGHT_SIZE);
-            cell.electricValue.frame=CGRectMake(55*HEIGHT_SIZE+70*NOW_SIZE+60*NOW_SIZE+38*NOW_SIZE+38*NOW_SIZE, 40*HEIGHT_SIZE, 38*NOW_SIZE+60*NOW_SIZE, 20*HEIGHT_SIZE);
+ 
                 
         }else if ([getDevice.type isEqualToString:@"storage"]){
             
             cell.electric.text =[NSString stringWithFormat:@"%@%@",root_dianChi_baifenBi,getDevice.dayPower];
                cell.power.text =@"";
-            cell.powerValue.text=@"";
-                 cell.electricValue.text =@"";
+              cell.electric.frame=CGRectMake(55*HEIGHT_SIZE+10*NOW_SIZE, 40*HEIGHT_SIZE, 180*NOW_SIZE, 20*HEIGHT_SIZE);
             
             if ([getDevice.statueData isEqualToString:@"0"]){
                 cell.stateValue.text =root_xianZhi;
@@ -2016,10 +2014,13 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
                 cell.stateValue.textColor=COLOR(121, 230, 129, 1);
             }
 
-              cell.electric.frame=CGRectMake(55*HEIGHT_SIZE, 40*HEIGHT_SIZE, 38*NOW_SIZE+70*NOW_SIZE, 20*HEIGHT_SIZE);
-                 cell.electricValue.frame=CGRectMake(55*HEIGHT_SIZE+70*NOW_SIZE+38*NOW_SIZE, 40*HEIGHT_SIZE, 38*NOW_SIZE+60*NOW_SIZE, 20*HEIGHT_SIZE);
+           
+
         }else if ([getDevice.type isEqualToString:@"mix"]){
-                cell.electric.text = root_dianChi_baifenBi;
+            
+            cell.electric.text =[NSString stringWithFormat:@"%@%@",root_dianChi_baifenBi,getDevice.dayPower];
+            cell.power.text =@"";
+                 cell.electric.frame=CGRectMake(55*HEIGHT_SIZE+10*NOW_SIZE, 40*HEIGHT_SIZE, 180*NOW_SIZE, 20*HEIGHT_SIZE);
             
             if ([getDevice.statueData isEqualToString:@"0"]){          //20 掉线
                 cell.stateValue.text =root_dengDai;

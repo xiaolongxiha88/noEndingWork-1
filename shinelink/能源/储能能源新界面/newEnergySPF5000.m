@@ -53,6 +53,7 @@
 @property (nonatomic,assign) NSInteger refreshTag;
 
 @property (nonatomic, strong) UIView *uiviewThree;
+    @property (nonatomic, strong) UIView *view3;
 @property (nonatomic, strong) NSMutableArray *toDetaiDataArray;
 @property (nonatomic, strong) NSMutableArray *toDetaiDataArray2;
 @property (nonatomic, strong) NSMutableArray *toDetaiDataArray3;
@@ -660,38 +661,48 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 }
 
 -(void)initUiThree{
-    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 1730*ScreenProH-viewAA+viewB+SPF5000H, SCREEN_Width, ScreenProH*60)];
-    [_scrollView addSubview:V1];
     
-    UIView *V11=[[UIView alloc]initWithFrame:CGRectMake(30*ScreenProW, 1730*ScreenProH-viewAA+viewB+ScreenProH*60+SPF5000H, SCREEN_Width-60*ScreenProW, ScreenProH*1)];
-    V11.backgroundColor=COLOR(222, 222, 222, 1);
-    [_scrollView addSubview:V11];
+    if(_view3){
+        [_view3 removeFromSuperview];
+        _view3=nil;
+    }
+    if(!_view3){
+        _view3=[[UIView alloc]initWithFrame:CGRectMake(0, 1730*ScreenProH-viewAA+viewB+SPF5000H, SCREEN_Width, ScreenProH*60)];
+        [_scrollView addSubview:_view3];
+        
+        UIView *V11=[[UIView alloc]initWithFrame:CGRectMake(30*ScreenProW, 1730*ScreenProH-viewAA+viewB+ScreenProH*60+SPF5000H, SCREEN_Width-60*ScreenProW, ScreenProH*1)];
+        V11.backgroundColor=COLOR(222, 222, 222, 1);
+        [_scrollView addSubview:V11];
+        
+        UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(40*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
+        [VM1 setImage:[UIImage imageNamed:@"sp_icon_e.png"]];
+        [_view3 addSubview:VM1];
+        
+        UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(90*ScreenProW, 0*ScreenProH, 300*ScreenProH, ScreenProH*60)];
+        VL1.font=[UIFont systemFontOfSize:28*ScreenProH];
+        VL1.textAlignment = NSTextAlignmentLeft;
+        VL1.text=root_chuneng_nengyuan;
+        VL1.textColor =COLOR(51, 51, 51, 1);;
+        [_view3 addSubview:VL1];
+        
+        float VM2w=ScreenWidth-35*ScreenProH-40*ScreenProW;
+        UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(VM2w, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
+        [VM2 setImage:[UIImage imageNamed:@"note.png"]];
+        VM2.userInteractionEnabled=YES;
+        UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail2)];
+        [VM2 addGestureRecognizer:demo1];
+        [_view3 addSubview:VM2];
+        
+        UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(43*ScreenProW, 1800*ScreenProH-viewAA+viewB+SPF5000H, SCREEN_Width, ScreenProH*30)];
+        VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
+        VL2.textAlignment = NSTextAlignmentLeft;
+        VL2.text=@"%";
+        VL2.textColor =COLOR(51, 51, 51, 1);
+        [_scrollView addSubview:VL2];
+    }
+
     
-    UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(40*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
-    [VM1 setImage:[UIImage imageNamed:@"sp_icon_e.png"]];
-    [V1 addSubview:VM1];
-    
-    UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(90*ScreenProW, 0*ScreenProH, 300*ScreenProH, ScreenProH*60)];
-    VL1.font=[UIFont systemFontOfSize:28*ScreenProH];
-    VL1.textAlignment = NSTextAlignmentLeft;
-    VL1.text=root_chuneng_nengyuan;
-    VL1.textColor =COLOR(51, 51, 51, 1);;
-    [V1 addSubview:VL1];
-    
-     float VM2w=ScreenWidth-35*ScreenProH-40*ScreenProW;
-    UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(VM2w, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
-    [VM2 setImage:[UIImage imageNamed:@"note.png"]];
-    VM2.userInteractionEnabled=YES;
-    UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail2)];
-    [VM2 addGestureRecognizer:demo1];
-    [V1 addSubview:VM2];
-    
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(43*ScreenProW, 1800*ScreenProH-viewAA+viewB+SPF5000H, SCREEN_Width, ScreenProH*30)];
-    VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
-    VL2.textAlignment = NSTextAlignmentLeft;
-    VL2.text=@"%";
-    VL2.textColor =COLOR(51, 51, 51, 1);
-    [_scrollView addSubview:VL2];
+  
     
     if (_dataFiveDic.count>0) {
         [self initUILineChart2];

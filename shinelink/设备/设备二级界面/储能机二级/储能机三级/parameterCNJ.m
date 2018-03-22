@@ -173,6 +173,8 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
                      [NSString stringWithFormat:@"%@V/%@Hz",content[@"vGrid"],content[@"freqGrid"]],
                     [NSString stringWithFormat:@"%@V/%@Hz",content[@"outPutVolt"],content[@"freqOutPut"]],
                     [NSString stringWithFormat:@"%@W",content[@"outPutPower"]],
+                    [NSString stringWithFormat:@"%.fW/%.fVA",content[@"outPutPower"],content[@"outPutPower"]],
+                    
                     [NSString stringWithFormat:@"%@%%",content[@"loadPercent"]],
                     [NSString stringWithFormat:@"%@kWh",content[@"epvToday"]],
                       [NSString stringWithFormat:@"%@kWh",content[@"epvTotal"]],

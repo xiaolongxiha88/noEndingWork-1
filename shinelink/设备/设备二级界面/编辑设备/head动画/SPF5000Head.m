@@ -36,18 +36,21 @@
     NSString *panelPower=[NSString stringWithFormat:@"%.fW",[[_pcsDataDic objectForKey:@"panelPower"] floatValue]];
        NSString *gridPower=[NSString stringWithFormat:@"%.fW",[[_pcsDataDic objectForKey:@"gridPower"] floatValue]];
          NSString *loadPower=[NSString stringWithFormat:@"%.fW",[[_pcsDataDic objectForKey:@"loadPower"] floatValue]];
+   
+    NSString *apparentPower=[NSString stringWithFormat:@"%.fVA",[[_pcsDataDic objectForKey:@"apparentPower"] floatValue]];
          NSString *batPower=[NSString stringWithFormat:@"%.fW",fabsf([[_pcsDataDic objectForKey:@"batPower"] floatValue])];
         NSString *capacity=[NSString stringWithFormat:@"%.f%%",[[_pcsDataDic objectForKey:@"capacity"] floatValue]];
     int PcsStatue=[[_pcsDataDic objectForKey:@"status"] floatValue];
     NSString *statueString=[self statueString:PcsStatue];
     
     
-    NSString *vBat=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"vBat"] floatValue]];
-    NSString *vpv=[NSString stringWithFormat:@"%.1f/%.1f",[[_pcsDataDic objectForKey:@"vPv1"] floatValue],[[_pcsDataDic objectForKey:@"vPv2"] floatValue]];
+    NSString *vBat=[NSString stringWithFormat:@"%.f",[[_pcsDataDic objectForKey:@"vBat"] floatValue]];
+    NSString *vpv=[NSString stringWithFormat:@"%.f/%.f",[[_pcsDataDic objectForKey:@"vPv1"] floatValue],[[_pcsDataDic objectForKey:@"vPv2"] floatValue]];
     NSString *iChargePV=[NSString stringWithFormat:@"%.1f/%.1f",[[_pcsDataDic objectForKey:@"iPv1"] floatValue],[[_pcsDataDic objectForKey:@"iPv2"] floatValue]];
      NSString *iChargePV0=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"iTotal"] floatValue]];
-      NSString *acIn=[NSString stringWithFormat:@"%.1fV/%.1fHZ",[[_pcsDataDic objectForKey:@"vAcInput"] floatValue],[[_pcsDataDic objectForKey:@"fAcInput"] floatValue]];
-    NSString *acOut=[NSString stringWithFormat:@"%.1fV/%.1fHZ",[[_pcsDataDic objectForKey:@"vAcOutput"] floatValue],[[_pcsDataDic objectForKey:@"fAcOutput"] floatValue]];
+      NSString *acIn=[NSString stringWithFormat:@"%.fV/%.fHZ",[[_pcsDataDic objectForKey:@"vAcInput"] floatValue],[[_pcsDataDic objectForKey:@"fAcInput"] floatValue]];
+    NSString *acOut=[NSString stringWithFormat:@"%.fV/%.fHZ",[[_pcsDataDic objectForKey:@"vAcOutput"] floatValue],[[_pcsDataDic objectForKey:@"fAcOutput"] floatValue]];
+         NSString *loadPowerAndapparentPower=[NSString stringWithFormat:@"%.fW/%.fVA",[[_pcsDataDic objectForKey:@"loadPower"] floatValue],[[_pcsDataDic objectForKey:@"apparentPower"] floatValue]];
      NSString *loadPercent=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"loadPrecent"] floatValue]];
     
     
@@ -111,7 +114,7 @@
     imageView2.image = [UIImage imageNamed:@"icon_sp.png"];
     [self addSubview:imageView2];
     UILabel *solorLable1=[[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width-imageSizeBig)/2+(imageSizeBig-lableW)/2,H1+SPF5000H-lableH,lableW,lableH)];
-    solorLable1.text=root_PCS_chunengji;
+    solorLable1.text=root_SPF5000_480;
     solorLable1.textColor=[UIColor whiteColor];
     solorLable1.font = [UIFont systemFontOfSize:fontSize];
     solorLable1.adjustsFontSizeToFitWidth=YES;
@@ -146,6 +149,13 @@
     solorLableB1.textAlignment = NSTextAlignmentCenter;
     [self addSubview:solorLableB1];
     
+    UILabel *solorLableB11=[[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width+imageSizeBig)/2+0*NOW_SIZE, H1+SPF5000H+imageSizeBig/2,lableW,lableH)];
+    solorLableB11.text=apparentPower;
+    solorLableB11.textColor=[UIColor whiteColor];
+    solorLableB11.adjustsFontSizeToFitWidth=YES;
+    solorLableB11.font = [UIFont systemFontOfSize:fontSize];
+    solorLableB11.textAlignment = NSTextAlignmentCenter;
+    [self addSubview:solorLableB11];
     
     //电池
     UIImageView *imageView12 = [[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_Width-imageSize)/2,self.frame.size.height-imageSize-15*HEIGHT_SIZE,imageSize,imageSize)];
@@ -182,8 +192,8 @@
     
     NSString *name55=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_ac_shuru,acIn];
     NSString *name66=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_ac_shuchu,acOut];
-    NSString *name77=[NSString stringWithFormat:@"%@:%@W",root_5000xianqing_fuzai_gonglv,loadPower];
-    NSString *name88=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_fuzai_baifengbi,loadPercent];
+    NSString *name77=[NSString stringWithFormat:@"%@:%@",root_5000xianqing_fuzai_gonglv,loadPowerAndapparentPower];
+    NSString *name88=[NSString stringWithFormat:@"%@:%@%%",root_5000xianqing_fuzai_baifengbi,loadPercent];
     
   
     
