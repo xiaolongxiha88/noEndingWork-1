@@ -165,17 +165,40 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
 -(void)getPCS5000data:(NSDictionary*)content{
     
 //      NSArray *nameArray=@[@"Vb/Cb",@"Vpv",@"Ic_pv",@"Ppv",@"Ac_In",@"Ac_Out",@"PL",@"Per_Load",@"Epv_d",@"Epv_a",@"Ec_day",@"Ec_all",@"Ed_day",@"Ed_all"];
+NSString* vbat=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"vbat"]] floatValue]];
+    NSString* capacity=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",content[@"capacity"]] floatValue]];
     
-    _SPF5000Array=@[[NSString stringWithFormat:@"%@V/%@%%",content[@"vbat"],content[@"capacity"]],
-                    [NSString stringWithFormat:@"%@V/%@V",content[@"vpv1"],content[@"vpv2"]],
-                      [NSString stringWithFormat:@"%@A/%@A",content[@"iChargePV1"],content[@"iChargePV2"]],
-                      [NSString stringWithFormat:@"%@W/%@W",content[@"pCharge1"],content[@"pCharge2"]],
-                     [NSString stringWithFormat:@"%@V/%@Hz",content[@"vGrid"],content[@"freqGrid"]],
-                    [NSString stringWithFormat:@"%@V/%@Hz",content[@"outPutVolt"],content[@"freqOutPut"]],
-                    [NSString stringWithFormat:@"%@W",content[@"outPutPower"]],
-                    [NSString stringWithFormat:@"%.fW/%.fVA",content[@"outPutPower"],content[@"outPutPower"]],
+   NSString* vpv1=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"vpv1"]] floatValue]];
+       NSString* vpv2=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"vpv2"]] floatValue]];
+    
+    NSString* iChargePV1=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",content[@"iChargePV1"]] floatValue]];
+        NSString* iChargePV2=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",content[@"iChargePV2"]] floatValue]];
+    
+     NSString* pCharge1=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"pCharge1"]] floatValue]];
+         NSString* pCharge2=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"pCharge2"]] floatValue]];
+    
+       NSString* vGrid=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"vGrid"]] floatValue]];
+       NSString* freqGrid=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"freqGrid"]] floatValue]];
+    
+    NSString* outPutVolt=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"outPutVolt"]] floatValue]];
+    NSString* freqOutPut=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"freqOutPut"]] floatValue]];
+    
+        NSString* activePower=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"activePower"]] floatValue]];
+      NSString* apparentPower=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"apparentPower"]] floatValue]];
+    
+    NSString* loadPercent=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%@",content[@"loadPercent"]] floatValue]];
+    
+    _SPF5000Array=@[[NSString stringWithFormat:@"%@V/%@%%",vbat,capacity],
+                    [NSString stringWithFormat:@"%@V/%@V",vpv1,vpv2],
+                      [NSString stringWithFormat:@"%@A/%@A",iChargePV1,iChargePV2],
+                      [NSString stringWithFormat:@"%@W/%@W",pCharge1,pCharge2],
+                     [NSString stringWithFormat:@"%@V/%@Hz",vGrid,freqGrid],
+                    [NSString stringWithFormat:@"%@V/%@Hz",outPutVolt,freqOutPut],
                     
-                    [NSString stringWithFormat:@"%@%%",content[@"loadPercent"]],
+                  //  [NSString stringWithFormat:@"%@W",outPutPower],
+                     [NSString stringWithFormat:@"%@W/%@VA",activePower,apparentPower],
+                    
+                    [NSString stringWithFormat:@"%@%%",loadPercent],
                     [NSString stringWithFormat:@"%@kWh",content[@"epvToday"]],
                       [NSString stringWithFormat:@"%@kWh",content[@"epvTotal"]],
                      [NSString stringWithFormat:@"%@kWh",content[@"eBatChargeToday"]],

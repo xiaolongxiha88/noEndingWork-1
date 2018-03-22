@@ -35,7 +35,7 @@
     
     NSString *panelPower=[NSString stringWithFormat:@"%.fW",[[_pcsDataDic objectForKey:@"panelPower"] floatValue]];
        NSString *gridPower=[NSString stringWithFormat:@"%.fW",[[_pcsDataDic objectForKey:@"gridPower"] floatValue]];
-         NSString *loadPower=[NSString stringWithFormat:@"%.fW",[[_pcsDataDic objectForKey:@"loadPower"] floatValue]];
+         NSString *loadPower=[NSString stringWithFormat:@"%.fW",[[_pcsDataDic objectForKey:@"activePower"] floatValue]];
    
     NSString *apparentPower=[NSString stringWithFormat:@"%.fVA",[[_pcsDataDic objectForKey:@"apparentPower"] floatValue]];
          NSString *batPower=[NSString stringWithFormat:@"%.fW",fabsf([[_pcsDataDic objectForKey:@"batPower"] floatValue])];
@@ -50,7 +50,7 @@
      NSString *iChargePV0=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"iTotal"] floatValue]];
       NSString *acIn=[NSString stringWithFormat:@"%.fV/%.fHZ",[[_pcsDataDic objectForKey:@"vAcInput"] floatValue],[[_pcsDataDic objectForKey:@"fAcInput"] floatValue]];
     NSString *acOut=[NSString stringWithFormat:@"%.fV/%.fHZ",[[_pcsDataDic objectForKey:@"vAcOutput"] floatValue],[[_pcsDataDic objectForKey:@"fAcOutput"] floatValue]];
-         NSString *loadPowerAndapparentPower=[NSString stringWithFormat:@"%.fW/%.fVA",[[_pcsDataDic objectForKey:@"loadPower"] floatValue],[[_pcsDataDic objectForKey:@"apparentPower"] floatValue]];
+         NSString *loadPowerAndapparentPower=[NSString stringWithFormat:@"%.fW/%.fVA",[[_pcsDataDic objectForKey:@"activePower"] floatValue],[[_pcsDataDic objectForKey:@"apparentPower"] floatValue]];
      NSString *loadPercent=[NSString stringWithFormat:@"%.1f",[[_pcsDataDic objectForKey:@"loadPrecent"] floatValue]];
     
     

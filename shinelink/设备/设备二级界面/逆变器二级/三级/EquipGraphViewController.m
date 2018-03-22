@@ -148,10 +148,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     float layerW=0.5;
     self.dayButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
-    if ([_StorageTypeNum isEqualToString:@"1"]) {
-        
-          self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 0, SCREEN_Width/2, 40*HEIGHT_SIZE);
-    }
+//    if ([_StorageTypeNum isEqualToString:@"1"]) {
+//          self.dayButton.frame = CGRectMake(0 * SCREEN_Width/4, 0, SCREEN_Width/2, 40*HEIGHT_SIZE);
+//    }
 
     [self.dayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
        [self.dayButton setTitle:root_DAY forState:UIControlStateNormal];
@@ -177,9 +176,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
      _monthButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.monthButton setTitle:root_MONTH forState:UIControlStateNormal];
     [self.monthButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    if (![_StorageTypeNum isEqualToString:@"1"]) {
+
            [_colorBackView addSubview:self.monthButton];
-    }
+   
  
     
     self.yearButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -192,16 +191,18 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _yearButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     [self.yearButton setTitle:root_YEAR forState:UIControlStateNormal];
     [self.yearButton addTarget:self action:@selector(buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    if (![_StorageTypeNum isEqualToString:@"1"]) {
-        [_colorBackView addSubview:self.yearButton];
-    }
+         [_colorBackView addSubview:self.yearButton];
+    
+ //   if (![_StorageTypeNum isEqualToString:@"1"]) {
+   
+ 
   
     
     self.totalButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.totalButton.frame = CGRectMake(3 * SCREEN_Width/4, 0, SCREEN_Width/4, 40*HEIGHT_SIZE);
-    if ([_StorageTypeNum isEqualToString:@"1"]) {
-    self.totalButton.frame = CGRectMake(1 * SCREEN_Width/2, 0, SCREEN_Width/2, 40*HEIGHT_SIZE);
-    }
+//    if ([_StorageTypeNum isEqualToString:@"1"]) {
+//    self.totalButton.frame = CGRectMake(1 * SCREEN_Width/2, 0, SCREEN_Width/2, 40*HEIGHT_SIZE);
+//    }
     [self.totalButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _totalButton.layer.borderWidth=layerW;
     _totalButton.layer.borderColor=COLOR(108, 199, 255, 1).CGColor;
