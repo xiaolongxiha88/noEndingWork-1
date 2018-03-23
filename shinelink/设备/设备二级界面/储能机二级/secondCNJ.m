@@ -438,7 +438,7 @@
     Ca.font = [UIFont systemFontOfSize:30*HEIGHT_SIZE];
     [self.scrollView addSubview:Ca];
     
-    UILabel *Status=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3+55*HEIGHT_SIZE-_pointCenterNum, 100*NOW_SIZE,40*HEIGHT_SIZE )];
+    UILabel *Status=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3+45*HEIGHT_SIZE-_pointCenterNum, 100*NOW_SIZE,40*HEIGHT_SIZE )];
     Status.text=_statusText;
     Status.textAlignment=NSTextAlignmentCenter;
     if ([_status isEqualToString:@"3"]) {
@@ -450,12 +450,12 @@
      Status.adjustsFontSizeToFitWidth=YES;
     [self.scrollView addSubview:Status];
     
-    UILabel *power1=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3+35*HEIGHT_SIZE-_pointCenterNum, 100*NOW_SIZE,40*HEIGHT_SIZE )];
-    power1.text=_power;
-    power1.textAlignment=NSTextAlignmentCenter;
-        power1.textColor=[UIColor whiteColor];
-    power1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-    [self.scrollView addSubview:power1];
+//    UILabel *power1=[[UILabel alloc]initWithFrame:CGRectMake((kScreenWidth-100*NOW_SIZE)/2, (240*HEIGHT_SIZE)/2-SizeH-SizeH3+35*HEIGHT_SIZE-_pointCenterNum, 100*NOW_SIZE,40*HEIGHT_SIZE )];
+//    power1.text=_power;
+//    power1.textAlignment=NSTextAlignmentCenter;
+//        power1.textColor=[UIColor whiteColor];
+//    power1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+  //  [self.scrollView addSubview:power1];
     
 }
 
