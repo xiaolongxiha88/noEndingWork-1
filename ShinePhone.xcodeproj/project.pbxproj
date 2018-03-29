@@ -36,6 +36,8 @@
 		332692681D780F410058C5B7 /* backAV.png in Resources */ = {isa = PBXBuildFile; fileRef = 332692671D780F410058C5B7 /* backAV.png */; };
 		3326926B1D794AB00058C5B7 /* AvCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3326926A1D794AB00058C5B7 /* AvCell.m */; };
 		3326926E1D79728F0058C5B7 /* AVfirstView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3326926D1D79728F0058C5B7 /* AVfirstView.m */; };
+		332BD6A8206C8B8E00FFD501 /* DeviceBatteryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 332BD6A7206C8B8E00FFD501 /* DeviceBatteryView.m */; };
+		332BD6AA206C8F8200FFD501 /* newheadD202.png in Resources */ = {isa = PBXBuildFile; fileRef = 332BD6A9206C8F8200FFD501 /* newheadD202.png */; };
 		3330F4D91F14B8330076C237 /* work_order_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4D81F14B8330076C237 /* work_order_icon.png */; };
 		3330F4E01F15B1E20076C237 /* search_icon_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4DE1F15B1E20076C237 /* search_icon_click.png */; };
 		3330F4E11F15B1E20076C237 /* search_icon_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4DF1F15B1E20076C237 /* search_icon_nor.png */; };
@@ -886,6 +888,9 @@
 		3326926A1D794AB00058C5B7 /* AvCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvCell.m; sourceTree = "<group>"; };
 		3326926C1D79728F0058C5B7 /* AVfirstView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AVfirstView.h; path = ../AVfirstView.h; sourceTree = "<group>"; };
 		3326926D1D79728F0058C5B7 /* AVfirstView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AVfirstView.m; path = ../AVfirstView.m; sourceTree = "<group>"; };
+		332BD6A6206C8B8D00FFD501 /* DeviceBatteryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceBatteryView.h; sourceTree = "<group>"; };
+		332BD6A7206C8B8E00FFD501 /* DeviceBatteryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceBatteryView.m; sourceTree = "<group>"; };
+		332BD6A9206C8F8200FFD501 /* newheadD202.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newheadD202.png; sourceTree = "<group>"; };
 		3330F4D81F14B8330076C237 /* work_order_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = work_order_icon.png; sourceTree = "<group>"; };
 		3330F4DE1F15B1E20076C237 /* search_icon_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon_click.png; sourceTree = "<group>"; };
 		3330F4DF1F15B1E20076C237 /* search_icon_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon_nor.png; sourceTree = "<group>"; };
@@ -3426,6 +3431,8 @@
 				3370EBD21F45874B00F37149 /* SPF5000Head.m */,
 				3387B8E01FB5376E0073FB35 /* MixHead.h */,
 				3387B8E11FB5376E0073FB35 /* MixHead.m */,
+				332BD6A6206C8B8D00FFD501 /* DeviceBatteryView.h */,
+				332BD6A7206C8B8E00FFD501 /* DeviceBatteryView.m */,
 			);
 			path = "head动画";
 			sourceTree = "<group>";
@@ -4155,6 +4162,7 @@
 		3387B8E31FB547C80073FB35 /* 设备头部图片 */ = {
 			isa = PBXGroup;
 			children = (
+				332BD6A9206C8F8200FFD501 /* newheadD202.png */,
 				3374722C1FBD1C5B00AC1420 /* mixPic.png */,
 				336B51161FE146E80094CD6E /* newheadAnimal42.png */,
 				336B51141FE146D40094CD6E /* newheadAnimal41.png */,
@@ -5014,6 +5022,7 @@
 				33252FCD1F57B71E0054BBC7 /* loadS.png in Resources */,
 				33EA49DE1E8B8A4D0044A01A /* pvDir_cn.jpg in Resources */,
 				33EFB68A1C9973D2003F336F /* bg3.png in Resources */,
+				332BD6AA206C8F8200FFD501 /* newheadD202.png in Resources */,
 				338E30CC1D93725D002215E4 /* service111.png in Resources */,
 				3381222B1D864D7B00C7704B /* btn1-choose-1.png in Resources */,
 				3370EBAB1F414A1000F37149 /* MeBoost.png in Resources */,
@@ -5362,6 +5371,7 @@
 				33860FE01EEA75C5004150FD /* MJRefreshFooter.m in Sources */,
 				3381ECEE1CBCA3ED00DCF0D2 /* energyDemo.m in Sources */,
 				33FEFCD31C7D8A9500324374 /* AddressPickView.m in Sources */,
+				332BD6A8206C8B8E00FFD501 /* DeviceBatteryView.m in Sources */,
 				335EE8F71F011138005F098A /* ossQuetionDetail.m in Sources */,
 				3376A6DE1FD6AEF60043FC53 /* usbToWifiWarnListCell.m in Sources */,
 				336F03FF1F04D59B00DE7CD7 /* orderCellOne.m in Sources */,

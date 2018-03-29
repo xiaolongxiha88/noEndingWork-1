@@ -11,9 +11,9 @@
 #import "SHBQRView.h"
 #import "AddDeviceViewController.h"
 #import "configWifiSViewController.h"
+#import "MMScanViewController.h"
 
-
-@interface meConfigerViewController ()<SHBQRViewDelegate>
+@interface meConfigerViewController ()
 @property(nonatomic,strong)UITextField *cellectId;
 @property(nonatomic,strong)UITextField *cellectNo;
 @property(nonatomic,strong)NSString *serverAddress;
@@ -156,16 +156,29 @@
 
 
 -(void)ScanQR{
-    // TempViewController *temp = [[TempViewController alloc] init];
-    // [self.navigationController pushViewController:temp animated:true];
+    MMScanViewController *scanVc = [[MMScanViewController alloc] initWithQrType:MMScanTypeAll onFinish:^(NSString *result, NSError *error) {
+        if (error) {
+            NSLog(@"error: %@",error);
+        } else {
+            [self ScanGoToNet:result];
+            NSLog(@"扫描结果：%@",result);
+        }
+    }];
+    scanVc.titleString=root_saomiao_sn;
+    scanVc.scanBarType=0;
+    self.hidesBottomBarWhenPushed=YES;
+    [self.navigationController pushViewController:scanVc animated:YES];
     
-    SHBQRView *qrView = [[SHBQRView alloc] initWithFrame:self.view.bounds];
-    qrView.delegate = self;
-    [self.view addSubview:qrView];
+    
+//    SHBQRView *qrView = [[SHBQRView alloc] initWithFrame:self.view.bounds];
+//    qrView.delegate = self;
+//    [self.view addSubview:qrView];
+    
 }
 
-- (void)qrView:(SHBQRView *)view ScanResult:(NSString *)result {
-    [view stopScan];
+
+- (void)ScanGoToNet:(NSString *)result {
+  //  [view stopScan];
     
     for (int i=0; i<2; i++) {
         UIButton *button2=[self.view viewWithTag:2000+i];

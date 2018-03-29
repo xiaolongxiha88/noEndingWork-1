@@ -9,6 +9,7 @@
 #import "MixHead.h"
 #import <objc/runtime.h>
 #import "PopoverView00.h"
+#import "DeviceBatteryView.h"
 
 #define kDegreesToRadian(x) (M_PI * (x) / 180.0)
 
@@ -34,7 +35,9 @@
         }
     }
    
-    NSArray *imageNameArray=@[@"newheadSolar.png",@"newheadbat.png",@"newheadgrid.png",@"newheadload.png"];
+    
+    
+    NSArray *imageNameArray=@[@"newheadSolar.png",@"newheadD202.png",@"newheadgrid.png",@"newheadload.png"];
     float  imageSize=64*NOW_SIZE,imageSize1=60*NOW_SIZE,imageSize2=45*NOW_SIZE;
    float lableH=20*NOW_SIZE;
      float lableW=120*NOW_SIZE;
@@ -152,9 +155,20 @@
     CGRect rectM2=CGRectMake((ScreenWidth-imageSize2)/2, (H0-imageSize2)/2+H1, imageSize2, imageSize2);
     
     [self getImageUI:rectW1 imageName:imageNameArray[1]];
+    
+    float batW=(1/5.0)*imageSize;
+    float batH=batW*(7.0/3.0);
+    float batX=W0+(imageSize-batW)/2;
+     float batY=(H0-imageSize)/2+H1+(imageSize-batH)/2;
+        DeviceBatteryView *batteryView=[[DeviceBatteryView alloc]initWithFrame:CGRectMake(batX, batY, batW, batH)];
+        [self addSubview:batteryView];
+        [batteryView initBatteryView0];
+    
 
       [self getImageUI:rectW3 imageName:imageNameArray[3]];
          [self getImageUI:rectH1 imageName:imageNameArray[0]];
+    
+
     
     if (_isGridToUp) {
            [self getImageUI:rectH2 imageName:@"newheadgrid.png"];
@@ -292,6 +306,8 @@
     image00.image = [UIImage imageNamed:@"newheadnotes.png"];
     image00.userInteractionEnabled=YES;
     [VV1 addSubview:image00];
+    
+
     
 }
 
