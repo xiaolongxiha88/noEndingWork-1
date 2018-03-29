@@ -11,7 +11,7 @@
 @interface DeviceBatteryView : UIView
 
 
-
+@property (nonatomic, assign)  float batValue;
 
 - (void)initBatteryView0;
 

@@ -38,7 +38,7 @@
     
     
     NSArray *imageNameArray=@[@"newheadSolar.png",@"newheadD202.png",@"newheadgrid.png",@"newheadload.png"];
-    float  imageSize=64*NOW_SIZE,imageSize1=60*NOW_SIZE,imageSize2=45*NOW_SIZE;
+    float  imageSize=64*NOW_SIZE,imageSize1=60*NOW_SIZE,imageSize2=35*NOW_SIZE;
    float lableH=20*NOW_SIZE;
      float lableW=120*NOW_SIZE;
     float  directionSizeW1=14*NOW_SIZE,directionSizeH1=18*NOW_SIZE,directionSizeW2=12*NOW_SIZE,directionSizeH2=16*NOW_SIZE;
@@ -109,7 +109,8 @@
     
         NSArray*lableValueArray=@[valueUp,valueL2,valuedown,valueRight,valueLeft];
     
-    NSArray*colorArray=@[COLOR(85, 162, 78, 1),COLOR(85, 162, 78, 1),COLOR(177, 112, 112, 1),COLOR(82, 164, 179, 1),COLOR(85, 162, 78, 1)];
+    //COLOR(0, 169, 17, 1) 绿色
+    NSArray*colorArray=@[COLOR(0, 169, 17, 1),COLOR(0, 169, 17, 1),COLOR(174, 138, 19, 1),COLOR(0, 169, 155, 1),COLOR(0, 169, 17, 1)];
     
       float LableX1=ScreenWidth/2+imageSize/2+KH1;
     float LableY1=H1+imageSize/2-lableH/2;
@@ -129,7 +130,7 @@
     }else if (allStatue==2) {
         [self getLableUI:rectL0 lableName:Name0 lableValue:@"" lableUnit:@"" valueColor:COLOR(177, 112, 112, 1) directorType:3];
     }else{
-           [self getLableUI:rectL0 lableName:Name0 lableValue:@"" lableUnit:@"" valueColor:COLOR(85, 162, 78, 1) directorType:3];
+           [self getLableUI:rectL0 lableName:Name0 lableValue:@"" lableUnit:@"" valueColor:COLOR(0, 169, 17, 1) directorType:3];
     }
     
     
@@ -140,7 +141,7 @@
     if (_isGridToUp) {
       [self getLableUI:rectL3 lableName:[NSString stringWithFormat:@"%@:",root_device_261] lableValue:lableValueArray[2] lableUnit:@"W" valueColor:colorArray[2] directorType:1];
     }else{
-      [self getLableUI:rectL3 lableName:[NSString stringWithFormat:@"%@:",root_device_262] lableValue:lableValueArray[2] lableUnit:@"W" valueColor:COLOR(85, 162, 78, 1) directorType:1];
+      [self getLableUI:rectL3 lableName:[NSString stringWithFormat:@"%@:",root_device_262] lableValue:lableValueArray[2] lableUnit:@"W" valueColor:COLOR(0, 169, 17, 1) directorType:1];
     }
    
      [self getLableUI:rectL4 lableName:lableNameArray[3] lableValue:lableValueArray[3] lableUnit:@"W" valueColor:colorArray[3] directorType:2];
@@ -151,17 +152,19 @@
      CGRect rectH1=CGRectMake((ScreenWidth-imageSize)/2, H1, imageSize, imageSize);
         CGRect rectH2=CGRectMake((ScreenWidth-imageSize)/2, H2, imageSize, imageSize);
     
+    
     CGRect rectM1=CGRectMake((ScreenWidth-imageSize1)/2, (H0-imageSize1)/2+H1, imageSize1, imageSize1);
     CGRect rectM2=CGRectMake((ScreenWidth-imageSize2)/2, (H0-imageSize2)/2+H1, imageSize2, imageSize2);
     
     [self getImageUI:rectW1 imageName:imageNameArray[1]];
     
-    float batW=(1/5.0)*imageSize;
+    float batW=0.23*imageSize;
     float batH=batW*(7.0/3.0);
     float batX=W0+(imageSize-batW)/2;
-     float batY=(H0-imageSize)/2+H1+(imageSize-batH)/2;
+     float batY=(H0-imageSize)/2+H1+(imageSize-batH)/2-1*HEIGHT_SIZE;
         DeviceBatteryView *batteryView=[[DeviceBatteryView alloc]initWithFrame:CGRectMake(batX, batY, batW, batH)];
         [self addSubview:batteryView];
+    batteryView.batValue=[valueL2 floatValue];
         [batteryView initBatteryView0];
     
 

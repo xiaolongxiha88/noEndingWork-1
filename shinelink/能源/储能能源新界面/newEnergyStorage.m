@@ -291,7 +291,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
      float VM2w=ScreenWidth-35*ScreenProH-40*ScreenProW;
     UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(VM2w, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
-    [VM2 setImage:[UIImage imageNamed:@"note.png"]];
+    [VM2 setImage:[UIImage imageNamed:@"newheadnotes.png"]];
     VM2.userInteractionEnabled=YES;
     UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail)];
     [VM2 addGestureRecognizer:demo1];
@@ -690,7 +690,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
       float VM2w=ScreenWidth-35*ScreenProH-40*ScreenProW;
     UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(VM2w, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
-    [VM2 setImage:[UIImage imageNamed:@"note.png"]];
+    [VM2 setImage:[UIImage imageNamed:@"newheadnotes.png"]];
     VM2.userInteractionEnabled=YES;
     UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail2)];
     [VM2 addGestureRecognizer:demo1];

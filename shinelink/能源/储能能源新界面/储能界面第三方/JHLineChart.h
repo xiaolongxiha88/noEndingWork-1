@@ -101,7 +101,7 @@ typedef NS_ENUM(NSInteger,JHLineChartQuadrantType){
 @property (nonatomic, strong) NSArray * valueLineColorArr;
 
 
-
+@property (nonatomic , assign)CGFloat xDescMaxWidth; //lable间距
 
 /**
  *  Color for each value draw point

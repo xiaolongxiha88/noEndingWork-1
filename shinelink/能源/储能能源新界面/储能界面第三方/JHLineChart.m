@@ -20,6 +20,9 @@
 @property (nonatomic,strong) CAShapeLayer *shapeLayer;
 @property (assign , nonatomic) BOOL  isEndAnimation ;
 @property (nonatomic,strong) NSMutableArray * layerArr;
+@property (assign, nonatomic) float lastLableX;
+
+
 @end
 
 @implementation JHLineChart
@@ -279,12 +282,33 @@
             if (_xlableNameArray.count>0) {
                 CGFloat xPace = (_xLength-kXandYSpaceForSuperView)/(_xlableNameArray.count-1);
                 
+                  _lastLableX=0;
                 for (NSInteger i = 0; i<_xlableNameArray.count;i++ ) {
                     CGPoint p = P_M(i*xPace+self.chartOrigin.x, self.chartOrigin.y);
                     CGFloat len = [self sizeOfStringWithMaxSize:CGSizeMake(CGFLOAT_MAX, 30) textFont:self.xDescTextFontSize aimString:_xlableNameArray[i]].width;
                     [self drawLineWithContext:context andStarPoint:p andEndPoint:P_M(p.x, p.y-3) andIsDottedLine:NO andColor:self.xAndYLineColor];
                     
-                    [self drawText:[NSString stringWithFormat:@"%@",_xlableNameArray[i]] andContext:context atPoint:P_M(p.x-len/2, p.y+2) WithColor:_xAndYNumberColor andFontSize:self.xDescTextFontSize];
+//                    [self drawText:[NSString stringWithFormat:@"%@",_xlableNameArray[i]] andContext:context atPoint:P_M(p.x-len/2, p.y+2) WithColor:_xAndYNumberColor andFontSize:self.xDescTextFontSize];
+                    
+                    UILabel *label = [[UILabel alloc]init];
+                    if ((isnan(p.x))||(isnan(p.y))) {
+                       label.frame =CGRectMake(0, 0, 0, 0);
+                    }else{
+                       label.frame =CGRectMake(p.x-len/2, p.y+2, _xDescMaxWidth, kXandYSpaceForSuperView);
+                    }
+           
+                    label.text = [NSString stringWithFormat:@"%@",_xlableNameArray[i]];
+                    label.font = [UIFont systemFontOfSize:self.xDescTextFontSize];
+                    label.tintColor=_xAndYNumberColor;
+                    label.adjustsFontSizeToFitWidth=YES;
+                    
+                    if (p.x>(_lastLableX+(_xDescMaxWidth*2))) {
+                        [self addSubview:label];
+                  
+                        _lastLableX=p.x;
+                        //    NSLog(@"x=%ld",i);
+                    }
+                    
                 }
             }
 
