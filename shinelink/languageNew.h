@@ -1129,7 +1129,7 @@
 #define  root_Inverter_490  NSLocalizedString(@"490电流", nil)
 #define  root_Inverter_491  NSLocalizedString(@"491功率", nil)
 
-
+#define  root_MIX_492  NSLocalizedString(@"492防逆流设置", nil)
 
 
 

@@ -90,7 +90,7 @@
     lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:lable1];
     
-    if (_setType==2 || _setType==3 || _setType==5 || _setType==7 || _setType==10 || _setType==11 || _setType==12) {
+    if (_setType==2 || _setType==3 || _setType==5 || _setType==7 || _setType==10 || _setType==11 || _setType==12 || _setType==13) {
         _textLable=[[UILabel alloc]initWithFrame:CGRectMake(70*NOW_SIZE, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
     
         _textLable.text=root_MIX_223;
@@ -348,10 +348,10 @@
 
 -(void)finishSet1{
     
-    NSArray *nameArray=@[@"mix_ac_discharge_time_period",@"mix_ac_charge_time_period",@"pv_on_off",@"pv_pf_cmd_memory_state",@"pv_active_p_rate",@"pv_reactive_p_rate",@"pv_power_factor",@"pf_sys_year",@"pv_grid_voltage_high",@"pv_grid_voltage_low",@"mix_off_grid_enable",@"mix_ac_discharge_frequency",@"mix_ac_discharge_voltage"];
+    NSArray *nameArray=@[@"mix_ac_discharge_time_period",@"mix_ac_charge_time_period",@"pv_on_off",@"pv_pf_cmd_memory_state",@"pv_active_p_rate",@"pv_reactive_p_rate",@"pv_power_factor",@"pf_sys_year",@"pv_grid_voltage_high",@"pv_grid_voltage_low",@"mix_off_grid_enable",@"mix_ac_discharge_frequency",@"mix_ac_discharge_voltage",@"backflow_setting"];
     NSString*typeName=nameArray[_setType];
     
-     if (_setType==2 || _setType==3 || _setType==7 || _setType==10 || _setType==11 || _setType==12) {
+     if (_setType==2 || _setType==3 || _setType==7 || _setType==10 || _setType==11 || _setType==12 || _setType==13) {
          if ([_choiceValue1 isEqualToString:@""] || _choiceValue1==nil) {
              [self showToastViewWithTitle:root_device_257];
              return;
@@ -449,10 +449,10 @@
         
     }
 
-    if (_setType==0) { _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":param2String,@"param3":_choiceValue1,@"param4":timeValueArrayTwo[0],@"param5":timeValueArrayTwo[1],@"param6":timeValueArrayTwo[2],@"param7":timeValueArrayTwo[3],@"param8":timeValueArrayTwo[4],@"param9":timeValueArrayTwo[5],@"param10":timeValueArrayTwo[6],@"param11":timeValueArrayTwo[7],@"param12":timeValueArrayTwo[8],@"param13":timeValueArrayTwo[9],@"param14":timeValueArrayTwo[10],@"param15":timeValueArrayTwo[11]};
+    if (_setType==0) { _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":param2String,@"param3":timeValueArrayTwo[0],@"param4":timeValueArrayTwo[1],@"param5":timeValueArrayTwo[2],@"param6":timeValueArrayTwo[3],@"param7":_timeEnable1,@"param8":timeValueArrayTwo[4],@"param9":timeValueArrayTwo[5],@"param10":timeValueArrayTwo[6],@"param11":timeValueArrayTwo[7],@"param12":_timeEnable2,@"param13":timeValueArrayTwo[8],@"param14":timeValueArrayTwo[9],@"param15":timeValueArrayTwo[10],@"param16":timeValueArrayTwo[11],@"param17":_timeEnable3};
     }
     
-    if (_setType==1) { _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":param2String,@"param3":timeValueArrayTwo[0],@"param4":timeValueArrayTwo[1],@"param5":timeValueArrayTwo[2],@"param6":timeValueArrayTwo[3],@"param7":_timeEnable1,@"param8":timeValueArrayTwo[3],@"param9":timeValueArrayTwo[4],@"param10":timeValueArrayTwo[5],@"param11":timeValueArrayTwo[6],@"param12":timeValueArrayTwo[7],@"param13":timeValueArrayTwo[8],@"param14":timeValueArrayTwo[9],@"param15":timeValueArrayTwo[10],@"param16":timeValueArrayTwo[11]};
+    if (_setType==1) { _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":param2String,@"param3":_choiceValue3,@"param4":timeValueArrayTwo[0],@"param5":timeValueArrayTwo[1],@"param6":timeValueArrayTwo[2],@"param7":timeValueArrayTwo[3],@"param8":_timeEnable1,@"param9":timeValueArrayTwo[4],@"param10":timeValueArrayTwo[5],@"param11":timeValueArrayTwo[6],@"param12":timeValueArrayTwo[7],@"param13":_timeEnable2,@"param14":timeValueArrayTwo[8],@"param15":timeValueArrayTwo[9],@"param16":timeValueArrayTwo[10],@"param17":timeValueArrayTwo[11],@"param18":_timeEnable3};
     }
     
     [self showProgressView];
@@ -508,7 +508,7 @@
 
 -(void)showTheChoice00{
      NSArray *choiceArray;
-    if (_setType==2 || _setType==3 || _setType==5 || _setType==10 || _setType==11 || _setType==12) {}
+    if (_setType==2 || _setType==3 || _setType==5 || _setType==10 || _setType==11 || _setType==12 || _setType==13) {}
     
         if (_setType==2) {
             choiceArray=@[root_CNJ_guanji,root_CNJ_kaiji];
@@ -528,8 +528,12 @@
     if (_setType==12) {
         choiceArray=@[@"230Hz",@"208Hz",@"240Hz"];
     }
+    if (_setType==13) {
+        choiceArray=@[root_guan,root_kai];
+    }
     
     [ZJBLStoreShopTypeAlert showWithTitle:root_MIX_224 titles:choiceArray selectIndex:^(NSInteger SelectIndexNum){
+        
  _choiceValue1=[NSString stringWithFormat:@"%ld",SelectIndexNum];
         if (_setType==2) {
             if (SelectIndexNum==0) {
