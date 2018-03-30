@@ -62,6 +62,7 @@
 @property (nonatomic, strong) NSMutableArray *boolArray;
 @property (nonatomic, strong) NSArray *colorArray;
 @property (nonatomic, strong) NSArray *UncolorArray;
+@property (nonatomic, strong) UIView *chuNengNengYuanView;
 
 @end
 
@@ -500,8 +501,16 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 }
 
 -(void)initUiThree{
-    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 1730*ScreenProH-view2H-viewAA, SCREEN_Width, ScreenProH*60)];
-    [_scrollView addSubview:V1];
+    if (_chuNengNengYuanView) {
+        [_chuNengNengYuanView removeFromSuperview];
+        _chuNengNengYuanView=nil;
+    }
+    if (!_chuNengNengYuanView) {
+        _chuNengNengYuanView=[[UIView alloc]initWithFrame:CGRectMake(0, 1730*ScreenProH-view2H-viewAA, SCREEN_Width, ScreenProH*60)];
+        [_scrollView addSubview:_chuNengNengYuanView];
+    }
+    
+
     
     UIView *V11=[[UIView alloc]initWithFrame:CGRectMake(30*ScreenProW, 1730*ScreenProH-view2H-viewAA+ScreenProH*60, SCREEN_Width-60*ScreenProW, ScreenProH*1)];
     V11.backgroundColor=COLOR(222, 222, 222, 1);
@@ -509,14 +518,14 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     UIImageView *VM1= [[UIImageView alloc] initWithFrame:CGRectMake(40*ScreenProW, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
     [VM1 setImage:[UIImage imageNamed:@"sp_icon_e.png"]];
-    [V1 addSubview:VM1];
+    [_chuNengNengYuanView addSubview:VM1];
     
     UILabel *VL1= [[UILabel alloc] initWithFrame:CGRectMake(90*ScreenProW, 0*ScreenProH, 300*ScreenProH, ScreenProH*60)];
     VL1.font=[UIFont systemFontOfSize:28*ScreenProH];
     VL1.textAlignment = NSTextAlignmentLeft;
     VL1.text=root_chuneng_nengyuan;
     VL1.textColor =COLOR(51, 51, 51, 1);
-    [V1 addSubview:VL1];
+    [_chuNengNengYuanView addSubview:VL1];
     
        float VM2w=ScreenWidth-35*ScreenProH-40*ScreenProW;
     UIImageView *VM2= [[UIImageView alloc] initWithFrame:CGRectMake(VM2w, 13*ScreenProH, 35*ScreenProH, ScreenProH*35)];
@@ -524,7 +533,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     VM2.userInteractionEnabled=YES;
     UITapGestureRecognizer * demo1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(getDetail2)];
     [VM2 addGestureRecognizer:demo1];
-    [V1 addSubview:VM2];
+    [_chuNengNengYuanView addSubview:VM2];
     
     UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(43*ScreenProW, 1800*ScreenProH-view2H-viewAA, SCREEN_Width, ScreenProH*30)];
     VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
@@ -572,8 +581,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         [yArray addObject:_dataTwoDic[key]];
     }
     
-        NSMutableArray *yArray1 = [NSMutableArray array];
-       NSMutableArray *xArray1 = [NSMutableArray array];
+//        NSMutableArray *yArray1 = [NSMutableArray array];
+//       NSMutableArray *xArray1 = [NSMutableArray array];
     
     
     NSMutableArray*Y5=[NSMutableArray array];
@@ -607,105 +616,106 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             
         }
     }
-    _toDetaiDataArray=[NSMutableArray arrayWithObjects:xArray, Y5,Y6,Y7,Y8,nil];
+//    _toDetaiDataArray=[NSMutableArray arrayWithObjects:xArray, Y5,Y6,Y7,Y8,nil];
     
+//
+//    if (xArray.count>2) {
+//        for (int i=0; i<xArray.count-2; i++) {
+//            if (i%3==0) {
+//                float y1=([[yArray[i] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+1] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+2] objectForKey:@"pacToUser"] floatValue])/3;
+//                float y2=([[yArray[i] objectForKey:@"ppv"] floatValue]+[[yArray[i+1] objectForKey:@"ppv"] floatValue]+[[yArray[i+2] objectForKey:@"ppv"] floatValue])/3;
+//                float y3=([[yArray[i] objectForKey:@"sysOut"] floatValue]+[[yArray[i+1] objectForKey:@"sysOut"] floatValue]+[[yArray[i+2] objectForKey:@"sysOut"] floatValue])/3;
+//                float y4=([[yArray[i] objectForKey:@"userLoad"] floatValue]+[[yArray[i+1] objectForKey:@"userLoad"] floatValue]+[[yArray[i+2] objectForKey:@"userLoad"] floatValue])/3;
+//                NSDictionary *y0=@{@"pacToUser":[NSNumber numberWithFloat:y1],@"ppv":[NSNumber numberWithFloat:y2],@"sysOut":[NSNumber numberWithFloat:y3],@"userLoad":[NSNumber numberWithFloat:y4]};
+//                [xArray1 addObject:xArray[i]];
+//                [yArray1 addObject:y0];
+//            }
+//        }
+//        xArray=[NSMutableArray arrayWithArray:xArray1];
+//        yArray=[NSMutableArray arrayWithArray:yArray1];
+//    }
+//
+//    NSMutableArray*Y1=[NSMutableArray array];
+//    NSMutableArray*Y2=[NSMutableArray array];
+//    NSMutableArray*Y3=[NSMutableArray array];
+//    NSMutableArray*Y4=[NSMutableArray array];
+//
+//    if (yArray.count>0) {
+//
+//        for (int i=0; i<yArray.count; i++) {
+//            if ([[yArray[i] objectForKey:@"pacToUser"] floatValue]>=0) {
+//                [Y4 addObject:[yArray[i] objectForKey:@"pacToUser"]];
+//            }else{
+//                [Y4 addObject:@"0"];
+//            }
+//            if ([[yArray[i] objectForKey:@"ppv"] floatValue]>=0) {
+//                [Y1 addObject:[yArray[i] objectForKey:@"ppv"]];
+//            }else{
+//                [Y1 addObject:@"0"];
+//            }
+//            if ([[yArray[i] objectForKey:@"sysOut"] floatValue]>=0) {
+//                [Y2 addObject:[yArray[i] objectForKey:@"sysOut"]];
+//            }else{
+//                [Y2 addObject:@"0"];
+//            }
+//            if ([[yArray[i] objectForKey:@"userLoad"] floatValue]>=0) {
+//                [Y3 addObject:[yArray[i] objectForKey:@"userLoad"]];
+//            }else{
+//                [Y3 addObject:@"0"];
+//            }
+//
+//        }
+//    }
+//   //   _toDetaiDataArray=[NSMutableArray arrayWithObjects:xArray, Y1,Y2,Y3,Y4,nil];
+//
+//    NSMutableArray *tempXArr = [NSMutableArray array];
+//    if (xArray.count > 0) {
+//        NSString *flag = [[NSMutableString stringWithString:xArray[0]] substringWithRange:NSMakeRange(1, 1)];
+//        if ([flag isEqualToString:@":"]) {
+//            //从偶数统计
+//            for (int i = 1; i <= xArray.count; i++) {
+//                if (i % 2 == 0) {
+//                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
+//                    //    NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
+//                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
+//                } else {
+//                    //  NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
+//                    [tempXArr addObject:@""];
+//                }
+//            }
+//        } else {
+//            //从奇数统计
+//            for (int i = 1; i <= xArray.count; i++) {
+//                if (i % 2 != 0) {
+//                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
+//                    //NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
+//                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
+//                } else {
+//                    //         NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
+//                    [tempXArr addObject:@""];
+//                }
+//            }
+//        }
+//    }
+//
+//
+//    NSSet *set = [NSSet setWithArray:tempXArr];
+//    tempXArr=[NSMutableArray arrayWithArray:[set allObjects]];
+//    tempXArr= [NSMutableArray arrayWithArray:[tempXArr sortedArrayUsingComparator:sort]];
+//    NSString *AAA=[tempXArr objectAtIndex:0];
+//    if (AAA==nil) {
+//        [tempXArr removeObjectAtIndex:0];
+//    }
+//    if ([AAA isEqualToString:@""]) {
+//        [tempXArr removeObjectAtIndex:0];
+//    }
+//    if (AAA==NULL) {
+//        [tempXArr removeObjectAtIndex:0];
+//    }
+//
     
-    if (xArray.count>2) {
-        for (int i=0; i<xArray.count-2; i++) {
-            if (i%3==0) {
-                float y1=([[yArray[i] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+1] objectForKey:@"pacToUser"] floatValue]+[[yArray[i+2] objectForKey:@"pacToUser"] floatValue])/3;
-                float y2=([[yArray[i] objectForKey:@"ppv"] floatValue]+[[yArray[i+1] objectForKey:@"ppv"] floatValue]+[[yArray[i+2] objectForKey:@"ppv"] floatValue])/3;
-                float y3=([[yArray[i] objectForKey:@"sysOut"] floatValue]+[[yArray[i+1] objectForKey:@"sysOut"] floatValue]+[[yArray[i+2] objectForKey:@"sysOut"] floatValue])/3;
-                float y4=([[yArray[i] objectForKey:@"userLoad"] floatValue]+[[yArray[i+1] objectForKey:@"userLoad"] floatValue]+[[yArray[i+2] objectForKey:@"userLoad"] floatValue])/3;
-                NSDictionary *y0=@{@"pacToUser":[NSNumber numberWithFloat:y1],@"ppv":[NSNumber numberWithFloat:y2],@"sysOut":[NSNumber numberWithFloat:y3],@"userLoad":[NSNumber numberWithFloat:y4]};
-                [xArray1 addObject:xArray[i]];
-                [yArray1 addObject:y0];
-            }
-        }
-        xArray=[NSMutableArray arrayWithArray:xArray1];
-        yArray=[NSMutableArray arrayWithArray:yArray1];
-    }
-    
-    NSMutableArray*Y1=[NSMutableArray array];
-    NSMutableArray*Y2=[NSMutableArray array];
-    NSMutableArray*Y3=[NSMutableArray array];
-    NSMutableArray*Y4=[NSMutableArray array];
-    
-    if (yArray.count>0) {
-        
-        for (int i=0; i<yArray.count; i++) {
-            if ([[yArray[i] objectForKey:@"pacToUser"] floatValue]>=0) {
-                [Y4 addObject:[yArray[i] objectForKey:@"pacToUser"]];
-            }else{
-                [Y4 addObject:@"0"];
-            }
-            if ([[yArray[i] objectForKey:@"ppv"] floatValue]>=0) {
-                [Y1 addObject:[yArray[i] objectForKey:@"ppv"]];
-            }else{
-                [Y1 addObject:@"0"];
-            }
-            if ([[yArray[i] objectForKey:@"sysOut"] floatValue]>=0) {
-                [Y2 addObject:[yArray[i] objectForKey:@"sysOut"]];
-            }else{
-                [Y2 addObject:@"0"];
-            }
-            if ([[yArray[i] objectForKey:@"userLoad"] floatValue]>=0) {
-                [Y3 addObject:[yArray[i] objectForKey:@"userLoad"]];
-            }else{
-                [Y3 addObject:@"0"];
-            }
-            
-        }
-    }
-   //   _toDetaiDataArray=[NSMutableArray arrayWithObjects:xArray, Y1,Y2,Y3,Y4,nil];
-    
-    NSMutableArray *tempXArr = [NSMutableArray array];
-    if (xArray.count > 0) {
-        NSString *flag = [[NSMutableString stringWithString:xArray[0]] substringWithRange:NSMakeRange(1, 1)];
-        if ([flag isEqualToString:@":"]) {
-            //从偶数统计
-            for (int i = 1; i <= xArray.count; i++) {
-                if (i % 2 == 0) {
-                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
-                    //    NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
-                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
-                } else {
-                    //  NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
-                    [tempXArr addObject:@""];
-                }
-            }
-        } else {
-            //从奇数统计
-            for (int i = 1; i <= xArray.count; i++) {
-                if (i % 2 != 0) {
-                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
-                    //NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
-                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
-                } else {
-                    //         NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
-                    [tempXArr addObject:@""];
-                }
-            }
-        }
-    }
-    
-    
-    NSSet *set = [NSSet setWithArray:tempXArr];
-    tempXArr=[NSMutableArray arrayWithArray:[set allObjects]];
-    tempXArr= [NSMutableArray arrayWithArray:[tempXArr sortedArrayUsingComparator:sort]];
-    NSString *AAA=[tempXArr objectAtIndex:0];
-    if (AAA==nil) {
-        [tempXArr removeObjectAtIndex:0];
-    }
-    if ([AAA isEqualToString:@""]) {
-        [tempXArr removeObjectAtIndex:0];
-    }
-    if (AAA==NULL) {
-        [tempXArr removeObjectAtIndex:0];
-    }
-    
-    
-    NSArray *valueArray0=@[Y1,Y2,Y3,Y4];
+       _toDetaiDataArray=[NSMutableArray arrayWithObjects:xArray, Y5,Y6,Y7,Y8,nil];
+    NSArray *valueArray0=@[Y5,Y6,Y7,Y8];
     NSArray *valueLineColorArray0=@[COLOR(255, 217, 35, 1),COLOR(54, 193, 118, 1),COLOR(139, 128, 255, 1),COLOR(14, 239, 246, 1)];
     float A=0.5;
         NSArray *contentFillColorArray0=@[COLOR(255, 217, 35, A),COLOR(54, 193, 118, A),COLOR(139, 128, 255, A),COLOR(14, 239, 246, 1)];
@@ -731,8 +741,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     
     _lineChart = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 620*ScreenProH-view1H-viewAA,ScreenWidth-10*ScreenProW*3, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
-    _lineChart.xlableNameArray=[NSArray arrayWithArray:tempXArr];
+    _lineChart.xlableNameArray=[NSArray arrayWithArray:xArray];
     _lineChart.xLineDataArr =xArray;
+        _lineChart.xDescMaxWidth=60*ScreenProW;
     _lineChart.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 0*ScreenProW);
     
     _lineChart.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
@@ -775,50 +786,52 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     _toDetaiDataArray2=[NSMutableArray arrayWithObjects:xArray,yArray, nil];
     
-    NSMutableArray *tempXArr = [NSMutableArray array];
-    if (xArray.count > 0) {
-        NSString *flag = [[NSMutableString stringWithString:xArray[0]] substringWithRange:NSMakeRange(1, 1)];
-        if ([flag isEqualToString:@":"]) {
-            //从偶数统计
-            for (int i = 1; i <= xArray.count; i++) {
-                if (i % 2 == 0) {
-                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
-                    //    NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
-                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
-                } else {
-                    //  NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
-                    [tempXArr addObject:@""];
-                }
-            }
-        } else {
-            //从奇数统计
-            for (int i = 1; i <= xArray.count; i++) {
-                if (i % 2 != 0) {
-                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
-                    //NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
-                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
-                } else {
-                    //         NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
-                    [tempXArr addObject:@""];
-                }
-            }
-        }
-    }
+//    NSMutableArray *tempXArr = [NSMutableArray array];
+//    if (xArray.count > 0) {
+//        NSString *flag = [[NSMutableString stringWithString:xArray[0]] substringWithRange:NSMakeRange(1, 1)];
+//        if ([flag isEqualToString:@":"]) {
+//            //从偶数统计
+//            for (int i = 1; i <= xArray.count; i++) {
+//                if (i % 2 == 0) {
+//                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
+//                    //    NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
+//                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
+//                } else {
+//                    //  NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
+//                    [tempXArr addObject:@""];
+//                }
+//            }
+//        } else {
+//            //从奇数统计
+//            for (int i = 1; i <= xArray.count; i++) {
+//                if (i % 2 != 0) {
+//                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
+//                    //NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
+//                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
+//                } else {
+//                    //         NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
+//                    [tempXArr addObject:@""];
+//                }
+//            }
+//        }
+//    }
+//
+//
+//    NSSet *set = [NSSet setWithArray:tempXArr];
+//    tempXArr=[NSMutableArray arrayWithArray:[set allObjects]];
+//    tempXArr= [NSMutableArray arrayWithArray:[tempXArr sortedArrayUsingComparator:sort]];
+//    NSString *AAA=[tempXArr objectAtIndex:0];
+//    if (AAA==nil) {
+//        [tempXArr removeObjectAtIndex:0];
+//    }
+//    if ([AAA isEqualToString:@""]) {
+//        [tempXArr removeObjectAtIndex:0];
+//    }
+//    if (AAA==NULL) {
+//        [tempXArr removeObjectAtIndex:0];
+//    }
     
     
-    NSSet *set = [NSSet setWithArray:tempXArr];
-    tempXArr=[NSMutableArray arrayWithArray:[set allObjects]];
-    tempXArr= [NSMutableArray arrayWithArray:[tempXArr sortedArrayUsingComparator:sort]];
-    NSString *AAA=[tempXArr objectAtIndex:0];
-    if (AAA==nil) {
-        [tempXArr removeObjectAtIndex:0];
-    }
-    if ([AAA isEqualToString:@""]) {
-        [tempXArr removeObjectAtIndex:0];
-    }
-    if (AAA==NULL) {
-        [tempXArr removeObjectAtIndex:0];
-    }
     if (_lineChart2) {
         [_lineChart2 removeFromSuperview];
         _lineChart2=nil;
@@ -827,8 +840,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     //    _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-viewAA+viewB, 730*ScreenProW, 530*ScreenProH)
                        
     _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-view2H-viewAA, ScreenWidth-10*ScreenProW*3, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
-    _lineChart2.xlableNameArray=[NSArray arrayWithArray:tempXArr];
+    _lineChart2.xlableNameArray=[NSArray arrayWithArray:xArray];
     _lineChart2.xLineDataArr =xArray;
+       _lineChart2.xDescMaxWidth=60*ScreenProW;
     _lineChart2.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 10*ScreenProW);
     
     _lineChart2.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;

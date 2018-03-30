@@ -153,7 +153,7 @@
                 
                 for (NSArray *arr in _valueArr) {
                     for (NSString * numer  in arr) {
-                        NSInteger i = [numer integerValue];
+                        NSInteger i = ceil([numer floatValue]);
                         if (i>=max) {
                             max = i;
                         }
@@ -163,61 +163,74 @@
                 }
 
                 
-                if (max%5==0) {
-                    max = max;
-                }else{
-                    max = (max/5+1)*5;
-                }
+//                if (max%5==0) {
+//                    max = max;
+//                }else{
+//                    max = (max/5+1)*5;
+//                }
                 
                 if (_isOnlyOne) {
             max=100;
+                }
+                if (max==0) {
+                    max=5;
                 }
                 
                 _yLineDataArr = nil;
                 NSMutableArray *arr = [NSMutableArray array];
                 if (max<=5) {
+                       float unit=max/5.0;
                     for (NSInteger i = 0; i<5; i++) {
-                        
-                        [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*1]];
+                        [arr addObject:[NSString stringWithFormat:@"%.1f",(i+1)*unit]];
                         
                     }
                 }
                 
-                if (max<=10&&max>5) {
+                if (max>5) {
+                    float unit=max/5.0;
+                    int unit1=ceil(unit);
+              for (NSInteger i = 0; i<5; i++) {
+                  [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*unit1]];
+              }
                     
-                    
-                    for (NSInteger i = 0; i<5; i++) {
-                        
-                        [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*2]];
-                        
-                    }
-                    
-                }else if(max>10&&max<=50){
-                    
-                    for (NSInteger i = 0; i<max/5+1; i++) {
-                        [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*5]];
-                        
-                        
-                    }
-                    
-                }else if(max<=100){
-                    
-                    for (NSInteger i = 0; i<max/10; i++) {
-                        [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*10]];
-                        
-                        
-                    }
-                    
-                }else if(max > 100){
-                    
-                    NSInteger count = max / 10;
-                    
-                    for (NSInteger i = 0; i<10+1; i++) {
-                        [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*count]];
-                        
-                    }
-                }
+            }
+                
+//                if (max<=10&&max>5) {
+//
+//
+//                    for (NSInteger i = 0; i<5; i++) {
+//
+//                        [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*2]];
+//
+//                    }
+//
+//                }else if(max>10&&max<=50){
+//
+//                    for (NSInteger i = 0; i<max/5+1; i++) {
+//                        [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*5]];
+//
+//
+//                    }
+//
+//                }else if(max<=100 ){
+//
+//                    for (NSInteger i = 0; i<max/10; i++) {
+//                        [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*10]];
+//
+//
+//                    }
+//
+//                }else if(max > 100){
+//
+//                    NSInteger count = max / 10;
+//
+//                    for (NSInteger i = 0; i<10+1; i++) {
+//                        [arr addObject:[NSString stringWithFormat:@"%ld",(i+1)*count]];
+//
+//                    }
+//                }
 
+                
                 
                 _yLineDataArr = [arr copy];
                 
@@ -286,7 +299,8 @@
                 for (NSInteger i = 0; i<_xlableNameArray.count;i++ ) {
                     CGPoint p = P_M(i*xPace+self.chartOrigin.x, self.chartOrigin.y);
                     CGFloat len = [self sizeOfStringWithMaxSize:CGSizeMake(CGFLOAT_MAX, 30) textFont:self.xDescTextFontSize aimString:_xlableNameArray[i]].width;
-                    [self drawLineWithContext:context andStarPoint:p andEndPoint:P_M(p.x, p.y-3) andIsDottedLine:NO andColor:self.xAndYLineColor];
+                    
+              //      [self drawLineWithContext:context andStarPoint:p andEndPoint:P_M(p.x, p.y-3) andIsDottedLine:NO andColor:self.xAndYLineColor];
                     
 //                    [self drawText:[NSString stringWithFormat:@"%@",_xlableNameArray[i]] andContext:context atPoint:P_M(p.x-len/2, p.y+2) WithColor:_xAndYNumberColor andFontSize:self.xDescTextFontSize];
                     
@@ -299,18 +313,24 @@
            
                     label.text = [NSString stringWithFormat:@"%@",_xlableNameArray[i]];
                     label.font = [UIFont systemFontOfSize:self.xDescTextFontSize];
-                    label.tintColor=_xAndYNumberColor;
+                    label.tintColor=COLOR(102, 102, 102, 1);
+                         label.textColor=COLOR(102, 102, 102, 1);
                     label.adjustsFontSizeToFitWidth=YES;
-                    
-                    if (p.x>(_lastLableX+(_xDescMaxWidth*2))) {
+                    if (i==0) {
                         [self addSubview:label];
-                  
                         _lastLableX=p.x;
-                        //    NSLog(@"x=%ld",i);
+                    }else{
+                        if (p.x>(_lastLableX+(_xDescMaxWidth*2))) {
+                            [self addSubview:label];
+                            
+                            _lastLableX=p.x;
+                            //    NSLog(@"x=%ld",i);
+                        }
                     }
+                 
                     
                 }
-            }
+            }    
 
             
             if (_yLineDataArr.count>0) {
@@ -326,7 +346,7 @@
                     }else{
                         [self drawLineWithContext:context andStarPoint:p andEndPoint:P_M(p.x+3, p.y) andIsDottedLine:NO andColor:self.xAndYLineColor];
                     }
-                    [self drawText:[NSString stringWithFormat:@"%@",_yLineDataArr[i]] andContext:context atPoint:P_M(p.x-len-3, p.y-hei / 2) WithColor:_xAndYNumberColor andFontSize:self.yDescTextFontSize];
+                    [self drawText:[NSString stringWithFormat:@"%@",_yLineDataArr[i]] andContext:context atPoint:P_M(p.x-len-3, p.y-hei / 2) WithColor:COLOR(102, 102, 102, 1) andFontSize:self.yDescTextFontSize];
                 }
             }
             

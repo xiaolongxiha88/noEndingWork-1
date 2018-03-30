@@ -59,6 +59,7 @@
 @property (nonatomic, strong) UIRefreshControl *control;
 @property (nonatomic,assign) NSInteger refreshTag;
 
+@property (nonatomic, strong) UILabel *socLable;
 @property (nonatomic, strong) UIView *uiviewThree;
 @property (nonatomic, strong) NSMutableArray *toDetaiDataArray;
 @property (nonatomic, strong) NSMutableArray *toDetaiDataArray2;
@@ -753,14 +754,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     
     
-
-    
-
-    
- 
-    
-    
 }
+
 
 -(void)initUiTwo2{
         float HH=1160*ScreenProH;
@@ -974,6 +969,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 }
 
 -(void)initUiThree{
+    
     if (!_threeView) {
         _threeView=[[UIView alloc]initWithFrame:CGRectMake(0, 1730*ScreenProH-viewAA+viewB+SPF5000H, SCREEN_Width, ScreenProH*60)];
         [_scrollView addSubview:_threeView];
@@ -1221,7 +1217,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _lineChart.xlableNameArray=[NSArray arrayWithArray:xArray];
     _lineChart.xLineDataArr =xArray;
     _lineChart.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 0*ScreenProW);
-    _lineChart.xDescMaxWidth=40*ScreenProW;
+    _lineChart.xDescMaxWidth=60*ScreenProW;
     _lineChart.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
     
     _lineChart.valueArr = valueArray;
@@ -1237,7 +1233,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _lineChart.valueLineColorArr =valueLineColorArray;
     // _lineChart.pointColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
     _lineChart.xAndYLineColor = COLOR(153, 153, 153, 1);
-    _lineChart.xAndYNumberColor =COLOR(102, 102, 102, 1);
+    _lineChart.xAndYNumberColor =COLOR(153, 153, 153, 1);
     _lineChart.positionLineColorArr = positionLineColorArray;
     _lineChart.contentFill = YES;
     _lineChart.pathCurve = NO;
@@ -1277,50 +1273,53 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     _toDetaiDataArray2=[NSMutableArray arrayWithObjects:xArray,yArray, nil];
     
-    NSMutableArray *tempXArr = [NSMutableArray array];
-    if (xArray.count > 0) {
-        NSString *flag = [[NSMutableString stringWithString:xArray[0]] substringWithRange:NSMakeRange(1, 1)];
-        if ([flag isEqualToString:@":"]) {
-            //从偶数统计
-            for (int i = 1; i <= xArray.count; i++) {
-                if (i % 2 == 0) {
-                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
-                    //    NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
-                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
-                } else {
-                    //  NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
-                    [tempXArr addObject:@""];
-                }
-            }
-        } else {
-            //从奇数统计
-            for (int i = 1; i <= xArray.count; i++) {
-                if (i % 2 != 0) {
-                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
-                    //NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
-                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
-                } else {
-                    //         NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
-                    [tempXArr addObject:@""];
-                }
-            }
-        }
-    }
+//    NSMutableArray *tempXArr = [NSMutableArray array];
+//    if (xArray.count > 0) {
+//        NSString *flag = [[NSMutableString stringWithString:xArray[0]] substringWithRange:NSMakeRange(1, 1)];
+//        if ([flag isEqualToString:@":"]) {
+//            //从偶数统计
+//            for (int i = 1; i <= xArray.count; i++) {
+//                if (i % 2 == 0) {
+//                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
+//                    //    NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
+//                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
+//                } else {
+//                    //  NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
+//                    [tempXArr addObject:@""];
+//                }
+//            }
+//        } else {
+//            //从奇数统计
+//            for (int i = 1; i <= xArray.count; i++) {
+//                if (i % 2 != 0) {
+//                    NSString *tempStr = [[NSMutableString stringWithString:xArray[i-1]] substringToIndex:2];
+//                    //NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: [NSString stringWithFormat:@"%d", [tempStr intValue]]};
+//                    [tempXArr addObject:[NSString stringWithFormat:@"%d", [tempStr intValue]]];
+//                } else {
+//                    //         NSDictionary *tempDict = @{[NSNumber numberWithInt:i]: @""};
+//                    [tempXArr addObject:@""];
+//                }
+//            }
+//        }
+//    }
+//
+//
+//    NSSet *set = [NSSet setWithArray:tempXArr];
+//    tempXArr=[NSMutableArray arrayWithArray:[set allObjects]];
+//    tempXArr= [NSMutableArray arrayWithArray:[tempXArr sortedArrayUsingComparator:sort]];
+//    NSString *AAA=[tempXArr objectAtIndex:0];
+//    if (AAA==nil) {
+//        [tempXArr removeObjectAtIndex:0];
+//    }
+//    if ([AAA isEqualToString:@""]) {
+//        [tempXArr removeObjectAtIndex:0];
+//    }
+//    if (AAA==NULL) {
+//        [tempXArr removeObjectAtIndex:0];
+//    }
     
     
-    NSSet *set = [NSSet setWithArray:tempXArr];
-    tempXArr=[NSMutableArray arrayWithArray:[set allObjects]];
-    tempXArr= [NSMutableArray arrayWithArray:[tempXArr sortedArrayUsingComparator:sort]];
-    NSString *AAA=[tempXArr objectAtIndex:0];
-    if (AAA==nil) {
-        [tempXArr removeObjectAtIndex:0];
-    }
-    if ([AAA isEqualToString:@""]) {
-        [tempXArr removeObjectAtIndex:0];
-    }
-    if (AAA==NULL) {
-        [tempXArr removeObjectAtIndex:0];
-    }
+    
     if (_lineChart2) {
         [_lineChart2 removeFromSuperview];
         _lineChart2=nil;
@@ -1330,8 +1329,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     _lineChart2 = [[JHLineChart alloc] initWithFrame:CGRectMake(10*ScreenProW, 1810*ScreenProH-viewAA+viewB+SPF5000H,ScreenWidth-10*ScreenProW*3, 530*ScreenProH) andLineChartType:JHChartLineValueNotForEveryX];
     
-    _lineChart2.xlableNameArray=[NSArray arrayWithArray:tempXArr];
+    _lineChart2.xlableNameArray=[NSArray arrayWithArray:xArray];
     _lineChart2.xLineDataArr =xArray;
+      _lineChart2.xDescMaxWidth=60*ScreenProW;
     _lineChart2.contentInsets = UIEdgeInsetsMake(10*ScreenProH, 65*ScreenProW, 40*ScreenProH, 10*ScreenProW);
     
     _lineChart2.lineChartQuadrantType = JHLineChartQuadrantTypeFirstQuardrant;
@@ -1349,7 +1349,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _lineChart2.valueLineColorArr =@[COLOR(89, 225, 151, 1)];
     // _lineChart2.pointColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
     _lineChart2.xAndYLineColor = COLOR(153, 153, 153, 1);
-    _lineChart2.xAndYNumberColor =COLOR(102, 102, 102, 1);
+    _lineChart2.xAndYNumberColor =COLOR(153, 153, 153, 1);
     _lineChart2.positionLineColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
     _lineChart2.contentFill = YES;
     _lineChart2.pathCurve = YES;
@@ -1357,12 +1357,19 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_scrollView addSubview:_lineChart2];
     [_lineChart2 showAnimation];
     
-    UILabel *VL2= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2350*ScreenProH+viewB-viewAA+SPF5000H, ScreenWidth-10*ScreenProW*2, 30*ScreenProH)];
-    VL2.font=[UIFont systemFontOfSize:28*ScreenProH];
-    VL2.textAlignment = NSTextAlignmentCenter;
-    VL2.text=root_shishi_SOC;
-    VL2.textColor =COLOR(102, 102, 102, 1);
-    [_scrollView addSubview:VL2];
+    if (_socLable) {
+        [_socLable removeFromSuperview];
+        _socLable=nil;
+    }
+    if (!_socLable) {
+        _socLable= [[UILabel alloc] initWithFrame:CGRectMake(10*ScreenProW, 2350*ScreenProH+viewB-viewAA+SPF5000H, ScreenWidth-10*ScreenProW*2, 30*ScreenProH)];
+        _socLable.font=[UIFont systemFontOfSize:28*ScreenProH];
+        _socLable.textAlignment = NSTextAlignmentCenter;
+        _socLable.text=root_shishi_SOC;
+        _socLable.textColor =COLOR(102, 102, 102, 1);
+        [_scrollView addSubview:_socLable];
+    }
+
     
 }
 
@@ -1645,29 +1652,29 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
        NSNumber *maxyAxisValue2 = [ppvArray valueForKeyPath:@"@max.floatValue"];
        NSNumber *maxyAxisValue3 = [sysOutArray valueForKeyPath:@"@max.floatValue"];
        NSNumber *maxyAxisValue4 = [userLoadArray valueForKeyPath:@"@max.floatValue"];
-    NSArray *maxArray=@[maxyAxisValue1,maxyAxisValue2,maxyAxisValue3,maxyAxisValue4];
+        NSArray *maxArray0=@[maxyAxisValue2,maxyAxisValue3,maxyAxisValue4,maxyAxisValue1];
+    
+    NSMutableArray *maxArray=[NSMutableArray array];
+    for (int i=0; i<_boolArray.count; i++) {
+        BOOL value=[_boolArray[i] boolValue];
+        if (value) {
+            [maxArray addObject:maxArray0[i]];
+        }
+    }
+    
+
       NSNumber *maxyAxisValue = [maxArray valueForKeyPath:@"@max.floatValue"];
     
     if ([maxyAxisValue integerValue]==0) {
             maxyAxisValue=[NSNumber numberWithInt:100];
     }else{
-        float getY0=[maxyAxisValue floatValue]/6;
-        int getY1=ceil(getY0);
-        if ((0<getY1)&&(getY1<10)) {
+    
+
+            float getY0=[maxyAxisValue floatValue]/6;
+            int getY1=ceil(getY0);
             maxyAxisValue=[NSNumber numberWithInt:getY1*6];
-        }else if ((10<getY1)&&(getY1<100)) {
-            getY1=ceil(getY0/5)*5;
-            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
-        }else if ((100<getY1)&&(getY1<1000)) {
-            getY1=ceil(getY0/50)*50;
-            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
-        }else if ((1000<getY1)&&(getY1<10000)) {
-            getY1=ceil(getY0/500)*500;
-            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
-        }else if ((10000<getY1)&&(getY1<100000)) {
-            getY1=ceil(getY0/5000)*5000;
-            maxyAxisValue=[NSNumber numberWithInt:getY1*6];
-        }
+       
+        
     }
 
     //ppv   sysOut   pacToUser  userLoad
@@ -1692,19 +1699,21 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                 }
             }
             if (boolValue2) {
-                if (pacToUserArray.count>i) {
-                    [newArray addObject:pacToUserArray[i]];
-                }else{
-                    [newArray addObject:@"0"];
-                }
-            }
-            if (boolValue3) {
                 if (userLoadArray.count>i) {
                     [newArray addObject:userLoadArray[i]];
                 }else{
                     [newArray addObject:@"0"];
                 }
             }
+            
+            if (boolValue3) {
+                if (pacToUserArray.count>i) {
+                    [newArray addObject:pacToUserArray[i]];
+                }else{
+                    [newArray addObject:@"0"];
+                }
+            }
+      
             
             
         
@@ -1723,7 +1732,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 
     
- _toDetaiDataArray=[NSMutableArray arrayWithObjects:allArrayX, ppvArray,sysOutArray,pacToUserArray,userLoadArray,nil];
+ _toDetaiDataArray=[NSMutableArray arrayWithObjects:allArrayX, ppvArray,sysOutArray,userLoadArray,pacToUserArray,nil];
     
     
 NSArray *valueLineColorArray000=@[mixPVcolor,mixYongDianXiaoHaocolor,mixDianWangQuDiancolor,mixLaiZiDianChicolor];

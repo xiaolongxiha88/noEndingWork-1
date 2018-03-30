@@ -37,6 +37,10 @@
 @property(nonatomic,strong)NSString *timeValue6;
  @property(nonatomic,strong) NSDictionary *netDic;
 
+@property(nonatomic,strong)NSString *timeEnable1;
+@property(nonatomic,strong)NSString *timeEnable2;
+@property(nonatomic,strong)NSString *timeEnable3;
+
 @end
 
 @implementation MixControl
@@ -147,11 +151,11 @@
 
     NSArray*nameArray;
     if (_setType==0) {
-          nameArray=@[root_MIX_221,root_PCS_fangdian_gonglv,root_MIX_227,[NSString stringWithFormat:@"%@1",root_MIX_222],[NSString stringWithFormat:@"%@2",root_MIX_222],[NSString stringWithFormat:@"%@3",root_MIX_222]];
+          nameArray=@[root_PCS_fangdian_gonglv,root_MIX_227,[NSString stringWithFormat:@"%@1",root_MIX_222],[NSString stringWithFormat:@"%@2",root_MIX_222],[NSString stringWithFormat:@"%@3",root_MIX_222]];
         
        // @[[NSString stringWithFormat:@"%@1",root_MIX_222],[NSString stringWithFormat:@"%@2",root_MIX_222],[NSString stringWithFormat:@"%@3",root_MIX_222]]
     }else{
-          nameArray=@[root_MIX_221,root_CHARGING_POWER,root_MIX_228,[NSString stringWithFormat:@"%@%@",root_5000_ac_chongdian,root_MIX_221],[NSString stringWithFormat:@"%@1",root_MIX_222],[NSString stringWithFormat:@"%@2",root_MIX_222],[NSString stringWithFormat:@"%@3",root_MIX_222]];
+          nameArray=@[root_CHARGING_POWER,root_MIX_228,[NSString stringWithFormat:@"%@%@",root_5000_ac_chongdian,root_MIX_221],[NSString stringWithFormat:@"%@1",root_MIX_222],[NSString stringWithFormat:@"%@2",root_MIX_222],[NSString stringWithFormat:@"%@3",root_MIX_222]];
     }
   
     float H1=40*HEIGHT_SIZE;
@@ -165,20 +169,22 @@
         [_scrollView addSubview:lable1];
     }
     
-    _textLable=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
-    _textLable.text=root_MIX_223;
-    _textLable.userInteractionEnabled=YES;
-    _textLable.layer.borderWidth=1;
-    _textLable.layer.cornerRadius=5;
-    _textLable.textAlignment=NSTextAlignmentCenter;
-    _textLable.textColor=[UIColor whiteColor];
-    _textLable.layer.borderColor=[UIColor whiteColor].CGColor;
-    _textLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice1)];
-    [_textLable addGestureRecognizer:tapGestureRecognizer1];
-    [_scrollView addSubview:_textLable];
+//    _textLable=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
+//    _textLable.text=root_MIX_223;
+//    _textLable.userInteractionEnabled=YES;
+//    _textLable.layer.borderWidth=1;
+//    _textLable.layer.cornerRadius=5;
+//    _textLable.textAlignment=NSTextAlignmentCenter;
+//    _textLable.textColor=[UIColor whiteColor];
+//    _textLable.layer.borderColor=[UIColor whiteColor].CGColor;
+//    _textLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+//    UITapGestureRecognizer *tapGestureRecognizer1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice1)];
+//    [_textLable addGestureRecognizer:tapGestureRecognizer1];
+//    [_scrollView addSubview:_textLable];
     
-
+    _timeEnable1=@"1";
+    _timeEnable2=@"1";
+    _timeEnable3=@"1";
     
         [self initTwo];
     
@@ -196,17 +202,17 @@
     
     float H=120*HEIGHT_SIZE; float LH=30*HEIGHT_SIZE;
     if (_setType==0) {
-        H=140*HEIGHT_SIZE;
+        H=100*HEIGHT_SIZE;
     }
     if (_setType==1) {
-        H=180*HEIGHT_SIZE;
+        H=140*HEIGHT_SIZE;
     }
     
     float H1=40*HEIGHT_SIZE;
     
-
+    float W=60*HEIGHT_SIZE;
     for (int i=0; i<3; i++) {
-        UILabel *timeLable1=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, H+H1*i, 80*NOW_SIZE, LH)];
+        UILabel *timeLable1=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, H+H1*i, W, LH)];
         timeLable1.text=root_MIX_223;
         timeLable1.adjustsFontSizeToFitWidth=YES;
         timeLable1.userInteractionEnabled=YES;
@@ -221,14 +227,14 @@
         [timeLable1 addGestureRecognizer:tapGestureRecognizer1];
         [_scrollView addSubview:timeLable1];
         
-        UILabel *lable1=[[UILabel alloc]initWithFrame:CGRectMake(200*NOW_SIZE, H+H1*i, 20*NOW_SIZE, LH)];
+        UILabel *lable1=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE+W, H+H1*i, 20*NOW_SIZE, LH)];
         lable1.text=@"~";
         lable1.textAlignment=NSTextAlignmentCenter;
         lable1.textColor=[UIColor whiteColor];
         lable1.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
         [_scrollView addSubview:lable1];
         
-         UILabel *timeLable2=[[UILabel alloc]initWithFrame:CGRectMake(220*NOW_SIZE, H+H1*i, 80*NOW_SIZE, LH)];
+         UILabel *timeLable2=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE+W+20*NOW_SIZE, H+H1*i, W, LH)];
         timeLable2.text=root_MIX_223;
           timeLable2.adjustsFontSizeToFitWidth=YES;
         timeLable2.userInteractionEnabled=YES;
@@ -242,6 +248,22 @@
         UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice3:)];
         [timeLable2 addGestureRecognizer:tapGestureRecognizer2];
         [_scrollView addSubview:timeLable2];
+        
+        UILabel *enableLable2=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE+W*2+20*NOW_SIZE+5*NOW_SIZE, H+H1*i, 45*NOW_SIZE, LH)];
+        enableLable2.text=root_shineng;
+        enableLable2.adjustsFontSizeToFitWidth=YES;
+        enableLable2.userInteractionEnabled=YES;
+        enableLable2.layer.borderWidth=1;
+        enableLable2.layer.cornerRadius=5;
+        enableLable2.tag=5000+i;
+        enableLable2.layer.borderColor=[UIColor whiteColor].CGColor;
+        enableLable2.textColor=[UIColor whiteColor];
+        enableLable2.textAlignment=NSTextAlignmentCenter;
+        enableLable2.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        UITapGestureRecognizer *tapGestureRecognizer3 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showEnable:)];
+        [enableLable2 addGestureRecognizer:tapGestureRecognizer3];
+        [_scrollView addSubview:enableLable2];
+        
     }
     
     
@@ -259,7 +281,7 @@
 -(void)initThree{
      float H1=40*HEIGHT_SIZE;
     
-    _fieldOne = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*1, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
+    _fieldOne = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*0, 190*NOW_SIZE, 30*HEIGHT_SIZE)];
     _fieldOne.textColor = [UIColor whiteColor];
     _fieldOne.tintColor = [UIColor whiteColor];
     _fieldOne.layer.borderWidth=1;
@@ -271,7 +293,7 @@
     _fieldOne.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:_fieldOne];
     
-    _fieldTwo = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*2, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
+    _fieldTwo = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*1, 190*NOW_SIZE, 30*HEIGHT_SIZE)];
     _fieldTwo.textColor = [UIColor whiteColor];
     _fieldTwo.tintColor = [UIColor whiteColor];
     _fieldTwo.layer.borderWidth=1;
@@ -283,7 +305,7 @@
     _fieldTwo.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:_fieldTwo];
     
-    _textLable5=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*3, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
+    _textLable5=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*2, 190*NOW_SIZE, 30*HEIGHT_SIZE)];
     _textLable5.text=root_MIX_223;
     _textLable5.userInteractionEnabled=YES;
     _textLable5.layer.borderWidth=1;
@@ -301,6 +323,27 @@
     
 }
 
+
+-(void)showEnable:(UITapGestureRecognizer*)tag{
+    int Tag=(int)tag.view.tag-5000;
+ 
+   NSArray* choiceArray=@[root_shineng,root_jinzhi];
+    [ZJBLStoreShopTypeAlert showWithTitle:root_MIX_224 titles:choiceArray selectIndex:^(NSInteger SelectIndexNum){
+        if (SelectIndexNum==1) {
+            if (Tag==0) {
+                _timeEnable1=@"0";
+            }else if (Tag==1) {
+                   _timeEnable2=@"0";
+            }else if (Tag==2) {
+                   _timeEnable3=@"0";
+            }
+        }
+     
+    } selectValue:^(NSString* valueString){
+        _textLable.text=valueString;
+    } showCloseButton:YES];
+    
+}
 
 
 -(void)finishSet1{
@@ -409,14 +452,14 @@
     if (_setType==0) { _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":param2String,@"param3":_choiceValue1,@"param4":timeValueArrayTwo[0],@"param5":timeValueArrayTwo[1],@"param6":timeValueArrayTwo[2],@"param7":timeValueArrayTwo[3],@"param8":timeValueArrayTwo[4],@"param9":timeValueArrayTwo[5],@"param10":timeValueArrayTwo[6],@"param11":timeValueArrayTwo[7],@"param12":timeValueArrayTwo[8],@"param13":timeValueArrayTwo[9],@"param14":timeValueArrayTwo[10],@"param15":timeValueArrayTwo[11]};
     }
     
-    if (_setType==1) { _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":param2String,@"param3":_choiceValue1,@"param4":_choiceValue3,@"param5":timeValueArrayTwo[0],@"param6":timeValueArrayTwo[1],@"param7":timeValueArrayTwo[2],@"param8":timeValueArrayTwo[3],@"param9":timeValueArrayTwo[4],@"param10":timeValueArrayTwo[5],@"param11":timeValueArrayTwo[6],@"param12":timeValueArrayTwo[7],@"param13":timeValueArrayTwo[8],@"param14":timeValueArrayTwo[9],@"param15":timeValueArrayTwo[10],@"param16":timeValueArrayTwo[11]};
+    if (_setType==1) { _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":param2String,@"param3":timeValueArrayTwo[0],@"param4":timeValueArrayTwo[1],@"param5":timeValueArrayTwo[2],@"param6":timeValueArrayTwo[3],@"param7":_timeEnable1,@"param8":timeValueArrayTwo[3],@"param9":timeValueArrayTwo[4],@"param10":timeValueArrayTwo[5],@"param11":timeValueArrayTwo[6],@"param12":timeValueArrayTwo[7],@"param13":timeValueArrayTwo[8],@"param14":timeValueArrayTwo[9],@"param15":timeValueArrayTwo[10],@"param16":timeValueArrayTwo[11]};
     }
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:_netDic paramarsSite:@"/newTcpsetAPI.do?op=mixSetApi" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:_netDic paramarsSite:@"/newTcpsetAPI.do?op=mixSetApiNew" sucessBlock:^(id content) {
        
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"mixSetApi: %@", content1);
+        NSLog(@"mixSetApiNew: %@", content1);
         [self hideProgressView];
         
         if (content1) {

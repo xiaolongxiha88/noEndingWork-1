@@ -231,6 +231,11 @@
     
     
     if (_textField) {
+        if ([_textField1.text isEqualToString:@""] || (_textField1.text==nil)) {
+            [self showToastViewWithTitle:root_Alet_user_pwd];
+               return;
+        }
+        
         if (![[_textField text]isEqualToString:[_textField1 text]])
         {
             [self showToastViewWithTitle:root_xiangTong_miMa];

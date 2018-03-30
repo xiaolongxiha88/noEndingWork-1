@@ -307,6 +307,9 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             }
              }
             
+            
+      
+            
             self.line2View = [[Line2View alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.timeDisplayView.frame), SCREEN_Width, SCREEN_Height - self.tabBarController.tabBar.frame.size.height - CGRectGetMaxY(self.timeDisplayView.frame)-50*HEIGHT_SIZE)];
             self.line2View.flag=@"1";
                self.line2View.frameType=@"2";
@@ -327,8 +330,14 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
             _timePickerType=@"1";
             [self.line2View refreshLineChartViewWithDataDict: self.dayDict];
             
-            self.line2View.energyTitleLabel.text = root_Today_Energy;
-            self.line2View.unitLabel.text = root_Powre;
+            if ([_StorageTypeNum isEqualToString:@"4"]) {     //MIX 单位
+                        self.line2View.unitLabel.text = @"V";
+            }else{
+                       self.line2View.unitLabel.text = root_Powre;
+            }
+            
+          self.line2View.energyTitleLabel.text = root_Today_Energy;
+        
             
             //上滑提示
            _upImage= [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_Width/2-8*NOW_SIZE, CGRectGetMaxY(self.line2View.frame)+0*HEIGHT_SIZE, 16*NOW_SIZE, 12*HEIGHT_SIZE )];
@@ -1276,7 +1285,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
                      _type=string;
                 }
                 
-                if ([_StorageTypeNum isEqualToString:@"4"]) {     //MIX
+                if ([_StorageTypeNum isEqualToString:@"4"]) {     //MIX 单位
                     int typeNum=[string intValue];
                     if (typeNum==1 || typeNum==2) {
                         _unitLaleName=@"V";
