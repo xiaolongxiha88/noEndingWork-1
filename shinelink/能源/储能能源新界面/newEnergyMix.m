@@ -23,10 +23,10 @@
 #define ScreenProW  HEIGHT_SIZE/2.38
 #define ScreenProH  NOW_SIZE/2.34
 
-#define mixPVcolor COLOR(85, 162, 78, 1)
-#define mixYongDianXiaoHaocolor COLOR(82, 164, 179, 1)
-#define mixDianWangQuDiancolor COLOR(175, 105, 105, 1)
-#define mixLaiZiDianChicolor COLOR(89, 135, 212, 1)
+#define mixPVcolor COLOR(48, 187, 62, 1)
+#define mixYongDianXiaoHaocolor COLOR(63, 196, 185, 1)
+#define mixDianWangQuDiancolor COLOR(208, 169, 39, 1)
+#define mixLaiZiDianChicolor COLOR(64, 137, 205, 1)
 
 @interface newEnergyMix ()<EditGraphViewDelegate,UIScrollViewDelegate,UIPickerViewDelegate,MCBarChartViewDataSource, MCBarChartViewDelegate,UIPickerViewDelegate, UIPickerViewDataSource>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -632,7 +632,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     NSString *V3LableName=[NSString stringWithFormat:@"%@:%@",V3N1,V3N2];
     
     NSArray*titleArray=@[V2LableName,V3LableName];
-      NSArray*titleColorArray=@[mixPVcolor,mixYongDianXiaoHaocolor];
+//      NSArray*titleColorArray=@[mixPVcolor,mixYongDianXiaoHaocolor];
        NSArray*rightNameArray=@[root_MIX_217,root_Energy_263];
     
     NSString *C1=[NSString stringWithFormat:@"%.1f",[[_dataTwoNetAllDic objectForKey:@"echarge1"] floatValue]];
@@ -651,7 +651,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         VL2.font=[UIFont systemFontOfSize:30*ScreenProH];
         VL2.textAlignment = NSTextAlignmentCenter;
         VL2.text=titleArray[i];
-        VL2.textColor =titleColorArray[i];
+        VL2.textColor =COLOR(102, 102, 102, 1);
         [_uiview2 addSubview:VL2];
 
         
@@ -1186,8 +1186,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     NSArray *valueArray0=@[Y5,Y6,Y7,Y8];
     NSArray *valueLineColorArray0=@[mixPVcolor,mixYongDianXiaoHaocolor,mixDianWangQuDiancolor,mixLaiZiDianChicolor];
       //ppv   sysOut   pacToUser  userLoad
-    float A=0.7;
-    NSArray *contentFillColorArray0=@[COLOR(85, 162, 78, A),COLOR(82, 164, 179, A),COLOR(175, 105, 105, A),COLOR(89, 135, 212, A)];
+    float A=0.8;
+    NSArray *contentFillColorArray0=@[COLOR(48, 187, 62, A),COLOR(63, 196, 185, A),COLOR(208, 169, 39, A),COLOR(64, 137, 205, A)];
     
     NSMutableArray *valueArray=[NSMutableArray new];
     NSMutableArray *valueLineColorArray=[NSMutableArray new];
@@ -1346,14 +1346,14 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     _lineChart2.backgroundColor = [UIColor clearColor];
     _lineChart2.hasPoint=NO;
     //   lineChart.showValueLeadingLine=YES;
-    _lineChart2.valueLineColorArr =@[COLOR(89, 225, 151, 1)];
+    _lineChart2.valueLineColorArr =@[COLOR(48, 187, 62, 1)];
     // _lineChart2.pointColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
     _lineChart2.xAndYLineColor = COLOR(153, 153, 153, 1);
     _lineChart2.xAndYNumberColor =COLOR(153, 153, 153, 1);
     _lineChart2.positionLineColorArr = @[[UIColor clearColor],[UIColor clearColor],[UIColor clearColor],[UIColor clearColor]];
     _lineChart2.contentFill = YES;
     _lineChart2.pathCurve = YES;
-    _lineChart2.contentFillColorArr = @[COLOR(89, 225, 151, 0.6)];
+    _lineChart2.contentFillColorArr = @[COLOR(48, 187, 62, 0.8)];
     [_scrollView addSubview:_lineChart2];
     [_lineChart2 showAnimation];
     
@@ -1372,6 +1372,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
     
 }
+
+//@[COLOR(48, 187, 62, A),COLOR(63, 196, 185, A),COLOR(208, 169, 39, A),COLOR(64, 137, 205, A)]
 
 -(void)getUiColumnChart{
     NSString *dataS=[_dataFourDic objectForKey:@"date"];
@@ -1477,7 +1479,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     column.colorForXYLine =  COLOR(153, 153, 153, 1);
     column.xAndYLineColor = COLOR(153, 153, 153, 1);
     /*    Each module of the color array, such as the A class of the language performance of the color is red, the color of the math achievement is green     */
-    column.columnBGcolorsArr = @[COLOR(122, 230, 129, 1),COLOR(254, 238, 62, 1)];
+    column.columnBGcolorsArr = @[COLOR(48, 187, 62, 1),COLOR(208, 169, 39, 1)];
     /*        Module prompt         */
     column.xShowInfoText = xArray;
     column.isShowLineChart = YES;
@@ -1502,7 +1504,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [_uiviewThree addSubview:VL3];
     
     NSArray *nameArray1=@[root_chongDian,root_fangDian];
-    NSArray *IMAGEnameArray1=@[COLOR(18, 237, 7, 1),COLOR(254, 238, 62, 1)];
+    NSArray *IMAGEnameArray1=@[COLOR(48, 187, 62, 1),COLOR(208, 169, 39, 1)];
     float W00=(ScreenWidth-345*ScreenProW)/2;
     for (int i=0; i<2; i++) {
         UIView *LV1=[[UIView alloc]initWithFrame:CGRectMake(335*ScreenProW+W00*i, 2440*ScreenProH-HH, W00, 30*ScreenProH)];

@@ -144,6 +144,7 @@
     
     NSString *alertString=[NSString stringWithFormat:@"%@:%@",root_MAX_302,password];
     [self showAlertViewWithTitle:root_MAX_303 message:alertString cancelButtonTitle:root_OK];
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 

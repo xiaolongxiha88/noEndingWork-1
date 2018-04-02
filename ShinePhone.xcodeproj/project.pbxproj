@@ -104,6 +104,12 @@
 		3349A7C01C75BF3B009172C2 /* SpinerLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3349A7BE1C75BF3B009172C2 /* SpinerLayer.m */; };
 		3349A7C31C75C215009172C2 /* StTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3349A7C21C75C215009172C2 /* StTransitions.m */; };
 		3349BB381C7ED28100E6E34B /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3349BB371C7ED28100E6E34B /* UserInfo.m */; };
+		3349C35E2071FE4300527BC1 /* max_ele.png in Resources */ = {isa = PBXBuildFile; fileRef = 3349C35D2071FE4300527BC1 /* max_ele.png */; };
+		3349C3602071FE5D00527BC1 /* max_power.png in Resources */ = {isa = PBXBuildFile; fileRef = 3349C35F2071FE5D00527BC1 /* max_power.png */; };
+		3349C365207203B600527BC1 /* max_real_time.png in Resources */ = {isa = PBXBuildFile; fileRef = 3349C361207203B600527BC1 /* max_real_time.png */; };
+		3349C366207203B600527BC1 /* max_iv_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 3349C362207203B600527BC1 /* max_iv_graph.png */; };
+		3349C367207203B600527BC1 /* max_onekey.png in Resources */ = {isa = PBXBuildFile; fileRef = 3349C363207203B600527BC1 /* max_onekey.png */; };
+		3349C368207203B600527BC1 /* max_fault.png in Resources */ = {isa = PBXBuildFile; fileRef = 3349C364207203B600527BC1 /* max_fault.png */; };
 		334AED581CA37569007E39F3 /* 客户服务.png in Resources */ = {isa = PBXBuildFile; fileRef = 334AED571CA37569007E39F3 /* 客户服务.png */; };
 		334AED5A1CA37577007E39F3 /* 质保查询.png in Resources */ = {isa = PBXBuildFile; fileRef = 334AED591CA37577007E39F3 /* 质保查询.png */; };
 		334AED5C1CA37583007E39F3 /* 增值服务.png in Resources */ = {isa = PBXBuildFile; fileRef = 334AED5B1CA37583007E39F3 /* 增值服务.png */; };
@@ -449,12 +455,10 @@
 		3376A6E71FD7E3180043FC53 /* ossToolListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6E61FD7E3180043FC53 /* ossToolListView.m */; };
 		3376A6EA1FD8D2320043FC53 /* usbToWifiLoginOSS.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376A6E91FD8D2320043FC53 /* usbToWifiLoginOSS.m */; };
 		3376B3CC1F9726720069F820 /* useToWifiView1.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376B3CB1F9726720069F820 /* useToWifiView1.m */; };
-		3376B3CF1F973ED00069F820 /* max_ele.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3CE1F973ED00069F820 /* max_ele.png */; };
 		3376B3D51F973EE00069F820 /* max_parameter.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3D01F973EDF0069F820 /* max_parameter.png */; };
 		3376B3D61F973EE00069F820 /* max_set.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3D11F973EE00069F820 /* max_set.png */; };
 		3376B3D71F973EE00069F820 /* max_worning.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3D21F973EE00069F820 /* max_worning.png */; };
 		3376B3D81F973EE00069F820 /* max_product.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3D31F973EE00069F820 /* max_product.png */; };
-		3376B3D91F973EE00069F820 /* max_power.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3D41F973EE00069F820 /* max_power.png */; };
 		3376B3DD1F973EEE0069F820 /* MAXdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3DA1F973EED0069F820 /* MAXdown.png */; };
 		3376B3DE1F973EEE0069F820 /* MAXup.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3DB1F973EED0069F820 /* MAXup.png */; };
 		3376B3DF1F973EEE0069F820 /* MAXright.png in Resources */ = {isa = PBXBuildFile; fileRef = 3376B3DC1F973EEE0069F820 /* MAXright.png */; };
@@ -481,10 +485,6 @@
 		33780082201C26D3008E5C00 /* checkOneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780081201C26D3008E5C00 /* checkOneView.m */; };
 		33780085201C2709008E5C00 /* checkTwoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780084201C2709008E5C00 /* checkTwoView.m */; };
 		33780088201C2720008E5C00 /* checkThreeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780087201C2720008E5C00 /* checkThreeView.m */; };
-		3378008D201C2AE3008E5C00 /* max_fault.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378008C201C2AE3008E5C00 /* max_fault.png */; };
-		3378008F201C2AE9008E5C00 /* max_iv_graph.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378008E201C2AE9008E5C00 /* max_iv_graph.png */; };
-		33780092201C2AF0008E5C00 /* max_onekey.png in Resources */ = {isa = PBXBuildFile; fileRef = 33780090201C2AEF008E5C00 /* max_onekey.png */; };
-		33780093201C2AF0008E5C00 /* max_real_time.png in Resources */ = {isa = PBXBuildFile; fileRef = 33780091201C2AF0008E5C00 /* max_real_time.png */; };
 		33780096201C65B3008E5C00 /* CustomProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 33780094201C65B2008E5C00 /* CustomProgress.m */; };
 		3378D65E1F147AFD00632CBD /* layout.png in Resources */ = {isa = PBXBuildFile; fileRef = 3378D65D1F147AFD00632CBD /* layout.png */; };
 		33793D141CE583AD000D0F9E /* storage4.png in Resources */ = {isa = PBXBuildFile; fileRef = 33793D131CE583AD000D0F9E /* storage4.png */; };
@@ -985,6 +985,12 @@
 		3349A7C21C75C215009172C2 /* StTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StTransitions.m; path = ../StTransitions.m; sourceTree = "<group>"; };
 		3349BB361C7ED28100E6E34B /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		3349BB371C7ED28100E6E34B /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		3349C35D2071FE4300527BC1 /* max_ele.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_ele.png; sourceTree = "<group>"; };
+		3349C35F2071FE5D00527BC1 /* max_power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_power.png; sourceTree = "<group>"; };
+		3349C361207203B600527BC1 /* max_real_time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = max_real_time.png; path = "../../../../../../../../Volumes/2.系统监控/0.Aui/ShinePhone/app建议修改/切图/max_real_time.png"; sourceTree = "<group>"; };
+		3349C362207203B600527BC1 /* max_iv_graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = max_iv_graph.png; path = "../../../../../../../../Volumes/2.系统监控/0.Aui/ShinePhone/app建议修改/切图/max_iv_graph.png"; sourceTree = "<group>"; };
+		3349C363207203B600527BC1 /* max_onekey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = max_onekey.png; path = "../../../../../../../../Volumes/2.系统监控/0.Aui/ShinePhone/app建议修改/切图/max_onekey.png"; sourceTree = "<group>"; };
+		3349C364207203B600527BC1 /* max_fault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = max_fault.png; path = "../../../../../../../../Volumes/2.系统监控/0.Aui/ShinePhone/app建议修改/切图/max_fault.png"; sourceTree = "<group>"; };
 		334AED571CA37569007E39F3 /* 客户服务.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "客户服务.png"; sourceTree = "<group>"; };
 		334AED591CA37577007E39F3 /* 质保查询.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "质保查询.png"; sourceTree = "<group>"; };
 		334AED5B1CA37583007E39F3 /* 增值服务.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "增值服务.png"; sourceTree = "<group>"; };
@@ -1534,12 +1540,10 @@
 		3376A6E91FD8D2320043FC53 /* usbToWifiLoginOSS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiLoginOSS.m; sourceTree = "<group>"; };
 		3376B3CA1F9726720069F820 /* useToWifiView1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = useToWifiView1.h; sourceTree = "<group>"; };
 		3376B3CB1F9726720069F820 /* useToWifiView1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = useToWifiView1.m; sourceTree = "<group>"; };
-		3376B3CE1F973ED00069F820 /* max_ele.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_ele.png; sourceTree = "<group>"; };
 		3376B3D01F973EDF0069F820 /* max_parameter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_parameter.png; sourceTree = "<group>"; };
 		3376B3D11F973EE00069F820 /* max_set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_set.png; sourceTree = "<group>"; };
 		3376B3D21F973EE00069F820 /* max_worning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_worning.png; sourceTree = "<group>"; };
 		3376B3D31F973EE00069F820 /* max_product.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_product.png; sourceTree = "<group>"; };
-		3376B3D41F973EE00069F820 /* max_power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_power.png; sourceTree = "<group>"; };
 		3376B3DA1F973EED0069F820 /* MAXdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAXdown.png; sourceTree = "<group>"; };
 		3376B3DB1F973EED0069F820 /* MAXup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAXup.png; sourceTree = "<group>"; };
 		3376B3DC1F973EEE0069F820 /* MAXright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MAXright.png; sourceTree = "<group>"; };
@@ -1578,10 +1582,6 @@
 		33780084201C2709008E5C00 /* checkTwoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = checkTwoView.m; sourceTree = "<group>"; };
 		33780086201C2720008E5C00 /* checkThreeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = checkThreeView.h; sourceTree = "<group>"; };
 		33780087201C2720008E5C00 /* checkThreeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = checkThreeView.m; sourceTree = "<group>"; };
-		3378008C201C2AE3008E5C00 /* max_fault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_fault.png; sourceTree = "<group>"; };
-		3378008E201C2AE9008E5C00 /* max_iv_graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_iv_graph.png; sourceTree = "<group>"; };
-		33780090201C2AEF008E5C00 /* max_onekey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_onekey.png; sourceTree = "<group>"; };
-		33780091201C2AF0008E5C00 /* max_real_time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_real_time.png; sourceTree = "<group>"; };
 		33780094201C65B2008E5C00 /* CustomProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomProgress.m; sourceTree = "<group>"; };
 		33780095201C65B3008E5C00 /* CustomProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomProgress.h; sourceTree = "<group>"; };
 		3378D65D1F147AFD00632CBD /* layout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = layout.png; sourceTree = "<group>"; };
@@ -3496,10 +3496,10 @@
 			isa = PBXGroup;
 			children = (
 				33C040BD204CDB8900B5A964 /* getMore.png */,
-				33780090201C2AEF008E5C00 /* max_onekey.png */,
-				33780091201C2AF0008E5C00 /* max_real_time.png */,
-				3378008E201C2AE9008E5C00 /* max_iv_graph.png */,
-				3378008C201C2AE3008E5C00 /* max_fault.png */,
+				3349C364207203B600527BC1 /* max_fault.png */,
+				3349C362207203B600527BC1 /* max_iv_graph.png */,
+				3349C363207203B600527BC1 /* max_onekey.png */,
+				3349C361207203B600527BC1 /* max_real_time.png */,
 				3378007B201C184E008E5C00 /* max_note.png */,
 				33780079201C183E008E5C00 /* max_intelligent _icon.png */,
 				33780077201C182A008E5C00 /* max_arrow.png */,
@@ -3509,11 +3509,11 @@
 				3376B3DC1F973EEE0069F820 /* MAXright.png */,
 				3376B3DB1F973EED0069F820 /* MAXup.png */,
 				3376B3D01F973EDF0069F820 /* max_parameter.png */,
-				3376B3D41F973EE00069F820 /* max_power.png */,
 				3376B3D31F973EE00069F820 /* max_product.png */,
 				3376B3D11F973EE00069F820 /* max_set.png */,
 				3376B3D21F973EE00069F820 /* max_worning.png */,
-				3376B3CE1F973ED00069F820 /* max_ele.png */,
+				3349C35D2071FE4300527BC1 /* max_ele.png */,
+				3349C35F2071FE5D00527BC1 /* max_power.png */,
 			);
 			path = "本地调试图片";
 			sourceTree = "<group>";
@@ -4910,6 +4910,7 @@
 				3370EBBF1F41918400F37149 /* deviceHead1.png in Resources */,
 				33B445BD1FD1695E000B18AA /* loginMore.png in Resources */,
 				337F96201F0CCDBE00840527 /* firstGo.png in Resources */,
+				3349C366207203B600527BC1 /* max_iv_graph.png in Resources */,
 				338321C31EEE3370004FFC20 /* edit_nor.png in Resources */,
 				33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */,
 				338E34F91EE655140027EBD5 /* userOSS.png in Resources */,
@@ -4937,7 +4938,6 @@
 				334B8F631C915A1B00798A69 /* bg.png in Resources */,
 				33AF3D171D8E67210007D6C2 /* addDevice.jpg in Resources */,
 				337F961C1F0CCBCA00840527 /* Follow-up2.png in Resources */,
-				3378008D201C2AE3008E5C00 /* max_fault.png in Resources */,
 				3370FF031F5FC87D0089B317 /* pven.png in Resources */,
 				337F962A1F0DE09800840527 /* inv_iconI.png in Resources */,
 				3370EBA01F41468C00F37149 /* 全新的监控管理_cn.png in Resources */,
@@ -4949,14 +4949,11 @@
 				338E30CE1D93727A002215E4 /* 增值服务1.png in Resources */,
 				33252FD11F57B7330054BBC7 /* storageS.png in Resources */,
 				338321C71EEE3378004FFC20 /* set_nor.png in Resources */,
-				33780092201C2AF0008E5C00 /* max_onekey.png in Resources */,
 				334CB02A1CD847C90061AC0B /* Localizable.strings in Resources */,
 				33252FCB1F53F4C50054BBC7 /* date_right_icon.png in Resources */,
 				338990AF1CEAB61400A708F8 /* mebg.png in Resources */,
 				33252FD31F57B7D00054BBC7 /* gridS.png in Resources */,
 				3355AD9A1CF6A49400AE6891 /* 222.jpg in Resources */,
-				33780093201C2AF0008E5C00 /* max_real_time.png in Resources */,
-				3376B3CF1F973ED00069F820 /* max_ele.png in Resources */,
 				337F96271F0DE08300840527 /* e-today_iconI.png in Resources */,
 				334FF0C01CF53C7C001E6716 /* top.png in Resources */,
 				336664EF1CB77CD3005573FB /* user-agreement@2x.png in Resources */,
@@ -5028,7 +5025,6 @@
 				335089231C73179400D7AA03 /* bg_list_popver.png in Resources */,
 				33775ADB1D2E03B40070742E /* 质保.png in Resources */,
 				3370EBC31F41AB8100F37149 /* upGo.png in Resources */,
-				3378008F201C2AE9008E5C00 /* max_iv_graph.png in Resources */,
 				33FEFD7A1C7DB38400324374 /* shebei_press@3x.png in Resources */,
 				33775AEF1D2E3BC00070742E /* 打勾.png in Resources */,
 				334FF0BF1CF53C7C001E6716 /* text_bg.png in Resources */,
@@ -5065,6 +5061,7 @@
 				33875A541EBABDE700F7E0E6 /* toolx_icon.png in Resources */,
 				33FEFD671C7DB38400324374 /* iconfont-address@2x.png in Resources */,
 				331B37D61F073A3400755335 /* workorder_button_icon_nor.png in Resources */,
+				3349C35E2071FE4300527BC1 /* max_ele.png in Resources */,
 				335BF1E71D100558008EEE99 /* message.png in Resources */,
 				334B8F5E1C914B4E00798A69 /* LICENSE in Resources */,
 				3378D65E1F147AFD00632CBD /* layout.png in Resources */,
@@ -5125,8 +5122,10 @@
 				33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */,
 				335456C51C853AFD00275478 /* scanLine@2x.png in Resources */,
 				3343F3EB1C805BD2009F69BC /* LICENSE in Resources */,
+				3349C368207203B600527BC1 /* max_fault.png in Resources */,
 				335614A01CB3B8E90071BAC9 /* frame2@2x.png in Resources */,
 				3387B8A71FB181E00073FB35 /* wifi_icon.png in Resources */,
+				3349C365207203B600527BC1 /* max_real_time.png in Resources */,
 				337F96101F0B90F800840527 /* phone.png in Resources */,
 				338321CB1EEE35B7004FFC20 /* configure_nor.png in Resources */,
 				336B51071FE11B380094CD6E /* newheadAnimal21.png in Resources */,
@@ -5199,6 +5198,7 @@
 				3330F4E11F15B1E20076C237 /* search_icon_nor.png in Resources */,
 				3383F1341C9FF7370075E834 /* connected@2x.png in Resources */,
 				334AED5A1CA37577007E39F3 /* 质保查询.png in Resources */,
+				3349C367207203B600527BC1 /* max_onekey.png in Resources */,
 				3330F4E01F15B1E20076C237 /* search_icon_click.png in Resources */,
 				335456C91C853C2F00275478 /* scanscanBg.png in Resources */,
 				338964771E57E7E600A7B1AE /* icon_bat.png in Resources */,
@@ -5246,10 +5246,10 @@
 				337079521D928E0B00D7DA98 /* manual_bg.jpg in Resources */,
 				3387B8CA1FB308CF0073FB35 /* payadd2.png in Resources */,
 				33FEFD571C7DB38400324374 /* icon---Email---Full@2x.png in Resources */,
+				3349C3602071FE5D00527BC1 /* max_power.png in Resources */,
 				3370EBBD1F41917C00F37149 /* deviceHead2.png in Resources */,
 				332BD6BA206CC16200FFD501 /* newheadD33.png in Resources */,
 				3381222D1D864D8400C7704B /* btn1-choose.png in Resources */,
-				3376B3D91F973EE00069F820 /* max_power.png in Resources */,
 				3389648F1E5D678800A7B1AE /* icon_yijianjianzhan.png in Resources */,
 				3363DD241C7C610A00D740FB /* 语言.png in Resources */,
 				33E3695A1FDA70D6001D947D /* resource.bundle in Resources */,

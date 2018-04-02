@@ -283,7 +283,7 @@ static NSString *cellTwo = @"cellTwo";
         _firstView.backgroundColor=[UIColor clearColor];
         [_scrollView addSubview:_firstView];
         NSArray *picName=@[@"max_ele.png",@"max_power.png",@"max_worning.png"];
-        NSArray *colorArray=@[COLOR(88, 196, 95, 1),COLOR(0, 156, 255, 1),COLOR(221, 120, 120, 1)];
+        NSArray *colorArray=@[COLOR(88, 196, 95, 1),COLOR(27, 201, 213, 1),COLOR(221, 120, 120, 1)];
         NSArray *nameArray=@[root_energy_fadianliang,root_gongLv,root_cuoWu];
         
         

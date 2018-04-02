@@ -89,6 +89,19 @@ static int  firstReadTime=72.0;
    
     _isReadfirstDataOver=NO;
     _isIVchar=YES;
+    
+            _colorArray=@[COLOR(208, 107, 107, 1),COLOR(217, 189, 60, 1),COLOR(85, 207, 85, 1),COLOR(85, 122, 207, 1),COLOR(79, 208, 206, 1),COLOR(146, 91, 202, 1),COLOR(161, 177, 55, 1),COLOR(215, 98, 208, 1)];
+    
+    _selectBoolArray=[NSMutableArray array];
+    for (int i=0; i<_colorArray.count; i++) {
+        if (i<6) {
+            [_selectBoolArray addObject:[NSNumber numberWithBool:YES]];
+        }else{
+            [_selectBoolArray addObject:[NSNumber numberWithBool:NO]];
+        }
+        
+    }
+    
     [self initUI];
    
 }
@@ -284,10 +297,7 @@ static int  firstReadTime=72.0;
 
 //读取刷新的寄存器
 -(void)goToReadFirstData{
-    _selectBoolArray=[NSMutableArray array];
-    for (int i=0; i<_colorArray.count; i++) {
-        [_selectBoolArray addObject:[NSNumber numberWithBool:YES]];
-    }
+
 
     _isReadfirstDataOver=NO;
      [_ControlOne goToOneTcp:9 cmdNum:1 cmdType:@"16" regAdd:@"250" Length:@"1_2_1"];
@@ -339,11 +349,15 @@ static int  firstReadTime=72.0;
     float Wk=5*NOW_SIZE;
     for (int i=0; i<value1Array.count; i++) {
         BOOL isSelect=[_selectBoolArray[i] boolValue];
+        
+        UILabel *lable=[self.view viewWithTag:7000+i];
+        lable.frame=CGRectMake((ScreenWidth/2-lable1Size2.width)/2-Wk, 0,ScreenWidth/2-Lable11x,everyLalbeH);
+        lable.textAlignment=NSTextAlignmentLeft;
+        
         if (isSelect) {
-            UILabel *lable=[self.view viewWithTag:7000+i];
             lable.text=[NSString stringWithFormat:@"(%@,%@)",value1Array[i],value2Array[i]];
-            lable.frame=CGRectMake((ScreenWidth/2-lable1Size2.width)/2-Wk, 0,ScreenWidth/2-Lable11x,everyLalbeH);
-            lable.textAlignment=NSTextAlignmentLeft;
+        }else{
+               lable.text=@"(--,--)";
         }
         
   
@@ -531,7 +545,7 @@ static int  firstReadTime=72.0;
     [self.view addSubview:_lable01];
     
     
-        _colorArray=@[COLOR(208, 107, 107, 1),COLOR(217, 189, 60, 1),COLOR(85, 207, 85, 1),COLOR(85, 122, 207, 1),COLOR(79, 208, 206, 1),COLOR(146, 91, 202, 1),COLOR(161, 177, 55, 1),COLOR(215, 98, 208, 1)];
+
     
     float view2H=SCREEN_Height-265*HEIGHT_SIZE-lastH-NavigationbarHeight-StatusHeight;
      everyLalbeH=view2H/(_colorArray.count+1);
@@ -570,7 +584,12 @@ static int  firstReadTime=72.0;
         [button1 setTitleColor:COLOR(242, 242, 242, 1) forState:UIControlStateHighlighted];
         button1.tag = 4000+i;
         button1.backgroundColor=[UIColor whiteColor];
-        button1.selected=YES;
+        if (i==6 || i==7) {
+               button1.selected=NO;
+        }else{
+               button1.selected=YES;
+        }
+     
         button1.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
         [button1 setTitle:@"" forState:UIControlStateNormal];
         [button1 addTarget:self action:@selector(buttonForNum:) forControlEvents:UIControlEventTouchUpInside];
@@ -626,11 +645,13 @@ static int  firstReadTime=72.0;
     
     if (allDataArrayOld.count>0) {
         _allDataArray=[NSMutableArray arrayWithArray:allDataArrayOld];
-        _selectBoolArray=[NSMutableArray array];
-        for (int i=0; i<_colorArray.count; i++) {
-            [_selectBoolArray addObject:[NSNumber numberWithBool:YES]];
-        }
-           [self changData];
+             [self changData];
+        
+//        _selectBoolArray=[NSMutableArray array];
+//        for (int i=0; i<_colorArray.count; i++) {
+//            [_selectBoolArray addObject:[NSNumber numberWithBool:YES]];
+//        }
+      
     }else{
            [self showFirstQuardrant];
     }
