@@ -154,7 +154,7 @@
             [self.alertView addSubview:self.closeButton];
         }
         
-        _isSelectArray=[NSMutableArray arrayWithArray:@[[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO]]];
+        _isSelectArray=[NSMutableArray arrayWithArray:@[[NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES],[NSNumber numberWithBool:YES]]];
         [self initUI];
         
         [self show];
@@ -187,7 +187,7 @@
     UIButton *allButton = [UIButton buttonWithType:UIButtonTypeCustom];
     allButton.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     allButton.frame = CGRectMake(0, _alertView.frame.size.height-buttonHeight, _alertView.frame.size.width/2, buttonHeight);
-    allButton.selected=NO;
+    allButton.selected=YES;
     [allButton setTitle:@"全选" forState:UIControlStateNormal];
     [allButton setTitleColor:MainColor forState:UIControlStateNormal];
     allButton.titleLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];

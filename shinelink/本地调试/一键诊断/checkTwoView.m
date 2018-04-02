@@ -296,7 +296,7 @@ static float readWaveTime=20;      //读波形时间
         lableNameArray=@[@"ID",root_MAX_469,root_MAX_470];
     }
     if (_charType==3) {
-        lableNameArray=@[@"Phase",@"Rms(V),f(Hz)",[NSString stringWithFormat:@"%@(V)",root_MAX_470]];
+        lableNameArray=@[root_MIX_493,@"Rms(V),f(Hz)",[NSString stringWithFormat:@"%@(V)",root_MAX_470]];
     }
     
      W0=SCREEN_Width/lableNameArray.count;
@@ -323,10 +323,13 @@ static float readWaveTime=20;      //读波形时间
     float imageViewH=10*HEIGHT_SIZE; float Wk=2*NOW_SIZE;
 //    float imageViewx=(W0-lable1Size.width)/2-imageViewH-Wk;
      float imageViewx=15*NOW_SIZE;
+    if (_charType==3) {
+        imageViewx=40*NOW_SIZE;
+    }
     
     _xNumArray=[NSMutableArray array];
     
-    NSArray *oneKeyLeftNameArray=@[@"R",@"S",@"T"];
+    NSArray *oneKeyLeftNameArray=@[@"RS",@"ST",@"TR"];
     
           _valueForLeftLableArray=[NSMutableArray array];
     for (int i=0; i<_colorArray.count; i++) {

@@ -82,7 +82,7 @@ static int  gotoModel4=1;
 @property (assign, nonatomic) int progressTimes;
 @property (assign, nonatomic) int everyProgress;
 @property (strong, nonatomic)UILabel *lableSetTime1;
-@property (assign, nonatomic) int alertTime;
+@property (assign, nonatomic) float alertTime;
 
 @property (strong, nonatomic)NSMutableArray* readDataForRememberArray;
 @property (strong, nonatomic)NSMutableDictionary* readDataForRememberDic;
@@ -122,7 +122,7 @@ static int  gotoModel4=1;
             _isOneViewH=SCREEN_Height-lastH-NavigationbarHeight+everyLalbeH+everyModelKongH*2+20*HEIGHT_SIZE;
         [self initOneView];
         
-   _alertTime=_alertTime+2;
+   _alertTime=_alertTime+4.5;
     }
     
     if (_isTwoViewEnable) {
@@ -153,7 +153,7 @@ static int  gotoModel4=1;
         
         [self initThreeView];
         
-           _alertTime=_alertTime+5;
+           _alertTime=_alertTime+1.5;
     }
     
     if (_isFourViewEnable) {
@@ -169,9 +169,15 @@ static int  gotoModel4=1;
         
         [self initFourView];
         
-           _alertTime=_alertTime+5;
+           _alertTime=_alertTime+1;
     }
     
+    NSString *alertString;
+    if (_isThreeViewEnable) {
+        alertString=root_MAX_458;
+    }else{
+         alertString=root_MAX_458_1;
+    }
     [self showAlertViewWithTitle:root_energy_wenxin_tishi message:[NSString stringWithFormat:@"%@%d%@",root_MAX_458,_alertTime,root_MAX_459] cancelButtonTitle:root_OK];
     
     _everyProgress=100/_progressTimes;

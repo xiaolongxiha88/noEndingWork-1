@@ -1090,6 +1090,8 @@
 #define  root_MAX_456 NSLocalizedString(@"456电网电压谐波(THDV)", nil)
 #define  root_MAX_457 NSLocalizedString(@"457电网线路阻抗", nil)
 #define  root_MAX_458 NSLocalizedString(@"4581、确保逆变器在运行状态；2、检测过程中会关断逆变器；3、诊断时间预计15分钟", nil)
+#define  root_MAX_458_1 NSLocalizedString(@"458_11、确保逆变器在运行状态；2、诊断时间预计", nil)
+
 #define  root_MAX_459 NSLocalizedString(@"459分钟", nil)
 #define  root_MAX_460 NSLocalizedString(@"460开始", nil)
 #define  root_MAX_461 NSLocalizedString(@"461读取数据中", nil)
@@ -1131,6 +1133,7 @@
 
 #define  root_MIX_492  NSLocalizedString(@"492防逆流设置", nil)
 
+#define  root_MIX_493  NSLocalizedString(@"493Phase", nil)
 
 
 
