@@ -132,12 +132,32 @@
         _fieldOne.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [_scrollView addSubview:_fieldOne];
     }
+    
+    if (_setType==5 || _setType==4) {
+        UILabel *lable22=[[UILabel alloc]initWithFrame:CGRectMake(255*NOW_SIZE, 60*HEIGHT_SIZE, 30*NOW_SIZE, 30*HEIGHT_SIZE)];
+        lable22.text=@"%";
+        lable22.textAlignment=NSTextAlignmentLeft;
+        lable22.adjustsFontSizeToFitWidth=YES;
+        lable22.textColor=[UIColor whiteColor];
+        lable22.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        [_scrollView addSubview:lable22];
+    }
  
+    if (_setType==6) {
+        UILabel *lable22=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE, 92*HEIGHT_SIZE, 300*NOW_SIZE, 20*HEIGHT_SIZE)];
+        lable22.text=@"(-0.8 ~ -1)/(0.8 ~ 1)";
+        lable22.textAlignment=NSTextAlignmentCenter;
+        lable22.adjustsFontSizeToFitWidth=YES;
+        lable22.textColor=[UIColor whiteColor];
+        lable22.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_scrollView addSubview:lable22];
+    }
+    
     
     UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goBut.frame=CGRectMake(60*NOW_SIZE,120*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    goBut.frame=CGRectMake(60*NOW_SIZE,140*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     if (_setType==5) {
-        goBut.frame=CGRectMake(60*NOW_SIZE,150*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+        goBut.frame=CGRectMake(60*NOW_SIZE,170*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     }
     [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [goBut setTitle:root_finish forState:UIControlStateNormal];
@@ -281,7 +301,7 @@
 -(void)initThree{
      float H1=40*HEIGHT_SIZE;
     
-    _fieldOne = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*0, 190*NOW_SIZE, 30*HEIGHT_SIZE)];
+    _fieldOne = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*0, 165*NOW_SIZE, 30*HEIGHT_SIZE)];
     _fieldOne.textColor = [UIColor whiteColor];
     _fieldOne.tintColor = [UIColor whiteColor];
     _fieldOne.layer.borderWidth=1;
@@ -293,7 +313,15 @@
     _fieldOne.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:_fieldOne];
     
-    _fieldTwo = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*1, 190*NOW_SIZE, 30*HEIGHT_SIZE)];
+    UILabel *lable23=[[UILabel alloc]initWithFrame:CGRectMake(290*NOW_SIZE, 20*HEIGHT_SIZE+H1*0, 30*NOW_SIZE, 30*HEIGHT_SIZE)];
+    lable23.text=@"%";
+    lable23.textAlignment=NSTextAlignmentLeft;
+    lable23.adjustsFontSizeToFitWidth=YES;
+    lable23.textColor=[UIColor whiteColor];
+    lable23.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [_scrollView addSubview:lable23];
+    
+    _fieldTwo = [[UITextField alloc] initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*1, 165*NOW_SIZE, 30*HEIGHT_SIZE)];
     _fieldTwo.textColor = [UIColor whiteColor];
     _fieldTwo.tintColor = [UIColor whiteColor];
     _fieldTwo.layer.borderWidth=1;
@@ -304,6 +332,14 @@
     [_fieldTwo setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     _fieldTwo.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [_scrollView addSubview:_fieldTwo];
+    
+    UILabel *lable24=[[UILabel alloc]initWithFrame:CGRectMake(290*NOW_SIZE, 20*HEIGHT_SIZE+H1*1, 30*NOW_SIZE, 30*HEIGHT_SIZE)];
+    lable24.text=@"%";
+    lable24.textAlignment=NSTextAlignmentLeft;
+    lable24.adjustsFontSizeToFitWidth=YES;
+    lable24.textColor=[UIColor whiteColor];
+    lable24.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    [_scrollView addSubview:lable24];
     
     _textLable5=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE, 20*HEIGHT_SIZE+H1*2, 190*NOW_SIZE, 30*HEIGHT_SIZE)];
     _textLable5.text=root_MIX_223;
@@ -329,6 +365,16 @@
  
    NSArray* choiceArray=@[root_shineng,root_jinzhi];
     [ZJBLStoreShopTypeAlert showWithTitle:root_MIX_224 titles:choiceArray selectIndex:^(NSInteger SelectIndexNum){
+        if (SelectIndexNum==0) {
+            if (Tag==0) {
+                _timeEnable1=@"1";
+            }else if (Tag==1) {
+                _timeEnable2=@"1";
+            }else if (Tag==2) {
+                _timeEnable3=@"1";
+            }
+        }
+        
         if (SelectIndexNum==1) {
             if (Tag==0) {
                 _timeEnable1=@"0";
@@ -376,9 +422,12 @@
         }
            _netDic=@{@"serialNum":_CnjSN,@"type":typeName,@"param1":value2,@"param2":_choiceValue1};
     }
+    
     NSArray *timeValueArray=@[_timeValue1,_timeValue2,_timeValue3,_timeValue4,_timeValue5,_timeValue6];
 
     NSMutableArray *timeValueArrayTwo=[NSMutableArray new];
+    
+    
     if (_setType==1 || _setType==0) {
         for (int i=0; i<3; i++) {
             NSString *valueOne=timeValueArray[2*i];
@@ -410,17 +459,16 @@
         
         }
 
-    }
-    if ([_choiceValue1 isEqualToString:@""]) {
-        [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_MIX_225,root_MIX_221]];
-        return;
-    }
-    if (_setType==1) {
-        if ([_choiceValue3 isEqualToString:@""]) {
-            [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@%@",root_MIX_225,root_5000_ac_chongdian,root_MIX_221]];
-            return;
+        if (_setType==1) {
+            if ([_choiceValue3 isEqualToString:@""]) {
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@%@",root_MIX_225,root_5000_ac_chongdian,root_MIX_221]];
+                return;
+            }
         }
+        
     }
+
+
   
     
     NSString *param1String,*param2String;
@@ -457,16 +505,16 @@
     
     [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:HEAD_URL paramars:_netDic paramarsSite:@"/newTcpsetAPI.do?op=mixSetApiNew" sucessBlock:^(id content) {
-       
+
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"mixSetApiNew: %@", content1);
         [self hideProgressView];
-        
+
         if (content1) {
             if ([content1[@"success"] integerValue] == 0) {
                 if ([content1[@"msg"] integerValue] ==501) {
                     [self showAlertViewWithTitle:nil message:root_xitong_cuoWu cancelButtonTitle:root_Yes];
-                    
+
                 }else if ([content1[@"msg"] integerValue] ==502) {
                     [self showAlertViewWithTitle:nil message:root_CNJ_fuwuqi_cuowu cancelButtonTitle:root_Yes];
                 }else if ([content1[@"msg"] integerValue] ==503) {
@@ -491,6 +539,8 @@
                     [self showAlertViewWithTitle:nil message:root_device_248 cancelButtonTitle:root_Yes];
                 }else if ([content1[@"msg"] integerValue] ==701) {
                     [self showAlertViewWithTitle:nil message:root_meiyou_quanxian cancelButtonTitle:root_Yes];
+                }else{
+                     [self showAlertViewWithTitle:nil message:[NSString stringWithFormat:@"%@(%@)",root_xitong_cuoWu,content1[@"msg"]] cancelButtonTitle:root_Yes];
                 }
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
@@ -501,7 +551,7 @@
     } failure:^(NSError *error) {
         [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];
-        
+
     }];
     
 }
