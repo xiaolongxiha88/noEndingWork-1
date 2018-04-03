@@ -184,7 +184,7 @@ static NSString *cellOne = @"cell1";
     }
     cell.backgroundColor=[UIColor whiteColor];
     cell.textLabel.text=[NSString stringWithFormat:@"%ld.%@",indexPath.row,_nameArray[indexPath.row]];
-    cell.textLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
+    cell.textLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
     cell.tintColor = COLOR(102, 102, 102, 1);
     cell.textLabel.textColor=COLOR(102, 102, 102, 1);
     cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;

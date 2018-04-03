@@ -65,6 +65,7 @@
         lable0.textColor =[UIColor blackColor];
         lable0.textAlignment=NSTextAlignmentLeft;
         lable0.text=_nameArray[i];
+        lable0.adjustsFontSizeToFitWidth=YES;
         lable0.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
         [view0 addSubview:lable0];
         

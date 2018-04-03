@@ -442,8 +442,13 @@ static NSString *cellTwo = @"cellTwo";
             UILabel *lable5 = [[UILabel alloc]initWithFrame:CGRectMake(0, V2H1+imageH+5*HEIGHT_SIZE,WW,lableH1)];
             lable5.textColor =COLOR(102, 102, 102, 1);
             lable5.textAlignment=NSTextAlignmentCenter;
+            if ([self.languageType isEqualToString:@"0"]) {
+                     lable5.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            }else{
+                     lable5.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+            }
             lable5.text=nameArray[i];
-            lable5.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+       
             [VV addSubview:lable5];
         }
     }

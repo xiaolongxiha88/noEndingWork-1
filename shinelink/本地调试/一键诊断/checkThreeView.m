@@ -178,7 +178,7 @@ static int  gotoModel4=1;
     }else{
          alertString=root_MAX_458_1;
     }
-    [self showAlertViewWithTitle:root_energy_wenxin_tishi message:[NSString stringWithFormat:@"%@%d%@",root_MAX_458,_alertTime,root_MAX_459] cancelButtonTitle:root_OK];
+    [self showAlertViewWithTitle:root_energy_wenxin_tishi message:[NSString stringWithFormat:@"%@%.1f%@",alertString,_alertTime,root_MAX_459] cancelButtonTitle:root_OK];
     
     _everyProgress=100/_progressTimes;
     
