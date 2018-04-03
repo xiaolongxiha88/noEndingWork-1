@@ -691,7 +691,7 @@ static int  gotoModel4=1;
     [view1 addSubview:view11];
     
     UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake((everyLalbeH-imageW)/2,(everyLalbeH-imageW)/2, imageW, imageW)];
-    image2.image=IMAGE(@"getMore.png");
+    image2.image=IMAGE(@"newheadnotes.png");
     [view11 addSubview:image2];
     
     

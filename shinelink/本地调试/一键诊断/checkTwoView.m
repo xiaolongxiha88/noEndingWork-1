@@ -1311,6 +1311,8 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
             
             self.pointGap *= scale;
             
+               ((YDLineChart*)recognizerView).pointGap = self.pointGap;
+            
             [UIView animateWithDuration:0.25 animations:^{
                 
                 CGRect frame = recognizerView.frame;
@@ -1344,8 +1346,10 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
                 leftMagin = centerX - self.scrollView.contentOffset.x;
                 
                 currentIndex = centerX / self.pointGap;
+                
+                     self.pointGap *= recognizer.scale;
                 ((YDLineChart*)recognizerView).pointGap = self.pointGap;
-                self.pointGap *= recognizer.scale;
+           
                 
                 if (_Type==1) {
                     recognizerView.frame = CGRectMake(((YDLineChart*)recognizerView).frame.origin.x, ((YDLineChart*)recognizerView).frame.origin.y, (((YDLineChart*)recognizerView).MaxX-1)* ((YDLineChart*)recognizerView).perXLen, ((YDLineChart*)recognizerView).frame.size.height);

@@ -525,13 +525,18 @@
     
     
     _isLongPress = isLongPress;
-     [self clear];
+   //  [self clear];
     [self setNeedsDisplay];
 }
 
 /* 绘制x与y轴 */
 - (void)drawXAndYLineWithContext:(CGContextRef)context{
     
+    if (_lableArray.count>0) {
+        for (UILabel *lable in _lableArray) { 
+            [lable removeFromSuperview];
+        }
+    }
     switch (_lineChartQuadrantType) {
         case JHLineChartQuadrantTypeFirstQuardrantYD:{
             
@@ -936,7 +941,7 @@
 
          
             
-            NSLog(@"长按X=%@",num);
+        //    NSLog(@"长按X=%@",num);
             CGFloat chartHeight = self.frame.size.height;
             
             CGPoint selectPoint = CGPointMake((nowPoint+1)*self.pointGap, chartHeight);

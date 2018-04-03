@@ -181,7 +181,7 @@
         }else{
         _customerCodeEnable=@"0";
             if ([_customerCodeEnable isEqualToString:@"0"]) {
-                [_textFieldMutableArray[5] removeFromSuperview];
+                [[_textFieldMutableArray lastObject] removeFromSuperview];
                [self removeText5];
             }
             
@@ -219,10 +219,10 @@
 }
 
 -(void)removeText5{
-    [_textFieldMutableArray[5] removeFromSuperview];
-    UIImageView *image3=[_backScroll viewWithTag:5];
-    UILabel *button3=[_backScroll viewWithTag:15];
-    UIView *view3=[_backScroll viewWithTag:25];
+    [[_textFieldMutableArray lastObject] removeFromSuperview];
+    UIImageView *image3=[_backScroll viewWithTag:_textFieldMutableArray.count-1];
+    UILabel *button3=[_backScroll viewWithTag:10+_textFieldMutableArray.count-1];
+    UIView *view3=[_backScroll viewWithTag:20+_textFieldMutableArray.count-1];
     [image3 removeFromSuperview];
     [button3 removeFromSuperview];
     [view3 removeFromSuperview];
@@ -247,10 +247,17 @@
     [_addressLable addGestureRecognizer:forget2];
     [_backScroll addSubview:_addressLable];
     
-    
-    NSArray *imageArray=[NSArray arrayWithObjects:@"icon---Name.png", @"icon---Password.png", @"icon---Password.png", @"icon---Email.png", @"iconfont-shouji.png",@"bianhao.png",nil];
-    NSArray *labelArray=[NSArray arrayWithObjects:root_yongHuMing, root_Mima, root_chongFu_miMa,root_dianzZiYouJian, root_DianHua, root_daiLiShangBianHao,nil];
-    NSArray *textFieldArray=[NSArray arrayWithObjects:root_Enter_your_username,root_Enter_your_pwd, root_chongFu_shuRu_miMa, root_Enter_email, root_Enter_phone_number,root_shuRu_daiLiShangBianHao, nil];
+    NSArray *imageArray;NSArray *labelArray;NSArray *textFieldArray;
+    if ([self.languageType isEqualToString:@"0"]) {
+        imageArray=[NSArray arrayWithObjects:@"icon---Name.png", @"icon---Password.png", @"icon---Password.png", @"icon---Email.png", @"iconfont-shouji.png",@"bianhao.png",nil];
+        labelArray=[NSArray arrayWithObjects:root_yongHuMing, root_Mima, root_chongFu_miMa,root_dianzZiYouJian, root_DianHua, root_daiLiShangBianHao,nil];
+        textFieldArray=[NSArray arrayWithObjects:root_Enter_your_username,root_Enter_your_pwd, root_chongFu_shuRu_miMa, root_Enter_email, root_Enter_phone_number,root_shuRu_daiLiShangBianHao, nil];
+    }else{
+        imageArray=[NSArray arrayWithObjects:@"icon---Name.png", @"icon---Password.png", @"icon---Password.png", @"icon---Email.png", @"bianhao.png",nil];
+        labelArray=[NSArray arrayWithObjects:root_yongHuMing, root_Mima, root_chongFu_miMa,root_dianzZiYouJian, root_daiLiShangBianHao,nil];
+        textFieldArray=[NSArray arrayWithObjects:root_Enter_your_username,root_Enter_your_pwd, root_chongFu_shuRu_miMa, root_Enter_email,root_shuRu_daiLiShangBianHao, nil];
+    }
+
    
     for (int i=0; i<labelArray.count; i++) {
         UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(30*NOW_SIZE,16*HEIGHT_SIZE+i*60*HEIGHT_SIZE+moveHeight,17*NOW_SIZE, 17*HEIGHT_SIZE)];
@@ -292,9 +299,7 @@
         if (i == 3) {
             textField.keyboardType = UIKeyboardTypeEmailAddress;
         }
-        if (i == 4) {
-            textField.keyboardType = UIKeyboardTypeEmailAddress;
-        }
+    
     }
     
     
@@ -409,8 +414,17 @@
 
 
 -(void)PresentGo{
-    NSArray *array=[[NSArray alloc]initWithObjects:root_Enter_your_username,root_Enter_your_pwd,root_chongFu_shuRu_miMa,root_Enter_email,root_Enter_phone_number,root_shuRu_daiLiShangBianHao,nil];
-    for (int i=0; i<array.count-2; i++) {
+    long checkNum;NSArray *array;
+   
+ 
+    if ([self.languageType isEqualToString:@"0"]) {
+        checkNum=array.count-2;
+         array=[[NSArray alloc]initWithObjects:root_Enter_your_username,root_Enter_your_pwd,root_chongFu_shuRu_miMa,root_Enter_email,root_Enter_phone_number,root_shuRu_daiLiShangBianHao,nil];
+    }else{
+          checkNum=array.count-1;
+         array=[[NSArray alloc]initWithObjects:root_Enter_your_username,root_Enter_your_pwd,root_chongFu_shuRu_miMa,root_Enter_email,root_shuRu_daiLiShangBianHao,nil];
+    }
+    for (int i=0; i<checkNum; i++) {
         if ([[_textFieldMutableArray[i] text] isEqual:@""]) {
             [self showToastViewWithTitle:array[i]];
             return;
@@ -460,8 +474,15 @@
      [_dataDic setObject:[_textFieldMutableArray[0] text] forKey:@"regUserName"];
      [_dataDic setObject:[_textFieldMutableArray[1] text] forKey:@"regPassword"];
      [_dataDic setObject:[_textFieldMutableArray[3] text] forKey:@"regEmail"];
-     [_dataDic setObject:[_textFieldMutableArray[4] text] forKey:@"regPhoneNumber"];
-      [_dataDic setObject:[_textFieldMutableArray[5] text] forKey:@"agentCode"];
+    
+    if ([self.languageType isEqualToString:@"0"]) {
+        [_dataDic setObject:[_textFieldMutableArray[4] text] forKey:@"regPhoneNumber"];
+        [_dataDic setObject:[_textFieldMutableArray[5] text] forKey:@"agentCode"];
+    }else{
+        [_dataDic setObject:@"" forKey:@"regPhoneNumber"];
+        [_dataDic setObject:[_textFieldMutableArray[4] text] forKey:@"agentCode"];
+    }
+
     
     AddCellectViewController *reg=[[AddCellectViewController alloc]initWithDataDict:_dataDic];
     //[self presentViewController:reg animated:YES completion:nil];

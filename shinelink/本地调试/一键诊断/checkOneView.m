@@ -991,6 +991,8 @@ __weak typeof(self) weakSelf = self;
             
             self.pointGap *= scale;
             
+                 ((YDLineChart*)recognizerView).pointGap = self.pointGap;
+            
             [UIView animateWithDuration:0.25 animations:^{
                 
                 CGRect frame = recognizerView.frame;
@@ -1026,8 +1028,9 @@ __weak typeof(self) weakSelf = self;
                 leftMagin = centerX - self.scrollView.contentOffset.x;
                 
                             currentIndex = centerX / self.pointGap;
+                     self.pointGap *= recognizer.scale;
                           ((YDLineChart*)recognizerView).pointGap = self.pointGap;
-                        self.pointGap *= recognizer.scale;
+                
                 
                 if (_Type==1) {
                     recognizerView.frame = CGRectMake(((YDLineChart*)recognizerView).frame.origin.x, ((YDLineChart*)recognizerView).frame.origin.y, (((YDLineChart*)recognizerView).MaxX-1)* ((YDLineChart*)recognizerView).perXLen, ((YDLineChart*)recognizerView).frame.size.height);
