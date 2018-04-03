@@ -15,10 +15,10 @@
 #import "usbToWifiDataControl.h"
 
 
-static float keyOneWaitTime=35.0;     //add 5second
+static float keyOneWaitTime=60.0;     //add 5second
 
 static int  firstReadTime=72.0;
- static int unit=72/35.0;
+ static int unit=72/60.0;
  static int unit2=28/7;
 
 #define   useToWifiCheckOneRemember @"useToWifiCheckOneRemember"

@@ -12,6 +12,7 @@ class ossTool: RootViewController  {
    var tableView:UITableView!
      var field0:UITextField!
         var view1:UIView!
+    var Lable3:UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,15 +90,21 @@ class ossTool: RootViewController  {
         }
          let snCode=self.getValidCode(field0.text)
         
-        let Lable3=UILabel()
-        Lable3.frame=CGRect(x: 0*NOW_SIZE, y: 100*HEIGHT_SIZE, width: 320*NOW_SIZE, height: 40*HEIGHT_SIZE)
-        let codeString="采集器校验码为"
-        Lable3.text=String(format: "%@:%@", codeString,snCode!)
-        Lable3.textColor=UIColor.white
-        Lable3.font=UIFont.systemFont(ofSize: 14*HEIGHT_SIZE)
-        Lable3.adjustsFontSizeToFitWidth=true
-        Lable3.textAlignment=NSTextAlignment.center
-        view1.addSubview(Lable3)
+        if (Lable3 == nil) {
+            Lable3=UILabel()
+            Lable3.frame=CGRect(x: 0*NOW_SIZE, y: 100*HEIGHT_SIZE, width: 320*NOW_SIZE, height: 40*HEIGHT_SIZE)
+            let codeString="采集器校验码为"
+            Lable3.text=String(format: "%@:%@", codeString,snCode!)
+            Lable3.textColor=UIColor.white
+            Lable3.font=UIFont.systemFont(ofSize: 14*HEIGHT_SIZE)
+            Lable3.adjustsFontSizeToFitWidth=true
+            Lable3.textAlignment=NSTextAlignment.center
+            view1.addSubview(Lable3)
+        }else{
+            let codeString="采集器校验码为"
+            Lable3.text=String(format: "%@:%@", codeString,snCode!)
+        }
+     
         
     }
     

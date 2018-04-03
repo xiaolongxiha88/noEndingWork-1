@@ -184,6 +184,19 @@
     }
     self.selectTableView.frame = CGRectMake(0, buttonHeight, _alertView.frame.size.width, _alertView.frame.size.height-reduceHeight);
     
+        float cancelH=buttonHeight*0.3;
+    
+ 
+
+    UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    cancelButton.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
+    cancelButton.frame = CGRectMake(buttonHeight*0.35, buttonHeight*0.35, cancelH, cancelH);
+       [cancelButton setBackgroundImage:IMAGE(@"close_max.png") forState:UIControlStateNormal];
+   [cancelButton.layer setCornerRadius:cancelH/2];
+    [cancelButton addTarget:self action:@selector(closeView) forControlEvents:UIControlEventTouchUpInside];
+    [self.alertView addSubview:cancelButton];
+    
+    
     UIButton *allButton = [UIButton buttonWithType:UIButtonTypeCustom];
     allButton.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     allButton.frame = CGRectMake(0, _alertView.frame.size.height-buttonHeight, _alertView.frame.size.width/2, buttonHeight);
@@ -194,6 +207,14 @@
     [allButton addTarget:self action:@selector(choiceAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.alertView addSubview:allButton];
     
+}
+
+- (void)closeView{
+    [UIView animateWithDuration:0.1 animations:^{
+        self.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 
 - (void)choiceAction:(UIButton*)button{

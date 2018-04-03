@@ -16,9 +16,9 @@
 #import "ZJBLStoreShopTypeAlert.h"
 #import "RKAlertView.h"
 
-static float keyOneWaitTime=8.0;     //add 3second            读波形20秒
-static float keyOneWaitTime2=23.0;      //add 3second         读波形20秒
-static int  firstReadTime=20.0;
+static float keyOneWaitTime=8.0;     //add 3second            读波形5秒
+static float keyOneWaitTime2=28.0;      //add 3second         读波形25秒
+static float  firstReadTime=20.0;
 static float readWaveTime=20;      //读波形时间
 
 #define   useToWifiCheckTwoOneRemember @"useToWifiCheckTwoOneRemember"

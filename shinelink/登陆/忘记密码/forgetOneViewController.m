@@ -27,7 +27,7 @@
     [self.navigationController.navigationBar setBarTintColor:MainColor];
     
     UIButton *byEmail =  [UIButton buttonWithType:UIButtonTypeCustom];
-    byEmail.frame=CGRectMake(60*NOW_SIZE,100*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    byEmail.frame=CGRectMake(60*NOW_SIZE,80*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     // [byEmail.layer setMasksToBounds:YES];
     //[byEmail.layer setCornerRadius:25.0];
     [byEmail setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
@@ -40,7 +40,7 @@
     NSString *currentLanguage = [languages objectAtIndex:0];
     if ([currentLanguage hasPrefix:@"zh-Hans"]) {
         UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-        goBut.frame=CGRectMake(60*NOW_SIZE,180*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+        goBut.frame=CGRectMake(60*NOW_SIZE,260*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
         // [goBut.layer setMasksToBounds:YES];
         //[goBut.layer setCornerRadius:25.0];
         [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
@@ -49,7 +49,7 @@
         [goBut addTarget:self action:@selector(byPhone) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:goBut];
         
-        UILabel *alertLable= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE,220*HEIGHT_SIZE, 300*NOW_SIZE, 30*HEIGHT_SIZE)];
+        UILabel *alertLable= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE,300*HEIGHT_SIZE, 300*NOW_SIZE, 30*HEIGHT_SIZE)];
         NSString *alertText1=root_jinggong_yijianjianzhan_yonghu;
         NSString *alertText=[NSString stringWithFormat:@"(%@)",alertText1];
         alertLable.text=alertText;

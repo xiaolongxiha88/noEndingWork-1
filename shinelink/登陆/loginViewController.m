@@ -898,6 +898,17 @@ NSLog(@"体验馆");
                                 
                                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]] forKey:@"roleNum"];
                                 
+                                      NSString *roleNum=[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]];
+                                
+                                //获取分销商名字
+                                if ([roleNum isEqualToString:@"7"] || [roleNum isEqualToString:@"15"] || [roleNum isEqualToString:@"6"] || [roleNum isEqualToString:@"14"]) {
+                                    NSDictionary *useDic=[NSDictionary dictionaryWithDictionary:objDic[@"user"]];
+                                    if ([useDic.allKeys containsObject:@"company"]) {
+                                        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"company"]] forKey:@"agentCompany"];
+                                           
+                                    }
+                                }
+                                
                                 _OssFirst=[[NSUserDefaults standardUserDefaults] objectForKey:@"firstGoToOss"];
                                 
                                 if ([_OssFirst isEqualToString:@"Y"]) {
@@ -905,7 +916,7 @@ NSLog(@"体验馆");
                                     OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];
                                     [self.navigationController pushViewController:OSSView animated:NO];
                                 }else{
-                                    NSString *roleNum=[NSString stringWithFormat:@"%@",objDic[@"user"][@"role"]];
+                              
                                     
                                     if ([roleNum isEqualToString:@"1"] || [roleNum isEqualToString:@"2"] || [roleNum isEqualToString:@"3"] ) {
 
@@ -932,12 +943,7 @@ NSLog(@"体验馆");
                                                 [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"agentCodeId"];
                                             }
                                         }
-                                        if ([roleNum isEqualToString:@"7"] || [roleNum isEqualToString:@"15"] || [roleNum isEqualToString:@"6"] || [roleNum isEqualToString:@"14"]) {
-                                            NSDictionary *useDic=[NSDictionary dictionaryWithDictionary:objDic[@"user"]];
-                                            if ([useDic.allKeys containsObject:@"company"]) {
-                                                      [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"company"]] forKey:@"agentCompany"];
-                                            }
-                                        }
+                                 
                                         
                                         ossFistVC *OSSView=[[ossFistVC alloc]init];
                                         OSSView.serverListArray=[NSMutableArray arrayWithArray:serverListArray];

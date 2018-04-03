@@ -112,7 +112,7 @@ class ossFistVC: RootViewController {
             
         
         }else if roleString=="6" || roleString=="14" || roleString=="7" || roleString=="15"{
-          let  companyString=UserDefaults.standard.object(forKey: "agentCompany") as! String
+          let  companyString=UserDefaults.standard.object(forKey: "agentCompany") as? String ?? ""
             if !(companyString.isEqual("")){
                    self.title=companyString
             }

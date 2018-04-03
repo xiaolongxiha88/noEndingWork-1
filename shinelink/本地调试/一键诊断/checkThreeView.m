@@ -18,10 +18,10 @@
 #define   useToWifiCheckThreeRemember @"useToWifiCheckThreeRemember"
 #define   useToWifiCheckThreeRememberTime @"useToWifiCheckThreeRememberTime"
 
-static float waitTime1=30;     //30
-static float waitTime2=20;      //20
-static float waitTime3=10;        //10
-static float waitTime4=15;          //15
+static float waitTime1=60;     //60
+static float waitTime2=25;      //25
+static float waitTime3=15;        //15
+static float waitTime4=20;          //20
 
 static int  gotoModel1=2;
 static int  gotoModel2=4;
