@@ -111,7 +111,7 @@
     //上线检查
     [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:is_Test];
     
-    NSString *testDemo=@"OK";
+    NSString *testDemo=@"O";
     if ([testDemo isEqualToString:@"OK"]) {
         useToWifiView1 *testView=[[useToWifiView1 alloc]init];
 
@@ -930,6 +930,12 @@ NSLog(@"体验馆");
                                                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"code"]] forKey:@"agentCodeId"];
                                             }else{
                                                 [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"agentCodeId"];
+                                            }
+                                        }
+                                        if ([roleNum isEqualToString:@"7"] || [roleNum isEqualToString:@"15"] || [roleNum isEqualToString:@"6"] || [roleNum isEqualToString:@"14"]) {
+                                            NSDictionary *useDic=[NSDictionary dictionaryWithDictionary:objDic[@"user"]];
+                                            if ([useDic.allKeys containsObject:@"company"]) {
+                                                      [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",objDic[@"user"][@"company"]] forKey:@"agentCompany"];
                                             }
                                         }
                                         

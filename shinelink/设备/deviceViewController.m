@@ -1623,6 +1623,7 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
     NSMutableDictionary *dict=[NSMutableDictionary dictionary];
     NSString *netType;
     GetDevice *get=[_managerNowArray objectAtIndex:_indexPath.row];
+    
     if ([getDevice.type isEqualToString:@"inverter"]) {
         [dict setObject:getDevice.deviceSN forKey:@"inverterId"];
         netType=@"/newInverterAPI.do?op=deleteInverter";
@@ -1666,7 +1667,11 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
                 }else
                 {
                     NSLog(@"del successFull");
-                    [self netRequest];
+                   // [self netRequest];
+          
+                    [_managerNowArray removeObjectAtIndex:_indexPath.row];
+                    
+                    [self.tableView reloadData];
                 }
             }
         }

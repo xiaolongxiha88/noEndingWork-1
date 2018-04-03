@@ -60,7 +60,7 @@ class ossFistVC: RootViewController {
         
         if isDaiLiShangBool{
        self.initNet1()
-   //     self.initNet4()
+    self.initNet4()
         }
         
     }
@@ -112,7 +112,11 @@ class ossFistVC: RootViewController {
             
         
         }else if roleString=="6" || roleString=="14" || roleString=="7" || roleString=="15"{
-           
+          let  companyString=UserDefaults.standard.object(forKey: "agentCompany") as! String
+            if !(companyString.isEqual("")){
+                   self.title=companyString
+            }
+            
                isDaiLiShangBool=true
         }
 
@@ -244,7 +248,7 @@ class ossFistVC: RootViewController {
     
         imageOne=UIImageView()
         self.imageOne.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: SCREEN_Width, height: heigh0)
-         imageOne.image=UIImage(named: "head_bg_oss_first.png")
+         imageOne.image=UIImage(named: "oss_head_bg.png")
         scrollView.addSubview(imageOne)
         
     }
@@ -259,7 +263,8 @@ class ossFistVC: RootViewController {
         let imageColor1=self.getImageWithColor(color: UIColor.white, size: CGSize(width: SCREEN_Width, height: lableH))
        // let imageColor2=self.getImageWithColor(color: COLOR(_R: 222, _G: 222, _B: 222, _A: 1), size: CGSize(width: SCREEN_Width, height: lableH))
 
-        let lableArray=["设备管理","用户管理","电站管理"]
+      //  let lableArray=["设备管理","用户管理","电站管理"]
+         let lableArray=["设备管理"]
            let imageArray=["device_iconI.png","oss_user_list.png","oss_power_station.png"]
         
         for i in 0..<lableArray.count {
@@ -391,48 +396,48 @@ class ossFistVC: RootViewController {
         }
         
       //   let lableValueArray2=["10000","10000"]
-        let lableArray2=["用户数","电站数"]
-        let imageArray2=["user_list_img.png","power_station_img.png"]
-          let colorArray2=[COLOR(_R: 55, _G: 190, _B: 182, _A: 1),COLOR(_R: 122, _G: 150, _B: 221, _A: 1)]
-        for i in 0...1 {
-             let H00=60*HEIGHT_SIZE+lableH
-            let imageAll2 = UIImageView()
-            imageAll2.frame=CGRect(x: 2*NOW_SIZE, y:heigh0+170*HEIGHT_SIZE+lableH*2+H00*CGFloat(i), width: SCREEN_Width-4*NOW_SIZE, height: 60*HEIGHT_SIZE)
-            imageAll2.image=UIImage(named: "intergrator_device.png")
-            if isDaiLiShangBool{
-                scrollView.addSubview(imageAll2)
-            }
-            
-            let viewW=100*NOW_SIZE
-             let viewH=60*HEIGHT_SIZE
-            let imagePH=40*HEIGHT_SIZE
-            let H=(viewH-imagePH)/2
-            let W=10*NOW_SIZE
-            let imageP = UIImageView()
-            imageP.frame=CGRect(x: W, y: H, width: imagePH, height: imagePH)
-              imageP.image=UIImage(named: imageArray2[i])
-            imageAll2.addSubview(imageP)
-            
-            let  lable22=UILabel()
-            lable22.frame=CGRect(x: W*2+imagePH, y: 0, width:viewW, height: viewH)
-            lable22.textColor=colorArray2[i]
-            lable22.textAlignment=NSTextAlignment.left
-            lable22.adjustsFontSizeToFitWidth=true
-            lable22.text=lableArray2[i]
-            lable22.font=UIFont.systemFont(ofSize: 14*HEIGHT_SIZE)
-            imageAll2.addSubview(lable22)
-            
-            let  lable33=UILabel()
-            lable33.frame=CGRect(x: W*2+imagePH+viewW, y: 0, width:imageAll2.frame.width-(W*4+imagePH+viewW), height: viewH)
-            lable33.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
-            lable33.textAlignment=NSTextAlignment.right
-            lable33.adjustsFontSizeToFitWidth=true
-            //   lable33.text=lableValueArray2[i]
-            lable33.tag=6004+i
-            lable33.font=UIFont.systemFont(ofSize: 24*HEIGHT_SIZE)
-            imageAll2.addSubview(lable33)
-            
-        }
+//        let lableArray2=["用户数","电站数"]
+//        let imageArray2=["user_list_img.png","power_station_img.png"]
+//          let colorArray2=[COLOR(_R: 55, _G: 190, _B: 182, _A: 1),COLOR(_R: 122, _G: 150, _B: 221, _A: 1)]
+//        for i in 0...1 {
+//             let H00=60*HEIGHT_SIZE+lableH
+//            let imageAll2 = UIImageView()
+//            imageAll2.frame=CGRect(x: 2*NOW_SIZE, y:heigh0+170*HEIGHT_SIZE+lableH*2+H00*CGFloat(i), width: SCREEN_Width-4*NOW_SIZE, height: 60*HEIGHT_SIZE)
+//            imageAll2.image=UIImage(named: "intergrator_device.png")
+//            if isDaiLiShangBool{
+//                scrollView.addSubview(imageAll2)
+//            }
+//
+//            let viewW=100*NOW_SIZE
+//             let viewH=60*HEIGHT_SIZE
+//            let imagePH=40*HEIGHT_SIZE
+//            let H=(viewH-imagePH)/2
+//            let W=10*NOW_SIZE
+//            let imageP = UIImageView()
+//            imageP.frame=CGRect(x: W, y: H, width: imagePH, height: imagePH)
+//              imageP.image=UIImage(named: imageArray2[i])
+//            imageAll2.addSubview(imageP)
+//
+//            let  lable22=UILabel()
+//            lable22.frame=CGRect(x: W*2+imagePH, y: 0, width:viewW, height: viewH)
+//            lable22.textColor=colorArray2[i]
+//            lable22.textAlignment=NSTextAlignment.left
+//            lable22.adjustsFontSizeToFitWidth=true
+//            lable22.text=lableArray2[i]
+//            lable22.font=UIFont.systemFont(ofSize: 14*HEIGHT_SIZE)
+//            imageAll2.addSubview(lable22)
+//
+//            let  lable33=UILabel()
+//            lable33.frame=CGRect(x: W*2+imagePH+viewW, y: 0, width:imageAll2.frame.width-(W*4+imagePH+viewW), height: viewH)
+//            lable33.textColor=COLOR(_R: 51, _G: 51, _B: 51, _A: 1)
+//            lable33.textAlignment=NSTextAlignment.right
+//            lable33.adjustsFontSizeToFitWidth=true
+//            //   lable33.text=lableValueArray2[i]
+//            lable33.tag=6004+i
+//            lable33.font=UIFont.systemFont(ofSize: 24*HEIGHT_SIZE)
+//            imageAll2.addSubview(lable33)
+//
+//        }
         
     }
     
@@ -1122,7 +1127,8 @@ class ossFistVC: RootViewController {
  
                     let array0=objDic.allKeys as NSArray
                         if  array0.contains("todayEnergy"){
- self.integratorValueArray=[objDic["todayEnergy"] as? NSString ?? "",objDic["totalEnergy"] as? NSString ?? "",objDic["totalInvNum"] as? NSString ?? "",objDic["totalPower"] as? NSString ?? "",objDic["userNum"] as? NSString ?? objDic["userNum"] as! Int,objDic["plantNum"] as? NSString ?? objDic["plantNum"] as! Int]
+// self.integratorValueArray=[objDic["todayEnergy"] as? NSString ?? "",objDic["totalEnergy"] as? NSString ?? "",objDic["totalInvNum"] as? NSString ?? "",objDic["totalPower"] as? NSString ?? "",objDic["userNum"] as? NSString ?? objDic["userNum"] as! Int,objDic["plantNum"] as? NSString ?? objDic["plantNum"] as! Int]
+                             self.integratorValueArray=[objDic["todayEnergy"] as? NSString ?? "",objDic["totalEnergy"] as? NSString ?? "",objDic["totalInvNum"] as? NSString ?? "",objDic["totalPower"] as? NSString ?? ""]
                             
                         }
 

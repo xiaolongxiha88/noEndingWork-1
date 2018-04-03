@@ -188,7 +188,7 @@
     allButton.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     allButton.frame = CGRectMake(0, _alertView.frame.size.height-buttonHeight, _alertView.frame.size.width/2, buttonHeight);
     allButton.selected=YES;
-    [allButton setTitle:@"全选" forState:UIControlStateNormal];
+    [allButton setTitle:root_MAX_494 forState:UIControlStateNormal];
     [allButton setTitleColor:MainColor forState:UIControlStateNormal];
     allButton.titleLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [allButton addTarget:self action:@selector(choiceAction:) forControlEvents:UIControlEventTouchUpInside];

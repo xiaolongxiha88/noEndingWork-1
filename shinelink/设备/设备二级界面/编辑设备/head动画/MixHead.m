@@ -203,7 +203,7 @@
         float KW2=(KW1-directionSizeW1-directionSizeW2)/4;
         float DX=imageSize+W0;
         float DX1=(ScreenWidth-imageSize1)/2+imageSize1;
-        float TIME=1;
+        float TIME=0.5;
         //方向图
         CGRect rectD1=CGRectMake((ScreenWidth-directionSizeH1)/2, H1+imageSize+KH3, directionSizeH1, directionSizeW1);
         CGRect rectD2=CGRectMake((ScreenWidth-directionSizeH1)/2, (H0-imageSize1)/2+H1+imageSize1+KH3, directionSizeH1, directionSizeW1);
@@ -217,7 +217,7 @@
         //上面的流向
         if ([valueUp floatValue]>0) {
             UIImageView*viewD1=[self getImageTwo:rectD1 imageName:@"newheadD1.png"];
-            [viewD1.layer addAnimation:[self getAnimationOne:TIME delayTime:0.5] forKey:nil];
+            [viewD1.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
         }
         
         
@@ -225,10 +225,10 @@
         if ([valuedown floatValue]>0) {
             if (_isGridToUp) {
                 UIImageView*viewD2=[self getImageTwo:rectD2 imageName:@"newheadD2.png"];
-                [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:1.5] forKey:nil];
+                [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:TIME] forKey:nil];
             }else{
                 UIImageView*viewD2=[self getImageTwo:rectD2 imageName:@"newheadD1.png"];
-                [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:1.5] forKey:nil];
+                [viewD2.layer addAnimation:[self getAnimationOne:TIME delayTime:TIME] forKey:nil];
             }
         }
         
@@ -240,13 +240,13 @@
                 [viewD3.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
                 
                 UIImageView*viewD31=[self getImageTwo:rectD31 imageName:@"newheadD4.png"];
-                [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:1] forKey:nil];
+                [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:TIME] forKey:nil];
             }else{
                 UIImageView*viewD31=[self getImageTwo:rectD3 imageName:@"newheadD33.png"];
-                [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:1] forKey:nil];
+                [viewD31.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
                 
                 UIImageView*viewD3=[self getImageTwo:rectD31 imageName:@"newheadD44.png"];
-                [viewD3.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
+                [viewD3.layer addAnimation:[self getAnimationOne:TIME delayTime:TIME] forKey:nil];
             }
         }
         
@@ -254,10 +254,10 @@
         //右边的流向
         if ([valueRight floatValue]>0) {
             UIImageView*viewD4=[self getImageTwo:rectD4 imageName:@"newheadD4.png"];
-            [viewD4.layer addAnimation:[self getAnimationOne:TIME delayTime:2] forKey:nil];
+            [viewD4.layer addAnimation:[self getAnimationOne:TIME delayTime:0] forKey:nil];
             
             UIImageView*viewD41=[self getImageTwo:rectD41 imageName:@"newheadD3.png"];
-            [viewD41.layer addAnimation:[self getAnimationOne:TIME delayTime:3] forKey:nil];
+            [viewD41.layer addAnimation:[self getAnimationOne:TIME delayTime:TIME] forKey:nil];
         }
         
     }

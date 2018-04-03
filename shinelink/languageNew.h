@@ -1134,7 +1134,7 @@
 #define  root_MIX_492  NSLocalizedString(@"492防逆流设置", nil)
 
 #define  root_MIX_493  NSLocalizedString(@"493Phase", nil)
-
+#define  root_MAX_494  NSLocalizedString(@"494全选", nil)
 
 
 

@@ -284,8 +284,13 @@
             if ([[jsonObj objectForKey:@"success"] integerValue] ==0) {
                 [self showAlertViewWithTitle:nil message:root_shanchu_shibai  cancelButtonTitle:root_Yes];
             }else{
+                
                 [self showAlertViewWithTitle:nil message:root_shanChu_chengGong cancelButtonTitle:root_Yes];
-                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+                [_arrayData removeObjectAtIndex:_indexPath.row];
+                [self.tableView reloadData];
+                
+               // [self.navigationController popToRootViewControllerAnimated:YES];
             }
         } failure:^(NSError *error) {
             [self hideProgressView];
