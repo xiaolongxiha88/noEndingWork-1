@@ -232,6 +232,7 @@
 		335667571D7E606800C40129 /* PGIndexBannerSubiew.m in Sources */ = {isa = PBXBuildFile; fileRef = 335667561D7E606800C40129 /* PGIndexBannerSubiew.m */; };
 		3356675B1D7E606F00C40129 /* NewPagedFlowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3356675A1D7E606F00C40129 /* NewPagedFlowView.m */; };
 		3356782B1CC62A5A00EE4A73 /* controlCNJTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3356782A1CC62A5A00EE4A73 /* controlCNJTable.m */; };
+		33571B862074A42F00BE66D5 /* log123.png in Resources */ = {isa = PBXBuildFile; fileRef = 33571B852074A42F00BE66D5 /* log123.png */; };
 		3357DDD21F6928720089A679 /* buttonCancle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3357DDD11F6928720089A679 /* buttonCancle.png */; };
 		3358812E1CB66E250068EFAD /* qualityTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3358812D1CB66E250068EFAD /* qualityTableViewController.m */; };
 		335881311CB66E460068EFAD /* qualityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335881301CB66E460068EFAD /* qualityCell.m */; };
@@ -1198,6 +1199,7 @@
 		3356675A1D7E606F00C40129 /* NewPagedFlowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPagedFlowView.m; sourceTree = "<group>"; };
 		335678291CC62A5A00EE4A73 /* controlCNJTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = controlCNJTable.h; sourceTree = "<group>"; };
 		3356782A1CC62A5A00EE4A73 /* controlCNJTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = controlCNJTable.m; sourceTree = "<group>"; };
+		33571B852074A42F00BE66D5 /* log123.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = log123.png; sourceTree = "<group>"; };
 		3357DDD11F6928720089A679 /* buttonCancle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonCancle.png; sourceTree = "<group>"; };
 		3358812C1CB66E250068EFAD /* qualityTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = qualityTableViewController.h; sourceTree = "<group>"; };
 		3358812D1CB66E250068EFAD /* qualityTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = qualityTableViewController.m; sourceTree = "<group>"; };
@@ -3601,6 +3603,7 @@
 		337C30511CCDAEDA002B99B7 /* pic */ = {
 			isa = PBXGroup;
 			children = (
+				33571B852074A42F00BE66D5 /* log123.png */,
 				33A4384B1D1ABE86004E9AB6 /* service3.png */,
 				335BF1E81D100572008EEE99 /* ziliao.png */,
 				335BF1E61D100558008EEE99 /* message.png */,
@@ -5240,6 +5243,7 @@
 				33FEFD6D1C7DB38400324374 /* iconfont-gongsijianjie@2x.png in Resources */,
 				3370EBB71F417E8E00F37149 /* 数据.png in Resources */,
 				3319E08F1D5AFD6D006623A9 /* view.html in Resources */,
+				33571B862074A42F00BE66D5 /* log123.png in Resources */,
 				3370FF0F1F5FC9050089B317 /* storageen.png.png in Resources */,
 				33FEFD7C1C7DB38400324374 /* shebei@3x.png in Resources */,
 				3376B3DD1F973EEE0069F820 /* MAXdown.png in Resources */,

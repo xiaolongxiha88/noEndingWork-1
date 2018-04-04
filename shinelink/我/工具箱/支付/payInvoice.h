@@ -10,4 +10,6 @@
 
 @interface payInvoice : RootViewController
 
+@property (nonatomic, strong) NSDictionary *infoDic;
+
 @end

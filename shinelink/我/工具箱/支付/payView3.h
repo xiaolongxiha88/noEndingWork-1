@@ -14,5 +14,6 @@
 @property(nonatomic,strong)NSArray *snArray;
 @property(nonatomic,strong)NSString *yearString;
 @property(nonatomic,strong)NSString *moneyString;
+@property (nonatomic, strong) NSDictionary *infoDic;
 
 @end

@@ -29,6 +29,8 @@
 @property (nonatomic, strong) NSMutableArray *choiceArray;
 @property(nonatomic,assign)NSInteger unitMoney;
 
+@property (nonatomic, strong) NSDictionary *infoDic;
+
 @end
 
 @implementation payView1
@@ -42,6 +44,7 @@
     UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"交易历史" style:UIBarButtonItemStylePlain target:self action:@selector(checkResult)];
     self.navigationItem.rightBarButtonItem=rightItem;
     
+    _infoDic=[NSDictionary new];
     _unitMoney=0;
     [self initUI];
     [self getNetMoney];
@@ -89,7 +92,7 @@
             if ([firstDic[@"result"] intValue]==1) {
                 
                 _unitMoney=[[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"flowPrice"]] integerValue];
-                
+                _infoDic=[NSDictionary dictionaryWithDictionary:firstDic[@"obj"]];
             }else{
                 
             }
@@ -152,7 +155,7 @@
     _moneyLable= [[UILabel alloc] initWithFrame:CGRectMake(20*NOW_SIZE, 0*HEIGHT_SIZE, 160*NOW_SIZE, HEIGHT_SIZE*40)];
     _moneyLable.font=[UIFont systemFontOfSize:16*HEIGHT_SIZE];
     _moneyLable.textAlignment = NSTextAlignmentLeft;
-    _moneyLable.text=@"总计:0";
+    _moneyLable.text=@"总计:¥ 0";
     _moneyLable.textColor =[UIColor redColor];
     [V2 addSubview:_moneyLable];
     
@@ -253,6 +256,7 @@
     
     payView3 *testView=[[payView3 alloc]init];
     testView.AllMoney=_AllMoney;
+    testView.infoDic=[NSDictionary dictionaryWithDictionary:_infoDic];
     testView.yearString=[NSString stringWithFormat:@"%ld",_yearNum];
        testView.moneyString=[NSString stringWithFormat:@"%ld",_AllMoney];
     testView.snArray=[NSMutableArray arrayWithArray:snArray0];
@@ -275,7 +279,7 @@
     }
     
     _AllMoney=allMoney*_yearNum;
-    _moneyLable.text=[NSString stringWithFormat:@"%@:%ld",@"总计",_AllMoney];
+    _moneyLable.text=[NSString stringWithFormat:@"%@:¥ %ld",@"总计",_AllMoney];
     
 }
 

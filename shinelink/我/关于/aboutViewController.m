@@ -101,7 +101,7 @@
     double imageSize=80*HEIGHT_SIZE;
     
     UIImageView *userImage= [[UIImageView alloc] initWithFrame:CGRectMake((Kwidth-imageSize)/2, 60*HEIGHT_SIZE, imageSize, imageSize)];
-    [userImage setImage:[UIImage imageNamed:@"logo3.png"]];
+    [userImage setImage:[UIImage imageNamed:@"log123.png"]];
     userImage.layer.masksToBounds=YES;
     userImage.layer.cornerRadius=imageSize/4.0;
 //    [userImage setUserInteractionEnabled:YES];

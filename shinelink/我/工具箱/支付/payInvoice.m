@@ -99,8 +99,9 @@
         [V5 addSubview:lineView];
     }
     
+    
     UIButton* _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-    _goBut.frame=CGRectMake(60*NOW_SIZE,390*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    _goBut.frame=CGRectMake(60*NOW_SIZE,460*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     [_goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
     [_goBut setTitle:@"完成" forState:UIControlStateNormal];
     _goBut.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
@@ -113,7 +114,7 @@
     
      NSArray *payValue=[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceArray"];
     
-    _view2=[[UIView alloc]initWithFrame:CGRectMake(0, 130*HEIGHT_SIZE, SCREEN_Width, 250*HEIGHT_SIZE)];
+    _view2=[[UIView alloc]initWithFrame:CGRectMake(0, 130*HEIGHT_SIZE, SCREEN_Width, 330*HEIGHT_SIZE)];
     _view2.backgroundColor=[UIColor clearColor];
     _view2.userInteractionEnabled=YES;
     [_scrollView addSubview:_view2];
@@ -128,7 +129,7 @@
     [_view2 addSubview:VL1];
     
     float H1=40*HEIGHT_SIZE;
-    NSArray *lableNameArray=@[@"发票抬头",@"企业税号",@"联系电话",@"详细地址"];
+    NSArray *lableNameArray=@[@"发票抬头",@"企业税号",@"收件人",@"联系电话",@"详细地址"];
     for (int i=0; i<lableNameArray.count; i++) {
         UIView *V0=[[UIView alloc]initWithFrame:CGRectMake(0, 30*HEIGHT_SIZE+H1*i, SCREEN_Width,H1)];
            V0.userInteractionEnabled=YES;
@@ -147,7 +148,7 @@
         _textField2.textColor = COLOR(102, 102, 102, 1);
         _textField2.tintColor = COLOR(102, 102, 102, 1);
         _textField2.textAlignment=NSTextAlignmentLeft;
-        if (payValue.count==5) {
+        if (payValue.count>i) {
             _textField2.text=payValue[i];
         }
         _textField2.tag=3000+i;
@@ -163,14 +164,17 @@
         
     }
     
-    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 190*HEIGHT_SIZE, SCREEN_Width,60*HEIGHT_SIZE)];
+    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 230*HEIGHT_SIZE, SCREEN_Width,60*HEIGHT_SIZE)];
     V1.userInteractionEnabled=YES;
     V1.backgroundColor=[UIColor whiteColor];
       [_view2 addSubview:V1];
     
     self.contentView = [[UITextView alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0, 300*NOW_SIZE,60*HEIGHT_SIZE )];
     _contentView.text=root_pay_191;
-      _contentView.text=payValue[4];
+    if (payValue.count>5) {
+        _contentView.text=payValue[5];
+    }
+    
     self.contentView.textColor = COLOR(153, 153, 153, 1);
     self.contentView.tintColor = COLOR(153, 153, 153, 1);
     _contentView.textAlignment=NSTextAlignmentLeft;
@@ -178,6 +182,18 @@
     self.contentView.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
     [V1 addSubview:_contentView];
     
+    
+    NSString* alertString1;
+    if ([_infoDic.allKeys containsObject:@"defaultCourier"]) {
+        alertString1=[_infoDic objectForKey:@"defaultCourier"];
+    }
+    UILabel *alertV= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 290*HEIGHT_SIZE, 300*NOW_SIZE, 30*HEIGHT_SIZE)];
+    alertV.font=[UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    alertV.textAlignment = NSTextAlignmentCenter;
+    alertV.text=[NSString stringWithFormat:@"快递信息:%@(运费到付)",alertString1];
+    alertV.numberOfLines=0;
+    alertV.textColor =MainColor;
+    [_view2 addSubview:alertV];
 
     
 }
@@ -191,9 +207,15 @@
           [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"invoiceEnable"];
         
         NSMutableArray *textArray=[NSMutableArray new];
-         for (int i=0; i<4; i++) {
+         for (int i=0; i<5; i++) {
             UITextField *textF=[_scrollView viewWithTag:3000+i];
-             [textArray addObject:textF.text];
+             if ([textF.text isEqualToString:@""]) {
+                 [self showToastViewWithTitle:@"请填写发票相关信息"];
+                 return;
+             }else{
+                   [textArray addObject:textF.text];
+             }
+           
         }
         if ([_contentView.text isEqualToString:root_pay_191]) {
             [textArray addObject:@""];

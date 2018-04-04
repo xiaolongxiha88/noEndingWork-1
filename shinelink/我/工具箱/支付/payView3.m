@@ -18,6 +18,8 @@
 @property(nonatomic,strong)NSArray *InvoiceArray;
 @property(nonatomic,assign)int payType;
 @property(nonatomic,strong)NSString *payID;
+
+
 @end
 
 @implementation payView3
@@ -143,7 +145,7 @@
     UILabel*  _moneyLable= [[UILabel alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 10*HEIGHT_SIZE, SCREEN_Width, HEIGHT_SIZE*80)];
     _moneyLable.font=[UIFont systemFontOfSize:36*HEIGHT_SIZE];
     _moneyLable.textAlignment = NSTextAlignmentCenter;
-    _moneyLable.text=[NSString stringWithFormat:@"¥ %ld",_AllMoney];
+    _moneyLable.text=[NSString stringWithFormat:@"¥ %ld ",_AllMoney];
     _moneyLable.textColor =[UIColor blackColor];
     [_V22 addSubview:_moneyLable];
     
@@ -253,9 +255,14 @@
       NSArray *payA=[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceArray"];
     
     BOOL payB=[[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceEnable"] boolValue];
-    NSString*haveInvoice; NSString*InvoiceName=@"";NSString*invoiceNum=@"";NSString*invoicePhone=@"";NSString*invoiceAddr=@"";NSString*remark=@"";
+    NSString*haveInvoice; NSString*InvoiceName=@"";NSString*invoiceNum=@"";NSString*recipients=@"";NSString*invoicePhone=@"";NSString*invoiceAddr=@"";NSString*remark=@"";
     if (payB) {
-        haveInvoice=@"1";InvoiceName=payA[0];invoiceNum=payA[1];invoicePhone=payA[2];invoiceAddr=payA[3];remark=payA[4];
+        if (payA.count>5) {
+             haveInvoice=@"1";InvoiceName=payA[0];invoiceNum=payA[1];recipients=payA[2];invoicePhone=payA[3];invoiceAddr=payA[4];remark=payA[5];
+        }else{
+             haveInvoice=@"0";
+        }
+       
     }else{
  haveInvoice=@"0";
     }
@@ -306,6 +313,7 @@
                              @"haveInvoice":haveInvoice,
                          @"invoiceName":InvoiceName,
                          @"invoiceNum":invoiceNum,
+                          @"recipients":recipients,
                          @"invoicePhone":invoicePhone,
                          @"invoiceAddr":invoiceAddr,
                            @"remark":remark,
@@ -405,6 +413,7 @@
 -(void)goTopaperView{
     
     payInvoice *testView=[[payInvoice alloc]init];
+        testView.infoDic=[NSDictionary dictionaryWithDictionary:_infoDic];
     [self.navigationController pushViewController:testView animated:YES];
     
 }
