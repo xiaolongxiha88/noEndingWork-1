@@ -13,6 +13,8 @@
 @interface resultDetailView ()
 
 @property (nonatomic, strong)UIScrollView *scrollView;
+@property (nonatomic, strong)NSMutableArray *billArray;
+
 @end
 
 @implementation resultDetailView
@@ -30,9 +32,30 @@
     
     [self.view addSubview:_scrollView];
     
+    _billArray=[NSMutableArray array];
+    if ([_allDic.allKeys containsObject:@"billingStatus"]) {
+        NSString *billingStatus=[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"billingStatus"]];
+        if ([billingStatus integerValue]==1) {
+            [_billArray addObject:@"等待开票"];
+        }else if ([billingStatus integerValue]==2) {
+            [_billArray addObject:@"已开发票"];
+            if ([_allDic.allKeys containsObject:@"expressDeliveryComany"]) {
+                [_billArray addObject:[_allDic objectForKey:@"expressDeliveryComany"]];
+                if ([_allDic.allKeys containsObject:@"expressDeliveryId"]) {
+                     [_billArray addObject:[_allDic objectForKey:@"expressDeliveryId"]];
+                }else{
+                     [_billArray addObject:@""];
+                }
+            }
+        }else{
+              [_billArray addObject:@"无需发票"];
+        }
+        
+    }
     
-    NSArray *nameArray=@[@"订单号",@"支付结果",@"支付金额",@"支付时间",@"采集器序列号",@"暂未续费成功序列号",@"续费年限",@"续费账号",@"发票抬头",@"企业税号",@"联系电话",@"详细地址",@"备注"];
-    NSArray*valueArray=@[@"growattOrderId",@"status",@"money",@"gmt_create",@"datalogSn",@"failureDatalog",@"year",@"username",@"invoiceName",@"invoiceNum",@"invoicePhone",@"invoiceAddr",@"remark"];
+    
+    NSArray *nameArray=@[@"订单号",@"支付结果",@"支付金额",@"支付时间",@"采集器序列号",@"暂未续费成功序列号",@"续费年限",@"续费账号",@"发票抬头",@"企业税号",@"收件人",@"联系电话",@"详细地址",@"备注"];
+    NSArray*valueArray=@[@"growattOrderId",@"status",@"money",@"gmt_create",@"datalogSn",@"failureDatalog",@"year",@"username",@"invoiceName",@"invoiceNum",@"recipients",@"invoicePhone",@"invoiceAddr",@"remark"];
     
     float H0=30*HEIGHT_SIZE, W0=300*NOW_SIZE;
  
@@ -80,7 +103,24 @@
           allH=allH+H;
     }
     
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,allH+200*HEIGHT_SIZE);
+    NSArray *billNameArray=@[@"发票状态",@"快递公司",@"快递单号"];
+    
+    for (int i=0; i<_billArray.count; i++) {
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake((SCREEN_Width-W0)/2, 0*HEIGHT_SIZE+allH, W0, H0)];
+        lable1.textColor = COLOR(102, 102, 102, 1);
+        lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        lable1.textAlignment=NSTextAlignmentLeft;
+        lable1.text=[NSString stringWithFormat:@"%@:%@",billNameArray[i],_billArray[i]];
+        [_scrollView addSubview:lable1];
+        
+        UIView *View0 = [[UIView alloc] initWithFrame:CGRectMake((SCREEN_Width-W0)/2, 0*HEIGHT_SIZE+allH+H0-LineWidth, W0, LineWidth)];
+        View0.backgroundColor=colorGary;
+        [_scrollView addSubview:View0];
+        
+             allH=allH+H0;
+    }
+    
+    _scrollView.contentSize = CGSizeMake(SCREEN_Width,allH+200*HEIGHT_SIZE+(_billArray.count*H0));
 }
 
 

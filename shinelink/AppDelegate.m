@@ -248,7 +248,7 @@
 // NOTE: 9.0以后使用新API接口
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
 {
-    if ([[url absoluteString] containsString:@"wx4f0bf741c4f4443d"]) {
+    if ([[url absoluteString] containsString:@"wx074a647e87deb0bd"]) {
           [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
         return YES;
     }

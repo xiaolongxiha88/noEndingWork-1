@@ -182,6 +182,8 @@
         ResultString=@"支付失败";
     }else if (resultInt==7) {
         ResultString=@"部分续费成功";
+    }else if (resultInt==8) {
+        ResultString=@"取消支付";
     }else{
         ResultString=result;
     }
