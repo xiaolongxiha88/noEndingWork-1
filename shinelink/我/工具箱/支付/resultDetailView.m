@@ -8,16 +8,30 @@
 
 #import "resultDetailView.h"
 #import "payResultView.h"
+#import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
 
-
-@interface resultDetailView ()
+@interface resultDetailView ()<WXApiDelegate>
 
 @property (nonatomic, strong)UIScrollView *scrollView;
 @property (nonatomic, strong)NSMutableArray *billArray;
+@property (nonatomic, strong)NSString *status;
+
+@property(nonatomic,assign)int payType;
+@property(nonatomic,strong)NSString *payID;
+@property(nonatomic,strong)NSString *kind;
 
 @end
 
 @implementation resultDetailView
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"payResultNotice" object:nil];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receivepayResultNotice:) name: @"payResultNotice" object:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,6 +45,10 @@
     _scrollView.scrollEnabled=YES;
     
     [self.view addSubview:_scrollView];
+    
+        _status=[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"status"]];
+ 
+    //_status=@"2";
     
     _billArray=[NSMutableArray array];
     if ([_allDic.allKeys containsObject:@"billingStatus"]) {
@@ -120,8 +138,220 @@
              allH=allH+H0;
     }
     
-    _scrollView.contentSize = CGSizeMake(SCREEN_Width,allH+200*HEIGHT_SIZE+(_billArray.count*H0));
+  
+    
+    if ([_status isEqualToString:@"2"]) {
+        
+        [WXApi registerApp:@"wx074a647e87deb0bd"];  //微信注册
+    
+        
+        float buttonH=30*HEIGHT_SIZE; float buttonW=115*NOW_SIZE;
+        UIButton  * _goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
+        _goBut.frame=CGRectMake(30*NOW_SIZE,allH+15*HEIGHT_SIZE, buttonW, buttonH);
+        [_goBut.layer setMasksToBounds:YES];
+        [_goBut.layer setCornerRadius:buttonH/2];
+        [_goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
+        [_goBut setTitle:@"取消" forState:UIControlStateNormal];
+        _goBut.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
+        [_goBut addTarget:self action:@selector(goToCancel) forControlEvents:UIControlEventTouchUpInside];
+        [_scrollView addSubview:_goBut];
+        
+        UIButton  * _goBut2 =  [UIButton buttonWithType:UIButtonTypeCustom];
+        _goBut2.frame=CGRectMake(175*NOW_SIZE,allH+15*HEIGHT_SIZE, buttonW, buttonH);
+        [_goBut2 setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
+        [_goBut2.layer setMasksToBounds:YES];
+        [_goBut2.layer setCornerRadius:buttonH/2];
+        [_goBut2 setTitle:@"继续支付" forState:UIControlStateNormal];
+        _goBut2.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
+        [_goBut2 addTarget:self action:@selector(goTopay) forControlEvents:UIControlEventTouchUpInside];
+        [_scrollView addSubview:_goBut2];
+        
+               allH=allH+buttonH;
+    }
+    
+      _scrollView.contentSize = CGSizeMake(SCREEN_Width,allH+200*HEIGHT_SIZE+(_billArray.count*H0));
+    
 }
+
+
+-(void)goToCancel{
+    _kind=@"0";
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"是否取消支付？" delegate:self cancelButtonTitle:@"否" otherButtonTitles:@"是", nil];
+    alertView.tag = 1001;
+    [alertView show];
+    
+}
+
+-(void)goTopay{
+      _kind=@"1";
+      [self getNetPay];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex) {
+        if( (alertView.tag == 1001)){
+          
+                [self getNetPay];
+        }
+    }
+    
+}
+
+-(void)receivepayResultNotice:(NSNotification*) notification{
+    NSString *goString; NSString *resultString;
+    if (_payType==0) {
+        NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
+        resultString=[NSString stringWithFormat:@"%@",[firstDic objectForKey:@"resultStatus"]];
+        if ([resultString intValue]==9000) {
+            goString=@"支付成功，将于月底统一续费。";
+        }else{
+            goString=[NSString stringWithFormat:@"%@(%d)",@"支付失败",[resultString intValue]];
+        }
+        
+    }
+    if (_payType==1) {
+        NSMutableDictionary *firstDic=[NSMutableDictionary dictionaryWithDictionary:[notification object]];
+        
+        resultString=[NSString stringWithFormat:@"%@",[firstDic objectForKey:@"code"]];
+        if ([resultString isEqualToString:@"0"]) {
+            goString=@"支付成功，将于月底统一续费。";
+        }else if ([resultString isEqualToString:@"-1"]){
+            goString=@"支付错误";
+        }else if ([resultString isEqualToString:@"-2"]){
+            goString=@"取消支付";
+        }else{
+            goString=[NSString stringWithFormat:@"支付失败(%@)",[firstDic objectForKey:@"code"]];
+        }
+    }
+    
+    [self getNetResult:resultString noticeString:goString];
+}
+
+
+-(void)getNetResult:(NSString*)codeString noticeString:(NSString*)noticeString{
+    
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo_2 paramars:@{@"growattOrderId":_payID,@"status":codeString} paramarsSite:@"/api/v2/renew/submitPayResult" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v2/renew/submitPayResult: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            if ([firstDic[@"result"] intValue]==1) {
+                
+                [self showAlertViewWithTitle:@"支付结果" message:noticeString cancelButtonTitle:root_OK];
+                [self.navigationController popViewControllerAnimated:YES];
+        
+                
+            }else{
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
+                [self showAlertViewWithTitle:@"支付结果" message:noticeString cancelButtonTitle:root_OK];
+            }
+            
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        [self showAlertViewWithTitle:@"支付结果" message:noticeString cancelButtonTitle:root_OK];
+        
+        
+    }];
+    
+}
+
+
+-(void)getNetPay{
+  
+    NSString*growattOrderId=[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"growattOrderId"]];
+    
+_payType=[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"pay_type"]] intValue];
+    
+//    NSString*orderId=[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"trade_no"]];
+
+    NSDictionary *netDic=@{
+                           @"growattOrderId":growattOrderId,
+                           @"kind":_kind,
+                           };
+    
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL_Demo_2 paramars:netDic paramarsSite:@"/api/v2/renew/updateStatus" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v2/renew/updateStatus: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            if ([firstDic[@"result"] intValue]==1) {
+                if ([_kind isEqualToString:@"0"]) {
+                    [self showToastViewWithTitle:@"取消成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+                if ([_kind isEqualToString:@"1"]) {
+                    _payID=firstDic[@"msg"];
+                    if (_payType==0) {
+                        NSString *payString=firstDic[@"obj"];
+                        [self goPayAlipay:payString];
+                    }
+                    if (_payType==1) {
+                        NSDictionary *DIC=firstDic[@"obj"];
+                        [self goPayWeChar:DIC];
+                    }
+                }
+             
+                
+            }else{
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
+            }
+            
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
+    
+}
+
+
+-(void)goPayWeChar:(NSDictionary*)dict{
+    //NSDictionary *dict=[NSDictionary new];
+    NSMutableString *stamp  = [dict objectForKey:@"timestrap"];
+    PayReq* req             = [[PayReq alloc] init];
+    req.partnerId           = [dict objectForKey:@"partnerid"];
+    req.prepayId            = [dict objectForKey:@"prepayid"];
+    req.nonceStr            = [dict objectForKey:@"noncestr"];
+    req.timeStamp           = stamp.intValue;
+    req.package             = @"Sign=WXPay";
+    req.sign                = [dict objectForKey:@"sign"];
+    [WXApi sendReq:req];
+    //日志输出
+    //    NSLog(@"appid=%@\npartid=%@\nprepayid=%@\nnoncestr=%@\ntimestamp=%ld\npackage=%@\nsign=%@",[dict objectForKey:@"appid"],req.partnerId,req.prepayId,req.nonceStr,(long)req.timeStamp,req.package,req.sign );
+    
+}
+
+
+-(void)goPayAlipay:(NSString*)payString{
+    //    NSArray *resultArr = [payString componentsSeparatedByString:@"&"];
+    
+    NSString *appScheme = @"ShinePhoneAlipay";
+    // NOTE: 调用支付结果开始支付
+    [[AlipaySDK defaultService] payOrder:payString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
+        
+        NSLog(@"reslut1212 = %@",resultDic);
+    }];
+    
+}
+
+
 
 
 -(NSString*)changeResult:(NSString*)result{

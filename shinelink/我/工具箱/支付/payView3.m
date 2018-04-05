@@ -25,7 +25,24 @@
 @implementation payView3
 
 -(void)viewWillDisappear:(BOOL)animated{
-    //    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"payResultNotice" object:nil];
+       [[NSNotificationCenter defaultCenter] removeObserver:self name:@"payResultNotice" object:nil];
+}
+
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    if (_paperLable1) {
+        BOOL payB=[[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceEnable"] boolValue];
+        if (payB) {
+            _paperLable1.text=@"是";
+            _InvoiceArray=[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceArray"];
+        }else{
+            _paperLable1.text=@"否";
+        }
+    }
+    
+         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receivepayResultNotice:) name: @"payResultNotice" object:nil];
+    
 }
 
 - (void)viewDidLoad {
@@ -36,7 +53,7 @@
     
        [WXApi registerApp:@"wx074a647e87deb0bd"];  //微信注册
     
-        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(receivepayResultNotice:) name: @"payResultNotice" object:nil];
+   
 
 }
 
@@ -110,18 +127,7 @@
 
 
 
--(void)viewWillAppear:(BOOL)animated{
-    if (_paperLable1) {
-        BOOL payB=[[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceEnable"] boolValue];
-        if (payB) {
-             _paperLable1.text=@"是";
-            _InvoiceArray=[[NSUserDefaults standardUserDefaults] objectForKey:@"invoiceArray"];
-        }else{
-            _paperLable1.text=@"否";
-        }
-    }
-    
-}
+
 
 -(void)initUI{
     

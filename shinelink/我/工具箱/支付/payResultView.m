@@ -9,7 +9,7 @@
 #import "payResultView.h"
 #import "payResultCell.h"
 #import "resultDetailView.h"
-
+#import "payView1.h"
 
 @interface payResultView ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -23,19 +23,37 @@
 
 @implementation payResultView
 
+
+-(void)viewWillAppear:(BOOL)animated{
+       [self getNetOne];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-
+    UIBarButtonItem *leftItem=[[UIBarButtonItem alloc]initWithTitle:@"返回" style:UIBarButtonItemStylePlain target:self action:@selector(goBackPop)];
+    self.navigationItem.leftBarButtonItem=leftItem;
     
     [self initUI];
-    [self getNetOne];
+ 
     
     if (_isShowAlert) {
             [self showAlertViewWithTitle:@"支付结果" message:_noticeString cancelButtonTitle:root_OK];
     }
 }
 
+-(void)goBackPop{
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[payView1 class]])
+        {
+            payView1 *A =(payView1 *)controller;
+            [self.navigationController popToViewController:A animated:YES];
+            
+        }
+        
+    }
+    
+}
 
 -(void)initUI{
     
