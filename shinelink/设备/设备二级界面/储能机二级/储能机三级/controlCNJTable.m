@@ -19,7 +19,9 @@
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic, strong) NSString *password;
  @property (nonatomic, assign) BOOL isRememberPassword;
-    
+
+@property (nonatomic, strong) NSDictionary *getOldDic;
+
 @end
 
 @implementation controlCNJTable
@@ -44,11 +46,38 @@
 
     if([_typeNum isEqualToString:@"1"]){
       self.dataArray =[NSMutableArray arrayWithObjects:root_5000Control_129,root_5000Control_130,root_5000Control_131,root_5000Control_132,root_5000Control_133,root_5000Control_134,root_5000Control_135,root_5000Control_136,root_5000Control_137,root_5000Control_138,root_5000Control_139,root_5000Control_140,root_5000Control_141,root_5000Control_142,root_5000Control_143,nil];
-    }else  if([_typeNum isEqualToString:@"3"]){
+    }else  if([_typeNum isEqualToString:@"3"]){         //MIX设置
          self.dataArray =[NSMutableArray arrayWithObjects:root_MIX_210,root_MIX_209,root_NBQ_kaiguan,root_device_249,root_NBQ_youxiao_gonglv,root_NBQ_wuxiao_gonglv,root_NBQ_PF,root_NBQ_shijian,root_device_250,root_device_251,root_device_252,root_device_253,root_device_254,root_MIX_492,nil];
+        
+        [self getOldSetValue];
     }
     
 
+    
+}
+
+
+
+
+-(void)getOldSetValue{
+    NSDictionary *dicGo=@{@"serialNum":_CnjSn,@"kind":@"0"};
+    _getOldDic=[NSDictionary new];
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:@"/newMixApi.do?op=getMixSetParams" sucessBlock:^(id content) {
+        NSLog(@"/newMixApi.do?op=getMixSetParams: %@", content);
+        NSString *result=[NSString stringWithFormat:@"%@",content[@"result"]];
+        if ([result intValue]==1) {
+            NSDictionary *objDic=[NSDictionary dictionaryWithDictionary:content[@"obj"]];
+            if ([objDic.allKeys containsObject:@"mixBean"]) {
+           _getOldDic=[NSDictionary dictionaryWithDictionary:objDic[@"mixBean"]];
+            }
+
+        }else{
+            
+        }
+        
+    } failure:^(NSError *error) {
+   
+    }];
     
 }
 
