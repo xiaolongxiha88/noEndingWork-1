@@ -39,9 +39,9 @@
         [_dataArray addObject:@"高级设置"];
     }
     
-    if ([_invType isEqualToString:@"1"]) {
-         self.dataArray =[NSMutableArray arrayWithObjects:root_NBQ_kaiguan,nil];
-    }
+//    if ([_invType isEqualToString:@"1"]) {        //MAX
+//         self.dataArray =[NSMutableArray arrayWithObjects:root_NBQ_kaiguan,nil];
+//    }
     
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {

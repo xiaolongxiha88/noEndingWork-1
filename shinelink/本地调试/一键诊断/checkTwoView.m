@@ -295,8 +295,9 @@ static float readWaveTime=20;      //读波形时间
     if (_charType==1 || _charType==2) {
         lableNameArray=@[@"ID",root_MAX_469,root_MAX_470];
     }
+    
     if (_charType==3) {
-        lableNameArray=@[root_MIX_493,@"Rms(V),f(Hz)",[NSString stringWithFormat:@"%@(V)",root_MAX_470]];
+        lableNameArray=@[root_MIX_493,[NSString stringWithFormat:@"%@(V)",root_MAX_497],[NSString stringWithFormat:@"%@(Hz)",root_MAX_321],[NSString stringWithFormat:@"%@(V)",root_MAX_470]];
     }
     
      W0=SCREEN_Width/lableNameArray.count;
@@ -1092,7 +1093,7 @@ _allSendDataAllArray=@[@[@"1000",@"1125",@"1250",@"1375",@"1500"],@[@"1625",@"17
         }
 
         if (_charType==3) {
-            _valueForLeftLableArray=[NSMutableArray arrayWithArray:@[@"R",@"S",@"T"]];
+            _valueForLeftLableArray=[NSMutableArray arrayWithArray:@[@"RS",@"ST",@"TR"]];
             if (_type3LeftLableArray.count!=0) {
                 for (int i=0; i<_colorArray.count; i++) {
                     UILabel *lable=[self.view viewWithTag:4500+i];

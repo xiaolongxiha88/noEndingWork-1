@@ -37,8 +37,7 @@
     [super viewDidLoad];
     _dataDic=[NSMutableDictionary new];
      self.view.backgroundColor=MainColor;
-//    UIImage *bgImage = IMAGE(@"bg4.png");
-//    self.view.layer.contents = (id)bgImage.CGImage;
+
     [self initUI];
     
 }

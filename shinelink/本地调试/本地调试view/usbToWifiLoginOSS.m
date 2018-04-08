@@ -63,7 +63,7 @@
     [_scrollView addSubview:_textField];
     
     UILabel *PV2Lable1=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE, 60*HEIGHT_SIZE, 100*NOW_SIZE,30*HEIGHT_SIZE )];
-    PV2Lable1.text=[NSString stringWithFormat:@"OSS%@:",root_Mima];
+    PV2Lable1.text=[NSString stringWithFormat:@"OSS %@:",root_Mima];
     PV2Lable1.textAlignment=NSTextAlignmentRight;
     PV2Lable1.textColor=COLOR(102, 102, 102, 1);
     PV2Lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];

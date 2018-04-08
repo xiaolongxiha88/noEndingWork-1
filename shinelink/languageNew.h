@@ -1136,6 +1136,11 @@
 #define  root_MIX_493  NSLocalizedString(@"493Phase", nil)
 #define  root_MAX_494  NSLocalizedString(@"494全选", nil)
 
+#define  root_Device_max_495  NSLocalizedString(@"495有功设置错误", nil)
+#define  root_Device_max_496  NSLocalizedString(@"496功率设置错误", nil)
+
+#define  root_MAX_497  NSLocalizedString(@"497有效值", nil)
+
 
 
 

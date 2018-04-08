@@ -1057,7 +1057,7 @@
 "460开始"="Start";
 "461读取数据中"="Reading";
 "462I-V/P-V 曲线"="I-V/P-V curve";
-"463相阻抗"="Phase impedance";
+"463相阻抗"="Phase";
 "464故障序号"="Fault number";
 "465波形触发时间"="Waveform record time";
 "466数据读取失败"="Failed to read data";
@@ -1072,7 +1072,7 @@
 "475请填写ID号"="Please enter ID number";
 "476请输入正确的ID号"="Please enter correct ID number";
 "477曲线"="curve";
-"478谐波次数"="Harmonics times";
+"478谐波次数"="Harmonics number";
 "479获取密码失败，请重新进入页面"="Get the password failed, please re-enter the page";
 
 
@@ -1093,3 +1093,9 @@
 "493Phase"="Line";
 "458_11、确保逆变器在运行状态；2、诊断时间预计"="1. Make sure the inverter is running normally 2. The whole process takes ";
 "494全选"="Select all";
+"495有功设置错误"="Active power rate should be a number in [0, 100].";
+"496功率设置错误"="Power Factor rate should be a number in (-0.8 ~ -1/0.8 ~ 1).";
+"497有效值"="Rms";
+
+
+
