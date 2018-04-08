@@ -44,6 +44,10 @@
 
 @implementation secondCNJ
 
+
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title=_deviceSN;

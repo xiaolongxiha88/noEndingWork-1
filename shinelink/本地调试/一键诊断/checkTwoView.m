@@ -325,7 +325,7 @@ static float readWaveTime=20;      //读波形时间
 //    float imageViewx=(W0-lable1Size.width)/2-imageViewH-Wk;
      float imageViewx=15*NOW_SIZE;
     if (_charType==3) {
-        imageViewx=40*NOW_SIZE;
+        imageViewx=25*NOW_SIZE;
     }
     
     _xNumArray=[NSMutableArray array];

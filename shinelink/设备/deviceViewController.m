@@ -594,7 +594,7 @@ _pcsNetStorageSN=@"";
             [_menuView removeFromSuperview];
             _menuView=nil;
         }
-        _menuView = [[KTDropdownMenuView alloc] initWithFrame:CGRectMake(0, 0,100, 44) titles:_stationName];
+        _menuView = [[KTDropdownMenuView alloc] initWithFrame:CGRectMake(0, 0,200, 44) titles:_stationName];
         
         _menuView.selectedAtIndex = ^(int index)
         {

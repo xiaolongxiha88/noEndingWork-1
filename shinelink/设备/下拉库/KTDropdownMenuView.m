@@ -46,8 +46,16 @@ static CGFloat DDPMAX_TABLEVIEW_HEIGHT(){
         _selectedIndex = 0;
         _titles = titles;
         
+        [self addTapGesture];
+        
+        self.userInteractionEnabled=YES;
+        
         [self addSubview:self.titleButton];
         [self addSubview:self.arrowImageView];
+        self.arrowImageView.userInteractionEnabled=YES;
+        UITapGestureRecognizer *tapGesture1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap2:)];
+        [_arrowImageView addGestureRecognizer:tapGesture1];
+        
         [self.wrapperView addSubview:self.backgroundView];
         [self.wrapperView addSubview:self.tableView];
         
@@ -59,6 +67,23 @@ static CGFloat DDPMAX_TABLEVIEW_HEIGHT(){
     
     return self;
 }
+
+
+- (void)addTapGesture{
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [self.backgroundView addGestureRecognizer:tapGesture];
+}
+- (void)onTap:(UITapGestureRecognizer *)gesture
+{
+    //点击视图 结束编辑状态
+    if (gesture.state == UIGestureRecognizerStateRecognized) {
+          self.isMenuShow = NO;
+    }
+}
+- (void)onTap2:(UITapGestureRecognizer *)gesture{
+     self.isMenuShow = !self.isMenuShow;
+}
+
 
 - (void)didMoveToWindow
 {
@@ -72,7 +97,7 @@ static CGFloat DDPMAX_TABLEVIEW_HEIGHT(){
             make.center.equalTo(self);
         }];
         [self.arrowImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.titleButton.mas_right).offset(5);
+            make.left.equalTo(self.titleButton.mas_right).offset(0);
             make.centerY.equalTo(self.titleButton.mas_centerY);
         }];
         // 依附于导航栏下面
@@ -363,6 +388,9 @@ static CGFloat DDPMAX_TABLEVIEW_HEIGHT(){
         UIImage *image = [UIImage imageNamed:@"triangular2.png"];
       
         _arrowImageView = [[UIImageView alloc] initWithImage:image];
+        _arrowImageView.userInteractionEnabled=YES;
+        
+
         
     }
     

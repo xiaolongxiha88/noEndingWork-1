@@ -880,7 +880,7 @@ static int  gotoModel4=1;
     [view1 addSubview:titleLable];
     
     
-    NSArray *nameArray=@[[NSString stringWithFormat:@"R%@",root_MAX_463],[NSString stringWithFormat:@"S%@",root_MAX_463],[NSString stringWithFormat:@"T%@",root_MAX_463]];
+    NSArray *nameArray=@[[NSString stringWithFormat:@"R %@",root_MAX_463],[NSString stringWithFormat:@"S %@",root_MAX_463],[NSString stringWithFormat:@"T %@",root_MAX_463]];
     
     float H1=40*HEIGHT_SIZE;
     for (int i=0; i<nameArray.count; i++) {

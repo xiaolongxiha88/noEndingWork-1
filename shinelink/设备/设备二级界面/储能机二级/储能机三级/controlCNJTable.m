@@ -26,6 +26,16 @@
 
 @implementation controlCNJTable
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    if([_typeNum isEqualToString:@"3"]){         //MIX设置
+  
+        [self getOldSetValue];
+    }
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
      self.view.backgroundColor=MainColor;
@@ -49,7 +59,7 @@
     }else  if([_typeNum isEqualToString:@"3"]){         //MIX设置
          self.dataArray =[NSMutableArray arrayWithObjects:root_MIX_210,root_MIX_209,root_NBQ_kaiguan,root_device_249,root_NBQ_youxiao_gonglv,root_NBQ_wuxiao_gonglv,root_NBQ_PF,root_NBQ_shijian,root_device_250,root_device_251,root_device_252,root_device_253,root_device_254,root_MIX_492,nil];
         
-        [self getOldSetValue];
+      //  [self getOldSetValue];
     }
     
 
