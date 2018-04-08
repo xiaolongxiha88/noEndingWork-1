@@ -301,7 +301,7 @@
     go.titleString=_dataArray[indexPath.row];
     go.CnjSN=_CnjSn;
     go.setType=(int)indexPath.row;
-    
+    go.getOldDic=[NSDictionary dictionaryWithDictionary:_getOldDic];
     
     if ([_controlType isEqualToString:@"2"]) {
         go.controlType=_controlType;

@@ -50,6 +50,7 @@ static SNLocationManager * _manager = nil;
     return _locationManager;
 }
 
+
 - (void)startUpdatingLocationWithSuccess:(UpdateLocationSuccessBlock)success andFailure:(UpdateLocationErrorBlock)error {
     
     _successBlock = [success copy];

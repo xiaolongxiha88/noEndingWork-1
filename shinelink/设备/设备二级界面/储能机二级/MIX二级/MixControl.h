@@ -15,6 +15,6 @@
 @property (nonatomic, strong) NSArray *choiceNumArray;
 @property (nonatomic, strong) NSString *titleString;
 
-
+@property (nonatomic, strong) NSDictionary *getOldDic;
 
 @end

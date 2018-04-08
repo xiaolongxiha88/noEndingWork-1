@@ -41,6 +41,8 @@
 @property(nonatomic,strong)NSString *timeEnable2;
 @property(nonatomic,strong)NSString *timeEnable3;
 
+@property(nonatomic,strong)NSArray *oldValueArray;
+
 @end
 
 @implementation MixControl
@@ -68,6 +70,8 @@
     tapGestureRecognizer.cancelsTouchesInView = NO;
     [self.view addGestureRecognizer:tapGestureRecognizer];
     
+    [self setOldValueForUI];
+    
     if (_setType==0 || _setType==1) {
           [self initUI];
     }else{
@@ -94,10 +98,18 @@
         _textLable=[[UILabel alloc]initWithFrame:CGRectMake(70*NOW_SIZE, 60*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
     
         _textLable.text=root_MIX_223;
+       
+        if (![_oldValueArray[0] isEqualToString:@""]) {
+            _textLable.text=_oldValueArray[0];
+        }
         if (_setType==5) {
             _textLable.frame=CGRectMake(70*NOW_SIZE, 100*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE);
-            _textLable.text=root_device_256;
-            _choiceValue1=@"over";
+            if (![_oldValueArray[1] isEqualToString:@""]) {
+                _textLable.text=_oldValueArray[1];
+            }else{
+                _textLable.text=root_device_256;
+                _choiceValue1=@"over";
+            }
         }
         _textLable.userInteractionEnabled=YES;
         _textLable.layer.borderWidth=1;
@@ -127,6 +139,9 @@
         _fieldOne.layer.cornerRadius=5;
         _fieldOne.layer.borderColor=[UIColor whiteColor].CGColor;
         _fieldOne.textAlignment=NSTextAlignmentCenter;
+        if (![_oldValueArray[0] isEqualToString:@""]) {
+            _fieldOne.text=_oldValueArray[0];
+        }
         [_fieldOne setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
         [_fieldOne setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
         _fieldOne.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -239,6 +254,16 @@
         timeLable1.layer.borderWidth=1;
         timeLable1.layer.cornerRadius=5;
         timeLable1.tag=3000+i;
+        if (_setType==0) {
+            if (![_oldValueArray[2+i] isEqualToString:@""]) {
+                timeLable1.text=_oldValueArray[2+i];
+            }
+        }
+        if (_setType==1) {
+            if (![_oldValueArray[3+i] isEqualToString:@""]) {
+                timeLable1.text=_oldValueArray[3+i];
+            }
+        }
         timeLable1.textAlignment=NSTextAlignmentCenter;
         timeLable1.textColor=[UIColor whiteColor];
         timeLable1.layer.borderColor=[UIColor whiteColor].CGColor;
@@ -256,6 +281,16 @@
         
          UILabel *timeLable2=[[UILabel alloc]initWithFrame:CGRectMake(120*NOW_SIZE+W+20*NOW_SIZE, H+H1*i, W, LH)];
         timeLable2.text=root_MIX_223;
+        if (_setType==0) {
+            if (![_oldValueArray[5+i] isEqualToString:@""]) {
+                timeLable2.text=_oldValueArray[5+i];
+            }
+        }
+        if (_setType==1) {
+            if (![_oldValueArray[6+i] isEqualToString:@""]) {
+                timeLable2.text=_oldValueArray[6+i];
+            }
+        }
           timeLable2.adjustsFontSizeToFitWidth=YES;
         timeLable2.userInteractionEnabled=YES;
         timeLable2.layer.borderWidth=1;
@@ -308,6 +343,9 @@
     _fieldOne.layer.cornerRadius=5;
     _fieldOne.layer.borderColor=[UIColor whiteColor].CGColor;
     _fieldOne.textAlignment=NSTextAlignmentCenter;
+    if (![_oldValueArray[0] isEqualToString:@""]) {
+        _fieldOne.text=_oldValueArray[0];
+    }
     [_fieldOne setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [_fieldOne setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     _fieldOne.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -328,6 +366,9 @@
     _fieldTwo.layer.cornerRadius=5;
     _fieldTwo.layer.borderColor=[UIColor whiteColor].CGColor;
     _fieldTwo.textAlignment=NSTextAlignmentCenter;
+    if (![_oldValueArray[1] isEqualToString:@""]) {
+        _fieldTwo.text=_oldValueArray[1];
+    }
     [_fieldTwo setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [_fieldTwo setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     _fieldTwo.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -353,6 +394,9 @@
     UITapGestureRecognizer *tapGestureRecognizer2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showTheChoice5)];
     [_textLable5 addGestureRecognizer:tapGestureRecognizer2];
     if (_setType==1) {
+        if (![_oldValueArray[2] isEqualToString:@""]) {
+            _textLable5.text=_oldValueArray[2];
+        }
           [_scrollView addSubview:_textLable5];
     }
   
@@ -605,6 +649,127 @@
     
 }
 
+
+-(void)setOldValueForUI{
+    _oldValueArray=@[@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@"",@""];
+    if (_getOldDic.allKeys.count>0) {
+        if (_setType==0) {
+            _timeValue1=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedDischargeTimeStart1"]];
+                _timeValue3=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedDischargeTimeStart2"]];
+                _timeValue5=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedDischargeTimeStart3"]];
+            _timeValue2=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedDischargeTimeStop1"]];
+            _timeValue4=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedDischargeTimeStop2"]];
+            _timeValue6=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedDischargeTimeStop3"]];
+            _oldValueArray=@[[NSString stringWithFormat:@"%@",_getOldDic[@"disChargePowerCommand"]],[NSString stringWithFormat:@"%@",_getOldDic[@"wdisChargeSOCLowLimit2"]],_timeValue1,_timeValue3,_timeValue5,_timeValue2,_timeValue4,_timeValue6];
+        }
+        if (_setType==1) {
+            _timeValue1=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedChargeTimeStart1"]];
+            _timeValue3=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedChargeTimeStart2"]];
+            _timeValue5=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedChargeTimeStart3"]];
+            _timeValue2=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedChargeTimeStop1"]];
+            _timeValue4=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedChargeTimeStop2"]];
+            _timeValue6=[NSString stringWithFormat:@"%@",_getOldDic[@"forcedChargeTimeStop3"]];
+            NSString *valueString=[NSString stringWithFormat:@"%@",_getOldDic[@"acChargeEnable"]];
+            _choiceValue3=valueString;
+            if ([valueString isEqualToString:@"0"]) {
+                valueString=root_jinzhi;
+            }
+            if ([valueString isEqualToString:@"1"]) {
+                  valueString=root_shineng;
+            }
+            
+            _oldValueArray=@[[NSString stringWithFormat:@"%@",_getOldDic[@"chargePowerCommand"]],[NSString stringWithFormat:@"%@",_getOldDic[@"wchargeSOCLowLimit2"]],
+                             valueString,_timeValue1,_timeValue3,_timeValue5,_timeValue2,_timeValue4,_timeValue6];
+        }
+        
+        if (_setType==2) {
+            NSString *valueString=[NSString stringWithFormat:@"%@",_getOldDic[@"pv_on_off"]];
+                           _choiceValue1=valueString;
+            if ([valueString isEqualToString:@"0101"]) {
+                      _oldValueArray=@[root_CNJ_kaiji];
+            }
+            if ([valueString isEqualToString:@"0000"]) {
+                _oldValueArray=@[root_CNJ_guanji];
+            }
+        }
+        if (_setType==3 || _setType==13) {
+            NSString *valueString;
+            if (_setType==3) {
+                    valueString=[NSString stringWithFormat:@"%@",_getOldDic[@"pv_pf_cmd_memory_state"]];
+            }
+            if (_setType==13) {
+                   valueString=[NSString stringWithFormat:@"%@",_getOldDic[@"backflow_setting"]];
+            }
+              _choiceValue1=valueString;
+            if ([valueString isEqualToString:@"0"]) {
+                _oldValueArray=@[root_guan];
+            }
+            if ([valueString isEqualToString:@"1"]) {
+                _oldValueArray=@[root_kai];
+            }
+        }
+        
+        if (_setType==4) {
+              _oldValueArray=@[[NSString stringWithFormat:@"%@",_getOldDic[@"pv_active_p_rate"]]];
+        }
+        if (_setType==5) {
+            NSString *valueString=[NSString stringWithFormat:@"%@",_getOldDic[@"pv_reactive_p_rate_two"]];
+              _choiceValue1=valueString;
+            if ([valueString isEqualToString:@"over"]) {
+                  _oldValueArray=@[[NSString stringWithFormat:@"%@",_getOldDic[@"pv_reactive_p_rate"]],root_device_256];
+            }
+            if ([valueString isEqualToString:@"under"]) {
+             _oldValueArray=@[[NSString stringWithFormat:@"%@",_getOldDic[@"pv_reactive_p_rate"]],root_device_259];
+            }
+        }
+        if (_setType==6) {
+            _oldValueArray=@[[NSString stringWithFormat:@"%@",_getOldDic[@"pv_power_factor"]]];
+        }
+        if (_setType==7) {
+            _oldValueArray=@[[NSString stringWithFormat:@"%@",_getOldDic[@"pf_sys_year"]]];
+        }
+        if (_setType==8) {
+            _oldValueArray=@[[NSString stringWithFormat:@"%@",_getOldDic[@"pv_grid_voltage_high"]]];
+        }
+        if (_setType==9) {
+            _oldValueArray=@[[NSString stringWithFormat:@"%@",_getOldDic[@"pv_grid_voltage_low"]]];
+        }
+        if (_setType==10) {
+            NSString *valueString=[NSString stringWithFormat:@"%@",_getOldDic[@"mix_off_grid_enable"]];
+                _choiceValue1=valueString;
+            if ([valueString isEqualToString:@"0"]) {
+                _oldValueArray=@[root_jinzhi];
+            }
+            if ([valueString isEqualToString:@"1"]) {
+                _oldValueArray=@[root_shineng];
+            }
+        }
+        if (_setType==11) {
+            NSString *valueString=[NSString stringWithFormat:@"%@",_getOldDic[@"mix_ac_discharge_frequency"]];
+                _choiceValue1=valueString;
+            if ([valueString isEqualToString:@"0"]) {
+                _oldValueArray=@[@"50HZ"];
+            }
+            if ([valueString isEqualToString:@"1"]) {
+                _oldValueArray=@[@"60HZ"];
+            }
+        }
+        if (_setType==12) {
+            NSString *valueString=[NSString stringWithFormat:@"%@",_getOldDic[@"mix_ac_discharge_voltage"]];
+                _choiceValue1=valueString;
+            if ([valueString isEqualToString:@"0"]) {
+                _oldValueArray=@[@"230V"];
+            }
+            if ([valueString isEqualToString:@"1"]) {
+                _oldValueArray=@[@"208V"];
+            }
+            if ([valueString isEqualToString:@"2"]) {
+                _oldValueArray=@[@"240V"];
+            }
+        }
+        
+    }
+}
 
 -(void)showTheChoice1{
     [self showTheChoice:1];
