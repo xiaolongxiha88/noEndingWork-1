@@ -187,6 +187,7 @@
 		335089231C73179400D7AA03 /* bg_list_popver.png in Resources */ = {isa = PBXBuildFile; fileRef = 335089221C73179400D7AA03 /* bg_list_popver.png */; };
 		335089251C7323C200D7AA03 /* frag4.png in Resources */ = {isa = PBXBuildFile; fileRef = 335089241C7323C200D7AA03 /* frag4.png */; };
 		335089281C73267A00D7AA03 /* findTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335089271C73267A00D7AA03 /* findTableViewCell.m */; };
+		335141F0207B3F5C00DFC417 /* inputLocationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335141EF207B3F5C00DFC417 /* inputLocationView.m */; };
 		335239061CD2067E00287EA9 /* RootPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 335239051CD2067E00287EA9 /* RootPickerView.m */; };
 		33528FF01C83E41D00D07889 /* listViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33528FEF1C83E41D00D07889 /* listViewController.m */; };
 		33528FF61C83E95F00D07889 /* listTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33528FF51C83E95F00D07889 /* listTableViewCell.m */; };
@@ -1123,6 +1124,8 @@
 		335089241C7323C200D7AA03 /* frag4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = frag4.png; path = "../设备/frag4.png"; sourceTree = "<group>"; };
 		335089261C73267A00D7AA03 /* findTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = findTableViewCell.h; sourceTree = "<group>"; };
 		335089271C73267A00D7AA03 /* findTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = findTableViewCell.m; sourceTree = "<group>"; };
+		335141EE207B3F5C00DFC417 /* inputLocationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = inputLocationView.h; sourceTree = "<group>"; };
+		335141EF207B3F5C00DFC417 /* inputLocationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = inputLocationView.m; sourceTree = "<group>"; };
 		335239041CD2067E00287EA9 /* RootPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootPickerView.h; sourceTree = "<group>"; };
 		335239051CD2067E00287EA9 /* RootPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootPickerView.m; sourceTree = "<group>"; };
 		33528FEE1C83E41D00D07889 /* listViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = listViewController.h; path = ../listViewController.h; sourceTree = "<group>"; };
@@ -2625,6 +2628,8 @@
 				3363DD1D1C7C48F100D740FB /* registerViewController.m */,
 				3363DD201C7C598B00D740FB /* countryViewController.h */,
 				3363DD211C7C598B00D740FB /* countryViewController.m */,
+				335141EE207B3F5C00DFC417 /* inputLocationView.h */,
+				335141EF207B3F5C00DFC417 /* inputLocationView.m */,
 			);
 			path = "注册";
 			sourceTree = "<group>";
@@ -5325,6 +5330,7 @@
 				33780082201C26D3008E5C00 /* checkOneView.m in Sources */,
 				33EA49F51E8DEA0B0044A01A /* newEnergyStorage.m in Sources */,
 				33860FDF1EEA75C5004150FD /* MJRefreshComponent.m in Sources */,
+				335141F0207B3F5C00DFC417 /* inputLocationView.m in Sources */,
 				337475F21FAB004B00BB1A76 /* usbToWifiFour.m in Sources */,
 				337F9C881C71A6710016FE43 /* AppDelegate.m in Sources */,
 				336D401B1D6FEA7600ECFA34 /* HanyuPinyinOutputFormat.m in Sources */,

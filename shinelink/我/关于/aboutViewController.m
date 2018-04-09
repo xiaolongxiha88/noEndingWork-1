@@ -60,8 +60,14 @@
 }
 
 -(void)netAbout{
-
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"admin":@"admin"} paramarsSite:@"/newUserAPI.do?op=getServicePhoneNum" sucessBlock:^(id content) {
+    NSString *typeString;
+    if ([self.languageType isEqualToString:@"0"]) {
+        typeString=@"0";
+    }else{
+          typeString=@"1";
+    }
+    
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"type":typeString} paramarsSite:@"/newUserAPI.do?op=getServicePhoneNum" sucessBlock:^(id content) {
         NSLog(@"getServicePhoneNum: %@", content);
         [self hideProgressView];
         if (content) {
@@ -179,7 +185,7 @@
     static NSString *cell11=@"cell1";
        // static NSString *cell22=@"cell2";
      static NSString *cell33=@"cell3";
-     static NSString *cell44=@"cell4";
+  //   static NSString *cell44=@"cell4";
     aboutTableViewCell *cell1=[tableView dequeueReusableCellWithIdentifier:cell11];
     //aboutOneTableViewCell *cell2=[tableView dequeueReusableCellWithIdentifier:cell22];
    // aboutTableViewCell *cell4=[tableView dequeueReusableCellWithIdentifier:cell44];
@@ -199,7 +205,12 @@
             cell3=[[aboutOneTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cell33];
         }
         [cell3.imageLog setImage:[UIImage imageNamed:@"service3.png"]];
-        cell3.tableName.text = root_WO_kefu_dianhua;
+        if ([self.languageType isEqualToString:@"0"]) {
+                  cell3.tableName.text = root_WO_kefu_dianhua;
+        }else{
+               cell3.tableName.text = root_MAX_502;
+        }
+  
         cell3.tableDetail.text=_serviceNum;
         
           return cell3;
@@ -236,9 +247,13 @@
         //NSString *allString = [NSString stringWithFormat:@"tel:10086"];
         
        // _serviceNum=@"+86-75529515888";
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:_serviceNum message:root_dadianhua delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
-        alertView.tag = 1002;
-        [alertView show];
+        
+        if ([self.languageType isEqualToString:@"0"]) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:_serviceNum message:root_dadianhua delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+            alertView.tag = 1002;
+            [alertView show];
+        }
+
            }
     
 //    if(indexPath.row==2)

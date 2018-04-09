@@ -12,6 +12,8 @@
 #import "registerViewController.h"
 #import "SNLocationManager.h"
 #import "AnotherSearchViewController.h"
+#import "ZJBLStoreShopTypeAlert.h"
+#import "inputLocationView.h"
 
 @interface countryViewController ()<UINavigationControllerDelegate>
 @property(nonatomic,strong)UILabel *label;
@@ -194,7 +196,34 @@
 }
 
 
+
+
 -(void)fetchLocation{
+    
+    NSArray*nameArray=@[root_MAX_498,root_MAX_499,root_MAX_500];
+    [ZJBLStoreShopTypeAlert showWithTitle:root_MAX_501 titles:nameArray selectIndex:^(NSInteger SelectIndexNum){
+        if (SelectIndexNum==0) {
+            [self autoGetLocation];
+        }
+        if (SelectIndexNum==1) {
+            [self inputGetLocation];
+        }
+        if (SelectIndexNum==2) {
+            
+        }
+        
+    } selectValue:^(NSString* valueString){
+     
+    } showCloseButton:YES];
+    
+    
+
+
+}
+
+
+-(void)autoGetLocation{
+    
     [[SNLocationManager shareLocationManager] startUpdatingLocationWithSuccess:^(CLLocation *location, CLPlacemark *placemark) {
         _longitude=[NSString stringWithFormat:@"%.2f", location.coordinate.longitude];
         _latitude=[NSString stringWithFormat:@"%.2f", location.coordinate.latitude];
@@ -207,8 +236,28 @@
     } andFailure:^(CLRegion *region, NSError *error) {
         
     }];
-
+    
 }
+
+
+-(void)inputGetLocation{
+    
+    inputLocationView *log=[[inputLocationView alloc]init];
+    log.locationArrayBlock=^(NSArray* locationArray){
+               _city=locationArray[0];
+        _longitude=locationArray[1];
+        _latitude=locationArray[2];
+        
+        NSString *lableText=[NSString stringWithFormat:@"%@(%@,%@)",_city,_longitude,_latitude];
+        _label2.text =lableText;
+    };
+    
+    [self.navigationController pushViewController:log animated:YES];
+    
+}
+
+
+
 
 
 - (void)showToastViewWithTitle:(NSString *)title {
@@ -282,23 +331,7 @@
     }
     
     
-    
-    
-    
-//    if(_provinceArray.count>0){
-//    AddressPickView *addressPickView = [AddressPickView shareInstance];
-//    addressPickView.provinceArray=_provinceArray;
-//    [self.view addSubview:addressPickView];
-//    addressPickView.block = ^(NSString *province){
-//       // [self.dataDic setObject:city forKey:@"regCountry"];
-//       // [self.dataDic setObject:town forKey:@"regCity"];
-//        _label.text = [NSString stringWithFormat:@"%@",province] ;
-//        _country=province;
-//    };
-//    }else{
-//        [self showToastViewWithTitle:root_country_huoQu];
-//        return;
-//    }
+
     
 }
 

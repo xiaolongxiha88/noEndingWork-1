@@ -185,7 +185,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                            self.getNoDataView()
                     }
                     
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
                     
                     
                 }

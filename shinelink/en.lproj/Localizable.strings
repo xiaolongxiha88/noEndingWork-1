@@ -1097,5 +1097,8 @@
 "496功率设置错误"="Power Factor rate should be a number in (-0.8 ~ -1/0.8 ~ 1).";
 "497有效值"="Rms";
 
-
-
+"498自动获取"="Automatic";
+"499手动输入"="Manual";
+"500不获取"="Do not get";
+"501选择位置获取方式"="Selection of location acquisition";
+"502客服邮箱"="Customer email";

@@ -260,6 +260,16 @@
 
    
     for (int i=0; i<labelArray.count; i++) {
+        if (i<4) {
+            UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(20*NOW_SIZE,13*HEIGHT_SIZE+i*60*HEIGHT_SIZE+moveHeight, 5*NOW_SIZE, 30*HEIGHT_SIZE)];
+            label.text=@"*";
+            label.textAlignment=NSTextAlignmentCenter;
+            label.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            label.textColor=[UIColor whiteColor];
+            [_backScroll addSubview:label];
+        }
+        
+        
         UIImageView *imageView=[[UIImageView alloc]initWithFrame:CGRectMake(30*NOW_SIZE,16*HEIGHT_SIZE+i*60*HEIGHT_SIZE+moveHeight,17*NOW_SIZE, 17*HEIGHT_SIZE)];
         imageView.contentMode=UIViewContentModeScaleAspectFit;
         imageView.clipsToBounds=YES;

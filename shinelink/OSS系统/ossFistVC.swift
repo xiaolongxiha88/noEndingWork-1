@@ -81,7 +81,7 @@ class ossFistVC: RootViewController {
 
      //[[NSUserDefaults standardUserDefaults] setObject:roleSecondNumArray forKey:@"roleSecondNumArray"];
      
-           roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString!
+        roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString?
         
            self.initLeftItem()
         serverNumArray=[0,0]
@@ -494,7 +494,7 @@ class ossFistVC: RootViewController {
            Lable3.textAlignment=NSTextAlignment.center
         view2.addSubview(Lable3)
         
-        let size1=self.getStringSize(Float(16*HEIGHT_SIZE), wsize: MAXFLOAT, hsize: Float(30*HEIGHT_SIZE), stringName: lable3AllString as String!)
+        let size1=self.getStringSize(Float(16*HEIGHT_SIZE), wsize: MAXFLOAT, hsize: Float(30*HEIGHT_SIZE), stringName: lable3AllString as String?)
         
         let image1=UIImageView()
         image1.frame=CGRect(x:(view1W+size1.width)/2+15*NOW_SIZE, y: 11.5*HEIGHT_SIZE, width: 5*HEIGHT_SIZE, height: 8*HEIGHT_SIZE)
@@ -598,7 +598,7 @@ class ossFistVC: RootViewController {
      let   netDic1=["deviceType":deviceType,"accessStatus":1,"agentCode":0,"plantName":"","userName":"","datalogSn":"","deviceSn":""] as [String : Any]
         
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic1 as [AnyHashable : Any]!, paramarsSite: "/api/v2/customer/device_num", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic1 as [AnyHashable : Any]?, paramarsSite: "/api/v2/customer/device_num", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
              self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
             
@@ -625,7 +625,7 @@ class ossFistVC: RootViewController {
                     
                     self.initUIFour()
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
                 }
                 
             }
@@ -997,13 +997,13 @@ class ossFistVC: RootViewController {
         if  newInfoType==1 {
             let vc=ossQuetionDetail()
             let id=NSString(format: "%d", infoID)
-            vc.qusetionId=id as String!
+            vc.qusetionId=id as String?
          //   vc.serverUrl=infoAddress! as String
             self.navigationController?.pushViewController(vc, animated: true)
         }else  if  newInfoType==2 {
             let vc=orderFirst()
             let id=NSString(format: "%d", infoID)
-            vc.orderID=id as String!
+            vc.orderID=id as String?
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -1064,7 +1064,7 @@ class ossFistVC: RootViewController {
                     }
                    
                     if (((UserDefaults.standard.object(forKey: "newInfoEnble")  as AnyObject).isEqual(NSNull.init())) == false){
-                        let newInfo=UserDefaults.standard.object(forKey: "newInfo") as! NSString
+                        let newInfo=UserDefaults.standard.object(forKey: "newInfo") as? NSString ?? ""
                         if newInfo != self.infoString{
                             UserDefaults.standard.set(self.infoString, forKey: "newInfo")
                             UserDefaults.standard.set(true, forKey: "newInfoEnble")
@@ -1079,7 +1079,7 @@ class ossFistVC: RootViewController {
                     
                 }else{
                        self.initUItwo2()
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
                 }
                 
             }
@@ -1146,7 +1146,7 @@ class ossFistVC: RootViewController {
                     
                 }else{
                       self.initUIThree3()
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
                 }
                 
             }
@@ -1180,8 +1180,8 @@ class ossFistVC: RootViewController {
       
         
         let vc=loginViewController()
-        vc.oldName=oldName as! String!
-            vc.oldPassword=oldPassword as! String!
+        vc.oldName=oldName as! String?
+        vc.oldPassword=oldPassword as! String?
         self.navigationController?.pushViewController(vc, animated: true)
         
 

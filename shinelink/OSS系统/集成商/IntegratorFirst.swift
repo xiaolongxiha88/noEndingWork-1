@@ -55,8 +55,8 @@ class IntegratorFirst: RootViewController {
         
     
         
-         roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString!
-         codeName=UserDefaults.standard.object(forKey: "agentCodeId") as! NSString!
+        roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString?
+        codeName=UserDefaults.standard.object(forKey: "agentCodeId") as! NSString?
         
         if roleString=="6" || roleString=="14"{
         self.initNet0()
@@ -260,7 +260,7 @@ class IntegratorFirst: RootViewController {
          Lable3.adjustsFontSizeToFitWidth=true
         view2.addSubview(Lable3)
         
-       let size1=self.getStringSize(Float(16*HEIGHT_SIZE), wsize: MAXFLOAT, hsize: Float(30*HEIGHT_SIZE), stringName: lable3AllString as String!)
+        let size1=self.getStringSize(Float(16*HEIGHT_SIZE), wsize: MAXFLOAT, hsize: Float(30*HEIGHT_SIZE), stringName: lable3AllString as String?)
 
         let image1=UIImageView()
         image1.frame=CGRect(x: (310*NOW_SIZE+size1.width)/2+10*NOW_SIZE, y: 11.5*HEIGHT_SIZE, width: 5*HEIGHT_SIZE, height: 8*HEIGHT_SIZE)
@@ -518,7 +518,7 @@ class IntegratorFirst: RootViewController {
                     
                     
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
                 }
                 
             }
@@ -533,19 +533,19 @@ class IntegratorFirst: RootViewController {
     func initNet1(){
         if self.roleString=="7" || self.roleString=="15"{
         agentCodeString=""
-            datalogSnString = (view0.viewWithTag(5002) as! UITextField).text as NSString!
-            deviceString = (view0.viewWithTag(5003) as! UITextField).text as NSString!
+            datalogSnString = (view0.viewWithTag(5002) as! UITextField).text as NSString?
+            deviceString = (view0.viewWithTag(5003) as! UITextField).text as NSString?
         }else{
-            plantName = (view0.viewWithTag(5000) as! UITextField).text as NSString!
-            userName = (view0.viewWithTag(5001) as! UITextField).text as NSString!
-            datalogSnString = (view0.viewWithTag(5002) as! UITextField).text as NSString!
-            deviceString = (view0.viewWithTag(5003) as! UITextField).text as NSString!
+            plantName = (view0.viewWithTag(5000) as! UITextField).text as NSString?
+            userName = (view0.viewWithTag(5001) as! UITextField).text as NSString?
+            datalogSnString = (view0.viewWithTag(5002) as! UITextField).text as NSString?
+            deviceString = (view0.viewWithTag(5003) as! UITextField).text as NSString?
         }
         
         netDic=["deviceType":deviceType,"accessStatus":accessStatus,"agentCode":agentCodeString,"plantName":plantName,"userName":userName,"datalogSn":datalogSnString,"deviceSn":deviceString]
         
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v2/customer/device_num", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:netDic as! [AnyHashable : Any]?, paramarsSite: "/api/v2/customer/device_num", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
             let data:Data=successBlock as! Data
@@ -570,7 +570,7 @@ self.valueDic=["chargeNum":objDic["chargeNum"]as! Int,"dischargeNum":objDic["dis
                     
                  self.initUIThree()
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
                 }
                 
             }

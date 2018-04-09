@@ -1141,7 +1141,11 @@
 
 #define  root_MAX_497  NSLocalizedString(@"497有效值", nil)
 
-
+#define  root_MAX_498  NSLocalizedString(@"498自动获取", nil)
+#define  root_MAX_499  NSLocalizedString(@"499手动输入", nil)
+#define  root_MAX_500 NSLocalizedString(@"500不获取", nil)
+#define  root_MAX_501 NSLocalizedString(@"501选择位置获取方式", nil)
+#define  root_MAX_502 NSLocalizedString(@"502客服邮箱", nil)
 
 
 #endif /* languageNew_h */
