@@ -1147,5 +1147,9 @@
 #define  root_MAX_501 NSLocalizedString(@"501选择位置获取方式", nil)
 #define  root_MAX_502 NSLocalizedString(@"502客服邮箱", nil)
 
+#define  root_MIX_503 NSLocalizedString(@"503电池自采电压", nil)
+
+
+
 
 #endif /* languageNew_h */

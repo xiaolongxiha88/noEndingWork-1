@@ -862,7 +862,13 @@ NSLog(@"体验馆");
                                 
                                 [self netRequest];
                                 
-                            }else{
+                            }else{      //OSS V2版入口
+                                if (![self.languageType isEqualToString:@"0"]) {
+                                    [self showAlertViewWithTitle:nil message:@"Please login via web:http://oss.growatt.com" cancelButtonTitle:root_OK];
+                       
+                                    return ;
+                                }
+                                
                                 if ([objDic.allKeys containsObject:@"ossServerUrl"]) {
                                     NSString *server1=[NSString stringWithFormat:@"%@",[objDic objectForKey:@"ossServerUrl"]];
                                     NSString *server2=@"http://";

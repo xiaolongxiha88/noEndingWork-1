@@ -1223,7 +1223,7 @@ _pcsNetStorageSN=@"";
         [_noneDeviceView addSubview:addDeviceButton];
         
         float H2=20*HEIGHT_SIZE;
-        UILabel *buttonName = [[UILabel alloc] initWithFrame:CGRectMake(0,20*HEIGHT_SIZE+H+5*HEIGHT_SIZE, ScreenWidth,H2)];
+        UILabel *buttonName = [[UILabel alloc] initWithFrame:CGRectMake(0,20*HEIGHT_SIZE+H+3*HEIGHT_SIZE, ScreenWidth,H2)];
         buttonName.font=[UIFont systemFontOfSize:12*HEIGHT_SIZE];
         buttonName.textAlignment = NSTextAlignmentCenter;
         buttonName.text=root_tianJia_sheBei;

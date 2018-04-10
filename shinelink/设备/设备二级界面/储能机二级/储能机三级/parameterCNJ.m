@@ -157,6 +157,8 @@ _Version=[NSString stringWithFormat:@"%@/%@",_params2Dict[@"fwVersion"],_params2
                     [NSString stringWithFormat:@"%@kWh",content[@"eBatChargeTotal"]],
                     [NSString stringWithFormat:@"%@kWh",content[@"eBatDisChargeToday"]],
                     [NSString stringWithFormat:@"%@kWh",content[@"eBatDisChargeTotal"]],
+                     [NSString stringWithFormat:@"%@V",content[@"vbatdsp"]],
+                    @"",
                     ];
     
     [self initUIThree];
@@ -380,7 +382,7 @@ NSString* vbat=[NSString stringWithFormat:@"%.f",[[NSString stringWithFormat:@"%
     NSArray *nameArray=@[@"Vb/Cb",@"Vpv",@"Ic_pv",@"Ppv",@"Ac_In",@"Ac_Out",@"PL",@"Per_Load",@"Epv_d",@"Epv_a",@"Ec_day",@"Ec_all",@"Ed_day",@"Ed_all"];
     
     if ([_typeNum isEqualToString:@"3"]) {
-        nameArray=@[root_5000Chart_159,root_5000Chart_160,root_5000xianqing_dianchi_dianya,root_PCS_dianchi_baifenbi,root_MIX_229,root_device_245,root_MIX_231,root_MIX_230,root_5000Chart_167,root_5000Chart_171,root_MIX_232,root_MIX_233,root_MIX_234,root_MIX_235];
+        nameArray=@[root_5000Chart_159,root_5000Chart_160,root_5000xianqing_dianchi_dianya,root_PCS_dianchi_baifenbi,root_MIX_229,root_device_245,root_MIX_231,root_MIX_230,root_5000Chart_167,root_5000Chart_171,root_MIX_232,root_MIX_233,root_MIX_234,root_MIX_235,root_MIX_503,@""];
     }
     
     float size3=50*HEIGHT_SIZE; float H1=10*HEIGHT_SIZE;

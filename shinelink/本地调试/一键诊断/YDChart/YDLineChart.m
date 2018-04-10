@@ -525,8 +525,12 @@
     
     
     _isLongPress = isLongPress;
+    
+
+    
    //  [self clear];
-    [self setNeedsDisplay];
+ [self setNeedsDisplay];
+    
 }
 
 /* 绘制x与y轴 */
@@ -898,19 +902,27 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    [self configValueDataArray];
-    [self drawAnimation];
-    
-    [self drawXAndYLineWithContext:context];
-    
-    [self longPressView];
-    if (!_isEndAnimation) {
-        return;
+    if(self.isLongPress)
+    {
+              [self drawXAndYLineWithContext:context];
+        
+           [self longPressView];
+    }else{
+        [self configValueDataArray];
+        [self drawAnimation];
+        
+        [self drawXAndYLineWithContext:context];
+        
+        
+        if (!_isEndAnimation) {
+            return;
+        }
+        
+        if (_drawDataArr.count) {
+            [self drawPositionLineWithContext:context];
+        }
     }
-    
-    if (_drawDataArr.count) {
-    [self drawPositionLineWithContext:context];
-    }
+
     
 }
 
@@ -919,7 +931,7 @@
     if(self.isLongPress)
     {
             CGContextRef context = UIGraphicsGetCurrentContext();
-        
+
         NSLog(@"%f",_currentLoc.x/self.pointGap);
         int nowPoint = _currentLoc.x/self.pointGap;
         NSInteger countNum=_xLineDataArr.count;
@@ -931,38 +943,38 @@
             if (_lineChartQuadrantType==JHLineChartQuadrantTypeFirstQuardrantYD) {
                  num = [NSNumber numberWithInt:nowPoint];
             }else{
-                        
+
                 if(_xLineDataArr.count>(nowPoint+1)){
                         num = [_xLineDataArr objectAtIndex:(nowPoint+1)];
                 }
-                
-            }
-     
 
-         
-            
+            }
+
+
+
+
         //    NSLog(@"长按X=%@",num);
             CGFloat chartHeight = self.frame.size.height;
-            
+
             CGPoint selectPoint = CGPointMake((nowPoint+1)*self.pointGap, chartHeight);
-            
+
             CGContextSaveGState(context);
-            
-             
+
+
             // 画十字线
             CGContextRestoreGState(context);
             CGContextSetLineWidth(context, 1);
             CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
             CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
-            
+
 //            // 选中横线
 //            CGContextMoveToPoint(context, 0, selectPoint.y);
 //            CGContextAddLineToPoint(context, self.frame.size.width, selectPoint.y);
-            
+
             if (_lineChartQuadrantType==JHLineChartQuadrantTypeFirstQuardrantYD) {
-            
+
                 if (![_xLineDataArr containsObject:[NSString stringWithFormat:@"%d",nowPoint]]) {
-                    
+
                     for (int i=0; i<_xLineDataArr.count-1; i++) {
                         int A=[[NSString stringWithFormat:@"%@",_xLineDataArr[i]] intValue];
                         int B=[[NSString stringWithFormat:@"%@",_xLineDataArr[i+1]] intValue];
@@ -972,7 +984,7 @@
                             }else{
                                 nowPoint=A;
                             }
-                            
+
                         }
                     }
                          selectPoint = CGPointMake((nowPoint+1)*self.pointGap, chartHeight);
@@ -980,24 +992,24 @@
                     // 选中竖线
                     CGContextMoveToPoint(context, selectPoint.x, 0);
                     CGContextAddLineToPoint(context, selectPoint.x, self.frame.size.height);
-                    
+
                     [self drawLine:context startPoint:CGPointMake(selectPoint.x, 0) endPoint:CGPointMake(selectPoint.x, self.frame.size.height) lineColor:[UIColor lightGrayColor] lineWidth:1];
-              
+
             }else{
                 // 选中竖线
                 CGContextMoveToPoint(context, selectPoint.x, 0);
                 CGContextAddLineToPoint(context, selectPoint.x, self.frame.size.height);
-                
+
                 [self drawLine:context startPoint:CGPointMake(selectPoint.x, 0) endPoint:CGPointMake(selectPoint.x, self.frame.size.height) lineColor:[UIColor lightGrayColor] lineWidth:1];
             }
-            
-     
-            
+
+
+
             CGContextStrokePath(context);
-  
+
             _xBlock(nowPoint);
-            
-            
+
+
             // 交界点
 //            CGRect myOval = {selectPoint.x-2, selectPoint.y-2, 4, 4};
 //            CGContextSetFillColorWithColor(context, [UIColor orangeColor].CGColor);
