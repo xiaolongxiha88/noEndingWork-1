@@ -70,6 +70,10 @@
 		333453E020731C1C000E409C /* max_onekey.png in Resources */ = {isa = PBXBuildFile; fileRef = 333453DC20731C1B000E409C /* max_onekey.png */; };
 		333453E120731C1C000E409C /* max_fault.png in Resources */ = {isa = PBXBuildFile; fileRef = 333453DD20731C1B000E409C /* max_fault.png */; };
 		333453E520736619000E409C /* oss_head_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 333453E420736619000E409C /* oss_head_bg.png */; };
+		33388E18207C8A5400B295E7 /* add_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33388E16207C8A5300B295E7 /* add_click.png */; };
+		33388E19207C8A5400B295E7 /* add_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 33388E17207C8A5400B295E7 /* add_nor.png */; };
+		33388E20207C986D00B295E7 /* help_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33388E1E207C986D00B295E7 /* help_click.png */; };
+		33388E21207C986E00B295E7 /* help_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 33388E1F207C986D00B295E7 /* help_nor.png */; };
 		333D44622010B96400C76FF9 /* oss_power_station.png in Resources */ = {isa = PBXBuildFile; fileRef = 333D44612010B96400C76FF9 /* oss_power_station.png */; };
 		333D44642010B97200C76FF9 /* oss_user_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 333D44632010B97100C76FF9 /* oss_user_list.png */; };
 		333D4466201189F400C76FF9 /* user_list_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 333D4465201189F400C76FF9 /* user_list_img.png */; };
@@ -469,7 +473,6 @@
 		3376B3E51F983D130069F820 /* usbModleOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 3376B3E41F983D130069F820 /* usbModleOne.m */; };
 		3377156A1D8E6CCC002EEEDF /* AddDeviceViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */; };
 		3377156C1D8E6E04002EEEDF /* liblibelian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AF3CEF1D8E67210007D6C2 /* liblibelian.a */; };
-		33771D521E8369B000786FCE /* zhushi11.png in Resources */ = {isa = PBXBuildFile; fileRef = 33771D511E8369B000786FCE /* zhushi11.png */; };
 		33775AD91D2CD7520070742E /* RKAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33775AD81D2CD7520070742E /* RKAlertView.m */; };
 		33775ADB1D2E03B40070742E /* 质保.png in Resources */ = {isa = PBXBuildFile; fileRef = 33775ADA1D2E03B40070742E /* 质保.png */; };
 		33775AED1D2E3BAF0070742E /* 未打勾.png in Resources */ = {isa = PBXBuildFile; fileRef = 33775AEC1D2E3BAF0070742E /* 未打勾.png */; };
@@ -925,6 +928,10 @@
 		333453DC20731C1B000E409C /* max_onekey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_onekey.png; sourceTree = "<group>"; };
 		333453DD20731C1B000E409C /* max_fault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max_fault.png; sourceTree = "<group>"; };
 		333453E420736619000E409C /* oss_head_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_head_bg.png; sourceTree = "<group>"; };
+		33388E16207C8A5300B295E7 /* add_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_click.png; sourceTree = "<group>"; };
+		33388E17207C8A5400B295E7 /* add_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_nor.png; sourceTree = "<group>"; };
+		33388E1E207C986D00B295E7 /* help_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_click.png; sourceTree = "<group>"; };
+		33388E1F207C986D00B295E7 /* help_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_nor.png; sourceTree = "<group>"; };
 		333D44612010B96400C76FF9 /* oss_power_station.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_power_station.png; sourceTree = "<group>"; };
 		333D44632010B97100C76FF9 /* oss_user_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_user_list.png; sourceTree = "<group>"; };
 		333D4465201189F400C76FF9 /* user_list_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_list_img.png; sourceTree = "<group>"; };
@@ -1561,7 +1568,6 @@
 		337715681D8E6CCC002EEEDF /* AddDeviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddDeviceViewController.h; path = ../WifConnect/num2/AddDeviceViewController.h; sourceTree = "<group>"; };
 		337715691D8E6CCC002EEEDF /* AddDeviceViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AddDeviceViewController.mm; path = ../WifConnect/num2/AddDeviceViewController.mm; sourceTree = "<group>"; };
 		3377156B1D8E6D28002EEEDF /* elian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = elian.h; path = OtherThing/cloudServices/elian.h; sourceTree = "<group>"; };
-		33771D511E8369B000786FCE /* zhushi11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhushi11.png; sourceTree = "<group>"; };
 		33775AD71D2CD7520070742E /* RKAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKAlertView.h; sourceTree = "<group>"; };
 		33775AD81D2CD7520070742E /* RKAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKAlertView.m; sourceTree = "<group>"; };
 		33775ADA1D2E03B40070742E /* 质保.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "质保.png"; path = "../../../../发现/质保.png"; sourceTree = "<group>"; };
@@ -2669,9 +2675,12 @@
 				3370EBA81F41496D00F37149 /* 充电桩.png */,
 				3382341A1D98ED8A002062AE /* adCancel.png */,
 				3370EBA41F4148CA00F37149 /* PV_head0.png */,
-				33771D511E8369B000786FCE /* zhushi11.png */,
 				33875A531EBABDE700F7E0E6 /* toolx_icon.png */,
 				3370EBAA1F414A1000F37149 /* MeBoost.png */,
+				33388E16207C8A5300B295E7 /* add_click.png */,
+				33388E17207C8A5400B295E7 /* add_nor.png */,
+				33388E1E207C986D00B295E7 /* help_click.png */,
+				33388E1F207C986D00B295E7 /* help_nor.png */,
 				336A24621DEFF7120002D1AD /* 设备头图片 */,
 			);
 			path = "图片";
@@ -4978,6 +4987,8 @@
 				3370EB9F1F41468C00F37149 /* 全面的数据分析_en.png in Resources */,
 				33FEFD7B1C7DB38400324374 /* shebei@2x.png in Resources */,
 				338234271D9A47AC002062AE /* Collectors_en.png in Resources */,
+				33388E20207C986D00B295E7 /* help_click.png in Resources */,
+				33388E19207C8A5400B295E7 /* add_nor.png in Resources */,
 				337475F61FADB4E700BB1A76 /* Max_control3.png in Resources */,
 				33C3FFFF1D3E33E00016351C /* L6.png in Resources */,
 				3370EBAF1F414C3F00F37149 /* equipmentV@2x.png in Resources */,
@@ -5099,9 +5110,11 @@
 				335D69AE1D77BA4D00894D90 /* hcdCachePlayer.bundle in Resources */,
 				33724D9F1CFE89BE005F3965 /* touxiang.png in Resources */,
 				333300341F10B4BB00754C6F /* device_search_icon.png in Resources */,
+				33388E18207C8A5400B295E7 /* add_click.png in Resources */,
 				3376B3D51F973EE00069F820 /* max_parameter.png in Resources */,
 				33FEFD631C7DB38400324374 /* icon---Username@2x.png in Resources */,
 				3370EB951F3C78B900F37149 /* LEDold2.gif in Resources */,
+				33388E21207C986E00B295E7 /* help_nor.png in Resources */,
 				33FEFD561C7DB38400324374 /* icon_press@3x.png in Resources */,
 				3330F4D91F14B8330076C237 /* work_order_icon.png in Resources */,
 				338964591E51979800A7B1AE /* device_bg.jpg in Resources */,
@@ -5140,7 +5153,6 @@
 				337F96101F0B90F800840527 /* phone.png in Resources */,
 				338321CB1EEE35B7004FFC20 /* configure_nor.png in Resources */,
 				336B51071FE11B380094CD6E /* newheadAnimal21.png in Resources */,
-				33771D521E8369B000786FCE /* zhushi11.png in Resources */,
 				338321C11EEE3370004FFC20 /* delete_nor.png in Resources */,
 				33884DAC1FF225BC0089E689 /* presentation.png in Resources */,
 				338E34F11EE55C290027EBD5 /* cancel_icon111.png in Resources */,

@@ -87,6 +87,8 @@
 @property (nonatomic, assign) int deviceType;      //3:MIX
 @property (nonatomic, strong) NSString *MixSN;    //头部MIX的SN
 
+@property (nonatomic, strong) UIView *noneDeviceView;
+
 @property (nonatomic) BOOL isPvType;
 
 @property (nonatomic, strong) NSMutableDictionary *storageTypeDic;
@@ -1057,6 +1059,17 @@ _pcsNetStorageSN=@"";
          [self initDatacore];
         self.edgesForExtendedLayout=UIRectEdgeNone;
          self.navigationController.navigationBar.translucent = NO;
+        
+        
+        if (self.managerNowArray.count>0) {
+            if (_noneDeviceView) {
+                [_noneDeviceView removeFromSuperview];
+                _noneDeviceView=nil;
+            }
+        }else{
+            [self initNoneDeviceUI];
+        }
+        
         //_tableView.frame =CGRectMake(0, NavigationbarHeight, SCREEN_Width, SCREEN_Height);
        //  [self.tableView reloadData];
             
@@ -1188,6 +1201,60 @@ _pcsNetStorageSN=@"";
     return pvPicName;
 }
 
+
+#pragma mark 创建没有设备的界面
+-(void)initNoneDeviceUI{
+    if (!_noneDeviceView) {
+        _noneDeviceView=[[UIView alloc]initWithFrame:CGRectMake(0,_headerView.frame.size.height+10*HEIGHT_SIZE, ScreenWidth, 300*HEIGHT_SIZE)];
+        _noneDeviceView.backgroundColor=[UIColor clearColor];
+        [self.view addSubview:_noneDeviceView];
+        
+        float H=100*HEIGHT_SIZE;
+        UIButton *addDeviceButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+        addDeviceButton.frame=CGRectMake((ScreenWidth-H)/2,20*HEIGHT_SIZE, H, H);
+        //    [addDeviceButton.layer setMasksToBounds:YES];
+        //    [addDeviceButton.layer setCornerRadius:20.0];
+        [addDeviceButton setBackgroundImage:IMAGE(@"add_nor.png") forState:UIControlStateNormal];
+        [addDeviceButton setBackgroundImage:IMAGE(@"add_click.png") forState:UIControlStateSelected];
+        [addDeviceButton setBackgroundImage:IMAGE(@"add_click.png") forState:UIControlStateHighlighted];
+        // addDeviceButton.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+        // [addDeviceButton setTitle:root_yijian_jianzhan forState:UIControlStateNormal];
+        [addDeviceButton addTarget:self action:@selector(selectRightAction) forControlEvents:UIControlEventTouchUpInside];
+        [_noneDeviceView addSubview:addDeviceButton];
+        
+        float H2=20*HEIGHT_SIZE;
+        UILabel *buttonName = [[UILabel alloc] initWithFrame:CGRectMake(0,20*HEIGHT_SIZE+H+5*HEIGHT_SIZE, ScreenWidth,H2)];
+        buttonName.font=[UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        buttonName.textAlignment = NSTextAlignmentCenter;
+        buttonName.text=root_tianJia_sheBei;
+        buttonName.textColor = COLOR(102, 102,102, 1);
+        [_noneDeviceView addSubview:buttonName];
+        
+           float W=160*HEIGHT_SIZE;
+        UIButton *gotoDataloggerButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+        gotoDataloggerButton.frame=CGRectMake((ScreenWidth-W)/2,20*HEIGHT_SIZE+H+20*HEIGHT_SIZE+20*HEIGHT_SIZE+H2, W, 30*HEIGHT_SIZE);
+        //    [addDeviceButton.layer setMasksToBounds:YES];
+        //    [addDeviceButton.layer setCornerRadius:20.0];
+        [gotoDataloggerButton setBackgroundImage:IMAGE(@"help_nor.png") forState:UIControlStateNormal];
+        [gotoDataloggerButton setBackgroundImage:IMAGE(@"help_click.png") forState:UIControlStateSelected];
+        [gotoDataloggerButton setBackgroundImage:IMAGE(@"help_click.png") forState:UIControlStateHighlighted];
+         gotoDataloggerButton.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
+         [gotoDataloggerButton setTitle:root_caiJiQi_leiBiao forState:UIControlStateNormal];
+        [gotoDataloggerButton addTarget:self action:@selector(goToDataloggerList) forControlEvents:UIControlEventTouchUpInside];
+        [_noneDeviceView addSubview:gotoDataloggerButton];
+        
+    }
+  
+    
+    
+}
+
+-(void)goToDataloggerList{
+    StationCellectViewController *goLog=[[StationCellectViewController alloc]init];
+    goLog.stationId=_stationIdOne;
+    goLog.getDirNum=_adNumber;
+    [self.navigationController pushViewController:goLog animated:YES];
+}
 
 
 #pragma mark 创建tableView的方法
@@ -1364,6 +1431,8 @@ _pcsNetStorageSN=@"";
         
     }
     
+
+  
     
     
 }
