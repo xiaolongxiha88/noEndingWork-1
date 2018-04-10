@@ -1232,7 +1232,7 @@ _pcsNetStorageSN=@"";
         
            float W=160*HEIGHT_SIZE;
         UIButton *gotoDataloggerButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-        gotoDataloggerButton.frame=CGRectMake((ScreenWidth-W)/2,20*HEIGHT_SIZE+H+20*HEIGHT_SIZE+20*HEIGHT_SIZE+H2, W, 30*HEIGHT_SIZE);
+        gotoDataloggerButton.frame=CGRectMake((ScreenWidth-W)/2,20*HEIGHT_SIZE+H+20*HEIGHT_SIZE+20*HEIGHT_SIZE+H2, W, (83.0/452.0)*160*HEIGHT_SIZE);
         //    [addDeviceButton.layer setMasksToBounds:YES];
         //    [addDeviceButton.layer setCornerRadius:20.0];
         [gotoDataloggerButton setBackgroundImage:IMAGE(@"help_nor.png") forState:UIControlStateNormal];
