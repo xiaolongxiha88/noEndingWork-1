@@ -1764,7 +1764,12 @@ GetDevice *getDevice=[_managerNowArray objectAtIndex:_indexPath.row];
 
 #pragma mark tableView的协议方法
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    if(self.managerNowArray.count==0){
+            return 0;
+    }else{
+         return 1;
+    }
+
 }
 
 
