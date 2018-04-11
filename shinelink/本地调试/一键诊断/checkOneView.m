@@ -244,6 +244,10 @@ static int  firstReadTime=72.0;
 
 //读取失败
 -(void)setFailed{
+        _isReadNow = !_isReadNow;
+    present=0;
+    [custompro setPresent:present];
+    custompro.presentlab.text = root_MAX_460;
     
     if (_oneCharType==2) {
         [self removeTheNotification];
@@ -262,9 +266,7 @@ static int  firstReadTime=72.0;
         [self showAlertViewWithTitle:root_MAX_466 message:root_MAX_467 cancelButtonTitle:root_OK];
     
     }
-    present=0;
-    [custompro setPresent:present];
-    custompro.presentlab.text = root_MAX_460;
+
     
 }
 

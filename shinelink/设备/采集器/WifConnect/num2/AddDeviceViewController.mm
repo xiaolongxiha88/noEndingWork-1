@@ -39,6 +39,10 @@
 
 @property(nonatomic,assign)float noticeH;
 
+@property(nonatomic,strong)NSString *ipNameString;
+@property(nonatomic,strong)NSString *pswdString;
+
+
 
 @end
 
@@ -538,6 +542,11 @@ static void *context = NULL;
     _deviceArray = [[NSMutableArray alloc] initWithCapacity:1];
     
     isSearching= true;
+    
+
+    
+    _ipNameString=self.ipName.text;
+    _pswdString=self.pswd.text;
     [self performSelectorInBackground:@selector(doneSearchDeviceAutoThread) withObject:nil];
 }
 
@@ -626,10 +635,10 @@ static void *context = NULL;
 
 
 -(void)OnSend:(unsigned int)flag SSID:(NSString*)ssidName PSWD:(NSString*)pswd{
-    const char *ssid = [ssidName cStringUsingEncoding:NSASCIIStringEncoding];
-    const char *s_authmode = [authMode cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *ssid = [ssidName cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *s_authmode = [authMode cStringUsingEncoding:NSUTF8StringEncoding];
     int authmode = atoi(s_authmode);
-    const char *password = [pswd cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *password = [pswd cStringUsingEncoding:NSUTF8StringEncoding];
  unsigned char target[] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
     
     NSLog(@"OnSend: ssid = %s, authmode = %d, password = %s", ssid, authmode, password);
@@ -639,8 +648,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
         //////////////////////   ////////////////////////////注销1  2
-//       elianStop(context);
-//        elianDestroy(context);
+       elianStop(context);
+        elianDestroy(context);
         
         
         
@@ -649,7 +658,7 @@ static void *context = NULL;
     
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销2  1
-// context = elianNew(NULL, 0, target, flag);
+ context = elianNew(NULL, 0, target, flag);
     
     
     if (context == NULL)
@@ -663,10 +672,10 @@ static void *context = NULL;
     //////// ////////////////// ////////////////////////////////
     //////////////////////   ////////////////////////////注销3  4
     
-//    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
-//    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
-//    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
-//    elianStart(context);
+    elianPut(context, TYPE_ID_AM, (char *)&authmode, 1);
+    elianPut(context, TYPE_ID_SSID, (char *)ssid, strlen(ssid));
+    elianPut(context, TYPE_ID_PWD, (char *)password, strlen(password));
+    elianStart(context);
 
     
 }
@@ -675,7 +684,9 @@ static void *context = NULL;
 -(void)doneSearchDeviceAutoThread{
     //进行一键配置
     NSLog(@"一键配置开始");
-    [self OnSend:(ELIAN_SEND_V1 | ELIAN_SEND_V4) SSID:self.ipName.text PSWD:self.pswd.text];
+
+    
+    [self OnSend:(ELIAN_SEND_V1 | ELIAN_SEND_V4) SSID:_ipNameString PSWD:_pswdString];
     
     
     __weak AddDeviceViewController* selfView = self;
@@ -703,7 +714,7 @@ static void *context = NULL;
     _timelineConfig.completionBlock = ^void (EasyTimeline *timeline) {
         //查找完成
          NSLog(@"停止配置");
-           _timer.fireDate=[NSDate distantFuture];
+           self.timer.fireDate=[NSDate distantFuture];
           _timer=nil;
         
         if (![myAlertView isHidden]) {
@@ -726,8 +737,8 @@ static void *context = NULL;
         
         //////// ////////////////// ////////////////////////////////
 //        //////////////////////   ////////////////////////////注销4  2
-//    elianStop(context);
-//     elianDestroy(context);
+    elianStop(context);
+     elianDestroy(context);
         
         
     }
@@ -751,8 +762,8 @@ static void *context = NULL;
            
           //////// ////////////////// ////////////////////////////////
          //////////////////////   ////////////////////////////注销5  2
-//            elianStop(context);
-//           elianDestroy(context);
+            elianStop(context);
+           elianDestroy(context);
             
             
             context = NULL;
