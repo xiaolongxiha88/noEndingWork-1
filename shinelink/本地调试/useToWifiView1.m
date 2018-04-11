@@ -135,6 +135,7 @@ static NSString *cellTwo = @"cellTwo";
 
 
 -(void)goBackPop{
+ 
  [self.navigationController popViewControllerAnimated:NO];
 }
 

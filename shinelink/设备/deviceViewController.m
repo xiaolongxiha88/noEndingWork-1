@@ -96,6 +96,9 @@
 @property (nonatomic, strong) DTKDropdownMenuView *rightMenuView;
 @property (nonatomic, strong) DTKDropdownMenuView *titleMenuView;
 @property (nonatomic, strong) KTDropdownMenuView *menuView;
+
+@property (nonatomic, strong) UIScrollView *scrollView;
+
 @end
 
 @implementation deviceViewController
@@ -160,6 +163,7 @@ _pcsNetStorageSN=@"";
     
     _isPvType=NO;
     
+ 
   
   [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:MainColor];
@@ -516,6 +520,7 @@ _pcsNetStorageSN=@"";
     
     addDevice *add=[[addDevice alloc]init];
     add.stationId=_stationIdOne;
+       add.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:add animated:YES];
 }
 
@@ -537,6 +542,7 @@ _pcsNetStorageSN=@"";
         StationCellectViewController *goLog=[[StationCellectViewController alloc]init];
         goLog.stationId=_stationIdOne;
         goLog.getDirNum=_adNumber;
+          goLog.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:goLog animated:NO];
     }];
     DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:root_Add_Plant iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
@@ -918,13 +924,7 @@ _pcsNetStorageSN=@"";
         
         
         
-        //创建Head
-        if (_headerView) {
-          [_headerView removeFromSuperview];
-            _headerView=nil;
-            
-        }
-         [self _createHeaderView];
+
         
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:@"GetDevice" inManagedObjectContext:_manager.managedObjContext];
@@ -1060,15 +1060,15 @@ _pcsNetStorageSN=@"";
         self.edgesForExtendedLayout=UIRectEdgeNone;
          self.navigationController.navigationBar.translucent = NO;
         
-        
-        if (self.managerNowArray.count>0) {
-            if (_noneDeviceView) {
-                [_noneDeviceView removeFromSuperview];
-                _noneDeviceView=nil;
-            }
-        }else{
-            [self initNoneDeviceUI];
+        //创建Head
+        if (_headerView) {
+            [_headerView removeFromSuperview];
+            _headerView=nil;
+            
         }
+        [self _createHeaderView];
+        
+
         
         //_tableView.frame =CGRectMake(0, NavigationbarHeight, SCREEN_Width, SCREEN_Height);
        //  [self.tableView reloadData];
@@ -1204,10 +1204,14 @@ _pcsNetStorageSN=@"";
 
 #pragma mark 创建没有设备的界面
 -(void)initNoneDeviceUI{
+    if (_noneDeviceView) {
+        [_noneDeviceView removeFromSuperview];
+        _noneDeviceView=nil;
+    }
     if (!_noneDeviceView) {
-        _noneDeviceView=[[UIView alloc]initWithFrame:CGRectMake(0,_headerView.frame.size.height+10*HEIGHT_SIZE, ScreenWidth, 300*HEIGHT_SIZE)];
-        _noneDeviceView.backgroundColor=[UIColor clearColor];
-        [self.view addSubview:_noneDeviceView];
+        _noneDeviceView=[[UIView alloc]initWithFrame:CGRectMake(0,200*HEIGHT_SIZE, ScreenWidth, 300*HEIGHT_SIZE)];
+        _noneDeviceView.backgroundColor=[UIColor whiteColor];
+        [_headerView addSubview:_noneDeviceView];
         
         float H=100*HEIGHT_SIZE;
         UIButton *addDeviceButton =  [UIButton buttonWithType:UIButtonTypeCustom];
@@ -1253,6 +1257,7 @@ _pcsNetStorageSN=@"";
     StationCellectViewController *goLog=[[StationCellectViewController alloc]init];
     goLog.stationId=_stationIdOne;
     goLog.getDirNum=_adNumber;
+      goLog.hidesBottomBarWhenPushed=YES;
     [self.navigationController pushViewController:goLog animated:YES];
 }
 
@@ -1386,11 +1391,17 @@ _pcsNetStorageSN=@"";
 #pragma mark - 增加Head的Banner
 
 - (void)_createHeaderView {
-    float headerViewH=200*HEIGHT_SIZE;
     
    
+    
+    float headerViewH=200*HEIGHT_SIZE;
+    
     if ([_deviceHeadType intValue]==2) {
         headerViewH=260*NOW_SIZE;
+    }
+    
+    if (self.managerNowArray.count==0) {
+        headerViewH=500*HEIGHT_SIZE;
     }
     
     if (!_headerView) {
@@ -1401,7 +1412,7 @@ _pcsNetStorageSN=@"";
    
     float headHeight=_headerView.bounds.size.height;
 
-    
+
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,Kwidth,headHeight)];
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.colors = @[(__bridge id)COLOR(0, 156, 255, 1).CGColor, (__bridge id)COLOR(11, 182, 255, 1).CGColor];
@@ -1411,6 +1422,16 @@ _pcsNetStorageSN=@"";
     gradientLayer.frame = CGRectMake(0, 0, imageView.frame.size.width, imageView.frame.size.height);
     [imageView.layer addSublayer:gradientLayer];
     [_headerView addSubview:imageView];
+    
+    
+    if (self.managerNowArray.count>0) {
+        if (_noneDeviceView) {
+            [_noneDeviceView removeFromSuperview];
+            _noneDeviceView=nil;
+        }
+    }else{
+        [self initNoneDeviceUI];
+    }
     
     
     //_deviceHeadType=@"1";

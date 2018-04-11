@@ -287,7 +287,7 @@
     } else {
     //    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:UIBarButtonItemStylePlain target:self action:@selector(openPhoto)];
         if (_scanBarType==1) {
-            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"跳过" style:UIBarButtonItemStylePlain target:self action:@selector(goToUsbTool)];
+            UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:root_MAX_504 style:UIBarButtonItemStylePlain target:self action:@selector(goToUsbTool)];
             [self.navigationItem setRightBarButtonItem:rightItem];
         }
       

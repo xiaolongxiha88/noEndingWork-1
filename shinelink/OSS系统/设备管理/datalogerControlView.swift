@@ -100,7 +100,7 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
         
         if indexPath.row==0 || indexPath.row==1 || indexPath.row==4{
             let goView=datalogerControlTwo()
-            goView.lableName=cellNameArray[indexPath.row] as! NSString
+            goView.lableName=cellNameArray[indexPath.row] as? NSString ?? ""
             goView.typeNum = NSString(format: "%d", indexPath.row)
             goView.snString=self.snString
             self.navigationController?.pushViewController(goView, animated: true)
@@ -174,7 +174,7 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v1/deviceSet/set/datalog",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                     
@@ -182,7 +182,7 @@ class datalogerControlView: RootViewController,UITableViewDataSource,UITableView
                   //  self.navigationController!.popViewController(animated: true)
                     
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }

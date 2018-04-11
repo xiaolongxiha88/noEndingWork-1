@@ -8,8 +8,13 @@
 
 import UIKit
 
+
 let NOW_SIZE = UIScreen.main.bounds.width/320
-let HEIGHT_SIZE = UIScreen.main.bounds.height/560
+
+let HEIGHT_SIZE =  UIScreen.main.bounds.height == 812 ? UIScreen.main.bounds.height/812 : UIScreen.main.bounds.height/560
+
+
+
 
 func COLOR(_R:Float,_G:Float,_B:Float,_A: Float) -> UIColor {
     return   UIColor.init(colorLiteralRed: _R / 255.0, green: _G / 255.0, blue: _B / 255.0, alpha: _A)

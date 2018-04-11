@@ -165,7 +165,7 @@ class changUserInfoTwo: RootViewController {
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v1/user/update/info",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                     

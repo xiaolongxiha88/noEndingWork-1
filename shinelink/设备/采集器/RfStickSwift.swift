@@ -125,7 +125,7 @@ class RfStickSwift: RootViewController {
                 if result.isEqual("1"){
                     self.showToastView(withTitle: root_peizhi_chenggong)
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
             
             }

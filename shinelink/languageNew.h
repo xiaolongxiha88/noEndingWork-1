@@ -1149,7 +1149,7 @@
 
 #define  root_MIX_503 NSLocalizedString(@"503电池自采电压", nil)
 
-
+#define  root_MAX_504 NSLocalizedString(@"504跳过", nil)
 
 
 #endif /* languageNew_h */

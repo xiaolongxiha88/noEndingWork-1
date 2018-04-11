@@ -172,7 +172,7 @@ deviceTypeString="1"
                             self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as? NSString ?? "")
                             self.cellValue2Array.add((plantAll[i] as! NSDictionary)["status"] as? Int ?? 7)
                             self.cellValue3Array.add((plantAll[i] as! NSDictionary)["dataLogSn"] as? NSString ?? "")
-                            let Type=(plantAll[i] as! NSDictionary)["deviceType"] as!Int
+                            let Type=(plantAll[i] as! NSDictionary)["deviceType"] as? Int ?? 0
                             var typeString:NSString=""
                             if Type==0{
                             typeString="SP2000"
@@ -213,7 +213,7 @@ deviceTypeString="1"
                             self.getNoDataView()
                     }
 
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 
                 }
                 
@@ -255,7 +255,7 @@ deviceTypeString="1"
     func tableViewReload(info:NSNotification){
 
         let  dic=info.userInfo as Any as!NSDictionary
-        let Tag=dic.object(forKey: "tag") as! Int
+        let Tag=dic.object(forKey: "tag") as? Int ?? 0
         if Tag==2000 {
               deviceTypeString="0"
           

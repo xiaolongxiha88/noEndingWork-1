@@ -227,11 +227,17 @@
     logo.image = IMAGE(@"logo2.png");
     [_scrollView addSubview:logo];
     
-    UIView *imageView111=[[UIView alloc]initWithFrame:CGRectMake(280*NOW_SIZE,0*HEIGHT_SIZE, 40*NOW_SIZE,40*HEIGHT_SIZE)];
+    float imageMoreH=5*HEIGHT_SIZE;
+    if (iPhoneX) {
+        imageMoreH=13*HEIGHT_SIZE;
+    }
+    UIView *imageView111=[[UIView alloc]initWithFrame:CGRectMake(280*NOW_SIZE,imageMoreH, 40*NOW_SIZE,40*HEIGHT_SIZE)];
     imageView111.userInteractionEnabled=YES;
     UITapGestureRecognizer *tapGestureRecognizerMore = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goToMoreView)];
     [imageView111 addGestureRecognizer:tapGestureRecognizerMore];
       [_scrollView addSubview:imageView111];
+    
+
     
     UIImageView *imageMore=[[UIImageView alloc]initWithFrame:CGRectMake(20*NOW_SIZE,18*HEIGHT_SIZE, 4*NOW_SIZE,18*HEIGHT_SIZE)];
     imageMore.image= IMAGE(@"loginMore.png");

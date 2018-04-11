@@ -162,7 +162,7 @@ class datalogerControlTwo: RootViewController {
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v1/device/info",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
             
@@ -170,7 +170,7 @@ class datalogerControlTwo: RootViewController {
                 self.navigationController!.popViewController(animated: true)
                     
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }

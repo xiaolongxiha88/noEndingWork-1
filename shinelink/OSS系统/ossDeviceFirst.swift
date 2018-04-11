@@ -637,8 +637,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                            self.cellNameArray=[root_shoujihao,root_yonghuming];
                       plantAll=objArray["userList"] as! NSArray
                         for i in 0..<plantAll.count{
-                          self.cellValue1Array.add((plantAll[i] as! NSDictionary)["phoneNum"] as!NSString)
-                              self.cellValue2Array.add((plantAll[i] as! NSDictionary)["accountName"] as!NSString)
+                          self.cellValue1Array.add((plantAll[i] as! NSDictionary)["phoneNum"] as? NSString ?? "")
+                              self.cellValue2Array.add((plantAll[i] as! NSDictionary)["accountName"] as? NSString ?? "")
                             self.plantListArray.add(plantAll[i])
                         }
                     }
@@ -648,8 +648,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                         self.cellNameArray=[root_youxiang,root_yonghuming];
                         plantAll=objArray["userList"] as! NSArray
                         for i in 0..<plantAll.count{
-                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["email"] as!NSString)
-                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["accountName"] as!NSString)
+                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["email"] as? NSString ?? "")
+                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["accountName"] as? NSString ?? "")
                             self.plantListArray.add(plantAll[i])
                         }
                     }

@@ -22,7 +22,7 @@ class changUserInfo: RootViewController,UITableViewDataSource,UITableViewDelegat
  self.view.backgroundColor=MainColor
         
         cellNameArray=["修改真实姓名","修改邮箱","修改手机号","修改时区","修改公司名称","重置密码"]
-        cellvalueArray=[userListDic["activeName"] as! NSString,userListDic["email"] as! NSString,userListDic["phoneNum"] as! NSString,userListDic["timeZone"] as! Int,userListDic["company"] as! NSString,""]
+        cellvalueArray=[userListDic["activeName"] as? NSString ?? "",userListDic["email"] as? NSString ?? "",userListDic["phoneNum"] as? NSString ?? "",userListDic["timeZone"] as? Int ?? 0,userListDic["company"]  as? NSString ?? "",""]
         
         self.initUI()
     }
@@ -83,7 +83,7 @@ class changUserInfo: RootViewController,UITableViewDataSource,UITableViewDelegat
        
        cell?.detailTextLabel?.text=cellvalueArray[indexPath.row] as? String
         if indexPath.row==3 {
-              cell?.detailTextLabel?.text=String(format: "%d", cellvalueArray[indexPath.row] as! Int)
+              cell?.detailTextLabel?.text=String(format: "%d", cellvalueArray[indexPath.row] as? Int ?? 0)
         }
         
         cell?.textLabel?.font=UIFont.systemFont(ofSize: 14*HEIGHT_SIZE)
@@ -111,13 +111,13 @@ class changUserInfo: RootViewController,UITableViewDataSource,UITableViewDelegat
     //    if indexPath.row==0 || indexPath.row==1 || indexPath.row==2 || indexPath.row==3 || indexPath.row==4{
             
             let goView=changUserInfoTwo()
-            goView.lableName=cellNameArray[indexPath.row] as! NSString
+            goView.lableName=cellNameArray[indexPath.row] as? NSString ?? ""
             goView.typeNum = indexPath.row
         if indexPath.row==3 {
-              goView.lableValue=NSString(format: "%d", cellvalueArray[indexPath.row] as! Int)
+              goView.lableValue=NSString(format: "%d", cellvalueArray[indexPath.row] as? Int ?? 0)
         }
        
-           goView.userName=userListDic["accountName"] as! NSString
+           goView.userName=userListDic["accountName"] as? NSString ?? ""
             self.navigationController?.pushViewController(goView, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
        
@@ -148,7 +148,7 @@ class changUserInfo: RootViewController,UITableViewDataSource,UITableViewDelegat
                 print("/api/v1/search/all=",jsonDate)
                 
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                     var plantAll:NSArray=[]
@@ -159,13 +159,13 @@ class changUserInfo: RootViewController,UITableViewDataSource,UITableViewDelegat
                     if (self.tableView == nil){
                         self.initUI()
                     }else{
-                           self.cellvalueArray=[self.userListDic["activeName"] as! NSString,self.userListDic["email"] as! NSString,self.userListDic["phoneNum"] as! NSString,self.userListDic["timeZone"] as! Int,self.userListDic["company"] as! NSString,""]
+                           self.cellvalueArray=[self.userListDic["activeName"] as? NSString ?? "",self.userListDic["email"] as? NSString ?? "",self.userListDic["phoneNum"] as? NSString ?? "",self.userListDic["timeZone"] as? Int ?? 0,self.userListDic["company"] as? NSString ?? "",""]
                         self.tableView.reloadData()
                     }
                     
                 }else{
                     
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }

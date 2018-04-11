@@ -60,11 +60,11 @@ class deviceControlView: RootViewController {
     
     func initData(){
              var status=""
-        if (valueDic["lost"] as! Bool){
+        if (valueDic["lost"] as? Bool ?? false){
             status="离线"}else{status="在线"}
         
         if typeNum=="0"{
-           let snCode=self.getValidCode(valueDic["serialNum"] as? String ?? "")
+            let snCode=self.getValidCode(valueDic["serialNum"] as? String ?? "") as NSString? ?? ""
          lableNameArray=["序列号","别名","设备类型","用户名","连接状态","IP及端口号","固件版本","服务器地址","更新时间","校验码"]
                 let paramBean=valueDic["paramBean"] as! Dictionary<String, Any>
             var version=""
@@ -74,7 +74,7 @@ class deviceControlView: RootViewController {
                 version=paramBean["firmwareVersionBuild"] as? String ?? ""
                 serverUrl=paramBean["serverUrl"] as? String ?? ""
             }
-            lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"] as? NSString ?? "",valueDic["deviceType"]as? NSString ?? "",valueDic["userName"]as? NSString ?? "",status,valueDic["clientUrl"]as? NSString ?? "",version,serverUrl,valueDic["lastUpdateTimeText"] as? NSString ?? "",snCode ?? ""]
+            lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"] as? NSString ?? "",valueDic["deviceType"]as? NSString ?? "",valueDic["userName"]as? NSString ?? "",status,valueDic["clientUrl"]as? NSString ?? "",version,serverUrl,valueDic["lastUpdateTimeText"] as? NSString ?? "",snCode]
         }else if typeNum=="1"{
             let nominalString=NSString(format: "%.f", valueDic["nominalPower"]as? Float ?? 0.0)
               let powerString=NSString(format: "%.f", valueDic["power"]as? Float ?? 0.0)
@@ -85,22 +85,22 @@ class deviceControlView: RootViewController {
             
         }else if typeNum=="2"{
             var type=""
-            if (valueDic["deviceType"] as! Int)==0{
-                type="SP2000"}else if (valueDic["deviceType"] as! Int)==1{type="SP3000"}else if (valueDic["deviceType"] as! Int)==2{type="SPF5000"}
+            if (valueDic["deviceType"] as? Int ?? 0)==0{
+                type="SP2000"}else if (valueDic["deviceType"] as? Int ?? 0)==1{type="SP3000"}else if (valueDic["deviceType"] as? Int ?? 0)==2{type="SPF5000"}
             let pChargeString=NSString(format: "%.f", valueDic["pCharge"]as? Float ?? 0.0)
             let pDischargeString=NSString(format: "%.f", valueDic["pDischarge"]as? Float ?? 0.0)
-            let statueIne=valueDic["status"] as! Int
+            let statueIne=valueDic["status"] as? Int ?? 0
             var statueString:NSString?
             if statueIne==0 {
-                statueString=root_xianZhi as NSString!
+                statueString=root_xianZhi as NSString?
             }else if statueIne==1 {
-                statueString=root_chongDian as NSString!
+                statueString=root_chongDian as NSString?
             }else if statueIne==2 {
-                statueString=root_fangDian as NSString!
+                statueString=root_fangDian as NSString?
             }else if statueIne==3{
-                statueString=root_cuoWu as NSString!
+                statueString=root_cuoWu as NSString?
             }else if statueIne==4{
-                statueString=root_dengDai as NSString!
+                statueString=root_dengDai as NSString?
             }
     
             
@@ -117,11 +117,11 @@ class deviceControlView: RootViewController {
     func initNet0(){
         
         valueAllDic=[:]
-         let addressString=UserDefaults.standard.object(forKey: "OssAddress") as! NSString
+         let addressString=UserDefaults.standard.object(forKey: "OssAddress") as? NSString ?? ""
         
         netDic=["deviceSn":deviceSnString,"deviceType":deviceTypeString,"alias":"","serverAddr":addressString,"page":pageNum]
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/device/info", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]?, paramarsSite: "/api/v1/device/info", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
           
             let data:Data=successBlock as! Data
@@ -132,7 +132,7 @@ class deviceControlView: RootViewController {
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v1/device/info",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
@@ -141,7 +141,7 @@ class deviceControlView: RootViewController {
                     
                     if self.deviceTypeString=="0"{
                         plantAll=objArray["datalogList"] as! NSArray
-                      self.dataloggerTypeString=(plantAll[0]as! NSDictionary)["deviceTypeIndicate"] as! Int
+                      self.dataloggerTypeString=(plantAll[0]as! NSDictionary)["deviceTypeIndicate"] as? Int ?? 0
                         
                     }
                     if self.deviceTypeString=="1"{
@@ -159,7 +159,7 @@ class deviceControlView: RootViewController {
                     
                     
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }
@@ -190,7 +190,7 @@ class deviceControlView: RootViewController {
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v2/customer/device_info",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
@@ -201,7 +201,7 @@ class deviceControlView: RootViewController {
                         if self.deviceTypeString=="0"{
                             if objArray.keys.contains("datalogList"){
                                 plantAll=objArray["datalogList"] as! NSArray
-                                self.dataloggerTypeString=(plantAll[0]as! NSDictionary)["deviceTypeIndicate"] as! Int
+                                self.dataloggerTypeString=(plantAll[0]as! NSDictionary)["deviceTypeIndicate"] as? Int ?? 0
                             }else{
                             return
                             }
@@ -237,7 +237,7 @@ class deviceControlView: RootViewController {
                
 
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }
@@ -391,7 +391,7 @@ class deviceControlView: RootViewController {
                 let goView=datalogerControlView()
                 goView.cellNameArray=["设置服务器IP地址","设置服务器域名","重启采集器","清除采集器记录","高级设置"]
                 goView.valueDic=self.valueDic
-                goView.snString=valueDic["serialNum"]as! NSString
+                goView.snString=valueDic["serialNum"]as? NSString ?? ""
                 self.navigationController?.pushViewController(goView, animated: true)
             }
    
@@ -409,13 +409,13 @@ class deviceControlView: RootViewController {
                     let goView=controlCNJTable()
                     goView.controlType="2"
                     goView.typeNum="0"
-                    goView.cnjSn=valueDic["serialNum"]as! String
+                    goView.cnjSn=valueDic["serialNum"]as? String ?? ""
                     self.navigationController?.pushViewController(goView, animated: true)
                 }else if storageType==2{
                     let goView=controlCNJTable()
                     goView.controlType="2"
                        goView.typeNum="1"
-                    goView.cnjSn=valueDic["serialNum"]as! String
+                    goView.cnjSn=valueDic["serialNum"]as? String ?? ""
                     self.navigationController?.pushViewController(goView, animated: true)
                
                 }else{
@@ -430,8 +430,8 @@ class deviceControlView: RootViewController {
         
         if uibutton.tag==2001 {
             let goView=ChangeCellectViewController()
-            goView.alias=valueDic["alias"]as! String
-            goView.datalogSN=valueDic["serialNum"]as! String
+            goView.alias=valueDic["alias"]as? String ?? ""
+            goView.datalogSN=valueDic["serialNum"]as? String ?? ""
             goView.unitId=""
             goView.ossString="1"
             if typeNum=="0" {
@@ -466,7 +466,7 @@ class deviceControlView: RootViewController {
         if uibutton.tag==2003 {
             if  dataloggerTypeString==6 {                //新WiFi
                    let goView=AddDeviceViewController()
-                goView.snString=valueDic["serialNum"]as! String
+                goView.snString=valueDic["serialNum"]as? String ?? ""
                 goView.ossType="1";
                 goView.hidesBottomBarWhenPushed=true
                      self.navigationController?.pushViewController(goView, animated: true)
@@ -485,7 +485,7 @@ class deviceControlView: RootViewController {
             
             if  dataloggerTypeString==11 {                  //WiFi-S
                 let goView=configWifiSViewController()
-                goView.snString=valueDic["serialNum"]as! String
+                goView.snString=valueDic["serialNum"]as? String ?? ""
                 goView.hidesBottomBarWhenPushed=true
                 self.navigationController?.pushViewController(goView, animated: true)
                 
@@ -502,7 +502,7 @@ class deviceControlView: RootViewController {
     func finishSet(){
         
         
-        netDic=["deviceSn":valueDic["serialNum"]as! NSString,"deviceType":typeNum]
+        netDic=["deviceSn":valueDic["serialNum"]as? NSString ?? "","deviceType":typeNum]
         self.showProgressView()
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/device/delete", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
@@ -515,7 +515,7 @@ class deviceControlView: RootViewController {
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v1/device/info",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                     
@@ -523,7 +523,7 @@ class deviceControlView: RootViewController {
                   self.navigationController!.popViewController(animated: true)
                     
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }
