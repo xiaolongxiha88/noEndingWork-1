@@ -76,10 +76,10 @@ class deviceControlView: RootViewController {
             }
             lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"] as? NSString ?? "",valueDic["deviceType"]as? NSString ?? "",valueDic["userName"]as? NSString ?? "",status,valueDic["clientUrl"]as? NSString ?? "",version,serverUrl,valueDic["lastUpdateTimeText"] as? NSString ?? "",snCode ?? ""]
         }else if typeNum=="1"{
-            let nominalString=NSString(format: "%.f", valueDic["nominalPower"]as! Float)
-              let powerString=NSString(format: "%.f", valueDic["power"]as! Float)
-              let etodayString=NSString(format: "%.f", valueDic["eToday"]as! Float)
-              let eTotallString=NSString(format: "%.f", valueDic["eTotal"]as! Float)
+            let nominalString=NSString(format: "%.f", valueDic["nominalPower"]as? Float ?? 0.0)
+              let powerString=NSString(format: "%.f", valueDic["power"]as? Float ?? 0.0)
+              let etodayString=NSString(format: "%.f", valueDic["eToday"]as? Float ?? 0.0)
+              let eTotallString=NSString(format: "%.f", valueDic["eTotal"]as? Float ?? 0.0)
         lableNameArray=["序列号","别名","所属采集器","连接状态","额定功率(W)","当前功率(W)","今日发电(kWh)","累计发电量(kWh)","逆变器型号","最后更新时间"]
                lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"]as? NSString ?? "",valueDic["dataLogSn"]as? NSString ?? "",status,nominalString,powerString,etodayString,eTotallString,valueDic["modelText"]as? NSString ?? "",valueDic["lastUpdateTimeText"] as? NSString ?? ""]
             
@@ -87,8 +87,8 @@ class deviceControlView: RootViewController {
             var type=""
             if (valueDic["deviceType"] as! Int)==0{
                 type="SP2000"}else if (valueDic["deviceType"] as! Int)==1{type="SP3000"}else if (valueDic["deviceType"] as! Int)==2{type="SPF5000"}
-            let pChargeString=NSString(format: "%.f", valueDic["pCharge"]as! Float)
-            let pDischargeString=NSString(format: "%.f", valueDic["pDischarge"]as! Float)
+            let pChargeString=NSString(format: "%.f", valueDic["pCharge"]as? Float ?? 0.0)
+            let pDischargeString=NSString(format: "%.f", valueDic["pDischarge"]as? Float ?? 0.0)
             let statueIne=valueDic["status"] as! Int
             var statueString:NSString?
             if statueIne==0 {

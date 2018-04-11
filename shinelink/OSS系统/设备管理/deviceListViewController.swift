@@ -116,7 +116,7 @@ deviceTypeString="1"
         
         netDic=["plantId":plantIdString,"deviceType":deviceTypeString,"page":pageNum]
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/device/list", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]?, paramarsSite: "/api/v1/device/list", sucessBlock: {(successBlock)->() in
              self.hideProgressView()
     // cellNameArray=["序列号:","状态:","所属采集器序列号:","采集器类型:","逆变器型号:"];
             let data:Data=successBlock as! Data
@@ -127,7 +127,7 @@ deviceTypeString="1"
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v1/device/info",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
@@ -139,7 +139,7 @@ deviceTypeString="1"
                         for i in 0..<plantAll.count{
                             self.cellValue0Array.add((plantAll[i] as! NSDictionary)["alias"] as? NSString ?? "")
                             self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as? NSString ?? "")
-                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["lost"] as!Bool)
+                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["lost"] as? Bool ?? true)
                             self.cellValue3Array.add((plantAll[i] as! NSDictionary)["clientUrl"] as? NSString ?? "")
                             self.cellValue4Array.add((plantAll[i] as! NSDictionary)["deviceType"] as? NSString ?? "")
                             self.plantListArray.add(plantAll[i])

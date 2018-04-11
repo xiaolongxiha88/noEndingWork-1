@@ -55,8 +55,8 @@ class IntegratorFirst: RootViewController {
         
     
         
-        roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString?
-        codeName=UserDefaults.standard.object(forKey: "agentCodeId") as! NSString?
+        roleString=UserDefaults.standard.object(forKey: "roleNum") as? NSString ?? ""
+        codeName=UserDefaults.standard.object(forKey: "agentCodeId") as? NSString ?? ""
         
         if roleString=="6" || roleString=="14"{
         self.initNet0()
@@ -252,7 +252,7 @@ class IntegratorFirst: RootViewController {
              lable3Name0=String(format: "%@逆变器总数:", lable3Name1[accessStatus])
         }
         
-        let lable3AllString=NSString(format: "%@%d", lable3Name0,valueDic.object(forKey: "totalNum") as! Int)
+        let lable3AllString=NSString(format: "%@%d", lable3Name0,valueDic.object(forKey: "totalNum") as? Int ?? 0)
         Lable3.text=lable3AllString as String
         Lable3.textColor=MainColor
         Lable3.textAlignment=NSTextAlignment.center
@@ -273,13 +273,13 @@ class IntegratorFirst: RootViewController {
         if self.deviceType==0{
                 nameArray=["在线:","等待:","故障:","离线:"]
               colorArray=[COLOR(_R: 2, _G: 232, _B:2, _A: 1),COLOR(_R: 233, _G: 223, _B:74, _A: 1),COLOR(_R: 238, _G: 73, _B:51, _A: 1),COLOR(_R: 181, _G: 186, _B:189, _A: 1)]
-            valueArray=[valueDic.object(forKey: "onlineNum") as! Int,valueDic.object(forKey: "waitNum") as! Int,valueDic.object(forKey: "faultNum") as! Int,valueDic.object(forKey: "offlineNum") as! Int]
+            valueArray=[valueDic.object(forKey: "onlineNum") as? Int ?? 0,valueDic.object(forKey: "waitNum") as? Int ?? 0,valueDic.object(forKey: "faultNum") as? Int ?? 0,valueDic.object(forKey: "offlineNum") as? Int ?? 0]
                     }
         
         if self.deviceType==1{
              colorArray=[COLOR(_R: 2, _G: 232, _B:2, _A: 1),COLOR(_R: 181, _G: 186, _B:189, _A: 1),COLOR(_R: 154, _G: 229, _B:128, _A: 1),COLOR(_R: 222, _G: 211, _B:91, _A: 1),COLOR(_R: 238, _G: 73, _B:51, _A: 1)]
              nameArray=["在线:","离线:","充电:","放电:","故障:"]
-                    valueArray=[valueDic.object(forKey: "onlineNum") as! Int,valueDic.object(forKey: "offlineNum") as! Int,valueDic.object(forKey: "chargeNum") as! Int,valueDic.object(forKey: "dischargeNum") as! Int,valueDic.object(forKey: "faultNum") as! Int]
+                    valueArray=[valueDic.object(forKey: "onlineNum") as? Int ?? 0,valueDic.object(forKey: "offlineNum") as? Int ?? 0,valueDic.object(forKey: "chargeNum") as? Int ?? 0,valueDic.object(forKey: "dischargeNum") as? Int ?? 0,valueDic.object(forKey: "faultNum") as? Int ?? 0]
         }
 
 
@@ -301,7 +301,7 @@ class IntegratorFirst: RootViewController {
                 
                 let Lable3=UILabel()
                 Lable3.frame=CGRect(x: 15*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 130*NOW_SIZE, height: 30*HEIGHT_SIZE)
-                let lable3String=String(format: "%@%d", nameArray[i+2*K] as! NSString,valueArray[i+2*K] as! Int)
+                let lable3String=String(format: "%@%d", nameArray[i+2*K] as? NSString ?? "",valueArray[i+2*K] as? Int ?? 0)
                 Lable3.text=lable3String
                 Lable3.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
                 Lable3.textAlignment=NSTextAlignment.center
@@ -403,7 +403,7 @@ class IntegratorFirst: RootViewController {
                 (selectIndex)in
    
                 if self.roleString=="7" || self.roleString=="15"{
-                    let name=self.agentCompanyArray[selectIndex] as! NSString
+                    let name=self.agentCompanyArray[selectIndex] as? NSString ?? ""
                     if selectIndex != 0{
                         let substringArry =  name.components(separatedBy: ":");
                         //    (self.view0.viewWithTag(5000) as! UITextField).text=substringArry[0] as String
@@ -416,7 +416,7 @@ class IntegratorFirst: RootViewController {
                     }
                
                 }else{
-                self.agentCodeString=self.agentCodeArray[selectIndex] as! NSString
+                self.agentCodeString=self.agentCodeArray[selectIndex] as? NSString ?? ""
                 }
                 
              
@@ -434,7 +434,7 @@ class IntegratorFirst: RootViewController {
     func tableViewReload(info:NSNotification){
         
         let  dic=info.userInfo as Any as!NSDictionary
-        let Tag=dic.object(forKey: "tag") as! Int
+        let Tag=dic.object(forKey: "tag") as? Int ?? 0
         if Tag==2000 {
             deviceType=0
            
@@ -463,7 +463,7 @@ class IntegratorFirst: RootViewController {
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v1/customer/agent_list=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                      let objArray=jsonDate["obj"] as! NSArray
@@ -518,7 +518,7 @@ class IntegratorFirst: RootViewController {
                     
                     
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }
@@ -556,21 +556,21 @@ class IntegratorFirst: RootViewController {
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v2/customer/device_num=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                   let objDic=jsonDate["obj"] as! Dictionary<String, Any>
                     if self.deviceType==0{
-                    self.valueDic=["faultNum":objDic["faultNum"] as! Int,"nullNum":objDic["nullNum"] as! Int,"offlineNum":objDic["offlineNum"] as! Int,"onlineNum":objDic["onlineNum"] as! Int,"totalNum":objDic["totalNum"] as! Int,"waitNum":objDic["waitNum"] as! Int]
+                    self.valueDic=["faultNum":objDic["faultNum"] as? Int ?? 0,"nullNum":objDic["nullNum"] as? Int ?? 0,"offlineNum":objDic["offlineNum"] as? Int ?? 0,"onlineNum":objDic["onlineNum"] as? Int ?? 0,"totalNum":objDic["totalNum"] as? Int ?? 0,"waitNum":objDic["waitNum"] as? Int ?? 0]
                     }
                     if self.deviceType==1{
-self.valueDic=["chargeNum":objDic["chargeNum"]as! Int,"dischargeNum":objDic["dischargeNum"]as! Int,"faultNum":objDic["faultNum"]as! Int,"nullNum":objDic["nullNum"]as! Int,"offlineNum":objDic["offlineNum"]as! Int,"onlineNum":objDic["onlineNum"]as! Int,"totalNum":objDic["totalNum"]as! Int]
+self.valueDic=["chargeNum":objDic["chargeNum"]as? Int ?? 0,"dischargeNum":objDic["dischargeNum"]as? Int ?? 0,"faultNum":objDic["faultNum"]as? Int ?? 0,"nullNum":objDic["nullNum"]as? Int ?? 0,"offlineNum":objDic["offlineNum"]as? Int ?? 0,"onlineNum":objDic["onlineNum"]as? Int ?? 0,"totalNum":objDic["totalNum"]as? Int ?? 0]
                     }
                
                     
                  self.initUIThree()
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }

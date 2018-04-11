@@ -208,7 +208,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     func tableViewReload(info:NSNotification){
         
         let  dic=info.userInfo as Any as!NSDictionary
-        let Tag=dic.object(forKey: "tag") as! Int
+        let Tag=dic.object(forKey: "tag") as? Int ?? 0
         let array1=["全部问题","待处理","待跟进","处理中","已处理"]
         let array2=["全部工单","待接收","服务中","待回访","已完成"]
         if Tag==2000 {
@@ -371,14 +371,14 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         if  questionOrOrder==1 {
             let vc=ossQuetionDetail()
-            let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as! Int)
-            vc.qusetionId=id as String!
+            let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as? Int ?? 0)
+            vc.qusetionId=id as String?
      //       vc.serverUrl=self.cellValue6Array.object(at: indexPath.row) as! String
             self.navigationController?.pushViewController(vc, animated: true)
         }else  if  questionOrOrder==2 {
             let vc=orderFirst()
-              let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as! Int)
-             vc.orderID=id as String!
+              let id=NSString(format: "%d", self.cellValue5Array.object(at: indexPath.row) as? Int ?? 0)
+            vc.orderID=id as String?
             self.navigationController?.pushViewController(vc, animated: true)
         }
 
@@ -441,7 +441,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
     let jsonDate=jsonDate0 as! Dictionary<String, Any>
     print("/api/v2/order/newlist=",jsonDate)
     // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-    let result1=jsonDate["result"] as! Int
+    let result1=jsonDate["result"] as? Int ?? 0
     
     if result1==1 {
     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
@@ -449,8 +449,8 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
       
         
     for i in 0..<questionAll.count{
-    self.cellValue1Array.add((questionAll[i] as! NSDictionary)["title"] as!NSString)
-    self.cellValue2Array.add((questionAll[i] as! NSDictionary)["applicationTime"] as!NSString)
+    self.cellValue1Array.add((questionAll[i] as! NSDictionary)["title"] as? NSString ?? "")
+    self.cellValue2Array.add((questionAll[i] as! NSDictionary)["applicationTime"] as? NSString ?? "")
         
         var cellValue3Array2:NSString
         
@@ -462,20 +462,20 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
 //
         ///改用公司名称
         if (((((questionAll[i] as! NSDictionary)["customerName"] as AnyObject).isEqual(NSNull.init())) == false)) {
-            cellValue3Array2=((questionAll[i] as! NSDictionary)["customerName"] as!NSString)
+            cellValue3Array2=((questionAll[i] as! NSDictionary)["customerName"] as? NSString ?? "")
         }else{
             cellValue3Array2=""
         }
         
         let contentString=NSString(format: "%@", cellValue3Array2)
         self.cellValue3Array.add(contentString)
-    self.cellValue4Array.add((questionAll[i] as! NSDictionary)["status"] as! Int)
-    self.cellValue5Array.add((questionAll[i] as! NSDictionary)["id"] as! Int)
+    self.cellValue4Array.add((questionAll[i] as! NSDictionary)["status"] as? Int ?? 0)
+    self.cellValue5Array.add((questionAll[i] as! NSDictionary)["id"] as? Int ?? 0)
 
     self.plantListArray.add((questionAll[i] as! NSDictionary))
     }
     
-        let lableText=NSString(format: "%d/%d", self.plantListArray.count,objArray["total"] as! Int)
+        let lableText=NSString(format: "%d/%d", self.plantListArray.count,objArray["total"] as? Int ?? 0)
         self.lable2.text=lableText as String
         
     if self.plantListArray.count==0{
@@ -509,7 +509,7 @@ class ossServerFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                 self.tableView=nil
             }
         }
-    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
     }
     
     }
@@ -545,42 +545,42 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v2/question/worker/list=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
              let objArray=jsonDate["obj"] as! Dictionary<String, Any>
                    let questionAll=((objArray["pager"]) as! NSDictionary)["datas"] as! NSArray
                     for i in 0..<questionAll.count{
-       self.cellValue1Array.add((questionAll[i] as! NSDictionary)["title"] as!NSString)
-                self.cellValue2Array.add((questionAll[i] as! NSDictionary)["lastTime"] as!NSString)
+       self.cellValue1Array.add((questionAll[i] as! NSDictionary)["title"] as? NSString ?? "")
+                self.cellValue2Array.add((questionAll[i] as! NSDictionary)["lastTime"] as? NSString ?? "")
                         let replyArray=((questionAll[i] as! NSDictionary)["replyList"]) as! NSArray
                         if replyArray.count>0{
                             if (((replyArray[0] as AnyObject).isEqual(NSNull.init())) == false) {
                                 let replyDic=replyArray[0] as! Dictionary<String, Any>
                                 var name1:NSString
-                                if ((replyDic["isAdmin"]) as! Int)==1{
-                                name1=replyDic["accountName"] as! NSString
+                                if ((replyDic["isAdmin"]) as? Int ?? 0)==1{
+                                name1=replyDic["accountName"] as? NSString ?? ""
                                 }else{
-                                name1=((questionAll[i] as! NSDictionary)["jobId"])as! NSString
+                                name1=((questionAll[i] as! NSDictionary)["jobId"])as? NSString ?? ""
                                 }
-                                let contentString=NSString(format: "%@:%@", name1, (replyDic["message"])as! NSString)
+                                let contentString=NSString(format: "%@:%@", name1, (replyDic["message"])as? NSString ?? "")
                                 self.cellValue3Array.add(contentString)
                             }else{
-                            self.cellValue3Array.add((questionAll[i] as! NSDictionary)["content"] as!NSString)
+                            self.cellValue3Array.add((questionAll[i] as! NSDictionary)["content"] as? NSString ?? "")
                             }
                         }else{
-                          self.cellValue3Array.add((questionAll[i] as! NSDictionary)["content"] as!NSString)
+                          self.cellValue3Array.add((questionAll[i] as! NSDictionary)["content"] as? NSString ?? "")
                         }
                         
-                             self.cellValue4Array.add((questionAll[i] as! NSDictionary)["status"] as! Int)
-                          self.cellValue5Array.add((questionAll[i] as! NSDictionary)["id"] as! Int)
+                             self.cellValue4Array.add((questionAll[i] as! NSDictionary)["status"] as? Int ?? 0)
+                          self.cellValue5Array.add((questionAll[i] as! NSDictionary)["id"] as? Int ?? 0)
                      //    self.cellValue6Array.add((questionAll[i] as! NSDictionary)["serverUrl"] as! NSString)
                         
                           self.plantListArray.add((questionAll[i] as! NSDictionary))
                     }
                     
                  
-                    let lableText=NSString(format: "%d/%d", self.plantListArray.count,objArray["totalNum"] as! Int)
+                    let lableText=NSString(format: "%d/%d", self.plantListArray.count,objArray["totalNum"] as? Int ?? 0)
                     self.lable2.text=lableText as String
                     
                     if self.plantListArray.count==0{
@@ -617,7 +617,7 @@ netDic=["content":contentString,"status":statusInt,"page":pageNum]
                     }
                
                     
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }

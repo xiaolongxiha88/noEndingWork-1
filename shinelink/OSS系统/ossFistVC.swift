@@ -81,7 +81,7 @@ class ossFistVC: RootViewController {
 
      //[[NSUserDefaults standardUserDefaults] setObject:roleSecondNumArray forKey:@"roleSecondNumArray"];
      
-        roleString=UserDefaults.standard.object(forKey: "roleNum") as! NSString?
+        roleString=UserDefaults.standard.object(forKey: "roleNum") as? NSString ?? ""
         
            self.initLeftItem()
         serverNumArray=[0,0]
@@ -445,7 +445,7 @@ class ossFistVC: RootViewController {
         
         for i in 0..<integratorValueArray.count {
             let L1=scrollView.viewWithTag(6000+i) as! UILabel
-            L1.text=self.integratorValueArray[i] as? String ?? String.init(format: "%d", self.integratorValueArray[i] as! Int)
+            L1.text=self.integratorValueArray[i] as? String ?? String.init(format: "%d", self.integratorValueArray[i] as? Int ?? 0)
         }
    
     
@@ -470,7 +470,7 @@ class ossFistVC: RootViewController {
         view1.frame=CGRect(x: 2*NOW_SIZE, y:heigh0+55*HEIGHT_SIZE+170*HEIGHT_SIZE, width: SCREEN_Width-4*NOW_SIZE, height: 170*HEIGHT_SIZE)
         view1.isUserInteractionEnabled=true
         view1.image=UIImage(named: "intergrator_device.png")
-        self.view.addSubview(view1)
+        scrollView.addSubview(view1)
         
         let view1W=SCREEN_Width-4*NOW_SIZE
         
@@ -486,7 +486,7 @@ class ossFistVC: RootViewController {
         let Lable3=UILabel()
         Lable3.frame=CGRect(x: 0*NOW_SIZE, y: 0*HEIGHT_SIZE, width: view1W, height: 30*HEIGHT_SIZE)
         let lable3String="已接入逆变器总数:"
-        let lable3AllString=NSString(format: "%@%d", lable3String,valueDic.object(forKey: "totalNum") as! Int)
+        let lable3AllString=NSString(format: "%@%d", lable3String,valueDic.object(forKey: "totalNum") as? Int ?? 0)
         Lable3.text=lable3AllString as String
         Lable3.textColor=MainColor
         Lable3.font=UIFont.systemFont(ofSize: 16*HEIGHT_SIZE)
@@ -507,13 +507,13 @@ class ossFistVC: RootViewController {
         if self.deviceType==0{
             nameArray=["在线:","等待:","故障:","离线:"]
             colorArray=[COLOR(_R: 2, _G: 232, _B:2, _A: 1),COLOR(_R: 233, _G: 223, _B:74, _A: 1),COLOR(_R: 238, _G: 73, _B:51, _A: 1),COLOR(_R: 181, _G: 186, _B:189, _A: 1)]
-            valueArray=[valueDic.object(forKey: "onlineNum") as! Int,valueDic.object(forKey: "waitNum") as! Int,valueDic.object(forKey: "faultNum") as! Int,valueDic.object(forKey: "offlineNum") as! Int]
+            valueArray=[valueDic.object(forKey: "onlineNum") as? Int ?? 0,valueDic.object(forKey: "waitNum") as? Int ?? 0,valueDic.object(forKey: "faultNum") as? Int ?? 0,valueDic.object(forKey: "offlineNum") as? Int ?? 0]
         }
         
         if self.deviceType==1{
             colorArray=[COLOR(_R: 2, _G: 232, _B:2, _A: 1),COLOR(_R: 181, _G: 186, _B:189, _A: 1),COLOR(_R: 154, _G: 229, _B:128, _A: 1),COLOR(_R: 222, _G: 211, _B:91, _A: 1),COLOR(_R: 238, _G: 73, _B:51, _A: 1)]
             nameArray=["在线:","离线:","充电:","放电:","故障:"]
-            valueArray=[valueDic.object(forKey: "onlineNum") as! Int,valueDic.object(forKey: "offlineNum") as! Int,valueDic.object(forKey: "chargeNum") as! Int,valueDic.object(forKey: "dischargeNum") as! Int,valueDic.object(forKey: "faultNum") as! Int]
+            valueArray=[valueDic.object(forKey: "onlineNum") as? Int ?? 0,valueDic.object(forKey: "offlineNum") as? Int ?? 0,valueDic.object(forKey: "chargeNum") as? Int ?? 0,valueDic.object(forKey: "dischargeNum") as? Int ?? 0,valueDic.object(forKey: "faultNum") as? Int ?? 0]
         }
         
         
@@ -535,7 +535,7 @@ class ossFistVC: RootViewController {
                 
                 let Lable3=UILabel()
                 Lable3.frame=CGRect(x: 15*NOW_SIZE, y: 0*HEIGHT_SIZE, width: 130*NOW_SIZE, height: 30*HEIGHT_SIZE)
-                let lable3String=String(format: "%@%d", nameArray[i+2*K] as! NSString,valueArray[i+2*K] as! Int)
+                let lable3String=String(format: "%@%d", nameArray[i+2*K] as? NSString ?? "",valueArray[i+2*K] as? Int ?? "")
                 Lable3.text=lable3String
                 Lable3.textColor=COLOR(_R: 102, _G: 102, _B: 102, _A: 1)
                 Lable3.textAlignment=NSTextAlignment.center
@@ -611,21 +611,21 @@ class ossFistVC: RootViewController {
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v2/customer/device_num=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                     let objDic=jsonDate["obj"] as! Dictionary<String, Any>
                     if self.deviceType==0{
-                        self.valueDic=["faultNum":objDic["faultNum"] as! Int,"nullNum":objDic["nullNum"] as! Int,"offlineNum":objDic["offlineNum"] as! Int,"onlineNum":objDic["onlineNum"] as! Int,"totalNum":objDic["totalNum"] as! Int,"waitNum":objDic["waitNum"] as! Int]
+                        self.valueDic=["faultNum":objDic["faultNum"] as? Int ?? 0,"nullNum":objDic["nullNum"] as? Int ?? 0,"offlineNum":objDic["offlineNum"] as? Int ?? 0,"onlineNum":objDic["onlineNum"] as? Int ?? 0,"totalNum":objDic["totalNum"] as? Int ?? 0,"waitNum":objDic["waitNum"] as? Int ?? 0]
                     }
                     if self.deviceType==1{
-                        self.valueDic=["chargeNum":objDic["chargeNum"]as! Int,"dischargeNum":objDic["dischargeNum"]as! Int,"faultNum":objDic["faultNum"]as! Int,"nullNum":objDic["nullNum"]as! Int,"offlineNum":objDic["offlineNum"]as! Int,"onlineNum":objDic["onlineNum"]as! Int,"totalNum":objDic["totalNum"]as! Int]
+                        self.valueDic=["chargeNum":objDic["chargeNum"]as? Int ?? 0,"dischargeNum":objDic["dischargeNum"]as? Int ?? 0,"faultNum":objDic["faultNum"]as? Int ?? 0,"nullNum":objDic["nullNum"]as? Int ?? 0,"offlineNum":objDic["offlineNum"]as? Int ?? 0,"onlineNum":objDic["onlineNum"]as? Int ?? 0,"totalNum":objDic["totalNum"]as? Int ?? 0]
                     }
                     
                     
                     self.initUIFour()
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }
@@ -956,18 +956,18 @@ class ossFistVC: RootViewController {
       
         if questionModelBool || isKeFuBool {
             let L1=self.view.viewWithTag(3100) as! UILabel
-            L1.text=String(format: "%@:%d", "待跟进",(serverNumArray[0] as? Int)!)
+            L1.text=String(format: "%@:%d", "待跟进",(serverNumArray[0] as? Int ?? 0)!)
             
             let L3=self.view.viewWithTag(4100) as! UILabel
-            L3.text=String(format: "%@:%d", "处理中",serverNumArray[1] as! Int)
+            L3.text=String(format: "%@:%d", "处理中",serverNumArray[1] as? Int ?? 0)
         }
  
         if orderModelBool || isKeFuBool {
             let L2=self.view.viewWithTag(3101) as! UILabel
-            L2.text=String(format: "%@:%d", "待接收",(orderNumArray[0] as? Int)!)
+            L2.text=String(format: "%@:%d", "待接收",(orderNumArray[0] as? Int ?? 0)!)
             
             let L4=self.view.viewWithTag(4101) as! UILabel
-            L4.text=String(format: "%@:%d", "服务中",orderNumArray[1] as! Int)
+            L4.text=String(format: "%@:%d", "服务中",orderNumArray[1] as? Int ?? 0)
             
         }
 
@@ -975,7 +975,7 @@ class ossFistVC: RootViewController {
 
         
         if (((UserDefaults.standard.object(forKey: "newInfoEnble")  as AnyObject).isEqual(NSNull.init())) == false){
-            let newInfoEnble=UserDefaults.standard.object(forKey: "newInfoEnble") as! Bool
+            let newInfoEnble=UserDefaults.standard.object(forKey: "newInfoEnble") as? Bool ?? false
             if newInfoEnble {
                 image4.backgroundColor=UIColor.red
             }else{
@@ -1040,8 +1040,8 @@ class ossFistVC: RootViewController {
                         let ticketSystemBeanDic=objDic["workOrder"] as! NSDictionary
                         self.newInfoType=2
                         if ticketSystemBeanDic.count>0{
-                            self.infoID=ticketSystemBeanDic["id"] as! Int
-                              self.infoString=NSString(format: "%@",ticketSystemBeanDic["title"] as! NSString )
+                            self.infoID=ticketSystemBeanDic["id"] as? Int ?? 0
+                              self.infoString=NSString(format: "%@",ticketSystemBeanDic["title"] as? NSString ?? "")
                         }
                        
                     }
@@ -1050,13 +1050,13 @@ class ossFistVC: RootViewController {
                         let replyBeanDic=objDic["questionReply"] as! NSDictionary
                         if replyBeanDic.count>0{
                             self.newInfoType=1
-                            self.infoID=replyBeanDic["questionId"] as! Int
+                            self.infoID=replyBeanDic["questionId"] as? Int ?? 0
                           //  self.infoAddress=replyBeanDic["serverUrl"] as! NSString
-                            let isAdmin=replyBeanDic["isAdmin"] as! Int
+                            let isAdmin=replyBeanDic["isAdmin"]  as? Int ?? 0
                             if isAdmin==1{
-                                 self.infoString=NSString(format: "%@:%@",replyBeanDic["accountName"] as! NSString,replyBeanDic["message"] as! NSString )
+                                 self.infoString=NSString(format: "%@:%@",replyBeanDic["accountName"] as? NSString ?? "",replyBeanDic["message"] as? NSString ?? "" )
                             }else{
-                              self.infoString=NSString(format: "%@:%@",replyBeanDic["jobId"] as! NSString,replyBeanDic["message"] as! NSString )
+                              self.infoString=NSString(format: "%@:%@",replyBeanDic["jobId"] as? NSString ?? "",replyBeanDic["message"] as? NSString ?? "" )
                             }
                             
                           
@@ -1079,7 +1079,7 @@ class ossFistVC: RootViewController {
                     
                 }else{
                        self.initUItwo2()
-                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }
@@ -1119,7 +1119,7 @@ class ossFistVC: RootViewController {
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v2/customer/customer_overview_data=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
           
@@ -1146,7 +1146,7 @@ class ossFistVC: RootViewController {
                     
                 }else{
                       self.initUIThree3()
-                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }
@@ -1180,8 +1180,8 @@ class ossFistVC: RootViewController {
       
         
         let vc=loginViewController()
-        vc.oldName=oldName as! String?
-        vc.oldPassword=oldPassword as! String?
+        vc.oldName=oldName as? String ?? ""
+        vc.oldPassword=oldPassword as? String ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
         
 

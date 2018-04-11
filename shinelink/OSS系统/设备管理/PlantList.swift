@@ -90,7 +90,7 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
 
         netDic=["userName":userNameString,"page":pageNum]
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/search/user_plant_list", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]?, paramarsSite: "/api/v1/search/user_plant_list", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
             let data:Data=successBlock as! Data
@@ -101,7 +101,7 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v1/search/user_plant_list=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
@@ -109,10 +109,10 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
                     var plantAll:NSArray=[]
                      plantAll=objArray["plantList"] as! NSArray
                       for i in 0..<plantAll.count{
-                      self.cellValue1Array.add((plantAll[i] as! NSDictionary)["plantName"] as!NSString)
-                          self.cellValue2Array.add((plantAll[i] as! NSDictionary)["timezoneText"] as!NSString)
+                      self.cellValue1Array.add((plantAll[i] as! NSDictionary)["plantName"] as? NSString ?? "")
+                          self.cellValue2Array.add((plantAll[i] as! NSDictionary)["timezoneText"] as? NSString ?? "")
                       
-                          let idString=NSString(format: "%d", (plantAll[i] as! NSDictionary)["id"]  as! Int)
+                          let idString=NSString(format: "%d", (plantAll[i] as! NSDictionary)["id"]  as?  Int ?? 0)
                         self.cellValueIDArray.add(idString)
                         self.plantListArray.add(plantAll[i])
                     }
@@ -145,7 +145,7 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
                     
                     
                 }else{
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }
@@ -176,8 +176,8 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!plantListCell
         
-        let lable1=NSString(format: "%@:%@", cellNameArray[0]as!NSString,self.cellValue1Array.object(at: indexPath.row) as! CVarArg)
-        let lable2=NSString(format: "%@%@", cellNameArray[1]as!NSString,self.cellValue2Array.object(at: indexPath.row) as! CVarArg)
+        let lable1=NSString(format: "%@:%@", cellNameArray[0]as? NSString ?? "",self.cellValue1Array.object(at: indexPath.row) as! CVarArg)
+        let lable2=NSString(format: "%@%@", cellNameArray[1]as? NSString ?? "",self.cellValue2Array.object(at: indexPath.row) as! CVarArg)
         
         cell.TitleLabel1.text=lable1 as String
         cell.TitleLabel2.text=lable2 as String
@@ -193,7 +193,7 @@ class PlantList: RootViewController,UITableViewDataSource,UITableViewDelegate {
 
             let goView=deviceListViewController()
             
-            goView.plantIdString=self.cellValueIDArray.object(at: indexPath.row) as!NSString
+            goView.plantIdString=self.cellValueIDArray.object(at: indexPath.row) as? NSString ?? ""
             
             
           self.navigationController?.pushViewController(goView, animated: true)

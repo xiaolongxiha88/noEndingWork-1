@@ -193,7 +193,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         var searchDeviceAddressString=""
         if UserDefaults.standard.object(forKey: "searchDeviceAddress") as? String != nil {
-             searchDeviceAddressString=UserDefaults.standard.object(forKey: "searchDeviceAddress") as! String
+             searchDeviceAddressString=UserDefaults.standard.object(forKey: "searchDeviceAddress") as? String ?? ""
         }
         
         
@@ -219,23 +219,23 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         if self.languageType=="0" {
             for i in 0..<self.serverListArray.count {
                 let allArray=self.serverListArray[i]as!NSDictionary
-                let titleName=NSString(format: "%@:%@", allArray["cnName"]as!NSString,allArray["url"]as!NSString)
+                let titleName=NSString(format: "%@:%@", allArray["cnName"]as? NSString ?? "",allArray["url"]as? NSString ?? "")
                 nameArray.add(titleName)
-                addressArray.add(allArray["url"]as!NSString)
+                addressArray.add(allArray["url"]as? NSString ?? "")
             }
         }else{
             for i in 0..<self.serverListArray.count {
                 let allArray=self.serverListArray[i]as!NSDictionary
-                     let titleName=NSString(format: "%@:%@", allArray["enName"]as!NSString,allArray["url"]as!NSString)
+                     let titleName=NSString(format: "%@:%@", allArray["enName"]as? NSString ?? "",allArray["url"]as? NSString ?? "")
                 nameArray.add(titleName)
-                addressArray.add(allArray["url"]as!NSString)
+                addressArray.add(allArray["url"]as? NSString ?? "")
             }
         }
         
         ZJBLStoreShopTypeAlert.show(withTitle: root_xuanzhe_fuwuqi_dizhi, titles: nameArray as NSArray as! [NSString], selectIndex: {
             (selectIndex)in
        
-            self.addressString=addressArray[selectIndex] as! NSString
+            self.addressString=addressArray[selectIndex] as? NSString ?? ""
             self.getAddress=self.addressString
              print("选择11了"+String(describing: selectIndex))
             
@@ -308,8 +308,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
       let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!deviceFirstCell
         
-        let lable1=NSString(format: "%@:%@", cellNameArray[0]as!NSString,self.cellValue1Array.object(at: indexPath.row) as! CVarArg)
-         let lable2=NSString(format: "%@:%@", cellNameArray[1]as!NSString,self.cellValue2Array.object(at: indexPath.row) as! CVarArg)
+        let lable1=NSString(format: "%@:%@", cellNameArray[0]as? NSString ?? "",self.cellValue1Array.object(at: indexPath.row) as! CVarArg)
+         let lable2=NSString(format: "%@:%@", cellNameArray[1]as? NSString ?? "",self.cellValue2Array.object(at: indexPath.row) as! CVarArg)
         cell.TitleLabel1.text=lable1 as String
          cell.TitleLabel2.text=lable2 as String
 
@@ -327,10 +327,10 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             
             if self.typeNum==0{
                 
-                goView.userNameString=self.cellValue1Array.object(at: indexPath.row) as!NSString
+                goView.userNameString=self.cellValue1Array.object(at: indexPath.row) as? NSString ?? ""
             }else{
              
-                goView.userNameString=self.cellValue2Array.object(at: indexPath.row) as!NSString
+                goView.userNameString=self.cellValue2Array.object(at: indexPath.row) as? NSString ?? ""
             }
             goView.netToDic=self.netDic
               goView.userListDic=self.plantListArray.object(at: indexPath.row) as! NSDictionary
@@ -342,7 +342,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         if self.typeNum==3{
             let goView=deviceListViewController()
-            goView.plantIdString=self.cellValue3Array.object(at: 0) as!NSString
+            goView.plantIdString=self.cellValue3Array.object(at: 0) as? NSString ?? ""
             
             self.navigationController?.pushViewController(goView, animated: true)
         }
@@ -350,7 +350,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         if self.typeNum==4{
             let vc=deviceControlView()
             vc.deviceTypeString=self.deviceTypeString
-            vc.deviceSnString=self.cellValue1Array.object(at: indexPath.row) as!NSString
+            vc.deviceSnString=self.cellValue1Array.object(at: indexPath.row) as? NSString ?? ""
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
@@ -591,7 +591,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         netDic=["searchType":typeNum,"param":value1,"page":pageNum,"serverAddr":addressString]
         
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]! , paramarsSite: "/api/v1/search/all", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]? , paramarsSite: "/api/v1/search/all", sucessBlock: {(successBlock)->() in
             
             self.hideProgressView()
             let data:Data=successBlock as! Data
@@ -603,7 +603,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                 print("/api/v1/search/all=",jsonDate)
                 
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                      UserDefaults.standard.set(self.addressString, forKey: "OssAddress")
@@ -619,8 +619,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                       self.cellNameArray=[root_yonghuming,root_chuanjian_shijian];
                            plantAll=objArray["userList"] as! NSArray
                         for i in 0..<plantAll.count{
-                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["accountName"] as!NSString)
-                                   var dateString=(plantAll[i] as! NSDictionary)["createDate"] as!NSString
+                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["accountName"] as? NSString ?? "")
+                                   var dateString=(plantAll[i] as! NSDictionary)["createDate"] as? NSString ?? ""
                             if dateString.length>11{
                                dateString=dateString.substring(to: 11) as NSString
                             }
@@ -660,9 +660,9 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                          plantAll=objArray["plantList"] as! NSArray
                
                         for i in 0..<plantAll.count{
-                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["plantName"] as!NSString)
-                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["userAccount"] as!NSString)
-                            let idString=NSString(format: "%d", (plantAll[i] as! NSDictionary)["id"] as!Int)
+                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["plantName"] as? NSString ?? "")
+                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["userAccount"] as? NSString ?? "")
+                            let idString=NSString(format: "%d", (plantAll[i] as! NSDictionary)["id"] as? Int ?? 0)
                             self.cellValue3Array.add(idString)
                              self.plantListArray.add(plantAll[i])
                         }
@@ -678,9 +678,9 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                         if ((self.typeNum==0)||(self.typeNum==1)||(self.typeNum==2)){
                             let goView=PlantList()
                             if self.typeNum==0{
-                             goView.userNameString=self.cellValue1Array.object(at: 0) as!NSString
+                             goView.userNameString=self.cellValue1Array.object(at: 0) as? NSString ?? ""
                             }else{
-                            goView.userNameString=self.cellValue2Array.object(at: 0) as!NSString
+                            goView.userNameString=self.cellValue2Array.object(at: 0) as? NSString ?? ""
                             }
                                 goView.userListDic=self.plantListArray.object(at: 0) as! NSDictionary
                             goView.netToDic=self.netDic
@@ -689,7 +689,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                         
                         if self.typeNum==3{
                             let goView=deviceListViewController()
-                      goView.plantIdString=self.cellValue3Array.object(at: 0) as!NSString
+                      goView.plantIdString=self.cellValue3Array.object(at: 0) as? NSString ?? ""
                             
                             self.navigationController?.pushViewController(goView, animated: true)
                         }
@@ -719,7 +719,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     
                 }else{
                            self.hideProgressView()
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }
@@ -766,7 +766,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         
         netDic=["deviceSn":value2,"alias":value3,"deviceType":value1,"serverAddr":addressString,"page":pageNum]
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/device/info", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]?, paramarsSite: "/api/v1/device/info", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
             let data:Data=successBlock as! Data
@@ -777,7 +777,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v1/search/info=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                 
                 if result1==1 {
                     self.deviceTypeString=NSString(format: "%d", value1)
@@ -789,7 +789,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     let objArray=jsonDate["obj"] as! Dictionary<String, Any>
                     var plantAll:NSArray = []
                     
-                    let deviceType=objArray["deviceType"] as! Int
+                    let deviceType=objArray["deviceType"] as? Int ?? 0
                    
                     
                     if deviceType==0 {
@@ -801,8 +801,8 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     }
                     if plantAll.count>0{
                         for i in 0..<plantAll.count{
-                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as!NSString)
-                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["alias"] as!NSString)
+                            self.cellValue1Array.add((plantAll[i] as! NSDictionary)["serialNum"] as? NSString ?? "")
+                            self.cellValue2Array.add((plantAll[i] as! NSDictionary)["alias"] as? NSString ?? "")
                             self.plantListArray.add(plantAll[i])
                         }
                     }
@@ -810,7 +810,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     if self.plantListArray.count==1 {
                         let vc=deviceControlView()
                         vc.deviceTypeString=NSString(format: "%d", deviceType)
-                        vc.deviceSnString=(plantAll[0] as! NSDictionary)["serialNum"] as!NSString
+                        vc.deviceSnString=(plantAll[0] as! NSDictionary)["serialNum"] as? NSString ?? ""
                         self.navigationController?.pushViewController(vc, animated: false)
                     }
                     
@@ -836,7 +836,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                     
                 }else{
                      self.hideProgressView()
-                    self.showToastView(withTitle: jsonDate["msg"] as! String!)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                 }
                 
             }

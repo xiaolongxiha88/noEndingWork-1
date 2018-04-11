@@ -907,7 +907,7 @@
 "312厂商信息"="Manufacture";
 "313机器型号"="Model name";
 "314Model号"="Model code";
-"315固件(外部)版本"="FW Version (E)";
+"315固件(外部)版本"="FW version (E)";
 "316固件(内部)版本"="FW version (I)";
 "317AC电压/电流/功率/频率"="AC Volt/Current/Power/Freq";
 "318电压"="U";

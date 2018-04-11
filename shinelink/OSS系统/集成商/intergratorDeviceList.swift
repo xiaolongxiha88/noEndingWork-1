@@ -86,7 +86,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
         netAllDic.setValue( self.deviceStatusType, forKey: "deviceStatus")
           let DicAll=self.netAllDic as Dictionary
         
-        let accessStatusNum=self.netAllDic["accessStatus"] as! Int
+        let accessStatusNum=self.netAllDic["accessStatus"] as? Int ?? 0
         
         
         self.showProgressView()
@@ -101,7 +101,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
                 print("/api/v2/customer/device_list=",jsonDate)
      
-                let result1=jsonDate["result"] as! Int
+                let result1=jsonDate["result"] as? Int ?? 0
                var plantAll:NSArray=[]
                 if result1==1 {
                          let objArray=jsonDate["obj"] as! Dictionary<String, Any>
@@ -185,7 +185,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
                            self.getNoDataView()
                     }
                     
-                    self.showToastView(withTitle: jsonDate["msg"] as! String?)
+                    self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
                     
                     
                 }
@@ -246,7 +246,7 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as!intergratorDeviceCell
         
-        let lable1=NSString(format: "%@", cellValue1Array[indexPath.row]as!NSString)
+        let lable1=NSString(format: "%@", cellValue1Array[indexPath.row] as? NSString ?? "")
       
         
 
@@ -296,8 +296,8 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
             
         }
         
-        let  lable2=NSString(format: "%@",cellValue2Array[indexPath.row]as!NSString)
-        let  lable3=NSString(format: "%@",cellValue3Array[indexPath.row]as!NSString)
+        let  lable2=NSString(format: "%@",cellValue2Array[indexPath.row]as? NSString ?? "")
+        let  lable3=NSString(format: "%@",cellValue3Array[indexPath.row]as? NSString ?? "")
         
         
         
@@ -329,10 +329,10 @@ class intergratorDeviceList: RootViewController,UITableViewDataSource,UITableVie
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-          let accessStatusNum=self.netAllDic["accessStatus"] as! Int
+          let accessStatusNum=self.netAllDic["accessStatus"] as? Int ?? 0
         
         if accessStatusNum==1{
-            let CELL=cellValue5Array[indexPath.row] as! NSString
+            let CELL=cellValue5Array[indexPath.row] as? NSString ?? ""
             
             let goView=deviceControlView()
             goView.netType=1
