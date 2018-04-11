@@ -37,6 +37,7 @@
         self.tableDetail = [[UILabel alloc] initWithFrame:CGRectMake(195*NOW_SIZE, 5*NOW_SIZE, 115*NOW_SIZE, 45*HEIGHT_SIZE)];
         self.tableDetail.font=[UIFont systemFontOfSize:12*HEIGHT_SIZE];
         self.tableDetail.textAlignment = NSTextAlignmentRight;
+        self.tableDetail.adjustsFontSizeToFitWidth=YES;
         self.tableDetail.textColor = [UIColor blackColor];
         [self.contentView addSubview:_tableDetail];
         

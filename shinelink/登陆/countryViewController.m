@@ -62,6 +62,12 @@
     pwdBgImageView.userInteractionEnabled = YES;
     [self.view addSubview:pwdBgImageView];
     
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(45*NOW_SIZE,60*HEIGHT_SIZE, 10*NOW_SIZE, 40*HEIGHT_SIZE)];
+    label.text=@"*";
+    label.textAlignment=NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
+    label.textColor=[UIColor whiteColor];
+    [self.view addSubview:label];
     
     _label=[[UILabel alloc]initWithFrame:CGRectMake(60*NOW_SIZE,60*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE)];
 //    _label.layer.borderWidth=1;

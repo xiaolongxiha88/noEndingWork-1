@@ -229,7 +229,7 @@
     
     float imageMoreH=5*HEIGHT_SIZE;
     if (iPhoneX) {
-        imageMoreH=13*HEIGHT_SIZE;
+        imageMoreH=18*HEIGHT_SIZE;
     }
     UIView *imageView111=[[UIView alloc]initWithFrame:CGRectMake(280*NOW_SIZE,imageMoreH, 40*NOW_SIZE,40*HEIGHT_SIZE)];
     imageView111.userInteractionEnabled=YES;

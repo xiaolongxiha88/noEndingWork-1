@@ -549,6 +549,7 @@
     }else{
         _cmdTcpTimes++;
         if (_cmdTcpTimes==_setRegisterArray.count) {
+            [self removeTheWaitingView];
             [self showAlertViewWithTitle:root_MAX_303 message:nil cancelButtonTitle:root_OK];
         }else{
                self.navigationItem.rightBarButtonItem.enabled=NO;
