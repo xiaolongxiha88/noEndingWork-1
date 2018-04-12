@@ -270,7 +270,7 @@
     NSString *reallyPercent1=[NSString stringWithFormat:@"%.f%%",reallyPercent];                   //实际输出功率百分比
     
     float IPF=[self changeOneRegister:_data04_1 registerNum:100];
-    NSString *IPF1=[NSString stringWithFormat:@"%.4f",(IPF-10000)/10000];                          //IPF
+    NSString *IPF1=[NSString stringWithFormat:@"%.2f",(IPF-10000)/10000];                          //IPF
     float pvTem=[self changeOneRegister:_data04_1 registerNum:93]/10;
     NSString *pvTem1=[NSString stringWithFormat:@"%.1f℃",pvTem];                //内部环境温度
     

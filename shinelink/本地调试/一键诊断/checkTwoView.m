@@ -297,7 +297,7 @@ static float readWaveTime=20;      //读波形时间
     }
     
     if (_charType==3) {
-        lableNameArray=@[root_MIX_493,[NSString stringWithFormat:@"%@(V)",root_MAX_497],[NSString stringWithFormat:@"%@(Hz)",root_MAX_321],[NSString stringWithFormat:@"%@(V)",root_MAX_470]];
+        lableNameArray=@[root_MIX_493,[NSString stringWithFormat:@"%@,%@",[NSString stringWithFormat:@"%@(V)",root_MAX_497],[NSString stringWithFormat:@"%@(Hz)",root_MAX_321]],[NSString stringWithFormat:@"%@(V)",root_MAX_470]];
     }
     
      W0=SCREEN_Width/lableNameArray.count;
@@ -311,7 +311,21 @@ static float readWaveTime=20;      //读波形时间
         titleLable.text=lableNameArray[i];
         titleLable.tag=3100+i;
         titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        if (_charType==3) {
+            if (i==0) {
+                titleLable.frame=CGRectMake(0, 0,80*NOW_SIZE,everyLalbeH);
+            }
+            if (i==1) {
+                titleLable.frame=CGRectMake(80*NOW_SIZE, 0,160*NOW_SIZE,everyLalbeH);
+            }
+            if (i==2) {
+                titleLable.frame=CGRectMake(240*NOW_SIZE, 0,80*NOW_SIZE,everyLalbeH);
+            }
+            titleLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+            titleLable.adjustsFontSizeToFitWidth=YES;
+        }
         [_view2 addSubview:titleLable];
+        
     }
 
     if (_charType==1 || _charType==2) {
@@ -444,10 +458,16 @@ static float readWaveTime=20;      //读波形时间
         //////////////
         UIView* view22=[[UIView alloc]initWithFrame:CGRectMake(W0*2,everyLalbeH*(i+1), W0, everyLalbeH)];
         view22.backgroundColor=[UIColor whiteColor];
+        if (_charType==3) {
+            view22.frame=CGRectMake(240*NOW_SIZE, everyLalbeH*(i+1),80*NOW_SIZE,everyLalbeH);
+        }
         [_view2 addSubview:view22];
         
         //  UILabel *Lable22 = [[UILabel alloc]initWithFrame:CGRectMake((ScreenWidth/2-lable1Size2.width)/2-Wk, 0,ScreenWidth/2-Lable11x,everyLalbeH)];
         UILabel *Lable33 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,W0,everyLalbeH)];
+        if (_charType==3) {
+            Lable33.frame=CGRectMake(0, 0,80*NOW_SIZE,everyLalbeH);
+        }
         Lable33.textColor =COLOR(102, 102, 102, 1);
         Lable33.textAlignment=NSTextAlignmentCenter;
         Lable33.adjustsFontSizeToFitWidth=YES;

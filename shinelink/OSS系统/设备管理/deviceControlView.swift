@@ -504,7 +504,7 @@ class deviceControlView: RootViewController {
         
         netDic=["deviceSn":valueDic["serialNum"]as? NSString ?? "","deviceType":typeNum]
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v1/device/delete", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]?, paramarsSite: "/api/v1/device/delete", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
             let data:Data=successBlock as! Data
