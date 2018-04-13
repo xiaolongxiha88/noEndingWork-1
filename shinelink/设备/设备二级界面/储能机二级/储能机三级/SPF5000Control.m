@@ -175,7 +175,7 @@
     if (_type==11) {
           noticeLable.text=@"（10A~130A）";
     }else{
-    noticeLable.text=@"（44.4A~51.4A）";
+    noticeLable.text=@"（44.4V~51.4V）";
     }
     noticeLable.textAlignment=NSTextAlignmentCenter;
     noticeLable.textColor=[UIColor whiteColor];
@@ -184,6 +184,7 @@
 
     
 }
+
 
 
 -(void)initUIFour{

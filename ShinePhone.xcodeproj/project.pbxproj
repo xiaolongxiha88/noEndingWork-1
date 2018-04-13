@@ -692,6 +692,7 @@
 		338E34F71EE6550D0027EBD5 /* kefu_iconOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 338E34F61EE6550D0027EBD5 /* kefu_iconOSS.png */; };
 		338E34F91EE655140027EBD5 /* userOSS.png in Resources */ = {isa = PBXBuildFile; fileRef = 338E34F81EE655140027EBD5 /* userOSS.png */; };
 		338F0E991E4B06920002B7FE /* downGo.png in Resources */ = {isa = PBXBuildFile; fileRef = 338F0E981E4B06920002B7FE /* downGo.png */; };
+		339216CB208090A200995580 /* zhushi11.png in Resources */ = {isa = PBXBuildFile; fileRef = 339216CA208090A100995580 /* zhushi11.png */; };
 		3392697D1F8C63CA00385A74 /* KTDropdownMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3392697B1F8C63CA00385A74 /* KTDropdownMenuView.m */; };
 		339844251FA82107006A15AD /* usbToWifiControlThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 339844241FA82107006A15AD /* usbToWifiControlThree.m */; };
 		339844281FA9B43A006A15AD /* usbToWifiWarnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 339844271FA9B43A006A15AD /* usbToWifiWarnView.m */; };
@@ -1897,6 +1898,7 @@
 		338E34F61EE6550D0027EBD5 /* kefu_iconOSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kefu_iconOSS.png; sourceTree = "<group>"; };
 		338E34F81EE655140027EBD5 /* userOSS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = userOSS.png; sourceTree = "<group>"; };
 		338F0E981E4B06920002B7FE /* downGo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = downGo.png; sourceTree = "<group>"; };
+		339216CA208090A100995580 /* zhushi11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zhushi11.png; sourceTree = "<group>"; };
 		3392697B1F8C63CA00385A74 /* KTDropdownMenuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KTDropdownMenuView.m; sourceTree = "<group>"; };
 		3392697C1F8C63CA00385A74 /* KTDropdownMenuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KTDropdownMenuView.h; sourceTree = "<group>"; };
 		339844231FA82107006A15AD /* usbToWifiControlThree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiControlThree.h; sourceTree = "<group>"; };
@@ -4197,6 +4199,7 @@
 				332BD6B3206CC11F00FFD501 /* newheadD3.png */,
 				332BD6B4206CC12000FFD501 /* newheadD4.png */,
 				332BD6BF206CC25400FFD501 /* newheadnotes.png */,
+				339216CA208090A100995580 /* zhushi11.png */,
 			);
 			path = "设备头部图片";
 			sourceTree = "<group>";
@@ -4952,6 +4955,7 @@
 				334AED641CA3765A007E39F3 /* 关于.png in Resources */,
 				338234261D9A47AC002062AE /* Collectors_cn.png in Resources */,
 				3381ECF31CBCA60C00DCF0D2 /* 智能调整优先设置.png in Resources */,
+				339216CB208090A200995580 /* zhushi11.png in Resources */,
 				33FEFD551C7DB38400324374 /* icon_press@2x.png in Resources */,
 				3381ECF11CBCA5F900DCF0D2 /* 峰谷电价设置切图.png in Resources */,
 				335D69F11D77FD3100894D90 /* downloadAV.png in Resources */,

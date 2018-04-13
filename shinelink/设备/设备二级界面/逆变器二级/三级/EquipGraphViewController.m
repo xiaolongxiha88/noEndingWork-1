@@ -75,7 +75,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
 
 - (void)viewWillAppear:(BOOL)animated {
 
-    _type=@"1";
+   // _type=@"1";
   self.navigationController.navigationBarHidden=NO;
     self.view.backgroundColor=[UIColor whiteColor];
     [self initData];
@@ -272,6 +272,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     [self showProgressView];
     
+       _type=@"1";
+    
     NSDictionary *dicGo=[NSDictionary new];
     if ([_dicType isEqualToString:@"2"]) {
        dicGo=@{@"plantId":_dictInfo[@"equipId"],@"date":self.currentDay} ;
@@ -280,6 +282,10 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     if ([_StorageTypeNum isEqualToString:@"4"] ) {
           dicGo=@{@"mixId":_dictInfo[@"equipId"],@"type":@"1", @"date":self.currentDay} ;
+    }
+    if ([_StorageTypeNum isEqualToString:@"1"]) {
+              _type=@"8";
+          dicGo=@{@"id":_dictInfo[@"equipId"],@"type":@"8", @"date":self.currentDay} ;
     }
     
   [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:dicGo paramarsSite:_dictInfo[@"daySite"] sucessBlock:^(id content) {
@@ -775,6 +781,12 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     [self.toolBar removeFromSuperview];
     
     if (sender.tag == 1000) {
+        if ([_StorageTypeNum isEqualToString:@"1"]) {
+            _type=@"8";
+        }else{
+              _type=@"1";
+        }
+        
         //日
         self.dayButton.selected = YES;
         self.monthButton.selected = NO;
@@ -820,6 +832,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     
     if (sender.tag == 1001) {
+               _type=@"1";
         //月
         self.dayButton.selected = NO;
         self.monthButton.selected = YES;
@@ -864,6 +877,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     
     if (sender.tag == 1002) {
+               _type=@"1";
         //年
         self.dayButton.selected = NO;
         self.monthButton.selected = NO;
@@ -908,6 +922,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     }
     
     if (sender.tag == 1003) {
+               _type=@"1";
         //总体
         self.dayButton.selected = NO;
         self.monthButton.selected = NO;
