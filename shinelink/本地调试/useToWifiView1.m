@@ -141,18 +141,19 @@ static NSString *cellTwo = @"cellTwo";
 
 
 -(void)checkIsWifi{
+    
     UIApplication *app = [UIApplication sharedApplication];
     
-//    NSArray *children = [[[app valueForKeyPath:@"statusBar"] valueForKeyPath:@"foregroundView"] subviews];
-
-    // 不能用 [[self deviceVersion] isEqualToString:@"iPhone X"] 来判断，因为模拟器不会返回 iPhone X
-        NSArray *children;
+   // NSArray *children = [[[app valueForKeyPath:@"statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+//     不能用 [[self deviceVersion] isEqualToString:@"iPhone X"] 来判断，因为模拟器不会返回 iPhone X
+    
+    NSArray *children;
     if ([[app valueForKeyPath:@"_statusBar"] isKindOfClass:NSClassFromString(@"UIStatusBar_Modern")]) {
       children = [[[[app valueForKeyPath:@"_statusBar"] valueForKeyPath:@"_statusBar"] valueForKeyPath:@"foregroundView"] subviews];
     } else {
       children = [[[app valueForKeyPath:@"_statusBar"] valueForKeyPath:@"foregroundView"] subviews];
     }
-    
+
       int netType = 0;
     //获得到网络返回码
     for (id child in children) {
@@ -161,6 +162,34 @@ static NSString *cellTwo = @"cellTwo";
             // 1，2，3，5 分别对应的网络状态是2G、3G、4G及WIFI。(需要判断当前网络类型写个switch 判断就OK)
         }
     }
+    
+    if (Is_Iphone_X) {
+        NSArray *children1;
+
+        NSString *state = [[NSString alloc] init];
+        //iPhone X
+        if ([[app valueForKeyPath:@"_statusBar"] isKindOfClass:NSClassFromString(@"UIStatusBar_Modern")]) {
+            children1 = [[[[app valueForKeyPath:@"_statusBar"] valueForKeyPath:@"_statusBar"] valueForKeyPath:@"foregroundView"] subviews];
+            for (UIView *view in children1) {
+                for (id child in view.subviews) {
+                    //wifi
+                    if ([child isKindOfClass:NSClassFromString(@"_UIStatusBarWifiSignalView")]) {
+                        state = @"wifi";
+                        netType=5;
+                    }
+                    //2G 3G 4G
+                    if ([child isKindOfClass:NSClassFromString(@"_UIStatusBarStringView")]) {
+                        if ([[child valueForKey:@"_originalText"] containsString:@"G"]) {
+                            state = [child valueForKey:@"_originalText"];
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+    }
+ 
     
     if (netType==5) {
         _isWiFi=YES;
@@ -189,6 +218,9 @@ static NSString *cellTwo = @"cellTwo";
             [_usbControl getDataAll:1];
             
         }else{
+            _rightItem.title=root_MAX_268;
+            _isAutoReflash =NO;
+            
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_MAX_278 message:root_MAX_279 delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_MAX_271, nil];
             alertView.tag = 1001;
             [alertView show];
