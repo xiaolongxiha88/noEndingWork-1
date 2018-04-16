@@ -303,31 +303,30 @@ _pcsNetStorageSN=@"";
                     }
                     
                     
+                    float adW=230*HEIGHT_SIZE;
+                     float adAllW=adW+25*HEIGHT_SIZE;
                     
-                    
-                     float adHeight= 260*NOW_SIZE*33/22;
+                     float adHeight= adW*33/22;
                     if (!_AdFrontView) {
-                         _AdFrontView=[[UIView alloc]initWithFrame:CGRectMake(30*NOW_SIZE, 25*HEIGHT_SIZE, 285*NOW_SIZE, adHeight)];
+                         _AdFrontView=[[UIView alloc]initWithFrame:CGRectMake((SCREEN_Width-adW)/2, 25*HEIGHT_SIZE, adAllW, adHeight)];
                     }
                     
                     _AdFrontView.userInteractionEnabled=YES;
                       [self.view addSubview:_AdFrontView];
                     
-                    UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
-                    goBut.frame=CGRectMake(260*NOW_SIZE,0*HEIGHT_SIZE, 25*NOW_SIZE, 25*HEIGHT_SIZE);
-                    [goBut setBackgroundImage:IMAGE(@"adCancel.png") forState:UIControlStateNormal];
-                    [goBut addTarget:self action:@selector(adRemove) forControlEvents:UIControlEventTouchUpInside];
-                    [_AdFrontView addSubview:goBut];
-                    
-                    
-
-                    UIImageView *AdFrontImageView=[[UIImageView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 25*HEIGHT_SIZE, 260*NOW_SIZE, adHeight)];
+                    UIImageView *AdFrontImageView=[[UIImageView alloc]initWithFrame:CGRectMake(0*NOW_SIZE, 25*HEIGHT_SIZE, adW, adHeight)];
                   //  AdFrontImageView.image=[UIImage imageNamed:@"pic_service.png"];
                                         NSURL* imagePath = [NSURL URLWithString:picUrl];
                                         [AdFrontImageView sd_setImageWithURL:imagePath placeholderImage:[UIImage imageNamed:@"pic_service.png"]];
                     [_AdFrontView addSubview:AdFrontImageView];
                     
               
+                    UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
+                    goBut.frame=CGRectMake(adW,0*HEIGHT_SIZE, 25*HEIGHT_SIZE, 25*HEIGHT_SIZE);
+                    [goBut setBackgroundImage:IMAGE(@"adCancel.png") forState:UIControlStateNormal];
+                    [goBut addTarget:self action:@selector(adRemove) forControlEvents:UIControlEventTouchUpInside];
+                    [_AdFrontView addSubview:goBut];
+                    
                 
                     if (!_AdBackView) {
                            _AdBackView=[[UIView alloc]initWithFrame: [UIScreen mainScreen].bounds];
