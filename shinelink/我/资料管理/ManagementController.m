@@ -151,9 +151,14 @@
     [self initCoredata];
     
     [self setAlias];
-    self.hidesBottomBarWhenPushed=YES;
-    [login.navigationController setNavigationBarHidden:YES];
-    [self.navigationController pushViewController:login animated:YES];
+    
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
+    
+    [self presentViewController:nav animated:YES completion:nil];
+    
+//    self.hidesBottomBarWhenPushed=YES;
+//    [login.navigationController setNavigationBarHidden:YES];
+//    [self.navigationController pushViewController:login animated:YES];
     
 }
 

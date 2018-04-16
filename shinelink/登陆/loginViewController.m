@@ -461,6 +461,7 @@
 }
 
 -(void)goQuickRegister{
+  
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController.navigationBar setBarTintColor:MainColor];
     

@@ -105,15 +105,10 @@
 
 -(void)registerUser{
 
-    BOOL isDemo=NO;
-    
-    if (isDemo) {
-        newEnergyStorage *go=[[newEnergyStorage alloc]init];
-        [self.navigationController pushViewController:go animated:YES];
-    }else{
+
         _Alert1 = [[UIAlertView alloc] initWithTitle:root_tuichu_zhanghu message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK,nil];
         [_Alert1 show];
-    }
+
     
 
 
@@ -357,8 +352,15 @@
         [[UserInfo defaultUserInfo] setUserPassword:nil];
         [[UserInfo defaultUserInfo] setUserName:nil];
         [[UserInfo defaultUserInfo] setServer:nil];
+
+        
+        [self initCoredata];
+        
+        [self setAlias];
+        
+        
         loginViewController *login =[[loginViewController alloc]init];
-    
+        
         
         if ([reUsername isEqualToString:@"guest"]) {
             login.oldName=nil;
@@ -368,12 +370,37 @@
             login.oldPassword=rePassword;
         }
         
-        [self initCoredata];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
         
-        [self setAlias];
-        self.hidesBottomBarWhenPushed=YES;
-        [login.navigationController setNavigationBarHidden:YES];
-        [self.navigationController pushViewController:login animated:YES];
+             [self presentViewController:nav animated:YES completion:nil];
+        
+//        for (UIViewController *controller in self.navigationController.viewControllers) {
+//            if ([controller isKindOfClass:[loginViewController class]])
+//            {
+//                loginViewController *login =[[loginViewController alloc]init];
+//                
+//
+//                if ([reUsername isEqualToString:@"guest"]) {
+//                    login.oldName=nil;
+//                    login.oldPassword=nil;
+//                }else{
+//                    login.oldName=reUsername;
+//                    login.oldPassword=rePassword;
+//                }
+//                self.hidesBottomBarWhenPushed=YES;
+//                [login.navigationController setNavigationBarHidden:YES];
+//             //   [self.navigationController pushViewController:login animated:YES];
+//
+//                [self.navigationController popToViewController:login animated:YES];
+//
+//            }
+//
+//        }
+        
+
+        
+        
+        
         
     }
     
