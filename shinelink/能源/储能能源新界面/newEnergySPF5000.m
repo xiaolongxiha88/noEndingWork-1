@@ -682,7 +682,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
         VL1.font=[UIFont systemFontOfSize:28*ScreenProH];
         VL1.textAlignment = NSTextAlignmentLeft;
         VL1.text=root_chuneng_nengyuan;
-        VL1.textColor =COLOR(51, 51, 51, 1);;
+        VL1.textColor =COLOR(51, 51, 51, 1);
         [_view3 addSubview:VL1];
         
         float VM2w=ScreenWidth-35*ScreenProH-40*ScreenProW;

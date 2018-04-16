@@ -206,21 +206,27 @@
 
 -(void)fetchLocation{
     
-    NSArray*nameArray=@[root_MAX_498,root_MAX_499,root_MAX_500];
-    [ZJBLStoreShopTypeAlert showWithTitle:root_MAX_501 titles:nameArray selectIndex:^(NSInteger SelectIndexNum){
-        if (SelectIndexNum==0) {
-            [self autoGetLocation];
-        }
-        if (SelectIndexNum==1) {
-            [self inputGetLocation];
-        }
-        if (SelectIndexNum==2) {
-            
-        }
+    if ([self.languageType isEqualToString:@"0"]) {
         
-    } selectValue:^(NSString* valueString){
-     
-    } showCloseButton:YES];
+                [self autoGetLocation];
+    }else{
+        NSArray*nameArray=@[root_MAX_498,root_MAX_499,root_MAX_500];
+        [ZJBLStoreShopTypeAlert showWithTitle:root_MAX_501 titles:nameArray selectIndex:^(NSInteger SelectIndexNum){
+            if (SelectIndexNum==0) {
+                [self autoGetLocation];
+            }
+            if (SelectIndexNum==1) {
+                [self inputGetLocation];
+            }
+            if (SelectIndexNum==2) {
+                
+            }
+            
+        } selectValue:^(NSString* valueString){
+            
+        } showCloseButton:YES];
+    }
+
     
     
 

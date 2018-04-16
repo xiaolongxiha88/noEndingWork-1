@@ -131,6 +131,8 @@
     [self.navigationController pushViewController:equipGraph animated:YES];
     
 }
+
+
 -(void)addGraph{
     _line2View = [[Line2View alloc] initWithFrame:CGRectMake(0, 265*HEIGHT_SIZE-SizeH-5*HEIGHT_SIZE, SCREEN_Width,270*HEIGHT_SIZE )];
     self.line2View.flag=@"1";
