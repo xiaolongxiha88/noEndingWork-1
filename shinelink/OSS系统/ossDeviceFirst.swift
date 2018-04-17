@@ -521,7 +521,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
             if (view3 != nil) {
                    let B1 = view3.viewWithTag(A) as! UIButton
                 if B1.isSelected {
-                    goNetString=String(format: "%d", A) as NSString!
+                    goNetString=String(format: "%d", A) as NSString?
                     if A==2004||A==2005||A==2006{              //具体设备接口
                         if (view4 != nil) {
                             let C1 = view4.viewWithTag(2007) as! UIButton
@@ -682,7 +682,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
                             }else{
                             goView.userNameString=self.cellValue2Array.object(at: 0) as? NSString ?? ""
                             }
-                                goView.userListDic=self.plantListArray.object(at: 0) as! NSDictionary
+                            goView.userListDic=self.plantListArray.object(at: 0) as? NSDictionary
                             goView.netToDic=self.netDic
                             self.navigationController?.pushViewController(goView, animated: true)
                         }
