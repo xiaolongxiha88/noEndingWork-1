@@ -49,6 +49,8 @@ class deviceControlView: RootViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         pageNum=1
         typeNum=deviceTypeString
        // self.initNet0()
@@ -63,6 +65,9 @@ class deviceControlView: RootViewController {
         if (valueDic["lost"] as? Bool ?? false){
             status="离线"}else{status="在线"}
         
+//        let test=[10,11.1];
+//        let test1=test[0] as? Double ?? 0.0;
+//         let test2=test[1] as? Double ?? 0.0;
         if typeNum=="0"{
             let snCode=self.getValidCode(valueDic["serialNum"] as? String ?? "") as NSString? ?? ""
          lableNameArray=["序列号","别名","设备类型","用户名","连接状态","IP及端口号","固件版本","服务器地址","更新时间","校验码"]
@@ -76,10 +81,11 @@ class deviceControlView: RootViewController {
             }
             lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"] as? NSString ?? "",valueDic["deviceType"]as? NSString ?? "",valueDic["userName"]as? NSString ?? "",status,valueDic["clientUrl"]as? NSString ?? "",version,serverUrl,valueDic["lastUpdateTimeText"] as? NSString ?? "",snCode]
         }else if typeNum=="1"{
-            let nominalString=NSString(format: "%.f", valueDic["nominalPower"]as? Float ?? 0.0)
-              let powerString=NSString(format: "%.f", valueDic["power"]as? Float ?? 0.0)
-              let etodayString=NSString(format: "%.f", valueDic["eToday"]as? Float ?? 0.0)
-              let eTotallString=NSString(format: "%.f", valueDic["eTotal"]as? Float ?? 0.0)
+        
+            let nominalString=NSString(format: "%.f", valueDic["nominalPower"]as? Double ?? 0.0)
+              let powerString=NSString(format: "%.1f", valueDic["power"]as? Double ?? 0.0)
+              let etodayString=NSString(format: "%.1f", valueDic["eToday"]as? Double ?? 0.0)
+              let eTotallString=NSString(format: "%.1f", valueDic["eTotal"]as? Double ?? 0.0)
         lableNameArray=["序列号","别名","所属采集器","连接状态","额定功率(W)","当前功率(W)","今日发电(kWh)","累计发电量(kWh)","逆变器型号","最后更新时间"]
                lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"]as? NSString ?? "",valueDic["dataLogSn"]as? NSString ?? "",status,nominalString,powerString,etodayString,eTotallString,valueDic["modelText"]as? NSString ?? "",valueDic["lastUpdateTimeText"] as? NSString ?? ""]
             
@@ -87,8 +93,8 @@ class deviceControlView: RootViewController {
             var type=""
             if (valueDic["deviceType"] as? Int ?? 0)==0{
                 type="SP2000"}else if (valueDic["deviceType"] as? Int ?? 0)==1{type="SP3000"}else if (valueDic["deviceType"] as? Int ?? 0)==2{type="SPF5000"}
-            let pChargeString=NSString(format: "%.f", valueDic["pCharge"]as? Float ?? 0.0)
-            let pDischargeString=NSString(format: "%.f", valueDic["pDischarge"]as? Float ?? 0.0)
+            let pChargeString=NSString(format: "%.f", valueDic["pCharge"]as? Double ?? 0.0)
+            let pDischargeString=NSString(format: "%.f", valueDic["pDischarge"]as? Double ?? 0.0)
             let statueIne=valueDic["status"] as? Int ?? 0
             var statueString:NSString?
             if statueIne==0 {

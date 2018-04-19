@@ -55,7 +55,7 @@
                 NSString *propertyName = [NSString stringWithUTF8String:char_f];
                 [props addObject:propertyName];
             }
-       
+         
             free(properties);
             BOOL isExit = NO;
             for (NSString * property in props) {

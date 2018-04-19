@@ -145,15 +145,18 @@
                             else if ([content[@"msg"] integerValue] ==503) {
                                 [self showAlertViewWithTitle:nil message:root_zhaoBuDao_yongHu cancelButtonTitle:root_Yes];
                             }
+                               [self.navigationController popViewControllerAnimated:YES];
                         }else{
                             NSString *email=content[@"msg"];
                             [self showAlertViewWithTitle:nil message:email cancelButtonTitle:root_Yes];
+                               [self.navigationController popViewControllerAnimated:YES];
                             
                         }
                     }
                 }failure:^(NSError *error) {
                     [self hideProgressView];
                     [self showToastViewWithTitle:root_Networking];
+                       [self.navigationController popViewControllerAnimated:YES];
                 }];
 
             }
@@ -161,10 +164,11 @@
     }failure:^(NSError *error) {
         [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];
+           [self.navigationController popViewControllerAnimated:YES];
     }];
     
     
-    
+ 
     
    
 }
