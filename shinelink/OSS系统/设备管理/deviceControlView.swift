@@ -83,9 +83,9 @@ class deviceControlView: RootViewController {
         }else if typeNum=="1"{
         
             let nominalString=NSString(format: "%.f", valueDic["nominalPower"]as? Double ?? 0.0)
-              let powerString=NSString(format: "%.1f", valueDic["power"]as? Double ?? 0.0)
-              let etodayString=NSString(format: "%.1f", valueDic["eToday"]as? Double ?? 0.0)
-              let eTotallString=NSString(format: "%.1f", valueDic["eTotal"]as? Double ?? 0.0)
+              let powerString=NSString(format: "%.f", valueDic["power"]as? Double ?? 0.0)
+              let etodayString=NSString(format: "%.f", valueDic["eToday"]as? Double ?? 0.0)
+              let eTotallString=NSString(format: "%.f", valueDic["eTotal"]as? Double ?? 0.0)
         lableNameArray=["序列号","别名","所属采集器","连接状态","额定功率(W)","当前功率(W)","今日发电(kWh)","累计发电量(kWh)","逆变器型号","最后更新时间"]
                lableValueArray=[valueDic["serialNum"]as? NSString ?? "",valueDic["alias"]as? NSString ?? "",valueDic["dataLogSn"]as? NSString ?? "",status,nominalString,powerString,etodayString,eTotallString,valueDic["modelText"]as? NSString ?? "",valueDic["lastUpdateTimeText"] as? NSString ?? ""]
             
@@ -127,6 +127,7 @@ class deviceControlView: RootViewController {
         
         netDic=["deviceSn":deviceSnString,"deviceType":deviceTypeString,"alias":"","serverAddr":addressString,"page":pageNum]
         self.showProgressView()
+
         BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]?, paramarsSite: "/api/v1/device/info", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
           
@@ -185,7 +186,7 @@ class deviceControlView: RootViewController {
 
         netDic=["deviceSn":deviceSnString,"deviceType":deviceTypeString]
         self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]!, paramarsSite: "/api/v2/customer/device_info", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars: netDic as! [AnyHashable : Any]?, paramarsSite: "/api/v2/customer/device_info", sucessBlock: {(successBlock)->() in
             self.hideProgressView()
             
             let data:Data=successBlock as! Data

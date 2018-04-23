@@ -525,7 +525,7 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     NSArray *data1=[self getCircleNum:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"eCharge"]] A2:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"eAcCharge"]] ];
     
-    NSArray *data2=[self getCircleNum:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"eDisCharge"]] A2:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"epvGridToday"]] ];
+    NSArray *data2=[self getCircleNum:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"eDisCharge"]] A2:[NSString stringWithFormat:@"%@",[_dataTwoNetAllDic objectForKey:@"eAcDisCharge"]] ];
     
     float vH=70*ScreenProH;  float vH0=35*ScreenProH;
     float vH1=20*ScreenProH;
@@ -1431,8 +1431,8 @@ static const NSTimeInterval secondsPerDay = 24 * 60 * 60;
     
     
     float D1=[A1 floatValue];   float D2=[A2 floatValue];
-    float B1=(D1/(D1+D2))*100;
-    float B2=(D2/(D1+D2))*100;
+    float B1=(D1/(D1+D2))*100.0;
+    float B2=(D2/(D1+D2))*100.0;
    
     CircleNumArray =@[[NSString stringWithFormat:@"%.1f/%.1f%%",D1,B1],
                       [NSString stringWithFormat:@"%.1f/%.1f%%",D2,B2],
