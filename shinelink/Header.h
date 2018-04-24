@@ -14,6 +14,7 @@
 #import "MBProgressHUD.h"
 #import "RootViewController.h"
 #import "CoreDataManager.h"
+#import "SafeObject.h"
 
 #define ManagerObjectModelFileName @"deviceCore" //数据库名字
 

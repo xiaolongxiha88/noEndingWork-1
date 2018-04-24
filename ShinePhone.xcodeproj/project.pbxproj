@@ -581,6 +581,13 @@
 		3383F13E1C9FFDA10075E834 /* 光伏收益.png in Resources */ = {isa = PBXBuildFile; fileRef = 3383F13D1C9FFDA10075E834 /* 光伏收益.png */; };
 		338418E21DC840AB00D679CA /* GifConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338418E11DC840AB00D679CA /* GifConfigViewController.m */; };
 		338418E71DC9783500D679CA /* GFWaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 338418E61DC9783500D679CA /* GFWaterView.m */; };
+		33842470208EC2190029271C /* NSArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 33842462208EC2180029271C /* NSArray+Safe.m */; };
+		33842471208EC2190029271C /* NSDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 33842464208EC2180029271C /* NSDictionary+Safe.m */; };
+		33842472208EC2190029271C /* NSMutableArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 33842466208EC2180029271C /* NSMutableArray+Safe.m */; };
+		33842473208EC2190029271C /* NSMutableDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 33842468208EC2180029271C /* NSMutableDictionary+Safe.m */; };
+		33842474208EC2190029271C /* NSMutableString+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 3384246A208EC2180029271C /* NSMutableString+Safe.m */; };
+		33842475208EC2190029271C /* NSObject+ImpChangeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 3384246C208EC2180029271C /* NSObject+ImpChangeTool.m */; };
+		33842476208EC2190029271C /* NSObject+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = 3384246E208EC2180029271C /* NSObject+Swizzling.m */; };
 		33851DDA1F9DED7A00AB758C /* energyDemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33851DD91F9DED7A00AB758C /* energyDemoCell.m */; };
 		33851DDE1FA08AE300AB758C /* usbToWifiControlOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 33851DDD1FA08AE300AB758C /* usbToWifiControlOne.m */; };
 		3385A3A81F4AB0D7004FF3C7 /* ossTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3385A3A71F4AB0D7004FF3C7 /* ossTool.swift */; };
@@ -1725,6 +1732,21 @@
 		338418E11DC840AB00D679CA /* GifConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GifConfigViewController.m; path = ../WifConnect/GifConfigViewController.m; sourceTree = "<group>"; };
 		338418E51DC9783500D679CA /* GFWaterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GFWaterView.h; path = ../GFWaterView.h; sourceTree = "<group>"; };
 		338418E61DC9783500D679CA /* GFWaterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GFWaterView.m; path = ../GFWaterView.m; sourceTree = "<group>"; };
+		33842461208EC2180029271C /* NSArray+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Safe.h"; sourceTree = "<group>"; };
+		33842462208EC2180029271C /* NSArray+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Safe.m"; sourceTree = "<group>"; };
+		33842463208EC2180029271C /* NSDictionary+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Safe.h"; sourceTree = "<group>"; };
+		33842464208EC2180029271C /* NSDictionary+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Safe.m"; sourceTree = "<group>"; };
+		33842465208EC2180029271C /* NSMutableArray+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Safe.h"; sourceTree = "<group>"; };
+		33842466208EC2180029271C /* NSMutableArray+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Safe.m"; sourceTree = "<group>"; };
+		33842467208EC2180029271C /* NSMutableDictionary+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+Safe.h"; sourceTree = "<group>"; };
+		33842468208EC2180029271C /* NSMutableDictionary+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+Safe.m"; sourceTree = "<group>"; };
+		33842469208EC2180029271C /* NSMutableString+Safe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableString+Safe.h"; sourceTree = "<group>"; };
+		3384246A208EC2180029271C /* NSMutableString+Safe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableString+Safe.m"; sourceTree = "<group>"; };
+		3384246B208EC2180029271C /* NSObject+ImpChangeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ImpChangeTool.h"; sourceTree = "<group>"; };
+		3384246C208EC2180029271C /* NSObject+ImpChangeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ImpChangeTool.m"; sourceTree = "<group>"; };
+		3384246D208EC2180029271C /* NSObject+Swizzling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzling.h"; sourceTree = "<group>"; };
+		3384246E208EC2180029271C /* NSObject+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzling.m"; sourceTree = "<group>"; };
+		3384246F208EC2180029271C /* SafeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SafeObject.h; sourceTree = "<group>"; };
 		33851DD81F9DED7A00AB758C /* energyDemoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = energyDemoCell.h; sourceTree = "<group>"; };
 		33851DD91F9DED7A00AB758C /* energyDemoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = energyDemoCell.m; sourceTree = "<group>"; };
 		33851DDC1FA08AE300AB758C /* usbToWifiControlOne.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiControlOne.h; sourceTree = "<group>"; };
@@ -2570,6 +2592,7 @@
 		3350891C1C73119B00D7AA03 /* 第三方库 */ = {
 			isa = PBXGroup;
 			children = (
+				33842460208EC2180029271C /* SafeObject */,
 				33860FAE1EEA75C5004150FD /* MJRefresh */,
 				3343F3E61C805BD1009F69BC /* MBProgressHUD */,
 				3343F3E21C805BBF009F69BC /* FXBlurView */,
@@ -3926,6 +3949,28 @@
 				33ECDCF11CDC9D3400E20AF8 /* deviceCore.xcdatamodeld */,
 			);
 			path = datacore;
+			sourceTree = "<group>";
+		};
+		33842460208EC2180029271C /* SafeObject */ = {
+			isa = PBXGroup;
+			children = (
+				33842461208EC2180029271C /* NSArray+Safe.h */,
+				33842462208EC2180029271C /* NSArray+Safe.m */,
+				33842463208EC2180029271C /* NSDictionary+Safe.h */,
+				33842464208EC2180029271C /* NSDictionary+Safe.m */,
+				33842465208EC2180029271C /* NSMutableArray+Safe.h */,
+				33842466208EC2180029271C /* NSMutableArray+Safe.m */,
+				33842467208EC2180029271C /* NSMutableDictionary+Safe.h */,
+				33842468208EC2180029271C /* NSMutableDictionary+Safe.m */,
+				33842469208EC2180029271C /* NSMutableString+Safe.h */,
+				3384246A208EC2180029271C /* NSMutableString+Safe.m */,
+				3384246B208EC2180029271C /* NSObject+ImpChangeTool.h */,
+				3384246C208EC2180029271C /* NSObject+ImpChangeTool.m */,
+				3384246D208EC2180029271C /* NSObject+Swizzling.h */,
+				3384246E208EC2180029271C /* NSObject+Swizzling.m */,
+				3384246F208EC2180029271C /* SafeObject.h */,
+			);
+			path = SafeObject;
 			sourceTree = "<group>";
 		};
 		33851DDB1FA08A8C00AB758C /* 本地调试Control */ = {
@@ -5441,6 +5486,7 @@
 				334FF09D1CF53C7C001E6716 /* MainViewController.m in Sources */,
 				3326926B1D794AB00058C5B7 /* AvCell.m in Sources */,
 				337475F91FADB64900BB1A76 /* usbToWifiControlFour.m in Sources */,
+				33842471208EC2190029271C /* NSDictionary+Safe.m in Sources */,
 				3389649C1E5E767700A7B1AE /* forgetOneViewController.m in Sources */,
 				3379E4EB1E94BE40000A4198 /* UIColor+Hex.m in Sources */,
 				334B8F541C914A6D00798A69 /* PNPieChartDataItem.m in Sources */,
@@ -5458,11 +5504,13 @@
 				3367CB4E1C86806700EF460C /* MASViewConstraint.m in Sources */,
 				338614E31F2839A9000F515E /* ESPUDPSocketServer.m in Sources */,
 				3381ED011CBCD85700DCF0D2 /* myListSecondTableViewCell.m in Sources */,
+				33842474208EC2190029271C /* NSMutableString+Safe.m in Sources */,
 				335D69B51D77BA4D00894D90 /* NSString+HCD.m in Sources */,
 				3343F3C61C80403C009F69BC /* AFURLResponseSerialization.m in Sources */,
 				337472281FB96C9200AC1420 /* toolOneView.m in Sources */,
 				3379E4ED1E94BE54000A4198 /* CircleMapView.m in Sources */,
 				33AF3D211D8E67210007D6C2 /* NSTimer+EasyTimeline.m in Sources */,
+				33842473208EC2190029271C /* NSMutableDictionary+Safe.m in Sources */,
 				338614AF1F26E59B000F515E /* newLine.m in Sources */,
 				3376B3E51F983D130069F820 /* usbModleOne.m in Sources */,
 				338614D51F2839A9000F515E /* ESP_ByteUtil.m in Sources */,
@@ -5555,6 +5603,7 @@
 				338614DE1F2839A9000F515E /* ESPTouchGenerator.m in Sources */,
 				33EFB6701C98F9B1003F336F /* ZFLineChart.m in Sources */,
 				3355F2681C7469AB006DDE5A /* aboutViewController.m in Sources */,
+				33842470208EC2190029271C /* NSArray+Safe.m in Sources */,
 				3343F3DC1C80405D009F69BC /* UIAlertView+AFNetworking.m in Sources */,
 				337472441FC0218700AC1420 /* payResultView.m in Sources */,
 				337F9CC51C71ABD80016FE43 /* deviceViewController.m in Sources */,
@@ -5577,6 +5626,7 @@
 				337079471D91397800D7DA98 /* QuestionTableViewCell.m in Sources */,
 				334FF0941CF53C7C001E6716 /* AsyncUdpSocket.m in Sources */,
 				3355DB971CE432CD0042F627 /* Common2ViewController.m in Sources */,
+				33842472208EC2190029271C /* NSMutableArray+Safe.m in Sources */,
 				334ED7041C902AE60095FFBC /* CircleView.m in Sources */,
 				338964641E53E8E200A7B1AE /* QCCountdownButton.m in Sources */,
 				3306CE5E1EF3CCE1002699BA /* intergratorDeviceList.swift in Sources */,
@@ -5689,6 +5739,7 @@
 				33860FE31EEA75C5004150FD /* MJRefreshAutoNormalFooter.m in Sources */,
 				334B8F4B1C914A6D00798A69 /* PNBarChart.m in Sources */,
 				338A623E1E71567A000E7CE4 /* PopoverView00.m in Sources */,
+				33842475208EC2190029271C /* NSObject+ImpChangeTool.m in Sources */,
 				3367EB951CD0B07600D2EF67 /* stationTableView.m in Sources */,
 				3378007F201C1B5C008E5C00 /* usbTowifiCheckOne.m in Sources */,
 				33860FEF1EEA75C5004150FD /* UIScrollView+MJRefresh.m in Sources */,
@@ -5723,6 +5774,7 @@
 				33860FE11EEA75C5004150FD /* MJRefreshHeader.m in Sources */,
 				336E04001EC9586C0034BC86 /* ossDeviceFirst.swift in Sources */,
 				33530F211CC8824500378EB2 /* changManeger.m in Sources */,
+				33842476208EC2190029271C /* NSObject+Swizzling.m in Sources */,
 				3350891B1C73112000D7AA03 /* EditStationMenuView.m in Sources */,
 				3387B8D81FB426A40073FB35 /* payView3.m in Sources */,
 				3399A8201FA33D7E006F8805 /* usbToWifiControlTwo.m in Sources */,

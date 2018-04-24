@@ -782,7 +782,7 @@ _pcsNetStorageSN=@"";
         imageStatueArray=[NSMutableArray array];
         _isStorageAllLost=YES;
     
-    
+
         
        // id jsonObj=[NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
          self.dataArr = [NSMutableArray arrayWithArray:content[@"deviceList"]];
@@ -793,6 +793,8 @@ _pcsNetStorageSN=@"";
            
             if ([content[@"deviceList"][i][@"deviceType"]isEqualToString:@"inverter"]) {                                //inverter 设备解析
                
+                
+                
                 NSDictionary *deviceDic=content[@"deviceList"][i];
                 if ([deviceDic.allKeys containsObject:@"invType"]) {                   //invType=0逆变器  1 max
                      NSString *invType=[NSString stringWithFormat:@"%@",content[@"deviceList"][i][@"invType"]];
