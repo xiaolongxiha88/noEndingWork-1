@@ -753,6 +753,8 @@
 		33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */; };
 		33E42E0F1DC9CE050024FFBB /* peizhi_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0E1DC9CE050024FFBB /* peizhi_btn.png */; };
 		33E42E1F1DCC28840024FFBB /* singal.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E1E1DCC28840024FFBB /* singal.png */; };
+		33E727862091A7A0009F460A /* ossNewDeviceList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E727852091A7A0009F460A /* ossNewDeviceList.m */; };
+		33E727892091F09E009F460A /* ossNewDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E727882091F09E009F460A /* ossNewDeviceCell.m */; };
 		33EA1CBA1EFA7A0D00A39192 /* select_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA1CB91EFA7A0D00A39192 /* select_icon.png */; };
 		33EA1CBC1EFA8E0B00A39192 /* pop_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA1CBB1EFA8E0B00A39192 /* pop_frame.png */; };
 		33EA49DE1E8B8A4D0044A01A /* pvDir_cn.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33EA49DA1E8B8A4D0044A01A /* pvDir_cn.jpg */; };
@@ -2009,6 +2011,10 @@
 		33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_2.png; path = ../../peizhi_btn_2.png; sourceTree = "<group>"; };
 		33E42E0E1DC9CE050024FFBB /* peizhi_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn.png; path = ../../peizhi_btn.png; sourceTree = "<group>"; };
 		33E42E1E1DCC28840024FFBB /* singal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = singal.png; path = ../../singal.png; sourceTree = "<group>"; };
+		33E727842091A7A0009F460A /* ossNewDeviceList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewDeviceList.h; sourceTree = "<group>"; };
+		33E727852091A7A0009F460A /* ossNewDeviceList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewDeviceList.m; sourceTree = "<group>"; };
+		33E727872091F09E009F460A /* ossNewDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewDeviceCell.h; sourceTree = "<group>"; };
+		33E727882091F09E009F460A /* ossNewDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewDeviceCell.m; sourceTree = "<group>"; };
 		33EA1CB91EFA7A0D00A39192 /* select_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select_icon.png; sourceTree = "<group>"; };
 		33EA1CBB1EFA8E0B00A39192 /* pop_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pop_frame.png; sourceTree = "<group>"; };
 		33EA49DA1E8B8A4D0044A01A /* pvDir_cn.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pvDir_cn.jpg; path = ../pvDir_cn.jpg; sourceTree = "<group>"; };
@@ -4380,6 +4386,10 @@
 				338D51BE1EE151D9003FE4D2 /* IntegratorFirst.swift */,
 				3306CE5D1EF3CCE1002699BA /* intergratorDeviceList.swift */,
 				338614AB1F2606A0000F515E /* intergratorDeviceCell.swift */,
+				33E727842091A7A0009F460A /* ossNewDeviceList.h */,
+				33E727852091A7A0009F460A /* ossNewDeviceList.m */,
+				33E727872091F09E009F460A /* ossNewDeviceCell.h */,
+				33E727882091F09E009F460A /* ossNewDeviceCell.m */,
 			);
 			path = "集成商";
 			sourceTree = "<group>";
@@ -5696,6 +5706,7 @@
 				33860FE21EEA75C5004150FD /* MJRefreshAutoGifFooter.m in Sources */,
 				33AF3D1A1D8E67210007D6C2 /* ACPButton.m in Sources */,
 				3367EBA41CD0C11800D2EF67 /* productViewController.m in Sources */,
+				33E727892091F09E009F460A /* ossNewDeviceCell.m in Sources */,
 				33875A4F1EB96A7900F7E0E6 /* newEnergyDetailData.m in Sources */,
 				33AF3D1E1D8E67210007D6C2 /* JDStatusBarNotification.m in Sources */,
 				335D69B21D77BA4D00894D90 /* HcdPlayerView.m in Sources */,
@@ -5733,6 +5744,7 @@
 				336F04101F05EBFA00DE7CD7 /* Model.m in Sources */,
 				33EFB66C1C98F9B1003F336F /* ZFGenericChart.m in Sources */,
 				33860FEA1EEA75C5004150FD /* MJRefreshStateHeader.m in Sources */,
+				33E727862091A7A0009F460A /* ossNewDeviceList.m in Sources */,
 				33FAD8EB1F99CA0C0030EEC3 /* usbToWifiDataControl.m in Sources */,
 				3381ECE51CBC900900DCF0D2 /* EquitGraph2ViewController.m in Sources */,
 				3367CB521C86806700EF460C /* ViewController+MASAdditions.m in Sources */,

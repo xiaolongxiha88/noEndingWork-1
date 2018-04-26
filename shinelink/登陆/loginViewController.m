@@ -458,6 +458,7 @@
         
     } showCloseButton:YES];
     
+    
 }
 
 -(void)goQuickRegister{

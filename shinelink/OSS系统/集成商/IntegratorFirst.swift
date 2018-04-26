@@ -364,9 +364,9 @@ class IntegratorFirst: RootViewController {
             }
         }
         
-        let vc=intergratorDeviceList()
+        let vc=ossNewDeviceList()
         vc.deviceStatusType=self.deviceStatusType
-        vc.netDic=self.netDic
+        vc.netDic=self.netDic  as! [AnyHashable : Any]?
      vc.deviceType=self.deviceType
         self.navigationController?.pushViewController(vc, animated: true)
         
