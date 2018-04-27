@@ -585,6 +585,7 @@ class ossDeviceFirst: RootViewController,UISearchBarDelegate,UITableViewDataSour
         self.initNet0()
     }
     
+    
     func initNet0(){
     
             let value1=searchBar.text!

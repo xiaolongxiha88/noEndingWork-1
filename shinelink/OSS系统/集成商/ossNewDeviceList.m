@@ -120,9 +120,7 @@
             self.twoScrollView.contentOffset = CGPointMake(self.threeScrollView.contentOffset.x, 0);
         }
     } else if ([scrollView isKindOfClass:[UITableView class]]) {
-//        float y1=self.tableView.contentOffset.y;
-//        float y2=y1/_tableH;
-//        self.tableView.contentOffset=CGPointMake(self.tableView.contentOffset.x, ceil(y2)*_tableH);
+
     }
     
 }

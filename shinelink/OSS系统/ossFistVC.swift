@@ -112,6 +112,7 @@ class ossFistVC: RootViewController {
             
         
         }else if roleString=="6" || roleString=="14" || roleString=="7" || roleString=="15"{
+            self.initRightItem()
           let  companyString=UserDefaults.standard.object(forKey: "agentCompany") as? String ?? ""
             if !(companyString.isEqual("")){
                    self.title=companyString
@@ -154,6 +155,10 @@ class ossFistVC: RootViewController {
        
     }
 
+    func initRightItem(){
+        let rightItem=UIBarButtonItem.init(image: UIImage.init(named: "add@2x.png"), style: .plain, target: self, action: #selector(self.oneKeyAdd))
+        self.navigationItem.rightBarButtonItem=rightItem
+    }
     
     func initLeftItem(){
         let item0Name="退出账户"
@@ -224,6 +229,11 @@ class ossFistVC: RootViewController {
     }
     
 
+    func oneKeyAdd(){
+        let vc=OneKeyAddForIntergrator()
+
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     func initAlertView(){
         let alertController = UIAlertController(title: "是否退出账户?", message: nil, preferredStyle:.alert)

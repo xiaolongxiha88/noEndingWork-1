@@ -533,6 +533,11 @@ class IntegratorFirst: RootViewController {
     func initNet1(){
         if self.roleString=="7" || self.roleString=="15"{
         agentCodeString=""
+
+            
+            if userName==""{
+               userName = (view0.viewWithTag(5001) as! UITextField).text as NSString?
+            }
             datalogSnString = (view0.viewWithTag(5002) as! UITextField).text as NSString?
             deviceString = (view0.viewWithTag(5003) as! UITextField).text as NSString?
         }else{

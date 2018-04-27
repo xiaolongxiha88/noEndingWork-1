@@ -755,6 +755,7 @@
 		33E42E1F1DCC28840024FFBB /* singal.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E1E1DCC28840024FFBB /* singal.png */; };
 		33E727862091A7A0009F460A /* ossNewDeviceList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E727852091A7A0009F460A /* ossNewDeviceList.m */; };
 		33E727892091F09E009F460A /* ossNewDeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E727882091F09E009F460A /* ossNewDeviceCell.m */; };
+		33E7278C20933DE3009F460A /* OneKeyAddForIntergrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E7278B20933DE3009F460A /* OneKeyAddForIntergrator.m */; };
 		33EA1CBA1EFA7A0D00A39192 /* select_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA1CB91EFA7A0D00A39192 /* select_icon.png */; };
 		33EA1CBC1EFA8E0B00A39192 /* pop_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 33EA1CBB1EFA8E0B00A39192 /* pop_frame.png */; };
 		33EA49DE1E8B8A4D0044A01A /* pvDir_cn.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33EA49DA1E8B8A4D0044A01A /* pvDir_cn.jpg */; };
@@ -2015,6 +2016,8 @@
 		33E727852091A7A0009F460A /* ossNewDeviceList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewDeviceList.m; sourceTree = "<group>"; };
 		33E727872091F09E009F460A /* ossNewDeviceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewDeviceCell.h; sourceTree = "<group>"; };
 		33E727882091F09E009F460A /* ossNewDeviceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewDeviceCell.m; sourceTree = "<group>"; };
+		33E7278A20933DE3009F460A /* OneKeyAddForIntergrator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OneKeyAddForIntergrator.h; sourceTree = "<group>"; };
+		33E7278B20933DE3009F460A /* OneKeyAddForIntergrator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OneKeyAddForIntergrator.m; sourceTree = "<group>"; };
 		33EA1CB91EFA7A0D00A39192 /* select_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = select_icon.png; sourceTree = "<group>"; };
 		33EA1CBB1EFA8E0B00A39192 /* pop_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pop_frame.png; sourceTree = "<group>"; };
 		33EA49DA1E8B8A4D0044A01A /* pvDir_cn.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pvDir_cn.jpg; path = ../pvDir_cn.jpg; sourceTree = "<group>"; };
@@ -4390,6 +4393,8 @@
 				33E727852091A7A0009F460A /* ossNewDeviceList.m */,
 				33E727872091F09E009F460A /* ossNewDeviceCell.h */,
 				33E727882091F09E009F460A /* ossNewDeviceCell.m */,
+				33E7278A20933DE3009F460A /* OneKeyAddForIntergrator.h */,
+				33E7278B20933DE3009F460A /* OneKeyAddForIntergrator.m */,
 			);
 			path = "集成商";
 			sourceTree = "<group>";
@@ -5641,6 +5646,7 @@
 				338964641E53E8E200A7B1AE /* QCCountdownButton.m in Sources */,
 				3306CE5E1EF3CCE1002699BA /* intergratorDeviceList.swift in Sources */,
 				334720E11C8E7048006388C8 /* energyTableViewCell.m in Sources */,
+				33E7278C20933DE3009F460A /* OneKeyAddForIntergrator.m in Sources */,
 				338614DC1F2839A9000F515E /* ESPGuideCode.m in Sources */,
 				3370794D1D92176600D7DA98 /* manualTableViewController.m in Sources */,
 				335456B61C852E6200275478 /* AddCellectViewController.m in Sources */,
