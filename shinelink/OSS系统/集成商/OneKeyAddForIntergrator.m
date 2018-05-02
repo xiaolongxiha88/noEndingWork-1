@@ -17,6 +17,8 @@
 @property (nonatomic, assign)NSInteger stepNum;
 @property (nonatomic, strong) NSMutableDictionary*oneDic;
 @property (nonatomic, assign)BOOL keepValueEnable;
+@property (nonatomic, assign)BOOL isJumpUser;
+@property (nonatomic, assign)float H1;
 
 @end
 
@@ -24,18 +26,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+   _H1=40*HEIGHT_SIZE;
+    
     [self initUI];
 }
 
 -(void)initUI{
-    float H1=40*HEIGHT_SIZE;
+  _H1=40*HEIGHT_SIZE;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
     float W1=SCREEN_Width/3.0;
     NSArray *nameArray=@[@"1.添加用户",@"2.添加电站",@"3.添加设备"];
     for (int i=0; i<3; i++) {
-        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1*i, 0,W1, H1)];
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1*i, 0,W1, _H1)];
         if (i==0) {
              lable1.textColor = MainColor;
               lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
@@ -52,7 +55,7 @@
     
     _stepNum=0;
     
-    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, H1, SCREEN_Width, ScreenHeight-H1)];
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, _H1, SCREEN_Width, ScreenHeight-_H1)];
     _scrollView.scrollEnabled=YES;
     [self.view addSubview:_scrollView];
     
@@ -66,73 +69,15 @@
     [_scrollView addSubview:_oneView];
     
     float H1=40*HEIGHT_SIZE;
-    float W1=8*NOW_SIZE;
+
     NSArray *name1Array=@[@"服务器地址",@"用户名",@"密码",@"重复密码",@"时区",@"手机号"];
     for (int i=0; i<name1Array.count; i++) {
-        UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,2*HEIGHT_SIZE+H1*i, W1, H1)];
-        label.text=@"*";
-        label.textAlignment=NSTextAlignmentCenter;
-        label.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
-        label.textColor=COLOR(154, 154, 154, 1);
-        [_oneView addSubview:label];
-        
-        NSString *nameString=[NSString stringWithFormat:@"%@:",name1Array[i]];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-        
-        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE+W1, 0+H1*i,size.width, H1)];
-            lable1.textColor = COLOR(154, 154, 154, 1);
-            lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        lable1.textAlignment=NSTextAlignmentLeft;
-        lable1.text=nameString;
-        [_oneView addSubview:lable1];
-        
-        UIView *V01 = [[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,H1+H1*i, SCREEN_Width-(2*10*NOW_SIZE),1*HEIGHT_SIZE)];
-        V01.backgroundColor = COLOR(222, 222, 222, 1);
-        [_oneView addSubview:V01];
-        
-            float WK1=5*NOW_SIZE;
-        float W_image1=6*HEIGHT_SIZE;
-           float H_image1=12*HEIGHT_SIZE;
-        float W2=SCREEN_Width-(10*NOW_SIZE+W1+size.width+WK1)-10*NOW_SIZE;
-        
+        float H2=0+_H1*i;
+        NSInteger type=0;
         if (i==0 || i==4) {
-            
-            UIView *V0= [[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE+W1+size.width+WK1,0+H1*i, W2,H1)];
-            V0.backgroundColor = [UIColor clearColor];
-            V0.userInteractionEnabled=YES;
-            V0.tag=2500+i;
-            UITapGestureRecognizer *labelTap1;
-            labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectChioce:)];
-            [V0 addGestureRecognizer:labelTap1];
-            [_oneView addSubview:V0];
-            
-            UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,W2-W_image1-WK1, H1)];
-            lable1.textColor = COLOR(51, 51, 51, 1);
-              lable1.tag=2600+i;
-            lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-            lable1.textAlignment=NSTextAlignmentLeft;
-            lable1.userInteractionEnabled=YES;
-            [V0 addSubview:lable1];
-            
-
-            
-            UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(W2-W_image1, (H1-H_image1)/2, W_image1,H_image1 )];
-                image2.userInteractionEnabled=YES;
-            image2.image=IMAGE(@"select_icon.png");
-            [V0 addSubview:image2];
-            
-        }else{
-            UITextField *text1 = [[UITextField alloc] initWithFrame:CGRectMake(10*NOW_SIZE+W1+size.width+WK1, 0+H1*i, W2, H1)];
-            text1.textColor =  COLOR(51, 51, 51, 1);
-            text1.tintColor =  COLOR(51, 51, 51, 1);
-             text1.tag=2600+i;
-            text1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-            [_oneView addSubview:text1];
-            
-            
+            type=1;
         }
-        
+        [self getUnitUI:name1Array[i] Hight:H2 type:type tagNum:2500+i firstView:_oneView];
     }
     
     _goNextView=[[UIView alloc]initWithFrame:CGRectMake(0, _oneView.frame.origin.x+_oneView.frame.size.height+20*HEIGHT_SIZE, SCREEN_Width, 100*HEIGHT_SIZE)];
@@ -179,11 +124,116 @@
     
 }
 
+-(void)getUnitUI:(NSString*)name Hight:(float)Hight type:(NSInteger)type tagNum:(NSInteger)tagNum firstView:(UIView*)firstView{
+        float W1=8*NOW_SIZE;
+    UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,2*HEIGHT_SIZE+Hight, W1, _H1)];
+    label.text=@"*";
+    label.textAlignment=NSTextAlignmentCenter;
+    label.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
+    label.textColor=COLOR(154, 154, 154, 1);
+    [firstView addSubview:label];
+    
+    NSString *nameString=[NSString stringWithFormat:@"%@:",name];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+    CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, _H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    
+    UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE+W1, Hight,size.width, _H1)];
+    lable1.textColor = COLOR(154, 154, 154, 1);
+    lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    lable1.textAlignment=NSTextAlignmentLeft;
+    lable1.text=nameString;
+    [firstView addSubview:lable1];
+    
+    UIView *V01 = [[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,_H1+Hight, SCREEN_Width-(2*10*NOW_SIZE),1*HEIGHT_SIZE)];
+    V01.backgroundColor = COLOR(222, 222, 222, 1);
+    [firstView addSubview:V01];
+    
+    float WK1=5*NOW_SIZE;
+    float W_image1=6*HEIGHT_SIZE;
+    float H_image1=12*HEIGHT_SIZE;
+    float W2=SCREEN_Width-(10*NOW_SIZE+W1+size.width+WK1)-10*NOW_SIZE;
+    
+    if (type==1) {
+        
+        UIView *V0= [[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE+W1+size.width+WK1,Hight, W2,_H1)];
+        V0.backgroundColor = [UIColor clearColor];
+        V0.userInteractionEnabled=YES;
+        V0.tag=tagNum;
+        UITapGestureRecognizer *labelTap1;
+        labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectChioce:)];
+        [V0 addGestureRecognizer:labelTap1];
+        [firstView addSubview:V0];
+        
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,W2-W_image1-WK1, _H1)];
+        lable1.textColor = COLOR(51, 51, 51, 1);
+        lable1.tag=tagNum+100;
+        lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        lable1.textAlignment=NSTextAlignmentLeft;
+        lable1.userInteractionEnabled=YES;
+        [V0 addSubview:lable1];
+        
+        
+        
+        UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(W2-W_image1, (_H1-H_image1)/2, W_image1,H_image1 )];
+        image2.userInteractionEnabled=YES;
+        image2.image=IMAGE(@"select_icon.png");
+        [V0 addSubview:image2];
+        
+    }else{
+        UITextField *text1 = [[UITextField alloc] initWithFrame:CGRectMake(10*NOW_SIZE+W1+size.width+WK1, Hight, W2, _H1)];
+        text1.textColor =  COLOR(51, 51, 51, 1);
+        text1.tintColor =  COLOR(51, 51, 51, 1);
+        text1.tag=tagNum+100;
+        text1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        [firstView addSubview:text1];
+        
+        
+    }
+    
+}
+
+-(void)initTwoUI{
+    if (_isJumpUser) {
+        UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, _oneView.frame.origin.x+_oneView.frame.size.height+20*HEIGHT_SIZE, SCREEN_Width, 241*HEIGHT_SIZE)];
+        jumpUserView.backgroundColor=[UIColor clearColor];
+        [_scrollView addSubview:jumpUserView];
+        
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0,SCREEN_Width-20*NOW_SIZE, _H1)];
+        lable1.textColor = COLOR(154, 154, 154, 1);
+        lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        lable1.textAlignment=NSTextAlignmentLeft;
+        lable1.text=@"请指定电站所属的用户:";
+        [_oneView addSubview:lable1];
+        
+            float W1=8*NOW_SIZE;
+        UILabel *label0=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,2*HEIGHT_SIZE+_H1, W1, _H1)];
+        label0.text=@"*";
+        label0.textAlignment=NSTextAlignmentCenter;
+        label0.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
+        label0.textColor=COLOR(154, 154, 154, 1);
+        [_oneView addSubview:label0];
+        
+        UILabel *lable2 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE+W1, 0,SCREEN_Width-20*NOW_SIZE, _H1)];
+        lable2.textColor = COLOR(154, 154, 154, 1);
+        lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        lable2.textAlignment=NSTextAlignmentLeft;
+        lable2.text=@"所属用户:";
+        [_oneView addSubview:lable2];
+        
+
+    }
+    
+    
+    
+    
+}
+
 
 
 -(void)nextGoStep{
     _keepValueEnable=YES;
     if (_stepNum==0) {
+        _isJumpUser=NO;
         [self checkOneValue];
     }
 }
@@ -195,6 +245,7 @@
 
 -(void)nextJumpStep{
         _keepValueEnable=NO;
+         _isJumpUser=YES;
     if (_stepNum==0) {
         [self checkOneValue];
     }
