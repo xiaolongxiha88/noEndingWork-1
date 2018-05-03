@@ -534,6 +534,10 @@
 		33801EB31D58274D00047232 /* addStationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33801EB21D58274D00047232 /* addStationViewController.m */; };
 		33801EBD1D5882D500047232 /* Growatt-2-5k.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33801EBC1D5882D500047232 /* Growatt-2-5k.jpg */; };
 		338049211ED2E2550077658D /* deviceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338049201ED2E2550077658D /* deviceControlView.swift */; };
+		33810C9F209AB8EA00FBEAFA /* oss_btn_2nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 33810C9D209AB8E800FBEAFA /* oss_btn_2nor.png */; };
+		33810CA0209AB8EA00FBEAFA /* oss_btn_2click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33810C9E209AB8E900FBEAFA /* oss_btn_2click.png */; };
+		33810CA3209ABAC400FBEAFA /* oss_btn_1click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33810CA1209ABAC300FBEAFA /* oss_btn_1click.png */; };
+		33810CA4209ABAC400FBEAFA /* oss_btn_1nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 33810CA2209ABAC400FBEAFA /* oss_btn_1nor.png */; };
 		338122261D864B3700C7704B /* AvCachTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 338122251D864B3700C7704B /* AvCachTableViewCell.m */; };
 		338122291D864BF500C7704B /* AvCachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 338122281D864BF500C7704B /* AvCachViewController.m */; };
 		3381222B1D864D7B00C7704B /* btn1-choose-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3381222A1D864D7B00C7704B /* btn1-choose-1.png */; };
@@ -1676,6 +1680,10 @@
 		33801EB21D58274D00047232 /* addStationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addStationViewController.m; sourceTree = "<group>"; };
 		33801EBC1D5882D500047232 /* Growatt-2-5k.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Growatt-2-5k.jpg"; sourceTree = "<group>"; };
 		338049201ED2E2550077658D /* deviceControlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = deviceControlView.swift; sourceTree = "<group>"; };
+		33810C9D209AB8E800FBEAFA /* oss_btn_2nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_btn_2nor.png; sourceTree = "<group>"; };
+		33810C9E209AB8E900FBEAFA /* oss_btn_2click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_btn_2click.png; sourceTree = "<group>"; };
+		33810CA1209ABAC300FBEAFA /* oss_btn_1click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_btn_1click.png; sourceTree = "<group>"; };
+		33810CA2209ABAC400FBEAFA /* oss_btn_1nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_btn_1nor.png; sourceTree = "<group>"; };
 		338122241D864B3700C7704B /* AvCachTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvCachTableViewCell.h; sourceTree = "<group>"; };
 		338122251D864B3700C7704B /* AvCachTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvCachTableViewCell.m; sourceTree = "<group>"; };
 		338122271D864BF500C7704B /* AvCachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvCachViewController.h; sourceTree = "<group>"; };
@@ -3309,6 +3317,10 @@
 		336F04151F06207300DE7CD7 /* order图片 */ = {
 			isa = PBXGroup;
 			children = (
+				33810CA1209ABAC300FBEAFA /* oss_btn_1click.png */,
+				33810CA2209ABAC400FBEAFA /* oss_btn_1nor.png */,
+				33810C9E209AB8E900FBEAFA /* oss_btn_2click.png */,
+				33810C9D209AB8E800FBEAFA /* oss_btn_2nor.png */,
 				33884DB01FF32D960089E689 /* more22.png */,
 				33884DAB1FF225BC0089E689 /* presentation.png */,
 				3330F4F01F177B920076C237 /* more2@2x.png */,
@@ -4970,6 +4982,7 @@
 				334FEF8E1CF45AEB001E6716 /* btn1.png in Resources */,
 				334FF0BE1CF53C7C001E6716 /* shinesmart.png in Resources */,
 				33EA49F11E8CAC060044A01A /* 设备页引导4.jpg in Resources */,
+				33810CA0209AB8EA00FBEAFA /* oss_btn_2click.png in Resources */,
 				33C3FFFE1D3E33E00016351C /* L5.png in Resources */,
 				33FEFD5C1C7DB38400324374 /* icon---Name.png in Resources */,
 				33C300041D3E33E00016351C /* L11.png in Resources */,
@@ -4977,6 +4990,7 @@
 				33252FC91F53F4AB0054BBC7 /* date_left_icon.png in Resources */,
 				3319E0911D5B121E006623A9 /* play_icon.png in Resources */,
 				3357DDD21F6928720089A679 /* buttonCancle.png in Resources */,
+				33810CA3209ABAC400FBEAFA /* oss_btn_1click.png in Resources */,
 				3330F4F11F177B920076C237 /* more2@2x.png in Resources */,
 				334AED601CA3763D007E39F3 /* 资料管理.png in Resources */,
 				3378007C201C184E008E5C00 /* max_note.png in Resources */,
@@ -5028,6 +5042,7 @@
 				335D69EF1D77DA9200894D90 /* AvPlay2.png in Resources */,
 				337F962C1F0DE09F00840527 /* power_iconI.png in Resources */,
 				334770FC1C9A3DEE003A6F13 /* energyTab@2x.png in Resources */,
+				33810C9F209AB8EA00FBEAFA /* oss_btn_2nor.png in Resources */,
 				3370EBA71F41494000F37149 /* storage.png in Resources */,
 				33C300001D3E33E00016351C /* L7.png in Resources */,
 				338E30CE1D93727A002215E4 /* 增值服务1.png in Resources */,
@@ -5196,6 +5211,7 @@
 				33AF3D271D8E67210007D6C2 /* ProgressHUD.bundle in Resources */,
 				33A4384C1D1ABE86004E9AB6 /* service3.png in Resources */,
 				336F04141F06203D00DE7CD7 /* workoader_date1.png in Resources */,
+				33810CA4209ABAC400FBEAFA /* oss_btn_1nor.png in Resources */,
 				338234391D9A50AD002062AE /* Prompt message_en2.png in Resources */,
 				33C300011D3E33E00016351C /* L8.png in Resources */,
 				333D446820118A4D00C76FF9 /* power_station_img.png in Resources */,

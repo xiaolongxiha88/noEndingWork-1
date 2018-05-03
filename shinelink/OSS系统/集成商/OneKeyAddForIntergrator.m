@@ -12,13 +12,21 @@
 @interface OneKeyAddForIntergrator ()
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *oneView;
+@property (nonatomic, strong) UIView *twoView;
+
 @property (nonatomic, strong) NSArray *addressArray;
 @property (nonatomic, strong) UIView *goNextView;
 @property (nonatomic, assign)NSInteger stepNum;
 @property (nonatomic, strong) NSMutableDictionary*oneDic;
+@property (nonatomic, strong) NSMutableDictionary*twoDic;
 @property (nonatomic, assign)BOOL keepValueEnable;
 @property (nonatomic, assign)BOOL isJumpUser;
 @property (nonatomic, assign)float H1;
+
+@property (nonatomic, strong) UIToolbar *toolBar;
+@property (nonatomic, strong) UIDatePicker *date;
+@property (nonatomic, strong) NSDateFormatter *dayFormatter;
+@property (nonatomic, strong) NSString *currentDay;
 
 @end
 
@@ -46,6 +54,7 @@
             lable1.textColor = COLOR(154, 154, 154, 1);
             lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         }
+        lable1.tag=1500+i;
         lable1.textAlignment=NSTextAlignmentCenter;
         lable1.text=nameArray[i];
         [self.view addSubview:lable1];
@@ -86,17 +95,18 @@
     
     UIButton*goButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     goButton.frame=CGRectMake(20*NOW_SIZE,0, 120*NOW_SIZE, H1);
-    [goButton setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
-    [goButton setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
+    [goButton setBackgroundImage:IMAGE(@"oss_btn_2nor.png") forState:UIControlStateNormal];
+    [goButton setBackgroundImage:IMAGE(@"oss_btn_2click.png") forState:UIControlStateHighlighted];
     [goButton setTitle:@"取消" forState:UIControlStateNormal];
+     [goButton setTitleColor:MainColor forState:UIControlStateNormal];
     goButton.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [goButton addTarget:self action:@selector(nextGoCancel) forControlEvents:UIControlEventTouchUpInside];
     [_goNextView addSubview:goButton];
     
     UIButton*goButton1 =  [UIButton buttonWithType:UIButtonTypeCustom];
-    goButton1.frame=CGRectMake(180*NOW_SIZE,0, 120*NOW_SIZE, H1);
-    [goButton1 setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
-    [goButton1 setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
+    goButton1.frame=CGRectMake(180*NOW_SIZE,1*HEIGHT_SIZE, 120*NOW_SIZE, H1);
+    [goButton1 setBackgroundImage:IMAGE(@"oss_btn_1nor.png") forState:UIControlStateNormal];
+    [goButton1 setBackgroundImage:IMAGE(@"oss_btn_1click.png") forState:UIControlStateHighlighted];
     [goButton1 setTitle:@"下一步" forState:UIControlStateNormal];
     goButton1.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [goButton1 addTarget:self action:@selector(nextGoStep) forControlEvents:UIControlEventTouchUpInside];
@@ -126,12 +136,20 @@
 
 -(void)getUnitUI:(NSString*)name Hight:(float)Hight type:(NSInteger)type tagNum:(NSInteger)tagNum firstView:(UIView*)firstView{
         float W1=8*NOW_SIZE;
+    
+    UIView *V011 = [[UIView alloc]initWithFrame:CGRectMake(0*NOW_SIZE,Hight, SCREEN_Width,_H1)];
+    V011.backgroundColor =[UIColor whiteColor];
+    [firstView addSubview:V011];
+    
     UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,2*HEIGHT_SIZE+Hight, W1, _H1)];
     label.text=@"*";
     label.textAlignment=NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
     label.textColor=COLOR(154, 154, 154, 1);
-    [firstView addSubview:label];
+    if (type!=2) {
+          [firstView addSubview:label];
+    }
+  
     
     NSString *nameString=[NSString stringWithFormat:@"%@:",name];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
@@ -172,8 +190,6 @@
         lable1.userInteractionEnabled=YES;
         [V0 addSubview:lable1];
         
-        
-        
         UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(W2-W_image1, (_H1-H_image1)/2, W_image1,H_image1 )];
         image2.userInteractionEnabled=YES;
         image2.image=IMAGE(@"select_icon.png");
@@ -193,8 +209,22 @@
 }
 
 -(void)initTwoUI{
+    for (int i=0; i<3; i++) {
+        
+        UILabel *lable1 =[self.view viewWithTag:1500+i];
+        if (i==1) {
+            lable1.textColor = MainColor;
+            lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        }else{
+            lable1.textColor = COLOR(154, 154, 154, 1);
+            lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        }
+
+    }
+    
+    float H2=_oneView.frame.origin.x+_oneView.frame.size.height+20*HEIGHT_SIZE;
     if (_isJumpUser) {
-        UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, _oneView.frame.origin.x+_oneView.frame.size.height+20*HEIGHT_SIZE, SCREEN_Width, 241*HEIGHT_SIZE)];
+        UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
         jumpUserView.backgroundColor=[UIColor clearColor];
         [_scrollView addSubview:jumpUserView];
         
@@ -203,32 +233,40 @@
         lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         lable1.textAlignment=NSTextAlignmentLeft;
         lable1.text=@"请指定电站所属的用户:";
-        [_oneView addSubview:lable1];
+        [jumpUserView addSubview:lable1];
         
-            float W1=8*NOW_SIZE;
-        UILabel *label0=[[UILabel alloc]initWithFrame:CGRectMake(10*NOW_SIZE,2*HEIGHT_SIZE+_H1, W1, _H1)];
-        label0.text=@"*";
-        label0.textAlignment=NSTextAlignmentCenter;
-        label0.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
-        label0.textColor=COLOR(154, 154, 154, 1);
-        [_oneView addSubview:label0];
+        [self getUnitUI:@"所属用户" Hight:_H1 type:1 tagNum:3400 firstView:jumpUserView];
         
-        UILabel *lable2 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE+W1, 0,SCREEN_Width-20*NOW_SIZE, _H1)];
-        lable2.textColor = COLOR(154, 154, 154, 1);
-        lable2.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        lable2.textAlignment=NSTextAlignmentLeft;
-        lable2.text=@"所属用户:";
-        [_oneView addSubview:lable2];
-        
-
+        H2=H2+_H1*2+15*HEIGHT_SIZE;
     }
     
+    _twoView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, 241*HEIGHT_SIZE)];
+    _twoView.backgroundColor=[UIColor whiteColor];
+    [_scrollView addSubview:_twoView];
     
+    _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+320*HEIGHT_SIZE+_goNextView.frame.size.height);
+    _goNextView.frame=CGRectMake(_goNextView.frame.origin.x, H2+_twoView.frame.origin.x+_twoView.frame.size.height+15*HEIGHT_SIZE, _goNextView.frame.size.width, _goNextView.frame.size.height);
     
+    NSArray *name1Array=@[@"电站名称",@"安装时间",@"装机容量",@"时区",@"国家",@"定位"];
+    for (int i=0; i<name1Array.count; i++) {
+        float H2=0+_H1*i;
+        NSInteger type=0;
+        if (i==1|| i==3 || i==4) {
+            type=1;
+        }
+        if (i==5){
+                 type=2;
+        }
+            
+        [self getUnitUI:name1Array[i] Hight:H2 type:type tagNum:3500+i firstView:_twoView];
+    }
     
 }
 
 
+-(void)initThreeUI{
+    
+}
 
 -(void)nextGoStep{
     _keepValueEnable=YES;
@@ -295,42 +333,196 @@
     }
 
     
-    _stepNum=1;
+    _stepNum++;
     
+    [self initTwoUI];
 }
 
+-(void)checkTwoValue{
+    _twoDic=[NSMutableDictionary new];
+    
+
+    
+    if (_keepValueEnable) {
+        NSArray *alertArray=@[@"请填写电站名称",@"请选择安装时间",@"请填写装机容量",@"请选择时区",@"请选择国家"];
+        NSArray*keyArray=@[@"serverId",@"userName",@"password",@"passwordtwo",@"timezone",@"phone"];
+        NSString *pass1String;    NSString *pass2String;
+        
+        if (_isJumpUser) {
+            UILabel *lable=[self.view viewWithTag:3400];
+            if ([lable.text isEqualToString:@""] || lable.text==nil) {
+                [self showToastViewWithTitle:@"请选择电站所属用户"];
+                return;
+            }
+        }
+        
+        for (int i=0; i<alertArray.count; i++) {
+            if (i==0 || i==4) {
+                UILabel *lable=[self.view viewWithTag:2600+i];
+                if ([lable.text isEqualToString:@""] || lable.text==nil) {
+                    [self showToastViewWithTitle:alertArray[i]];
+                    return;
+                }else{
+                    [_oneDic setObject:lable.text forKey:keyArray[i]];
+                }
+            }else{
+                UITextField *field=[self.view viewWithTag:2600+i];
+                if ([field.text isEqualToString:@""] || field.text==nil) {
+                    [self showToastViewWithTitle:alertArray[i]];
+                    return;
+                }else{
+                    [_oneDic setObject:field.text forKey:keyArray[i]];
+                }
+                if (i==2) {
+                    pass1String=field.text;
+                }
+                if (i==3) {
+                    pass2String=field.text;
+                }
+            }
+            
+        }
+        
+        if (![pass1String isEqualToString:pass2String]) {
+            [self showToastViewWithTitle:@"请输入相同的密码"];
+            return;
+        }
+    }
+    
+    
+    _stepNum++;
+    
+    [self initTwoUI];
+}
 
 -(void)selectChioce:(UITapGestureRecognizer*)tap{
     NSInteger Num=tap.view.tag;
-    NSArray *nameArray;NSString *title;
-  
     
+    if (Num==3500 ){
+        [self choiceTheUser];
+    }
+    
+    if (Num==3501 ){
+        [self pickDate];
+    }
+    
+    if (Num==2500 || Num==2504 || Num==3503) {
+        [self choiceTheValue:Num];
+    }
+    
+}
+
+-(void)choiceTheUser{
+    UILabel *lable=[self.view viewWithTag:3500+100];
+    lable.text=@"test";
+}
+
+-(void)choiceTheValue:(NSInteger)Num{
+    NSArray *nameArray;NSString *title;
     if (Num==2500) {
         title=@"选择服务器地址";
-              NSArray *serverListArray=[[NSUserDefaults standardUserDefaults] objectForKey:@"OssServerAddress"];
+        NSArray *serverListArray=[[NSUserDefaults standardUserDefaults] objectForKey:@"OssServerAddress"];
         NSMutableArray *array1=[NSMutableArray array];
         for (NSDictionary*dic in serverListArray) {
             [array1 addObject:dic[@"url"]];
         }
         nameArray=[NSArray arrayWithArray:array1];
-    }else if (Num==2504) {
+    }else if (Num==2504 || Num==3503) {
         title=@"选择时区";
-            nameArray=[NSArray arrayWithObjects:@"+1",@"+2",@"+3",@"+4",@"+5",@"+6",@"+7",@"+8",@"+9",@"+10",@"+11",@"+12",@"-1",@"-2",@"-3",@"-4",@"-5",@"-6",@"-7",@"-8",@"-9",@"-10",@"-11",@"-12", nil];
+        nameArray=[NSArray arrayWithObjects:@"+1",@"+2",@"+3",@"+4",@"+5",@"+6",@"+7",@"+8",@"+9",@"+10",@"+11",@"+12",@"-1",@"-2",@"-3",@"-4",@"-5",@"-6",@"-7",@"-8",@"-9",@"-10",@"-11",@"-12", nil];
     }
     
-
+    
     
     [ZJBLStoreShopTypeAlert showWithTitle:title titles:nameArray selectIndex:^(NSInteger selectIndex) {
-
+        
         
     }selectValue:^(NSString *selectValue){
         UILabel *lable=[self.view viewWithTag:Num+100];
         lable.text=selectValue;
         
     } showCloseButton:YES ];
+}
+
+
+
+
+-(void)pickDate{
+    // float buttonSize=70*HEIGHT_SIZE;
+    _date=[[UIDatePicker alloc]initWithFrame:CGRectMake(0*NOW_SIZE, SCREEN_Height-300*HEIGHT_SIZE, SCREEN_Width, 300*HEIGHT_SIZE)];
+    _date.backgroundColor=[UIColor whiteColor];
+    _date.datePickerMode=UIDatePickerModeDateAndTime;
+    [self.view addSubview:_date];
     
+    if (self.toolBar) {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.toolBar.alpha = 1;
+            self.toolBar.frame = CGRectMake(0, SCREEN_Height-300*HEIGHT_SIZE-44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE);
+            [self.view addSubview:_toolBar];
+        }];
+    } else {
+        self.toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, SCREEN_Height-300*HEIGHT_SIZE-44*HEIGHT_SIZE, SCREEN_Width, 44*HEIGHT_SIZE)];
+        self.toolBar.barStyle = UIBarStyleDefault;
+        self.toolBar.barTintColor = MainColor;
+        [self.view addSubview:self.toolBar];
+        
+        UIBarButtonItem *spaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(removeToolBar)];
+        
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(completeSelectDate:)];
+        
+        UIBarButtonItem *flexibleitem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:(UIBarButtonSystemItemFlexibleSpace) target:self action:nil];
+        
+        spaceButton.tintColor=[UIColor whiteColor];
+        doneButton.tintColor=[UIColor whiteColor];
+        
+        //           [doneButton setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIFont boldSystemFontOfSize:14*HEIGHT_SIZE],NSFontAttributeName, nil] forState:UIControlStateNormal];
+        //
+        //        doneButton.tintColor = [UIColor whiteColor];
+        self.toolBar.items = @[spaceButton,flexibleitem,doneButton];
+    }
     
 }
+
+
+-(void)removeToolBar{
+    [self.toolBar removeFromSuperview];
+    [self.date removeFromSuperview];
+    
+}
+
+
+- (void)completeSelectDate:(UIToolbar *)toolBar {
+    self.dayFormatter = [[NSDateFormatter alloc] init];
+    [self.dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    self.currentDay = [self.dayFormatter stringFromDate:self.date.date];
+    UILabel *lable=[self.view viewWithTag:3501+100];
+    lable.text=_currentDay;
+    
+    [self.toolBar removeFromSuperview];
+    [self.date removeFromSuperview];
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
