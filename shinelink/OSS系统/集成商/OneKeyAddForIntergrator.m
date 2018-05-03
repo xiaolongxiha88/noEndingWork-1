@@ -13,14 +13,17 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *oneView;
 @property (nonatomic, strong) UIView *twoView;
+@property (nonatomic, strong) UIView *threeView;
 
 @property (nonatomic, strong) NSArray *addressArray;
 @property (nonatomic, strong) UIView *goNextView;
 @property (nonatomic, assign)NSInteger stepNum;
 @property (nonatomic, strong) NSMutableDictionary*oneDic;
 @property (nonatomic, strong) NSMutableDictionary*twoDic;
+@property (nonatomic, strong) NSMutableDictionary*threeDic;
 @property (nonatomic, assign)BOOL keepValueEnable;
 @property (nonatomic, assign)BOOL isJumpUser;
+@property (nonatomic, assign)BOOL isJumpPlant;
 @property (nonatomic, assign)float H1;
 
 @property (nonatomic, strong) UIToolbar *toolBar;
@@ -162,7 +165,7 @@
     lable1.text=nameString;
     [firstView addSubview:lable1];
     
-    UIView *V01 = [[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,_H1+Hight, SCREEN_Width-(2*10*NOW_SIZE),1*HEIGHT_SIZE)];
+    UIView *V01 = [[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,_H1+Hight-1*HEIGHT_SIZE, SCREEN_Width-(2*10*NOW_SIZE),1*HEIGHT_SIZE)];
     V01.backgroundColor = COLOR(222, 222, 222, 1);
     [firstView addSubview:V01];
     
@@ -222,10 +225,13 @@
 
     }
     
-    float H2=_oneView.frame.origin.x+_oneView.frame.size.height+20*HEIGHT_SIZE;
+    _oneView.userInteractionEnabled=NO;
+    
+    float H2=_oneView.frame.origin.y+_oneView.frame.size.height+20*HEIGHT_SIZE;
     if (_isJumpUser) {
         UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
         jumpUserView.backgroundColor=[UIColor clearColor];
+        jumpUserView.tag=3300;
         [_scrollView addSubview:jumpUserView];
         
         UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0,SCREEN_Width-20*NOW_SIZE, _H1)];
@@ -244,7 +250,7 @@
     _twoView.backgroundColor=[UIColor whiteColor];
     [_scrollView addSubview:_twoView];
     
-    _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+320*HEIGHT_SIZE+_goNextView.frame.size.height);
+    _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+350*HEIGHT_SIZE+_goNextView.frame.size.height);
     _goNextView.frame=CGRectMake(_goNextView.frame.origin.x, H2+_twoView.frame.origin.x+_twoView.frame.size.height+15*HEIGHT_SIZE, _goNextView.frame.size.width, _goNextView.frame.size.height);
     
     NSArray *name1Array=@[@"电站名称",@"安装时间",@"装机容量",@"时区",@"国家",@"定位"];
@@ -265,6 +271,126 @@
 
 
 -(void)initThreeUI{
+    for (int i=0; i<3; i++) {
+        
+        UILabel *lable1 =[self.view viewWithTag:1500+i];
+        if (i==2) {
+            lable1.textColor = MainColor;
+            lable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        }else{
+            lable1.textColor = COLOR(154, 154, 154, 1);
+            lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        }
+        
+    }
+    
+    _twoView.userInteractionEnabled=NO;
+    
+    float H00=_twoView.frame.origin.y;
+     float H01=_twoView.frame.size.height;
+    float H2=H00+H01+20*HEIGHT_SIZE;
+    if (_isJumpUser) {
+        UIView *jumpView=[self.view viewWithTag:3300];
+        jumpView.userInteractionEnabled=NO;
+        
+        UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
+        jumpUserView.backgroundColor=[UIColor clearColor];
+        [_scrollView addSubview:jumpUserView];
+        
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0,SCREEN_Width-20*NOW_SIZE, _H1)];
+        lable1.textColor = COLOR(154, 154, 154, 1);
+        lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        lable1.textAlignment=NSTextAlignmentLeft;
+        lable1.text=@"请指定设备所属的用户:";
+        [jumpUserView addSubview:lable1];
+        
+        [self getUnitUI:@"所属用户" Hight:_H1 type:1 tagNum:4400 firstView:jumpUserView];
+        
+        H2=H2+_H1*2+15*HEIGHT_SIZE;
+    }
+    
+    if (_isJumpPlant) {
+        UIView *jumpPlantView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
+        jumpPlantView.backgroundColor=[UIColor clearColor];
+        [_scrollView addSubview:jumpPlantView];
+        
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0,SCREEN_Width-20*NOW_SIZE, _H1)];
+        lable1.textColor = COLOR(154, 154, 154, 1);
+        lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        lable1.textAlignment=NSTextAlignmentLeft;
+        lable1.text=@"请指定设备所属的电站:";
+        [jumpPlantView addSubview:lable1];
+        
+        [self getUnitUI:@"所属电站" Hight:_H1 type:1 tagNum:4401 firstView:jumpPlantView];
+        
+        H2=H2+_H1*2+15*HEIGHT_SIZE;
+    }
+    
+
+    _threeView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, 290*HEIGHT_SIZE)];
+    _threeView.backgroundColor=COLOR(242, 242, 242, 1);
+    [_scrollView addSubview:_threeView];
+    
+    _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+380*HEIGHT_SIZE+_goNextView.frame.size.height);
+    
+    [_goNextView removeFromSuperview];
+    
+//    _goNextView.frame=CGRectMake(_goNextView.frame.origin.x, H2+_threeView.frame.origin.x+_threeView.frame.size.height+15*HEIGHT_SIZE, _goNextView.frame.size.width, _goNextView.frame.size.height);
+    
+    UIView *V1=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 140*HEIGHT_SIZE)];
+    V1.backgroundColor=[UIColor whiteColor];
+    [_threeView addSubview:V1];
+    
+    UILabel *nameLable1 = [[UILabel alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 10*HEIGHT_SIZE,SCREEN_Width, _H1)];
+    nameLable1.textColor = COLOR(51, 51, 51, 1);
+    nameLable1.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    nameLable1.textAlignment=NSTextAlignmentCenter;
+    nameLable1.text=@"方式一:手动输入添加";
+    [V1 addSubview:nameLable1];
+    
+    float H11=(20*HEIGHT_SIZE+_H1);
+        float H22=(20*HEIGHT_SIZE+_H1*2);
+      [self getUnitUI:@"采集器序列号" Hight:H11 type:0 tagNum:4500 firstView:V1];
+    
+       [self getUnitUI:@"采集器校验码" Hight:H22 type:0 tagNum:4501 firstView:V1];
+    
+    
+    UIView *V2=[[UIView alloc]initWithFrame:CGRectMake(0, 150*HEIGHT_SIZE, SCREEN_Width, 140*HEIGHT_SIZE)];
+    V2.backgroundColor=[UIColor whiteColor];
+    [_threeView addSubview:V2];
+    
+    UILabel *nameLable2 = [[UILabel alloc] initWithFrame:CGRectMake(0*NOW_SIZE, 10*HEIGHT_SIZE,SCREEN_Width, _H1)];
+    nameLable2.textColor = COLOR(51, 51, 51, 1);
+    nameLable2.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+    nameLable2.textAlignment=NSTextAlignmentCenter;
+    nameLable2.text=@"方式二:扫码添加";
+    [V2 addSubview:nameLable2];
+    
+    UIButton*goButton2 =  [UIButton buttonWithType:UIButtonTypeCustom];
+    goButton2.frame=CGRectMake(40*NOW_SIZE,20*HEIGHT_SIZE+_H1, 240*NOW_SIZE, 50*HEIGHT_SIZE);
+    [goButton2 setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
+    [goButton2 setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
+    [goButton2 setTitle:@"扫描条形码" forState:UIControlStateNormal];
+    goButton2.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
+    [goButton2 addTarget:self action:@selector(scanSn) forControlEvents:UIControlEventTouchUpInside];
+    [V2 addSubview:goButton2];
+    
+    
+    UIButton*goButton3 =  [UIButton buttonWithType:UIButtonTypeCustom];
+    goButton3.frame=CGRectMake(60*NOW_SIZE,_threeView.frame.origin.y+_threeView.frame.size.height+20*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    [goButton3 setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
+    [goButton3 setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
+    [goButton3 setTitle:@"完成" forState:UIControlStateNormal];
+    goButton3.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
+    [goButton3 addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
+    [_scrollView addSubview:goButton3];
+}
+
+-(void)scanSn{
+    
+}
+
+-(void)finishSet{
     
 }
 
@@ -274,6 +400,13 @@
         _isJumpUser=NO;
         [self checkOneValue];
     }
+    
+    if (_stepNum==1) {
+        _isJumpPlant=NO;
+        [self checkTwoValue];
+    }
+    
+        _stepNum++;
 }
 
 -(void)nextGoCancel{
@@ -283,11 +416,18 @@
 
 -(void)nextJumpStep{
         _keepValueEnable=NO;
-         _isJumpUser=YES;
+ 
     if (_stepNum==0) {
+                _isJumpUser=YES;
         [self checkOneValue];
     }
     
+    if (_stepNum==1) {
+        _isJumpPlant=YES;
+          [self checkTwoValue];
+    }
+    
+        _stepNum++;
 }
 
 
@@ -333,7 +473,7 @@
     }
 
     
-    _stepNum++;
+
     
     [self initTwoUI];
 }
@@ -342,11 +482,10 @@
     _twoDic=[NSMutableDictionary new];
     
 
-    
     if (_keepValueEnable) {
         NSArray *alertArray=@[@"请填写电站名称",@"请选择安装时间",@"请填写装机容量",@"请选择时区",@"请选择国家"];
         NSArray*keyArray=@[@"serverId",@"userName",@"password",@"passwordtwo",@"timezone",@"phone"];
-        NSString *pass1String;    NSString *pass2String;
+  
         
         if (_isJumpUser) {
             UILabel *lable=[self.view viewWithTag:3400];
@@ -358,52 +497,51 @@
         
         for (int i=0; i<alertArray.count; i++) {
             if (i==0 || i==4) {
-                UILabel *lable=[self.view viewWithTag:2600+i];
+                UILabel *lable=[self.view viewWithTag:3600+i];
                 if ([lable.text isEqualToString:@""] || lable.text==nil) {
                     [self showToastViewWithTitle:alertArray[i]];
                     return;
                 }else{
-                    [_oneDic setObject:lable.text forKey:keyArray[i]];
+                    [_twoDic setObject:lable.text forKey:keyArray[i]];
                 }
             }else{
-                UITextField *field=[self.view viewWithTag:2600+i];
+                UITextField *field=[self.view viewWithTag:3600+i];
                 if ([field.text isEqualToString:@""] || field.text==nil) {
                     [self showToastViewWithTitle:alertArray[i]];
                     return;
                 }else{
-                    [_oneDic setObject:field.text forKey:keyArray[i]];
+                    [_twoDic setObject:field.text forKey:keyArray[i]];
                 }
-                if (i==2) {
-                    pass1String=field.text;
-                }
-                if (i==3) {
-                    pass2String=field.text;
-                }
+            
             }
             
         }
         
-        if (![pass1String isEqualToString:pass2String]) {
-            [self showToastViewWithTitle:@"请输入相同的密码"];
-            return;
+        if (_isJumpUser) {
+            _isJumpUser=NO;
         }
+        
     }
     
+
     
-    _stepNum++;
     
-    [self initTwoUI];
+    [self initThreeUI];
 }
 
 -(void)selectChioce:(UITapGestureRecognizer*)tap{
     NSInteger Num=tap.view.tag;
     
-    if (Num==3500 ){
+    if (Num==3400 ){
         [self choiceTheUser];
     }
     
     if (Num==3501 ){
         [self pickDate];
+    }
+    
+    if (Num==3504 ){
+        [self choiceTheCountry];
     }
     
     if (Num==2500 || Num==2504 || Num==3503) {
@@ -413,7 +551,12 @@
 }
 
 -(void)choiceTheUser{
-    UILabel *lable=[self.view viewWithTag:3500+100];
+    UILabel *lable=[self.view viewWithTag:3400+100];
+    lable.text=@"test";
+}
+
+-(void)choiceTheCountry{
+    UILabel *lable=[self.view viewWithTag:3504+100];
     lable.text=@"test";
 }
 
@@ -493,7 +636,7 @@
 
 - (void)completeSelectDate:(UIToolbar *)toolBar {
     self.dayFormatter = [[NSDateFormatter alloc] init];
-    [self.dayFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [self.dayFormatter setDateFormat:@"yyyy-MM-dd"];
     self.currentDay = [self.dayFormatter stringFromDate:self.date.date];
     UILabel *lable=[self.view viewWithTag:3501+100];
     lable.text=_currentDay;
