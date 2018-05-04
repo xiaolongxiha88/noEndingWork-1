@@ -8,6 +8,9 @@
 
 #import "OneKeyAddForIntergrator.h"
 #import "ZJBLStoreShopTypeAlert.h"
+#import "AnotherSearchViewController.h"
+#import "MMScanViewController.h"
+#import "SNLocationManager.h"
 
 @interface OneKeyAddForIntergrator ()
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -30,6 +33,9 @@
 @property (nonatomic, strong) UIDatePicker *date;
 @property (nonatomic, strong) NSDateFormatter *dayFormatter;
 @property (nonatomic, strong) NSString *currentDay;
+@property (nonatomic, strong) NSArray *userListArray;
+@property (nonatomic, strong) NSArray *countryListArray;
+@property (nonatomic, strong)NSMutableArray *textFieldMutableArray;
 
 @end
 
@@ -39,7 +45,18 @@
     [super viewDidLoad];
    _H1=40*HEIGHT_SIZE;
     
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+
+    _textFieldMutableArray=[NSMutableArray new];
+    
     [self initUI];
+}
+
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    for (UITextField *textField in _textFieldMutableArray) {
+        [textField resignFirstResponder];
+    }
 }
 
 -(void)initUI{
@@ -110,7 +127,7 @@
     goButton1.frame=CGRectMake(180*NOW_SIZE,1*HEIGHT_SIZE, 120*NOW_SIZE, H1);
     [goButton1 setBackgroundImage:IMAGE(@"oss_btn_1nor.png") forState:UIControlStateNormal];
     [goButton1 setBackgroundImage:IMAGE(@"oss_btn_1click.png") forState:UIControlStateHighlighted];
-    [goButton1 setTitle:@"下一步" forState:UIControlStateNormal];
+    [goButton1 setTitle:@"保存" forState:UIControlStateNormal];
     goButton1.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [goButton1 addTarget:self action:@selector(nextGoStep) forControlEvents:UIControlEventTouchUpInside];
     [_goNextView addSubview:goButton1];
@@ -134,7 +151,7 @@
     [_goNextView addSubview:lable1];
     
     
-    
+      _scrollView.contentSize=CGSizeMake(ScreenWidth, ScreenHeight+150*HEIGHT_SIZE);
 }
 
 -(void)getUnitUI:(NSString*)name Hight:(float)Hight type:(NSInteger)type tagNum:(NSInteger)tagNum firstView:(UIView*)firstView{
@@ -174,7 +191,7 @@
     float H_image1=12*HEIGHT_SIZE;
     float W2=SCREEN_Width-(10*NOW_SIZE+W1+size.width+WK1)-10*NOW_SIZE;
     
-    if (type==1) {
+    if (type==1 || type==2) {
         
         UIView *V0= [[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE+W1+size.width+WK1,Hight, W2,_H1)];
         V0.backgroundColor = [UIColor clearColor];
@@ -206,12 +223,15 @@
         text1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         [firstView addSubview:text1];
         
-        
+        [_textFieldMutableArray addObject:text1];
     }
     
 }
 
 -(void)initTwoUI{
+    _oneView.backgroundColor=COLOR(242, 242, 242, 1);
+         self.scrollView.contentOffset = CGPointMake(0, _oneView.frame.size.height);
+    
     for (int i=0; i<3; i++) {
         
         UILabel *lable1 =[self.view viewWithTag:1500+i];
@@ -250,7 +270,7 @@
     _twoView.backgroundColor=[UIColor whiteColor];
     [_scrollView addSubview:_twoView];
     
-    _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+350*HEIGHT_SIZE+_goNextView.frame.size.height);
+    _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+400*HEIGHT_SIZE+_goNextView.frame.size.height);
     _goNextView.frame=CGRectMake(_goNextView.frame.origin.x, H2+_twoView.frame.origin.x+_twoView.frame.size.height+15*HEIGHT_SIZE, _goNextView.frame.size.width, _goNextView.frame.size.height);
     
     NSArray *name1Array=@[@"电站名称",@"安装时间",@"装机容量",@"时区",@"国家",@"定位"];
@@ -271,6 +291,8 @@
 
 
 -(void)initThreeUI{
+           self.scrollView.contentOffset = CGPointMake(0, _twoView.frame.size.height+_oneView.frame.size.height+30*HEIGHT_SIZE);
+    
     for (int i=0; i<3; i++) {
         
         UILabel *lable1 =[self.view viewWithTag:1500+i];
@@ -286,12 +308,14 @@
     
     _twoView.userInteractionEnabled=NO;
     
-    float H00=_twoView.frame.origin.y;
-     float H01=_twoView.frame.size.height;
-    float H2=H00+H01+20*HEIGHT_SIZE;
+    float H2=_twoView.frame.origin.y+_twoView.frame.size.height+20*HEIGHT_SIZE;
     if (_isJumpUser) {
-        UIView *jumpView=[self.view viewWithTag:3300];
-        jumpView.userInteractionEnabled=NO;
+                UIView *jumpPlantView0=[self.view viewWithTag:3300];
+        [jumpPlantView0 removeFromSuperview];
+        
+        _twoView.frame=CGRectMake(_twoView.frame.origin.x, _twoView.frame.origin.y-(2*_H1), _twoView.frame.size.width, _twoView.frame.size.height);
+        
+        H2=_twoView.frame.origin.y+_twoView.frame.size.height+20*HEIGHT_SIZE;
         
         UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
         jumpUserView.backgroundColor=[UIColor clearColor];
@@ -310,6 +334,8 @@
     }
     
     if (_isJumpPlant) {
+
+        
         UIView *jumpPlantView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
         jumpPlantView.backgroundColor=[UIColor clearColor];
         [_scrollView addSubview:jumpPlantView];
@@ -331,7 +357,7 @@
     _threeView.backgroundColor=COLOR(242, 242, 242, 1);
     [_scrollView addSubview:_threeView];
     
-    _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+380*HEIGHT_SIZE+_goNextView.frame.size.height);
+    _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+420*HEIGHT_SIZE+_goNextView.frame.size.height);
     
     [_goNextView removeFromSuperview];
     
@@ -388,6 +414,30 @@
 
 -(void)scanSn{
     
+    MMScanViewController *scanVc = [[MMScanViewController alloc] initWithQrType:MMScanTypeAll onFinish:^(NSString *result, NSError *error) {
+        if (error) {
+            NSLog(@"error: %@",error);
+        } else {
+            [self ScanGoToNet:result];
+            NSLog(@"扫描结果：%@",result);
+        }
+    }];
+    scanVc.titleString=root_saomiao_sn;
+    scanVc.scanBarType=0;
+    [self.navigationController pushViewController:scanVc animated:YES];
+    
+}
+
+
+
+- (void)ScanGoToNet:(NSString *)result {
+    NSString *validCodeString=[self getValidCode:result];
+    
+     UILabel *lable=[self.view viewWithTag:4500+100];
+      lable.text=result;
+    
+    UILabel *lable1=[self.view viewWithTag:4501+100];
+    lable1.text=validCodeString;
 }
 
 -(void)finishSet{
@@ -396,38 +446,53 @@
 
 -(void)nextGoStep{
     _keepValueEnable=YES;
-    if (_stepNum==0) {
-        _isJumpUser=NO;
-        [self checkOneValue];
-    }
+
     
     if (_stepNum==1) {
         _isJumpPlant=NO;
         [self checkTwoValue];
     }
     
-        _stepNum++;
+    if (_stepNum==0) {
+        _isJumpUser=NO;
+        [self checkOneValue];
+    }
+    
 }
 
 -(void)nextGoCancel{
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"是否取消添加?" message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+    alertView.tag = 1001;
+        [alertView show];
+
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex) {
+        if( (alertView.tag == 1001)){
+               [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    }
     
 }
+
 
 -(void)nextJumpStep{
         _keepValueEnable=NO;
  
-    if (_stepNum==0) {
-                _isJumpUser=YES;
-        [self checkOneValue];
-    }
-    
     if (_stepNum==1) {
         _isJumpPlant=YES;
           [self checkTwoValue];
     }
     
-        _stepNum++;
+    if (_stepNum==0) {
+        _isJumpUser=YES;
+        [self checkOneValue];
+    }
+    
 }
 
 
@@ -440,8 +505,11 @@
         NSString *pass1String;    NSString *pass2String;
         
         for (int i=0; i<alertArray.count; i++) {
+      
+            
             if (i==0 || i==4) {
                 UILabel *lable=[self.view viewWithTag:2600+i];
+                
                 if ([lable.text isEqualToString:@""] || lable.text==nil) {
                     [self showToastViewWithTitle:alertArray[i]];
                     return;
@@ -450,12 +518,27 @@
                 }
             }else{
                 UITextField *field=[self.view viewWithTag:2600+i];
+    
                 if ([field.text isEqualToString:@""] || field.text==nil) {
                     [self showToastViewWithTitle:alertArray[i]];
                     return;
                 }else{
                     [_oneDic setObject:field.text forKey:keyArray[i]];
                 }
+                
+                if (i==1) {
+                    if ([field.text length]<3) {
+                        [self showToastViewWithTitle:root_daYu_san];
+                        return;
+                    }
+                }
+                if (i==2) {
+                    if ([field.text length]<6) {
+                        [self showToastViewWithTitle:root_daYu_liu];
+                        return;
+                    }
+                }
+                
                 if (i==2) {
                     pass1String=field.text;
                 }
@@ -470,6 +553,10 @@
             [self showToastViewWithTitle:@"请输入相同的密码"];
             return;
         }
+        
+          _stepNum++;
+    }else{
+          _stepNum++;
     }
 
     
@@ -488,7 +575,7 @@
   
         
         if (_isJumpUser) {
-            UILabel *lable=[self.view viewWithTag:3400];
+            UILabel *lable=[self.view viewWithTag:3400+100];
             if ([lable.text isEqualToString:@""] || lable.text==nil) {
                 [self showToastViewWithTitle:@"请选择电站所属用户"];
                 return;
@@ -521,6 +608,9 @@
             _isJumpUser=NO;
         }
         
+                  _stepNum++;
+    }else{
+                  _stepNum++;
     }
     
 
@@ -532,8 +622,12 @@
 -(void)selectChioce:(UITapGestureRecognizer*)tap{
     NSInteger Num=tap.view.tag;
     
-    if (Num==3400 ){
-        [self choiceTheUser];
+    if (Num==3400 || Num==4400 ){
+        [self choiceTheUser:Num];
+    }
+    
+    if (Num==4401 ){
+        [self choiceThePlant];
     }
     
     if (Num==3501 ){
@@ -543,6 +637,9 @@
     if (Num==3504 ){
         [self choiceTheCountry];
     }
+    if (Num==3505 ){
+        [self getTheLocation];
+    }
     
     if (Num==2500 || Num==2504 || Num==3503) {
         [self choiceTheValue:Num];
@@ -550,14 +647,100 @@
     
 }
 
--(void)choiceTheUser{
-    UILabel *lable=[self.view viewWithTag:3400+100];
-    lable.text=@"test";
+-(void)getTheLocation{
+    [[SNLocationManager shareLocationManager] startUpdatingLocationWithSuccess:^(CLLocation *location, CLPlacemark *placemark) {
+        NSString* _longitude=[NSString stringWithFormat:@"%.2f", location.coordinate.longitude];
+        NSString* _latitude=[NSString stringWithFormat:@"%.2f", location.coordinate.latitude];
+        NSString* _city=placemark.locality;
+     //   NSString* _countryGet=placemark.country;
+        
+                NSString *lableText=[NSString stringWithFormat:@"%@(%@,%@)",_city,_longitude,_latitude];
+        UILabel *lable=[self.view viewWithTag:3505+100];
+        lable.text=lableText;
+        
+    } andFailure:^(CLRegion *region, NSError *error) {
+        
+    }];
 }
 
+-(void)choiceThePlant{
+    _userListArray=@[@"中国",@"美国",@"英国",@"朝国",@"钱国"];
+    if(_userListArray.count>0){
+        
+        AnotherSearchViewController *another = [AnotherSearchViewController new];
+        //返回选中搜索的结果
+        [another didSelectedItem:^(NSString *item) {
+            UILabel *lable=[self.view viewWithTag:4401+100];
+            lable.text=item;
+        }];
+        another.title =@"选择所属电站";
+        another.isNeedRightItem=YES;
+        another.rightItemBlock = ^{
+            [self gotoAddUser];
+        };
+        another.dataSource=_userListArray;
+        [self.navigationController pushViewController:another animated:YES];
+    }else{
+        [self showToastViewWithTitle:@"点击获取电站列表"];
+        return;
+    }
+}
+    
+    
+-(void)choiceTheUser:(NSInteger)Num{
+    
+    _userListArray=@[@"中国",@"美国",@"英国",@"朝国",@"钱国"];
+    if(_userListArray.count>0){
+        
+        AnotherSearchViewController *another = [AnotherSearchViewController new];
+        //返回选中搜索的结果
+        [another didSelectedItem:^(NSString *item) {
+            
+            UILabel *lable=[self.view viewWithTag:Num+100];
+            lable.text=item;
+        }];
+        another.title =@"选择所属用户";
+        another.isNeedRightItem=YES;
+        another.rightItemBlock = ^{
+            [self gotoAddUser];
+        };
+        another.dataSource=_userListArray;
+        [self.navigationController pushViewController:another animated:YES];
+    }else{
+        [self showToastViewWithTitle:@"点击获取用户列表"];
+        return;
+    }
+ 
+}
+
+-(void)gotoAddUser{
+    
+}
+
+
 -(void)choiceTheCountry{
-    UILabel *lable=[self.view viewWithTag:3504+100];
-    lable.text=@"test";
+    _countryListArray=@[@"中国",@"美国",@"英国",@"朝国",@"钱国"];
+    if(_countryListArray.count>0){
+        
+        AnotherSearchViewController *another = [AnotherSearchViewController new];
+        //返回选中搜索的结果
+        [another didSelectedItem:^(NSString *item) {
+            UILabel *lable=[self.view viewWithTag:3504+100];
+            lable.text=item;
+        }];
+        another.title =@"选择用户";
+        another.isNeedRightItem=YES;
+        another.rightItemBlock = ^{
+            [self gotoAddUser];
+        };
+        another.dataSource=_countryListArray;
+        [self.navigationController pushViewController:another animated:YES];
+    }else{
+        [self showToastViewWithTitle:@"点击获取国家列表"];
+        return;
+    }
+    
+  
 }
 
 -(void)choiceTheValue:(NSInteger)Num{

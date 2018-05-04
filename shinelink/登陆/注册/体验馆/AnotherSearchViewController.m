@@ -24,15 +24,28 @@
 
 @end
 
+
 @implementation AnotherSearchViewController
 
 #pragma mark - Life Cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    if (_isNeedRightItem) {
+        UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:@"添加" style:UIBarButtonItemStylePlain target:self action:@selector(addRightItem)];
+        self.navigationItem.rightBarButtonItem=rightItem;
+    }
+
+    
     [self initData];
     [self.view addSubview:self.friendTableView];
     [self.view addSubview:self.searchBar];
+}
+
+-(void)addRightItem{
+    [self.navigationController popViewControllerAnimated:NO];
+    self.rightItemBlock();
 }
 
 - (void)didReceiveMemoryWarning {

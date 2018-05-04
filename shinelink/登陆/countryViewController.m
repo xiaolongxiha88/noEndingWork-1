@@ -326,6 +326,8 @@
 
 -(void)pickadress{
     
+  //  _provinceArray=[NSMutableArray arrayWithArray:@[@"说的",@"想的",@"心事的",@"阿萨德",@"那你"]];
+    
     if(_provinceArray.count>0){
     
         AnotherSearchViewController *another = [AnotherSearchViewController new];
@@ -343,9 +345,11 @@
     }
     
     
-
-    
 }
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
