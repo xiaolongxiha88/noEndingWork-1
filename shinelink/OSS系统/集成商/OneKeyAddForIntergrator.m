@@ -154,6 +154,7 @@
       _scrollView.contentSize=CGSizeMake(ScreenWidth, ScreenHeight+150*HEIGHT_SIZE);
 }
 
+
 -(void)getUnitUI:(NSString*)name Hight:(float)Hight type:(NSInteger)type tagNum:(NSInteger)tagNum firstView:(UIView*)firstView{
         float W1=8*NOW_SIZE;
     
