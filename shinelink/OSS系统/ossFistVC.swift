@@ -274,7 +274,7 @@ class ossFistVC: RootViewController {
        // let imageColor2=self.getImageWithColor(color: COLOR(_R: 222, _G: 222, _B: 222, _A: 1), size: CGSize(width: SCREEN_Width, height: lableH))
 
       //  let lableArray=["设备管理","用户管理","电站管理"]
-         let lableArray=["设备管理"]
+         let lableArray=["设备管理","用户管理","电站管理"]
            let imageArray=["device_iconI.png","oss_user_list.png","oss_power_station.png"]
         
         for i in 0..<lableArray.count {
@@ -285,7 +285,7 @@ class ossFistVC: RootViewController {
             }
             if i==1{
                 view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+170*HEIGHT_SIZE+lableH, width: SCREEN_Width, height: lableH)
-                view1.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
+                view1.addTarget(self, action:#selector(gotoUserList), for: .touchUpInside)
             }
             if i==2{
                 view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+170*HEIGHT_SIZE+lableH*2+60*HEIGHT_SIZE, width: SCREEN_Width, height: lableH)
@@ -1251,6 +1251,12 @@ class ossFistVC: RootViewController {
         
     }
     
+    
+    func gotoUserList()  {
+        let vc=addOssIntegratorDevice()
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
     
     func gotoDevice()  {
         

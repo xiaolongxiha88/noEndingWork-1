@@ -33,3 +33,6 @@
 
 #import "ossNewDeviceList.h"
 #import "OneKeyAddForIntergrator.h"
+#import "addOssIntegratorDevice.h"
+
+

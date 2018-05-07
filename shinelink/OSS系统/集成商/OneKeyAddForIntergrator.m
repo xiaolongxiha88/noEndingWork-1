@@ -274,7 +274,7 @@
     _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+400*HEIGHT_SIZE+_goNextView.frame.size.height);
     _goNextView.frame=CGRectMake(_goNextView.frame.origin.x, H2+_twoView.frame.origin.x+_twoView.frame.size.height+15*HEIGHT_SIZE, _goNextView.frame.size.width, _goNextView.frame.size.height);
     
-    NSArray *name1Array=@[@"电站名称",@"安装时间",@"装机容量",@"时区",@"国家",@"定位"];
+    NSArray *name1Array=@[@"电站名称",@"安装时间",@"装机容量(W)",@"时区",@"国家",@"定位"];
     for (int i=0; i<name1Array.count; i++) {
         float H2=0+_H1*i;
         NSInteger type=0;

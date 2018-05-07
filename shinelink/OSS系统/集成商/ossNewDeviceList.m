@@ -40,14 +40,14 @@
     _oneScrollView.bounces = NO;
     [self.view addSubview:_oneScrollView];
     
-    float W1=70*NOW_SIZE;
-    
+    float W1=80*NOW_SIZE;
+      float W11=90*NOW_SIZE;
     for (int i=0; i<_oneParaArray.count; i++) {
-        UIView *View1 = [[UIView alloc]initWithFrame:CGRectMake(0+W1*i, 0*HEIGHT_SIZE, W1,H1)];
+        UIView *View1 = [[UIView alloc]initWithFrame:CGRectMake(0+W11*i, 0*HEIGHT_SIZE, W11,H1)];
         View1.backgroundColor = [UIColor clearColor];
         [_oneScrollView addSubview:View1];
         
-        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,W1, H1)];
+        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,W11, H1)];
         lableR.textColor = COLOR(102, 102, 102, 1);
         lableR.textAlignment=NSTextAlignmentCenter;
         lableR.text=_oneParaArray[i];
@@ -55,7 +55,7 @@
         [View1 addSubview:lableR];
     }
    
-    _oneScrollView.contentSize=CGSizeMake(_oneParaArray.count*W1, H1);
+    _oneScrollView.contentSize=CGSizeMake(_oneParaArray.count*W11, H1);
     
       float H2=40*HEIGHT_SIZE;
     
@@ -89,7 +89,7 @@
     [self.view addSubview:_threeScrollView];
         _threeScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, H1);
     
-    _tableH=30*HEIGHT_SIZE;
+    _tableH=40*HEIGHT_SIZE;
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _cellNameArray.count*W1, H3) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;

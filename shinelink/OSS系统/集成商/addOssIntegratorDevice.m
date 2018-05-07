@@ -45,6 +45,7 @@
     
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, ScreenHeight)];
     _scrollView.scrollEnabled=YES;
+    _scrollView.backgroundColor=COLOR(242, 242, 242, 1);
     [self.view addSubview:_scrollView];
     
     _finishButton=  [UIButton buttonWithType:UIButtonTypeCustom];
@@ -56,6 +57,8 @@
     [_finishButton addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:_finishButton];
     
+    
+    _deviceType=3;
     if (_deviceType==1) {
         [self initUiForUser];
     }else  if (_deviceType==2) {
@@ -85,7 +88,7 @@
     _oneView.backgroundColor=[UIColor whiteColor];
     [_scrollView addSubview:_oneView];
     
-            _finishButton.frame=CGRectMake(60*NOW_SIZE,_oneView.frame.origin.y+_oneView.frame.size.height+20*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+            _finishButton.frame=CGRectMake(60*NOW_SIZE,_oneView.frame.origin.y+_oneView.frame.size.height+40*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     
     NSArray *name1Array=@[@"服务器地址",@"用户名",@"密码",@"重复密码",@"时区",@"手机号"];
     for (int i=0; i<name1Array.count; i++) {
@@ -104,7 +107,7 @@
 
 -(void)initUiForPlant{
     
-    float H2=_oneView.frame.origin.y+_oneView.frame.size.height+20*HEIGHT_SIZE;
+    float H2=0*HEIGHT_SIZE;
 
     
         UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
@@ -116,6 +119,7 @@
         lable1.textColor = COLOR(154, 154, 154, 1);
         lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
         lable1.textAlignment=NSTextAlignmentLeft;
+   // lable1.backgroundColor=COLOR(242, 242, 242, 1);
         lable1.text=@"请指定电站所属的用户:";
         [jumpUserView addSubview:lable1];
         
@@ -129,9 +133,9 @@
     [_scrollView addSubview:_twoView];
     
    
-
+           _finishButton.frame=CGRectMake(60*NOW_SIZE,_twoView.frame.origin.y+_twoView.frame.size.height+40*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     
-    NSArray *name1Array=@[@"电站名称",@"安装时间",@"装机容量",@"时区",@"国家",@"定位"];
+    NSArray *name1Array=@[@"电站名称",@"安装时间",@"装机容量(W)",@"时区",@"国家",@"定位"];
     for (int i=0; i<name1Array.count; i++) {
         float H2=0+_H1*i;
         NSInteger type=0;
@@ -145,22 +149,15 @@
         [self getUnitUI:name1Array[i] Hight:H2 type:type tagNum:3500+i firstView:_twoView];
     }
     
-     _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+400*HEIGHT_SIZE);
+     _scrollView.contentSize=CGSizeMake(ScreenWidth, _finishButton.frame.origin.y+_finishButton.frame.size.height+30*HEIGHT_SIZE);
     
 }
 
 
 -(void)initUiForDevice{
     
-    float H2=_twoView.frame.origin.y+_twoView.frame.size.height+20*HEIGHT_SIZE;
+        float H2=0*HEIGHT_SIZE;
   
-        UIView *jumpPlantView0=[self.view viewWithTag:3300];
-        [jumpPlantView0 removeFromSuperview];
-        
-        _twoView.frame=CGRectMake(_twoView.frame.origin.x, _twoView.frame.origin.y-(2*_H1), _twoView.frame.size.width, _twoView.frame.size.height);
-        
-        H2=_twoView.frame.origin.y+_twoView.frame.size.height+20*HEIGHT_SIZE;
-        
         UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
         jumpUserView.backgroundColor=[UIColor clearColor];
         [_scrollView addSubview:jumpUserView];
@@ -238,6 +235,9 @@
     goButton2.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [goButton2 addTarget:self action:@selector(scanSn) forControlEvents:UIControlEventTouchUpInside];
     [V2 addSubview:goButton2];
+    
+            _finishButton.frame=CGRectMake(60*NOW_SIZE,_threeView.frame.origin.y+_threeView.frame.size.height+40*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+         _scrollView.contentSize=CGSizeMake(ScreenWidth, _finishButton.frame.origin.y+_finishButton.frame.size.height+100*HEIGHT_SIZE);
     
 }
 

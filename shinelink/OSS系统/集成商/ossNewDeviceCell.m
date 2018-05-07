@@ -23,7 +23,7 @@
 
 
 - (void)setNameArray:(NSArray *)nameArray {
-    float W1=70*NOW_SIZE;       float H1=30*HEIGHT_SIZE;
+    float W1=80*NOW_SIZE;       float H1=40*HEIGHT_SIZE;
     
     for (int i=0; i<nameArray.count; i++) {
         UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(0+W1*i, 0,W1, H1)];
