@@ -31,8 +31,6 @@
 -(void)initUI{
     _oneParaArray=@[@"状态",@"额定功率",@"今日发电量",@"累计发电量",@"当前功率"];
     
-
-    
     float H1=30*HEIGHT_SIZE;
     _oneScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, H1)];
     _oneScrollView.backgroundColor = [UIColor whiteColor];
@@ -40,12 +38,16 @@
     _oneScrollView.bounces = NO;
     [self.view addSubview:_oneScrollView];
     
-    float W1=80*NOW_SIZE;
+
       float W11=90*NOW_SIZE;
     for (int i=0; i<_oneParaArray.count; i++) {
         UIView *View1 = [[UIView alloc]initWithFrame:CGRectMake(0+W11*i, 0*HEIGHT_SIZE, W11,H1)];
         View1.backgroundColor = [UIColor clearColor];
         [_oneScrollView addSubview:View1];
+        
+        NSString *nameString=_oneParaArray[i];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
         UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,W11, H1)];
         lableR.textColor = COLOR(102, 102, 102, 1);
@@ -53,12 +55,19 @@
         lableR.text=_oneParaArray[i];
         lableR.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [View1 addSubview:lableR];
+        
+        float image0H=12*HEIGHT_SIZE;
+        float image0W=5*HEIGHT_SIZE;
+        UIImageView *image0=[[UIImageView alloc]initWithFrame:CGRectMake((W11+size.width)/2.0+3*NOW_SIZE, (H1-image0H)/2.0, image0W,image0H )];
+        image0.userInteractionEnabled=YES;
+        image0.image=IMAGE(@"oss_up_down.png");
+        [View1 addSubview:image0];
     }
    
     _oneScrollView.contentSize=CGSizeMake(_oneParaArray.count*W11, H1);
     
       float H2=50*HEIGHT_SIZE;
-    
+        float W1=80*NOW_SIZE;
     
     UIView *View2= [[UIView alloc]initWithFrame:CGRectMake(0, H1, ScreenWidth,H2)];
     View2.backgroundColor = COLOR(242, 242, 242, 1);

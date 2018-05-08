@@ -710,6 +710,9 @@
 		3398B97720A04ABA00BDD8CC /* addOssIntegratorDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 3398B97620A04ABA00BDD8CC /* addOssIntegratorDevice.m */; };
 		3398B97920A134B300BDD8CC /* OSS_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 3398B97820A134B300BDD8CC /* OSS_list.png */; };
 		3398B97D20A1514B00BDD8CC /* oss_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 3398B97C20A1514B00BDD8CC /* oss_search.png */; };
+		3398B98120A1761A00BDD8CC /* oss_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3398B97E20A1761800BDD8CC /* oss_down.png */; };
+		3398B98220A1761A00BDD8CC /* oss_up_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3398B97F20A1761800BDD8CC /* oss_up_down.png */; };
+		3398B98320A1761A00BDD8CC /* oss_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 3398B98020A1761900BDD8CC /* oss_up.png */; };
 		3399A8201FA33D7E006F8805 /* usbToWifiControlTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */; };
 		33A4384C1D1ABE86004E9AB6 /* service3.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A4384B1D1ABE86004E9AB6 /* service3.png */; };
 		33ABC2A51DC2E619003B92AC /* extensionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ABC2A41DC2E619003B92AC /* extensionTableViewCell.m */; };
@@ -1945,6 +1948,9 @@
 		3398B97620A04ABA00BDD8CC /* addOssIntegratorDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = addOssIntegratorDevice.m; sourceTree = "<group>"; };
 		3398B97820A134B300BDD8CC /* OSS_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OSS_list.png; sourceTree = "<group>"; };
 		3398B97C20A1514B00BDD8CC /* oss_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_search.png; sourceTree = "<group>"; };
+		3398B97E20A1761800BDD8CC /* oss_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_down.png; sourceTree = "<group>"; };
+		3398B97F20A1761800BDD8CC /* oss_up_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_up_down.png; sourceTree = "<group>"; };
+		3398B98020A1761900BDD8CC /* oss_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_up.png; sourceTree = "<group>"; };
 		3399A81E1FA33D7E006F8805 /* usbToWifiControlTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiControlTwo.h; sourceTree = "<group>"; };
 		3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiControlTwo.m; sourceTree = "<group>"; };
 		33A4384B1D1ABE86004E9AB6 /* service3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = service3.png; sourceTree = "<group>"; };
@@ -3241,6 +3247,9 @@
 		336E03F61EC944940034BC86 /* oss图片 */ = {
 			isa = PBXGroup;
 			children = (
+				3398B97F20A1761800BDD8CC /* oss_up_down.png */,
+				3398B98020A1761900BDD8CC /* oss_up.png */,
+				3398B97E20A1761800BDD8CC /* oss_down.png */,
 				3398B97C20A1514B00BDD8CC /* oss_search.png */,
 				3398B97820A134B300BDD8CC /* OSS_list.png */,
 				333453E420736619000E409C /* oss_head_bg.png */,
@@ -5124,6 +5133,7 @@
 				33252FCD1F57B71E0054BBC7 /* loadS.png in Resources */,
 				33EA49DE1E8B8A4D0044A01A /* pvDir_cn.jpg in Resources */,
 				33EFB68A1C9973D2003F336F /* bg3.png in Resources */,
+				3398B98120A1761A00BDD8CC /* oss_down.png in Resources */,
 				332BD6B2206CBD7300FFD501 /* newheadSolar.png in Resources */,
 				338E30CC1D93725D002215E4 /* service111.png in Resources */,
 				3381222B1D864D7B00C7704B /* btn1-choose-1.png in Resources */,
@@ -5144,6 +5154,7 @@
 				334FF0BF1CF53C7C001E6716 /* text_bg.png in Resources */,
 				33EFB67A1C9931D2003F336F /* 按钮2.png in Resources */,
 				332BD6BC206CC1CF00FFD501 /* newheadD1.png in Resources */,
+				3398B98320A1761A00BDD8CC /* oss_up.png in Resources */,
 				336D40201D6FEA7600ECFA34 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				3381ECF91CBCA63000DCF0D2 /* 控制优先级设置切图.png in Resources */,
 				333D44622010B96400C76FF9 /* oss_power_station.png in Resources */,
@@ -5301,6 +5312,7 @@
 				33724D9D1CFE85FB005F3965 /* pic_service.png in Resources */,
 				33E42E0B1DC9CDB60024FFBB /* peizhi_btn_click_2.png in Resources */,
 				33FEFD661C7DB38400324374 /* icon@3x.png in Resources */,
+				3398B98220A1761A00BDD8CC /* oss_up_down.png in Resources */,
 				33FEFCD21C7D8A9500324374 /* Address.plist in Resources */,
 				334AED581CA37569007E39F3 /* 客户服务.png in Resources */,
 				33775AF11D2E40290070742E /* 客服.png in Resources */,
