@@ -57,8 +57,38 @@
    
     _oneScrollView.contentSize=CGSizeMake(_oneParaArray.count*W11, H1);
     
-      float H2=40*HEIGHT_SIZE;
+      float H2=50*HEIGHT_SIZE;
     
+    
+    UIView *View2= [[UIView alloc]initWithFrame:CGRectMake(0, H1, ScreenWidth,H2)];
+    View2.backgroundColor = COLOR(242, 242, 242, 1);
+    [self.view addSubview:View2];
+    
+    float imageW=22*HEIGHT_SIZE;
+    UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, (H2-imageW)/2, imageW,imageW )];
+    image2.userInteractionEnabled=YES;
+    image2.image=IMAGE(@"OSS_list.png");
+    UITapGestureRecognizer *labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectChioce:)];
+    [image2 addGestureRecognizer:labelTap1];
+    [View2 addSubview:image2];
+    
+    float View01_W=ScreenWidth-20*NOW_SIZE-imageW-10*NOW_SIZE;
+    float imageH1=30*HEIGHT_SIZE;
+    UIView *View01= [[UIView alloc]initWithFrame:CGRectMake(20*NOW_SIZE+imageW, (H2-imageH1)/2.0, View01_W,imageH1)];
+    View01.backgroundColor = [UIColor whiteColor];
+    [View01.layer setMasksToBounds:YES];
+    [View01.layer setCornerRadius:(imageH1/2.0)];
+    [View2 addSubview:View01];
+    
+        float imageH2=20*HEIGHT_SIZE;
+      float imageW2=imageH2*(34/36.0);
+    float W22=(View01.frame.size.width-imageW2)/2.0;
+    UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake(W22, (imageH1-imageH2)/2, imageW2,imageH2 )];
+    image3.userInteractionEnabled=YES;
+    image3.image=IMAGE(@"oss_search.png");
+    UITapGestureRecognizer *labelTap3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectChioce:)];
+    [image3 addGestureRecognizer:labelTap3];
+    [View01 addSubview:image3];
   
     _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
     _twoScrollView.backgroundColor = [UIColor whiteColor];
