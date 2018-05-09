@@ -713,6 +713,7 @@
 		3398B98120A1761A00BDD8CC /* oss_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3398B97E20A1761800BDD8CC /* oss_down.png */; };
 		3398B98220A1761A00BDD8CC /* oss_up_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 3398B97F20A1761800BDD8CC /* oss_up_down.png */; };
 		3398B98320A1761A00BDD8CC /* oss_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 3398B98020A1761900BDD8CC /* oss_up.png */; };
+		3398B98620A2D93700BDD8CC /* ossNewDeviceTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3398B98520A2D93700BDD8CC /* ossNewDeviceTwoCell.m */; };
 		3399A8201FA33D7E006F8805 /* usbToWifiControlTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */; };
 		33A4384C1D1ABE86004E9AB6 /* service3.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A4384B1D1ABE86004E9AB6 /* service3.png */; };
 		33ABC2A51DC2E619003B92AC /* extensionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ABC2A41DC2E619003B92AC /* extensionTableViewCell.m */; };
@@ -1951,6 +1952,8 @@
 		3398B97E20A1761800BDD8CC /* oss_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_down.png; sourceTree = "<group>"; };
 		3398B97F20A1761800BDD8CC /* oss_up_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_up_down.png; sourceTree = "<group>"; };
 		3398B98020A1761900BDD8CC /* oss_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_up.png; sourceTree = "<group>"; };
+		3398B98420A2D93700BDD8CC /* ossNewDeviceTwoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewDeviceTwoCell.h; sourceTree = "<group>"; };
+		3398B98520A2D93700BDD8CC /* ossNewDeviceTwoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewDeviceTwoCell.m; sourceTree = "<group>"; };
 		3399A81E1FA33D7E006F8805 /* usbToWifiControlTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiControlTwo.h; sourceTree = "<group>"; };
 		3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiControlTwo.m; sourceTree = "<group>"; };
 		33A4384B1D1ABE86004E9AB6 /* service3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = service3.png; sourceTree = "<group>"; };
@@ -4423,6 +4426,8 @@
 				33E727852091A7A0009F460A /* ossNewDeviceList.m */,
 				33E727872091F09E009F460A /* ossNewDeviceCell.h */,
 				33E727882091F09E009F460A /* ossNewDeviceCell.m */,
+				3398B98420A2D93700BDD8CC /* ossNewDeviceTwoCell.h */,
+				3398B98520A2D93700BDD8CC /* ossNewDeviceTwoCell.m */,
 				33E7278A20933DE3009F460A /* OneKeyAddForIntergrator.h */,
 				33E7278B20933DE3009F460A /* OneKeyAddForIntergrator.m */,
 				3398B97520A04ABA00BDD8CC /* addOssIntegratorDevice.h */,
@@ -5510,6 +5515,7 @@
 				33EA4A0B1E8F79050044A01A /* JHLineChart.m in Sources */,
 				334E9BF21CAD263700C8271F /* parameterPV.m in Sources */,
 				33FAD8E81F99C7AC0030EEC3 /* wifiToPvDataModel.m in Sources */,
+				3398B98620A2D93700BDD8CC /* ossNewDeviceTwoCell.m in Sources */,
 				3319E08D1D5AFB39006623A9 /* LWLoadingView.m in Sources */,
 				3367CB501C86806700EF460C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				3389648B1E5C1D2000A7B1AE /* quickRegister2ViewController.m in Sources */,

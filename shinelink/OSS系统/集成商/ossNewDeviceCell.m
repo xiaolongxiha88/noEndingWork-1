@@ -23,17 +23,33 @@
 
 
 - (void)setNameArray:(NSArray *)nameArray {
-    float W1=80*NOW_SIZE;       float H1=40*HEIGHT_SIZE;
+   float H1=40*HEIGHT_SIZE;
+
+    float W_K_0=12*NOW_SIZE;             //平均空隙
+    float W_all=0;
     
     for (int i=0; i<nameArray.count; i++) {
-        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(0+W1*i, 0,W1, H1)];
+        
+        NSString *nameString=nameArray[i];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        
+            float W_all_0=W_K_0*2+size.width;
+        
+        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(W_all, 0,W_all_0, H1)];
         lableR.textColor = COLOR(102, 102, 102, 1);
         lableR.textAlignment=NSTextAlignmentCenter;
-        lableR.text=nameArray[i];
+        lableR.text=nameString;
         lableR.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [self.contentView addSubview:lableR];
+        
+             W_all=W_all+W_all_0;
+        
     }
+    
 }
+
+
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
