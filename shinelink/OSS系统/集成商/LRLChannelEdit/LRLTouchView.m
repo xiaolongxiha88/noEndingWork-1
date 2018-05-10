@@ -7,7 +7,7 @@
 //
 
 #import "LRLTouchView.h"
-#import "UIImage+LRLBundle.h"
+
 
 @implementation LRLTouchView
 
@@ -32,7 +32,7 @@
         
         self.closeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.bounds.size.width - 16.5, 1.5, 15, 15)];
         self.closeImageView.hidden = YES;
-        self.closeImageView.image = [UIImage imageMyBundleNamed:@"del"];
+        self.closeImageView.image = IMAGE(@"del_LRL.png");
         [self addSubview:self.closeImageView];
     }
     return self;

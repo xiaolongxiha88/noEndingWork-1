@@ -763,6 +763,7 @@
 		33E36AAE20A3F2AB00F58E6D /* LRLChannelUnitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AA620A3F2AA00F58E6D /* LRLChannelUnitModel.m */; };
 		33E36AAF20A3F2AB00F58E6D /* LRLTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AA820A3F2AA00F58E6D /* LRLTouchView.m */; };
 		33E36AB220A3F3ED00F58E6D /* lanmu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E36AB120A3F3ED00F58E6D /* lanmu2.png */; };
+		33E36AB420A46B5B00F58E6D /* del_LRL.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E36AB320A46B5B00F58E6D /* del_LRL.png */; };
 		33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */; };
 		33E42E0B1DC9CDB60024FFBB /* peizhi_btn_click_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */; };
 		33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */; };
@@ -2042,6 +2043,7 @@
 		33E36AA720A3F2AA00F58E6D /* LRLTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRLTouchView.h; sourceTree = "<group>"; };
 		33E36AA820A3F2AA00F58E6D /* LRLTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRLTouchView.m; sourceTree = "<group>"; };
 		33E36AB120A3F3ED00F58E6D /* lanmu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lanmu2.png; sourceTree = "<group>"; };
+		33E36AB320A46B5B00F58E6D /* del_LRL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = del_LRL.png; sourceTree = "<group>"; };
 		33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click.png; path = ../../peizhi_btn_click.png; sourceTree = "<group>"; };
 		33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click_2.png; path = ../../peizhi_btn_click_2.png; sourceTree = "<group>"; };
 		33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_2.png; path = ../../peizhi_btn_2.png; sourceTree = "<group>"; };
@@ -4690,6 +4692,7 @@
 		33E36AA020A3F2AA00F58E6D /* LRLChannelEdit */ = {
 			isa = PBXGroup;
 			children = (
+				33E36AB320A46B5B00F58E6D /* del_LRL.png */,
 				33E36AB120A3F3ED00F58E6D /* lanmu2.png */,
 				33E36AA220A3F2AA00F58E6D /* LRLChannelEditController.h */,
 				33E36AA320A3F2AA00F58E6D /* LRLChannelEditController.m */,
@@ -5291,6 +5294,7 @@
 				3398B97920A134B300BDD8CC /* OSS_list.png in Resources */,
 				33884DAC1FF225BC0089E689 /* presentation.png in Resources */,
 				338E34F11EE55C290027EBD5 /* cancel_icon111.png in Resources */,
+				33E36AB420A46B5B00F58E6D /* del_LRL.png in Resources */,
 				3383F1311C9FF4210075E834 /* PowerRegulator.png in Resources */,
 				33FEFD5E1C7DB38400324374 /* icon---Name@3x.png in Resources */,
 				335456C71C853B4900275478 /* btn_cha11.png in Resources */,

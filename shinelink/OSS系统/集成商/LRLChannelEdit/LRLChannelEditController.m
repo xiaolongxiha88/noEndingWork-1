@@ -7,7 +7,6 @@
 //
 
 #import "LRLTouchView.h"
-#import "UIImage+LRLBundle.h"
 #import "LRLChannelUnitModel.h"
 #import "LRLChannelEditController.h"
 
@@ -20,8 +19,8 @@
 #define ButtonHeight (ButtonWidth * 4/9)
 #define LocationWidth (ScreenWidth - EdgeX * 2)
 #define ButtonWidth (LocationWidth/ButtonCountOneRow)
-#define ScreenWidth ([UIScreen mainScreen].bounds.size.width)
-#define ScreenHeight ([UIScreen mainScreen].bounds.size.height)
+//#define ScreenWidth ([UIScreen mainScreen].bounds.size.width)
+//#define ScreenHeight ([UIScreen mainScreen].bounds.size.height)
 #define TitleSize 12.0
 #define EditTextSize 9.0
 
@@ -40,15 +39,22 @@
 @property (nonatomic, strong) NSMutableArray<LRLTouchView *> *topViewArr;
 @property (nonatomic, strong) NSMutableArray<LRLTouchView *> *bottomViewArr;
 
-@property (nonatomic, weak) IBOutlet UILabel *topLabel;
+@property (nonatomic, strong) UILabel *topLabel;
+//@property (nonatomic, weak) IBOutlet UILabel *topLabel;
 @property (nonatomic, assign) CGFloat topHeight;
 
 @property (nonatomic, strong) UILabel *bottomLabel;
 @property (nonatomic, assign) CGFloat bottomHeight;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, weak) IBOutlet UIButton *editButton;
-@property (nonatomic, weak) IBOutlet UILabel *editAlertLabel;
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIButton *editButton;
+@property (nonatomic, strong) UILabel *editAlertLabel;
+//@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+//@property (nonatomic, weak) IBOutlet UIButton *editButton;
+//@property (nonatomic, weak) IBOutlet UILabel *editAlertLabel;
+
+
+
 @property (nonatomic, strong) LRLTouchView *clearView;
 @property (nonatomic, strong) LRLChannelUnitModel *placeHolderModel;
 @property (nonatomic, strong) LRLChannelUnitModel *touchingModel;
@@ -62,19 +68,64 @@
 @implementation LRLChannelEditController
 
 -(id)initWithTopDataSource:(NSArray<LRLChannelUnitModel *> *)topDataArr andBottomDataSource:(NSArray<LRLChannelUnitModel *> *)bottomDataSource andInitialIndex:(NSInteger)initialIndex{
-    if (self = [super initWithNibName:@"LRLChannelEditController" bundle:[NSBundle bundleForClass:self.class]]) {
+  
         self.topDataSource = [NSMutableArray arrayWithArray:topDataArr];
         self.bottomDataSource = [NSMutableArray arrayWithArray:bottomDataSource];
         self.fixedCount = 0;
         self.locationIndex = initialIndex;
-    }
+
     return self;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = UIColorFromRGB(0xf5f5f5);
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [self initUI];
     [self configUI];
+
+}
+
+-(void)initUI{
+    
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 105*HEIGHT_SIZE, SCREEN_Width, ScreenHeight-95*HEIGHT_SIZE)];
+    _scrollView.scrollEnabled=YES;
+    //_scrollView.backgroundColor=COLOR(242, 242, 242, 1);
+    [self.view addSubview:_scrollView];
+    
+    float H=70*HEIGHT_SIZE;
+    _topLabel= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, H,80*NOW_SIZE, 30*HEIGHT_SIZE)];
+    _topLabel.textColor = COLOR(51, 51, 51, 1);
+    _topLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    _topLabel.textAlignment=NSTextAlignmentLeft;
+    // lable1.backgroundColor=COLOR(242, 242, 242, 1);
+    _topLabel.text=@"已显示参数";
+    [self.view addSubview:_topLabel];
+    
+    _editAlertLabel= [[UILabel alloc] initWithFrame:CGRectMake(100*NOW_SIZE, H,80*NOW_SIZE, 30*HEIGHT_SIZE)];
+    _editAlertLabel.textColor = MainColor;
+    _editAlertLabel.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    _editAlertLabel.textAlignment=NSTextAlignmentLeft;
+    _editAlertLabel.adjustsFontSizeToFitWidth=YES;
+    // lable1.backgroundColor=COLOR(242, 242, 242, 1);
+    _editAlertLabel.text=@"拖拽可以排序";
+    [self.view addSubview:_editAlertLabel];
+    
+   _editButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    _editButton.frame=CGRectMake(210*NOW_SIZE,H, 100*NOW_SIZE, 30*HEIGHT_SIZE);
+    [_editButton setBackgroundImage:IMAGE(@"oss_btn_1nor.png") forState:UIControlStateNormal];
+    [_editButton setBackgroundImage:IMAGE(@"oss_btn_1click.png") forState:UIControlStateHighlighted];
+    [_editButton setTitle:@"编辑" forState:UIControlStateNormal];
+    _editButton.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
+    //[goButton2 addTarget:self action:@selector(scanSn) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_editButton];
+    
+    UIButton *backButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.frame=CGRectMake(270*NOW_SIZE,20*HEIGHT_SIZE, 30*NOW_SIZE, 30*HEIGHT_SIZE);
+    [backButton setBackgroundImage:IMAGE(@"del_LRL.png") forState:UIControlStateNormal];
+   // [backButton setBackgroundImage:IMAGE(@"oss_btn_1click.png") forState:UIControlStateHighlighted];
+    [backButton addTarget:self action:@selector(closeButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:backButton];
+    
 }
 
 -(void)configUI{
@@ -83,11 +134,11 @@
     self.scrollView.backgroundColor = UIColorFromRGB(0xf5f5f5);
     
     //上面的标题
-    self.topLabel.text = @"我的栏目";
-    self.topLabel.font = [UIFont boldSystemFontOfSize:TitleSize];
+   // self.topLabel.text = @"我的栏目";
+  //  self.topLabel.font = [UIFont boldSystemFontOfSize:TitleSize];
     
-    self.editAlertLabel.textColor = UIColorFromRGB(0xc0c0c0);
-    self.editAlertLabel.font = [UIFont systemFontOfSize:EditTextSize];
+//    self.editAlertLabel.textColor = UIColorFromRGB(0xc0c0c0);
+//    self.editAlertLabel.font = [UIFont systemFontOfSize:EditTextSize];
     self.editAlertLabel.hidden = YES;
     
     [self.editButton addTarget:self action:@selector(editOrderAct:) forControlEvents:UIControlEventTouchUpInside];
@@ -506,8 +557,9 @@
 #pragma mark - 进入或者退出编辑状态
 -(void)inOrOutEditWithEditing:(BOOL)isEditing{
     if (isEditing) {
-        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"finsh"] forState:UIControlStateNormal];
-        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"finsh-1"] forState:UIControlStateHighlighted];
+//        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"finsh"] forState:UIControlStateNormal];
+//        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"finsh-1"] forState:UIControlStateHighlighted];
+           [_editButton setTitle:@"完成" forState:UIControlStateNormal];
         
         if (self.initalTouchView) {
             if (self.locationIndex > 1) {
@@ -526,8 +578,9 @@
             }
         }
     }else{
-        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"reorder"] forState:UIControlStateNormal];
-        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"reorder-1"] forState:UIControlStateHighlighted];
+//        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"reorder"] forState:UIControlStateNormal];
+//        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"reorder-1"] forState:UIControlStateHighlighted];
+            [_editButton setTitle:@"编辑" forState:UIControlStateNormal];
         
         if (self.initalTouchView && self.initialIndexModel.isTop) {
             self.initalTouchView.contentLabel.textColor = UIColorFromRGB(0x008dff);
@@ -550,7 +603,24 @@
 }
 
 #pragma mark - 点击关闭按钮
-- (IBAction)closeButtonAct:(id)sender {
+//- (void)closeButtonAct:(id)sender {
+//    if (self.initialIndexModel && self.initialIndexModel.isTop) {
+//        if ([self.topDataSource containsObject:self.initialIndexModel]) {
+//            if (self.chooseIndexBlock) {
+//                self.chooseIndexBlock([self.topDataSource indexOfObject:self.initialIndexModel], self.topDataSource, self.bottomDataSource);
+//            }
+//        }
+//    }else{
+//        if (self.removeInitialIndexBlock) {
+//            self.removeInitialIndexBlock(self.topDataSource, self.bottomDataSource);
+//        }
+//    }
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        [self updateTOsql];
+//    }];
+//}
+
+-(void)closeButton{
     if (self.initialIndexModel && self.initialIndexModel.isTop) {
         if ([self.topDataSource containsObject:self.initialIndexModel]) {
             if (self.chooseIndexBlock) {
@@ -566,5 +636,7 @@
         [self updateTOsql];
     }];
 }
+
+
 
 @end
