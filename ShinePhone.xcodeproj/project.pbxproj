@@ -759,6 +759,10 @@
 		33E369661FDBC8F1001D947D /* MaxSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E369651FDBC8F1001D947D /* MaxSecondViewController.m */; };
 		33E369691FDBE217001D947D /* MaxControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E369681FDBE217001D947D /* MaxControl.m */; };
 		33E3696C1FDBEAAB001D947D /* MaxParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3696B1FDBEAAB001D947D /* MaxParameter.m */; };
+		33E36AAC20A3F2AB00F58E6D /* LRLChannelEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AA320A3F2AA00F58E6D /* LRLChannelEditController.m */; };
+		33E36AAE20A3F2AB00F58E6D /* LRLChannelUnitModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AA620A3F2AA00F58E6D /* LRLChannelUnitModel.m */; };
+		33E36AAF20A3F2AB00F58E6D /* LRLTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AA820A3F2AA00F58E6D /* LRLTouchView.m */; };
+		33E36AB220A3F3ED00F58E6D /* lanmu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E36AB120A3F3ED00F58E6D /* lanmu2.png */; };
 		33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */; };
 		33E42E0B1DC9CDB60024FFBB /* peizhi_btn_click_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */; };
 		33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */; };
@@ -2031,6 +2035,13 @@
 		33E369681FDBE217001D947D /* MaxControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MaxControl.m; sourceTree = "<group>"; };
 		33E3696A1FDBEAAB001D947D /* MaxParameter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MaxParameter.h; sourceTree = "<group>"; };
 		33E3696B1FDBEAAB001D947D /* MaxParameter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MaxParameter.m; sourceTree = "<group>"; };
+		33E36AA220A3F2AA00F58E6D /* LRLChannelEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRLChannelEditController.h; sourceTree = "<group>"; };
+		33E36AA320A3F2AA00F58E6D /* LRLChannelEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRLChannelEditController.m; sourceTree = "<group>"; };
+		33E36AA520A3F2AA00F58E6D /* LRLChannelUnitModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRLChannelUnitModel.h; sourceTree = "<group>"; };
+		33E36AA620A3F2AA00F58E6D /* LRLChannelUnitModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRLChannelUnitModel.m; sourceTree = "<group>"; };
+		33E36AA720A3F2AA00F58E6D /* LRLTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRLTouchView.h; sourceTree = "<group>"; };
+		33E36AA820A3F2AA00F58E6D /* LRLTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRLTouchView.m; sourceTree = "<group>"; };
+		33E36AB120A3F3ED00F58E6D /* lanmu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lanmu2.png; sourceTree = "<group>"; };
 		33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click.png; path = ../../peizhi_btn_click.png; sourceTree = "<group>"; };
 		33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click_2.png; path = ../../peizhi_btn_click_2.png; sourceTree = "<group>"; };
 		33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_2.png; path = ../../peizhi_btn_2.png; sourceTree = "<group>"; };
@@ -4432,6 +4443,7 @@
 				33E7278B20933DE3009F460A /* OneKeyAddForIntergrator.m */,
 				3398B97520A04ABA00BDD8CC /* addOssIntegratorDevice.h */,
 				3398B97620A04ABA00BDD8CC /* addOssIntegratorDevice.m */,
+				33E36AA020A3F2AA00F58E6D /* LRLChannelEdit */,
 			);
 			path = "集成商";
 			sourceTree = "<group>";
@@ -4673,6 +4685,20 @@
 				33E3696B1FDBEAAB001D947D /* MaxParameter.m */,
 			);
 			path = "MAX类型";
+			sourceTree = "<group>";
+		};
+		33E36AA020A3F2AA00F58E6D /* LRLChannelEdit */ = {
+			isa = PBXGroup;
+			children = (
+				33E36AB120A3F3ED00F58E6D /* lanmu2.png */,
+				33E36AA220A3F2AA00F58E6D /* LRLChannelEditController.h */,
+				33E36AA320A3F2AA00F58E6D /* LRLChannelEditController.m */,
+				33E36AA520A3F2AA00F58E6D /* LRLChannelUnitModel.h */,
+				33E36AA620A3F2AA00F58E6D /* LRLChannelUnitModel.m */,
+				33E36AA720A3F2AA00F58E6D /* LRLTouchView.h */,
+				33E36AA820A3F2AA00F58E6D /* LRLTouchView.m */,
+			);
+			path = LRLChannelEdit;
 			sourceTree = "<group>";
 		};
 		33EA49F21E8DE9AE0044A01A /* 储能能源新界面 */ = {
@@ -5193,6 +5219,7 @@
 				33FEFD671C7DB38400324374 /* iconfont-address@2x.png in Resources */,
 				331B37D61F073A3400755335 /* workorder_button_icon_nor.png in Resources */,
 				3349C35E2071FE4300527BC1 /* max_ele.png in Resources */,
+				33E36AB220A3F3ED00F58E6D /* lanmu2.png in Resources */,
 				335BF1E71D100558008EEE99 /* message.png in Resources */,
 				334B8F5E1C914B4E00798A69 /* LICENSE in Resources */,
 				3378D65E1F147AFD00632CBD /* layout.png in Resources */,
@@ -5434,6 +5461,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33E36AAE20A3F2AB00F58E6D /* LRLChannelUnitModel.m in Sources */,
 				33AF3D291D8E67210007D6C2 /* UdpCheckUtl.m in Sources */,
 				337042521CC4E4340069D3AA /* kongZhiNi0.m in Sources */,
 				335D69B11D77BA4D00894D90 /* HcdLoaderURLConnection.m in Sources */,
@@ -5670,6 +5698,7 @@
 				3343F3DC1C80405D009F69BC /* UIAlertView+AFNetworking.m in Sources */,
 				337472441FC0218700AC1420 /* payResultView.m in Sources */,
 				337F9CC51C71ABD80016FE43 /* deviceViewController.m in Sources */,
+				33E36AAF20A3F2AB00F58E6D /* LRLTouchView.m in Sources */,
 				335D69B01D77BA4D00894D90 /* HcdLightView.m in Sources */,
 				337079501D9217D700D7DA98 /* manualTableViewCell.m in Sources */,
 				33775AD91D2CD7520070742E /* RKAlertView.m in Sources */,
@@ -5708,6 +5737,7 @@
 				33AF3D221D8E67210007D6C2 /* Reachability.m in Sources */,
 				3319E0861D5AFAA7006623A9 /* HtmlCommon.m in Sources */,
 				33860FDD1EEA75C5004150FD /* MJRefreshAutoFooter.m in Sources */,
+				33E36AAC20A3F2AB00F58E6D /* LRLChannelEditController.m in Sources */,
 				334E9BE41CACB78900C8271F /* ControlCNJ.m in Sources */,
 				334B8F4F1C914A6D00798A69 /* PNGenericChart.m in Sources */,
 				338418E21DC840AB00D679CA /* GifConfigViewController.m in Sources */,

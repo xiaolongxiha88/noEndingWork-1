@@ -1273,13 +1273,16 @@ class ossFistVC: RootViewController {
         
     }
     
+    //进入代理商设备列表
     func gotoDaiLiShang()  {
         
    if isDaiLiShangBool{
             UserDefaults.standard.set("", forKey: "searchDeviceAddress")
             
-            let vc=IntegratorFirst()
-            vc.firstNum=0
+//            let vc=IntegratorFirst()
+//            vc.firstNum=0
+    
+               let vc=ossNewDeviceList()
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
             self.showToastView(withTitle:"没有操作权限")

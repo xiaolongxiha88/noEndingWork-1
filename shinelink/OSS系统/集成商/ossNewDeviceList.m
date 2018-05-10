@@ -9,7 +9,7 @@
 #import "ossNewDeviceList.h"
 #import "ossNewDeviceCell.h"
 #import "ossNewDeviceTwoCell.h"
-
+#import "ShinePhone-Swift.h"
 
 @interface ossNewDeviceList ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *oneScrollView;
@@ -22,6 +22,7 @@
 @property (nonatomic, assign)float tableW;
 @property (nonatomic, assign)BOOL isChangTableView;
 @property (nonatomic, strong) NSMutableArray *selectRowNumArray;
+@property (nonatomic, strong) DTKDropdownMenuView *rightMenuView;
 
 @end
 
@@ -33,6 +34,7 @@
     _isChangTableView=NO;
     
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
+    [self addRightItem];
     [self initUI];
 }
 
@@ -111,7 +113,10 @@
     UIView *View01= [[UIView alloc]initWithFrame:CGRectMake(20*NOW_SIZE+imageW, (H2-imageH1)/2.0, View01_W,imageH1)];
     View01.backgroundColor = [UIColor whiteColor];
     [View01.layer setMasksToBounds:YES];
+        View01.userInteractionEnabled=YES;
     [View01.layer setCornerRadius:(imageH1/2.0)];
+    UITapGestureRecognizer *labelTap3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToSearch)];
+    [View01 addGestureRecognizer:labelTap3];
     [View2 addSubview:View01];
     
         float imageH2=20*HEIGHT_SIZE;
@@ -120,8 +125,6 @@
     UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake(W22, (imageH1-imageH2)/2, imageW2,imageH2 )];
     image3.userInteractionEnabled=YES;
     image3.image=IMAGE(@"oss_search.png");
-    UITapGestureRecognizer *labelTap3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectChioce:)];
-    [image3 addGestureRecognizer:labelTap3];
     [View01 addSubview:image3];
   
     _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
@@ -180,30 +183,83 @@
     
 }
 
+- (void)addRightItem
+{
+    DTKDropdownItem *item0 = [DTKDropdownItem itemWithTitle:@"添加设备" iconName:@"DTK_jiangbei" callBack:^(NSUInteger index, id info) {
+        NSLog(@"rightItem%lu",(unsigned long)index);
+        
+        IntegratorFirst *searchView=[[IntegratorFirst alloc]init];
+        [self.navigationController pushViewController:searchView animated:YES];
+        
+    }];
+    DTKDropdownItem *item1 = [DTKDropdownItem itemWithTitle:@"展示参数" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
+        NSLog(@"rightItem%lu",(unsigned long)index);
+   
+        [self goToChoiceParameter];
+        
+    }];
+    
+    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:@"设备分配" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
+        NSLog(@"rightItem%lu",(unsigned long)index);
+        
+    }];
+    
+    _rightMenuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0,item1,item2] icon:@"add@2x.png"];
+    //  menuView.intrinsicContentSize=CGSizeMake(44.f, 44.f);
+    // menuView.translatesAutoresizingMaskIntoConstraints=true;
+    _rightMenuView.dropWidth =150.f;
+    _rightMenuView.titleFont = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    _rightMenuView.textColor =COLOR(102, 102, 102, 1);
+    _rightMenuView.cellSeparatorColor =COLOR(229, 229, 229, 1);
+    _rightMenuView.textFont = [UIFont systemFontOfSize:14.f];
+    _rightMenuView.animationDuration = 0.2f;
+    
+    // _rightMenuView.userInteractionEnabled=YES;
+    
+    if (deviceSystemVersion>=11.0) {
+        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd  target:self.rightMenuView action:@selector(pullTheTableView)];
+        self.navigationItem.rightBarButtonItem = rightButton;
+        
+    }else{
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightMenuView];
+    }
+    
+    
+}
+
+-(void)goToChoiceParameter{
+    
+}
+
+-(void)goToSearch{
+    IntegratorFirst *searchView=[[IntegratorFirst alloc]init];
+
+    [self.navigationController pushViewController:searchView animated:YES];
+}
 
 -(void)changeTheRowNum:(UITapGestureRecognizer*)tap{
   NSInteger  tagNum=tap.view.tag-2000;
-    BOOL isSelect=_selectRowNumArray[tagNum];
+ 
+    BOOL isSelect=[_selectRowNumArray[tagNum] boolValue];
     isSelect = !isSelect;
 
-    if (isSelect) {
-        UIImageView *image0=[self.view viewWithTag:3000+tagNum];
-            image0.image=IMAGE(@"oss_up.png");
-    }else{
-        UIImageView *image0=[self.view viewWithTag:3000+tagNum];
-        image0.image=IMAGE(@"oss_down.png");
-    }
-    for (int i=0; i<_oneParaArray.count; i++) {
+    for (int i=0; i<_selectRowNumArray.count; i++) {
+                    UIImageView *image0=[self.view viewWithTag:3000+i];
         if (i!=tagNum) {
-            UIImageView *image0=[self.view viewWithTag:3000+tagNum];
             image0.image=IMAGE(@"oss_up_down.png");
-                [_selectRowNumArray replaceObjectAtIndex:tagNum withObject:[NSNumber numberWithBool:NO]];
+                [_selectRowNumArray replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:NO]];
         }else{
-                [_selectRowNumArray replaceObjectAtIndex:tagNum withObject:[NSNumber numberWithBool:isSelect]];
+            if (isSelect) {
+                image0.image=IMAGE(@"oss_up.png");
+            }else{
+                image0.image=IMAGE(@"oss_down.png");
+            }
+     
+                [_selectRowNumArray replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:isSelect]];
         }
-  
+
     }
-    
+   
 }
 
 -(void)changTableView{
