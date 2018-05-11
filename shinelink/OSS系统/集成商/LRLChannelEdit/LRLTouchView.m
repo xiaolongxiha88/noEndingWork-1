@@ -25,7 +25,7 @@
         self.contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, self.bounds.size.width - 10, self.bounds.size.height - 10)];
         self.contentLabel.textAlignment = NSTextAlignmentCenter;
         self.contentLabel.backgroundColor = [UIColor colorWithRed:236.0/255.0 green:236.0/255.0 blue:236.0/255.0 alpha:1.0];
-
+        self.contentLabel.adjustsFontSizeToFitWidth=YES;
         self.contentLabel.font = [UIFont systemFontOfSize:[self getTextSizeWithInOrOut:NO]];
         self.contentLabel.textColor = [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0];
         [self addSubview:self.contentLabel];

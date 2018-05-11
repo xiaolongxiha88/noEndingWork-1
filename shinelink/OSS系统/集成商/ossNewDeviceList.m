@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIScrollView *twoScrollView;
 @property (nonatomic, strong) UIScrollView *threeScrollView;
 @property (nonatomic, strong) NSArray *oneParaArray;
+@property (nonatomic, strong) NSArray *oneParaArrayNum;
 @property (nonatomic, strong) NSArray *cellNameArray;
 @property (nonatomic, strong) NSArray *cellNameArray2;
 @property (nonatomic, strong) UITableView *tableView;
@@ -29,6 +30,11 @@
 @property (nonatomic, strong) NSMutableArray<LRLChannelUnitModel *> *bottomChannelArr;
 @property (nonatomic, assign) NSInteger chooseIndex;
 
+@property (nonatomic, strong) NSDictionary *forChoiceParameterDic;
+@property (nonatomic, strong) NSArray *NetForParameterArray;
+@property (nonatomic, strong) NSArray *oldForParameterArray;
+@property (nonatomic, strong) NSArray *topArray;
+@property (nonatomic, strong) NSArray *battomArray;
 @end
 
 @implementation ossNewDeviceList
@@ -41,6 +47,26 @@
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     [self addRightItem];
     [self initUI];
+    
+}
+
+-(void)initData{
+    _oldForParameterArray=@[@"2",@"5",@"4",@"9",@"11",@"12",@"13",@"10"];
+    
+    NSArray*numArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
+    _forChoiceParameterDic=@{@"1":@"类型",@"2":@"别名",@" 3":@"安装商",@"4":@"所属电站",@"5":@"所属用户",@"6":@"城市",@"7":@"采集器",@"8":@"最后更新时间",@"9":@"状态",@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
+    
+    if (_NetForParameterArray.count==0) {
+        _topArray=[NSArray arrayWithArray:_oldForParameterArray];
+        for (int i=0; i<numArray.count; i++) {
+            NSString *keyNum=numArray[i];
+            if ([_oldForParameterArray containsObject:keyNum]) {
+                
+            }
+        }
+    }
+    
+    
 }
 
 -(void)initUI{
@@ -240,6 +266,7 @@
     channelEdit.removeInitialIndexBlock = ^(NSMutableArray<LRLChannelUnitModel *> *topArr, NSMutableArray<LRLChannelUnitModel *> *bottomArr){
         weakSelf.topChannelArr = topArr;
         weakSelf.bottomChannelArr = bottomArr;
+      //  LRLChannelUnitModel *model =weakSelf.topChannelArr[1];
         NSLog(@"删除了初始选中项的回调:\n保留的频道有: %@", topArr);
     };
     channelEdit.chooseIndexBlock = ^(NSInteger index, NSMutableArray<LRLChannelUnitModel *> *topArr, NSMutableArray<LRLChannelUnitModel *> *bottomArr){

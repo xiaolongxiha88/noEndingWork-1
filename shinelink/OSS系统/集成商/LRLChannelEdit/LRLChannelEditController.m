@@ -12,7 +12,7 @@
 
 //左右边距
 #define EdgeX 5
-#define TopEdge 30
+#define TopEdge 15
 
 //每行频道的个数
 #define ButtonCountOneRow 4
@@ -176,10 +176,11 @@
     }
     
     //下面的标题
-    self.bottomLabel = [[UILabel alloc] initWithFrame:CGRectMake(10,TopEdge + 25 + self.topHeight, 150, 20)];
+    self.bottomLabel = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE,TopEdge + 25 + self.topHeight, 200*NOW_SIZE, 30*HEIGHT_SIZE)];
     self.bottomLabel.textAlignment = NSTextAlignmentLeft;
-    self.bottomLabel.text = @"点击添加更过栏目";
-    self.bottomLabel.font = [UIFont boldSystemFontOfSize:TitleSize];
+    self.bottomLabel.text = @"未显示参数";
+    self.bottomLabel.textColor=COLOR(51, 51, 51, 1);
+    self.bottomLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.scrollView addSubview:self.bottomLabel];
     
     CGFloat startHeight = self.bottomLabel.frame.origin.y + 20 + 10;
@@ -232,7 +233,7 @@
         }
         
         [UIView animateWithDuration:0.3 animations:^{
-            self.bottomLabel.frame = CGRectMake(10, TopEdge + 25 + self.topHeight, 200, 20);
+            self.bottomLabel.frame = CGRectMake(10*NOW_SIZE, TopEdge + 25 + self.topHeight, 200*NOW_SIZE, 30*NOW_SIZE);
             [self reconfigTopView];
             [self reconfigBottomView];
             touchView.closeImageView.hidden = YES;
@@ -293,7 +294,7 @@
     NSInteger i = self.topViewArr.count - 1;
     [UIView animateWithDuration:0.3 animations:^{
         touchView.frame = CGRectMake(EdgeX + i%ButtonCountOneRow * ButtonWidth, TopEdge + i/ButtonCountOneRow*ButtonHeight, ButtonWidth, ButtonHeight);
-        self.bottomLabel.frame = CGRectMake(10, TopEdge + 25 + self.topHeight, 200, 20);
+        self.bottomLabel.frame = CGRectMake(10*NOW_SIZE, TopEdge + 25 + self.topHeight, 200*NOW_SIZE, 30*NOW_SIZE);
         [self reconfigBottomView];
         touchView.closeImageView.hidden = !_isEditing;
     }];
