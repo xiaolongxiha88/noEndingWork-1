@@ -18,7 +18,7 @@
 @property (nonatomic, strong) UIScrollView *threeScrollView;
 @property (nonatomic, strong) NSArray *oneParaArray;
 @property (nonatomic, strong) NSArray *oneParaArrayNum;
-@property (nonatomic, strong) NSArray *cellNameArray;
+@property (nonatomic, strong) NSMutableArray *cellNameArray;
 @property (nonatomic, strong) NSArray *cellNameArray2;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign)float tableW;
@@ -33,8 +33,8 @@
 @property (nonatomic, strong) NSDictionary *forChoiceParameterDic;
 @property (nonatomic, strong) NSArray *NetForParameterArray;
 @property (nonatomic, strong) NSArray *oldForParameterArray;
-@property (nonatomic, strong) NSArray *topArray;
-@property (nonatomic, strong) NSArray *battomArray;
+@property (nonatomic, strong) NSMutableArray *topArray;
+@property (nonatomic, strong) NSMutableArray *battomArray;
 @end
 
 @implementation ossNewDeviceList
@@ -43,34 +43,49 @@
     [super viewDidLoad];
 
     _isChangTableView=NO;
-    
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
+    
+    [self initData];
     [self addRightItem];
     [self initUI];
     
 }
 
 -(void)initData{
+    _cellNameArray=[NSMutableArray new];
+    _topArray=[NSMutableArray new];
+    _battomArray=[NSMutableArray new];
+    
+    _oneParaArray=@[@"状态",@"额定功率",@"今日发电量",@"累计发电量",@"当前功率",];
     _oldForParameterArray=@[@"2",@"5",@"4",@"9",@"11",@"12",@"13",@"10"];
     
     NSArray*numArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
-    _forChoiceParameterDic=@{@"1":@"类型",@"2":@"别名",@" 3":@"安装商",@"4":@"所属电站",@"5":@"所属用户",@"6":@"城市",@"7":@"采集器",@"8":@"最后更新时间",@"9":@"状态",@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
+    _forChoiceParameterDic=@{@"1":@"类型",@"2":@"别名",@"3":@"安装商",@"4":@"所属电站",@"5":@"所属用户",@"6":@"城市",@"7":@"采集器",@"8":@"最后更新时间",@"9":@"状态",@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
     
+    NSArray *nowNameArray;
     if (_NetForParameterArray.count==0) {
-        _topArray=[NSArray arrayWithArray:_oldForParameterArray];
+        nowNameArray=[NSArray arrayWithArray:_oldForParameterArray];
+    }else{
+         nowNameArray=[NSArray arrayWithArray:_NetForParameterArray];
+    }
+    
         for (int i=0; i<numArray.count; i++) {
             NSString *keyNum=numArray[i];
-            if ([_oldForParameterArray containsObject:keyNum]) {
-                
+            NSArray *keyAndValueArray=@[keyNum,[_forChoiceParameterDic objectForKey:keyNum]];
+            if ([nowNameArray containsObject:keyNum]) {
+                [_topArray addObject:keyAndValueArray];
+                [_cellNameArray addObject:[_forChoiceParameterDic objectForKey:keyNum]];
+            }else{
+                  [_battomArray addObject:keyAndValueArray];
             }
         }
-    }
+
     
     
 }
 
 -(void)initUI{
-    _oneParaArray=@[@"状态",@"额定功率",@"今日发电量",@"累计发电量",@"当前功率"];
+  
     
     float H1=40*HEIGHT_SIZE;
     _oneScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, H1)];
@@ -166,7 +181,7 @@
     [self.view addSubview:_twoScrollView];
     
     _cellNameArray2=@[@"别名",@"状态",@"当前功率",@"今日发电"];
-    _cellNameArray=@[@"状态",@"额定功率",@"今日发电量",@"累计发电量",@"当前功率",@"当前功率",@"当前功率"];
+
      _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, H1);
     
 
@@ -273,6 +288,7 @@
         weakSelf.topChannelArr = topArr;
         weakSelf.bottomChannelArr = bottomArr;
         weakSelf.chooseIndex = index;
+        [self changeParameterData];
         NSLog(@"选中了某一项的回调:\n保留的频道有: %@, 选中第%ld个频道", topArr, index);
     };
     
@@ -281,14 +297,94 @@
     
 }
 
+-(void)changeParameterData{
+    _cellNameArray=[NSMutableArray new];
+    _topArray=[NSMutableArray new];
+    _battomArray=[NSMutableArray new];
+    
+    for (int i=0; i<_topChannelArr.count; i++) {
+        LRLChannelUnitModel *model =_topChannelArr[i];
+        NSArray *modeArray=@[model.cid,model.name];
+        [_topArray addObject:modeArray];
+        [_cellNameArray addObject:model.name];
+    }
+    for (int i=0; i<_bottomChannelArr.count; i++) {
+        LRLChannelUnitModel *model =_bottomChannelArr[i];
+        NSArray *modeArray=@[model.cid,model.name];
+        [_battomArray addObject:modeArray];
+    }
+    
+      float H1=40*HEIGHT_SIZE;  float H2=50*HEIGHT_SIZE;    float W1=80*NOW_SIZE;
+    
+    if (_twoScrollView) {
+        [_twoScrollView removeFromSuperview];
+        _twoScrollView=nil;
+    }
+    _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
+    _twoScrollView.backgroundColor = [UIColor whiteColor];
+    _twoScrollView.showsHorizontalScrollIndicator = NO;
+    _twoScrollView.delegate=self;
+    _twoScrollView.bounces = NO;
+    [self.view addSubview:_twoScrollView];
+    
+    
+    _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, H1);
+    
+    
+    float W_K_0=12*NOW_SIZE;             //平均空隙
+    float W1_all=0;
+    
+    for (int i=0; i<_cellNameArray.count; i++) {
+        NSString *nameString=_cellNameArray[i];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        
+        float W_all_0=W_K_0*2+size.width;
+        
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0, H1)];
+        lable1.textColor = COLOR(51, 51, 51, 1);
+        lable1.textAlignment=NSTextAlignmentCenter;
+        lable1.text=_cellNameArray[i];
+        lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_twoScrollView addSubview:lable1];
+        
+        W1_all=W1_all+W_all_0;
+    }
+    
+    
+    _tableW=_cellNameArray.count*W1;
+    float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
+        _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
+    
+    if (_tableView) {
+        [_tableView removeFromSuperview];
+        _tableView=nil;
+    }
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _tableW, H3) style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor=COLOR(242, 242, 242, 1);
+    [_threeScrollView addSubview:_tableView];
+    
+    //注册单元格类型
+    [_tableView registerClass:[ossNewDeviceCell class] forCellReuseIdentifier:@"CELL1"];
+    [_tableView registerClass:[ossNewDeviceTwoCell class] forCellReuseIdentifier:@"CELL2"];
+    
+
+}
+
+
 -(NSMutableArray<LRLChannelUnitModel *> *)topChannelArr{
     if (!_topChannelArr) {
         //这里模拟从本地获取的频道数组
         _topChannelArr = [NSMutableArray array];
-        for (int i = 0; i < 50; ++i) {
+        
+        for (int i = 0; i < _topArray.count; ++i) {
+            NSArray *modeArray=_topArray[i];
             LRLChannelUnitModel *channelModel = [[LRLChannelUnitModel alloc] init];
-            channelModel.name = [NSString stringWithFormat:@"标题%d", i];
-            channelModel.cid = [NSString stringWithFormat:@"%d", i];
+            channelModel.name = modeArray[1];
+            channelModel.cid =modeArray[0];
             channelModel.isTop = YES;
             [_topChannelArr addObject:channelModel];
         }
@@ -298,10 +394,11 @@
 -(NSMutableArray<LRLChannelUnitModel *> *)bottomChannelArr{
     if (!_bottomChannelArr) {
         _bottomChannelArr = [NSMutableArray array];
-        for (int i = 30; i < 50; ++i) {
+        for (int i = 0; i < _battomArray.count; i++) {
+                    NSArray *modeArray=_battomArray[i];
             LRLChannelUnitModel *channelModel = [[LRLChannelUnitModel alloc] init];
-            channelModel.name = [NSString stringWithFormat:@"标题气温气温%d", i];
-            channelModel.cid = [NSString stringWithFormat:@"%d", i];
+            channelModel.name = modeArray[1];
+            channelModel.cid = modeArray[0];
             channelModel.isTop = NO;
             [_bottomChannelArr addObject:channelModel];
         }
