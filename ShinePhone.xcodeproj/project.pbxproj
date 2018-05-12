@@ -764,6 +764,7 @@
 		33E36AAF20A3F2AB00F58E6D /* LRLTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AA820A3F2AA00F58E6D /* LRLTouchView.m */; };
 		33E36AB220A3F3ED00F58E6D /* lanmu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E36AB120A3F3ED00F58E6D /* lanmu2.png */; };
 		33E36AB420A46B5B00F58E6D /* del_LRL.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E36AB320A46B5B00F58E6D /* del_LRL.png */; };
+		33E36AB720A70AAC00F58E6D /* ossUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AB620A70AAC00F58E6D /* ossUserList.m */; };
 		33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */; };
 		33E42E0B1DC9CDB60024FFBB /* peizhi_btn_click_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */; };
 		33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */; };
@@ -2044,6 +2045,8 @@
 		33E36AA820A3F2AA00F58E6D /* LRLTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRLTouchView.m; sourceTree = "<group>"; };
 		33E36AB120A3F3ED00F58E6D /* lanmu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lanmu2.png; sourceTree = "<group>"; };
 		33E36AB320A46B5B00F58E6D /* del_LRL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = del_LRL.png; sourceTree = "<group>"; };
+		33E36AB520A70AAC00F58E6D /* ossUserList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossUserList.h; sourceTree = "<group>"; };
+		33E36AB620A70AAC00F58E6D /* ossUserList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossUserList.m; sourceTree = "<group>"; };
 		33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click.png; path = ../../peizhi_btn_click.png; sourceTree = "<group>"; };
 		33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click_2.png; path = ../../peizhi_btn_click_2.png; sourceTree = "<group>"; };
 		33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_2.png; path = ../../peizhi_btn_2.png; sourceTree = "<group>"; };
@@ -4437,6 +4440,8 @@
 				338614AB1F2606A0000F515E /* intergratorDeviceCell.swift */,
 				33E727842091A7A0009F460A /* ossNewDeviceList.h */,
 				33E727852091A7A0009F460A /* ossNewDeviceList.m */,
+				33E36AB520A70AAC00F58E6D /* ossUserList.h */,
+				33E36AB620A70AAC00F58E6D /* ossUserList.m */,
 				33E727872091F09E009F460A /* ossNewDeviceCell.h */,
 				33E727882091F09E009F460A /* ossNewDeviceCell.m */,
 				3398B98420A2D93700BDD8CC /* ossNewDeviceTwoCell.h */,
@@ -5681,6 +5686,7 @@
 				33E3696C1FDBEAAB001D947D /* MaxParameter.m in Sources */,
 				3374722B1FBAF51000AC1420 /* newEnergyMix.m in Sources */,
 				338614AC1F2606A0000F515E /* intergratorDeviceCell.swift in Sources */,
+				33E36AB720A70AAC00F58E6D /* ossUserList.m in Sources */,
 				3370793D1D910FEC00D7DA98 /* NJKWebViewProgressView.m in Sources */,
 				336F1A1D1D88E46900CD4C2B /* UIButton+WebCache.m in Sources */,
 				33528FF01C83E41D00D07889 /* listViewController.m in Sources */,
