@@ -565,6 +565,7 @@
     
     }else{
           _stepNum++;
+              [self initTwoUI];
     }
 
 
@@ -778,29 +779,94 @@
     
 -(void)choiceTheUser:(NSInteger)Num{
     
-    _userListArray=@[@"中国",@"美国",@"英国",@"朝国",@"钱国"];
+    NSDictionary *netDic=@{@"kind":@"0"};
     if(_userListArray.count>0){
-        
-        AnotherSearchViewController *another = [AnotherSearchViewController new];
-        //返回选中搜索的结果
-        [another didSelectedItem:^(NSString *item) {
-            
-            UILabel *lable=[self.view viewWithTag:Num+100];
-            lable.text=item;
-        }];
-        another.title =@"选择所属用户";
-        another.isNeedRightItem=YES;
-        another.rightItemBlock = ^{
-            [self gotoAddUser];
-        };
-        another.dataSource=_userListArray;
-        [self.navigationController pushViewController:another animated:YES];
+        [self choiceTheUser2:Num];
     }else{
-        [self showToastViewWithTitle:@"点击获取用户列表"];
-        return;
+        [self getNetForUserAndPlant:netDic typeNum:0 tagNum:Num];
     }
- 
+
 }
+
+-(void)choiceTheUser2:(NSInteger)Num{
+
+        if(_userListArray.count>0){
+    
+            AnotherSearchViewController *another = [AnotherSearchViewController new];
+            //返回选中搜索的结果
+            [another didSelectedItem:^(NSString *item) {
+    
+                UILabel *lable=[self.view viewWithTag:Num+100];
+                lable.text=item;
+            }];
+            another.title =@"选择所属用户";
+            another.isNeedRightItem=YES;
+            another.rightItemBlock = ^{
+                [self gotoAddUser];
+            };
+            another.dataSource=_userListArray;
+            [self.navigationController pushViewController:another animated:YES];
+        }else{
+            [self showToastViewWithTitle:@"点击获取用户列表"];
+            return;
+        }
+    
+    
+    
+    
+}
+
+ //获取电站或用户列表 type 0用户 1电站
+-(void)getNetForUserAndPlant:(NSDictionary*)netDic typeNum:(NSInteger)typeNum tagNum:(NSInteger)tagNum{
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:netDic paramarsSite:@"/api/v3/customer/user/plant" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/user/plant: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+                if (typeNum==0) {
+                    NSArray *dicArray1=firstDic[@"obj"][@"pagers"];
+                    NSArray *dicArray=dicArray1[0][@"datas"];
+                    NSMutableArray *newList=[NSMutableArray new];
+                    for (int i=0; i<dicArray.count; i++) {
+                        NSDictionary *dic1=dicArray[i];
+                        [newList addObject:dic1[@"accountName"]];
+                    }
+                    _userListArray=[NSArray arrayWithArray:newList];
+                    _serverID=dicArray1[0][@"serverId"];
+                    [self choiceTheUser2:tagNum];
+                }
+
+                
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                NSArray *resultArray=@[@"非集成商用户",@"未找到指定的服务器地址"];
+                
+                if (ResultValue<(resultArray.count+2)) {
+                    [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                }
+                if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"登录超时"];
+                }
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
+}
+
+
 
 -(void)gotoAddUser{
     
