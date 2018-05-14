@@ -37,6 +37,7 @@
 @property (nonatomic, strong) NSArray *countryListArray;
 @property (nonatomic, strong)NSMutableArray *textFieldMutableArray;
 
+@property (nonatomic, strong) NSString *serverID;
 @end
 
 @implementation OneKeyAddForIntergrator
@@ -555,15 +556,102 @@
             return;
         }
         
-          _stepNum++;
+        [_oneDic setObject:@"" forKey:@"email"];
+        [_oneDic setObject:@"" forKey:@"company"];
+        [_oneDic setObject:@"" forKey:@"iCode"];
+          [_oneDic setObject:_serverID forKey:@"serverId"];
+        
+            [self getNetOne];
+    
     }else{
           _stepNum++;
     }
 
-    
 
+
+  //  NSString *companyString=[[NSUserDefaults standardUserDefaults] objectForKey:@"agentCompany"];
+
+
+
+}
+
+
+-(void)getNetOne{
     
-    [self initTwoUI];
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_oneDic paramarsSite:@"/api/v3/customer/userManage_overview_creatUserPage" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/userManage_overview_creatUserPage: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+                      _stepNum++;
+                [self showToastViewWithTitle:@"保存用户成功"];
+                    [self initTwoUI];
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                NSArray *resultArray=@[@"用户数量超出",@"注册国家必须非china",@"注册国家必须是china",@"用户名或者密码为空",@"用户名已经存在",@"国家错误",@"时区错误",@"远程服务器注册用户失败",@"注册失败",@"操作失败",@"运行错误",@"服务器地址为空",@"确认密码不正确",@"时区为空"];
+                
+                if (ResultValue<(resultArray.count+2)) {
+                    [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                }
+                if (ResultValue==22) {
+                       [self showToastViewWithTitle:@"未登录"];
+                }
+               // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
+    
+}
+
+-(void)getNetTwo{
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_oneDic paramarsSite:@"/api/v3/customer/userManage/creatNormalPlant" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/userManage/creatNormalPlant: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+                _stepNum++;
+                [self showToastViewWithTitle:@"保存用户成功"];
+                [self initTwoUI];
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                NSArray *resultArray=@[@"用户数量超出",@"注册国家必须非china",@"注册国家必须是china",@"用户名或者密码为空",@"用户名已经存在",@"国家错误",@"时区错误",@"远程服务器注册用户失败",@"注册失败",@"操作失败",@"运行错误",@"服务器地址为空",@"确认密码不正确",@"时区为空"];
+                
+                if (ResultValue<(resultArray.count+2)) {
+                    [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                }
+                if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"未登录"];
+                }
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
+    
 }
 
 -(void)checkTwoValue{
@@ -745,13 +833,15 @@
 }
 
 -(void)choiceTheValue:(NSInteger)Num{
-    NSArray *nameArray;NSString *title;
+    NSArray *nameArray;NSString *title;  NSMutableArray *serverIdArray;
     if (Num==2500) {
         title=@"选择服务器地址";
         NSArray *serverListArray=[[NSUserDefaults standardUserDefaults] objectForKey:@"OssServerAddress"];
         NSMutableArray *array1=[NSMutableArray array];
+        serverIdArray=[NSMutableArray array];
         for (NSDictionary*dic in serverListArray) {
             [array1 addObject:dic[@"url"]];
+           [serverIdArray addObject:dic[@"id"]];
         }
         nameArray=[NSArray arrayWithArray:array1];
     }else if (Num==2504 || Num==3503) {
@@ -762,7 +852,12 @@
     
     
     [ZJBLStoreShopTypeAlert showWithTitle:title titles:nameArray selectIndex:^(NSInteger selectIndex) {
-        
+        if (Num==2500) {
+            if (serverIdArray.count>selectIndex) {
+                 _serverID=serverIdArray[selectIndex];
+            }
+           
+        }
         
     }selectValue:^(NSString *selectValue){
         UILabel *lable=[self.view viewWithTag:Num+100];
