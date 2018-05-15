@@ -48,7 +48,7 @@
     NSString *type;
     
     if (ary.count <= 0) {
-        [UIAlertController showAlertViewWithTitle:@"提示" Message:@"数据源不能为空" BtnTitles:@[@"确定"] ClickBtn:nil];
+  //      [UIAlertController showAlertViewWithTitle:@"提示" Message:@"数据源不能为空" BtnTitles:@[@"确定"] ClickBtn:nil];
         return sortDic;
     }
     

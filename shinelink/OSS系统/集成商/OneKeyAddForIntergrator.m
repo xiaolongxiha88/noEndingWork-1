@@ -43,7 +43,7 @@
 
 @property (nonatomic, strong) NSString *serverID;
 @property (nonatomic, strong) NSString *userName;
-@property (nonatomic, strong) NSString *plantID;
+
 @property (nonatomic, assign) NSInteger userTagNum;
 @property (nonatomic, strong) NSString *longitude;
 @property (nonatomic, strong) NSString *latitude;
@@ -76,7 +76,7 @@
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
     float W1=SCREEN_Width/3.0;
-    NSArray *nameArray=@[@"1.添加用户",@"2.添加电站",@"3.添加设备"];
+    NSArray *nameArray=@[@"1.添加用户",@"2.添加电站",@"3.添加采集器"];
     for (int i=0; i<3; i++) {
         UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1*i, 0,W1, _H1)];
         if (i==0) {
@@ -287,7 +287,7 @@
     _twoView.backgroundColor=[UIColor whiteColor];
     [_scrollView addSubview:_twoView];
     
-    _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+400*HEIGHT_SIZE+_goNextView.frame.size.height);
+    _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+450*HEIGHT_SIZE+_goNextView.frame.size.height);
     _goNextView.frame=CGRectMake(_goNextView.frame.origin.x, H2+_twoView.frame.origin.x+_twoView.frame.size.height+15*HEIGHT_SIZE, _goNextView.frame.size.width, _goNextView.frame.size.height);
     
     NSArray *name1Array=@[@"电站名称",@"安装时间",@"装机容量(W)",@"时区",@"国家",@"定位"];
@@ -376,7 +376,7 @@
     if (_isJumpPlant) {
         HH=HH+_H1*2;
     }
-       self.scrollView.contentOffset = CGPointMake(0, H2-HH+10*HEIGHT_SIZE);
+       self.scrollView.contentOffset = CGPointMake(0, H2-HH-5*HEIGHT_SIZE);
     
     _threeView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, 290*HEIGHT_SIZE)];
     _threeView.backgroundColor=COLOR(242, 242, 242, 1);
@@ -433,7 +433,7 @@
     [goButton3 setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
     [goButton3 setTitle:@"完成" forState:UIControlStateNormal];
     goButton3.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
-    [goButton3 addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
+    [goButton3 addTarget:self action:@selector(checkThreeValue) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:goButton3];
 }
 
@@ -463,11 +463,11 @@
     
     UILabel *lable1=[self.view viewWithTag:4501+100];
     lable1.text=validCodeString;
+    
+     NSLog(@"validCodeString: %@", validCodeString);
 }
 
--(void)finishSet{
-    
-}
+
 
 -(void)nextGoStep{
     _keepValueEnable=YES;
@@ -741,10 +741,108 @@
     }
     
 
-    
-    
- 
 }
+
+
+
+-(void)checkThreeValue{
+    _threeDic=[NSMutableDictionary new];
+    if (_isJumpUser) {
+           UILabel *lable=[self.view viewWithTag:4400+100];
+        if ([lable.text isEqualToString:@""] || lable.text==nil) {
+            [self showToastViewWithTitle:@"请选择电站所属用户"];
+            return;
+        }else{
+            [_threeDic setObject:_serverID forKey:@"serverId"];
+        }
+    }else{
+        [_threeDic setObject:_serverID forKey:@"serverId"];
+    }
+    
+    if (_isJumpPlant) {
+          UILabel *lable1=[self.view viewWithTag:4401+100];
+        if ([lable1.text isEqualToString:@""] || lable1.text==nil) {
+            [self showToastViewWithTitle:@"请选择设备所属电站"];
+            return;
+        }else{
+              [_threeDic setObject:_plantID forKey:@"pId"];
+        }
+        
+    }else{
+         [_threeDic setObject:_plantID forKey:@"pId"];
+    }
+   
+       UITextField *Text1=[self.view viewWithTag:4500+100];
+      UITextField *Text2=[self.view viewWithTag:4501+100];
+    
+    if ([Text1.text isEqualToString:@""] || Text1.text==nil) {
+        [self showToastViewWithTitle:@"请输入采集器序列号"];
+        return;
+    }else{
+           [_threeDic setObject:Text1.text forKey:@"datalog"];
+    }
+    if ([Text2.text isEqualToString:@""] || Text2.text==nil) {
+        [self showToastViewWithTitle:@"请输入采集器校验码"];
+        return;
+    }else{
+        [_threeDic setObject:Text2.text forKey:@"validCode"];
+    }
+
+    NSString *snCheck=[self getValidCode:Text1.text];
+    if (![Text2.text isEqualToString:snCheck]) {
+          [self showToastViewWithTitle:@"请输入正确的采集器校验码"];
+                return;
+    }
+    
+    [self getNetThree];
+}
+
+
+
+-(void)getNetThree{
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_threeDic paramarsSite:@"/api/v3/customer/plantManage/addDatalog" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/plantManage/addDatalog: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+         
+             //   [self showToastViewWithTitle:@"保存采集器成功"];
+
+                [self.navigationController popViewControllerAnimated:YES];
+                [self showAlertViewWithTitle:@"注册成功" message:nil cancelButtonTitle:root_OK];
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                NSArray *resultArray=@[@"电站不存在",@"用户不存在",@"采集器序列号错误",@"采集器数量超标",@"采集器已存在",@"采集器校验码不匹配",@"必须参数不完整"];
+                
+                if (ResultValue<(resultArray.count+2)) {
+                    [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                }
+                if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"登录超时"];
+                }
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
+    
+}
+
+
+
+
 
 -(void)selectChioce:(UITapGestureRecognizer*)tap{
     NSInteger Num=tap.view.tag;
@@ -824,6 +922,7 @@
         [another didSelectedItem:^(NSString *item) {
             UILabel *lable=[self.view viewWithTag:4401+100];
             lable.text=item;
+            _plantID=[_plantListDic objectForKey:item];
         }];
         another.title =@"选择所属电站";
         another.isNeedRightItem=YES;
@@ -853,7 +952,7 @@
 
 -(void)choiceTheUser2:(NSInteger)Num{
 
-        if(_userListArray.count>0){
+   // _userListArray=[NSMutableArray new];
     
             AnotherSearchViewController *another = [AnotherSearchViewController new];
             //返回选中搜索的结果
@@ -871,10 +970,12 @@
             };
             another.dataSource=_userListArray;
             [self.navigationController pushViewController:another animated:YES];
-        }else{
-            [self showToastViewWithTitle:@"点击获取用户列表"];
-            return;
-        }
+    
+     //   if(_userListArray.count>0){
+//        }else{
+//            [self showToastViewWithTitle:@"点击获取用户列表"];
+//            return;
+//        }
     
     
     
@@ -970,10 +1071,20 @@
     
 }
 
+-(void)setPlantName:(NSString *)plantName{
+ 
+    
+    UILabel *lable=[self.view viewWithTag:4401+100];
+    lable.text=plantName;
+    
+}
+
 -(void)gotoAddPlant{
     addOssIntegratorDevice *searchView=[[addOssIntegratorDevice alloc]init];
     searchView.deviceType=2;
     searchView.cmdType=2;
+    searchView.userName=_userName;
+    searchView.serverID=_serverID;
     [self.navigationController pushViewController:searchView animated:YES];
 }
 

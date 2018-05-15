@@ -28,12 +28,14 @@
 @property (nonatomic, strong) NSDateFormatter *dayFormatter;
 @property (nonatomic, strong) NSString *currentDay;
 @property (nonatomic, strong) NSArray *userListArray;
-@property (nonatomic, strong) NSArray *countryListArray;
+@property (nonatomic, strong) NSMutableArray *countryListArray;
 
 @property (nonatomic, strong) NSMutableDictionary*oneDic;
 @property (nonatomic, strong) NSMutableDictionary*twoDic;
 @property (nonatomic, strong) NSMutableDictionary*threeDic;
-@property (nonatomic, strong) NSString *serverID;
+@property (nonatomic, strong) NSString *longitude;
+@property (nonatomic, strong) NSString *latitude;
+
 
 @end
 
@@ -84,14 +86,14 @@
 
 -(void)initUiForUser{
 
-    
+    self.title=@"添加用户";
     _oneView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 361*HEIGHT_SIZE)];
     _oneView.backgroundColor=[UIColor whiteColor];
     [_scrollView addSubview:_oneView];
     
             _finishButton.frame=CGRectMake(60*NOW_SIZE,_oneView.frame.origin.y+_oneView.frame.size.height+40*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     
-    NSArray *name1Array=@[@"服务器地址",@"用户名",@"密码",@"重复密码",@"时区",@"手机号",@"邮箱地址",@"公司名称",@"代理商代码"];
+    NSArray *name1Array=@[@"服务器地址",@"用户名",@"密码",@"重复密码",@"时区",@"手机号",@"邮箱地址",@"公司名称",@"安装商代码"];
     for (int i=0; i<name1Array.count; i++) {
         float H2=0+_H1*i;
         NSInteger type=0;
@@ -116,23 +118,23 @@
     
     float H2=0*HEIGHT_SIZE;
 
-    
-        UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
-        jumpUserView.backgroundColor=[UIColor clearColor];
-        jumpUserView.tag=3300;
-        [_scrollView addSubview:jumpUserView];
-        
-        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0,SCREEN_Width-20*NOW_SIZE, _H1)];
-        lable1.textColor = COLOR(154, 154, 154, 1);
-        lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        lable1.textAlignment=NSTextAlignmentLeft;
-   // lable1.backgroundColor=COLOR(242, 242, 242, 1);
-        lable1.text=@"请指定电站所属的用户:";
-        [jumpUserView addSubview:lable1];
-        
-        [self getUnitUI:@"所属用户" Hight:_H1 type:1 tagNum:3400 firstView:jumpUserView];
-        
-        H2=H2+_H1*2+15*HEIGHT_SIZE;
+      self.title=@"添加电站";
+//        UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
+//        jumpUserView.backgroundColor=[UIColor clearColor];
+//        jumpUserView.tag=3300;
+//        [_scrollView addSubview:jumpUserView];
+//        
+//        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0,SCREEN_Width-20*NOW_SIZE, _H1)];
+//        lable1.textColor = COLOR(154, 154, 154, 1);
+//        lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+//        lable1.textAlignment=NSTextAlignmentLeft;
+//   // lable1.backgroundColor=COLOR(242, 242, 242, 1);
+//        lable1.text=@"请指定电站所属的用户:";
+//        [jumpUserView addSubview:lable1];
+//        
+//        [self getUnitUI:@"所属用户" Hight:_H1 type:1 tagNum:3400 firstView:jumpUserView];
+//        
+//        H2=H2+_H1*2+15*HEIGHT_SIZE;
 
     
     _twoView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, 241*HEIGHT_SIZE)];
@@ -162,7 +164,7 @@
 
 
 -(void)initUiForDevice{
-    
+        self.title=@"添加采集器";
         float H2=0*HEIGHT_SIZE;
   
         UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
@@ -349,13 +351,54 @@
         [self choiceTheValue:Num];
     }
     
+    if (Num==2508 ){
+        [self getTheIcode];
+    }
+    
 }
 
 
+-(void)getTheIcode{
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:netDic paramarsSite:@"/api/v3/customer/user/plant" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/user/plant: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+             
+                
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                NSArray *resultArray=@[@"非集成商用户",@"未找到指定的服务器地址"];
+                
+                if (ResultValue<(resultArray.count+2)) {
+                    [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                }
+                if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"登录超时"];
+                }
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+
+    }];
+    
+    
+}
+
 -(void)getTheLocation{
     [[SNLocationManager shareLocationManager] startUpdatingLocationWithSuccess:^(CLLocation *location, CLPlacemark *placemark) {
-        NSString* _longitude=[NSString stringWithFormat:@"%.2f", location.coordinate.longitude];
-        NSString* _latitude=[NSString stringWithFormat:@"%.2f", location.coordinate.latitude];
+        _longitude=[NSString stringWithFormat:@"%.2f", location.coordinate.longitude];
+        _latitude=[NSString stringWithFormat:@"%.2f", location.coordinate.latitude];
         NSString* _city=placemark.locality;
         //   NSString* _countryGet=placemark.country;
         
@@ -367,6 +410,7 @@
         
     }];
 }
+
 
 -(void)choiceThePlant{
     _userListArray=@[@"中国",@"美国",@"英国",@"朝国",@"钱国"];
@@ -423,8 +467,13 @@
 }
 
 
+
 -(void)choiceTheCountry{
-    _countryListArray=@[@"中国",@"美国",@"英国",@"朝国",@"钱国"];
+    _countryListArray=[NSMutableArray array];
+    [self netForCountry];
+}
+
+-(void)choiceTheCountry2{
     if(_countryListArray.count>0){
         
         AnotherSearchViewController *another = [AnotherSearchViewController new];
@@ -433,18 +482,52 @@
             UILabel *lable=[self.view viewWithTag:3504+100];
             lable.text=item;
         }];
-        another.title =@"选择用户";
-        another.isNeedRightItem=YES;
-        another.rightItemBlock = ^{
-            [self gotoAddUser];
-        };
+        another.title =@"选择国家";
         another.dataSource=_countryListArray;
         [self.navigationController pushViewController:another animated:YES];
     }else{
-        [self showToastViewWithTitle:@"点击获取国家列表"];
+        [self showToastViewWithTitle:@"重新点击获取国家列表"];
         return;
     }
+}
+
+-(void)netForCountry{
     
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL_Demo_CN paramars:@{@"admin":@"admin"} paramarsSite:@"/newCountryCityAPI.do?op=getCountryCity" sucessBlock:^(id content) {
+        [self hideProgressView];
+        NSLog(@"getCountryCity: %@", content);
+        if (content) {
+            NSArray *dataDic=[NSArray arrayWithArray:content];
+            if (dataDic.count>0) {
+                for (int i=0; i<dataDic.count; i++) {
+                    NSString *DY=[NSString stringWithFormat:@"%@",content[i][@"country"]];
+                    [ _countryListArray addObject:DY];
+                }
+                
+                [_countryListArray sortUsingComparator:^NSComparisonResult(__strong id obj1,__strong id obj2){
+                    NSString *str1=(NSString *)obj1;
+                    NSString *str2=(NSString *)obj2;
+                    return [str1 compare:str2];
+                }];
+                
+                [_countryListArray insertObject:@"A1_中国" atIndex:0];
+                [self choiceTheCountry2];
+            }else{
+                
+                [self hideProgressView];
+                [self showToastViewWithTitle:root_Networking];
+                
+            }
+            
+            
+            
+        }
+        
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        
+    }];
     
 }
 
@@ -718,7 +801,7 @@
     
  
         NSArray *alertArray=@[@"请填写电站名称",@"请选择安装时间",@"请填写装机容量",@"请选择时区",@"请选择国家"];
-        NSArray*keyArray=@[@"serverId",@"userName",@"password",@"passwordtwo",@"timezone",@"phone"];
+        NSArray*keyArray=@[@"plantName",@"addDate",@"designPower",@"timezone",@"country"];
         
         
 
@@ -751,7 +834,65 @@
             
         }
         
-   
+    [_twoDic setObject:_userName forKey:@"userName"];
+    [_twoDic setObject:_serverID forKey:@"serverId"];
+    [_twoDic setObject:_latitude forKey:@"wd"];
+    [_twoDic setObject:_longitude forKey:@"jd"];
+    
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_twoDic paramarsSite:@"/api/v3/customer/userManage/creatNormalPlant" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/userManage/creatNormalPlant: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+           
+                [self showToastViewWithTitle:@"保存电站成功"];
+                if (_cmdType==1) {
+                    for (UIViewController *controller in self.navigationController.viewControllers) {
+                        if ([controller isKindOfClass:[OneKeyAddForIntergrator class]])
+                        {
+                            OneKeyAddForIntergrator *A =(OneKeyAddForIntergrator *)controller;
+                            A.plantID=firstDic[@"obj"][@"plantId"];
+                            [self.navigationController popToViewController:A animated:YES];
+                            
+                        }
+                        
+                    }
+                }
+                
+                //_userName=firstDic[@"obj"][@"userName"];
+               
+         
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                NSArray *resultArray=@[@"电站数量超标",@"电站国家不存在",@"电站已存在",@"电站信息错误",@"用户不存在",@"必须参数未传完整",@"添加失败"];
+                
+                if (ResultValue<(resultArray.count+2)) {
+                    [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                }
+                if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"未登录"];
+                }
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
+    
+    
+    
+    
     
 }
 

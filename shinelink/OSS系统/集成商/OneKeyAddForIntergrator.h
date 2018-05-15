@@ -12,4 +12,7 @@
 
 @property (nonatomic, strong) NSString *addNewUser;
 
+@property (nonatomic, strong) NSString *plantName;
+@property (nonatomic, strong) NSString *plantID;
+
 @end
