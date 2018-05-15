@@ -10,4 +10,6 @@
 
 @interface OneKeyAddForIntergrator : RootViewController
 
+@property (nonatomic, strong) NSString *addNewUser;
+
 @end

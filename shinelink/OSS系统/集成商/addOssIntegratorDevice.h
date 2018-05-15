@@ -12,4 +12,6 @@
 
 @property (nonatomic, assign)float deviceType;
 
+@property (nonatomic, assign)NSInteger cmdType;
+
 @end

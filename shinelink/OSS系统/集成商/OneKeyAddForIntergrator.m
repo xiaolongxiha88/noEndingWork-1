@@ -11,6 +11,7 @@
 #import "AnotherSearchViewController.h"
 #import "MMScanViewController.h"
 #import "SNLocationManager.h"
+#import "addOssIntegratorDevice.h"
 
 @interface OneKeyAddForIntergrator ()
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -34,10 +35,20 @@
 @property (nonatomic, strong) NSDateFormatter *dayFormatter;
 @property (nonatomic, strong) NSString *currentDay;
 @property (nonatomic, strong) NSArray *userListArray;
-@property (nonatomic, strong) NSArray *countryListArray;
+@property (nonatomic, strong) NSMutableDictionary *userListDic;
+@property (nonatomic, strong) NSMutableArray *plantListArray;
+@property (nonatomic, strong) NSMutableDictionary *plantListDic;
+@property (nonatomic, strong) NSMutableArray *countryListArray;
 @property (nonatomic, strong)NSMutableArray *textFieldMutableArray;
 
 @property (nonatomic, strong) NSString *serverID;
+@property (nonatomic, strong) NSString *userName;
+@property (nonatomic, strong) NSString *plantID;
+@property (nonatomic, assign) NSInteger userTagNum;
+@property (nonatomic, strong) NSString *longitude;
+@property (nonatomic, strong) NSString *latitude;
+
+
 @end
 
 @implementation OneKeyAddForIntergrator
@@ -231,6 +242,10 @@
 }
 
 -(void)initTwoUI{
+    
+    _longitude=@"";
+    _latitude=@"";
+
     _oneView.backgroundColor=COLOR(242, 242, 242, 1);
          self.scrollView.contentOffset = CGPointMake(0, _oneView.frame.size.height);
     
@@ -293,7 +308,7 @@
 
 
 -(void)initThreeUI{
-           self.scrollView.contentOffset = CGPointMake(0, _twoView.frame.size.height+_oneView.frame.size.height+30*HEIGHT_SIZE);
+ 
     
     for (int i=0; i<3; i++) {
         
@@ -317,7 +332,7 @@
         
         _twoView.frame=CGRectMake(_twoView.frame.origin.x, _twoView.frame.origin.y-(2*_H1), _twoView.frame.size.width, _twoView.frame.size.height);
         
-        H2=_twoView.frame.origin.y+_twoView.frame.size.height+20*HEIGHT_SIZE;
+        H2=_twoView.frame.origin.y+_twoView.frame.size.height+15*HEIGHT_SIZE;
         
         UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
         jumpUserView.backgroundColor=[UIColor clearColor];
@@ -332,7 +347,7 @@
         
         [self getUnitUI:@"所属用户" Hight:_H1 type:1 tagNum:4400 firstView:jumpUserView];
         
-        H2=H2+_H1*2+15*HEIGHT_SIZE;
+        H2=H2+_H1*2+0*HEIGHT_SIZE;
     }
     
     if (_isJumpPlant) {
@@ -353,8 +368,16 @@
         
         H2=H2+_H1*2+15*HEIGHT_SIZE;
     }
+ 
+    float HH=0;
+    if (_isJumpUser) {
+       HH=HH+_H1*2;
+    }
+    if (_isJumpPlant) {
+        HH=HH+_H1*2;
+    }
+       self.scrollView.contentOffset = CGPointMake(0, H2-HH+10*HEIGHT_SIZE);
     
-
     _threeView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, 290*HEIGHT_SIZE)];
     _threeView.backgroundColor=COLOR(242, 242, 242, 1);
     [_scrollView addSubview:_threeView];
@@ -592,6 +615,7 @@
             if ([firstDic[@"result"] intValue]==1) {
                       _stepNum++;
                 [self showToastViewWithTitle:@"保存用户成功"];
+                      _userName=firstDic[@"obj"][@"userName"];
                     [self initTwoUI];
             }else{
                 int ResultValue=[firstDic[@"result"] intValue];
@@ -619,7 +643,7 @@
 -(void)getNetTwo{
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_oneDic paramarsSite:@"/api/v3/customer/userManage/creatNormalPlant" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_twoDic paramarsSite:@"/api/v3/customer/userManage/creatNormalPlant" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
@@ -630,11 +654,13 @@
             
             if ([firstDic[@"result"] intValue]==1) {
                 _stepNum++;
-                [self showToastViewWithTitle:@"保存用户成功"];
-                [self initTwoUI];
+                [self showToastViewWithTitle:@"保存电站成功"];
+                _userName=firstDic[@"obj"][@"userName"];
+                _plantID=firstDic[@"obj"][@"plantId"];
+                [self initThreeUI];
             }else{
                 int ResultValue=[firstDic[@"result"] intValue];
-                NSArray *resultArray=@[@"用户数量超出",@"注册国家必须非china",@"注册国家必须是china",@"用户名或者密码为空",@"用户名已经存在",@"国家错误",@"时区错误",@"远程服务器注册用户失败",@"注册失败",@"操作失败",@"运行错误",@"服务器地址为空",@"确认密码不正确",@"时区为空"];
+                NSArray *resultArray=@[@"电站数量超标",@"电站国家不存在",@"电站已存在",@"电站信息错误",@"用户不存在",@"必须参数未传完整",@"添加失败"];
                 
                 if (ResultValue<(resultArray.count+2)) {
                     [self showToastViewWithTitle:resultArray[ResultValue-2]];
@@ -661,7 +687,7 @@
 
     if (_keepValueEnable) {
         NSArray *alertArray=@[@"请填写电站名称",@"请选择安装时间",@"请填写装机容量",@"请选择时区",@"请选择国家"];
-        NSArray*keyArray=@[@"serverId",@"userName",@"password",@"passwordtwo",@"timezone",@"phone"];
+        NSArray*keyArray=@[@"plantName",@"addDate",@"designPower",@"timezone",@"country"];
   
         
         if (_isJumpUser) {
@@ -681,6 +707,11 @@
                 }else{
                     [_twoDic setObject:lable.text forKey:keyArray[i]];
                 }
+                if (i==4) {
+                    if ([lable.text isEqualToString:@"A1_中国"] || [lable.text containsString:@"中国"]) {
+                        [_twoDic setObject:@"China" forKey:keyArray[i]];
+                    }
+                }
             }else{
                 UITextField *field=[self.view viewWithTag:3600+i];
                 if ([field.text isEqualToString:@""] || field.text==nil) {
@@ -694,23 +725,31 @@
             
         }
         
+            [_twoDic setObject:_userName forKey:@"userName"];
+          [_twoDic setObject:_serverID forKey:@"serverId"];
+           [_twoDic setObject:_latitude forKey:@"wd"];
+            [_twoDic setObject:_longitude forKey:@"jd"];
+        
         if (_isJumpUser) {
             _isJumpUser=NO;
         }
         
-                  _stepNum++;
+        [self getNetTwo];
     }else{
                   _stepNum++;
+           [self initThreeUI];
     }
     
 
     
     
-    [self initThreeUI];
+ 
 }
 
 -(void)selectChioce:(UITapGestureRecognizer*)tap{
     NSInteger Num=tap.view.tag;
+    
+      [self keyboardHide:nil];
     
     if (Num==3400 || Num==4400 ){
         [self choiceTheUser:Num];
@@ -739,11 +778,11 @@
 
 -(void)getTheLocation{
     [[SNLocationManager shareLocationManager] startUpdatingLocationWithSuccess:^(CLLocation *location, CLPlacemark *placemark) {
-        NSString* _longitude=[NSString stringWithFormat:@"%.2f", location.coordinate.longitude];
-        NSString* _latitude=[NSString stringWithFormat:@"%.2f", location.coordinate.latitude];
+         _longitude=[NSString stringWithFormat:@"%.2f", location.coordinate.longitude];
+         _latitude=[NSString stringWithFormat:@"%.2f", location.coordinate.latitude];
         NSString* _city=placemark.locality;
      //   NSString* _countryGet=placemark.country;
-        
+      
                 NSString *lableText=[NSString stringWithFormat:@"%@(%@,%@)",_city,_longitude,_latitude];
         UILabel *lable=[self.view viewWithTag:3505+100];
         lable.text=lableText;
@@ -754,8 +793,31 @@
 }
 
 -(void)choiceThePlant{
-    _userListArray=@[@"中国",@"美国",@"英国",@"朝国",@"钱国"];
-    if(_userListArray.count>0){
+    if (_isJumpUser) {
+      //  UILabel *lable=[self.view viewWithTag:4400+100];
+        if ((_userName==nil) || [_userName isEqualToString:@""]) {
+            [self showToastViewWithTitle:@"请先选择所属用户"];
+            return;
+        }
+    }
+ 
+    
+    
+    NSInteger Num=4401;
+    NSDictionary *netDic=@{@"kind":@"1",@"userName":_userName,@"serverId":_serverID};
+    
+//    if(_userListArray.count>0){
+//        [self choiceThePlant:Num];
+//    }else{
+    
+        [self getNetForUserAndPlant:netDic typeNum:1 tagNum:Num];
+  
+    
+  
+}
+
+-(void)choiceThePlant2:(NSInteger)Num{
+    if(_plantListArray.count>0){
         
         AnotherSearchViewController *another = [AnotherSearchViewController new];
         //返回选中搜索的结果
@@ -766,9 +828,9 @@
         another.title =@"选择所属电站";
         another.isNeedRightItem=YES;
         another.rightItemBlock = ^{
-            [self gotoAddUser];
+            [self gotoAddPlant];
         };
-        another.dataSource=_userListArray;
+        another.dataSource=_plantListArray;
         [self.navigationController pushViewController:another animated:YES];
     }else{
         [self showToastViewWithTitle:@"点击获取电站列表"];
@@ -776,15 +838,16 @@
     }
 }
     
-    
 -(void)choiceTheUser:(NSInteger)Num{
     
+    _userTagNum=Num;
     NSDictionary *netDic=@{@"kind":@"0"};
-    if(_userListArray.count>0){
-        [self choiceTheUser2:Num];
-    }else{
+//    if(_userListArray.count>0){
+//        [self choiceTheUser2:Num];
+//    }else{
+    
         [self getNetForUserAndPlant:netDic typeNum:0 tagNum:Num];
-    }
+ 
 
 }
 
@@ -798,6 +861,8 @@
     
                 UILabel *lable=[self.view viewWithTag:Num+100];
                 lable.text=item;
+                _userName=item;
+                _serverID=[_userListDic objectForKey:item];
             }];
             another.title =@"选择所属用户";
             another.isNeedRightItem=YES;
@@ -831,16 +896,37 @@
             
             if ([firstDic[@"result"] intValue]==1) {
                 if (typeNum==0) {
+                    _userListDic=[NSMutableDictionary new];
                     NSArray *dicArray1=firstDic[@"obj"][@"pagers"];
-                    NSArray *dicArray=dicArray1[0][@"datas"];
-                    NSMutableArray *newList=[NSMutableArray new];
-                    for (int i=0; i<dicArray.count; i++) {
-                        NSDictionary *dic1=dicArray[i];
-                        [newList addObject:dic1[@"accountName"]];
+                           NSMutableArray *newList=[NSMutableArray new];
+                    
+                   for (int i=0; i<dicArray1.count; i++) {
+                       NSArray *dicArray=dicArray1[i][@"datas"];
+                   NSString * serverIdString=dicArray1[i][@"serverId"];
+                       
+                       for (int i=0; i<dicArray.count; i++) {
+                           NSDictionary *dic1=dicArray[i];
+                           [newList addObject:dic1[@"accountName"]];
+                           [_userListDic setObject:serverIdString forKey:dic1[@"accountName"]];
+                       }
+             
                     }
-                    _userListArray=[NSArray arrayWithArray:newList];
-                    _serverID=dicArray1[0][@"serverId"];
+                 
+                           _userListArray=[NSArray arrayWithArray:newList];
                     [self choiceTheUser2:tagNum];
+                }
+                
+                if (typeNum==1) {
+                    _plantListArray=[NSMutableArray array];
+                     _plantListDic=[NSMutableDictionary new];
+                      NSArray *dicArray2=firstDic[@"obj"][@"datas"];
+                    for (int i=0; i<dicArray2.count; i++) {
+                        NSDictionary *dic2=dicArray2[i];
+                        [_plantListArray addObject:dic2[@"plantName"]];
+                        [_plantListDic setObject:dic2[@"pId"] forKey:dic2[@"plantName"]];
+                    }
+                    
+                    [self choiceThePlant2:tagNum];
                 }
 
                 
@@ -870,11 +956,33 @@
 
 -(void)gotoAddUser{
     
+    addOssIntegratorDevice *searchView=[[addOssIntegratorDevice alloc]init];
+    searchView.deviceType=1;
+    searchView.cmdType=1;
+    [self.navigationController pushViewController:searchView animated:YES];
 }
 
+-(void)setAddNewUser:(NSString *)addNewUser{
+    
+    UILabel *lable=[self.view viewWithTag:_userTagNum+100];
+    lable.text=addNewUser;
+     _userName=addNewUser;
+    
+}
+
+-(void)gotoAddPlant{
+    addOssIntegratorDevice *searchView=[[addOssIntegratorDevice alloc]init];
+    searchView.deviceType=2;
+    searchView.cmdType=2;
+    [self.navigationController pushViewController:searchView animated:YES];
+}
 
 -(void)choiceTheCountry{
-    _countryListArray=@[@"中国",@"美国",@"英国",@"朝国",@"钱国"];
+    _countryListArray=[NSMutableArray array];
+    [self netForCountry];
+}
+
+-(void)choiceTheCountry2{
     if(_countryListArray.count>0){
         
         AnotherSearchViewController *another = [AnotherSearchViewController new];
@@ -883,19 +991,53 @@
             UILabel *lable=[self.view viewWithTag:3504+100];
             lable.text=item;
         }];
-        another.title =@"选择用户";
-        another.isNeedRightItem=YES;
-        another.rightItemBlock = ^{
-            [self gotoAddUser];
-        };
+        another.title =@"选择国家";
         another.dataSource=_countryListArray;
         [self.navigationController pushViewController:another animated:YES];
     }else{
-        [self showToastViewWithTitle:@"点击获取国家列表"];
+        [self showToastViewWithTitle:@"重新点击获取国家列表"];
         return;
     }
+}
+
+-(void)netForCountry{
     
-  
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL_Demo_CN paramars:@{@"admin":@"admin"} paramarsSite:@"/newCountryCityAPI.do?op=getCountryCity" sucessBlock:^(id content) {
+        [self hideProgressView];
+        NSLog(@"getCountryCity: %@", content);
+        if (content) {
+            NSArray *dataDic=[NSArray arrayWithArray:content];
+            if (dataDic.count>0) {
+                for (int i=0; i<dataDic.count; i++) {
+                    NSString *DY=[NSString stringWithFormat:@"%@",content[i][@"country"]];
+                    [ _countryListArray addObject:DY];
+                }
+                
+                [_countryListArray sortUsingComparator:^NSComparisonResult(__strong id obj1,__strong id obj2){
+                    NSString *str1=(NSString *)obj1;
+                    NSString *str2=(NSString *)obj2;
+                    return [str1 compare:str2];
+                }];
+                
+                [_countryListArray insertObject:@"A1_中国" atIndex:0];
+                [self choiceTheCountry2];
+            }else{
+              
+                    [self hideProgressView];
+                    [self showToastViewWithTitle:root_Networking];
+              
+            }
+            
+            
+            
+        }
+        
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+    
+    }];
+    
 }
 
 -(void)choiceTheValue:(NSInteger)Num{
@@ -936,6 +1078,8 @@
 
 
 -(void)pickDate{
+    
+    [self keyboardHide:nil];
     // float buttonSize=70*HEIGHT_SIZE;
     _date=[[UIDatePicker alloc]initWithFrame:CGRectMake(0*NOW_SIZE, SCREEN_Height-300*HEIGHT_SIZE, SCREEN_Width, 300*HEIGHT_SIZE)];
     _date.backgroundColor=[UIColor whiteColor];

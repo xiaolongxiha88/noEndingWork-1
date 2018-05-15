@@ -11,7 +11,7 @@
 #import "AnotherSearchViewController.h"
 #import "MMScanViewController.h"
 #import "SNLocationManager.h"
-
+#import "OneKeyAddForIntergrator.h"
 
 @interface addOssIntegratorDevice ()
 
@@ -33,6 +33,7 @@
 @property (nonatomic, strong) NSMutableDictionary*oneDic;
 @property (nonatomic, strong) NSMutableDictionary*twoDic;
 @property (nonatomic, strong) NSMutableDictionary*threeDic;
+@property (nonatomic, strong) NSString *serverID;
 
 @end
 
@@ -58,7 +59,7 @@
     [_scrollView addSubview:_finishButton];
     
     
-    _deviceType=3;
+  //  _deviceType=3;
     if (_deviceType==1) {
         [self initUiForUser];
     }else  if (_deviceType==2) {
@@ -84,18 +85,24 @@
 -(void)initUiForUser{
 
     
-    _oneView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 241*HEIGHT_SIZE)];
+    _oneView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, 361*HEIGHT_SIZE)];
     _oneView.backgroundColor=[UIColor whiteColor];
     [_scrollView addSubview:_oneView];
     
             _finishButton.frame=CGRectMake(60*NOW_SIZE,_oneView.frame.origin.y+_oneView.frame.size.height+40*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     
-    NSArray *name1Array=@[@"服务器地址",@"用户名",@"密码",@"重复密码",@"时区",@"手机号"];
+    NSArray *name1Array=@[@"服务器地址",@"用户名",@"密码",@"重复密码",@"时区",@"手机号",@"邮箱地址",@"公司名称",@"代理商代码"];
     for (int i=0; i<name1Array.count; i++) {
         float H2=0+_H1*i;
         NSInteger type=0;
         if (i==0 || i==4) {
             type=1;
+        }
+        if (i==6 || i==7) {
+            type=3;
+        }
+        if (i==8) {
+            type=2;
         }
         [self getUnitUI:name1Array[i] Hight:H2 type:type tagNum:2500+i firstView:_oneView];
     }
@@ -254,7 +261,7 @@
     label.textAlignment=NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
     label.textColor=COLOR(154, 154, 154, 1);
-    if (type!=2) {
+    if ((type==0) || (type==1)) {
         [firstView addSubview:label];
     }
     
@@ -442,13 +449,15 @@
 }
 
 -(void)choiceTheValue:(NSInteger)Num{
-    NSArray *nameArray;NSString *title;
+    NSArray *nameArray;NSString *title;NSMutableArray *serverIdArray;
     if (Num==2500) {
         title=@"选择服务器地址";
         NSArray *serverListArray=[[NSUserDefaults standardUserDefaults] objectForKey:@"OssServerAddress"];
         NSMutableArray *array1=[NSMutableArray array];
+        serverIdArray=[NSMutableArray array];
         for (NSDictionary*dic in serverListArray) {
             [array1 addObject:dic[@"url"]];
+            [serverIdArray addObject:dic[@"id"]];
         }
         nameArray=[NSArray arrayWithArray:array1];
     }else if (Num==2504 || Num==3503) {
@@ -459,7 +468,12 @@
     
     
     [ZJBLStoreShopTypeAlert showWithTitle:title titles:nameArray selectIndex:^(NSInteger selectIndex) {
-        
+        if (Num==2500) {
+            if (serverIdArray.count>selectIndex) {
+                _serverID=serverIdArray[selectIndex];
+            }
+            
+        }
         
     }selectValue:^(NSString *selectValue){
         UILabel *lable=[self.view viewWithTag:Num+100];
@@ -621,8 +635,81 @@
             return;
         }
         
-  
- 
+   NSArray*keyArray2=@[@"email",@"company",@"iCode"];
+    for (int i=0; i<keyArray2.count; i++) {
+        if (i==0 || i==1) {
+            UITextField *field=[self.view viewWithTag:2606+i];
+            if ([field.text isEqualToString:@""] || field.text==nil) {
+                      [_oneDic setObject:@"" forKey:keyArray2[i]];
+            }else{
+                   [_oneDic setObject:field.text forKey:keyArray2[i]];
+            }
+            
+        }else{
+            UILabel *lable=[self.view viewWithTag:2606+i];
+            if ([lable.text isEqualToString:@""] || lable.text==nil) {
+                     [_oneDic setObject:@"" forKey:keyArray2[i]];
+            }else{
+                [_oneDic setObject:lable.text forKey:keyArray2[i]];
+            }
+            
+        }
+        
+        
+    }
+    
+       [_oneDic setObject:_serverID forKey:@"serverId"];
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_oneDic paramarsSite:@"/api/v3/customer/userManage_overview_creatUserPage" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/userManage_overview_creatUserPage: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+       
+                [self showToastViewWithTitle:@"添加用户成功"];
+                
+                if (_cmdType==1) {
+                    for (UIViewController *controller in self.navigationController.viewControllers) {
+                        if ([controller isKindOfClass:[OneKeyAddForIntergrator class]])
+                        {
+                            OneKeyAddForIntergrator *A =(OneKeyAddForIntergrator *)controller;
+                            A.addNewUser=firstDic[@"obj"][@"userName"];
+                            [self.navigationController popToViewController:A animated:YES];
+                            
+                        }
+                        
+                    }
+                }
+        
+                
+         
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                NSArray *resultArray=@[@"用户数量超出",@"注册国家必须非china",@"注册国家必须是china",@"用户名或者密码为空",@"用户名已经存在",@"国家错误",@"时区错误",@"远程服务器注册用户失败",@"注册失败",@"操作失败",@"运行错误",@"服务器地址为空",@"确认密码不正确",@"时区为空"];
+                
+                if (ResultValue<(resultArray.count+2)) {
+                    [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                }
+                if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"未登录"];
+                }
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
+    
     
 }
 
