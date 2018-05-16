@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSArray *cellNameArray2;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign)float tableW;
+@property (nonatomic, assign)float oldTableW;
 @property (nonatomic, assign)BOOL isChangTableView;
 @property (nonatomic, strong) NSMutableArray *selectRowNumArray;
 @property (nonatomic, strong) DTKDropdownMenuView *rightMenuView;
@@ -61,7 +62,7 @@
     _oldForParameterArray=@[@"2",@"5",@"4",@"9",@"11",@"12",@"13",@"10"];
     
     NSArray*numArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
-    _forChoiceParameterDic=@{@"1":@"类型",@"2":@"别名",@"3":@"安装商",@"4":@"所属电站",@"5":@"所属用户",@"6":@"城市",@"7":@"采集器",@"8":@"最后更新时间",@"9":@"状态",@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
+    _forChoiceParameterDic=@{@"1":@"类型",@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器",@"8":@"最后更新时间",@"9":@"状态",@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
     
     NSArray *nowNameArray;
     if (_NetForParameterArray.count==0) {
@@ -187,7 +188,7 @@
     
 
     float W_K_0=12*NOW_SIZE;             //平均空隙
-    float W1_all=0;
+    float W1_all=10*NOW_SIZE;
     
     for (int i=0; i<_cellNameArray.count; i++) {
         NSString *nameString=_cellNameArray[i];
@@ -198,7 +199,7 @@
         
         UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0, H1)];
         lable1.textColor = COLOR(51, 51, 51, 1);
-        lable1.textAlignment=NSTextAlignmentCenter;
+        lable1.textAlignment=NSTextAlignmentLeft;
         lable1.text=_cellNameArray[i];
         lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_twoScrollView addSubview:lable1];
@@ -206,7 +207,7 @@
                      W1_all=W1_all+W_all_0;
     }
     
-      _tableW=_cellNameArray.count*W1;
+      _tableW=W1_all;
     float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
     _threeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2+H1, SCREEN_Width, H3)];
     _threeScrollView.backgroundColor = [UIColor whiteColor];
@@ -353,7 +354,7 @@
     }
     
     
-    _tableW=_cellNameArray.count*W1;
+    _tableW=W1_all;
     float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
         _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
     
@@ -446,9 +447,11 @@
     if (_isChangTableView) {
         [_twoScrollView removeFromSuperview];
              _threeScrollView.frame=CGRectMake(_threeScrollView.frame.origin.x, _threeScrollView.frame.origin.y-40*HEIGHT_SIZE, _threeScrollView.frame.size.width, _threeScrollView.frame.size.height+40*HEIGHT_SIZE);
+           _threeScrollView.contentSize=CGSizeMake(ScreenWidth, _threeScrollView.frame.size.height);
     }else{
          [self.view addSubview:_twoScrollView];
                   _threeScrollView.frame=CGRectMake(_threeScrollView.frame.origin.x, _threeScrollView.frame.origin.y+40*HEIGHT_SIZE, _threeScrollView.frame.size.width, _threeScrollView.frame.size.height-40*HEIGHT_SIZE);
+         _threeScrollView.contentSize=CGSizeMake(_tableW, _threeScrollView.frame.size.height);
     }
     
     [_tableView removeFromSuperview];

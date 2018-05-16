@@ -26,7 +26,7 @@
    float H1=40*HEIGHT_SIZE;
 
     float W_K_0=12*NOW_SIZE;             //平均空隙
-    float W_all=0;
+    float W_all=10*NOW_SIZE;
     
     for (int i=0; i<nameArray.count; i++) {
         
@@ -38,7 +38,7 @@
         
         UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(W_all, 0,W_all_0, H1)];
         lableR.textColor = COLOR(102, 102, 102, 1);
-        lableR.textAlignment=NSTextAlignmentCenter;
+        lableR.textAlignment=NSTextAlignmentLeft;
         lableR.text=nameString;
         lableR.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [self.contentView addSubview:lableR];
