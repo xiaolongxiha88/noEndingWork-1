@@ -29,6 +29,8 @@
 @property (nonatomic, strong) NSString *currentDay;
 @property (nonatomic, strong) NSArray *userListArray;
 @property (nonatomic, strong) NSMutableArray *countryListArray;
+@property (nonatomic, strong) NSMutableArray *icodeListArray;
+@property (nonatomic, strong) NSMutableDictionary*icodeListDic;
 
 @property (nonatomic, strong) NSMutableDictionary*oneDic;
 @property (nonatomic, strong) NSMutableDictionary*twoDic;
@@ -359,18 +361,28 @@
 
 
 -(void)getTheIcode{
+    
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:netDic paramarsSite:@"/api/v3/customer/user/plant" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"kind":@"0"} paramarsSite:@"/api/v3/customer/group/installer" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"/api/v3/customer/user/plant: %@", content1);
+        NSLog(@"/api/v3/customer /group/installer: %@", content1);
         
         if (content1) {
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             
             if ([firstDic[@"result"] intValue]==1) {
-             
+                _icodeListArray=[NSMutableArray array];
+                _icodeListDic=[NSMutableDictionary new];
+                NSArray *icodeArray=firstDic[@"obj"];
+                for (int i=0; i<icodeArray.count; i++) {
+                    NSDictionary*dic=icodeArray[i];
+                    NSString*name=[NSString stringWithFormat:@"%@(%@)",dic[@"iCode"],dic[@"company"]];
+                    [_icodeListArray addObject:name];
+                    [_icodeListDic setObject:dic[@"iCode"] forKey:name];
+                }
+                [self choiceTheIcode];
                 
             }else{
                 int ResultValue=[firstDic[@"result"] intValue];
@@ -391,8 +403,27 @@
         [self showToastViewWithTitle:root_Networking];
 
     }];
-    
-    
+
+}
+
+-(void)choiceTheIcode{
+  
+
+        
+        AnotherSearchViewController *another = [AnotherSearchViewController new];
+        //返回选中搜索的结果
+        [another didSelectedItem:^(NSString *item) {
+            UILabel *lable=[self.view viewWithTag:2508+100];
+            lable.text=item;
+        }];
+        another.title =@"选择安装商";
+//        another.isNeedRightItem=YES;
+//        another.rightItemBlock = ^{
+//            [self gotoAddUser];
+//        };
+        another.dataSource=_icodeListArray;
+        [self.navigationController pushViewController:another animated:YES];
+
 }
 
 -(void)getTheLocation{
@@ -733,7 +764,7 @@
             if ([lable.text isEqualToString:@""] || lable.text==nil) {
                      [_oneDic setObject:@"" forKey:keyArray2[i]];
             }else{
-                [_oneDic setObject:lable.text forKey:keyArray2[i]];
+                [_oneDic setObject:[_icodeListDic objectForKey:lable.text] forKey:keyArray2[i]];
             }
             
         }
@@ -805,13 +836,13 @@
         
         
 
-            UILabel *lable=[self.view viewWithTag:3400+100];
-            if ([lable.text isEqualToString:@""] || lable.text==nil) {
-                [self showToastViewWithTitle:@"请选择电站所属用户"];
-                return;
-            }
+//            UILabel *lable=[self.view viewWithTag:3400+100];
+//            if ([lable.text isEqualToString:@""] || lable.text==nil) {
+//                [self showToastViewWithTitle:@"请选择电站所属用户"];
+//                return;
+//            }
 
-        
+    _twoDic=[NSMutableDictionary new];
         for (int i=0; i<alertArray.count; i++) {
             if (i==0 || i==4) {
                 UILabel *lable=[self.view viewWithTag:3600+i];
@@ -820,6 +851,11 @@
                     return;
                 }else{
                     [_twoDic setObject:lable.text forKey:keyArray[i]];
+                }
+                if (i==4) {
+                    if ([lable.text isEqualToString:@"A1_中国"] || [lable.text containsString:@"中国"]) {
+                        [_twoDic setObject:@"China" forKey:keyArray[i]];
+                    }
                 }
             }else{
                 UITextField *field=[self.view viewWithTag:3600+i];
@@ -853,12 +889,13 @@
             if ([firstDic[@"result"] intValue]==1) {
            
                 [self showToastViewWithTitle:@"保存电站成功"];
-                if (_cmdType==1) {
+                if (_cmdType==2) {
                     for (UIViewController *controller in self.navigationController.viewControllers) {
                         if ([controller isKindOfClass:[OneKeyAddForIntergrator class]])
                         {
                             OneKeyAddForIntergrator *A =(OneKeyAddForIntergrator *)controller;
                             A.plantID=firstDic[@"obj"][@"plantId"];
+                            A.plantName=_twoDic[@"plantName"];
                             [self.navigationController popToViewController:A animated:YES];
                             
                         }

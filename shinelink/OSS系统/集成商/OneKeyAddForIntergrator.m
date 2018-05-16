@@ -12,6 +12,7 @@
 #import "MMScanViewController.h"
 #import "SNLocationManager.h"
 #import "addOssIntegratorDevice.h"
+#import "ossIntegratorSearch.h"
 
 @interface OneKeyAddForIntergrator ()
 @property (nonatomic, strong) UIScrollView *scrollView;

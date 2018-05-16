@@ -11,6 +11,7 @@
 #import "ossNewDeviceTwoCell.h"
 #import "ShinePhone-Swift.h"
 #import "LRLChannelEditController.h"
+#import "ossIntegratorSearch.h"
 
 @interface ossNewDeviceList ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *oneScrollView;
@@ -410,8 +411,8 @@
 
 
 -(void)goToSearch{
-    IntegratorFirst *searchView=[[IntegratorFirst alloc]init];
-
+    ossIntegratorSearch *searchView=[[ossIntegratorSearch alloc]init];
+    searchView.searchType=1;
     [self.navigationController pushViewController:searchView animated:YES];
 }
 

@@ -765,6 +765,7 @@
 		33E36AB220A3F3ED00F58E6D /* lanmu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E36AB120A3F3ED00F58E6D /* lanmu2.png */; };
 		33E36AB420A46B5B00F58E6D /* del_LRL.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E36AB320A46B5B00F58E6D /* del_LRL.png */; };
 		33E36AB720A70AAC00F58E6D /* ossUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AB620A70AAC00F58E6D /* ossUserList.m */; };
+		33E36ABA20AC034200F58E6D /* ossIntegratorSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AB920AC034200F58E6D /* ossIntegratorSearch.m */; };
 		33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */; };
 		33E42E0B1DC9CDB60024FFBB /* peizhi_btn_click_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */; };
 		33E42E0D1DC9CDC40024FFBB /* peizhi_btn_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */; };
@@ -2047,6 +2048,8 @@
 		33E36AB320A46B5B00F58E6D /* del_LRL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = del_LRL.png; sourceTree = "<group>"; };
 		33E36AB520A70AAC00F58E6D /* ossUserList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossUserList.h; sourceTree = "<group>"; };
 		33E36AB620A70AAC00F58E6D /* ossUserList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossUserList.m; sourceTree = "<group>"; };
+		33E36AB820AC034200F58E6D /* ossIntegratorSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossIntegratorSearch.h; sourceTree = "<group>"; };
+		33E36AB920AC034200F58E6D /* ossIntegratorSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossIntegratorSearch.m; sourceTree = "<group>"; };
 		33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click.png; path = ../../peizhi_btn_click.png; sourceTree = "<group>"; };
 		33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click_2.png; path = ../../peizhi_btn_click_2.png; sourceTree = "<group>"; };
 		33E42E0C1DC9CDC40024FFBB /* peizhi_btn_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_2.png; path = ../../peizhi_btn_2.png; sourceTree = "<group>"; };
@@ -4440,6 +4443,8 @@
 				338614AB1F2606A0000F515E /* intergratorDeviceCell.swift */,
 				33E727842091A7A0009F460A /* ossNewDeviceList.h */,
 				33E727852091A7A0009F460A /* ossNewDeviceList.m */,
+				33E36AB820AC034200F58E6D /* ossIntegratorSearch.h */,
+				33E36AB920AC034200F58E6D /* ossIntegratorSearch.m */,
 				33E36AB520A70AAC00F58E6D /* ossUserList.h */,
 				33E36AB620A70AAC00F58E6D /* ossUserList.m */,
 				33E727872091F09E009F460A /* ossNewDeviceCell.h */,
@@ -5702,6 +5707,7 @@
 				33860FEC1EEA75C5004150FD /* MJRefreshConst.m in Sources */,
 				33EFB6011C979B5F003F336F /* StationCellectViewController.m in Sources */,
 				338614DE1F2839A9000F515E /* ESPTouchGenerator.m in Sources */,
+				33E36ABA20AC034200F58E6D /* ossIntegratorSearch.m in Sources */,
 				33EFB6701C98F9B1003F336F /* ZFLineChart.m in Sources */,
 				3355F2681C7469AB006DDE5A /* aboutViewController.m in Sources */,
 				33842470208EC2190029271C /* NSArray+Safe.m in Sources */,
