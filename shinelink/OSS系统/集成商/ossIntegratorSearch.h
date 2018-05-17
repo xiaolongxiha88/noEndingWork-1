@@ -13,4 +13,6 @@
 
 @property (nonatomic, assign) NSInteger searchType;     //1设备搜索
 
+@property (nonatomic,copy) void(^searchResultBlock)(NSArray* netResultArray);
+
 @end

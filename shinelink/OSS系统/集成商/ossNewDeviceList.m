@@ -37,6 +37,11 @@
 @property (nonatomic, strong) NSArray *oldForParameterArray;
 @property (nonatomic, strong) NSMutableArray *topArray;
 @property (nonatomic, strong) NSMutableArray *battomArray;
+
+@property (nonatomic, strong) NSArray *netResultArray;
+@property (nonatomic, strong) UILabel *numLable;
+@property (nonatomic, strong) UILabel *numNameLable;
+
 @end
 
 @implementation ossNewDeviceList
@@ -47,6 +52,7 @@
     _isChangTableView=NO;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
+    [self getNetForListParameter];
     [self initData];
     [self addRightItem];
     [self initUI];
@@ -86,6 +92,7 @@
     
 }
 
+#pragma mark -UI区域
 -(void)initUI{
   
     
@@ -143,22 +150,64 @@
     
       float H2=50*HEIGHT_SIZE;
         float W1=80*NOW_SIZE;
+        float WK1=10*NOW_SIZE;
     
+
     UIView *View2= [[UIView alloc]initWithFrame:CGRectMake(0, H1, ScreenWidth,H2)];
     View2.backgroundColor = COLOR(242, 242, 242, 1);
     [self.view addSubview:View2];
     
     float imageW=22*HEIGHT_SIZE;
-    UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(10*NOW_SIZE, (H2-imageW)/2, imageW,imageW )];
+    UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(WK1, (H2-imageW)/2, imageW,imageW )];
     image2.userInteractionEnabled=YES;
     image2.image=IMAGE(@"OSS_list.png");
     UITapGestureRecognizer *labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changTableView)];
     [image2 addGestureRecognizer:labelTap1];
     [View2 addSubview:image2];
     
-    float View01_W=ScreenWidth-20*NOW_SIZE-imageW-10*NOW_SIZE;
+    float H2_1=30*HEIGHT_SIZE;
+    float W2_1=40*NOW_SIZE;
+    float image00W=8*HEIGHT_SIZE;  float image00H=6*HEIGHT_SIZE;float image00K=3*NOW_SIZE;
+    float W_View201=W2_1+image00W+image00K;
+    UIView *View201= [[UIView alloc]initWithFrame:CGRectMake(WK1+imageW+WK1, 0, W_View201,H2)];
+    View201.backgroundColor =[UIColor clearColor];
+    View201.userInteractionEnabled=YES;
+    UITapGestureRecognizer *labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changStatue)];
+    [View201 addGestureRecognizer:labelTap2];
+    [View2 addSubview:View201];
+    
+    if (!_numNameLable) {
+        _numNameLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0,W2_1, H2_1/2.0)];
+        _numNameLable.textColor = COLOR(51, 51, 51, 1);
+        _numNameLable.text=@"全部";
+        _numNameLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        _numNameLable.textAlignment=NSTextAlignmentCenter;
+        _numNameLable.adjustsFontSizeToFitWidth=YES;
+        _numNameLable.userInteractionEnabled=YES;
+        [View201 addSubview:_numNameLable];
+    }
+
+    if (!_numLable) {
+        _numLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0+H2_1/2.0,W2_1, H2_1/2.0)];
+        _numLable.textColor =mainColor;
+        _numLable.text=@"12312";
+        _numLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+        _numLable.textAlignment=NSTextAlignmentCenter;
+           _numLable.adjustsFontSizeToFitWidth=YES;
+        _numLable.userInteractionEnabled=YES;
+        [View201 addSubview:_numLable];
+    }
+    
+    
+    UIImageView *image00=[[UIImageView alloc]initWithFrame:CGRectMake(W2_1+image00K, (H2-image00H)/2, image00W,image00H )];
+    image00.userInteractionEnabled=YES;
+    image00.image=IMAGE(@"upOSS.png");
+    [View201 addSubview:image00];
+    
+    
+    float View01_W=ScreenWidth-2*WK1-imageW-WK1-WK1-W_View201;
     float imageH1=30*HEIGHT_SIZE;
-    UIView *View01= [[UIView alloc]initWithFrame:CGRectMake(20*NOW_SIZE+imageW, (H2-imageH1)/2.0, View01_W,imageH1)];
+    UIView *View01= [[UIView alloc]initWithFrame:CGRectMake(2*WK1+imageW+W_View201+WK1, (H2-imageH1)/2.0, View01_W,imageH1)];
     View01.backgroundColor = [UIColor whiteColor];
     [View01.layer setMasksToBounds:YES];
         View01.userInteractionEnabled=YES;
@@ -175,6 +224,9 @@
     image3.image=IMAGE(@"oss_search.png");
     [View01 addSubview:image3];
   
+    
+    
+    /////////////列表显示内容
     _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
     _twoScrollView.backgroundColor = [UIColor whiteColor];
     _twoScrollView.showsHorizontalScrollIndicator = NO;
@@ -247,12 +299,12 @@
         
     }];
     
-    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:@"设备分配" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
-        NSLog(@"rightItem%lu",(unsigned long)index);
-        
-    }];
+//    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:@"设备分配" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
+//        NSLog(@"rightItem%lu",(unsigned long)index);
+//
+//    }];
     
-    _rightMenuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0,item1,item2] icon:@"add@2x.png"];
+    _rightMenuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0,item1] icon:@"add@2x.png"];
     //  menuView.intrinsicContentSize=CGSizeMake(44.f, 44.f);
     // menuView.translatesAutoresizingMaskIntoConstraints=true;
     _rightMenuView.dropWidth =150.f;
@@ -280,12 +332,12 @@
     
     //编辑后的回调
     __weak ossNewDeviceList *weakSelf = self;
-    channelEdit.removeInitialIndexBlock = ^(NSMutableArray<LRLChannelUnitModel *> *topArr, NSMutableArray<LRLChannelUnitModel *> *bottomArr){
-        weakSelf.topChannelArr = topArr;
-        weakSelf.bottomChannelArr = bottomArr;
-      //  LRLChannelUnitModel *model =weakSelf.topChannelArr[1];
-        NSLog(@"删除了初始选中项的回调:\n保留的频道有: %@", topArr);
-    };
+//    channelEdit.removeInitialIndexBlock = ^(NSMutableArray<LRLChannelUnitModel *> *topArr, NSMutableArray<LRLChannelUnitModel *> *bottomArr){
+//        weakSelf.topChannelArr = topArr;
+//        weakSelf.bottomChannelArr = bottomArr;
+//      //  LRLChannelUnitModel *model =weakSelf.topChannelArr[1];
+//        NSLog(@"删除了初始选中项的回调:\n保留的频道有: %@", topArr);
+//    };
     channelEdit.chooseIndexBlock = ^(NSInteger index, NSMutableArray<LRLChannelUnitModel *> *topArr, NSMutableArray<LRLChannelUnitModel *> *bottomArr){
         weakSelf.topChannelArr = topArr;
         weakSelf.bottomChannelArr = bottomArr;
@@ -334,7 +386,7 @@
     
     
     float W_K_0=12*NOW_SIZE;             //平均空隙
-    float W1_all=0;
+    float W1_all=10*NOW_SIZE;
     
     for (int i=0; i<_cellNameArray.count; i++) {
         NSString *nameString=_cellNameArray[i];
@@ -345,7 +397,7 @@
         
         UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0, H1)];
         lable1.textColor = COLOR(51, 51, 51, 1);
-        lable1.textAlignment=NSTextAlignmentCenter;
+        lable1.textAlignment=NSTextAlignmentLeft;
         lable1.text=_cellNameArray[i];
         lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_twoScrollView addSubview:lable1];
@@ -374,6 +426,11 @@
     [_tableView registerClass:[ossNewDeviceTwoCell class] forCellReuseIdentifier:@"CELL2"];
     
 
+}
+
+
+-(void)changStatue{       //改变状态
+    
 }
 
 
@@ -414,8 +471,19 @@
 -(void)goToSearch{
     ossIntegratorSearch *searchView=[[ossIntegratorSearch alloc]init];
     searchView.searchType=1;
+    searchView.searchResultBlock = ^(NSArray *resultArray){
+        _netResultArray=resultArray;
+        [self changeNetData];
+    };
     [self.navigationController pushViewController:searchView animated:YES];
 }
+
+
+-(void)changeNetData{
+    
+}
+
+
 
 -(void)changeTheRowNum:(UITapGestureRecognizer*)tap{
   NSInteger  tagNum=tap.view.tag-2000;
@@ -486,6 +554,41 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return 2;
+}
+
+
+#pragma mark -网络获取区域
+-(void)getNetForListParameter{
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"":@""} paramarsSite:@"/api/v3/device/getShowCol" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/device/getShowCol: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+              
+                
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                
+                if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"登录超时"];
+                }else{
+                      [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
+                }
+             
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+    }];
+    
 }
 
 #pragma mark - UIScrollViewDelegate

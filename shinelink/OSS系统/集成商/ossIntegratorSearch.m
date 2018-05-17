@@ -21,6 +21,9 @@
 @property (nonatomic, strong) NSMutableDictionary*icodeListDic;
 @property (nonatomic, strong) NSMutableArray *oldValueArray;
 @property (nonatomic, strong) NSArray *deviceNameArray;
+@property (nonatomic, strong) NSDictionary *deviceNameIdDic;
+@property (nonatomic, strong) NSArray *lineTypeArray;
+@property (nonatomic, strong) NSDictionary *lineTypeDic;
 @property (nonatomic, strong) NSArray *moreNameArray;      //更多条件
 @property (nonatomic, strong) NSArray *titleNameArray;
 @property (nonatomic, strong) NSArray *titleNameTypeArray;
@@ -80,6 +83,7 @@
 -(void)initDeviceUI{
     self.title=@"搜索设备";
    _deviceNameArray=@[@"逆变器",@"储能机",@"混储一体机"];
+    _deviceNameIdDic=@{_deviceNameArray[0]:@"1",_deviceNameArray[1]:@"2",_deviceNameArray[2]:@"3",};
     _H_All=0;
     if (_oldValueArray.count==0) {
         _oldValueArray=[NSMutableArray arrayWithArray:@[@"逆变器",@"所有",@"",@"",@"序列号",@""]];
@@ -89,6 +93,9 @@
     }else{
         _moreNameArray=@[@"序列号",@"用户或电站名"];
     }
+    
+    _lineTypeArray=@[@"所有",@"已接入设备",@"未接入设备"];
+    _lineTypeDic=@{_lineTypeArray[0]:@"3",_lineTypeArray[1]:@"2",_lineTypeArray[2]:@"1"};
     
     _titleNameArray=@[@"设备类型",@"接入类型",@"所属安装商",@"城市",@"其他条件"];
      _titleNameTypeArray=@[@"1",@"1",@"1",@"0",@"1"];
@@ -214,11 +221,18 @@
             if (lable.text==nil || [lable.text isEqualToString:@""]) {
                 [_deviceNetDic setObject:@"" forKey:keyArray[i]];
             }else{
-                if (i==2) {
-                      [_deviceNetDic setObject:[_icodeListDic objectForKey:lable.text] forKey:keyArray[i]];
-                }else{
-                      [_deviceNetDic setObject:lable.text forKey:keyArray[i]];
-                }
+          
+                    if (i==0) {
+                        [_deviceNetDic setObject:[_deviceNameIdDic objectForKey:lable.text] forKey:keyArray[i]];
+                    }else if (i==1) {
+                        [_deviceNetDic setObject:[_lineTypeDic objectForKey:lable.text] forKey:keyArray[i]];
+                    }else if (i==2) {
+                        [_deviceNetDic setObject:[_icodeListDic objectForKey:lable.text] forKey:keyArray[i]];
+                    }else{
+                          [_deviceNetDic setObject:lable.text forKey:keyArray[i]];
+                    }
+                
+                
                 
             }
         }else{
@@ -248,7 +262,7 @@
     
       [_deviceNetDic setObject:@"1" forKey:@"page"];
          [_deviceNetDic setObject:@"" forKey:@"deviceStatus"];
-    
+            [_deviceNetDic setObject:@"1" forKey:@"order"];
     
     [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_deviceNetDic paramarsSite:@"/api/v3/device/deviceManage/list" sucessBlock:^(id content) {
@@ -261,14 +275,30 @@
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             
             if ([firstDic[@"result"] intValue]==1) {
-            
+                NSInteger totalNum=0;
+                NSArray *allArray=firstDic[@"obj"][@"pagers"];
+                for (int i=0; i<allArray.count; i++) {
+                    NSDictionary *unitDic=allArray[i];
+                    totalNum=[[NSString stringWithFormat:@"%@",unitDic[@"nums"][@"totalNum"]] integerValue]+totalNum;
+                }
+                if (totalNum>0) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                    self.searchResultBlock(allArray);
+                }else{
+                        [self showToastViewWithTitle:@"没有设备"];
+                }
                 
             }else{
                 int ResultValue=[firstDic[@"result"] intValue];
-                NSArray *resultArray=@[@"用户数量超出",@"注册国家必须非china",@"注册国家必须是china",@"用户名或者密码为空",@"用户名已经存在",@"国家错误",@"时区错误",@"远程服务器注册用户失败",@"注册失败",@"操作失败",@"运行错误",@"服务器地址为空",@"确认密码不正确",@"时区为空"];
                 
-                if (ResultValue<(resultArray.count+2)) {
-                    [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                if ((ResultValue>1) && (ResultValue<5)) {
+                    NSArray *resultArray=@[@"参数错误",@"服务器地址为空",@"您不是集成商账户"];
+                    if (ResultValue<(resultArray.count+2)) {
+                        [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                    }
+                }
+                if (ResultValue==0) {
+                         [self showToastViewWithTitle:@"返回异常"];
                 }
                 if (ResultValue==22) {
                     [self showToastViewWithTitle:@"未登录"];
@@ -298,7 +328,8 @@
                 nameArray=_deviceNameArray;
             }else if (Num==2001) {
                  titleString=@"选择接入类型";
-                nameArray=@[@"所有",@"已接入设备",@"未接入设备"];
+                nameArray=_lineTypeArray;
+                _lineTypeDic=@{nameArray[0]:@"3",nameArray[1]:@"2",nameArray[2]:@"1"};
             }else if (Num==2004) {
                  titleString=@"选择搜索条件";
                 UILabel *lable=[self.view viewWithTag:Num+100];
