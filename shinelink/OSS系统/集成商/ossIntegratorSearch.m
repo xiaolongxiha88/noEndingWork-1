@@ -19,6 +19,14 @@
 @property (nonatomic, assign)float H_All;
 @property (nonatomic, strong) NSMutableArray *icodeListArray;
 @property (nonatomic, strong) NSMutableDictionary*icodeListDic;
+@property (nonatomic, strong) NSMutableArray *oldValueArray;
+@property (nonatomic, strong) NSArray *deviceNameArray;
+@property (nonatomic, strong) NSArray *moreNameArray;      //更多条件
+@property (nonatomic, strong) NSArray *titleNameArray;
+@property (nonatomic, strong) NSArray *titleNameTypeArray;
+
+@property (nonatomic, strong) NSMutableDictionary*deviceNetDic;
+
 @property (nonatomic, strong)UIButton*searchButton;
 
 @end
@@ -41,14 +49,14 @@
     
     _searchButton =  [UIButton buttonWithType:UIButtonTypeCustom];
 
-    _searchButton.layer.borderWidth=0.8*HEIGHT_SIZE;
-    _searchButton.layer.cornerRadius=40*HEIGHT_SIZE/2.0;
-    _searchButton.layer.borderColor=COLOR(222, 222, 222, 1).CGColor;
-//    [_searchButton setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
-//    [_searchButton setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
+//    _searchButton.layer.borderWidth=0.8*HEIGHT_SIZE;
+//    _searchButton.layer.cornerRadius=40*HEIGHT_SIZE/2.0;
+//    _searchButton.layer.borderColor=COLOR(222, 222, 222, 1).CGColor;
+    [_searchButton setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
+    [_searchButton setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
     [_searchButton setTitle:@"搜索" forState:UIControlStateNormal];
     //_searchButton.titleLabel.tintColor=COLOR(51, 51, 51, 1);
-    [_searchButton setTitleColor:COLOR(51, 51, 51, 1) forState:UIControlStateNormal];
+  //  [_searchButton setTitleColor:COLOR(51, 51, 51, 1) forState:UIControlStateNormal];
     _searchButton.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [_searchButton addTarget:self action:@selector(goToSearch) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:_searchButton];
@@ -71,54 +79,66 @@
 
 -(void)initDeviceUI{
     self.title=@"搜索设备";
+   _deviceNameArray=@[@"逆变器",@"储能机",@"混储一体机"];
     _H_All=0;
-    NSArray* nameArray=@[@"逆变器",@"所有",@"所有安装商",@"城市"];
-     NSArray* typeArray=@[@"2",@"2",@"2",@"1"];
-    float w_k=15*NOW_SIZE;
-    float WW=ScreenWidth/2.0;
-    for (int i=0; i<nameArray.count; i++) {
-        int H_i=i/2;
-         int W_i=i%2;
-        CGRect Rect=CGRectMake(w_k+W_i*WW, 0+_HH*H_i, WW-2*w_k, _HH);
-        
-        [self getSelectUI:Rect name:nameArray[i] type:[typeArray[i] integerValue] tagNum:2000+i firstView:_scrollView];
-        
+    if (_oldValueArray.count==0) {
+        _oldValueArray=[NSMutableArray arrayWithArray:@[@"逆变器",@"所有",@"",@"",@"序列号",@""]];
+    }
+    if ([_oldValueArray[0] isEqualToString:_deviceNameArray[0]]) {
+        _moreNameArray=@[@"序列号",@"用户或电站名",@"额定功率"];
+    }else{
+        _moreNameArray=@[@"序列号",@"用户或电站名"];
     }
     
-    _H_All=((nameArray.count/2)+(nameArray.count%2))*_HH;
+    _titleNameArray=@[@"设备类型",@"接入类型",@"所属安装商",@"城市",@"其他条件"];
+     _titleNameTypeArray=@[@"1",@"1",@"1",@"0",@"1"];
+
+    for (int i=0; i<_titleNameArray.count; i++) {
+        NSInteger tagNum=2000+i;
+        
+        [self getUnitUI:_titleNameArray[i] Hight:_H_All type:[_titleNameTypeArray[i] integerValue] tagNum:tagNum firstView:_scrollView];
+     
+              _H_All=_HH+_H_All;
+    }
     
-    [self getSelectTwoUI:_H_All name:@"序列号" name2:@"输入序列号" tagNum:3000 firstView:_scrollView];
+    [self getUnitUiTwo:[NSString stringWithFormat:@"%@%@",@"请输入",_oldValueArray[4]] Hight:_H_All type:1 tagNum:3000 firstView:_scrollView];
     
-    _H_All= _H_All+_HH+30*HEIGHT_SIZE;
+    _H_All= _H_All+_HH+50*HEIGHT_SIZE;
     
         _searchButton.frame=CGRectMake(60*NOW_SIZE,_H_All, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    
+    _scrollView.contentSize=CGSizeMake(ScreenWidth, ScreenHeight+50*HEIGHT_SIZE);
 }
 
 
 
--(void)getSelectUI:(CGRect)frameSize name:(NSString*)name type:(NSInteger)type tagNum:(NSInteger)tagNum firstView:(UIView*)firstView{
-
-    float WK1=5*NOW_SIZE;
-    float W_image1=8*HEIGHT_SIZE;
-    float H_image1=6*HEIGHT_SIZE;
-
+-(void)getUnitUI:(NSString*)name Hight:(float)Hight type:(NSInteger)type tagNum:(NSInteger)tagNum firstView:(UIView*)firstView{
+    float W1=0*NOW_SIZE;
+    
+    
+    NSString *nameString=[NSString stringWithFormat:@"%@:",name];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
+    CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, _HH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    
+    UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE+W1, Hight,size.width, _HH)];
+    lable1.textColor = COLOR(154, 154, 154, 1);
+    lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    lable1.textAlignment=NSTextAlignmentLeft;
+    lable1.text=nameString;
+    [firstView addSubview:lable1];
+    
+    UIView *V01 = [[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,_HH+Hight-1*HEIGHT_SIZE, SCREEN_Width-(2*10*NOW_SIZE),1*HEIGHT_SIZE)];
+    V01.backgroundColor = COLOR(222, 222, 222, 1);
+    [firstView addSubview:V01];
+    
+    float WK1=10*NOW_SIZE;
+    float W_image1=6*HEIGHT_SIZE;
+    float H_image1=12*HEIGHT_SIZE;
+    float W2=SCREEN_Width-(10*NOW_SIZE+W1+size.width+WK1)-10*NOW_SIZE;
+    
     if (type==1) {
-        UITextField *text1 = [[UITextField alloc] initWithFrame:frameSize];
-        text1.textColor =  COLOR(51, 51, 51, 1);
-        text1.tintColor =  COLOR(51, 51, 51, 1);
-        text1.tag=tagNum+100;
-        text1.adjustsFontSizeToFitWidth=YES;
-         text1.textAlignment=NSTextAlignmentCenter;
-        text1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        text1.placeholder = name;
-        [text1 setValue:COLOR(154, 154, 154, 1) forKeyPath:@"_placeholderLabel.textColor"];
-        [text1 setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
         
-        [firstView addSubview:text1];
-        
-        [_textFieldMutableArray addObject:text1];
-    }else{
-        UIView *V0= [[UIView alloc]initWithFrame:frameSize];
+        UIView *V0= [[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE+W1+size.width+WK1,Hight, W2,_HH)];
         V0.backgroundColor = [UIColor clearColor];
         V0.userInteractionEnabled=YES;
         V0.tag=tagNum;
@@ -127,88 +147,142 @@
         [V0 addGestureRecognizer:labelTap1];
         [firstView addSubview:V0];
         
-        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,frameSize.size.width-W_image1-WK1, frameSize.size.height)];
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,W2-W_image1-WK1, _HH)];
         lable1.textColor = COLOR(51, 51, 51, 1);
         lable1.tag=tagNum+100;
-        lable1.text=name;
-        lable1.adjustsFontSizeToFitWidth=YES;
+        if (![_oldValueArray[tagNum-2000] isEqualToString:@""]) {
+            lable1.text=_oldValueArray[tagNum-2000];
+        }
         lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-        lable1.textAlignment=NSTextAlignmentCenter;
+        lable1.textAlignment=NSTextAlignmentLeft;
         lable1.userInteractionEnabled=YES;
         [V0 addSubview:lable1];
         
-        UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(frameSize.size.width-W_image1, (frameSize.size.height-H_image1)/2, W_image1,H_image1 )];
+        UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(W2-W_image1, (_HH-H_image1)/2, W_image1,H_image1 )];
         image2.userInteractionEnabled=YES;
-        image2.image=IMAGE(@"upOSS.png");
+        image2.image=IMAGE(@"select_icon.png");
         [V0 addSubview:image2];
+        
+    }else{
+        UITextField *text1 = [[UITextField alloc] initWithFrame:CGRectMake(10*NOW_SIZE+W1+size.width+WK1, Hight, W2, _HH)];
+        text1.textColor =  COLOR(51, 51, 51, 1);
+        text1.tintColor =  COLOR(51, 51, 51, 1);
+        text1.tag=tagNum+100;
+        if (![_oldValueArray[tagNum-2000] isEqualToString:@""]) {
+            text1.text=_oldValueArray[tagNum-2000];
+        }
+        text1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        [firstView addSubview:text1];
+        
+        [_textFieldMutableArray addObject:text1];
     }
-    
-    
-    UIView *V01 = [[UIView alloc]initWithFrame:CGRectMake(frameSize.origin.x,frameSize.origin.y+frameSize.size.height-1*HEIGHT_SIZE, frameSize.size.width,1*HEIGHT_SIZE)];
-    V01.backgroundColor = COLOR(222, 222, 222, 1);
-    [firstView addSubview:V01];
     
 }
 
 
-
--(void)getSelectTwoUI:(float)Y_H name:(NSString*)name name2:(NSString*)name2 tagNum:(NSInteger)tagNum firstView:(UIView*)firstView{
-    float WK1=5*NOW_SIZE;
-    float W_image1=8*HEIGHT_SIZE;
-    float H_image1=6*HEIGHT_SIZE;
-      float w_k=15*NOW_SIZE;
-      float W1=ScreenWidth/2.0-2*w_k-WK1-W_image1;
-    
-    UIView *V0= [[UIView alloc]initWithFrame:CGRectMake(w_k, Y_H, W1+WK1+W_image1, _HH)];
-    V0.backgroundColor = [UIColor clearColor];
-    V0.userInteractionEnabled=YES;
-    V0.tag=tagNum;
-    UITapGestureRecognizer *labelTap1;
-    labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectChioce:)];
-    [V0 addGestureRecognizer:labelTap1];
-    [firstView addSubview:V0];
-    
-    UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,W1, _HH)];
-    lable1.textColor = COLOR(51, 51, 51, 1);
-    lable1.tag=tagNum+100;
-    lable1.text=name;
-    lable1.adjustsFontSizeToFitWidth=YES;
-    lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    lable1.textAlignment=NSTextAlignmentCenter;
-    lable1.userInteractionEnabled=YES;
-    [V0 addSubview:lable1];
-    
-    UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(W1+WK1, (_HH-H_image1)/2, W_image1,H_image1 )];
-    image2.userInteractionEnabled=YES;
-    image2.image=IMAGE(@"upOSS.png");
-    [V0 addSubview:image2];
-    
-        float WK2=30*NOW_SIZE;
-    float W_left=w_k+W1+WK1+W_image1+WK2;
-    UITextField *text1 = [[UITextField alloc] initWithFrame:CGRectMake(W_left, Y_H, ScreenWidth-w_k-W_left,_HH )];
+-(void)getUnitUiTwo:(NSString*)name Hight:(float)Hight type:(NSInteger)type tagNum:(NSInteger)tagNum firstView:(UIView*)firstView{
+    float W=10*NOW_SIZE;
+    UITextField *text1 = [[UITextField alloc] initWithFrame:CGRectMake(W, Hight, ScreenWidth-W*2,_HH )];
     text1.textColor =  COLOR(51, 51, 51, 1);
     text1.tintColor =  COLOR(51, 51, 51, 1);
-    text1.tag=tagNum+200;
+    text1.tag=tagNum;
     text1.adjustsFontSizeToFitWidth=YES;
-    text1.textAlignment=NSTextAlignmentCenter;
+    text1.textAlignment=NSTextAlignmentLeft;
     text1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    text1.placeholder = name2;
-    [text1 setValue:COLOR(154, 154, 154, 1) forKeyPath:@"_placeholderLabel.textColor"];
+    text1.placeholder = name;
+    [text1 setValue:COLOR(222, 222, 222, 1) forKeyPath:@"_placeholderLabel.textColor"];
     [text1 setValue:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKeyPath:@"_placeholderLabel.font"];
     
     [firstView addSubview:text1];
     
     [_textFieldMutableArray addObject:text1];
     
-    UIView *V01 = [[UIView alloc]initWithFrame:CGRectMake(w_k,Y_H+_HH-1*HEIGHT_SIZE,ScreenWidth-w_k*2,1*HEIGHT_SIZE)];
+    UIView *V01 = [[UIView alloc]initWithFrame:CGRectMake(W,Hight+_HH-1*HEIGHT_SIZE,ScreenWidth-W*2,1*HEIGHT_SIZE)];
     V01.backgroundColor = COLOR(222, 222, 222, 1);
     [firstView addSubview:V01];
-    
 }
 
 
+
 -(void)goToSearch{
+    _deviceNetDic=[NSMutableDictionary new];
+    NSArray* keyArray=@[@"deviceType",@"lineType",@"iCode",@"city"];
+    for (int i=0; i<keyArray.count; i++) {
+        if ([_titleNameTypeArray[i] integerValue]==1) {
+            UILabel *lable=[self.view viewWithTag:2000+i+100];
+            
+            if (lable.text==nil || [lable.text isEqualToString:@""]) {
+                [_deviceNetDic setObject:@"" forKey:keyArray[i]];
+            }else{
+                if (i==2) {
+                      [_deviceNetDic setObject:[_icodeListDic objectForKey:lable.text] forKey:keyArray[i]];
+                }else{
+                      [_deviceNetDic setObject:lable.text forKey:keyArray[i]];
+                }
+                
+            }
+        }else{
+            UITextField *textField=[self.view viewWithTag:2000+i+100];
+            if (textField.text==nil || [textField.text isEqualToString:@""]) {
+            
+            }
+        }
+    }
     
+         UILabel *lable=[self.view viewWithTag:2004+100];
+      UITextField *textField=[self.view viewWithTag:3000];
+    
+    NSArray *moreKeyArray=@[@"deviceSn",@"userName",@"ratedPower"];
+    for (int i=0; i<_moreNameArray.count; i++) {
+        if ([_moreNameArray[i] isEqualToString:lable.text]) {
+            if (textField.text==nil || [textField.text isEqualToString:@""]) {
+                [_deviceNetDic setObject:@"" forKey:moreKeyArray[i]];
+            }else{
+                [_deviceNetDic setObject:textField.text forKey:moreKeyArray[i]];
+            }
+        }else{
+               [_deviceNetDic setObject:@"" forKey:moreKeyArray[i]];
+        }
+   
+    }
+    
+      [_deviceNetDic setObject:@"1" forKey:@"page"];
+         [_deviceNetDic setObject:@"" forKey:@"deviceStatus"];
+    
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_deviceNetDic paramarsSite:@"/api/v3/device/deviceManage/list" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/userManage_overview_creatUserPage: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+            
+                
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                NSArray *resultArray=@[@"用户数量超出",@"注册国家必须非china",@"注册国家必须是china",@"用户名或者密码为空",@"用户名已经存在",@"国家错误",@"时区错误",@"远程服务器注册用户失败",@"注册失败",@"操作失败",@"运行错误",@"服务器地址为空",@"确认密码不正确",@"时区为空"];
+                
+                if (ResultValue<(resultArray.count+2)) {
+                    [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                }
+                if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"未登录"];
+                }
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
     
 }
 
@@ -218,16 +292,23 @@
     NSInteger Num=tap.view.tag;
     NSArray *nameArray;NSString *titleString;
     if (_searchType==1) {
-        if (Num==2000 || Num==2001 || Num==3000) {
+        if (Num==2000 || Num==2001 || Num==2004) {
             if (Num==2000) {
                 titleString=@"选择设备类型";
-                nameArray=@[@"逆变器",@"储能机",@"混储一体机"];
+                nameArray=_deviceNameArray;
             }else if (Num==2001) {
                  titleString=@"选择接入类型";
                 nameArray=@[@"所有",@"已接入设备",@"未接入设备"];
-            }else if (Num==3000) {
+            }else if (Num==2004) {
                  titleString=@"选择搜索条件";
-                nameArray=@[@"序列号",@"用户或电站名",@"额定功率"];
+                UILabel *lable=[self.view viewWithTag:Num+100];
+                if ([lable.text isEqualToString:_deviceNameArray[0]]) {
+                      _moreNameArray=@[@"序列号",@"用户或电站名",@"额定功率"];
+                }else{
+                       _moreNameArray=@[@"序列号",@"用户或电站名"];
+                }
+                nameArray=_moreNameArray;
+              
             }
             [self chiceItem:titleString nameArray:nameArray Num:Num];
         }
@@ -290,9 +371,9 @@
     }selectValue:^(NSString *selectValue){
         UILabel *lable=[self.view viewWithTag:Num+100];
         lable.text=selectValue;
-        if (Num==3000) {
-           UITextField *textField=[self.view viewWithTag:Num+200];
-                textField.placeholder = [NSString stringWithFormat:@"%@%@",@"输入",selectValue];
+        if (Num==2004) {
+           UITextField *textField=[self.view viewWithTag:3000];
+                textField.placeholder = [NSString stringWithFormat:@"%@%@",@"请输入",selectValue];
         }
         
     } showCloseButton:YES ];
