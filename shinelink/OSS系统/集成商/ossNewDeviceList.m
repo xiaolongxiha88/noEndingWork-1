@@ -34,6 +34,7 @@
 
 @property (nonatomic, strong) NSDictionary *forChoiceParameterDic;
 @property (nonatomic, strong) NSArray *NetForParameterArray;
+@property (nonatomic, strong) NSArray *NetForParameterNewArray;
 @property (nonatomic, strong) NSArray *oldForParameterArray;
 @property (nonatomic, strong) NSMutableArray *topArray;
 @property (nonatomic, strong) NSMutableArray *battomArray;
@@ -114,10 +115,10 @@
         for (int i=0; i<_NetForParameterArray.count; i++) {
             [numArray addObject:[NSString stringWithFormat:@"%@",_NetForParameterArray[i]]];
         }
-        _NetForParameterArray=[NSArray arrayWithArray:numArray];
+   //     _NetForParameterArray=[NSArray arrayWithArray:numArray];
         nowNameArray=[NSArray arrayWithArray:numArray];
     }
-    
+    _NetForParameterNewArray=[NSArray arrayWithArray:nowNameArray];
     [_cellNameArray addObject:[_forChoiceParameterDic objectForKey:@"0"]];
     for (int i=0; i<_parameterNumArray.count; i++) {
         NSString *keyNum=_parameterNumArray[i];
@@ -521,21 +522,35 @@
 }
 
 
--(void)changeNetData{
+-(void)changeNetData{                     //给tableviewcell用的数据
     _allTableViewDataArray=[NSMutableArray array];
     
     for (int i=0; i<_netResultArray.count; i++) {
         NSDictionary *unitOneDic=_netResultArray[i];
-        if ([unitOneDic.allKeys containsObject:@"serverId"]) {
-            NSArray *dataArray=unitOneDic[@"datas"];
+           NSArray *dataArray=unitOneDic[@"datas"];
+        
+      
             for (int i=0; i<dataArray.count; i++) {
                 NSDictionary *twoDic=dataArray[i];
+                NSMutableArray *valueArray=[NSMutableArray array];
+                [valueArray addObject:twoDic[@"deviceSn"]];
+                for (int i=0; i<_NetForParameterNewArray.count; i++) {
+                    if ([unitOneDic.allKeys containsObject:@"serverId"]) {
+                        NSString*keyString=[_numForNetKeyDic objectForKey:_NetForParameterNewArray[i]];
+                        [valueArray addObject:twoDic[keyString]];
+                    }else{
+                           [valueArray addObject:@""];         //没有接入的设备
+                    }
+                  
+                }
+                
+                [_allTableViewDataArray addObject:valueArray];
             }
-            
-        }
         
     }
  
+    [_tableView reloadData];
+    
     
 }
 
@@ -609,7 +624,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 2;
+    return _allTableViewDataArray.count;
 }
 
 
