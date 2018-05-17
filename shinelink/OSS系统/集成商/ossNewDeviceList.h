@@ -13,7 +13,8 @@
 @property (nonatomic, strong) NSDictionary *netDic;
 @property (nonatomic, assign) NSInteger pageNum;
 @property (nonatomic, assign) NSInteger deviceStatusType;
-@property (nonatomic, assign) NSInteger deviceType;
+@property (nonatomic, assign) NSInteger deviceType;      //1、逆变器  2、储能机   3、mix
+@property (nonatomic, strong) NSDictionary *parameterDic;
 
 @end
 

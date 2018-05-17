@@ -12,6 +12,7 @@ class ossFistVC: RootViewController {
 
      var deviceStatusType:Int!
         var valueDic:NSDictionary!
+      var parameterListDic:NSDictionary!    //参数列表字典
       var deviceType:Int!
     // var view1:UIView!
      var imageOne:UIImageView!
@@ -60,6 +61,7 @@ class ossFistVC: RootViewController {
         
         if isDaiLiShangBool{
        self.initNet1()
+            self.NetForParameterList()
     //self.initNet4()
         }
         
@@ -651,6 +653,38 @@ class ossFistVC: RootViewController {
     }
     
 
+    func NetForParameterList(){
+        
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:["":""], paramarsSite: "/api/v3/device/getShowCol", sucessBlock: {(successBlock)->() in
+    
+            
+            let data:Data=successBlock as! Data
+            
+            let jsonDate0=try? JSONSerialization.jsonObject(with: data, options:[])
+            
+            if (jsonDate0 != nil){
+                self.hideProgressView()
+                let jsonDate=jsonDate0 as! Dictionary<String, Any>
+                print("/api/v3/device/getShowCol=",jsonDate)
+                // let result:NSString=NSString(format:"%s",jsonDate["result"] )
+                let result1=jsonDate["result"] as? Int ?? 0
+                
+                if result1==1 {
+                    self.parameterListDic=jsonDate["obj"] as! Dictionary<String, Any> as NSDictionary
+
+                }else{
+                  //  self.showToastView(withTitle: jsonDate["msg"] as? String ?? "")
+                }
+                
+            }
+            
+        }, failure: {(error) in
+            self.hideProgressView()
+            //self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
+          //  self.showToastView(withTitle: root_Networking)
+        })
+        
+    }
     
     
      func getImageWithColor(color: UIColor, size: CGSize) -> UIImage
@@ -1283,6 +1317,8 @@ class ossFistVC: RootViewController {
 //            vc.firstNum=0
     
                let vc=ossNewDeviceList()
+    vc.parameterDic=self.parameterListDic as! [AnyHashable : Any]?
+             vc.deviceType=1;
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
             self.showToastView(withTitle:"没有操作权限")

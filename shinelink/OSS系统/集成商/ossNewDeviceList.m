@@ -37,10 +37,15 @@
 @property (nonatomic, strong) NSArray *oldForParameterArray;
 @property (nonatomic, strong) NSMutableArray *topArray;
 @property (nonatomic, strong) NSMutableArray *battomArray;
+@property (nonatomic, strong) NSArray *parameterNumArray;
+@property (nonatomic, strong) NSDictionary *numForNetKeyDic;
 
 @property (nonatomic, strong) NSArray *netResultArray;
 @property (nonatomic, strong) UILabel *numLable;
 @property (nonatomic, strong) UILabel *numNameLable;
+@property (nonatomic, strong) NSMutableDictionary*deviceNetDic;
+
+@property (nonatomic, strong) NSMutableArray *allTableViewDataArray;
 
 @end
 
@@ -52,7 +57,8 @@
     _isChangTableView=NO;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
-    [self getNetForListParameter];
+   // [self getNetForListParameter];
+    
     [self initData];
     [self addRightItem];
     [self initUI];
@@ -60,35 +66,69 @@
 }
 
 -(void)initData{
+
+    
+    
+    if (_deviceType==1) {
+        if (_parameterDic.allKeys.count>0) {
+            _NetForParameterArray=_parameterDic[@"dm_invapp"];
+        }
+      
+        _deviceNetDic=[NSMutableDictionary new];
+
+        [_deviceNetDic setObject:@"3" forKey:@"lineType"];
+        [_deviceNetDic setObject:@"1" forKey:@"page"];
+        [_deviceNetDic setObject:@"1" forKey:@"order"];
+        [_deviceNetDic setObject:@"1" forKey:@"deviceType"];
+        [_deviceNetDic setObject:@"" forKey:@"iCode"];
+          [_deviceNetDic setObject:@"" forKey:@"deviceStatus"];
+          [_deviceNetDic setObject:@"" forKey:@"userName"];
+          [_deviceNetDic setObject:@"" forKey:@"deviceSn"];
+               [_deviceNetDic setObject:@"" forKey:@"city"];
+         [_deviceNetDic setObject:@"" forKey:@"ratedPower"];
+        
+        _oneParaArray=@[@"状态",@"额定功率",@"今日发电量",@"累计发电量",@"当前功率",];
+        _oldForParameterArray=@[@"2",@"5",@"4",@"9",@"11",@"12",@"13",@"10"];
+        
+     _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
+        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"类型",@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器",@"8":@"最后更新时间",@"9":@"状态",@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
+        _numForNetKeyDic=@{@"2":@"alias",@"3":@"iCode",@"4":@"plantName",@"5":@"accountName",@"6":@"cityId",@"7":@"datalog_sn",@"8":@"time",@"9":@"status",@"10":@"nominal_power",@"11":@"etoday",@"12":@"etotal",@"13":@"pac"};
+    }
+
+    
+    [self changeTheParameter];
+
+
+}
+
+-(void)changeTheParameter{
+    
     _cellNameArray=[NSMutableArray new];
     _topArray=[NSMutableArray new];
     _battomArray=[NSMutableArray new];
-    
-    _oneParaArray=@[@"状态",@"额定功率",@"今日发电量",@"累计发电量",@"当前功率",];
-    _oldForParameterArray=@[@"2",@"5",@"4",@"9",@"11",@"12",@"13",@"10"];
-    
-    NSArray*numArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
-    _forChoiceParameterDic=@{@"1":@"类型",@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器",@"8":@"最后更新时间",@"9":@"状态",@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
-    
-    NSArray *nowNameArray;
+    NSArray *nowNameArray;     //现在显示的参数
     if (_NetForParameterArray.count==0) {
         nowNameArray=[NSArray arrayWithArray:_oldForParameterArray];
     }else{
-         nowNameArray=[NSArray arrayWithArray:_NetForParameterArray];
+        NSMutableArray *numArray=[NSMutableArray array];
+        for (int i=0; i<_NetForParameterArray.count; i++) {
+            [numArray addObject:[NSString stringWithFormat:@"%@",_NetForParameterArray[i]]];
+        }
+        _NetForParameterArray=[NSArray arrayWithArray:numArray];
+        nowNameArray=[NSArray arrayWithArray:numArray];
     }
     
-        for (int i=0; i<numArray.count; i++) {
-            NSString *keyNum=numArray[i];
-            NSArray *keyAndValueArray=@[keyNum,[_forChoiceParameterDic objectForKey:keyNum]];
-            if ([nowNameArray containsObject:keyNum]) {
-                [_topArray addObject:keyAndValueArray];
-                [_cellNameArray addObject:[_forChoiceParameterDic objectForKey:keyNum]];
-            }else{
-                  [_battomArray addObject:keyAndValueArray];
-            }
+    [_cellNameArray addObject:[_forChoiceParameterDic objectForKey:@"0"]];
+    for (int i=0; i<_parameterNumArray.count; i++) {
+        NSString *keyNum=_parameterNumArray[i];
+        NSArray *keyAndValueArray=@[keyNum,[_forChoiceParameterDic objectForKey:keyNum]];
+        if ([nowNameArray containsObject:keyNum]) {
+            [_topArray addObject:keyAndValueArray];
+            [_cellNameArray addObject:[_forChoiceParameterDic objectForKey:keyNum]];
+        }else{
+            [_battomArray addObject:keyAndValueArray];
         }
-
-    
+    }
     
 }
 
@@ -234,7 +274,7 @@
     _twoScrollView.bounces = NO;
     [self.view addSubview:_twoScrollView];
     
-    _cellNameArray2=@[@"别名",@"状态",@"当前功率",@"今日发电"];
+    _cellNameArray2=@[@"别名",@"状态",@"当前功率",@"今日发电"];     //列表的另一种展示
 
      _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, H1);
     
@@ -280,6 +320,8 @@
     //注册单元格类型
     [_tableView registerClass:[ossNewDeviceCell class] forCellReuseIdentifier:@"CELL1"];
      [_tableView registerClass:[ossNewDeviceTwoCell class] forCellReuseIdentifier:@"CELL2"];
+    
+    [self NetForDevice];
     
 }
 
@@ -480,6 +522,20 @@
 
 
 -(void)changeNetData{
+    _allTableViewDataArray=[NSMutableArray array];
+    
+    for (int i=0; i<_netResultArray.count; i++) {
+        NSDictionary *unitOneDic=_netResultArray[i];
+        if ([unitOneDic.allKeys containsObject:@"serverId"]) {
+            NSArray *dataArray=unitOneDic[@"datas"];
+            for (int i=0; i<dataArray.count; i++) {
+                NSDictionary *twoDic=dataArray[i];
+            }
+            
+        }
+        
+    }
+ 
     
 }
 
@@ -570,7 +626,7 @@
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             
             if ([firstDic[@"result"] intValue]==1) {
-              
+                self.parameterDic=firstDic[@"obj"];
                 
             }else{
                 int ResultValue=[firstDic[@"result"] intValue];
@@ -590,6 +646,66 @@
     }];
     
 }
+
+
+-(void)NetForDevice{
+
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_deviceNetDic paramarsSite:@"/api/v3/device/deviceManage/list" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/userManage_overview_creatUserPage: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+                NSInteger totalNum=0;
+                NSArray *allArray=firstDic[@"obj"][@"pagers"];
+                for (int i=0; i<allArray.count; i++) {
+                    NSDictionary *unitDic=allArray[i];
+                    totalNum=[[NSString stringWithFormat:@"%@",unitDic[@"nums"][@"totalNum"]] integerValue]+totalNum;
+                }
+                if (totalNum>0) {
+                    _netResultArray=allArray;
+                    [self changeNetData];
+                }else{
+                    [self showToastViewWithTitle:@"没有设备"];
+                }
+                
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                
+                if ((ResultValue>1) && (ResultValue<5)) {
+                    NSArray *resultArray=@[@"参数错误",@"服务器地址为空",@"您不是集成商账户"];
+                    if (ResultValue<(resultArray.count+2)) {
+                        [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                    }
+                }
+                if (ResultValue==0) {
+                    [self showToastViewWithTitle:@"返回异常"];
+                }
+                if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"未登录"];
+                }
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
+    
+}
+
+
+
+
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
