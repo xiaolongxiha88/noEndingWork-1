@@ -141,13 +141,18 @@
         
     }
     
-        [self initUI];
+    if (!_oneScrollView) {
+             [self initUI];
+    }else{
+        [self initTheTheChangeUI];
+    }
+   
 }
 
 #pragma mark -UI区域
 -(void)initUI{
   
-    
+  
     float H1=40*HEIGHT_SIZE;
     _oneScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, H1)];
     _oneScrollView.backgroundColor = [UIColor whiteColor];
@@ -327,6 +332,24 @@
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
    _tableView.backgroundColor=COLOR(242, 242, 242, 1);
+    
+    if (_allTableViewDataArray.count>1) {
+        
+        
+        MJRefreshAutoNormalFooter *foot=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+         
+       //     [self requestData];
+            
+            [_tableView.mj_footer endRefreshing];
+            
+            
+        }];
+        [foot setTitle:@"" forState:MJRefreshStateIdle];
+        _tableView.mj_footer=foot;
+        _tableView.mj_footer.automaticallyHidden=YES;
+        
+    }
+    
     [_threeScrollView addSubview:_tableView];
  
     //注册单元格类型
@@ -336,6 +359,69 @@
     [self NetForDevice];
     
 }
+
+-(void)initTheTheChangeUI{
+    
+    float H1=40*HEIGHT_SIZE;  float H2=50*HEIGHT_SIZE;    float W1=80*NOW_SIZE;
+    
+    if (_twoScrollView) {
+        [_twoScrollView removeFromSuperview];
+        _twoScrollView=nil;
+    }
+    _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
+    _twoScrollView.backgroundColor = [UIColor whiteColor];
+    _twoScrollView.showsHorizontalScrollIndicator = NO;
+    _twoScrollView.delegate=self;
+    _twoScrollView.bounces = NO;
+    [self.view addSubview:_twoScrollView];
+    
+    
+    _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, H1);
+    
+    
+    float W_K_0=12*NOW_SIZE;             //平均空隙
+    float W1_all=10*NOW_SIZE;
+    
+    for (int i=0; i<_cellNameArray.count; i++) {
+        NSString *nameString=_cellNameArray[i];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        
+        float W_all_0=W_K_0*2+size.width;
+        
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0-5*NOW_SIZE, H1)];
+        lable1.textColor = COLOR(51, 51, 51, 1);
+        lable1.textAlignment=NSTextAlignmentLeft;
+        lable1.text=_cellNameArray[i];
+        lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+        [_twoScrollView addSubview:lable1];
+        
+        W1_all=W1_all+W_all_0;
+    }
+    
+    
+    _tableW=W1_all;
+    float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
+    _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
+    
+    if (_tableView) {
+        [_tableView removeFromSuperview];
+        _tableView=nil;
+    }
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _tableW, H3) style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    _tableView.backgroundColor=COLOR(242, 242, 242, 1);
+    [_threeScrollView addSubview:_tableView];
+    
+    //注册单元格类型
+    [_tableView registerClass:[ossNewDeviceCell class] forCellReuseIdentifier:@"CELL1"];
+    [_tableView registerClass:[ossNewDeviceTwoCell class] forCellReuseIdentifier:@"CELL2"];
+    
+        [self NetForDevice];
+}
+
 
 - (void)addRightItem
 {
@@ -386,17 +472,26 @@
     
     //编辑后的回调
     __weak ossNewDeviceList *weakSelf = self;
-//    channelEdit.removeInitialIndexBlock = ^(NSMutableArray<LRLChannelUnitModel *> *topArr, NSMutableArray<LRLChannelUnitModel *> *bottomArr){
-//        weakSelf.topChannelArr = topArr;
-//        weakSelf.bottomChannelArr = bottomArr;
-//      //  LRLChannelUnitModel *model =weakSelf.topChannelArr[1];
-//        NSLog(@"删除了初始选中项的回调:\n保留的频道有: %@", topArr);
-//    };
+    channelEdit.removeInitialIndexBlock = ^(NSMutableArray<LRLChannelUnitModel *> *topArr, NSMutableArray<LRLChannelUnitModel *> *bottomArr){
+        weakSelf.topChannelArr = topArr;
+        weakSelf.bottomChannelArr = bottomArr;
+      //  LRLChannelUnitModel *model =weakSelf.topChannelArr[1];
+        NSLog(@"删除了初始选中项的回调:\n保留的频道有: %@", topArr);
+    };
     channelEdit.chooseIndexBlock = ^(NSInteger index, NSMutableArray<LRLChannelUnitModel *> *topArr, NSMutableArray<LRLChannelUnitModel *> *bottomArr){
         weakSelf.topChannelArr = topArr;
         weakSelf.bottomChannelArr = bottomArr;
         weakSelf.chooseIndex = index;
-        [self changeParameterData];
+        
+        NSMutableArray *numArray=[NSMutableArray array];
+        for (int i=0; i<weakSelf.topChannelArr.count; i++) {
+            LRLChannelUnitModel *model =weakSelf.topChannelArr[i];
+           // NSArray *modeArray=@[model.cid,model.name];
+            [numArray addObject:model.cid];
+        }
+        weakSelf.NetForParameterArray=[NSMutableArray arrayWithArray:numArray];
+        [weakSelf changeTheParameter];
+        [weakSelf goToNetForListParameter];
         NSLog(@"选中了某一项的回调:\n保留的频道有: %@, 选中第%ld个频道", topArr, index);
     };
     
@@ -405,89 +500,9 @@
     
 }
 
--(void)changeParameterData{
-//    _cellNameArray=[NSMutableArray new];
-//    _topArray=[NSMutableArray new];
-//    _battomArray=[NSMutableArray new];
-//
-//    for (int i=0; i<_topChannelArr.count; i++) {
-//        LRLChannelUnitModel *model =_topChannelArr[i];
-//        NSArray *modeArray=@[model.cid,model.name];
-//        [_topArray addObject:modeArray];
-//        [_cellNameArray addObject:model.name];
-//    }
-//    for (int i=0; i<_bottomChannelArr.count; i++) {
-//        LRLChannelUnitModel *model =_bottomChannelArr[i];
-//        NSArray *modeArray=@[model.cid,model.name];
-//        [_battomArray addObject:modeArray];
-//    }
-    
-        for (int i=0; i<_topChannelArr.count; i++) {
-            LRLChannelUnitModel *model =_topChannelArr[i];
-            NSArray *modeArray=@[model.cid,model.name];
-            [_topArray addObject:modeArray];
-            [_cellNameArray addObject:model.name];
-        }
-    
-      float H1=40*HEIGHT_SIZE;  float H2=50*HEIGHT_SIZE;    float W1=80*NOW_SIZE;
-    
-    if (_twoScrollView) {
-        [_twoScrollView removeFromSuperview];
-        _twoScrollView=nil;
-    }
-    _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
-    _twoScrollView.backgroundColor = [UIColor whiteColor];
-    _twoScrollView.showsHorizontalScrollIndicator = NO;
-    _twoScrollView.delegate=self;
-    _twoScrollView.bounces = NO;
-    [self.view addSubview:_twoScrollView];
-    
-    
-    _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, H1);
-    
-    
-    float W_K_0=12*NOW_SIZE;             //平均空隙
-    float W1_all=10*NOW_SIZE;
-    
-    for (int i=0; i<_cellNameArray.count; i++) {
-        NSString *nameString=_cellNameArray[i];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-        
-        float W_all_0=W_K_0*2+size.width;
-        
-        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0-5*NOW_SIZE, H1)];
-        lable1.textColor = COLOR(51, 51, 51, 1);
-        lable1.textAlignment=NSTextAlignmentLeft;
-        lable1.text=_cellNameArray[i];
-        lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        [_twoScrollView addSubview:lable1];
-        
-        W1_all=W1_all+W_all_0;
-    }
-    
-    
-    _tableW=W1_all;
-    float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
-        _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
-    
-    if (_tableView) {
-        [_tableView removeFromSuperview];
-        _tableView=nil;
-    }
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _tableW, H3) style:UITableViewStylePlain];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor=COLOR(242, 242, 242, 1);
-    [_threeScrollView addSubview:_tableView];
-    
-    //注册单元格类型
-    [_tableView registerClass:[ossNewDeviceCell class] forCellReuseIdentifier:@"CELL1"];
-    [_tableView registerClass:[ossNewDeviceTwoCell class] forCellReuseIdentifier:@"CELL2"];
-    
 
-}
+
+
 
 
 -(void)changStatue{       //改变状态
@@ -650,32 +665,51 @@
     return _allTableViewDataArray.count;
 }
 
+//转字典转JSON
+-(NSString*) jsonStringWithPrettyPrint:(BOOL) prettyPrint dataArray:(NSArray*)dataArray{
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataArray
+                                                       options:(NSJSONWritingOptions)    (prettyPrint ? NSJSONWritingPrettyPrinted : 0)
+                                                         error:&error];
+    
+    if (! jsonData) {
+        NSLog(@"jsonStringWithPrettyPrint: error: %@", error.localizedDescription);
+        return @"{}";
+    } else {
+        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+}
 
 #pragma mark -网络获取区域
--(void)getNetForListParameter{
-    [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"":@""} paramarsSite:@"/api/v3/device/getShowCol" sucessBlock:^(id content) {
+-(void)goToNetForListParameter{
+    NSString *keyValueString=@"";
+    if (_deviceType==1) {
+        keyValueString=@"dm_invapp";
+    }
+    NSString *textString=[self jsonStringWithPrettyPrint:YES dataArray:_NetForParameterArray];
+    NSDictionary *netDic=@{@"text":textString,@"key":keyValueString};
+  //  [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:netDic paramarsSite:@"/api/v3/device/saveShowCol" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"/api/v3/device/getShowCol: %@", content1);
+        NSLog(@"/api/v3/device/saveShowCol: %@", content1);
         
         if (content1) {
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             
             if ([firstDic[@"result"] intValue]==1) {
-                self.parameterDic=firstDic[@"obj"];
+               // self.parameterDic=firstDic[@"obj"];
                 
             }else{
-                int ResultValue=[firstDic[@"result"] intValue];
-                
-                if (ResultValue==22) {
-                    [self showToastViewWithTitle:@"登录超时"];
-                }else{
-                      [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
-                }
-             
-                
+//                int ResultValue=[firstDic[@"result"] intValue];
+//
+//                if (ResultValue==22) {
+//                    [self showToastViewWithTitle:@"登录超时"];
+//                }else{
+//                      [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
+//                }
+ 
             }
         }
     } failure:^(NSError *error) {
@@ -685,6 +719,9 @@
     
 }
 
+-(void)NetForDevice0{
+    
+}
 
 -(void)NetForDevice{
 

@@ -250,7 +250,7 @@
         [touchView.tap removeTarget:self action:@selector(topTapAct:)];
         [touchView.tap addTarget:self action:@selector(bottomTapAct:)];
     }else{
-        [self returnToHomeWithIndex:index];
+     //   [self returnToHomeWithIndex:index];
     }
 }
 #pragma mark - 点击上边前两个按钮
@@ -622,21 +622,34 @@
 //}
 
 -(void)closeButton{
-    if (self.initialIndexModel && self.initialIndexModel.isTop) {
-        if ([self.topDataSource containsObject:self.initialIndexModel]) {
-            if (self.chooseIndexBlock) {
-                self.chooseIndexBlock([self.topDataSource indexOfObject:self.initialIndexModel], self.topDataSource, self.bottomDataSource);
-            }
-        }
-    }else{
-        if (self.removeInitialIndexBlock) {
-            self.removeInitialIndexBlock(self.topDataSource, self.bottomDataSource);
-        }
+    if (self.chooseIndexBlock) {
+        self.chooseIndexBlock(1, self.topDataSource, self.bottomDataSource);
     }
     [self dismissViewControllerAnimated:YES completion:^{
         [self updateTOsql];
     }];
+    
+//    if (self.initialIndexModel && self.initialIndexModel.isTop) {
+//        if ([self.topDataSource containsObject:self.initialIndexModel]) {
+//            if (self.chooseIndexBlock) {
+//                self.chooseIndexBlock([self.topDataSource indexOfObject:self.initialIndexModel], self.topDataSource, self.bottomDataSource);
+//            }
+//        }
+//    }else{
+//        if (self.removeInitialIndexBlock) {
+//            self.removeInitialIndexBlock(self.topDataSource, self.bottomDataSource);
+//        }
+//    }
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        [self updateTOsql];
+//    }];
+    
 }
+
+
+
+
+
 
 
 
