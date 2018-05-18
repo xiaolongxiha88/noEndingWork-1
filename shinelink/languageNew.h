@@ -1152,4 +1152,7 @@
 #define  root_MAX_504 NSLocalizedString(@"504跳过", nil)
 
 
+#define  root_oss_505_Status NSLocalizedString(@"505状态", nil)
+
+
 #endif /* languageNew_h */

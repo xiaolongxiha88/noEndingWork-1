@@ -15,4 +15,8 @@
 
 @property (nonatomic, strong) UIView *lineView;
 
+@property (nonatomic, strong) NSString *statusNameString;
+
+@property (nonatomic, assign) NSInteger deviceType;      //1、逆变器  2、储能机   3、mix
+
 @end

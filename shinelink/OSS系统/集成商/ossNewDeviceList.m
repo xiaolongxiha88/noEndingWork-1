@@ -92,7 +92,7 @@
         _oldForParameterArray=@[@"2",@"5",@"4",@"9",@"11",@"12",@"13",@"10"];
         
      _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"类型",@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器    ",@"8":@"最后更新时间",@"9":@"状态",@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
+        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"类型",@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器    ",@"8":@"最后更新时间",@"9":root_oss_505_Status,@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
         _numForNetKeyDic=@{@"2":@"alias",@"3":@"iCode",@"4":@"plantName",@"5":@"accountName",@"6":@"cityId",@"7":@"datalog_sn",@"8":@"time",@"9":@"status",@"10":@"nominal_power",@"11":@"etoday",@"12":@"etotal",@"13":@"pac"};
     }
 
@@ -571,10 +571,12 @@
                     if ([unitOneDic.allKeys containsObject:@"serverId"]) {
                         NSString*keyString=[_numForNetKeyDic objectForKey:_NetForParameterNewArray[i]];
                         NSString *valueString=[NSString stringWithFormat:@"%@",twoDic[keyString]];
-                        if ([_NetForParameterNewArray[i] isEqualToString:@"6"] && [valueString isEqualToString:@"-1"]) {
+                        if ([_NetForParameterNewArray[i] isEqualToString:@"6"] && [valueString isEqualToString:@"-1"]) {         //城市
                             valueString=@"";
                         }
-                        
+                        if ([_NetForParameterNewArray[i] isEqualToString:@"9"]){               //状态
+                            valueString=[self changeTheDeviceStatue:valueString];
+                        }
                         [valueArray addObject:valueString];
                     }else{
                            [valueArray addObject:@""];         //没有接入的设备
@@ -582,6 +584,11 @@
                   
                 }
                 
+                if ([unitOneDic.allKeys containsObject:@"serverId"]) {
+                       [valueArray addObject:unitOneDic[@"serverId"]];
+                }else{
+                       [valueArray addObject:@"110"];
+                }
                 [_allTableViewDataArray addObject:valueArray];
             }
         
@@ -806,6 +813,7 @@
         if (!cell) {
             cell=[[ossNewDeviceCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL1"];
         }
+        cell.deviceType=_deviceType;
         cell.nameValueArray=_allTableViewDataArray[indexPath.row];
         cell.nameArray=_cellNameArray;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -832,6 +840,8 @@
    
     
 }
+
+
 
 
 

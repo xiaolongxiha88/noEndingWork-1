@@ -54,7 +54,9 @@
             }else{
                 lableR.text=_nameValueArray[i];
             }
-            
+            if ([nameArray[i] isEqualToString:root_oss_505_Status]) {
+                lableR.text=[self changeTheDeviceStatue:_nameValueArray[i]];
+            }
             lableR.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
             [self.contentView addSubview:lableR];
             
@@ -83,6 +85,44 @@
     
 }
 
+
+
+-(NSString*)changeTheDeviceStatue:(NSString*)numString{
+    NSString*valueString=@"";
+    
+    NSDictionary *statueDic;
+    if (_deviceType==1) {
+        statueDic=@{@"3":@"故障",@"-1":@"离线",@"0":@"等待",@"1":@"在线"};
+    }else if (_deviceType==2) {
+        statueDic=@{@"3":@"故障",@"-1":@"离线",@"1":@"充电",@"2":@"放电",@"-2":@"在线"};
+    }else if (_deviceType==3) {
+        statueDic=@{@"3":@"故障",@"-1":@"离线",@"0":@"等待",@"1":@"自检",@"5":@"在线"};
+    }
+    if ([statueDic.allKeys containsObject:numString]) {
+        valueString=[statueDic objectForKey:numString];
+    }else{
+        valueString=numString;
+    }
+    
+    return valueString;
+}
+
+
+-(UIColor*)changeTheDeviceStatueColor:(NSString*)numString{
+    UIColor*valueColor= COLOR(102, 102, 102, 1);
+    
+    NSDictionary *statueDic;
+    if (_deviceType==1) {
+        statueDic=@{@"3":@"故障",@"-1":@"离线",@"0":@"等待",@"1":@"在线"};
+    }else if (_deviceType==2) {
+        statueDic=@{@"3":@"故障",@"-1":@"离线",@"1":@"充电",@"2":@"放电",@"-2":@"在线"};
+    }else if (_deviceType==3) {
+        statueDic=@{@"3":@"故障",@"-1":@"离线",@"0":@"等待",@"1":@"自检",@"5":@"在线"};
+    }
+
+    
+    return valueColor;
+}
 
 
 
