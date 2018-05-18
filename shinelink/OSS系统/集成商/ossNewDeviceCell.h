@@ -11,5 +11,8 @@
 @interface ossNewDeviceCell : UITableViewCell
 
 @property (nonatomic, strong) NSArray *nameArray;
+@property (nonatomic, strong) NSArray *nameValueArray;
+
+@property (nonatomic, strong) UIView *lineView;
 
 @end

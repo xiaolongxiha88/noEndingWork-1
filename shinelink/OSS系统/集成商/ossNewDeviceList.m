@@ -62,7 +62,7 @@
     
     [self initData];
     [self addRightItem];
-    [self initUI];
+
     
 }
 
@@ -92,7 +92,7 @@
         _oldForParameterArray=@[@"2",@"5",@"4",@"9",@"11",@"12",@"13",@"10"];
         
      _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"类型",@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器",@"8":@"最后更新时间",@"9":@"状态",@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
+        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"类型",@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器    ",@"8":@"最后更新时间",@"9":@"状态",@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
         _numForNetKeyDic=@{@"2":@"alias",@"3":@"iCode",@"4":@"plantName",@"5":@"accountName",@"6":@"cityId",@"7":@"datalog_sn",@"8":@"time",@"9":@"status",@"10":@"nominal_power",@"11":@"etoday",@"12":@"etotal",@"13":@"pac"};
     }
 
@@ -107,6 +107,7 @@
     _cellNameArray=[NSMutableArray new];
     _topArray=[NSMutableArray new];
     _battomArray=[NSMutableArray new];
+    
     NSArray *nowNameArray;     //现在显示的参数
     if (_NetForParameterArray.count==0) {
         nowNameArray=[NSArray arrayWithArray:_oldForParameterArray];
@@ -120,8 +121,8 @@
     }
     _NetForParameterNewArray=[NSArray arrayWithArray:nowNameArray];
     [_cellNameArray addObject:[_forChoiceParameterDic objectForKey:@"0"]];
-    for (int i=0; i<_parameterNumArray.count; i++) {
-        NSString *keyNum=_parameterNumArray[i];
+    for (int i=0; i<_NetForParameterNewArray.count; i++) {
+        NSString *keyNum=_NetForParameterNewArray[i];
         NSArray *keyAndValueArray=@[keyNum,[_forChoiceParameterDic objectForKey:keyNum]];
         if ([nowNameArray containsObject:keyNum]) {
             [_topArray addObject:keyAndValueArray];
@@ -131,6 +132,16 @@
         }
     }
     
+    for (int i=0; i<_parameterNumArray.count; i++) {
+        NSString *keyNum=_parameterNumArray[i];
+        NSArray *keyAndValueArray=@[keyNum,[_forChoiceParameterDic objectForKey:keyNum]];
+        if (![nowNameArray containsObject:keyNum]) {
+              [_battomArray addObject:keyAndValueArray];
+        }
+        
+    }
+    
+        [self initUI];
 }
 
 #pragma mark -UI区域
@@ -395,21 +406,28 @@
 }
 
 -(void)changeParameterData{
-    _cellNameArray=[NSMutableArray new];
-    _topArray=[NSMutableArray new];
-    _battomArray=[NSMutableArray new];
+//    _cellNameArray=[NSMutableArray new];
+//    _topArray=[NSMutableArray new];
+//    _battomArray=[NSMutableArray new];
+//
+//    for (int i=0; i<_topChannelArr.count; i++) {
+//        LRLChannelUnitModel *model =_topChannelArr[i];
+//        NSArray *modeArray=@[model.cid,model.name];
+//        [_topArray addObject:modeArray];
+//        [_cellNameArray addObject:model.name];
+//    }
+//    for (int i=0; i<_bottomChannelArr.count; i++) {
+//        LRLChannelUnitModel *model =_bottomChannelArr[i];
+//        NSArray *modeArray=@[model.cid,model.name];
+//        [_battomArray addObject:modeArray];
+//    }
     
-    for (int i=0; i<_topChannelArr.count; i++) {
-        LRLChannelUnitModel *model =_topChannelArr[i];
-        NSArray *modeArray=@[model.cid,model.name];
-        [_topArray addObject:modeArray];
-        [_cellNameArray addObject:model.name];
-    }
-    for (int i=0; i<_bottomChannelArr.count; i++) {
-        LRLChannelUnitModel *model =_bottomChannelArr[i];
-        NSArray *modeArray=@[model.cid,model.name];
-        [_battomArray addObject:modeArray];
-    }
+        for (int i=0; i<_topChannelArr.count; i++) {
+            LRLChannelUnitModel *model =_topChannelArr[i];
+            NSArray *modeArray=@[model.cid,model.name];
+            [_topArray addObject:modeArray];
+            [_cellNameArray addObject:model.name];
+        }
     
       float H1=40*HEIGHT_SIZE;  float H2=50*HEIGHT_SIZE;    float W1=80*NOW_SIZE;
     
@@ -438,7 +456,7 @@
         
         float W_all_0=W_K_0*2+size.width;
         
-        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0, H1)];
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0-5*NOW_SIZE, H1)];
         lable1.textColor = COLOR(51, 51, 51, 1);
         lable1.textAlignment=NSTextAlignmentLeft;
         lable1.text=_cellNameArray[i];
@@ -537,7 +555,12 @@
                 for (int i=0; i<_NetForParameterNewArray.count; i++) {
                     if ([unitOneDic.allKeys containsObject:@"serverId"]) {
                         NSString*keyString=[_numForNetKeyDic objectForKey:_NetForParameterNewArray[i]];
-                        [valueArray addObject:twoDic[keyString]];
+                        NSString *valueString=[NSString stringWithFormat:@"%@",twoDic[keyString]];
+                        if ([_NetForParameterNewArray[i] isEqualToString:@"6"] && [valueString isEqualToString:@"-1"]) {
+                            valueString=@"";
+                        }
+                        
+                        [valueArray addObject:valueString];
                     }else{
                            [valueArray addObject:@""];         //没有接入的设备
                     }
@@ -612,7 +635,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    float H=40*HEIGHT_SIZE;
+    float H=30*HEIGHT_SIZE;
 
     if (_isChangTableView) {
           NSInteger Num=_cellNameArray2.count/2+_cellNameArray2.count%2;
@@ -742,12 +765,12 @@
     
     if (!_isChangTableView) {
         ossNewDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL1" forIndexPath:indexPath];
-        
-        cell.nameArray=_cellNameArray;
-        
+
         if (!cell) {
             cell=[[ossNewDeviceCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL1"];
         }
+        cell.nameValueArray=_allTableViewDataArray[indexPath.row];
+        cell.nameArray=_cellNameArray;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
