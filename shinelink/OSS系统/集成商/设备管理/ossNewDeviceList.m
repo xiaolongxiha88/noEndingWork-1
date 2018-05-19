@@ -48,6 +48,9 @@
 
 @property (nonatomic, strong) NSMutableArray *allTableViewDataArray;
 
+@property (nonatomic, strong)NSString* numNameLableString;
+@property (nonatomic, strong) NSMutableDictionary *deviceStatueNumDic;
+
 @end
 
 @implementation ossNewDeviceList
@@ -229,14 +232,23 @@
     UIView *View201= [[UIView alloc]initWithFrame:CGRectMake(WK1+imageW+WK1, 0, W_View201,H2)];
     View201.backgroundColor =[UIColor clearColor];
     View201.userInteractionEnabled=YES;
-    UITapGestureRecognizer *labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changStatue)];
+    UITapGestureRecognizer *labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(chioceTheStatue)];
     [View201 addGestureRecognizer:labelTap2];
     [View2 addSubview:View201];
     
+    NSArray *numArray=[self getTheDeviceStatueNum];
+    _deviceStatueNumDic=[NSMutableDictionary new];
+    for (int i=0; i<numArray.count; i++) {
+        NSArray *statueArray=[self changeTheDeviceStatue:numArray[i]];
+        [_deviceStatueNumDic setObject:@"" forKey:statueArray[2]];
+    }
+    
+    NSArray *statueArray1=[self changeTheDeviceStatue:@""];
+    _numNameLableString=statueArray1[2];
     if (!_numNameLable) {
         _numNameLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0,W2_1, H2_1/2.0)];
         _numNameLable.textColor = COLOR(51, 51, 51, 1);
-        _numNameLable.text=@"全部";
+        _numNameLable.text=statueArray1[1];
         _numNameLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         _numNameLable.textAlignment=NSTextAlignmentCenter;
         _numNameLable.adjustsFontSizeToFitWidth=YES;
@@ -247,7 +259,7 @@
     if (!_numLable) {
         _numLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0+H2_1/2.0,W2_1, H2_1/2.0)];
         _numLable.textColor =mainColor;
-        _numLable.text=@"12312";
+        _numLable.text=@"";
         _numLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         _numLable.textAlignment=NSTextAlignmentCenter;
            _numLable.adjustsFontSizeToFitWidth=YES;
@@ -505,9 +517,6 @@
 
 
 
--(void)changStatue{       //改变状态
-    
-}
 
 
 -(NSMutableArray<LRLChannelUnitModel *> *)topChannelArr{
@@ -558,10 +567,30 @@
 -(void)changeNetData{                     //给tableviewcell用的数据
     _allTableViewDataArray=[NSMutableArray array];
     
+    NSArray *numArray=[self getTheDeviceStatueNum];
+     NSMutableArray *keyNameArray=[NSMutableArray array];
+     NSMutableArray *numValueArray=[NSMutableArray array];
+    
+    _deviceStatueNumDic=[NSMutableDictionary new];
+    for (int i=0; i<numArray.count; i++) {
+       
+        NSArray *statueArray=[self changeTheDeviceStatue:numArray[i]];
+         [keyNameArray addObject:statueArray[2]];
+        [numValueArray addObject:[NSNumber numberWithInteger:0]];
+//        [_deviceStatueNumDic setObject:@"" forKey:statueArray[2]];
+    }
+    
     for (int i=0; i<_netResultArray.count; i++) {
         NSDictionary *unitOneDic=_netResultArray[i];
            NSArray *dataArray=unitOneDic[@"datas"];
-        
+        NSDictionary *numsDic=unitOneDic[@"nums"];
+        for (int i=0; i<keyNameArray.count; i++) {
+            if ([numsDic.allKeys containsObject:keyNameArray[i]]) {
+                NSInteger value1=[[NSString stringWithFormat:@"%@",keyNameArray[i]] integerValue];
+                NSInteger value2=[numValueArray[i] integerValue];
+                [numValueArray replaceObjectAtIndex:i withObject:[NSNumber numberWithInteger:value1+value2]];
+            }
+        }
       
             for (int i=0; i<dataArray.count; i++) {
                 NSDictionary *twoDic=dataArray[i];
@@ -574,9 +603,7 @@
                         if ([_NetForParameterNewArray[i] isEqualToString:@"6"] && [valueString isEqualToString:@"-1"]) {         //城市
                             valueString=@"";
                         }
-                        if ([_NetForParameterNewArray[i] isEqualToString:@"9"]){               //状态
-                            valueString=[self changeTheDeviceStatue:valueString];
-                        }
+        
                         [valueArray addObject:valueString];
                     }else{
                            [valueArray addObject:@""];         //没有接入的设备
@@ -593,6 +620,14 @@
             }
         
     }
+    
+    for (int i=0; i<keyNameArray.count; i++) {
+       [_deviceStatueNumDic setObject:numValueArray[i] forKey:keyNameArray[i]];
+    }
+    if ([_deviceStatueNumDic.allKeys containsObject:_numNameLableString]) {
+         _numLable.text=[NSString stringWithFormat:@"%@",[_deviceStatueNumDic objectForKey:_numNameLableString]];
+    }
+   
  
     [_tableView reloadData];
     
@@ -842,7 +877,75 @@
 }
 
 
+-(void)chioceTheStatue{
+    NSString *titleString=@"选择设备状态";
+    NSArray*numArray;
+    numArray=[self getTheDeviceStatueNum];
+   
+    NSMutableArray *nameArray=[NSMutableArray array];
+    NSMutableDictionary *nameAndValueDic=[NSMutableDictionary new];
+        NSMutableDictionary *numAndValueStringDic=[NSMutableDictionary new];
+    NSMutableDictionary *netAndValueStringDic=[NSMutableDictionary new];
+    for (int i=0; i<numArray.count; i++) {
+        NSArray* statueArray=[self changeTheDeviceStatue:numArray[i]];
+        NSString *name=[NSString stringWithFormat:@"%@(%@)",statueArray[1], [_deviceStatueNumDic objectForKey:statueArray[2]]];
+        [nameArray addObject:statueArray[1]];
+        [nameAndValueDic setObject:statueArray[1] forKey:name];
+           [numAndValueStringDic setObject:numArray[i] forKey:name];
+       [netAndValueStringDic setObject:numArray[2] forKey:name];
+    }
+    [ZJBLStoreShopTypeAlert showWithTitle:titleString titles:nameArray selectIndex:^(NSInteger selectIndex) {
+        
+    }selectValue:^(NSString *selectValue){
+        _numNameLable.text=[nameAndValueDic objectForKey:selectValue];
+        _numLable.text=[_deviceStatueNumDic objectForKey:[nameAndValueDic objectForKey:selectValue]];
+    NSString*netNum=[numAndValueStringDic objectForKey:selectValue];
+        [_deviceNetDic setObject:netNum forKey:@"deviceStatus"];
+        _numNameLableString=[netAndValueStringDic objectForKey:selectValue];
+        [self NetForDevice];
+    } showCloseButton:YES ];
+    
+    
+}
 
+-(NSArray*)getTheDeviceStatueNum{
+    NSArray *numArray;
+    if (_deviceType==2) {
+        numArray=@[@"",@"-2",@"1",@"2",@"3",@"-1"];
+    }else if (_deviceType==3) {
+        numArray=@[@"",@"5",@"1",@"0",@"3",@"-1"];
+    }else{
+        numArray=@[@"",@"1",@"3",@"-1",@"0"];
+    }
+    return numArray;
+}
+-(NSArray*)changeTheDeviceStatue:(NSString*)numString{
+    NSArray *statueArray;
+    
+    NSDictionary *colorDic; NSDictionary *nameDic;NSDictionary *netKeyDic;
+    if (_deviceType==1) {
+        colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(170, 170, 170, 1),@"0":COLOR(213, 180, 0, 1),@"1":COLOR(44, 189, 10, 1),@"":MainColor};
+           nameDic=@{@"3":@"故障",@"-1":@"离线",@"0":@"等待",@"1":@"在线",@"":@"全部"};
+        netKeyDic=@{@"3":@"faultNum",@"-1":@"lostNum",@"0":@"waitNum",@"1":@"onlineNum",@"":@"totalNum"};
+    }else if (_deviceType==2) {
+        colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(170, 170, 170, 1),@"1":COLOR(44, 189, 10, 1),@"2":COLOR(213, 180, 0, 1),@"-2":COLOR(61, 190, 4, 1),@"":MainColor};
+           nameDic=@{@"3":@"故障",@"-1":@"离线",@"1":@"充电",@"2":@"放电",@"-2":@"在线",@"":@"全部"};
+            netKeyDic=@{@"3":@"faultNum",@"-1":@"lostNum",@"1":@"chargeNum",@"2":@"dischargeNum",@"-2":@"onlineNum",@"":@"totalNum"};
+    }else if (_deviceType==3) {
+        colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(170, 170, 170, 1),@"0":COLOR(213, 180, 0, 1),@"1":COLOR(209, 148, 0, 1),@"5":COLOR(44, 189, 10, 1),@"":MainColor};
+        nameDic=@{@"3":@"故障",@"-1":@"离线",@"0":@"等待",@"1":@"自检",@"5":@"在线",@"":@"全部"};
+          netKeyDic=@{@"3":@"faultNum",@"-1":@"lostNum",@"0":@"waitNum",@"1":@"selfCheck",@"5":@"onlineNum",@"":@"totalNum"};
+    }
+    
+    
+    if ([colorDic.allKeys containsObject:numString]) {           //颜色、名字、网络KEY
+        statueArray=@[[colorDic objectForKey:numString],[nameDic objectForKey:numString],[netKeyDic objectForKey:numString]];
+    }else{
+          statueArray=@[[colorDic objectForKey:@""],[nameDic objectForKey:@""],[netKeyDic objectForKey:@""]];
+    }
+    
+    return statueArray;
+}
 
 
 

@@ -4441,16 +4441,9 @@
 				338D51BE1EE151D9003FE4D2 /* IntegratorFirst.swift */,
 				3306CE5D1EF3CCE1002699BA /* intergratorDeviceList.swift */,
 				338614AB1F2606A0000F515E /* intergratorDeviceCell.swift */,
-				33E727842091A7A0009F460A /* ossNewDeviceList.h */,
-				33E727852091A7A0009F460A /* ossNewDeviceList.m */,
-				33E36AB820AC034200F58E6D /* ossIntegratorSearch.h */,
-				33E36AB920AC034200F58E6D /* ossIntegratorSearch.m */,
-				33E36AB520A70AAC00F58E6D /* ossUserList.h */,
-				33E36AB620A70AAC00F58E6D /* ossUserList.m */,
-				33E727872091F09E009F460A /* ossNewDeviceCell.h */,
-				33E727882091F09E009F460A /* ossNewDeviceCell.m */,
-				3398B98420A2D93700BDD8CC /* ossNewDeviceTwoCell.h */,
-				3398B98520A2D93700BDD8CC /* ossNewDeviceTwoCell.m */,
+				33A5CE2220AFDBC200A24619 /* 电站管理 */,
+				33A5CE2020AFDBC100A24619 /* 设备管理 */,
+				33A5CE2120AFDBC200A24619 /* 用户管理 */,
 				33E7278A20933DE3009F460A /* OneKeyAddForIntergrator.h */,
 				33E7278B20933DE3009F460A /* OneKeyAddForIntergrator.m */,
 				3398B97520A04ABA00BDD8CC /* addOssIntegratorDevice.h */,
@@ -4468,6 +4461,37 @@
 				336A108E1CBDDBA500E30E83 /* 2triangular.png */,
 			);
 			path = "下拉图片";
+			sourceTree = "<group>";
+		};
+		33A5CE2020AFDBC100A24619 /* 设备管理 */ = {
+			isa = PBXGroup;
+			children = (
+				33E727842091A7A0009F460A /* ossNewDeviceList.h */,
+				33E727852091A7A0009F460A /* ossNewDeviceList.m */,
+				33E36AB820AC034200F58E6D /* ossIntegratorSearch.h */,
+				33E36AB920AC034200F58E6D /* ossIntegratorSearch.m */,
+				33E727872091F09E009F460A /* ossNewDeviceCell.h */,
+				33E727882091F09E009F460A /* ossNewDeviceCell.m */,
+				3398B98420A2D93700BDD8CC /* ossNewDeviceTwoCell.h */,
+				3398B98520A2D93700BDD8CC /* ossNewDeviceTwoCell.m */,
+			);
+			path = "设备管理";
+			sourceTree = "<group>";
+		};
+		33A5CE2120AFDBC200A24619 /* 用户管理 */ = {
+			isa = PBXGroup;
+			children = (
+				33E36AB520A70AAC00F58E6D /* ossUserList.h */,
+				33E36AB620A70AAC00F58E6D /* ossUserList.m */,
+			);
+			path = "用户管理";
+			sourceTree = "<group>";
+		};
+		33A5CE2220AFDBC200A24619 /* 电站管理 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "电站管理";
 			sourceTree = "<group>";
 		};
 		33AF3CE21D8E67210007D6C2 /* num2 */ = {
