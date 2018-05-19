@@ -586,7 +586,7 @@
         NSDictionary *numsDic=unitOneDic[@"nums"];
         for (int i=0; i<keyNameArray.count; i++) {
             if ([numsDic.allKeys containsObject:keyNameArray[i]]) {
-                NSInteger value1=[[NSString stringWithFormat:@"%@",keyNameArray[i]] integerValue];
+                NSInteger value1=[[NSString stringWithFormat:@"%@",[numsDic objectForKey:keyNameArray[i]]] integerValue];
                 NSInteger value2=[numValueArray[i] integerValue];
                 [numValueArray replaceObjectAtIndex:i withObject:[NSNumber numberWithInteger:value1+value2]];
             }
@@ -886,22 +886,27 @@
     NSMutableDictionary *nameAndValueDic=[NSMutableDictionary new];
         NSMutableDictionary *numAndValueStringDic=[NSMutableDictionary new];
     NSMutableDictionary *netAndValueStringDic=[NSMutableDictionary new];
+       NSMutableDictionary *netKeyAndValueStringDic=[NSMutableDictionary new];
     for (int i=0; i<numArray.count; i++) {
         NSArray* statueArray=[self changeTheDeviceStatue:numArray[i]];
         NSString *name=[NSString stringWithFormat:@"%@(%@)",statueArray[1], [_deviceStatueNumDic objectForKey:statueArray[2]]];
-        [nameArray addObject:statueArray[1]];
+        [nameArray addObject:name];
         [nameAndValueDic setObject:statueArray[1] forKey:name];
            [numAndValueStringDic setObject:numArray[i] forKey:name];
-       [netAndValueStringDic setObject:numArray[2] forKey:name];
+        [netKeyAndValueStringDic setObject:statueArray[2] forKey:name];
+       [netAndValueStringDic setObject:numArray[i] forKey:name];
     }
     [ZJBLStoreShopTypeAlert showWithTitle:titleString titles:nameArray selectIndex:^(NSInteger selectIndex) {
         
     }selectValue:^(NSString *selectValue){
+          _numNameLableString=[netAndValueStringDic objectForKey:selectValue];
+          NSArray* statue1Array=[self changeTheDeviceStatue:_numNameLableString];
+        _numLable.textColor=statue1Array[0];
         _numNameLable.text=[nameAndValueDic objectForKey:selectValue];
-        _numLable.text=[_deviceStatueNumDic objectForKey:[nameAndValueDic objectForKey:selectValue]];
+        _numLable.text=[NSString stringWithFormat:@"%@",[_deviceStatueNumDic objectForKey:[netKeyAndValueStringDic objectForKey:selectValue]]];
     NSString*netNum=[numAndValueStringDic objectForKey:selectValue];
         [_deviceNetDic setObject:netNum forKey:@"deviceStatus"];
-        _numNameLableString=[netAndValueStringDic objectForKey:selectValue];
+      
         [self NetForDevice];
     } showCloseButton:YES ];
     
@@ -924,15 +929,15 @@
     
     NSDictionary *colorDic; NSDictionary *nameDic;NSDictionary *netKeyDic;
     if (_deviceType==1) {
-        colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(170, 170, 170, 1),@"0":COLOR(213, 180, 0, 1),@"1":COLOR(44, 189, 10, 1),@"":MainColor};
+        colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(154, 154, 154, 1),@"0":COLOR(213, 180, 0, 1),@"1":COLOR(44, 189, 10, 1),@"":MainColor};
            nameDic=@{@"3":@"故障",@"-1":@"离线",@"0":@"等待",@"1":@"在线",@"":@"全部"};
         netKeyDic=@{@"3":@"faultNum",@"-1":@"lostNum",@"0":@"waitNum",@"1":@"onlineNum",@"":@"totalNum"};
     }else if (_deviceType==2) {
-        colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(170, 170, 170, 1),@"1":COLOR(44, 189, 10, 1),@"2":COLOR(213, 180, 0, 1),@"-2":COLOR(61, 190, 4, 1),@"":MainColor};
+        colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(154, 154, 154, 1),@"1":COLOR(44, 189, 10, 1),@"2":COLOR(213, 180, 0, 1),@"-2":COLOR(61, 190, 4, 1),@"":MainColor};
            nameDic=@{@"3":@"故障",@"-1":@"离线",@"1":@"充电",@"2":@"放电",@"-2":@"在线",@"":@"全部"};
             netKeyDic=@{@"3":@"faultNum",@"-1":@"lostNum",@"1":@"chargeNum",@"2":@"dischargeNum",@"-2":@"onlineNum",@"":@"totalNum"};
     }else if (_deviceType==3) {
-        colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(170, 170, 170, 1),@"0":COLOR(213, 180, 0, 1),@"1":COLOR(209, 148, 0, 1),@"5":COLOR(44, 189, 10, 1),@"":MainColor};
+        colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(154, 154, 154, 1),@"0":COLOR(213, 180, 0, 1),@"1":COLOR(209, 148, 0, 1),@"5":COLOR(44, 189, 10, 1),@"":MainColor};
         nameDic=@{@"3":@"故障",@"-1":@"离线",@"0":@"等待",@"1":@"自检",@"5":@"在线",@"":@"全部"};
           netKeyDic=@{@"3":@"faultNum",@"-1":@"lostNum",@"0":@"waitNum",@"1":@"selfCheck",@"5":@"onlineNum",@"":@"totalNum"};
     }
