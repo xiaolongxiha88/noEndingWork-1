@@ -28,6 +28,7 @@
     float W_K_0=12*NOW_SIZE;             //平均空隙
     float W_all=10*NOW_SIZE;
     
+    NSArray *deviceTypeArray=@[@"",@"逆变器",@"储能机",@"MIX"];
     if (!_lineView) {
         _lineView = [[UIView alloc]initWithFrame:CGRectMake(10*NOW_SIZE,H1-1*HEIGHT_SIZE, SCREEN_Width-(2*10*NOW_SIZE),1*HEIGHT_SIZE)];
         _lineView.backgroundColor = COLOR(222, 222, 222, 1);
@@ -58,6 +59,10 @@
                 lableR.text=[self changeTheDeviceStatue:_nameValueArray[i]];
                 lableR.textColor =[self changeTheDeviceStatueColor:_nameValueArray[i]];
             }
+            if ([nameArray[i] isEqualToString:root_oss_506_leiXing]) {
+                NSString*num=_nameValueArray[i];
+                lableR.text=deviceTypeArray[[num integerValue]];
+            }
             lableR.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
             [self.contentView addSubview:lableR];
             
@@ -81,6 +86,11 @@
                 lableR.text=[self changeTheDeviceStatue:_nameValueArray[i]];
                 lableR.textColor =[self changeTheDeviceStatueColor:_nameValueArray[i]];
             }
+            if ([nameArray[i] isEqualToString:root_oss_506_leiXing]) {
+                NSString*num=_nameValueArray[i];
+                lableR.text=deviceTypeArray[[num integerValue]];
+            }
+            
         }
       
         

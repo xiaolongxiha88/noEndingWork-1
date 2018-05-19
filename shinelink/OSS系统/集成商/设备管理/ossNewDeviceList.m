@@ -31,6 +31,8 @@
 @property (nonatomic, strong) NSMutableArray<LRLChannelUnitModel *> *topChannelArr;
 @property (nonatomic, strong) NSMutableArray<LRLChannelUnitModel *> *bottomChannelArr;
 @property (nonatomic, assign) NSInteger chooseIndex;
+@property (nonatomic, assign) NSInteger pageNumForNet;
+@property (nonatomic, assign) NSInteger pageTotalNum;
 
 @property (nonatomic, strong) NSDictionary *forChoiceParameterDic;
 @property (nonatomic, strong) NSArray *NetForParameterArray;
@@ -41,6 +43,8 @@
 @property (nonatomic, strong) NSArray *parameterNumArray;
 @property (nonatomic, strong) NSDictionary *numForNetKeyDic;
 
+@property (nonatomic, strong) NSArray *upOrDownNetValueArray;
+@property (nonatomic, strong) NSArray *searchNameArray;
 @property (nonatomic, strong) NSArray *netResultArray;
 @property (nonatomic, strong) UILabel *numLable;
 @property (nonatomic, strong) UILabel *numNameLable;
@@ -78,10 +82,12 @@
             _NetForParameterArray=_parameterDic[@"dm_invapp"];
         }
       
-        _deviceNetDic=[NSMutableDictionary new];
-
+            _deviceNetDic=[NSMutableDictionary new];
+        
+        [self initTheNetPageAndValue];
+        
         [_deviceNetDic setObject:@"3" forKey:@"lineType"];
-        [_deviceNetDic setObject:@"1" forKey:@"page"];
+        [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
         [_deviceNetDic setObject:@"1" forKey:@"order"];
         [_deviceNetDic setObject:@"1" forKey:@"deviceType"];
         [_deviceNetDic setObject:@"" forKey:@"iCode"];
@@ -91,12 +97,14 @@
                [_deviceNetDic setObject:@"" forKey:@"city"];
          [_deviceNetDic setObject:@"" forKey:@"ratedPower"];
         
-        _oneParaArray=@[@"状态",@"额定功率",@"今日发电量",@"累计发电量",@"当前功率",];
+        _oneParaArray=@[@"状态",@"额定功率",@"今日发电量",@"累计发电量",@"用户名",@"电站名",@"当前功率"];
+        _upOrDownNetValueArray=@[@[@"1",@"2"],@[@"3",@"4"],@[@"5",@"6"],@[@"7",@"8"],@[@"9",@"10"],@[@"11",@"12"],@[@"13",@"14"]];
+        
         _oldForParameterArray=@[@"2",@"5",@"4",@"9",@"11",@"12",@"13",@"10"];
         
      _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"类型",@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器    ",@"8":@"最后更新时间",@"9":root_oss_505_Status,@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
-        _numForNetKeyDic=@{@"2":@"alias",@"3":@"iCode",@"4":@"plantName",@"5":@"accountName",@"6":@"cityId",@"7":@"datalog_sn",@"8":@"time",@"9":@"status",@"10":@"nominal_power",@"11":@"etoday",@"12":@"etotal",@"13":@"pac"};
+        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":root_oss_506_leiXing,@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器    ",@"8":@"最后更新时间",@"9":root_oss_505_Status,@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
+        _numForNetKeyDic=@{@"1":@"type",@"2":@"alias",@"3":@"iCode",@"4":@"plantName",@"5":@"accountName",@"6":@"cityId",@"7":@"datalog_sn",@"8":@"time",@"9":@"status",@"10":@"nominal_power",@"11":@"etoday",@"12":@"etotal",@"13":@"pac"};
     }
 
     
@@ -339,37 +347,55 @@
         _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
     
 
+   [self initTableViewUI:H3];
+    
+    [self NetForDevice];
+    
+}
+
+-(void)initTableViewUI:(float)H3{
+    
+    if (_tableView) {
+        [_tableView removeFromSuperview];
+        _tableView=nil;
+    }
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _tableW, H3) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-   _tableView.backgroundColor=COLOR(242, 242, 242, 1);
+    _tableView.backgroundColor=COLOR(242, 242, 242, 1);
     
-    if (_allTableViewDataArray.count>1) {
-        
+ 
         
         MJRefreshAutoNormalFooter *foot=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+            if (_allTableViewDataArray.count>1) {
+                if (_pageNumForNet<_pageTotalNum) {
+                    _pageNumForNet++;
+                    [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
+                    [self NetForDevice];
+                }else{
+                    [self showToastViewWithTitle:@"已经到最后一页"];
+                }
          
-       //     [self requestData];
+                
+            }
+    
             
             [_tableView.mj_footer endRefreshing];
-            
             
         }];
         [foot setTitle:@"" forState:MJRefreshStateIdle];
         _tableView.mj_footer=foot;
-        _tableView.mj_footer.automaticallyHidden=YES;
+ 
+        _tableView.mj_footer.automaticallyHidden=NO;
         
-    }
+
     
     [_threeScrollView addSubview:_tableView];
- 
+    
     //注册单元格类型
     [_tableView registerClass:[ossNewDeviceCell class] forCellReuseIdentifier:@"CELL1"];
-     [_tableView registerClass:[ossNewDeviceTwoCell class] forCellReuseIdentifier:@"CELL2"];
-    
-    [self NetForDevice];
-    
+    [_tableView registerClass:[ossNewDeviceTwoCell class] forCellReuseIdentifier:@"CELL2"];
 }
 
 -(void)initTheTheChangeUI{
@@ -416,22 +442,9 @@
     float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
     _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
     
-    if (_tableView) {
-        [_tableView removeFromSuperview];
-        _tableView=nil;
-    }
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _tableW, H3) style:UITableViewStylePlain];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _tableView.backgroundColor=COLOR(242, 242, 242, 1);
-    [_threeScrollView addSubview:_tableView];
+   [self initTableViewUI:H3];
     
-    //注册单元格类型
-    [_tableView registerClass:[ossNewDeviceCell class] forCellReuseIdentifier:@"CELL1"];
-    [_tableView registerClass:[ossNewDeviceTwoCell class] forCellReuseIdentifier:@"CELL2"];
-    
-        [self NetForDevice];
+   [self NetForDevice];
 }
 
 
@@ -479,6 +492,8 @@
     
 }
 
+
+#pragma mark -选择显示参数
 -(void)goToChoiceParameter{
     LRLChannelEditController *channelEdit = [[LRLChannelEditController alloc] initWithTopDataSource:self.topChannelArr andBottomDataSource:self.bottomChannelArr andInitialIndex:self.chooseIndex];
     
@@ -499,12 +514,12 @@
         for (int i=0; i<weakSelf.topChannelArr.count; i++) {
             LRLChannelUnitModel *model =weakSelf.topChannelArr[i];
            // NSArray *modeArray=@[model.cid,model.name];
-            [numArray addObject:model.cid];
+            [numArray addObject:[NSString stringWithFormat:@"%@",model.cid]];
         }
         weakSelf.NetForParameterArray=[NSMutableArray arrayWithArray:numArray];
-        [weakSelf changeTheParameter];
+    [weakSelf changeTheParameter];
         [weakSelf goToNetForListParameter];
-        NSLog(@"选中了某一项的回调:\n保留的频道有: %@, 选中第%ld个频道", topArr, index);
+      
     };
     
     channelEdit.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -552,12 +567,18 @@
 }
 
 
-
+#pragma mark -搜索回调
 -(void)goToSearch{
     ossIntegratorSearch *searchView=[[ossIntegratorSearch alloc]init];
     searchView.searchType=1;
+    searchView.oldSearchValueArray=self.searchNameArray;
+    searchView.searchDicBlock = ^(NSDictionary *netDic){
+        _deviceNetDic=[NSMutableDictionary dictionaryWithDictionary:netDic];
+    };
     searchView.searchResultBlock = ^(NSArray *resultArray){
-        _netResultArray=resultArray;
+        [self initTheNetPageAndValue];
+        _netResultArray=resultArray[0];
+        _searchNameArray=resultArray[1];
         [self changeNetData];
     };
     [self.navigationController pushViewController:searchView animated:YES];
@@ -565,7 +586,7 @@
 
 
 -(void)changeNetData{                     //给tableviewcell用的数据
-    _allTableViewDataArray=[NSMutableArray array];
+ 
     
     NSArray *numArray=[self getTheDeviceStatueNum];
      NSMutableArray *keyNameArray=[NSMutableArray array];
@@ -581,7 +602,14 @@
     }
     
     for (int i=0; i<_netResultArray.count; i++) {
+   
         NSDictionary *unitOneDic=_netResultArray[i];
+        
+        if (i==0) {
+            _pageNumForNet=[[NSString stringWithFormat:@"%@",unitOneDic[@"offset"]] integerValue];
+             _pageTotalNum=[[NSString stringWithFormat:@"%@",unitOneDic[@"pages"]] integerValue];
+        }
+        
            NSArray *dataArray=unitOneDic[@"datas"];
         NSDictionary *numsDic=unitOneDic[@"nums"];
         for (int i=0; i<keyNameArray.count; i++) {
@@ -635,10 +663,11 @@
 }
 
 
-
+#pragma mark -排序
 -(void)changeTheRowNum:(UITapGestureRecognizer*)tap{
   NSInteger  tagNum=tap.view.tag-2000;
  
+    NSArray *netValueArray=_upOrDownNetValueArray[tagNum];
     BOOL isSelect=[_selectRowNumArray[tagNum] boolValue];
     isSelect = !isSelect;
 
@@ -650,15 +679,27 @@
         }else{
             if (isSelect) {
                 image0.image=IMAGE(@"oss_up.png");
+                   [_deviceNetDic setObject:netValueArray[1] forKey:@"order"];
             }else{
                 image0.image=IMAGE(@"oss_down.png");
+                    [_deviceNetDic setObject:netValueArray[0] forKey:@"order"];
             }
      
                 [_selectRowNumArray replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:isSelect]];
         }
 
     }
+    
+    [self initTheNetPageAndValue];
+    [self NetForDevice];
    
+}
+
+-(void)initTheNetPageAndValue{
+    
+ _allTableViewDataArray=[NSMutableArray array];
+    _pageNumForNet=1;
+    _pageTotalNum=1;
 }
 
 -(void)changTableView{
@@ -728,7 +769,7 @@
     if (_deviceType==1) {
         keyValueString=@"dm_invapp";
     }
-    NSString *textString=[self jsonStringWithPrettyPrint:YES dataArray:_NetForParameterArray];
+    NSString *textString=[NSString stringWithFormat:@"%@",[self jsonStringWithPrettyPrint:YES dataArray:_NetForParameterArray]];
     NSDictionary *netDic=@{@"text":textString,@"key":keyValueString};
   //  [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:netDic paramarsSite:@"/api/v3/device/saveShowCol" sucessBlock:^(id content) {
@@ -761,9 +802,7 @@
     
 }
 
--(void)NetForDevice0{
-    
-}
+
 
 -(void)NetForDevice{
 
@@ -905,9 +944,14 @@
         _numNameLable.text=[nameAndValueDic objectForKey:selectValue];
         _numLable.text=[NSString stringWithFormat:@"%@",[_deviceStatueNumDic objectForKey:[netKeyAndValueStringDic objectForKey:selectValue]]];
     NSString*netNum=[numAndValueStringDic objectForKey:selectValue];
-        [_deviceNetDic setObject:netNum forKey:@"deviceStatus"];
+  
       
+        [self initTheNetPageAndValue];
+        
+         [_deviceNetDic setObject:netNum forKey:@"deviceStatus"];
+            [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
         [self NetForDevice];
+        
     } showCloseButton:YES ];
     
     

@@ -85,8 +85,10 @@
    _deviceNameArray=@[@"逆变器",@"储能机",@"混储一体机"];
     _deviceNameIdDic=@{_deviceNameArray[0]:@"1",_deviceNameArray[1]:@"2",_deviceNameArray[2]:@"3",};
     _H_All=0;
-    if (_oldValueArray.count==0) {
+    if (_oldSearchValueArray.count==0) {
         _oldValueArray=[NSMutableArray arrayWithArray:@[@"逆变器",@"所有",@"",@"",@"序列号",@""]];
+    }else{
+        _oldValueArray=[NSMutableArray arrayWithArray:_oldSearchValueArray];
     }
     if ([_oldValueArray[0] isEqualToString:_deviceNameArray[0]]) {
         _moreNameArray=@[@"序列号",@"用户或电站名",@"额定功率"];
@@ -212,6 +214,8 @@
 
 
 -(void)goToSearch{
+    NSMutableArray *netNameArray=[NSMutableArray array];
+    
     _deviceNetDic=[NSMutableDictionary new];
     NSArray* keyArray=@[@"deviceType",@"lineType",@"iCode",@"city"];
     for (int i=0; i<keyArray.count; i++) {
@@ -220,8 +224,9 @@
             
             if (lable.text==nil || [lable.text isEqualToString:@""]) {
                 [_deviceNetDic setObject:@"" forKey:keyArray[i]];
+                [netNameArray addObject:@""];
             }else{
-          
+           [netNameArray addObject:lable.text];
                     if (i==0) {
                         [_deviceNetDic setObject:[_deviceNameIdDic objectForKey:lable.text] forKey:keyArray[i]];
                     }else if (i==1) {
@@ -238,7 +243,9 @@
         }else{
             UITextField *textField=[self.view viewWithTag:2000+i+100];
             if (textField.text==nil || [textField.text isEqualToString:@""]) {
-            
+              [_deviceNetDic setObject:@"" forKey:keyArray[i]];
+            }else{
+                   [_deviceNetDic setObject:textField.text forKey:keyArray[i]];
             }
         }
     }
@@ -246,13 +253,17 @@
          UILabel *lable=[self.view viewWithTag:2004+100];
       UITextField *textField=[self.view viewWithTag:3000];
     
+     [netNameArray addObject:lable.text];
+    
     NSArray *moreKeyArray=@[@"deviceSn",@"userName",@"ratedPower"];
     for (int i=0; i<_moreNameArray.count; i++) {
         if ([_moreNameArray[i] isEqualToString:lable.text]) {
             if (textField.text==nil || [textField.text isEqualToString:@""]) {
                 [_deviceNetDic setObject:@"" forKey:moreKeyArray[i]];
+                   [netNameArray addObject:@""];
             }else{
                 [_deviceNetDic setObject:textField.text forKey:moreKeyArray[i]];
+                   [netNameArray addObject:textField.text];
             }
         }else{
                [_deviceNetDic setObject:@"" forKey:moreKeyArray[i]];
@@ -283,7 +294,9 @@
                 }
                 if (totalNum>0) {
                     [self.navigationController popViewControllerAnimated:YES];
-                    self.searchResultBlock(allArray);
+                    NSArray* allArray0=@[allArray,netNameArray];
+                    self.searchResultBlock(allArray0);
+                      self.searchDicBlock(_deviceNetDic);
                 }else{
                         [self showToastViewWithTitle:@"没有设备"];
                 }
