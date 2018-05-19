@@ -517,6 +517,7 @@
             [numArray addObject:[NSString stringWithFormat:@"%@",model.cid]];
         }
         weakSelf.NetForParameterArray=[NSMutableArray arrayWithArray:numArray];
+        [self initTheNetPageAndValue];
     [weakSelf changeTheParameter];
         [weakSelf goToNetForListParameter];
       
