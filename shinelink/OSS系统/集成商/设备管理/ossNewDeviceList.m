@@ -37,6 +37,7 @@
 @property (nonatomic, strong) NSDictionary *forChoiceParameterDic;
 @property (nonatomic, strong) NSArray *NetForParameterArray;
 @property (nonatomic, strong) NSArray *NetForParameterNewArray;
+@property (nonatomic, strong) NSArray *NetForParameterNew22Array;
 @property (nonatomic, strong) NSArray *oldForParameterArray;
 @property (nonatomic, strong) NSMutableArray *topArray;
 @property (nonatomic, strong) NSMutableArray *battomArray;
@@ -51,6 +52,7 @@
 @property (nonatomic, strong) NSMutableDictionary*deviceNetDic;
 
 @property (nonatomic, strong) NSMutableArray *allTableViewDataArray;
+@property (nonatomic, strong) NSMutableArray *allTableViewData22Array;
 
 @property (nonatomic, strong)NSString* numNameLableString;
 @property (nonatomic, strong) NSMutableDictionary *deviceStatueNumDic;
@@ -104,7 +106,10 @@
         
      _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
         _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":root_oss_506_leiXing,@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器    ",@"8":@"最后更新时间",@"9":root_oss_505_Status,@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
-        _numForNetKeyDic=@{@"1":@"type",@"2":@"alias",@"3":@"iCode",@"4":@"plantName",@"5":@"accountName",@"6":@"cityId",@"7":@"datalog_sn",@"8":@"time",@"9":@"status",@"10":@"nominal_power",@"11":@"etoday",@"12":@"etotal",@"13":@"pac"};
+        _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"type",@"2":@"alias",@"3":@"iCode",@"4":@"plantName",@"5":@"accountName",@"6":@"cityId",@"7":@"datalog_sn",@"8":@"time",@"9":@"status",@"10":@"nominal_power",@"11":@"etoday",@"12":@"etotal",@"13":@"pac"};
+        
+            _cellNameArray2=@[@"序列号",root_oss_505_Status,@"当前功率",@"今日发电"];     //列表的另一种展示
+        _NetForParameterNew22Array=@[@"0",@"9",@"13",@"11"];
     }
 
     
@@ -311,7 +316,7 @@
     _twoScrollView.bounces = NO;
     [self.view addSubview:_twoScrollView];
     
-    _cellNameArray2=@[@"别名",@"状态",@"当前功率",@"今日发电"];     //列表的另一种展示
+
 
      _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, H1);
     
@@ -388,8 +393,6 @@
         _tableView.mj_footer=foot;
  
         _tableView.mj_footer.automaticallyHidden=NO;
-        
-
     
     [_threeScrollView addSubview:_tableView];
     
@@ -586,6 +589,7 @@
 }
 
 
+#pragma mark -转换网络数据
 -(void)changeNetData{                     //给tableviewcell用的数据
  
     
@@ -624,8 +628,10 @@
             for (int i=0; i<dataArray.count; i++) {
                 NSDictionary *twoDic=dataArray[i];
                 NSMutableArray *valueArray=[NSMutableArray array];
+                   NSMutableArray *valueArray22=[NSMutableArray array];
                 [valueArray addObject:twoDic[@"deviceSn"]];
-                for (int i=0; i<_NetForParameterNewArray.count; i++) {
+                
+                for (int i=0; i<_NetForParameterNewArray.count; i++) {                  //列表1的数据
                     if ([unitOneDic.allKeys containsObject:@"serverId"]) {
                         NSString*keyString=[_numForNetKeyDic objectForKey:_NetForParameterNewArray[i]];
                         NSString *valueString=[NSString stringWithFormat:@"%@",twoDic[keyString]];
@@ -640,12 +646,27 @@
                   
                 }
                 
+                for (int i=0; i<_NetForParameterNew22Array.count; i++) {
+                    if ([unitOneDic.allKeys containsObject:@"serverId"]) {
+                        NSString*keyString=[_numForNetKeyDic objectForKey:_NetForParameterNew22Array[i]];
+                        NSString *valueString=[NSString stringWithFormat:@"%@",twoDic[keyString]];
+
+                        [valueArray22 addObject:valueString];
+                    }else{
+                        [valueArray22 addObject:@""];         //没有接入的设备
+                    }
+                    
+                }
+                
                 if ([unitOneDic.allKeys containsObject:@"serverId"]) {
                        [valueArray addObject:unitOneDic[@"serverId"]];
                 }else{
                        [valueArray addObject:@"110"];
                 }
+                
                 [_allTableViewDataArray addObject:valueArray];
+                [_allTableViewData22Array addObject:valueArray22];
+                
             }
         
     }
@@ -699,6 +720,7 @@
 -(void)initTheNetPageAndValue{
     
  _allTableViewDataArray=[NSMutableArray array];
+    _allTableViewData22Array=[NSMutableArray array];
     _pageNumForNet=1;
     _pageTotalNum=1;
 }
@@ -715,21 +737,10 @@
          _threeScrollView.contentSize=CGSizeMake(_tableW, _threeScrollView.frame.size.height);
     }
     
-    [_tableView removeFromSuperview];
-    _tableView=nil;
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, _tableW, _threeScrollView.frame.size.height) style:UITableViewStylePlain];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-      _tableView.backgroundColor=COLOR(242, 242, 242, 1);
-    [_threeScrollView addSubview:_tableView];
+
+    [self initTableViewUI:_threeScrollView.frame.size.height];
     
-    //注册单元格类型
-    [_tableView registerClass:[ossNewDeviceCell class] forCellReuseIdentifier:@"CELL1"];
-    [_tableView registerClass:[ossNewDeviceTwoCell class] forCellReuseIdentifier:@"CELL2"];
-    
-   // [_tableView reloadData];
-    
+  
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -738,7 +749,7 @@
 
     if (_isChangTableView) {
           NSInteger Num=_cellNameArray2.count/2+_cellNameArray2.count%2;
-        H=Num*40*HEIGHT_SIZE+10*HEIGHT_SIZE;
+        H=Num*20*HEIGHT_SIZE*2+10*HEIGHT_SIZE+5*HEIGHT_SIZE;
     }
     return H;
     
@@ -894,15 +905,17 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
-        ossNewDeviceTwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL2" forIndexPath:indexPath];
         
-        cell.nameArray=_cellNameArray2;
+        ossNewDeviceTwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL2" forIndexPath:indexPath];
         
         if (!cell) {
             cell=[[ossNewDeviceTwoCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL2"];
         }
-        
+           cell.deviceType=_deviceType;
+          cell.nameValueArray=_allTableViewData22Array[indexPath.row];
+        cell.nameArray=_cellNameArray2;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         return cell;
     }
 

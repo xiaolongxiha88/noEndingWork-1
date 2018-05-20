@@ -11,5 +11,9 @@
 @interface ossNewDeviceTwoCell : UITableViewCell
 
 @property (nonatomic, strong) NSArray *nameArray;
+@property (nonatomic, strong) NSArray *nameValueArray;
+
+@property (nonatomic, strong) UIView *allView;
+@property (nonatomic, assign) NSInteger deviceType;
 
 @end
