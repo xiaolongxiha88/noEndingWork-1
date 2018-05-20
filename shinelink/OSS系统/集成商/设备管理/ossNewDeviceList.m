@@ -50,6 +50,7 @@
 @property (nonatomic, strong) UILabel *numLable;
 @property (nonatomic, strong) UILabel *numNameLable;
 @property (nonatomic, strong) NSMutableDictionary*deviceNetDic;
+@property (nonatomic, strong) UIView *View2;
 
 @property (nonatomic, strong) NSMutableArray *allTableViewDataArray;
 @property (nonatomic, strong) NSMutableArray *allTableViewData22Array;
@@ -69,40 +70,43 @@
     
    // [self getNetForListParameter];
     
+    [self firstNetData];
     [self initData];
     [self addRightItem];
 
     
 }
 
+-(void)firstNetData{
+    _deviceNetDic=[NSMutableDictionary new];
+    
+    [self initTheNetPageAndValue];
+    
+    [_deviceNetDic setObject:@"3" forKey:@"lineType"];
+    [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
+    [_deviceNetDic setObject:@"1" forKey:@"order"];
+    [_deviceNetDic setObject:@"1" forKey:@"deviceType"];
+    [_deviceNetDic setObject:@"" forKey:@"iCode"];
+    [_deviceNetDic setObject:@"" forKey:@"deviceStatus"];
+    [_deviceNetDic setObject:@"" forKey:@"userName"];
+    [_deviceNetDic setObject:@"" forKey:@"deviceSn"];
+    [_deviceNetDic setObject:@"" forKey:@"city"];
+    [_deviceNetDic setObject:@"" forKey:@"ratedPower"];
+}
+
 -(void)initData{
 
-    
+        [self initTheNetPageAndValue];
     
     if (_deviceType==1) {
         if (_parameterDic.allKeys.count>0) {
             _NetForParameterArray=_parameterDic[@"dm_invapp"];
         }
       
-            _deviceNetDic=[NSMutableDictionary new];
-        
-        [self initTheNetPageAndValue];
-        
-        [_deviceNetDic setObject:@"3" forKey:@"lineType"];
-        [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
-        [_deviceNetDic setObject:@"1" forKey:@"order"];
-        [_deviceNetDic setObject:@"1" forKey:@"deviceType"];
-        [_deviceNetDic setObject:@"" forKey:@"iCode"];
-          [_deviceNetDic setObject:@"" forKey:@"deviceStatus"];
-          [_deviceNetDic setObject:@"" forKey:@"userName"];
-          [_deviceNetDic setObject:@"" forKey:@"deviceSn"];
-               [_deviceNetDic setObject:@"" forKey:@"city"];
-         [_deviceNetDic setObject:@"" forKey:@"ratedPower"];
-        
         _oneParaArray=@[@"状态",@"额定功率",@"今日发电量",@"累计发电量",@"用户名",@"电站名",@"当前功率"];
         _upOrDownNetValueArray=@[@[@"1",@"2"],@[@"3",@"4"],@[@"5",@"6"],@[@"7",@"8"],@[@"9",@"10"],@[@"11",@"12"],@[@"13",@"14"]];
         
-        _oldForParameterArray=@[@"2",@"5",@"4",@"9",@"11",@"12",@"13",@"10"];
+        _oldForParameterArray=@[@"5",@"4",@"9",@"11",@"12",@"13",@"10",@"3",@"8"];
         
      _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
         _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":root_oss_506_leiXing,@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器    ",@"8":@"最后更新时间",@"9":root_oss_505_Status,@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
@@ -110,6 +114,39 @@
         
             _cellNameArray2=@[@"序列号",root_oss_505_Status,@"当前功率",@"今日发电"];     //列表的另一种展示
         _NetForParameterNew22Array=@[@"0",@"9",@"13",@"11"];
+        
+    }else if (_deviceType==2) {               //储能机
+        if (_parameterDic.allKeys.count>0) {
+            _NetForParameterArray=_parameterDic[@"dm_storageapp"];
+        }
+        
+
+        _oldForParameterArray=@[@"4",@"3",@"7",@"8",@"9",@"2",@"6"];
+        
+        _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
+        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":@"最后更新时间",@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":@"城市    "};
+        _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"alias",@"2":@"iCode",@"3":@"plantName",@"4":@"accountName",@"5":@"datalog_sn",@"6":@"time",@"7":@"status",@"8":@"charge",@"9":@"discharge",@"10":@"cityId"};
+        
+        _cellNameArray2=@[@"序列号",root_oss_505_Status,@"充电",@"放电"];     //列表的另一种展示
+        _NetForParameterNew22Array=@[@"0",@"7",@"8",@"9"];
+        
+        
+    }else if (_deviceType==3) {
+        if (_parameterDic.allKeys.count>0) {
+            _NetForParameterArray=_parameterDic[@"dm_mixapp"];
+        }
+        
+        _oldForParameterArray=@[@"4",@"3",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"2",@"6"];
+        
+        _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14"];
+            _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":@"最后更新时间",@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":@"今日发电量",@"11":@"总输出电量",@"12":@"当前功率",@"13":@"额定功率",@"14":@"城市    "};
+        
+        _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"alias",@"2":@"iCode",@"3":@"plantName",@"4":@"accountName",@"5":@"datalog_sn",@"6":@"time",@"7":@"status",@"8":@"pcharge",@"9":@"pdischarge",@"10":@"etoday",@"11":@"etotal",@"12":@"pac",@"13":@"pMax",@"14":@"cityId"};
+        
+        _cellNameArray2=@[@"序列号",root_oss_505_Status,@"充电",@"放电"];     //列表的另一种展示
+        _NetForParameterNew22Array=@[@"0",@"7",@"8",@"9"];
+        
+        
     }
 
     
@@ -169,66 +206,80 @@
 -(void)initUI{
   
   
-    float H1=40*HEIGHT_SIZE;
-    _oneScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, H1)];
-    _oneScrollView.backgroundColor = [UIColor whiteColor];
-    _oneScrollView.showsHorizontalScrollIndicator = NO;
-    _oneScrollView.bounces = NO;
-    [self.view addSubview:_oneScrollView];
+    float H1=0*HEIGHT_SIZE;
     
-
-   //   float W11=90*NOW_SIZE;
-    float W_all=0;
-    _selectRowNumArray=[NSMutableArray new];
-    for (int i=0; i<_oneParaArray.count; i++) {
+    if (_oneScrollView) {
+        [_oneScrollView removeFromSuperview];
+        _oneScrollView=nil;
+    }
+    
+    if (_deviceType==1) {
+           H1=40*HEIGHT_SIZE;
+        _oneScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, H1)];
+        _oneScrollView.backgroundColor = [UIColor whiteColor];
+        _oneScrollView.showsHorizontalScrollIndicator = NO;
+        _oneScrollView.bounces = NO;
+        [self.view addSubview:_oneScrollView];
         
-        NSString *nameString=_oneParaArray[i];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
-        float image0H=12*HEIGHT_SIZE;
-        float image0W=5*HEIGHT_SIZE;
-         float W_K=3*NOW_SIZE;
-          float W_K_0=12*NOW_SIZE;             //平均空隙
-        float W_all_0=W_K_0*2+size.width+image0W+W_K;
-
-        UIView *View1 = [[UIView alloc]initWithFrame:CGRectMake(0+W_all, 0*HEIGHT_SIZE, W_all_0,H1)];
-        View1.backgroundColor = [UIColor clearColor];
-        [_oneScrollView addSubview:View1];
-        
-                W_all=W_all+W_all_0;
-        
-        UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,W_all_0, H1)];
-        lableR.textColor = COLOR(102, 102, 102, 1);
-        lableR.textAlignment=NSTextAlignmentCenter;
-        lableR.userInteractionEnabled=YES;
-        lableR.tag=2000+i;
-        UITapGestureRecognizer *labelTapR=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeTheRowNum:)];
-        [lableR addGestureRecognizer:labelTapR];
-        lableR.text=_oneParaArray[i];
-        lableR.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        [View1 addSubview:lableR];
-        
-        [_selectRowNumArray addObject:[NSNumber numberWithBool:NO]];
-        
-        UIImageView *image0=[[UIImageView alloc]initWithFrame:CGRectMake((W_all_0+size.width)/2.0+W_K, (H1-image0H)/2.0, image0W,image0H )];
-        image0.userInteractionEnabled=YES;
+        //   float W11=90*NOW_SIZE;
+        float W_all=0;
+        _selectRowNumArray=[NSMutableArray new];
+        for (int i=0; i<_oneParaArray.count; i++) {
+            
+            NSString *nameString=_oneParaArray[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            float image0H=12*HEIGHT_SIZE;
+            float image0W=5*HEIGHT_SIZE;
+            float W_K=3*NOW_SIZE;
+            float W_K_0=12*NOW_SIZE;             //平均空隙
+            float W_all_0=W_K_0*2+size.width+image0W+W_K;
+            
+            UIView *View1 = [[UIView alloc]initWithFrame:CGRectMake(0+W_all, 0*HEIGHT_SIZE, W_all_0,H1)];
+            View1.backgroundColor = [UIColor clearColor];
+            [_oneScrollView addSubview:View1];
+            
+            W_all=W_all+W_all_0;
+            
+            UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,W_all_0, H1)];
+            lableR.textColor = COLOR(102, 102, 102, 1);
+            lableR.textAlignment=NSTextAlignmentCenter;
+            lableR.userInteractionEnabled=YES;
+            lableR.tag=2000+i;
+            UITapGestureRecognizer *labelTapR=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeTheRowNum:)];
+            [lableR addGestureRecognizer:labelTapR];
+            lableR.text=_oneParaArray[i];
+            lableR.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [View1 addSubview:lableR];
+            
+            [_selectRowNumArray addObject:[NSNumber numberWithBool:NO]];
+            
+            UIImageView *image0=[[UIImageView alloc]initWithFrame:CGRectMake((W_all_0+size.width)/2.0+W_K, (H1-image0H)/2.0, image0W,image0H )];
+            image0.userInteractionEnabled=YES;
             image0.tag=3000+i;
-        image0.image=IMAGE(@"oss_up_down.png");
-        [View1 addSubview:image0];
+            image0.image=IMAGE(@"oss_up_down.png");
+            [View1 addSubview:image0];
+            
+        }
+        
+        _oneScrollView.contentSize=CGSizeMake(W_all+20*NOW_SIZE, H1);
         
     }
    
-    _oneScrollView.contentSize=CGSizeMake(W_all+20*NOW_SIZE, H1);
     
       float H2=50*HEIGHT_SIZE;
         float W1=80*NOW_SIZE;
         float WK1=10*NOW_SIZE;
     
-
-    UIView *View2= [[UIView alloc]initWithFrame:CGRectMake(0, H1, ScreenWidth,H2)];
-    View2.backgroundColor = COLOR(242, 242, 242, 1);
-    [self.view addSubview:View2];
+    if (_View2) {
+        [_View2 removeFromSuperview];
+        _View2=nil;
+    }
+    _View2= [[UIView alloc]initWithFrame:CGRectMake(0, H1, ScreenWidth,H2)];
+    _View2.backgroundColor = COLOR(242, 242, 242, 1);
+    [self.view addSubview:_View2];
     
     float imageW=22*HEIGHT_SIZE;
     UIImageView *image2=[[UIImageView alloc]initWithFrame:CGRectMake(WK1, (H2-imageW)/2, imageW,imageW )];
@@ -236,7 +287,7 @@
     image2.image=IMAGE(@"OSS_list.png");
     UITapGestureRecognizer *labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changTableView)];
     [image2 addGestureRecognizer:labelTap1];
-    [View2 addSubview:image2];
+    [_View2 addSubview:image2];
     
     float H2_1=30*HEIGHT_SIZE;
     float W2_1=40*NOW_SIZE;
@@ -247,7 +298,7 @@
     View201.userInteractionEnabled=YES;
     UITapGestureRecognizer *labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(chioceTheStatue)];
     [View201 addGestureRecognizer:labelTap2];
-    [View2 addSubview:View201];
+    [_View2 addSubview:View201];
     
     NSArray *numArray=[self getTheDeviceStatueNum];
     _deviceStatueNumDic=[NSMutableDictionary new];
@@ -258,7 +309,11 @@
     
     NSArray *statueArray1=[self changeTheDeviceStatue:@""];
     _numNameLableString=statueArray1[2];
-    if (!_numNameLable) {
+    
+    if (_numNameLable) {
+        [_numNameLable removeFromSuperview];
+        _numNameLable=nil;
+    }
         _numNameLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0,W2_1, H2_1/2.0)];
         _numNameLable.textColor = COLOR(51, 51, 51, 1);
         _numNameLable.text=statueArray1[1];
@@ -267,9 +322,12 @@
         _numNameLable.adjustsFontSizeToFitWidth=YES;
         _numNameLable.userInteractionEnabled=YES;
         [View201 addSubview:_numNameLable];
+   
+    if (_numLable) {
+        [_numLable removeFromSuperview];
+        _numLable=nil;
     }
-
-    if (!_numLable) {
+  
         _numLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0+H2_1/2.0,W2_1, H2_1/2.0)];
         _numLable.textColor =mainColor;
         _numLable.text=@"";
@@ -278,7 +336,7 @@
            _numLable.adjustsFontSizeToFitWidth=YES;
         _numLable.userInteractionEnabled=YES;
         [View201 addSubview:_numLable];
-    }
+    
     
     
     UIImageView *image00=[[UIImageView alloc]initWithFrame:CGRectMake(W2_1+image00K, (H2-image00H)/2, image00W,image00H )];
@@ -296,7 +354,7 @@
     [View01.layer setCornerRadius:(imageH1/2.0)];
     UITapGestureRecognizer *labelTap3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToSearch)];
     [View01 addGestureRecognizer:labelTap3];
-    [View2 addSubview:View01];
+    [_View2 addSubview:View01];
     
         float imageH2=20*HEIGHT_SIZE;
       float imageW2=imageH2*(34/36.0);
@@ -307,9 +365,13 @@
     [View01 addSubview:image3];
   
     
-    
+    float _twoScrollViewH=40*HEIGHT_SIZE;
     /////////////列表显示内容
-    _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
+    if (_twoScrollView) {
+        [_twoScrollView removeFromSuperview];
+        _twoScrollView=nil;
+    }
+    _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, _twoScrollViewH)];
     _twoScrollView.backgroundColor = [UIColor whiteColor];
     _twoScrollView.showsHorizontalScrollIndicator = NO;
     _twoScrollView.delegate=self;
@@ -318,7 +380,7 @@
     
 
 
-     _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, H1);
+     _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, _twoScrollViewH);
     
 
     float W_K_0=12*NOW_SIZE;             //平均空隙
@@ -327,11 +389,11 @@
     for (int i=0; i<_cellNameArray.count; i++) {
         NSString *nameString=_cellNameArray[i];
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, _twoScrollViewH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
         float W_all_0=W_K_0*2+size.width;
         
-        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0, H1)];
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0, _twoScrollViewH)];
         lable1.textColor = COLOR(51, 51, 51, 1);
         lable1.textAlignment=NSTextAlignmentLeft;
         lable1.text=_cellNameArray[i];
@@ -342,8 +404,12 @@
     }
     
       _tableW=W1_all;
-    float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
-    _threeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2+H1, SCREEN_Width, H3)];
+    float H3=ScreenHeight-H1-H2-_twoScrollViewH-(NaviHeight);
+    if (_threeScrollView) {
+        [_threeScrollView removeFromSuperview];
+        _threeScrollView=nil;
+    }
+    _threeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2+_twoScrollViewH, SCREEN_Width, H3)];
     _threeScrollView.backgroundColor = [UIColor whiteColor];
     _threeScrollView.showsHorizontalScrollIndicator = NO;
     _threeScrollView.bounces = NO;
@@ -578,6 +644,15 @@
     searchView.oldSearchValueArray=self.searchNameArray;
     searchView.searchDicBlock = ^(NSDictionary *netDic){
         _deviceNetDic=[NSMutableDictionary dictionaryWithDictionary:netDic];
+        if ([[_deviceNetDic objectForKey:@"deviceType"] integerValue] != _deviceType) {
+            _deviceType=[[_deviceNetDic objectForKey:@"deviceType"] integerValue];
+            if (_oneScrollView) {
+                [_oneScrollView removeFromSuperview];
+                _oneScrollView=nil;
+            }
+            [self goToGetListParameter];
+        }
+
     };
     searchView.searchResultBlock = ^(NSArray *resultArray){
         [self initTheNetPageAndValue];
@@ -797,13 +872,6 @@
                // self.parameterDic=firstDic[@"obj"];
                 
             }else{
-//                int ResultValue=[firstDic[@"result"] intValue];
-//
-//                if (ResultValue==22) {
-//                    [self showToastViewWithTitle:@"登录超时"];
-//                }else{
-//                      [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
-//                }
  
             }
         }
@@ -814,6 +882,32 @@
     
 }
 
+-(void)goToGetListParameter{
+    
+
+    //  [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"":@""} paramarsSite:@"/api/v3/device/getShowCol" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/device/getShowCol: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+                self.parameterDic=firstDic[@"obj"];
+                     [self initData];
+            }else{
+              [self initData];
+            }
+        }
+    } failure:^(NSError *error) {
+             [self initData];
+    
+    }];
+    
+}
 
 
 -(void)NetForDevice{

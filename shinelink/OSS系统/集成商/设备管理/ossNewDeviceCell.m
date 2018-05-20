@@ -87,8 +87,8 @@
                 lableR.textColor =[self changeTheDeviceStatueColor:_nameValueArray[i]];
             }
             if ([nameArray[i] isEqualToString:root_oss_506_leiXing]) {
-                NSString*num=_nameValueArray[i];
-                lableR.text=deviceTypeArray[[num integerValue]];
+          //      NSString*num=_nameValueArray[i];
+                lableR.text=deviceTypeArray[_deviceType];
             }
             
         }

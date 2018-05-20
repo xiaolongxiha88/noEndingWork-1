@@ -244,8 +244,10 @@
             UITextField *textField=[self.view viewWithTag:2000+i+100];
             if (textField.text==nil || [textField.text isEqualToString:@""]) {
               [_deviceNetDic setObject:@"" forKey:keyArray[i]];
+                        [netNameArray addObject:@""];
             }else{
                    [_deviceNetDic setObject:textField.text forKey:keyArray[i]];
+                  [netNameArray addObject:textField.text];
             }
         }
     }
