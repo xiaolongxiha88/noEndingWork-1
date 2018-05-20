@@ -109,7 +109,7 @@
         _oldForParameterArray=@[@"5",@"4",@"9",@"11",@"12",@"13",@"10",@"3",@"8"];
         
      _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":root_oss_506_leiXing,@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":@"城市    ",@"7":@"采集器    ",@"8":@"最后更新时间",@"9":root_oss_505_Status,@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
+        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":root_oss_506_leiXing,@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":root_oss_507_chengShi,@"7":@"采集器    ",@"8":@"最后更新时间",@"9":root_oss_505_Status,@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
         _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"type",@"2":@"alias",@"3":@"iCode",@"4":@"plantName",@"5":@"accountName",@"6":@"cityId",@"7":@"datalog_sn",@"8":@"time",@"9":@"status",@"10":@"nominal_power",@"11":@"etoday",@"12":@"etotal",@"13":@"pac"};
         
             _cellNameArray2=@[@"序列号",root_oss_505_Status,@"当前功率",@"今日发电"];     //列表的另一种展示
@@ -124,7 +124,7 @@
         _oldForParameterArray=@[@"4",@"3",@"7",@"8",@"9",@"2",@"6"];
         
         _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":@"最后更新时间",@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":@"城市    "};
+        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":@"最后更新时间",@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":root_oss_507_chengShi};
         _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"alias",@"2":@"iCode",@"3":@"plantName",@"4":@"accountName",@"5":@"datalog_sn",@"6":@"time",@"7":@"status",@"8":@"charge",@"9":@"discharge",@"10":@"cityId"};
         
         _cellNameArray2=@[@"序列号",root_oss_505_Status,@"充电",@"放电"];     //列表的另一种展示
@@ -139,7 +139,7 @@
         _oldForParameterArray=@[@"4",@"3",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"2",@"6"];
         
         _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14"];
-            _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":@"最后更新时间",@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":@"今日发电量",@"11":@"总输出电量",@"12":@"当前功率",@"13":@"额定功率",@"14":@"城市    "};
+            _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":@"最后更新时间",@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":@"今日发电量",@"11":@"总输出电量",@"12":@"当前功率",@"13":@"额定功率",@"14":root_oss_507_chengShi};
         
         _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"alias",@"2":@"iCode",@"3":@"plantName",@"4":@"accountName",@"5":@"datalog_sn",@"6":@"time",@"7":@"status",@"8":@"pcharge",@"9":@"pdischarge",@"10":@"etoday",@"11":@"etotal",@"12":@"pac",@"13":@"pMax",@"14":@"cityId"};
         
@@ -710,10 +710,7 @@
                     if ([unitOneDic.allKeys containsObject:@"serverId"]) {
                         NSString*keyString=[_numForNetKeyDic objectForKey:_NetForParameterNewArray[i]];
                         NSString *valueString=[NSString stringWithFormat:@"%@",twoDic[keyString]];
-                        if ([_NetForParameterNewArray[i] isEqualToString:@"6"] && [valueString isEqualToString:@"-1"]) {         //城市
-                            valueString=@"";
-                        }
-        
+
                         [valueArray addObject:valueString];
                     }else{
                            [valueArray addObject:@""];         //没有接入的设备
@@ -855,6 +852,10 @@
     NSString *keyValueString=@"";
     if (_deviceType==1) {
         keyValueString=@"dm_invapp";
+    }else if (_deviceType==2) {
+        keyValueString=@"dm_storageapp";
+    }else if (_deviceType==3) {
+        keyValueString=@"dm_mixapp";
     }
     NSString *textString=[NSString stringWithFormat:@"%@",[self jsonStringWithPrettyPrint:YES dataArray:_NetForParameterArray]];
     NSDictionary *netDic=@{@"text":textString,@"key":keyValueString};

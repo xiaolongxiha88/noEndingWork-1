@@ -63,6 +63,17 @@
                 NSString*num=_nameValueArray[i];
                 lableR.text=deviceTypeArray[[num integerValue]];
             }
+            if ([nameArray[i] isEqualToString:root_oss_507_chengShi]) {
+                if ([_nameValueArray[i] isEqualToString:@"-1"]) {
+                    lableR.text=@"";
+                }else{
+                    NSString*num=_nameValueArray[i];
+                    lableR.text=deviceTypeArray[[num integerValue]];
+                }
+              
+            }
+            
+   
             lableR.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
             [self.contentView addSubview:lableR];
             
@@ -90,6 +101,11 @@
           //      NSString*num=_nameValueArray[i];
                 lableR.text=deviceTypeArray[_deviceType];
             }
+            if ([nameArray[i] isEqualToString:root_oss_507_chengShi]) {
+                NSString*num=_nameValueArray[i];
+                lableR.text=deviceTypeArray[[num integerValue]];
+            }
+            
             
         }
       

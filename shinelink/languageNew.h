@@ -1154,6 +1154,8 @@
 
 #define  root_oss_505_Status NSLocalizedString(@"505状态", nil)
 #define  root_oss_506_leiXing NSLocalizedString(@"506类型", nil)
+#define  root_oss_507_chengShi NSLocalizedString(@"507城市", nil)
+
 
 
 #endif /* languageNew_h */
