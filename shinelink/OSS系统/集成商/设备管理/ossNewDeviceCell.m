@@ -102,8 +102,13 @@
                 lableR.text=deviceTypeArray[_deviceType];
             }
             if ([nameArray[i] isEqualToString:root_oss_507_chengShi]) {
-                NSString*num=_nameValueArray[i];
-                lableR.text=deviceTypeArray[[num integerValue]];
+                if ([_nameValueArray[i] isEqualToString:@"-1"]) {
+                    lableR.text=@"";
+                }else{
+                    NSString*num=_nameValueArray[i];
+                    lableR.text=deviceTypeArray[[num integerValue]];
+                }
+                
             }
             
             

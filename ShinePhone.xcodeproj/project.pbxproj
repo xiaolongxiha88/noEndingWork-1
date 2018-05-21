@@ -716,6 +716,7 @@
 		3398B98620A2D93700BDD8CC /* ossNewDeviceTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3398B98520A2D93700BDD8CC /* ossNewDeviceTwoCell.m */; };
 		3399A8201FA33D7E006F8805 /* usbToWifiControlTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3399A81F1FA33D7E006F8805 /* usbToWifiControlTwo.m */; };
 		33A4384C1D1ABE86004E9AB6 /* service3.png in Resources */ = {isa = PBXBuildFile; fileRef = 33A4384B1D1ABE86004E9AB6 /* service3.png */; };
+		33A5CE2520B25F3D00A24619 /* ossNewDeviceControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A5CE2420B25F3D00A24619 /* ossNewDeviceControl.m */; };
 		33ABC2A51DC2E619003B92AC /* extensionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ABC2A41DC2E619003B92AC /* extensionTableViewCell.m */; };
 		33ABC2A71DC2EB69003B92AC /* 增值问题33.png in Resources */ = {isa = PBXBuildFile; fileRef = 33ABC2A61DC2EB69003B92AC /* 增值问题33.png */; };
 		33AF3D171D8E67210007D6C2 /* addDevice.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33AF3CE31D8E67210007D6C2 /* addDevice.jpg */; };
@@ -1971,6 +1972,8 @@
 		33A438511D1BB63D004E9AB6 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		33A438521D1BB651004E9AB6 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		33A438531D1BB658004E9AB6 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		33A5CE2320B25F3D00A24619 /* ossNewDeviceControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewDeviceControl.h; sourceTree = "<group>"; };
+		33A5CE2420B25F3D00A24619 /* ossNewDeviceControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewDeviceControl.m; sourceTree = "<group>"; };
 		33ABC2A31DC2E619003B92AC /* extensionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = extensionTableViewCell.h; sourceTree = "<group>"; };
 		33ABC2A41DC2E619003B92AC /* extensionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = extensionTableViewCell.m; sourceTree = "<group>"; };
 		33ABC2A61DC2EB69003B92AC /* 增值问题33.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "增值问题33.png"; sourceTree = "<group>"; };
@@ -4474,6 +4477,8 @@
 				33E727882091F09E009F460A /* ossNewDeviceCell.m */,
 				3398B98420A2D93700BDD8CC /* ossNewDeviceTwoCell.h */,
 				3398B98520A2D93700BDD8CC /* ossNewDeviceTwoCell.m */,
+				33A5CE2320B25F3D00A24619 /* ossNewDeviceControl.h */,
+				33A5CE2420B25F3D00A24619 /* ossNewDeviceControl.m */,
 			);
 			path = "设备管理";
 			sourceTree = "<group>";
@@ -5669,6 +5674,7 @@
 				336D3FD61DF80C4700BE8422 /* RfStickSwift.swift in Sources */,
 				3343F3C51C80403C009F69BC /* AFURLRequestSerialization.m in Sources */,
 				3367EBA11CD0B2D200D2EF67 /* StationAppearanceViewController.m in Sources */,
+				33A5CE2520B25F3D00A24619 /* ossNewDeviceControl.m in Sources */,
 				335089281C73267A00D7AA03 /* findTableViewCell.m in Sources */,
 				338049211ED2E2550077658D /* deviceControlView.swift in Sources */,
 				3343F3E01C80405D009F69BC /* UIRefreshControl+AFNetworking.m in Sources */,

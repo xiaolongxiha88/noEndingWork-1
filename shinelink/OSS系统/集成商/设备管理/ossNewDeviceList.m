@@ -12,6 +12,7 @@
 #import "ShinePhone-Swift.h"
 #import "LRLChannelEditController.h"
 #import "ossIntegratorSearch.h"
+#import "ossNewDeviceControl.h"
 
 @interface ossNewDeviceList ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *oneScrollView;
@@ -109,7 +110,7 @@
         _oldForParameterArray=@[@"5",@"4",@"9",@"11",@"12",@"13",@"10",@"3",@"8"];
         
      _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":root_oss_506_leiXing,@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":root_oss_507_chengShi,@"7":@"采集器    ",@"8":@"最后更新时间",@"9":root_oss_505_Status,@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
+        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":root_oss_506_leiXing,@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":root_oss_507_chengShi,@"7":@"采集器    ",@"8":root_oss_508_zuiHouGenXinShiJian,@"9":root_oss_505_Status,@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
         _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"type",@"2":@"alias",@"3":@"iCode",@"4":@"plantName",@"5":@"accountName",@"6":@"cityId",@"7":@"datalog_sn",@"8":@"time",@"9":@"status",@"10":@"nominal_power",@"11":@"etoday",@"12":@"etotal",@"13":@"pac"};
         
             _cellNameArray2=@[@"序列号",root_oss_505_Status,@"当前功率",@"今日发电"];     //列表的另一种展示
@@ -124,7 +125,7 @@
         _oldForParameterArray=@[@"4",@"3",@"7",@"8",@"9",@"2",@"6"];
         
         _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":@"最后更新时间",@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":root_oss_507_chengShi};
+        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":root_oss_508_zuiHouGenXinShiJian,@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":root_oss_507_chengShi};
         _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"alias",@"2":@"iCode",@"3":@"plantName",@"4":@"accountName",@"5":@"datalog_sn",@"6":@"time",@"7":@"status",@"8":@"charge",@"9":@"discharge",@"10":@"cityId"};
         
         _cellNameArray2=@[@"序列号",root_oss_505_Status,@"充电",@"放电"];     //列表的另一种展示
@@ -139,7 +140,7 @@
         _oldForParameterArray=@[@"4",@"3",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"2",@"6"];
         
         _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14"];
-            _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":@"最后更新时间",@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":@"今日发电量",@"11":@"总输出电量",@"12":@"当前功率",@"13":@"额定功率",@"14":root_oss_507_chengShi};
+            _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":root_oss_508_zuiHouGenXinShiJian,@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":@"今日发电量",@"11":@"总输出电量",@"12":@"当前功率",@"13":@"额定功率",@"14":root_oss_507_chengShi};
         
         _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"alias",@"2":@"iCode",@"3":@"plantName",@"4":@"accountName",@"5":@"datalog_sn",@"6":@"time",@"7":@"status",@"8":@"pcharge",@"9":@"pdischarge",@"10":@"etoday",@"11":@"etotal",@"12":@"pac",@"13":@"pMax",@"14":@"cityId"};
         
@@ -735,6 +736,16 @@
                 }else{
                        [valueArray addObject:@"110"];
                 }
+                if (_deviceType==1) {
+                    if ([twoDic.allKeys containsObject:@"type"]) {
+                         [valueArray addObject:[NSString stringWithFormat:@"%@",twoDic[@"type"]]];
+                       [valueArray22 addObject:[NSString stringWithFormat:@"%@",twoDic[@"type"]]];
+                    }else{
+                        [valueArray addObject:@"1"];
+                      [valueArray22 addObject:@"1"];
+                    }
+                    
+                }
                 
                 [_allTableViewDataArray addObject:valueArray];
                 [_allTableViewData22Array addObject:valueArray22];
@@ -1021,6 +1032,24 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
    
+    ossNewDeviceControl *deviceView=[[ossNewDeviceControl alloc]init];
+        deviceView.deviceType=_deviceType;
+    NSArray *infoArray;
+    if (!_isChangTableView) {
+        infoArray=_allTableViewDataArray[indexPath.row];
+    deviceView.deviceSn=infoArray[0];
+    }else{
+          infoArray=_allTableViewData22Array[indexPath.row];
+         deviceView.deviceSn=infoArray[0];
+    }
+    if (_deviceType==1) {
+        if([[infoArray lastObject] isEqualToString:@"6"]){
+            deviceView.deviceType=4;
+        }
+    }
+  
+    
+    [self.navigationController pushViewController:deviceView animated:YES];
     
 }
 
