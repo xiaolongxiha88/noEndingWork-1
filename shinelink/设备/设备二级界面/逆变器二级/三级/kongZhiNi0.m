@@ -127,6 +127,10 @@
         }
     }
  
+    if ([_password isEqualToString:@""] || _password==nil) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_Device_479 message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        [alertView show];
+    }
     
     if ([_invType isEqualToString:@"1"]) {
         MaxControl *go=[[MaxControl alloc]init];
@@ -236,8 +240,7 @@
         
     } failure:^(NSError *error) {
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_Device_479 message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-        [alertView show];
+  
         
     }];
     

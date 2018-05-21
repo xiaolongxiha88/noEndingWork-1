@@ -35,7 +35,10 @@
 
 -(void)initUI{
     NSArray *labelArray=[[NSArray alloc]initWithObjects:root_xuleihao,root_bieming,root_zubie, nil];
-    for (int i=0; i<3; i++) {
+    if ([_OssString isEqualToString:@"2"]) {
+        labelArray=@[root_xuleihao,root_bieming];
+    }
+    for (int i=0; i<labelArray.count; i++) {
         UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(20*NOW_SIZE, (50+i*40)*HEIGHT_SIZE, 100*NOW_SIZE, 40*HEIGHT_SIZE)];
         label.text=labelArray[i];
         label.font=[UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -46,7 +49,7 @@
 
     _textFieldMutableArray=[NSMutableArray new];
     NSArray *array=[[NSArray alloc]initWithObjects:_datalogSN,_alias,_unitId, nil];
-    for (int i=0; i<3; i++) {
+    for (int i=0; i<labelArray.count; i++) {
         UITextField *textField=[[UITextField alloc]initWithFrame:CGRectMake(120*NOW_SIZE, (55+i*40)*HEIGHT_SIZE, 180*NOW_SIZE, 30*HEIGHT_SIZE)];
         textField.text=array[i];
         textField.layer.borderWidth=0.8;
@@ -91,6 +94,8 @@
      goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
     if ([_OssString isEqualToString:@"1"]) {
             [goBut addTarget:self action:@selector(addButtonPressed0) forControlEvents:UIControlEventTouchUpInside];
+    }else if ([_OssString isEqualToString:@"2"]) {
+        [goBut addTarget:self action:@selector(addButtonPressed2) forControlEvents:UIControlEventTouchUpInside];
     }else{
       [goBut addTarget:self action:@selector(addButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -101,6 +106,40 @@
 -(void)delButtonPressed{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(void)addButtonPressed2{
+    NSArray *array=[[NSArray alloc]initWithObjects:@"请输入序列号",@"请输入别名", nil];
+    for (int i=0; i<2; i++) {
+        if ([[_textFieldMutableArray[i] text] isEqual:@""]) {
+            [self showToastViewWithTitle:array[i]];
+            return;
+        }
+    }
+    
+    NSDictionary *dict=@{@"deviceSn":[_textFieldMutableArray[0] text],
+                         @"alias":[_textFieldMutableArray[1] text],
+                         @"serverId":_serverID,
+                         };
+    
+    [self showProgressView];
+    NSString *address=OSS_HEAD_URL;
+    [BaseRequest requestWithMethodResponseStringResult:address paramars:dict paramarsSite:@"/api/v3/device/deviceManage/edit" sucessBlock:^(id content) {
+        [self hideProgressView];
+        id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/device/deviceManage/edit=: %@", jsonObj);
+        if ([[jsonObj objectForKey:@"result"] integerValue] ==1) {
+            [self showAlertViewWithTitle:nil message:@"修改成功" cancelButtonTitle:root_Yes];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            NSString *msg=[jsonObj objectForKey:@"msg"];
+            [self showAlertViewWithTitle:nil message:msg cancelButtonTitle:root_Yes];
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+    }];
+}
+
 
 -(void)addButtonPressed0{
     NSArray *array=[[NSArray alloc]initWithObjects:@"Insert true datalog sn",@"Datalog verification code is incorrect", nil];

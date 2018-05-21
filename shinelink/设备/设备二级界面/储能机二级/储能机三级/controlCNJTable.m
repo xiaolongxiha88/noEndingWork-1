@@ -58,6 +58,9 @@
       self.dataArray =[NSMutableArray arrayWithObjects:root_5000Control_129,root_5000Control_130,root_5000Control_131,root_5000Control_132,root_5000Control_133,root_5000Control_134,root_5000Control_135,root_5000Control_136,root_5000Control_137,root_5000Control_138,root_5000Control_139,root_5000Control_140,root_5000Control_141,root_5000Control_142,root_5000Control_143,nil];
     }else  if([_typeNum isEqualToString:@"3"]){         //MIX设置
          self.dataArray =[NSMutableArray arrayWithObjects:root_MIX_210,root_MIX_209,root_NBQ_kaiguan,root_device_249,root_NBQ_youxiao_gonglv,root_NBQ_wuxiao_gonglv,root_NBQ_PF,root_NBQ_shijian,root_device_250,root_device_251,root_device_252,root_device_253,root_device_254,root_MIX_492,nil];
+        if ([_controlType isEqualToString:@"2"]) {
+               self.dataArray =[NSMutableArray arrayWithObjects:root_MIX_210,root_MIX_209,root_NBQ_kaiguan,root_device_249,root_NBQ_youxiao_gonglv,root_NBQ_wuxiao_gonglv,root_NBQ_PF,root_NBQ_shijian,root_device_250,root_device_251,root_device_252,root_device_253,root_device_254,root_MIX_492,@"高级设置",nil];
+        }
         
       //  [self getOldSetValue];
     }
@@ -116,8 +119,8 @@
         
     } failure:^(NSError *error) {
   
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_Device_479 message:nil delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
-        [alertView show];
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_Device_479 message:nil delegate:self cancelButtonTitle:root_OK otherButtonTitles:nil];
+//        [alertView show];
         
     }];
     
@@ -189,6 +192,11 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if ([_password isEqualToString:@""] || _password==nil) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:root_Device_479 message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        [alertView show];
+    }
     
     if([_typeNum isEqualToString:@"1"]){
         [self goSPF5000:indexPath];
@@ -315,6 +323,7 @@
     
     if ([_controlType isEqualToString:@"2"]) {
         go.controlType=_controlType;
+        go.serverId=_serverId;
         [self.navigationController pushViewController:go animated:YES];
     }else{
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {

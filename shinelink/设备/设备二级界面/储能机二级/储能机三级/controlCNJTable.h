@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) NSString *typeNum;
 
+@property (nonatomic, strong) NSString *serverId;
+
 @end

@@ -8,6 +8,8 @@
 
 #import "ossNewDeviceControl.h"
 #import "kongZhiNi0.h"
+#import "ChangeCellectViewController.h"
+#import "controlCNJTable.h"
 
 @interface ossNewDeviceControl ()
 @property (nonatomic, strong) NSDictionary* allDic;
@@ -23,6 +25,10 @@
 
 @implementation ossNewDeviceControl
 
+- (void)viewWillAppear:(BOOL)animated{
+        [self getNetForInfo];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -31,7 +37,7 @@
     [self initData];
     [self initUI];
     
-    [self getNetForInfo];
+
     
 }
 
@@ -154,13 +160,59 @@
         if (_deviceType==1) {
             kongZhiNi0 *deviceView=[[kongZhiNi0 alloc]init];
             deviceView.controlType=@"2";
+            deviceView.PvSn=_deviceSn;
             [self.navigationController pushViewController:deviceView animated:YES];
         }else if (_deviceType==4) {
             kongZhiNi0 *deviceView=[[kongZhiNi0 alloc]init];
             deviceView.controlType=@"2";
               deviceView.invType=@"1";
+                  deviceView.PvSn=_deviceSn;
             deviceView.serverID=_serverID;
             [self.navigationController pushViewController:deviceView animated:YES];
+            
+        }else if (_deviceType==2) {
+            controlCNJTable *deviceView=[[controlCNJTable alloc]init];
+            deviceView.controlType=@"2";
+            deviceView.typeNum=@"1";
+            deviceView.CnjSn=_deviceSn;
+            [self.navigationController pushViewController:deviceView animated:YES];
+            
+        }else if (_deviceType==3) {
+            controlCNJTable *deviceView=[[controlCNJTable alloc]init];
+            deviceView.controlType=@"2";
+            deviceView.typeNum=@"3";
+            deviceView.CnjSn=_deviceSn;
+            deviceView.serverId=_serverID;
+            [self.navigationController pushViewController:deviceView animated:YES];
+            
+        }
+        
+    }
+    
+    
+    if (tagNum==1) {
+        ChangeCellectViewController *deviceView=[[ChangeCellectViewController alloc]init];
+        deviceView.serverID=_serverID;
+        deviceView.datalogSN=_deviceSn;
+        deviceView.OssString=@"2";
+        [self.navigationController pushViewController:deviceView animated:YES];
+    }
+    
+    if (tagNum==2) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"是否删除设备?" message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
+        alertView.tag = 1001;
+        [alertView show];
+        
+   
+    }
+    
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    if (buttonIndex) {
+        if( (alertView.tag == 1001) || (alertView.tag == 1002) || (alertView.tag == 1003)){
+        [self goToDeleteDevice];
         }
     }
     
@@ -197,6 +249,53 @@
 
     }
 }
+
+
+-(void)goToDeleteDevice{
+    
+    [self showProgressView];
+    NSDictionary *Dic=@{@"serverId":_serverID,@"sn":_deviceSn};
+    
+        NSString *textString=[NSString stringWithFormat:@"%@",[self jsonStringWithPrettyPrint:YES dataArray:Dic]];
+    
+    NSDictionary *dic=@{@"deviceSn":textString};
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:dic paramarsSite:@"/api/v3/device/deviceManage/del" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/device/deviceManage/del: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+                     [self showToastViewWithTitle:@"删除成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+
+                if (ResultValue==3) {
+                    [self showToastViewWithTitle:@"网络超时"];
+                }else if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"未登录"];
+                }else{
+                     [self showToastViewWithTitle:firstDic[@"msg"]];
+                }
+                
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
+    
+}
+
+
 
 -(void)getNetForInfo{
     
@@ -301,6 +400,20 @@
 
 
 
+//转数组转JSON
+-(NSString*) jsonStringWithPrettyPrint:(BOOL) prettyPrint dataArray:(NSDictionary*)Dic{
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:Dic
+                                                       options:(NSJSONWritingOptions)    (prettyPrint ? NSJSONWritingPrettyPrinted : 0)
+                                                         error:&error];
+    
+    if (! jsonData) {
+        NSLog(@"jsonStringWithPrettyPrint: error: %@", error.localizedDescription);
+        return @"{}";
+    } else {
+        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    }
+}
 
 
 - (void)didReceiveMemoryWarning {

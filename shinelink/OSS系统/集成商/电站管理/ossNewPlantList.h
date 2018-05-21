@@ -1,13 +1,13 @@
 //
-//  ossUserList.h
+//  ossNewPlantList.h
 //  ShinePhone
 //
-//  Created by sky on 2018/5/12.
+//  Created by sky on 2018/5/21.
 //  Copyright © 2018年 sky. All rights reserved.
 //
 
 #import "RootViewController.h"
 
-@interface ossUserList : RootViewController
+@interface ossNewPlantList : RootViewController
 
 @end

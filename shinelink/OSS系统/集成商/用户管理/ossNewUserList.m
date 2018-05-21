@@ -1,12 +1,12 @@
 //
-//  ossNewDeviceList.m
+//  ossNewUserList.m
 //  ShinePhone
 //
-//  Created by sky on 2018/4/26.
+//  Created by sky on 2018/5/21.
 //  Copyright © 2018年 sky. All rights reserved.
 //
 
-#import "ossNewDeviceList.h"
+#import "ossNewUserList.h"
 #import "ossNewDeviceCell.h"
 #import "ossNewDeviceTwoCell.h"
 #import "ShinePhone-Swift.h"
@@ -14,7 +14,7 @@
 #import "ossIntegratorSearch.h"
 #import "ossNewDeviceControl.h"
 
-@interface ossNewDeviceList ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
+@interface ossNewUserList ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *oneScrollView;
 @property (nonatomic, strong) UIScrollView *twoScrollView;
 @property (nonatomic, strong) UIScrollView *threeScrollView;
@@ -61,20 +61,21 @@
 
 @end
 
-@implementation ossNewDeviceList
+@implementation ossNewUserList
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     _isChangTableView=NO;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
-   // [self getNetForListParameter];
+    // [self getNetForListParameter];
     
     [self firstNetData];
     [self initData];
     [self addRightItem];
-
+    
     
 }
 
@@ -83,77 +84,41 @@
     
     [self initTheNetPageAndValue];
     
-    [_deviceNetDic setObject:@"3" forKey:@"lineType"];
+ 
     [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
-    [_deviceNetDic setObject:@"1" forKey:@"order"];
-    [_deviceNetDic setObject:@"1" forKey:@"deviceType"];
+
+    [_deviceNetDic setObject:@"" forKey:@"accountName"];
     [_deviceNetDic setObject:@"" forKey:@"iCode"];
-    [_deviceNetDic setObject:@"" forKey:@"deviceStatus"];
-    [_deviceNetDic setObject:@"" forKey:@"userName"];
-    [_deviceNetDic setObject:@"" forKey:@"deviceSn"];
-    [_deviceNetDic setObject:@"" forKey:@"city"];
-    [_deviceNetDic setObject:@"" forKey:@"ratedPower"];
+   //  [_deviceNetDic setObject:@"" forKey:@"pageSize"];
+
 }
 
 -(void)initData{
-
-        [self initTheNetPageAndValue];
     
-    if (_deviceType==1) {
+    [self initTheNetPageAndValue];
+    
+ if (_deviceType==2) {               //用户
         if (_parameterDic.allKeys.count>0) {
-            _NetForParameterArray=_parameterDic[@"dm_invapp"];
-        }
-      
-        _oneParaArray=@[@"状态",@"额定功率",@"今日发电量",@"累计发电量",@"用户名",@"电站名",@"当前功率"];
-        _upOrDownNetValueArray=@[@[@"1",@"2"],@[@"3",@"4"],@[@"5",@"6"],@[@"7",@"8"],@[@"9",@"10"],@[@"11",@"12"],@[@"13",@"14"]];
-        
-        _oldForParameterArray=@[@"5",@"4",@"9",@"11",@"12",@"13",@"10",@"3",@"8"];
-        
-     _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":root_oss_506_leiXing,@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":root_oss_507_chengShi,@"7":@"采集器    ",@"8":root_oss_508_zuiHouGenXinShiJian,@"9":root_oss_505_Status,@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
-        _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"type",@"2":@"alias",@"3":@"iCode",@"4":@"plantName",@"5":@"accountName",@"6":@"cityId",@"7":@"datalog_sn",@"8":@"time",@"9":@"status",@"10":@"nominal_power",@"11":@"etoday",@"12":@"etotal",@"13":@"pac"};
-        
-            _cellNameArray2=@[@"序列号",root_oss_505_Status,@"当前功率",@"今日发电"];     //列表的另一种展示
-        _NetForParameterNew22Array=@[@"0",@"9",@"13",@"11"];
-        
-    }else if (_deviceType==2) {               //储能机
-        if (_parameterDic.allKeys.count>0) {
-            _NetForParameterArray=_parameterDic[@"dm_storageapp"];
+            _NetForParameterArray=_parameterDic[@"dm_userapp"];
         }
         
-
-        _oldForParameterArray=@[@"4",@"3",@"7",@"8",@"9",@"2",@"6"];
         
-        _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":root_oss_508_zuiHouGenXinShiJian,@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":root_oss_507_chengShi};
-        _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"alias",@"2":@"iCode",@"3":@"plantName",@"4":@"accountName",@"5":@"datalog_sn",@"6":@"time",@"7":@"status",@"8":@"charge",@"9":@"discharge",@"10":@"cityId"};
+        _oldForParameterArray=@[@"1",@"3",@"4",@"5",@"6",@"7"];
         
-        _cellNameArray2=@[@"序列号",root_oss_505_Status,@"充电",@"放电"];     //列表的另一种展示
-        _NetForParameterNew22Array=@[@"0",@"7",@"8",@"9"];
+        _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7"];
+        _forChoiceParameterDic=@{@"0":@"账号    ",@"1":@"别名      ",@"2":@"真实名字",@"3":@"手机号   ",@"4":@"电子邮箱   ",@"5":@"注册日期      ",@"6":@"设备数量  ",@"7":@"安装商"};
+        _numForNetKeyDic=@{@"0":@"accountName",@"1":@"alias",@"2":@"activeName",@"3":@"phoneNum",@"4":@"email",@"5":@"creatDate",@"6":@"deviceCount",@"7":@"iCode"};
         
-        
-    }else if (_deviceType==3) {
-        if (_parameterDic.allKeys.count>0) {
-            _NetForParameterArray=_parameterDic[@"dm_mixapp"];
-        }
-        
-        _oldForParameterArray=@[@"4",@"3",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"2",@"6"];
-        
-        _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14"];
-            _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":root_oss_508_zuiHouGenXinShiJian,@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":@"今日发电量",@"11":@"总输出电量",@"12":@"当前功率",@"13":@"额定功率",@"14":root_oss_507_chengShi};
-        
-        _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"alias",@"2":@"iCode",@"3":@"plantName",@"4":@"accountName",@"5":@"datalog_sn",@"6":@"time",@"7":@"status",@"8":@"pcharge",@"9":@"pdischarge",@"10":@"etoday",@"11":@"etotal",@"12":@"pac",@"13":@"pMax",@"14":@"cityId"};
-        
-        _cellNameArray2=@[@"序列号",root_oss_505_Status,@"充电",@"放电"];     //列表的另一种展示
-        _NetForParameterNew22Array=@[@"0",@"7",@"8",@"9"];
+        _cellNameArray2=@[@"序列号",@"设备数量",@"手机号",@"注册日期"];     //列表的另一种展示
+        _NetForParameterNew22Array=@[@"0",@"6",@"3",@"5"];
         
         
     }
-
+    
     
     [self changeTheParameter];
-
-
+    
+    
 }
 
 -(void)changeTheParameter{
@@ -170,7 +135,7 @@
         for (int i=0; i<_NetForParameterArray.count; i++) {
             [numArray addObject:[NSString stringWithFormat:@"%@",_NetForParameterArray[i]]];
         }
-   //     _NetForParameterArray=[NSArray arrayWithArray:numArray];
+        //     _NetForParameterArray=[NSArray arrayWithArray:numArray];
         nowNameArray=[NSArray arrayWithArray:numArray];
     }
     _NetForParameterNewArray=[NSArray arrayWithArray:nowNameArray];
@@ -190,23 +155,23 @@
         NSString *keyNum=_parameterNumArray[i];
         NSArray *keyAndValueArray=@[keyNum,[_forChoiceParameterDic objectForKey:keyNum]];
         if (![nowNameArray containsObject:keyNum]) {
-              [_battomArray addObject:keyAndValueArray];
+            [_battomArray addObject:keyAndValueArray];
         }
         
     }
     
     if (!_oneScrollView) {
-             [self initUI];
+        [self initUI];
     }else{
         [self initTheTheChangeUI];
     }
-   
+    
 }
 
 #pragma mark -UI区域
 -(void)initUI{
-  
-  
+    
+    
     float H1=0*HEIGHT_SIZE;
     
     if (_oneScrollView) {
@@ -215,7 +180,7 @@
     }
     
     if (_deviceType==1) {
-           H1=40*HEIGHT_SIZE;
+        H1=40*HEIGHT_SIZE;
         _oneScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, H1)];
         _oneScrollView.backgroundColor = [UIColor whiteColor];
         _oneScrollView.showsHorizontalScrollIndicator = NO;
@@ -268,11 +233,11 @@
         _oneScrollView.contentSize=CGSizeMake(W_all+20*NOW_SIZE, H1);
         
     }
-   
     
-      float H2=50*HEIGHT_SIZE;
-        float W1=80*NOW_SIZE;
-        float WK1=10*NOW_SIZE;
+    
+    float H2=50*HEIGHT_SIZE;
+    float W1=80*NOW_SIZE;
+    float WK1=10*NOW_SIZE;
     
     if (_View2) {
         [_View2 removeFromSuperview];
@@ -293,13 +258,13 @@
     float H2_1=30*HEIGHT_SIZE;
     float W2_1=40*NOW_SIZE;
     float image00W=8*HEIGHT_SIZE;  float image00H=6*HEIGHT_SIZE;float image00K=3*NOW_SIZE;
-    float W_View201=W2_1+image00W+image00K;
+    float W_View201=0;
     UIView *View201= [[UIView alloc]initWithFrame:CGRectMake(WK1+imageW+WK1, 0, W_View201,H2)];
     View201.backgroundColor =[UIColor clearColor];
     View201.userInteractionEnabled=YES;
     UITapGestureRecognizer *labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(chioceTheStatue)];
     [View201 addGestureRecognizer:labelTap2];
-    [_View2 addSubview:View201];
+  //  [_View2 addSubview:View201];
     
     NSArray *numArray=[self getTheDeviceStatueNum];
     _deviceStatueNumDic=[NSMutableDictionary new];
@@ -315,28 +280,28 @@
         [_numNameLable removeFromSuperview];
         _numNameLable=nil;
     }
-        _numNameLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0,W2_1, H2_1/2.0)];
-        _numNameLable.textColor = COLOR(51, 51, 51, 1);
-        _numNameLable.text=statueArray1[1];
-        _numNameLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-        _numNameLable.textAlignment=NSTextAlignmentCenter;
-        _numNameLable.adjustsFontSizeToFitWidth=YES;
-        _numNameLable.userInteractionEnabled=YES;
-        [View201 addSubview:_numNameLable];
-   
+    _numNameLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0,W2_1, H2_1/2.0)];
+    _numNameLable.textColor = COLOR(51, 51, 51, 1);
+    _numNameLable.text=statueArray1[1];
+    _numNameLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    _numNameLable.textAlignment=NSTextAlignmentCenter;
+    _numNameLable.adjustsFontSizeToFitWidth=YES;
+    _numNameLable.userInteractionEnabled=YES;
+    [View201 addSubview:_numNameLable];
+    
     if (_numLable) {
         [_numLable removeFromSuperview];
         _numLable=nil;
     }
-  
-        _numLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0+H2_1/2.0,W2_1, H2_1/2.0)];
-        _numLable.textColor =mainColor;
-        _numLable.text=@"";
-        _numLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-        _numLable.textAlignment=NSTextAlignmentCenter;
-           _numLable.adjustsFontSizeToFitWidth=YES;
-        _numLable.userInteractionEnabled=YES;
-        [View201 addSubview:_numLable];
+    
+    _numLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0+H2_1/2.0,W2_1, H2_1/2.0)];
+    _numLable.textColor =mainColor;
+    _numLable.text=@"";
+    _numLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
+    _numLable.textAlignment=NSTextAlignmentCenter;
+    _numLable.adjustsFontSizeToFitWidth=YES;
+    _numLable.userInteractionEnabled=YES;
+    [View201 addSubview:_numLable];
     
     
     
@@ -351,20 +316,20 @@
     UIView *View01= [[UIView alloc]initWithFrame:CGRectMake(2*WK1+imageW+W_View201+WK1, (H2-imageH1)/2.0, View01_W,imageH1)];
     View01.backgroundColor = [UIColor whiteColor];
     [View01.layer setMasksToBounds:YES];
-        View01.userInteractionEnabled=YES;
+    View01.userInteractionEnabled=YES;
     [View01.layer setCornerRadius:(imageH1/2.0)];
     UITapGestureRecognizer *labelTap3=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(goToSearch)];
     [View01 addGestureRecognizer:labelTap3];
     [_View2 addSubview:View01];
     
-        float imageH2=20*HEIGHT_SIZE;
-      float imageW2=imageH2*(34/36.0);
+    float imageH2=20*HEIGHT_SIZE;
+    float imageW2=imageH2*(34/36.0);
     float W22=(View01.frame.size.width-imageW2)/2.0;
     UIImageView *image3=[[UIImageView alloc]initWithFrame:CGRectMake(W22, (imageH1-imageH2)/2, imageW2,imageH2 )];
     image3.userInteractionEnabled=YES;
     image3.image=IMAGE(@"oss_search.png");
     [View01 addSubview:image3];
-  
+    
     
     float _twoScrollViewH=40*HEIGHT_SIZE;
     /////////////列表显示内容
@@ -379,11 +344,11 @@
     _twoScrollView.bounces = NO;
     [self.view addSubview:_twoScrollView];
     
-
-
-     _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, _twoScrollViewH);
     
-
+    
+    _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, _twoScrollViewH);
+    
+    
     float W_K_0=12*NOW_SIZE;             //平均空隙
     float W1_all=10*NOW_SIZE;
     
@@ -401,10 +366,10 @@
         lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [_twoScrollView addSubview:lable1];
         
-                     W1_all=W1_all+W_all_0;
+        W1_all=W1_all+W_all_0;
     }
     
-      _tableW=W1_all;
+    _tableW=W1_all;
     float H3=ScreenHeight-H1-H2-_twoScrollViewH-(NaviHeight);
     if (_threeScrollView) {
         [_threeScrollView removeFromSuperview];
@@ -414,12 +379,12 @@
     _threeScrollView.backgroundColor = [UIColor whiteColor];
     _threeScrollView.showsHorizontalScrollIndicator = NO;
     _threeScrollView.bounces = NO;
-        _threeScrollView.delegate=self;
+    _threeScrollView.delegate=self;
     [self.view addSubview:_threeScrollView];
-        _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
+    _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
     
-
-   [self initTableViewUI:H3];
+    
+    [self initTableViewUI:H3];
     
     [self NetForDevice];
     
@@ -437,29 +402,29 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.backgroundColor=COLOR(242, 242, 242, 1);
     
- 
-        
-        MJRefreshAutoNormalFooter *foot=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-            if (_allTableViewDataArray.count>1) {
-                if (_pageNumForNet<_pageTotalNum) {
-                    _pageNumForNet++;
-                    [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
-                    [self NetForDevice];
-                }else{
-                    [self showToastViewWithTitle:@"已经到最后一页"];
-                }
-         
-                
-            }
     
+    
+    MJRefreshAutoNormalFooter *foot=[MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        if (_allTableViewDataArray.count>1) {
+            if (_pageNumForNet<_pageTotalNum) {
+                _pageNumForNet++;
+                [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
+                [self NetForDevice];
+            }else{
+                [self showToastViewWithTitle:@"已经到最后一页"];
+            }
             
-            [_tableView.mj_footer endRefreshing];
             
-        }];
-        [foot setTitle:@"" forState:MJRefreshStateIdle];
-        _tableView.mj_footer=foot;
- 
-        _tableView.mj_footer.automaticallyHidden=NO;
+        }
+        
+        
+        [_tableView.mj_footer endRefreshing];
+        
+    }];
+    [foot setTitle:@"" forState:MJRefreshStateIdle];
+    _tableView.mj_footer=foot;
+    
+    _tableView.mj_footer.automaticallyHidden=NO;
     
     [_threeScrollView addSubview:_tableView];
     
@@ -512,9 +477,9 @@
     float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
     _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
     
-   [self initTableViewUI:H3];
+    [self initTableViewUI:H3];
     
-   [self NetForDevice];
+    [self NetForDevice];
 }
 
 
@@ -529,15 +494,15 @@
     }];
     DTKDropdownItem *item1 = [DTKDropdownItem itemWithTitle:@"展示参数" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
         NSLog(@"rightItem%lu",(unsigned long)index);
-   
+        
         [self goToChoiceParameter];
         
     }];
     
-//    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:@"设备分配" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
-//        NSLog(@"rightItem%lu",(unsigned long)index);
-//
-//    }];
+    //    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:@"设备分配" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
+    //        NSLog(@"rightItem%lu",(unsigned long)index);
+    //
+    //    }];
     
     _rightMenuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0,item1] icon:@"add@2x.png"];
     //  menuView.intrinsicContentSize=CGSizeMake(44.f, 44.f);
@@ -568,11 +533,11 @@
     LRLChannelEditController *channelEdit = [[LRLChannelEditController alloc] initWithTopDataSource:self.topChannelArr andBottomDataSource:self.bottomChannelArr andInitialIndex:self.chooseIndex];
     
     //编辑后的回调
-    __weak ossNewDeviceList *weakSelf = self;
+    __weak ossNewUserList *weakSelf = self;
     channelEdit.removeInitialIndexBlock = ^(NSMutableArray<LRLChannelUnitModel *> *topArr, NSMutableArray<LRLChannelUnitModel *> *bottomArr){
         weakSelf.topChannelArr = topArr;
         weakSelf.bottomChannelArr = bottomArr;
-      //  LRLChannelUnitModel *model =weakSelf.topChannelArr[1];
+        //  LRLChannelUnitModel *model =weakSelf.topChannelArr[1];
         NSLog(@"删除了初始选中项的回调:\n保留的频道有: %@", topArr);
     };
     channelEdit.chooseIndexBlock = ^(NSInteger index, NSMutableArray<LRLChannelUnitModel *> *topArr, NSMutableArray<LRLChannelUnitModel *> *bottomArr){
@@ -583,14 +548,14 @@
         NSMutableArray *numArray=[NSMutableArray array];
         for (int i=0; i<weakSelf.topChannelArr.count; i++) {
             LRLChannelUnitModel *model =weakSelf.topChannelArr[i];
-           // NSArray *modeArray=@[model.cid,model.name];
+            // NSArray *modeArray=@[model.cid,model.name];
             [numArray addObject:[NSString stringWithFormat:@"%@",model.cid]];
         }
         weakSelf.NetForParameterArray=[NSMutableArray arrayWithArray:numArray];
         [self initTheNetPageAndValue];
-    [weakSelf changeTheParameter];
+        [weakSelf changeTheParameter];
         [weakSelf goToNetForListParameter];
-      
+        
     };
     
     channelEdit.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -625,7 +590,7 @@
     if (!_bottomChannelArr) {
         _bottomChannelArr = [NSMutableArray array];
         for (int i = 0; i < _battomArray.count; i++) {
-                    NSArray *modeArray=_battomArray[i];
+            NSArray *modeArray=_battomArray[i];
             LRLChannelUnitModel *channelModel = [[LRLChannelUnitModel alloc] init];
             channelModel.name = modeArray[1];
             channelModel.cid = modeArray[0];
@@ -653,7 +618,7 @@
             }
             [self goToGetListParameter];
         }
-
+        
     };
     searchView.searchResultBlock = ^(NSArray *resultArray){
         [self initTheNetPageAndValue];
@@ -667,31 +632,31 @@
 
 #pragma mark -转换网络数据
 -(void)changeNetData{                     //给tableviewcell用的数据
- 
+    
     
     NSArray *numArray=[self getTheDeviceStatueNum];
-     NSMutableArray *keyNameArray=[NSMutableArray array];
-     NSMutableArray *numValueArray=[NSMutableArray array];
+    NSMutableArray *keyNameArray=[NSMutableArray array];
+    NSMutableArray *numValueArray=[NSMutableArray array];
     
     _deviceStatueNumDic=[NSMutableDictionary new];
     for (int i=0; i<numArray.count; i++) {
-       
+        
         NSArray *statueArray=[self changeTheDeviceStatue:numArray[i]];
-         [keyNameArray addObject:statueArray[2]];
+        [keyNameArray addObject:statueArray[2]];
         [numValueArray addObject:[NSNumber numberWithInteger:0]];
-//        [_deviceStatueNumDic setObject:@"" forKey:statueArray[2]];
+        //        [_deviceStatueNumDic setObject:@"" forKey:statueArray[2]];
     }
     
     for (int i=0; i<_netResultArray.count; i++) {
-   
+        
         NSDictionary *unitOneDic=_netResultArray[i];
         
         if (i==0) {
             _pageNumForNet=[[NSString stringWithFormat:@"%@",unitOneDic[@"offset"]] integerValue];
-             _pageTotalNum=[[NSString stringWithFormat:@"%@",unitOneDic[@"pages"]] integerValue];
+            _pageTotalNum=[[NSString stringWithFormat:@"%@",unitOneDic[@"pages"]] integerValue];
         }
         
-           NSArray *dataArray=unitOneDic[@"datas"];
+        NSArray *dataArray=unitOneDic[@"datas"];
         NSDictionary *numsDic=unitOneDic[@"nums"];
         for (int i=0; i<keyNameArray.count; i++) {
             if ([numsDic.allKeys containsObject:keyNameArray[i]]) {
@@ -700,68 +665,68 @@
                 [numValueArray replaceObjectAtIndex:i withObject:[NSNumber numberWithInteger:value1+value2]];
             }
         }
-      
-            for (int i=0; i<dataArray.count; i++) {
-                NSDictionary *twoDic=dataArray[i];
-                NSMutableArray *valueArray=[NSMutableArray array];
-                   NSMutableArray *valueArray22=[NSMutableArray array];
-                [valueArray addObject:twoDic[@"deviceSn"]];
-                
-                for (int i=0; i<_NetForParameterNewArray.count; i++) {                  //列表1的数据
-                    if ([unitOneDic.allKeys containsObject:@"serverId"]) {
-                        NSString*keyString=[_numForNetKeyDic objectForKey:_NetForParameterNewArray[i]];
-                        NSString *valueString=[NSString stringWithFormat:@"%@",twoDic[keyString]];
-
-                        [valueArray addObject:valueString];
-                    }else{
-                           [valueArray addObject:@""];         //没有接入的设备
-                    }
-                  
-                }
-                
-                for (int i=0; i<_NetForParameterNew22Array.count; i++) {
-                    if ([unitOneDic.allKeys containsObject:@"serverId"]) {
-                        NSString*keyString=[_numForNetKeyDic objectForKey:_NetForParameterNew22Array[i]];
-                        NSString *valueString=[NSString stringWithFormat:@"%@",twoDic[keyString]];
-
-                        [valueArray22 addObject:valueString];
-                    }else{
-                        [valueArray22 addObject:@""];         //没有接入的设备
-                    }
-                    
-                }
-                
+        
+        for (int i=0; i<dataArray.count; i++) {
+            NSDictionary *twoDic=dataArray[i];
+            NSMutableArray *valueArray=[NSMutableArray array];
+            NSMutableArray *valueArray22=[NSMutableArray array];
+            [valueArray addObject:twoDic[@"deviceSn"]];
+            
+            for (int i=0; i<_NetForParameterNewArray.count; i++) {                  //列表1的数据
                 if ([unitOneDic.allKeys containsObject:@"serverId"]) {
-                       [valueArray addObject:unitOneDic[@"serverId"]];
-                }else{
-                       [valueArray addObject:@"110"];
-                }
-                if (_deviceType==1) {
-                    if ([twoDic.allKeys containsObject:@"type"]) {
-                         [valueArray addObject:[NSString stringWithFormat:@"%@",twoDic[@"type"]]];
-                       [valueArray22 addObject:[NSString stringWithFormat:@"%@",twoDic[@"type"]]];
-                    }else{
-                        [valueArray addObject:@"1"];
-                      [valueArray22 addObject:@"1"];
-                    }
+                    NSString*keyString=[_numForNetKeyDic objectForKey:_NetForParameterNewArray[i]];
+                    NSString *valueString=[NSString stringWithFormat:@"%@",twoDic[keyString]];
                     
+                    [valueArray addObject:valueString];
+                }else{
+                    [valueArray addObject:@""];         //没有接入的设备
                 }
-                
-                [_allTableViewDataArray addObject:valueArray];
-                [_allTableViewData22Array addObject:valueArray22];
                 
             }
+            
+            for (int i=0; i<_NetForParameterNew22Array.count; i++) {
+                if ([unitOneDic.allKeys containsObject:@"serverId"]) {
+                    NSString*keyString=[_numForNetKeyDic objectForKey:_NetForParameterNew22Array[i]];
+                    NSString *valueString=[NSString stringWithFormat:@"%@",twoDic[keyString]];
+                    
+                    [valueArray22 addObject:valueString];
+                }else{
+                    [valueArray22 addObject:@""];         //没有接入的设备
+                }
+                
+            }
+            
+            if ([unitOneDic.allKeys containsObject:@"serverId"]) {
+                [valueArray addObject:unitOneDic[@"serverId"]];
+            }else{
+                [valueArray addObject:@"110"];
+            }
+            if (_deviceType==1) {
+                if ([twoDic.allKeys containsObject:@"type"]) {
+                    [valueArray addObject:[NSString stringWithFormat:@"%@",twoDic[@"type"]]];
+                    [valueArray22 addObject:[NSString stringWithFormat:@"%@",twoDic[@"type"]]];
+                }else{
+                    [valueArray addObject:@"1"];
+                    [valueArray22 addObject:@"1"];
+                }
+                
+            }
+            
+            [_allTableViewDataArray addObject:valueArray];
+            [_allTableViewData22Array addObject:valueArray22];
+            
+        }
         
     }
     
     for (int i=0; i<keyNameArray.count; i++) {
-       [_deviceStatueNumDic setObject:numValueArray[i] forKey:keyNameArray[i]];
+        [_deviceStatueNumDic setObject:numValueArray[i] forKey:keyNameArray[i]];
     }
     if ([_deviceStatueNumDic.allKeys containsObject:_numNameLableString]) {
-         _numLable.text=[NSString stringWithFormat:@"%@",[_deviceStatueNumDic objectForKey:_numNameLableString]];
+        _numLable.text=[NSString stringWithFormat:@"%@",[_deviceStatueNumDic objectForKey:_numNameLableString]];
     }
-   
- 
+    
+    
     [_tableView reloadData];
     
     
@@ -770,39 +735,39 @@
 
 #pragma mark -排序
 -(void)changeTheRowNum:(UITapGestureRecognizer*)tap{
-  NSInteger  tagNum=tap.view.tag-2000;
- 
+    NSInteger  tagNum=tap.view.tag-2000;
+    
     NSArray *netValueArray=_upOrDownNetValueArray[tagNum];
     BOOL isSelect=[_selectRowNumArray[tagNum] boolValue];
     isSelect = !isSelect;
-
+    
     for (int i=0; i<_selectRowNumArray.count; i++) {
-                    UIImageView *image0=[self.view viewWithTag:3000+i];
+        UIImageView *image0=[self.view viewWithTag:3000+i];
         if (i!=tagNum) {
             image0.image=IMAGE(@"oss_up_down.png");
-                [_selectRowNumArray replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:NO]];
+            [_selectRowNumArray replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:NO]];
         }else{
             if (isSelect) {
                 image0.image=IMAGE(@"oss_up.png");
-                   [_deviceNetDic setObject:netValueArray[1] forKey:@"order"];
+                [_deviceNetDic setObject:netValueArray[1] forKey:@"order"];
             }else{
                 image0.image=IMAGE(@"oss_down.png");
-                    [_deviceNetDic setObject:netValueArray[0] forKey:@"order"];
+                [_deviceNetDic setObject:netValueArray[0] forKey:@"order"];
             }
-     
-                [_selectRowNumArray replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:isSelect]];
+            
+            [_selectRowNumArray replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:isSelect]];
         }
-
+        
     }
     
     [self initTheNetPageAndValue];
     [self NetForDevice];
-   
+    
 }
 
 -(void)initTheNetPageAndValue{
     
- _allTableViewDataArray=[NSMutableArray array];
+    _allTableViewDataArray=[NSMutableArray array];
     _allTableViewData22Array=[NSMutableArray array];
     _pageNumForNet=1;
     _pageTotalNum=1;
@@ -812,26 +777,26 @@
     _isChangTableView=!_isChangTableView;
     if (_isChangTableView) {
         [_twoScrollView removeFromSuperview];
-             _threeScrollView.frame=CGRectMake(_threeScrollView.frame.origin.x, _threeScrollView.frame.origin.y-40*HEIGHT_SIZE, _threeScrollView.frame.size.width, _threeScrollView.frame.size.height+40*HEIGHT_SIZE);
-           _threeScrollView.contentSize=CGSizeMake(ScreenWidth, _threeScrollView.frame.size.height);
+        _threeScrollView.frame=CGRectMake(_threeScrollView.frame.origin.x, _threeScrollView.frame.origin.y-40*HEIGHT_SIZE, _threeScrollView.frame.size.width, _threeScrollView.frame.size.height+40*HEIGHT_SIZE);
+        _threeScrollView.contentSize=CGSizeMake(ScreenWidth, _threeScrollView.frame.size.height);
     }else{
-         [self.view addSubview:_twoScrollView];
-                  _threeScrollView.frame=CGRectMake(_threeScrollView.frame.origin.x, _threeScrollView.frame.origin.y+40*HEIGHT_SIZE, _threeScrollView.frame.size.width, _threeScrollView.frame.size.height-40*HEIGHT_SIZE);
-         _threeScrollView.contentSize=CGSizeMake(_tableW, _threeScrollView.frame.size.height);
+        [self.view addSubview:_twoScrollView];
+        _threeScrollView.frame=CGRectMake(_threeScrollView.frame.origin.x, _threeScrollView.frame.origin.y+40*HEIGHT_SIZE, _threeScrollView.frame.size.width, _threeScrollView.frame.size.height-40*HEIGHT_SIZE);
+        _threeScrollView.contentSize=CGSizeMake(_tableW, _threeScrollView.frame.size.height);
     }
     
-
+    
     [self initTableViewUI:_threeScrollView.frame.size.height];
     
-  
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     float H=30*HEIGHT_SIZE;
-
+    
     if (_isChangTableView) {
-          NSInteger Num=_cellNameArray2.count/2+_cellNameArray2.count%2;
+        NSInteger Num=_cellNameArray2.count/2+_cellNameArray2.count%2;
         H=Num*20*HEIGHT_SIZE*2+10*HEIGHT_SIZE+5*HEIGHT_SIZE;
     }
     return H;
@@ -870,7 +835,7 @@
     }
     NSString *textString=[NSString stringWithFormat:@"%@",[self jsonStringWithPrettyPrint:YES dataArray:_NetForParameterArray]];
     NSDictionary *netDic=@{@"text":textString,@"key":keyValueString};
-  //  [self showProgressView];
+    //  [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:netDic paramarsSite:@"/api/v3/device/saveShowCol" sucessBlock:^(id content) {
         [self hideProgressView];
         
@@ -881,10 +846,10 @@
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             
             if ([firstDic[@"result"] intValue]==1) {
-               // self.parameterDic=firstDic[@"obj"];
+                // self.parameterDic=firstDic[@"obj"];
                 
             }else{
- 
+                
             }
         }
     } failure:^(NSError *error) {
@@ -896,7 +861,7 @@
 
 -(void)goToGetListParameter{
     
-
+    
     //  [self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"":@""} paramarsSite:@"/api/v3/device/getShowCol" sucessBlock:^(id content) {
         [self hideProgressView];
@@ -909,28 +874,28 @@
             
             if ([firstDic[@"result"] intValue]==1) {
                 self.parameterDic=firstDic[@"obj"];
-                     [self initData];
+                [self initData];
             }else{
-              [self initData];
+                [self initData];
             }
         }
     } failure:^(NSError *error) {
-             [self initData];
-    
+        [self initData];
+        
     }];
     
 }
 
 
 -(void)NetForDevice{
-
+    
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_deviceNetDic paramarsSite:@"/api/v3/device/deviceManage/list" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_deviceNetDic paramarsSite:@"/api/v3/customer/customer_overview_userinfo" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"/api/v3/customer/userManage_overview_creatUserPage: %@", content1);
+        NSLog(@"/api/v3/customer/customer_overview_userinfo: %@", content1);
         
         if (content1) {
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
@@ -992,7 +957,7 @@
             self.twoScrollView.contentOffset = CGPointMake(self.threeScrollView.contentOffset.x, 0);
         }
     } else if ([scrollView isKindOfClass:[UITableView class]]) {
-
+        
     }
     
 }
@@ -1001,14 +966,14 @@
     
     if (!_isChangTableView) {
         ossNewDeviceCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL1" forIndexPath:indexPath];
-
+        
         if (!cell) {
             cell=[[ossNewDeviceCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL1"];
         }
         cell.deviceType=_deviceType;
         cell.nameValueArray=_allTableViewDataArray[indexPath.row];
         cell.nameArray=_cellNameArray;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
         
@@ -1017,37 +982,37 @@
         if (!cell) {
             cell=[[ossNewDeviceTwoCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL2"];
         }
-           cell.deviceType=_deviceType;
-          cell.nameValueArray=_allTableViewData22Array[indexPath.row];
+        cell.deviceType=_deviceType;
+        cell.nameValueArray=_allTableViewData22Array[indexPath.row];
         cell.nameArray=_cellNameArray2;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
     }
-
+    
     
     
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    
     ossNewDeviceControl *deviceView=[[ossNewDeviceControl alloc]init];
-        deviceView.deviceType=_deviceType;
+    deviceView.deviceType=_deviceType;
     NSArray *infoArray;
     if (!_isChangTableView) {
         infoArray=_allTableViewDataArray[indexPath.row];
-    deviceView.deviceSn=infoArray[0];
+        deviceView.deviceSn=infoArray[0];
     }else{
-          infoArray=_allTableViewData22Array[indexPath.row];
-         deviceView.deviceSn=infoArray[0];
+        infoArray=_allTableViewData22Array[indexPath.row];
+        deviceView.deviceSn=infoArray[0];
     }
     if (_deviceType==1) {
         if([[infoArray lastObject] isEqualToString:@"6"]){
             deviceView.deviceType=4;
         }
     }
-  
+    
     
     [self.navigationController pushViewController:deviceView animated:YES];
     
@@ -1058,36 +1023,36 @@
     NSString *titleString=@"选择设备状态";
     NSArray*numArray;
     numArray=[self getTheDeviceStatueNum];
-   
+    
     NSMutableArray *nameArray=[NSMutableArray array];
     NSMutableDictionary *nameAndValueDic=[NSMutableDictionary new];
-        NSMutableDictionary *numAndValueStringDic=[NSMutableDictionary new];
+    NSMutableDictionary *numAndValueStringDic=[NSMutableDictionary new];
     NSMutableDictionary *netAndValueStringDic=[NSMutableDictionary new];
-       NSMutableDictionary *netKeyAndValueStringDic=[NSMutableDictionary new];
+    NSMutableDictionary *netKeyAndValueStringDic=[NSMutableDictionary new];
     for (int i=0; i<numArray.count; i++) {
         NSArray* statueArray=[self changeTheDeviceStatue:numArray[i]];
         NSString *name=[NSString stringWithFormat:@"%@(%@)",statueArray[1], [_deviceStatueNumDic objectForKey:statueArray[2]]];
         [nameArray addObject:name];
         [nameAndValueDic setObject:statueArray[1] forKey:name];
-           [numAndValueStringDic setObject:numArray[i] forKey:name];
+        [numAndValueStringDic setObject:numArray[i] forKey:name];
         [netKeyAndValueStringDic setObject:statueArray[2] forKey:name];
-       [netAndValueStringDic setObject:numArray[i] forKey:name];
+        [netAndValueStringDic setObject:numArray[i] forKey:name];
     }
     [ZJBLStoreShopTypeAlert showWithTitle:titleString titles:nameArray selectIndex:^(NSInteger selectIndex) {
         
     }selectValue:^(NSString *selectValue){
-          _numNameLableString=[netAndValueStringDic objectForKey:selectValue];
-          NSArray* statue1Array=[self changeTheDeviceStatue:_numNameLableString];
+        _numNameLableString=[netAndValueStringDic objectForKey:selectValue];
+        NSArray* statue1Array=[self changeTheDeviceStatue:_numNameLableString];
         _numLable.textColor=statue1Array[0];
         _numNameLable.text=[nameAndValueDic objectForKey:selectValue];
         _numLable.text=[NSString stringWithFormat:@"%@",[_deviceStatueNumDic objectForKey:[netKeyAndValueStringDic objectForKey:selectValue]]];
-    NSString*netNum=[numAndValueStringDic objectForKey:selectValue];
-  
-      
+        NSString*netNum=[numAndValueStringDic objectForKey:selectValue];
+        
+        
         [self initTheNetPageAndValue];
         
-         [_deviceNetDic setObject:netNum forKey:@"deviceStatus"];
-            [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
+        [_deviceNetDic setObject:netNum forKey:@"deviceStatus"];
+        [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
         [self NetForDevice];
         
     } showCloseButton:YES ];
@@ -1112,27 +1077,36 @@
     NSDictionary *colorDic; NSDictionary *nameDic;NSDictionary *netKeyDic;
     if (_deviceType==1) {
         colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(154, 154, 154, 1),@"0":COLOR(213, 180, 0, 1),@"1":COLOR(44, 189, 10, 1),@"":MainColor};
-           nameDic=@{@"3":@"故障",@"-1":@"离线",@"0":@"等待",@"1":@"在线",@"":@"全部"};
+        nameDic=@{@"3":@"故障",@"-1":@"离线",@"0":@"等待",@"1":@"在线",@"":@"全部"};
         netKeyDic=@{@"3":@"faultNum",@"-1":@"lostNum",@"0":@"waitNum",@"1":@"onlineNum",@"":@"totalNum"};
     }else if (_deviceType==2) {
         colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(154, 154, 154, 1),@"1":COLOR(44, 189, 10, 1),@"2":COLOR(213, 180, 0, 1),@"-2":COLOR(61, 190, 4, 1),@"":MainColor};
-           nameDic=@{@"3":@"故障",@"-1":@"离线",@"1":@"充电",@"2":@"放电",@"-2":@"在线",@"":@"全部"};
-            netKeyDic=@{@"3":@"faultNum",@"-1":@"lostNum",@"1":@"chargeNum",@"2":@"dischargeNum",@"-2":@"onlineNum",@"":@"totalNum"};
+        nameDic=@{@"3":@"故障",@"-1":@"离线",@"1":@"充电",@"2":@"放电",@"-2":@"在线",@"":@"全部"};
+        netKeyDic=@{@"3":@"faultNum",@"-1":@"lostNum",@"1":@"chargeNum",@"2":@"dischargeNum",@"-2":@"onlineNum",@"":@"totalNum"};
     }else if (_deviceType==3) {
         colorDic=@{@"3":COLOR(210, 53, 53, 1),@"-1":COLOR(154, 154, 154, 1),@"0":COLOR(213, 180, 0, 1),@"1":COLOR(209, 148, 0, 1),@"5":COLOR(44, 189, 10, 1),@"":MainColor};
         nameDic=@{@"3":@"故障",@"-1":@"离线",@"0":@"等待",@"1":@"自检",@"5":@"在线",@"":@"全部"};
-          netKeyDic=@{@"3":@"faultNum",@"-1":@"lostNum",@"0":@"waitNum",@"1":@"selfCheck",@"5":@"onlineNum",@"":@"totalNum"};
+        netKeyDic=@{@"3":@"faultNum",@"-1":@"lostNum",@"0":@"waitNum",@"1":@"selfCheck",@"5":@"onlineNum",@"":@"totalNum"};
     }
     
     
     if ([colorDic.allKeys containsObject:numString]) {           //颜色、名字、网络KEY
         statueArray=@[[colorDic objectForKey:numString],[nameDic objectForKey:numString],[netKeyDic objectForKey:numString]];
     }else{
-          statueArray=@[[colorDic objectForKey:@""],[nameDic objectForKey:@""],[netKeyDic objectForKey:@""]];
+        statueArray=@[[colorDic objectForKey:@""],[nameDic objectForKey:@""],[netKeyDic objectForKey:@""]];
     }
     
     return statueArray;
 }
+
+
+
+
+
+
+
+
+
 
 
 

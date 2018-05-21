@@ -42,6 +42,8 @@
 @property(nonatomic,strong)NSString *timeEnable3;
 
 @property(nonatomic,strong)NSArray *oldValueArray;
+@property (nonatomic, strong)UITextField *textField3;
+@property (nonatomic, strong)UITextField *textField4;
 
 @end
 
@@ -74,7 +76,10 @@
     
     if (_setType==0 || _setType==1) {
           [self initUI];
+    }else if (_setType==14){
+        [self initHighSet];
     }else{
+    
         [self initUiZero];
     }
     
@@ -404,6 +409,54 @@
 }
 
 
+-(void)initHighSet{
+    
+    if(_setType==14){
+        NSArray *ossLableName=[NSArray arrayWithObjects:@"寄存器:",@"值:", nil];
+        for (int i=0; i<ossLableName.count; i++) {
+            UILabel *PVData=[[UILabel alloc]initWithFrame:CGRectMake(5*NOW_SIZE,  40*HEIGHT_SIZE+50*HEIGHT_SIZE*i, 100*NOW_SIZE,30*HEIGHT_SIZE )];
+            PVData.text=ossLableName[i];
+            PVData.textAlignment=NSTextAlignmentRight;
+            PVData.textColor=[UIColor whiteColor];
+            PVData.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+            PVData.adjustsFontSizeToFitWidth=YES;
+            [_scrollView addSubview:PVData];
+        }
+        
+        _textField3 = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 40*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
+        _textField3.layer.borderWidth=1;
+        _textField3.layer.cornerRadius=5;
+        _textField3.layer.borderColor=[UIColor whiteColor].CGColor;
+        _textField3.textColor = [UIColor whiteColor];
+        _textField3.tintColor = [UIColor whiteColor];
+        _textField3.textAlignment=NSTextAlignmentCenter;
+        _textField3.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        [_scrollView addSubview:_textField3];
+        
+        _textField4 = [[UITextField alloc] initWithFrame:CGRectMake(112*NOW_SIZE, 90*HEIGHT_SIZE, 150*NOW_SIZE, 30*HEIGHT_SIZE)];
+        _textField4.layer.borderWidth=1;
+        _textField4.layer.cornerRadius=5;
+        _textField4.layer.borderColor=[UIColor whiteColor].CGColor;
+        _textField4.textColor = [UIColor whiteColor];
+        _textField4.tintColor = [UIColor whiteColor];
+        _textField4.textAlignment=NSTextAlignmentCenter;
+        _textField4.font = [UIFont systemFontOfSize:16*HEIGHT_SIZE];
+        [_scrollView addSubview:_textField4];
+        
+        UIButton *goBut =  [UIButton buttonWithType:UIButtonTypeCustom];
+        goBut.frame=CGRectMake(60*NOW_SIZE,170*HEIGHT_SIZE, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+       
+        [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
+        [goBut setTitle:root_finish forState:UIControlStateNormal];
+        goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
+        [goBut addTarget:self action:@selector(finishSet1) forControlEvents:UIControlEventTouchUpInside];
+        [_scrollView addSubview:goBut];
+        
+    }
+    
+
+}
+
 -(void)showEnable:(UITapGestureRecognizer*)tag{
     int Tag=(int)tag.view.tag-5000;
  
@@ -435,8 +488,15 @@
     
 }
 
-
 -(void)finishSet1{
+    if ([_controlType isEqualToString:@"2"]) {
+        [self finishSet2];
+    }else{
+          [self finishSet0];
+    }
+}
+
+-(void)finishSet0{
     
     NSArray *nameArray=@[@"mix_ac_discharge_time_period",@"mix_ac_charge_time_period",@"pv_on_off",@"pv_pf_cmd_memory_state",@"pv_active_p_rate",@"pv_reactive_p_rate",@"pv_power_factor",@"pf_sys_year",@"pv_grid_voltage_high",@"pv_grid_voltage_low",@"mix_off_grid_enable",@"mix_ac_discharge_frequency",@"mix_ac_discharge_voltage",@"backflow_setting"];
     NSString*typeName=nameArray[_setType];
@@ -599,6 +659,175 @@
     }];
     
 }
+
+
+
+-(void)finishSet2{
+    
+    NSArray *nameArray=@[@"mix_ac_discharge_time_period",@"mix_ac_charge_time_period",@"pv_on_off",@"pv_pf_cmd_memory_state",@"pv_active_p_rate",@"pv_reactive_p_rate",@"pv_power_factor",@"pf_sys_year",@"pv_grid_voltage_high",@"pv_grid_voltage_low",@"mix_off_grid_enable",@"mix_ac_discharge_frequency",@"mix_ac_discharge_voltage",@"backflow_setting",@"set_any_reg"];
+    NSString*typeName=nameArray[_setType];
+    
+    if (_setType==2 || _setType==3 || _setType==7 || _setType==10 || _setType==11 || _setType==12 || _setType==13) {
+        if ([_choiceValue1 isEqualToString:@""] || _choiceValue1==nil) {
+            [self showToastViewWithTitle:root_device_257];
+            return;
+        }
+        _netDic=@{@"serverId":_serverId,@"deviceSn":_CnjSN,@"type":typeName,@"param1":_choiceValue1};
+    }
+    
+    if (_setType==4 || _setType==6  || _setType==8 || _setType==9) {
+        _choiceValue1=_fieldOne.text;
+        if ([_choiceValue1 isEqualToString:@""] || _choiceValue1==nil) {
+            [self showToastViewWithTitle:root_device_257];
+            return;
+        }
+        _netDic=@{@"serverId":_serverId,@"deviceSn":_CnjSN,@"type":typeName,@"param1":_choiceValue1};
+    }
+    
+    if (_setType==5) {
+        NSString *value2=_fieldOne.text;
+        if ([value2 isEqualToString:@""] || value2==nil) {
+            [self showToastViewWithTitle:root_device_257];
+            return;
+        }
+        _netDic=@{@"serverId":_serverId,@"deviceSn":_CnjSN,@"type":typeName,@"param1":value2,@"param2":_choiceValue1};
+    }
+    
+    NSArray *timeValueArray=@[_timeValue1,_timeValue2,_timeValue3,_timeValue4,_timeValue5,_timeValue6];
+    
+    NSMutableArray *timeValueArrayTwo=[NSMutableArray new];
+    
+    
+    if (_setType==1 || _setType==0) {
+        for (int i=0; i<3; i++) {
+            NSString *valueOne=timeValueArray[2*i];
+            NSString *valueTwo=timeValueArray[2*i+1];
+            if ((![valueOne isEqualToString:@""]) && (![valueTwo isEqualToString:@""])) {
+                NSDate *DATA=[_dayFormatter dateFromString:valueOne];
+                NSDate *DATA1=[_dayFormatter dateFromString:valueTwo];
+                NSDateFormatter *dateFormatterH = [[NSDateFormatter alloc] init];
+                NSDateFormatter *dateFormatterM = [[NSDateFormatter alloc] init];
+                [dateFormatterH setDateFormat:@"HH"];
+                [dateFormatterM setDateFormat:@"mm"];
+                [timeValueArrayTwo addObject:[dateFormatterH stringFromDate:DATA]];
+                [timeValueArrayTwo addObject:[dateFormatterM stringFromDate:DATA]];
+                [timeValueArrayTwo addObject:[dateFormatterH stringFromDate:DATA1]];
+                [timeValueArrayTwo addObject:[dateFormatterM stringFromDate:DATA1]];
+                
+            }else{
+                if (([valueOne isEqualToString:@""]) && ([valueTwo isEqualToString:@""])) {
+                    [timeValueArrayTwo addObject:@""];
+                    [timeValueArrayTwo addObject:@""];
+                    [timeValueArrayTwo addObject:@""];
+                    [timeValueArrayTwo addObject:@""];
+                }else{
+                    [self showToastViewWithTitle:root_device_258];
+                    return;
+                }
+                
+            }
+            
+        }
+        
+        if (_setType==1) {
+            if ([_choiceValue3 isEqualToString:@""]) {
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@%@",root_MIX_225,root_5000_ac_chongdian,root_MIX_221]];
+                return;
+            }
+        }
+        
+    }
+    
+    
+    if (_setType==14) {
+        NSString *textValue;
+        NSString *textValue1;
+        if (_textField3.text==nil || [_textField3.text isEqualToString:@""]) {
+            [self showToastViewWithTitle:@"请输入寄存器"];
+            return;
+        }else{
+                textValue= [NSString stringWithFormat:@"%d",[[_textField3 text] intValue]];
+        }
+        if (_textField4.text==nil || [_textField4.text isEqualToString:@""]) {
+            [self showToastViewWithTitle:@"请输入设置值"];
+            return;
+        }else{
+               textValue1= [NSString stringWithFormat:@"%d",[[_textField4 text] intValue]];
+        }
+
+           _netDic=@{@"serverId":_serverId,@"deviceSn":_CnjSN,@"type":typeName,@"param1":textValue,@"param2":textValue1};
+
+     
+    }
+    
+    
+    NSString *param1String,*param2String;
+    if (_setType==0 || _setType==1){
+        if ([_fieldOne.text isEqualToString:@""] || _fieldOne.text==nil) {
+            if (_setType==0) {
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_device_255,root_PCS_fangdian_gonglv]];
+            }else{
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_device_255,root_CHARGING_POWER]];
+            }
+            
+            return;
+        }else{
+            param1String=_fieldOne.text;
+        }
+        if ([_fieldTwo.text isEqualToString:@""] || _fieldTwo.text==nil) {
+            if (_setType==0) {
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_device_255,root_MIX_227]];
+            }else{
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"%@%@",root_device_255,root_MIX_228]];
+            }
+            return;
+        }else{
+            param2String=_fieldTwo.text;
+        }
+        
+    }
+    
+    if (_setType==0) { _netDic=@{@"serverId":_serverId,@"deviceSn":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":param2String,@"param3":timeValueArrayTwo[0],@"param4":timeValueArrayTwo[1],@"param5":timeValueArrayTwo[2],@"param6":timeValueArrayTwo[3],@"param7":_timeEnable1,@"param8":timeValueArrayTwo[4],@"param9":timeValueArrayTwo[5],@"param10":timeValueArrayTwo[6],@"param11":timeValueArrayTwo[7],@"param12":_timeEnable2,@"param13":timeValueArrayTwo[8],@"param14":timeValueArrayTwo[9],@"param15":timeValueArrayTwo[10],@"param16":timeValueArrayTwo[11],@"param17":_timeEnable3};
+    }
+    
+    if (_setType==1) { _netDic=@{@"serverId":_serverId,@"deviceSn":_CnjSN,@"type":typeName,@"param1":param1String,@"param2":param2String,@"param3":_choiceValue3,@"param4":timeValueArrayTwo[0],@"param5":timeValueArrayTwo[1],@"param6":timeValueArrayTwo[2],@"param7":timeValueArrayTwo[3],@"param8":_timeEnable1,@"param9":timeValueArrayTwo[4],@"param10":timeValueArrayTwo[5],@"param11":timeValueArrayTwo[6],@"param12":timeValueArrayTwo[7],@"param13":_timeEnable2,@"param14":timeValueArrayTwo[8],@"param15":timeValueArrayTwo[9],@"param16":timeValueArrayTwo[10],@"param17":timeValueArrayTwo[11],@"param18":_timeEnable3};
+    }
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_netDic paramarsSite:@"/api/v3/device/mixManage/set" sucessBlock:^(id content) {
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/device/mixManage/set: %@", content1);
+        [self hideProgressView];
+        
+        if (content1) {
+            if ([content1[@"result"] integerValue] != 1) {
+                if ([content1[@"result"] integerValue] == 2) {
+                    [self showToastViewWithTitle:@"参数为空"];
+                }else if ([content1[@"result"] integerValue] == 3) {
+                      [self showToastViewWithTitle:@"操作失败"];
+                }else if ([content1[@"result"] integerValue] ==4) {
+                         [self showToastViewWithTitle:@"网络超时"];
+                }else{
+                        [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",content1[@"msg"]]];
+                }
+                
+             
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [self showAlertViewWithTitle:nil message:root_CNJ_canshu_chenggong cancelButtonTitle:root_Yes];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+    }];
+    
+}
+
+
 
 -(void)showTheChoice00{
      NSArray *choiceArray;

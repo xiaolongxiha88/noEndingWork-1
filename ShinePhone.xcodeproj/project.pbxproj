@@ -53,6 +53,8 @@
 		332DDE682073766B00CC0B47 /* close_max.png in Resources */ = {isa = PBXBuildFile; fileRef = 332DDE672073766B00CC0B47 /* close_max.png */; };
 		332FD1E820B2BB9400DB9675 /* check_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 332FD1E620B2BB9300DB9675 /* check_click.png */; };
 		332FD1E920B2BB9400DB9675 /* check_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 332FD1E720B2BB9400DB9675 /* check_nor.png */; };
+		332FD1EC20B2FB6A00DB9675 /* ossNewUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1EB20B2FB6A00DB9675 /* ossNewUserList.m */; };
+		332FD1EF20B3069000DB9675 /* ossNewPlantList.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1EE20B3069000DB9675 /* ossNewPlantList.m */; };
 		3330F4D91F14B8330076C237 /* work_order_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4D81F14B8330076C237 /* work_order_icon.png */; };
 		3330F4E01F15B1E20076C237 /* search_icon_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4DE1F15B1E20076C237 /* search_icon_click.png */; };
 		3330F4E11F15B1E20076C237 /* search_icon_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4DF1F15B1E20076C237 /* search_icon_nor.png */; };
@@ -767,7 +769,6 @@
 		33E36AAF20A3F2AB00F58E6D /* LRLTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AA820A3F2AA00F58E6D /* LRLTouchView.m */; };
 		33E36AB220A3F3ED00F58E6D /* lanmu2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E36AB120A3F3ED00F58E6D /* lanmu2.png */; };
 		33E36AB420A46B5B00F58E6D /* del_LRL.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E36AB320A46B5B00F58E6D /* del_LRL.png */; };
-		33E36AB720A70AAC00F58E6D /* ossUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AB620A70AAC00F58E6D /* ossUserList.m */; };
 		33E36ABA20AC034200F58E6D /* ossIntegratorSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E36AB920AC034200F58E6D /* ossIntegratorSearch.m */; };
 		33E42E091DC9CDAE0024FFBB /* peizhi_btn_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */; };
 		33E42E0B1DC9CDB60024FFBB /* peizhi_btn_click_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 33E42E0A1DC9CDB60024FFBB /* peizhi_btn_click_2.png */; };
@@ -942,6 +943,10 @@
 		332DDE672073766B00CC0B47 /* close_max.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close_max.png; sourceTree = "<group>"; };
 		332FD1E620B2BB9300DB9675 /* check_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_click.png; sourceTree = "<group>"; };
 		332FD1E720B2BB9400DB9675 /* check_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check_nor.png; sourceTree = "<group>"; };
+		332FD1EA20B2FB6A00DB9675 /* ossNewUserList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewUserList.h; sourceTree = "<group>"; };
+		332FD1EB20B2FB6A00DB9675 /* ossNewUserList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewUserList.m; sourceTree = "<group>"; };
+		332FD1ED20B3069000DB9675 /* ossNewPlantList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewPlantList.h; sourceTree = "<group>"; };
+		332FD1EE20B3069000DB9675 /* ossNewPlantList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewPlantList.m; sourceTree = "<group>"; };
 		3330F4D81F14B8330076C237 /* work_order_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = work_order_icon.png; sourceTree = "<group>"; };
 		3330F4DE1F15B1E20076C237 /* search_icon_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon_click.png; sourceTree = "<group>"; };
 		3330F4DF1F15B1E20076C237 /* search_icon_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon_nor.png; sourceTree = "<group>"; };
@@ -2053,8 +2058,6 @@
 		33E36AA820A3F2AA00F58E6D /* LRLTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRLTouchView.m; sourceTree = "<group>"; };
 		33E36AB120A3F3ED00F58E6D /* lanmu2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lanmu2.png; sourceTree = "<group>"; };
 		33E36AB320A46B5B00F58E6D /* del_LRL.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = del_LRL.png; sourceTree = "<group>"; };
-		33E36AB520A70AAC00F58E6D /* ossUserList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossUserList.h; sourceTree = "<group>"; };
-		33E36AB620A70AAC00F58E6D /* ossUserList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossUserList.m; sourceTree = "<group>"; };
 		33E36AB820AC034200F58E6D /* ossIntegratorSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossIntegratorSearch.h; sourceTree = "<group>"; };
 		33E36AB920AC034200F58E6D /* ossIntegratorSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossIntegratorSearch.m; sourceTree = "<group>"; };
 		33E42E081DC9CDAE0024FFBB /* peizhi_btn_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = peizhi_btn_click.png; path = ../../peizhi_btn_click.png; sourceTree = "<group>"; };
@@ -4492,8 +4495,8 @@
 		33A5CE2120AFDBC200A24619 /* 用户管理 */ = {
 			isa = PBXGroup;
 			children = (
-				33E36AB520A70AAC00F58E6D /* ossUserList.h */,
-				33E36AB620A70AAC00F58E6D /* ossUserList.m */,
+				332FD1EA20B2FB6A00DB9675 /* ossNewUserList.h */,
+				332FD1EB20B2FB6A00DB9675 /* ossNewUserList.m */,
 			);
 			path = "用户管理";
 			sourceTree = "<group>";
@@ -4501,6 +4504,8 @@
 		33A5CE2220AFDBC200A24619 /* 电站管理 */ = {
 			isa = PBXGroup;
 			children = (
+				332FD1ED20B3069000DB9675 /* ossNewPlantList.h */,
+				332FD1EE20B3069000DB9675 /* ossNewPlantList.m */,
 			);
 			path = "电站管理";
 			sourceTree = "<group>";
@@ -5685,6 +5690,7 @@
 				33A5CE2520B25F3D00A24619 /* ossNewDeviceControl.m in Sources */,
 				335089281C73267A00D7AA03 /* findTableViewCell.m in Sources */,
 				338049211ED2E2550077658D /* deviceControlView.swift in Sources */,
+				332FD1EC20B2FB6A00DB9675 /* ossNewUserList.m in Sources */,
 				3343F3E01C80405D009F69BC /* UIRefreshControl+AFNetworking.m in Sources */,
 				33EFB6721C98F9B1003F336F /* ZFTranslucencePath.m in Sources */,
 				334B8F501C914A6D00798A69 /* PNLineChart.m in Sources */,
@@ -5729,7 +5735,6 @@
 				33E3696C1FDBEAAB001D947D /* MaxParameter.m in Sources */,
 				3374722B1FBAF51000AC1420 /* newEnergyMix.m in Sources */,
 				338614AC1F2606A0000F515E /* intergratorDeviceCell.swift in Sources */,
-				33E36AB720A70AAC00F58E6D /* ossUserList.m in Sources */,
 				3370793D1D910FEC00D7DA98 /* NJKWebViewProgressView.m in Sources */,
 				336F1A1D1D88E46900CD4C2B /* UIButton+WebCache.m in Sources */,
 				33528FF01C83E41D00D07889 /* listViewController.m in Sources */,
@@ -5871,6 +5876,7 @@
 				337472341FBE76F200AC1420 /* MixControl.m in Sources */,
 				334AED701CA381D0007E39F3 /* ASValuePopUpView.m in Sources */,
 				336F1A181D88E46900CD4C2B /* SDWebImageDecoder.m in Sources */,
+				332FD1EF20B3069000DB9675 /* ossNewPlantList.m in Sources */,
 				337C8D991E6545CF0013D650 /* phoneRegister2ViewController.m in Sources */,
 				33851DDE1FA08AE300AB758C /* usbToWifiControlOne.m in Sources */,
 				33E369691FDBE217001D947D /* MaxControl.m in Sources */,

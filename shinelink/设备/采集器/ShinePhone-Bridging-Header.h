@@ -34,5 +34,5 @@
 #import "ossNewDeviceList.h"
 #import "OneKeyAddForIntergrator.h"
 #import "addOssIntegratorDevice.h"
-
+#import "ossNewUserList.h"
 

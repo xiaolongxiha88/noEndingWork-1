@@ -15,4 +15,6 @@
 
 @property(nonatomic,strong)NSString *OssString;
 @property(nonatomic,strong)NSString *deviceType;
+@property(nonatomic,strong)NSString *serverID;
+
 @end

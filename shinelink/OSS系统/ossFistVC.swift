@@ -1287,7 +1287,9 @@ class ossFistVC: RootViewController {
     
     
     func gotoUserList()  {
-        let vc=addOssIntegratorDevice()
+        let vc=ossNewUserList()
+        vc.parameterDic=self.parameterListDic as! [AnyHashable : Any]?
+        vc.deviceType=2;
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
