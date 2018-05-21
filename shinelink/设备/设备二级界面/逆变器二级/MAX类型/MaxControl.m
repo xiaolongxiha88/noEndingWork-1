@@ -248,10 +248,12 @@
         [goBut setBackgroundImage:IMAGE(@"按钮2.png") forState:UIControlStateNormal];
         [goBut setTitle:root_finish forState:UIControlStateNormal];
         goBut.titleLabel.font=[UIFont systemFontOfSize: 16*HEIGHT_SIZE];
-
-            [goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
-      
-        
+        if ([_controlType isEqualToString:@"2"]) {
+             [goBut addTarget:self action:@selector(finishSet1) forControlEvents:UIControlEventTouchUpInside];
+        }else{
+             [goBut addTarget:self action:@selector(finishSet) forControlEvents:UIControlEventTouchUpInside];
+        }
+   
         [_scrollView addSubview:goBut];
     }
 }
@@ -351,103 +353,101 @@
 
 
 //OSS
-//-(void)finishSet1{
-//
-//    _commandValue1=@"";
-//
-//
-//    if(_slider){
-//        NSString *S1=[NSString stringWithFormat:@"%.0f",_slider.value];
-//        _commandValue=[NSString stringWithString:S1];
-//        _paramId=@"pv_active_p_rate";
-//    }else if (_slider1){
-//        NSString *S2=[NSString stringWithFormat:@"%.0f",_slider1.value];
-//        _commandValue=[NSString stringWithString:S2];
-//        _paramId=@"pv_reactive_p_rate";
-//    }else if (_slider2){
-//        NSString *S3=[NSString stringWithFormat:@"%.2f",_slider2.value];
-//        _commandValue=[NSString stringWithString:S3];
-//        _paramId=@"pv_power_factor";
-//    }
-//
-//    if (_textField1) {
-//        NSString *textValue= [NSString stringWithFormat:@"%.1f",[[_textField1 text] floatValue]];
-//
-//        _commandValue=textValue;
-//        if ([_type isEqualToString:@"5"]) {
-//            _paramId=@"pv_grid_voltage_high";
-//        }else if ([_type isEqualToString:@"6"]){
-//            _paramId=@"pv_grid_voltage_low";
-//        }
-//
-//    }
-//
-//    if (_textField2) {
-//        NSString *textValue= [NSString stringWithFormat:@"%.2f",[[_textField2 text] floatValue]];
-//
-//        _commandValue=textValue;
-//
-//        _paramId=@"pv_power_factor";
-//    }
-//
-//    if (_textField3) {
-//        NSString *textValue= [NSString stringWithFormat:@"%d",[[_textField3 text] intValue]];
-//        _commandValue=textValue;
-//        NSString *textValue1= [NSString stringWithFormat:@"%d",[[_textField4 text] intValue]];
-//        _commandValue1=textValue1;
-//
-//        _paramId=@"set_any_reg";
-//    }
-//
-//    if (_commandValue==nil || _commandValue==NULL||([_commandValue isEqual:@""] )){
-//        [self showToastViewWithTitle:@"请填写设置参数"];
-//        return;
-//    }
-//
-//    [self showProgressView];
-//    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"inverterSn":_PvSn,@"paramId":_paramId,@"param_1":_commandValue,@"param_2":_commandValue1} paramarsSite:@"/api/v1/deviceSet/set/inverter" sucessBlock:^(id content) {
-//        //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
-//        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-//        NSLog(@"inverterSet: %@", content1);
-//        [self hideProgressView];
-//
-//        if (content1) {
-//            if ([content1[@"result"] integerValue] != 1) {
-//                if ([content1[@"result"] integerValue] ==0) {
-//                    [self showAlertViewWithTitle:nil message:root_xitong_cuoWu cancelButtonTitle:root_Yes];
-//
-//                }else if ([content1[@"result"] integerValue] ==2) {
-//                    [self showAlertViewWithTitle:nil message:root_CNJ_fuwuqi_cuowu cancelButtonTitle:root_Yes];
-//                }else if ([content1[@"result"] integerValue] ==3) {
-//                    [self showAlertViewWithTitle:nil message:root_CNJ_buzaixian cancelButtonTitle:root_Yes];
-//                }else if ([content1[@"result"] integerValue] ==4) {
-//                    [self showAlertViewWithTitle:nil message:root_CNJ_xuliehao_kong cancelButtonTitle:root_Yes];
-//                }else if ([content1[@"result"] integerValue] ==5) {
-//                    [self showAlertViewWithTitle:nil message:root_CNJ_caijiqi_buzai cancelButtonTitle:root_Yes];
-//                }else if ([content1[@"result"] integerValue] ==6) {
-//                    [self showAlertViewWithTitle:nil message:root_CNJ_leixing_buzai cancelButtonTitle:root_Yes];
-//                }else if ([content1[@"result"] integerValue] ==7) {
-//                    [self showAlertViewWithTitle:nil message:root_CNJ_canshu_kong cancelButtonTitle:root_Yes];
-//                }else if ([content1[@"result"] integerValue] ==8) {
-//                    [self showAlertViewWithTitle:nil message:root_CNJ_canshu_buzai_fanwei cancelButtonTitle:root_Yes];
-//                }else if ([content1[@"result"] integerValue] ==9) {
-//                    [self showAlertViewWithTitle:nil message:root_CNJ_shijian_budui cancelButtonTitle:root_Yes];
-//                }else if ([content1[@"result"] integerValue] ==12) {
-//                    [self showAlertViewWithTitle:nil message:@"远程设置错误" cancelButtonTitle:root_Yes];
-//                }
-//                [self.navigationController popViewControllerAnimated:YES];
-//            }else{
-//                [self showAlertViewWithTitle:nil message:root_CNJ_canshu_chenggong cancelButtonTitle:root_Yes];
-//                [self.navigationController popViewControllerAnimated:YES];
-//            }
-//        }
-//    } failure:^(NSError *error) {
-//        [self hideProgressView];
-//        [self showToastViewWithTitle:root_Networking];
-//
-//    }];
-//
-//}
+-(void)finishSet1{
+
+    if(_slider){
+        NSString *S1=[NSString stringWithFormat:@"%.0f",_slider.value];
+        _commandValue=[NSString stringWithString:S1];
+        _paramId=@"max_active_p_rate";
+    }else if (_slider1){
+        NSString *S2=[NSString stringWithFormat:@"%.0f",_slider1.value];
+        _commandValue=[NSString stringWithString:S2];
+        _paramId=@"max_reactive_p_rate";
+    }else if (_slider2){
+        NSString *S3=[NSString stringWithFormat:@"%.2f",_slider2.value];
+        _commandValue=[NSString stringWithString:S3];
+        _paramId=@"max_power_factor";
+    }
+    
+    if (_textField1) {
+        NSString *textValue= [NSString stringWithFormat:@"%.1f",[[_textField1 text] floatValue]];
+        
+        _commandValue=textValue;
+        if ([_type isEqualToString:@"5"]) {
+            _paramId=@"max_grid_voltage_high";
+        }else if ([_type isEqualToString:@"6"]){
+            _paramId=@"max_grid_voltage_low";
+        }
+        
+    }
+    
+    if (_textField2) {
+        NSString *textValue= [NSString stringWithFormat:@"%.2f",[[_textField2 text] floatValue]];
+        
+        _commandValue=textValue;
+        
+        _paramId=@"max_power_factor";
+    }
+    
+    _commandValue1=@"";
+    if (_textField3) {
+        NSString *textValue= [NSString stringWithFormat:@"%d",[[_textField3 text] intValue]];
+        _commandValue=textValue;
+        NSString *textValue1= [NSString stringWithFormat:@"%d",[[_textField4 text] intValue]];
+        _commandValue1=textValue1;
+        
+        _paramId=@"set_any_reg";
+    }
+    
+    
+    NSDictionary *netDic=@{@"deviceSn":_PvSn,@"type":_paramId,@"param1":_commandValue,@"param2":_commandValue1,@"param3":@"",@"param4":@"",@"serverId":_serverID};
+    
+    
+
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:netDic paramarsSite:@"/api/v3/device/inverterManage/setMax" sucessBlock:^(id content) {
+        //NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/device /inverterManage/setMax: %@", content1);
+        [self hideProgressView];
+
+        if (content1) {
+            if ([content1[@"result"] integerValue] != 1) {
+                if ([content1[@"result"] integerValue] ==0) {
+                    [self showAlertViewWithTitle:nil message:root_xitong_cuoWu cancelButtonTitle:root_Yes];
+
+                }else if ([content1[@"result"] integerValue] ==2) {
+                    [self showAlertViewWithTitle:nil message:@"参数为空" cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==3) {
+                    [self showAlertViewWithTitle:nil message:@"操作失败" cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==4) {
+                    [self showAlertViewWithTitle:nil message:@"网络超时" cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==5) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_caijiqi_buzai cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==6) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_leixing_buzai cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==7) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_canshu_kong cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==8) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_canshu_buzai_fanwei cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==9) {
+                    [self showAlertViewWithTitle:nil message:root_CNJ_shijian_budui cancelButtonTitle:root_Yes];
+                }else if ([content1[@"result"] integerValue] ==12) {
+                    [self showAlertViewWithTitle:nil message:@"远程设置错误" cancelButtonTitle:root_Yes];
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [self showAlertViewWithTitle:nil message:root_CNJ_canshu_chenggong cancelButtonTitle:root_Yes];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+
+    }];
+
+}
 
 
 -(void)pickDate{
@@ -501,7 +501,7 @@
     _commandValue= self.currentDay;
     _paramId=@"max_sys_year";
     if ([_controlType isEqualToString:@"2"]) {
-    //    [self finishSet1];
+       [self finishSet1];
     }else{
         [self finishSet];
     }
@@ -533,7 +533,7 @@
             _commandValue=@"0101";
             _paramId=@"max_cmd_on_off";
             if ([_controlType isEqualToString:@"2"]) {
-           //     [self finishSet1];
+       [self finishSet1];
             }else{
                 [self finishSet];
             }
@@ -542,7 +542,7 @@
             _commandValue=@"0000";
             _paramId=@"max_cmd_on_off";
             if ([_controlType isEqualToString:@"2"]) {
-           //     [self finishSet1];
+            [self finishSet1];
             }else{
                 [self finishSet];
             }

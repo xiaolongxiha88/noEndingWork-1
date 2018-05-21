@@ -37,11 +37,12 @@
       self.dataArray =[NSMutableArray arrayWithObjects:root_NBQ_kaiguan,root_NBQ_youxiao_gonglv,root_NBQ_wuxiao_gonglv,root_NBQ_PF,root_NBQ_shijian,root_NBQ_shidian_dianya,root_shezhi_shidian_dianya_xiaxian,nil];
     if ([_controlType isEqualToString:@"2"]) {
         [_dataArray addObject:@"高级设置"];
+        _isRememberPassword=YES;
     }
     
-//    if ([_invType isEqualToString:@"1"]) {        //MAX
-//         self.dataArray =[NSMutableArray arrayWithObjects:root_NBQ_kaiguan,nil];
-//    }
+    if ([_invType isEqualToString:@"1"] && [_controlType isEqualToString:@"2"]) {        //MAX
+         self.dataArray =[NSMutableArray arrayWithObjects:root_NBQ_kaiguan,@"高级设置",nil];
+    }
     
     
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -119,16 +120,26 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
-        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
-        return;
+    if (![_controlType isEqualToString:@"2"]){
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+            [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+            return;
+        }
     }
+ 
     
     if ([_invType isEqualToString:@"1"]) {
         MaxControl *go=[[MaxControl alloc]init];
         go.PvSn=_PvSn;
         go.type=[NSString stringWithFormat:@"%ld",(long)indexPath.row];
+        if ([_controlType isEqualToString:@"2"]) {
+                   go.controlType=_controlType;
+             go.serverID=_serverID;
+            if (indexPath.row==1) {
+                    go.type=@"7";
+            }
+        
+        }
         if(_isRememberPassword){
             
             [self.navigationController pushViewController:go animated:YES];

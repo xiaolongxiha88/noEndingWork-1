@@ -14,4 +14,6 @@
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property (nonatomic, strong) NSString *invType;     // 1是MAX
 
+@property (nonatomic, strong) NSString* serverID;
+
 @end

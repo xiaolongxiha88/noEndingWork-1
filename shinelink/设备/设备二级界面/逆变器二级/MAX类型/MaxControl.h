@@ -13,4 +13,6 @@
 @property (nonatomic, strong) NSString *PvSn;
 @property (nonatomic, strong) NSString *controlType;     //OSS是2
 
+@property (nonatomic, strong) NSString* serverID;
+
 @end
