@@ -101,56 +101,23 @@
     
     [self initTheNetPageAndValue];
     
-    if (_deviceType==1) {
+  
         if (_parameterDic.allKeys.count>0) {
-            _NetForParameterArray=_parameterDic[@"dm_invapp"];
+            _NetForParameterArray=_parameterDic[@"dm_plantapp"];
         }
         
-        _oneParaArray=@[@"状态",@"额定功率",@"今日发电量",@"累计发电量",@"用户名",@"电站名",@"当前功率"];
-        _upOrDownNetValueArray=@[@[@"1",@"2"],@[@"3",@"4"],@[@"5",@"6"],@[@"7",@"8"],@[@"9",@"10"],@[@"11",@"12"],@[@"13",@"14"]];
+        _oneParaArray=@[@"建站日期",@"时区",@"设备数量",@"设计功率",@"今日发电量",@"累计发电量"];
+        _upOrDownNetValueArray=@[@[@"1",@"2"],@[@"3",@"4"],@[@"5",@"6"],@[@"7",@"8"],@[@"9",@"10"],@[@"11",@"12"]];
         
         _oldForParameterArray=@[@"5",@"4",@"9",@"11",@"12",@"13",@"10",@"3",@"8"];
         
-        _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":root_oss_506_leiXing,@"2":@"别名      ",@"3":@"安装商",@"4":@"所属电站    ",@"5":@"所属用户      ",@"6":root_oss_507_chengShi,@"7":@"采集器    ",@"8":root_oss_508_zuiHouGenXinShiJian,@"9":root_oss_505_Status,@"10":@"额定功率",@"11":@"今日发电量",@"12":@"累计发电量",@"13":@"当前功率"};
-        _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"type",@"2":@"alias",@"3":@"iCode",@"4":@"plantName",@"5":@"accountName",@"6":@"cityId",@"7":@"datalog_sn",@"8":@"time",@"9":@"status",@"10":@"nominal_power",@"11":@"etoday",@"12":@"etotal",@"13":@"pac"};
+        _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12"];
+        _forChoiceParameterDic=@{@"0":@"电站名称",@"1":@"分组名称",@"2":@"别名      ",@"3":@"城市",@"4":@"时区",@"5":@"建站日期      ",@"6":@"设备数量",@"7":@"设计功率  ",@"8":@"今日发电量",@"9":@"累计发电量",@"10":@"日发电量下限值",@"11":@"安装商",@"12":@"资金收益"};
+        _numForNetKeyDic=@{@"0":@"plantName",@"1":@"groupId",@"2":@"alias",@"3":@"cityId",@"4":@"timezone",@"5":@"creatDate",@"6":@"deviceCount",@"7":@"nominal_power",@"8":@"etoday",@"9":@"etotal",@"10":@"lowEnergy",@"11":@"iCode",@"12":@"formula_money"};
         
-        _cellNameArray2=@[@"序列号",root_oss_505_Status,@"当前功率",@"今日发电"];     //列表的另一种展示
-        _NetForParameterNew22Array=@[@"0",@"9",@"13",@"11"];
-        
-    }else if (_deviceType==2) {               //储能机
-        if (_parameterDic.allKeys.count>0) {
-            _NetForParameterArray=_parameterDic[@"dm_storageapp"];
-        }
-        
-        
-        _oldForParameterArray=@[@"4",@"3",@"7",@"8",@"9",@"2",@"6"];
-        
-        _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":root_oss_508_zuiHouGenXinShiJian,@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":root_oss_507_chengShi};
-        _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"alias",@"2":@"iCode",@"3":@"plantName",@"4":@"accountName",@"5":@"datalog_sn",@"6":@"time",@"7":@"status",@"8":@"charge",@"9":@"discharge",@"10":@"cityId"};
-        
-        _cellNameArray2=@[@"序列号",root_oss_505_Status,@"充电",@"放电"];     //列表的另一种展示
+        _cellNameArray2=@[@"电站名称",@"设计功率",@"今日发电量",@"累计发电量"];     //列表的另一种展示
         _NetForParameterNew22Array=@[@"0",@"7",@"8",@"9"];
         
-        
-    }else if (_deviceType==3) {
-        if (_parameterDic.allKeys.count>0) {
-            _NetForParameterArray=_parameterDic[@"dm_mixapp"];
-        }
-        
-        _oldForParameterArray=@[@"4",@"3",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"2",@"6"];
-        
-        _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",@"14"];
-        _forChoiceParameterDic=@{@"0":@"序列号    ",@"1":@"别名      ",@"2":@"安装商",@"3":@"所属电站    ",@"4":@"所属用户      ",@"5":@"采集器    ",@"6":root_oss_508_zuiHouGenXinShiJian,@"7":root_oss_505_Status,@"8":@"充电",@"9":@"放电",@"10":@"今日发电量",@"11":@"总输出电量",@"12":@"当前功率",@"13":@"额定功率",@"14":root_oss_507_chengShi};
-        
-        _numForNetKeyDic=@{@"0":@"deviceSn",@"1":@"alias",@"2":@"iCode",@"3":@"plantName",@"4":@"accountName",@"5":@"datalog_sn",@"6":@"time",@"7":@"status",@"8":@"pcharge",@"9":@"pdischarge",@"10":@"etoday",@"11":@"etotal",@"12":@"pac",@"13":@"pMax",@"14":@"cityId"};
-        
-        _cellNameArray2=@[@"序列号",root_oss_505_Status,@"充电",@"放电"];     //列表的另一种展示
-        _NetForParameterNew22Array=@[@"0",@"7",@"8",@"9"];
-        
-        
-    }
     
     
     [self changeTheParameter];

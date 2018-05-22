@@ -10,4 +10,7 @@
 
 @interface ossNewUserEdit : RootViewController
 
+@property (nonatomic, strong) NSString* serverId;
+@property (nonatomic, strong) NSString* userId;
+
 @end

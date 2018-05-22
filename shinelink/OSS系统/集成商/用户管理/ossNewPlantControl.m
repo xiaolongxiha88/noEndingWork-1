@@ -8,6 +8,8 @@
 
 #import "ossNewPlantControl.h"
 #import "ossNewUserEdit.h"
+#import "DTKDropdownMenuView.h"
+#import "ShinePhone-Swift.h"
 
 @interface ossNewPlantControl ()
 @property (nonatomic, strong) NSDictionary* allDic;
@@ -19,6 +21,7 @@
 
 @property (nonatomic, strong) NSArray* lableNameKeyArray;
 @property (nonatomic, strong) UIScrollView *ScrollView;
+@property (nonatomic, strong) DTKDropdownMenuView *rightMenuView;
 @end
 
 @implementation ossNewPlantControl
@@ -32,6 +35,8 @@
     [super viewDidLoad];
     
     _allDic=[NSDictionary new];
+    
+     [self addRightItem];
     
     [self initData];
     [self initUI];
@@ -149,11 +154,61 @@
     
 }
 
+
+- (void)addRightItem
+{
+    DTKDropdownItem *item0 = [DTKDropdownItem itemWithTitle:@"返回首页" iconName:@"DTK_jiangbei" callBack:^(NSUInteger index, id info) {
+        NSLog(@"rightItem%lu",(unsigned long)index);
+        
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[ossFistVC class]])
+            {
+                ossFistVC *A =(ossFistVC *)controller;
+                [self.navigationController popToViewController:A animated:YES];
+                
+            }
+            
+        }
+        
+    }];
+    
+    
+    //    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:@"设备分配" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
+    //        NSLog(@"rightItem%lu",(unsigned long)index);
+    //
+    //    }];
+    
+    _rightMenuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0] icon:@"add@2x.png"];
+    //  menuView.intrinsicContentSize=CGSizeMake(44.f, 44.f);
+    // menuView.translatesAutoresizingMaskIntoConstraints=true;
+    _rightMenuView.dropWidth =150.f;
+    _rightMenuView.titleFont = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+    _rightMenuView.textColor =COLOR(102, 102, 102, 1);
+    _rightMenuView.cellSeparatorColor =COLOR(229, 229, 229, 1);
+    _rightMenuView.textFont = [UIFont systemFontOfSize:14.f];
+    _rightMenuView.animationDuration = 0.2f;
+    
+    // _rightMenuView.userInteractionEnabled=YES;
+    
+    if (deviceSystemVersion>=11.0) {
+        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd  target:self.rightMenuView action:@selector(pullTheTableView)];
+        self.navigationItem.rightBarButtonItem = rightButton;
+        
+    }else{
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:_rightMenuView];
+    }
+    
+    
+}
+
+
+
 -(void)goToOtherView:(UIButton*)button{
     NSInteger tagNum=button.tag-3000;
     if (tagNum==0) {
         ossNewUserEdit *deviceView=[[ossNewUserEdit alloc]init];
-
+        deviceView.serverId=_serverId;
+        deviceView.userId=_userId;
         [self.navigationController pushViewController:deviceView animated:YES];
         
     }
@@ -290,11 +345,13 @@
                     if (ResultValue<(resultArray.count+2)) {
                         [self showToastViewWithTitle:resultArray[ResultValue-2]];
                     }
+                }else if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"登录超时"];
+                }else{
+                       [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
                 }
              
-                if (ResultValue==22) {
-                    [self showToastViewWithTitle:@"登录超时"];
-                }
+              
                 // [self showToastViewWithTitle:firstDic[@"msg"]];
                 
             }
