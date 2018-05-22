@@ -836,12 +836,6 @@
         
         
 
-//            UILabel *lable=[self.view viewWithTag:3400+100];
-//            if ([lable.text isEqualToString:@""] || lable.text==nil) {
-//                [self showToastViewWithTitle:@"请选择电站所属用户"];
-//                return;
-//            }
-
     _twoDic=[NSMutableDictionary new];
         for (int i=0; i<alertArray.count; i++) {
             if (i==0 || i==4) {

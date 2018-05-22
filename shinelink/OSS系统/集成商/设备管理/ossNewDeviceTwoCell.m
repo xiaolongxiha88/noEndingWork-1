@@ -58,7 +58,8 @@
             UILabel *lableL1 = [[UILabel alloc] initWithFrame:CGRectMake(WW*0.28, H1+H_all*i,WW, H1)];
             lableL1.textColor = COLOR(102, 102, 102, 1);
             lableL1.textAlignment=NSTextAlignmentLeft;
-              [self changeTheLableText:lableL1 nameString:_nameValueArray[0+2*i] lableNameString:nameArray[0+2*i]];
+            
+              [self changeTheLableText:lableL1 nameString:[NSString stringWithFormat:@"%@",_nameValueArray[0+2*i]]lableNameString:nameArray[0+2*i]];
           //  lableL1.text=_nameValueArray[0+2*i];
             lableL1.tag=2000+0+2*i;
             lableL1.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
@@ -76,8 +77,8 @@
                 UILabel *lableR1 = [[UILabel alloc] initWithFrame:CGRectMake(WW*0.28+WW, H1+H_all*i,WW, H1)];
                 lableR1.textColor = COLOR(102, 102, 102, 1);
                 lableR1.textAlignment=NSTextAlignmentLeft;
-               // lableR1.text=_nameValueArray[1+2*i];
-                    [self changeTheLableText:lableR1 nameString:_nameValueArray[1+2*i] lableNameString:nameArray[1+2*i]];
+           
+                    [self changeTheLableText:lableR1 nameString:[NSString stringWithFormat:@"%@",_nameValueArray[1+2*i]] lableNameString:nameArray[1+2*i]];
                   lableR1.tag=2000+1+2*i;
                 lableR1.font = [UIFont systemFontOfSize:11*HEIGHT_SIZE];
                 [View2 addSubview:lableR1];
@@ -88,10 +89,10 @@
     }else{
         for (int i=0; i<Num; i++) {
                UILabel *lableR=[self.contentView viewWithTag:2000+0+2*i];
-            [self changeTheLableText:lableR nameString:_nameValueArray[0+2*i] lableNameString:nameArray[0+2*i]];
+            [self changeTheLableText:lableR nameString:[NSString stringWithFormat:@"%@",_nameValueArray[0+2*i]] lableNameString:nameArray[0+2*i]];
             
                UILabel *lableR1=[self.contentView viewWithTag:2000+1+2*i];
-                  [self changeTheLableText:lableR1 nameString:_nameValueArray[1+2*i] lableNameString:nameArray[1+2*i]];
+                  [self changeTheLableText:lableR1 nameString:[NSString stringWithFormat:@"%@",_nameValueArray[1+2*i]] lableNameString:nameArray[1+2*i]];
         }
         
     }

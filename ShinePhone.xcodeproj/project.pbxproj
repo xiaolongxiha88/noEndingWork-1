@@ -57,6 +57,10 @@
 		332FD1EF20B3069000DB9675 /* ossNewPlantList.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1EE20B3069000DB9675 /* ossNewPlantList.m */; };
 		332FD1F220B3B35200DB9675 /* ossNewPlantControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1F120B3B35200DB9675 /* ossNewPlantControl.m */; };
 		332FD1F520B3C34700DB9675 /* ossNewUserEdit.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1F420B3C34700DB9675 /* ossNewUserEdit.m */; };
+		332FD1FA20B4301600DB9675 /* ossNewUserSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1F920B4301600DB9675 /* ossNewUserSearch.m */; };
+		332FD1FD20B439AD00DB9675 /* ossNewPlantSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1FC20B439AD00DB9675 /* ossNewPlantSearch.m */; };
+		332FD20020B4422C00DB9675 /* ossNewPlantControl2.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1FF20B4422C00DB9675 /* ossNewPlantControl2.m */; };
+		332FD20320B4438E00DB9675 /* ossNewPlantEdit.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD20220B4438E00DB9675 /* ossNewPlantEdit.m */; };
 		3330F4D91F14B8330076C237 /* work_order_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4D81F14B8330076C237 /* work_order_icon.png */; };
 		3330F4E01F15B1E20076C237 /* search_icon_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4DE1F15B1E20076C237 /* search_icon_click.png */; };
 		3330F4E11F15B1E20076C237 /* search_icon_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4DF1F15B1E20076C237 /* search_icon_nor.png */; };
@@ -953,6 +957,14 @@
 		332FD1F120B3B35200DB9675 /* ossNewPlantControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewPlantControl.m; sourceTree = "<group>"; };
 		332FD1F320B3C34700DB9675 /* ossNewUserEdit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewUserEdit.h; sourceTree = "<group>"; };
 		332FD1F420B3C34700DB9675 /* ossNewUserEdit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewUserEdit.m; sourceTree = "<group>"; };
+		332FD1F820B4301600DB9675 /* ossNewUserSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewUserSearch.h; sourceTree = "<group>"; };
+		332FD1F920B4301600DB9675 /* ossNewUserSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewUserSearch.m; sourceTree = "<group>"; };
+		332FD1FB20B439AD00DB9675 /* ossNewPlantSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewPlantSearch.h; sourceTree = "<group>"; };
+		332FD1FC20B439AD00DB9675 /* ossNewPlantSearch.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewPlantSearch.m; sourceTree = "<group>"; };
+		332FD1FE20B4422C00DB9675 /* ossNewPlantControl2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewPlantControl2.h; sourceTree = "<group>"; };
+		332FD1FF20B4422C00DB9675 /* ossNewPlantControl2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewPlantControl2.m; sourceTree = "<group>"; };
+		332FD20120B4438E00DB9675 /* ossNewPlantEdit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewPlantEdit.h; sourceTree = "<group>"; };
+		332FD20220B4438E00DB9675 /* ossNewPlantEdit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewPlantEdit.m; sourceTree = "<group>"; };
 		3330F4D81F14B8330076C237 /* work_order_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = work_order_icon.png; sourceTree = "<group>"; };
 		3330F4DE1F15B1E20076C237 /* search_icon_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon_click.png; sourceTree = "<group>"; };
 		3330F4DF1F15B1E20076C237 /* search_icon_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon_nor.png; sourceTree = "<group>"; };
@@ -4507,6 +4519,8 @@
 				332FD1F120B3B35200DB9675 /* ossNewPlantControl.m */,
 				332FD1F320B3C34700DB9675 /* ossNewUserEdit.h */,
 				332FD1F420B3C34700DB9675 /* ossNewUserEdit.m */,
+				332FD1F820B4301600DB9675 /* ossNewUserSearch.h */,
+				332FD1F920B4301600DB9675 /* ossNewUserSearch.m */,
 			);
 			path = "用户管理";
 			sourceTree = "<group>";
@@ -4516,6 +4530,12 @@
 			children = (
 				332FD1ED20B3069000DB9675 /* ossNewPlantList.h */,
 				332FD1EE20B3069000DB9675 /* ossNewPlantList.m */,
+				332FD1FB20B439AD00DB9675 /* ossNewPlantSearch.h */,
+				332FD1FC20B439AD00DB9675 /* ossNewPlantSearch.m */,
+				332FD1FE20B4422C00DB9675 /* ossNewPlantControl2.h */,
+				332FD1FF20B4422C00DB9675 /* ossNewPlantControl2.m */,
+				332FD20120B4438E00DB9675 /* ossNewPlantEdit.h */,
+				332FD20220B4438E00DB9675 /* ossNewPlantEdit.m */,
 			);
 			path = "电站管理";
 			sourceTree = "<group>";
@@ -5576,6 +5596,7 @@
 				3343F3AA1C803DC9009F69BC /* BaseRequest.m in Sources */,
 				335881311CB66E460068EFAD /* qualityCell.m in Sources */,
 				335047201C9BA6F600BF8683 /* EGOCache.m in Sources */,
+				332FD1FD20B439AD00DB9675 /* ossNewPlantSearch.m in Sources */,
 				338A528E1F28961F000611F3 /* configWifiSViewController.m in Sources */,
 				3376A6EA1FD8D2320043FC53 /* usbToWifiLoginOSS.m in Sources */,
 				336F1A1E1D88E46900CD4C2B /* UIImage+GIF.m in Sources */,
@@ -5594,6 +5615,7 @@
 				332BD6A8206C8B8E00FFD501 /* DeviceBatteryView.m in Sources */,
 				335EE8F71F011138005F098A /* ossQuetionDetail.m in Sources */,
 				3376A6DE1FD6AEF60043FC53 /* usbToWifiWarnListCell.m in Sources */,
+				332FD1FA20B4301600DB9675 /* ossNewUserSearch.m in Sources */,
 				336F03FF1F04D59B00DE7CD7 /* orderCellOne.m in Sources */,
 				33AF3D281D8E67210007D6C2 /* ProgressHUD.m in Sources */,
 				3387B8BB1FB295B40073FB35 /* payView1.m in Sources */,
@@ -5614,6 +5636,7 @@
 				3367CB501C86806700EF460C /* NSLayoutConstraint+MASDebugAdditions.m in Sources */,
 				3389648B1E5C1D2000A7B1AE /* quickRegister2ViewController.m in Sources */,
 				336F1A141D88E46900CD4C2B /* MKAnnotationView+WebCache.m in Sources */,
+				332FD20320B4438E00DB9675 /* ossNewPlantEdit.m in Sources */,
 				33742B3C1ED51BFF0015F2EA /* datalogerControlView.swift in Sources */,
 				337079191D8FC78500D7DA98 /* InfoCenterViewController.m in Sources */,
 				33C5E2291D4AFB1C00A0DB00 /* moreBigImage.m in Sources */,
@@ -5678,6 +5701,7 @@
 				335431BA1CCF549000CEAFFC /* SNLocationManager.m in Sources */,
 				336F1A1A1D88E46900CD4C2B /* SDWebImageDownloaderOperation.m in Sources */,
 				3370EBD31F45874B00F37149 /* SPF5000Head.m in Sources */,
+				332FD20020B4422C00DB9675 /* ossNewPlantControl2.m in Sources */,
 				336E03F51EC9411B0034BC86 /* ossFistVC.swift in Sources */,
 				33780096201C65B3008E5C00 /* CustomProgress.m in Sources */,
 				3319E08C1D5AFB39006623A9 /* LWLoadingAnimationView.m in Sources */,

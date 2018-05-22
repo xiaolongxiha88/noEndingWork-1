@@ -53,21 +53,21 @@
             if (name==nil || [name isEqualToString:@""] || [name isEqualToString:@"(null)"]) {
                 lableR.text=@"---";
             }else{
-                lableR.text=_nameValueArray[i];
+                lableR.text=[NSString stringWithFormat:@"%@",_nameValueArray[i]];
             }
             if ([nameArray[i] isEqualToString:root_oss_505_Status]) {
-                lableR.text=[self changeTheDeviceStatue:_nameValueArray[i]];
-                lableR.textColor =[self changeTheDeviceStatueColor:_nameValueArray[i]];
+                lableR.text=[self changeTheDeviceStatue:[NSString stringWithFormat:@"%@",_nameValueArray[i]]];
+                lableR.textColor =[self changeTheDeviceStatueColor:[NSString stringWithFormat:@"%@",_nameValueArray[i]]];
             }
             if ([nameArray[i] isEqualToString:root_oss_506_leiXing]) {
-                NSString*num=_nameValueArray[i];
+                NSString*num=[NSString stringWithFormat:@"%@",_nameValueArray[i]];
                 lableR.text=deviceTypeArray[[num integerValue]];
             }
             if ([nameArray[i] isEqualToString:root_oss_507_chengShi]) {
-                if ([_nameValueArray[i] isEqualToString:@"-1"]) {
+                if ([[NSString stringWithFormat:@"%@",_nameValueArray[i]] isEqualToString:@"-1"]) {
                     lableR.text=@"";
                 }else{
-                    NSString*num=_nameValueArray[i];
+                    NSString*num=[NSString stringWithFormat:@"%@",_nameValueArray[i]];
                     lableR.text=deviceTypeArray[[num integerValue]];
                 }
               
@@ -91,21 +91,21 @@
             if (name==nil || [name isEqualToString:@""] || [name isEqualToString:@"(null)"]) {
                 lableR.text=@"---";
             }else{
-                lableR.text=_nameValueArray[i];
+                lableR.text=[NSString stringWithFormat:@"%@",_nameValueArray[i]];
             }
             if ([nameArray[i] isEqualToString:root_oss_505_Status]) {
-                lableR.text=[self changeTheDeviceStatue:_nameValueArray[i]];
-                lableR.textColor =[self changeTheDeviceStatueColor:_nameValueArray[i]];
+                lableR.text=[self changeTheDeviceStatue:[NSString stringWithFormat:@"%@",_nameValueArray[i]]];
+                lableR.textColor =[self changeTheDeviceStatueColor:[NSString stringWithFormat:@"%@",_nameValueArray[i]]];
             }
             if ([nameArray[i] isEqualToString:root_oss_506_leiXing]) {
           //      NSString*num=_nameValueArray[i];
                 lableR.text=deviceTypeArray[_deviceType];
             }
             if ([nameArray[i] isEqualToString:root_oss_507_chengShi]) {
-                if ([_nameValueArray[i] isEqualToString:@"-1"]) {
+                if ([[NSString stringWithFormat:@"%@",_nameValueArray[i]] isEqualToString:@"-1"]) {
                     lableR.text=@"";
                 }else{
-                    NSString*num=_nameValueArray[i];
+                    NSString*num=[NSString stringWithFormat:@"%@",_nameValueArray[i]];
                     lableR.text=deviceTypeArray[[num integerValue]];
                 }
                 

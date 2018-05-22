@@ -1,16 +1,15 @@
 //
-//  ossIntegratorSearch.m
+//  ossNewPlantSearch.m
 //  ShinePhone
 //
-//  Created by sky on 2018/5/16.
+//  Created by sky on 2018/5/22.
 //  Copyright © 2018年 sky. All rights reserved.
 //
 
-#import "ossIntegratorSearch.h"
+#import "ossNewPlantSearch.h"
 #import "ZJBLStoreShopTypeAlert.h"
 
-@interface ossIntegratorSearch ()
-
+@interface ossNewPlantSearch ()
 @property (nonatomic, strong) NSArray *unitNameArray;
 @property (nonatomic, strong) NSArray *unitTypeArray;
 @property (nonatomic, strong)NSMutableArray *textFieldMutableArray;
@@ -31,17 +30,18 @@
 @property (nonatomic, strong) NSMutableDictionary*deviceNetDic;
 
 @property (nonatomic, strong)UIButton*searchButton;
-
 @end
 
-@implementation ossIntegratorSearch
+@implementation ossNewPlantSearch
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
-       _textFieldMutableArray=[NSMutableArray new];
+    _textFieldMutableArray=[NSMutableArray new];
     
     if (!_scrollView) {
         _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, ScreenHeight)];
@@ -51,19 +51,19 @@
     }
     
     _searchButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-
-//    _searchButton.layer.borderWidth=0.8*HEIGHT_SIZE;
-//    _searchButton.layer.cornerRadius=40*HEIGHT_SIZE/2.0;
-//    _searchButton.layer.borderColor=COLOR(222, 222, 222, 1).CGColor;
+    
+    //    _searchButton.layer.borderWidth=0.8*HEIGHT_SIZE;
+    //    _searchButton.layer.cornerRadius=40*HEIGHT_SIZE/2.0;
+    //    _searchButton.layer.borderColor=COLOR(222, 222, 222, 1).CGColor;
     [_searchButton setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
     [_searchButton setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
     [_searchButton setTitle:@"搜索" forState:UIControlStateNormal];
     //_searchButton.titleLabel.tintColor=COLOR(51, 51, 51, 1);
-  //  [_searchButton setTitleColor:COLOR(51, 51, 51, 1) forState:UIControlStateNormal];
+    //  [_searchButton setTitleColor:COLOR(51, 51, 51, 1) forState:UIControlStateNormal];
     _searchButton.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
     [_searchButton addTarget:self action:@selector(goToSearch) forControlEvents:UIControlEventTouchUpInside];
     [_scrollView addSubview:_searchButton];
-  
+    
     _HH=40*HEIGHT_SIZE;
     [self initSearchType];
 }
@@ -81,41 +81,34 @@
 }
 
 -(void)initDeviceUI{
-    self.title=@"搜索设备";
-   _deviceNameArray=@[@"逆变器",@"储能机",@"混储一体机"];
+    self.title=@"搜索电站";
+    _deviceNameArray=@[@"逆变器",@"储能机",@"混储一体机"];
     _deviceNameIdDic=@{_deviceNameArray[0]:@"1",_deviceNameArray[1]:@"2",_deviceNameArray[2]:@"3",};
     _H_All=0;
     if (_oldSearchValueArray.count==0) {
-        _oldValueArray=[NSMutableArray arrayWithArray:@[@"逆变器",@"所有",@"",@"",@"序列号",@""]];
+        _oldValueArray=[NSMutableArray arrayWithArray:@[@"",@"",@"",@"",@""]];
     }else{
         _oldValueArray=[NSMutableArray arrayWithArray:_oldSearchValueArray];
         [self getTheIcode2];
     }
-    if ([_oldValueArray[0] isEqualToString:_deviceNameArray[0]]) {
-        _moreNameArray=@[@"序列号",@"用户或电站名",@"额定功率"];
-    }else{
-        _moreNameArray=@[@"序列号",@"用户或电站名"];
-    }
-    
-    _lineTypeArray=@[@"所有",@"已接入设备",@"未接入设备"];
-    _lineTypeDic=@{_lineTypeArray[0]:@"3",_lineTypeArray[1]:@"2",_lineTypeArray[2]:@"1"};
-    
-    _titleNameArray=@[@"设备类型",@"接入类型",@"所属安装商",@"城市",@"其他条件"];
-     _titleNameTypeArray=@[@"1",@"1",@"1",@"0",@"1"];
 
+
+    _titleNameArray=@[@"所属安装商",@"城市",@"用户名",@"电站名称",@"设计功率(W)"];
+    _titleNameTypeArray=@[@"1",@"0",@"0",@"0",@"0"];
+    
     for (int i=0; i<_titleNameArray.count; i++) {
         NSInteger tagNum=2000+i;
         
         [self getUnitUI:_titleNameArray[i] Hight:_H_All type:[_titleNameTypeArray[i] integerValue] tagNum:tagNum firstView:_scrollView];
-     
-              _H_All=_HH+_H_All;
+        
+        _H_All=_HH+_H_All;
     }
     
-    [self getUnitUiTwo:[NSString stringWithFormat:@"%@%@",@"请输入",_oldValueArray[4]] Hight:_H_All type:1 tagNum:3000 firstView:_scrollView];
+   // [self getUnitUiTwo:[NSString stringWithFormat:@"%@%@",@"请输入",_oldValueArray[4]] Hight:_H_All type:1 tagNum:3000 firstView:_scrollView];
     
     _H_All= _H_All+_HH+50*HEIGHT_SIZE;
     
-        _searchButton.frame=CGRectMake(60*NOW_SIZE,_H_All, 200*NOW_SIZE, 40*HEIGHT_SIZE);
+    _searchButton.frame=CGRectMake(60*NOW_SIZE,_H_All, 200*NOW_SIZE, 40*HEIGHT_SIZE);
     
     _scrollView.contentSize=CGSizeMake(ScreenWidth, ScreenHeight+50*HEIGHT_SIZE);
 }
@@ -218,7 +211,7 @@
     NSMutableArray *netNameArray=[NSMutableArray array];
     
     _deviceNetDic=[NSMutableDictionary new];
-    NSArray* keyArray=@[@"deviceType",@"lineType",@"iCode",@"city"];
+    NSArray* keyArray=@[@"iCode",@"city",@"accountName",@"plantName",@"designPower"];
     for (int i=0; i<keyArray.count; i++) {
         if ([_titleNameTypeArray[i] integerValue]==1) {
             UILabel *lable=[self.view viewWithTag:2000+i+100];
@@ -227,95 +220,63 @@
                 [_deviceNetDic setObject:@"" forKey:keyArray[i]];
                 [netNameArray addObject:@""];
             }else{
-           [netNameArray addObject:lable.text];
-                    if (i==0) {
-                        [_deviceNetDic setObject:[_deviceNameIdDic objectForKey:lable.text] forKey:keyArray[i]];
-                    }else if (i==1) {
-                        [_deviceNetDic setObject:[_lineTypeDic objectForKey:lable.text] forKey:keyArray[i]];
-                    }else if (i==2) {
-                        [_deviceNetDic setObject:[_icodeListDic objectForKey:lable.text] forKey:keyArray[i]];
-                    }else{
-                          [_deviceNetDic setObject:lable.text forKey:keyArray[i]];
-                    }
-                
-                
+                [netNameArray addObject:lable.text];
+            if (i==0) {
+                    [_deviceNetDic setObject:[_icodeListDic objectForKey:lable.text] forKey:keyArray[i]];
+                }
                 
             }
         }else{
             UITextField *textField=[self.view viewWithTag:2000+i+100];
             if (textField.text==nil || [textField.text isEqualToString:@""]) {
-              [_deviceNetDic setObject:@"" forKey:keyArray[i]];
-                        [netNameArray addObject:@""];
+                [_deviceNetDic setObject:@"" forKey:keyArray[i]];
+                [netNameArray addObject:@""];
             }else{
-                   [_deviceNetDic setObject:textField.text forKey:keyArray[i]];
-                  [netNameArray addObject:textField.text];
+                [_deviceNetDic setObject:textField.text forKey:keyArray[i]];
+                [netNameArray addObject:textField.text];
             }
         }
     }
     
-         UILabel *lable=[self.view viewWithTag:2004+100];
-      UITextField *textField=[self.view viewWithTag:3000];
+
     
-     [netNameArray addObject:lable.text];
-    
-    NSArray *moreKeyArray=@[@"deviceSn",@"userName",@"ratedPower"];
-    for (int i=0; i<_moreNameArray.count; i++) {
-        if ([_moreNameArray[i] isEqualToString:lable.text]) {
-            if (textField.text==nil || [textField.text isEqualToString:@""]) {
-                [_deviceNetDic setObject:@"" forKey:moreKeyArray[i]];
-                   [netNameArray addObject:@""];
-            }else{
-                [_deviceNetDic setObject:textField.text forKey:moreKeyArray[i]];
-                   [netNameArray addObject:textField.text];
-            }
-        }else{
-               [_deviceNetDic setObject:@"" forKey:moreKeyArray[i]];
-        }
-   
-    }
-    
-      [_deviceNetDic setObject:@"1" forKey:@"page"];
-         [_deviceNetDic setObject:@"" forKey:@"deviceStatus"];
-            [_deviceNetDic setObject:@"1" forKey:@"order"];
+    [_deviceNetDic setObject:@"1" forKey:@"page"];
+    [_deviceNetDic setObject:@"-1" forKey:@"groupId"];
+    [_deviceNetDic setObject:@"1" forKey:@"order"];
     
     [self showProgressView];
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_deviceNetDic paramarsSite:@"/api/v3/device/deviceManage/list" sucessBlock:^(id content) {
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_deviceNetDic paramarsSite:@"/api/v3/customer/plantManage/list" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"/api/v3/customer/userManage_overview_creatUserPage: %@", content1);
+        NSLog(@"/api/v3/customer/plantManage/list: %@", content1);
         
         if (content1) {
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             
             if ([firstDic[@"result"] intValue]==1) {
-                NSInteger totalNum=0;
+             
                 NSArray *allArray=firstDic[@"obj"][@"pagers"];
-                for (int i=0; i<allArray.count; i++) {
-                    NSDictionary *unitDic=allArray[i];
-                    totalNum=[[NSString stringWithFormat:@"%@",unitDic[@"nums"][@"totalNum"]] integerValue]+totalNum;
-                }
-                if (totalNum>0) {
+       
+                if (allArray.count>0) {
                     [self.navigationController popViewControllerAnimated:YES];
                     NSArray* allArray0=@[allArray,netNameArray];
                     self.searchResultBlock(allArray0);
-                      self.searchDicBlock(_deviceNetDic);
+                    self.searchDicBlock(_deviceNetDic);
                 }else{
-                        [self showToastViewWithTitle:@"没有设备"];
+                    [self showToastViewWithTitle:@"没有电站"];
                 }
                 
             }else{
                 int ResultValue=[firstDic[@"result"] intValue];
                 
                 if ((ResultValue>1) && (ResultValue<5)) {
-                    NSArray *resultArray=@[@"参数错误",@"服务器地址为空",@"您不是集成商账户"];
+                    NSArray *resultArray=@[@"不是集成商",@"服务器地址为空"];
                     if (ResultValue<(resultArray.count+2)) {
                         [self showToastViewWithTitle:resultArray[ResultValue-2]];
                     }
-                }else if (ResultValue==0) {
-                         [self showToastViewWithTitle:@"返回异常"];
                 }else if (ResultValue==22) {
-                    [self showToastViewWithTitle:@"未登录"];
+                    [self showToastViewWithTitle:@"登录超时"];
                 }else{
                     [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
                 }
@@ -335,33 +296,10 @@
 
 -(void)selectChioce:(UITapGestureRecognizer*)tap{
     NSInteger Num=tap.view.tag;
-    NSArray *nameArray;NSString *titleString;
-    if (_searchType==1) {
-        if (Num==2000 || Num==2001 || Num==2004) {
-            if (Num==2000) {
-                titleString=@"选择设备类型";
-                nameArray=_deviceNameArray;
-            }else if (Num==2001) {
-                 titleString=@"选择接入类型";
-                nameArray=_lineTypeArray;
-                _lineTypeDic=@{nameArray[0]:@"3",nameArray[1]:@"2",nameArray[2]:@"1"};
-            }else if (Num==2004) {
-                 titleString=@"选择搜索条件";
-                UILabel *lable=[self.view viewWithTag:Num+100];
-                if ([lable.text isEqualToString:_deviceNameArray[0]]) {
-                      _moreNameArray=@[@"序列号",@"用户或电站名",@"额定功率"];
-                }else{
-                       _moreNameArray=@[@"序列号",@"用户或电站名"];
-                }
-                nameArray=_moreNameArray;
-              
-            }
-            [self chiceItem:titleString nameArray:nameArray Num:Num];
-        }
-   
-        if (Num==2002){
+
+        if (Num==2000){
             [self getTheIcode];
-        }
+    
     }
     
 }
@@ -391,7 +329,7 @@
                     [_icodeListArray addObject:name];
                     [_icodeListDic setObject:dic[@"iCode"] forKey:name];
                 }
-               [self chiceItem:@"选择安装商" nameArray:_icodeListArray Num:2002];
+                [self chiceItem:@"选择安装商" nameArray:_icodeListArray Num:2000];
                 
             }else{
                 int ResultValue=[firstDic[@"result"] intValue];
@@ -412,11 +350,12 @@
         [self showToastViewWithTitle:root_Networking];
         
     }];
-
+    
 }
 
+
 -(void)getTheIcode2{
-  //  [self showProgressView];
+    //[self showProgressView];
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:@{@"kind":@"0"} paramarsSite:@"/api/v3/customer/group/installer" sucessBlock:^(id content) {
         [self hideProgressView];
         
@@ -440,7 +379,7 @@
                     [_icodeListArray addObject:name];
                     [_icodeListDic setObject:dic[@"iCode"] forKey:name];
                 }
-            //    [self chiceItem:@"选择安装商" nameArray:_icodeListArray Num:2002];
+             //   [self chiceItem:@"选择安装商" nameArray:_icodeListArray Num:2002];
                 
             }else{
                 int ResultValue=[firstDic[@"result"] intValue];
@@ -466,19 +405,18 @@
 
 -(void)chiceItem:(NSString*)titleString nameArray:(NSArray*)nameArray Num:(NSInteger)Num{
     [ZJBLStoreShopTypeAlert showWithTitle:titleString titles:nameArray selectIndex:^(NSInteger selectIndex) {
-      
+        
     }selectValue:^(NSString *selectValue){
         UILabel *lable=[self.view viewWithTag:Num+100];
         lable.text=selectValue;
         if (Num==2004) {
-           UITextField *textField=[self.view viewWithTag:3000];
-                textField.placeholder = [NSString stringWithFormat:@"%@%@",@"请输入",selectValue];
+            UITextField *textField=[self.view viewWithTag:3000];
+            textField.placeholder = [NSString stringWithFormat:@"%@%@",@"请输入",selectValue];
         }
         
     } showCloseButton:YES ];
     
 }
-
 
 
 

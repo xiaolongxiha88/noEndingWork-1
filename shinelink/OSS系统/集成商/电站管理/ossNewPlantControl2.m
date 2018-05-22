@@ -1,17 +1,18 @@
 //
-//  ossNewPlantControl.m
+//  ossNewPlantControl2.m
 //  ShinePhone
 //
 //  Created by sky on 2018/5/22.
 //  Copyright © 2018年 sky. All rights reserved.
 //
 
-#import "ossNewPlantControl.h"
-#import "ossNewUserEdit.h"
+#import "ossNewPlantControl2.h"
 #import "DTKDropdownMenuView.h"
 #import "ShinePhone-Swift.h"
+#import "ossNewPlantEdit.h"
 
-@interface ossNewPlantControl ()
+@interface ossNewPlantControl2 ()
+
 @property (nonatomic, strong) NSDictionary* allDic;
 @property (nonatomic, strong) NSString* serverID;
 @property (nonatomic, strong) NSArray* lableNameArray;
@@ -22,9 +23,10 @@
 @property (nonatomic, strong) NSArray* lableNameKeyArray;
 @property (nonatomic, strong) UIScrollView *ScrollView;
 @property (nonatomic, strong) DTKDropdownMenuView *rightMenuView;
+
 @end
 
-@implementation ossNewPlantControl
+@implementation ossNewPlantControl2
 
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -36,7 +38,7 @@
     
     _allDic=[NSDictionary new];
     
-     [self addRightItem];
+    [self addRightItem];
     
     [self initData];
     [self initUI];
@@ -46,14 +48,14 @@
 }
 
 -(void)initData{
-
-
     
-        _lableNameArray=@[@"账号",@"别名",@"真实姓名",@"手机号",@"电子邮箱",@"注册日期",@"设备数量",@"安装商"];
-        _lableNameKeyArray=@[@"accountName",@"alias",@"activeName",@"phoneNum",@"email",@"creatDate",@"deviceCount",@"iCode"];
-
     
-    _controlNameArray=@[@"编辑",@"查看该用户"];
+    
+    _lableNameArray=@[@"电站名称",@"别名",@"所属用户",@"安装商",@"资金收益",@"时区",@"建站日期",@"设备数量",@"设计功率",@"今日发电量",@"累计发电量",@"日发电量下限值"];
+    _lableNameKeyArray=@[@"plantName",@"alias",@"accountName",@"iCode",@"formula_money",@"timezone",@"creatDate",@"deviceCount",@"nominal_power",@"etoday",@"etotal",@"lowEnergy"];
+    
+    
+    _controlNameArray=@[@"编辑",@"查看该电站"];
     _controlImageArray=@[@"edit_nor.png",@"check_nor.png"];
     _controlImageClickArray=@[@"edit_click.png",@"check_click.png"];
     
@@ -66,7 +68,7 @@
     _ScrollView.backgroundColor = COLOR(222, 222, 222, 1);
     [self.view addSubview:_ScrollView];
     
-    float lable_H=30*HEIGHT_SIZE;float line_W=20*HEIGHT_SIZE;
+    float lable_H=20*HEIGHT_SIZE;float line_W=10*HEIGHT_SIZE;
     float unit_H=lable_H*2+line_W;
     
     float WW=ScreenWidth/2.0;
@@ -206,19 +208,19 @@
 -(void)goToOtherView:(UIButton*)button{
     NSInteger tagNum=button.tag-3000;
     if (tagNum==0) {
-        ossNewUserEdit *deviceView=[[ossNewUserEdit alloc]init];
-        deviceView.serverId=_serverId;
-        deviceView.userId=_userId;
+        ossNewPlantEdit *deviceView=[[ossNewPlantEdit alloc]init];
+//        deviceView.serverId=_serverId;
+//        deviceView.userId=_userId;
         [self.navigationController pushViewController:deviceView animated:YES];
         
     }
     
     
     if (tagNum==1) {
-      
+        
     }
     
-  
+    
     
     
 }
@@ -227,7 +229,7 @@
     
     if (buttonIndex) {
         if( (alertView.tag == 1001) || (alertView.tag == 1002) || (alertView.tag == 1003)){
-            [self goToDeleteDevice];
+      
         }
     }
     
@@ -253,13 +255,23 @@
                 valueString=@"在线";
             }
         }
+        if ([nameString isEqualToString:root_oss_507_chengShi]) {
+            if ([[NSString stringWithFormat:@"%@",_allDic[keyString]] isEqualToString:@"-1"]) {
+                valueString=@"---";
+            }else{
+                valueString=[NSString stringWithFormat:@"%@",_allDic[keyString]];
+            }
+            
+        }
+
+        
         if ([nameString isEqualToString:root_oss_510_yunXingZhuangTai]) {
             NSString* statueString=[NSString stringWithFormat:@"%@",_allDic[keyString]];
             valueString=[self changeTheDeviceStatue:statueString];
             lableValue.textColor=[self changeTheDeviceStatueColor:statueString];
         }
         if (valueString==nil || [valueString isEqualToString:@""]) {
-             valueString=@"---";
+            valueString=@"---";
         }
         
         lableValue.text=valueString;
@@ -268,73 +280,31 @@
 }
 
 
--(void)goToDeleteDevice{
-    
-    [self showProgressView];
-    NSDictionary *Dic=@{@"serverId":_serverID,@"sn":_deviceSn};
-    
-    NSString *textString=[NSString stringWithFormat:@"%@",[self jsonStringWithPrettyPrint:YES dataArray:Dic]];
-    
-    NSDictionary *dic=@{@"deviceSn":textString};
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:dic paramarsSite:@"/api/v3/device/deviceManage/del" sucessBlock:^(id content) {
-        [self hideProgressView];
-        
-        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"/api/v3/device/deviceManage/del: %@", content1);
-        
-        if (content1) {
-            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
-            
-            if ([firstDic[@"result"] intValue]==1) {
-                [self showToastViewWithTitle:@"删除成功"];
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                int ResultValue=[firstDic[@"result"] intValue];
-                
-                if (ResultValue==3) {
-                    [self showToastViewWithTitle:@"网络超时"];
-                }else if (ResultValue==22) {
-                    [self showToastViewWithTitle:@"未登录"];
-                }else{
-                    [self showToastViewWithTitle:firstDic[@"msg"]];
-                }
-                
-                // [self showToastViewWithTitle:firstDic[@"msg"]];
-                
-            }
-        }
-    } failure:^(NSError *error) {
-        [self hideProgressView];
-        [self showToastViewWithTitle:root_Networking];
-        
-        
-    }];
-    
-}
+
 
 
 
 -(void)getNetForInfo{
     
     [self showProgressView];
-    NSDictionary *dic=@{@"serverId":_serverId,@"userName":_deviceSn};
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:dic paramarsSite:@"/api/v3/device/getDisUsers" sucessBlock:^(id content) {
+    NSDictionary *dic=@{@"serverId":_serverId,@"plantId":_userId};
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:dic paramarsSite:@"/api/v3/device/getAPPDisPlants" sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"/api/v3/device/getDisUsers: %@", content1);
+        NSLog(@"/api/v3/device/getAPPDisPlants: %@", content1);
         
         if (content1) {
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             
             if ([firstDic[@"result"] intValue]==1) {
-              
-              
+                
+                
                 NSArray *netArray=firstDic[@"obj"][@"datas"];
-         
+                
                 _allDic=netArray[0];
                 
-             //   _serverID=[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"serverId"]];
+                //   _serverID=[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"serverId"]];
                 
                 [self freshUI];
             }else{
@@ -348,10 +318,10 @@
                 }else if (ResultValue==22) {
                     [self showToastViewWithTitle:@"登录超时"];
                 }else{
-                       [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
+                    [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
                 }
-             
-              
+                
+                
                 // [self showToastViewWithTitle:firstDic[@"msg"]];
                 
             }
@@ -426,6 +396,10 @@
         return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
 }
+
+
+
+
 
 
 

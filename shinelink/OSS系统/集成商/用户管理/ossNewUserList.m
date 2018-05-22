@@ -14,7 +14,7 @@
 #import "ossIntegratorSearch.h"
 #import "ossNewDeviceControl.h"
 #import "ossNewPlantControl.h"
-
+#import "ossNewUserSearch.h"
 
 @interface ossNewUserList ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *oneScrollView;
@@ -89,7 +89,7 @@
  
     [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
 
-    [_deviceNetDic setObject:@"" forKey:@"accountName"];
+    [_deviceNetDic setObject:@"" forKey:@"userName"];
     [_deviceNetDic setObject:@"" forKey:@"iCode"];
       [_deviceNetDic setObject:@"15" forKey:@"pageSize"];
 
@@ -608,19 +608,20 @@
 #pragma mark -搜索回调
 -(void)goToSearch{
     
-    ossIntegratorSearch *searchView=[[ossIntegratorSearch alloc]init];
+    ossNewUserSearch *searchView=[[ossNewUserSearch alloc]init];
     searchView.searchType=1;
     searchView.oldSearchValueArray=self.searchNameArray;
     searchView.searchDicBlock = ^(NSDictionary *netDic){
         _deviceNetDic=[NSMutableDictionary dictionaryWithDictionary:netDic];
-        if ([[_deviceNetDic objectForKey:@"deviceType"] integerValue] != _deviceType) {
-            _deviceType=[[_deviceNetDic objectForKey:@"deviceType"] integerValue];
-            if (_oneScrollView) {
-                [_oneScrollView removeFromSuperview];
-                _oneScrollView=nil;
-            }
-            [self goToGetListParameter];
-        }
+        
+//        if ([[_deviceNetDic objectForKey:@"deviceType"] integerValue] != _deviceType) {
+//            _deviceType=[[_deviceNetDic objectForKey:@"deviceType"] integerValue];
+//            if (_oneScrollView) {
+//                [_oneScrollView removeFromSuperview];
+//                _oneScrollView=nil;
+//            }
+//            [self goToGetListParameter];
+//        }
         
     };
     searchView.searchResultBlock = ^(NSArray *resultArray){
