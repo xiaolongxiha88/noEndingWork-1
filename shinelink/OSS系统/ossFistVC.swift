@@ -291,7 +291,7 @@ class ossFistVC: RootViewController {
             }
             if i==2{
                 view1.frame=CGRect(x: 0*NOW_SIZE, y: heigh0+170*HEIGHT_SIZE+lableH*2+60*HEIGHT_SIZE, width: SCREEN_Width, height: lableH)
-                view1.addTarget(self, action:#selector(gotoDevice), for: .touchUpInside)
+                view1.addTarget(self, action:#selector(gotoPlantList), for: .touchUpInside)
             }
             
             view1.setBackgroundImage(imageColor0, for: .normal)
@@ -1293,6 +1293,15 @@ class ossFistVC: RootViewController {
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
+    
+    func gotoPlantList()  {
+        let vc=ossNewPlantList()
+        vc.parameterDic=self.parameterListDic as! [AnyHashable : Any]?
+        vc.deviceType=1;
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
     
     func gotoDevice()  {
         

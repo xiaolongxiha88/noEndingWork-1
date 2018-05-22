@@ -55,6 +55,8 @@
 		332FD1E920B2BB9400DB9675 /* check_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 332FD1E720B2BB9400DB9675 /* check_nor.png */; };
 		332FD1EC20B2FB6A00DB9675 /* ossNewUserList.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1EB20B2FB6A00DB9675 /* ossNewUserList.m */; };
 		332FD1EF20B3069000DB9675 /* ossNewPlantList.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1EE20B3069000DB9675 /* ossNewPlantList.m */; };
+		332FD1F220B3B35200DB9675 /* ossNewPlantControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1F120B3B35200DB9675 /* ossNewPlantControl.m */; };
+		332FD1F520B3C34700DB9675 /* ossNewUserEdit.m in Sources */ = {isa = PBXBuildFile; fileRef = 332FD1F420B3C34700DB9675 /* ossNewUserEdit.m */; };
 		3330F4D91F14B8330076C237 /* work_order_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4D81F14B8330076C237 /* work_order_icon.png */; };
 		3330F4E01F15B1E20076C237 /* search_icon_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4DE1F15B1E20076C237 /* search_icon_click.png */; };
 		3330F4E11F15B1E20076C237 /* search_icon_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 3330F4DF1F15B1E20076C237 /* search_icon_nor.png */; };
@@ -947,6 +949,10 @@
 		332FD1EB20B2FB6A00DB9675 /* ossNewUserList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewUserList.m; sourceTree = "<group>"; };
 		332FD1ED20B3069000DB9675 /* ossNewPlantList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewPlantList.h; sourceTree = "<group>"; };
 		332FD1EE20B3069000DB9675 /* ossNewPlantList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewPlantList.m; sourceTree = "<group>"; };
+		332FD1F020B3B35200DB9675 /* ossNewPlantControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewPlantControl.h; sourceTree = "<group>"; };
+		332FD1F120B3B35200DB9675 /* ossNewPlantControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewPlantControl.m; sourceTree = "<group>"; };
+		332FD1F320B3C34700DB9675 /* ossNewUserEdit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ossNewUserEdit.h; sourceTree = "<group>"; };
+		332FD1F420B3C34700DB9675 /* ossNewUserEdit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ossNewUserEdit.m; sourceTree = "<group>"; };
 		3330F4D81F14B8330076C237 /* work_order_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = work_order_icon.png; sourceTree = "<group>"; };
 		3330F4DE1F15B1E20076C237 /* search_icon_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon_click.png; sourceTree = "<group>"; };
 		3330F4DF1F15B1E20076C237 /* search_icon_nor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_icon_nor.png; sourceTree = "<group>"; };
@@ -4497,6 +4503,10 @@
 			children = (
 				332FD1EA20B2FB6A00DB9675 /* ossNewUserList.h */,
 				332FD1EB20B2FB6A00DB9675 /* ossNewUserList.m */,
+				332FD1F020B3B35200DB9675 /* ossNewPlantControl.h */,
+				332FD1F120B3B35200DB9675 /* ossNewPlantControl.m */,
+				332FD1F320B3C34700DB9675 /* ossNewUserEdit.h */,
+				332FD1F420B3C34700DB9675 /* ossNewUserEdit.m */,
 			);
 			path = "用户管理";
 			sourceTree = "<group>";
@@ -5620,6 +5630,7 @@
 				336B511A1FE225A40094CD6E /* MCBarChartView.m in Sources */,
 				33860FF21EEABB9D004150FD /* PlantList.swift in Sources */,
 				334B8F4C1C914A6D00798A69 /* PNChartLabel.m in Sources */,
+				332FD1F520B3C34700DB9675 /* ossNewUserEdit.m in Sources */,
 				3376A6DB1FD52B580043FC53 /* usbToWifiWarnList.m in Sources */,
 				33AF3D1D1D8E67210007D6C2 /* EasyTimelineEvent.m in Sources */,
 				334771041C9A6219003A6F13 /* aliasViewController.m in Sources */,
@@ -5811,6 +5822,7 @@
 				3387B8C51FB2EA1C0073FB35 /* singleSelectTableViewCell.m in Sources */,
 				338A623F1E71567A000E7CE4 /* PopoverViewCell.m in Sources */,
 				334B8F511C914A6D00798A69 /* PNLineChartData.m in Sources */,
+				332FD1F220B3B35200DB9675 /* ossNewPlantControl.m in Sources */,
 				33EFB6711C98F9B1003F336F /* ZFPieChart.m in Sources */,
 				337F9CCE1C71AC2E0016FE43 /* meViewController.m in Sources */,
 				33851DDA1F9DED7A00AB758C /* energyDemoCell.m in Sources */,

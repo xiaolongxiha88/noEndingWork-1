@@ -13,6 +13,8 @@
 #import "LRLChannelEditController.h"
 #import "ossIntegratorSearch.h"
 #import "ossNewDeviceControl.h"
+#import "ossNewPlantControl.h"
+
 
 @interface ossNewUserList ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *oneScrollView;
@@ -89,7 +91,7 @@
 
     [_deviceNetDic setObject:@"" forKey:@"accountName"];
     [_deviceNetDic setObject:@"" forKey:@"iCode"];
-   //  [_deviceNetDic setObject:@"" forKey:@"pageSize"];
+      [_deviceNetDic setObject:@"15" forKey:@"pageSize"];
 
 }
 
@@ -106,7 +108,7 @@
         _oldForParameterArray=@[@"1",@"3",@"4",@"5",@"6",@"7"];
         
         _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7"];
-        _forChoiceParameterDic=@{@"0":@"账号    ",@"1":@"别名      ",@"2":@"真实名字",@"3":@"手机号   ",@"4":@"电子邮箱   ",@"5":@"注册日期      ",@"6":@"设备数量  ",@"7":@"安装商"};
+        _forChoiceParameterDic=@{@"0":@"账号    ",@"1":@"别名      ",@"2":@"真实名字",@"3":@"手机号       ",@"4":@"电子邮箱   ",@"5":@"注册日期",@"6":@"设备数量  ",@"7":@"安装商"};
         _numForNetKeyDic=@{@"0":@"accountName",@"1":@"alias",@"2":@"activeName",@"3":@"phoneNum",@"4":@"email",@"5":@"creatDate",@"6":@"deviceCount",@"7":@"iCode"};
         
         _cellNameArray2=@[@"序列号",@"设备数量",@"手机号",@"注册日期"];     //列表的另一种展示
@@ -605,6 +607,7 @@
 
 #pragma mark -搜索回调
 -(void)goToSearch{
+    
     ossIntegratorSearch *searchView=[[ossIntegratorSearch alloc]init];
     searchView.searchType=1;
     searchView.oldSearchValueArray=self.searchNameArray;
@@ -627,6 +630,8 @@
         [self changeNetData];
     };
     [self.navigationController pushViewController:searchView animated:YES];
+    
+
 }
 
 
@@ -657,20 +662,14 @@
         }
         
         NSArray *dataArray=unitOneDic[@"datas"];
-        NSDictionary *numsDic=unitOneDic[@"nums"];
-        for (int i=0; i<keyNameArray.count; i++) {
-            if ([numsDic.allKeys containsObject:keyNameArray[i]]) {
-                NSInteger value1=[[NSString stringWithFormat:@"%@",[numsDic objectForKey:keyNameArray[i]]] integerValue];
-                NSInteger value2=[numValueArray[i] integerValue];
-                [numValueArray replaceObjectAtIndex:i withObject:[NSNumber numberWithInteger:value1+value2]];
-            }
-        }
+     
+     
         
         for (int i=0; i<dataArray.count; i++) {
             NSDictionary *twoDic=dataArray[i];
             NSMutableArray *valueArray=[NSMutableArray array];
             NSMutableArray *valueArray22=[NSMutableArray array];
-            [valueArray addObject:twoDic[@"deviceSn"]];
+            [valueArray addObject:twoDic[@"accountName"]];
             
             for (int i=0; i<_NetForParameterNewArray.count; i++) {                  //列表1的数据
                 if ([unitOneDic.allKeys containsObject:@"serverId"]) {
@@ -698,18 +697,18 @@
             
             if ([unitOneDic.allKeys containsObject:@"serverId"]) {
                 [valueArray addObject:unitOneDic[@"serverId"]];
+                    [valueArray22 addObject:unitOneDic[@"serverId"]];
             }else{
-                [valueArray addObject:@"110"];
+                [valueArray addObject:@"2"];
+                    [valueArray22 addObject:unitOneDic[@"2"]];
             }
-            if (_deviceType==1) {
-                if ([twoDic.allKeys containsObject:@"type"]) {
-                    [valueArray addObject:[NSString stringWithFormat:@"%@",twoDic[@"type"]]];
-                    [valueArray22 addObject:[NSString stringWithFormat:@"%@",twoDic[@"type"]]];
-                }else{
-                    [valueArray addObject:@"1"];
-                    [valueArray22 addObject:@"1"];
-                }
-                
+            
+            if ([twoDic.allKeys containsObject:@"uId"]) {
+                [valueArray addObject:twoDic[@"uId"]];
+                [valueArray22 addObject:twoDic[@"uId"]];
+            }else{
+                [valueArray addObject:@""];
+                [valueArray22 addObject:unitOneDic[@""]];
             }
             
             [_allTableViewDataArray addObject:valueArray];
@@ -719,12 +718,6 @@
         
     }
     
-    for (int i=0; i<keyNameArray.count; i++) {
-        [_deviceStatueNumDic setObject:numValueArray[i] forKey:keyNameArray[i]];
-    }
-    if ([_deviceStatueNumDic.allKeys containsObject:_numNameLableString]) {
-        _numLable.text=[NSString stringWithFormat:@"%@",[_deviceStatueNumDic objectForKey:_numNameLableString]];
-    }
     
     
     [_tableView reloadData];
@@ -744,7 +737,7 @@
     for (int i=0; i<_selectRowNumArray.count; i++) {
         UIImageView *image0=[self.view viewWithTag:3000+i];
         if (i!=tagNum) {
-            image0.image=IMAGE(@"oss_up_down.png");
+                image0.image=IMAGE(@"oss_up_down.png");
             [_selectRowNumArray replaceObjectAtIndex:i withObject:[NSNumber numberWithBool:NO]];
         }else{
             if (isSelect) {
@@ -825,14 +818,8 @@
 
 #pragma mark -网络获取区域
 -(void)goToNetForListParameter{
-    NSString *keyValueString=@"";
-    if (_deviceType==1) {
-        keyValueString=@"dm_invapp";
-    }else if (_deviceType==2) {
-        keyValueString=@"dm_storageapp";
-    }else if (_deviceType==3) {
-        keyValueString=@"dm_mixapp";
-    }
+    NSString *keyValueString=@"dm_userapp";
+ 
     NSString *textString=[NSString stringWithFormat:@"%@",[self jsonStringWithPrettyPrint:YES dataArray:_NetForParameterArray]];
     NSDictionary *netDic=@{@"text":textString,@"key":keyValueString};
     //  [self showProgressView];
@@ -901,13 +888,10 @@
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             
             if ([firstDic[@"result"] intValue]==1) {
-                NSInteger totalNum=0;
+             
                 NSArray *allArray=firstDic[@"obj"][@"pagers"];
-                for (int i=0; i<allArray.count; i++) {
-                    NSDictionary *unitDic=allArray[i];
-                    totalNum=[[NSString stringWithFormat:@"%@",unitDic[@"nums"][@"totalNum"]] integerValue]+totalNum;
-                }
-                if (totalNum>0) {
+           
+                if (allArray.count>0) {
                     _netResultArray=allArray;
                     [self changeNetData];
                 }else{
@@ -997,22 +981,18 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    ossNewDeviceControl *deviceView=[[ossNewDeviceControl alloc]init];
+    ossNewPlantControl *deviceView=[[ossNewPlantControl alloc]init];
     deviceView.deviceType=_deviceType;
     NSArray *infoArray;
     if (!_isChangTableView) {
         infoArray=_allTableViewDataArray[indexPath.row];
-        deviceView.deviceSn=infoArray[0];
     }else{
         infoArray=_allTableViewData22Array[indexPath.row];
-        deviceView.deviceSn=infoArray[0];
     }
-    if (_deviceType==1) {
-        if([[infoArray lastObject] isEqualToString:@"6"]){
-            deviceView.deviceType=4;
-        }
-    }
-    
+
+    deviceView.deviceSn=infoArray[0];
+    deviceView.serverId=infoArray[(infoArray.count-2)];
+    deviceView.userId=infoArray[(infoArray.count-1)];
     
     [self.navigationController pushViewController:deviceView animated:YES];
     
