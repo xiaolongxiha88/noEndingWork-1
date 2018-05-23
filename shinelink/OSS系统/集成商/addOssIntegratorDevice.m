@@ -37,7 +37,10 @@
 @property (nonatomic, strong) NSMutableDictionary*threeDic;
 @property (nonatomic, strong) NSString *longitude;
 @property (nonatomic, strong) NSString *latitude;
+@property (nonatomic, strong) NSMutableDictionary *userListDic;
 
+@property (nonatomic, strong) NSMutableArray *plantListArray;
+@property (nonatomic, strong) NSMutableDictionary *plantListDic;
 
 @end
 
@@ -48,7 +51,10 @@
     
     _latitude=@"";
     _longitude=@"";
-
+    _textFieldMutableArray=[NSMutableArray new];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
     
       _H1=40*HEIGHT_SIZE;
     
@@ -90,6 +96,12 @@
     
 }
 
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    for (UITextField *textField in _textFieldMutableArray) {
+        [textField resignFirstResponder];
+    }
+}
+
 -(void)initUiForUser{
 
     self.title=@"添加用户";
@@ -125,22 +137,26 @@
     float H2=0*HEIGHT_SIZE;
 
       self.title=@"添加电站";
-//        UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
-//        jumpUserView.backgroundColor=[UIColor clearColor];
-//        jumpUserView.tag=3300;
-//        [_scrollView addSubview:jumpUserView];
-//        
-//        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0,SCREEN_Width-20*NOW_SIZE, _H1)];
-//        lable1.textColor = COLOR(154, 154, 154, 1);
-//        lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-//        lable1.textAlignment=NSTextAlignmentLeft;
-//   // lable1.backgroundColor=COLOR(242, 242, 242, 1);
-//        lable1.text=@"请指定电站所属的用户:";
-//        [jumpUserView addSubview:lable1];
-//        
-//        [self getUnitUI:@"所属用户" Hight:_H1 type:1 tagNum:3400 firstView:jumpUserView];
-//        
-//        H2=H2+_H1*2+15*HEIGHT_SIZE;
+    
+    if (_cmdType==2) {
+        UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
+        jumpUserView.backgroundColor=[UIColor clearColor];
+        jumpUserView.tag=3300;
+        [_scrollView addSubview:jumpUserView];
+        
+        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, 0,SCREEN_Width-20*NOW_SIZE, _H1)];
+        lable1.textColor = COLOR(154, 154, 154, 1);
+        lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+        lable1.textAlignment=NSTextAlignmentLeft;
+        // lable1.backgroundColor=COLOR(242, 242, 242, 1);
+        lable1.text=@"请指定电站所属的用户:";
+        [jumpUserView addSubview:lable1];
+        
+        [self getUnitUI:@"所属用户" Hight:_H1 type:1 tagNum:3400 firstView:jumpUserView];
+        
+        H2=H2+_H1*2+15*HEIGHT_SIZE;
+    }
+    
 
     
     _twoView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, 241*HEIGHT_SIZE)];
@@ -332,6 +348,9 @@
 }
 
 -(void)selectChioce:(UITapGestureRecognizer*)tap{
+    
+          [self keyboardHide:nil];
+    
     NSInteger Num=tap.view.tag;
     
     if (Num==3400 || Num==4400 ){
@@ -447,57 +466,127 @@
 }
 
 
--(void)choiceThePlant{
-    _userListArray=@[@"中国",@"美国",@"英国",@"朝国",@"钱国"];
-    if(_userListArray.count>0){
-        
-        AnotherSearchViewController *another = [AnotherSearchViewController new];
-        //返回选中搜索的结果
-        [another didSelectedItem:^(NSString *item) {
-            UILabel *lable=[self.view viewWithTag:4401+100];
-            lable.text=item;
-        }];
-        another.title =@"选择所属电站";
-        another.isNeedRightItem=YES;
-        another.rightItemBlock = ^{
-            [self gotoAddUser];
-        };
-        another.dataSource=_userListArray;
-        [self.navigationController pushViewController:another animated:YES];
-    }else{
-        [self showToastViewWithTitle:@"点击获取电站列表"];
-        return;
-    }
-}
+
 
 
 -(void)choiceTheUser:(NSInteger)Num{
     
-    _userListArray=@[@"中国",@"美国",@"英国",@"朝国",@"钱国"];
-    if(_userListArray.count>0){
-        
-        AnotherSearchViewController *another = [AnotherSearchViewController new];
-        //返回选中搜索的结果
-        [another didSelectedItem:^(NSString *item) {
-            
-            UILabel *lable=[self.view viewWithTag:Num+100];
-            lable.text=item;
-        }];
-        another.title =@"选择所属用户";
-        another.isNeedRightItem=YES;
-        another.rightItemBlock = ^{
-            [self gotoAddUser];
-        };
-        another.dataSource=_userListArray;
-        [self.navigationController pushViewController:another animated:YES];
-    }else{
-        [self showToastViewWithTitle:@"点击获取用户列表"];
-        return;
-    }
+ //   _userTagNum=Num;
+    NSDictionary *netDic=@{@"kind":@"0"};
+ 
+    
+    [self getNetForUserAndPlant:netDic typeNum:0 tagNum:Num];
+    
     
 }
 
+
+//获取电站或用户列表 type 0用户 1电站
+-(void)getNetForUserAndPlant:(NSDictionary*)netDic typeNum:(NSInteger)typeNum tagNum:(NSInteger)tagNum{
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:netDic paramarsSite:@"/api/v3/customer/user/plant" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/user/plant: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+                if (typeNum==0) {
+                    _userListDic=[NSMutableDictionary new];
+                    NSArray *dicArray1=firstDic[@"obj"][@"pagers"];
+                    NSMutableArray *newList=[NSMutableArray new];
+                    
+                    for (int i=0; i<dicArray1.count; i++) {
+                        NSArray *dicArray=dicArray1[i][@"datas"];
+                        NSString * serverIdString=dicArray1[i][@"serverId"];
+                        
+                        for (int i=0; i<dicArray.count; i++) {
+                            NSDictionary *dic1=dicArray[i];
+                            [newList addObject:dic1[@"accountName"]];
+                            [_userListDic setObject:serverIdString forKey:dic1[@"accountName"]];
+                        }
+                        
+                    }
+                    
+                    _userListArray=[NSArray arrayWithArray:newList];
+                    [self choiceTheUser2:tagNum];
+                }
+                
+                if (typeNum==1) {
+                    _plantListArray=[NSMutableArray array];
+                    _plantListDic=[NSMutableDictionary new];
+                    NSArray *dicArray2=firstDic[@"obj"][@"datas"];
+                    for (int i=0; i<dicArray2.count; i++) {
+                        NSDictionary *dic2=dicArray2[i];
+                        [_plantListArray addObject:dic2[@"plantName"]];
+                        [_plantListDic setObject:dic2[@"pId"] forKey:dic2[@"plantName"]];
+                    }
+
+                    [self choiceThePlant2:tagNum];
+                }
+                
+                
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                NSArray *resultArray=@[@"非集成商用户",@"未找到指定的服务器地址"];
+                
+                if (ResultValue<(resultArray.count+2)) {
+                    [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                }
+                if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"登录超时"];
+                }
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
+}
+
+
+-(void)choiceTheUser2:(NSInteger)Num{
+    
+    // _userListArray=[NSMutableArray new];
+    
+    AnotherSearchViewController *another = [AnotherSearchViewController new];
+    //返回选中搜索的结果
+    [another didSelectedItem:^(NSString *item) {
+        
+        UILabel *lable=[self.view viewWithTag:Num+100];
+        lable.text=item;
+        _userName=item;
+        _serverID=[_userListDic objectForKey:item];
+    }];
+    another.title =@"选择所属用户";
+    another.isNeedRightItem=YES;
+    another.rightItemBlock = ^{
+        [self gotoAddUser];
+    };
+    another.dataSource=_userListArray;
+    [self.navigationController pushViewController:another animated:YES];
+    
+
+    
+    
+}
+
+
+
 -(void)gotoAddUser{
+    
+    addOssIntegratorDevice *searchView=[[addOssIntegratorDevice alloc]init];
+    searchView.deviceType=1;
+    searchView.cmdType=3;
+    [self.navigationController pushViewController:searchView animated:YES];
     
 }
 
@@ -693,7 +782,60 @@
 
 
 
+-(void)choiceThePlant{
+  
+        //  UILabel *lable=[self.view viewWithTag:4400+100];
+        if ((_userName==nil) || [_userName isEqualToString:@""]) {
+            [self showToastViewWithTitle:@"请先选择所属用户"];
+            return;
+        }
+    
+    
+    
+    
+    NSInteger Num=4401;
+    NSDictionary *netDic=@{@"kind":@"1",@"userName":_userName,@"serverId":_serverID};
+    
+    //    if(_userListArray.count>0){
+    //        [self choiceThePlant:Num];
+    //    }else{
+    
+    [self getNetForUserAndPlant:netDic typeNum:1 tagNum:Num];
+    
+}
 
+-(void)choiceThePlant2:(NSInteger)Num{
+    if(_plantListArray.count>0){
+        
+        AnotherSearchViewController *another = [AnotherSearchViewController new];
+        //返回选中搜索的结果
+        [another didSelectedItem:^(NSString *item) {
+            UILabel *lable=[self.view viewWithTag:4401+100];
+            lable.text=item;
+            _plantID=[_plantListDic objectForKey:item];
+        }];
+        another.title =@"选择所属电站";
+        another.isNeedRightItem=YES;
+        another.rightItemBlock = ^{
+            [self gotoAddPlant];
+        };
+        another.dataSource=_plantListArray;
+        [self.navigationController pushViewController:another animated:YES];
+    }else{
+        [self showToastViewWithTitle:@"点击获取电站列表"];
+        return;
+    }
+}
+
+
+-(void)gotoAddPlant{
+    addOssIntegratorDevice *searchView=[[addOssIntegratorDevice alloc]init];
+    searchView.deviceType=2;
+    searchView.cmdType=3;
+    searchView.userName=_userName;
+    searchView.serverID=_serverID;
+    [self.navigationController pushViewController:searchView animated:YES];
+}
 
 -(void)NetForUser{
     
@@ -792,7 +934,7 @@
        
                 [self showToastViewWithTitle:@"添加用户成功"];
                 
-                if (_cmdType==1) {
+                if (_cmdType==1) {     //在一键注册里，用户列表添加用户
                     for (UIViewController *controller in self.navigationController.viewControllers) {
                         if ([controller isKindOfClass:[OneKeyAddForIntergrator class]])
                         {
@@ -803,9 +945,23 @@
                         }
                         
                     }
-                }else  if (_cmdType==2) {
+                }else  if (_cmdType==2) {             //单独添加用户
                        self.addSuccessBlock();
                     [self.navigationController popViewControllerAnimated:YES];
+                }else  if (_cmdType==3) {     //在一键注册里，用户列表添加用户
+                    for (UIViewController *controller in self.navigationController.viewControllers) {
+                        if ([controller isKindOfClass:[addOssIntegratorDevice class]])
+                        {
+                            addOssIntegratorDevice *A =(addOssIntegratorDevice *)controller;
+                            A.userName=firstDic[@"obj"][@"userName"];
+                               A.userName2=firstDic[@"obj"][@"userName"];
+                            A.serverID=_serverID;
+                            [self.navigationController popToViewController:A animated:YES];
+                       
+                            
+                        }
+                        
+                    }
                 }
         
                 
@@ -835,9 +991,30 @@
 }
 
 
+-(void)setUserName2:(NSString *)userName2{
+    UILabel *lable=[self.view viewWithTag:3400+100];
+    lable.text=userName2;
+    
+}
+
+
+-(void)setPlantName2:(NSString *)plantName2{
+    
+    UILabel *lable=[self.view viewWithTag:4401+100];
+    lable.text=plantName2;
+    
+}
+
 -(void)NetForPlant{
     
- 
+    if (_cmdType==2) {
+        UILabel *lable=[self.view viewWithTag:3400+100];
+        if ([lable.text isEqualToString:@""] || lable.text==nil) {
+            [self showToastViewWithTitle:@"请选择电站所属用户"];
+            return;
+        }
+    }
+    
         NSArray *alertArray=@[@"请填写电站名称",@"请选择安装时间",@"请填写装机容量",@"请选择时区",@"请选择国家"];
         NSArray*keyArray=@[@"plantName",@"addDate",@"designPower",@"timezone",@"country"];
         
@@ -902,6 +1079,20 @@
                         }
                         
                     }
+                }  if (_cmdType==3) {     //在一键注册里，用户列表添加用户
+                    for (UIViewController *controller in self.navigationController.viewControllers) {
+                        if ([controller isKindOfClass:[addOssIntegratorDevice class]])
+                        {
+                            addOssIntegratorDevice *A =(addOssIntegratorDevice *)controller;
+                            A.plantID=firstDic[@"obj"][@"plantId"];
+                            A.plantName=_twoDic[@"plantName"];
+                            
+                            [self.navigationController popToViewController:A animated:YES];
+                            
+                            
+                        }
+                        
+                    }
                 }
                 
                 //_userName=firstDic[@"obj"][@"userName"];
@@ -934,12 +1125,102 @@
     
 }
 
--(void)NetForDevice{
+
+
+
+
+
+
+
+
+-(void)checkThreeValue{
     
+    [self showProgressView];
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:_threeDic paramarsSite:@"/api/v3/customer/plantManage/addDatalog" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/plantManage/addDatalog: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+                
+                //   [self showToastViewWithTitle:@"保存采集器成功"];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                [self showAlertViewWithTitle:@"注册成功" message:nil cancelButtonTitle:root_OK];
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                NSArray *resultArray=@[@"电站不存在",@"用户不存在",@"采集器序列号错误",@"采集器数量超标",@"采集器已存在",@"采集器校验码不匹配",@"必须参数不完整"];
+                
+                if (ResultValue<(resultArray.count+2)) {
+                    [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                }
+                if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"登录超时"];
+                }
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
     
 }
 
 
+-(void)NetForDevice{
+    _threeDic=[NSMutableDictionary new];
+ 
+        UILabel *lable=[self.view viewWithTag:4400+100];
+        if ([lable.text isEqualToString:@""] || lable.text==nil) {
+            [self showToastViewWithTitle:@"请选择电站所属用户"];
+            return;
+        }else{
+            [_threeDic setObject:_serverID forKey:@"serverId"];
+        }
+ 
+    
+
+        UILabel *lable1=[self.view viewWithTag:4401+100];
+        if ([lable1.text isEqualToString:@""] || lable1.text==nil) {
+            [self showToastViewWithTitle:@"请选择设备所属电站"];
+            return;
+        }else{
+            [_threeDic setObject:_plantID forKey:@"pId"];
+        }
+        
+    
+    UITextField *Text1=[self.view viewWithTag:4500+100];
+    UITextField *Text2=[self.view viewWithTag:4501+100];
+    
+    if ([Text1.text isEqualToString:@""] || Text1.text==nil) {
+        [self showToastViewWithTitle:@"请输入采集器序列号"];
+        return;
+    }else{
+        [_threeDic setObject:Text1.text forKey:@"datalog"];
+    }
+    if ([Text2.text isEqualToString:@""] || Text2.text==nil) {
+        [self showToastViewWithTitle:@"请输入采集器校验码"];
+        return;
+    }else{
+        [_threeDic setObject:Text2.text forKey:@"validCode"];
+    }
+    
+    NSString *snCheck=[self getValidCode:Text1.text];
+    if (![Text2.text isEqualToString:snCheck]) {
+        [self showToastViewWithTitle:@"请输入正确的采集器校验码"];
+        return;
+    }
+    
+    [self checkThreeValue];
+}
 
 
 

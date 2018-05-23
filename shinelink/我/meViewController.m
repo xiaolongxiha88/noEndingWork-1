@@ -133,7 +133,13 @@
     [registerUser setTitleColor: [UIColor whiteColor]forState:UIControlStateNormal];
     [registerUser addTarget:self action:@selector(registerUser) forControlEvents:UIControlEventTouchUpInside];
     //  goBut.highlighted=[UIColor grayColor];
-    [_scrollView2 addSubview:registerUser];
+    
+
+    NSString *LogTypeForOSS=[[NSUserDefaults standardUserDefaults] objectForKey:@"LogTypeForOSS"];
+    if (![LogTypeForOSS isEqualToString:@"1"]) {
+           [_scrollView2 addSubview:registerUser];
+    }
+ 
     
     //_tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
      _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_Width, tableViewH) style:UITableViewStylePlain];

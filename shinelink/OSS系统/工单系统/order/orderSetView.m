@@ -30,7 +30,7 @@
 
 -(void)getData{
  
-    if (_setType==1) {
+    if (_setType==1 || _setType==6) {
         _titleName=@"现场维修服务报告"; _lableKeyArray=@[@"service_name",@"service_productNumber",@"service_installation",@"service_product",@"service_software",@"service_client",@"service_contactPerson",@"service_contactNumber"];
         _lableKeyArray2=@[@"service_description",@"service_dealWith",@"service_accessories",@"service_service"];
         _lableNameArray=@[@"项目名称",@"产品类型",@"安装或第一次开机年月",@"产品SN号",@"软件版本号",@"客户公司名称",@"联系人员",@"联系电话"];

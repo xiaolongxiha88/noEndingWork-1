@@ -919,8 +919,6 @@
     
         [self getNetForUserAndPlant:netDic typeNum:1 tagNum:Num];
   
-    
-  
 }
 
 -(void)choiceThePlant2:(NSInteger)Num{
@@ -986,9 +984,7 @@
 //            return;
 //        }
     
-    
-    
-    
+
 }
 
  //获取电站或用户列表 type 0用户 1电站

@@ -17,4 +17,12 @@
 
 @property (nonatomic, strong) NSString *LogType;
 
+@property (nonatomic, strong) NSString *demoName;
+@property (nonatomic, strong) NSString *demoServerURL;
+
+@property (nonatomic, assign) NSInteger LogTypeForOSS;   //1就是模拟登陆
+@property (nonatomic,assign) BOOL isFirstLogin;
+
+@property (nonatomic, assign) NSInteger LogOssNum;   //1设备页 2、用户管理  3、电站管理
+
 @end

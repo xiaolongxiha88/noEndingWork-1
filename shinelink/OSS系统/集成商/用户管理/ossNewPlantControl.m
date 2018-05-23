@@ -10,10 +10,11 @@
 #import "ossNewUserEdit.h"
 #import "DTKDropdownMenuView.h"
 #import "ShinePhone-Swift.h"
+#import "loginViewController.h"
 
 @interface ossNewPlantControl ()
 @property (nonatomic, strong) NSDictionary* allDic;
-@property (nonatomic, strong) NSString* serverID;
+//@property (nonatomic, strong) NSString* serverID;
 @property (nonatomic, strong) NSArray* lableNameArray;
 @property (nonatomic, strong) NSArray* controlNameArray;
 @property (nonatomic, strong) NSArray* controlImageArray;
@@ -215,7 +216,25 @@
     
     
     if (tagNum==1) {
-      
+        
+        NSArray *serverListArray=[[NSUserDefaults standardUserDefaults] objectForKey:@"OssServerAddress"];
+        NSString *serverUrl;
+    //   NSMutableArray* serverIdArray=[NSMutableArray array];
+        for (NSDictionary*dic in serverListArray) {
+            NSString *ID=[NSString stringWithFormat:@"%@",dic[@"id"]];
+            if([ID isEqualToString:[NSString stringWithFormat:@"%@",_serverId]]) {
+                serverUrl=[NSString stringWithFormat:@"%@",dic[@"url"]];
+            }
+        }
+        
+        loginViewController *deviceView=[[loginViewController alloc]init];
+        deviceView.demoServerURL=serverUrl;
+        deviceView.demoName=_deviceSn;
+        deviceView.LogTypeForOSS=1;
+          deviceView.isFirstLogin=YES;
+        [self.navigationController pushViewController:deviceView animated:NO];
+        
+
     }
     
   
@@ -227,7 +246,7 @@
     
     if (buttonIndex) {
         if( (alertView.tag == 1001) || (alertView.tag == 1002) || (alertView.tag == 1003)){
-            [self goToDeleteDevice];
+         //   [self goToDeleteDevice];
         }
     }
     
@@ -268,49 +287,49 @@
 }
 
 
--(void)goToDeleteDevice{
-    
-    [self showProgressView];
-    NSDictionary *Dic=@{@"serverId":_serverID,@"sn":_deviceSn};
-    
-    NSString *textString=[NSString stringWithFormat:@"%@",[self jsonStringWithPrettyPrint:YES dataArray:Dic]];
-    
-    NSDictionary *dic=@{@"deviceSn":textString};
-    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:dic paramarsSite:@"/api/v3/device/deviceManage/del" sucessBlock:^(id content) {
-        [self hideProgressView];
-        
-        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-        NSLog(@"/api/v3/device/deviceManage/del: %@", content1);
-        
-        if (content1) {
-            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
-            
-            if ([firstDic[@"result"] intValue]==1) {
-                [self showToastViewWithTitle:@"删除成功"];
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                int ResultValue=[firstDic[@"result"] intValue];
-                
-                if (ResultValue==3) {
-                    [self showToastViewWithTitle:@"网络超时"];
-                }else if (ResultValue==22) {
-                    [self showToastViewWithTitle:@"未登录"];
-                }else{
-                    [self showToastViewWithTitle:firstDic[@"msg"]];
-                }
-                
-                // [self showToastViewWithTitle:firstDic[@"msg"]];
-                
-            }
-        }
-    } failure:^(NSError *error) {
-        [self hideProgressView];
-        [self showToastViewWithTitle:root_Networking];
-        
-        
-    }];
-    
-}
+//-(void)goToDeleteDevice{
+//
+//    [self showProgressView];
+//    NSDictionary *Dic=@{@"serverId":_serverID,@"sn":_deviceSn};
+//
+//    NSString *textString=[NSString stringWithFormat:@"%@",[self jsonStringWithPrettyPrint:YES dataArray:Dic]];
+//
+//    NSDictionary *dic=@{@"deviceSn":textString};
+//    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:dic paramarsSite:@"/api/v3/device/deviceManage/del" sucessBlock:^(id content) {
+//        [self hideProgressView];
+//
+//        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+//        NSLog(@"/api/v3/device/deviceManage/del: %@", content1);
+//
+//        if (content1) {
+//            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+//
+//            if ([firstDic[@"result"] intValue]==1) {
+//                [self showToastViewWithTitle:@"删除成功"];
+//                [self.navigationController popViewControllerAnimated:YES];
+//            }else{
+//                int ResultValue=[firstDic[@"result"] intValue];
+//
+//                if (ResultValue==3) {
+//                    [self showToastViewWithTitle:@"网络超时"];
+//                }else if (ResultValue==22) {
+//                    [self showToastViewWithTitle:@"未登录"];
+//                }else{
+//                    [self showToastViewWithTitle:firstDic[@"msg"]];
+//                }
+//
+//                // [self showToastViewWithTitle:firstDic[@"msg"]];
+//
+//            }
+//        }
+//    } failure:^(NSError *error) {
+//        [self hideProgressView];
+//        [self showToastViewWithTitle:root_Networking];
+//
+//
+//    }];
+//
+//}
 
 
 

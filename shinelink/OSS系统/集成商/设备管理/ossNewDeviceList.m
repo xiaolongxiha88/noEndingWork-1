@@ -526,7 +526,7 @@
         NSLog(@"rightItem%lu",(unsigned long)index);
         
         addOssIntegratorDevice *searchView=[[addOssIntegratorDevice alloc]init];
-        searchView.deviceType=1;
+        searchView.deviceType=3;
         searchView.cmdType=2;
         searchView.addSuccessBlock = ^{
              [self initTheNetPageAndValue];

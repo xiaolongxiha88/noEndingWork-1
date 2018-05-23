@@ -64,7 +64,7 @@
 @property (nonatomic, strong) NSString *userNameGet;
 @property (nonatomic) int getServerAddressNum;
 
-@property (nonatomic,assign) BOOL isFirstLogin;
+
 
 @property (nonatomic, strong)UIImageView *userBgImageView;
 @property (nonatomic, strong)UIImageView *pwdBgImageView;
@@ -75,8 +75,10 @@
 -(void)viewDidAppear:(BOOL)animated{
      animated=NO;
     
+    if (_LogTypeForOSS!=1) {
+         [self.navigationController setNavigationBarHidden:YES];
+    }
 
- [self.navigationController setNavigationBarHidden:YES];
     
     if (!_isFirstLogin) {
          [self getLoginType];
@@ -106,20 +108,25 @@
     }
 
  
-    
-    //////////测试区域
-    //上线检查
-    [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:is_Test];
-    
-    NSString *testDemo=@"O";
-    if ([testDemo isEqualToString:@"OK"]) {
-        useToWifiView1 *testView=[[useToWifiView1 alloc]init];
-
-        [self.navigationController pushViewController:testView animated:NO];
+    if (_LogTypeForOSS==1) {
+        [self netRequestDemo];
+        
     }else{
-        _isFirstLogin=YES;
-        [self getLoginType];
+        //////////测试区域
+        //上线检查
+        [[NSUserDefaults standardUserDefaults] setObject:@"N" forKey:is_Test];
+        
+        NSString *testDemo=@"O";
+        if ([testDemo isEqualToString:@"OK"]) {
+            useToWifiView1 *testView=[[useToWifiView1 alloc]init];
+            
+            [self.navigationController pushViewController:testView animated:NO];
+        }else{
+            _isFirstLogin=YES;
+            [self getLoginType];
+        }
     }
+
     
 }
 
@@ -842,6 +849,119 @@ NSLog(@"体验馆");
 }
 
 
+
+
+
+-(void)netRequestDemo{
+    
+    NSDateFormatter*dayFormatter = [[NSDateFormatter alloc] init];
+    [dayFormatter setDateFormat:@"yyyyMMdd"];
+      NSString*demoPassword0 = [dayFormatter stringFromDate:[NSDate date]];
+    NSString*demoPassword=[NSString stringWithFormat:@"Growatt%@",demoPassword0];
+  
+   // [self MD5:demoPassword]
+    [self showProgressView];
+    [BaseRequest requestWithMethod:HEAD_URL paramars:@{@"userName":_demoName, @"password":demoPassword,@"serverUrl":_demoServerURL} paramarsSite:@"/newLoginAPI.do?op=apiserverlogin" sucessBlock:^(id content) {
+        [self hideProgressView];
+        NSLog(@"/newLoginAPI.do?op=apiserverlogin:%@",content);
+        if (content) {
+            if ([content[@"success"] integerValue] == 0) {
+                //登陆失败
+                if ([content[@"msg"] integerValue] == 501) {
+                    [self showAlertViewWithTitle:nil message:root_yongHuMing_mima_weikong cancelButtonTitle:root_OK];
+                    
+                }
+                if ([content[@"msg"] integerValue] ==502) {
+                    [self showAlertViewWithTitle:nil message:root_yongHuMing_mima_cuowu cancelButtonTitle:root_OK];
+                    
+                }
+                if ([content[@"msg"] integerValue] ==503) {
+                    [self showAlertViewWithTitle:nil message:root_fuWuQi_cuoWu cancelButtonTitle:root_OK];
+                    
+                }
+                
+                [self.navigationController popViewControllerAnimated:NO];
+                
+                
+            } else {
+                
+                  [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"LogTypeForOSS"];    //OSS模拟登陆
+                
+                      [[UserInfo defaultUserInfo] setServer:_demoServerURL];
+                
+                self.dataSource = [NSDictionary dictionaryWithDictionary:content];
+                _userNameGet=_dataSource[@"user"][@"accountName"];
+                
+                _adNumber=content[@"app_code"];
+                
+                
+                
+    
+                
+                
+                NSDictionary *userDic=[NSDictionary dictionaryWithDictionary:_dataSource[@"user"]];
+                if ([userDic.allKeys containsObject:@"isValiPhone"]) {
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",_dataSource[@"user"][@"isValiPhone"]] forKey:@"isValiPhone"];
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@",_dataSource[@"user"][@"isValiEmail"]] forKey:@"isValiEmail"];
+                }
+                
+                if ([_dataSource[@"user"][@"rightlevel"] integerValue]==2) {
+                    [[NSUserDefaults standardUserDefaults] setObject:@"isDemo" forKey:@"isDemo"];
+                }else{
+                    [[NSUserDefaults standardUserDefaults] setObject:@"isNotDemo" forKey:@"isDemo"];
+                }
+                
+                
+                NSString *counrtyName=_dataSource[@"user"][@"counrty"];
+                NSString *timeZoneNum=_dataSource[@"user"][@"timeZone"];
+                [[NSUserDefaults standardUserDefaults] setObject:counrtyName forKey:@"counrtyName"];
+                [[NSUserDefaults standardUserDefaults] setObject:timeZoneNum forKey:@"timeZoneNum"];
+                
+                [[NSUserDefaults standardUserDefaults] setObject:@"S" forKey:@"LoginType"];
+                [[UserInfo defaultUserInfo] setTelNumber:_dataSource[@"user"][@"phoneNum"]];
+                [[UserInfo defaultUserInfo] setUserID:_dataSource[@"user"][@"id"]];
+                [[UserInfo defaultUserInfo] setEmail:_dataSource[@"user"][@"email"]];
+                [[UserInfo defaultUserInfo] setAgentCode:_dataSource[@"user"][@"agentCode"]];
+                
+                NSString *ID=[[NSUserDefaults standardUserDefaults] objectForKey:@"userID"];
+                NSLog(@"ID=%@",ID);
+                
+                
+                NSString *serviceBool=_dataSource[@"service"];
+                if ([serviceBool isEqualToString:@"0"]||[serviceBool isEqualToString:@""]) {
+                    [[NSUserDefaults standardUserDefaults] setObject:@"0" forKey:@"serviceBool"];
+                }else if ([serviceBool isEqualToString:@"1"]){
+                    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"serviceBool"];
+                }
+                
+                
+                
+                [self goToTheDeviceView];
+                
+            }
+        }else{
+            
+                  [self.navigationController popViewControllerAnimated:NO];
+        }
+        
+    } failure:^(NSError *error) {
+       
+        [self hideProgressView];
+        //    [self didPresentControllerButtonTouch];
+        [self showToastViewWithTitle:root_Networking];
+        
+              [self.navigationController popViewControllerAnimated:NO];
+        
+    }];
+    
+}
+
+
+
+
+
+
+
 -(void)getOSSnet{
    [self showProgressView];
     
@@ -1152,6 +1272,44 @@ NSLog(@"体验馆");
     }];
     [alertCtrl addAction:btnAction];
     [self presentViewController:alertCtrl animated:YES completion:nil];
+}
+
+
+//模拟登录成功跳转
+- (void)goToTheDeviceView{
+    NSMutableArray *stationID1=_dataSource[@"data"];
+    NSMutableArray *stationID=[NSMutableArray array];
+    if (stationID1.count>0) {
+        for(int i=0;i<stationID1.count;i++){
+            NSString *a=stationID1[i][@"plantId"];
+            [stationID addObject:a];
+        }
+    }
+    NSMutableArray *stationName1=_dataSource[@"data"];
+    NSMutableArray *stationName=[NSMutableArray array];
+    if (stationID1.count>0) {
+        for(int i=0;i<stationID1.count;i++){
+            NSString *a=stationName1[i][@"plantName"];
+            [stationName addObject:a];
+        }
+    }
+    
+    if (stationID.count>0) {
+//       stationID= [NSMutableArray arrayWithArray:stationID];
+//       stationName= [NSMutableArray arrayWithArray:stationName];
+    }else{
+        stationID=[NSMutableArray arrayWithObjects:@"1", nil];
+      stationName =[NSMutableArray arrayWithObjects:root_shiFan_dianZhan, nil];
+    }
+    
+  //  deviceViewController *deviceVc=[[deviceViewController alloc]initWithDataDict:stationID stationName:stationName];
+    
+    deviceViewController *deviceVV=[[deviceViewController alloc]init];
+    deviceVV.adNumber=_adNumber;
+    deviceVV.stationID=stationID;
+    deviceVV.stationName=stationName;
+    [self.navigationController pushViewController:deviceVV animated:NO];
+    
 }
 
     //登录成功条跳转的方法

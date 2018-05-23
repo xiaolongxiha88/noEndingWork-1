@@ -48,8 +48,7 @@
 @property (nonatomic, strong) NSMutableArray *DemoPicName11;
 @property (nonatomic, strong) NSMutableArray *DemoPicName2;
 @property (nonatomic, strong) NSMutableArray *DemoPicName22;
-@property (nonatomic, strong) NSMutableArray *stationID;
-@property (nonatomic, strong) NSMutableArray *stationName;
+
 @property (nonatomic, strong) NSMutableArray *dataArr;
 @property (nonatomic, strong) NSMutableArray *typeArr;
 @property (nonatomic, strong) NSMutableDictionary *plantId;

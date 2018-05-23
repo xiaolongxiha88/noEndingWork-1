@@ -207,7 +207,7 @@ static NSString *cellFour = @"cellFour";
     [_headView addSubview:titleLabel2];
     
     NSArray *headName=[NSArray arrayWithObjects:@"所属地区",@"类型", nil];
-    NSArray *serviceType=[NSArray arrayWithObjects:@"",@"现场维修",@"安装调试", @"培训",@"巡检",@"其他",nil];
+    NSArray *serviceType=[NSArray arrayWithObjects:@"",@"现场维修",@"安装调试", @"培训",@"巡检",@"其他",@"整改",nil];
     int k=[[NSString stringWithFormat:@"%@",_allValueDic[@"serviceType"]] intValue];
     
 //    NSString *test0=[NSString stringWithFormat:@"%@",_allValueDic[@"serviceType11"]];

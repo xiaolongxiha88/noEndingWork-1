@@ -78,7 +78,13 @@
     [registerUser setTitleColor: [UIColor whiteColor]forState:UIControlStateNormal];
     [registerUser addTarget:self action:@selector(registerUser) forControlEvents:UIControlEventTouchUpInside];
     //  goBut.highlighted=[UIColor grayColor];
-    [self.view addSubview:registerUser];
+    
+    NSString *LogTypeForOSS=[[NSUserDefaults standardUserDefaults] objectForKey:@"LogTypeForOSS"];
+    if (![LogTypeForOSS isEqualToString:@"1"]) {
+          [self.view addSubview:registerUser];
+    }
+    
+
     
     
     

@@ -18,4 +18,7 @@
 @property (nonatomic, strong) NSMutableArray *pvHeadDataUnitArray;
 @property (nonatomic, strong) NSMutableArray *pvHeadNameArray;
 
+@property (nonatomic, strong) NSMutableArray *stationID;
+@property (nonatomic, strong) NSMutableArray *stationName;
+
 @end

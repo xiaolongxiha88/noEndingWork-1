@@ -12,7 +12,7 @@
 
 @property (nonatomic, assign) NSInteger deviceType;
 
-@property (nonatomic, strong) NSString* deviceSn;
+@property (nonatomic, strong) NSString* deviceSn;    //用户名
 
 @property (nonatomic, strong) NSString* serverId;
 @property (nonatomic, strong) NSString* userId;

@@ -954,7 +954,7 @@ static NSString *statusNum = @"3";
     
 
     [self showProgressView];
-    [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v2/order/newperfect" dataImageDict:dataImageDict sucessBlock:^(id content) {
+    [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:allDict paramarsSite:@"/api/v2/order/perfectthree" dataImageDict:dataImageDict sucessBlock:^(id content) {
         [self hideProgressView];
         
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
