@@ -15,6 +15,7 @@
 #import "ossNewDeviceControl.h"
 #import "ossNewPlantSearch.h"
 #import "ossNewPlantControl2.h"
+#import "addOssIntegratorDevice.h"
 
 @interface ossNewPlantList ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *oneScrollView;
@@ -489,11 +490,18 @@
 
 - (void)addRightItem
 {
-    DTKDropdownItem *item0 = [DTKDropdownItem itemWithTitle:@"添加设备" iconName:@"DTK_jiangbei" callBack:^(NSUInteger index, id info) {
+    DTKDropdownItem *item0 = [DTKDropdownItem itemWithTitle:@"添加电站" iconName:@"DTK_jiangbei" callBack:^(NSUInteger index, id info) {
         NSLog(@"rightItem%lu",(unsigned long)index);
         
-        IntegratorFirst *searchView=[[IntegratorFirst alloc]init];
+        addOssIntegratorDevice *searchView=[[addOssIntegratorDevice alloc]init];
+        searchView.deviceType=2;
+        searchView.cmdType=2;
+        searchView.addSuccessBlock = ^{
+             [self initTheNetPageAndValue];
+            [self NetForDevice];
+        };
         [self.navigationController pushViewController:searchView animated:YES];
+        
         
     }];
     DTKDropdownItem *item1 = [DTKDropdownItem itemWithTitle:@"展示参数" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {

@@ -529,6 +529,7 @@
         searchView.deviceType=1;
         searchView.cmdType=2;
         searchView.addSuccessBlock = ^{
+             [self initTheNetPageAndValue];
             [self NetForDevice];
         };
         [self.navigationController pushViewController:searchView animated:YES];

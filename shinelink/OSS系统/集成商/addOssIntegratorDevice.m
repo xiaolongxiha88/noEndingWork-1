@@ -46,6 +46,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    _latitude=@"";
+    _longitude=@"";
+
+    
       _H1=40*HEIGHT_SIZE;
     
     _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_Width, ScreenHeight)];
