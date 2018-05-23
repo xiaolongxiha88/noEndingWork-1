@@ -12,7 +12,7 @@
 @property (nonatomic, strong) NSString* serverId;
 @property (nonatomic, strong) NSString* plantId;
 @property (nonatomic, strong) NSString* userName;
-
-
+@property (nonatomic, strong) NSString* accountName;
+@property (nonatomic, strong) NSDictionary* allDic;
 
 @end

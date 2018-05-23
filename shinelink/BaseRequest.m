@@ -197,7 +197,7 @@ float Time=25.f;
     [manager POST:url parameters:paramars constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         NSArray *keys = dataDict.allKeys;
         for (NSString *key in keys) {
-        
+
                 NSData *data = [[NSData alloc] initWithData:dataDict[key]];
                 [formData appendPartWithFileData:data name:key fileName:key mimeType:@"image/png"];
             

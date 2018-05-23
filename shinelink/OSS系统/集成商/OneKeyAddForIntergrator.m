@@ -48,7 +48,7 @@
 @property (nonatomic, assign) NSInteger userTagNum;
 @property (nonatomic, strong) NSString *longitude;
 @property (nonatomic, strong) NSString *latitude;
-
+@property (nonatomic, strong) UILabel *jumpLable;
 
 @end
 
@@ -153,15 +153,15 @@
     dic[NSForegroundColorAttributeName]=MainColor;
     [attrStr addAttributes:dic range:[str rangeOfString:@" 跳过"]];
 
-    UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0, H1+10*HEIGHT_SIZE,SCREEN_Width, H1)];
-    lable1.textColor = COLOR(154, 154, 154, 1);
-    lable1.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
-    lable1.textAlignment=NSTextAlignmentCenter;
-    lable1.userInteractionEnabled=YES;
+    _jumpLable = [[UILabel alloc] initWithFrame:CGRectMake(0, H1+10*HEIGHT_SIZE,SCREEN_Width, H1)];
+    _jumpLable.textColor = COLOR(154, 154, 154, 1);
+    _jumpLable.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
+    _jumpLable.textAlignment=NSTextAlignmentCenter;
+    _jumpLable.userInteractionEnabled=YES;
     UITapGestureRecognizer *labelTap1=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(nextJumpStep)];
-    [lable1 addGestureRecognizer:labelTap1];
-    lable1.attributedText=attrStr;
-    [_goNextView addSubview:lable1];
+    [_jumpLable addGestureRecognizer:labelTap1];
+    _jumpLable.attributedText=attrStr;
+    [_goNextView addSubview:_jumpLable];
     
     
       _scrollView.contentSize=CGSizeMake(ScreenWidth, ScreenHeight+150*HEIGHT_SIZE);
@@ -288,6 +288,14 @@
     _twoView.backgroundColor=[UIColor whiteColor];
     [_scrollView addSubview:_twoView];
     
+    NSString *str =@"已有电站?  跳过";
+    NSMutableAttributedString *attrStr = [[NSMutableAttributedString alloc] initWithString:str];
+    NSMutableDictionary * dic=[NSMutableDictionary dictionary];
+    dic[NSFontAttributeName]=[UIFont boldSystemFontOfSize:16*HEIGHT_SIZE];
+    dic[NSForegroundColorAttributeName]=MainColor;
+    [attrStr addAttributes:dic range:[str rangeOfString:@" 跳过"]];
+    _jumpLable.attributedText=attrStr;
+
     _scrollView.contentSize=CGSizeMake(ScreenWidth, H2+450*HEIGHT_SIZE+_goNextView.frame.size.height);
     _goNextView.frame=CGRectMake(_goNextView.frame.origin.x, H2+_twoView.frame.origin.x+_twoView.frame.size.height+15*HEIGHT_SIZE, _goNextView.frame.size.width, _goNextView.frame.size.height);
     

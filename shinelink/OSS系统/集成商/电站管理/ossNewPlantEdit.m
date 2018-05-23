@@ -26,7 +26,6 @@
 @property (nonatomic, strong)NSMutableArray *textFieldMutableArray;
 @property (nonatomic, strong)NSArray *name1Array;
 @property (nonatomic, strong)NSArray *keyArray;
-@property (nonatomic, strong) NSDictionary* allDic;
 @property (nonatomic, strong) UIToolbar *toolBar;
 @property (nonatomic, strong) UIDatePicker *date;
 @property (nonatomic, strong) NSDateFormatter *dayFormatter;
@@ -43,6 +42,8 @@
 @property (nonatomic, strong) UIImagePickerController *photoLibraryImagePicker;
 @property (nonatomic, assign)NSInteger imageNum;
 @property (nonatomic, strong) NSMutableDictionary*twoDic;
+@property (nonatomic, strong)NSArray*firstKeyArray;
+@property (nonatomic, strong)NSDictionary*unitKeyAndValue;
 
 @end
 
@@ -51,13 +52,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    _latitude=@"";
+    _longitude=@"";
+    
+    
     [self initUiForPlant];
+    [self getThePlantInfo];
+    
 }
 
 
 -(void)initUiForPlant{
     
-
+_firstKeyArray=@[@"plantName",@"alias",@"createDateText",@"normalPower",@"country",@"city",@"timezone",@"plant_lng",@"formulaMoney",@"formulaMoneyUnitId",@"formulaCoal",@"formulaCo2",@"formulaSo2"];
+    
+        _unitKeyAndValue=@{@"RMB(￥)":@"rmb",@"USD($)":@"dallor", @"EUR(€)":@"euro", @"AUD($A)":@"aud", @"JPY(￥)":@"jpy", @"GBP(￡)":@"gbp", @"NT($)":@"twd", @" CAD($)":@"cad", @"THP(?)":@"thp", @"INR(Rs)":@"inr", @"NZD($)":@"nzd", @"HUF(FT)":@"huf", @"VND(D)":@"vnd", @"LAK(K)":@"lak",@"KHR(CR)":@"khr", @"PHP(Ph)":@"php", @"MYR($)":@"myr", @"SGD($)":@"sgd", @"BUK(K)":@"buk", @"LKR(S)":@"lkr", @" IDR(Rps)":@"idr", @"ISK(I.Kr)":@"isk",@"DKK(D.Kr)":@"dkk", @"NOK(N.Kr)":@"nok",@"BRC($)":@"brc",@"ARP(Arg.P)":@"arp", @" ZAR(R)":@"zar"};
     
     self.title=@"修改电站";
     _H1=40*HEIGHT_SIZE;
@@ -173,10 +182,10 @@
     label.textAlignment=NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:18*HEIGHT_SIZE];
     label.textColor=COLOR(154, 154, 154, 1);
-    //    if ((type==0) || (type==1)) {
-    //        [firstView addSubview:label];
-    //    }
-    //
+        if ((tagNum==3000) || (tagNum==3002) || (tagNum==3004)  || (tagNum==3006)) {
+            [firstView addSubview:label];
+        }
+    
     
     NSString *nameString=[NSString stringWithFormat:@"%@:",name];
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:14*HEIGHT_SIZE] forKey:NSFontAttributeName];
@@ -274,8 +283,13 @@
         title=@"选择时区";
         nameArray=[NSArray arrayWithObjects:@"+1",@"+2",@"+3",@"+4",@"+5",@"+6",@"+7",@"+8",@"+9",@"+10",@"+11",@"+12",@"-1",@"-2",@"-3",@"-4",@"-5",@"-6",@"-7",@"-8",@"-9",@"-10",@"-11",@"-12", nil];
         
-    }else if (Num==3008) {
-   
+    }else if (Num==3009) {
+          title=@"选择货币种类";
+     nameArray=[NSArray arrayWithObjects:@"RMB(￥)",@"USD($)",@"EUR(€)",@"AUD($A)",@"JPY(￥)",@"GBP(￡)",@"NT($)",@"CAD($)",@"THP(?)",@"INR(Rs)",@"NZD($)",@"HUF(FT)",@"VND(D)",@"LAK(K)",@"KHR(CR)",@"PHP(Ph)",@"MYR($)",@"SGD($)",@"BUK(K)",@"LKR(S)",@"IDR(Rps)",@"ISK(I.Kr)",@"DKK(D.Kr)",@"NOK(N.Kr)",@"BRC($)",@"ARP(Arg.P)",@"ZAR(R)",nil];
+        
+    
+       
+        
     }
     
     
@@ -426,26 +440,52 @@
     
     NSArray*keyArray=@[@"plantName",@"alias",@"addDate",@"designPower",@"country",@"city",@"timezone",@"wd",@"zjsy",@"zjsy_uint",@"coal",@"co2",@"so2"];
     
-    
+    //  if ((tagNum==3000) || (tagNum==3002) || (tagNum==3004)  || (tagNum==3006)) {
     
     _twoDic=[NSMutableDictionary new];
     for (int i=0; i<keyArray.count; i++) {
         if (i==2 || i==4 || i==6 || i==7 || i==9) {
             UILabel *lable=[self.view viewWithTag:3100+i];
             if ([lable.text isEqualToString:@""] || lable.text==nil) {
-                [_twoDic setObject:@"" forKey:keyArray[i]];
+                if (i==2) {
+                    [self showToastViewWithTitle:@"请输入安装日期"];
+                    return;
+                }else  if (i==4) {
+                    [self showToastViewWithTitle:@"请输入国家"];
+                    return;
+                }else  if (i==6) {
+                    [self showToastViewWithTitle:@"请输入时区"];
+                    return;
+                }else{
+                       [_twoDic setObject:@"" forKey:keyArray[i]];
+                }
+             
             }else{
                 [_twoDic setObject:lable.text forKey:keyArray[i]];
+                if (i==9) {
+                    [_twoDic setObject:[_unitKeyAndValue objectForKey:lable.text] forKey:keyArray[i]];
+                }
             }
             if (i==4) {
                 if ([lable.text isEqualToString:@"A1_中国"] || [lable.text containsString:@"中国"]) {
                     [_twoDic setObject:@"China" forKey:keyArray[i]];
                 }
             }
+            if (i==6) {
+                if ([lable.text isEqualToString:@""] || lable.text==nil) {
+                       [_twoDic setObject:@"+8" forKey:keyArray[i]];
+                }
+            }
         }else{
             UITextField *field=[self.view viewWithTag:3100+i];
             if ([field.text isEqualToString:@""] || field.text==nil) {
-                [_twoDic setObject:@"" forKey:keyArray[i]];
+                if (i==0) {
+                    [self showToastViewWithTitle:@"请输入电站名称"];
+                    return;
+                }else{
+                           [_twoDic setObject:@"" forKey:keyArray[i]];
+                }
+         
             }else{
                 [_twoDic setObject:field.text forKey:keyArray[i]];
             }
@@ -454,24 +494,27 @@
         
     }
     
-    [_twoDic setObject:_userName forKey:@"userName"];
+    
+    [_twoDic setObject:_accountName forKey:@"userName"];
     [_twoDic setObject:_plantId forKey:@"plantId"];
         [_twoDic setObject:_serverId forKey:@"serverId"];
     [_twoDic setObject:_latitude forKey:@"wd"];
     [_twoDic setObject:_longitude forKey:@"jd"];
-    
+      [_twoDic setObject:@"" forKey:@"designCompany"];
     
        UILabel *lable40=[self.view viewWithTag:4000+100];
     UILabel *lable41=[self.view viewWithTag:4001+100];
         NSMutableDictionary *dataImageDict = [NSMutableDictionary dictionary];
     if ([lable40.text isEqualToString:@""] || lable40.text==nil) {
-     //     [dataImageDict setObject:@"" forKey:@"file1"];
+        //  [dataImageDict setObject:@"" forKey:@"file1"];
+          [_twoDic setObject:@"" forKey:@"file1"];
     }else{
           NSData *imageData = UIImageJPEGRepresentation(_imageView.image, 0.5);
             [dataImageDict setObject:imageData forKey:@"file1"];
     }
     if ([lable41.text isEqualToString:@""] || lable41.text==nil) {
-     //   [dataImageDict setObject:@"" forKey:@"file2"];
+    //    [dataImageDict setObject:@"" forKey:@"file2"];
+           [_twoDic setObject:@"" forKey:@"file2"];
     }else{
         NSData *imageData = UIImageJPEGRepresentation(_imageView2.image, 0.5);
         [dataImageDict setObject:imageData forKey:@"file2"];
@@ -480,26 +523,154 @@
 
 
     
-    
+       [self showProgressView];
     [BaseRequest uplodImageWithMethod:OSS_HEAD_URL paramars:_twoDic paramarsSite:@"/api/v3/customer/plantManage/edit" dataImageDict:dataImageDict sucessBlock:^(id content) {
-        
+          [self hideProgressView];
         id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"/api/v3/device/getAPPDisPlants: %@", content1);
         
-        NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
-        if ([res rangeOfString:@"true"].location == NSNotFound) {
-            [self showToastViewWithTitle:root_Modification_fails];
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             
-        } else {
-            [self showToastViewWithTitle:root_Successfully_modified];
-            [self.navigationController popViewControllerAnimated:YES];
+            if ([firstDic[@"result"] intValue]==1) {
+                
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                [self showToastViewWithTitle:@"修改成功"];
+                //   _serverID=[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"serverId"]];
+                
+          
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                
+                if ((ResultValue>1) && (ResultValue<7)) {
+                    NSArray *resultArray=@[@"必须参数完整",@"电站国家不存在",@"电站已存在",@"电站信息错误",@"用户不存在"];
+                    if (ResultValue<(resultArray.count+2)) {
+                        [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                    }
+                }else if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"登录超时"];
+                }else{
+                    [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
+                }
+                
+                
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
         }
+        
+        
     } failure:^(NSError *error) {
         [self hideProgressView];
         [self showToastViewWithTitle:root_Networking];
     }];
     
 }
+
+
+
+-(void)getThePlantInfo{
+    
+    [self showProgressView];
+    NSDictionary *dic=@{@"plantId":_plantId};
+    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:dic paramarsSite:@"/api/v3/customer/getPlant" sucessBlock:^(id content) {
+        [self hideProgressView];
+        
+        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
+        NSLog(@"/api/v3/customer/getPlant: %@", content1);
+        
+        if (content1) {
+            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
+            
+            if ([firstDic[@"result"] intValue]==1) {
+                
+                
+               _allDic=firstDic[@"obj"];
+                
+          
+                
+                //   _serverID=[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"serverId"]];
+                
+                [self freshUI];
+            }else{
+                int ResultValue=[firstDic[@"result"] intValue];
+                
+                if ((ResultValue>1) && (ResultValue<4)) {
+                    NSArray *resultArray=@[@"运行异常",@"服务器地址为空"];
+                    if (ResultValue<(resultArray.count+2)) {
+                        [self showToastViewWithTitle:resultArray[ResultValue-2]];
+                    }
+                }else if (ResultValue==22) {
+                    [self showToastViewWithTitle:@"登录超时"];
+                }else{
+                    [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",firstDic[@"msg"]]];
+                }
+                
+                
+                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                
+            }
+        }
+    } failure:^(NSError *error) {
+        [self hideProgressView];
+        [self showToastViewWithTitle:root_Networking];
+        
+        
+    }];
+    
+    
+}
+
+
+-(void)freshUI{
+    
+    for (int i=0; i<_firstKeyArray.count; i++) {
+        NSString*ValueString=[NSString stringWithFormat:@"%@",[_allDic objectForKey:_firstKeyArray[i]]];
+        if ([ValueString containsString:@"null"]) {
+            ValueString=@"";
+        }
+        if (i==2 || i==4 || i==6 || i==7 || i==9) {
+            UILabel *lable=[self.view viewWithTag:3100+i];
+            
+            if (![ValueString isEqualToString:@""]) {
+               
+                lable.text=ValueString;
+                
+                if (i==7) {
+                    _longitude=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"plant_lng"]] floatValue]];
+                    _latitude=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"plant_lat"]] floatValue]];
+                    NSString *lableText=[NSString stringWithFormat:@"(%@,%@)",_longitude,_latitude];
+                            lable.text=lableText;
+                }
+                if (i==9) {
+                    for (int i=0; i<_unitKeyAndValue.allKeys.count; i++) {
+                        NSString*keySring2=_unitKeyAndValue.allKeys[i];
+                        NSString*value2=[_unitKeyAndValue objectForKey:keySring2];
+                        if ([value2 isEqualToString:ValueString]) {
+                            ValueString=keySring2;
+                        }
+                    }
+                    lable.text=ValueString;
+                }
+                
+            }
+      
+        }else{
+            
+            UITextField *field=[self.view viewWithTag:3100+i];
+            if (![ValueString isEqualToString:@""]) {
+                field.text=ValueString;
+            }
+
+        }
+        
+    }
+    
+    
+}
+
+
 
 -(void)choiceTheCountry2{
     if(_countryListArray.count>0){

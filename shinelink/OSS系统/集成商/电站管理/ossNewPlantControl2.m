@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) NSDictionary* allDic;
 @property (nonatomic, strong) NSString* serverID;
+@property (nonatomic, strong) NSString* accountName;
 @property (nonatomic, strong) NSArray* lableNameArray;
 @property (nonatomic, strong) NSArray* controlNameArray;
 @property (nonatomic, strong) NSArray* controlImageArray;
@@ -209,8 +210,10 @@
     NSInteger tagNum=button.tag-3000;
     if (tagNum==0) {
         ossNewPlantEdit *deviceView=[[ossNewPlantEdit alloc]init];
-//        deviceView.serverId=_serverId;
-//        deviceView.userId=_userId;
+        deviceView.serverId=_serverId;
+        deviceView.plantId=_userId;
+        deviceView.accountName=[NSString stringWithFormat:@"%@",[_allDic objectForKey:@"accountName"]];
+     //   deviceView.allDic=[NSDictionary dictionaryWithDictionary:_allDic];
         [self.navigationController pushViewController:deviceView animated:YES];
         
     }
