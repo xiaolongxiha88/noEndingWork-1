@@ -799,6 +799,9 @@
                         }
                         
                     }
+                }else  if (_cmdType==2) {
+                       self.addSuccessBlock();
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
         
                 

@@ -13,6 +13,7 @@
 #import "LRLChannelEditController.h"
 #import "ossIntegratorSearch.h"
 #import "ossNewDeviceControl.h"
+#import "addOssIntegratorDevice.h"
 
 @interface ossNewDeviceList ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *oneScrollView;
@@ -77,6 +78,7 @@
 
     
 }
+
 
 -(void)firstNetData{
     _deviceNetDic=[NSMutableDictionary new];
@@ -523,7 +525,12 @@
     DTKDropdownItem *item0 = [DTKDropdownItem itemWithTitle:@"添加设备" iconName:@"DTK_jiangbei" callBack:^(NSUInteger index, id info) {
         NSLog(@"rightItem%lu",(unsigned long)index);
         
-        IntegratorFirst *searchView=[[IntegratorFirst alloc]init];
+        addOssIntegratorDevice *searchView=[[addOssIntegratorDevice alloc]init];
+        searchView.deviceType=1;
+        searchView.cmdType=2;
+        searchView.addSuccessBlock = ^{
+            [self NetForDevice];
+        };
         [self.navigationController pushViewController:searchView animated:YES];
         
     }];
@@ -806,6 +813,8 @@
     _allTableViewData22Array=[NSMutableArray array];
     _pageNumForNet=1;
     _pageTotalNum=1;
+       [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
+    
 }
 
 -(void)changTableView{

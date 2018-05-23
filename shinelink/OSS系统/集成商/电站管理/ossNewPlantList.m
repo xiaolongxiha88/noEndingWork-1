@@ -748,6 +748,9 @@
     _allTableViewData22Array=[NSMutableArray array];
     _pageNumForNet=1;
     _pageTotalNum=1;
+    
+       [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
+    
 }
 
 -(void)changTableView{

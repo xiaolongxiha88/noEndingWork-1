@@ -16,6 +16,8 @@
 @property (nonatomic, assign) NSInteger deviceType;      //1、逆变器  2、储能机   3、mix
 @property (nonatomic, strong) NSDictionary *parameterDic;
 
+
+
 @end
 
 
