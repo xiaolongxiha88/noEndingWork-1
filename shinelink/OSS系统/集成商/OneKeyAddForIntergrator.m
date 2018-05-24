@@ -58,6 +58,8 @@
     [super viewDidLoad];
    _H1=40*HEIGHT_SIZE;
     
+    self.title=@"一键添加";
+    
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
     [self.view addGestureRecognizer:tapGestureRecognizer];
 

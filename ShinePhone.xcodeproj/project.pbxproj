@@ -88,6 +88,7 @@
 		333D44642010B97200C76FF9 /* oss_user_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 333D44632010B97100C76FF9 /* oss_user_list.png */; };
 		333D4466201189F400C76FF9 /* user_list_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 333D4465201189F400C76FF9 /* user_list_img.png */; };
 		333D446820118A4D00C76FF9 /* power_station_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 333D446720118A4C00C76FF9 /* power_station_img.png */; };
+		333F5AB120B6651A006CBCF7 /* serverPlantList.m in Sources */ = {isa = PBXBuildFile; fileRef = 333F5AB020B6651A006CBCF7 /* serverPlantList.m */; };
 		3343F3AA1C803DC9009F69BC /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3A91C803DC9009F69BC /* BaseRequest.m */; };
 		3343F3BF1C80403C009F69BC /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3AD1C80403C009F69BC /* AFHTTPRequestOperation.m */; };
 		3343F3C01C80403C009F69BC /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3343F3AF1C80403C009F69BC /* AFHTTPRequestOperationManager.m */; };
@@ -993,6 +994,8 @@
 		333D44632010B97100C76FF9 /* oss_user_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oss_user_list.png; sourceTree = "<group>"; };
 		333D4465201189F400C76FF9 /* user_list_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_list_img.png; sourceTree = "<group>"; };
 		333D446720118A4C00C76FF9 /* power_station_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power_station_img.png; sourceTree = "<group>"; };
+		333F5AAF20B6651A006CBCF7 /* serverPlantList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = serverPlantList.h; sourceTree = "<group>"; };
+		333F5AB020B6651A006CBCF7 /* serverPlantList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = serverPlantList.m; sourceTree = "<group>"; };
 		3343F3A81C803DC9009F69BC /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
 		3343F3A91C803DC9009F69BC /* BaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseRequest.m; sourceTree = "<group>"; };
 		3343F3AC1C80403C009F69BC /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -2665,6 +2668,8 @@
 				336A391D1F29E43F00EF05F6 /* 图片11 */,
 				335088D71C73011300D7AA03 /* addDevice.h */,
 				335088D81C73011300D7AA03 /* addDevice.m */,
+				333F5AAF20B6651A006CBCF7 /* serverPlantList.h */,
+				333F5AB020B6651A006CBCF7 /* serverPlantList.m */,
 			);
 			path = "添加设备";
 			sourceTree = "<group>";
@@ -5925,6 +5930,7 @@
 				33EFB66C1C98F9B1003F336F /* ZFGenericChart.m in Sources */,
 				33860FEA1EEA75C5004150FD /* MJRefreshStateHeader.m in Sources */,
 				33E727862091A7A0009F460A /* ossNewDeviceList.m in Sources */,
+				333F5AB120B6651A006CBCF7 /* serverPlantList.m in Sources */,
 				33FAD8EB1F99CA0C0030EEC3 /* usbToWifiDataControl.m in Sources */,
 				3381ECE51CBC900900DCF0D2 /* EquitGraph2ViewController.m in Sources */,
 				3367CB521C86806700EF460C /* ViewController+MASAdditions.m in Sources */,

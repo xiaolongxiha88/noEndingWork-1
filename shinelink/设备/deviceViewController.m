@@ -32,6 +32,9 @@
 #import "MixHead.h"
 #import "MixSecondView.h"
 #import "MaxSecondViewController.h"
+#import "ossNewPlantControl.h"
+#import "ossNewPlantControl2.h"
+#import "ossNewDeviceControl.h"
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 #define  AnimationTime 5
@@ -97,6 +100,7 @@
 @property (nonatomic, strong) KTDropdownMenuView *menuView;
 
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property(nonatomic,strong)UIBarButtonItem *leftItem;
 
 @end
 
@@ -163,6 +167,11 @@ _pcsNetStorageSN=@"";
     _isPvType=NO;
     
  
+    if (_LogTypeForOSS==1) {
+        _leftItem=[[UIBarButtonItem alloc]initWithTitle:@"返回OSS" style:UIBarButtonItemStylePlain target:self action:@selector(goToOSS)];
+        self.navigationItem.leftBarButtonItem=_leftItem;
+    }
+    
   
   [self.navigationController.navigationBar setTranslucent:YES];
     [self.navigationController.navigationBar setBarTintColor:MainColor];
@@ -578,6 +587,37 @@ _pcsNetStorageSN=@"";
 
 
 
+-(void)goToOSS{
+    if (_LogOssNum==1) {
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[ossNewDeviceControl class]])
+            {
+                ossNewDeviceControl *A =(ossNewDeviceControl *)controller;
+                [self.navigationController popToViewController:A animated:YES];
+            }
+            
+        }
+    }else  if (_LogOssNum==2) {
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[ossNewPlantControl class]])
+            {
+                ossNewPlantControl *A =(ossNewPlantControl *)controller;
+                [self.navigationController popToViewController:A animated:YES];
+            }
+            
+        }
+    }else  if (_LogOssNum==3) {
+        for (UIViewController *controller in self.navigationController.viewControllers) {
+            if ([controller isKindOfClass:[ossNewPlantControl2 class]])
+            {
+                ossNewPlantControl2 *A =(ossNewPlantControl2 *)controller;
+                [self.navigationController popToViewController:A animated:YES];
+            }
+            
+        }
+    }
+    
+}
 
 
 - (void)addTitleMenu

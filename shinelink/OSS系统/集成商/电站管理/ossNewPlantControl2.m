@@ -10,6 +10,7 @@
 #import "DTKDropdownMenuView.h"
 #import "ShinePhone-Swift.h"
 #import "ossNewPlantEdit.h"
+#import "loginViewController.h"
 
 @interface ossNewPlantControl2 ()
 
@@ -216,10 +217,25 @@
      //   deviceView.allDic=[NSDictionary dictionaryWithDictionary:_allDic];
         [self.navigationController pushViewController:deviceView animated:YES];
         
-    }
-    
-    
-    if (tagNum==1) {
+    }else if (tagNum==1) {
+      
+            NSArray *serverListArray=[[NSUserDefaults standardUserDefaults] objectForKey:@"OssServerAddress"];
+            NSString *serverUrl;
+            //   NSMutableArray* serverIdArray=[NSMutableArray array];
+            for (NSDictionary*dic in serverListArray) {
+                NSString *ID=[NSString stringWithFormat:@"%@",dic[@"id"]];
+                if([ID isEqualToString:[NSString stringWithFormat:@"%@",_serverId]]) {
+                    serverUrl=[NSString stringWithFormat:@"%@",dic[@"url"]];
+                }
+            }
+            
+            loginViewController *deviceView=[[loginViewController alloc]init];
+            deviceView.demoServerURL=serverUrl;
+            deviceView.demoName=_userName;
+            deviceView.LogTypeForOSS=1;
+            deviceView.isFirstLogin=YES;
+            deviceView.LogOssNum=3;
+            [self.navigationController pushViewController:deviceView animated:NO];
         
     }
     
@@ -307,6 +323,7 @@
                 
                 _allDic=netArray[0];
                 
+                _userName=_allDic[@"accountName"];
                 //   _serverID=[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"serverId"]];
                 
                 [self freshUI];

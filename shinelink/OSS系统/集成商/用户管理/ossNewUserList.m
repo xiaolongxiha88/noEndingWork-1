@@ -70,6 +70,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+         self.title=@"用户管理";
+    
     _isChangTableView=NO;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
@@ -112,7 +114,7 @@
         _forChoiceParameterDic=@{@"0":@"账号    ",@"1":@"别名      ",@"2":@"真实名字",@"3":@"手机号       ",@"4":@"电子邮箱   ",@"5":@"注册日期",@"6":@"设备数量  ",@"7":@"安装商"};
         _numForNetKeyDic=@{@"0":@"accountName",@"1":@"alias",@"2":@"activeName",@"3":@"phoneNum",@"4":@"email",@"5":@"creatDate",@"6":@"deviceCount",@"7":@"iCode"};
         
-        _cellNameArray2=@[@"序列号",@"设备数量",@"手机号",@"注册日期"];     //列表的另一种展示
+        _cellNameArray2=@[@"用户名",@"设备数量",@"手机号",@"注册日期"];     //列表的另一种展示
         _NetForParameterNew22Array=@[@"0",@"6",@"3",@"5"];
         
         

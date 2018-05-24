@@ -67,6 +67,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+     self.title=@"设备管理";
+    
     _isChangTableView=NO;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
@@ -85,7 +87,7 @@
     
     [self initTheNetPageAndValue];
     
-    [_deviceNetDic setObject:@"3" forKey:@"lineType"];
+    [_deviceNetDic setObject:@"2" forKey:@"lineType"];
     [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"page"];
     [_deviceNetDic setObject:@"1" forKey:@"order"];
     [_deviceNetDic setObject:@"1" forKey:@"deviceType"];
@@ -739,11 +741,7 @@
                     
                 }
                 
-                if ([unitOneDic.allKeys containsObject:@"serverId"]) {
-                       [valueArray addObject:unitOneDic[@"serverId"]];
-                }else{
-                       [valueArray addObject:@"110"];
-                }
+       
                 if (_deviceType==1) {
                     if ([twoDic.allKeys containsObject:@"type"]) {
                          [valueArray addObject:[NSString stringWithFormat:@"%@",twoDic[@"type"]]];
@@ -752,6 +750,16 @@
                         [valueArray addObject:@"1"];
                       [valueArray22 addObject:@"1"];
                     }
+                    
+                }
+                
+                if ([unitOneDic.allKeys containsObject:@"serverId"]) {          //最后一个参数显示serverID
+                    [valueArray addObject:[NSString stringWithFormat:@"%@",unitOneDic[@"serverId"]]];
+                            [valueArray22 addObject:[NSString stringWithFormat:@"%@",unitOneDic[@"serverId"]]];
+                    
+                }else{
+                    [valueArray addObject:@"110"];
+                       [valueArray22 addObject:@"110"];
                     
                 }
                 
@@ -1053,13 +1061,20 @@
          deviceView.deviceSn=infoArray[0];
     }
     if (_deviceType==1) {
-        if([[infoArray lastObject] isEqualToString:@"6"]){
+        if([infoArray[infoArray.count-2] isEqualToString:@"6"]){
             deviceView.deviceType=4;
         }
     }
-  
+    if([infoArray[infoArray.count-1] isEqualToString:@"110"]){
+        
+        [self showToastViewWithTitle:@"设备未接入"];
+        return;
+    }else{
+        
+            [self.navigationController pushViewController:deviceView animated:YES];
+    }
     
-    [self.navigationController pushViewController:deviceView animated:YES];
+
     
 }
 

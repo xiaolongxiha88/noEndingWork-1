@@ -16,4 +16,6 @@
 @property (nonatomic, strong) NSString* serverId;
 @property (nonatomic, strong) NSString* userId;
 
+@property (nonatomic, strong) NSString* userName;
+
 @end

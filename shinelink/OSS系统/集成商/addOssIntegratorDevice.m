@@ -138,7 +138,7 @@
 
       self.title=@"添加电站";
     
-    if (_cmdType==2) {
+    if (_cmdType==4) {
         UIView *jumpUserView=[[UIView alloc]initWithFrame:CGRectMake(0, H2, SCREEN_Width, _H1*2)];
         jumpUserView.backgroundColor=[UIColor clearColor];
         jumpUserView.tag=3300;
@@ -1007,7 +1007,7 @@
 
 -(void)NetForPlant{
     
-    if (_cmdType==2) {
+    if (_cmdType==4) {
         UILabel *lable=[self.view viewWithTag:3400+100];
         if ([lable.text isEqualToString:@""] || lable.text==nil) {
             [self showToastViewWithTitle:@"请选择电站所属用户"];
@@ -1067,7 +1067,7 @@
             if ([firstDic[@"result"] intValue]==1) {
            
                 [self showToastViewWithTitle:@"保存电站成功"];
-                if (_cmdType==2) {
+                if (_cmdType==2) {     //在一键注册里，电站列表添加电站
                     for (UIViewController *controller in self.navigationController.viewControllers) {
                         if ([controller isKindOfClass:[OneKeyAddForIntergrator class]])
                         {
@@ -1079,20 +1079,23 @@
                         }
                         
                     }
-                }  if (_cmdType==3) {     //在一键注册里，用户列表添加用户
+                }else  if (_cmdType==3) {                //在单独注册里，电站列表添加电站
                     for (UIViewController *controller in self.navigationController.viewControllers) {
                         if ([controller isKindOfClass:[addOssIntegratorDevice class]])
                         {
                             addOssIntegratorDevice *A =(addOssIntegratorDevice *)controller;
                             A.plantID=firstDic[@"obj"][@"plantId"];
                             A.plantName=_twoDic[@"plantName"];
-                            
+                             A.plantName2=_twoDic[@"plantName"];
                             [self.navigationController popToViewController:A animated:YES];
                             
                             
                         }
                         
                     }
+                }else  if (_cmdType==4) {                //在单独注册里，添加成功
+                        self.addSuccessBlock();
+                    [self.navigationController popViewControllerAnimated:YES];
                 }
                 
                 //_userName=firstDic[@"obj"][@"userName"];
@@ -1147,8 +1150,9 @@
             
             if ([firstDic[@"result"] intValue]==1) {
                 
-                //   [self showToastViewWithTitle:@"保存采集器成功"];
-                
+                if (_cmdType==2) {
+                         self.addSuccessBlock();
+                }
                 [self.navigationController popViewControllerAnimated:YES];
                 [self showAlertViewWithTitle:@"注册成功" message:nil cancelButtonTitle:root_OK];
             }else{

@@ -10,10 +10,11 @@
 #import "kongZhiNi0.h"
 #import "ChangeCellectViewController.h"
 #import "controlCNJTable.h"
+#import "loginViewController.h"
 
 @interface ossNewDeviceControl ()
 @property (nonatomic, strong) NSDictionary* allDic;
-@property (nonatomic, strong) NSString* serverID;
+
 @property (nonatomic, strong) NSArray* lableNameArray;
 @property (nonatomic, strong) NSArray* controlNameArray;
 @property (nonatomic, strong) NSArray* controlImageArray;
@@ -187,26 +188,46 @@
             
         }
         
-    }
-    
-    
-    if (tagNum==1) {
+    }else if (tagNum==1) {
         ChangeCellectViewController *deviceView=[[ChangeCellectViewController alloc]init];
         deviceView.serverID=_serverID;
         deviceView.datalogSN=_deviceSn;
         deviceView.OssString=@"2";
         [self.navigationController pushViewController:deviceView animated:YES];
-    }
-    
-    if (tagNum==2) {
+        
+    }else if (tagNum==2) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"是否删除设备?" message:nil delegate:self cancelButtonTitle:root_cancel otherButtonTitles:root_OK, nil];
         alertView.tag = 1001;
         [alertView show];
         
    
+    }else if (tagNum==3) {
+        
+        NSArray *serverListArray=[[NSUserDefaults standardUserDefaults] objectForKey:@"OssServerAddress"];
+        NSString *serverUrl;
+        //   NSMutableArray* serverIdArray=[NSMutableArray array];
+        for (NSDictionary*dic in serverListArray) {
+            NSString *ID=[NSString stringWithFormat:@"%@",dic[@"id"]];
+            if([ID isEqualToString:[NSString stringWithFormat:@"%@",_serverID]]) {
+                serverUrl=[NSString stringWithFormat:@"%@",dic[@"url"]];
+            }
+        }
+        
+        loginViewController *deviceView=[[loginViewController alloc]init];
+        deviceView.demoServerURL=serverUrl;
+        deviceView.demoName=_userName;
+        deviceView.LogTypeForOSS=1;
+        deviceView.isFirstLogin=YES;
+        deviceView.LogOssNum=1;
+        [self.navigationController pushViewController:deviceView animated:NO];
+        
+        
     }
     
 }
+
+
+
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     
@@ -325,6 +346,7 @@
                 }
                 _allDic=netArray[0];
                 _serverID=[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"serverId"]];
+                _userName=[NSString stringWithFormat:@"%@",_allDic[@"userName"]];
                 
                 [self freshUI];
             }else{

@@ -861,7 +861,11 @@ NSLog(@"体验馆");
   
    // [self MD5:demoPassword]
     [self showProgressView];
-    [BaseRequest requestWithMethod:HEAD_URL paramars:@{@"userName":_demoName, @"password":demoPassword,@"serverUrl":_demoServerURL} paramarsSite:@"/newLoginAPI.do?op=apiserverlogin" sucessBlock:^(id content) {
+    
+    if (![_demoServerURL isEqualToString:@"http://"]) {
+        _demoServerURL=[NSString stringWithFormat:@"http://%@",_demoServerURL];
+    }
+    [BaseRequest requestWithMethod:_demoServerURL paramars:@{@"userName":_demoName, @"password":demoPassword,@"serverUrl":_demoServerURL} paramarsSite:@"/newLoginAPI.do?op=apiserverlogin" sucessBlock:^(id content) {
         [self hideProgressView];
         NSLog(@"/newLoginAPI.do?op=apiserverlogin:%@",content);
         if (content) {
@@ -917,7 +921,8 @@ NSLog(@"体验馆");
                 [[NSUserDefaults standardUserDefaults] setObject:counrtyName forKey:@"counrtyName"];
                 [[NSUserDefaults standardUserDefaults] setObject:timeZoneNum forKey:@"timeZoneNum"];
                 
-                [[NSUserDefaults standardUserDefaults] setObject:@"S" forKey:@"LoginType"];
+              //  [[NSUserDefaults standardUserDefaults] setObject:@"S" forKey:@"LoginType"];
+                
                 [[UserInfo defaultUserInfo] setTelNumber:_dataSource[@"user"][@"phoneNum"]];
                 [[UserInfo defaultUserInfo] setUserID:_dataSource[@"user"][@"id"]];
                 [[UserInfo defaultUserInfo] setEmail:_dataSource[@"user"][@"email"]];
@@ -1308,6 +1313,8 @@ NSLog(@"体验馆");
     deviceVV.adNumber=_adNumber;
     deviceVV.stationID=stationID;
     deviceVV.stationName=stationName;
+    deviceVV.LogOssNum=_LogOssNum;
+    deviceVV.LogTypeForOSS=_LogTypeForOSS;
     [self.navigationController pushViewController:deviceVV animated:NO];
     
 }

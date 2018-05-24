@@ -21,4 +21,7 @@
 @property (nonatomic, strong) NSMutableArray *stationID;
 @property (nonatomic, strong) NSMutableArray *stationName;
 
+@property (nonatomic, assign) NSInteger LogOssNum;    //1设备页 2、用户管理  3、电站管理
+
+@property (nonatomic, assign) NSInteger LogTypeForOSS; 
 @end

@@ -71,6 +71,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title=@"电站管理";
+    
     _isChangTableView=NO;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
@@ -495,7 +497,7 @@
         
         addOssIntegratorDevice *searchView=[[addOssIntegratorDevice alloc]init];
         searchView.deviceType=2;
-        searchView.cmdType=2;
+        searchView.cmdType=4;
         searchView.addSuccessBlock = ^{
              [self initTheNetPageAndValue];
             [self NetForDevice];

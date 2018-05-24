@@ -232,6 +232,7 @@
         deviceView.demoName=_deviceSn;
         deviceView.LogTypeForOSS=1;
           deviceView.isFirstLogin=YES;
+        deviceView.LogOssNum=2;
         [self.navigationController pushViewController:deviceView animated:NO];
         
 
