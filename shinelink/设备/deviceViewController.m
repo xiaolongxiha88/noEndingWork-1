@@ -35,6 +35,8 @@
 #import "ossNewPlantControl.h"
 #import "ossNewPlantControl2.h"
 #import "ossNewDeviceControl.h"
+#import "serverPlantList.h"
+
 
 #define ColorWithRGB(r,g,b) [UIColor colorWithRed:r/255. green:g/255. blue:b/255. alpha:1]
 #define  AnimationTime 5
@@ -552,10 +554,14 @@ _pcsNetStorageSN=@"";
           goLog.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:goLog animated:NO];
     }];
-    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:root_Add_Plant iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
-        NSLog(@"rightItem%lu",(unsigned long)index);
-        addStationViewController *addView=[[addStationViewController alloc]init];
-        [self.navigationController pushViewController:addView animated:YES];
+    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:@"电站管理" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
+     
+                serverPlantList *addView=[[serverPlantList alloc]init];
+          addView.hidesBottomBarWhenPushed=YES;
+                [self.navigationController pushViewController:addView animated:YES];
+        
+//        addStationViewController *addView=[[addStationViewController alloc]init];
+//        [self.navigationController pushViewController:addView animated:YES];
         
     }];
     

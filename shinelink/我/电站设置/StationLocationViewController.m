@@ -60,8 +60,13 @@
 
 //请求数据
 -(void)requestData{
-    
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"plantId":[UserInfo defaultUserInfo].plantID} paramarsSite:@"/newPlantAPI.do?op=getPlant" sucessBlock:^(id content) {
+    NSString *plantId ;
+    if (_setType==1) {
+        plantId=_stationId;
+    }else{
+        plantId=[UserInfo defaultUserInfo].plantID;
+    }
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"plantId":plantId} paramarsSite:@"/newPlantAPI.do?op=getPlant" sucessBlock:^(id content) {
         NSLog(@"getPlant:%@",content);
         _dict=[NSDictionary new];
         _dict=content;
@@ -291,7 +296,11 @@
     }
     
     NSMutableDictionary *dicArray=[NSMutableDictionary new];
-    [dicArray setObject:[UserInfo defaultUserInfo].plantID forKey:@"plantID"];
+    if (_setType==1) {
+        [dicArray setObject:_stationId forKey:@"plantID"];
+    }else{
+        [dicArray setObject:[UserInfo defaultUserInfo].plantID forKey:@"plantID"];
+    }
     [dicArray setObject:_dict[@"plantName"] forKey:@"plantName"];
     [dicArray setObject:_dict[@"createDateText"] forKey:@"plantDate"];
     [dicArray setObject:_dict[@"designCompany"] forKey:@"plantFirm"];

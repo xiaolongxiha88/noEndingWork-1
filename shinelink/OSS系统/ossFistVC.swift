@@ -1150,7 +1150,7 @@ class ossFistVC: RootViewController {
         
              integratorValueArray=[0,0,0,0];
      self.showProgressView()
-        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v2/customer/customer_overview_data", sucessBlock: {(successBlock)->() in
+        BaseRequest.request(withMethodResponseStringResult: OSS_HEAD_URL, paramars:[:], paramarsSite: "/api/v3/customer/customerdata", sucessBlock: {(successBlock)->() in
         self.hideProgressView()
              self.perform(#selector(self.removeProgress), with: self, afterDelay: 1)
             
@@ -1162,7 +1162,7 @@ class ossFistVC: RootViewController {
                   self.hideProgressView()
                 
                 let jsonDate=jsonDate0 as! Dictionary<String, Any>
-                print("/api/v2/customer/customer_overview_data=",jsonDate)
+                print("/api/v3/customer/customerdata=",jsonDate)
                 // let result:NSString=NSString(format:"%s",jsonDate["result"] )
                 let result1=jsonDate["result"] as? Int ?? 0
                 

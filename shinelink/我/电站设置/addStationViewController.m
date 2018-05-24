@@ -253,8 +253,13 @@
         id jsonObj = [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
         if ([jsonObj[@"success"] integerValue]==1) {
             [self showAlertViewWithTitle:nil message:root_tianjia_dianzhan_chenggong cancelButtonTitle:root_Yes];
-            
-            [self registerUser];
+            if (_cmdType==1) {
+                self.addSuccessBlock();
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                     [self registerUser];
+            }
+       
             
            // [self.navigationController popViewControllerAnimated:YES];
         }else{

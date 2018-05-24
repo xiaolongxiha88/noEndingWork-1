@@ -11,4 +11,8 @@
 @interface StationSafeViewController : RootViewController
 @property(nonatomic,strong)NSDictionary *dict;
 @property(nonatomic,strong)NSString *stationId;
+
+
+@property(nonatomic,assign)NSInteger setType;
+
 @end

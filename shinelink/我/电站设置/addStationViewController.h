@@ -10,4 +10,8 @@
 
 @interface addStationViewController : RootViewController
 
+@property (nonatomic,copy) void(^addSuccessBlock)();
+@property (nonatomic, assign)NSInteger cmdType;
+
+
 @end

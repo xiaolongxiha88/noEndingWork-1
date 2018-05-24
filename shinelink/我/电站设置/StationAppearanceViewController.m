@@ -36,7 +36,13 @@
 
 -(void)requestData{
     [self showProgressView];
-    [BaseRequest requestImageWithMethodByGet:HEAD_URL paramars:@{@"id":[UserInfo defaultUserInfo].plantID} paramarsSite:@"/newPlantAPI.do?op=getImg" sucessBlock:^(id content) {
+    NSString *plantId ;
+    if (_setType==1) {
+        plantId=_stationId;
+    }else{
+        plantId=[UserInfo defaultUserInfo].plantID;  
+    }
+    [BaseRequest requestImageWithMethodByGet:HEAD_URL paramars:@{@"id":plantId} paramarsSite:@"/newPlantAPI.do?op=getImg" sucessBlock:^(id content) {
         [self hideProgressView];
           [self initUI];
         _imageView.image=content;
@@ -139,8 +145,15 @@
     
     NSMutableDictionary *dataImageDict = [NSMutableDictionary dictionary];
     [dataImageDict setObject:imageData forKey:@"plantMap"];
-    //NSString *plantId = _stationId;
-        [BaseRequest uplodImageWithMethod:HEAD_URL paramars:@{@"id":[UserInfo defaultUserInfo].plantID} paramarsSite:@"/newPlantAPI.do?op=updateImg" dataImageDict:dataImageDict sucessBlock:^(id content) {
+ NSString *plantId ;
+    if (_setType==1) {
+        plantId=_stationId;
+       
+    }else{
+        plantId=[UserInfo defaultUserInfo].plantID;
+
+    }
+        [BaseRequest uplodImageWithMethod:HEAD_URL paramars:@{@"id":plantId} paramarsSite:@"/newPlantAPI.do?op=updateImg" dataImageDict:dataImageDict sucessBlock:^(id content) {
             NSString *res = [[NSString alloc] initWithData:content encoding:NSUTF8StringEncoding];
             if ([res rangeOfString:@"true"].location == NSNotFound) {
                 [self showToastViewWithTitle:root_Modification_fails];

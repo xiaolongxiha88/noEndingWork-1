@@ -56,8 +56,13 @@
 
 //请求数据
 -(void)requestData{
-
-    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"plantId":[UserInfo defaultUserInfo].plantID} paramarsSite:@"/newPlantAPI.do?op=getPlant" sucessBlock:^(id content) {
+    NSString *plantId ;
+    if (_setType==1) {
+        plantId=_stationId;
+    }else{
+        plantId=[UserInfo defaultUserInfo].plantID;
+    }
+    [BaseRequest requestWithMethodResponseJsonByGet:HEAD_URL paramars:@{@"plantId":plantId} paramarsSite:@"/newPlantAPI.do?op=getPlant" sucessBlock:^(id content) {
         NSLog(@"getPlant:%@",content);
         _dict=[NSDictionary new];
         _dict=content;
@@ -197,7 +202,12 @@
 //    NSRange newRange={range.location+1,[_dict[@"timeZone"] length]-range.location-1};
 //    NSString *timeString=[_dict[@"timeZone"] substringWithRange:newRange];
     NSMutableDictionary *dicArray=[NSMutableDictionary new];
-    [dicArray setObject:[UserInfo defaultUserInfo].plantID forKey:@"plantID"];
+    if (_setType==1) {
+         [dicArray setObject:_stationId forKey:@"plantID"];
+    }else{
+         [dicArray setObject:[UserInfo defaultUserInfo].plantID forKey:@"plantID"];
+    }
+   
      [dicArray setObject:[_textFieldMutableArray[0] text] forKey:@"plantName"];
      [dicArray setObject:[_textFieldMutableArray[1] text] forKey:@"plantDate"];
      [dicArray setObject:[_textFieldMutableArray[2] text] forKey:@"plantFirm"];

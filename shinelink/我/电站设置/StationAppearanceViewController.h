@@ -10,5 +10,8 @@
 #import "RootViewController.h"
 
 @interface StationAppearanceViewController : RootViewController
+
 @property(nonatomic,strong)NSString *stationId;
+@property(nonatomic,assign)NSInteger setType;
+
 @end

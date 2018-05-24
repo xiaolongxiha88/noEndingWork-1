@@ -10,4 +10,10 @@
 
 @interface stationTableView : UITableViewController
 
+@property(nonatomic,strong)NSString *stationId;
+
+@property(nonatomic,assign)NSInteger setType;
+
+@property (nonatomic,copy) void(^goToPlantBlock)();
+
 @end

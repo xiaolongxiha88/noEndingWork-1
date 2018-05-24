@@ -134,11 +134,8 @@
     [registerUser addTarget:self action:@selector(registerUser) forControlEvents:UIControlEventTouchUpInside];
     //  goBut.highlighted=[UIColor grayColor];
     
-
-    NSString *LogTypeForOSS=[[NSUserDefaults standardUserDefaults] objectForKey:@"LogTypeForOSS"];
-    if (![LogTypeForOSS isEqualToString:@"1"]) {
            [_scrollView2 addSubview:registerUser];
-    }
+   
  
     
     //_tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];

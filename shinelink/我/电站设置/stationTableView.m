@@ -15,12 +15,18 @@
 
 @interface stationTableView ()
 @property(nonatomic,strong)NSMutableArray *dataArray;
+@property(nonatomic,strong)UIBarButtonItem *leftItem;
 @end
 
 @implementation stationTableView
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (_setType==1) {
+        _leftItem=[[UIBarButtonItem alloc]initWithTitle:@"返回电站管理" style:UIBarButtonItemStylePlain target:self action:@selector(goToPlantEdit)];
+        self.navigationItem.leftBarButtonItem=_leftItem;
+    }
     
     self.view.backgroundColor=MainColor;
        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -33,12 +39,18 @@
         [self.tableView setLayoutMargins:UIEdgeInsetsZero];
     }
     
-    
-    UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_tianjia_1 style:UIBarButtonItemStylePlain target:self action:@selector(buttonPressed)];
-    rightItem.tag=10;
-    self.navigationItem.rightBarButtonItem=rightItem;
-    
+    if (_setType!=1) {
+        UIBarButtonItem *rightItem=[[UIBarButtonItem alloc]initWithTitle:root_tianjia_1 style:UIBarButtonItemStylePlain target:self action:@selector(buttonPressed)];
+        rightItem.tag=10;
+        self.navigationItem.rightBarButtonItem=rightItem;
+    }
  
+}
+
+
+-(void)goToPlantEdit{
+    self.goToPlantBlock();
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)buttonPressed{
@@ -118,16 +130,25 @@
   
     if (indexPath.row==0) {
         StationSafeViewController *aboutView = [[StationSafeViewController alloc]init];
+        aboutView.stationId=_stationId;
+        aboutView.setType=1;
+        
         [self.navigationController pushViewController:aboutView animated:NO];
       
     }else if (indexPath.row==1){
         StationLocationViewController *aboutView = [[StationLocationViewController alloc]init];
+        aboutView.stationId=_stationId;
+        aboutView.setType=1;
         [self.navigationController pushViewController:aboutView animated:NO];
     }else if (indexPath.row==2){
         StationEarningsViewController *aboutView = [[StationEarningsViewController alloc]init];
+        aboutView.stationId=_stationId;
+        aboutView.setType=1;
         [self.navigationController pushViewController:aboutView animated:NO];
     }else if (indexPath.row==3){
         StationAppearanceViewController *aboutView = [[StationAppearanceViewController alloc]init];
+        aboutView.stationId=_stationId;
+        aboutView.setType=1;
         [self.navigationController pushViewController:aboutView animated:NO];
     }
    
