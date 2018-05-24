@@ -557,11 +557,15 @@ _pcsNetStorageSN=@"";
     DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:@"电站管理" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
      
                 serverPlantList *addView=[[serverPlantList alloc]init];
+        addView.goBackBlock = ^(NSArray *plantArray){
+            NSArray *allArray=plantArray;
+            _stationID=[NSMutableArray arrayWithArray:allArray[0]];
+      
+        };
           addView.hidesBottomBarWhenPushed=YES;
                 [self.navigationController pushViewController:addView animated:YES];
         
-//        addStationViewController *addView=[[addStationViewController alloc]init];
-//        [self.navigationController pushViewController:addView animated:YES];
+
         
     }];
     

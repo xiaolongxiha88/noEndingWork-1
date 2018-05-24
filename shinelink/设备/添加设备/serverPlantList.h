@@ -18,6 +18,6 @@
 @property (nonatomic, strong) NSDictionary *parameterDic;
 
 
-
+@property (nonatomic,copy) void(^goBackBlock)(NSArray* plantArray);
 
 @end

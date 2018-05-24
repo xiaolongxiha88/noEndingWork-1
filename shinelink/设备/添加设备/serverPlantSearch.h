@@ -10,4 +10,11 @@
 
 @interface serverPlantSearch : RootViewController
 
+@property (nonatomic, assign) NSInteger searchType;     //1设备搜索
+
+@property (nonatomic,copy) void(^searchResultBlock)(NSArray* netResultArray);
+@property (nonatomic,copy) void(^searchDicBlock)(NSDictionary* netDic);
+
+@property (nonatomic, strong) NSArray *oldSearchValueArray;
+
 @end

@@ -16,6 +16,8 @@
 #import "addOssIntegratorDevice.h"
 #import "addStationViewController.h"
 #import "stationTableView.h"
+#import "serverPlantSearch.h"
+#import "serverPlantCEll2.h"
 
 @interface serverPlantList ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *oneScrollView;
@@ -445,7 +447,7 @@
     
     //注册单元格类型
     [_tableView registerClass:[ossNewDeviceCell class] forCellReuseIdentifier:@"CELL1"];
-    [_tableView registerClass:[ossNewDeviceTwoCell class] forCellReuseIdentifier:@"CELL2"];
+    [_tableView registerClass:[serverPlantCEll2 class] forCellReuseIdentifier:@"CELL2"];
 }
 
 -(void)initTheTheChangeUI{
@@ -629,25 +631,23 @@
 
 #pragma mark -搜索回调
 -(void)goToSearch{
-    ossIntegratorSearch *searchView=[[ossIntegratorSearch alloc]init];
+    serverPlantSearch *searchView=[[serverPlantSearch alloc]init];
     searchView.searchType=1;
     searchView.oldSearchValueArray=self.searchNameArray;
     searchView.searchDicBlock = ^(NSDictionary *netDic){
         _deviceNetDic=[NSMutableDictionary dictionaryWithDictionary:netDic];
-        if ([[_deviceNetDic objectForKey:@"deviceType"] integerValue] != _deviceType) {
-            _deviceType=[[_deviceNetDic objectForKey:@"deviceType"] integerValue];
-            if (_oneScrollView) {
-                [_oneScrollView removeFromSuperview];
-                _oneScrollView=nil;
-            }
-            [self goToGetListParameter];
-        }
-        
+     
     };
     searchView.searchResultBlock = ^(NSArray *resultArray){
-        [self initTheNetPageAndValue];
+    //[self initTheNetPageAndValue];
+        _allTableViewDataArray=[NSMutableArray array];
+        _allTableViewData22Array=[NSMutableArray array];
+        _pageNumForNet=1;
+        [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"toPageNum"];
+        
         _netResultArray=resultArray[0];
         _searchNameArray=resultArray[1];
+        _allNumArray=resultArray[2];
         [self changeNetData];
     };
     [self.navigationController pushViewController:searchView animated:YES];
@@ -657,8 +657,13 @@
 #pragma mark -转换网络数据
 -(void)changeNetData{                     //给tableviewcell用的数据
     
-    
+    if (_pageNumForNet==1) {
+        [_allNumArray addObject:@"建站日期"];
+        [_allNumArray addObject:@""];
+        [_allTableViewData22Array addObject:_allNumArray];
+    }
   
+    
     
     for (int i=0; i<_netResultArray.count; i++) {
         
@@ -708,7 +713,8 @@
              
                 
             }
-            
+        
+      [valueArray22 addObject:[NSString stringWithFormat:@"%@",twoDic[@"createDateText"]]];
         
                 [valueArray addObject:[NSString stringWithFormat:@"%@",twoDic[@"id"]]];
                 [valueArray22 addObject:[NSString stringWithFormat:@"%@",twoDic[@"id"]]];
@@ -794,8 +800,7 @@
     float H=30*HEIGHT_SIZE;
     
     if (_isChangTableView) {
-        NSInteger Num=_cellNameArray2.count/2+_cellNameArray2.count%2;
-        H=Num*20*HEIGHT_SIZE*2+10*HEIGHT_SIZE+5*HEIGHT_SIZE;
+       H=190*HEIGHT_SIZE;
     }
     return H;
     
@@ -957,19 +962,25 @@
 
 - (void)cellDidLongPressed2:(UIGestureRecognizer *)recognizer{
     if(recognizer.state == UIGestureRecognizerStateBegan) {
-        
         NSInteger NUM=recognizer.view.tag;
-         _tableRowNum=NUM-7000;
+        _tableRowNum=NUM-7000;
         
-        if (!_isChangTableView) {
-            NSArray *dataArray=_allTableViewDataArray[_tableRowNum];
-            _plantID=dataArray[dataArray.count-1];
+        if (_tableRowNum!=0) {
+            if (!_isChangTableView) {
+                NSArray *dataArray=_allTableViewDataArray[_tableRowNum];
+                _plantID=dataArray[dataArray.count-1];
+            }else{
+                NSArray *dataArray=_allTableViewData22Array[_tableRowNum];
+                _plantID=dataArray[dataArray.count-1];
+            }
+            
+            [self goToEdit];
         }else{
-            NSArray *dataArray=_allTableViewData22Array[_tableRowNum];
-            _plantID=dataArray[dataArray.count-1];
+            [self showToastViewWithTitle:@"全部电站,不能编辑"];
         }
+
         
-        [self goToEdit];
+     
         
     }
 
@@ -1076,16 +1087,16 @@
         return cell;
     }else{
         
-        ossNewDeviceTwoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL2" forIndexPath:indexPath];
+        serverPlantCEll2 *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL2" forIndexPath:indexPath];
         
         if (!cell) {
-            cell=[[ossNewDeviceTwoCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL2"];
+            cell=[[serverPlantCEll2 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL2"];
         }
-        cell.deviceType=_deviceType;
+        
         cell.nameValueArray=_allTableViewData22Array[indexPath.row];
         cell.nameArray=_cellNameArray2;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+          cell.tag=7000+indexPath.row;
         UILongPressGestureRecognizer * longPressGesture1 = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellDidLongPressed2:)];
         longPressGesture1.minimumPressDuration = 0.5f;
         [cell addGestureRecognizer:longPressGesture1];
@@ -1098,32 +1109,29 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    ossNewDeviceControl *deviceView=[[ossNewDeviceControl alloc]init];
-    deviceView.deviceType=_deviceType;
-    NSArray *infoArray;
+    NSMutableArray *plantIDArray=[NSMutableArray new];
+    NSString*plantID; NSString*plantName;
     if (!_isChangTableView) {
-        infoArray=_allTableViewDataArray[indexPath.row];
-        deviceView.deviceSn=infoArray[0];
-    }else{
-        infoArray=_allTableViewData22Array[indexPath.row];
-        deviceView.deviceSn=infoArray[0];
-    }
-    if (_deviceType==1) {
-        if([infoArray[infoArray.count-2] isEqualToString:@"6"]){
-            deviceView.deviceType=4;
+        for (int i=0; i<_allTableViewDataArray.count; i++) {
+            NSArray*array1=[NSArray arrayWithArray:_allTableViewDataArray[i]];
+            [plantIDArray addObject:array1[array1.count-1]];
         }
-    }
-    if([infoArray[infoArray.count-1] isEqualToString:@"110"]){
-        
-        [self showToastViewWithTitle:@"设备未接入"];
-        return;
+             NSArray*array2=[NSArray arrayWithArray:_allTableViewDataArray[indexPath.row]];
+        plantID=[NSString stringWithFormat:@"%@",array2[array2.count-1]];
+            plantName=[NSString stringWithFormat:@"%@",array2[0]];
     }else{
+        for (int i=0; i<_allTableViewData22Array.count; i++) {
+            NSArray*array1=[NSArray arrayWithArray:_allTableViewData22Array[i]];
+            [plantIDArray addObject:array1[array1.count-1]];
+        }
+        NSArray*array2=[NSArray arrayWithArray:_allTableViewData22Array[indexPath.row]];
+        plantID=[NSString stringWithFormat:@"%@",array2[array2.count-1]];
+        plantName=[NSString stringWithFormat:@"%@",array2[0]];
         
-        [self.navigationController pushViewController:deviceView animated:YES];
     }
     
-    
+    NSArray *allArray=@[plantIDArray,plantID,plantName];
+    self.goBackBlock(allArray);
     
 }
 
