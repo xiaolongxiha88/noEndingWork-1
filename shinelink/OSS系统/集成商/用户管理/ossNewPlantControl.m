@@ -92,6 +92,7 @@
         lableValue.textColor = COLOR(102, 102, 102, 1);
         lableValue.textAlignment=NSTextAlignmentLeft;
         lableValue.tag=2000+i;
+           lableValue.adjustsFontSizeToFitWidth=YES;
         lableValue.adjustsFontSizeToFitWidth=YES;
         lableValue.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
         [View0 addSubview:lableValue];

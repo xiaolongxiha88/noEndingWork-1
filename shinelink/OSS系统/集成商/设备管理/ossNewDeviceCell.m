@@ -44,6 +44,8 @@
             
             UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(W_all, 0,W_all_0-5*NOW_SIZE, H1)];
             lableR.textColor = COLOR(102, 102, 102, 1);
+           //    lableR.adjustsFontSizeToFitWidth=YES;
+            
             lableR.textAlignment=NSTextAlignmentLeft;
             lableR.tag=2000+i;
             NSString *name=[NSString stringWithFormat:@"%@",_nameValueArray[i]];

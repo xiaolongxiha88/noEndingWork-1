@@ -554,13 +554,23 @@ _pcsNetStorageSN=@"";
           goLog.hidesBottomBarWhenPushed=YES;
         [self.navigationController pushViewController:goLog animated:NO];
     }];
-    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:@"电站管理" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
-     
+    DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:root_oss_511_dianZhanGuanLi iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
+        
+         _netEnable=@"0";
                 serverPlantList *addView=[[serverPlantList alloc]init];
         addView.goBackBlock = ^(NSArray *plantArray){
-            NSArray *allArray=plantArray;
-            _stationID=[NSMutableArray arrayWithArray:allArray[0]];
-      
+            NSArray *idArray=[NSArray arrayWithArray:plantArray[0]];
+            
+            if (idArray.count>0) {
+                 _stationID=[NSMutableArray arrayWithArray:plantArray[0]];
+                _stationName=[NSMutableArray arrayWithArray:plantArray[1]];
+            }else{
+                _stationID =[NSMutableArray arrayWithObjects:@"1", nil];
+                _stationName =[NSMutableArray arrayWithObjects:root_shiFan_dianZhan, nil];
+            }
+            
+        [self addTitleMenu];
+            
         };
           addView.hidesBottomBarWhenPushed=YES;
                 [self.navigationController pushViewController:addView animated:YES];

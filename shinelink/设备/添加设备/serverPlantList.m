@@ -68,6 +68,8 @@
 
 @property (nonatomic, strong)NSString*plantID;
 @property (nonatomic, assign)NSInteger tableRowNum;
+@property (nonatomic, strong)NSString*selectPlantID;
+@property (nonatomic, strong)NSArray*selectPlantArray;
 
 @end
 
@@ -77,7 +79,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title=@"电站管理";
+    self.title=root_oss_511_dianZhanGuanLi;
     
     _isChangTableView=NO;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
@@ -989,7 +991,7 @@
 
 
 -(void)goToEdit{
-    [ZJBLStoreShopTypeAlert showWithTitle:@"电站管理" titles:@[@"编辑电站",@"删除电站"] selectIndex:^(NSInteger selectIndex) {
+    [ZJBLStoreShopTypeAlert showWithTitle:root_oss_511_dianZhanGuanLi titles:@[@"编辑电站",@"删除电站"] selectIndex:^(NSInteger selectIndex) {
         
         if (selectIndex==0) {
             stationTableView *addView=[[stationTableView alloc]init];
@@ -1110,11 +1112,13 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableArray *plantIDArray=[NSMutableArray new];
+      NSMutableArray *plantNameArray=[NSMutableArray new];
     NSString*plantID; NSString*plantName;
     if (!_isChangTableView) {
         for (int i=0; i<_allTableViewDataArray.count; i++) {
             NSArray*array1=[NSArray arrayWithArray:_allTableViewDataArray[i]];
             [plantIDArray addObject:array1[array1.count-1]];
+                 [plantNameArray addObject:array1[0]];
         }
              NSArray*array2=[NSArray arrayWithArray:_allTableViewDataArray[indexPath.row]];
         plantID=[NSString stringWithFormat:@"%@",array2[array2.count-1]];
@@ -1123,6 +1127,7 @@
         for (int i=0; i<_allTableViewData22Array.count; i++) {
             NSArray*array1=[NSArray arrayWithArray:_allTableViewData22Array[i]];
             [plantIDArray addObject:array1[array1.count-1]];
+               [plantNameArray addObject:array1[0]];
         }
         NSArray*array2=[NSArray arrayWithArray:_allTableViewData22Array[indexPath.row]];
         plantID=[NSString stringWithFormat:@"%@",array2[array2.count-1]];
@@ -1130,10 +1135,127 @@
         
     }
     
-    NSArray *allArray=@[plantIDArray,plantID,plantName];
-    self.goBackBlock(allArray);
+    _selectPlantID=plantID;
+    _selectPlantArray=@[plantIDArray,plantNameArray];
+    
+    [self goToGetPlantName];
+
     
 }
+
+
+
+-(void)goToGetPlantName{
+    
+
+    NSString *reUsername=[[NSUserDefaults standardUserDefaults] objectForKey:@"userName"];
+    NSString *rePassword=[[NSUserDefaults standardUserDefaults] objectForKey:@"userPassword"];
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethod:HEAD_URL paramars:@{@"userName":reUsername, @"password":[self MD5:rePassword]} paramarsSite:@"/newLoginAPI.do" sucessBlock:^(id content) {
+        [self hideProgressView];
+        NSLog(@"loginIn:%@",content);
+        if (content) {
+            if ([content[@"success"] integerValue] == 0) {
+                
+                  [self sendThePlantArray:_selectPlantArray];
+
+            } else {
+                
+             NSDictionary *dataDic = [NSDictionary dictionaryWithDictionary:content];
+           
+                NSMutableArray *stationID1=dataDic[@"data"];
+                NSMutableArray *stationID=[NSMutableArray array];
+                if (stationID1.count>0) {
+                    for(int i=0;i<stationID1.count;i++){
+                        NSString *a=stationID1[i][@"plantId"];
+                        [stationID addObject:a];
+                    }
+                }
+                NSMutableArray *stationName1=dataDic[@"data"];
+                NSMutableArray *stationName=[NSMutableArray array];
+                if (stationID1.count>0) {
+                    for(int i=0;i<stationID1.count;i++){
+                        NSString *a=stationName1[i][@"plantName"];
+                        [stationName addObject:a];
+                    }
+                }
+                
+                if (stationID.count>0) {
+                    //       stationID= [NSMutableArray arrayWithArray:stationID];
+                    //       stationName= [NSMutableArray arrayWithArray:stationName];
+                }else{
+                    stationID=[NSMutableArray arrayWithObjects:@"1", nil];
+                    stationName =[NSMutableArray arrayWithObjects:root_shiFan_dianZhan, nil];
+                }
+                
+                
+                NSArray *plantArray=@[stationID,stationName];
+                
+                [self sendThePlantArray:plantArray];
+                
+            }
+        }else{
+                [self sendThePlantArray:_selectPlantArray];
+        }
+        
+    } failure:^(NSError *error) {
+
+        [self hideProgressView];
+  
+       [self sendThePlantArray:_selectPlantArray];
+        
+    }];
+
+    
+}
+
+
+
+
+
+-(void)sendThePlantArray:(NSArray*)plantArray{
+   
+    
+    NSInteger selectNum=0;
+    
+    NSArray *plantIdArray=plantArray[0];
+    for (int i=0;i<plantIdArray.count ; i++) {
+        NSString *ID=plantIdArray[i];
+        if ([ID isEqualToString:_selectPlantID]) {
+            selectNum=i;
+        }
+    }
+    
+        [ [UserInfo defaultUserInfo]setPlantNum:[NSString stringWithFormat:@"%ld",selectNum]];
+    
+        self.goBackBlock(plantArray);
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 -(void)chioceTheStatue{

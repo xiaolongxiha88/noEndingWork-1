@@ -130,7 +130,11 @@
     self.xArray = [dict.allKeys sortedArrayUsingComparator:sort];
     self.valuesArray = [NSMutableArray array];
     for (NSString *key in self.xArray) {
-        [self.valuesArray addObject:dict[key]];
+        
+        NSString *value=[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",dict[key]] floatValue]];
+        [self.valuesArray addObject:value];
+        
+       // [self.valuesArray addObject:dict[key]];
     }
     
     

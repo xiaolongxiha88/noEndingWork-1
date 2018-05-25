@@ -71,7 +71,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title=@"电站管理";
+    self.title=root_oss_511_dianZhanGuanLi;
     
     _isChangTableView=NO;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
@@ -713,6 +713,9 @@
     }
     
 
+    if (_allTableViewDataArray.count==0) {
+        [self showToastViewWithTitle:@"没有电站"];
+    }
     
     [_tableView reloadData];
     

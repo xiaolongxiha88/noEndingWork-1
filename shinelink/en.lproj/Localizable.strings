@@ -1104,3 +1104,6 @@
 "502客服邮箱"="Customer email";
 "503电池自采电压"="VBat_Dsp";
 "504跳过"="Skip";
+
+"511电站管理"="Plant management";
+"512返回电站管理"="Return plant management";

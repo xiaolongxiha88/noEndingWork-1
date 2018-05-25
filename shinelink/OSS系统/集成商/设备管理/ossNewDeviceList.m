@@ -335,7 +335,7 @@
   
         _numLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0+H2_1/2.0,W2_1, H2_1/2.0)];
         _numLable.textColor =mainColor;
-        _numLable.text=@"";
+        _numLable.text=@"0";
         _numLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
         _numLable.textAlignment=NSTextAlignmentCenter;
            _numLable.adjustsFontSizeToFitWidth=YES;
@@ -778,6 +778,10 @@
     }
    
  
+    if (_allTableViewDataArray.count==0) {
+        [self showToastViewWithTitle:@"没有设备"];
+    }
+    
     [_tableView reloadData];
     
     

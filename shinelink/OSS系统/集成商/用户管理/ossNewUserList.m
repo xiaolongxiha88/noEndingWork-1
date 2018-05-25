@@ -728,7 +728,9 @@
         
     }
     
-    
+    if (_allTableViewDataArray.count==0) {
+        [self showToastViewWithTitle:@"没有用户"];
+    }
     
     [_tableView reloadData];
     

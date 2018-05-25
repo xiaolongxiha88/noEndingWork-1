@@ -77,7 +77,7 @@
                 UILabel *lableR1 = [[UILabel alloc] initWithFrame:CGRectMake(WW*0.28+WW, H1+H_all*i,WW, H1)];
                 lableR1.textColor = COLOR(102, 102, 102, 1);
                 lableR1.textAlignment=NSTextAlignmentLeft;
-           
+            //    lableR1.adjustsFontSizeToFitWidth=YES;
                     [self changeTheLableText:lableR1 nameString:[NSString stringWithFormat:@"%@",_nameValueArray[1+2*i]] lableNameString:nameArray[1+2*i]];
                   lableR1.tag=2000+1+2*i;
                 lableR1.font = [UIFont systemFontOfSize:11*HEIGHT_SIZE];

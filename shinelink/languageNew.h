@@ -1160,8 +1160,8 @@
 #define  root_oss_510_yunXingZhuangTai NSLocalizedString(@"510运行状态", nil)
 
 
-
-
+#define  root_oss_511_dianZhanGuanLi NSLocalizedString(@"511电站管理", nil)
+#define  root_oss_512_fanHui_dianZhanGuanLi NSLocalizedString(@"512返回电站管理", nil)
 
 
 
