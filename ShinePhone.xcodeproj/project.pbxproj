@@ -832,7 +832,7 @@
 		33F868FF20B6DDB0003B6163 /* ele_sm_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F868FE20B6DDAF003B6163 /* ele_sm_icon.png */; };
 		33F8690220B6DDB9003B6163 /* profit__sm_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F8690020B6DDB9003B6163 /* profit__sm_icon.png */; };
 		33F8690320B6DDB9003B6163 /* power_sm_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F8690120B6DDB9003B6163 /* power_sm_icon.png */; };
-		33F8690520B6E15C003B6163 /* station_sm_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 33F8690420B6E15C003B6163 /* station_sm_icon.jpg */; };
+		33F8690720B7EB34003B6163 /* station_sm_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F8690620B7EB34003B6163 /* station_sm_icon.png */; };
 		33FAD8E01F99996F0030EEC3 /* usbToWifiCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FAD8DF1F99996F0030EEC3 /* usbToWifiCell2.m */; };
 		33FAD8E51F99C78F0030EEC3 /* wifiToPvOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FAD8E41F99C78E0030EEC3 /* wifiToPvOne.m */; };
 		33FAD8E81F99C7AC0030EEC3 /* wifiToPvDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 33FAD8E71F99C7AC0030EEC3 /* wifiToPvDataModel.m */; };
@@ -2172,7 +2172,7 @@
 		33F868FE20B6DDAF003B6163 /* ele_sm_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ele_sm_icon.png; sourceTree = "<group>"; };
 		33F8690020B6DDB9003B6163 /* profit__sm_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profit__sm_icon.png; sourceTree = "<group>"; };
 		33F8690120B6DDB9003B6163 /* power_sm_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = power_sm_icon.png; sourceTree = "<group>"; };
-		33F8690420B6E15C003B6163 /* station_sm_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = station_sm_icon.jpg; sourceTree = "<group>"; };
+		33F8690620B7EB34003B6163 /* station_sm_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = station_sm_icon.png; sourceTree = "<group>"; };
 		33FAD8DE1F99996F0030EEC3 /* usbToWifiCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = usbToWifiCell2.h; sourceTree = "<group>"; };
 		33FAD8DF1F99996F0030EEC3 /* usbToWifiCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = usbToWifiCell2.m; sourceTree = "<group>"; };
 		33FAD8E31F99C78E0030EEC3 /* wifiToPvOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wifiToPvOne.h; sourceTree = "<group>"; };
@@ -3236,7 +3236,7 @@
 		336A391D1F29E43F00EF05F6 /* 图片11 */ = {
 			isa = PBXGroup;
 			children = (
-				33F8690420B6E15C003B6163 /* station_sm_icon.jpg */,
+				33F8690620B7EB34003B6163 /* station_sm_icon.png */,
 				33F8690120B6DDB9003B6163 /* power_sm_icon.png */,
 				33F8690020B6DDB9003B6163 /* profit__sm_icon.png */,
 				33F868FE20B6DDAF003B6163 /* ele_sm_icon.png */,
@@ -5311,7 +5311,6 @@
 				33FFBD511CEC7202003C56E1 /* pass3.jpg in Resources */,
 				33EA49EC1E8CAC060044A01A /* 设备页引导2_en.jpg in Resources */,
 				3370EBC51F41ABA700F37149 /* left.png in Resources */,
-				33F8690520B6E15C003B6163 /* station_sm_icon.jpg in Resources */,
 				33692BF51C926B5000698375 /* xia.png in Resources */,
 				33FEFD601C7DB38400324374 /* icon---Password@2x.png in Resources */,
 				33FEFD791C7DB38400324374 /* shebei_press@2x.png in Resources */,
@@ -5532,6 +5531,7 @@
 				3389648F1E5D678800A7B1AE /* icon_yijianjianzhan.png in Resources */,
 				3363DD241C7C610A00D740FB /* 语言.png in Resources */,
 				33E3695A1FDA70D6001D947D /* resource.bundle in Resources */,
+				33F8690720B7EB34003B6163 /* station_sm_icon.png in Resources */,
 				33FEFD581C7DB38400324374 /* icon---Email---Full@3x.png in Resources */,
 				33775AF31D2E404D0070742E /* 客户.png in Resources */,
 				334C659B206DE42C00928149 /* newheadAnimal22.png in Resources */,

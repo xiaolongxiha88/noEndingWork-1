@@ -84,6 +84,7 @@
     
 }
 
+
 -(void)finishSet{
     
     if (_deviceType==1) {
@@ -100,7 +101,14 @@
     for (UITextField *textField in _textFieldMutableArray) {
         [textField resignFirstResponder];
     }
+    if (self.toolBar) {
+        [self.toolBar removeFromSuperview];
+        [self.date removeFromSuperview];
+    }
+
+    
 }
+
 
 -(void)initUiForUser{
 

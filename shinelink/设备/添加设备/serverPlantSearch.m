@@ -56,7 +56,7 @@
     //    _searchButton.layer.borderColor=COLOR(222, 222, 222, 1).CGColor;
     [_searchButton setBackgroundImage:IMAGE(@"workorder_button_icon_nor.png") forState:UIControlStateNormal];
     [_searchButton setBackgroundImage:IMAGE(@"workorder_button_icon_click.png") forState:UIControlStateHighlighted];
-    [_searchButton setTitle:@"搜索" forState:UIControlStateNormal];
+    [_searchButton setTitle:root_sousuo forState:UIControlStateNormal];
     //_searchButton.titleLabel.tintColor=COLOR(51, 51, 51, 1);
     //  [_searchButton setTitleColor:COLOR(51, 51, 51, 1) forState:UIControlStateNormal];
     _searchButton.titleLabel.font=[UIFont systemFontOfSize: 14*HEIGHT_SIZE];
@@ -95,7 +95,7 @@
     _lineTypeArray=@[@"所有",@"已接入设备",@"未接入设备"];
     _lineTypeDic=@{_lineTypeArray[0]:@"3",_lineTypeArray[1]:@"2",_lineTypeArray[2]:@"1"};
     
-    _titleNameArray=@[@"电站名称",@"装机容量"];
+    _titleNameArray=@[root_plant_name,root_Device_head_181];
     _titleNameTypeArray=@[@"0",@"0"];
     
     for (int i=0; i<_titleNameArray.count; i++) {
@@ -269,7 +269,7 @@
             NSMutableArray *_allNumArray=[NSMutableArray new];
             if (PlantListArray.count>0) {
                 
-                [_allNumArray addObject:@"全部电站累计数据"];
+                [_allNumArray addObject:root_oss_520_QuanBuDianZhanLeiJiShuJu];
                 [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usercurrentPac"]] floatValue]]];
                 [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usernominalPower"]] floatValue]]];
                 [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usereToday"]] floatValue]]];
@@ -284,7 +284,7 @@
                 self.searchDicBlock(_deviceNetDic);
                 
             }else{
-                [self showToastViewWithTitle:@"暂无电站"];
+                [self showToastViewWithTitle:@"No plant"];
                 
             }
             

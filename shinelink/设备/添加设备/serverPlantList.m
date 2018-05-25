@@ -107,6 +107,7 @@
 
 }
 
+
 -(void)initData{
     
     [self initTheNetPageAndValue];
@@ -117,17 +118,18 @@
     
     //_NetForParameterArray=[NSArray array];
     
-        _oneParaArray=@[@"建站日期",@"设备数量",@"装机容量",@"实时功率",@"今日发电量",@"今日收益",@"累计发电量",@"累计收益"];
+        _oneParaArray=@[root_oss_513_jianZhanShiJian,root_oss_514_sheBeiShuLiang,root_Device_head_181,root_Device_head_180,root_Today_Energy,root_jinri_shouyi,root_Total_Energy,root_zong_shouyi];
         _upOrDownNetValueArray=@[@[@"1",@"2"],@[@"3",@"4"],@[@"5",@"6"],@[@"7",@"8"],@[@"9",@"10"],@[@"11",@"12"],@[@"13",@"14"],@[@"15",@"16"]];
         
         _oldForParameterArray=@[@"5",@"4",@"6",@"7",@"8",@"9",@"10",@"11"];
         
         _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11"];
     
-        _forChoiceParameterDic=@{@"0":@"电站名称",@"1":@"别名     ",@"2":root_oss_507_chengShi,@"3":@"时区",@"4":@"建站日期      ",@"5":@"设备数量",@"6":@"当前功率",@"7":@"设计功率  ",@"8":@"今日发电量",@"9":@"累计发电量",@"10":@"今日收益",@"11":@"累计收益"};
+  //  [NSString stringWithFormat:@"%@   ",root_oss_513_jianZhanShiJian]
+        _forChoiceParameterDic=@{@"0":[NSString stringWithFormat:@"%@     ",root_plant_name],@"1":[NSString stringWithFormat:@"%@     ",root_bieming],@"2":root_oss_507_chengShi,@"3":root_WO_shiqu,@"4":[NSString stringWithFormat:@"%@   ",root_oss_513_jianZhanShiJian],@"5":root_oss_514_sheBeiShuLiang,@"6":root_Device_head_180,@"7":root_Device_head_181,@"8":root_NBQ_ri_fadianliang,@"9":root_Total_Energy,@"10":root_jinri_shouyi,@"11":root_zong_shouyi};
         _numForNetKeyDic=@{@"0":@"plantName",@"1":@"alias",@"2":@"city",@"3":@"timezoneText",@"4":@"createDateText",@"5":@"deviceCount",@"6":@"currentPac",@"7":@"nominalPower",@"8":@"eToday",@"9":@"eTotal",@"10":@"etodayMoneyText",@"11":@"etotalMoneyText"};
         
-        _cellNameArray2=@[@"电站名称",@"当前功率",@"设计功率",@"今日发电",@"累计发电量",@"今日收益",@"累计收益"];     //列表的另一种展示
+        _cellNameArray2=@[root_plant_name,root_Device_head_180,root_Device_head_181,root_NBQ_ri_fadianliang,root_Total_Energy,root_jinri_shouyi,root_zong_shouyi];     //列表的另一种展示
         _NetForParameterNew22Array=@[@"0",@"6",@"7",@"8",@"9",@"10",@"11"];
         
 
@@ -365,18 +367,34 @@
     
     
     
-    _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, _twoScrollViewH);
+  
     
     
     float W_K_0=12*NOW_SIZE;             //平均空隙
     float W1_all=10*NOW_SIZE;
     
+    float W_MIX_K=0;
+    float W1_all_0=10*NOW_SIZE;
     for (int i=0; i<_cellNameArray.count; i++) {
         NSString *nameString=_cellNameArray[i];
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
         CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, _twoScrollViewH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
         float W_all_0=W_K_0*2+size.width;
+        
+        W1_all_0=W1_all_0+W_all_0;
+    }
+    if (ScreenWidth>W1_all_0) {
+        float num=_cellNameArray.count/1.0;
+        W_MIX_K=(ScreenWidth-W1_all_0)/num;
+    }
+    
+    for (int i=0; i<_cellNameArray.count; i++) {
+        NSString *nameString=_cellNameArray[i];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, _twoScrollViewH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        
+        float W_all_0=W_K_0*2+size.width+W_MIX_K;
         
         UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0, _twoScrollViewH)];
         lable1.textColor = COLOR(51, 51, 51, 1);
@@ -387,6 +405,8 @@
         
         W1_all=W1_all+W_all_0;
     }
+    
+      _twoScrollView.contentSize=CGSizeMake(W1_all, _twoScrollViewH);
     
     _tableW=W1_all;
     float H3=ScreenHeight-H1-H2-_twoScrollViewH-(NaviHeight);
@@ -430,7 +450,7 @@
                 [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"toPageNum"];
                 [self NetForDevice];
             }else{
-                [self showToastViewWithTitle:@"已经到最后一页"];
+                [self showToastViewWithTitle:root_oss_515_yiJingDaoZuiHouYiYe];
             }
             
             
@@ -450,11 +470,12 @@
     //注册单元格类型
     [_tableView registerClass:[ossNewDeviceCell class] forCellReuseIdentifier:@"CELL1"];
     [_tableView registerClass:[serverPlantCEll2 class] forCellReuseIdentifier:@"CELL2"];
+    
 }
 
 -(void)initTheTheChangeUI{
     
-    float H1=40*HEIGHT_SIZE;  float H2=50*HEIGHT_SIZE;    float W1=80*NOW_SIZE;
+    float H1=40*HEIGHT_SIZE;  float H2=50*HEIGHT_SIZE;   
     
     if (_twoScrollView) {
         [_twoScrollView removeFromSuperview];
@@ -468,18 +489,31 @@
     [self.view addSubview:_twoScrollView];
     
     
-    _twoScrollView.contentSize=CGSizeMake(_cellNameArray.count*W1, H1);
-    
-    
     float W_K_0=12*NOW_SIZE;             //平均空隙
     float W1_all=10*NOW_SIZE;
     
+    float W_MIX_K=0;
+    float W1_all_0=10*NOW_SIZE;
     for (int i=0; i<_cellNameArray.count; i++) {
         NSString *nameString=_cellNameArray[i];
         NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
         CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
         
         float W_all_0=W_K_0*2+size.width;
+        
+        W1_all_0=W1_all_0+W_all_0;
+    }
+    if (ScreenWidth>W1_all_0) {
+        float num=_cellNameArray.count/1.0;
+        W_MIX_K=(ScreenWidth-W1_all_0)/num;
+    }
+    
+    for (int i=0; i<_cellNameArray.count; i++) {
+        NSString *nameString=_cellNameArray[i];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        
+        float W_all_0=W_K_0*2+size.width+W_MIX_K;
         
         UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0-5*NOW_SIZE, H1)];
         lable1.textColor = COLOR(51, 51, 51, 1);
@@ -491,6 +525,7 @@
         W1_all=W1_all+W_all_0;
     }
     
+        _twoScrollView.contentSize=CGSizeMake(W1_all, H1);
     
     _tableW=W1_all;
     float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
@@ -504,9 +539,13 @@
 
 - (void)addRightItem
 {
-    DTKDropdownItem *item0 = [DTKDropdownItem itemWithTitle:@"添加电站" iconName:@"DTK_jiangbei" callBack:^(NSUInteger index, id info) {
+    DTKDropdownItem *item0 = [DTKDropdownItem itemWithTitle:root_Add_Plant iconName:@"DTK_jiangbei" callBack:^(NSUInteger index, id info) {
         NSLog(@"rightItem%lu",(unsigned long)index);
         
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+            [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+            return;
+        }
         
                 addStationViewController *addView=[[addStationViewController alloc]init];
               addView.hidesBottomBarWhenPushed=YES;
@@ -520,7 +559,7 @@
 
         
     }];
-    DTKDropdownItem *item1 = [DTKDropdownItem itemWithTitle:@"展示参数" iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
+    DTKDropdownItem *item1 = [DTKDropdownItem itemWithTitle:root_oss_516_zhanShiCanShu iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
         NSLog(@"rightItem%lu",(unsigned long)index);
         
         [self goToChoiceParameter];
@@ -659,8 +698,9 @@
 #pragma mark -转换网络数据
 -(void)changeNetData{                     //给tableviewcell用的数据
     
+   
     if (_pageNumForNet==1) {
-        [_allNumArray addObject:@"建站日期"];
+        [_allNumArray addObject:root_oss_513_jianZhanShiJian];
         [_allNumArray addObject:@""];
         [_allTableViewData22Array addObject:_allNumArray];
     }
@@ -677,7 +717,7 @@
             NSMutableArray *valueArray22=[NSMutableArray array];
             [valueArray addObject:twoDic[@"plantName"]];
         
-//                _forChoiceParameterDic=@{@"0":@"电站名称",@"1":@"别名     ",@"2":root_oss_507_chengShi,@"3":@"时区",@"4":@"建站日期      ",@"5":@"设备数量",@"6":@"当前功率",@"7":@"设计功率  ",@"8":@"今日发电量",@"9":@"累计发电量",@"10":@"今日收益",@"11":@"累计收益"};
+
         
             for (int i=0; i<_NetForParameterNewArray.count; i++) {                  //列表1的数据
               
@@ -779,7 +819,13 @@
     
 }
 
+
+#pragma mark -切换tableview
+
 -(void)changTableView{
+    
+//    [self initTheNetPageAndValue];
+    
     _isChangTableView=!_isChangTableView;
     if (_isChangTableView) {
         [_twoScrollView removeFromSuperview];
@@ -914,7 +960,7 @@
             
             if (PlantListArray.count>0) {
                 
-                [_allNumArray addObject:@"全部电站累计数据"];
+                [_allNumArray addObject:root_oss_520_QuanBuDianZhanLeiJiShuJu];
                  [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usercurrentPac"]] floatValue]]];
            [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usernominalPower"]] floatValue]]];
                    [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usereToday"]] floatValue]]];
@@ -930,7 +976,7 @@
  
  
             }else{
-                     [self showToastViewWithTitle:@"暂无电站"];
+                     [self showToastViewWithTitle:@"No Plant"];
                 
             }
         }
@@ -978,7 +1024,7 @@
             
             [self goToEdit];
         }else{
-            [self showToastViewWithTitle:@"全部电站,不能编辑"];
+            [self showToastViewWithTitle:root_oss_521_QuanBuDianZhan_BuNengBianJi];
         }
 
         
@@ -991,7 +1037,13 @@
 
 
 -(void)goToEdit{
-    [ZJBLStoreShopTypeAlert showWithTitle:root_oss_511_dianZhanGuanLi titles:@[@"编辑电站",@"删除电站"] selectIndex:^(NSInteger selectIndex) {
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+        [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+        return;
+    }
+    
+    [ZJBLStoreShopTypeAlert showWithTitle:root_oss_511_dianZhanGuanLi titles:@[root_oss_522_bianJiDianZhan,root_oss_523_ShanChuDianZhan] selectIndex:^(NSInteger selectIndex) {
         
         if (selectIndex==0) {
             stationTableView *addView=[[stationTableView alloc]init];
@@ -1029,7 +1081,7 @@
             NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
             
             if ([firstDic[@"result"] intValue]==1) {
-                [self showToastViewWithTitle:@"删除成功"];
+                [self showToastViewWithTitle:root_shanChu_chengGong];
                 
                 if (!_isChangTableView) {
                     [_allTableViewDataArray removeObjectAtIndex:_tableRowNum];

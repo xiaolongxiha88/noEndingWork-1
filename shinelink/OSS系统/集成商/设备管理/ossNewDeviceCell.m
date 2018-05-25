@@ -34,13 +34,30 @@
         _lineView.backgroundColor = COLOR(222, 222, 222, 1);
         [self.contentView addSubview:_lineView];
         
+        
+        float W_MIX_K=0;
+        float W1_all_0=10*NOW_SIZE;
+        for (int i=0; i<nameArray.count; i++) {
+            NSString *nameString=nameArray[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            float W_all_0=W_K_0*2+size.width;
+            
+            W1_all_0=W1_all_0+W_all_0;
+        }
+        if (ScreenWidth>W1_all_0) {
+            float num=nameArray.count/1.0;
+            W_MIX_K=(ScreenWidth-W1_all_0)/num;
+        }
+        
         for (int i=0; i<nameArray.count; i++) {
             
             NSString *nameString=nameArray[i];
             NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
             CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
             
-            float W_all_0=W_K_0*2+size.width;
+            float W_all_0=W_K_0*2+size.width+W_MIX_K;
             
             UILabel *lableR = [[UILabel alloc] initWithFrame:CGRectMake(W_all, 0,W_all_0-5*NOW_SIZE, H1)];
             lableR.textColor = COLOR(102, 102, 102, 1);

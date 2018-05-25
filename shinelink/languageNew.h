@@ -1162,6 +1162,18 @@
 
 #define  root_oss_511_dianZhanGuanLi NSLocalizedString(@"511电站管理", nil)
 #define  root_oss_512_fanHui_dianZhanGuanLi NSLocalizedString(@"512返回电站管理", nil)
+#define  root_oss_513_jianZhanShiJian NSLocalizedString(@"513建站日期", nil)
+#define  root_oss_514_sheBeiShuLiang NSLocalizedString(@"514设备数量", nil)
+#define  root_oss_515_yiJingDaoZuiHouYiYe NSLocalizedString(@"515已经到最后一页", nil)
+#define  root_oss_516_zhanShiCanShu NSLocalizedString(@"516展示参数", nil)
+#define  root_oss_517_yiXianShiCanShu NSLocalizedString(@"517已显示参数", nil)
+#define  root_oss_518_tuoYeKeYiPaiXu NSLocalizedString(@"518拖拽可以排序", nil)
+#define  root_oss_519_weiXianShiCanShu NSLocalizedString(@"519未显示参数", nil)
+#define  root_oss_520_QuanBuDianZhanLeiJiShuJu NSLocalizedString(@"520全部电站累计数据", nil)
+#define  root_oss_521_QuanBuDianZhan_BuNengBianJi NSLocalizedString(@"521全部电站不能编辑", nil)
+#define  root_oss_522_bianJiDianZhan NSLocalizedString(@"522编辑电站", nil)
+
+#define  root_oss_523_ShanChuDianZhan NSLocalizedString(@"523删除电站", nil)
 
 
 

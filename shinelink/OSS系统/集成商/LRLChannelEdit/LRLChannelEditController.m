@@ -98,7 +98,7 @@
     _topLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     _topLabel.textAlignment=NSTextAlignmentLeft;
     // lable1.backgroundColor=COLOR(242, 242, 242, 1);
-    _topLabel.text=@"已显示参数";
+    _topLabel.text=root_oss_517_yiXianShiCanShu;
     [self.view addSubview:_topLabel];
     
     _editAlertLabel= [[UILabel alloc] initWithFrame:CGRectMake(100*NOW_SIZE, H,80*NOW_SIZE, 30*HEIGHT_SIZE)];
@@ -107,14 +107,14 @@
     _editAlertLabel.textAlignment=NSTextAlignmentLeft;
     _editAlertLabel.adjustsFontSizeToFitWidth=YES;
     // lable1.backgroundColor=COLOR(242, 242, 242, 1);
-    _editAlertLabel.text=@"拖拽可以排序";
+    _editAlertLabel.text=root_oss_518_tuoYeKeYiPaiXu;
     [self.view addSubview:_editAlertLabel];
     
    _editButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     _editButton.frame=CGRectMake(210*NOW_SIZE,H, 100*NOW_SIZE, 30*HEIGHT_SIZE);
     [_editButton setBackgroundImage:IMAGE(@"oss_btn_1nor.png") forState:UIControlStateNormal];
     [_editButton setBackgroundImage:IMAGE(@"oss_btn_1click.png") forState:UIControlStateHighlighted];
-    [_editButton setTitle:@"编辑" forState:UIControlStateNormal];
+    [_editButton setTitle:root_dianzhan_bianji forState:UIControlStateNormal];
     _editButton.titleLabel.font=[UIFont systemFontOfSize: 12*HEIGHT_SIZE];
     //[goButton2 addTarget:self action:@selector(scanSn) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_editButton];
@@ -178,7 +178,7 @@
     //下面的标题
     self.bottomLabel = [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE,TopEdge + 25 + self.topHeight, 200*NOW_SIZE, 30*HEIGHT_SIZE)];
     self.bottomLabel.textAlignment = NSTextAlignmentLeft;
-    self.bottomLabel.text = @"未显示参数";
+    self.bottomLabel.text = root_oss_519_weiXianShiCanShu;
     self.bottomLabel.textColor=COLOR(51, 51, 51, 1);
     self.bottomLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
     [self.scrollView addSubview:self.bottomLabel];
@@ -560,7 +560,7 @@
     if (isEditing) {
 //        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"finsh"] forState:UIControlStateNormal];
 //        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"finsh-1"] forState:UIControlStateHighlighted];
-           [_editButton setTitle:@"完成" forState:UIControlStateNormal];
+           [_editButton setTitle:root_finish forState:UIControlStateNormal];
         
         if (self.initalTouchView) {
             if (self.locationIndex > 1) {
@@ -581,7 +581,7 @@
     }else{
 //        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"reorder"] forState:UIControlStateNormal];
 //        [self.editButton setBackgroundImage:[UIImage imageMyBundleNamed:@"reorder-1"] forState:UIControlStateHighlighted];
-            [_editButton setTitle:@"编辑" forState:UIControlStateNormal];
+            [_editButton setTitle:root_dianzhan_bianji forState:UIControlStateNormal];
         
         if (self.initalTouchView && self.initialIndexModel.isTop) {
             self.initalTouchView.contentLabel.textColor = UIColorFromRGB(0x008dff);

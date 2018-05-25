@@ -60,7 +60,7 @@
           float image01_K_W=10*NOW_SIZE;
         float image_01_W=15*HEIGHT_SIZE;
         UIImageView *image01=[[UIImageView alloc]initWithFrame:CGRectMake(image01_K_W, (H2-image_01_W)/2.0, image_01_W,image_01_W )];
-        image01.image=IMAGE(@"station_sm_icon.jpg");
+        image01.image=IMAGE(@"station_sm_icon.png");
         [View3 addSubview:image01];
         
         float W2=150*NOW_SIZE;
@@ -119,7 +119,9 @@
             
         }
         
-        NSArray*imageNameArray=@[@"功率",@"发电量",@"收益"];
+       
+        
+        NSArray*imageNameArray=@[root_PpvN,root_todayPV,root_Revenue];
         NSArray*imageNamePicArray=@[@"power_sm_icon.png",@"ele_sm_icon.png",@"profit__sm_icon.png"];
         
                     float imageW=20*HEIGHT_SIZE;

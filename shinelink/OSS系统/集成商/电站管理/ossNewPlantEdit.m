@@ -55,10 +55,21 @@
     _latitude=@"";
     _longitude=@"";
     
+        _textFieldMutableArray=[NSMutableArray new];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
     
     [self initUiForPlant];
     [self getThePlantInfo];
     
+}
+
+
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    for (UITextField *textField in _textFieldMutableArray) {
+        [textField resignFirstResponder];
+    }
 }
 
 
