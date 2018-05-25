@@ -18,4 +18,8 @@
 
 @property (nonatomic, strong) NSString* userName;
 
+@property (nonatomic,copy) void(^delectSuccessBlock)();
+
 @end
+
+

@@ -111,7 +111,7 @@
         _oldForParameterArray=@[@"1",@"3",@"4",@"5",@"6",@"7"];
         
         _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7"];
-        _forChoiceParameterDic=@{@"0":@"账号    ",@"1":@"别名      ",@"2":@"真实名字",@"3":@"手机号       ",@"4":@"电子邮箱   ",@"5":@"注册日期",@"6":@"设备数量  ",@"7":@"安装商"};
+        _forChoiceParameterDic=@{@"0":@"用户名    ",@"1":@"别名      ",@"2":@"真实名字",@"3":@"手机号       ",@"4":@"电子邮箱   ",@"5":@"注册日期",@"6":@"设备数量  ",@"7":@"安装商"};
         _numForNetKeyDic=@{@"0":@"accountName",@"1":@"alias",@"2":@"activeName",@"3":@"phoneNum",@"4":@"email",@"5":@"creatDate",@"6":@"deviceCount",@"7":@"iCode"};
         
         _cellNameArray2=@[@"用户名",@"设备数量",@"手机号",@"注册日期"];     //列表的另一种展示
@@ -165,7 +165,7 @@
         
     }
     
-    if (!_oneScrollView) {
+    if (!_View2) {
         [self initUI];
     }else{
         [self initTheTheChangeUI];
@@ -458,61 +458,76 @@
 
 -(void)initTheTheChangeUI{
     
-    float H1=40*HEIGHT_SIZE;  float H2=50*HEIGHT_SIZE;    float W1=80*NOW_SIZE;
+    float H1=0;  float H2=50*HEIGHT_SIZE;
     
     if (_twoScrollView) {
         [_twoScrollView removeFromSuperview];
-        _twoScrollView=nil;
     }
-    _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
-    _twoScrollView.backgroundColor = [UIColor whiteColor];
-    _twoScrollView.showsHorizontalScrollIndicator = NO;
-    _twoScrollView.delegate=self;
-    _twoScrollView.bounces = NO;
-    [self.view addSubview:_twoScrollView];
     
- 
     float W_K_0=12*NOW_SIZE;             //平均空隙
     float W1_all=10*NOW_SIZE;
     
-    float W_MIX_K=0;
-    float W1_all_0=10*NOW_SIZE;
-    for (int i=0; i<_cellNameArray.count; i++) {
-        NSString *nameString=_cellNameArray[i];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    if (!_isChangTableView) {
         
-        float W_all_0=W_K_0*2+size.width;
+        if (_twoScrollView) {
+            _twoScrollView=nil;
+        }
         
-        W1_all_0=W1_all_0+W_all_0;
-    }
-    if (ScreenWidth>W1_all_0) {
-        float num=_cellNameArray.count/1.0;
-        W_MIX_K=(ScreenWidth-W1_all_0)/num;
+        H1=40*HEIGHT_SIZE;
+        
+        _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
+        _twoScrollView.backgroundColor = [UIColor whiteColor];
+        _twoScrollView.showsHorizontalScrollIndicator = NO;
+        _twoScrollView.delegate=self;
+        _twoScrollView.bounces = NO;
+        [self.view addSubview:_twoScrollView];
+        
+        
+        
+        
+        float W_MIX_K=0;
+        float W1_all_0=10*NOW_SIZE;
+        for (int i=0; i<_cellNameArray.count; i++) {
+            NSString *nameString=_cellNameArray[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            float W_all_0=W_K_0*2+size.width;
+            
+            W1_all_0=W1_all_0+W_all_0;
+        }
+        if (ScreenWidth>W1_all_0) {
+            float num=_cellNameArray.count/1.0;
+            W_MIX_K=(ScreenWidth-W1_all_0)/num;
+        }
+        
+        for (int i=0; i<_cellNameArray.count; i++) {
+            NSString *nameString=_cellNameArray[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            float W_all_0=W_K_0*2+size.width+W_MIX_K;
+            
+            UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0-5*NOW_SIZE, H1)];
+            lable1.textColor = COLOR(51, 51, 51, 1);
+            lable1.textAlignment=NSTextAlignmentLeft;
+            lable1.text=_cellNameArray[i];
+            lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [_twoScrollView addSubview:lable1];
+            
+            W1_all=W1_all+W_all_0;
+        }
+            _tableW=W1_all;
+        _twoScrollView.contentSize=CGSizeMake(W1_all, H1);
+        
+    }else{
+        W1_all=ScreenWidth;
     }
     
-    for (int i=0; i<_cellNameArray.count; i++) {
-        NSString *nameString=_cellNameArray[i];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-        
-        float W_all_0=W_K_0*2+size.width+W_MIX_K;
-        
-        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0-5*NOW_SIZE, H1)];
-        lable1.textColor = COLOR(51, 51, 51, 1);
-        lable1.textAlignment=NSTextAlignmentLeft;
-        lable1.text=_cellNameArray[i];
-        lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        [_twoScrollView addSubview:lable1];
-        
-        W1_all=W1_all+W_all_0;
-    }
     
-       _twoScrollView.contentSize=CGSizeMake(W1_all, H1);
-    
-    _tableW=W1_all;
+
     float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
-    _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
+    _threeScrollView.contentSize=CGSizeMake(W1_all, H1);
     
     [self initTableViewUI:H3];
     
@@ -920,6 +935,7 @@
 }
 
 
+
 -(void)NetForDevice{
     
     
@@ -952,12 +968,12 @@
                     if (ResultValue<(resultArray.count+2)) {
                         [self showToastViewWithTitle:resultArray[ResultValue-2]];
                     }
-                }
-                if (ResultValue==0) {
+                }else if (ResultValue==0) {
                     [self showToastViewWithTitle:@"返回异常"];
-                }
-                if (ResultValue==22) {
+                }else if (ResultValue==22) {
                     [self showToastViewWithTitle:@"未登录"];
+                }else{
+                    [NSString stringWithFormat:@"%@",firstDic[@"msg"]];
                 }
                 // [self showToastViewWithTitle:firstDic[@"msg"]];
                 

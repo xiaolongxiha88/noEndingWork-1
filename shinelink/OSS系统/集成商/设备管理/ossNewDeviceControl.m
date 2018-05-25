@@ -39,8 +39,9 @@
     [self initUI];
     
 
-    
 }
+
+
 
 -(void)initData{
     if (_deviceType==1 || _deviceType==4) {
@@ -280,8 +281,10 @@
     [self showProgressView];
     NSDictionary *Dic=@{@"serverId":_serverID,@"sn":_deviceSn};
     
-        NSString *textString=[NSString stringWithFormat:@"%@",[self jsonStringWithPrettyPrint:YES dataArray:Dic]];
+      NSArray*textStringArray=@[Dic];
     
+        NSString *textString=[NSString stringWithFormat:@"%@",[self jsonStringWithPrettyPrint:YES dataArray:textStringArray]];
+  
     NSDictionary *dic=@{@"deviceSn":textString};
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:dic paramarsSite:@"/api/v3/device/deviceManage/del" sucessBlock:^(id content) {
         [self hideProgressView];
@@ -294,6 +297,7 @@
             
             if ([firstDic[@"result"] intValue]==1) {
                      [self showToastViewWithTitle:@"删除成功"];
+                self.delectSuccessBlock();
                 [self.navigationController popViewControllerAnimated:YES];
             }else{
                 int ResultValue=[firstDic[@"result"] intValue];
@@ -324,7 +328,7 @@
 -(void)getNetForInfo{
     
     [self showProgressView];
-    NSDictionary *dic=@{@"deviceSn":_deviceSn,@"deviceType":[NSString stringWithFormat:@"%ld",_deviceType]};
+    NSDictionary *dic=@{@"deviceSn":_deviceSn,@"deviceType":[NSString stringWithFormat:@"%ld",(long)_deviceType]};
     [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:dic paramarsSite:@"/api/v3/device/device_info" sucessBlock:^(id content) {
         [self hideProgressView];
         
@@ -426,7 +430,7 @@
 
 
 //转数组转JSON
--(NSString*) jsonStringWithPrettyPrint:(BOOL) prettyPrint dataArray:(NSDictionary*)Dic{
+-(NSString*) jsonStringWithPrettyPrint:(BOOL) prettyPrint dataArray:(NSArray*)Dic{
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:Dic
                                                        options:(NSJSONWritingOptions)    (prettyPrint ? NSJSONWritingPrettyPrinted : 0)

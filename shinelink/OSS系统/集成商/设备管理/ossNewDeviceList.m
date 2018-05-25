@@ -60,6 +60,8 @@
 @property (nonatomic, strong)NSString* numNameLableString;
 @property (nonatomic, strong) NSMutableDictionary *deviceStatueNumDic;
 
+@property (nonatomic, strong)NSString*numlLableKey;
+
 @end
 
 @implementation ossNewDeviceList
@@ -199,7 +201,9 @@
         
     }
     
-    if (!_oneScrollView) {
+    
+    
+    if (!_View2) {
              [self initUI];
     }else{
         [self initTheTheChangeUI];
@@ -275,7 +279,7 @@
    
     
       float H2=50*HEIGHT_SIZE;
-        float W1=80*NOW_SIZE;
+    
         float WK1=10*NOW_SIZE;
     
     if (_View2) {
@@ -315,6 +319,7 @@
     NSArray *statueArray1=[self changeTheDeviceStatue:@""];
     _numNameLableString=statueArray1[2];
     
+  
     if (_numNameLable) {
         [_numNameLable removeFromSuperview];
         _numNameLable=nil;
@@ -488,68 +493,82 @@
     //注册单元格类型
     [_tableView registerClass:[ossNewDeviceCell class] forCellReuseIdentifier:@"CELL1"];
     [_tableView registerClass:[ossNewDeviceTwoCell class] forCellReuseIdentifier:@"CELL2"];
+    
+    
 }
 
 -(void)initTheTheChangeUI{
     
-    float H1=40*HEIGHT_SIZE;  float H2=50*HEIGHT_SIZE;    float W1=80*NOW_SIZE;
+    float H1=0;  float H2=50*HEIGHT_SIZE;
     
     if (_twoScrollView) {
         [_twoScrollView removeFromSuperview];
-        _twoScrollView=nil;
     }
-    _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
-    _twoScrollView.backgroundColor = [UIColor whiteColor];
-    _twoScrollView.showsHorizontalScrollIndicator = NO;
-    _twoScrollView.delegate=self;
-    _twoScrollView.bounces = NO;
-    [self.view addSubview:_twoScrollView];
-    
-    
-
-    
     
     float W_K_0=12*NOW_SIZE;             //平均空隙
     float W1_all=10*NOW_SIZE;
     
-    float W_MIX_K=0;
-    float W1_all_0=10*NOW_SIZE;
-    for (int i=0; i<_cellNameArray.count; i++) {
-        NSString *nameString=_cellNameArray[i];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    if (!_isChangTableView) {
         
-        float W_all_0=W_K_0*2+size.width;
+        if (_twoScrollView) {
+            _twoScrollView=nil;
+        }
         
-        W1_all_0=W1_all_0+W_all_0;
-    }
-    if (ScreenWidth>W1_all_0) {
-        float num=_cellNameArray.count/1.0;
-        W_MIX_K=(ScreenWidth-W1_all_0)/num;
-    }
-    
-    for (int i=0; i<_cellNameArray.count; i++) {
-        NSString *nameString=_cellNameArray[i];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        H1=40*HEIGHT_SIZE;
         
-        float W_all_0=W_K_0*2+size.width+W_MIX_K;
+        _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
+        _twoScrollView.backgroundColor = [UIColor whiteColor];
+        _twoScrollView.showsHorizontalScrollIndicator = NO;
+        _twoScrollView.delegate=self;
+        _twoScrollView.bounces = NO;
+        [self.view addSubview:_twoScrollView];
         
-        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0-5*NOW_SIZE, H1)];
-        lable1.textColor = COLOR(51, 51, 51, 1);
-        lable1.textAlignment=NSTextAlignmentLeft;
-        lable1.text=_cellNameArray[i];
-        lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        [_twoScrollView addSubview:lable1];
+
+        float W_MIX_K=0;
+        float W1_all_0=10*NOW_SIZE;
+        for (int i=0; i<_cellNameArray.count; i++) {
+            NSString *nameString=_cellNameArray[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            float W_all_0=W_K_0*2+size.width;
+            
+            W1_all_0=W1_all_0+W_all_0;
+        }
+        if (ScreenWidth>W1_all_0) {
+            float num=_cellNameArray.count/1.0;
+            W_MIX_K=(ScreenWidth-W1_all_0)/num;
+        }
         
-        W1_all=W1_all+W_all_0;
-    }
-    
+        for (int i=0; i<_cellNameArray.count; i++) {
+            NSString *nameString=_cellNameArray[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            float W_all_0=W_K_0*2+size.width+W_MIX_K;
+            
+            UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0-5*NOW_SIZE, H1)];
+            lable1.textColor = COLOR(51, 51, 51, 1);
+            lable1.textAlignment=NSTextAlignmentLeft;
+            lable1.text=_cellNameArray[i];
+            lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [_twoScrollView addSubview:lable1];
+            
+            W1_all=W1_all+W_all_0;
+        }
+           _tableW=W1_all;
         _twoScrollView.contentSize=CGSizeMake(W1_all, H1);
+        
+    }else{
+        W1_all=ScreenWidth;
+    }
+   
     
-    _tableW=W1_all;
+    
+    
+ 
     float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
-    _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
+    _threeScrollView.contentSize=CGSizeMake(W1_all, H1);
     
    [self initTableViewUI:H3];
     
@@ -808,6 +827,8 @@
     for (int i=0; i<keyNameArray.count; i++) {
        [_deviceStatueNumDic setObject:numValueArray[i] forKey:keyNameArray[i]];
     }
+    
+    
     if ([_deviceStatueNumDic.allKeys containsObject:_numNameLableString]) {
          _numLable.text=[NSString stringWithFormat:@"%@",[_deviceStatueNumDic objectForKey:_numNameLableString]];
     }
@@ -865,6 +886,7 @@
     
 }
 
+#pragma mark -转换TableView
 -(void)changTableView{
     _isChangTableView=!_isChangTableView;
     if (_isChangTableView) {
@@ -1014,12 +1036,12 @@
                     if (ResultValue<(resultArray.count+2)) {
                         [self showToastViewWithTitle:resultArray[ResultValue-2]];
                     }
-                }
-                if (ResultValue==0) {
+                }else if (ResultValue==0) {
                     [self showToastViewWithTitle:@"返回异常"];
-                }
-                if (ResultValue==22) {
+                }else if (ResultValue==22) {
                     [self showToastViewWithTitle:@"未登录"];
+                }else{
+                    [NSString stringWithFormat:@"%@",firstDic[@"msg"]];
                 }
                 // [self showToastViewWithTitle:firstDic[@"msg"]];
                 
@@ -1090,6 +1112,10 @@
 {
    
     ossNewDeviceControl *deviceView=[[ossNewDeviceControl alloc]init];
+    deviceView.delectSuccessBlock=^{
+              [self initTheNetPageAndValue];
+        [self NetForDevice];
+    };
         deviceView.deviceType=_deviceType;
     NSArray *infoArray;
     if (!_isChangTableView) {
@@ -1140,9 +1166,12 @@
     [ZJBLStoreShopTypeAlert showWithTitle:titleString titles:nameArray selectIndex:^(NSInteger selectIndex) {
         
     }selectValue:^(NSString *selectValue){
-          _numNameLableString=[netAndValueStringDic objectForKey:selectValue];
-          NSArray* statue1Array=[self changeTheDeviceStatue:_numNameLableString];
+        
+         NSString* NUM=[netAndValueStringDic objectForKey:selectValue];
+          NSArray* statue1Array=[self changeTheDeviceStatue:NUM];
+        
         _numLable.textColor=statue1Array[0];
+        _numNameLableString=statue1Array[2];
         _numNameLable.text=[nameAndValueDic objectForKey:selectValue];
         _numLable.text=[NSString stringWithFormat:@"%@",[_deviceStatueNumDic objectForKey:[netKeyAndValueStringDic objectForKey:selectValue]]];
     NSString*netNum=[numAndValueStringDic objectForKey:selectValue];

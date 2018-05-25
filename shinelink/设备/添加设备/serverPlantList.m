@@ -179,7 +179,7 @@
         
     }
     
-    if (!_oneScrollView) {
+    if (!_View2) {
         [self initUI];
     }else{
         [self initTheTheChangeUI];
@@ -475,61 +475,77 @@
 
 -(void)initTheTheChangeUI{
     
-    float H1=40*HEIGHT_SIZE;  float H2=50*HEIGHT_SIZE;   
+    float H1=0;  float H2=50*HEIGHT_SIZE;
     
     if (_twoScrollView) {
         [_twoScrollView removeFromSuperview];
-        _twoScrollView=nil;
     }
-    _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
-    _twoScrollView.backgroundColor = [UIColor whiteColor];
-    _twoScrollView.showsHorizontalScrollIndicator = NO;
-    _twoScrollView.delegate=self;
-    _twoScrollView.bounces = NO;
-    [self.view addSubview:_twoScrollView];
-    
     
     float W_K_0=12*NOW_SIZE;             //平均空隙
     float W1_all=10*NOW_SIZE;
     
-    float W_MIX_K=0;
-    float W1_all_0=10*NOW_SIZE;
-    for (int i=0; i<_cellNameArray.count; i++) {
-        NSString *nameString=_cellNameArray[i];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+    if (!_isChangTableView) {
         
-        float W_all_0=W_K_0*2+size.width;
+        if (_twoScrollView) {
+            _twoScrollView=nil;
+        }
         
-        W1_all_0=W1_all_0+W_all_0;
-    }
-    if (ScreenWidth>W1_all_0) {
-        float num=_cellNameArray.count/1.0;
-        W_MIX_K=(ScreenWidth-W1_all_0)/num;
-    }
-    
-    for (int i=0; i<_cellNameArray.count; i++) {
-        NSString *nameString=_cellNameArray[i];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+        H1=40*HEIGHT_SIZE;
         
-        float W_all_0=W_K_0*2+size.width+W_MIX_K;
+        _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
+        _twoScrollView.backgroundColor = [UIColor whiteColor];
+        _twoScrollView.showsHorizontalScrollIndicator = NO;
+        _twoScrollView.delegate=self;
+        _twoScrollView.bounces = NO;
+        [self.view addSubview:_twoScrollView];
         
-        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0-5*NOW_SIZE, H1)];
-        lable1.textColor = COLOR(51, 51, 51, 1);
-        lable1.textAlignment=NSTextAlignmentLeft;
-        lable1.text=_cellNameArray[i];
-        lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        [_twoScrollView addSubview:lable1];
         
-        W1_all=W1_all+W_all_0;
-    }
-    
+        
+        
+        float W_MIX_K=0;
+        float W1_all_0=10*NOW_SIZE;
+        for (int i=0; i<_cellNameArray.count; i++) {
+            NSString *nameString=_cellNameArray[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            float W_all_0=W_K_0*2+size.width;
+            
+            W1_all_0=W1_all_0+W_all_0;
+        }
+        if (ScreenWidth>W1_all_0) {
+            float num=_cellNameArray.count/1.0;
+            W_MIX_K=(ScreenWidth-W1_all_0)/num;
+        }
+        
+        for (int i=0; i<_cellNameArray.count; i++) {
+            NSString *nameString=_cellNameArray[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, H1) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            float W_all_0=W_K_0*2+size.width+W_MIX_K;
+            
+            UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0-5*NOW_SIZE, H1)];
+            lable1.textColor = COLOR(51, 51, 51, 1);
+            lable1.textAlignment=NSTextAlignmentLeft;
+            lable1.text=_cellNameArray[i];
+            lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [_twoScrollView addSubview:lable1];
+            
+            W1_all=W1_all+W_all_0;
+        }
+        
         _twoScrollView.contentSize=CGSizeMake(W1_all, H1);
+            _tableW=W1_all;
+    }else{
+        W1_all=ScreenWidth;
+    }
     
-    _tableW=W1_all;
+    
+    
+
     float H3=ScreenHeight-H1-H2-H1-(NaviHeight);
-    _threeScrollView.contentSize=CGSizeMake(_tableW, H1);
+    _threeScrollView.contentSize=CGSizeMake(W1_all, H1);
     
     [self initTableViewUI:H3];
     
@@ -856,8 +872,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return _allTableViewDataArray.count;
+    NSInteger Num;
+    
+    if (_isChangTableView) {
+        Num=_allTableViewData22Array.count;
+    }else{
+            Num=_allTableViewDataArray.count;
+    }
+    
+    return Num;
 }
+
 
 //转数组转JSON
 -(NSString*) jsonStringWithPrettyPrint:(BOOL) prettyPrint dataArray:(NSArray*)dataArray{
@@ -873,6 +898,7 @@
         return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     }
 }
+
 
 #pragma mark -网络获取区域
 -(void)goToNetForListParameter{
@@ -1189,6 +1215,13 @@
     
     _selectPlantID=plantID;
     _selectPlantArray=@[plantIDArray,plantNameArray];
+    
+    if (_isChangTableView) {
+        if (indexPath.row==0) {
+       //     [self showToastViewWithTitle:[NSString stringWithFormat:@"%@",]];
+            return;
+        }
+    }
     
     [self goToGetPlantName];
 

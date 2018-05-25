@@ -70,6 +70,12 @@
     for (UITextField *textField in _textFieldMutableArray) {
         [textField resignFirstResponder];
     }
+    
+    if (self.toolBar) {
+        [self.toolBar removeFromSuperview];
+        [self.date removeFromSuperview];
+    }
+    
 }
 
 

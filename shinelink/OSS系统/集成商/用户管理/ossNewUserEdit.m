@@ -35,14 +35,22 @@
     
     _textFieldMutableArray=[NSMutableArray new];
     
-    //    [self addRightItem];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];
+    [self.view addGestureRecognizer:tapGestureRecognizer];
     
     [self initUiForUser];
     
     [self getTheValue];
 }
 
-
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    for (UITextField *textField in _textFieldMutableArray) {
+        [textField resignFirstResponder];
+    }
+    
+ 
+    
+}
 
 -(void)initUiForUser{
     
@@ -209,28 +217,37 @@
 
 -(void)finishSet{
     NSMutableDictionary *netDic=[NSMutableDictionary new];
-     //   _name1Array=@[@"别名",@"姓名",@"电子邮箱",@"手机号",@"公司名称",@"时区",@"语言",@"是否重置密码",@"是否发送新密码到客户邮箱"];
+    
+ NSArray * alertArray=@[@"别名",@"姓名",@"电子邮箱",@"手机号",@"公司名称",@"时区",@"语言"];
 
     for (int i=0; i<_name1Array.count; i++) {
         
         if (i<5) {
             UILabel *lable=[self.view viewWithTag:2600+i];
             
-            if ([lable.text isEqualToString:@""] || lable.text==nil || [lable.text isEqualToString:@"null"]) {
-                [netDic setObject:@"" forKey:_keyArray[i]];
+            if ([lable.text isEqualToString:@""] || lable.text==nil) {
+                [self showToastViewWithTitle:[NSString stringWithFormat:@"请输入%@",alertArray[i]]];
+         
+                return;
+                //[netDic setObject:@"" forKey:_keyArray[i]];
             }else{
                 [netDic setObject:lable.text forKey:_keyArray[i]];
             }
         }else{
             UITextField *field=[self.view viewWithTag:2600+i];
             
-            if ([field.text isEqualToString:@""] || field.text==nil || [field.text isEqualToString:@"null"]) {
-                 [netDic setObject:@"" forKey:_keyArray[i]];
+            if ([field.text isEqualToString:@""] || field.text==nil) {
+               
+               //  [netDic setObject:@"" forKey:_keyArray[i]];
                 if (i==7) {
                       [netDic setObject:@"0" forKey:_keyArray[i]];
                 }else if (i==8) {
                      [netDic setObject:@"0" forKey:_keyArray[i]];
+                }else{
+                    [self showToastViewWithTitle:[NSString stringWithFormat:@"请输入%@",alertArray[i]]];
+                    return;
                 }
+                
             }else{
                 NSString *value=field.text;
                 if (i==6) {

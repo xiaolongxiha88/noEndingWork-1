@@ -998,8 +998,9 @@ NSLog(@"体验馆");
                             }else{      //OSS V2版入口
                                 if (![self.languageType isEqualToString:@"0"]) {
                                     [self showAlertViewWithTitle:nil message:@"Please login via web:http://oss.growatt.com" cancelButtonTitle:root_OK];
-                       
+                                       [self addSubViews];
                                     return ;
+                                    
                                 }
                                 
                                 if ([objDic.allKeys containsObject:@"ossServerUrl"]) {

@@ -1113,3 +1113,24 @@
 "502客服邮箱"="Customer email";
 "503电池自采电压"="VBat_Dsp";
 "504跳过"="Skip";
+
+
+"505状态"="Status";
+"506类型"="Type";
+"507城市"="City    ";
+"508最后更新时间"=" Last update time     ";
+"509连接状态"=" Connection status ";
+"510运行状态"=" running state ";
+"511电站管理"="Plant management";
+"512返回电站管理"="Return plant management";
+"513建站日期"="Instal date";
+"514设备数量"="Number of devices";
+"515已经到最后一页"="Is the last page";
+"516展示参数"="Display parameters";
+"517已显示参数"="Displayed parameters";
+"518拖拽可以排序"="Drag and drop can be sorted";
+"519未显示参数"="Non display parameter";
+"520全部电站累计数据"="Total data of all plants";
+"521全部电站不能编辑"="All plants can not be edited";
+"522编辑电站"="Edit plant";
+"523删除电站"="Delete plant";

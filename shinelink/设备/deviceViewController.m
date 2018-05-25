@@ -556,8 +556,11 @@ _pcsNetStorageSN=@"";
     }];
     DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:root_oss_511_dianZhanGuanLi iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
         
-         _netEnable=@"0";
+      //   _netEnable=@"0";
+        
                 serverPlantList *addView=[[serverPlantList alloc]init];
+        
+        
         addView.goBackBlock = ^(NSArray *plantArray){
             NSArray *idArray=[NSArray arrayWithArray:plantArray[0]];
             
@@ -569,9 +572,11 @@ _pcsNetStorageSN=@"";
                 _stationName =[NSMutableArray arrayWithObjects:root_shiFan_dianZhan, nil];
             }
             
-        [self addTitleMenu];
+     //   [self addTitleMenu];
             
         };
+        
+        
           addView.hidesBottomBarWhenPushed=YES;
                 [self.navigationController pushViewController:addView animated:YES];
         
@@ -579,7 +584,7 @@ _pcsNetStorageSN=@"";
         
     }];
     
-   _rightMenuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item0,item1,item2] icon:@"add@2x.png"];
+   _rightMenuView = [DTKDropdownMenuView dropdownMenuViewWithType:dropDownTypeRightItem frame:CGRectMake(0, 0, 44.f, 44.f) dropdownItems:@[item2,item0,item1] icon:@"add@2x.png"];
 //  menuView.intrinsicContentSize=CGSizeMake(44.f, 44.f);
    // menuView.translatesAutoresizingMaskIntoConstraints=true;
     _rightMenuView.dropWidth = 200.f;
