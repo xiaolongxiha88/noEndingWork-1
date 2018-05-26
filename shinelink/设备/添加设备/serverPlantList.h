@@ -20,4 +20,10 @@
 
 @property (nonatomic,copy) void(^goBackBlock)(NSArray* plantArray);
 
+@property (nonatomic, assign) NSInteger LogTypeForOSS;
+
+@property (nonatomic, strong) NSString *demoLoginName;
+@property (nonatomic, strong) NSString *demoLoginPassword;
+
+
 @end

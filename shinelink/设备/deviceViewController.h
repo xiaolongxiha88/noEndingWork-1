@@ -23,5 +23,11 @@
 
 @property (nonatomic, assign) NSInteger LogOssNum;    //1设备页 2、用户管理  3、电站管理
 
-@property (nonatomic, assign) NSInteger LogTypeForOSS; 
+@property (nonatomic, assign) NSInteger LogTypeForOSS;
+
+@property (nonatomic, strong) NSString *demoLoginName;
+@property (nonatomic, strong) NSString *demoLoginPassword;
+
+
+
 @end

@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSString *LogType;
 
 @property (nonatomic, strong) NSString *demoName;
+@property (nonatomic, strong) NSString *demoPassword;
+
 @property (nonatomic, strong) NSString *demoServerURL;
 
 @property (nonatomic, assign) NSInteger LogTypeForOSS;   //1就是模拟登陆

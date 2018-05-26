@@ -546,6 +546,7 @@ _pcsNetStorageSN=@"";
         }
         
     }];
+    
     DTKDropdownItem *item1 = [DTKDropdownItem itemWithTitle:root_caiJiQi_leiBiao iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
         NSLog(@"rightItem%lu",(unsigned long)index);
         StationCellectViewController *goLog=[[StationCellectViewController alloc]init];
@@ -559,7 +560,9 @@ _pcsNetStorageSN=@"";
       //   _netEnable=@"0";
         
                 serverPlantList *addView=[[serverPlantList alloc]init];
-        
+        addView.demoLoginName=_demoLoginName;
+        addView.demoLoginPassword=_demoLoginPassword;
+        addView.LogTypeForOSS=_LogTypeForOSS;
         
         addView.goBackBlock = ^(NSArray *plantArray){
             NSArray *idArray=[NSArray arrayWithArray:plantArray[0]];

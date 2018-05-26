@@ -1223,7 +1223,12 @@
         }
     }
     
-    [self goToGetPlantName];
+    if (_LogTypeForOSS==1) {
+        [self goToGetPlantNameDemo];
+    }else{
+        [self goToGetPlantName];
+    }
+
 
     
 }
@@ -1297,14 +1302,86 @@
 
 
 
+-(void)goToGetPlantNameDemo{
+    
+    
+    
+    [self showProgressView];
+    [BaseRequest requestWithMethod:HEAD_URL paramars:@{@"userName":_demoLoginName, @"password":_demoLoginPassword,@"serverUrl":HEAD_URL} paramarsSite:@"/newLoginAPI.do?op=apiserverlogin" sucessBlock:^(id content) {
+        [self hideProgressView];
+        NSLog(@"/newLoginAPI.do?op=apiserverlogin:%@",content);
+        if (content) {
+            if ([content[@"success"] integerValue] == 0) {
+                
+                [self sendThePlantArray:_selectPlantArray];
+                
+            } else {
+                
+                NSDictionary *dataDic = [NSDictionary dictionaryWithDictionary:content];
+                
+                NSMutableArray *stationID1=dataDic[@"data"];
+                NSMutableArray *stationID=[NSMutableArray array];
+                if (stationID1.count>0) {
+                    for(int i=0;i<stationID1.count;i++){
+                        NSString *a=stationID1[i][@"plantId"];
+                        [stationID addObject:a];
+                    }
+                }
+                NSMutableArray *stationName1=dataDic[@"data"];
+                NSMutableArray *stationName=[NSMutableArray array];
+                if (stationID1.count>0) {
+                    for(int i=0;i<stationID1.count;i++){
+                        NSString *a=stationName1[i][@"plantName"];
+                        [stationName addObject:a];
+                    }
+                }
+                
+                if (stationID.count>0) {
+                    //       stationID= [NSMutableArray arrayWithArray:stationID];
+                    //       stationName= [NSMutableArray arrayWithArray:stationName];
+                }else{
+                    stationID=[NSMutableArray arrayWithObjects:@"1", nil];
+                    stationName =[NSMutableArray arrayWithObjects:root_shiFan_dianZhan, nil];
+                }
+                
+                
+                NSArray *plantArray=@[stationID,stationName];
+                
+                [self sendThePlantArray:plantArray];
+                
+            }
+        }else{
+            [self sendThePlantArray:_selectPlantArray];
+        }
+        
+    } failure:^(NSError *error) {
+        
+        [self hideProgressView];
+        
+        [self sendThePlantArray:_selectPlantArray];
+        
+    }];
+    
+    
+}
+
+
 
 
 -(void)sendThePlantArray:(NSArray*)plantArray{
-   
+    NSArray *plantAllArray=[NSArray arrayWithArray:plantArray];
     
     NSInteger selectNum=0;
     
-    NSArray *plantIdArray=plantArray[0];
+    NSArray *plantIdArray=plantAllArray[0];
+    
+    if (plantIdArray.count==0) {
+        NSArray *array1 =[NSArray arrayWithObjects:@"1", nil];
+          NSArray *array2=[NSArray arrayWithObjects:root_shiFan_dianZhan, nil];
+             plantAllArray=@[array1,array2];
+    }
+
+    
     for (int i=0;i<plantIdArray.count ; i++) {
         NSString *ID=plantIdArray[i];
         if ([ID isEqualToString:_selectPlantID]) {
@@ -1314,7 +1391,7 @@
     
         [ [UserInfo defaultUserInfo]setPlantNum:[NSString stringWithFormat:@"%ld",selectNum]];
     
-        self.goBackBlock(plantArray);
+        self.goBackBlock(plantAllArray);
     [self.navigationController popViewControllerAnimated:YES];
     
 }

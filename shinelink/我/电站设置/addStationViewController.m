@@ -392,6 +392,11 @@
     for (UITextField *textField in _textFieldMutableArray) {
         [textField resignFirstResponder];
     }
+    
+    if (self.datePicker) {
+        [self.datePicker removeFromSuperview];
+        [self.toolBar removeFromSuperview];
+    }
 }
 
 

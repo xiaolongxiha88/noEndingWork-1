@@ -857,7 +857,7 @@ NSLog(@"体验馆");
     NSDateFormatter*dayFormatter = [[NSDateFormatter alloc] init];
     [dayFormatter setDateFormat:@"yyyyMMdd"];
       NSString*demoPassword0 = [dayFormatter stringFromDate:[NSDate date]];
-    NSString*demoPassword=[NSString stringWithFormat:@"Growatt%@",demoPassword0];
+    _demoPassword=[NSString stringWithFormat:@"Growatt%@",demoPassword0];
   
    // [self MD5:demoPassword]
     [self showProgressView];
@@ -865,7 +865,9 @@ NSLog(@"体验馆");
     if (![_demoServerURL isEqualToString:@"http://"]) {
         _demoServerURL=[NSString stringWithFormat:@"http://%@",_demoServerURL];
     }
-    [BaseRequest requestWithMethod:_demoServerURL paramars:@{@"userName":_demoName, @"password":demoPassword,@"serverUrl":_demoServerURL} paramarsSite:@"/newLoginAPI.do?op=apiserverlogin" sucessBlock:^(id content) {
+    
+   
+    [BaseRequest requestWithMethod:_demoServerURL paramars:@{@"userName":_demoName, @"password":_demoPassword,@"serverUrl":_demoServerURL} paramarsSite:@"/newLoginAPI.do?op=apiserverlogin" sucessBlock:^(id content) {
         [self hideProgressView];
         NSLog(@"/newLoginAPI.do?op=apiserverlogin:%@",content);
         if (content) {
@@ -1313,6 +1315,8 @@ NSLog(@"体验馆");
     deviceViewController *deviceVV=[[deviceViewController alloc]init];
     deviceVV.adNumber=_adNumber;
     deviceVV.stationID=stationID;
+    deviceVV.demoLoginName=_demoName;
+    deviceVV.demoLoginPassword=_demoPassword;
     deviceVV.stationName=stationName;
     deviceVV.LogOssNum=_LogOssNum;
     deviceVV.LogTypeForOSS=_LogTypeForOSS;
