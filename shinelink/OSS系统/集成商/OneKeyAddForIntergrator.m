@@ -672,8 +672,12 @@
             if ([firstDic[@"result"] intValue]==1) {
                 _stepNum++;
                 [self showToastViewWithTitle:@"保存电站成功"];
-                _userName=firstDic[@"obj"][@"userName"];
-                _plantID=firstDic[@"obj"][@"plantId"];
+                _userName=[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"userName"]];
+                _plantID=[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"plantId"]];
+                
+                if ([_plantID isEqualToString:@"-1"]) {
+                    _isJumpPlant=YES;
+                }
                 [self initThreeUI];
             }else{
                 int ResultValue=[firstDic[@"result"] intValue];
@@ -685,7 +689,7 @@
                 if (ResultValue==22) {
                     [self showToastViewWithTitle:@"未登录"];
                 }
-                // [self showToastViewWithTitle:firstDic[@"msg"]];
+                // [self showToastViewWithTitle:firstDic[@"msg"]];  AAEBC001
                 
             }
         }

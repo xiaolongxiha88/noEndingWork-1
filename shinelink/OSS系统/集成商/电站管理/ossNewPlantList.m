@@ -62,7 +62,8 @@
 @property (nonatomic, strong)NSString* numNameLableString;
 @property (nonatomic, strong) NSMutableDictionary *deviceStatueNumDic;
 
-
+@property (nonatomic, strong) NSMutableArray *allTableViewDataUNITArray;
+@property (nonatomic, strong) NSMutableArray *allTableViewData22UNITArray;
 
 @end
 
@@ -690,11 +691,10 @@
 -(void)changeNetData{                     //给tableviewcell用的数据
     
 
- 
-    
-
     
     for (int i=0; i<_netResultArray.count; i++) {
+        
+              int firstNum=i;
         
         NSDictionary *unitOneDic=_netResultArray[i];
         
@@ -703,11 +703,27 @@
             _pageTotalNum=[[NSString stringWithFormat:@"%@",unitOneDic[@"pages"]] integerValue];
         }
         
+        if ([[NSString stringWithFormat:@"%@",unitOneDic[@"pages"]] integerValue]>_pageTotalNum) {
+          _pageTotalNum=[[NSString stringWithFormat:@"%@",unitOneDic[@"pages"]] integerValue];
+        }
+        
         NSArray *dataArray=unitOneDic[@"datas"];
         
-
+        NSMutableArray *justForNetArray;
+        if (_allTableViewDataUNITArray.count>firstNum) {
+            justForNetArray=[NSMutableArray arrayWithArray:_allTableViewDataUNITArray[firstNum]];
+        }else{
+            justForNetArray=[NSMutableArray array];
+        }
         
-        for (int i=0; i<dataArray.count; i++) {
+        NSMutableArray *justForNet22Array;
+        if (_allTableViewData22UNITArray.count>firstNum) {
+            justForNet22Array=[NSMutableArray arrayWithArray:_allTableViewData22UNITArray[firstNum]];
+        }else{
+            justForNet22Array=[NSMutableArray new];
+        }
+        
+        for (int i=0; i<dataArray.count; i++) {          /////////////////////////获取数据层
             NSDictionary *twoDic=dataArray[i];
             NSMutableArray *valueArray=[NSMutableArray array];
             NSMutableArray *valueArray22=[NSMutableArray array];
@@ -754,11 +770,45 @@
             }
 
             
-            [_allTableViewDataArray addObject:valueArray];
-            [_allTableViewData22Array addObject:valueArray22];
+            [justForNetArray addObject:valueArray];
+            [justForNet22Array addObject:valueArray22];
+            
+            if (_allTableViewDataUNITArray.count>firstNum) {
+                [_allTableViewDataUNITArray replaceObjectAtIndex:firstNum withObject:justForNetArray];
+            }else{
+                [_allTableViewDataUNITArray addObject:justForNetArray];
+            }
+            
+            
+            if (_allTableViewData22UNITArray.count>firstNum) {
+                [_allTableViewData22UNITArray replaceObjectAtIndex:firstNum withObject:justForNet22Array];
+                
+            }else{
+                [_allTableViewData22UNITArray addObject:justForNet22Array];
+            }
+            
+//            [_allTableViewDataArray addObject:valueArray];
+//            [_allTableViewData22Array addObject:valueArray22];
             
         }
         
+    }
+    
+    
+    _allTableViewDataArray=[NSMutableArray new];
+    for (int i=0; i<_allTableViewDataUNITArray.count; i++) {
+        NSArray *mixArray=_allTableViewDataUNITArray[i];
+        for (int i=0; i<mixArray.count; i++) {
+            [_allTableViewDataArray addObject:mixArray[i]];
+        }
+    }
+    
+    _allTableViewData22Array=[NSMutableArray new];
+    for (int i=0; i<_allTableViewData22UNITArray.count; i++) {
+        NSArray *mix22Array=_allTableViewData22UNITArray[i];
+        for (int i=0; i<mix22Array.count; i++) {
+            [_allTableViewData22Array addObject:mix22Array[i]];
+        }
     }
     
 
@@ -806,8 +856,9 @@
 
 -(void)initTheNetPageAndValue{
     
-    _allTableViewDataArray=[NSMutableArray array];
-    _allTableViewData22Array=[NSMutableArray array];
+    _allTableViewDataUNITArray=[NSMutableArray array];
+    _allTableViewData22UNITArray=[NSMutableArray array];
+    
     _pageNumForNet=1;
     _pageTotalNum=1;
     

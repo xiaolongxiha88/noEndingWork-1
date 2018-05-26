@@ -774,6 +774,10 @@
              _pageTotalNum=[[NSString stringWithFormat:@"%@",unitOneDic[@"pages"]] integerValue];
         }
         
+        if ([[NSString stringWithFormat:@"%@",unitOneDic[@"pages"]] integerValue]>_pageTotalNum) {
+            _pageTotalNum=[[NSString stringWithFormat:@"%@",unitOneDic[@"pages"]] integerValue];
+        }
+        
            NSArray *dataArray=unitOneDic[@"datas"];
         NSDictionary *numsDic=unitOneDic[@"nums"];
         for (int i=0; i<keyNameArray.count; i++) {
