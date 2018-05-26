@@ -475,7 +475,7 @@
         
         H1=40*HEIGHT_SIZE;
         
-        _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, H1)];
+        _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0+H2, SCREEN_Width, H1)];
         _twoScrollView.backgroundColor = [UIColor whiteColor];
         _twoScrollView.showsHorizontalScrollIndicator = NO;
         _twoScrollView.delegate=self;

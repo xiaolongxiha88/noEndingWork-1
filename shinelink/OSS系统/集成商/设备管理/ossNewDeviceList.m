@@ -66,6 +66,8 @@
 @property (nonatomic, strong)NSString*numlLableKey;
 @property (nonatomic, assign) BOOL isNotChangeTheType;
 
+@property (nonatomic, assign) BOOL isGoToChangeNumLable;
+
 @end
 
 @implementation ossNewDeviceList
@@ -75,6 +77,7 @@
 
      self.title=@"设备管理";
     
+    _isGoToChangeNumLable=NO;
     _isNotChangeTheType=YES;
     _isChangTableView=NO;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
@@ -728,8 +731,14 @@
     searchView.oldSearchValueArray=self.searchNameArray;
     searchView.searchDicBlock = ^(NSDictionary *netDic){
         _deviceNetDic=[NSMutableDictionary dictionaryWithDictionary:netDic];
+        _numNameLableString=@"totalNum";
+        _numLable.textColor=MainColor;
+        _numNameLable.text=@"全部";
+        
+        
         if ([[_deviceNetDic objectForKey:@"deviceType"] integerValue] != _deviceType) {
             _deviceType=[[_deviceNetDic objectForKey:@"deviceType"] integerValue];
+            
             if (_View2) {
                 [_View2 removeFromSuperview];
                 _View2=nil;
@@ -772,6 +781,7 @@
 //        [_deviceStatueNumDic setObject:@"" forKey:statueArray[2]];
     }
     
+
 
     
     for (int i=0; i<_netResultArray.count; i++) {                    /////////////////////////轮询整个数据
@@ -985,9 +995,10 @@
            _threeScrollView.contentSize=CGSizeMake(ScreenWidth, _threeScrollView.frame.size.height);
     }else{
          [self.view addSubview:_twoScrollView];
-        if (_deviceType==2 || _deviceType==3) {
-            _twoScrollView.frame=CGRectMake(_twoScrollView.frame.origin.x, _View2.frame.origin.y+_View2.frame.size.height, _twoScrollView.frame.size.width, _twoScrollView.frame.size.height-40*HEIGHT_SIZE);
-        }
+       // if (_deviceType==2 || _deviceType==3) {
+        
+            _twoScrollView.frame=CGRectMake(_twoScrollView.frame.origin.x, _View2.frame.origin.y+_View2.frame.size.height, _twoScrollView.frame.size.width, _twoScrollView.frame.size.height);
+      
         
                   _threeScrollView.frame=CGRectMake(_threeScrollView.frame.origin.x, _threeScrollView.frame.origin.y+40*HEIGHT_SIZE, _threeScrollView.frame.size.width, _threeScrollView.frame.size.height-40*HEIGHT_SIZE);
          _threeScrollView.contentSize=CGSizeMake(_tableW, _threeScrollView.frame.size.height);
@@ -1237,6 +1248,7 @@
     
 }
 
+#pragma mark - 更新设备状态数量
 
 -(void)chioceTheStatue{
     NSString *titleString=@"选择设备状态";

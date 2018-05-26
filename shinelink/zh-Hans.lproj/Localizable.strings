@@ -271,7 +271,7 @@
 "Insert datalog code"="请输入正确的采集器校验码";
 
 "Plant List" = "电站列表";
-"Today Energy" = "今日发电";
+"Today Energy" = "今日发电量";
 "Total Energy" = "累计发电量";
 "Current Power" = "当前功率";
 "Gains" = "收益";
