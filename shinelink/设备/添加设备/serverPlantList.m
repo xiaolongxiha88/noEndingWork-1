@@ -126,7 +126,7 @@
         _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11"];
     
   //  [NSString stringWithFormat:@"%@   ",root_oss_513_jianZhanShiJian]
-        _forChoiceParameterDic=@{@"0":[NSString stringWithFormat:@"%@     ",root_plant_name],@"1":[NSString stringWithFormat:@"%@     ",root_bieming],@"2":root_oss_507_chengShi,@"3":root_WO_shiqu,@"4":[NSString stringWithFormat:@"%@   ",root_oss_513_jianZhanShiJian],@"5":root_oss_514_sheBeiShuLiang,@"6":root_Device_head_180,@"7":root_Device_head_181,@"8":root_NBQ_ri_fadianliang,@"9":root_Total_Energy,@"10":root_jinri_shouyi,@"11":root_zong_shouyi};
+        _forChoiceParameterDic=@{@"0":[NSString stringWithFormat:@"%@     ",root_plant_name],@"1":[NSString stringWithFormat:@"%@     ",root_bieming],@"2":root_oss_507_chengShi,@"3":root_WO_shiqu,@"4":[NSString stringWithFormat:@"%@   ",root_oss_513_jianZhanShiJian],@"5":root_oss_514_sheBeiShuLiang,@"6":root_oss_524_dangqianGongLv,@"7":root_Device_head_181,@"8":root_NBQ_ri_fadianliang,@"9":root_Total_Energy,@"10":root_jinri_shouyi,@"11":root_zong_shouyi};
         _numForNetKeyDic=@{@"0":@"plantName",@"1":@"alias",@"2":@"city",@"3":@"timezoneText",@"4":@"createDateText",@"5":@"deviceCount",@"6":@"currentPac",@"7":@"nominalPower",@"8":@"eToday",@"9":@"eTotal",@"10":@"etodayMoneyText",@"11":@"etotalMoneyText"};
         
         _cellNameArray2=@[root_plant_name,root_Device_head_180,root_Device_head_181,root_NBQ_ri_fadianliang,root_Total_Energy,root_jinri_shouyi,root_zong_shouyi];     //列表的另一种展示

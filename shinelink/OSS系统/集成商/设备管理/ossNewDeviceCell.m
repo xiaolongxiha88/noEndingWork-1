@@ -104,6 +104,8 @@
             
         }
         
+        _lineView.frame=CGRectMake(10*NOW_SIZE,H1-1*HEIGHT_SIZE, W_all-(2*10*NOW_SIZE),1*HEIGHT_SIZE);
+        
     }else{
         for (int i=0; i<_nameValueArray.count; i++) {
               UILabel *lableR=[self.contentView viewWithTag:2000+i];
