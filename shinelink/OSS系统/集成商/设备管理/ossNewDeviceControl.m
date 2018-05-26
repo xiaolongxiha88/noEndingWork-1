@@ -22,6 +22,8 @@
 
 @property (nonatomic, strong) NSArray* lableNameKeyArray;
 @property (nonatomic, strong) UIScrollView *ScrollView;
+@property (nonatomic, strong) NSString *plantId;
+
 @end
 
 @implementation ossNewDeviceControl
@@ -46,7 +48,11 @@
 -(void)initData{
     if (_deviceType==1 || _deviceType==4) {
         _lableNameArray=@[@"序列号",@"别名",@"所属用户",@"所属电站",@"所属采集器",root_oss_509_lianJieZhuangTai,root_oss_510_yunXingZhuangTai,@"额定功率(W)",@"当前功率(W)",@"今日发电(kWh)",@"累计发电量(kWh)",@"逆变器型号",@"逆变器版本",@"最后更新时间"];
-          _lableNameKeyArray=@[@"serialNum",@"alias",@"userName",@"plantname",@"dataLogSn",@"lost",@"status",@"normalPower",@"power",@"eToday",@"eTotal",@"modelText",@"fwVersion",@"lastUpdateTimeText"];
+        if (_deviceType==1){
+            _lableNameKeyArray=@[@"serialNum",@"alias",@"userName",@"plantname",@"dataLogSn",@"lost",@"status",@"nominalPower",@"power",@"eToday",@"eTotal",@"modelText",@"fwVersion",@"lastUpdateTimeText"];
+        }else if (_deviceType==4){
+            _lableNameKeyArray=@[@"serialNum",@"alias",@"userName",@"plantname",@"dataLogSn",@"lost",@"status",@"normalPower",@"power",@"eToday",@"eTotal",@"modelText",@"fwVersion",@"lastUpdateTimeText"];
+        }
     }else  if (_deviceType==2) {
        _lableNameArray=@[@"序列号",@"别名",@"所属用户",@"所属电站",@"所属采集器",root_oss_509_lianJieZhuangTai,root_oss_510_yunXingZhuangTai,@"充电功率(W)",@"放电功率(W)",@"机器型号",@"固件版本",@"最后更新时间"];
         _lableNameKeyArray=@[@"serialNum",@"alias",@"userName",@"plantname",@"dataLogSn",@"lost",@"status",@"pCharge",@"pDischarge",@"modelText",@"fwVersion",@"lastUpdateTimeText"];
@@ -221,6 +227,7 @@
         deviceView.LogTypeForOSS=1;
         deviceView.isFirstLogin=YES;
         deviceView.LogOssNum=1;
+             deviceView.demoPlantID=_plantId;
         [self.navigationController pushViewController:deviceView animated:NO];
         
         
@@ -352,6 +359,7 @@
                 _allDic=netArray[0];
                 _serverID=[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"serverId"]];
                 _userName=[NSString stringWithFormat:@"%@",_allDic[@"userName"]];
+                _plantId=[NSString stringWithFormat:@"%@",_allDic[@"plantId"]];
                 
                 [self freshUI];
             }else{

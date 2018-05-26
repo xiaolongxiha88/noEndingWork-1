@@ -26,5 +26,6 @@
 @property (nonatomic,assign) BOOL isFirstLogin;
 
 @property (nonatomic, assign) NSInteger LogOssNum;   //1设备页 2、用户管理  3、电站管理
+@property (nonatomic, assign) NSString *demoPlantID;  
 
 @end

@@ -87,7 +87,7 @@
                     lableR.text=@"";
                 }else{
                     NSString*num=[NSString stringWithFormat:@"%@",_nameValueArray[i]];
-                    lableR.text=deviceTypeArray[[num integerValue]];
+                    lableR.text=num;
                 }
               
             }
@@ -125,7 +125,7 @@
                     lableR.text=@"";
                 }else{
                     NSString*num=[NSString stringWithFormat:@"%@",_nameValueArray[i]];
-                    lableR.text=deviceTypeArray[[num integerValue]];
+                    lableR.text=num;
                 }
                 
             }

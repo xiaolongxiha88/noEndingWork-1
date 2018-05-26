@@ -62,6 +62,8 @@
 @property (nonatomic, strong)NSString* numNameLableString;
 @property (nonatomic, strong) NSMutableDictionary *deviceStatueNumDic;
 
+
+
 @end
 
 @implementation ossNewPlantList
@@ -116,7 +118,7 @@
         
         _parameterNumArray=@[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13"];
         _forChoiceParameterDic=@{@"0":@"电站名称",@"1":@"分组名称",@"2":@"别名      ",@"3":root_oss_507_chengShi,@"4":@"时区",@"5":@"建站日期      ",@"6":@"设备数量",@"7":@"设计功率  ",@"8":@"今日发电量",@"9":@"累计发电量",@"10":@"日发电量下限值",@"11":@"安装商",@"12":@"资金收益",@"13":@"所属用户"};
-        _numForNetKeyDic=@{@"0":@"plantName",@"1":@"groupId",@"2":@"alias",@"3":@"cityId",@"4":@"timezone",@"5":@"creatDate",@"6":@"deviceCount",@"7":@"nominal_power",@"8":@"etoday",@"9":@"etotal",@"10":@"lowEnergy",@"11":@"iCode",@"12":@"formula_money",@"13":@"accountName"};
+        _numForNetKeyDic=@{@"0":@"plantName",@"1":@"groupId",@"2":@"alias",@"3":@"cityText",@"4":@"timezone",@"5":@"creatDate",@"6":@"deviceCount",@"7":@"nominal_power",@"8":@"etoday",@"9":@"etotal",@"10":@"lowEnergy",@"11":@"iCode",@"12":@"formula_money",@"13":@"accountName"};
         
         _cellNameArray2=@[@"电站名称",@"设计功率",@"今日发电量",@"累计发电量"];     //列表的另一种展示
         _NetForParameterNew22Array=@[@"0",@"7",@"8",@"9"];

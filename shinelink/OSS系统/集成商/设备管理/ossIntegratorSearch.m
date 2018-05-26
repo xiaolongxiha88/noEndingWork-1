@@ -298,8 +298,11 @@
                 if (totalNum>0) {
                     [self.navigationController popViewControllerAnimated:YES];
                     NSArray* allArray0=@[allArray,netNameArray];
-                    self.searchResultBlock(allArray0);
+            
                       self.searchDicBlock(_deviceNetDic);
+                    
+                            self.searchResultBlock(allArray0);
+                    
                 }else{
                         [self showToastViewWithTitle:@"没有设备"];
                 }

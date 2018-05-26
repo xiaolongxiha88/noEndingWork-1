@@ -1310,7 +1310,19 @@ NSLog(@"体验馆");
       stationName =[NSMutableArray arrayWithObjects:root_shiFan_dianZhan, nil];
     }
     
-  //  deviceViewController *deviceVc=[[deviceViewController alloc]initWithDataDict:stationID stationName:stationName];
+    if (_LogOssNum==1 || _LogOssNum==3) {
+        NSInteger selectNum=0;
+        for (int i=0;i<stationID.count ; i++) {
+            NSString *ID=stationID[i];
+            if ([ID isEqualToString:_demoPlantID]) {
+                selectNum=i;
+            }
+        }
+           [ [UserInfo defaultUserInfo]setPlantNum:[NSString stringWithFormat:@"%ld",selectNum]];
+    }
+
+    
+ 
     
     deviceViewController *deviceVV=[[deviceViewController alloc]init];
     deviceVV.adNumber=_adNumber;

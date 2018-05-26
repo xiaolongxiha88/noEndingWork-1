@@ -26,6 +26,8 @@
 @property (nonatomic, strong) UIScrollView *ScrollView;
 @property (nonatomic, strong) DTKDropdownMenuView *rightMenuView;
 
+@property (nonatomic, strong) NSString *plantId;
+
 @end
 
 @implementation ossNewPlantControl2
@@ -236,6 +238,7 @@
             deviceView.LogTypeForOSS=1;
             deviceView.isFirstLogin=YES;
             deviceView.LogOssNum=3;
+        deviceView.demoPlantID=_plantId;
             [self.navigationController pushViewController:deviceView animated:NO];
         
     }
@@ -324,6 +327,7 @@
                 
                 _allDic=netArray[0];
                 
+                _plantId=_allDic[@"pId"];
                 _userName=_allDic[@"accountName"];
                 //   _serverID=[NSString stringWithFormat:@"%@",firstDic[@"obj"][@"serverId"]];
                 
