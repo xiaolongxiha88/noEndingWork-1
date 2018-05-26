@@ -118,7 +118,7 @@
     
     //_NetForParameterArray=[NSArray array];
     
-        _oneParaArray=@[root_oss_513_jianZhanShiJian,root_oss_514_sheBeiShuLiang,root_Device_head_181,root_Device_head_180,root_Today_Energy,root_jinri_shouyi,root_Total_Energy,root_zong_shouyi];
+        _oneParaArray=@[root_oss_513_jianZhanShiJian,root_oss_514_sheBeiShuLiang,root_Device_head_181,root_oss_524_dangqianGongLv,root_Today_Energy,root_jinri_shouyi,root_Total_Energy,root_zong_shouyi];
         _upOrDownNetValueArray=@[@[@"1",@"2"],@[@"3",@"4"],@[@"5",@"6"],@[@"7",@"8"],@[@"9",@"10"],@[@"11",@"12"],@[@"13",@"14"],@[@"15",@"16"]];
         
         _oldForParameterArray=@[@"5",@"4",@"6",@"7",@"8",@"9",@"10",@"11"];

@@ -376,12 +376,12 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     if (self.datePicker) {
-        [UIView animateWithDuration:0.3f animations:^{
+        [UIView animateWithDuration:0.01f animations:^{
             self.datePicker.frame = CGRectMake(0, SCREEN_Height, SCREEN_Width, 216*HEIGHT_SIZE);
           
         } completion:^(BOOL finished) {
             [self.datePicker removeFromSuperview];
-          
+             [self.toolBar removeFromSuperview];
         }];
     }
  
@@ -393,10 +393,11 @@
         [textField resignFirstResponder];
     }
     
-    if (self.datePicker) {
-        [self.datePicker removeFromSuperview];
-        [self.toolBar removeFromSuperview];
-    }
+//    if (self.datePicker) {
+//        [self.datePicker removeFromSuperview];
+//        [self.toolBar removeFromSuperview];
+//    }
+    
 }
 
 
