@@ -80,7 +80,7 @@
 }
 
 -(void)initDeviceUI{
-    self.title=@"搜索设备";
+    self.title=root_oss_525_shousuoDianZhang;
     _deviceNameArray=@[@"逆变器",@"储能机",@"混储一体机"];
     _deviceNameIdDic=@{_deviceNameArray[0]:@"1",_deviceNameArray[1]:@"2",_deviceNameArray[2]:@"3",};
     _H_All=0;

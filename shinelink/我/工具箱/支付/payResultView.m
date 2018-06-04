@@ -195,7 +195,7 @@
     }else if (resultInt==2) {
         ResultString=@"待支付";
     }else if (resultInt==3 || resultInt==4 ||resultInt==6) {
-        ResultString=@"支付成功，续费中";
+        ResultString=@"支付成功，续费中(30天内完成续费)";
     }else if (resultInt==5) {
         ResultString=@"支付失败";
     }else if (resultInt==7) {

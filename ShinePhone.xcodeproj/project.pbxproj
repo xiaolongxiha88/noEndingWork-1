@@ -6180,7 +6180,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinephone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinephoneBB;
 				PRODUCT_NAME = ShinePhone;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6215,7 +6215,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinephone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinephoneBB;
 				PRODUCT_NAME = ShinePhone;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
