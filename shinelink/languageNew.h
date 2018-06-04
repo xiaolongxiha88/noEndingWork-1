@@ -1175,7 +1175,7 @@
 
 #define  root_oss_523_ShanChuDianZhan NSLocalizedString(@"523删除电站", nil)
 #define  root_oss_524_dangqianGongLv NSLocalizedString(@"524当前功率", nil)
-
+#define  root_oss_525_shousuoDianZhang NSLocalizedString(@"525搜索电站", nil)
 
 
 
