@@ -36,7 +36,7 @@
 #import "useToWifiView1.h"
 #import "quickRegister2ViewController.h"
 #import "MMScanViewController.h"
-
+#import "serverPlantList.h"
 //测试头
 #import "useToWifiView1.h"
 #import "payView1.h"
@@ -1356,13 +1356,13 @@ NSLog(@"体验馆");
         }
         }
 
+        
         findViewController *findVc=[[findViewController alloc]init];
         findVc.title=root_service;
         
          LZPageViewController *energyVc = [[LZPageViewController alloc] initWithTitles:@[root_energy,root_energy_Smart,] controllersClass:@[[energyViewController class],[energyDemo class]]];
-       // energyViewController *energyVc=[[energyViewController alloc]init];
-          // energyVc.title=@"能源分析";
         energyVc.type=@"1";
+        
         
         deviceViewController *deviceVc=[[deviceViewController alloc]initWithDataDict:stationID stationName:stationName];
         deviceVc.adNumber=_adNumber;
@@ -1370,44 +1370,27 @@ NSLog(@"体验馆");
         meViewController *meVc=[[meViewController alloc]init];
          meVc.title=root_ME;
         
-        UINavigationController *Vc3=[[UINavigationController alloc]initWithRootViewController:findVc];
-        UINavigationController *Vc2=[[UINavigationController alloc]initWithRootViewController:energyVc];
-        UINavigationController *Vc1=[[UINavigationController alloc]initWithRootViewController:deviceVc];
-        UINavigationController *Vc4=[[UINavigationController alloc]initWithRootViewController:meVc];
-        //Vc1.navigationBar.titleTextAttributes=[NSDictionary dictionaryWithObject:[UIColor blackColor] forKey:NSForegroundColorAttributeName];
-        Vc1.title=root_device;
-        Vc2.title=root_energy_title;
-        Vc3.title=root_service;
-        Vc4.title=root_ME;
-        Vc1.tabBarItem.image=[UIImage imageNamed:@"equipment@2x.png"];
-        Vc1.tabBarItem.selectedImage=[[UIImage imageNamed:@"equipmentV@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        Vc2.tabBarItem.image=[UIImage imageNamed:@"energyTab@2x.png"];
-        Vc2.tabBarItem.selectedImage=[[UIImage imageNamed:@"energy2@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        Vc3.tabBarItem.image=[UIImage imageNamed:@"server@2x.png"];
-        Vc3.tabBarItem.selectedImage=[[UIImage imageNamed:@"serverV@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        Vc4.tabBarItem.image=[UIImage imageNamed:@"mine@2x.png"];
-        Vc4.tabBarItem.selectedImage=[[UIImage imageNamed:@"mine2v@2x.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        NSArray *controlViewArray=@[deviceVc,energyVc,findVc,meVc];
         
-        [Vc1.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                [UIColor grayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
-        [Vc1.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                MainColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-        [Vc2.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                [UIColor grayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
-        [Vc2.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                MainColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-        [Vc3.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                [UIColor grayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
-        [Vc3.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                MainColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
-        [Vc4.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                [UIColor grayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
-        [Vc4.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                MainColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+        NSArray *titleArray=@[root_device,root_energy_title,root_service,root_ME];
+        NSArray *imageArray=@[@"equipment@2x.png",@"energyTab@2x.png",@"server@2x.png",@"mine@2x.png"];
+                NSArray *imageSelectArray=@[@"equipmentV@2x.png",@"energy2@2x.png",@"serverV@2x.png",@"mine2v@2x.png"];
         
-     
+        NSMutableArray *controllers=[NSMutableArray new];
+        for (int i=0; i<controlViewArray.count; i++) {
+             UINavigationController *NAV=[[UINavigationController alloc]initWithRootViewController:controlViewArray[i]];
+                NAV.title=titleArray[i];
+              NAV.tabBarItem.image=[UIImage imageNamed:imageArray[i]];
+            NAV.tabBarItem.selectedImage=[[UIImage imageNamed:imageSelectArray[i]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+            [NAV.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    [UIColor grayColor], NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
+            [NAV.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                    MainColor, NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
+            [controllers addObject:NAV];
+        }
         
-        NSArray *controllers=[NSArray arrayWithObjects:Vc1,Vc2,Vc3,Vc4,nil];
+        
+ 
         _tabbar=[[UITabBarController alloc]init];
         _tabbar.viewControllers=controllers;
        

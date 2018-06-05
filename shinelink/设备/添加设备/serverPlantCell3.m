@@ -49,8 +49,8 @@
         UIView *View2= [[UIView alloc]initWithFrame:CGRectMake((ScreenWidth-W)/2.0, K_H0/2.0, W,H_all)];
         [View2.layer setMasksToBounds:YES];
         [View2.layer setCornerRadius:(H_all/22.0)];
-        View2.layer.borderColor=MainColor.CGColor;
-        View2.layer.borderWidth=2;
+        View2.layer.borderColor=COLOR(122, 199, 249, 1).CGColor;
+        View2.layer.borderWidth=1;
         View2.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:View2];
         

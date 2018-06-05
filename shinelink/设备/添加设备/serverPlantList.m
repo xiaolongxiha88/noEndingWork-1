@@ -100,7 +100,7 @@
     
     [self initTheNetPageAndValue];
     
-    [_deviceNetDic setObject:@"15" forKey:@"pageSize"];
+    [_deviceNetDic setObject:@"25" forKey:@"pageSize"];
     [_deviceNetDic setObject:[NSString stringWithFormat:@"%ld",_pageNumForNet] forKey:@"toPageNum"];
     [_deviceNetDic setObject:@"" forKey:@"plantName"];
     [_deviceNetDic setObject:@"" forKey:@"nominalPower"];

@@ -94,7 +94,7 @@
 
     [_deviceNetDic setObject:@"" forKey:@"userName"];
     [_deviceNetDic setObject:@"" forKey:@"iCode"];
-      [_deviceNetDic setObject:@"15" forKey:@"pageSize"];
+      [_deviceNetDic setObject:@"25" forKey:@"pageSize"];
 
 }
 

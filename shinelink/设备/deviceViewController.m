@@ -558,7 +558,10 @@ _pcsNetStorageSN=@"";
     DTKDropdownItem *item2 = [DTKDropdownItem itemWithTitle:root_oss_511_dianZhanGuanLi iconName:@"DTK_renwu" callBack:^(NSUInteger index, id info) {
         
       //   _netEnable=@"0";
-        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isDemo"] isEqualToString:@"isDemo"]) {
+            [self showAlertViewWithTitle:nil message:root_demo_Alert cancelButtonTitle:root_Yes];
+            return;
+        }
                 serverPlantList *addView=[[serverPlantList alloc]init];
         addView.demoLoginName=_demoLoginName;
         addView.demoLoginPassword=_demoLoginPassword;

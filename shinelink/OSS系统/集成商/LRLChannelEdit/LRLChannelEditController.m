@@ -87,12 +87,12 @@
 
 -(void)initUI{
     
-    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 105*HEIGHT_SIZE, SCREEN_Width, ScreenHeight-95*HEIGHT_SIZE)];
+    _scrollView=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 135*HEIGHT_SIZE, SCREEN_Width, ScreenHeight-95*HEIGHT_SIZE)];
     _scrollView.scrollEnabled=YES;
     //_scrollView.backgroundColor=COLOR(242, 242, 242, 1);
     [self.view addSubview:_scrollView];
     
-    float H=70*HEIGHT_SIZE;
+    float H=100*HEIGHT_SIZE;
     _topLabel= [[UILabel alloc] initWithFrame:CGRectMake(10*NOW_SIZE, H,80*NOW_SIZE, 30*HEIGHT_SIZE)];
     _topLabel.textColor = COLOR(51, 51, 51, 1);
     _topLabel.font = [UIFont systemFontOfSize:14*HEIGHT_SIZE];
@@ -120,7 +120,7 @@
     [self.view addSubview:_editButton];
     
     UIButton *backButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    backButton.frame=CGRectMake(270*NOW_SIZE,20*HEIGHT_SIZE, 30*NOW_SIZE, 30*HEIGHT_SIZE);
+    backButton.frame=CGRectMake(270*NOW_SIZE,50*HEIGHT_SIZE, 30*NOW_SIZE, 30*HEIGHT_SIZE);
     [backButton setBackgroundImage:IMAGE(@"del_LRL.png") forState:UIControlStateNormal];
    // [backButton setBackgroundImage:IMAGE(@"oss_btn_1click.png") forState:UIControlStateHighlighted];
     [backButton addTarget:self action:@selector(closeButton) forControlEvents:UIControlEventTouchUpInside];
