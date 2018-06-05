@@ -514,6 +514,7 @@
 		3379E4F61E960C1C000A4198 /* JHColumnChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 3379E4F51E960C1C000A4198 /* JHColumnChart.m */; };
 		337A70FB1E9B820600FE5F3C /* solarS.png in Resources */ = {isa = PBXBuildFile; fileRef = 337A70FA1E9B820600FE5F3C /* solarS.png */; };
 		337A70FE1E9C7F0200FE5F3C /* newEnergyStorage2000.m in Sources */ = {isa = PBXBuildFile; fileRef = 337A70FD1E9C7F0200FE5F3C /* newEnergyStorage2000.m */; };
+		337A846F20C66C8400EF4562 /* serverPlantCell3.m in Sources */ = {isa = PBXBuildFile; fileRef = 337A846E20C66C8400EF4562 /* serverPlantCell3.m */; };
 		337C30541CCDAF3C002B99B7 /* protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C30531CCDAF3C002B99B7 /* protocol.m */; };
 		337C43BA1FC400220000A6F2 /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C43B91FC400220000A6F2 /* WXApiManager.m */; };
 		337C43BD1FC4464D0000A6F2 /* resultDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337C43BC1FC4464D0000A6F2 /* resultDetailView.m */; };
@@ -1680,6 +1681,8 @@
 		337A70FA1E9B820600FE5F3C /* solarS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = solarS.png; sourceTree = "<group>"; };
 		337A70FC1E9C7F0200FE5F3C /* newEnergyStorage2000.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = newEnergyStorage2000.h; sourceTree = "<group>"; };
 		337A70FD1E9C7F0200FE5F3C /* newEnergyStorage2000.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = newEnergyStorage2000.m; sourceTree = "<group>"; };
+		337A846D20C66C8400EF4562 /* serverPlantCell3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = serverPlantCell3.h; sourceTree = "<group>"; };
+		337A846E20C66C8400EF4562 /* serverPlantCell3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = serverPlantCell3.m; sourceTree = "<group>"; };
 		337C30521CCDAF3C002B99B7 /* protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = protocol.h; sourceTree = "<group>"; };
 		337C30531CCDAF3C002B99B7 /* protocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = protocol.m; sourceTree = "<group>"; };
 		337C43B81FC400210000A6F2 /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
@@ -2686,6 +2689,8 @@
 				333F5AB320B6BC23006CBCF7 /* serverPlantSearch.m */,
 				333F5AB520B6C40E006CBCF7 /* serverPlantCEll2.h */,
 				333F5AB620B6C40E006CBCF7 /* serverPlantCEll2.m */,
+				337A846D20C66C8400EF4562 /* serverPlantCell3.h */,
+				337A846E20C66C8400EF4562 /* serverPlantCell3.m */,
 			);
 			path = "添加设备";
 			sourceTree = "<group>";
@@ -5979,6 +5984,7 @@
 				33860FE41EEA75C5004150FD /* MJRefreshAutoStateFooter.m in Sources */,
 				33AF3D261D8E67210007D6C2 /* UIAlertView+Block.m in Sources */,
 				3367CB4F1C86806700EF460C /* NSArray+MASAdditions.m in Sources */,
+				337A846F20C66C8400EF4562 /* serverPlantCell3.m in Sources */,
 				3353B1B61CA1272C00577595 /* CoreDataManager.m in Sources */,
 				335BF1ED1D100761008EEE99 /* MessageCeterTableViewController.m in Sources */,
 				3379E4F61E960C1C000A4198 /* JHColumnChart.m in Sources */,
@@ -6180,7 +6186,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinephoneBB;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinephone;
 				PRODUCT_NAME = ShinePhone;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6215,7 +6221,7 @@
 					"$(PROJECT_DIR)/lib",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinephoneBB;
+				PRODUCT_BUNDLE_IDENTIFIER = com.growatt.shinephone;
 				PRODUCT_NAME = ShinePhone;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

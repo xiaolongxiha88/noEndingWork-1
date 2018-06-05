@@ -18,6 +18,7 @@
 #import "stationTableView.h"
 #import "serverPlantSearch.h"
 #import "serverPlantCEll2.h"
+#import "serverPlantCell3.h"
 
 @interface serverPlantList ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *oneScrollView;
@@ -81,7 +82,7 @@
     
     self.title=root_oss_511_dianZhanGuanLi;
     
-    _isChangTableView=NO;
+    _isChangTableView=YES;
     self.view.backgroundColor=COLOR(242, 242, 242, 1);
     
     // [self getNetForListParameter];
@@ -179,11 +180,12 @@
         
     }
     
-    if (!_View2) {
+  
         [self initUI];
-    }else{
-        [self initTheTheChangeUI];
-    }
+    
+//    }else{
+//        [self initTheTheChangeUI];
+//    }
     
 }
 
@@ -255,7 +257,7 @@
     
     
     float H2=50*HEIGHT_SIZE;
-    float W1=80*NOW_SIZE;
+  // float W1=80*NOW_SIZE;
     float WK1=10*NOW_SIZE;
     
     if (_View2) {
@@ -280,58 +282,7 @@
     
     float W_View201=0;
     
-//    UIView *View201= [[UIView alloc]initWithFrame:CGRectMake(WK1+imageW+WK1, 0, W_View201,H2)];
-//    View201.backgroundColor =[UIColor clearColor];
-//    View201.userInteractionEnabled=YES;
-//    UITapGestureRecognizer *labelTap2=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(chioceTheStatue)];
-//    [View201 addGestureRecognizer:labelTap2];
-//    [_View2 addSubview:View201];
-//
-//    NSArray *numArray=[self getTheDeviceStatueNum];
-//    _deviceStatueNumDic=[NSMutableDictionary new];
-//    for (int i=0; i<numArray.count; i++) {
-//        NSArray *statueArray=[self changeTheDeviceStatue:numArray[i]];
-//        [_deviceStatueNumDic setObject:@"" forKey:statueArray[2]];
-//    }
-//
-//    NSArray *statueArray1=[self changeTheDeviceStatue:@""];
-//    _numNameLableString=statueArray1[2];
-//
-//    if (_numNameLable) {
-//        [_numNameLable removeFromSuperview];
-//        _numNameLable=nil;
-//    }
-//    _numNameLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0,W2_1, H2_1/2.0)];
-//    _numNameLable.textColor = COLOR(51, 51, 51, 1);
-//    _numNameLable.text=statueArray1[1];
-//    _numNameLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-//    _numNameLable.textAlignment=NSTextAlignmentCenter;
-//    _numNameLable.adjustsFontSizeToFitWidth=YES;
-//    _numNameLable.userInteractionEnabled=YES;
-//    [View201 addSubview:_numNameLable];
-//
-//    if (_numLable) {
-//        [_numLable removeFromSuperview];
-//        _numLable=nil;
-//    }
-//
-//    _numLable = [[UILabel alloc] initWithFrame:CGRectMake(0, (H2-H2_1)/2.0+H2_1/2.0,W2_1, H2_1/2.0)];
-//    _numLable.textColor =mainColor;
-//    _numLable.text=@"";
-//    _numLable.font = [UIFont systemFontOfSize:10*HEIGHT_SIZE];
-//    _numLable.textAlignment=NSTextAlignmentCenter;
-//    _numLable.adjustsFontSizeToFitWidth=YES;
-//    _numLable.userInteractionEnabled=YES;
-//    [View201 addSubview:_numLable];
-//
-//
-//
-//    UIImageView *image00=[[UIImageView alloc]initWithFrame:CGRectMake(W2_1+image00K, (H2-image00H)/2, image00W,image00H )];
-//    image00.userInteractionEnabled=YES;
-//    image00.image=IMAGE(@"upOSS.png");
-//    [View201 addSubview:image00];
-    
-    
+
     float View01_W=ScreenWidth-2*WK1-imageW-WK1-WK1-W_View201;
     float imageH1=30*HEIGHT_SIZE;
     UIView *View01= [[UIView alloc]initWithFrame:CGRectMake(2*WK1+imageW+W_View201+WK1, (H2-imageH1)/2.0, View01_W,imageH1)];
@@ -351,70 +302,79 @@
     image3.image=IMAGE(@"oss_search.png");
     [View01 addSubview:image3];
     
-    
-    float _twoScrollViewH=40*HEIGHT_SIZE;
-    /////////////列表显示内容
-    if (_twoScrollView) {
-        [_twoScrollView removeFromSuperview];
-        _twoScrollView=nil;
-    }
-    _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, _twoScrollViewH)];
-    _twoScrollView.backgroundColor = [UIColor whiteColor];
-    _twoScrollView.showsHorizontalScrollIndicator = NO;
-    _twoScrollView.delegate=self;
-    _twoScrollView.bounces = NO;
-    [self.view addSubview:_twoScrollView];
-    
-    
+    float   _twoScrollViewH=40*HEIGHT_SIZE;
     
   
-    
-    
-    float W_K_0=12*NOW_SIZE;             //平均空隙
-    float W1_all=10*NOW_SIZE;
-    
-    float W_MIX_K=0;
-    float W1_all_0=10*NOW_SIZE;
-    for (int i=0; i<_cellNameArray.count; i++) {
-        NSString *nameString=_cellNameArray[i];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, _twoScrollViewH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-        
-        float W_all_0=W_K_0*2+size.width;
-        
-        W1_all_0=W1_all_0+W_all_0;
+        /////////////列表显示内容
+        if (_twoScrollView) {
+            [_twoScrollView removeFromSuperview];
+            _twoScrollView=nil;
+        }
+    if (!_isChangTableView) {
+               _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, _twoScrollViewH)];
+    }else{
+           _twoScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2, SCREEN_Width, 0)];
     }
-    if (ScreenWidth>W1_all_0) {
-        float num=_cellNameArray.count/1.0;
-        W_MIX_K=(ScreenWidth-W1_all_0)/num;
+ 
+        _twoScrollView.backgroundColor = [UIColor whiteColor];
+        _twoScrollView.showsHorizontalScrollIndicator = NO;
+        _twoScrollView.delegate=self;
+        _twoScrollView.bounces = NO;
+        [self.view addSubview:_twoScrollView];
+        
+        float W_K_0=12*NOW_SIZE;             //平均空隙
+        float W1_all=10*NOW_SIZE;
+        
+        float W_MIX_K=0;
+        float W1_all_0=10*NOW_SIZE;
+        for (int i=0; i<_cellNameArray.count; i++) {
+            NSString *nameString=_cellNameArray[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, _twoScrollViewH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            float W_all_0=W_K_0*2+size.width;
+            
+            W1_all_0=W1_all_0+W_all_0;
+        }
+        if (ScreenWidth>W1_all_0) {
+            float num=_cellNameArray.count/1.0;
+            W_MIX_K=(ScreenWidth-W1_all_0)/num;
+        }
+        
+        for (int i=0; i<_cellNameArray.count; i++) {
+            NSString *nameString=_cellNameArray[i];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
+            CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, _twoScrollViewH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
+            
+            float W_all_0=W_K_0*2+size.width+W_MIX_K;
+            
+            UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0, _twoScrollViewH)];
+            lable1.textColor = COLOR(51, 51, 51, 1);
+            lable1.textAlignment=NSTextAlignmentLeft;
+            lable1.text=_cellNameArray[i];
+            lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
+            [_twoScrollView addSubview:lable1];
+            
+            W1_all=W1_all+W_all_0;
+        }
+        
+        _twoScrollView.contentSize=CGSizeMake(W1_all, _twoScrollViewH);
+        
+    
+
+    if (!_isChangTableView) {
+            _tableW=W1_all;
+    }else{
+        _tableW=ScreenWidth;
     }
     
-    for (int i=0; i<_cellNameArray.count; i++) {
-        NSString *nameString=_cellNameArray[i];
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObject:[UIFont systemFontOfSize:12*HEIGHT_SIZE] forKey:NSFontAttributeName];
-        CGSize size = [nameString boundingRectWithSize:CGSizeMake(MAXFLOAT, _twoScrollViewH) options:NSStringDrawingUsesLineFragmentOrigin attributes:dic context:nil].size;
-        
-        float W_all_0=W_K_0*2+size.width+W_MIX_K;
-        
-        UILabel *lable1 = [[UILabel alloc] initWithFrame:CGRectMake(0+W1_all, 0,W_all_0, _twoScrollViewH)];
-        lable1.textColor = COLOR(51, 51, 51, 1);
-        lable1.textAlignment=NSTextAlignmentLeft;
-        lable1.text=_cellNameArray[i];
-        lable1.font = [UIFont systemFontOfSize:12*HEIGHT_SIZE];
-        [_twoScrollView addSubview:lable1];
-        
-        W1_all=W1_all+W_all_0;
-    }
-    
-      _twoScrollView.contentSize=CGSizeMake(W1_all, _twoScrollViewH);
-    
-    _tableW=W1_all;
-    float H3=ScreenHeight-H1-H2-_twoScrollViewH-(NaviHeight);
+   
+    float H3=ScreenHeight-H1-H2-_twoScrollView.frame.size.height-(NaviHeight);
     if (_threeScrollView) {
         [_threeScrollView removeFromSuperview];
         _threeScrollView=nil;
     }
-    _threeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2+_twoScrollViewH, SCREEN_Width, H3)];
+    _threeScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, H1+H2+_twoScrollView.frame.size.height, SCREEN_Width, H3)];
     _threeScrollView.backgroundColor = [UIColor whiteColor];
     _threeScrollView.showsHorizontalScrollIndicator = NO;
     _threeScrollView.bounces = NO;
@@ -470,6 +430,7 @@
     //注册单元格类型
     [_tableView registerClass:[ossNewDeviceCell class] forCellReuseIdentifier:@"CELL1"];
     [_tableView registerClass:[serverPlantCEll2 class] forCellReuseIdentifier:@"CELL2"];
+        [_tableView registerClass:[serverPlantCell3 class] forCellReuseIdentifier:@"CELL3"];
     
 }
 
@@ -740,9 +701,19 @@
                     NSString*keyString=[_numForNetKeyDic objectForKey:_NetForParameterNewArray[i]];
                 NSString *keyNum=_NetForParameterNewArray[i];
                 
+//                _numForNetKeyDic=@{@"0":@"plantName",@"1":@"alias",@"2":@"city",@"3":@"timezoneText",@"4":@"createDateText",@"5":@"deviceCount",@"6":@"currentPac",@"7":@"nominalPower",@"8":@"eToday",@"9":@"eTotal",@"10":@"etodayMoneyText",@"11":@"etotalMoneyText"};
+                
                     NSString *valueString;
-                if ([keyNum isEqualToString:@"6"] || [keyNum isEqualToString:@"8"] || [keyNum isEqualToString:@"9"]) {
-                     valueString=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",twoDic[keyString]] floatValue]];
+                if ([keyNum isEqualToString:@"6"] || [keyNum isEqualToString:@"7"] || [keyNum isEqualToString:@"8"] || [keyNum isEqualToString:@"9"] || [keyNum isEqualToString:@"10"] || [keyNum isEqualToString:@"11"]) {
+                    if ([keyNum isEqualToString:@"6"] || [keyNum isEqualToString:@"7"]) {
+                          valueString=[NSString stringWithFormat:@"%.fW",[[NSString stringWithFormat:@"%@",twoDic[keyString]] floatValue]];
+                    }else if ([keyNum isEqualToString:@"8"] || [keyNum isEqualToString:@"9"]) {
+                        valueString=[NSString stringWithFormat:@"%.1fkWh",[[NSString stringWithFormat:@"%@",twoDic[keyString]] floatValue]];
+                    }else if ([keyNum isEqualToString:@"10"] || [keyNum isEqualToString:@"11"]) {
+                        valueString=[NSString stringWithFormat:@"%.1f%@",[[NSString stringWithFormat:@"%@",twoDic[keyString]] floatValue],[NSString stringWithFormat:@"%@",twoDic[@"moneyUnitText"]]];
+                    }
+                    
+                   
                 }else{
                          valueString=[NSString stringWithFormat:@"%@",twoDic[keyString]];
                 }
@@ -759,8 +730,15 @@
                 NSString *keyNum=_NetForParameterNew22Array[i];
                 
                 NSString *valueString;
-                if ([keyNum isEqualToString:@"6"] || [keyNum isEqualToString:@"8"] || [keyNum isEqualToString:@"9"]) {
-                    valueString=[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",twoDic[keyString]] floatValue]];
+                if ([keyNum isEqualToString:@"6"] || [keyNum isEqualToString:@"7"] || [keyNum isEqualToString:@"8"] || [keyNum isEqualToString:@"9"] || [keyNum isEqualToString:@"10"] || [keyNum isEqualToString:@"11"]) {
+                    if ([keyNum isEqualToString:@"6"] || [keyNum isEqualToString:@"7"]) {
+                        valueString=[NSString stringWithFormat:@"%.fW",[[NSString stringWithFormat:@"%@",twoDic[keyString]] floatValue]];
+                    }else if ([keyNum isEqualToString:@"8"] || [keyNum isEqualToString:@"9"]) {
+                        valueString=[NSString stringWithFormat:@"%.1fkWh",[[NSString stringWithFormat:@"%@",twoDic[keyString]] floatValue]];
+                    }else if ([keyNum isEqualToString:@"10"] || [keyNum isEqualToString:@"11"]) {
+                        valueString=[NSString stringWithFormat:@"%.1f%@",[[NSString stringWithFormat:@"%@",twoDic[keyString]] floatValue],[NSString stringWithFormat:@"%@",twoDic[@"moneyUnitText"]]];
+                    }
+                    
                 }else{
                     valueString=[NSString stringWithFormat:@"%@",twoDic[keyString]];
                 }
@@ -843,18 +821,24 @@
 //    [self initTheNetPageAndValue];
     
     _isChangTableView=!_isChangTableView;
-    if (_isChangTableView) {
-        [_twoScrollView removeFromSuperview];
-        _threeScrollView.frame=CGRectMake(_threeScrollView.frame.origin.x, _threeScrollView.frame.origin.y-40*HEIGHT_SIZE, _threeScrollView.frame.size.width, _threeScrollView.frame.size.height+40*HEIGHT_SIZE);
-        _threeScrollView.contentSize=CGSizeMake(ScreenWidth, _threeScrollView.frame.size.height);
-    }else{
-        [self.view addSubview:_twoScrollView];
-        _threeScrollView.frame=CGRectMake(_threeScrollView.frame.origin.x, _threeScrollView.frame.origin.y+40*HEIGHT_SIZE, _threeScrollView.frame.size.width, _threeScrollView.frame.size.height-40*HEIGHT_SIZE);
-        _threeScrollView.contentSize=CGSizeMake(_tableW, _threeScrollView.frame.size.height);
-    }
     
+    [self initUI];
     
-    [self initTableViewUI:_threeScrollView.frame.size.height];
+//    if (_isChangTableView) {
+//        [_twoScrollView removeFromSuperview];
+//        _threeScrollView.frame=CGRectMake(_threeScrollView.frame.origin.x, _threeScrollView.frame.origin.y-40*HEIGHT_SIZE, _threeScrollView.frame.size.width, _threeScrollView.frame.size.height+40*HEIGHT_SIZE);
+//        _threeScrollView.contentSize=CGSizeMake(ScreenWidth, _threeScrollView.frame.size.height);
+//    }else{
+//        [self.view addSubview:_twoScrollView];
+//
+//        _twoScrollView.frame=CGRectMake(_twoScrollView.frame.origin.x, _twoScrollView.frame.origin.y, _twoScrollView.frame.size.width,40*HEIGHT_SIZE );
+//
+//        _threeScrollView.frame=CGRectMake(_threeScrollView.frame.origin.x, _threeScrollView.frame.origin.y+40*HEIGHT_SIZE, _threeScrollView.frame.size.width, _threeScrollView.frame.size.height-40*HEIGHT_SIZE);
+//        _threeScrollView.contentSize=CGSizeMake(_tableW, _threeScrollView.frame.size.height);
+//    }
+//
+//
+//    [self initTableViewUI:_threeScrollView.frame.size.height];
     
     
 }
@@ -904,38 +888,6 @@
 -(void)goToNetForListParameter{
     
               [[NSUserDefaults standardUserDefaults] setObject:_NetForParameterArray forKey:@"serverPlantListNum"];    //保存参数列表
-    
-//    NSString *keyValueString=@"";
-//    if (_deviceType==1) {
-//        keyValueString=@"dm_invapp";
-//    }else if (_deviceType==2) {
-//        keyValueString=@"dm_storageapp";
-//    }else if (_deviceType==3) {
-//        keyValueString=@"dm_mixapp";
-//    }
-//    NSString *textString=[NSString stringWithFormat:@"%@",[self jsonStringWithPrettyPrint:YES dataArray:_NetForParameterArray]];
-//    NSDictionary *netDic=@{@"text":textString,@"key":keyValueString};
-//    //  [self showProgressView];
-//    [BaseRequest requestWithMethodResponseStringResult:OSS_HEAD_URL paramars:netDic paramarsSite:@"/api/v3/device/saveShowCol" sucessBlock:^(id content) {
-//        [self hideProgressView];
-//
-//        id  content1= [NSJSONSerialization JSONObjectWithData:content options:NSJSONReadingAllowFragments error:nil];
-//        NSLog(@"/api/v3/device/saveShowCol: %@", content1);
-//
-//        if (content1) {
-//            NSDictionary *firstDic=[NSDictionary dictionaryWithDictionary:content1];
-//
-//            if ([firstDic[@"result"] intValue]==1) {
-//                // self.parameterDic=firstDic[@"obj"];
-//
-//            }else{
-//
-//            }
-//        }
-//    } failure:^(NSError *error) {
-//        [self hideProgressView];
-//        [self showToastViewWithTitle:root_Networking];
-//    }];
     
 }
 
@@ -987,12 +939,20 @@
             if (PlantListArray.count>0) {
                 
                 [_allNumArray addObject:root_oss_520_QuanBuDianZhanLeiJiShuJu];
-                 [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usercurrentPac"]] floatValue]]];
-           [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usernominalPower"]] floatValue]]];
-                   [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usereToday"]] floatValue]]];
-                   [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usereTotal"]] floatValue]]];
-                   [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usereTodayMoney"]] floatValue]]];
-                   [_allNumArray addObject:[NSString stringWithFormat:@"%.2f",[[NSString stringWithFormat:@"%@",firstDic[@"usereTotalMoney"]] floatValue]]];
+                 [_allNumArray addObject:[NSString stringWithFormat:@"%.fW",[[NSString stringWithFormat:@"%@",firstDic[@"usercurrentPac"]] floatValue]]];
+           [_allNumArray addObject:[NSString stringWithFormat:@"%.fW",[[NSString stringWithFormat:@"%@",firstDic[@"usernominalPower"]] floatValue]]];
+                   [_allNumArray addObject:[NSString stringWithFormat:@"%.1fkWh",[[NSString stringWithFormat:@"%@",firstDic[@"usereToday"]] floatValue]]];
+                   [_allNumArray addObject:[NSString stringWithFormat:@"%.1fkWh",[[NSString stringWithFormat:@"%@",firstDic[@"usereTotal"]] floatValue]]];
+                if ([[NSString stringWithFormat:@"%@",firstDic[@"moneyUnitText"]] isEqualToString:@"(null)"]) {
+                    [_allNumArray addObject:[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",firstDic[@"usereTodayMoney"]] floatValue]]];
+                      [_allNumArray addObject:[NSString stringWithFormat:@"%.1f",[[NSString stringWithFormat:@"%@",firstDic[@"usereTotalMoney"]] floatValue]]];
+                }else{
+                     [_allNumArray addObject:[NSString stringWithFormat:@"%.1f%@",[[NSString stringWithFormat:@"%@",firstDic[@"usereTodayMoney"]] floatValue],[NSString stringWithFormat:@"%@",firstDic[@"moneyUnitText"]]]];
+                    
+                     [_allNumArray addObject:[NSString stringWithFormat:@"%.1f%@",[[NSString stringWithFormat:@"%@",firstDic[@"usereTotalMoney"]] floatValue],[NSString stringWithFormat:@"%@",firstDic[@"moneyUnitText"]]]];
+                }
+            
+          
                 
                 _pageNumForNet=[[NSString stringWithFormat:@"%@",firstDic[@"currentPageNum"]] integerValue];
                 _pageTotalNum=[[NSString stringWithFormat:@"%@",firstDic[@"totalPageNum"]] integerValue];
@@ -1167,20 +1127,40 @@
         return cell;
     }else{
         
-        serverPlantCEll2 *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL2" forIndexPath:indexPath];
-        
-        if (!cell) {
-            cell=[[serverPlantCEll2 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL2"];
+        if (indexPath.row==0) {
+             //  [_tableView registerClass:[serverPlantCell3 class] forCellReuseIdentifier:@"CELL3"];
+            serverPlantCell3 *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL3" forIndexPath:indexPath];
+            
+            if (!cell) {
+                cell=[[serverPlantCell3 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL3"];
+            }
+            
+            cell.nameValueArray=_allTableViewData22Array[indexPath.row];
+            cell.nameArray=_cellNameArray2;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.tag=7000+indexPath.row;
+            UILongPressGestureRecognizer * longPressGesture1 = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellDidLongPressed2:)];
+            longPressGesture1.minimumPressDuration = 0.5f;
+            [cell addGestureRecognizer:longPressGesture1];
+            return cell;
+            
+        }else{
+            serverPlantCEll2 *cell = [tableView dequeueReusableCellWithIdentifier:@"CELL2" forIndexPath:indexPath];
+            
+            if (!cell) {
+                cell=[[serverPlantCEll2 alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CELL2"];
+            }
+            
+            cell.nameValueArray=_allTableViewData22Array[indexPath.row];
+            cell.nameArray=_cellNameArray2;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.tag=7000+indexPath.row;
+            UILongPressGestureRecognizer * longPressGesture1 = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellDidLongPressed2:)];
+            longPressGesture1.minimumPressDuration = 0.5f;
+            [cell addGestureRecognizer:longPressGesture1];
+            return cell;
         }
-        
-        cell.nameValueArray=_allTableViewData22Array[indexPath.row];
-        cell.nameArray=_cellNameArray2;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-          cell.tag=7000+indexPath.row;
-        UILongPressGestureRecognizer * longPressGesture1 = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(cellDidLongPressed2:)];
-        longPressGesture1.minimumPressDuration = 0.5f;
-        [cell addGestureRecognizer:longPressGesture1];
-        return cell;
+  
     }
     
     
